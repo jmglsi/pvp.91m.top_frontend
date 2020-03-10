@@ -134,24 +134,25 @@
         />
       </vxe-table-column>
 
-      <vxe-table-column title="分钟 (平均)">
+      <vxe-table-column
+        title="承伤 (分)"
+        field="totalBeHurtedCntPerMin"
+        :width="listWidth"
+        :formatter="['toFixedString', 0]"
+        sortable
+      />
+
+      <vxe-table-column title="伤害">
         <vxe-table-column
-          title="金币"
-          field="equMoneyMin"
-          :width="listWidth"
-          :formatter="['toFixedString', 0]"
-          sortable
-        />
-        <vxe-table-column
-          title="承伤"
-          field="totalBeHurtedCntPerMin"
-          :width="listWidth"
-          :formatter="['toFixedString', 0]"
-          sortable
-        />
-        <vxe-table-column
-          title="对人"
+          title="对人 (分)"
           field="totalHurtHeroCntPerMin"
+          :width="listWidth"
+          :formatter="['toFixedString', 0]"
+          sortable
+        />
+        <vxe-table-column
+          title="全部 (场)"
+          field="totalOutputPerMin"
           :width="listWidth"
           :formatter="['toFixedString', 0]"
           sortable
@@ -159,8 +160,16 @@
       </vxe-table-column>
 
       <vxe-table-column
-        title="伤害"
-        field="totalOutputPerMin"
+        title="金币 (分)"
+        field="equMoneyMin"
+        :width="listWidth"
+        :formatter="['toFixedString', 0]"
+        sortable
+      />
+
+      <vxe-table-column
+        title="经济 (场)"
+        field="equMoneyOverflow"
         :width="listWidth"
         :formatter="['toFixedString', 0]"
         sortable
@@ -185,14 +194,6 @@
         field="assistCnt"
         :width="listWidth"
         :formatter="['toFixedString', 2]"
-        sortable
-      />
-
-      <vxe-table-column
-        title="经济"
-        field="equMoneyOverflow"
-        :width="listWidth"
-        :formatter="['toFixedString', 0]"
         sortable
       />
       <vxe-table-column
