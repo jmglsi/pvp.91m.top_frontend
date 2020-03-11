@@ -197,7 +197,7 @@
         :column-num="2"
       >
         <van-grid-item @click="addHeroVote(1)">
-          <AppSmile
+          <AppCry
             width="50"
             height="50"
           />
@@ -206,7 +206,7 @@
           </span>
         </van-grid-item>
         <van-grid-item @click="addHeroVote(2)">
-          <AppCry
+          <AppSmile
             width="50"
             height="50"
           />
