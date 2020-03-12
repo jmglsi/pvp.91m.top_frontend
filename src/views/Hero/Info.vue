@@ -327,11 +327,6 @@ export default {
     AppSmile: resolve => require(["@/components/AppIcons/AppSmile.vue"], resolve),
     AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
   },
-  metaInfo () {
-    return {
-      meta: this.meta
-    };
-  },
   data () {
     this.markLine = {
       data: [
@@ -547,7 +542,7 @@ export default {
 
           this.heroInfoTitle = heroInfo.name;
 
-          document.title = heroInfo.name + " - 信息";
+          document.title = heroInfo.name + " | 苏苏的荣耀助手";
 
           this.toolbox.feature.saveAsImage.name = heroInfo.name + "_巅峰赛趋势";
 
@@ -636,7 +631,7 @@ export default {
         this.tagsInputShow = false;
       }
 
-      document.title = "英雄信息 - " + dTitle;
+      document.title = dTitle + " | 苏苏的荣耀助手";
 
       this.copyData =
         heroInfo.name +

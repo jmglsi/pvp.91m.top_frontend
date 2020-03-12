@@ -202,7 +202,7 @@ export default {
             query: { type: 1, from: from, heroName: heroName }
           });
 
-          if (heroName) document.title = heroName + " - 关系";
+          if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
 
           this.loading = false;
         });

@@ -30,7 +30,7 @@ export default new Router({
             name: 'Home',
             component: resolve => require(['./views/Home.vue'], resolve),
             meta: {
-                title: '苏苏的荣耀助手',
+                title: '首页',
                 keepAlive: true
             }
         }, {
@@ -38,6 +38,7 @@ export default new Router({
             name: 'Ranking',
             component: resolve => require(['./views/Ranking/Index.vue'], resolve),
             meta: {
+                title: '排行',
                 keepAlive: true
             }
         }, {
@@ -79,7 +80,7 @@ export default new Router({
             name: 'HeroReplay',
             component: resolve => require(['./views/Hero/Replay.vue'], resolve),
             meta: {
-                title: '对局回顾(部分)'
+                title: '回顾'
             }
         }
     ]

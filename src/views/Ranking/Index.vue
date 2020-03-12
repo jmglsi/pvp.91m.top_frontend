@@ -49,17 +49,8 @@ export default {
     let type = Number(this.$route.query.type);
     if (type) this.active = type;
   },
-  activated () {
-    document.title = "排行";
-  },
   methods: {
     onChange: function (e) {
-      let a;
-      if (e == 0) a = "巅峰赛";
-      if (e == 1) a = "关系";
-      if (e == 2) a = "玩家";
-      document.title = a;
-
       this.$router.push({ path: "/ranking", query: { type: e } });
     }
   }

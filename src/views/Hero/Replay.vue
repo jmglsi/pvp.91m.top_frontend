@@ -205,7 +205,7 @@ export default {
         .then(ret => {
           this.heroInfo = ret.data.data.heroInfo;
 
-          document.title = "对局回顾 (部分) - " + this.heroInfo.name;
+          document.title = this.heroInfo.name + " | 苏苏的荣耀助手";
 
           if (heroId.indexOf(",") > -1) this.duiyou = true;
         });
