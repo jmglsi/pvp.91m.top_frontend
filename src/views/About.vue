@@ -3,6 +3,7 @@
     <van-tabs
       swipeable
       color="rgb(222,177,81)"
+      v-model="tabsActive"
     >
       <van-tab title="巅峰赛 · 趋势">
         <van-cell
@@ -87,8 +88,14 @@
           label="根据英雄近期特点生成的标签(ヽ（≧□≦）ノ)。"
         />
       </van-tab>
-    </van-tabs>
 
+      <van-tab title="全局BP模拟器">
+        <vue-markdown
+          :source="statementBp"
+          style="padding: 3%;"
+        />
+      </van-tab>
+    </van-tabs>
     <AppBottomTabbar />
   </div>
 </template>
@@ -103,12 +110,20 @@
 export default {
   name: "About",
   components: {
+    VueMarkdown: resolve => require(["vue-markdown"], resolve),
     AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
   },
   data () {
     return {
-      statementApp: ""
+      tabsActive: 0,
+      statementBp: ""
     };
+  },
+  activated() {
+    this.tabsActive = parseInt(this.$route.query.type);
+  },
+  mounted () {
+    this.getStatementBp();
   },
   methods: {
     onCopy: function () {
@@ -116,6 +131,11 @@ export default {
     },
     onError: function () {
       this.$message.error("复制失败");
+    },
+    getStatementBp: function () {
+      this.axios.get("/md/statement_bp.md?ts=" + this.appTs).then(ret => {
+        this.statementBp = ret.data;
+      });
     }
   }
 };

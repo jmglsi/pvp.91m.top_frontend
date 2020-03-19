@@ -314,7 +314,8 @@ export default {
       otherType: 0,
       otherOptions: [
         { text: "٩( 'ω' )و", value: 0 },
-        { text: "更新记录 (本站)", value: 1 }
+        { text: "关于", value: 1 },
+        { text: "更新记录 (本站)", value: 2 }
       ],
       listWidth: 0,
       tableData: {
@@ -359,12 +360,19 @@ export default {
 
       if (e == 3) {
         if (this.otherType == 1) {
-          this.otherType = 0;
+          this.$router.push({
+            path: "/about",
+            query: { from: "ranking-dropdown-menu" }
+          });
+        }
+
+        if (this.otherType == 2) {
           this.$router.push({
             path: "/changelog",
             query: { from: "ranking-dropdown-menu" }
           });
         }
+        this.otherType = 0;
       }
     },
     onCellClick: function ({ row }) {

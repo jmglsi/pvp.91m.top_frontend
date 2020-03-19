@@ -1,6 +1,6 @@
 <template>
   <div class="setting">
-    <van-cell-group title="设置">
+    <van-cell-group title="功能">
       <van-field
         v-model="key"
         clearable
@@ -12,30 +12,20 @@
         @blur="saveKey"
         class="ex-icons"
       />
+      <van-cell
+        title="全局BP模拟器"
+        icon="cluster-o"
+        to="/bp?from=setting"
+        is-link
+      />
+    </van-cell-group>
+
+    <van-cell-group title="其它">
       <van-switch-cell
         v-model="particlesSwitch"
         icon="photo-o"
         title="粒子背景"
         @change="onChange"
-      />
-    </van-cell-group>
-
-    <van-cell-group title="其它">
-      <van-cell
-        title="清除缓存"
-        icon="/img/app-icons/clean.png"
-        @click="clearData"
-        class="ex-icons"
-        is-link
-      />
-    </van-cell-group>
-
-    <van-cell-group title=" ">
-      <van-cell
-        title="关于"
-        icon="info-o"
-        to="/about?from=setting"
-        is-link
       />
     </van-cell-group>
 
@@ -108,30 +98,6 @@ export default {
     },
     onChange: function (e) {
       this.$cookie.set("bg-lz", e, { expires: "1Y" });
-    },
-    clearData: function () {
-      this.$dialog
-        .confirm({
-          title: "是否清除缓存?",
-          message:
-            "页面显示不正常时可尝试清除缓存。\r\r此操作不可逆，还请妥善保管密钥。"
-        })
-        .then(() => {
-          // on confirm
-          this.clearAllCookie();
-          this.$message.success("已清除");
-        })
-        .catch(() => {
-          // on cancel
-          this.$message.error("已取消");
-        });
-    },
-    clearAllCookie: function () {
-      document.cookie.split(";").forEach(function (c) {
-        document.cookie = c
-          .replace(/^ +/, "")
-          .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-      });
     }
   }
 };

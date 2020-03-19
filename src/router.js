@@ -19,12 +19,24 @@ export default new Router({
             }
         }, {
             path: '/bp',
-            name: 'Bp',
-            component: resolve => require(['./views/Bp/Index.vue'], resolve),
-            meta: {
-                title: '全局BP模拟器(观赛助手)',
-                keepAlive: true
-            }
+            component: resolve => require(['./views/Bp/Dashboard.vue'], resolve),
+            children: [{
+                path: '',
+                name: 'Home',
+                component: resolve => require(['./views/Bp/Home.vue'], resolve),
+                meta: {
+                    title: '全局BP模拟器 (观赛助手)',
+                    keepAlive: true
+                }
+            }, {
+                path: 'add',
+                name: 'Add',
+                component: resolve => require(['./views/Bp/Add.vue'], resolve),
+                meta: {
+                    title: '全局BP模拟器 (观赛助手)',
+                    keepAlive: true
+                }
+            }]
         }, {
             path: '/',
             name: 'Home',

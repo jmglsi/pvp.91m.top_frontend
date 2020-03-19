@@ -256,7 +256,7 @@ export default {
           }
 
           if (list.type == 2) {
-            day.topInfo = list.text;
+            day.text = list.text;
             day.className = "dayTag-xpf";
           }
         }

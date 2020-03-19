@@ -2,7 +2,6 @@
   <div class="info">
     <van-nav-bar
       :title="heroInfoTitle"
-      left-text="对局回顾"
       :border="false"
       @click-left="onClickLeft"
     >
