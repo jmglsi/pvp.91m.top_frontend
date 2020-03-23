@@ -25,7 +25,10 @@ export default {
   data() {
     return {
       actionSheetShow: false,
-      actions: [{ name: "添加对局", value: 0 }]
+      actions: [
+        { name: "BP模拟", subname: "分享我的阵容", value: 0 },
+        { name: "请我喝咖啡", subname: "制作不易", value: 1 }
+      ]
     };
   },
   mounted() {},
