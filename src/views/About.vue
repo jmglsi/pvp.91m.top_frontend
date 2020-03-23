@@ -92,7 +92,7 @@
       <van-tab title="全局BP模拟器">
         <vue-markdown
           :source="statementBp"
-          style="padding: 3%;"
+          style="padding: 25px;"
         />
       </van-tab>
     </van-tabs>

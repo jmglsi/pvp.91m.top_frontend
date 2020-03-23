@@ -14,7 +14,7 @@
 }
 
 .app-markdown {
-  padding: 0 3%;
+  padding: 25px;
 }
 </style>
 
