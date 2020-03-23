@@ -1,53 +1,26 @@
 <template>
   <div class="home">
-    <van-swipe
-      :autoplay="5000"
-      :style="swipeStyle"
-      class="home-swipe"
-    >
-      <van-swipe-item
-        v-for="(data, index) in homeInfo.swipeList"
-        :key="index + '-img'"
-      >
-        <a
-          :href="data.url"
-          target="_bank"
-        >
-          <img
-            width="100%"
-            height="200"
-            v-lazy="data.img"
-            style="object-fit: cover;"
-          />
+    <van-swipe :autoplay="5000" :style="swipeStyle" class="home-swipe">
+      <van-swipe-item v-for="(data, index) in homeInfo.swipeList" :key="index + '-img'">
+        <a :href="data.url" target="_bank">
+          <img width="100%" height="200" v-lazy="data.img" style="object-fit: cover;" />
         </a>
         <van-tag
           mark
           v-if="data.type > 0"
           :color="data.tag.color"
           class="home-swipe-text"
-        >
-          {{ data.tag.text }}
-        </van-tag>
+        >{{ data.tag.text }}</van-tag>
       </van-swipe-item>
     </van-swipe>
 
-    <div
-      @click="calendarShow = true"
-      class="home-title"
-    >
-      <AppCalendar
-        width="25"
-        height="25"
-        style="margin-right: 5px;"
-      />
+    <div @click="calendarShow = true" class="home-title">
+      <AppCalendar width="25" height="25" style="margin-right: 5px;" />
       <span style="position: absolute;font-size: 25px;margin-top: -4px;">动态</span>
     </div>
 
     <div class="home-dayTag">
-      <van-loading
-        class="home-loading"
-        v-show="loadingShow"
-      />
+      <van-loading class="home-loading" v-show="loadingShow" />
       <a-timeline v-show="!loadingShow">
         <a-timeline-item
           v-for="(data,index) in homeInfo.dayTagList"
@@ -59,38 +32,19 @@
             v-if="data.calendarInfo.day"
             :color="data.color"
             @click="calendarShow = true"
-          >
-            {{ data.calendarInfo.day }}
-          </van-tag>
-          <div
-            v-if="data.url"
-            class="item-title"
-          >
-            <a
-              :href="data.url"
-              target="_blank"
-            >
-              <img
-                v-lazy="'/img/app-icons/link_black.png'"
-                class="home-link"
-              />
+          >{{ data.calendarInfo.day }}</van-tag>
+          <div v-if="data.url" class="item-title">
+            <a :href="data.url" target="_blank">
+              <img v-lazy="'/img/app-icons/link_black.png'" class="home-link" />
               {{ data.title }}
             </a>
           </div>
-          <div
-            v-else
-            class="item-title"
-            v-html="data.title"
-          >
-          </div>
-          <div
-            v-if="data.item.length > 0"
-            class="item-data"
-          >
+          <div v-else class="item-title" v-html="data.title"></div>
+          <div v-if="data.item.length > 0" class="item-data">
             <router-link
               v-for="(id, index) in data.item"
               :key="index + '-data-img-id'"
-              :to="'/heroInfo/' + id + '?from=dayTag-' + data.calendarInfo.day"
+              :to="{ path: '/heroInfo/' + id, query: { from: 'dayTag-'+ data.calendarInfo.day } }"
             >
               <img
                 v-if="id != null"
@@ -114,13 +68,7 @@
     />
 
     <span class="home-record">
-      <a
-        href="http://beian.miit.gov.cn/"
-        target="_blank"
-        style="color: black;"
-      >
-        沪ICP备16031287号-2
-      </a>
+      <a href="http://beian.miit.gov.cn/" target="_blank" style="color: black;">沪ICP备16031287号-2</a>
     </span>
   </div>
 </template>
@@ -183,10 +131,12 @@
 export default {
   name: "Home",
   components: {
-    AppCalendar: resolve => require(["@/components/AppIcons/AppCalendar.vue"], resolve),
-    AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
+    AppCalendar: resolve =>
+      require(["@/components/AppIcons/AppCalendar.vue"], resolve),
+    AppBottomTabbar: resolve =>
+      require(["@/components/AppBottomTabbar.vue"], resolve)
   },
-  data () {
+  data() {
     return {
       loadingShow: true,
       calendarShow: false,
@@ -202,7 +152,7 @@ export default {
       }
     };
   },
-  mounted () {
+  mounted() {
     let from = this.$route.query.from;
     if (from) {
       this.$cookie.set("from", from, { expires: "1Y" });
@@ -216,7 +166,7 @@ export default {
     this.getTime();
   },
   methods: {
-    getHome: function () {
+    getHome: function() {
       this.axios.get(this.appApi.list.getHome).then(ret => {
         this.homeInfo = ret.data.data;
 
@@ -225,12 +175,12 @@ export default {
         }, 500);
       });
     },
-    getTime: function () {
+    getTime: function() {
       let date = new Date();
       this.minDate = new Date(date.setMonth(date.getMonth() - 4));
       this.maxDate = new Date(date.setMonth(date.getMonth() + 5));
     },
-    onFormatter: function (day) {
+    onFormatter: function(day) {
       let oDay =
         day.date.getFullYear() +
         "/" +

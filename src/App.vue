@@ -21,16 +21,10 @@
     />
 
     <keep-alive>
-      <router-view
-        v-if="$route.meta.keepAlive"
-        class="app-data"
-      />
+      <router-view v-if="$route.meta.keepAlive" class="app-data" />
     </keep-alive>
-    <router-view
-      v-if="!$route.meta.keepAlive"
-      class="app-data"
-    />
-    
+    <router-view v-if="!$route.meta.keepAlive" class="app-data" />
+
     <van-tabbar
       fixed
       :z-index="2"
@@ -40,27 +34,17 @@
       active-color="rgb(222,177,81)"
       inactive-color="rgb(67,62,52)"
     >
-      <van-tabbar-item
-        icon="flag-o"
-        to="/?from=tabbar-0"
-        name="/home"
-      >
-        发现
-      </van-tabbar-item>
+      <van-tabbar-item icon="flag-o" :to="{ path:'/', query: { from: 'tabbar-0' } }" name="/home">发现</van-tabbar-item>
       <van-tabbar-item
         :icon="rankingIcon"
-        to="/ranking?from=tabbar-1"
+        :to="{ path:'/ranking', query: { from: 'tabbar-1' } }"
         name="/ranking"
-      >
-        排行
-      </van-tabbar-item>
+      >排行</van-tabbar-item>
       <van-tabbar-item
         icon="setting-o"
-        to="/setting?from=tabbar-2"
+        :to="{ path:'/setting', query: { from: 'tabbar-2' } }"
         name="/setting"
-      >
-        设置
-      </van-tabbar-item>
+      >设置</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -163,13 +147,13 @@ td.col-green div.vxe-cell {
 <script>
 export default {
   name: "App",
-  metaInfo () {
+  metaInfo() {
     return {
       script: this.appInfo.homeInfo.script,
       link: this.appInfo.homeInfo.link
     };
   },
-  data () {
+  data() {
     return {
       viewKey: 0,
       tabbarActive: "/home",
@@ -180,10 +164,11 @@ export default {
       }
     };
   },
-  mounted () {
+  mounted() {
     this.init();
 
-    let pName = location.pathname, pSearch = location.search;
+    let pName = location.pathname,
+      pSearch = location.search;
 
     if (pName == "/") pName = "/home";
     this.tabbarActive = pName;
@@ -196,14 +181,14 @@ export default {
     }, 1000 * 10);
   },
   methods: {
-    init: function () {
+    init: function() {
       let bgLz = this.$cookie.get("bg-lz");
 
       bgLz == "true"
         ? (this.particlesShow = true)
         : (this.particlesShow = false);
     },
-    getApp: function (e) {
+    getApp: function(e) {
       this.axios
         .get(this.appApi.list.getApp + "&url=" + encodeURIComponent(e))
         .then(ret => {

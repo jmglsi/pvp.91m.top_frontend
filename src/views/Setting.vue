@@ -15,18 +15,13 @@
       <van-cell
         title="全局BP模拟器"
         icon="cluster-o"
-        to="/bp?from=setting"
+        :to="{ path: '/match', query: { from: 'setting' } }"
         is-link
       />
     </van-cell-group>
 
     <van-cell-group title="其它">
-      <van-switch-cell
-        v-model="particlesSwitch"
-        icon="photo-o"
-        title="粒子背景"
-        @change="onChange"
-      />
+      <van-switch-cell v-model="particlesSwitch" icon="photo-o" title="粒子背景" @change="onChange" />
     </van-cell-group>
 
     <van-cell-group title="友情链接">
@@ -68,21 +63,22 @@ i.van-icon.van-grid-item__icon img.van-icon__image {
 export default {
   name: "Setting",
   components: {
-    AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
+    AppBottomTabbar: resolve =>
+      require(["@/components/AppBottomTabbar.vue"], resolve)
   },
-  data () {
+  data() {
     return {
       key: "",
       particlesSwitch: true,
       setting: {}
     };
   },
-  mounted () {
+  mounted() {
     this.init();
     this.getSetting();
   },
   methods: {
-    init: function () {
+    init: function() {
       this.$cookie.get("bg-lz") == "true"
         ? (this.particlesSwitch = true)
         : (this.particlesSwitch = false);
@@ -90,15 +86,15 @@ export default {
       let key = this.$cookie.get("key");
       if (key) this.key = key;
     },
-    getSetting: function () {
+    getSetting: function() {
       this.axios.get(this.appApi.list.getSetting).then(ret => {
         this.setting = ret.data.data;
       });
     },
-    saveKey: function () {
+    saveKey: function() {
       this.$cookie.set("key", this.key, { expires: "1Y" });
     },
-    onChange: function (e) {
+    onChange: function(e) {
       this.$cookie.set("bg-lz", e, { expires: "1Y" });
     }
   }
