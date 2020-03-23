@@ -44,7 +44,7 @@
             <router-link
               v-for="(id, index) in data.item"
               :key="index + '-data-img-id'"
-              :to="{ path: '/heroInfo/' + id, query: { from: 'dayTag-'+ data.calendarInfo.day } }"
+              :to="{ path: '/heroInfo/' + id, query: { from: 'dayTag-' + data.calendarInfo.day } }"
             >
               <img
                 v-if="id != null"
