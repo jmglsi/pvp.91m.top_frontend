@@ -47,7 +47,7 @@ export default {
 
       if (item.value == 0) {
         this.$router.push({
-          path: "/bp/add",
+          path: "/match/add",
           query: { from: from }
         });
       }

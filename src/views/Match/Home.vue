@@ -58,10 +58,6 @@ i.van-icon.van-grid-item__icon img.van-icon__image {
   text-align: left;
 }
 
-.match {
-  padding: 0 10px;
-}
-
 .match-time {
   font-size: 12px;
 }
