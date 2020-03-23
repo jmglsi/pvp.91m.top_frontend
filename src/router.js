@@ -10,6 +10,10 @@ export default new Router({
             name: '404',
             redirect: '/ranking'
         }, {
+            path: '/bp',
+            name: 'match',
+            redirect: '/match'
+        }, {
             path: '/',
             name: 'Home',
             component: resolve => require(['./views/Home.vue'], resolve),
@@ -75,20 +79,20 @@ export default new Router({
                 keepAlive: true
             }
         }, {
-            path: '/bp',
-            component: resolve => require(['./views/Bp/Dashboard.vue'], resolve),
+            path: '/match',
+            component: resolve => require(['./views/Match/Dashboard.vue'], resolve),
             children: [{
                 path: '/',
-                name: 'BpHome',
-                component: resolve => require(['./views/Bp/Home.vue'], resolve),
+                name: 'MatchHome',
+                component: resolve => require(['./views/Match/Home.vue'], resolve),
                 meta: {
                     title: '全局BP模拟器 (观赛助手)',
                     keepAlive: true
                 }
             }, {
                 path: 'add',
-                name: 'BpAdd',
-                component: resolve => require(['./views/Bp/Add.vue'], resolve),
+                name: 'MatchAdd',
+                component: resolve => require(['./views/Match/Add.vue'], resolve),
                 meta: {
                     title: '全局BP模拟器 (观赛助手)',
                     keepAlive: true
