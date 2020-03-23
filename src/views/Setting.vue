@@ -53,6 +53,8 @@ div.ex-icons img.van-icon__image {
 
 i.van-icon.van-grid-item__icon img.van-icon__image {
   border-radius: 100%;
+  width: 40px;
+  height: 40px;
 }
 </style>
 
