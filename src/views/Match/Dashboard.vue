@@ -1,5 +1,5 @@
 <template>
-  <div class="bp-dashboard">
+  <div class="match-dashboard">
     <van-nav-bar :border="false" @click-left="onClickLeft" @click-right="onClickRight">
       <van-icon name="add-o" slot="left" />
       <van-icon name="question-o" slot="right" />
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "BpDashboard",
+  name: "MatchDashboard",
   data() {
     return {
       actionSheetShow: false,
@@ -39,11 +39,11 @@ export default {
     onClickRight: function() {
       this.$router.push({
         path: "/about",
-        query: { type: 4, from: "bp-dashboard" }
+        query: { type: 4, from: "match-dashboard" }
       });
     },
     onSelect: function(item) {
-      let from = "bp-dashboard";
+      let from = "match-dashboard";
 
       if (item.value == 0) {
         this.$router.push({
