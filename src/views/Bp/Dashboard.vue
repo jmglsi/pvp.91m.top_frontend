@@ -26,8 +26,8 @@ export default {
     return {
       actionSheetShow: false,
       actions: [
-        { name: "模拟 BP", subname: "分享阵容", value: 1 },
-        { name: "制作不易", subname: "请喝咖啡", value: 0 }
+        { name: "模拟 BP", subname: "分享阵容", value: 0 },
+        { name: "制作不易", subname: "请喝咖啡", value: 1 }
       ]
     };
   },
