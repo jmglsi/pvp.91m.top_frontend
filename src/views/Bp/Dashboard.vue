@@ -1,35 +1,54 @@
 <template>
   <div class="bp-dashboard">
-    <van-nav-bar
-      :border="false"
-      @click-right="onClickRight"
-    >
-      <van-icon
-        name="question-o"
-        slot="right"
-      />
+    <van-nav-bar :border="false" @click-left="onClickLeft" @click-right="onClickRight">
+      <van-icon name="add-o" slot="left" />
+      <van-icon name="question-o" slot="right" />
     </van-nav-bar>
 
     <router-view />
+
+    <van-action-sheet
+      title="如何打开"
+      v-model="actionSheetShow"
+      safe-area-inset-bottom
+      :actions="actions"
+      :close-on-click-action="true"
+      @select="onSelect"
+      class="app-action-sheet"
+    />
   </div>
 </template>
 
 <script>
 export default {
   name: "BpDashboard",
-  data () {
+  data() {
     return {
-    }
+      actionSheetShow: false,
+      actions: [{ name: "添加对局", value: 0 }]
+    };
   },
-  mounted () {
-  },
+  mounted() {},
   methods: {
-    onClickRight: function () {
+    onClickLeft: function() {
+      this.actionSheetShow = true;
+    },
+    onClickRight: function() {
       this.$router.push({
         path: "/about",
-        query: { type: 4, from: "bpdashboard" }
+        query: { type: 4, from: "bp-dashboard" }
       });
+    },
+    onSelect: function(item) {
+      let from = "bp-dashboard";
+
+      if (item.value == 0) {
+        this.$router.push({
+          path: "/bp/add",
+          query: { from: from }
+        });
+      }
     }
   }
-}
+};
 </script>

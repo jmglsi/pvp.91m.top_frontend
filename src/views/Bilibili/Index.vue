@@ -9,11 +9,7 @@
       class="app-top-search"
     />
 
-    <van-checkbox
-      v-model="checked"
-      class="auto-refresh"
-      @change="onCheckBoxChange"
-    />
+    <van-checkbox v-model="checked" class="auto-refresh" @change="onCheckBoxChange" />
 
     <vxe-grid
       :loading="loading"
@@ -23,57 +19,15 @@
       @cell-click="onCellClick"
       class="app-table"
     >
-      <vxe-table-column
-        title="id"
-        field="uid"
-        fixed="left"
-        width="100"
-      ></vxe-table-column>
-      <vxe-table-column
-        title="#"
-        type="seq"
-        width="75"
-      />
-      <vxe-table-column
-        title="类型"
-        field="type"
-        sortable
-        :width="listWidth"
-      />
-      <vxe-table-column
-        title="开始数量"
-        field="start_num"
-        sortable
-        :width="listWidth"
-      />
-      <vxe-table-column
-        title="目标数量"
-        field="num"
-        sortable
-        :width="listWidth"
-      />
-      <vxe-table-column
-        title="剩余数量"
-        field="task_num"
-        sortable
-        :width="listWidth"
-      />
-      <vxe-table-column
-        title="实时数量"
-        field="bz"
-        :width="listWidth"
-      />
-      <vxe-table-column
-        title="更新时间"
-        field="update_time"
-        sortable
-        width="200"
-      />
-      <vxe-table-column
-        title="状态"
-        field="is_running"
-        width="75"
-      />
+      <vxe-table-column title="id" field="uid" fixed="left" width="100"></vxe-table-column>
+      <vxe-table-column title="#" type="seq" width="75" />
+      <vxe-table-column title="类型" field="type" sortable :width="listWidth" />
+      <vxe-table-column title="开始数量" field="start_num" sortable :width="listWidth" />
+      <vxe-table-column title="目标数量" field="num" sortable :width="listWidth" />
+      <vxe-table-column title="剩余数量" field="task_num" sortable :width="listWidth" />
+      <vxe-table-column title="实时数量" field="bz" :width="listWidth" />
+      <vxe-table-column title="更新时间" field="update_time" sortable width="200" />
+      <vxe-table-column title="状态" field="is_running" width="75" />
       <template v-slot:empty>暂无数据</template>
     </vxe-grid>
 
@@ -90,25 +44,13 @@
 
     <van-action-sheet
       v-model="actionSheetShow"
-      :title="orderInfo.uid + ' 的其他数据'"
+      :title="orderInfo.uid + ' 如何打开'"
       safe-area-inset-bottom
+      :actions="actions"
+      :close-on-click-action="true"
+      @select="onSelect"
       class="app-action-sheet"
-    >
-      <van-cell-group>
-        <van-cell
-          title="复制订单"
-          v-clipboard:copy="copyData"
-          v-clipboard:success="onCopy"
-          v-clipboard:error="onError"
-          is-link
-        />
-        <van-cell
-          title="查看相关"
-          :url="'/bilibili?from=search&uid=' + orderInfo.uid"
-          is-link
-        />
-      </van-cell-group>
-    </van-action-sheet>
+    />
   </div>
 </template>
 
@@ -128,7 +70,7 @@
 <script>
 export default {
   name: "Bilibili",
-  data () {
+  data() {
     return {
       checked: true,
       getOrderInterval: 0,
@@ -140,13 +82,17 @@ export default {
       currentPage: 1,
       listWidth: 0,
       actionSheetShow: false,
+      actions: [
+        { name: "复制订单", value: 0 },
+        { name: "查看相关", value: 1 }
+      ],
       orderInfo: {},
       clientHeight: 0,
       copyData: "",
       loading: true
     };
   },
-  created () {
+  created() {
     const cHeight = document.documentElement.clientHeight;
     const cWidth = document.documentElement.clientWidth;
 
@@ -158,7 +104,7 @@ export default {
       ? (this.listWidth = 0)
       : (this.listWidth = 100);
   },
-  activated () {
+  activated() {
     /* https://cn.vuejs.org/v2/api/#activated */
 
     this.searchValue = "";
@@ -179,33 +125,33 @@ export default {
     }, 1000 * 10);
   },
   methods: {
-    getOrder: function (uid, page) {
+    getOrder: function(uid, page) {
       this.axios
         .get(
           this.appApi.list.getOrder +
-          "&uid=" +
-          encodeURIComponent(uid) +
-          "&page=" +
-          page
+            "&uid=" +
+            encodeURIComponent(uid) +
+            "&page=" +
+            page
         )
         .then(ret => {
           this.tableData = ret.data.data;
           this.loading = false;
         });
     },
-    getOrderInfo: function (row) {
+    getOrderInfo: function(row) {
       this.actionSheetShow = true;
       this.orderInfo = row;
 
       this.axios
         .get(
           "https://s.91m.top/?url=" +
-          encodeURIComponent(
-            location.origin +
-            location.pathname +
-            "?from=copyshare&uid=" +
-            encodeURIComponent(row.uid)
-          )
+            encodeURIComponent(
+              location.origin +
+                location.pathname +
+                "?from=copyshare&uid=" +
+                encodeURIComponent(row.uid)
+            )
         )
         .then(ret => {
           this.copyData =
@@ -229,13 +175,13 @@ export default {
             ret.data.data.url;
         });
     },
-    onClear: function () {
+    onClear: function() {
       this.searchValue = "";
       this.tableData = [];
       clearInterval(this.getOrderInterval);
       this.getOrder("", this.currentPage);
     },
-    onSearch: function () {
+    onSearch: function() {
       if (!this.searchValue) return;
       this.getOrder(this.searchValue, this.currentPage);
 
@@ -244,23 +190,36 @@ export default {
         this.getOrder(this.searchValue, this.currentPage);
       }, 1000 * 10);
     },
-    onCheckBoxChange: function (e) {
+    onCheckBoxChange: function(e) {
       if (e == false) {
         clearInterval(this.getOrderInterval);
       }
     },
-    onPaginationChange: function (e) {
+    onPaginationChange: function(e) {
       this.getOrder(this.searchValue, e);
     },
-    onCopy: function () {
+    onCopy: function() {
       this.$message.success("复制成功");
       this.actionSheetShow = false;
     },
-    onError: function () {
+    onError: function() {
       this.$message.error("复制失败");
     },
-    onCellClick: function ({ row }) {
+    onCellClick: function({ row }) {
       this.getOrderInfo(row, this.currentPage);
+    },
+    onSelect: function(item) {
+      let orderInfo = this.orderInfo;
+
+      if (item.value == 0) {
+        this.$copyText(this.copyData);
+        this.$message.success("已复制");
+      }
+
+      if (item.value == 1) {
+        this.searchValue = orderInfo.uid;
+        this.getOrder(orderInfo.uid, 1);
+      }
     }
   }
 };

@@ -10,34 +10,6 @@ export default new Router({
             name: '404',
             redirect: '/ranking'
         }, {
-            path: '/bilibili',
-            name: 'Bilibili',
-            component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
-            meta: {
-                title: 'bilibili',
-                keepAlive: true
-            }
-        }, {
-            path: '/bp',
-            component: resolve => require(['./views/Bp/Dashboard.vue'], resolve),
-            children: [{
-                path: '',
-                name: 'Home',
-                component: resolve => require(['./views/Bp/Home.vue'], resolve),
-                meta: {
-                    title: '全局BP模拟器 (观赛助手)',
-                    keepAlive: true
-                }
-            }, {
-                path: 'add',
-                name: 'Add',
-                component: resolve => require(['./views/Bp/Add.vue'], resolve),
-                meta: {
-                    title: '全局BP模拟器 (观赛助手)',
-                    keepAlive: true
-                }
-            }]
-        }, {
             path: '/',
             name: 'Home',
             component: resolve => require(['./views/Home.vue'], resolve),
@@ -94,6 +66,34 @@ export default new Router({
             meta: {
                 title: '回顾'
             }
+        }, {
+            path: '/bilibili',
+            name: 'Bilibili',
+            component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
+            meta: {
+                title: 'bilibili',
+                keepAlive: true
+            }
+        }, {
+            path: '/bp',
+            component: resolve => require(['./views/Bp/Dashboard.vue'], resolve),
+            children: [{
+                path: '/',
+                name: 'BpHome',
+                component: resolve => require(['./views/Bp/Home.vue'], resolve),
+                meta: {
+                    title: '全局BP模拟器 (观赛助手)',
+                    keepAlive: true
+                }
+            }, {
+                path: 'add',
+                name: 'BpAdd',
+                component: resolve => require(['./views/Bp/Add.vue'], resolve),
+                meta: {
+                    title: '全局BP模拟器 (观赛助手)',
+                    keepAlive: true
+                }
+            }]
         }
     ]
 })

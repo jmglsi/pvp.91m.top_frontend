@@ -18,52 +18,24 @@
       :sort-config="{trigger: 'cell'}"
       @cell-click="onCellClick"
     >
-      <vxe-table-column
-        title="英雄1"
-        field="adaptationRate1"
-        fixed="left"
-        width="75"
-        sortable
-      >
+      <vxe-table-column title="英雄1" field="adaptationRate1" fixed="left" width="75" sortable>
         <template v-slot="{ row }">
-          <img
-            v-lazy="row.img1"
-            width="50"
-            class="app-img"
-          />
+          <img v-lazy="row.img1" width="50" class="app-img" />
           <div class="row-rate">
-            <span class="bottom-num adaptation-rate">
-              {{ row.adaptationRate1 }}
-            </span>
+            <span class="bottom-num adaptation-rate">{{ row.adaptationRate1 }}</span>
           </div>
         </template>
       </vxe-table-column>
-      <vxe-table-column
-        title="英雄2"
-        field="adaptationRate2"
-        fixed="left"
-        width="75"
-        sortable
-      >
+      <vxe-table-column title="英雄2" field="adaptationRate2" fixed="left" width="75" sortable>
         <template v-slot="{ row }">
-          <img
-            v-lazy="row.img2"
-            width="50"
-            class="app-img"
-          />
+          <img v-lazy="row.img2" width="50" class="app-img" />
           <div class="row-rate">
-            <span class="bottom-num adaptation-rate">
-              {{ row.adaptationRate2 }}
-            </span>
+            <span class="bottom-num adaptation-rate">{{ row.adaptationRate2 }}</span>
           </div>
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="#"
-        type="seq"
-        width="75"
-      />
+      <vxe-table-column title="#" type="seq" width="75" />
 
       <vxe-table-column title="队友 (%)">
         <vxe-table-column
@@ -110,24 +82,14 @@
     </vxe-grid>
 
     <van-action-sheet
-      :title="heroInfo.name1 + ' & ' + heroInfo.name2 + ' 的其它数据'"
+      :title="heroInfo.name1 + ' & ' + heroInfo.name2 + ' 如何打开'"
       v-model="actionSheetShow"
       safe-area-inset-bottom
+      :actions="actions"
+      :close-on-click-action="true"
+      @select="onSelect"
       class="app-action-sheet"
-    >
-      <van-cell
-        title="复制信息"
-        v-clipboard:copy="copyData"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError"
-        is-link
-      />
-      <van-cell
-        title="对局回顾"
-        :to="'/heroReplay/' + heroInfo.id1 + ',' + heroInfo.id2 + '?from=ranking-action-sheet'"
-        is-link
-      />
-    </van-action-sheet>
+    />
   </div>
 </template>
 
@@ -141,7 +103,7 @@
 <script>
 export default {
   name: "Guanxi",
-  data () {
+  data() {
     return {
       searchValue: "",
       searchPlaceholder: "请输入搜索关键词",
@@ -151,6 +113,10 @@ export default {
         list: []
       },
       actionSheetShow: false,
+      actions: [
+        { name: "复制信息", value: 0 },
+        { name: "对局回顾", value: 1 }
+      ],
       heroInfo: {},
       clientHeight: 0,
       listWidth: 0,
@@ -158,14 +124,14 @@ export default {
       loading: true
     };
   },
-  created () {
+  created() {
     this.appHeightInit(1440);
   },
-  mounted () {
+  mounted() {
     this.combinationInit();
   },
   methods: {
-    combinationInit: function () {
+    combinationInit: function() {
       this.searchValue = "";
 
       let heroName = this.$route.query.heroName;
@@ -179,17 +145,19 @@ export default {
       this.getHeroCombination(heroName);
 
       setInterval(() => {
-        let text = this.tableData.searchPlaceholder, textNum = text.length, index = Math.floor(Math.random() * textNum);
+        let text = this.tableData.searchPlaceholder,
+          textNum = text.length,
+          index = Math.floor(Math.random() * textNum);
 
         this.searchPlaceholder = text[index];
       }, 1000 * 5);
     },
-    getHeroCombination: function (heroName, type = 0) {
+    getHeroCombination: function(heroName, type = 0) {
       this.axios
         .get(
           this.appApi.list.getHeroCombination +
-          "&heroName=" +
-          encodeURIComponent(heroName)
+            "&heroName=" +
+            encodeURIComponent(heroName)
         )
         .then(ret => {
           this.tableData = ret.data.data;
@@ -207,7 +175,7 @@ export default {
           this.loading = false;
         });
     },
-    getHeroInfo: function (row) {
+    getHeroInfo: function(row) {
       this.actionSheetShow = true;
       this.heroInfo = row;
 
@@ -217,16 +185,16 @@ export default {
       this.axios
         .get(
           "https://s.91m.top/?url=" +
-          encodeURIComponent(
-            location.origin +
-            location.pathname +
-            "?type=1&from=copyshare&heroName=" +
-            encodeURIComponent(heroName) +
-            "&heroId1=" +
-            row.id1 +
-            "&heroId2=" +
-            row.id2
-          )
+            encodeURIComponent(
+              location.origin +
+                location.pathname +
+                "?type=1&from=copyshare&heroName=" +
+                encodeURIComponent(heroName) +
+                "&heroId1=" +
+                row.id1 +
+                "&heroId2=" +
+                row.id2
+            )
         )
         .then(ret => {
           this.copyData =
@@ -245,8 +213,9 @@ export default {
             ret.data.data.url;
         });
     },
-    cellClassName: function ({ row, column }) {
-      let pick = this.tableData.color.pick, win = this.tableData.color.win;
+    cellClassName: function({ row, column }) {
+      let pick = this.tableData.color.pick,
+        win = this.tableData.color.win;
 
       if (
         column.property === "teammatePickRate" ||
@@ -269,22 +238,23 @@ export default {
         }
       }
     },
-    onClear: function () {
+    onClear: function() {
       this.searchValue = "";
 
       this.getHeroCombination("", 1);
     },
-    onSearch: function () {
+    onSearch: function() {
       if (!this.searchValue) return;
       if (this.searchValue.indexOf(",") > -1) {
         this.axios
           .get(
             this.appApi.list.addHeroByCombination +
-            "&heroName=" +
-            this.searchValue
+              "&heroName=" +
+              this.searchValue
           )
           .then(ret => {
-            let code = ret.data.data.code, msg;
+            let code = ret.data.data.code,
+              msg;
             if (code == 1) {
               msg = "添加成功";
               this.$message.success(msg);
@@ -307,15 +277,24 @@ export default {
         this.getHeroCombination(this.searchValue, 1);
       }
     },
-    onCopy: function () {
-      this.$message.success("复制成功");
-      this.actionSheetShow = false;
-    },
-    onError: function () {
-      this.$message.error("复制失败");
-    },
-    onCellClick: function ({ row }) {
+    onCellClick: function({ row }) {
       this.getHeroInfo(row);
+    },
+    onSelect: function(item) {
+      let from = "ranking-action-sheet";
+      let heroInfo = this.heroInfo;
+
+      if (item.value == 0) {
+        this.$copyText(this.copyData);
+        this.$message.success("已复制");
+      }
+
+      if (item.value == 1) {
+        this.$router.push({
+          path: "/heroReplay/" + heroInfo.id1 + "," + heroInfo.id2,
+          query: { from: from }
+        });
+      }
     }
   }
 };

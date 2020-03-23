@@ -1,21 +1,9 @@
 <template>
   <div class="ranking-dianfengsai">
     <van-dropdown-menu style="height: 54px;">
-      <van-dropdown-item
-        v-model="areaType"
-        :options="areaOptions"
-        @change="onChange(1)"
-      />
-      <van-dropdown-item
-        v-model="heroType"
-        :options="heroOptions"
-        @change="onChange(2)"
-      />
-      <van-dropdown-item
-        v-model="otherType"
-        :options="otherOptions"
-        @change="onChange(3)"
-      />
+      <van-dropdown-item v-model="areaType" :options="areaOptions" @change="onChange(1)" />
+      <van-dropdown-item v-model="heroType" :options="heroOptions" @change="onChange(2)" />
+      <van-dropdown-item v-model="otherType" :options="otherOptions" @change="onChange(3)" />
     </van-dropdown-menu>
 
     <vxe-grid
@@ -27,13 +15,7 @@
       :sort-config="{trigger: 'cell'}"
       @cell-click="onCellClick"
     >
-      <vxe-table-column
-        title="英雄"
-        field="score"
-        fixed="left"
-        width="75"
-        sortable
-      >
+      <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
         <template v-slot="{ row }">
           <van-tag
             mark
@@ -41,14 +23,8 @@
             v-if="row.tag.text"
             :color="row.tag.color"
             class="dfs-tag"
-          >
-            {{ row.tag.text }}
-          </van-tag>
-          <img
-            v-lazy="row.img"
-            width="50"
-            class="app-img"
-          />
+          >{{ row.tag.text }}</van-tag>
+          <img v-lazy="row.img" width="50" class="app-img" />
           <img
             v-if="row.trend > 0"
             v-lazy="'/img/app-icons/hot-' + row.trend + '.png'"
@@ -56,14 +32,8 @@
             class="dfs-trend"
           />
           <div class="dfs-skill">
-            <img
-              width="20"
-              v-lazy="row.skill[0].img"
-              class="dfs-skill-img dfs-skill-1"
-            />
-            <span class="bottom-num skill-pick-rate-1">
-              {{row.skill[0].pickRate}}
-            </span>
+            <img width="20" v-lazy="row.skill[0].img" class="dfs-skill-img dfs-skill-1" />
+            <span class="bottom-num skill-pick-rate-1">{{row.skill[0].pickRate}}</span>
             <img
               width="20"
               v-if="row.skill[1].id"
@@ -73,18 +43,12 @@
             <span
               v-if="row.skill[1].id"
               class="bottom-num skill-pick-rate-2"
-            >
-              {{row.skill[1].pickRate}}
-            </span>
+            >{{row.skill[1].pickRate}}</span>
           </div>
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="#"
-        type="seq"
-        width="75"
-      />
+      <vxe-table-column title="#" type="seq" width="75" />
 
       <vxe-table-column title="出场越低,波动越大 (%)">
         <vxe-table-column
@@ -213,41 +177,14 @@
     </vxe-grid>
 
     <van-action-sheet
-      :title="heroInfo.name + ' 的其它数据'"
+      :title="heroInfo.name + ' 如何打开'"
       v-model="actionSheetShow"
       safe-area-inset-bottom
+      :actions="actions"
+      :close-on-click-action="true"
+      @select="onSelect"
       class="app-action-sheet"
-    >
-      <van-cell
-        title="趋势 & 职业对比"
-        :to="'/heroInfo/' + heroInfo.id + '?from=ranking-action-sheet'"
-        is-link
-      />
-      <van-cell
-        title="对局回顾"
-        value="第一视角"
-        :to="'/heroReplay/' + heroInfo.id + '?from=ranking-action-sheet'"
-        is-link
-      />
-      <van-cell
-        title="更新记录"
-        value="NGA @EndMP"
-        :url="'https://nga.178.com/read.php?pid=' + heroInfo.updatePid"
-        is-link
-      />
-      <van-cell
-        title="攻速阈值"
-        value="NGA @小熊de大熊"
-        url="https://bbs.nga.cn/read.php?tid=12677614"
-        is-link
-      />
-      <van-cell
-        title="赛事数据"
-        value="玩加电竞"
-        :url="'https://www.wanplus.com/static/app/community/share.html?header_type=5&id=' + heroInfo.id + '&tab_type=5&gm=kog&gametype=6&tag_id=0'"
-        is-link
-      />
-    </van-action-sheet>
+    />
   </div>
 </template>
 
@@ -292,7 +229,7 @@
 <script>
 export default {
   name: "DianFengSai",
-  data () {
+  data() {
     return {
       areaType: 0,
       areaOptions: [
@@ -323,6 +260,13 @@ export default {
         list: []
       },
       actionSheetShow: false,
+      actions: [
+        { name: "趋势 & 职业对比", value: 0 },
+        { name: "对局回顾", subname: "第一视角", value: 1 },
+        { name: "赛事数据", subname: "玩加电竞", value: 2 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 3 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 }
+      ],
       heroInfo: {
         hero: {
           id: 0,
@@ -334,14 +278,14 @@ export default {
       loading: true
     };
   },
-  created () {
+  created() {
     this.appHeightInit(1440);
   },
-  mounted () {
+  mounted() {
     this.getHeroRanking(0, 0);
   },
   methods: {
-    getHeroRanking: function (aid, bid) {
+    getHeroRanking: function(aid, bid) {
       this.axios
         .get(this.appApi.list.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
@@ -349,11 +293,11 @@ export default {
           this.loading = false;
         });
     },
-    getHeroInfo: function (row) {
+    getHeroInfo: function(row) {
       this.actionSheetShow = true;
       this.heroInfo = row;
     },
-    onChange: function (e) {
+    onChange: function(e) {
       if (e == 1 || e == 2) {
         this.getHeroRanking(this.areaType, this.heroType);
       }
@@ -375,10 +319,10 @@ export default {
         this.otherType = 0;
       }
     },
-    onCellClick: function ({ row }) {
+    onCellClick: function({ row }) {
       this.getHeroInfo(row);
     },
-    cellClassName: function ({ row, column }) {
+    cellClassName: function({ row, column }) {
       let color = this.tableData.color;
 
       if (column.property === "banRate") {
@@ -400,6 +344,40 @@ export default {
         ) {
           return "col-green";
         }
+      }
+    },
+    onSelect: function(item) {
+      let from = "ranking-action-sheet";
+      let heroInfo = this.heroInfo;
+
+      if (item.value == 0) {
+        this.$router.push({
+          path: "/heroInfo/" + heroInfo.id,
+          query: { from: from }
+        });
+      }
+
+      if (item.value == 1) {
+        this.$router.push({
+          path: "/heroReplay/" + heroInfo.id,
+          query: { from: from }
+        });
+      }
+
+      if (item.value == 2) {
+        window.open(
+          "https://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
+            heroInfo.id +
+            "&tab_type=5&gm=kog&gametype=6&tag_id=0"
+        );
+      }
+
+      if (item.value == 3) {
+        window.open("https://nga.178.com/read.php?pid=" + heroInfo.updatePid);
+      }
+
+      if (item.value == 4) {
+        window.open("https://bbs.nga.cn/read.php?tid=12677614");
       }
     }
   }

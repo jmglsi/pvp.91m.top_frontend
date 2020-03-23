@@ -1,5 +1,5 @@
 <template>
-  <div class="bp">
+  <div class="bp-add">
     <!-- 数据:下拉 -->
     <van-dropdown-menu class="app-top-menu">
       <van-dropdown-item
@@ -449,7 +449,7 @@
 
 <script>
 export default {
-  name: "Bp",
+  name: "BpAdd",
   components: {
     VueMarkdown: resolve => require(["vue-markdown"], resolve),
     AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)

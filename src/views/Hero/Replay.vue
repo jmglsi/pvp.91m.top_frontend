@@ -1,15 +1,7 @@
 <template>
   <div class="replay">
-    <van-nav-bar
-      :title="heroInfo.name"
-      left-text="英雄信息"
-      :border="false"
-      @click-left="onClickLeft"
-    >
-      <van-icon
-        name="chart-trending-o"
-        slot="left"
-      />
+    <van-nav-bar :title="heroInfo.name" left-text="英雄信息" :border="false" @click-left="onClickLeft">
+      <van-icon name="chart-trending-o" slot="left" />
     </van-nav-bar>
 
     <van-collapse v-model="activeNames">
@@ -19,38 +11,14 @@
         :name="index"
         :value="data.time"
       >
-        <div
-          slot="title"
-          class="replay-title"
-        >
-          <van-tag
-            round
-            :type="data.status"
-            class="replay-usedtime replay-tag"
-          >
-            {{data.usedtime}}
-          </van-tag>
-          <van-tag
-            round
-            color="black"
-            class="replay-tag"
-            v-show="!duiyou"
-          >
-            {{ data.equMoney }}
-          </van-tag>
-          <span class="replay-playername">
-            {{ data.gamePlayerName }}
-          </span>
+        <div slot="title" class="replay-title">
+          <van-tag round :type="data.status" class="replay-usedtime replay-tag">{{data.usedtime}}</van-tag>
+          <van-tag round color="black" class="replay-tag" v-show="!duiyou">{{ data.equMoney }}</van-tag>
+          <span class="replay-playername">{{ data.gamePlayerName }}</span>
         </div>
 
-        <div
-          class="replay-item-data"
-          v-show="!duiyou"
-        >
-          <van-grid
-            :border="false"
-            :column-num="7"
-          >
+        <div class="replay-item-data" v-show="!duiyou">
+          <van-grid :border="false" :column-num="7">
             <van-grid-item
               v-show="data.heroSkill > 0"
               :icon="'https://image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'"
@@ -73,9 +41,7 @@
           size="mini"
           class="replay-button"
           v-show="!duiyou"
-        >
-          {{ data.heroKda }}
-        </van-button>
+        >{{ data.heroKda }}</van-button>
 
         <van-button
           round
@@ -91,28 +57,11 @@
       v-model="actionSheetShow"
       :title="nowData.gamePlayerName + ' 如何打开'"
       safe-area-inset-bottom
+      :actions="actions"
+      :close-on-click-action="true"
+      @select="onSelect"
       class="app-action-sheet"
-    >
-      <van-cell
-        title="复制链接"
-        v-clipboard:copy="copyData"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError"
-        is-link
-      />
-      <van-cell
-        title="详情"
-        value="需要安装王者营地"
-        :url="nowData.hippy"
-        is-link
-      />
-      <van-cell
-        title="回顾"
-        value="需要安装王者营地"
-        :url="nowData.url"
-        is-link
-      />
-    </van-action-sheet>
+    />
 
     <van-pagination
       v-model="currentPage"
@@ -167,9 +116,10 @@ div.van-collapse {
 export default {
   name: "HeroReplay",
   components: {
-    AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
+    AppBottomTabbar: resolve =>
+      require(["@/components/AppBottomTabbar.vue"], resolve)
   },
-  data () {
+  data() {
     return {
       duiyou: false,
       activeNames: ["1"],
@@ -183,10 +133,15 @@ export default {
       },
       currentPage: 1,
       nowData: {},
-      actionSheetShow: false
+      actionSheetShow: false,
+      actions: [
+        { name: "复制链接", value: 0 },
+        { name: "详情", subname: "需要安装王者营地", value: 1 },
+        { name: "回顾", subname: "需要安装王者营地", value: 2 }
+      ]
     };
   },
-  mounted () {
+  mounted() {
     let heroId = this.$route.params.id;
     this.nowHeroId = heroId;
 
@@ -199,7 +154,7 @@ export default {
     }, 100);
   },
   methods: {
-    getHeroInfo: function (heroId) {
+    getHeroInfo: function(heroId) {
       this.axios
         .get(this.appApi.list.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
@@ -210,11 +165,12 @@ export default {
           if (heroId.indexOf(",") > -1) this.duiyou = true;
         });
     },
-    getActionSheet: function (row) {
+    getActionSheet: function(row) {
       this.nowData = row;
       this.actionSheetShow = true;
 
-      let url = row.url, urlIndex = url.indexOf("=");
+      let url = row.url,
+        urlIndex = url.indexOf("=");
 
       this.axios
         .get("https://s.91m.top/?url=" + url.substr(urlIndex + 1, url.length))
@@ -223,20 +179,20 @@ export default {
             this.heroInfo.name + " 的对局回顾 ↓\r-\r" + ret.data.data.url;
         });
     },
-    getHeroReplayByHeroId: function (heroId, page) {
+    getHeroReplayByHeroId: function(heroId, page) {
       this.axios
         .get(
           this.appApi.list.getHeroReplayByHeroId +
-          "&heroId=" +
-          heroId +
-          "&page=" +
-          page
+            "&heroId=" +
+            heroId +
+            "&page=" +
+            page
         )
         .then(ret => {
           this.tableData = ret.data.data;
         });
     },
-    equUpdate: function () {
+    equUpdate: function() {
       this.$dialog
         .confirm({
           title: "是否打开装备更新记录?",
@@ -247,21 +203,30 @@ export default {
           window.open("https://ngabbs.com/read.php?tid=19902976");
         });
     },
-    onChange: function (e) {
+    onChange: function(e) {
       this.getHeroReplayByHeroId(this.nowHeroId, e);
     },
-    onCopy: function () {
-      this.$message.success("复制成功");
-      this.actionSheetShow = false;
-    },
-    onError: function () {
-      this.$message.error("复制失败");
-    },
-    onClickLeft: function () {
+    onClickLeft: function() {
       this.$router.push({
         path: "/heroInfo/" + this.heroInfo.id,
         query: { from: "heroReplay" }
       });
+    },
+    onSelect: function(item) {
+      let nowData = this.nowData;
+
+      if (item.value == 0) {
+        this.$copyText(this.copyData);
+        this.$message.success("已复制");
+      }
+
+      if (item.value == 1) {
+        window.open(nowData.hippy);
+      }
+
+      if (item.value == 2) {
+        window.open(nowData.url);
+      }
     }
   }
 };

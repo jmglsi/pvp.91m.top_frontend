@@ -1,24 +1,10 @@
 <template>
   <div class="ranking-wanjia">
     <van-dropdown-menu style="height: 54px;">
-      <van-dropdown-item
-        v-model="areaType"
-        :options="playerOptions"
-        @change="onChange"
-      />
-      <van-dropdown-item
-        title="筛选"
-        ref="item"
-      >
-        <van-switch-cell
-          v-model="switchShield"
-          title="隐藏战绩"
-        />
-        <van-button
-          block
-          type="info"
-          @click="onConfirm"
-        >确认</van-button>
+      <van-dropdown-item v-model="areaType" :options="playerOptions" @change="onChange" />
+      <van-dropdown-item title="筛选" ref="item">
+        <van-switch-cell v-model="switchShield" title="隐藏战绩" />
+        <van-button block type="info" @click="onConfirm">确认</van-button>
       </van-dropdown-item>
     </van-dropdown-menu>
 
@@ -30,12 +16,7 @@
       :sort-config="{trigger: 'cell'}"
       @cell-click="onCellClick"
     >
-      <vxe-table-column
-        title="玩家"
-        field="userId"
-        fixed="left"
-        width="75"
-      >
+      <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
         <template v-slot="{ row }">
           <van-tag
             mark
@@ -43,59 +24,34 @@
             class="wj-tag"
             v-if="row.tag"
             :color="row.tag.color"
-          >
-            {{ row.tag.text }}
-          </van-tag>
-          <img
-            v-lazy="row.avatar"
-            width="50"
-            class="app-img"
-          />
+          >{{ row.tag.text }}</van-tag>
+          <img v-lazy="row.avatar" width="50" class="app-img" />
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="#"
-        type="seq"
-        width="75"
-      />
+      <vxe-table-column title="#" type="seq" width="75" />
 
-      <vxe-table-column
-        title="昵称"
-        field="gamePlayerName"
-        :width="listWidth"
-      />
+      <vxe-table-column title="昵称" field="gamePlayerName" :width="listWidth" />
 
-      <vxe-table-column
-        title="分数"
-        field="rankScore"
-        :width="listWidth"
-        sortable
-      />
+      <vxe-table-column title="分数" field="rankScore" :width="listWidth" sortable />
     </vxe-grid>
 
     <van-action-sheet
-      :title="playerInfo.gamePlayerName + ' 的其它数据'"
+      :title="playerInfo.gamePlayerName + ' 如何打开'"
       v-model="actionSheetShow"
       safe-area-inset-bottom
+      :actions="playerInfo.area < 3 ? actions : []"
+      :close-on-click-action="true"
+      @select="onSelect"
       class="app-action-sheet"
-    >
-      <van-cell
-        title="查看QQ"
-        v-show="playerInfo.area < 3"
-        v-clipboard:copy="copyData"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError"
-        is-link
-      />
-    </van-action-sheet>
+    />
   </div>
 </template>
 
 <script>
 export default {
   name: "WanJia",
-  data () {
+  data() {
     return {
       playerShield: 0,
       switchShield: false,
@@ -113,19 +69,20 @@ export default {
         list: []
       },
       actionSheetShow: false,
+      actions: [{ name: "查看QQ", value: 0 }],
       playerInfo: {},
       clientHeight: 0,
       loading: true
     };
   },
-  created () {
+  created() {
     this.appHeightInit(350);
   },
-  mounted () {
+  mounted() {
     this.getPlayerRanking(0, 0);
   },
   methods: {
-    getPlayerRanking: function (aid, bid) {
+    getPlayerRanking: function(aid, bid) {
       this.axios
         .get(this.appApi.list.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
@@ -133,7 +90,7 @@ export default {
           this.loading = false;
         });
     },
-    getPlayerInfo: function (row) {
+    getPlayerInfo: function(row) {
       if (row.userId == "0") return;
 
       this.actionSheetShow = true;
@@ -145,7 +102,8 @@ export default {
           this.appApi.list.getUserInfo + "&aid=" + row.userId + "&bid=" + key
         )
         .then(ret => {
-          let data = ret.data.data, code = data.code;
+          let data = ret.data.data,
+            code = data.code;
 
           if (code != 1) {
             this.$message.error("未知错误");
@@ -164,27 +122,28 @@ export default {
             row.userId;
         });
     },
-    onChange: function (e) {
+    onChange: function(e) {
       this.getPlayerRanking(e, this.playerShield);
     },
-    onConfirm: function () {
+    onConfirm: function() {
       this.$refs.item.toggle();
 
       this.playerShield = Number(this.switchShield);
       this.getPlayerRanking(this.areaType, this.playerShield);
     },
-    onCopy: function () {
-      this.$dialog.alert({
-        title: this.playerInfo.gamePlayerName,
-        message: "QQ:" + this.qq + "\r信息已复制 ;D"
-      });
-      this.actionSheetShow = false;
-    },
-    onError: function () {
-      this.$message.error("复制失败");
-    },
-    onCellClick: function ({ row }) {
+    onCellClick: function({ row }) {
       this.getPlayerInfo(row);
+    },
+    onSelect: function(item) {
+      let playerInfo = this.playerInfo;
+
+      if (item.value == 0) {
+        this.$copyText(this.copyData);
+        this.$dialog.alert({
+          title: playerInfo.gamePlayerName,
+          message: "QQ:" + this.qq + "\r信息已复制 ;D"
+        });
+      }
     }
   }
 };
