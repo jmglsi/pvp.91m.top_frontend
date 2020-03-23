@@ -97,6 +97,22 @@ export default new Router({
                     title: '全局BP模拟器 (观赛助手)',
                     keepAlive: true
                 }
+            }, {
+                path: 'more',
+                name: 'MatchMore',
+                component: resolve => require(['./views/Match/More.vue'], resolve),
+                meta: {
+                    title: '全局BP模拟器 (观赛助手)',
+                    keepAlive: true
+                }
+            }, {
+                path: ':id',
+                name: 'MatchInfo',
+                component: resolve => require(['./views/Match/Info.vue'], resolve),
+                meta: {
+                    title: '全局BP模拟器 (观赛助手)',
+                    keepAlive: true
+                }
             }]
         }
     ]
