@@ -18,6 +18,7 @@ export default new Router({
             name: 'Home',
             component: resolve => require(['./views/Home.vue'], resolve),
             meta: {
+                type: 1,
                 title: '首页',
                 keepAlive: true
             }
@@ -26,6 +27,7 @@ export default new Router({
             name: 'Ranking',
             component: resolve => require(['./views/Ranking/Index.vue'], resolve),
             meta: {
+                type: 1,
                 title: '排行',
                 keepAlive: true
             }
@@ -34,6 +36,7 @@ export default new Router({
             name: 'Changelog',
             component: resolve => require(['./views/Changelog.vue'], resolve),
             meta: {
+                type: 1,
                 title: '更新记录',
                 keepAlive: true
             }
@@ -42,6 +45,7 @@ export default new Router({
             name: 'Setting',
             component: resolve => require(['./views/Setting.vue'], resolve),
             meta: {
+                type: 1,
                 title: '设置',
                 keepAlive: true
             }
@@ -51,6 +55,7 @@ export default new Router({
             name: 'About',
             component: resolve => require(['./views/About.vue'], resolve),
             meta: {
+                type: 1,
                 title: '关于',
                 keepAlive: true
             }
@@ -60,6 +65,7 @@ export default new Router({
             name: 'HeroInfo',
             component: resolve => require(['./views/Hero/Info.vue'], resolve),
             meta: {
+                type: 1,
                 title: '信息'
             }
         },
@@ -68,6 +74,7 @@ export default new Router({
             name: 'HeroReplay',
             component: resolve => require(['./views/Hero/Replay.vue'], resolve),
             meta: {
+                type: 1,
                 title: '回顾'
             }
         }, {
@@ -75,6 +82,7 @@ export default new Router({
             name: 'Bilibili',
             component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
             meta: {
+                type: 1,
                 title: 'bilibili',
                 keepAlive: true
             }
@@ -86,7 +94,8 @@ export default new Router({
                 name: 'MatchHome',
                 component: resolve => require(['./views/Match/Home.vue'], resolve),
                 meta: {
-                    title: '全局BP模拟器 (观赛助手)',
+                    type: 2,
+                    title: '首页',
                     keepAlive: true
                 }
             }, {
@@ -94,7 +103,8 @@ export default new Router({
                 name: 'MatchAdd',
                 component: resolve => require(['./views/Match/Add.vue'], resolve),
                 meta: {
-                    title: '全局BP模拟器 (观赛助手)',
+                    type: 2,
+                    title: '添加',
                     keepAlive: true
                 }
             }, {
@@ -102,7 +112,8 @@ export default new Router({
                 name: 'MatchMore',
                 component: resolve => require(['./views/Match/More.vue'], resolve),
                 meta: {
-                    title: '全局BP模拟器 (观赛助手)',
+                    type: 2,
+                    title: '更多',
                     keepAlive: true
                 }
             }, {
@@ -110,8 +121,8 @@ export default new Router({
                 name: 'MatchInfo',
                 component: resolve => require(['./views/Match/Info.vue'], resolve),
                 meta: {
-                    title: '全局BP模拟器 (观赛助手)',
-                    keepAlive: true
+                    type: 2,
+                    title: '详情'
                 }
             }]
         }
