@@ -1,8 +1,12 @@
 <template>
-  <div class="bp-home">
+  <div class="match-home">
     <div class="match">
       <van-cell-group title="官方赛事">
-        <van-cell v-for="(data, index) in match.list" :key="index + '-match'" :value="data.des">
+        <van-cell
+          v-for="(data, index) in official.list"
+          :key="index + '-official'"
+          @click="onClick(data.id)"
+        >
           <template #title>
             <van-grid :border="false" :column-num="3">
               <van-grid-item :icon="data.camp1Img" :text="data.camp1Name" />
@@ -15,11 +19,19 @@
             </van-grid>
           </template>
         </van-cell>
-        <van-cell :title="match.title" is-link to="bp" />
+        <van-cell
+          :title="official.title"
+          is-link
+          :to="{ path: '/match/more', query: { type: 1, from: 'match-home' } }"
+        />
       </van-cell-group>
 
       <van-cell-group title="玩家分享">
-        <van-cell v-for="(data, index) in playerShare.list" :key="index + '-playerShare'">
+        <van-cell
+          v-for="(data, index) in player.list"
+          :key="index + '-player'"
+          @click="onClick(data.id)"
+        >
           <template #title>
             <van-grid :border="false" :column-num="3">
               <van-grid-item :icon="data.camp1Img" :text="data.camp1Name" />
@@ -32,10 +44,13 @@
             </van-grid>
           </template>
         </van-cell>
-        <van-cell :title="playerShare.title" is-link to="bp" />
+        <van-cell
+          :title="player.title"
+          is-link
+          :to="{ path: '/match/more', query: { type: 2, from: 'match-home' } }"
+        />
       </van-cell-group>
     </div>
-    <AppBottomTabbar />
   </div>
 </template>
 
@@ -54,7 +69,7 @@ i.van-icon.van-grid-item__icon img.van-icon__image {
 </style>
 
 <style scoped>
-.bp-home {
+.match-home {
   text-align: left;
 }
 
@@ -74,16 +89,13 @@ i.van-icon.van-grid-item__icon img.van-icon__image {
 <script>
 export default {
   name: "BpHome",
-  components: {
-    AppBottomTabbar: resolve =>
-      require(["@/components/AppBottomTabbar.vue"], resolve)
-  },
   data() {
     return {
-      match: {
+      official: {
         title: "查看更多",
         list: [
           {
+            id: "9ee90e020d",
             camp1Img:
               "https://p.qpic.cn/sign_up17/0/9ee90d6340da4a19855df4e2b5b5c70e/0",
             camp1Name: "成都AG",
@@ -91,9 +103,10 @@ export default {
               "https://p.qpic.cn/sign_up17/0/e020d7c560b3f9acd3d6e64e2cc18bed/0",
             camp2Name: "南京Hero",
             bo: 5,
-            time: "昨天 20:00"
+            time: "03-22 20:00"
           },
           {
+            id: "d21a930905",
             camp1Img:
               "https://p.qpic.cn/sign_up17/0/d21a9b7c6ae284cd291dca60a5dafcca/0",
             camp1Name: "RNG.M",
@@ -101,9 +114,10 @@ export default {
               "https://p.qpic.cn/sign_up17/0/309054a239b5693c3830acad662976af/0",
             camp2Name: "RW侠",
             bo: 5,
-            time: "昨天 18:00"
+            time: "03-22 18:00"
           },
           {
+            id: "9bbfa49428",
             camp1Img:
               "https://p.qpic.cn/sign_up17/0/9bbfa0f7ef8413c31fff4ee79d54848d/0",
             camp1Name: "GK",
@@ -111,11 +125,11 @@ export default {
               "https://p.qpic.cn/sign_up17/0/494287de3372f42536bcaf85a6a75e99/0",
             camp2Name: "VG",
             bo: 5,
-            time: "昨天 15:00"
+            time: "03-22 15:00"
           }
         ]
       },
-      playerShare: {
+      player: {
         title: "测试",
         list: [
           {
@@ -157,7 +171,7 @@ export default {
               "https://q.qlogo.cn/headimg_dl?dst_uin=710555780&spec=100",
             camp2Name: "小年叔叔",
             bo: 7,
-            time: "前天 12:30",
+            time: "03-22 12:30",
             des: "后攻着火了！"
           },
           {
@@ -173,9 +187,12 @@ export default {
       }
     };
   },
-  mounted() {
-    this.$message.info("正在重写，原始入口在左上角");
-  },
-  methods: {}
+  methods: {
+    onClick: function(e) {
+      this.$router.push({
+        path: "/match/" + e
+      });
+    }
+  }
 };
 </script>
