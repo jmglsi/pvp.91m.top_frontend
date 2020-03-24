@@ -6,6 +6,7 @@
     </van-nav-bar>
 
     <router-view />
+    <AppBottomTabbar />
 
     <van-action-sheet
       title="如何打开"
@@ -22,6 +23,10 @@
 <script>
 export default {
   name: "MatchDashboard",
+  components: {
+    AppBottomTabbar: resolve =>
+      require(["@/components/AppBottomTabbar.vue"], resolve)
+  },
   data() {
     return {
       actionSheetShow: false,
