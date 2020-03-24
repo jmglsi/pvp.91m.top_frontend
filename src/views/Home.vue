@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <van-swipe :autoplay="5000" :style="swipeStyle" class="home-swipe">
-      <van-swipe-item v-for="(data, index) in homeInfo.swipeList" :key="index + '-img'">
+      <van-swipe-item v-for="(data, index) in homeInfo.swipe.list" :key="index + '-img'">
         <a :href="data.url" target="_bank">
           <img width="100%" height="200" v-lazy="data.img" style="object-fit: cover;" />
         </a>
@@ -23,7 +23,7 @@
       <van-loading class="home-loading" v-show="loadingShow" />
       <a-timeline v-show="!loadingShow">
         <a-timeline-item
-          v-for="(data,index) in homeInfo.dayTagList"
+          v-for="(data,index) in homeInfo.dayTag.list"
           :key="index + '-dayTag'"
           :color="data.color"
         >
@@ -143,9 +143,13 @@ export default {
       minDate: new Date(),
       maxDate: new Date(),
       homeInfo: {
-        swipeList: [],
-        dayTagList: [],
-        dayTag: {}
+        swipe: {
+          list: []
+        },
+        dayTag: {
+          title: "",
+          list: []
+        }
       },
       swipeStyle: {
         marginTop: 0

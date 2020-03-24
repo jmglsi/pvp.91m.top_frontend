@@ -1,77 +1,38 @@
 <template>
   <div class="info">
-    <van-nav-bar
-      :title="heroInfoTitle"
-      :border="false"
-      @click-left="onClickLeft"
-    >
-      <van-icon
-        name="todo-list-o"
-        slot="left"
-      />
+    <van-nav-bar :title="heroInfoTitle" :border="false" @click-left="onClickLeft">
+      <van-icon name="todo-list-o" slot="left" />
     </van-nav-bar>
 
-    <van-grid
-      :border="false"
-      :column-num="3"
-      v-show="shuntShow"
-      class="app-grid"
-    >
-      <div
-        class="div-type"
-        @click="$message.info('巅峰赛趋势、分路推荐 ;D')"
-      >
+    <van-grid :border="false" :column-num="3" v-show="shuntShow" class="app-grid">
+      <div class="div-type" @click="$message.info('巅峰赛趋势、分路推荐 ;D')">
         <img
           v-if="heroInfo.trend > 0"
           width="15"
           v-lazy="'/img/app-icons/hot-' + heroInfo.trend + '.png'"
           class="info-trend"
         />
-        <span
-          class="info-type"
-          v-for="(data, index) in heroInfo.type"
-          :key="index + '-tag'"
-        >
+        <span class="info-type" v-for="(data, index) in heroInfo.type" :key="index + '-tag'">
           <van-tag
             round
             class="info-space"
             v-if="data > 0"
-            :color="typeList[data][1]"
-          >
-            {{ typeList[data][0] }}
-          </van-tag>
+            :color="positionInfo[data][1]"
+          >{{ positionInfo[data][0] }}</van-tag>
         </span>
       </div>
 
       <van-grid-item @click="$message.info('分均经济、场均时长、场均经济 XD')">
         <div class="div-other">
-          <AppGold
-            width="25"
-            height="25"
-            class="info-space"
-          />
-          <span class="bottom-num info-num">
-            {{ heroInfo.equMoneyMin || 0 }}
-          </span>
+          <AppGold width="25" height="25" class="info-space" />
+          <span class="bottom-num info-num">{{ heroInfo.equMoneyMin || 0 }}</span>
 
-          <AppTime
-            width="25"
-            height="25"
-            class="info-space"
-          />
-          <span class="bottom-num info-num">
-            {{ heroInfo.usedtime || 0 }}
-          </span>
+          <AppTime width="25" height="25" class="info-space" />
+          <span class="bottom-num info-num">{{ heroInfo.usedtime || 0 }}</span>
         </div>
 
         <span class="info-money">
-          <van-tag
-            round
-            class="info-space"
-            color="black"
-          >
-            {{ heroInfo.equMoneyOverflow || 0 }}
-          </van-tag>
+          <van-tag round class="info-space" color="black">{{ heroInfo.equMoneyOverflow || 0 }}</van-tag>
         </span>
       </van-grid-item>
       <van-grid-item @click="actionSheetShow = true">
@@ -84,29 +45,13 @@
           size="75"
           :text="circleInfo.text"
         />
-        <img
-          width="50"
-          v-show="heroImgShow"
-          v-lazy="heroInfo.img"
-          class="info-img"
-        />
+        <img width="50" v-show="heroImgShow" v-lazy="heroInfo.img" class="info-img" />
       </van-grid-item>
       <van-grid-item @click="$message.info('技能下面的数字是占比 ;D')">
         <div class="div-skill">
-          <span
-            class="info-skill"
-            v-for="(data, index) in heroInfo.skill"
-            :key="index + '-img'"
-          >
-            <img
-              v-if="data.id > 0"
-              width="25"
-              v-lazy="data.img"
-              class="info-space"
-            />
-            <span class="bottom-num info-num">
-              {{ data.pickRate }}
-            </span>
+          <span class="info-skill" v-for="(data, index) in heroInfo.skill" :key="index + '-img'">
+            <img v-if="data.id > 0" width="25" v-lazy="data.img" class="info-space" />
+            <span class="bottom-num info-num">{{ data.pickRate }}</span>
           </span>
         </div>
       </van-grid-item>
@@ -119,14 +64,8 @@
       color="rgb(222,177,81)"
       class="app-index info-margin"
     >
-      <van-tab
-        title="巅峰赛趋势"
-        :disabled="tabsDisabled"
-      />
-      <van-tab
-        title="同职业对比"
-        :disabled="tabsDisabled"
-      />
+      <van-tab title="巅峰赛趋势" :disabled="tabsDisabled" />
+      <van-tab title="同职业对比" :disabled="tabsDisabled" />
       <van-tab title="自定义对比" />
     </van-tabs>
 
@@ -180,9 +119,7 @@
         v-clipboard:copy="copyData"
         v-clipboard:success="onCopy"
         v-clipboard:error="onError"
-      >
-        {{ heroInfo.shareText }}
-      </van-button>
+      >{{ heroInfo.shareText }}</van-button>
     </div>
 
     <van-action-sheet
@@ -191,35 +128,16 @@
       safe-area-inset-bottom
       class="app-action-sheet"
     >
-      <van-grid
-        :border="false"
-        :column-num="2"
-      >
+      <van-grid :border="false" :column-num="2">
         <van-grid-item @click="addHeroVote(1)">
-          <AppCry
-            width="50"
-            height="50"
-          />
-          <span class="vote-choose">
-            {{ circleInfo.vote[0].text }}
-          </span>
+          <AppCry width="50" height="50" />
+          <span class="vote-choose">{{ circleInfo.vote[0].text }}</span>
         </van-grid-item>
         <van-grid-item @click="addHeroVote(2)">
-          <AppSmile
-            width="50"
-            height="50"
-          />
-          <span class="vote-choose">
-            {{ circleInfo.vote[1].text }}
-          </span>
+          <AppSmile width="50" height="50" />
+          <span class="vote-choose">{{ circleInfo.vote[1].text }}</span>
         </van-grid-item>
-        <van-cell
-          title="注意事项"
-          icon="question-o"
-          @click="getTips"
-          class="hero-list-tips"
-          is-link
-        />
+        <van-cell title="注意事项" icon="question-o" @click="getTips" class="hero-list-tips" is-link />
       </van-grid>
     </van-action-sheet>
 
@@ -323,10 +241,12 @@ export default {
     AppGold: resolve => require(["@/components/AppIcons/AppGold.vue"], resolve),
     AppTime: resolve => require(["@/components/AppIcons/AppTime.vue"], resolve),
     AppCry: resolve => require(["@/components/AppIcons/AppCry.vue"], resolve),
-    AppSmile: resolve => require(["@/components/AppIcons/AppSmile.vue"], resolve),
-    AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
+    AppSmile: resolve =>
+      require(["@/components/AppIcons/AppSmile.vue"], resolve),
+    AppBottomTabbar: resolve =>
+      require(["@/components/AppBottomTabbar.vue"], resolve)
   },
-  data () {
+  data() {
     this.markLine = {
       data: [
         {
@@ -375,7 +295,9 @@ export default {
       heroInfo: {
         shareText: "可爱的宝贝已经分享了"
       },
-      typeList: [],
+      type: {
+        list: []
+      },
       copyData: "",
       list: [],
       nowData: {},
@@ -423,7 +345,7 @@ export default {
       copyDataCustomize: ""
     };
   },
-  mounted () {
+  mounted() {
     let heroId = this.$route.params.id;
     this.heroInfoTitle = "加载中";
 
@@ -478,7 +400,7 @@ export default {
     }, 1000 * 10);
   },
   methods: {
-    getHeroChartsLog: function (heroId) {
+    getHeroChartsLog: function(heroId) {
       this.axios
         .get(this.appApi.list.getHeroChartsLog + "&heroId=" + heroId)
         .then(ret => {
@@ -490,7 +412,7 @@ export default {
           }
         });
     },
-    getHeroChartsLogBySimilar: function (heroId) {
+    getHeroChartsLogBySimilar: function(heroId) {
       this.axios
         .get(this.appApi.list.getHeroChartsLogBySimilar + "&heroId=" + heroId)
         .then(ret => {
@@ -502,12 +424,10 @@ export default {
           }
         });
     },
-    getHeroChartsLogByCustomize: function (heroName) {
+    getHeroChartsLogByCustomize: function(heroName) {
       this.axios
         .get(
-          this.appApi.list.getHeroChartsLogByCustomize +
-          "&heroName=" +
-          heroName
+          this.appApi.list.getHeroChartsLogByCustomize + "&heroName=" + heroName
         )
         .then(ret => {
           let chartData = ret.data.data.chartData;
@@ -518,7 +438,7 @@ export default {
           }
         });
     },
-    getHeroChartsLogByCustomizeFromUrl: function (heroName) {
+    getHeroChartsLogByCustomizeFromUrl: function(heroName) {
       let e, hero, newTags;
       e = heroName.split(",");
       for (let i = 0; i < e.length; i++) {
@@ -529,12 +449,12 @@ export default {
 
       this.getHeroChartsLogByCustomize(heroName);
     },
-    getHeroInfo: function (heroId) {
+    getHeroInfo: function(heroId) {
       this.axios
         .get(this.appApi.list.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
           this.circleInfo = ret.data.data.circleInfo;
-          this.typeList = ret.data.data.typeList;
+          this.positionInfo = ret.data.data.positionInfo;
           this.heroInfo = ret.data.data.heroInfo;
 
           let heroInfo = this.heroInfo;
@@ -567,20 +487,20 @@ export default {
             "?from=copyshare";
         });
     },
-    getTips: function () {
+    getTips: function() {
       this.$dialog.alert({
         title: "请客观评价该英雄",
         message: this.circleInfo.tips
       });
     },
-    addHeroVote: function (voteType) {
+    addHeroVote: function(voteType) {
       this.axios
         .get(
           this.appApi.list.addHeroVote +
-          "&heroId=" +
-          this.heroInfo.id +
-          "&voteType=" +
-          voteType
+            "&heroId=" +
+            this.heroInfo.id +
+            "&voteType=" +
+            voteType
         )
         .then(ret => {
           let code = ret.data.data.code;
@@ -592,10 +512,11 @@ export default {
         });
       this.actionSheetShow = false;
     },
-    onTabsChange: function (e) {
+    onTabsChange: function(e) {
       e == 0 ? (this.shuntShow = true) : (this.shuntShow = false);
 
-      let heroInfo = this.heroInfo, dTitle;
+      let heroInfo = this.heroInfo,
+        dTitle;
 
       if (e == 0) {
         this.lineShow = true;
@@ -653,7 +574,7 @@ export default {
         location.pathname +
         "?from=copyshare";
     },
-    onTagsChanged: function (e) {
+    onTagsChanged: function(e) {
       if (e.length == 0) {
         this.chartSettings = {};
         this.chartData = [];
@@ -666,18 +587,18 @@ export default {
         this.copyDataCustomize = newTags.replace("undefined,", "");
       }
     },
-    onBlur: function () {
+    onBlur: function() {
       this.radar_2_Show = true;
       this.getHeroChartsLogByCustomize(this.copyDataCustomize);
 
       this.axios
         .get(
           "https://s.91m.top/?url=" +
-          encodeURIComponent(
-            location.origin +
-            "/heroInfo/0?from=tagschanged&type=2&heroName=" +
-            encodeURIComponent(this.copyDataCustomize)
-          )
+            encodeURIComponent(
+              location.origin +
+                "/heroInfo/0?from=tagschanged&type=2&heroName=" +
+                encodeURIComponent(this.copyDataCustomize)
+            )
         )
         .then(ret => {
           this.copyData =
@@ -687,19 +608,19 @@ export default {
             ret.data.data.url;
         });
     },
-    onCopy: function () {
+    onCopy: function() {
       this.$message.success("复制成功");
     },
-    onError: function () {
+    onError: function() {
       this.$message.error("复制失败");
     },
-    onClickLeft: function () {
+    onClickLeft: function() {
       this.$router.push({
         path: "/heroReplay/" + this.heroInfo.id,
         query: { from: "heroInfo" }
       });
     },
-    onClickRight: function () { }
+    onClickRight: function() {}
   }
 };
 </script>
