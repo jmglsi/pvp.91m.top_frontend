@@ -9,13 +9,13 @@
         >
           <template #title>
             <van-grid :border="false" :column-num="3">
-              <van-grid-item :icon="data.camp1Img" :text="data.camp1Name" />
+              <van-grid-item :icon="data.camp1Img" :text="data.camp1Name" class="match-item" />
               <van-grid-item>
                 <span class="match-time">{{ data.time}}</span>
                 <span class="match-vs">VS</span>
                 <span class="match-des">{{ data.des }}</span>
               </van-grid-item>
-              <van-grid-item :icon="data.camp2Img" :text="data.camp2Name" />
+              <van-grid-item :icon="data.camp2Img" :text="data.camp2Name" class="match-item" />
             </van-grid>
           </template>
         </van-cell>
@@ -34,13 +34,13 @@
         >
           <template #title>
             <van-grid :border="false" :column-num="3">
-              <van-grid-item :icon="data.camp1Img" :text="data.camp1Name" />
+              <van-grid-item :icon="data.camp1Img" :text="data.camp1Name" class="match-item" />
               <van-grid-item>
                 <span class="match-time">{{ data.time}}</span>
                 <span class="match-vs">VS</span>
                 <span class="match-des">{{ data.des }}</span>
               </van-grid-item>
-              <van-grid-item :icon="data.camp2Img" :text="data.camp2Name" />
+              <van-grid-item :icon="data.camp2Img" :text="data.camp2Name" class="match-item" />
             </van-grid>
           </template>
         </van-cell>
@@ -61,7 +61,7 @@ div.match
   font-weight: 600;
 }
 
-i.van-icon.van-grid-item__icon img.van-icon__image {
+div.match-item i.van-icon.van-grid-item__icon img.van-icon__image {
   border-radius: 100%;
   width: 40px;
   height: 40px;
