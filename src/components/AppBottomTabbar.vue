@@ -1,8 +1,8 @@
 <template>
   <div class="miao">
-    <van-divider
-      :style="{padding: '0 100px', color: 'rgb(174, 174, 174)', borderColor: 'rgb(174, 174, 174)' }"
-    >我是有底线的</van-divider>
+    <van-divider :style="{color: '#969799', borderColor: '#969799' }">
+      <span class="hello" @click="onClick">{{ hello }}</span>
+    </van-divider>
   </div>
 </template>
 
@@ -10,4 +10,32 @@
 .miao {
   height: 100px;
 }
+
+.hello {
+  font-size: 10px;
+}
 </style>
+
+<script>
+export default {
+  name: "Miao",
+  data() {
+    return { hello: "" };
+  },
+  mounted() {
+    /\/setting/i.test(location.pathname)
+      ? this.getHitokoto()
+      : (this.hello = "");
+  },
+  methods: {
+    getHitokoto: function() {
+      this.axios.get(this.appApi.list.getHitokoto).then(ret => {
+        this.hello = ret.data.hitokoto;
+      });
+    },
+    onClick: function() {
+      this.getHitokoto();
+    }
+  }
+};
+</script>

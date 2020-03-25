@@ -1,5 +1,6 @@
 const pvp = "https://api.91m.top/hero/word.php"
 const bili = "https://api.91m.top/hero/bilibili.php"
+const hitokoto = "https://v1.hitokoto.cn"
 
 const list = {
     getBp: pvp + "?type=getBp",
@@ -8,6 +9,7 @@ const list = {
     getAbout: pvp + "?type=getAbout",
     getOrder: bili + "?type=getOrder",
     getSetting: pvp + "?type=getSetting",
+    getHitokoto: hitokoto,
     addHeroVote: pvp + "?type=addHeroVote",
     getHeroInfo: pvp + "?type=getHeroInfo",
     getUserInfo: pvp + "?type=getUserInfo",
