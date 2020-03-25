@@ -1,7 +1,13 @@
 <template>
   <div class="replay">
-    <van-nav-bar :title="heroInfo.name" left-text="英雄信息" :border="false" @click-left="onClickLeft">
+    <van-nav-bar
+      :title="heroInfo.name"
+      :border="false"
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
       <van-icon name="chart-trending-o" slot="left" />
+      <van-icon name="question-o" slot="right" />
     </van-nav-bar>
 
     <van-collapse v-model="activeNames">
@@ -70,8 +76,6 @@
       @change="onChange"
       class="replay-pagination"
     />
-
-    <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa' }">红色为失败,绿色为胜利,数字为时长,黑色为保底经济</van-divider>
 
     <AppBottomTabbar />
   </div>
@@ -208,9 +212,11 @@ export default {
     },
     onClickLeft: function() {
       this.$router.push({
-        path: "/heroInfo/" + this.heroInfo.id,
-        query: { from: "heroReplay" }
+        path: "/hero/" + this.heroInfo.id + "/info"
       });
+    },
+    onClickRight: function() {
+      this.$message.info("红色为失败,绿色为胜利,数字为时长,黑色为保底经济");
     },
     onSelect: function(item) {
       let nowData = this.nowData;

@@ -1,7 +1,13 @@
 <template>
   <div class="info">
-    <van-nav-bar :title="heroInfoTitle" :border="false" @click-left="onClickLeft">
+    <van-nav-bar
+      :title="heroInfoTitle"
+      :border="false"
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
       <van-icon name="todo-list-o" slot="left" />
+      <van-icon name="question-o" slot="right" />
     </van-nav-bar>
 
     <van-grid :border="false" :column-num="3" v-show="shuntShow" class="app-grid">
@@ -146,11 +152,11 @@
 </template>
 
 <style>
-i.van-button__icon {
+div.app-copyshare i.van-button__icon {
   margin-top: -1px;
 }
 
-span.van-button__text {
+div.app-copyshare span.van-button__text {
   margin-top: 2px;
 }
 
@@ -596,7 +602,7 @@ export default {
           "https://s.91m.top/?url=" +
             encodeURIComponent(
               location.origin +
-                "/heroInfo/0?from=tagschanged&type=2&heroName=" +
+                "/hero/0/info?from=tagschanged&type=2&heroName=" +
                 encodeURIComponent(this.copyDataCustomize)
             )
         )
@@ -616,11 +622,14 @@ export default {
     },
     onClickLeft: function() {
       this.$router.push({
-        path: "/heroReplay/" + this.heroInfo.id,
-        query: { from: "heroInfo" }
+        path: "/hero/" + this.heroInfo.id + "/replay"
       });
     },
-    onClickRight: function() {}
+    onClickRight: function() {
+      this.$router.push({
+        path: "/about"
+      });
+    }
   }
 };
 </script>
