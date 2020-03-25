@@ -120,7 +120,7 @@
 .home-record {
   font-size: 10px;
   position: fixed;
-  width: 100%;
+  margin: 0 auto;
   left: 0;
   right: 0;
   bottom: 55px;

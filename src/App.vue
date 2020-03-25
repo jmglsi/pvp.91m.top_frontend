@@ -182,9 +182,9 @@ export default {
   },
   methods: {
     init: function() {
-      let bgLz = this.$cookie.get("bg-lz");
+      let lzbg = this.$cookie.get("lz-bg");
 
-      bgLz == "true"
+      lzbg == "true"
         ? (this.particlesShow = true)
         : (this.particlesShow = false);
     },

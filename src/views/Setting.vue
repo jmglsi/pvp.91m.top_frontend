@@ -25,7 +25,7 @@
     </van-cell-group>
 
     <van-cell-group title="友情链接">
-      <van-grid :border="false">
+      <van-grid :border="false" :column-num="3">
         <van-grid-item
           v-for="(data, index) in setting.friendship"
           :key="index + '-friendship'"
@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     init: function() {
-      this.$cookie.get("bg-lz") == "true"
+      this.$cookie.get("lz-bg") == "true"
         ? (this.particlesSwitch = true)
         : (this.particlesSwitch = false);
 
@@ -95,7 +95,7 @@ export default {
       this.$cookie.set("key", this.key, { expires: "1Y" });
     },
     onChange: function(e) {
-      this.$cookie.set("bg-lz", e, { expires: "1Y" });
+      this.$cookie.set("lz-bg", e, { expires: "1Y" });
     }
   }
 };
