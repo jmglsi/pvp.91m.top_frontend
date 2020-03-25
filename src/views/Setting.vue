@@ -46,7 +46,7 @@ div.ex-icons img.van-icon__image {
   margin-top: -6px;
 }
 
-i.van-icon.van-grid-item__icon img.van-icon__image {
+div.link-item i.van-icon.van-grid-item__icon img.van-icon__image {
   border-radius: 100%;
   width: 40px;
   height: 40px;

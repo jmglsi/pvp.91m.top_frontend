@@ -14,6 +14,27 @@ export default new Router({
             name: 'match',
             redirect: '/match'
         }, {
+            path: '/hero',
+            name: 'hero',
+            redirect: '/ranking'
+        }, {
+            path: '/heroInfo/:id',
+            name: 'heroInfo',
+            redirect: '/hero/:id/info'
+        }, {
+            path: '/heroReplay/:id',
+            name: 'heroReplay',
+            redirect: '/hero/:id/replay'
+        }, {
+            path: '/bilibili',
+            name: 'Bilibili',
+            component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
+            meta: {
+                type: 1,
+                title: 'bilibili',
+                keepAlive: true
+            }
+        }, {
             path: '/',
             name: 'Home',
             component: resolve => require(['./views/Home.vue'], resolve),
@@ -61,32 +82,29 @@ export default new Router({
             }
         },
         {
-            path: '/heroInfo/:id',
-            name: 'HeroInfo',
-            component: resolve => require(['./views/Hero/Info.vue'], resolve),
-            meta: {
-                type: 1,
-                title: '信息'
-            }
+            path: '/hero',
+            component: resolve => require(['./views/Hero/Dashboard.vue'], resolve),
+            children: [{
+                    path: ':id/info',
+                    name: 'HeroInfo',
+                    component: resolve => require(['./views/Hero/Info.vue'], resolve),
+                    meta: {
+                        type: 1,
+                        title: '信息'
+                    }
+                },
+                {
+                    path: ':id/replay',
+                    name: 'HeroReplay',
+                    component: resolve => require(['./views/Hero/Replay.vue'], resolve),
+                    meta: {
+                        type: 1,
+                        title: '回顾'
+                    }
+                }
+            ]
         },
         {
-            path: '/heroReplay/:id',
-            name: 'HeroReplay',
-            component: resolve => require(['./views/Hero/Replay.vue'], resolve),
-            meta: {
-                type: 1,
-                title: '回顾'
-            }
-        }, {
-            path: '/bilibili',
-            name: 'Bilibili',
-            component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
-            meta: {
-                type: 1,
-                title: 'bilibili',
-                keepAlive: true
-            }
-        }, {
             path: '/match',
             component: resolve => require(['./views/Match/Dashboard.vue'], resolve),
             children: [{

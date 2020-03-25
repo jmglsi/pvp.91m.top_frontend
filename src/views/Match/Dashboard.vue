@@ -44,16 +44,13 @@ export default {
     onClickRight: function() {
       this.$router.push({
         path: "/about",
-        query: { type: 4, from: "match-dashboard" }
+        query: { type: 4 }
       });
     },
     onSelect: function(item) {
-      let from = "match-dashboard";
-
       if (item.value == 0) {
         this.$router.push({
-          path: "/match/add",
-          query: { from: from }
+          path: "/match/add"
         });
       }
     }

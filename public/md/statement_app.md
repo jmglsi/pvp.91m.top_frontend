@@ -6,7 +6,7 @@
 个人使用写明出处即可，商务使用务必 [联系我](http://wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes)。
 
 ## 介绍
-以 [**钟馗**](/heroInfo/175) 举例，点击 [![9DtbrLOJaksvWXx](https://i.loli.net/2019/12/29/9DtbrLOJaksvWXx.jpg)](/heroInfo/175) 那一行，可查看其它数据(趋势、对局回顾、更新记录、赛事)，可提前 一周 ~ 半个月 预测接下来的趋势。
+以 [**钟馗**](/hero/175/info) 举例，点击 [![9DtbrLOJaksvWXx](https://i.loli.net/2019/12/29/9DtbrLOJaksvWXx.jpg)](/hero/175/info) 那一行，可查看其它数据(趋势、对局回顾、更新记录、赛事)，可提前 一周 ~ 半个月 预测接下来的趋势。
 
 **左上角**为标签、**右上角**是近期热度预览(红色上升、蓝色下降)、**下方**为技能占比
 

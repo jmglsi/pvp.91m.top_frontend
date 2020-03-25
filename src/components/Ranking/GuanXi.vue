@@ -281,7 +281,6 @@ export default {
       this.getHeroInfo(row);
     },
     onSelect: function(item) {
-      let from = "ranking-action-sheet";
       let heroInfo = this.heroInfo;
 
       if (item.value == 0) {
@@ -291,8 +290,7 @@ export default {
 
       if (item.value == 1) {
         this.$router.push({
-          path: "/heroReplay/" + heroInfo.id1 + "," + heroInfo.id2,
-          query: { from: from }
+          path: "/hero/" + heroInfo.id1 + "," + heroInfo.id2 + "/replay"
         });
       }
     }

@@ -305,15 +305,13 @@ export default {
       if (e == 3) {
         if (this.otherType == 1) {
           this.$router.push({
-            path: "/about",
-            query: { from: "ranking-dropdown-menu" }
+            path: "/about"
           });
         }
 
         if (this.otherType == 2) {
           this.$router.push({
-            path: "/changelog",
-            query: { from: "ranking-dropdown-menu" }
+            path: "/changelog"
           });
         }
         this.otherType = 0;
@@ -352,14 +350,14 @@ export default {
 
       if (item.value == 0) {
         this.$router.push({
-          path: "/heroInfo/" + heroInfo.id,
+          path: "/hero/" + heroInfo.id + "/info",
           query: { from: from }
         });
       }
 
       if (item.value == 1) {
         this.$router.push({
-          path: "/heroReplay/" + heroInfo.id,
+          path: "/hero/" + heroInfo.id + "/replay",
           query: { from: from }
         });
       }

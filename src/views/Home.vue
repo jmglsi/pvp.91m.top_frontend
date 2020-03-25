@@ -44,7 +44,7 @@
             <router-link
               v-for="(id, index) in data.item"
               :key="index + '-data-img-id'"
-              :to="{ path: '/heroInfo/' + id, query: { from: 'dayTag-' + data.calendarInfo.day } }"
+              :to="{ path: '/hero/' + id + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
             >
               <img
                 v-if="id != null"
@@ -191,7 +191,7 @@ export default {
         (day.date.getMonth() + 1) +
         "/" +
         day.date.getDate();
-      let dayTagList = this.homeInfo.dayTagList;
+      let dayTagList = this.homeInfo.dayTag.list;
 
       for (let i = 0; i < dayTagList.length; i++) {
         let list = dayTagList[i].calendarInfo;
