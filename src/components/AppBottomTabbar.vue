@@ -1,6 +1,6 @@
 <template>
   <div class="miao">
-    <van-divider :style="{color: '#969799', borderColor: '#969799' }">
+    <van-divider v-if="hello" :style="{color: '#969799', marginTop: '25px' }">
       <span class="hello" @click="onClick">{{ hello }}</span>
     </van-divider>
   </div>
@@ -23,7 +23,7 @@ export default {
     return { hello: "" };
   },
   mounted() {
-    /\/setting/i.test(location.pathname)
+    /\/setting/i.test(location.pathname) && this.appDevice
       ? this.getHitokoto()
       : (this.hello = "");
   },

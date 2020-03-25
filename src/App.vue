@@ -3,7 +3,7 @@
     <vue-particles
       color="#000"
       :particleOpacity="0.7"
-      :particlesNumber="15"
+      :particlesNumber="30"
       shapeType="star"
       :particleSize="4"
       linesColor="#000"
@@ -59,12 +59,17 @@
 
 .app-data {
   position: absolute;
-  width: 100%;
-  height: 100%;
 }
 
 .app-particles {
+  position: fixed;
   margin-top: -50px;
+}
+
+.app-data,
+.app-particles {
+  width: 100%;
+  height: 100%;
 }
 </style>
 
