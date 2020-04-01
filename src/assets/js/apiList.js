@@ -1,6 +1,6 @@
-const pvp = "https://api.91m.top/hero/word.php"
-const bili = "https://api.91m.top/hero/bilibili.php"
-const hitokoto = "https://v1.hitokoto.cn"
+const pvp = "//api.91m.top/hero/word.php"
+const bili = "//api.91m.top/hero/bilibili.php"
+const hitokoto = "//v1.hitokoto.cn"
 
 const list = {
     getBp: pvp + "?type=getBp",
