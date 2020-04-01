@@ -19,7 +19,10 @@
       @cell-click="onCellClick"
       class="app-table"
     >
-      <vxe-table-column title="id" field="uid" fixed="left" width="100"></vxe-table-column>
+      <vxe-table-column title="id" field="uid" fixed="left" width="100" />
+      <vxe-table-column title="bv" field="bv" width="150">
+        <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
+      </vxe-table-column>
       <vxe-table-column title="#" type="seq" width="75" />
       <vxe-table-column title="类型" field="type" sortable :width="listWidth" />
       <vxe-table-column title="开始数量" field="start_num" sortable :width="listWidth" />
@@ -59,7 +62,7 @@
   position: absolute;
   z-index: 2;
   left: 40px;
-  margin-top: 15px;
+  margin-top: 13px;
 }
 
 .bilibili-bottom {
@@ -88,6 +91,7 @@ export default {
       ],
       orderInfo: {},
       clientHeight: 0,
+      copyAv: "",
       copyData: "",
       loading: true
     };
@@ -137,7 +141,16 @@ export default {
         .then(ret => {
           this.tableData = ret.data.data;
           this.loading = false;
+
+          if (this.copyAv) {
+            this.copyDataByAv(this.copyAv);
+          }
         });
+    },
+    copyDataByAv: function(e) {
+      this.$copyText(e);
+      this.$message.success("【" + e + "】已复制");
+      this.copyAv = "";
     },
     getOrderInfo: function(row) {
       this.actionSheetShow = true;
@@ -149,14 +162,17 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?from=copyshare&uid=" +
-                encodeURIComponent(row.uid)
+                "?from=copyshare&uid=av" +
+                row.uid
             )
         )
         .then(ret => {
           this.copyData =
-            "id:" +
+            "id:av" +
             row.uid +
+            "(" +
+            this.av2bv(row.uid) +
+            ")" +
             "\r类型:" +
             row.type +
             "\r开始:" +
@@ -182,12 +198,22 @@ export default {
       this.getOrder("", this.currentPage);
     },
     onSearch: function() {
-      if (!this.searchValue) return;
-      this.getOrder(this.searchValue, this.currentPage);
+      let searchValue = this.searchValue;
+      if (!searchValue) return;
+
+      let newValue;
+      if (/[bv]{2}/i.test(searchValue.substr(0, 2))) {
+        newValue = this.bv2av(searchValue);
+        this.copyAv = newValue;
+      } else {
+        newValue = searchValue;
+      }
+
+      this.getOrder(newValue, this.currentPage);
 
       clearInterval(this.getOrderInterval);
       this.getOrderInterval = setInterval(() => {
-        this.getOrder(this.searchValue, this.currentPage);
+        this.getOrder(newValue, this.currentPage);
       }, 1000 * 10);
     },
     onCheckBoxChange: function(e) {

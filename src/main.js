@@ -41,6 +41,7 @@ import './assets/import/vxe-utils'
 import './assets/import/vxe-table'
 
 import './assets/js/app'
+import './assets/js/bilibili'
 import appApiList from './assets/js/apiList'
 Vue.prototype.appApi = appApiList
 
