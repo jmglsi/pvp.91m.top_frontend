@@ -1,6 +1,15 @@
 <template>
   <div class="setting">
     <van-cell-group title="功能">
+      <van-cell
+        title="全局BP模拟器"
+        icon="cluster-o"
+        :to="{ path: '/match', query: { from: 'setting' } }"
+        is-link
+      />
+    </van-cell-group>
+
+    <van-cell-group title="其它">
       <van-field
         v-model="key"
         clearable
@@ -12,15 +21,6 @@
         @blur="saveKey"
         class="ex-icons"
       />
-      <van-cell
-        title="全局BP模拟器"
-        icon="cluster-o"
-        :to="{ path: '/match', query: { from: 'setting' } }"
-        is-link
-      />
-    </van-cell-group>
-
-    <van-cell-group title="其它">
       <van-switch-cell v-model="particlesSwitch" icon="photo-o" title="粒子背景" @change="onChange" />
     </van-cell-group>
 
