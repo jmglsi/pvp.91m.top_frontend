@@ -15,15 +15,13 @@
     </van-swipe>
 
     <div @click="onClick" class="home-title">
-      <van-icon size="30px" name="friends-o" />
-      <span class="home-title-span" style="margin-top: -5px;">伙伴</span>
+      <AppGame width="25" height="25" class="app-icons" />
     </div>
 
     <AppFriendship :aid="1" />
 
     <div @click="calendarShow = true" class="home-title">
-      <AppCalendar width="25" height="25" style="margin-right: 5px;" />
-      <span class="home-title-span">动态</span>
+      <AppCalendar width="25" height="25" class="app-icons" />
     </div>
 
     <div class="home-dayTag">
@@ -108,6 +106,10 @@
   width: 100px;
 }
 
+.app-icons {
+  margin-right: 5px;
+}
+
 .home-loading {
   text-align: center;
 }
@@ -144,6 +146,7 @@
 export default {
   name: "Home",
   components: {
+    AppGame: resolve => require(["@/components/AppIcons/AppGame.vue"], resolve),
     AppCalendar: resolve =>
       require(["@/components/AppIcons/AppCalendar.vue"], resolve),
     AppBottomTabbar: resolve =>
