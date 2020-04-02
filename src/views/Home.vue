@@ -15,8 +15,8 @@
     </van-swipe>
 
     <div @click="onClick" class="home-title">
-      <van-icon size="25px" name="friends-o" />
-      <span class="home-title-span" style="margin-left: 5px;margin-top: -8px;">伙伴们</span>
+      <van-icon size="30px" name="friends-o" />
+      <span class="home-title-span" style="margin-top: -5px;">伙伴</span>
     </div>
 
     <AppFriendship :aid="1" />
