@@ -14,9 +14,16 @@
       </van-swipe-item>
     </van-swipe>
 
+    <div @click="onClick" class="home-title">
+      <van-icon size="25px" name="friends-o" />
+      <span class="home-title-span" style="margin-left: 5px;margin-top: -8px;">伙伴们</span>
+    </div>
+
+    <AppFriendship :aid="1" />
+
     <div @click="calendarShow = true" class="home-title">
       <AppCalendar width="25" height="25" style="margin-right: 5px;" />
-      <span style="position: absolute;font-size: 25px;margin-top: -4px;">动态</span>
+      <span class="home-title-span">动态</span>
     </div>
 
     <div class="home-dayTag">
@@ -78,6 +85,12 @@
   width: 20px;
   margin-top: -3px;
 }
+
+.home-title-span {
+  position: absolute;
+  font-size: 25px;
+  margin-top: -4px;
+}
 </style>
 
 <style scoped>
@@ -134,7 +147,9 @@ export default {
     AppCalendar: resolve =>
       require(["@/components/AppIcons/AppCalendar.vue"], resolve),
     AppBottomTabbar: resolve =>
-      require(["@/components/AppBottomTabbar.vue"], resolve)
+      require(["@/components/AppBottomTabbar.vue"], resolve),
+    AppFriendship: resolve =>
+      require(["@/components/AppFriendship.vue"], resolve)
   },
   data() {
     return {
@@ -145,6 +160,10 @@ export default {
       homeInfo: {
         swipe: {
           list: []
+        },
+        friendship: {
+          type: "",
+          data: ""
         },
         dayTag: {
           title: "",
@@ -178,6 +197,13 @@ export default {
           this.loadingShow = false;
         }, 500);
       });
+    },
+    onClick: function() {
+      let friendship = this.homeInfo.friendship;
+
+      if (friendship.type) {
+        this.$message.info(friendship.data);
+      }
     },
     getTime: function() {
       let date = new Date();

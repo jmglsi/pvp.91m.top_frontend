@@ -8,7 +8,7 @@ const list = {
     getHome: pvp + "?type=getHome",
     getAbout: pvp + "?type=getAbout",
     getOrder: bili + "?type=getOrder",
-    getSetting: pvp + "?type=getSetting",
+    getFriendship: pvp + "?type=getFriendship",
     getHitokoto: hitokoto,
     addHeroVote: pvp + "?type=addHeroVote",
     getHeroInfo: pvp + "?type=getHeroInfo",

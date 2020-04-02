@@ -25,16 +25,7 @@
     </van-cell-group>
 
     <van-cell-group title="友情链接">
-      <van-grid :border="false" :column-num="3">
-        <van-grid-item
-          v-for="(data, index) in setting.friendship"
-          :key="index + '-friendship'"
-          :icon="data.icon"
-          :text="data.text"
-          :url="data.url"
-          class="link-item"
-        />
-      </van-grid>
+      <AppFriendship :aid="2" />
     </van-cell-group>
 
     <AppBottomTabbar v-show="appDevice" />
@@ -44,12 +35,6 @@
 <style>
 div.ex-icons img.van-icon__image {
   margin-top: -6px;
-}
-
-div.link-item i.van-icon.van-grid-item__icon img.van-icon__image {
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
 }
 </style>
 
@@ -64,18 +49,18 @@ export default {
   name: "Setting",
   components: {
     AppBottomTabbar: resolve =>
-      require(["@/components/AppBottomTabbar.vue"], resolve)
+      require(["@/components/AppBottomTabbar.vue"], resolve),
+    AppFriendship: resolve =>
+      require(["@/components/AppFriendship.vue"], resolve)
   },
   data() {
     return {
       key: "",
-      particlesSwitch: true,
-      setting: {}
+      particlesSwitch: true
     };
   },
   mounted() {
     this.init();
-    this.getSetting();
   },
   methods: {
     init: function() {
@@ -85,11 +70,6 @@ export default {
 
       let key = this.$cookie.get("key");
       if (key) this.key = key;
-    },
-    getSetting: function() {
-      this.axios.get(this.appApi.list.getSetting).then(ret => {
-        this.setting = ret.data.data;
-      });
     },
     saveKey: function() {
       this.$cookie.set("key", this.key, { expires: "1Y" });
