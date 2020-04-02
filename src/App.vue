@@ -149,6 +149,14 @@ td.col-green div.vxe-cell {
 }
 </style>
 
+<style>
+div.link-item i.van-icon.van-grid-item__icon img.van-icon__image {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+</style>
+
 <script>
 export default {
   name: "App",
