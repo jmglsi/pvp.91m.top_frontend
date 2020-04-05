@@ -19,7 +19,7 @@
       @cell-click="onCellClick"
       class="app-table"
     >
-      <vxe-table-column title="id" field="uid" fixed="left" width="100" />
+      <vxe-table-column title="id" field="uid" fixed="left" width="125" />
       <vxe-table-column title="bv" field="bv" width="150">
         <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
       </vxe-table-column>
@@ -61,7 +61,7 @@
 .auto-refresh {
   position: absolute;
   z-index: 2;
-  left: 40px;
+  left: 55px;
   margin-top: 13px;
 }
 
