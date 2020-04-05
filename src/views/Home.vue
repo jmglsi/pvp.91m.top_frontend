@@ -52,7 +52,7 @@
               :to="{ path: '/hero/' + id + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
             >
               <img
-                v-if="id != null"
+                v-if="id"
                 v-lazy="'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + id + '/' + id + '.jpg'"
                 class="item-data-img-id"
               />
