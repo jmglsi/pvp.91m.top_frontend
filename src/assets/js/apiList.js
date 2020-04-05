@@ -1,4 +1,4 @@
-const pvp = "//api.91m.top/hero/word.php"
+const pvp = "//api.91m.top/hero/app.php"
 const bili = "//api.91m.top/hero/bilibili.php"
 const hitokoto = "//v1.hitokoto.cn"
 
