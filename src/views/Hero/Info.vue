@@ -86,7 +86,6 @@
     />
 
     <ve-line
-      legend-position="bottom"
       v-show="lineShow"
       :settings="chart.qushi.settings"
       :extend="extend"
@@ -237,6 +236,7 @@ import VeRadar from "v-charts/lib/radar.common";
 import "echarts/lib/component/toolbox";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
+import "echarts/lib/component/dataZoom";
 
 export default {
   name: "HeroInfo",
@@ -270,7 +270,15 @@ export default {
       ]
     };
     this.extend = {
-      "xAxis.0.axisLabel.rotate": 45
+      "xAxis.0.axisLabel.rotate": 45,
+      dataZoom: [
+        {
+          type: "slider",
+          show: true,
+          start: 80,
+          end: 100
+        }
+      ]
     };
     return {
       currentRate: 0,
