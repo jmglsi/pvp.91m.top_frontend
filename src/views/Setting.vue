@@ -1,32 +1,29 @@
 <template>
   <div class="setting">
-    <van-cell-group title="功能">
-      <van-cell
-        title="全局BP模拟器"
-        icon="cluster-o"
-        :to="{ path: '/match', query: { from: 'setting' } }"
-        is-link
-      />
-    </van-cell-group>
+    <div class="data">
+      <van-cell-group title="其它">
+        <van-field
+          v-model="key"
+          clearable
+          label="密钥"
+          left-icon="/img/app-icons/password.png"
+          right-icon="question-o"
+          placeholder="请输入密钥"
+          @click-right-icon="$message.info('待开发')"
+          @blur="saveKey"
+          class="ex-icons"
+        />
+        <van-switch-cell v-model="particlesSwitch" icon="photo-o" title="粒子背景" @change="onChange" />
+      </van-cell-group>
 
-    <van-cell-group title="其它">
-      <van-field
-        v-model="key"
-        clearable
-        label="密钥"
-        left-icon="/img/app-icons/password.png"
-        right-icon="question-o"
-        placeholder="请输入密钥"
-        @click-right-icon="$message.info('待开发')"
-        @blur="saveKey"
-        class="ex-icons"
-      />
-      <van-switch-cell v-model="particlesSwitch" icon="photo-o" title="粒子背景" @change="onChange" />
-    </van-cell-group>
+      <van-cell-group title="友情链接" class="app-cell-group">
+        <AppFriendship :aid="2" />
+      </van-cell-group>
+    </div>
 
-    <van-cell-group title="友情链接">
-      <AppFriendship :aid="2" />
-    </van-cell-group>
+    <span class="record">
+      <a href="http://beian.miit.gov.cn/" target="_blank" style="color: black;">沪ICP备16031287号-2</a>
+    </span>
 
     <AppBottomTabbar v-show="appDevice" />
   </div>
@@ -39,8 +36,13 @@ div.ex-icons img.van-icon__image {
 </style>
 
 <style scoped>
-.setting {
+.data {
   text-align: left;
+  margin-bottom: 25px;
+}
+
+.record {
+  font-size: 10px;
 }
 </style>
 

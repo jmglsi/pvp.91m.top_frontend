@@ -1,11 +1,12 @@
 <template>
-  <div class="friendship">
+  <div class="friendship-data">
     <van-grid :border="false" :column-num="3">
       <van-grid-item
         v-for="(data, index) in setting.friendship"
         :key="index + '-friendship-1'"
         :icon="data.icon"
         :text="data.text"
+        :to="data.to"
         :url="data.url"
         class="link-item"
       />
@@ -18,7 +19,7 @@ export default {
   name: "Friendship",
   props: {
     aid: {
-      type: String,
+      type: Number,
       required: true
     }
   },
