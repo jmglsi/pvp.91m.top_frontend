@@ -44,6 +44,15 @@ export default new Router({
                 keepAlive: true
             }
         }, {
+            path: '/miniapp',
+            name: 'MiniApp',
+            component: resolve => require(['./views/MiniApp.vue'], resolve),
+            meta: {
+                type: 1,
+                title: '小程序',
+                keepAlive: true
+            }
+        }, {
             path: '/ranking',
             name: 'Ranking',
             component: resolve => require(['./views/Ranking/Index.vue'], resolve),

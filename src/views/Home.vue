@@ -14,67 +14,71 @@
       </van-swipe-item>
     </van-swipe>
 
-    <div @click="onClick" class="home-title">
-      <AppGame width="25" height="25" class="app-icons" />
-    </div>
+    <van-pull-refresh
+      v-model="isLoading"
+      @refresh="onRefresh"
+      :pulling-text="homeInfo.miniapp.pulling"
+      :loosing-text="homeInfo.miniapp.loosing"
+      :loading-text="homeInfo.miniapp.loading"
+      :success-text="homeInfo.miniapp.success"
+      class="pull-refresh"
+    >
+      <div @click="onClick" class="home-title">
+        <AppGame width="25" height="25" class="app-icons" />
+      </div>
+      <AppFriendship :aid="1" style="margin-top: -10px;" />
 
-    <AppFriendship :aid="1" />
-
-    <div @click="calendarShow = true" class="home-title">
-      <AppCalendar width="25" height="25" class="app-icons" />
-    </div>
-
-    <div class="home-dayTag">
-      <van-loading class="home-loading" v-show="loadingShow" />
-      <a-timeline v-show="!loadingShow">
-        <a-timeline-item
-          v-for="(data,index) in homeInfo.dayTag.list"
-          :key="index + '-dayTag'"
-          :color="data.color"
-        >
-          <van-tag
-            round
-            v-if="data.calendarInfo.day"
+      <div @click="calendarShow = true" class="home-title">
+        <AppCalendar width="25" height="25" class="app-icons" />
+      </div>
+      <div class="home-dayTag">
+        <van-loading class="home-loading" v-show="loadingShow" />
+        <a-timeline v-show="!loadingShow">
+          <a-timeline-item
+            v-for="(data,index) in homeInfo.dayTag.list"
+            :key="index + '-dayTag'"
             :color="data.color"
-            @click="calendarShow = true"
-          >{{ data.calendarInfo.day }}</van-tag>
-          <div v-if="data.url" class="item-title">
-            <a :href="data.url" target="_blank">
-              <img v-lazy="'/img/app-icons/link_black.png'" class="home-link" />
-              {{ data.title }}
-            </a>
-          </div>
-          <div v-else class="item-title" v-html="data.title"></div>
-          <div v-if="data.item.length > 0" class="item-data">
-            <router-link
-              v-for="(id, index) in data.item"
-              :key="index + '-data-img-id'"
-              :to="{ path: '/hero/' + id + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
-            >
-              <img
-                v-if="id"
-                v-lazy="'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + id + '/' + id + '.jpg'"
-                class="item-data-img-id"
-              />
-            </router-link>
-          </div>
-        </a-timeline-item>
-      </a-timeline>
-      <AppBottomTabbar />
-    </div>
+          >
+            <van-tag
+              round
+              v-if="data.calendarInfo.day"
+              :color="data.color"
+              @click="calendarShow = true"
+            >{{ data.calendarInfo.day }}</van-tag>
+            <div v-if="data.url" class="item-title">
+              <a :href="data.url" target="_blank">
+                <img v-lazy="'/img/app-icons/link_black.png'" class="home-link" />
+                {{ data.title }}
+              </a>
+            </div>
+            <div v-else class="item-title" v-html="data.title"></div>
+            <div v-if="data.item.length > 0" class="item-data">
+              <router-link
+                v-for="(id, index) in data.item"
+                :key="index + '-data-img-id'"
+                :to="{ path: '/hero/' + id + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
+              >
+                <img
+                  v-if="id"
+                  v-lazy="'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + id + '/' + id + '.jpg'"
+                  class="item-data-img-id"
+                />
+              </router-link>
+            </div>
+          </a-timeline-item>
+        </a-timeline>
+        <AppBottomTabbar />
+      </div>
 
-    <van-calendar
-      :title="homeInfo.dayTag.title"
-      :show-confirm="false"
-      :formatter="onFormatter"
-      :min-date="minDate"
-      :max-date="maxDate"
-      v-model="calendarShow"
-    />
-
-    <span class="home-record">
-      <a href="http://beian.miit.gov.cn/" target="_blank" style="color: black;">沪ICP备16031287号-2</a>
-    </span>
+      <van-calendar
+        :title="homeInfo.dayTag.title"
+        :show-confirm="false"
+        :formatter="onFormatter"
+        :min-date="minDate"
+        :max-date="maxDate"
+        v-model="calendarShow"
+      />
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -88,6 +92,12 @@
   position: absolute;
   font-size: 25px;
   margin-top: -4px;
+}
+</style>
+
+<style>
+div.pull-refresh.van-pull-refresh {
+  overflow: unset;
 }
 </style>
 
@@ -131,15 +141,6 @@
   margin-bottom: 3px;
   margin-right: 3px;
 }
-
-.home-record {
-  font-size: 10px;
-  position: fixed;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  bottom: 55px;
-}
 </style>
 
 <script>
@@ -171,11 +172,13 @@ export default {
         dayTag: {
           title: "",
           list: []
-        }
+        },
+        miniapp: {}
       },
       swipeStyle: {
         marginTop: 0
-      }
+      },
+      isLoading: false
     };
   },
   mounted() {
@@ -245,6 +248,14 @@ export default {
         }
       }
       return day;
+    },
+    onRefresh() {
+      setTimeout(() => {
+        this.isLoading = false;
+        this.$router.push({
+          path: "/miniapp"
+        });
+      }, 200);
     }
   }
 };

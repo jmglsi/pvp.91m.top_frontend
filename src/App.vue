@@ -29,6 +29,7 @@
       fixed
       :z-index="2"
       :border="false"
+      v-show="tabbarShow"
       v-model="tabbarActive"
       safe-area-inset-bottom
       active-color="rgb(222,177,81)"
@@ -106,8 +107,13 @@ div.van-circle__text {
 }
 
 div.van-nav-bar,
+div.van-cell-group,
 div.van-grid-item__content {
   background-color: transparent;
+}
+
+div.app-cell-group.van-hairline--top-bottom {
+  position: unset;
 }
 
 div.van-nav-bar__title {
@@ -170,12 +176,20 @@ export default {
     return {
       viewKey: 0,
       tabbarActive: "/home",
+      tabbarShow: true,
       particlesShow: true,
       rankingIcon: "friends-o",
       appInfo: {
         homeInfo: {}
       }
     };
+  },
+  watch: {
+    $route(to) {
+      to.path == "/miniapp"
+        ? (this.tabbarShow = false)
+        : (this.tabbarShow = true);
+    }
   },
   mounted() {
     this.init();
