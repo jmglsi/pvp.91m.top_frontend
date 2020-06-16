@@ -1,9 +1,6 @@
 <template>
   <div class="changelog">
-    <vue-markdown
-      :source="statementApp"
-      class="app-markdown"
-    />
+    <vue-markdown :source="statementApp" class="app-590fc197fe73db0aa2ec03687a372eea" />
     <AppBottomTabbar />
   </div>
 </template>
@@ -13,7 +10,7 @@
   text-align: left;
 }
 
-.app-markdown {
+.app-590fc197fe73db0aa2ec03687a372eea {
   padding: 25px;
 }
 </style>
@@ -23,18 +20,19 @@ export default {
   name: "Changelog",
   components: {
     VueMarkdown: resolve => require(["vue-markdown"], resolve),
-    AppBottomTabbar: resolve => require(["@/components/AppBottomTabbar.vue"], resolve)
+    AppBottomTabbar: resolve =>
+      require(["@/components/App/BottomTabbar.vue"], resolve)
   },
-  data () {
+  data() {
     return {
       statementApp: ""
     };
   },
-  mounted () {
+  mounted() {
     this.getStatementApp();
   },
   methods: {
-    getStatementApp: function () {
+    getStatementApp: function() {
       this.axios.get("/md/statement_app.md?ts=" + this.appTs).then(ret => {
         this.statementApp = ret.data;
       });

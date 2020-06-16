@@ -1,36 +1,40 @@
 <template>
-  <div class="ranking-guanxi">
+  <div class="ranking-gx">
     <van-search
       v-model="searchValue"
       :placeholder="searchPlaceholder"
-      shape="round"
       @search="onSearch"
       @clear="onClear"
-      class="app-top-search"
+      shape="round"
+      class="app-c1130d301aabe8d6a9d46c322fd6150a"
     />
 
     <vxe-grid
-      ref="ranking-guanxi"
+      ref="gx-ff4a008470319a22d9cf3d14af485977"
       :loading="loading"
-      :data="tableData.list"
+      :data="tableData.result"
       :height="clientHeight"
       :cell-class-name="cellClassName"
       :sort-config="{trigger: 'cell'}"
       @cell-click="onCellClick"
     >
-      <vxe-table-column title="英雄1" field="adaptationRate1" fixed="left" width="75" sortable>
+      <vxe-table-column title="英雄_1" field="adaptationRate_1" fixed="left" width="75" sortable>
         <template v-slot="{ row }">
-          <img v-lazy="row.img1" width="50" class="app-img" />
-          <div class="row-rate">
-            <span class="bottom-num adaptation-rate">{{ row.adaptationRate1 }}</span>
+          <img v-lazy="row.img_1" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+          <div class="row-8d777f385d3dfec8815d20f7496026dc">
+            <span
+              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c row-d57964e1d6adcef4cf486eda0333b596"
+            >{{ row.adaptationRate_1 }}</span>
           </div>
         </template>
       </vxe-table-column>
-      <vxe-table-column title="英雄2" field="adaptationRate2" fixed="left" width="75" sortable>
+      <vxe-table-column title="英雄_2" field="adaptationRate_2" fixed="left" width="75" sortable>
         <template v-slot="{ row }">
-          <img v-lazy="row.img2" width="50" class="app-img" />
-          <div class="row-rate">
-            <span class="bottom-num adaptation-rate">{{ row.adaptationRate2 }}</span>
+          <img v-lazy="row.img_2" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+          <div class="row-8d777f385d3dfec8815d20f7496026dc">
+            <span
+              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c row-d57964e1d6adcef4cf486eda0333b596"
+            >{{ row.adaptationRate_2 }}</span>
           </div>
         </template>
       </vxe-table-column>
@@ -39,42 +43,42 @@
 
       <vxe-table-column title="队友 (%)">
         <vxe-table-column
-          title="出场"
-          field="teammatePickRate"
           :width="listWidth"
           :formatter="['toFixedString', 2]"
+          title="出场"
+          field="teammatePickRate"
           sortable
         />
         <vxe-table-column
-          title="胜率"
-          field="teammateWinRate"
           :width="listWidth"
           :formatter="['toFixedString', 2]"
+          title="胜率"
+          field="teammateWinRate"
           sortable
         />
       </vxe-table-column>
 
       <vxe-table-column
-        title="适配"
-        field="adaptation"
         :width="listWidth"
         :formatter="['toFixedString', 2]"
+        title="适配"
+        field="adaptation"
         sortable
       />
 
       <vxe-table-column title="对手 (%)">
         <vxe-table-column
-          title="出场"
-          field="opponentPickRate"
           :width="listWidth"
           :formatter="['toFixedString', 2]"
+          title="出场"
+          field="opponentPickRate"
           sortable
         />
         <vxe-table-column
-          title="胜率"
-          field="opponentWinRate"
           :width="listWidth"
           :formatter="['toFixedString', 2]"
+          title="胜率"
+          field="opponentWinRate"
           sortable
         />
       </vxe-table-column>
@@ -82,19 +86,18 @@
     </vxe-grid>
 
     <van-action-sheet
-      :title="heroInfo.name1 + ' & ' + heroInfo.name2 + ' 如何打开'"
       v-model="actionSheetShow"
-      safe-area-inset-bottom
+      :title="heroInfo.name_1 + ' & ' + heroInfo.name_2 + ' 如何打开'"
       :actions="actions"
       :close-on-click-action="true"
+      safe-area-inset-bottom
       @select="onSelect"
-      class="app-action-sheet"
     />
   </div>
 </template>
 
 <style scoped>
-.adaptation-rate {
+.row-d57964e1d6adcef4cf486eda0333b596 {
   margin-left: -25px;
   margin-top: -8px;
 }
@@ -110,7 +113,7 @@ export default {
       tableData: {
         searchPlaceholder: [],
         color: {},
-        list: []
+        result: []
       },
       actionSheetShow: false,
       actions: [
@@ -180,7 +183,7 @@ export default {
       this.heroInfo = row;
 
       let heroName = this.searchValue;
-      if (!heroName) heroName = this.heroInfo.name1;
+      if (!heroName) heroName = this.heroInfo.name_1;
 
       this.axios
         .get(
@@ -191,17 +194,17 @@ export default {
                 "?type=1&from=copyshare&heroName=" +
                 encodeURIComponent(heroName) +
                 "&heroId1=" +
-                row.id1 +
+                row.id_1 +
                 "&heroId2=" +
-                row.id2
+                row.id_2
             )
         )
         .then(ret => {
           this.copyData =
             "英雄:" +
-            row.name1 +
+            row.name_1 +
             " & " +
-            row.name2 +
+            row.name_2 +
             "" +
             "\r-\r队友胜率:" +
             row.teammateWinRate +
@@ -222,19 +225,19 @@ export default {
         column.property === "opponentPickRate"
       ) {
         if (row.teammatePickRate >= pick || row.opponentPickRate >= pick) {
-          return "col-blue";
+          return "col-48d6215903dff56238e52e8891380c8f";
         }
       }
 
       if (column.property === "teammateWinRate") {
         if (row.teammatePickRate >= pick && row.teammateWinRate >= win) {
-          return "col-green";
+          return "col-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
 
       if (column.property === "opponentWinRate") {
         if (row.opponentPickRate >= pick && row.opponentWinRate >= win) {
-          return "col-green";
+          return "col-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
     },
@@ -290,7 +293,7 @@ export default {
 
       if (item.value == 1) {
         this.$router.push({
-          path: "/hero/" + heroInfo.id1 + "," + heroInfo.id2 + "/replay"
+          path: "/hero/" + heroInfo.id_1 + "," + heroInfo.id_2 + "/replay"
         });
       }
     }

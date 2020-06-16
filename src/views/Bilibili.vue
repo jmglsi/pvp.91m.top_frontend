@@ -3,21 +3,25 @@
     <van-search
       v-model="searchValue"
       :placeholder="tableData.searchPlaceholder"
-      shape="round"
       @search="onSearch"
       @clear="onClear"
-      class="app-top-search"
+      shape="round"
+      class="app-c1130d301aabe8d6a9d46c322fd6150a"
     />
 
-    <van-checkbox v-model="checked" class="auto-refresh" @change="onCheckBoxChange" />
+    <van-checkbox
+      v-model="checked"
+      class="bilibili-a47ba339330136bcab5b4c91d5d10882"
+      @change="onCheckBoxChange"
+    />
 
     <vxe-grid
+      ref="bilibili-ff4a008470319a22d9cf3d14af485977"
       :loading="loading"
-      :data="tableData.list"
+      :data="tableData.result"
       :height="clientHeight"
       :sort-config="{trigger: 'cell'}"
       @cell-click="onCellClick"
-      class="app-table"
     >
       <vxe-table-column title="id" field="uid" fixed="left" width="125" />
       <vxe-table-column title="bv" field="bv" width="150">
@@ -34,11 +38,11 @@
       <template v-slot:empty>暂无数据</template>
     </vxe-grid>
 
-    <div class="bilibili-bottom">
+    <div class="bilibili-71f262d796bed1ab30e8a2d5a8ddee6f">
       <van-pagination
         v-model="currentPage"
-        :total-items="tableData.num"
-        :items-per-page="tableData.page"
+        :total-items="tableData.total"
+        :items-per-page="tableData.pageSize"
         @change="onPaginationChange"
       />
 
@@ -48,24 +52,23 @@
     <van-action-sheet
       v-model="actionSheetShow"
       :title="orderInfo.uid + ' 如何打开'"
-      safe-area-inset-bottom
       :actions="actions"
       :close-on-click-action="true"
+      safe-area-inset-bottom
       @select="onSelect"
-      class="app-action-sheet"
     />
   </div>
 </template>
 
 <style scoped>
-.auto-refresh {
+.bilibili-a47ba339330136bcab5b4c91d5d10882 {
   position: absolute;
   z-index: 2;
   left: 55px;
   margin-top: 13px;
 }
 
-.bilibili-bottom {
+.bilibili-71f262d796bed1ab30e8a2d5a8ddee6f {
   margin-top: 25px;
 }
 </style>
@@ -80,7 +83,9 @@ export default {
       searchValue: "",
       tableData: {
         searchPlaceholder: "请输入搜索关键词",
-        list: []
+        result: [],
+        total: 200,
+        pageSize: 50
       },
       currentPage: 1,
       listWidth: 0,

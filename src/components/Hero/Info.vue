@@ -1,44 +1,63 @@
 <template>
   <div class="info">
-    <van-nav-bar
-      :title="heroInfoTitle"
-      :border="false"
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    >
+    <van-nav-bar :border="false" @click-left="onClickNavBarLeft" @click-right="onClickNavBarRight">
+      <template #title>
+        <div @click="$message.info('巅峰赛趋势、分路推荐 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">
+          <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfoTitle }}</span>
+          <img
+            v-if="heroInfo.trend > 0"
+            v-lazy="'/img/app-icons/hot-' + heroInfo.trend + '.png'"
+            v-show="shuntShow"
+            width="15"
+            class="info-3d5f1ffeadf58eb64ef57aef7e53a31e"
+          />
+          <span v-show="shuntShow" class="info-68adaff1d028a37f27fb33c483329cba">
+            <ul>
+              <li
+                v-for="(data, index) in heroInfo.type"
+                :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
+                class="info-fd136b2a1c6099bfa0535fe944e0cdc6"
+              >
+                <van-tag
+                  v-if="data > 0"
+                  :color="positionInfo[data][1]"
+                  round
+                  class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+                >{{ positionInfo[data][0] }}</van-tag>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </template>
       <van-icon name="todo-list-o" slot="left" />
       <van-icon name="question-o" slot="right" />
     </van-nav-bar>
 
-    <van-grid :border="false" :column-num="3" v-show="shuntShow" class="app-grid">
-      <div class="div-type" @click="$message.info('巅峰赛趋势、分路推荐 ;D')">
-        <img
-          v-if="heroInfo.trend > 0"
-          width="15"
-          v-lazy="'/img/app-icons/hot-' + heroInfo.trend + '.png'"
-          class="info-trend"
-        />
-        <span class="info-type" v-for="(data, index) in heroInfo.type" :key="index + '-tag'">
-          <van-tag
-            round
-            class="info-space"
-            v-if="data > 0"
-            :color="positionInfo[data][1]"
-          >{{ positionInfo[data][0] }}</van-tag>
-        </span>
-      </div>
-
+    <van-grid
+      :border="false"
+      :column-num="3"
+      v-show="shuntShow"
+      class="app-ff4a008470319a22d9cf3d14af485977"
+    >
       <van-grid-item @click="$message.info('分均经济、场均时长、场均经济 XD')">
-        <div class="div-other">
-          <AppGold width="25" height="25" class="info-space" />
-          <span class="bottom-num info-num">{{ heroInfo.equMoneyMin || 0 }}</span>
+        <div class="info-795f3202b17cb6bc3d4b771d8c6c9eaf">
+          <AppGold width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
+          <span
+            class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
+          >{{ heroInfo.equMoneyMin || 0 }}</span>
 
-          <AppTime width="25" height="25" class="info-space" />
-          <span class="bottom-num info-num">{{ heroInfo.usedtime || 0 }}</span>
+          <AppTime width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
+          <span
+            class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
+          >{{ heroInfo.usedtime || 0 }}</span>
         </div>
 
-        <span class="info-money">
-          <van-tag round class="info-space" color="black">{{ heroInfo.equMoneyOverflow || 0 }}</van-tag>
+        <span class="info-9726255eec083aa56dc0449a21b33190">
+          <van-tag
+            round
+            color="black"
+            class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+          >{{ heroInfo.equMoneyOverflow || 0 }}</van-tag>
         </span>
       </van-grid-item>
       <van-grid-item @click="actionSheetShow = true">
@@ -48,27 +67,43 @@
           :speed="33"
           :clockwise="false"
           :color="gradientColor"
-          size="75"
           :text="circleInfo.text"
+          size="75"
         />
-        <img width="50" v-show="heroImgShow" v-lazy="heroInfo.img" class="info-img" />
+        <img
+          width="50"
+          v-show="heroImgShow"
+          v-lazy="heroInfo.img"
+          class="info-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+        />
       </van-grid-item>
       <van-grid-item @click="$message.info('技能下面的数字是占比 ;D')">
-        <div class="div-skill">
-          <span class="info-skill" v-for="(data, index) in heroInfo.skill" :key="index + '-img'">
-            <img v-if="data.id > 0" width="25" v-lazy="data.img" class="info-space" />
-            <span class="bottom-num info-num">{{ data.pickRate }}</span>
+        <div class="info-f3412345b511c61986bba9a39793157f">
+          <span
+            class="info-713dd4d0b2e842c08da62ddeec872331"
+            v-for="(data, index) in heroInfo.skill"
+            :key="'hero-713dd4d0b2e842c08da62ddeec872331-' + index"
+          >
+            <img
+              v-if="data.id > 0"
+              v-lazy="data.img"
+              width="25"
+              class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+            />
+            <span
+              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
+            >{{ data.pickRate }}</span>
           </span>
         </div>
       </van-grid-item>
     </van-grid>
 
     <van-tabs
+      v-model="infoTabsActive"
       :border="false"
-      v-model="tabsActive"
       @change="onTabsChange"
       color="rgb(222,177,81)"
-      class="app-index info-margin"
+      class="app-6a992d5529f459a44fee58c733255e86 info-d42f4851e770aa0f758b01388874f67b"
     >
       <van-tab title="巅峰赛趋势" :disabled="tabsDisabled" />
       <van-tab title="同职业对比" :disabled="tabsDisabled" />
@@ -76,13 +111,13 @@
     </van-tabs>
 
     <vue-tags-input
-      class="app-index info-tags"
-      v-show="tagsInputShow"
       v-model="tag"
-      @tags-changed="onTagsChanged"
-      @blur="onBlur"
+      v-show="tagsInputShow"
       :tags="tags"
       :placeholder="tagsPlaceholder"
+      @tags-changed="onTagsChanged"
+      @blur="onBlur"
+      class="app-6a992d5529f459a44fee58c733255e86 info-d57ac45256849d9b13e2422d91580fb9"
     />
 
     <ve-line
@@ -114,35 +149,40 @@
       :data="chart.zidingyi.data"
     />
 
-    <div class="app-copyshare">
+    <div class="app-71f24db02647f7d930444128c0b02003">
       <van-button
+        v-clipboard:copy="copyData"
+        v-clipboard:success="onCopy"
+        v-clipboard:error="onError"
         round
         size="small"
         type="info"
         icon="/img/app-icons/share.png"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
-        v-clipboard:copy="copyData"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError"
       >{{ heroInfo.shareText }}</van-button>
     </div>
 
     <van-action-sheet
-      :title="heroInfo.name + ' 的 ' + circleInfo.text"
       v-model="actionSheetShow"
+      :title="heroInfo.name + ' 的 ' + circleInfo.text"
       safe-area-inset-bottom
-      class="app-action-sheet"
     >
       <van-grid :border="false" :column-num="2">
         <van-grid-item @click="addHeroVote(1)">
           <AppCry width="50" height="50" />
-          <span class="vote-choose">{{ circleInfo.vote[0].text }}</span>
+          <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circleInfo.vote[0].text }}</span>
         </van-grid-item>
         <van-grid-item @click="addHeroVote(2)">
           <AppSmile width="50" height="50" />
-          <span class="vote-choose">{{ circleInfo.vote[1].text }}</span>
+          <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circleInfo.vote[1].text }}</span>
         </van-grid-item>
-        <van-cell title="注意事项" icon="question-o" @click="getTips" class="hero-list-tips" is-link />
+        <van-cell
+          title="注意事项"
+          icon="question-o"
+          @click="getTips"
+          class="hero-fc861e4a5806e7411f7860142244c917"
+          is-link
+        />
       </van-grid>
     </van-action-sheet>
 
@@ -151,11 +191,15 @@
 </template>
 
 <style>
-div.app-copyshare i.van-button__icon {
+div.van-circle__text {
+  font-size: 10px;
+}
+
+div.app-71f24db02647f7d930444128c0b02003 i.van-button__icon {
   margin-top: -1px;
 }
 
-div.app-copyshare span.van-button__text {
+div.app-71f24db02647f7d930444128c0b02003 span.van-button__text {
   margin-top: 2px;
 }
 
@@ -165,58 +209,65 @@ div.ti-input {
 </style>
 
 <style scoped>
-.app-grid {
-  margin-top: 23px;
+.info {
+  background-color: white;
+  width: 100%;
+  height: 100%;
 }
 
-.app-index {
+.info-d5d3db1765287eef77d7927cc956f50a {
+  font-size: 20px;
+}
+.info-3d5f1ffeadf58eb64ef57aef7e53a31e {
+  margin: 0 5px;
+  margin-top: -5px;
+}
+
+.info-68adaff1d028a37f27fb33c483329cba {
+  position: absolute;
+  margin-top: -3px;
+}
+
+.info-fd136b2a1c6099bfa0535fe944e0cdc6 {
+  float: left;
+}
+
+.app-ff4a008470319a22d9cf3d14af485977 {
+  margin-top: 15px;
+}
+
+.app-6a992d5529f459a44fee58c733255e86 {
   z-index: 1;
 }
 
-.info-margin {
+.info-d42f4851e770aa0f758b01388874f67b {
   margin: 23px 0;
 }
 
-.info-money {
+.info-9726255eec083aa56dc0449a21b33190 {
   margin-top: 5px;
 }
 
-.info-img {
+.info-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
   position: absolute;
   border-radius: 100%;
 }
 
-.info-num {
+.info-0fc3cfbc27e91ea60a787de13dae3e3c {
   margin-left: -40px;
   margin-top: 26px;
 }
 
-.div-type {
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 33.33%;
-  height: 25px;
-  margin: 0 auto;
-  z-index: 1;
-  top: 50px;
-}
-
-.vote-choose {
+.vote-ebd73ade48cb3e102d1dbbfbc0377c5f {
   font-size: 10px;
   margin-top: 10px;
 }
 
-.info-type,
-.info-skill {
-  right: 15px;
-}
-
-.info-space {
+.info-ff2364a0be3d20e46cc69efb36afe9a5 {
   margin: 0 3px;
 }
 
-.info-tags {
+.info-d57ac45256849d9b13e2422d91580fb9 {
   text-align: center;
   width: 85%;
   max-width: 500px;
@@ -224,8 +275,8 @@ div.ti-input {
   margin-top: -15px;
 }
 
-.app-copyshare {
-  margin-top: 15px;
+.app-71f24db02647f7d930444128c0b02003 {
+  margin-top: 60px;
 }
 </style>
 
@@ -244,13 +295,12 @@ export default {
     VeLine,
     VeRadar,
     VueTagsInput: resolve => require(["@johmun/vue-tags-input"], resolve),
-    AppGold: resolve => require(["@/components/AppIcons/AppGold.vue"], resolve),
-    AppTime: resolve => require(["@/components/AppIcons/AppTime.vue"], resolve),
-    AppCry: resolve => require(["@/components/AppIcons/AppCry.vue"], resolve),
-    AppSmile: resolve =>
-      require(["@/components/AppIcons/AppSmile.vue"], resolve),
+    AppGold: resolve => require(["@/assets/Icons/AppGold.vue"], resolve),
+    AppTime: resolve => require(["@/assets/Icons/AppTime.vue"], resolve),
+    AppCry: resolve => require(["@/assets/Icons/AppCry.vue"], resolve),
+    AppSmile: resolve => require(["@/assets/Icons/AppSmile.vue"], resolve),
     AppBottomTabbar: resolve =>
-      require(["@/components/AppBottomTabbar.vue"], resolve)
+      require(["@/components/App/BottomTabbar.vue"], resolve)
   },
   data() {
     this.markLine = {
@@ -302,7 +352,7 @@ export default {
         "0%": "#3fecff",
         "100%": "#6149f6"
       },
-      tabsActive: 0,
+      infoTabsActive: 0,
       tabsDisabled: false,
       heroImgShow: true,
       heroInfoTitle: "加载中",
@@ -373,7 +423,7 @@ export default {
       this.shuntShow = false;
       this.radar_2_Show = true;
 
-      this.tabsActive = 2;
+      this.infoTabsActive = 2;
       this.tabsDisabled = true;
       this.tagsInputShow = true;
 
@@ -382,17 +432,17 @@ export default {
         this.getHeroChartsLogByCustomizeFromUrl(heroName);
       }
     } else {
-      this.tabsActive = parseInt(this.$route.query.type);
+      this.infoTabsActive = parseInt(this.$route.query.type);
 
       this.getHeroInfo(heroId);
 
-      if (!this.tabsActive || this.tabsActive == 0) {
+      if (!this.infoTabsActive || this.infoTabsActive == 0) {
         setTimeout(() => {
           this.getHeroChartsLog(heroId);
         }, 100);
       }
 
-      if (this.tabsActive != 2) {
+      if (this.infoTabsActive != 2) {
         setTimeout(() => {
           this.getHeroChartsLogBySimilar(heroId);
         }, 100);
@@ -628,12 +678,12 @@ export default {
     onError: function() {
       this.$message.error("复制失败");
     },
-    onClickLeft: function() {
+    onClickNavBarLeft: function() {
       this.$router.push({
         path: "/hero/" + this.heroInfo.id + "/replay"
       });
     },
-    onClickRight: function() {
+    onClickNavBarRight: function() {
       this.$router.push({
         path: "/about"
       });

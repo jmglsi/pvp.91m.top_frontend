@@ -1,145 +1,34 @@
 <template>
   <div class="home">
-    <van-swipe :autoplay="5000" :style="swipeStyle" class="home-swipe">
-      <van-swipe-item v-for="(data, index) in homeInfo.swipe.list" :key="index + '-img'">
-        <a :href="data.url" target="_bank">
-          <img width="100%" height="200" v-lazy="data.img" style="object-fit: cover;" />
-        </a>
-        <van-tag
-          mark
-          v-if="data.type > 0"
-          :color="data.tag.color"
-          class="home-swipe-text"
-        >{{ data.tag.text }}</van-tag>
-      </van-swipe-item>
-    </van-swipe>
-
-    <van-pull-refresh
-      v-model="isLoading"
-      @refresh="onRefresh"
-      :pulling-text="homeInfo.miniapp.pulling"
-      :loosing-text="homeInfo.miniapp.loosing"
-      :loading-text="homeInfo.miniapp.loading"
-      :success-text="homeInfo.miniapp.success"
-      class="pull-refresh"
+    <van-tabs
+      v-model="homeTabsActive"
+      :border="false"
+      :ellipsis="false"
+      :swipeable="true"
+      color="rgb(222, 177, 81)"
+      class="home-5db8dca30c2d7f0c2bc225ae852c5053"
     >
-      <div @click="onClick" class="home-title">
-        <AppGame width="25" height="25" class="app-icons" />
-      </div>
-      <AppFriendship :aid="1" style="margin-top: -10px;" />
+      <!--<van-tab title="关注">即将上线</van-tab>-->
+      <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
+        <TuiJian />
+      </van-tab>
+      <!--
+      <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
+        <Game />
+      </van-tab>
+      -->
+      <!--<van-tab title="舆论">即将上线</van-tab>-->
 
-      <div @click="calendarShow = true" class="home-title">
-        <AppCalendar width="25" height="25" class="app-icons" />
-      </div>
-      <div class="home-dayTag">
-        <van-loading class="home-loading" v-show="loadingShow" />
-        <a-timeline v-show="!loadingShow">
-          <a-timeline-item
-            v-for="(data,index) in homeInfo.dayTag.list"
-            :key="index + '-dayTag'"
-            :color="data.color"
-          >
-            <van-tag
-              round
-              v-if="data.calendarInfo.day"
-              :color="data.color"
-              @click="calendarShow = true"
-            >{{ data.calendarInfo.day }}</van-tag>
-            <div v-if="data.url" class="item-title">
-              <a :href="data.url" target="_blank">
-                <img v-lazy="'/img/app-icons/link_black.png'" class="home-link" />
-                {{ data.title }}
-              </a>
-            </div>
-            <div v-else class="item-title" v-html="data.title"></div>
-            <div v-if="data.item.length > 0" class="item-data">
-              <router-link
-                v-for="(id, index) in data.item"
-                :key="index + '-data-img-id'"
-                :to="{ path: '/hero/' + id + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
-              >
-                <img
-                  v-if="id"
-                  v-lazy="'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + id + '/' + id + '.jpg'"
-                  class="item-data-img-id"
-                />
-              </router-link>
-            </div>
-          </a-timeline-item>
-        </a-timeline>
-        <AppBottomTabbar />
-      </div>
-
-      <van-calendar
-        :title="homeInfo.dayTag.title"
-        :show-confirm="false"
-        :formatter="onFormatter"
-        :min-date="minDate"
-        :max-date="maxDate"
-        v-model="calendarShow"
-      />
-    </van-pull-refresh>
+      <AppBottomTabbar :height="100" />
+    </van-tabs>
   </div>
 </template>
 
 <style>
-.home-link {
-  width: 20px;
+.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
+  width: 15px;
+  height: 15px;
   margin-top: -3px;
-}
-
-.home-title-span {
-  position: absolute;
-  font-size: 25px;
-  margin-top: -4px;
-}
-</style>
-
-<style>
-div.pull-refresh.van-pull-refresh {
-  overflow: unset;
-}
-</style>
-
-<style scoped>
-.home-swipe-text {
-  left: 0;
-  z-index: 1;
-  float: left;
-  margin-top: 160px;
-  position: absolute;
-}
-
-.home-title {
-  margin: 20px;
-  text-align: left;
-  width: 100px;
-}
-
-.app-icons {
-  margin-right: 5px;
-}
-
-.home-loading {
-  text-align: center;
-}
-
-.home-dayTag {
-  height: 200px;
-  text-align: left;
-  margin: 0 20px;
-}
-
-.item-title {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.item-data-img-id {
-  width: 50px;
-  border-radius: 10px;
-  margin-bottom: 3px;
-  margin-right: 3px;
 }
 </style>
 
@@ -147,115 +36,21 @@ div.pull-refresh.van-pull-refresh {
 export default {
   name: "Home",
   components: {
-    AppGame: resolve => require(["@/components/AppIcons/AppGame.vue"], resolve),
-    AppCalendar: resolve =>
-      require(["@/components/AppIcons/AppCalendar.vue"], resolve),
+    TuiJian: resolve =>
+      require(["@/components/Home/TuiJian/Index.vue"], resolve),
+    Game: resolve => require(["@/components/Home/Game/Index.vue"], resolve),
     AppBottomTabbar: resolve =>
-      require(["@/components/AppBottomTabbar.vue"], resolve),
-    AppFriendship: resolve =>
-      require(["@/components/AppFriendship.vue"], resolve)
+      require(["@/components/App/BottomTabbar.vue"], resolve)
   },
   data() {
     return {
-      loadingShow: true,
-      calendarShow: false,
-      minDate: new Date(),
-      maxDate: new Date(),
-      homeInfo: {
-        swipe: {
-          list: []
-        },
-        friendship: {
-          type: "",
-          data: ""
-        },
-        dayTag: {
-          title: "",
-          list: []
-        },
-        miniapp: {}
-      },
-      swipeStyle: {
-        marginTop: 0
-      },
-      isLoading: false
+      homeTabsActive: 0
     };
   },
   mounted() {
     let from = this.$route.query.from;
     if (from) {
       this.$cookie.set("from", from, { expires: "1Y" });
-    }
-
-    if (this.$cookie.get("from") == "pwa") {
-      this.swipeStyle.marginTop = "-50px";
-    }
-
-    this.getHome();
-    this.getTime();
-  },
-  methods: {
-    getHome: function() {
-      this.axios.get(this.appApi.list.getHome).then(ret => {
-        this.homeInfo = ret.data.data;
-
-        setTimeout(() => {
-          this.loadingShow = false;
-        }, 500);
-      });
-    },
-    onClick: function() {
-      let friendship = this.homeInfo.friendship;
-
-      if (friendship.type) {
-        this.$message.info(friendship.data);
-      }
-    },
-    getTime: function() {
-      let date = new Date();
-      this.minDate = new Date(date.setMonth(date.getMonth() - 4));
-      this.maxDate = new Date(date.setMonth(date.getMonth() + 5));
-    },
-    onFormatter: function(day) {
-      let oDay =
-        day.date.getFullYear() +
-        "/" +
-        (day.date.getMonth() + 1) +
-        "/" +
-        day.date.getDate();
-      let dayTagList = this.homeInfo.dayTag.list;
-
-      for (let i = 0; i < dayTagList.length; i++) {
-        let list = dayTagList[i].calendarInfo;
-
-        if (!list.day) continue;
-
-        if (oDay === list.day) {
-          if (list.type == 0) {
-            day.bottomInfo = list.text;
-            day.className = "dayTag-tyf";
-          }
-
-          if (list.type == 1) {
-            day.topInfo = list.text;
-            day.className = "dayTag-zsf";
-          }
-
-          if (list.type == 2) {
-            day.text = list.text;
-            day.className = "dayTag-xpf";
-          }
-        }
-      }
-      return day;
-    },
-    onRefresh() {
-      setTimeout(() => {
-        this.isLoading = false;
-        this.$router.push({
-          path: "/miniapp"
-        });
-      }, 200);
     }
   }
 };

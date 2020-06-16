@@ -1,17 +1,17 @@
 <template>
-  <div class="ranking-wanjia">
-    <van-dropdown-menu style="height: 54px;">
+  <div class="ranking-wj">
+    <van-dropdown-menu>
       <van-dropdown-item v-model="areaType" :options="playerOptions" @change="onChange" />
-      <van-dropdown-item title="筛选" ref="item">
+      <van-dropdown-item ref="wj-447b7147e84be512208dcc0995d67ebc" title="筛选">
         <van-switch-cell v-model="switchShield" title="隐藏战绩" />
-        <van-button block type="info" @click="onConfirm">确认</van-button>
+        <van-button type="info" block @click="onConfirm">确认</van-button>
       </van-dropdown-item>
     </van-dropdown-menu>
 
     <vxe-grid
-      ref="ranking-wanjia"
+      ref="wj-ff4a008470319a22d9cf3d14af485977"
       :loading="loading"
-      :data="tableData.list"
+      :data="tableData.result"
       :height="clientHeight"
       :sort-config="{trigger: 'cell'}"
       @cell-click="onCellClick"
@@ -19,13 +19,13 @@
       <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
         <template v-slot="{ row }">
           <van-tag
-            mark
-            type="primary"
-            class="wj-tag"
             v-if="row.tag"
             :color="row.tag.color"
+            mark
+            type="primary"
+            class="app-e4d23e841d8e8804190027bce3180fa5"
           >{{ row.tag.text }}</van-tag>
-          <img v-lazy="row.avatar" width="50" class="app-img" />
+          <img v-lazy="row.avatar" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
         </template>
       </vxe-table-column>
 
@@ -37,13 +37,12 @@
     </vxe-grid>
 
     <van-action-sheet
-      :title="playerInfo.gamePlayerName + ' 如何打开'"
       v-model="actionSheetShow"
-      safe-area-inset-bottom
+      :title="playerInfo.gamePlayerName + ' 如何打开'"
       :actions="playerInfo.area < 3 ? actions : []"
       :close-on-click-action="true"
+      safe-area-inset-bottom
       @select="onSelect"
-      class="app-action-sheet"
     />
   </div>
 </template>
@@ -66,7 +65,7 @@ export default {
         { text: "微信苹果", value: 4 }
       ],
       tableData: {
-        list: []
+        result: []
       },
       actionSheetShow: false,
       actions: [{ name: "查看QQ", value: 0 }],
@@ -102,15 +101,14 @@ export default {
           this.appApi.list.getUserInfo + "&aid=" + row.userId + "&bid=" + key
         )
         .then(ret => {
-          let data = ret.data.data,
-            code = data.code;
+          let data = ret.data;
 
-          if (code != 1) {
+          if (data.status.code != 200) {
             this.$message.error("未知错误");
             return;
           }
 
-          this.qq = data.qq;
+          this.qq = data.data.qq;
           this.copyData =
             row.gamePlayerName +
             "\rQQ:" +

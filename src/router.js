@@ -11,8 +11,8 @@ export default new Router({
             redirect: '/ranking'
         }, {
             path: '/bp',
-            name: 'match',
-            redirect: '/match'
+            name: 'game',
+            redirect: '/game'
         }, {
             path: '/hero',
             name: 'hero',
@@ -25,15 +25,6 @@ export default new Router({
             path: '/heroReplay/:id',
             name: 'heroReplay',
             redirect: '/hero/:id/replay'
-        }, {
-            path: '/bilibili',
-            name: 'Bilibili',
-            component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
-            meta: {
-                type: 1,
-                title: 'bilibili',
-                keepAlive: true
-            }
         }, {
             path: '/',
             name: 'Home',
@@ -55,7 +46,7 @@ export default new Router({
         }, {
             path: '/ranking',
             name: 'Ranking',
-            component: resolve => require(['./views/Ranking/Index.vue'], resolve),
+            component: resolve => require(['./views/Ranking.vue'], resolve),
             meta: {
                 type: 1,
                 title: '排行',
@@ -71,12 +62,12 @@ export default new Router({
                 keepAlive: true
             }
         }, {
-            path: '/setting',
-            name: 'Setting',
-            component: resolve => require(['./views/Setting.vue'], resolve),
+            path: '/my',
+            name: 'My',
+            component: resolve => require(['./views/My.vue'], resolve),
             meta: {
                 type: 1,
-                title: '设置',
+                title: '我的',
                 keepAlive: true
             }
         },
@@ -92,11 +83,11 @@ export default new Router({
         },
         {
             path: '/hero',
-            component: resolve => require(['./views/Hero/Dashboard.vue'], resolve),
+            component: resolve => require(['./views/Hero.vue'], resolve),
             children: [{
                     path: ':id/info',
                     name: 'HeroInfo',
-                    component: resolve => require(['./views/Hero/Info.vue'], resolve),
+                    component: resolve => require(['./components/Hero/Info.vue'], resolve),
                     meta: {
                         type: 1,
                         title: '信息'
@@ -105,7 +96,7 @@ export default new Router({
                 {
                     path: ':id/replay',
                     name: 'HeroReplay',
-                    component: resolve => require(['./views/Hero/Replay.vue'], resolve),
+                    component: resolve => require(['./components/Hero/Replay.vue'], resolve),
                     meta: {
                         type: 1,
                         title: '回顾'
@@ -114,12 +105,12 @@ export default new Router({
             ]
         },
         {
-            path: '/match',
-            component: resolve => require(['./views/Match/Dashboard.vue'], resolve),
+            path: '/game',
+            component: resolve => require(['./components/Game/Dashboard.vue'], resolve),
             children: [{
                 path: '/',
-                name: 'MatchHome',
-                component: resolve => require(['./views/Match/Home.vue'], resolve),
+                name: 'GameHome',
+                component: resolve => require(['./components/Home/Game/Index.vue'], resolve),
                 meta: {
                     type: 2,
                     title: '首页',
@@ -127,8 +118,8 @@ export default new Router({
                 }
             }, {
                 path: 'add',
-                name: 'MatchAdd',
-                component: resolve => require(['./views/Match/Add.vue'], resolve),
+                name: 'GameAdd',
+                component: resolve => require(['./components/Game/Add.vue'], resolve),
                 meta: {
                     type: 2,
                     title: '添加',
@@ -136,8 +127,8 @@ export default new Router({
                 }
             }, {
                 path: 'more',
-                name: 'MatchMore',
-                component: resolve => require(['./views/Match/More.vue'], resolve),
+                name: 'GameMore',
+                component: resolve => require(['./components/Game/More.vue'], resolve),
                 meta: {
                     type: 2,
                     title: '更多',
@@ -145,13 +136,22 @@ export default new Router({
                 }
             }, {
                 path: ':id',
-                name: 'MatchInfo',
-                component: resolve => require(['./views/Match/Info.vue'], resolve),
+                name: 'GameInfo',
+                component: resolve => require(['./components/Game/Info.vue'], resolve),
                 meta: {
                     type: 2,
                     title: '详情'
                 }
             }]
+        }, {
+            path: '/bilibili',
+            name: 'Bilibili',
+            component: resolve => require(['./views/Bilibili.vue'], resolve),
+            meta: {
+                type: 1,
+                title: 'bilibili',
+                keepAlive: true
+            }
         }
     ]
 })

@@ -1,29 +1,36 @@
 <template>
   <div class="replay">
-    <van-nav-bar
-      :title="heroInfo.name"
-      :border="false"
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    >
+    <van-nav-bar :border="false" @click-left="onClickNavBarLeft" @click-right="onClickNavBarRight">
+      <template #title>
+        <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
+      </template>
       <van-icon name="chart-trending-o" slot="left" />
       <van-icon name="question-o" slot="right" />
     </van-nav-bar>
 
-    <van-collapse v-model="activeNames">
+    <van-collapse v-model="replayCollapseNames" :border="false">
       <van-collapse-item
-        v-for="(data, index) in tableData.list"
-        :key="index + '-collapse'"
+        v-for="(data, index) in tableData.result"
+        :key="'replay-1a721faf2df53972bfd0831c64b6146d-' + index"
         :name="index"
         :value="data.time"
       >
-        <div slot="title" class="replay-title">
-          <van-tag round :type="data.status" class="replay-usedtime replay-tag">{{data.usedtime}}</van-tag>
-          <van-tag round color="black" class="replay-tag" v-show="!duiyou">{{ data.equMoney }}</van-tag>
-          <span class="replay-playername">{{ data.gamePlayerName }}</span>
+        <div slot="title" class="replay-d5d3db1765287eef77d7927cc956f50a">
+          <van-tag
+            :type="data.status"
+            round
+            class="replay-01cac4e332fec6d6ecd331a00412712d replay-e4d23e841d8e8804190027bce3180fa5"
+          >{{data.usedtime}}</van-tag>
+          <van-tag
+            v-show="!duiyou"
+            round
+            color="black"
+            class="replay-e4d23e841d8e8804190027bce3180fa5"
+          >{{ data.equMoney }}</van-tag>
+          <span class="replay-12d045cdd2c0b9b6bf64ab787d773ae6">{{ data.gamePlayerName }}</span>
         </div>
 
-        <div class="replay-item-data" v-show="!duiyou">
+        <div v-show="!duiyou" class="replay-f01902c0d0136ca30fe1034f339964ba">
           <van-grid :border="false" :column-num="7">
             <van-grid-item
               v-show="data.heroSkill > 0"
@@ -32,7 +39,7 @@
             />
             <van-grid-item
               v-for="(data, index) in data.equInfo"
-              :key="index + '-equ'"
+              :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
               v-show="data > 0"
               :icon="'https://image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png'"
               @click="equUpdate"
@@ -41,20 +48,20 @@
         </div>
 
         <van-button
+          v-show="!duiyou"
           round
           disabled
           color="#000000"
           size="mini"
-          class="replay-button"
-          v-show="!duiyou"
+          class="replay-ce50a09343724eb82df11390e2c1de18"
         >{{ data.heroKda }}</van-button>
 
         <van-button
           round
           type="info"
           size="mini"
+          class="replay-ce50a09343724eb82df11390e2c1de18"
           @click="getActionSheet(data)"
-          class="replay-button"
         >对局</van-button>
       </van-collapse-item>
     </van-collapse>
@@ -62,19 +69,18 @@
     <van-action-sheet
       v-model="actionSheetShow"
       :title="nowData.gamePlayerName + ' 如何打开'"
-      safe-area-inset-bottom
       :actions="actions"
       :close-on-click-action="true"
+      safe-area-inset-bottom
       @select="onSelect"
-      class="app-action-sheet"
     />
 
     <van-pagination
       v-model="currentPage"
-      :total-items="tableData.num"
-      :items-per-page="tableData.page"
+      :total-items="tableData.total"
+      :items-per-page="tableData.pageSize"
       @change="onChange"
-      class="replay-pagination"
+      class="replay-fe7cd4d1bf3fea9a0d921e224b3fa24c"
     />
 
     <AppBottomTabbar />
@@ -86,32 +92,32 @@ div.van-collapse {
   margin-top: 3px;
 }
 
-.hero-info {
+.info-d5d3db1765287eef77d7927cc956f50a {
   font-size: 20px;
 }
 
-.replay-button {
+.replay-ce50a09343724eb82df11390e2c1de18 {
   margin-right: 3px;
 }
 
-.replay-title {
+.replay-d5d3db1765287eef77d7927cc956f50a {
   text-align: left;
 }
 
-.replay-tag {
+.replay-e4d23e841d8e8804190027bce3180fa5 {
   margin-right: 3px;
 }
 
-.replay-playername {
+.replay-12d045cdd2c0b9b6bf64ab787d773ae6 {
   margin-top: 2px;
   position: absolute;
 }
 
-.replay-item-data {
+.replay-f01902c0d0136ca30fe1034f339964ba {
   margin-bottom: 10px;
 }
 
-.replay-pagination {
+.replay-fe7cd4d1bf3fea9a0d921e224b3fa24c {
   margin-top: 25px;
 }
 </style>
@@ -121,19 +127,19 @@ export default {
   name: "HeroReplay",
   components: {
     AppBottomTabbar: resolve =>
-      require(["@/components/AppBottomTabbar.vue"], resolve)
+      require(["@/components/App/BottomTabbar.vue"], resolve)
   },
   data() {
     return {
       duiyou: false,
-      activeNames: ["1"],
+      replayCollapseNames: ["1"],
       nowHeroId: 0,
       heroInfo: {},
       copyData: "",
       tableData: {
-        list: [],
-        num: 200,
-        page: 5
+        result: [],
+        total: 200,
+        pageSize: 25
       },
       currentPage: 1,
       nowData: {},
@@ -210,12 +216,12 @@ export default {
     onChange: function(e) {
       this.getHeroReplayByHeroId(this.nowHeroId, e);
     },
-    onClickLeft: function() {
+    onClickNavBarLeft: function() {
       this.$router.push({
         path: "/hero/" + this.heroInfo.id + "/info"
       });
     },
-    onClickRight: function() {
+    onClickNavBarRight: function() {
       this.$message.info("红色为失败,绿色为胜利,数字为时长,黑色为保底经济");
     },
     onSelect: function(item) {

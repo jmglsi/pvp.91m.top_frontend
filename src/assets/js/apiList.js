@@ -1,6 +1,9 @@
-const pvp = "//api.91m.top/hero/app.php"
-const bili = "//api.91m.top/hero/bilibili.php"
-const hitokoto = "//v1.hitokoto.cn"
+let host, debug = false;
+
+debug ? host = "api-test.frp.smartfox.cc" : host = "api.91m.top"
+
+const pvp = "//" + host + "/hero/v1/app.php"
+const bili = "//" + host + "/hero/v1/bilibili.php"
 
 const list = {
     getBp: pvp + "?type=getBp",
@@ -9,8 +12,6 @@ const list = {
     getAbout: pvp + "?type=getAbout",
     getOrder: bili + "?type=getOrder",
     getMiniApp: pvp + "?type=getMiniApp",
-    getFriendship: pvp + "?type=getFriendship",
-    getHitokoto: hitokoto,
     addHeroVote: pvp + "?type=addHeroVote",
     getHeroInfo: pvp + "?type=getHeroInfo",
     getUserInfo: pvp + "?type=getUserInfo",
@@ -18,8 +19,8 @@ const list = {
     getPlayerRanking: pvp + "?type=getPlayerRanking",
     getHeroChartsLog: pvp + "?type=getHeroChartsLog",
     getHeroCombination: pvp + "?type=getHeroCombination",
-    getHeroReplayByHeroId: pvp + "?type=getHeroReplayByHeroId",
     addHeroByCombination: pvp + "?type=addHeroByCombination",
+    getHeroReplayByHeroId: pvp + "?type=getHeroReplayByHeroId",
     getHeroChartsLogBySimilar: pvp + "?type=getHeroChartsLogBySimilar",
     getHeroChartsLogByCustomize: pvp + "?type=getHeroChartsLogByCustomize"
 }

@@ -1,7 +1,9 @@
+/*
 body {
     padding-top: constant(safe-area-inset-top);
     padding-top: env(safe-area-inset-top);
 }
+
 
 body:before {
     content: ' ';
@@ -13,3 +15,4 @@ body:before {
     left: 0;
     background: url(/background.png);
 }
+*/

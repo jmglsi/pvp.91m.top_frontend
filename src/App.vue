@@ -1,51 +1,28 @@
 <template>
   <div id="app">
-    <vue-particles
-      color="#000"
-      :particleOpacity="0.7"
-      :particlesNumber="30"
-      shapeType="star"
-      :particleSize="4"
-      linesColor="#000"
-      :linesWidth="1"
-      :lineLinked="true"
-      :lineOpacity="0.4"
-      :linesDistance="150"
-      :moveSpeed="2"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="true"
-      clickMode="push"
-      v-show="particlesShow"
-      class="app-data app-particles"
-    />
-
     <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" class="app-data" />
+      <router-view v-if="$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" class="app-data" />
+    <router-view v-if="!$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
 
     <van-tabbar
-      fixed
+      v-model="tabbar.active"
+      v-show="tabbar.default.show"
       :z-index="2"
-      :border="false"
-      v-show="tabbarShow"
-      v-model="tabbarActive"
+      fixed
       safe-area-inset-bottom
-      active-color="rgb(222,177,81)"
-      inactive-color="rgb(67,62,52)"
+      active-color="rgb(222, 177, 81)"
+      inactive-color="rgb(67, 62, 52)"
+      class="app-130a360689f8d613da10c94d53527a1b"
     >
-      <van-tabbar-item icon="flag-o" :to="{ path:'/', query: { from: 'tabbar-0' } }" name="/home">发现</van-tabbar-item>
       <van-tabbar-item
-        :icon="rankingIcon"
-        :to="{ path:'/ranking', query: { from: 'tabbar-1' } }"
-        name="/ranking"
-      >排行</van-tabbar-item>
-      <van-tabbar-item
-        icon="setting-o"
-        :to="{ path:'/setting', query: { from: 'tabbar-2' } }"
-        name="/setting"
-      >设置</van-tabbar-item>
+        v-for="(data, index) in tabbar.default.list"
+        :key="'app-e0c3b278eeb2cab05f548d7af0f2c949-' + index"
+        :icon="data.icon"
+        :to="data.to"
+        :name="data.name"
+        class="app-e0c3b278eeb2cab05f548d7af0f2c949"
+      >{{ data.text }}</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -56,110 +33,39 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-}
-
-.app-data {
-  position: absolute;
-}
-
-.app-particles {
-  position: fixed;
-  margin-top: -50px;
-}
-
-.app-data,
-.app-particles {
   width: 100%;
   height: 100%;
+}
+
+.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  border-radius: 10px;
+  object-fit: cover;
 }
 </style>
 
 <style>
-.dfs-tag,
-.wj-tag {
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  margin-top: -13px;
+div.app-b5e3c0b9ac8b718b9b4cb60f4fabe214
+  div.van-grid-item__content
+  i.van-icon.van-grid-item__icon
+  img.van-icon__image {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
 }
+</style>
 
-.app-action-sheet {
-  text-align: left;
-}
-
-.bottom-num {
+<style>
+.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
   position: absolute;
   font-size: 10px;
   width: 50px;
   margin-top: -7px;
-}
-
-.app-img {
-  border-radius: 10px;
-}
-
-div.van-tabs__nav.van-tabs__nav--line {
-  height: auto;
-}
-
-div.van-circle__text {
-  font-size: 10px;
-}
-
-div.van-nav-bar,
-div.van-cell-group,
-div.van-grid-item__content {
-  background-color: transparent;
-}
-
-div.app-cell-group.van-hairline--top-bottom {
-  position: unset;
-}
-
-div.van-nav-bar__title {
-  font-size: 20px;
-}
-
-td.vxe-body--column {
-  padding: 13px 0;
-}
-
-div.vxe-table--main-wrapper {
-  margin-top: -3px;
-}
-
-div.vxe-cell {
-  text-align: center;
-}
-
-td.vxe-body--column div.vxe-cell {
-  font-size: 15px;
-}
-
-td.col-red {
-  color: red;
-}
-
-td.col-blue {
-  color: blue;
-}
-
-td.col-green {
-  color: green;
-}
-
-td.col-red div.vxe-cell,
-td.col-blue div.vxe-cell,
-td.col-green div.vxe-cell {
-  font-size: 20px;
-}
-</style>
-
-<style>
-div.link-item i.van-icon.van-grid-item__icon img.van-icon__image {
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
 }
 </style>
 
@@ -174,11 +80,32 @@ export default {
   },
   data() {
     return {
-      viewKey: 0,
-      tabbarActive: "/home",
-      tabbarShow: true,
-      particlesShow: true,
-      rankingIcon: "friends-o",
+      tabbar: {
+        active: "/",
+        default: {
+          show: false,
+          list: [
+            {
+              icon: "wap-home-o",
+              to: { path: "/", query: { from: "tabbar-0" } },
+              name: "/",
+              text: "资讯"
+            },
+            {
+              icon: "friends-o",
+              to: { path: "/ranking", query: { from: "tabbar-1" } },
+              name: "/ranking",
+              text: "排行"
+            },
+            {
+              icon: "user-o",
+              to: { path: "/my", query: { from: "tabbar-2" } },
+              name: "/my",
+              text: "我的"
+            }
+          ]
+        }
+      },
       appInfo: {
         homeInfo: {}
       }
@@ -186,38 +113,30 @@ export default {
   },
   watch: {
     $route(to) {
-      to.path == "/miniapp"
-        ? (this.tabbarShow = false)
-        : (this.tabbarShow = true);
+      if (
+        to.path == "/miniapp" ||
+        to.path == "/bilibili" ||
+        to.path.indexOf("/hero/") > -1 ||
+        to.path.indexOf("/game/") > -1
+      ) {
+        this.tabbar.default.show = false;
+      } else {
+        this.tabbar.default.show = true;
+        this.tabbar.active = to.path;
+      }
     }
   },
   mounted() {
-    this.init();
-
-    let pName = location.pathname,
-      pSearch = location.search;
-
-    if (pName == "/") pName = "/home";
-    this.tabbarActive = pName;
-    this.getApp(pName + pSearch);
-
-    setInterval(() => {
-      this.rankingIcon == "friends-o"
-        ? (this.rankingIcon = "friends")
-        : (this.rankingIcon = "friends-o");
-    }, 1000 * 10);
+    this.getApp();
   },
   methods: {
-    init: function() {
-      let lzbg = this.$cookie.get("lz-bg");
-
-      lzbg == "true"
-        ? (this.particlesShow = true)
-        : (this.particlesShow = false);
-    },
-    getApp: function(e) {
+    getApp: function() {
       this.axios
-        .get(this.appApi.list.getApp + "&url=" + encodeURIComponent(e))
+        .get(
+          this.appApi.list.getApp +
+            "&url=" +
+            encodeURIComponent(location.pathname + location.search)
+        )
         .then(ret => {
           this.appInfo = ret.data.data;
 
@@ -225,7 +144,7 @@ export default {
           if (tipsInfo) {
             this.$notification.open({
               message: tipsInfo.title,
-              description: tipsInfo.text,
+              description: tipsInfo.des,
               onClick: () => {
                 if (tipsInfo.url) {
                   this.$dialog

@@ -22,9 +22,6 @@ router.beforeEach((to, from, next) => {
 import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 
-import VueParticles from 'vue-particles'
-Vue.use(VueParticles)
-
 import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)
 
