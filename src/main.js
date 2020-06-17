@@ -16,6 +16,7 @@ router.beforeEach((to, from, next) => {
         document.title = to.meta.title + " | 全局BP模拟器 && " + hello
     }
 
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
     next()
 })
 
