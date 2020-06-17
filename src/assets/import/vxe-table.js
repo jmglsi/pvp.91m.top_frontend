@@ -18,3 +18,5 @@ VXETable.setup({
 });
 
 Vue.use(Column).use(Icon).use(Header).use(Loading).use(Grid).use(Table)
+
+Vue.prototype.$XModal = VXETable.modal
