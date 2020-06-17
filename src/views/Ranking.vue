@@ -103,12 +103,12 @@ export default {
     };
   },
   mounted() {
-    let type = Number(this.$route.query.type);
+    let type = parseInt(this.$route.query.type);
     if (type) this.rankingTabsActive = type;
   },
   methods: {
     onRankingChange: function(e) {
-      this.$router.push({ path: "/ranking", query: { type: e } });
+      this.$router.push({ path: "/ranking?from=ee240fe51687ee66cca7493aedcc3c24", query: { type: e } });
     }
   }
 };

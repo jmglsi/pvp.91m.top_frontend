@@ -4,7 +4,7 @@
       v-model="searchValue"
       :placeholder="tableData.searchPlaceholder"
       @search="onSearch"
-      @clear="onClear"
+      @clear="onSearchClear"
       shape="round"
       class="app-c1130d301aabe8d6a9d46c322fd6150a"
     />
@@ -55,7 +55,7 @@
       :actions="actions"
       :close-on-click-action="true"
       safe-area-inset-bottom
-      @select="onSelect"
+      @select="onActionSheetSelect"
     />
   </div>
 </template>
@@ -167,13 +167,13 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?from=copyshare&uid=av" +
+                "?from=71f24db02647f7d930444128c0b02003&uid=av" +
                 row.uid
             )
         )
         .then(ret => {
           this.copyData =
-            "id:av" +
+            "id:" +
             row.uid +
             "(" +
             this.av2bv(row.uid) +
@@ -196,7 +196,7 @@ export default {
             ret.data.data.url;
         });
     },
-    onClear: function() {
+    onSearchClear: function() {
       this.searchValue = "";
       this.tableData = [];
       clearInterval(this.getOrderInterval);
@@ -239,7 +239,7 @@ export default {
     onCellClick: function({ row }) {
       this.getOrderInfo(row, this.currentPage);
     },
-    onSelect: function(item) {
+    onActionSheetSelect: function(item) {
       let orderInfo = this.orderInfo;
 
       if (item.value == 0) {

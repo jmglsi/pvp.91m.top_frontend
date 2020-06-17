@@ -126,7 +126,7 @@ export default {
     onConfirm: function() {
       this.$refs.item.toggle();
 
-      this.playerShield = Number(this.switchShield);
+      this.playerShield = parseInt(this.switchShield);
       this.getPlayerRanking(this.areaType, this.playerShield);
     },
     onCellClick: function({ row }) {

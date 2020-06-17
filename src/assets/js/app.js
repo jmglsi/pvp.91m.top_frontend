@@ -8,7 +8,7 @@ Vue.prototype.appHeightInit = function(uWidth) {
 
     cWidth > cHeight ?
         (this.clientHeight = cHeight - 138) :
-        (this.clientHeight = cHeight - 173)
+        (this.clientHeight = cHeight - 178)
 
     cWidth >= uWidth ? (this.listWidth = 0) : (this.listWidth = 100)
 }

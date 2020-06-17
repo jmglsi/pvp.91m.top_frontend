@@ -24,14 +24,6 @@
   </div>
 </template>
 
-<style>
-.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
-  width: 15px;
-  height: 15px;
-  margin-top: -3px;
-}
-</style>
-
 <script>
 export default {
   name: "Home",

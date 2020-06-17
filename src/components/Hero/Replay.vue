@@ -1,11 +1,11 @@
 <template>
   <div class="replay">
-    <van-nav-bar :border="false" @click-left="onClickNavBarLeft" @click-right="onClickNavBarRight">
+    <van-nav-bar :border="false" @click-left="onNavBarLeftClick" @click-right="onNavBarRightClick">
       <template #title>
         <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
       </template>
-      <van-icon name="chart-trending-o" slot="left" />
-      <van-icon name="question-o" slot="right" />
+      <van-icon name="arrow-left" slot="left" />
+      <van-icon name="ellipsis" slot="right" />
     </van-nav-bar>
 
     <van-collapse v-model="replayCollapseNames" :border="false">
@@ -72,15 +72,22 @@
       :actions="actions"
       :close-on-click-action="true"
       safe-area-inset-bottom
-      @select="onSelect"
+      @select="onReplaySelect"
     />
 
     <van-pagination
       v-model="currentPage"
       :total-items="tableData.total"
       :items-per-page="tableData.pageSize"
-      @change="onChange"
+      @change="onPaginationChange"
       class="replay-fe7cd4d1bf3fea9a0d921e224b3fa24c"
+    />
+
+    <van-share-sheet
+      v-model="shareSheetShow"
+      title="立即分享给好友"
+      :options="shareSheetOptions"
+      @select="onShareSheetSelect"
     />
 
     <AppBottomTabbar />
@@ -133,8 +140,9 @@ export default {
     return {
       duiyou: false,
       replayCollapseNames: ["1"],
-      nowHeroId: 0,
-      heroInfo: {},
+      heroInfo: {
+        id: 0
+      },
       copyData: "",
       tableData: {
         result: [],
@@ -143,6 +151,10 @@ export default {
       },
       currentPage: 1,
       nowData: {},
+      shareSheetShow: false,
+      shareSheetOptions: [
+        { name: "常见问题", icon: "/img/app-icons/inspiration.png", value: 0 }
+      ],
       actionSheetShow: false,
       actions: [
         { name: "复制链接", value: 0 },
@@ -153,14 +165,14 @@ export default {
   },
   mounted() {
     let heroId = this.$route.params.id;
-    this.nowHeroId = heroId;
+    this.heroInfo.id = heroId;
 
     setTimeout(() => {
       this.getHeroInfo(heroId);
     }, 100);
 
     setTimeout(() => {
-      this.getHeroReplayByHeroId(this.nowHeroId, 1);
+      this.getHeroReplayByHeroId(this.heroInfo.id, 1);
     }, 100);
   },
   methods: {
@@ -213,18 +225,18 @@ export default {
           window.open("https://ngabbs.com/read.php?tid=19902976");
         });
     },
-    onChange: function(e) {
-      this.getHeroReplayByHeroId(this.nowHeroId, e);
+    onPaginationChange: function(e) {
+      this.getHeroReplayByHeroId(this.heroInfo.id, e);
     },
-    onClickNavBarLeft: function() {
+    onNavBarLeftClick: function() {
       this.$router.push({
-        path: "/hero/" + this.heroInfo.id + "/info"
+        path: "/ranking?from=b2dbeb695fa205804b1e5e72650ad2bb"
       });
     },
-    onClickNavBarRight: function() {
-      this.$message.info("红色为失败,绿色为胜利,数字为时长,黑色为保底经济");
+    onNavBarRightClick: function() {
+      this.shareSheetShow = true;
     },
-    onSelect: function(item) {
+    onReplaySelect: function(item) {
       let nowData = this.nowData;
 
       if (item.value == 0) {
@@ -238,6 +250,11 @@ export default {
 
       if (item.value == 2) {
         window.open(nowData.url);
+      }
+    },
+    onShareSheetSelect: function(option) {
+      if (option.value == 0) {
+        window.open("https://doc.91m.top");
       }
     }
   }

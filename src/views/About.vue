@@ -75,12 +75,6 @@ export default {
     this.getStatementBp();
   },
   methods: {
-    onCopy: function() {
-      this.$message.success("复制成功");
-    },
-    onError: function() {
-      this.$message.error("复制失败");
-    },
     getStatementBp: function() {
       this.axios.get("/md/statement_bp.md?ts=" + this.appTs).then(ret => {
         this.statementBp = ret.data;

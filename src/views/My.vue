@@ -21,7 +21,7 @@
       </van-cell-group>
 
       <van-cell-group :border="false" title="其它" class="my-058928a73f2a944d621b028eb9addd36">
-        <van-cell title="常见问题" value="自豪的使用语雀" is-link url="https://doc.91m.top/pvp" />
+        <van-cell title="常见问题" value="自豪的使用语雀" is-link url="https://doc.91m.top" />
         <van-cell
           title="意见/建议/咨询/交友"
           value="jmglsi (苏苏)"

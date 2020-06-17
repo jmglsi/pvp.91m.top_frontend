@@ -1,9 +1,21 @@
 <template>
   <div class="ranking-dfs">
     <van-dropdown-menu>
-      <van-dropdown-item v-model="areaType" :options="areaOptions" @change="onChange(1)" />
-      <van-dropdown-item v-model="heroType" :options="heroOptions" @change="onChange(2)" />
-      <van-dropdown-item v-model="otherType" :options="otherOptions" @change="onChange(3)" />
+      <van-dropdown-item
+        v-model="areaType"
+        :options="areaOptions"
+        @change="onDropdownMenuChange(1)"
+      />
+      <van-dropdown-item
+        v-model="heroType"
+        :options="heroOptions"
+        @change="onDropdownMenuChange(2)"
+      />
+      <van-dropdown-item
+        v-model="otherType"
+        :options="otherOptions"
+        @change="onDropdownMenuChange(3)"
+      />
     </van-dropdown-menu>
 
     <vxe-grid
@@ -188,7 +200,7 @@
       :actions="actions"
       :close-on-click-action="true"
       safe-area-inset-bottom
-      @select="onSelect"
+      @select="onActionSheetSelect"
     />
   </div>
 </template>
@@ -299,7 +311,7 @@ export default {
       this.actionSheetShow = true;
       this.heroInfo = row;
     },
-    onChange: function(e) {
+    onDropdownMenuChange: function(e) {
       if (e == 1 || e == 2) {
         this.getHeroRanking(this.areaType, this.heroType);
       }
@@ -307,13 +319,13 @@ export default {
       if (e == 3) {
         if (this.otherType == 1) {
           this.$router.push({
-            path: "/about"
+            path: "/about?from=ee240fe51687ee66cca7493aedcc3c24"
           });
         }
 
         if (this.otherType == 2) {
           this.$router.push({
-            path: "/changelog"
+            path: "/changelog?from=ee240fe51687ee66cca7493aedcc3c24"
           });
         }
         this.otherType = 0;
@@ -346,8 +358,8 @@ export default {
         }
       }
     },
-    onSelect: function(item) {
-      let from = "ranking-action-sheet";
+    onActionSheetSelect: function(item) {
+      let from = "02dba815434bc4a42eeeaf3443227aa4";
       let heroInfo = this.heroInfo;
 
       if (item.value == 0) {

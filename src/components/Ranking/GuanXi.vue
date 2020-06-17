@@ -4,7 +4,7 @@
       v-model="searchValue"
       :placeholder="searchPlaceholder"
       @search="onSearch"
-      @clear="onClear"
+      @clear="onSearchClear"
       shape="round"
       class="app-c1130d301aabe8d6a9d46c322fd6150a"
     />
@@ -91,7 +91,7 @@
       :actions="actions"
       :close-on-click-action="true"
       safe-area-inset-bottom
-      @select="onSelect"
+      @select="onActionSheetSelect"
     />
   </div>
 </template>
@@ -241,7 +241,7 @@ export default {
         }
       }
     },
-    onClear: function() {
+    onSearchClear: function() {
       this.searchValue = "";
 
       this.getHeroCombination("", 1);
@@ -283,7 +283,7 @@ export default {
     onCellClick: function({ row }) {
       this.getHeroInfo(row);
     },
-    onSelect: function(item) {
+    onActionSheetSelect: function(item) {
       let heroInfo = this.heroInfo;
 
       if (item.value == 0) {
@@ -293,7 +293,7 @@ export default {
 
       if (item.value == 1) {
         this.$router.push({
-          path: "/hero/" + heroInfo.id_1 + "," + heroInfo.id_2 + "/replay"
+          path: "/hero/" + heroInfo.id_1 + "," + heroInfo.id_2 + "/replay?from=ee240fe51687ee66cca7493aedcc3c24"
         });
       }
     }

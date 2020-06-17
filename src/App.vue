@@ -37,6 +37,10 @@
   height: 100%;
 }
 
+.app-margin {
+  margin: 0 10px;
+}
+
 .app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
   position: absolute;
   width: 100%;
@@ -58,6 +62,25 @@ div.app-b5e3c0b9ac8b718b9b4cb60f4fabe214
   width: 40px;
   height: 40px;
 }
+
+div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
+  border-radius: 0;
+}
+</style>
+
+<style>
+.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
+  width: 15px;
+  height: 15px;
+  margin-top: -3px;
+}
+
+.tuijian-447b7147e84be512208dcc0995d67ebc {
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
+  padding: 15px 10px;
+  margin: 20px 10px;
+}
 </style>
 
 <style>
@@ -66,6 +89,16 @@ div.app-b5e3c0b9ac8b718b9b4cb60f4fabe214
   font-size: 10px;
   width: 50px;
   margin-top: -7px;
+}
+</style>
+
+<style>
+div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-menu__bar {
+  border-radius: 100px;
+}
+
+div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-item {
+  margin-bottom: 25px;
 }
 </style>
 
@@ -86,20 +119,29 @@ export default {
           show: false,
           list: [
             {
-              icon: "wap-home-o",
-              to: { path: "/", query: { from: "tabbar-0" } },
+              icon: "/img/app-icons/information.png",
+              to: {
+                path: "/",
+                query: { from: "fa57e0725457a667d8dd6e9b0a4b3bd4" }
+              },
               name: "/",
               text: "资讯"
             },
             {
-              icon: "friends-o",
-              to: { path: "/ranking", query: { from: "tabbar-1" } },
+              icon: "/img/app-icons/ranking.png",
+              to: {
+                path: "/ranking",
+                query: { from: "72b664ef95e47693fc2737cd3b0a0a92" }
+              },
               name: "/ranking",
               text: "排行"
             },
             {
-              icon: "user-o",
-              to: { path: "/my", query: { from: "tabbar-2" } },
+              icon: "/img/app-icons/user.png",
+              to: {
+                path: "/my",
+                query: { from: "a5d041e8ffec04b0b5e1c26537364540" }
+              },
               name: "/my",
               text: "我的"
             }

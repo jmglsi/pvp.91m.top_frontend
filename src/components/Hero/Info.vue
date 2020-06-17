@@ -1,6 +1,6 @@
 <template>
   <div class="info">
-    <van-nav-bar :border="false" @click-left="onClickNavBarLeft" @click-right="onClickNavBarRight">
+    <van-nav-bar :border="false" @click-left="onNavBarLeftClick" @click-right="onNavBarRightClick">
       <template #title>
         <div @click="$message.info('巅峰赛趋势、分路推荐 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">
           <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfoTitle }}</span>
@@ -29,8 +29,8 @@
           </span>
         </div>
       </template>
-      <van-icon name="todo-list-o" slot="left" />
-      <van-icon name="question-o" slot="right" />
+      <van-icon name="arrow-left" slot="left" />
+      <van-icon name="ellipsis" slot="right" />
     </van-nav-bar>
 
     <van-grid
@@ -116,7 +116,7 @@
       :tags="tags"
       :placeholder="tagsPlaceholder"
       @tags-changed="onTagsChanged"
-      @blur="onBlur"
+      @blur="onTagsBlur"
       class="app-6a992d5529f459a44fee58c733255e86 info-d57ac45256849d9b13e2422d91580fb9"
     />
 
@@ -149,17 +149,8 @@
       :data="chart.zidingyi.data"
     />
 
-    <div class="app-71f24db02647f7d930444128c0b02003">
-      <van-button
-        v-clipboard:copy="copyData"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError"
-        round
-        size="small"
-        type="info"
-        icon="/img/app-icons/share.png"
-        color="linear-gradient(to right, #4bb0ff, #6149f6)"
-      >{{ heroInfo.shareText }}</van-button>
+    <div class="app-margin">
+      <HeroUpdate v-if="isLoaded" v-show="shuntShow" :aid="parseInt(heroInfo.id)" />
     </div>
 
     <van-action-sheet
@@ -185,6 +176,13 @@
         />
       </van-grid>
     </van-action-sheet>
+
+    <van-share-sheet
+      v-model="shareSheetShow"
+      title="立即分享给好友"
+      :options="shareSheetOptions"
+      @select="onShareSheetSelect"
+    />
 
     <AppBottomTabbar v-if="appDevice" />
   </div>
@@ -299,6 +297,7 @@ export default {
     AppTime: resolve => require(["@/assets/Icons/AppTime.vue"], resolve),
     AppCry: resolve => require(["@/assets/Icons/AppCry.vue"], resolve),
     AppSmile: resolve => require(["@/assets/Icons/AppSmile.vue"], resolve),
+    HeroUpdate: resolve => require(["@/components/Hero/Update.vue"], resolve),
     AppBottomTabbar: resolve =>
       require(["@/components/App/BottomTabbar.vue"], resolve)
   },
@@ -320,7 +319,11 @@ export default {
       ]
     };
     this.extend = {
-      "xAxis.0.axisLabel.rotate": 45,
+      xAxis: {
+        axisLabel: {
+          rotate: 45
+        }
+      },
       dataZoom: [
         {
           type: "slider",
@@ -331,6 +334,7 @@ export default {
       ]
     };
     return {
+      isLoaded: false,
       currentRate: 0,
       circleInfo: {
         text: "加载中",
@@ -347,6 +351,11 @@ export default {
         ]
       },
       shuntShow: true,
+      shareSheetShow: false,
+      shareSheetOptions: [
+        [{ name: "复制链接", icon: "link", value: 0 }],
+        [{ name: "常见问题", icon: "/img/app-icons/inspiration.png", value: 1 }]
+      ],
       actionSheetShow: false,
       gradientColor: {
         "0%": "#3fecff",
@@ -357,6 +366,7 @@ export default {
       heroImgShow: true,
       heroInfoTitle: "加载中",
       heroInfo: {
+        id: 0,
         shareText: "可爱的宝贝已经分享了"
       },
       type: {
@@ -517,6 +527,7 @@ export default {
       this.axios
         .get(this.appApi.list.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
+          this.isLoaded = true;
           this.circleInfo = ret.data.data.circleInfo;
           this.positionInfo = ret.data.data.positionInfo;
           this.heroInfo = ret.data.data.heroInfo;
@@ -548,7 +559,7 @@ export default {
             "\r-\r巅峰赛趋势 & 职业对比,结果仅供参考 ↓\r" +
             location.origin +
             location.pathname +
-            "?from=copyshare";
+            "?from=71f24db02647f7d930444128c0b02003";
         });
     },
     getTips: function() {
@@ -636,7 +647,7 @@ export default {
         "\r-\r巅峰赛趋势 & 职业对比,结果仅供参考 ↓\r" +
         location.origin +
         location.pathname +
-        "?from=copyshare";
+        "?from=71f24db02647f7d930444128c0b02003";
     },
     onTagsChanged: function(e) {
       if (e.length == 0) {
@@ -651,7 +662,7 @@ export default {
         this.copyDataCustomize = newTags.replace("undefined,", "");
       }
     },
-    onBlur: function() {
+    onTagsBlur: function() {
       this.radar_2_Show = true;
       this.getHeroChartsLogByCustomize(this.copyDataCustomize);
 
@@ -660,7 +671,7 @@ export default {
           "https://s.91m.top/?url=" +
             encodeURIComponent(
               location.origin +
-                "/hero/0/info?from=tagschanged&type=2&heroName=" +
+                "/hero/0/info?from=ac0eb60533b5843bb8fbdf98e5922072&type=2&heroName=" +
                 encodeURIComponent(this.copyDataCustomize)
             )
         )
@@ -672,21 +683,24 @@ export default {
             ret.data.data.url;
         });
     },
-    onCopy: function() {
-      this.$message.success("复制成功");
-    },
-    onError: function() {
-      this.$message.error("复制失败");
-    },
-    onClickNavBarLeft: function() {
+    onNavBarLeftClick: function() {
       this.$router.push({
-        path: "/hero/" + this.heroInfo.id + "/replay"
+        path: "/ranking?from=caf9b6b99962bf5c2264824231d7a40c"
       });
     },
-    onClickNavBarRight: function() {
-      this.$router.push({
-        path: "/about"
-      });
+    onNavBarRightClick: function() {
+      this.shareSheetShow = true;
+    },
+    onShareSheetSelect: function(option) {
+      if (option.value == 0) {
+        this.shareSheetShow = false;
+        this.$copyText(this.copyData);
+        this.$message.success("已复制");
+      }
+
+      if (option.value == 1) {
+        window.open("https://doc.91m.top");
+      }
     }
   }
 };
