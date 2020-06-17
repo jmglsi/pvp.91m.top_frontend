@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     init: function() {
-      this.axios.get(this.appApi.list.getHome).then(ret => {
+      this.axios.get(this.appApi.list.getAppHome).then(ret => {
         this.homeInfo = ret.data.data;
       });
     },
@@ -113,7 +113,8 @@ export default {
       setTimeout(() => {
         this.tuiJianIsLoading = false;
         this.$router.push({
-          path: "/miniapp?from=9485e07d3fa6e237df83da7ff5f83bde"
+          path: "/miniapp",
+          query: { from: "9485e07d3fa6e237df83da7ff5f83bde" }
         });
       }, 1500);
     }

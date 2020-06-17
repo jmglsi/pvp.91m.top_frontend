@@ -694,7 +694,8 @@ export default {
     },
     onNavBarLeftClick: function() {
       this.$router.push({
-        path: "/ranking?from=caf9b6b99962bf5c2264824231d7a40c"
+        path: "/ranking",
+        query: { from: "caf9b6b99962bf5c2264824231d7a40c" }
       });
     },
     onNavBarRightClick: function() {

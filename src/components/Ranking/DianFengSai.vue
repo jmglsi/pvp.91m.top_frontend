@@ -319,13 +319,15 @@ export default {
       if (e == 3) {
         if (this.otherType == 1) {
           this.$router.push({
-            path: "/about?from=ee240fe51687ee66cca7493aedcc3c24"
+            path: "/about",
+            query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
           });
         }
 
         if (this.otherType == 2) {
           this.$router.push({
-            path: "/changelog?from=ee240fe51687ee66cca7493aedcc3c24"
+            path: "/changelog",
+            query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
           });
         }
         this.otherType = 0;

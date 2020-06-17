@@ -230,7 +230,8 @@ export default {
     },
     onNavBarLeftClick: function() {
       this.$router.push({
-        path: "/ranking?from=b2dbeb695fa205804b1e5e72650ad2bb"
+        path: "/ranking",
+        query: { from: "b2dbeb695fa205804b1e5e72650ad2bb" }
       });
     },
     onNavBarRightClick: function() {

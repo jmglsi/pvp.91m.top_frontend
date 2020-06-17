@@ -5,6 +5,7 @@
       :border="false"
       :ellipsis="false"
       :swipeable="true"
+      @change="onHomeChange"
       color="rgb(222, 177, 81)"
       class="home-5db8dca30c2d7f0c2bc225ae852c5053"
     >
@@ -40,9 +41,20 @@ export default {
     };
   },
   mounted() {
-    let from = this.$route.query.from;
-    if (from) {
-      this.$cookie.set("from", from, { expires: "1Y" });
+    let pwa = this.$route.query.pwa;
+    if (pwa) {
+      this.$cookie.set("pwa", parseInt(pwa), { expires: "1Y" });
+    }
+
+    let type = parseInt(this.$route.query.type);
+    !type ? (this.homeTabsActive = 0) : (this.homeTabsActive = type);
+  },
+  methods: {
+    onHomeChange: function(e) {
+      this.$router.push({
+        path: "/",
+        query: { type: e, from: "7964334078bf3863a2f7809c20df23a3" }
+      });
     }
   }
 };

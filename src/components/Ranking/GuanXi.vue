@@ -293,7 +293,8 @@ export default {
 
       if (item.value == 1) {
         this.$router.push({
-          path: "/hero/" + heroInfo.id_1 + "," + heroInfo.id_2 + "/replay?from=ee240fe51687ee66cca7493aedcc3c24"
+          path: "/hero/" + heroInfo.id_1 + "," + heroInfo.id_2 + "/replay",
+          query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
         });
       }
     }

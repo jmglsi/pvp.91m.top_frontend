@@ -106,7 +106,7 @@ export default new Router({
         },
         {
             path: '/game',
-            component: resolve => require(['./components/Game/Dashboard.vue'], resolve),
+            component: resolve => require(['./components/Game/Home.vue'], resolve),
             children: [{
                 path: '/',
                 name: 'GameHome',
