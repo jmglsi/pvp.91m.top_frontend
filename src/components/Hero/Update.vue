@@ -105,6 +105,14 @@ export default {
       default: 0
     }
   },
+  watch: {
+    aid: {
+      immediate: true,
+      handler(val) {
+        this.init(val);
+      }
+    }
+  },
   data() {
     return {
       heroType: 0,
@@ -117,6 +125,7 @@ export default {
       minDate: new Date(),
       maxDate: new Date(),
       homeInfo: {
+        id: 0,
         dayTag: {
           active: 0,
           tips: null,
@@ -128,12 +137,13 @@ export default {
     };
   },
   mounted() {
-    this.init();
+    let heroId = this.$props.aid;
+    this.init(heroId);
   },
   methods: {
-    init: function() {
+    init: function(heroId) {
       this.axios
-        .get(this.appApi.list.getHeroUpdate + "&aid=" + this.$props.aid)
+        .get(this.appApi.list.getHeroUpdate + "&aid=" + heroId)
         .then(ret => {
           this.homeInfo = ret.data.data;
         });
