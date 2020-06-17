@@ -301,6 +301,12 @@ export default {
     AppBottomTabbar: resolve =>
       require(["@/components/App/BottomTabbar.vue"], resolve)
   },
+  beforeRouteUpdate(to, from, next) {
+    if (to.params.id != from.params.id) {
+      this.init(to.params.id);
+      next();
+    }
+  },
   data() {
     this.markLine = {
       data: [
@@ -421,59 +427,62 @@ export default {
   },
   mounted() {
     let heroId = this.$route.params.id;
-    this.heroInfoTitle = "加载中";
-
-    this.radar_1_Show = false;
-    this.radar_2_Show = false;
-
-    if (heroId == 0) {
-      this.heroInfoTitle = "自定义对比";
-
-      this.lineShow = false;
-      this.shuntShow = false;
-      this.radar_2_Show = true;
-
-      this.infoTabsActive = 2;
-      this.tabsDisabled = true;
-      this.tagsInputShow = true;
-
-      let heroName = this.$route.query.heroName;
-      if (heroName) {
-        this.getHeroChartsLogByCustomizeFromUrl(heroName);
-      }
-    } else {
-      this.infoTabsActive = parseInt(this.$route.query.type);
-
-      this.getHeroInfo(heroId);
-
-      if (!this.infoTabsActive || this.infoTabsActive == 0) {
-        setTimeout(() => {
-          this.getHeroChartsLog(heroId);
-        }, 100);
-      }
-
-      if (this.infoTabsActive != 2) {
-        setTimeout(() => {
-          this.getHeroChartsLogBySimilar(heroId);
-        }, 100);
-      }
-
-      if (this.appDevice) {
-        this.radar_1_style.marginTop = "-180px";
-        this.radar_2_style.marginTop = "-50px";
-
-        this.radar_1_height = "700px";
-        this.radar_2_height = "500px";
-      }
-    }
-
-    setInterval(() => {
-      this.heroImgShow == true
-        ? (this.heroImgShow = false)
-        : (this.heroImgShow = true);
-    }, 1000 * 10);
+    this.init(heroId);
   },
   methods: {
+    init: function(heroId) {
+      this.heroInfoTitle = "加载中";
+
+      this.radar_1_Show = false;
+      this.radar_2_Show = false;
+
+      if (heroId == 0) {
+        this.heroInfoTitle = "自定义对比";
+
+        this.lineShow = false;
+        this.shuntShow = false;
+        this.radar_2_Show = true;
+
+        this.infoTabsActive = 2;
+        this.tabsDisabled = true;
+        this.tagsInputShow = true;
+
+        let heroName = this.$route.query.heroName;
+        if (heroName) {
+          this.getHeroChartsLogByCustomizeFromUrl(heroName);
+        }
+      } else {
+        this.infoTabsActive = parseInt(this.$route.query.type);
+
+        this.getHeroInfo(heroId);
+
+        if (!this.infoTabsActive || this.infoTabsActive == 0) {
+          setTimeout(() => {
+            this.getHeroChartsLog(heroId);
+          }, 100);
+        }
+
+        if (this.infoTabsActive != 2) {
+          setTimeout(() => {
+            this.getHeroChartsLogBySimilar(heroId);
+          }, 100);
+        }
+
+        if (this.appDevice) {
+          this.radar_1_style.marginTop = "-180px";
+          this.radar_2_style.marginTop = "-50px";
+
+          this.radar_1_height = "700px";
+          this.radar_2_height = "500px";
+        }
+      }
+
+      setInterval(() => {
+        this.heroImgShow == true
+          ? (this.heroImgShow = false)
+          : (this.heroImgShow = true);
+      }, 1000 * 10);
+    },
     getHeroChartsLog: function(heroId) {
       this.axios
         .get(this.appApi.list.getHeroChartsLog + "&heroId=" + heroId)
