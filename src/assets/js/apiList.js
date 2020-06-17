@@ -1,6 +1,6 @@
 let host, debug = false;
 
-debug ? host = "api-test.frp.smartfox.cc" : host = "api.91m.top"
+debug ? host = "localhost/api.91m.top" : host = "api.91m.top"
 
 const pvp = "//" + host + "/hero/v1/app.php"
 const bili = "//" + host + "/hero/v1/bilibili.php"
@@ -15,6 +15,7 @@ const list = {
     addHeroVote: pvp + "?type=addHeroVote",
     getHeroInfo: pvp + "?type=getHeroInfo",
     getUserInfo: pvp + "?type=getUserInfo",
+    getHeroUpdate: pvp + "?type=getHeroUpdate",
     getHeroRanking: pvp + "?type=getHeroRanking",
     getPlayerRanking: pvp + "?type=getPlayerRanking",
     getHeroChartsLog: pvp + "?type=getHeroChartsLog",
