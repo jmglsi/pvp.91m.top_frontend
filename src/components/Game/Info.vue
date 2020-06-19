@@ -3,20 +3,20 @@
     <span class="game-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
-      >{{ gameInfo.active % 2 == 0 ? gameInfo.camp_1.name : gameInfo.camp_2.name }}</span>
+      >{{ gameTabsActive % 2 == 0 ? campInfo.camp_1.name : campInfo.camp_2.name }}</span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
-      >{{ gameInfo.active % 2 == 0 ? gameInfo.camp_2.name : gameInfo.camp_1.name }}</span>
+      >{{ gameTabsActive % 2 == 0 ? campInfo.camp_2.name : campInfo.camp_1.name }}</span>
     </span>
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
       <div class="ban-8c9cb4a232c7e88403dddc3a0e589162">
         <ul class="ban-bebaefe0582b00649bc558529bba9df5">
           <li
-            v-for="(data, index) in gameInfo.list[gameInfo.active].bpOrder"
+            v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
             :key="'ban-camp1-1-data-' + index"
-            @click="onBanPickClick(1, 1, index)"
+            @click="onGameBanPickClick(1, 1, index)"
             class="ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3"
           >
             <span
@@ -27,7 +27,7 @@
                 width="30"
                 height="30"
                 v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                :class="stepsShow && gameInfo.list[gameInfo.active].stepsNow == index  ? blueStepsClass : ''"
+                :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
                 class="ban-eee32796c3fdfc147115c9f6e875c090"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -39,10 +39,10 @@
       <div class="ban-c6a2f8b3941d7f91bc4e51839e5371e0">
         <ul class="ban-3f2e7ec281ad2d884845f35f17756624">
           <li
-            v-for="(data, index) in gameInfo.list[gameInfo.active].bpOrder"
+            v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
             :key="'ban-camp2-1-data-' + index"
             class="ban-ba9bced6af8121cf6413000a4274ac2b"
-            @click="onBanPickClick(2, 1, index)"
+            @click="onGameBanPickClick(2, 1, index)"
           >
             <span
               v-show="index == 1 || index == 3 || index == 10 || index == 12"
@@ -52,7 +52,7 @@
                 width="30"
                 height="30"
                 v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                :class="stepsShow && gameInfo.list[gameInfo.active].stepsNow == index  ? redStepsClass : ''"
+                :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
                 class="ban-aa95efe1c5d39e5e9389ca5833e63fbe"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -68,9 +68,9 @@
           <div class="pick-8c9cb4a232c7e88403dddc3a0e589162">
             <ul class="pick-bebaefe0582b00649bc558529bba9df5">
               <li
-                v-for="(data, index) in gameInfo.list[gameInfo.active].bpOrder"
+                v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
                 :key="'pick-camp1-1-data-' + index"
-                @click="onBanPickClick(1, 2, index)"
+                @click="onGameBanPickClick(1, 2, index)"
                 class="pick-4d5eb62584759be250091d21c745edd4"
               >
                 <span
@@ -81,7 +81,7 @@
                     width="40"
                     height="40"
                     v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                    :class="stepsShow && gameInfo.list[gameInfo.active].stepsNow == index  ? blueStepsClass : ''"
+                    :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
                     class="pick-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -90,7 +90,7 @@
           </div>
         </van-col>
         <van-col span="18">
-          <div v-show="heroSelectShow" class="hero-99938282f04071859941e18f16efcf42">
+          <div v-show="seeHeroShow" class="hero-99938282f04071859941e18f16efcf42">
             <van-tabs
               v-model="tableData.active"
               :border="false"
@@ -119,8 +119,8 @@
                       v-show="data.trend == 2 && data.type == tableData.active + 1"
                       :key="'hero-select-' + index"
                       :icon="data.img"
-                      :class="gameInfo.list[gameInfo.active].blueBan.includes(data.id) || gameInfo.list[gameInfo.active].redBan.includes(data.id) || gameInfo.used.includes(data.id) ? banPickClass : ''"
-                      @click="onHeroUseClick(data)"
+                      :class="gameInfo.list[gameTabsActive].blueBan.includes(data.id) || gameInfo.list[gameTabsActive].redBan.includes(data.id) || gameInfo.used.includes(data.id) ? banPickClass : ''"
+                      @click="onGamePickHeroClick(data)"
                     />
                   </van-grid>
                 </van-cell-group>
@@ -140,8 +140,8 @@
                       v-show="data.trend != 2 && data.type == tableData.active + 1"
                       :key="'hero-select-' + index"
                       :icon="data.img"
-                      :class="gameInfo.list[gameInfo.active].blueBan.includes(data.id) || gameInfo.list[gameInfo.active].redBan.includes(data.id) || gameInfo.used.includes(data.id) ? banPickClass : ''"
-                      @click="onHeroUseClick(data)"
+                      :class="gameInfo.list[gameTabsActive].blueBan.includes(data.id) || gameInfo.list[gameTabsActive].redBan.includes(data.id) || gameInfo.used.includes(data.id) ? banPickClass : ''"
+                      @click="onGamePickHeroClick(data)"
                     />
                   </van-grid>
                 </van-cell-group>
@@ -153,9 +153,9 @@
           <div class="pick-c6a2f8b3941d7f91bc4e51839e5371e0">
             <ul class="pick-3f2e7ec281ad2d884845f35f17756624">
               <li
-                v-for="(data, index) in gameInfo.list[gameInfo.active].bpOrder"
+                v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
                 :key="'pick-camp2-1-data-' + index"
-                @click="onBanPickClick(2, 2, index)"
+                @click="onGameBanPickClick(2, 2, index)"
                 class="pick-9907d81a5157ef27607fd257364f3f43"
               >
                 <span
@@ -166,7 +166,7 @@
                     width="40"
                     height="40"
                     v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                    :class="stepsShow && gameInfo.list[gameInfo.active].stepsNow == index  ? redStepsClass : ''"
+                    :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
                     class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -194,16 +194,17 @@
             :icon="eye"
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
-            @click="onHeroSelectClick"
-          >查看 {{ gameInfo.perspective == 1 ? gameInfo.camp_2.name : gameInfo.camp_1.name }} 英雄池</van-button>
+            @click="onSeeHeroClick"
+          >查看 {{ perspective == 1 ? campInfo.camp_2.name : campInfo.camp_1.name }} 剩余英雄</van-button>
         </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023 game-03382ae6a22ec34a72bdf96acd07232b">
           <van-button
             round
-            :icon="gameInfo.perspective == 1 ? gameInfo.camp_1.img : gameInfo.camp_2.img"
+            v-show="perspectiveShow"
+            :icon="perspective == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
             size="small"
-            @click="onPerspectiveClick(1)"
-          >{{gameInfo.perspective == 1 ? gameInfo.camp_1.name : gameInfo.camp_2.name }} 视角</van-button>
+            @click="onGamePerspectiveClick(1)"
+          >以 {{perspective == 1 ? campInfo.camp_1.name : campInfo.camp_2.name }} 的视角</van-button>
         </li>
       </ul>
     </div>
@@ -211,11 +212,11 @@
     <div class="game-fca3ffea6534176432f58b5a22ed22e1">
       <van-steps
         v-show="stepsShow"
-        :active="gameInfo.list[gameInfo.active].stepsActive"
-        @click-step="onStepsClick"
+        :active="gameInfo.list[gameTabsActive].stepsActive"
+        @click-step="onGameStepsClick"
       >
         <van-step
-          v-for="(data, index) in gameInfo.list[gameInfo.active].bpOrder"
+          v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
           :key="'hero-steps-data-' + index"
         >{{ index + 1 }}</van-step>
       </van-steps>
@@ -223,17 +224,17 @@
 
     <div class="game-22b9550116c87c4fffd94a4271127d9c">
       <van-tabs
-        v-model="gameInfo.active"
+        v-model="gameTabsActive"
         @change="onGameTabsChange"
         color="orange"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
-        <van-tab v-for="index in gameInfo.list.length" :key="'game-tab-' + index">
+        <van-tab v-for="(data, index) in gameInfo.list" :key="'game-tab-' + index">
           <template #title>
             <van-icon
-              :name="gameInfo.list[index - 1].winCamp == 1 ? gameInfo.camp_1.img : gameInfo.camp_2.img"
+              :name="gameInfo.list[index].winCamp == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
             />
-            第 {{ index }} 场
+            第 {{ index + 1 }} 局
           </template>
         </van-tab>
       </van-tabs>
@@ -243,7 +244,7 @@
       v-model="moreActionSheetShow"
       :actions="actions"
       :close-on-click-action="true"
-      @select="onActionSheetSelect"
+      @select="onMoreActionSheet"
     />
   </div>
 </template>
@@ -392,9 +393,12 @@ div.van-steps--horizontal {
   position: absolute;
 }
 
-.ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3,
-.ban-ba9bced6af8121cf6413000a4274ac2b {
+.ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3 {
   float: left;
+}
+
+.ban-ba9bced6af8121cf6413000a4274ac2b {
+  float: right;
 }
 
 .ban-8c9cb4a232c7e88403dddc3a0e589162,
@@ -479,179 +483,30 @@ export default {
       redStepsClass: "steps-99b844b6785d8d7378bbc2b1401af365",
       banPickClass: "hero-551270e8a38a84d3f0b214e6854357e3",
       copyData: "",
-      gameInfo: {
-        mode: "view",
-        active: 0,
-        self: "",
-        opponent: "",
-        perspective: 1,
+      mode: "view",
+      self: "",
+      opponent: "",
+      perspective: 1,
+      gameLabel: "new",
+      gameTabsActive: 0,
+      campInfo: {
         camp_1: {
-          img:
-            "https://game.gtimg.cn/images/datamore/kingwatch/private/KPLALL/GuildALL/44.png",
-          name: "TS",
-          score: 3
+          id: 1,
+          name: "队伍_1",
+          img: "/img/app-icons/camp_blue.png"
         },
         camp_2: {
-          img:
-            "https://game.gtimg.cn/images/datamore/kingwatch/private/KPLALL/GuildALL/26.png",
-          name: "EDG.M",
-          score: 2
-        },
+          id: 2,
+          name: "队伍_2",
+          img: "/img/app-icons/camp_red.png"
+        }
+      },
+      gameInfo: {
         list: [
           {
-            /*
-            blueBan: [509, 118, 152, 523],
-            bluePick: [518, 171, 140, 107, 192],
-            redBan: [153, 525, 157, 502],
-            redPick: [191, 120, 199, 529, 142],
-            */
             stepsNow: 0,
             stepsActive: 0,
-            bpOrder: [
-              509,
-              153,
-              118,
-              525,
-              518,
-              191,
-              120,
-              171,
-              140,
-              199,
-              157,
-              152,
-              502,
-              523,
-              529,
-              107,
-              192,
-              142
-            ],
-            winCamp: 2
-          },
-          {
-            /*
-            blueBan: [509, 199, 156, 312],
-            bluePick: [132, 107, 140, 136, 194],
-            redBan: [118, 525, 197, 523],
-            redPick: [524, 149, 153, 148, 114],
-            */
-            stepsNow: 0,
-            stepsActive: 0,
-            bpOrder: [
-              509,
-              118,
-              199,
-              525,
-              132,
-              524,
-              149,
-              107,
-              140,
-              153,
-              197,
-              156,
-              523,
-              312,
-              148,
-              136,
-              194,
-              114
-            ],
-            winCamp: 1
-          },
-          {
-            /*
-            blueBan: [153, 111, 133, 508],
-            bluePick: [511, 170, 156, 175, 169],
-            redBan: [191, 120, 139, 132],
-            redPick: [525, 518, 148, 105, 167],
-            */
-            stepsNow: 0,
-            stepsActive: 0,
-            bpOrder: [
-              153,
-              191,
-              111,
-              120,
-              511,
-              525,
-              518,
-              170,
-              156,
-              148,
-              139,
-              133,
-              132,
-              508,
-              105,
-              175,
-              169,
-              167
-            ],
-            winCamp: 1
-          },
-          {
-            /*
-            blueBan: [191, 120, 152, 312],
-            bluePick: [118, 502, 123, 157, 192],
-            redBan: [153, 511, 156, 523],
-            redPick: [509, 199, 144, 163, 132],
-            */
-            stepsNow: 0,
-            stepsActive: 0,
-            bpOrder: [
-              191,
-              153,
-              120,
-              511,
-              118,
-              509,
-              199,
-              502,
-              123,
-              144,
-              156,
-              152,
-              523,
-              312,
-              163,
-              157,
-              192,
-              132
-            ],
-            winCamp: 2
-          },
-          {
-            /*
-            blueBan: [509, 511, 515, 149],
-            bluePick: [503, 196, 312, 178, 108],
-            redBan: [191, 120, 162, 131],
-            redPick: [186, 111, 153, 126, 119],
-            */
-            stepsNow: 0,
-            stepsActive: 0,
-            bpOrder: [
-              509,
-              191,
-              511,
-              120,
-              503,
-              186,
-              111,
-              196,
-              312,
-              153,
-              162,
-              515,
-              131,
-              149,
-              126,
-              178,
-              108,
-              119
-            ],
-            winCamp: 1
+            bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ],
         used: []
@@ -660,35 +515,51 @@ export default {
         active: 0,
         heroList: []
       },
-      heroSelectShow: true,
+      seeHeroShow: true,
       eye: "eye-o",
+      perspectiveShow: true,
       stepsShow: false,
       moreActionSheetShow: false,
       actions: [
-        { name: "查看顺序", subname: "显示当前的 BP 顺序", value: 0 },
-        { name: "保存本局", subname: "只能保存自己创建的", value: 1 },
+        { name: "编辑本局", subname: "显示当前的 BP 顺序", value: 0 },
+        { name: "再来一局", subname: "不可以超过 6 局噢", value: 1 },
         { name: "视频回放", value: 2 },
-        { name: "分享本局", value: 3 },
-        { name: "常见问题", value: 4 }
+        { name: "保存", value: 3 },
+        { name: "分享", value: 4 },
+        { name: "常见问题", value: 5 }
       ]
     };
   },
   mounted() {
-    this.getHeroList();
+    let gameLabel = this.$route.params.id;
 
-    let type = parseInt(this.$route.query.type);
-    !type ? (this.gameInfo.active = 0) : (this.gameInfo.active = type);
+    if (gameLabel) {
+      this.getHeroList();
 
-    this.init(this.gameInfo.perspective, type + 1);
+      this.gameLabel = gameLabel;
+      if (gameLabel == "new") {
+        this.initNewGame();
+      } else {
+        this.getGameInfo(gameLabel);
+      }
+    } else {
+      this.$router.push({
+        query: {
+          path: "/game",
+          from: "c083a9362c48884b161429aa0ccddc11"
+        }
+      });
+      return;
+    }
   },
   methods: {
-    init: function(perspective, type) {
+    bpOrderInit: function(perspective, type) {
       if (perspective == 1) {
-        this.gameInfo.self = this.gameInfo.camp_1;
-        this.gameInfo.opponent = this.gameInfo.camp_2;
+        this.self = this.campInfo.camp_1;
+        this.opponent = this.campInfo.camp_2;
       } else {
-        this.gameInfo.self = this.gameInfo.camp_2;
-        this.gameInfo.opponent = this.gameInfo.camp_1;
+        this.self = this.campInfo.camp_2;
+        this.opponent = this.campInfo.camp_1;
       }
 
       let used = [];
@@ -751,97 +622,41 @@ export default {
       this.gameInfo.used = Array.from(new Set(used));
       //console.log(perspective, this.gameInfo.used);
     },
-    onHeroSelectClick: function() {
-      if (this.eye == "eye-o") {
-        this.eye = "closed-eye";
-        this.heroSelectShow = false;
-      } else {
-        this.eye = "eye-o";
-        this.heroSelectShow = true;
-      }
-    },
-    onPerspectiveClick: function(mode) {
-      this.gameInfo.perspective == 1
-        ? (this.gameInfo.perspective = 2)
-        : (this.gameInfo.perspective = 1);
-
-      this.init(this.gameInfo.perspective, this.gameInfo.active + 1);
-
-      mode == 1
-        ? this.$message.success("初始化 " + this.gameInfo.self.name + " 视角")
-        : "";
-    },
-    onGameTabsChange: function(e) {
-      this.init(this.gameInfo.perspective, e + 1);
-
-      this.$router.push({
-        query: {
-          type: e,
-          from: "39298652302aab3fb0c303d72f32ac4e"
-        }
-      });
-    },
     getHeroList: function() {
       this.axios.get(this.appApi.list.getHeroRanking).then(ret => {
         this.tableData.heroList = ret.data.data.result;
       });
     },
-    onBanPickClick: function(camp, type, newIndex) {
-      if (
-        this.gameInfo.list[this.tableData.active].bpOrder[newIndex - 1] == 0
-      ) {
-        this.$message.error("请按顺序BP ;D");
-        return;
-      }
+    getGameInfo: function(gameLabel) {
+      this.axios
+        .get(this.appApi.list.getGameInfo + "&aid=" + gameLabel)
+        .then(ret => {
+          let data = ret.data.data;
 
-      let gameInfoActive = this.gameInfo.active;
+          this.campInfo = data.campInfo;
+          this.gameInfo.list = data.result;
 
-      let oldIndex = this.gameInfo.list[gameInfoActive].stepsNow;
+          this.bpOrderInit(this.perspective, this.gameTabsActive + 1);
+        });
+    },
+    initNewGame: function() {
+      this.bpOrderInit(this.perspective, this.gameTabsActive + 1);
+    },
+    onCreateNewGameClick: function() {
+      let newGame = {
+        stepsNow: 0,
+        stepsActive: 0,
+        bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      };
 
-      if (this.gameInfo.mode == "edit") {
-        if (this.campColor(1, oldIndex) != this.campColor(1, newIndex)) {
-          this.onPerspectiveClick(1);
-        }
-        //切换阵容时初始化
-
-        this.gameInfo.list[gameInfoActive].stepsNow = newIndex;
+      if (this.gameInfo.list.length > 5) {
+        this.$message.error("最多创建 6 局 ;D");
+      } else {
+        this.gameInfo.list.push(newGame);
+        this.$message.success("创建成功");
       }
     },
-    onHeroUseClick: function(hero) {
-      let gameInfoActive = this.gameInfo.active;
-      if (
-        this.gameInfo.list[gameInfoActive].blueBan.includes(hero.id) ||
-        this.gameInfo.list[gameInfoActive].redBan.includes(hero.id)
-      ) {
-        this.$message.error(hero.name + " 已被禁用");
-        return;
-      } else if (this.gameInfo.used.includes(hero.id)) {
-        this.$message.error(
-          hero.name + " 已被 " + this.gameInfo.opponent.name + " 用过"
-        );
-        return;
-      }
-
-      let stepsNow = this.gameInfo.list[gameInfoActive].stepsNow;
-
-      this.gameInfo.list[gameInfoActive].bpOrder.splice(stepsNow, 1, hero.id);
-
-      this.init(this.gameInfo.perspective, gameInfoActive + 1);
-
-      stepsNow > this.gameInfo.list[gameInfoActive].bpOrder.length
-        ? (stepsNow = 0)
-        : (stepsNow = stepsNow + 1);
-      this.gameInfo.list[gameInfoActive].stepsNow = stepsNow;
-    },
-    onGameShareClick: function() {
-      let vs = this.gameInfo.camp_1.name + " vs " + this.gameInfo.camp_2.name;
-      let type = this.gameInfo.active + 1;
-      this.copyData =
-        "正在复盘【" + vs + "】第【" + type + "】场比赛 ↓\r" + location.href;
-      this.$copyText(this.copyData);
-      this.$message.success("已复制");
-    },
-    campColor(color, index) {
+    gameCampColor(color, index) {
       let ret = false;
 
       if (color == 1) {
@@ -854,38 +669,138 @@ export default {
 
       return ret;
     },
-    onActionSheetSelect: function(e) {
+    onSeeHeroClick: function() {
+      if (this.eye == "eye-o") {
+        this.eye = "closed-eye";
+        this.seeHeroShow = false;
+      } else {
+        this.eye = "eye-o";
+        this.seeHeroShow = true;
+      }
+    },
+    onGamePerspectiveClick: function(mode) {
+      this.perspective == 1 ? (this.perspective = 2) : (this.perspective = 1);
+
+      this.bpOrderInit(this.perspective, this.gameTabsActive + 1);
+
+      mode == 1
+        ? this.$message.success("初始化 " + this.self.name + " 的视角")
+        : "";
+    },
+    onGameTabsChange: function(e) {
+      this.bpOrderInit(this.perspective, e + 1);
+    },
+    onGameBanPickClick: function(camp, type, newIndex) {
+      if (
+        this.gameInfo.list[this.tableData.active].bpOrder[newIndex - 1] == 0
+      ) {
+        this.$message.error("请按顺序BP ;D");
+        return;
+      }
+
+      let gameInfoActive = this.gameTabsActive;
+
+      let oldIndex = this.gameInfo.list[gameInfoActive].stepsNow;
+
+      if (this.mode == "edit") {
+        if (
+          this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)
+        ) {
+          this.onGamePerspectiveClick(1);
+        }
+        //切换阵容时初始化
+
+        this.gameInfo.list[gameInfoActive].stepsNow = newIndex;
+      }
+    },
+    onGamePickHeroClick: function(hero) {
+      let gameInfoActive = this.gameTabsActive;
+      if (
+        this.gameInfo.list[gameInfoActive].blueBan.includes(hero.id) ||
+        this.gameInfo.list[gameInfoActive].redBan.includes(hero.id)
+      ) {
+        this.$message.error(hero.name + " 已被禁用");
+        return;
+      } else if (this.gameInfo.used.includes(hero.id)) {
+        this.$message.error(
+          hero.name + " 已被 " + this.opponent.name + " 用过"
+        );
+        return;
+      }
+
+      if (this.mode == "view") return;
+
+      let oldIndex = this.gameInfo.list[gameInfoActive].stepsNow;
+
+      let newIndex;
+      if (oldIndex > 17) {
+        newIndex = 0;
+      } else {
+        newIndex = oldIndex + 1;
+
+        if (
+          this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)
+        ) {
+          this.onGamePerspectiveClick(0);
+        }
+
+        this.gameInfo.list[gameInfoActive].bpOrder.splice(oldIndex, 1, hero.id);
+      }
+
+      this.gameInfo.list[gameInfoActive].stepsNow = newIndex;
+
+      this.bpOrderInit(this.perspective, gameInfoActive + 1);
+    },
+    onGameShareClick: function() {
+      let vs = this.campInfo.camp_1.name + " vs " + this.campInfo.camp_2.name;
+      this.copyData =
+        "正在复盘【" +
+        vs +
+        "】的第 " +
+        (this.gameTabsActive + 1) +
+        " 局比赛 ↓\r" +
+        location.href;
+      this.$copyText(this.copyData);
+      this.$message.success("已复制");
+    },
+    onGameStepsClick: function(e) {
+      this.gameInfo.list[this.gameTabsActive].stepsNow = e;
+
+      this.$message.info("正在查看第【" + (e + 1) + "】个禁选");
+    },
+    onMoreActionSheet: function(e) {
       if (e.value == 0) {
         if (this.stepsShow == false) {
+          this.perspectiveShow = false;
           this.stepsShow = true;
-          this.gameInfo.mode = "edit";
+          this.mode = "edit";
 
-          if (this.gameInfo.active % 2 == 0) {
-            this.gameInfo.perspective = 1;
-            this.onPerspectiveClick(0);
+          if (this.gameTabsActive % 2 == 0) {
+            this.perspective = 1;
+            this.onGamePerspectiveClick(0);
           }
 
           this.$message.warning("已进入 编辑模式");
         } else {
+          this.perspectiveShow = true;
           this.stepsShow = false;
-          this.gameInfo.mode = "view";
+          this.mode = "view";
 
-          this.gameInfo.perspective = 2;
-          this.onPerspectiveClick(0);
+          this.perspective = 2;
+          this.onGamePerspectiveClick(0);
           //退出的时候 强制初始化为 队伍1 视角
 
           this.$message.warning("已退出 编辑模式");
         }
       }
 
+      if (e.value == 1 && this.gameLabel == "new") {
+        this.onCreateNewGameClick();
+      }
+
       if (e.value == 3) {
         this.onGameShareClick();
       }
-    },
-    onStepsClick: function(e) {
-      this.gameInfo.list[this.gameInfo.active].stepsNow = e;
-
-      this.$message.info("正在查看第【" + (e + 1) + "】个禁选");
     }
   }
 };
