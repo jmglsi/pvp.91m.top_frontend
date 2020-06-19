@@ -12,7 +12,7 @@
           placeholder="请输入密钥"
           @click-right-icon="$message.info('待开发')"
           @blur="saveKey"
-          class="ex-bd21190449b7e88db48fa0f580a8f666 my-7ba06fc75951168b5c44297fa2e6a607"
+          class="my-7ba06fc75951168b5c44297fa2e6a607"
         />
       </van-cell-group>
 
@@ -38,9 +38,6 @@
 </template>
 
 <style>
-div.ex-bd21190449b7e88db48fa0f580a8f666 img.van-icon__image {
-  margin-top: -6px;
-}
 </style>
 
 <style scoped>

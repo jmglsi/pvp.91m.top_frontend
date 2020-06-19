@@ -13,11 +13,9 @@
       <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
         <TuiJian />
       </van-tab>
-      <!--
       <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
         <Game />
       </van-tab>
-      -->
       <!--<van-tab title="舆论">即将上线</van-tab>-->
 
       <AppBottomTabbar :height="100" />
@@ -52,7 +50,6 @@ export default {
   methods: {
     onHomeChange: function(e) {
       this.$router.push({
-        path: "/",
         query: { type: e, from: "7964334078bf3863a2f7809c20df23a3" }
       });
     }

@@ -37,10 +37,6 @@
   margin-top: -13px;
 }
 
-div.van-tabs__nav.van-tabs__nav--line {
-  height: auto;
-}
-
 div.ranking div.van-dropdown-menu__bar {
   height: 54px;
 }
@@ -109,7 +105,6 @@ export default {
   methods: {
     onRankingChange: function(e) {
       this.$router.push({
-        path: "/ranking",
         query: { type: e, from: "ee240fe51687ee66cca7493aedcc3c24" }
       });
     }

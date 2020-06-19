@@ -66,6 +66,14 @@ div.app-b5e3c0b9ac8b718b9b4cb60f4fabe214
 div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
   border-radius: 0;
 }
+
+.tuijian-447b7147e84be512208dcc0995d67ebc,
+div.hero-f3cc17bc0d768ca60b8bb496a10b1990
+  div.van-tabs__wrap.van-tabs__wrap--scrollable
+  div.van-tabs__nav,
+div.van-steps {
+  background-color: rgb(245, 245, 245);
+}
 </style>
 
 <style>
@@ -76,7 +84,6 @@ div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
 }
 
 .tuijian-447b7147e84be512208dcc0995d67ebc {
-  background-color: rgb(245, 245, 245);
   border-radius: 10px;
   padding: 15px 10px;
   margin: 20px 10px;
@@ -102,6 +109,22 @@ div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-item {
 }
 </style>
 
+<style>
+i.van-icon img.van-icon__image {
+  margin-top: -3px;
+}
+
+i.van-button__icon img.van-icon__image {
+  margin-top: -6px;
+}
+</style>
+
+<style>
+div.van-tabs__nav {
+  height: unset;
+  overflow-x: unset;
+}
+</style>
 <script>
 export default {
   name: "App",

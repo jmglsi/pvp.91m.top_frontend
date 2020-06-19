@@ -229,13 +229,6 @@ export default {
     onPaginationChange: function(e) {
       this.getOrder(this.searchValue, e);
     },
-    onCopy: function() {
-      this.$message.success("复制成功");
-      this.actionSheetShow = false;
-    },
-    onError: function() {
-      this.$message.error("复制失败");
-    },
     onCellClick: function({ row }) {
       this.getOrderInfo(row, this.currentPage);
     },
