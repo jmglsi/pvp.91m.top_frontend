@@ -45,7 +45,10 @@ export default {
     }
 
     let type = parseInt(this.$route.query.type);
-    !type ? (this.homeTabsActive = 0) : (this.homeTabsActive = type);
+    if (!type) {
+      type = 0;
+    }
+    this.homeTabsActive = type;
   },
   methods: {
     onHomeChange: function(e) {

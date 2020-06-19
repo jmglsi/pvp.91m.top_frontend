@@ -69,7 +69,11 @@ export default {
     };
   },
   activated() {
-    this.aboutTabsActive = parseInt(this.$route.query.type);
+    let type = parseInt(this.$route.query.type);
+    if (!type) {
+      type = 0;
+    }
+    this.aboutTabsActive = type;
   },
   mounted() {
     this.getStatementBp();

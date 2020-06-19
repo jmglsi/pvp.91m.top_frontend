@@ -100,7 +100,10 @@ export default {
   },
   mounted() {
     let type = parseInt(this.$route.query.type);
-    !type ? (this.rankingTabsActive = 0) : (this.rankingTabsActive = type);
+    if (!type) {
+      type = 0;
+    }
+    this.rankingTabsActive = type;
   },
   methods: {
     onRankingChange: function(e) {
