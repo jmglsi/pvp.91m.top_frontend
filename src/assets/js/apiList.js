@@ -3,6 +3,7 @@ let host, debug = false;
 debug ? host = "localhost/api.91m.top" : host = "api.91m.top"
 
 const pvp = "//" + host + "/hero/v1/app.php"
+const game = "//" + host + "/hero/v1/game.php"
 const bili = "//" + host + "/hero/v1/bilibili.php"
 
 const list = {
@@ -15,6 +16,7 @@ const list = {
     addHeroVote: pvp + "?type=addHeroVote",
     getHeroInfo: pvp + "?type=getHeroInfo",
     getUserInfo: pvp + "?type=getUserInfo",
+    getGameInfo: game + "?type=getGameInfo",
     getHeroUpdate: pvp + "?type=getHeroUpdate",
     getHeroRanking: pvp + "?type=getHeroRanking",
     getPlayerRanking: pvp + "?type=getPlayerRanking",
