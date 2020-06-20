@@ -27,7 +27,7 @@
                 width="30"
                 height="30"
                 v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
+                :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
                 class="ban-eee32796c3fdfc147115c9f6e875c090"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -52,7 +52,7 @@
                 width="30"
                 height="30"
                 v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
+                :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
                 class="ban-aa95efe1c5d39e5e9389ca5833e63fbe"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -81,7 +81,7 @@
                     width="40"
                     height="40"
                     v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                    :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
+                    :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
                     class="pick-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -119,9 +119,10 @@
                       v-show="data.trend == 2 && data.type == tableData.active + 1"
                       :key="'hero-select-' + index"
                       :icon="data.img"
-                      :class="gameInfo.list[gameTabsActive].blueBan.includes(data.id) || gameInfo.list[gameTabsActive].redBan.includes(data.id) || gameInfo.used.includes(data.id) ? banPickClass : ''"
+                      :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
                     />
+                    <!-- gameInfo.list[gameTabsActive].blueBan.includes(data.id) || gameInfo.list[gameTabsActive].redBan.includes(data.id) || -->
                   </van-grid>
                 </van-cell-group>
 
@@ -140,7 +141,7 @@
                       v-show="data.trend != 2 && data.type == tableData.active + 1"
                       :key="'hero-select-' + index"
                       :icon="data.img"
-                      :class="gameInfo.list[gameTabsActive].blueBan.includes(data.id) || gameInfo.list[gameTabsActive].redBan.includes(data.id) || gameInfo.used.includes(data.id) ? banPickClass : ''"
+                      :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
                     />
                   </van-grid>
@@ -166,7 +167,7 @@
                     width="40"
                     height="40"
                     v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                    :class="stepsShow && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
+                    :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
                     class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -200,26 +201,12 @@
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023 game-03382ae6a22ec34a72bdf96acd07232b">
           <van-button
             round
-            v-show="perspectiveShow"
             :icon="perspective == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
             size="small"
             @click="onGamePerspectiveClick(1)"
           >以 {{perspective == 1 ? campInfo.camp_1.name : campInfo.camp_2.name }} 的视角</van-button>
         </li>
       </ul>
-    </div>
-
-    <div class="game-fca3ffea6534176432f58b5a22ed22e1">
-      <van-steps
-        v-show="stepsShow"
-        :active="gameInfo.list[gameTabsActive].stepsActive"
-        @click-step="onGameStepsClick"
-      >
-        <van-step
-          v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
-          :key="'hero-steps-data-' + index"
-        >{{ index + 1 }}</van-step>
-      </van-steps>
     </div>
 
     <div class="game-22b9550116c87c4fffd94a4271127d9c">
@@ -368,13 +355,6 @@ div.van-steps--horizontal {
   bottom: 45px;
 }
 
-.game-fca3ffea6534176432f58b5a22ed22e1 {
-  z-index: 1;
-  position: fixed;
-  width: 100%;
-  bottom: -10px;
-}
-
 .game-39ab32c5aeb56c9f5ae17f073ce31023 {
   margin: 3px 5px;
   float: right;
@@ -476,8 +456,28 @@ export default {
   data() {
     return {
       index: {
+        ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
-        red: [1, 3, 5, 6, 9, 10, 12, 14, 17]
+        red: [1, 3, 5, 6, 9, 10, 12, 14, 17],
+        perspective: [
+          1, // 0 - 1
+          1, // 1 - 2
+          1, // 2 - 3
+          0, // 3 - 4
+          1, // 4 - 5
+          0, // 5 - 6
+          1, // 6 - 7
+          0, // 7 - 8
+          1, // 8 - 9
+          1, // 9 - 10
+          1, // 10 - 11
+          1, // 11 - 12
+          1, // 12 - 13
+          0, // 13 - 14
+          1, // 14 - 15
+          0, // 15 - 16
+          1 // 16 -17
+        ]
       },
       blueStepsClass: "steps-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "steps-99b844b6785d8d7378bbc2b1401af365",
@@ -505,7 +505,6 @@ export default {
         list: [
           {
             stepsNow: 0,
-            stepsActive: 0,
             bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ],
@@ -517,8 +516,6 @@ export default {
       },
       seeHeroShow: true,
       eye: "eye-o",
-      perspectiveShow: true,
-      stepsShow: false,
       moreActionSheetShow: false,
       actions: [
         { name: "编辑本局", subname: "显示当前的 BP 顺序", value: 0 },
@@ -565,12 +562,6 @@ export default {
       let used = [];
       for (let i = 0; i < type; i++) {
         let orderList = this.gameInfo.list[i];
-
-        let stepsActive = orderList.bpOrder.indexOf(0);
-
-        stepsActive == -1
-          ? (this.gameInfo.list[i].stepsActive = orderList.bpOrder.length - 1)
-          : (this.gameInfo.list[i].stepsActive = stepsActive - 1);
 
         this.gameInfo.list[i].blueBan = [
           orderList.bpOrder[0],
@@ -645,7 +636,6 @@ export default {
     onCreateNewGameClick: function() {
       let newGame = {
         stepsNow: 0,
-        stepsActive: 0,
         bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       };
 
@@ -689,35 +679,40 @@ export default {
     },
     onGameTabsChange: function(e) {
       this.bpOrderInit(this.perspective, e + 1);
+
+      if (this.mode == "edit") {
+        this.$message.warning("编辑模式下切换对局记得保存~");
+      }
     },
     onGameBanPickClick: function(camp, type, newIndex) {
-      if (
-        this.gameInfo.list[this.tableData.active].bpOrder[newIndex - 1] == 0
-      ) {
+      if (this.mode == "view") return;
+
+      let gameTabsActive = this.gameTabsActive;
+
+      if (this.gameInfo.list[gameTabsActive].bpOrder[newIndex - 1] == 0) {
         this.$message.error("请按顺序BP ;D");
         return;
       }
 
-      let gameInfoActive = this.gameTabsActive;
-
-      let oldIndex = this.gameInfo.list[gameInfoActive].stepsNow;
+      let oldIndex = this.gameInfo.list[gameTabsActive].stepsNow;
 
       if (this.mode == "edit") {
         if (
           this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)
         ) {
-          this.onGamePerspectiveClick(1);
+          this.onGamePerspectiveClick(0);
         }
         //切换阵容时初始化
 
-        this.gameInfo.list[gameInfoActive].stepsNow = newIndex;
+        this.gameInfo.list[gameTabsActive].stepsNow = newIndex;
       }
     },
     onGamePickHeroClick: function(hero) {
-      let gameInfoActive = this.gameTabsActive;
+      let gameTabsActive = this.gameTabsActive;
+
       if (
-        this.gameInfo.list[gameInfoActive].blueBan.includes(hero.id) ||
-        this.gameInfo.list[gameInfoActive].redBan.includes(hero.id)
+        this.gameInfo.list[gameTabsActive].blueBan.includes(hero.id) ||
+        this.gameInfo.list[gameTabsActive].redBan.includes(hero.id)
       ) {
         this.$message.error(hero.name + " 已被禁用");
         return;
@@ -730,26 +725,23 @@ export default {
 
       if (this.mode == "view") return;
 
-      let oldIndex = this.gameInfo.list[gameInfoActive].stepsNow;
-
-      let newIndex;
+      let oldIndex = this.gameInfo.list[gameTabsActive].stepsNow;
+      let newIndex = 0;
       if (oldIndex > 17) {
         newIndex = 0;
       } else {
         newIndex = oldIndex + 1;
 
-        if (
-          this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)
-        ) {
-          this.onGamePerspectiveClick(0);
-        }
-
-        this.gameInfo.list[gameInfoActive].bpOrder.splice(oldIndex, 1, hero.id);
+        this.gameInfo.list[gameTabsActive].bpOrder.splice(oldIndex, 1, hero.id);
       }
 
-      this.gameInfo.list[gameInfoActive].stepsNow = newIndex;
+      if (this.index.perspective[oldIndex] == 1) {
+        this.onGamePerspectiveClick(0);
+      }
 
-      this.bpOrderInit(this.perspective, gameInfoActive + 1);
+      this.gameInfo.list[gameTabsActive].stepsNow = newIndex;
+
+      this.bpOrderInit(this.perspective, gameTabsActive + 1);
     },
     onGameShareClick: function() {
       let vs = this.campInfo.camp_1.name + " vs " + this.campInfo.camp_2.name;
@@ -763,34 +755,25 @@ export default {
       this.$copyText(this.copyData);
       this.$message.success("已复制");
     },
-    onGameStepsClick: function(e) {
-      this.gameInfo.list[this.gameTabsActive].stepsNow = e;
-
-      this.$message.info("正在查看第【" + (e + 1) + "】个禁选");
-    },
     onMoreActionSheet: function(e) {
+      let gameTabsActive = this.gameTabsActive;
+
       if (e.value == 0) {
-        if (this.stepsShow == false) {
-          this.perspectiveShow = false;
-          this.stepsShow = true;
+        if (this.mode == "view") {
           this.mode = "edit";
-
-          if (this.gameTabsActive % 2 == 0) {
-            this.perspective = 1;
-            this.onGamePerspectiveClick(0);
-          }
-
           this.$message.warning("已进入 编辑模式");
-        } else {
-          this.perspectiveShow = true;
-          this.stepsShow = false;
-          this.mode = "view";
 
-          this.perspective = 2;
+          this.index.ban.includes(
+            this.gameInfo.list[gameTabsActive].stepsNow
+          ) && gameTabsActive % 2 == 0
+            ? (this.perspective = 2)
+            : (this.perspective = 1);
           this.onGamePerspectiveClick(0);
-          //退出的时候 强制初始化为 队伍1 视角
-
+          //gameTabsActive % 2 == 0
+        } else {
+          this.mode = "view";
           this.$message.warning("已退出 编辑模式");
+          //退出的时候 强制初始化为 队伍1 视角
         }
       }
 
