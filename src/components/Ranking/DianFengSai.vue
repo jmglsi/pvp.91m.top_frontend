@@ -1,21 +1,8 @@
 <template>
   <div class="ranking-dfs">
     <van-dropdown-menu>
-      <van-dropdown-item
-        v-model="areaType"
-        :options="areaOptions"
-        @change="onDropdownMenuChange(1)"
-      />
-      <van-dropdown-item
-        v-model="heroType"
-        :options="heroOptions"
-        @change="onDropdownMenuChange(2)"
-      />
-      <van-dropdown-item
-        v-model="otherType"
-        :options="otherOptions"
-        @change="onDropdownMenuChange(3)"
-      />
+      <van-dropdown-item v-model="areaType" :options="areaOptions" @change="onDropdownMenuChange" />
+      <van-dropdown-item v-model="heroType" :options="heroOptions" @change="onDropdownMenuChange" />
     </van-dropdown-menu>
 
     <vxe-grid
@@ -61,7 +48,7 @@
             <span
               v-if="row.skill[1].id"
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-dabb6e25dffefe5b4821b7062afbdaef"
-            >{{row.skill[1].pickRate}}</span>
+            >{{ row.skill[1].pickRate }}</span>
           </div>
         </template>
       </vxe-table-column>
@@ -259,12 +246,6 @@ export default {
         { text: "发育", value: 5 },
         { text: "辅助", value: 6 }
       ],
-      otherType: 0,
-      otherOptions: [
-        { text: "٩( 'ω' )و", value: 0 },
-        { text: "关于", value: 1 },
-        { text: "更新记录 (本站)", value: 2 }
-      ],
       listWidth: 0,
       tableData: {
         color: {},
@@ -311,27 +292,8 @@ export default {
       this.actionSheetShow = true;
       this.heroInfo = row;
     },
-    onDropdownMenuChange: function(e) {
-      if (e == 1 || e == 2) {
-        this.getHeroRanking(this.areaType, this.heroType);
-      }
-
-      if (e == 3) {
-        if (this.otherType == 1) {
-          this.$router.push({
-            path: "/about",
-            query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
-          });
-        }
-
-        if (this.otherType == 2) {
-          this.$router.push({
-            path: "/changelog",
-            query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
-          });
-        }
-        this.otherType = 0;
-      }
+    onDropdownMenuChange: function() {
+      this.getHeroRanking(this.areaType, this.heroType);
     },
     onCellClick: function({ row }) {
       this.getHeroInfo(row);
