@@ -53,31 +53,12 @@ export default new Router({
                 keepAlive: true
             }
         }, {
-            path: '/changelog',
-            name: 'Changelog',
-            component: resolve => require(['./views/Changelog.vue'], resolve),
-            meta: {
-                type: 1,
-                title: '更新记录',
-                keepAlive: true
-            }
-        }, {
             path: '/my',
             name: 'My',
             component: resolve => require(['./views/My.vue'], resolve),
             meta: {
                 type: 1,
                 title: '我的',
-                keepAlive: true
-            }
-        },
-        {
-            path: '/about',
-            name: 'About',
-            component: resolve => require(['./views/About.vue'], resolve),
-            meta: {
-                type: 1,
-                title: '关于',
                 keepAlive: true
             }
         },
@@ -114,15 +95,6 @@ export default new Router({
                 meta: {
                     type: 2,
                     title: '首页',
-                    keepAlive: true
-                }
-            }, {
-                path: 'add',
-                name: 'GameAdd',
-                component: resolve => require(['./components/Game/Add.vue'], resolve),
-                meta: {
-                    type: 2,
-                    title: '添加',
                     keepAlive: true
                 }
             }, {

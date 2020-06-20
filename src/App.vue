@@ -71,7 +71,7 @@ div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
 div.hero-f3cc17bc0d768ca60b8bb496a10b1990
   div.van-tabs__wrap.van-tabs__wrap--scrollable
   div.van-tabs__nav,
-div.van-steps {
+.my-4236a440a662cc8253d7536e5aa17942 {
   background-color: rgb(245, 245, 245);
 }
 </style>

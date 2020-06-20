@@ -20,9 +20,9 @@
             :type="data.status"
             round
             class="replay-01cac4e332fec6d6ecd331a00412712d replay-e4d23e841d8e8804190027bce3180fa5"
-          >{{data.usedtime}}</van-tag>
+          >{{ data.usedtime }}</van-tag>
           <van-tag
-            v-show="!duiyou"
+            v-if="!teammate"
             round
             color="black"
             class="replay-e4d23e841d8e8804190027bce3180fa5"
@@ -30,7 +30,7 @@
           <span class="replay-12d045cdd2c0b9b6bf64ab787d773ae6">{{ data.gamePlayerName }}</span>
         </div>
 
-        <div v-show="!duiyou" class="replay-f01902c0d0136ca30fe1034f339964ba">
+        <div v-if="!teammate" class="replay-f01902c0d0136ca30fe1034f339964ba">
           <van-grid :border="false" :column-num="7">
             <van-grid-item
               v-show="data.heroSkill > 0"
@@ -48,7 +48,7 @@
         </div>
 
         <van-button
-          v-show="!duiyou"
+          v-if="!teammate"
           round
           disabled
           color="#000000"
@@ -138,7 +138,7 @@ export default {
   },
   data() {
     return {
-      duiyou: false,
+      teammate: false,
       replayCollapseNames: ["1"],
       heroInfo: {
         id: 0
@@ -184,7 +184,7 @@ export default {
 
           document.title = this.heroInfo.name + " | 苏苏的荣耀助手";
 
-          if (heroId.indexOf(",") > -1) this.duiyou = true;
+          if (heroId.indexOf(",") > -1) this.teammate = true;
         });
     },
     getActionSheet: function(row) {
