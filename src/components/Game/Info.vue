@@ -1,5 +1,9 @@
 <template>
-  <div class="game-info">
+  <div class="game-df2d7fac7a1e329f2cf92d22005bc36c" v-if="isPortrait">
+    <img width="100" height="100" src="/img/app-icons/landscape.png" />
+    <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
+  </div>
+  <div class="game-info" v-else-if="isPortrait == false">
     <span class="game-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
@@ -179,35 +183,73 @@
     </div>
 
     <div class="game-b5a9628110ebc1c03f58e06a553622e5">
-      <ul class="game-4a931512ce65bdc9ca6808adf92d8783">
+      <ul class="game-d8c5d57b13e288cafb4b23e2ba382f75">
+        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+          <a-dropdown placement="topCenter" :trigger="['click']">
+            <van-button round :icon="authorInfo.img" size="small">{{ authorInfo.name }}</van-button>
+            <a-menu slot="overlay">
+              <a-menu-item
+                v-for="(data, index) in authorActions"
+                :key="index"
+                @click="onAuthorActionsClick"
+              >
+                <a-icon :type="data.icon" />
+                {{ data.title }}
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+        </li>
+      </ul>
+    </div>
+    <!-- 左下角 -->
+
+    <div class="game-b5a9628110ebc1c03f58e06a553622e5">
+      <ul class="game-d100e41250812deed3189136414361f9">
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <van-button
             round
-            icon="apps-o"
+            :icon="perspective == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
             size="small"
-            color="linear-gradient(to right, #6874E8, #9708CC)"
-            @click="moreActionSheetShow = true"
-          >更多</van-button>
+            color="linear-gradient(to right, #43CBFF, #6874E8)"
+            @click="onGamePerspectiveClick(1)"
+          >以 {{ perspective == 1 ? campInfo.camp_1.name : campInfo.camp_2.name }} 的视角</van-button>
         </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <van-button
             round
             :icon="eye"
             size="small"
-            color="linear-gradient(to right, #43CBFF, #6874E8)"
+            color="linear-gradient(to right, #6874E8, #9708CC)"
             @click="onSeeHeroClick"
           >查看 {{ perspective == 1 ? campInfo.camp_2.name : campInfo.camp_1.name }} 剩余英雄</van-button>
         </li>
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023 game-03382ae6a22ec34a72bdf96acd07232b">
-          <van-button
-            round
-            :icon="perspective == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
-            size="small"
-            @click="onGamePerspectiveClick(1)"
-          >以 {{perspective == 1 ? campInfo.camp_1.name : campInfo.camp_2.name }} 的视角</van-button>
+      </ul>
+    </div>
+    <!-- 右上角 -->
+
+    <div class="game-b5a9628110ebc1c03f58e06a553622e5">
+      <ul class="game-4a931512ce65bdc9ca6808adf92d8783">
+        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+          <van-button round icon="question-o" size="small" @click="onQuestionClick">常见问题</van-button>
+        </li>
+        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+          <a-dropdown placement="topCenter" :trigger="['click']">
+            <van-button round icon="apps-o" size="small">功能</van-button>
+            <a-menu slot="overlay">
+              <a-menu-item
+                v-for="(data, index) in toolsActions"
+                :key="index"
+                @click="onToolsActionsClick"
+              >
+                <a-icon :type="data.icon" />
+                {{ data.title }}
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
         </li>
       </ul>
     </div>
+    <!-- 右下角 -->
 
     <div class="game-22b9550116c87c4fffd94a4271127d9c">
       <van-tabs
@@ -226,13 +268,6 @@
         </van-tab>
       </van-tabs>
     </div>
-
-    <van-action-sheet
-      v-model="moreActionSheetShow"
-      :actions="actions"
-      :close-on-click-action="true"
-      @select="onMoreActionSheet"
-    />
   </div>
 </template>
 
@@ -282,18 +317,18 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
   border-radius: 10px;
   overflow: hidden;
 }
-
-div.van-steps {
-  overflow: auto;
-  width: 100%;
-}
-
-div.van-steps--horizontal {
-  padding: unset;
-}
 </style>
 
 <style scoped>
+.game-df2d7fac7a1e329f2cf92d22005bc36c {
+  margin-top: 60%;
+}
+
+.game-b3d70a861f68652bf97d7a26bf421d4f {
+  font-size: 12px;
+  margin-top: 15px;
+}
+
 .game-f4842dcb685d490e2a43212b8072a6fe {
   font-size: 10px;
 }
@@ -348,16 +383,34 @@ div.van-steps--horizontal {
   background-color: white;
 }
 
+.game-d8c5d57b13e288cafb4b23e2ba382f75,
+.game-d100e41250812deed3189136414361f9,
 .game-4a931512ce65bdc9ca6808adf92d8783 {
   position: fixed;
-  text-align: right;
-  right: 15%;
+  margin: 3px;
+}
+
+.game-d100e41250812deed3189136414361f9,
+.game-4a931512ce65bdc9ca6808adf92d8783 {
+  right: 125px;
+}
+
+.game-d8c5d57b13e288cafb4b23e2ba382f75,
+.game-4a931512ce65bdc9ca6808adf92d8783 {
   bottom: 45px;
+}
+
+.game-d8c5d57b13e288cafb4b23e2ba382f75 {
+  left: 120px;
+}
+
+.game-d100e41250812deed3189136414361f9 {
+  top: 67px;
 }
 
 .game-39ab32c5aeb56c9f5ae17f073ce31023 {
   margin: 3px 5px;
-  float: right;
+  float: left;
 }
 
 .ban-dce7c4174ce9323904a934a486c41288 {
@@ -455,6 +508,7 @@ export default {
   },
   data() {
     return {
+      isPortrait: true,
       index: {
         ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
@@ -489,6 +543,11 @@ export default {
       perspective: 1,
       gameLabel: "new",
       gameTabsActive: 0,
+      authorInfo: {
+        id: 0,
+        name: "KPL",
+        img: "/img/app-icons/kpl.png"
+      },
       campInfo: {
         camp_1: {
           id: 1,
@@ -516,18 +575,19 @@ export default {
       },
       seeHeroShow: true,
       eye: "eye-o",
-      moreActionSheetShow: false,
-      actions: [
-        { name: "编辑本局", subname: "显示当前的 BP 顺序", value: 0 },
-        { name: "再来一局", subname: "不可以超过 6 局噢", value: 1 },
-        { name: "视频回放", value: 2 },
-        { name: "保存", value: 3 },
-        { name: "分享", value: 4 },
-        { name: "常见问题", value: 5 }
+      authorActions: [{ icon: "qq", title: "联系方式", key: 0 }],
+      toolsActions: [
+        { icon: "edit", title: "编辑", key: 0 },
+        { icon: "cloud-upload", title: "上传", key: 1 },
+        { icon: "plus", title: "再来一局", key: 2 },
+        { icon: "play-circle", title: "视频回放", key: 3 },
+        { icon: "share-alt", title: "分享本局", key: 4 }
       ]
     };
   },
   mounted() {
+    window.addEventListener("resize", this.renderResize, false);
+
     let gameLabel = this.$route.params.id;
 
     if (gameLabel) {
@@ -549,7 +609,19 @@ export default {
       return;
     }
   },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.renderResize, false);
+  },
   methods: {
+    renderResize() {
+      let width = document.documentElement.clientWidth;
+      let height = document.documentElement.clientHeight;
+      if (width < height) {
+        this.isPortrait = true;
+      } else {
+        this.isPortrait = false;
+      }
+    },
     bpOrderInit: function(perspective, type) {
       if (perspective == 1) {
         this.self = this.campInfo.camp_1;
@@ -755,10 +827,15 @@ export default {
       this.$copyText(this.copyData);
       this.$message.success("已复制");
     },
-    onMoreActionSheet: function(e) {
+    onAuthorActionsClick: function({ key }) {
+      if (key == 0) {
+        window.open("https://pvp.qq.com");
+      }
+    },
+    onToolsActionsClick: function({ key }) {
       let gameTabsActive = this.gameTabsActive;
 
-      if (e.value == 0) {
+      if (key == 0) {
         if (this.mode == "view") {
           this.mode = "edit";
           this.$message.warning("已进入 编辑模式");
@@ -777,13 +854,16 @@ export default {
         }
       }
 
-      if (e.value == 1 && this.gameLabel == "new") {
+      if (key == 2 && this.gameLabel == "new") {
         this.onCreateNewGameClick();
       }
 
-      if (e.value == 3) {
+      if (key == 4) {
         this.onGameShareClick();
       }
+    },
+    onQuestionClick: function() {
+      window.open("https://doc.91m.top");
     }
   }
 };
