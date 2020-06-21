@@ -342,7 +342,7 @@ export default {
 
       if (item.value == 2) {
         this.appOpenUrl(
-          "是否查看英雄赛事信息?",
+          "是否查看英雄赛事数据?",
           "玩加电竞",
           "https://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +

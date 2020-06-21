@@ -42,7 +42,7 @@
               :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
               v-show="data > 0"
               :icon="'https://image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png'"
-              @click="equUpdate"
+              @click="appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', 'https://ngabbs.com/read.php?tid=19902976')"
             />
           </van-grid>
         </div>
@@ -61,7 +61,7 @@
           type="info"
           size="mini"
           class="replay-ce50a09343724eb82df11390e2c1de18"
-          @click="getActionSheet(data)"
+          @click="onGameActionSheetClick(data)"
         >对局</van-button>
       </van-collapse-item>
     </van-collapse>
@@ -187,7 +187,7 @@ export default {
           if (heroId.indexOf(",") > -1) this.teammate = true;
         });
     },
-    getActionSheet: function(row) {
+    onGameActionSheetClick: function(row) {
       this.nowData = row;
       this.actionSheetShow = true;
 
@@ -213,13 +213,6 @@ export default {
         .then(ret => {
           this.tableData = ret.data.data;
         });
-    },
-    equUpdate: function() {
-      this.appOpenUrl(
-        "是否查看装备更新记录?",
-        "NGA @破笼之鸟",
-        "https://ngabbs.com/read.php?tid=19902976"
-      );
     },
     onPaginationChange: function(e) {
       this.getHeroReplayByHeroId(this.heroInfo.id, e);

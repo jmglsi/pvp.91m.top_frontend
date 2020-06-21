@@ -25,7 +25,7 @@ Vue.prototype.appOpenUrl = function(title, message, url) {
         })
         .catch(() => {
             // on cancel
-            this.$message.error("已取消");
+            //this.$message.error("已取消");
         });
 }
 

@@ -211,7 +211,7 @@ export default {
               description: tipsInfo.des,
               onClick: () => {
                 if (tipsInfo.url) {
-                  this.appOpenUrl("是否打开外部链接?", tipsInfo.url, tipsInfo.url);
+                  this.appOpenUrl("是否打开外部链接?", null, tipsInfo.url);
                 }
               }
             });
