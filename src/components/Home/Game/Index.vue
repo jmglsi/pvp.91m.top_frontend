@@ -5,8 +5,8 @@
         <van-cell
           v-for="(data, index) in gameList.official"
           :border="false"
-          :key="'officialList-' + index"
-          @click="onCellClick(data.id)"
+          :key="'official-b02986e365a0828581dffc56b591ffa9-' + index"
+          @click="onGameCellClick(data.id)"
         >
           <template #title>
             <van-grid :border="false" :column-num="3">
@@ -34,8 +34,8 @@
         <van-cell
           v-for="(data, index) in gameList.player"
           :border="false"
-          :key="'playerList-' + index"
-          @click="onCellClick(data.id)"
+          :key="'player-da72e7ff477a6dbf4430a69af9576154-' + index"
+          @click="onGameCellClick(data.id)"
         >
           <template #title>
             <van-grid :border="false" :column-num="3">
@@ -117,7 +117,7 @@ export default {
         this.gameList = data.result;
       });
     },
-    onCellClick: function(e) {
+    onGameCellClick: function(e) {
       this.$router.push({
         path: "/game/" + e + "/bp",
         query: { from: "f34f122844890855d125cdfccd6bc973" }

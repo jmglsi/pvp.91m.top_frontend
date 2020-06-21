@@ -4,7 +4,7 @@
       <van-dropdown-item v-model="areaType" :options="playerOptions" @change="onChange" />
       <van-dropdown-item ref="wj-447b7147e84be512208dcc0995d67ebc" title="筛选">
         <van-switch-cell v-model="switchShield" title="隐藏战绩" />
-        <van-button type="info" block @click="onConfirm">确认</van-button>
+        <van-button type="info" block @click="onDropdownConfirmClick">确认</van-button>
       </van-dropdown-item>
     </van-dropdown-menu>
 
@@ -42,7 +42,7 @@
       :actions="playerInfo.area < 3 ? actions : []"
       :close-on-click-action="true"
       safe-area-inset-bottom
-      @select="onSelect"
+      @select="onActionSheetSelect"
     />
   </div>
 </template>
@@ -123,7 +123,7 @@ export default {
     onChange: function(e) {
       this.getPlayerRanking(e, this.playerShield);
     },
-    onConfirm: function() {
+    onDropdownConfirmClick: function() {
       this.$refs.item.toggle();
 
       this.playerShield = parseInt(this.switchShield);
@@ -132,7 +132,7 @@ export default {
     onCellClick: function({ row }) {
       this.getPlayerInfo(row);
     },
-    onSelect: function(item) {
+    onActionSheetSelect: function(item) {
       if (item.value == 0) {
         this.appCopyData(this.copyData);
       }

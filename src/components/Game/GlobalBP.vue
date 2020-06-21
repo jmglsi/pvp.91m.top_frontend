@@ -19,7 +19,7 @@
         <ul class="ban-bebaefe0582b00649bc558529bba9df5">
           <li
             v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
-            :key="'ban-camp1-1-data-' + index"
+            :key="'ban-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(1, 1, index)"
             class="ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3"
           >
@@ -44,7 +44,7 @@
         <ul class="ban-3f2e7ec281ad2d884845f35f17756624">
           <li
             v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
-            :key="'ban-camp2-1-data-' + index"
+            :key="'ban-64621b00510adc52b301306824c89659-' + index"
             class="ban-ba9bced6af8121cf6413000a4274ac2b"
             @click="onGameBanPickClick(2, 1, index)"
           >
@@ -73,7 +73,7 @@
             <ul class="pick-bebaefe0582b00649bc558529bba9df5">
               <li
                 v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
-                :key="'pick-camp1-1-data-' + index"
+                :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 @click="onGameBanPickClick(1, 2, index)"
                 class="pick-4d5eb62584759be250091d21c745edd4"
               >
@@ -121,7 +121,7 @@
                     <van-grid-item
                       v-for="(data, index) in tableData.heroList"
                       v-show="data.trend == 2 && data.type == tableData.active + 1"
-                      :key="'hero-select-' + index"
+                      :key="'hero-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                       :icon="data.img"
                       :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
@@ -143,7 +143,7 @@
                     <van-grid-item
                       v-for="(data, index) in tableData.heroList"
                       v-show="data.trend != 2 && data.type == tableData.active + 1"
-                      :key="'hero-select-' + index"
+                      :key="'hero-35368a19f307e4af02d0df055846840d-' + index"
                       :icon="data.img"
                       :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
@@ -159,7 +159,7 @@
             <ul class="pick-3f2e7ec281ad2d884845f35f17756624">
               <li
                 v-for="(data, index) in gameInfo.list[gameTabsActive].bpOrder"
-                :key="'pick-camp2-1-data-' + index"
+                :key="'pick-64621b00510adc52b301306824c89659-' + index"
                 @click="onGameBanPickClick(2, 2, index)"
                 class="pick-9907d81a5157ef27607fd257364f3f43"
               >
@@ -189,9 +189,9 @@
             <van-button round :icon="authorInfo.img" size="small">{{ authorInfo.name }}</van-button>
             <a-menu slot="overlay">
               <a-menu-item
-                v-for="(data, index) in authorActions"
+                v-for="(data, index) in authorInfo.actions"
                 :key="index"
-                @click="onAuthorActionsClick"
+                @click="appOpenUrl('是否打开' + data.title, null, data.url)"
               >
                 <a-icon :type="data.icon" />
                 {{ data.title }}
@@ -223,7 +223,7 @@
 
     <div class="game-b5a9628110ebc1c03f58e06a553622e5">
       <ul class="game-4a931512ce65bdc9ca6808adf92d8783">
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+        <li v-show="appsShow" class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" />
             <a-menu slot="overlay">
@@ -231,20 +231,28 @@
                 <a-icon type="setting" />设置
               </a-menu-item>
               <a-menu-divider />
-              <a-menu-item @click="onToolsMenuClick(1)">
-                <a-icon :type="mode == 'view' ? 'edit' : 'cloud-upload'" />编辑
+              <a-menu-item
+                v-if="mode == 'edit' && gameInfo.list.length > 1 && gameInfo.list.length - 1 == gameTabsActive"
+                @click="onToolsMenuClick(1)"
+              >
+                <a-icon type="minus" />删除本局
               </a-menu-item>
               <a-menu-item @click="onToolsMenuClick(2)">
                 <a-icon type="plus" />再来一局
               </a-menu-item>
-              <a-menu-item
-                v-if="mode == 'edit' && gameInfo.list.length > 1"
-                @click="onToolsMenuClick(3)"
-              >
-                <a-icon type="minus" />删除本局
+              <a-menu-item @click="onToolsMenuClick(3)">
+                <a-icon :type="mode == 'view' ? 'edit' : 'cloud-upload'" />编辑
               </a-menu-item>
             </a-menu>
           </a-dropdown>
+        </li>
+        <li v-show="videoShow" class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+          <van-button
+            round
+            icon="video"
+            size="small"
+            @click="appOpenUrl('是否打开外部链接?', null, gameInfo.list[gameTabsActive].videoUrl)"
+          />
         </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <van-button
@@ -252,7 +260,7 @@
             :border="false"
             icon="question-o"
             size="small"
-            @click="onQuestionClick"
+            @click="appOpenUrl('是否查看常见问题?', null, 'https://doc.91m.top')"
           />
         </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
@@ -269,7 +277,10 @@
         color="orange"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
-        <van-tab v-for="(data, index) in gameInfo.list" :key="'game-tab-' + index">
+        <van-tab
+          v-for="(data, index) in gameInfo.list"
+          :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
+        >
           <template #title>
             <van-icon
               :name="gameInfo.list[index].winCamp == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
@@ -551,7 +562,14 @@ export default {
       authorInfo: {
         id: 0,
         name: "苏苏",
-        img: "https://i.loli.net/2020/06/20/jNdowuY2EIvk4Uf.jpg"
+        img: "https://i.loli.net/2020/06/20/jNdowuY2EIvk4Uf.jpg",
+        actions: [
+          {
+            icon: "qq",
+            title: "QQ",
+            url: "http://wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes"
+          }
+        ]
       },
       campInfo: {
         camp_1: {
@@ -568,6 +586,8 @@ export default {
       gameInfo: {
         list: [
           {
+            type: 1,
+            videoUrl: null,
             stepsNow: 0,
             bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
@@ -578,9 +598,10 @@ export default {
         active: 0,
         heroList: []
       },
+      appsShow: false,
+      videoShow: false,
       seeHeroShow: true,
-      eye: "eye-o",
-      authorActions: [{ icon: "qq", title: "联系方式", key: 0 }]
+      eye: "eye-o"
     };
   },
   mounted() {
@@ -598,6 +619,7 @@ export default {
       this.gameLabel = gameLabel;
       if (gameLabel == "new") {
         this.initNewGame();
+        this.appsShow = true;
       } else {
         this.getGameInfo(gameLabel);
       }
@@ -614,6 +636,27 @@ export default {
   beforeDestroy() {
     if (this.appDevice) {
       window.removeEventListener("resize", this.renderResize, false);
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    next(false);
+    if (this.mode == "edit" && to.path.indexOf("/game") == -1) {
+      this.$dialog
+        .confirm({
+          title:
+            "还未保存第 " + (this.gameTabsActive + 1) + " 局，是否要退出？",
+          message: "此操作不可逆"
+        })
+        .then(() => {
+          // on confirm
+          next();
+        })
+        .catch(() => {
+          // on cancel
+          next(false);
+        });
+    } else {
+      next();
     }
   },
   methods: {
@@ -709,6 +752,14 @@ export default {
             return;
           }
 
+          data.result[this.gameTabsActive].type > 0
+            ? (this.appsShow = true)
+            : (this.appsShow = false);
+
+          data.result[this.gameTabsActive].videoUrl
+            ? (this.videoShow = true)
+            : (this.videoShow = false);
+
           this.campInfo = data.campInfo;
           this.gameInfo.list = data.result;
 
@@ -720,6 +771,8 @@ export default {
     },
     onCreateNewGameClick: function() {
       let newGame = {
+        type: 1,
+        videoUrl: null,
         stepsNow: 0,
         bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       };
@@ -839,11 +892,6 @@ export default {
         location.href;
       this.appCopyData(this.copyData);
     },
-    onAuthorActionsClick: function({ key }) {
-      if (key == 0) {
-        this.appOpenUrl("是否打开联系方式?", null, "https://pvp.qq.com");
-      }
-    },
     onToolsMenuClick: function(type) {
       let gameTabsActive = this.gameTabsActive;
 
@@ -852,6 +900,26 @@ export default {
       }
 
       if (type == 1) {
+        this.$dialog
+          .confirm({
+            title: "是否删除第 " + (gameTabsActive + 1) + " 局？",
+            message: "此操作不可逆"
+          })
+          .then(() => {
+            // on confirm
+            this.gameInfo.list.splice(gameTabsActive, 1);
+            this.gameTabsActive = gameTabsActive - 1;
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
+
+      if (type == 2) {
+        this.onCreateNewGameClick();
+      }
+
+      if (type == 3) {
         if (this.mode == "view") {
           this.mode = "edit";
           this.$message.info("已进入编辑模式");
@@ -868,13 +936,6 @@ export default {
           this.$message.success("已保存第 " + (gameTabsActive + 1) + " 局 ;D");
         }
       }
-
-      if (type == 2 && this.gameLabel == "new") {
-        this.onCreateNewGameClick();
-      }
-    },
-    onQuestionClick: function() {
-      this.appOpenUrl("是否查看常见问题?", null, "https://doc.91m.top");
     }
   }
 };

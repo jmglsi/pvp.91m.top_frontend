@@ -159,18 +159,18 @@
       safe-area-inset-bottom
     >
       <van-grid :border="false" :column-num="2">
-        <van-grid-item @click="addHeroVote(1)">
+        <van-grid-item @click="onHeroVoteClick(1)">
           <AppCry width="50" height="50" />
           <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circleInfo.vote[0].text }}</span>
         </van-grid-item>
-        <van-grid-item @click="addHeroVote(2)">
+        <van-grid-item @click="onHeroVoteClick(2)">
           <AppSmile width="50" height="50" />
           <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circleInfo.vote[1].text }}</span>
         </van-grid-item>
         <van-cell
           title="注意事项"
           icon="question-o"
-          @click="getTips"
+          @click="onTipsClick"
           class="hero-fc861e4a5806e7411f7860142244c917"
           is-link
         />
@@ -571,13 +571,13 @@ export default {
             "?from=71f24db02647f7d930444128c0b02003";
         });
     },
-    getTips: function() {
+    onTipsClick: function() {
       this.$dialog.alert({
         title: "请客观评价该英雄",
         message: this.circleInfo.tips
       });
     },
-    addHeroVote: function(voteType) {
+    onHeroVoteClick: function(voteType) {
       this.axios
         .get(
           this.appApi.list.addHeroVote +
