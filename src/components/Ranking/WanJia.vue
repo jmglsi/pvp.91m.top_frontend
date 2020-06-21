@@ -104,7 +104,7 @@ export default {
           let data = ret.data;
 
           if (data.status.code != 200) {
-            this.$message.error("未知错误");
+            this.$message.error("错误:1005,玩家信息返回异常");
             return;
           }
 

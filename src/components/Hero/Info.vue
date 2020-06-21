@@ -591,7 +591,7 @@ export default {
           if (code >= 0) {
             this.$message.success("投票成功");
           } else {
-            this.$message.error("本周投过");
+            this.$message.error("错误:1003,本周投过");
           }
         });
       this.actionSheetShow = false;

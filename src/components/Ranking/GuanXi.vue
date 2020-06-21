@@ -259,21 +259,20 @@ export default {
             let code = ret.data.data.code,
               msg;
             if (code == 1) {
-              msg = "添加成功";
-              this.$message.success(msg);
+              this.$message.success("添加成功");
 
               this.getHeroCombination("", 1);
             } else {
               if (code == 0) {
-                msg = "已存在";
+                msg = "关系已存在";
               }
               if (code == -1) {
-                msg = "英雄名字错误";
+                msg = "英雄名错误";
               }
               if (code == -2) {
                 msg = "格式错误,小写逗号【,】";
               }
-              this.$message.error(msg);
+              this.$message.error("错误:1004," + msg);
             }
           });
       } else {
