@@ -341,7 +341,9 @@ export default {
       }
 
       if (item.value == 2) {
-        window.open(
+        this.appOpenUrl(
+          "是否查看英雄赛事信息?",
+          "玩加电竞",
           "https://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
             "&tab_type=5&gm=kog&gametype=6&tag_id=0"
@@ -349,11 +351,19 @@ export default {
       }
 
       if (item.value == 3) {
-        window.open("https://nga.178.com/read.php?pid=" + heroInfo.updatePid);
+        this.appOpenUrl(
+          "是否查看英雄更新记录?",
+          "NGA @EndMP",
+          "https://nga.178.com/read.php?pid=" + heroInfo.updatePid
+        );
       }
 
       if (item.value == 4) {
-        window.open("https://bbs.nga.cn/read.php?tid=12677614");
+        this.appOpenUrl(
+          "是否查看英雄攻速阈值?",
+          "NGA @小熊de大熊",
+          "https://bbs.nga.cn/read.php?tid=12677614"
+        );
       }
     }
   }

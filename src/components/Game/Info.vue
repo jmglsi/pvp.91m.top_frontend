@@ -183,9 +183,9 @@
     </div>
 
     <div class="game-b5a9628110ebc1c03f58e06a553622e5">
-      <ul class="game-d8c5d57b13e288cafb4b23e2ba382f75">
+      <ul class="game-d100e41250812deed3189136414361f9">
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
-          <a-dropdown placement="topCenter" :trigger="['click']">
+          <a-dropdown placement="bottomCenter" :trigger="['click']">
             <van-button round :icon="authorInfo.img" size="small">{{ authorInfo.name }}</van-button>
             <a-menu slot="overlay">
               <a-menu-item
@@ -199,12 +199,6 @@
             </a-menu>
           </a-dropdown>
         </li>
-      </ul>
-    </div>
-    <!-- 左下角 -->
-
-    <div class="game-b5a9628110ebc1c03f58e06a553622e5">
-      <ul class="game-d100e41250812deed3189136414361f9">
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <van-button
             round
@@ -246,6 +240,9 @@
               </a-menu-item>
             </a-menu>
           </a-dropdown>
+        </li>
+        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+          <van-button round icon="share" size="small" @click="onGameShareClick">分享本局</van-button>
         </li>
       </ul>
     </div>
@@ -383,7 +380,6 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
   background-color: white;
 }
 
-.game-d8c5d57b13e288cafb4b23e2ba382f75,
 .game-d100e41250812deed3189136414361f9,
 .game-4a931512ce65bdc9ca6808adf92d8783 {
   position: fixed;
@@ -392,16 +388,11 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
 
 .game-d100e41250812deed3189136414361f9,
 .game-4a931512ce65bdc9ca6808adf92d8783 {
-  right: 125px;
+  right: 95px;
 }
 
-.game-d8c5d57b13e288cafb4b23e2ba382f75,
 .game-4a931512ce65bdc9ca6808adf92d8783 {
   bottom: 45px;
-}
-
-.game-d8c5d57b13e288cafb4b23e2ba382f75 {
-  left: 120px;
 }
 
 .game-d100e41250812deed3189136414361f9 {
@@ -545,8 +536,8 @@ export default {
       gameTabsActive: 0,
       authorInfo: {
         id: 0,
-        name: "KPL",
-        img: "/img/app-icons/kpl.png"
+        name: "苏苏",
+        img: "https://i.loli.net/2020/06/20/jNdowuY2EIvk4Uf.jpg"
       },
       campInfo: {
         camp_1: {
@@ -578,15 +569,18 @@ export default {
       authorActions: [{ icon: "qq", title: "联系方式", key: 0 }],
       toolsActions: [
         { icon: "edit", title: "编辑", key: 0 },
-        { icon: "cloud-upload", title: "上传", key: 1 },
-        { icon: "plus", title: "再来一局", key: 2 },
-        { icon: "play-circle", title: "视频回放", key: 3 },
-        { icon: "share-alt", title: "分享本局", key: 4 }
+        { icon: "plus", title: "再来一局", key: 1 },
+        { icon: "minus", title: "删除本局", key: 2 },
+        { icon: "play-circle", title: "视频回放", key: 3 }
       ]
     };
   },
   mounted() {
-    window.addEventListener("resize", this.renderResize, false);
+    if (this.appDevice) {
+      window.addEventListener("resize", this.renderResize, false);
+    } else {
+      this.isPortrait = false;
+    }
 
     let gameLabel = this.$route.params.id;
 
@@ -610,7 +604,9 @@ export default {
     }
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.renderResize, false);
+    if (this.appDevice) {
+      window.removeEventListener("resize", this.renderResize, false);
+    }
   },
   methods: {
     renderResize() {
@@ -620,6 +616,10 @@ export default {
         this.isPortrait = true;
       } else {
         this.isPortrait = false;
+      }
+
+      if (width < 700 || height < 400) {
+        this.$message.warning("分辨率过小,可能会挡住英雄,建议将网站添加到桌面");
       }
     },
     bpOrderInit: function(perspective, type) {
@@ -824,12 +824,11 @@ export default {
         (this.gameTabsActive + 1) +
         " 局比赛 ↓\r" +
         location.href;
-      this.$copyText(this.copyData);
-      this.$message.success("已复制");
+      this.appCopyData(this.copyData);
     },
     onAuthorActionsClick: function({ key }) {
       if (key == 0) {
-        window.open("https://pvp.qq.com");
+        this.appOpenUrl("是否打开联系方式?", null, "https://pvp.qq.com");
       }
     },
     onToolsActionsClick: function({ key }) {
@@ -840,6 +839,9 @@ export default {
           this.mode = "edit";
           this.$message.warning("已进入 编辑模式");
 
+          this.toolsActions[0].icon = "cloud-upload";
+          this.toolsActions[0].title = "保存";
+
           this.index.ban.includes(
             this.gameInfo.list[gameTabsActive].stepsNow
           ) && gameTabsActive % 2 == 0
@@ -849,21 +851,23 @@ export default {
           //gameTabsActive % 2 == 0
         } else {
           this.mode = "view";
-          this.$message.warning("已退出 编辑模式");
-          //退出的时候 强制初始化为 队伍1 视角
+          this.$message.success("已保存第 " + (gameTabsActive + 1) + " 局 ;D");
+
+          this.toolsActions[0].icon = "edit";
+          this.toolsActions[0].title = "编辑";
         }
       }
 
-      if (key == 2 && this.gameLabel == "new") {
+      if (key == 1 && this.gameLabel == "new") {
         this.onCreateNewGameClick();
       }
 
-      if (key == 4) {
-        this.onGameShareClick();
+      if (key == 2) {
+        this.$message.success("已删除第 " + (gameTabsActive + 1) + " 局 ;D");
       }
     },
     onQuestionClick: function() {
-      window.open("https://doc.91m.top");
+      this.appOpenUrl("是否查看常见问题?", null, "https://doc.91m.top");
     }
   }
 };

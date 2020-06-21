@@ -215,15 +215,11 @@ export default {
         });
     },
     equUpdate: function() {
-      this.$dialog
-        .confirm({
-          title: "是否打开装备更新记录?",
-          message: "NGA @破笼之鸟"
-        })
-        .then(() => {
-          // on confirm
-          window.open("https://ngabbs.com/read.php?tid=19902976");
-        });
+      this.appOpenUrl(
+        "是否查看装备更新记录?",
+        "NGA @破笼之鸟",
+        "https://ngabbs.com/read.php?tid=19902976"
+      );
     },
     onPaginationChange: function(e) {
       this.getHeroReplayByHeroId(this.heroInfo.id, e);
@@ -241,21 +237,20 @@ export default {
       let nowData = this.nowData;
 
       if (item.value == 0) {
-        this.$copyText(this.copyData);
-        this.$message.success("已复制");
+        this.appCopyData(this.copyData);
       }
 
       if (item.value == 1) {
-        window.open(nowData.hippy);
+        this.appOpenUrl("是否打开对局详情?", "需要安装王者营地", nowData.hippy);
       }
 
       if (item.value == 2) {
-        window.open(nowData.url);
+        this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", nowData.url);
       }
     },
     onShareSheetSelect: function(option) {
       if (option.value == 0) {
-        window.open("https://doc.91m.top");
+        this.appOpenUrl("是否查看常见问题?", null, "https://doc.91m.top");
       }
     }
   }

@@ -287,8 +287,7 @@ export default {
       let heroInfo = this.heroInfo;
 
       if (item.value == 0) {
-        this.$copyText(this.copyData);
-        this.$message.success("已复制");
+        this.appCopyData(this.copyData);
       }
 
       if (item.value == 1) {

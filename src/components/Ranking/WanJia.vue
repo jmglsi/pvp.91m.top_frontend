@@ -133,14 +133,8 @@ export default {
       this.getPlayerInfo(row);
     },
     onSelect: function(item) {
-      let playerInfo = this.playerInfo;
-
       if (item.value == 0) {
-        this.$copyText(this.copyData);
-        this.$dialog.alert({
-          title: playerInfo.gamePlayerName,
-          message: "QQ:" + this.qq + "\r信息已复制 ;D"
-        });
+        this.appCopyData(this.copyData);
       }
     }
   }

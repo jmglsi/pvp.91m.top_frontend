@@ -70,8 +70,7 @@ div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
 .tuijian-447b7147e84be512208dcc0995d67ebc,
 div.hero-f3cc17bc0d768ca60b8bb496a10b1990
   div.van-tabs__wrap.van-tabs__wrap--scrollable
-  div.van-tabs__nav,
-.my-4236a440a662cc8253d7536e5aa17942 {
+  div.van-tabs__nav {
   background-color: rgb(245, 245, 245);
 }
 </style>
@@ -212,19 +211,7 @@ export default {
               description: tipsInfo.des,
               onClick: () => {
                 if (tipsInfo.url) {
-                  this.$dialog
-                    .confirm({
-                      title: "是否打开链接?",
-                      message: tipsInfo.url
-                    })
-                    .then(() => {
-                      // on confirm
-                      window.open(tipsInfo.url);
-                    })
-                    .catch(() => {
-                      // on cancel
-                      this.$message.error("已取消");
-                    });
+                  this.appOpenUrl("是否打开外部链接?", tipsInfo.url, tipsInfo.url);
                 }
               }
             });

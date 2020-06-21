@@ -153,8 +153,7 @@ export default {
         });
     },
     copyDataByAv: function(e) {
-      this.$copyText(e);
-      this.$message.success("【" + e + "】已复制");
+      this.appCopyData(e);
       this.copyAv = "";
     },
     getOrderInfo: function(row) {
@@ -236,8 +235,7 @@ export default {
       let orderInfo = this.orderInfo;
 
       if (item.value == 0) {
-        this.$copyText(this.copyData);
-        this.$message.success("已复制");
+        this.appCopyData(this.copyData);
       }
 
       if (item.value == 1) {

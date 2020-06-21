@@ -21,7 +21,7 @@
 
     <van-divider
       :style="{ padding: '0 16px', marginTop: '2px', color: 'rgb(222, 177, 81)', borderColor: 'rgb(222, 177, 81)' }"
-      @click="$message.warning('你在摸哪里，是上面啊喂 (lll￢ω￢)')"
+      @click="$message.warning('你在摸哪里,是上面啊喂 (lll￢ω￢)')"
     >
       点击&nbsp;
       <van-tag round type="danger">上方数据</van-tag>&nbsp;查看更多信息

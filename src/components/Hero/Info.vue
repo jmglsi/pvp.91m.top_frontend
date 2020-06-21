@@ -704,12 +704,11 @@ export default {
     onShareSheetSelect: function(option) {
       if (option.value == 0) {
         this.shareSheetShow = false;
-        this.$copyText(this.copyData);
-        this.$message.success("已复制");
+        this.appCopyData(this.copyData);
       }
 
       if (option.value == 1) {
-        window.open("https://doc.91m.top");
+        this.appOpenUrl("是否查看常见问题?", null, "https://doc.91m.top");
       }
     }
   }
