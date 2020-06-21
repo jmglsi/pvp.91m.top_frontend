@@ -3,7 +3,7 @@
     <img width="100" height="100" src="/img/app-icons/landscape.png" />
     <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
   </div>
-  <div class="game-info" v-else-if="isPortrait == false">
+  <div class="game-bp" v-else-if="isPortrait == false">
     <span class="game-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
@@ -224,25 +224,39 @@
     <div class="game-b5a9628110ebc1c03f58e06a553622e5">
       <ul class="game-4a931512ce65bdc9ca6808adf92d8783">
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
-          <van-button round icon="question-o" size="small" @click="onQuestionClick">常见问题</van-button>
-        </li>
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <a-dropdown placement="topCenter" :trigger="['click']">
-            <van-button round icon="apps-o" size="small">功能</van-button>
+            <van-button round icon="apps-o" size="small" />
             <a-menu slot="overlay">
+              <a-menu-item @click="onToolsMenuClick(0)">
+                <a-icon type="setting" />设置
+              </a-menu-item>
+              <a-menu-divider />
+              <a-menu-item @click="onToolsMenuClick(1)">
+                <a-icon :type="mode == 'view' ? 'edit' : 'cloud-upload'" />编辑
+              </a-menu-item>
+              <a-menu-item @click="onToolsMenuClick(2)">
+                <a-icon type="plus" />再来一局
+              </a-menu-item>
               <a-menu-item
-                v-for="(data, index) in toolsActions"
-                :key="index"
-                @click="onToolsActionsClick"
+                v-if="mode == 'edit' && gameInfo.list.length > 1"
+                @click="onToolsMenuClick(3)"
               >
-                <a-icon :type="data.icon" />
-                {{ data.title }}
+                <a-icon type="minus" />删除本局
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
-          <van-button round icon="share" size="small" @click="onGameShareClick">分享本局</van-button>
+          <van-button
+            round
+            :border="false"
+            icon="question-o"
+            size="small"
+            @click="onQuestionClick"
+          />
+        </li>
+        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+          <van-button round icon="share" size="small" @click="onGameShareClick" />
         </li>
       </ul>
     </div>
@@ -493,7 +507,7 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
 
 <script>
 export default {
-  name: "MatchInfo",
+  name: "GlobalBP",
   components: {
     AppLock: resolve => require(["@/assets/Icons/AppLock.vue"], resolve)
   },
@@ -566,13 +580,7 @@ export default {
       },
       seeHeroShow: true,
       eye: "eye-o",
-      authorActions: [{ icon: "qq", title: "联系方式", key: 0 }],
-      toolsActions: [
-        { icon: "edit", title: "编辑", key: 0 },
-        { icon: "plus", title: "再来一局", key: 1 },
-        { icon: "minus", title: "删除本局", key: 2 },
-        { icon: "play-circle", title: "视频回放", key: 3 }
-      ]
+      authorActions: [{ icon: "qq", title: "联系方式", key: 0 }]
     };
   },
   mounted() {
@@ -616,10 +624,10 @@ export default {
         this.isPortrait = true;
       } else {
         this.isPortrait = false;
-      }
 
-      if (width < 700 || height < 400) {
-        this.$message.warning("分辨率过小,可能会挡住英雄,建议将网站添加到桌面");
+        if (width < 700 || height < 400) {
+          this.$message.warning("警告:1000,分辨率过小,可能会挡住英雄");
+        }
       }
     },
     bpOrderInit: function(perspective, type) {
@@ -696,6 +704,11 @@ export default {
         .then(ret => {
           let data = ret.data.data;
 
+          if (data.result.length == 0) {
+            this.$message.error("错误:1000,对局不存在");
+            return;
+          }
+
           this.campInfo = data.campInfo;
           this.gameInfo.list = data.result;
 
@@ -712,7 +725,7 @@ export default {
       };
 
       if (this.gameInfo.list.length > 5) {
-        this.$message.error("最多创建 6 局 ;D");
+        this.$message.error("错误:1001,最多创建 6 局");
       } else {
         this.gameInfo.list.push(newGame);
         this.$message.success("创建成功");
@@ -753,7 +766,7 @@ export default {
       this.bpOrderInit(this.perspective, e + 1);
 
       if (this.mode == "edit") {
-        this.$message.warning("编辑模式下切换对局记得保存~");
+        this.$message.warning("警告:1001,编辑模式下切换对局记得保存");
       }
     },
     onGameBanPickClick: function(camp, type, newIndex) {
@@ -762,7 +775,7 @@ export default {
       let gameTabsActive = this.gameTabsActive;
 
       if (this.gameInfo.list[gameTabsActive].bpOrder[newIndex - 1] == 0) {
-        this.$message.error("请按顺序BP ;D");
+        this.$message.error("错误:1002,请按顺序BP");
         return;
       }
 
@@ -786,11 +799,11 @@ export default {
         this.gameInfo.list[gameTabsActive].blueBan.includes(hero.id) ||
         this.gameInfo.list[gameTabsActive].redBan.includes(hero.id)
       ) {
-        this.$message.error(hero.name + " 已被禁用");
+        this.$message.warning("警告:1003," + hero.name + " 已被禁用");
         return;
       } else if (this.gameInfo.used.includes(hero.id)) {
-        this.$message.error(
-          hero.name + " 已被 " + this.opponent.name + " 用过"
+        this.$message.warning(
+          "警告:1004," + hero.name + " 已被 " + this.opponent.name + " 用过"
         );
         return;
       }
@@ -831,16 +844,17 @@ export default {
         this.appOpenUrl("是否打开联系方式?", null, "https://pvp.qq.com");
       }
     },
-    onToolsActionsClick: function({ key }) {
+    onToolsMenuClick: function(type) {
       let gameTabsActive = this.gameTabsActive;
 
-      if (key == 0) {
+      if (type == 0) {
+        //
+      }
+
+      if (type == 1) {
         if (this.mode == "view") {
           this.mode = "edit";
-          this.$message.warning("已进入 编辑模式");
-
-          this.toolsActions[0].icon = "cloud-upload";
-          this.toolsActions[0].title = "保存";
+          this.$message.info("已进入编辑模式");
 
           this.index.ban.includes(
             this.gameInfo.list[gameTabsActive].stepsNow
@@ -852,18 +866,11 @@ export default {
         } else {
           this.mode = "view";
           this.$message.success("已保存第 " + (gameTabsActive + 1) + " 局 ;D");
-
-          this.toolsActions[0].icon = "edit";
-          this.toolsActions[0].title = "编辑";
         }
       }
 
-      if (key == 1 && this.gameLabel == "new") {
+      if (type == 2 && this.gameLabel == "new") {
         this.onCreateNewGameClick();
-      }
-
-      if (key == 2) {
-        this.$message.success("已删除第 " + (gameTabsActive + 1) + " 局 ;D");
       }
     },
     onQuestionClick: function() {

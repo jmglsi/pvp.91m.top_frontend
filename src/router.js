@@ -10,12 +10,12 @@ export default new Router({
             name: '404',
             redirect: '/ranking'
         }, {
-            path: '/bp',
-            name: 'game',
-            redirect: '/game'
-        }, {
             path: '/hero',
             name: 'hero',
+            redirect: '/ranking'
+        }, {
+            path: '/game',
+            name: 'game',
             redirect: '/ranking'
         }, {
             path: '/heroInfo/:id',
@@ -28,9 +28,8 @@ export default new Router({
         }, {
             path: '/',
             name: 'Home',
-            component: resolve => require(['./views/Home.vue'], resolve),
+            component: resolve => require(['./views/AppHome.vue'], resolve),
             meta: {
-                type: 1,
                 title: '首页',
                 keepAlive: true
             }
@@ -39,7 +38,6 @@ export default new Router({
             name: 'MiniApp',
             component: resolve => require(['./views/MiniApp.vue'], resolve),
             meta: {
-                type: 1,
                 title: '小程序',
                 keepAlive: true
             }
@@ -48,7 +46,6 @@ export default new Router({
             name: 'Ranking',
             component: resolve => require(['./views/Ranking.vue'], resolve),
             meta: {
-                type: 1,
                 title: '排行',
                 keepAlive: true
             }
@@ -57,7 +54,6 @@ export default new Router({
             name: 'My',
             component: resolve => require(['./views/My.vue'], resolve),
             meta: {
-                type: 1,
                 title: '我的',
                 keepAlive: true
             }
@@ -70,7 +66,6 @@ export default new Router({
                     name: 'HeroInfo',
                     component: resolve => require(['./components/Hero/Info.vue'], resolve),
                     meta: {
-                        type: 1,
                         title: '信息'
                     }
                 },
@@ -79,7 +74,6 @@ export default new Router({
                     name: 'HeroReplay',
                     component: resolve => require(['./components/Hero/Replay.vue'], resolve),
                     meta: {
-                        type: 1,
                         title: '回顾'
                     }
                 }
@@ -87,32 +81,13 @@ export default new Router({
         },
         {
             path: '/game',
-            component: resolve => require(['./components/Game/Home.vue'], resolve),
+            component: resolve => require(['./views/GameHome.vue'], resolve),
             children: [{
-                path: '/',
-                name: 'GameHome',
-                component: resolve => require(['./components/Home/Game/Index.vue'], resolve),
+                path: ':id/bp',
+                name: 'GameBp',
+                component: resolve => require(['./components/Game/GlobalBP.vue'], resolve),
                 meta: {
-                    type: 2,
-                    title: '首页',
-                    keepAlive: true
-                }
-            }, {
-                path: 'more',
-                name: 'GameMore',
-                component: resolve => require(['./components/Game/More.vue'], resolve),
-                meta: {
-                    type: 2,
-                    title: '更多',
-                    keepAlive: true
-                }
-            }, {
-                path: ':id',
-                name: 'GameInfo',
-                component: resolve => require(['./components/Game/Info.vue'], resolve),
-                meta: {
-                    type: 2,
-                    title: '详情'
+                    title: '全局BP模拟器'
                 }
             }]
         }, {
@@ -120,7 +95,6 @@ export default new Router({
             name: 'Bilibili',
             component: resolve => require(['./views/Bilibili.vue'], resolve),
             meta: {
-                type: 1,
                 title: 'bilibili',
                 keepAlive: true
             }

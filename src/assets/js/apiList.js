@@ -17,6 +17,7 @@ const list = {
     getHeroInfo: pvp + "?type=getHeroInfo",
     getUserInfo: pvp + "?type=getUserInfo",
     getGameInfo: game + "?type=getGameInfo",
+    getGameHome: game + "?type=getGameHome",
     getHeroUpdate: pvp + "?type=getHeroUpdate",
     getHeroRanking: pvp + "?type=getHeroRanking",
     getPlayerRanking: pvp + "?type=getPlayerRanking",

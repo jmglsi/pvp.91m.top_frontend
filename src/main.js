@@ -8,13 +8,7 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
     let hello = "苏苏的荣耀助手"
 
-    if (to.meta.title && to.meta.type == 1) {
-        document.title = to.meta.title + " | " + hello
-    }
-
-    if (to.meta.title && to.meta.type == 2) {
-        document.title = to.meta.title + " | 全局BP模拟器 && " + hello
-    }
+    document.title = to.meta.title + " | " + hello
 
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     next()
