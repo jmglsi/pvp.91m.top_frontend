@@ -136,10 +136,6 @@ export default {
       homeTuiJianIsLoading: false
     };
   },
-  mounted() {
-    let heroId = this.$props.aid;
-    this.init(heroId);
-  },
   methods: {
     init: function(heroId) {
       this.axios

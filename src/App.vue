@@ -191,13 +191,13 @@ export default {
     }
   },
   mounted() {
-    this.getApp();
+    this.getAppInfo();
   },
   methods: {
-    getApp: function() {
+    getAppInfo: function() {
       this.axios
         .get(
-          this.appApi.list.getApp +
+          this.appApi.list.getAppInfo +
             "&url=" +
             encodeURIComponent(location.pathname + location.search)
         )

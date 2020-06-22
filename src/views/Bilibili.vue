@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       checked: true,
-      getOrderInterval: 0,
+      getOrderInfoInterval: 0,
       searchValue: "",
       tableData: {
         searchPlaceholder: "请输入搜索关键词",
@@ -119,25 +119,15 @@ export default {
     this.searchValue = "";
     let uid = this.$route.query.uid;
 
-    if (!uid) {
-      uid = "";
-    } else {
-      uid = decodeURIComponent(uid);
-      this.searchValue = uid;
-    }
+    !uid ? (this.searchValue = "") : (this.searchValue = uid);
 
-    this.getOrder(uid, 1);
-    this.getOrderInterval = setInterval(() => {
-      if (uid) {
-        this.getOrder(uid, 1);
-      }
-    }, 1000 * 10);
+    this.getOrderInfo(this.searchValue, 1);
   },
   methods: {
-    getOrder: function(uid, page) {
+    getOrderInfo: function(uid, page) {
       this.axios
         .get(
-          this.appApi.list.getOrder +
+          this.appApi.list.getOrderInfo +
             "&uid=" +
             encodeURIComponent(uid) +
             "&page=" +
@@ -156,7 +146,7 @@ export default {
       this.appCopyData(e);
       this.copyAv = "";
     },
-    getOrderInfo: function(row) {
+    onActionSheetClick: function(row) {
       this.actionSheetShow = true;
       this.orderInfo = row;
 
@@ -198,8 +188,7 @@ export default {
     onSearchClear: function() {
       this.searchValue = "";
       this.tableData = [];
-      clearInterval(this.getOrderInterval);
-      this.getOrder("", this.currentPage);
+      clearInterval(this.getOrderInfoInterval);
     },
     onSearch: function() {
       let searchValue = this.searchValue;
@@ -209,27 +198,28 @@ export default {
       if (/[bv]{2}/i.test(searchValue.substr(0, 2))) {
         newValue = this.bv2av(searchValue);
         this.copyAv = newValue;
-      } else {
-        newValue = searchValue;
       }
 
-      this.getOrder(newValue, this.currentPage);
+      this.getOrderInfo(this.searchValue, this.currentPage);
 
-      clearInterval(this.getOrderInterval);
-      this.getOrderInterval = setInterval(() => {
-        this.getOrder(newValue, this.currentPage);
+      clearInterval(this.getOrderInfoInterval);
+      this.getOrderInfoInterval = setInterval(() => {
+        this.getOrderInfo(this.searchValue, this.currentPage);
       }, 1000 * 10);
     },
     onCheckBoxChange: function(e) {
-      if (e == false) {
-        clearInterval(this.getOrderInterval);
+      clearInterval(this.getOrderInfoInterval);
+      if (e == true) {
+        this.getOrderInfoInterval = setInterval(() => {
+          this.getOrderInfo(this.searchValue, this.currentPage);
+        }, 1000 * 10);
       }
     },
     onPaginationChange: function(e) {
-      this.getOrder(this.searchValue, e);
+      this.getOrderInfo(this.searchValue, e);
     },
     onCellClick: function({ row }) {
-      this.getOrderInfo(row, this.currentPage);
+      this.onActionSheetClick(row);
     },
     onActionSheetSelect: function(item) {
       let orderInfo = this.orderInfo;
@@ -240,7 +230,7 @@ export default {
 
       if (item.value == 1) {
         this.searchValue = orderInfo.uid;
-        this.getOrder(orderInfo.uid, 1);
+        this.getOrderInfo(orderInfo.uid, 1);
       }
     }
   }

@@ -621,7 +621,7 @@ export default {
         this.initNewGame();
         this.appsShow = true;
       } else {
-        this.getGameInfo(gameLabel);
+        this.getGameBP(gameLabel);
       }
     } else {
       this.$router.push({
@@ -741,9 +741,9 @@ export default {
         this.tableData.heroList = ret.data.data.result;
       });
     },
-    getGameInfo: function(gameLabel) {
+    getGameBP: function(gameLabel) {
       this.axios
-        .get(this.appApi.list.getGameInfo + "&aid=" + gameLabel)
+        .get(this.appApi.list.getGameBP + "&aid=" + gameLabel)
         .then(ret => {
           let data = ret.data.data;
 
