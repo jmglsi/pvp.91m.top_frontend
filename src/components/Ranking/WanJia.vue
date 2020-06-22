@@ -98,7 +98,7 @@ export default {
       let key = this.$cookie.get("key");
       this.axios
         .get(
-          this.appApi.list.getUserInfo + "&aid=" + row.userId + "&bid=" + key
+          this.appApi.list.getSmobaHelperUserInfo + "&aid=" + row.userId + "&bid=" + key
         )
         .then(ret => {
           let data = ret.data;

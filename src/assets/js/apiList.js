@@ -13,7 +13,6 @@ const list = {
     getMiniApp: pvp + "?type=getMiniApp",
     addHeroVote: pvp + "?type=addHeroVote",
     getHeroInfo: pvp + "?type=getHeroInfo",
-    getUserInfo: pvp + "?type=getUserInfo",
     getGameHome: game + "?type=getGameHome",
     getOrderInfo: bili + "?type=getOrderInfo",
     getHeroUpdate: pvp + "?type=getHeroUpdate",
@@ -23,6 +22,7 @@ const list = {
     getHeroCombination: pvp + "?type=getHeroCombination",
     addHeroByCombination: pvp + "?type=addHeroByCombination",
     getHeroReplayByHeroId: pvp + "?type=getHeroReplayByHeroId",
+    getSmobaHelperUserInfo: pvp + "?type=getSmobaHelperUserInfo",
     getHeroChartsLogBySimilar: pvp + "?type=getHeroChartsLogBySimilar",
     getHeroChartsLogByCustomize: pvp + "?type=getHeroChartsLogByCustomize"
 }
