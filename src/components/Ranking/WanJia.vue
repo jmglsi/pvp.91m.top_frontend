@@ -95,11 +95,8 @@ export default {
       this.actionSheetShow = true;
       this.playerInfo = row;
 
-      let key = this.$cookie.get("key");
       this.axios
-        .get(
-          this.apiList.pvp.getSmobaHelperUserInfo + "&aid=" + row.userId + "&bid=" + key
-        )
+        .get(this.apiList.pvp.getSmobaHelperUserInfo + "&aid=" + row.userId)
         .then(ret => {
           let data = ret.data;
 

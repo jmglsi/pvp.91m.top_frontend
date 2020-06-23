@@ -39,7 +39,7 @@
       </div>
     </van-pull-refresh>
 
-    <HeroUpdate :aid="0" />
+    <HeroUpdate :heroId="0" />
   </div>
 </template>
 

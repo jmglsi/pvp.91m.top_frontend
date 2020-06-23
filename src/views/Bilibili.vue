@@ -114,8 +114,6 @@ export default {
       : (this.listWidth = 100);
   },
   activated() {
-    /* https://cn.vuejs.org/v2/api/#activated */
-
     this.searchValue = "";
     let uid = this.$route.query.uid;
 
@@ -152,7 +150,7 @@ export default {
 
       this.axios
         .get(
-          "https://s.91m.top/?url=" +
+          "//s.91m.top/?url=" +
             encodeURIComponent(
               location.origin +
                 location.pathname +

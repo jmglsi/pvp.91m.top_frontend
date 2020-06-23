@@ -30,7 +30,7 @@
               <img
                 width="30"
                 height="30"
-                v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
                 class="ban-eee32796c3fdfc147115c9f6e875c090"
               />
@@ -55,7 +55,7 @@
               <img
                 width="30"
                 height="30"
-                v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
                 class="ban-aa95efe1c5d39e5e9389ca5833e63fbe"
               />
@@ -84,7 +84,7 @@
                   <img
                     width="40"
                     height="40"
-                    v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                    v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? blueStepsClass : ''"
                     class="pick-eee32796c3fdfc147115c9f6e875c090"
                   />
@@ -170,7 +170,7 @@
                   <img
                     width="40"
                     height="40"
-                    v-lazy="data ? 'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                    v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.list[gameTabsActive].stepsNow == index  ? redStepsClass : ''"
                     class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
@@ -184,7 +184,7 @@
 
     <div class="game-b5a9628110ebc1c03f58e06a553622e5">
       <ul class="game-d100e41250812deed3189136414361f9">
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+        <li v-if="authorInfo.name" class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <a-dropdown placement="bottomCenter" :trigger="['click']">
             <van-button round :icon="authorInfo.img" size="small">{{ authorInfo.name }}</van-button>
             <a-menu slot="overlay">
@@ -246,21 +246,13 @@
             </a-menu>
           </a-dropdown>
         </li>
-        <li v-show="videoShow" class="game-39ab32c5aeb56c9f5ae17f073ce31023">
-          <van-button
-            round
-            icon="video"
-            size="small"
-            @click="appOpenUrl('是否打开外部链接?', null, gameInfo.list[gameTabsActive].videoUrl)"
-          />
-        </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
           <van-button
             round
             :border="false"
             icon="question-o"
             size="small"
-            @click="appOpenUrl('是否查看常见问题?', null, 'https://doc.91m.top')"
+            @click="appOpenUrl('是否查看常见问题?', null, '//doc.91m.top')"
           />
         </li>
         <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
@@ -560,16 +552,9 @@ export default {
       gameLabel: "new",
       gameTabsActive: 0,
       authorInfo: {
-        id: 0,
-        name: "苏苏",
-        img: "https://i.loli.net/2020/06/20/jNdowuY2EIvk4Uf.jpg",
-        actions: [
-          {
-            icon: "qq",
-            title: "QQ",
-            url: "http://wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes"
-          }
-        ]
+        name: null,
+        img: null,
+        actions: []
       },
       campInfo: {
         camp_1: {
@@ -599,7 +584,6 @@ export default {
         heroList: []
       },
       appsShow: false,
-      videoShow: false,
       seeHeroShow: true,
       eye: "eye-o"
     };
@@ -756,10 +740,7 @@ export default {
             ? (this.appsShow = true)
             : (this.appsShow = false);
 
-          data.result[this.gameTabsActive].videoUrl
-            ? (this.videoShow = true)
-            : (this.videoShow = false);
-
+          this.authorInfo = data.authorInfo;
           this.campInfo = data.campInfo;
           this.gameInfo.list = data.result;
 

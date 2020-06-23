@@ -187,7 +187,7 @@ export default {
 
       this.axios
         .get(
-          "https://s.91m.top/?url=" +
+          "//s.91m.top/?url=" +
             encodeURIComponent(
               location.origin +
                 location.pathname +

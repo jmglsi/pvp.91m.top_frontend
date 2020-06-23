@@ -47,7 +47,7 @@
               >
                 <img
                   v-if="dataItem"
-                  v-lazy="dataItem == 999 ? '/img/app-icons/hero.png' :'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + dataItem + '/' + dataItem + '.jpg'"
+                  v-lazy="dataItem == 999 ? '/img/app-icons/hero.png' :'//game.gtimg.cn/images/yxzj/img201606/heroimg/' + dataItem + '/' + dataItem + '.jpg'"
                   @click="dataItem == 999 ? $message.info('还没上线正式服的新英雄') : ''"
                   class="tuijian-5d39f3848925994b52ec52fba934577c"
                 />
@@ -101,13 +101,13 @@
 export default {
   name: "Update",
   props: {
-    aid: {
+    heroId: {
       type: Number,
       default: 0
     }
   },
   watch: {
-    aid: {
+    heroId: {
       immediate: true,
       handler(val) {
         this.init(val);
@@ -137,7 +137,7 @@ export default {
   methods: {
     init: function(heroId) {
       this.axios
-        .get(this.apiList.pvp.getHeroUpdate + "&aid=" + heroId)
+        .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then(ret => {
           this.dayTagInfo = ret.data.data;
         });

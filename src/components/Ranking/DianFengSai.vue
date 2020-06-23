@@ -344,7 +344,7 @@ export default {
         this.appOpenUrl(
           "是否查看英雄赛事数据?",
           "玩加电竞",
-          "https://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
+          "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
             "&tab_type=5&gm=kog&gametype=6&tag_id=0"
         );
@@ -354,7 +354,7 @@ export default {
         this.appOpenUrl(
           "是否查看英雄更新记录?",
           "NGA @EndMP",
-          "https://nga.178.com/read.php?pid=" + heroInfo.updatePid
+          "//nga.178.com/read.php?pid=" + heroInfo.updatePid
         );
       }
 
@@ -362,7 +362,7 @@ export default {
         this.appOpenUrl(
           "是否查看英雄攻速阈值?",
           "NGA @小熊de大熊",
-          "https://bbs.nga.cn/read.php?tid=12677614"
+          "//bbs.nga.cn/read.php?tid=12677614"
         );
       }
     }

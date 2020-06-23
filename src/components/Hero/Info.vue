@@ -150,7 +150,7 @@
     />
 
     <div class="app-margin">
-      <HeroUpdate v-if="isLoaded" v-show="shuntShow" :aid="parseInt(heroInfo.id)" />
+      <HeroUpdate v-if="isLoaded" v-show="shuntShow" :heroId="parseInt(heroInfo.id)" />
     </div>
 
     <van-action-sheet
@@ -677,7 +677,7 @@ export default {
 
       this.axios
         .get(
-          "https://s.91m.top/?url=" +
+          "//s.91m.top/?url=" +
             encodeURIComponent(
               location.origin +
                 "/hero/0/info?from=ac0eb60533b5843bb8fbdf98e5922072&type=2&heroName=" +
@@ -702,7 +702,7 @@ export default {
       }
 
       if (option.value == 1) {
-        this.appOpenUrl("是否查看常见问题?", null, "https://doc.91m.top");
+        this.appOpenUrl("是否查看常见问题?", null, "//doc.91m.top");
       }
     }
   }

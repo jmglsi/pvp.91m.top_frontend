@@ -113,8 +113,13 @@ i.van-icon img.van-icon__image {
   margin-top: -3px;
 }
 
-i.van-button__icon img.van-icon__image {
-  margin-top: -6px;
+div.game-bp i.van-button__icon img.van-icon__image {
+  margin-top: -5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-left: -12px;
+  margin-top: -7px;
 }
 </style>
 

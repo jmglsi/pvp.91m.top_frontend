@@ -56,9 +56,9 @@
           title="特别感谢"
           value="互相帮助过的伙伴们"
           is-link
-          url="https://doc.91m.top"
+          url="//doc.91m.top"
         />
-        <van-cell icon="question-o" title="常见问题" value="自豪的使用语雀" is-link url="https://doc.91m.top" />
+        <van-cell icon="question-o" title="常见问题" value="自豪的使用语雀" is-link url="//doc.91m.top" />
         <van-cell
           icon="comment-o"
           title="意见/建议/咨询/交友"
