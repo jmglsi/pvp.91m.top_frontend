@@ -1,42 +1,48 @@
 <template>
   <div class="bilibili-home">
-    <van-search
-      v-model="searchValue"
-      :placeholder="tableData.searchPlaceholder"
-      @search="onSearch"
-      @clear="onSearchClear"
-      shape="round"
-      class="app-c1130d301aabe8d6a9d46c322fd6150a"
-    />
+    <div class="bilibili-727f1cf32d65577632c02b9225ecbb67">
+      <van-search
+        v-model="searchValue"
+        :placeholder="tableData.searchPlaceholder"
+        @search="onSearch"
+        @clear="onSearchClear"
+        shape="round"
+        class="app-c1130d301aabe8d6a9d46c322fd6150a"
+      />
+    </div>
 
-    <van-checkbox
-      v-model="checked"
-      class="bilibili-a47ba339330136bcab5b4c91d5d10882"
-      @change="onCheckBoxChange"
-    />
+    <div class="bilibili-8b0f547eb9990da1c540f7f31fb437b8">
+      <van-checkbox
+        v-model="checked"
+        class="bilibili-a47ba339330136bcab5b4c91d5d10882"
+        @change="onCheckBoxChange"
+      />
+    </div>
 
-    <vxe-grid
-      ref="bilibili-ff4a008470319a22d9cf3d14af485977"
-      :loading="loading"
-      :data="tableData.result"
-      :height="clientHeight"
-      :sort-config="{trigger: 'cell'}"
-      @cell-click="onCellClick"
-    >
-      <vxe-table-column title="id" field="uid" fixed="left" width="125" />
-      <vxe-table-column title="bv" field="bv" width="150">
-        <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
-      </vxe-table-column>
-      <vxe-table-column title="#" type="seq" width="75" />
-      <vxe-table-column title="类型" field="type" sortable :width="listWidth" />
-      <vxe-table-column title="开始数量" field="start_num" sortable :width="listWidth" />
-      <vxe-table-column title="目标数量" field="num" sortable :width="listWidth" />
-      <vxe-table-column title="剩余数量" field="task_num" sortable :width="listWidth" />
-      <vxe-table-column title="实时数量" field="bz" :width="listWidth" />
-      <vxe-table-column title="更新时间" field="update_time" sortable width="200" />
-      <vxe-table-column title="状态" field="is_running" width="75" />
-      <template v-slot:empty>暂无数据</template>
-    </vxe-grid>
+    <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
+      <vxe-grid
+        ref="bilibili-ff4a008470319a22d9cf3d14af485977"
+        :loading="loading"
+        :data="tableData.result"
+        :height="clientHeight"
+        :sort-config="{trigger: 'cell'}"
+        @cell-click="onCellClick"
+      >
+        <vxe-table-column title="id" field="uid" fixed="left" width="125" />
+        <vxe-table-column title="bv" field="bv" width="150">
+          <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
+        </vxe-table-column>
+        <vxe-table-column title="#" type="seq" width="75" />
+        <vxe-table-column title="类型" field="type" sortable :width="listWidth" />
+        <vxe-table-column title="开始数量" field="start_num" sortable :width="listWidth" />
+        <vxe-table-column title="目标数量" field="num" sortable :width="listWidth" />
+        <vxe-table-column title="剩余数量" field="task_num" sortable :width="listWidth" />
+        <vxe-table-column title="实时数量" field="bz" :width="listWidth" />
+        <vxe-table-column title="更新时间" field="update_time" sortable width="200" />
+        <vxe-table-column title="状态" field="is_running" width="75" />
+        <template v-slot:empty>暂无数据</template>
+      </vxe-grid>
+    </div>
 
     <div class="bilibili-71f262d796bed1ab30e8a2d5a8ddee6f">
       <van-pagination
@@ -49,14 +55,16 @@
       <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa' }">有问题请联系相关客服</van-divider>
     </div>
 
-    <van-action-sheet
-      v-model="actionSheetShow"
-      :title="orderInfo.uid + ' 如何打开'"
-      :actions="actions"
-      :close-on-click-action="true"
-      safe-area-inset-bottom
-      @select="onActionSheetSelect"
-    />
+    <div class="bilibili-8fd741f0ce683493b1bed18a2ed32d4a">
+      <van-action-sheet
+        v-model="actionSheetShow"
+        :title="orderInfo.uid + ' 如何打开'"
+        :actions="actions"
+        :close-on-click-action="true"
+        safe-area-inset-bottom
+        @select="onActionSheetSelect"
+      />
+    </div>
   </div>
 </template>
 

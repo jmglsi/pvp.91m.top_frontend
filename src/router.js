@@ -91,6 +91,13 @@ export default new Router({
             path: '/game',
             component: resolve => require(['./views/Game/Index.vue'], resolve),
             children: [{
+                path: 'dashboard',
+                name: 'GameDashboard',
+                component: resolve => require(['./views/Game/Dashboard.vue'], resolve),
+                meta: {
+                    title: '仪表盘'
+                }
+            }, {
                 path: ':id/bp',
                 name: 'GameBp',
                 component: resolve => require(['./views/Game/GlobalBP.vue'], resolve),

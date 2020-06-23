@@ -1,7 +1,9 @@
 <template>
   <div class="game-bp-portrait" v-if="isPortrait">
-    <img width="100" height="100" src="/img/app-icons/landscape.png" />
-    <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
+    <div class="game-a76e75b5854094183e66c274e1d276e9">
+      <img width="100" height="100" src="/img/app-icons/landscape.png" />
+      <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
+    </div>
   </div>
   <div class="game-bp" v-else-if="isPortrait == false">
     <span class="game-f4842dcb685d490e2a43212b8072a6fe">

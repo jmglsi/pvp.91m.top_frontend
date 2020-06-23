@@ -1,86 +1,94 @@
 <template>
   <div class="hero-replay">
-    <van-nav-bar :border="false" @click-left="$router.go(-1)">
-      <template #title>
-        <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
-      </template>
-      <van-icon name="arrow-left" slot="left" />
-    </van-nav-bar>
+    <div class="hero-3717f3cb4a2b2b688e50fb4f63170918">
+      <van-nav-bar :border="false" @click-left="$router.go(-1)">
+        <template #title>
+          <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
+        </template>
+        <van-icon name="arrow-left" slot="left" />
+      </van-nav-bar>
+    </div>
 
-    <van-collapse v-model="replayCollapseNames" :border="false">
-      <van-collapse-item
-        v-for="(data, index) in tableData.result"
-        :key="'replay-1a721faf2df53972bfd0831c64b6146d-' + index"
-        :name="index"
-        :value="data.time"
-      >
-        <div slot="title" class="replay-d5d3db1765287eef77d7927cc956f50a">
-          <van-tag
-            :type="data.status"
-            round
-            class="replay-01cac4e332fec6d6ecd331a00412712d replay-e4d23e841d8e8804190027bce3180fa5"
-          >{{ data.usedtime }}</van-tag>
-          <van-tag
+    <div class="hero-9a7c47049573e03028c2e650b73f6252">
+      <van-collapse v-model="replayCollapseNames" :border="false">
+        <van-collapse-item
+          v-for="(data, index) in tableData.result"
+          :key="'replay-1a721faf2df53972bfd0831c64b6146d-' + index"
+          :name="index"
+          :value="data.time"
+        >
+          <div slot="title" class="replay-d5d3db1765287eef77d7927cc956f50a">
+            <van-tag
+              :type="data.status"
+              round
+              class="replay-01cac4e332fec6d6ecd331a00412712d replay-e4d23e841d8e8804190027bce3180fa5"
+            >{{ data.usedtime }}</van-tag>
+            <van-tag
+              v-if="!teammate"
+              round
+              color="black"
+              class="replay-e4d23e841d8e8804190027bce3180fa5"
+            >{{ data.equMoney }}</van-tag>
+            <span class="replay-12d045cdd2c0b9b6bf64ab787d773ae6">{{ data.gamePlayerName }}</span>
+          </div>
+
+          <div v-if="!teammate" class="replay-f01902c0d0136ca30fe1034f339964ba">
+            <van-grid :border="false" :column-num="7">
+              <van-grid-item
+                v-show="data.heroSkill > 0"
+                :icon="'//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'"
+                :text="data.heroPosition"
+              />
+              <van-grid-item
+                v-for="(data, index) in data.equInfo"
+                :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
+                v-show="data > 0"
+                :icon="'//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png'"
+                @click="appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', '//ngabbs.com/read.php?tid=19902976')"
+              />
+            </van-grid>
+          </div>
+
+          <van-button
             v-if="!teammate"
             round
-            color="black"
-            class="replay-e4d23e841d8e8804190027bce3180fa5"
-          >{{ data.equMoney }}</van-tag>
-          <span class="replay-12d045cdd2c0b9b6bf64ab787d773ae6">{{ data.gamePlayerName }}</span>
-        </div>
+            disabled
+            color="#000000"
+            size="mini"
+            class="replay-ce50a09343724eb82df11390e2c1de18"
+          >{{ data.heroKda }}</van-button>
 
-        <div v-if="!teammate" class="replay-f01902c0d0136ca30fe1034f339964ba">
-          <van-grid :border="false" :column-num="7">
-            <van-grid-item
-              v-show="data.heroSkill > 0"
-              :icon="'//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'"
-              :text="data.heroPosition"
-            />
-            <van-grid-item
-              v-for="(data, index) in data.equInfo"
-              :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
-              v-show="data > 0"
-              :icon="'//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png'"
-              @click="appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', '//ngabbs.com/read.php?tid=19902976')"
-            />
-          </van-grid>
-        </div>
+          <van-button
+            round
+            type="info"
+            size="mini"
+            class="replay-ce50a09343724eb82df11390e2c1de18"
+            @click="onGameActionSheetClick(data)"
+          >对局</van-button>
+        </van-collapse-item>
+      </van-collapse>
+    </div>
 
-        <van-button
-          v-if="!teammate"
-          round
-          disabled
-          color="#000000"
-          size="mini"
-          class="replay-ce50a09343724eb82df11390e2c1de18"
-        >{{ data.heroKda }}</van-button>
+    <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
+      <van-action-sheet
+        v-model="actionSheetShow"
+        :title="nowData.gamePlayerName + ' 如何打开'"
+        :actions="actions"
+        :close-on-click-action="true"
+        safe-area-inset-bottom
+        @select="onReplaySelect"
+      />
+    </div>
 
-        <van-button
-          round
-          type="info"
-          size="mini"
-          class="replay-ce50a09343724eb82df11390e2c1de18"
-          @click="onGameActionSheetClick(data)"
-        >对局</van-button>
-      </van-collapse-item>
-    </van-collapse>
-
-    <van-action-sheet
-      v-model="actionSheetShow"
-      :title="nowData.gamePlayerName + ' 如何打开'"
-      :actions="actions"
-      :close-on-click-action="true"
-      safe-area-inset-bottom
-      @select="onReplaySelect"
-    />
-
-    <van-pagination
-      v-model="currentPage"
-      :total-items="tableData.total"
-      :items-per-page="tableData.pageSize"
-      @change="onPaginationChange"
-      class="replay-fe7cd4d1bf3fea9a0d921e224b3fa24c"
-    />
+    <div class="hero-face1cbe136c70e1fc08cff038596944">
+      <van-pagination
+        v-model="currentPage"
+        :total-items="tableData.total"
+        :items-per-page="tableData.pageSize"
+        @change="onPaginationChange"
+        class="replay-fe7cd4d1bf3fea9a0d921e224b3fa24c"
+      />
+    </div>
 
     <AppBottomTabbar />
   </div>

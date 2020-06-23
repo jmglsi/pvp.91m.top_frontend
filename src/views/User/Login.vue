@@ -1,8 +1,11 @@
 <template>
   <div class="login-home">
-    <van-nav-bar :border="false" @click-left="onNavBarLeftClick">
-      <van-icon name="arrow-left" slot="left" />
-    </van-nav-bar>
+    <div class="login-9ffe6c014e6f06f1c218fde0ca3fc4ef">
+      <van-nav-bar :border="false" @click-left="onNavBarLeftClick">
+        <van-icon name="arrow-left" slot="left" />
+      </van-nav-bar>
+    </div>
+
     <div class="login-2a642626758deefdc2989a73aae823d3">
       <van-cell-group>
         <van-field

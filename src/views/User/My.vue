@@ -34,13 +34,23 @@
 
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-grid v-if="isLogin" :border="false" :column-num="2">
-        <van-grid-item icon="/img/app-icons/team.png" template #text>
+        <van-grid-item
+          icon="/img/app-icons/team.png"
+          template
+          #text
+          @click="onMyStatisticsClick(1)"
+        >
           <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
             <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.teamNum }}</span>
             <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
           </div>
         </van-grid-item>
-        <van-grid-item icon="/img/app-icons/bp_data.png" to="/game/new/bp" template #text>
+        <van-grid-item
+          icon="/img/app-icons/bp_data.png"
+          template
+          #text
+          @click="onMyStatisticsClick(2)"
+        >
           <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
             <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.labelNum }}</span>
             <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
@@ -197,6 +207,12 @@ export default {
         .catch(() => {
           // on cancel
         });
+    },
+    onMyStatisticsClick: function(e) {
+      this.$router.push({
+        path: "/game/dashboard",
+        query: { type: e }
+      });
     }
   }
 };

@@ -1,29 +1,33 @@
 <template>
   <div id="app">
-    <keep-alive>
-      <router-view v-if="$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+    <div class="app-63c4cfbde5ad50f3f537c2540374995e">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+    </div>
 
-    <van-tabbar
-      v-model="tabbar.active"
-      v-show="tabbar.default.show"
-      :z-index="2"
-      fixed
-      safe-area-inset-bottom
-      active-color="rgb(222, 177, 81)"
-      inactive-color="rgb(67, 62, 52)"
-      class="app-130a360689f8d613da10c94d53527a1b"
-    >
-      <van-tabbar-item
-        v-for="(data, index) in tabbar.default.list"
-        :key="'app-e0c3b278eeb2cab05f548d7af0f2c949-' + index"
-        :icon="data.icon"
-        :to="data.to"
-        :name="data.name"
-        class="app-e0c3b278eeb2cab05f548d7af0f2c949"
-      >{{ data.text }}</van-tabbar-item>
-    </van-tabbar>
+    <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
+      <van-tabbar
+        v-model="tabbar.active"
+        v-show="tabbar.default.show"
+        :z-index="2"
+        fixed
+        safe-area-inset-bottom
+        active-color="rgb(222, 177, 81)"
+        inactive-color="rgb(67, 62, 52)"
+        class="app-130a360689f8d613da10c94d53527a1b"
+      >
+        <van-tabbar-item
+          v-for="(data, index) in tabbar.default.list"
+          :key="'app-e0c3b278eeb2cab05f548d7af0f2c949-' + index"
+          :icon="data.icon"
+          :to="data.to"
+          :name="data.name"
+          class="app-e0c3b278eeb2cab05f548d7af0f2c949"
+        >{{ data.text }}</van-tabbar-item>
+      </van-tabbar>
+    </div>
   </div>
 </template>
 

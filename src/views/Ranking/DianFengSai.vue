@@ -1,194 +1,208 @@
 <template>
   <div class="ranking-dfs">
-    <van-dropdown-menu>
-      <van-dropdown-item v-model="areaType" :options="areaOptions" @change="onDropdownMenuChange" />
-      <van-dropdown-item v-model="heroType" :options="heroOptions" @change="onDropdownMenuChange" />
-    </van-dropdown-menu>
+    <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
+      <van-dropdown-menu>
+        <van-dropdown-item
+          v-model="areaType"
+          :options="areaOptions"
+          @change="onDropdownMenuChange"
+        />
+        <van-dropdown-item
+          v-model="heroType"
+          :options="heroOptions"
+          @change="onDropdownMenuChange"
+        />
+      </van-dropdown-menu>
+    </div>
 
-    <vxe-grid
-      ref="dfs-ff4a008470319a22d9cf3d14af485977"
-      :loading="loading"
-      :data="tableData.result"
-      :height="clientHeight"
-      :cell-class-name="cellClassName"
-      :sort-config="{trigger: 'cell'}"
-      @cell-click="onCellClick"
-    >
-      <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
-        <template v-slot="{ row }">
-          <van-tag
-            v-if="row.tag.text"
-            :color="row.tag.color"
-            mark
-            type="primary"
-            class="app-e4d23e841d8e8804190027bce3180fa5"
-          >{{ row.tag.text }}</van-tag>
-          <img v-lazy="row.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
-          <img
-            v-if="row.trend > 0"
-            v-lazy="'/img/app-icons/hot-' + row.trend + '.png'"
-            width="15"
-            class="dfs-3d5f1ffeadf58eb64ef57aef7e53a31e"
+    <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
+      <vxe-grid
+        ref="dfs-ff4a008470319a22d9cf3d14af485977"
+        :loading="loading"
+        :data="tableData.result"
+        :height="clientHeight"
+        :cell-class-name="cellClassName"
+        :sort-config="{trigger: 'cell'}"
+        @cell-click="onCellClick"
+      >
+        <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
+          <template v-slot="{ row }">
+            <van-tag
+              v-if="row.tag.text"
+              :color="row.tag.color"
+              mark
+              type="primary"
+              class="app-e4d23e841d8e8804190027bce3180fa5"
+            >{{ row.tag.text }}</van-tag>
+            <img v-lazy="row.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+            <img
+              v-if="row.trend > 0"
+              v-lazy="'/img/app-icons/hot-' + row.trend + '.png'"
+              width="15"
+              class="dfs-3d5f1ffeadf58eb64ef57aef7e53a31e"
+            />
+            <div class="dfs-713dd4d0b2e842c08da62ddeec872331">
+              <img
+                width="20"
+                v-lazy="row.skill[0].img"
+                class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-35af5e6c0fc290aa4f2e38d4c8296a03"
+              />
+              <span
+                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-043052eea2d064cab23119e56f4f640e"
+              >{{ row.skill[0].pickRate }}</span>
+              <img
+                v-if="row.skill[1].id"
+                v-lazy="row.skill[1].img"
+                width="20"
+                class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-fbfe7b256ce6b4df1d03d8022163c6d2"
+              />
+              <span
+                v-if="row.skill[1].id"
+                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-dabb6e25dffefe5b4821b7062afbdaef"
+              >{{ row.skill[1].pickRate }}</span>
+            </div>
+          </template>
+        </vxe-table-column>
+
+        <vxe-table-column title="#" type="seq" width="75" />
+
+        <vxe-table-column title="出场越低,波动越大 (%)">
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 2]"
+            sortable
+            title="禁用"
+            field="banRate"
           />
-          <div class="dfs-713dd4d0b2e842c08da62ddeec872331">
-            <img
-              width="20"
-              v-lazy="row.skill[0].img"
-              class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-35af5e6c0fc290aa4f2e38d4c8296a03"
-            />
-            <span
-              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-043052eea2d064cab23119e56f4f640e"
-            >{{ row.skill[0].pickRate }}</span>
-            <img
-              v-if="row.skill[1].id"
-              v-lazy="row.skill[1].img"
-              width="20"
-              class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-fbfe7b256ce6b4df1d03d8022163c6d2"
-            />
-            <span
-              v-if="row.skill[1].id"
-              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-dabb6e25dffefe5b4821b7062afbdaef"
-            >{{ row.skill[1].pickRate }}</span>
-          </div>
-        </template>
-      </vxe-table-column>
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 2]"
+            sortable
+            title="出场"
+            field="pickRate"
+          />
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 2]"
+            sortable
+            title="胜率"
+            field="winRate"
+          />
+        </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" width="75" />
+        <vxe-table-column title="MVP (%)">
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 2]"
+            sortable
+            title="全部"
+            field="allMvpRate"
+          />
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 2]"
+            sortable
+            title="胜方"
+            field="winMvpRate"
+          />
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 2]"
+            sortable
+            title="败方"
+            field="loseMvpRate"
+          />
+        </vxe-table-column>
 
-      <vxe-table-column title="出场越低,波动越大 (%)">
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="禁用"
-          field="banRate"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="出场"
-          field="pickRate"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="胜率"
-          field="winRate"
-        />
-      </vxe-table-column>
-
-      <vxe-table-column title="MVP (%)">
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="全部"
-          field="allMvpRate"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="胜方"
-          field="winMvpRate"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="败方"
-          field="loseMvpRate"
-        />
-      </vxe-table-column>
-
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 0]"
-        sortable
-        title="承伤 (分)"
-        field="totalBeHurtedCntPerMin"
-      />
-
-      <vxe-table-column title="伤害">
         <vxe-table-column
           :width="listWidth"
           :formatter="['toFixedString', 0]"
           sortable
-          title="对人 (分)"
-          field="totalHurtHeroCntPerMin"
+          title="承伤 (分)"
+          field="totalBeHurtedCntPerMin"
         />
+
+        <vxe-table-column title="伤害">
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 0]"
+            sortable
+            title="对人 (分)"
+            field="totalHurtHeroCntPerMin"
+          />
+          <vxe-table-column
+            :width="listWidth"
+            :formatter="['toFixedString', 0]"
+            sortable
+            title="全部 (场)"
+            field="totalOutputPerMin"
+          />
+        </vxe-table-column>
+
         <vxe-table-column
           :width="listWidth"
           :formatter="['toFixedString', 0]"
           sortable
-          title="全部 (场)"
-          field="totalOutputPerMin"
+          title="金币 (分)"
+          field="equMoneyMin"
         />
-      </vxe-table-column>
 
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 0]"
-        sortable
-        title="金币 (分)"
-        field="equMoneyMin"
-      />
+        <vxe-table-column
+          :width="listWidth"
+          :formatter="['toFixedString', 0]"
+          sortable
+          title="经济 (场)"
+          field="equMoneyOverflow"
+        />
 
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 0]"
-        sortable
-        title="经济 (场)"
-        field="equMoneyOverflow"
-      />
+        <vxe-table-column
+          :width="listWidth"
+          :formatter="['toFixedString', 2]"
+          sortable
+          title="击杀"
+          field="killCnt"
+        />
+        <vxe-table-column
+          :width="listWidth"
+          :formatter="['toFixedString', 2]"
+          sortable
+          title="死亡"
+          field="deadCnt"
+        />
+        <vxe-table-column
+          :width="listWidth"
+          :formatter="['toFixedString', 2]"
+          sortable
+          title="助攻"
+          field="assistCnt"
+        />
+        <vxe-table-column
+          :width="listWidth"
+          :formatter="['toFixedString', 2]"
+          sortable
+          title="参团"
+          field="joinGamePercent"
+        />
+        <vxe-table-column
+          :width="listWidth"
+          :formatter="['toFixedString', 2]"
+          sortable
+          title="时长"
+          field="usedtime"
+        />
+      </vxe-grid>
+    </div>
 
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 2]"
-        sortable
-        title="击杀"
-        field="killCnt"
+    <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
+      <van-action-sheet
+        v-model="actionSheetShow"
+        :title="heroInfo.name + ' 如何打开'"
+        :actions="actions"
+        :close-on-click-action="true"
+        safe-area-inset-bottom
+        @select="onActionSheetSelect"
       />
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 2]"
-        sortable
-        title="死亡"
-        field="deadCnt"
-      />
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 2]"
-        sortable
-        title="助攻"
-        field="assistCnt"
-      />
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 2]"
-        sortable
-        title="参团"
-        field="joinGamePercent"
-      />
-      <vxe-table-column
-        :width="listWidth"
-        :formatter="['toFixedString', 2]"
-        sortable
-        title="时长"
-        field="usedtime"
-      />
-    </vxe-grid>
-
-    <van-action-sheet
-      v-model="actionSheetShow"
-      :title="heroInfo.name + ' 如何打开'"
-      :actions="actions"
-      :close-on-click-action="true"
-      safe-area-inset-bottom
-      @select="onActionSheetSelect"
-    />
+    </div>
   </div>
 </template>
 
