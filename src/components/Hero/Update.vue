@@ -99,7 +99,7 @@
 
 <script>
 export default {
-  name: "Update",
+  name: "HeroUpdate",
   props: {
     heroId: {
       type: Number,

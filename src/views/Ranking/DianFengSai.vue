@@ -226,7 +226,7 @@
 
 <script>
 export default {
-  name: "DianFengSai",
+  name: "RankingDianFengSai",
   data() {
     return {
       areaType: 0,

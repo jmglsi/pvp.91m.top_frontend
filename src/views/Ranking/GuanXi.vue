@@ -105,7 +105,7 @@
 
 <script>
 export default {
-  name: "Guanxi",
+  name: "RankingGuanxi",
   data() {
     return {
       searchValue: "",

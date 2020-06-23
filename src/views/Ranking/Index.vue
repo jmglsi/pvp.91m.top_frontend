@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking">
+  <div class="ranking-home">
     <van-tabs
       v-model="rankingTabsActive"
       :border="false"
@@ -86,7 +86,7 @@ td.col-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
 
 <script>
 export default {
-  name: "Ranking",
+  name: "RankingHome",
   components: {
     DianFengSai: resolve =>
       require(["@/views/Ranking/DianFengSai.vue"], resolve),

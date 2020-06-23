@@ -1,5 +1,5 @@
 <template>
-  <div class="replay">
+  <div class="hero-replay">
     <van-nav-bar :border="false" @click-left="$router.go(-1)">
       <template #title>
         <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>

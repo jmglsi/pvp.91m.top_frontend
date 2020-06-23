@@ -1,5 +1,5 @@
 <template>
-  <div class="info">
+  <div class="hero-info">
     <van-nav-bar :border="false" @click-left="$router.go(-1)" @click-right="onNavBarRightClick">
       <template #title>
         <div @click="$message.info('巅峰赛趋势、分路推荐 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">

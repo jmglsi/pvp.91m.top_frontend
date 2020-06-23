@@ -1,5 +1,5 @@
 <template>
-  <div class="my">
+  <div class="my-home">
     <div v-if="isLogin == false" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
         <van-cell template #title>
@@ -51,13 +51,7 @@
 
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
-        <van-cell
-          icon="friends-o"
-          title="特别感谢"
-          value="互相帮助过的伙伴们"
-          is-link
-          url="//doc.91m.top"
-        />
+        <van-cell icon="friends-o" title="特别感谢" value="互相帮助过的伙伴们" is-link url="//doc.91m.top" />
         <van-cell icon="question-o" title="常见问题" value="自豪的使用语雀" is-link url="//doc.91m.top" />
         <van-cell
           icon="comment-o"
@@ -152,7 +146,7 @@ button.my-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
 
 <script>
 export default {
-  name: "My",
+  name: "MyHome",
   data() {
     return {
       isLogin: false,

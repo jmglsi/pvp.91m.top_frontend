@@ -1,11 +1,11 @@
 <template>
-  <div class="hero-dashboard">
+  <div class="hero-home">
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "HeroDashboard"
+  name: "HeroHome"
 };
 </script>

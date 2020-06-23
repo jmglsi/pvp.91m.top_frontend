@@ -1,5 +1,5 @@
 <template>
-  <div class="game-df2d7fac7a1e329f2cf92d22005bc36c" v-if="isPortrait">
+  <div class="game-bp-portrait" v-if="isPortrait">
     <img width="100" height="100" src="/img/app-icons/landscape.png" />
     <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
   </div>
@@ -334,7 +334,7 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
 </style>
 
 <style scoped>
-.game-df2d7fac7a1e329f2cf92d22005bc36c {
+.game-bp-portrait {
   margin-top: 60%;
 }
 
@@ -589,13 +589,15 @@ export default {
       eye: "eye-o"
     };
   },
-  mounted() {
+  created() {
+    window.addEventListener("beforeunload", e => this.beforeunload(e), false);
     if (this.appDevice) {
       window.addEventListener("resize", this.renderResize, false);
     } else {
       this.isPortrait = false;
     }
-
+  },
+  mounted() {
     let gameLabel = this.$route.params.id;
 
     if (gameLabel) {
@@ -620,33 +622,23 @@ export default {
     }
   },
   beforeDestroy() {
+    window.removeEventListener("beforeunload", this.beforeunload, false);
     if (this.appDevice) {
       window.removeEventListener("resize", this.renderResize, false);
     }
   },
-  beforeRouteLeave(to, from, next) {
-    next(false);
-    if (this.mode == "edit" && to.path.indexOf("/game") == -1) {
-      this.$dialog
-        .confirm({
-          title:
-            "还未保存第 " + (this.gameTabsActive + 1) + " 局，是否要退出？",
-          message: "此操作不可逆"
-        })
-        .then(() => {
-          // on confirm
-          next();
-        })
-        .catch(() => {
-          // on cancel
-          next(false);
-        });
-    } else {
-      next();
-    }
-  },
   methods: {
-    renderResize() {
+    beforeunload: function(e) {
+      e = e || window.event;
+
+      if (this.mode == "edit") {
+        if (e) {
+          e.returnValue = "关闭提示";
+        }
+        return "关闭提示";
+      }
+    },
+    renderResize: function() {
       let width = document.documentElement.clientWidth;
       let height = document.documentElement.clientHeight;
       if (width < height) {

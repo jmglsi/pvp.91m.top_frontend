@@ -1,5 +1,5 @@
 <template>
-  <div class="bilibili">
+  <div class="bilibili-home">
     <van-search
       v-model="searchValue"
       :placeholder="tableData.searchPlaceholder"
@@ -75,7 +75,7 @@
 
 <script>
 export default {
-  name: "Bilibili",
+  name: "BilibiliHome",
   data() {
     return {
       checked: true,

@@ -1,5 +1,5 @@
 <template>
-  <div class="home-tuijian app-margin">
+  <div class="tuijian-home app-margin">
     <van-pull-refresh
       v-model="tuiJianIsLoading"
       :pulling-text="appHomeInfo.miniappInfo.pulling"
@@ -75,7 +75,7 @@ div.van-cell.van-cell--clickable {
 
 <script>
 export default {
-  name: "HomeTuiJian",
+  name: "TuiJianHome",
   components: {
     HeroUpdate: resolve => require(["@/components/Hero/Update.vue"], resolve)
   },

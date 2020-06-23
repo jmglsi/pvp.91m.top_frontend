@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login-home">
     <van-nav-bar :border="false" @click-left="onNavBarLeftClick">
       <van-icon name="arrow-left" slot="left" />
     </van-nav-bar>
@@ -97,6 +97,7 @@
 import md5 from "js-md5";
 
 export default {
+  name: "LoginHome",
   data() {
     return {
       loginInfo: {
