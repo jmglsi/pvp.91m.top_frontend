@@ -16,7 +16,7 @@
             v-for="(data, index) in appHomeInfo.swipeInfo.result"
             :key="'tuijian-a139b05b7f8e496c00991733ef7cd589-' + index"
             class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
-            @click="appOpenUrl('是否打开外部链接？', null, data.url)"
+            @click="data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null"
           >
             <img :src="data.img" class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9" />
             <van-tag

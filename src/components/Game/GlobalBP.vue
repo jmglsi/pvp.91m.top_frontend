@@ -191,7 +191,7 @@
               <a-menu-item
                 v-for="(data, index) in authorInfo.actions"
                 :key="index"
-                @click="appOpenUrl('是否打开' + data.title, null, data.url)"
+                @click="data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null"
               >
                 <a-icon :type="data.icon" />
                 {{ data.title }}
@@ -549,6 +549,7 @@ export default {
       self: "",
       opponent: "",
       perspective: 1,
+      gameTime: null,
       gameLabel: "new",
       gameTabsActive: 0,
       authorInfo: {
@@ -572,7 +573,7 @@ export default {
         list: [
           {
             type: 1,
-            videoUrl: null,
+            time: null,
             stepsNow: 0,
             bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
@@ -598,8 +599,6 @@ export default {
     let gameLabel = this.$route.params.id;
 
     if (gameLabel) {
-      this.getHeroList();
-
       this.gameLabel = gameLabel;
       if (gameLabel == "new") {
         this.initNewGame();
@@ -607,6 +606,9 @@ export default {
       } else {
         this.getGameBP(gameLabel);
       }
+      setTimeout(() => {
+        this.getHeroList();
+      }, 1000);
     } else {
       this.$router.push({
         query: {
@@ -652,7 +654,7 @@ export default {
       } else {
         this.isPortrait = false;
 
-        if (width < 700 || height < 400) {
+        if (width < 700 || height < 375) {
           this.$message.warning("警告:1000,分辨率过小,可能会挡住英雄");
         }
       }
@@ -721,11 +723,15 @@ export default {
       //console.log(perspective, this.gameInfo.used);
     },
     getHeroList: function() {
-      this.axios.get(this.apiList.pvp.getHeroRanking).then(ret => {
-        this.tableData.heroList = ret.data.data.result;
-      });
+      this.axios
+        .get(this.apiList.pvp.getHeroRanking + "&time=" + this.gameTime)
+        .then(ret => {
+          this.tableData.heroList = ret.data.data.result;
+        });
     },
     getGameBP: function(gameLabel) {
+      let gameTabsActive = this.gameTabsActive;
+
       this.axios
         .get(this.apiList.game.getGameBP + "&aid=" + gameLabel)
         .then(ret => {
@@ -736,15 +742,16 @@ export default {
             return;
           }
 
-          data.result[this.gameTabsActive].type > 0
+          data.result[gameTabsActive].type > 0
             ? (this.appsShow = true)
             : (this.appsShow = false);
 
+          this.gameTime = data.result[gameTabsActive].gameTime;
           this.authorInfo = data.authorInfo;
           this.campInfo = data.campInfo;
           this.gameInfo.list = data.result;
 
-          this.bpOrderInit(this.perspective, this.gameTabsActive + 1);
+          this.bpOrderInit(this.perspective, gameTabsActive + 1);
         });
     },
     initNewGame: function() {
@@ -753,7 +760,7 @@ export default {
     onCreateNewGameClick: function() {
       let newGame = {
         type: 1,
-        videoUrl: null,
+        time: null,
         stepsNow: 0,
         bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       };
