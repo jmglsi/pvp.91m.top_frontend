@@ -1,6 +1,6 @@
 <template>
   <div class="info">
-    <van-nav-bar :border="false" @click-left="onNavBarLeftClick" @click-right="onNavBarRightClick">
+    <van-nav-bar :border="false" @click-left="$router.go(-1)" @click-right="onNavBarRightClick">
       <template #title>
         <div @click="$message.info('巅峰赛趋势、分路推荐 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">
           <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfoTitle }}</span>
@@ -485,7 +485,7 @@ export default {
     },
     getHeroChartsLog: function(heroId) {
       this.axios
-        .get(this.appApi.list.getHeroChartsLog + "&heroId=" + heroId)
+        .get(this.apiList.pvp.getHeroChartsLog + "&heroId=" + heroId)
         .then(ret => {
           let chartData = ret.data.data.chartData;
           if (chartData.rows.length != 0) {
@@ -497,7 +497,7 @@ export default {
     },
     getHeroChartsLogBySimilar: function(heroId) {
       this.axios
-        .get(this.appApi.list.getHeroChartsLogBySimilar + "&heroId=" + heroId)
+        .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
         .then(ret => {
           let chartData = ret.data.data.chartData;
           if (chartData.rows.length != 0) {
@@ -510,7 +510,7 @@ export default {
     getHeroChartsLogByCustomize: function(heroName) {
       this.axios
         .get(
-          this.appApi.list.getHeroChartsLogByCustomize + "&heroName=" + heroName
+          this.apiList.pvp.getHeroChartsLogByCustomize + "&heroName=" + heroName
         )
         .then(ret => {
           let chartData = ret.data.data.chartData;
@@ -534,7 +534,7 @@ export default {
     },
     getHeroInfo: function(heroId) {
       this.axios
-        .get(this.appApi.list.getHeroInfo + "&heroId=" + heroId)
+        .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
           this.isLoaded = true;
           this.circleInfo = ret.data.data.circleInfo;
@@ -580,7 +580,7 @@ export default {
     onHeroVoteClick: function(voteType) {
       this.axios
         .get(
-          this.appApi.list.addHeroVote +
+          this.apiList.pvp.addHeroVote +
             "&heroId=" +
             this.heroInfo.id +
             "&voteType=" +
@@ -691,12 +691,6 @@ export default {
             "\r-\r自定义英雄对比 ↓\r" +
             ret.data.data.url;
         });
-    },
-    onNavBarLeftClick: function() {
-      this.$router.push({
-        path: "/ranking",
-        query: { from: "caf9b6b99962bf5c2264824231d7a40c" }
-      });
     },
     onNavBarRightClick: function() {
       this.shareSheetShow = true;

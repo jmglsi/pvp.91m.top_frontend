@@ -23,6 +23,9 @@ Vue.use(VueCookie)
 import VueMeta from 'vue-meta'
 Vue.use(VueMeta)
 
+import qs from 'qs'
+Vue.prototype.$qs = qs
+
 Vue.prototype.axios = require("axios")
 
 import './assets/import/ant'
@@ -34,8 +37,8 @@ import './assets/import/vxe-table'
 
 import './assets/js/app'
 import './assets/js/bilibili'
-import appApiList from './assets/js/apiList'
-Vue.prototype.appApi = appApiList
+import apiList from './assets/js/apiList'
+Vue.prototype.apiList = apiList
 
 new Vue({
     router,

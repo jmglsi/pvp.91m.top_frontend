@@ -737,13 +737,13 @@ export default {
       //console.log(perspective, this.gameInfo.used);
     },
     getHeroList: function() {
-      this.axios.get(this.appApi.list.getHeroRanking).then(ret => {
+      this.axios.get(this.apiList.pvp.getHeroRanking).then(ret => {
         this.tableData.heroList = ret.data.data.result;
       });
     },
     getGameBP: function(gameLabel) {
       this.axios
-        .get(this.appApi.list.getGameBP + "&aid=" + gameLabel)
+        .get(this.apiList.game.getGameBP + "&aid=" + gameLabel)
         .then(ret => {
           let data = ret.data.data;
 

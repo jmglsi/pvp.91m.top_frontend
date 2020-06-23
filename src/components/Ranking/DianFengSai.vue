@@ -282,7 +282,7 @@ export default {
         this.$message.info("禁用率越高越容易挨刀,挨过刀的几个月内不会再动 ;D");
 
       this.axios
-        .get(this.appApi.list.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
+        .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
           this.tableData = ret.data.data;
           this.loading = false;

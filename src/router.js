@@ -57,6 +57,14 @@ export default new Router({
                 title: '我的',
                 keepAlive: true
             }
+        }, {
+            path: '/login',
+            name: 'Login',
+            component: resolve => require(['./views/Login.vue'], resolve),
+            meta: {
+                title: '登录',
+                keepAlive: true
+            }
         },
         {
             path: '/hero',

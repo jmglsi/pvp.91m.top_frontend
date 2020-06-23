@@ -3,7 +3,7 @@
     <van-tabs
       v-model="rankingTabsActive"
       :border="false"
-      @change="onRankingChange"
+      @change="$router.push({query: { type: rankingTabsActive, from: 'ee240fe51687ee66cca7493aedcc3c24' }})"
       color="rgb(222,177,81)"
     >
       <van-tab title="巅峰赛 (日榜)">
@@ -104,13 +104,6 @@ export default {
       type = 0;
     }
     this.rankingTabsActive = type;
-  },
-  methods: {
-    onRankingChange: function(e) {
-      this.$router.push({
-        query: { type: e, from: "ee240fe51687ee66cca7493aedcc3c24" }
-      });
-    }
   }
 };
 </script>

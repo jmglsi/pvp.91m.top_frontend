@@ -158,7 +158,7 @@ export default {
     getHeroCombination: function(heroName, type = 0) {
       this.axios
         .get(
-          this.appApi.list.getHeroCombination +
+          this.apiList.pvp.getHeroCombination +
             "&heroName=" +
             encodeURIComponent(heroName)
         )
@@ -251,7 +251,7 @@ export default {
       if (this.searchValue.indexOf(",") > -1) {
         this.axios
           .get(
-            this.appApi.list.addHeroByCombination +
+            this.apiList.pvp.addHeroByCombination +
               "&heroName=" +
               this.searchValue
           )

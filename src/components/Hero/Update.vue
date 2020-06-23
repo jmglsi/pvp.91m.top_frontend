@@ -4,7 +4,7 @@
       <div class="tuijian-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
           <van-col span="16" @click="calendarShow = true">
-            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{ homeInfo.dayTag.tips }}</span>
+            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{ dayTagInfo.tips }}</span>
           </van-col>
           <van-col span="8">
             <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
@@ -19,14 +19,14 @@
       <div class="tuijian-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
-            v-for="(data, index) in homeInfo.dayTag.result"
-            v-show="(heroType == 0 && homeInfo.dayTag.result[index].calendarInfo.type <= 0) || (heroType == 1 && homeInfo.dayTag.result[index].calendarInfo.type > 0) || (heroType == 2 && homeInfo.dayTag.result[index].calendarInfo.type > -1)"
+            v-for="(data, index) in dayTagInfo.result"
+            v-show="(heroType == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (heroType == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (heroType == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
             :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
-            :color="data.color"
+            :color="data.calendarInfo.color"
           >
             <van-tag
               v-if="data.calendarInfo.day"
-              :color="data.color"
+              :color="data.calendarInfo.color"
               round
             >{{ data.calendarInfo.day }}</van-tag>
             <div v-if="data.url" class="tuijian-5a5152e95445ede11c05f5fa898d8fd9">
@@ -41,13 +41,14 @@
             <div v-else class="tuijian-5a5152e95445ede11c05f5fa898d8fd9" v-html="data.title"></div>
             <div v-if="data.item.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
-                v-for="(id, index) in data.item"
-                :to="{ path: '/hero/' + id + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
+                v-for="(dataItem, index) in data.item"
+                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
                 :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
               >
                 <img
-                  v-if="id"
-                  v-lazy="'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + id + '/' + id + '.jpg'"
+                  v-if="dataItem"
+                  v-lazy="dataItem == 999 ? '/img/app-icons/hero.png' :'https://game.gtimg.cn/images/yxzj/img201606/heroimg/' + dataItem + '/' + dataItem + '.jpg'"
+                  @click="dataItem == 999 ? $message.info('还没上线正式服的新英雄') : ''"
                   class="tuijian-5d39f3848925994b52ec52fba934577c"
                 />
               </router-link>
@@ -60,7 +61,7 @@
     <div class="tuijian-a0e7b2a565119c0a7ec3126a16016113">
       <van-calendar
         v-model="calendarShow"
-        :title="homeInfo.dayTag.title"
+        :title="dayTagInfo.title"
         :show-confirm="false"
         :formatter="onFormatter"
         :min-date="minDate"
@@ -124,14 +125,11 @@ export default {
       calendarShow: false,
       minDate: new Date(),
       maxDate: new Date(),
-      homeInfo: {
-        id: 0,
-        dayTag: {
-          active: 0,
-          tips: null,
-          title: "",
-          result: []
-        }
+      dayTagInfo: {
+        active: 0,
+        tips: null,
+        title: "",
+        result: []
       },
       homeTuiJianIsLoading: false
     };
@@ -139,9 +137,9 @@ export default {
   methods: {
     init: function(heroId) {
       this.axios
-        .get(this.appApi.list.getHeroUpdate + "&aid=" + heroId)
+        .get(this.apiList.pvp.getHeroUpdate + "&aid=" + heroId)
         .then(ret => {
-          this.homeInfo = ret.data.data;
+          this.dayTagInfo = ret.data.data;
         });
 
       let date = new Date();
@@ -155,7 +153,7 @@ export default {
         (day.date.getMonth() + 1) +
         "/" +
         day.date.getDate();
-      let dayTagResult = this.homeInfo.dayTag.result;
+      let dayTagResult = this.dayTagInfo.result;
 
       for (let i = 0; i < dayTagResult.length; i++) {
         let result = dayTagResult[i].calendarInfo;

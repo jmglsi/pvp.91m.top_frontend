@@ -1,6 +1,6 @@
 <template>
   <div class="replay">
-    <van-nav-bar :border="false" @click-left="onNavBarLeftClick" @click-right="onNavBarRightClick">
+    <van-nav-bar :border="false" @click-left="$router.go(-1)" @click-right="onNavBarRightClick">
       <template #title>
         <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
       </template>
@@ -178,7 +178,7 @@ export default {
   methods: {
     getHeroInfo: function(heroId) {
       this.axios
-        .get(this.appApi.list.getHeroInfo + "&heroId=" + heroId)
+        .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
           this.heroInfo = ret.data.data.heroInfo;
 
@@ -204,7 +204,7 @@ export default {
     getHeroReplayByHeroId: function(heroId, page) {
       this.axios
         .get(
-          this.appApi.list.getHeroReplayByHeroId +
+          this.apiList.pvp.getHeroReplayByHeroId +
             "&heroId=" +
             heroId +
             "&page=" +
@@ -216,12 +216,6 @@ export default {
     },
     onPaginationChange: function(e) {
       this.getHeroReplayByHeroId(this.heroInfo.id, e);
-    },
-    onNavBarLeftClick: function() {
-      this.$router.push({
-        path: "/ranking",
-        query: { from: "b2dbeb695fa205804b1e5e72650ad2bb" }
-      });
     },
     onNavBarRightClick: function() {
       this.shareSheetShow = true;

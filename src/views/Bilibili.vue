@@ -127,7 +127,7 @@ export default {
     getOrderInfo: function(uid, page) {
       this.axios
         .get(
-          this.appApi.list.getOrderInfo +
+          this.apiList.bili.getOrderInfo +
             "&uid=" +
             encodeURIComponent(uid) +
             "&page=" +

@@ -83,7 +83,7 @@ export default {
   methods: {
     getPlayerRanking: function(aid, bid) {
       this.axios
-        .get(this.appApi.list.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
+        .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
           this.tableData = ret.data.data;
           this.loading = false;
@@ -98,7 +98,7 @@ export default {
       let key = this.$cookie.get("key");
       this.axios
         .get(
-          this.appApi.list.getSmobaHelperUserInfo + "&aid=" + row.userId + "&bid=" + key
+          this.apiList.pvp.getSmobaHelperUserInfo + "&aid=" + row.userId + "&bid=" + key
         )
         .then(ret => {
           let data = ret.data;

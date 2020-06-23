@@ -3,7 +3,7 @@
     <div class="game-c8d46d341bea4fd5bff866a65ff8aea9">
       <van-cell-group title="官方赛事">
         <van-cell
-          v-for="(data, index) in gameList.official"
+          v-for="(data, index) in gameHomeInfo.officialShareInfo.result"
           :border="false"
           :key="'official-b02986e365a0828581dffc56b591ffa9-' + index"
           @click="onGameCellClick(data.id)"
@@ -32,7 +32,7 @@
 
       <van-cell-group title="玩家分享">
         <van-cell
-          v-for="(data, index) in gameList.player"
+          v-for="(data, index) in gameHomeInfo.playerShareInfo.result"
           :border="false"
           :key="'player-da72e7ff477a6dbf4430a69af9576154-' + index"
           @click="onGameCellClick(data.id)"
@@ -101,9 +101,9 @@ export default {
   name: "GameHome",
   data() {
     return {
-      gameList: {
-        official: [],
-        player: []
+      gameHomeInfo: {
+        officialShareInfo: [],
+        playerShareInfo: []
       }
     };
   },
@@ -112,9 +112,8 @@ export default {
   },
   methods: {
     getGameHome() {
-      this.axios.get(this.appApi.list.getGameHome).then(ret => {
-        let data = ret.data.data;
-        this.gameList = data.result;
+      this.axios.get(this.apiList.game.getGameHome).then(ret => {
+        this.gameHomeInfo = ret.data.data;
       });
     },
     onGameCellClick: function(e) {

@@ -119,6 +119,14 @@ i.van-button__icon img.van-icon__image {
 </style>
 
 <style>
+.my-0162f4b7b2dbdf6aff3a25de02e49a8b,
+.my-4236a440a662cc8253d7536e5aa17942 {
+  width: 150px;
+  height: 35px;
+}
+</style>
+
+<style>
 div.van-tabs__nav {
   height: unset;
   overflow-x: unset;
@@ -178,6 +186,7 @@ export default {
   watch: {
     $route(to) {
       if (
+        to.path == "/login" ||
         to.path == "/miniapp" ||
         to.path == "/bilibili" ||
         to.path.indexOf("/hero/") > -1 ||
@@ -197,7 +206,7 @@ export default {
     getAppInfo: function() {
       this.axios
         .get(
-          this.appApi.list.getAppInfo +
+          this.apiList.pvp.getAppInfo +
             "&url=" +
             encodeURIComponent(location.pathname + location.search)
         )

@@ -2,10 +2,10 @@
   <div class="home-tuijian app-margin">
     <van-pull-refresh
       v-model="tuiJianIsLoading"
-      :pulling-text="homeInfo.miniapp.pulling"
-      :loosing-text="homeInfo.miniapp.loosing"
-      :loading-text="homeInfo.miniapp.loading"
-      :success-text="homeInfo.miniapp.success"
+      :pulling-text="appHomeInfo.miniappInfo.pulling"
+      :loosing-text="appHomeInfo.miniappInfo.loosing"
+      :loading-text="appHomeInfo.miniappInfo.loading"
+      :success-text="appHomeInfo.miniappInfo.success"
       @refresh="onTuiJianRefresh"
     >
       <div
@@ -13,7 +13,7 @@
       >
         <van-swipe :autoplay="3000" :height="175" class="tuijian-f97c2ea77c6a08b3afd5a59851cbe0d8">
           <van-swipe-item
-            v-for="(data, index) in homeInfo.swipe.result"
+            v-for="(data, index) in appHomeInfo.swipeInfo.result"
             :key="'tuijian-a139b05b7f8e496c00991733ef7cd589-' + index"
             class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
             @click="appOpenUrl('是否打开外部链接？', null, data.url)"
@@ -30,10 +30,10 @@
 
       <div class="tuijian-6a507ff2d5941aa4e30c98a8f3739ffe">
         <van-cell
-          :title="homeInfo.tipsInfo.title"
-          :value="homeInfo.tipsInfo.des"
-          :to="homeInfo.tipsInfo.to"
-          :url="homeInfo.tipsInfo.url"
+          :title="appHomeInfo.tipsInfo.title"
+          :value="appHomeInfo.tipsInfo.des"
+          :to="appHomeInfo.tipsInfo.to"
+          :url="appHomeInfo.tipsInfo.url"
           is-link
         />
       </div>
@@ -81,8 +81,8 @@ export default {
   },
   data() {
     return {
-      homeInfo: {
-        swipe: {
+      appHomeInfo: {
+        swipeInfo: {
           result: []
         },
         tipsInfo: {
@@ -91,7 +91,7 @@ export default {
           to: null,
           url: null
         },
-        miniapp: {
+        miniappInfo: {
           pulling: "喵呜...",
           loosing: "奇迹什么时候女装呢...",
           loading: "加载中...",
@@ -106,8 +106,8 @@ export default {
   },
   methods: {
     init: function() {
-      this.axios.get(this.appApi.list.getAppHome).then(ret => {
-        this.homeInfo = ret.data.data;
+      this.axios.get(this.apiList.pvp.getAppHome).then(ret => {
+        this.appHomeInfo = ret.data.data;
       });
     },
     onTuiJianRefresh: function() {
