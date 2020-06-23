@@ -724,7 +724,7 @@ export default {
     },
     getHeroList: function() {
       this.axios
-        .get(this.apiList.pvp.getHeroRanking + "&time=" + this.gameTime)
+        .get(this.apiList.pvp.getHeroRanking + "&gameTime=" + this.gameTime)
         .then(ret => {
           this.tableData.heroList = ret.data.data.result;
         });

@@ -28,7 +28,7 @@ export default new Router({
         }, {
             path: '/',
             name: 'Home',
-            component: resolve => require(['./views/AppHome.vue'], resolve),
+            component: resolve => require(['./views/Home/Index.vue'], resolve),
             meta: {
                 title: '首页',
                 keepAlive: true
@@ -36,7 +36,7 @@ export default new Router({
         }, {
             path: '/miniapp',
             name: 'MiniApp',
-            component: resolve => require(['./views/MiniApp.vue'], resolve),
+            component: resolve => require(['./components/Home/TuiJian/MiniApp.vue'], resolve),
             meta: {
                 title: '小程序',
                 keepAlive: true
@@ -44,7 +44,7 @@ export default new Router({
         }, {
             path: '/ranking',
             name: 'Ranking',
-            component: resolve => require(['./views/Ranking.vue'], resolve),
+            component: resolve => require(['./views/Ranking/Index.vue'], resolve),
             meta: {
                 title: '排行',
                 keepAlive: true
@@ -52,7 +52,7 @@ export default new Router({
         }, {
             path: '/my',
             name: 'My',
-            component: resolve => require(['./views/My.vue'], resolve),
+            component: resolve => require(['./views/User/My.vue'], resolve),
             meta: {
                 title: '我的',
                 keepAlive: true
@@ -60,7 +60,7 @@ export default new Router({
         }, {
             path: '/login',
             name: 'Login',
-            component: resolve => require(['./views/Login.vue'], resolve),
+            component: resolve => require(['./views/User/Login.vue'], resolve),
             meta: {
                 title: '登录',
                 keepAlive: true
@@ -68,11 +68,11 @@ export default new Router({
         },
         {
             path: '/hero',
-            component: resolve => require(['./views/Hero.vue'], resolve),
+            component: resolve => require(['./views/Hero/Index.vue'], resolve),
             children: [{
                     path: ':id/info',
                     name: 'HeroInfo',
-                    component: resolve => require(['./components/Hero/Info.vue'], resolve),
+                    component: resolve => require(['./views/Hero/Info.vue'], resolve),
                     meta: {
                         title: '信息'
                     }
@@ -80,7 +80,7 @@ export default new Router({
                 {
                     path: ':id/replay',
                     name: 'HeroReplay',
-                    component: resolve => require(['./components/Hero/Replay.vue'], resolve),
+                    component: resolve => require(['./views/Hero/Replay.vue'], resolve),
                     meta: {
                         title: '回顾'
                     }
@@ -89,11 +89,11 @@ export default new Router({
         },
         {
             path: '/game',
-            component: resolve => require(['./views/GameHome.vue'], resolve),
+            component: resolve => require(['./views/Game/Index.vue'], resolve),
             children: [{
                 path: ':id/bp',
                 name: 'GameBp',
-                component: resolve => require(['./components/Game/GlobalBP.vue'], resolve),
+                component: resolve => require(['./views/Game/GlobalBP.vue'], resolve),
                 meta: {
                     title: '全局BP模拟器'
                 }
@@ -101,7 +101,7 @@ export default new Router({
         }, {
             path: '/bilibili',
             name: 'Bilibili',
-            component: resolve => require(['./views/Bilibili.vue'], resolve),
+            component: resolve => require(['./views/Bilibili/Index.vue'], resolve),
             meta: {
                 title: 'bilibili',
                 keepAlive: true

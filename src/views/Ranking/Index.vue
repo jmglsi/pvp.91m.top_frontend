@@ -89,9 +89,9 @@ export default {
   name: "Ranking",
   components: {
     DianFengSai: resolve =>
-      require(["@/components/Ranking/DianFengSai.vue"], resolve),
-    GuanXi: resolve => require(["@/components/Ranking/GuanXi.vue"], resolve),
-    WanJia: resolve => require(["@/components/Ranking/WanJia.vue"], resolve)
+      require(["@/views/Ranking/DianFengSai.vue"], resolve),
+    GuanXi: resolve => require(["@/views/Ranking/GuanXi.vue"], resolve),
+    WanJia: resolve => require(["@/views/Ranking/WanJia.vue"], resolve)
   },
   data() {
     return {

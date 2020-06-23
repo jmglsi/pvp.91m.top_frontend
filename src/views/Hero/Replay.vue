@@ -1,11 +1,10 @@
 <template>
   <div class="replay">
-    <van-nav-bar :border="false" @click-left="$router.go(-1)" @click-right="onNavBarRightClick">
+    <van-nav-bar :border="false" @click-left="$router.go(-1)">
       <template #title>
         <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
       </template>
       <van-icon name="arrow-left" slot="left" />
-      <van-icon name="ellipsis" slot="right" />
     </van-nav-bar>
 
     <van-collapse v-model="replayCollapseNames" :border="false">
@@ -83,13 +82,6 @@
       class="replay-fe7cd4d1bf3fea9a0d921e224b3fa24c"
     />
 
-    <van-share-sheet
-      v-model="shareSheetShow"
-      title="立即分享给好友"
-      :options="shareSheetOptions"
-      @select="onShareSheetSelect"
-    />
-
     <AppBottomTabbar />
   </div>
 </template>
@@ -151,10 +143,6 @@ export default {
       },
       currentPage: 1,
       nowData: {},
-      shareSheetShow: false,
-      shareSheetOptions: [
-        { name: "常见问题", icon: "/img/app-icons/inspiration.png", value: 0 }
-      ],
       actionSheetShow: false,
       actions: [
         { name: "复制链接", value: 0 },
@@ -217,9 +205,6 @@ export default {
     onPaginationChange: function(e) {
       this.getHeroReplayByHeroId(this.heroInfo.id, e);
     },
-    onNavBarRightClick: function() {
-      this.shareSheetShow = true;
-    },
     onReplaySelect: function(item) {
       let nowData = this.nowData;
 
@@ -233,11 +218,6 @@ export default {
 
       if (item.value == 2) {
         this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", nowData.url);
-      }
-    },
-    onShareSheetSelect: function(option) {
-      if (option.value == 0) {
-        this.appOpenUrl("是否查看常见问题?", null, "//doc.91m.top");
       }
     }
   }
