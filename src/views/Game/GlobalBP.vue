@@ -17,13 +17,12 @@
     </span>
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
-      <div class="ban-8c9cb4a232c7e88403dddc3a0e589162">
-        <ul class="ban-bebaefe0582b00649bc558529bba9df5">
+      <div class="ban-8c9cb4a232c7e88403dddc3a0e589162 ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3">
+        <ul>
           <li
             v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
             :key="'ban-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(1, 1, index)"
-            class="ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3"
           >
             <span
               v-show="index == 0 || index == 2 || index == 11 || index == 13"
@@ -42,12 +41,11 @@
         </ul>
       </div>
 
-      <div class="ban-c6a2f8b3941d7f91bc4e51839e5371e0">
-        <ul class="ban-3f2e7ec281ad2d884845f35f17756624">
+      <div class="ban-c6a2f8b3941d7f91bc4e51839e5371e0 ban-ba9bced6af8121cf6413000a4274ac2b">
+        <ul>
           <li
             v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
             :key="'ban-64621b00510adc52b301306824c89659-' + index"
-            class="ban-ba9bced6af8121cf6413000a4274ac2b"
             @click="onGameBanPickClick(2, 1, index)"
           >
             <span
@@ -72,12 +70,11 @@
       <van-row>
         <van-col span="3">
           <div class="pick-8c9cb4a232c7e88403dddc3a0e589162">
-            <ul class="pick-bebaefe0582b00649bc558529bba9df5">
+            <ul>
               <li
                 v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
                 :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 @click="onGameBanPickClick(1, 2, index)"
-                class="pick-4d5eb62584759be250091d21c745edd4"
               >
                 <span
                   v-show="index == 4 || index == 7 || index == 8 || index == 15 || index == 16"
@@ -158,12 +155,11 @@
         </van-col>
         <van-col span="3">
           <div class="pick-c6a2f8b3941d7f91bc4e51839e5371e0">
-            <ul class="pick-3f2e7ec281ad2d884845f35f17756624">
+            <ul>
               <li
                 v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
                 :key="'pick-64621b00510adc52b301306824c89659-' + index"
                 @click="onGameBanPickClick(2, 2, index)"
-                class="pick-9907d81a5157ef27607fd257364f3f43"
               >
                 <span
                   v-show="index == 5 || index == 6 || index == 9 || index == 14 || index == 17"
@@ -184,9 +180,9 @@
       </van-row>
     </div>
 
-    <div class="game-b5a9628110ebc1c03f58e06a553622e5">
-      <ul class="game-d100e41250812deed3189136414361f9">
-        <li v-if="authorInfo.name" class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+    <div class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917">
+      <ul>
+        <li v-if="authorInfo.name">
           <a-dropdown placement="bottomCenter" :trigger="['click']">
             <van-button round :icon="authorInfo.img" size="small">{{ authorInfo.name }}</van-button>
             <a-menu slot="overlay">
@@ -201,7 +197,7 @@
             </a-menu>
           </a-dropdown>
         </li>
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+        <li>
           <van-button
             round
             :icon="perspective == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
@@ -210,7 +206,7 @@
             @click="onGamePerspectiveClick(1)"
           >以 {{ perspective == 1 ? campInfo.camp_1.name : campInfo.camp_2.name }} 的视角</van-button>
         </li>
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+        <li>
           <van-button
             round
             :icon="eye"
@@ -223,9 +219,9 @@
     </div>
     <!-- 右上角 -->
 
-    <div class="game-b5a9628110ebc1c03f58e06a553622e5">
-      <ul class="game-4a931512ce65bdc9ca6808adf92d8783">
-        <li v-show="show.apps" class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+    <div class="game-173f312c43fe32a4f01c84d1cf0520b1 game-e4e6288c92630a6c237c15442fdb0917">
+      <ul>
+        <li v-show="show.apps">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" />
             <a-menu slot="overlay">
@@ -248,7 +244,7 @@
             </a-menu>
           </a-dropdown>
         </li>
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+        <li>
           <van-button
             round
             :border="false"
@@ -257,7 +253,7 @@
             @click="appOpenUrl('是否查看常见问题?', null, '//doc.91m.top')"
           />
         </li>
-        <li class="game-39ab32c5aeb56c9f5ae17f073ce31023">
+        <li>
           <van-button round icon="share" size="small" @click="onGameShareClick" />
         </li>
       </ul>
@@ -399,26 +395,26 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
   background-color: white;
 }
 
-.game-d100e41250812deed3189136414361f9,
-.game-4a931512ce65bdc9ca6808adf92d8783 {
+.game-beedfb16b1c81d2901c32b6dcc2939d0,
+.game-173f312c43fe32a4f01c84d1cf0520b1 {
   position: fixed;
   margin: 3px;
 }
 
-.game-d100e41250812deed3189136414361f9,
-.game-4a931512ce65bdc9ca6808adf92d8783 {
+.game-beedfb16b1c81d2901c32b6dcc2939d0,
+.game-173f312c43fe32a4f01c84d1cf0520b1 {
   right: 95px;
 }
 
-.game-4a931512ce65bdc9ca6808adf92d8783 {
-  bottom: 45px;
-}
-
-.game-d100e41250812deed3189136414361f9 {
+.game-beedfb16b1c81d2901c32b6dcc2939d0 {
   top: 67px;
 }
 
-.game-39ab32c5aeb56c9f5ae17f073ce31023 {
+.game-173f312c43fe32a4f01c84d1cf0520b1 {
+  bottom: 45px;
+}
+
+.game-e4e6288c92630a6c237c15442fdb0917 li {
   margin: 3px 5px;
   float: left;
 }
@@ -436,11 +432,11 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
   position: absolute;
 }
 
-.ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3 {
+.ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3 li {
   float: left;
 }
 
-.ban-ba9bced6af8121cf6413000a4274ac2b {
+.ban-ba9bced6af8121cf6413000a4274ac2b li {
   float: right;
 }
 
@@ -481,19 +477,6 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
 .pick-aa95efe1c5d39e5e9389ca5833e63fbe {
   border-radius: 10px;
   margin: 5px 3px;
-}
-
-.pick-bebaefe0582b00649bc558529bba9df5,
-.pick-3f2e7ec281ad2d884845f35f17756624 {
-  width: 50px;
-}
-
-.pick-bebaefe0582b00649bc558529bba9df5 {
-  text-align: left;
-}
-
-.pick-3f2e7ec281ad2d884845f35f17756624 {
-  text-align: right;
 }
 
 .hero-99938282f04071859941e18f16efcf42 {
