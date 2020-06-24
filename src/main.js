@@ -9,8 +9,6 @@ router.beforeEach((to, from, next) => {
     let hello = "苏苏的荣耀助手"
 
     document.title = to.meta.title + " | " + hello
-
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
     next()
 })
 

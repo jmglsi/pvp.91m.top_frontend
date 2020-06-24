@@ -2,9 +2,13 @@
   <div class="ranking-wj">
     <div class="ranking-479cba1b23b02eea72d4bdc9f59e8122">
       <van-dropdown-menu>
-        <van-dropdown-item v-model="areaType" :options="playerOptions" @change="onChange" />
-        <van-dropdown-item ref="wj-447b7147e84be512208dcc0995d67ebc" title="筛选">
-          <van-switch-cell v-model="switchShield" title="隐藏战绩" />
+        <van-dropdown-item
+          v-model="areaModel"
+          :options="playerOptions"
+          @change="onPlayerOptionsChange"
+        />
+        <van-dropdown-item ref="item" title="筛选">
+          <van-switch-cell v-model="switchModel" title="隐藏战绩" />
           <van-button type="info" block @click="onDropdownConfirmClick">确认</van-button>
         </van-dropdown-item>
       </van-dropdown-menu>
@@ -12,8 +16,7 @@
 
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-grid
-        ref="wj-ff4a008470319a22d9cf3d14af485977"
-        :loading="loading"
+        :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
         :sort-config="{trigger: 'cell'}"
@@ -42,7 +45,7 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="actionSheetShow"
+        v-model="show.actionSheet"
         :title="playerInfo.gamePlayerName + ' 如何打开'"
         :actions="playerInfo.area < 3 ? actions : []"
         :close-on-click-action="true"
@@ -59,8 +62,8 @@ export default {
   data() {
     return {
       playerShield: 0,
-      switchShield: false,
-      areaType: 0,
+      areaModel: 0,
+      switchModel: false,
       qq: "",
       copyData: "",
       playerOptions: [
@@ -73,11 +76,13 @@ export default {
       tableData: {
         result: []
       },
-      actionSheetShow: false,
+      show: {
+        actionSheet: false
+      },
       actions: [{ name: "查看QQ", value: 0 }],
       playerInfo: {},
       clientHeight: 0,
-      loading: true
+      isLoading: true
     };
   },
   created() {
@@ -92,17 +97,17 @@ export default {
         .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
           this.tableData = ret.data.data;
-          this.loading = false;
+          this.isLoading = false;
         });
     },
     getPlayerInfo: function(row) {
       if (row.userId == "0") return;
 
-      this.actionSheetShow = true;
+      this.show.actionSheet = true;
       this.playerInfo = row;
 
       this.axios
-        .get(this.apiList.pvp.getSmobaHelperUserInfo + "&aid=" + row.userId)
+        .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then(ret => {
           let data = ret.data;
 
@@ -123,14 +128,14 @@ export default {
             row.userId;
         });
     },
-    onChange: function(e) {
+    onPlayerOptionsChange: function(e) {
       this.getPlayerRanking(e, this.playerShield);
     },
     onDropdownConfirmClick: function() {
       this.$refs.item.toggle();
 
-      this.playerShield = parseInt(this.switchShield);
-      this.getPlayerRanking(this.areaType, this.playerShield);
+      this.playerShield = Number(this.switchModel);
+      this.getPlayerRanking(this.areaModel, this.playerShield);
     },
     onCellClick: function({ row }) {
       this.getPlayerInfo(row);

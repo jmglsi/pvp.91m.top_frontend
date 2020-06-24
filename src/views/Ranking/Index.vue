@@ -2,9 +2,9 @@
   <div class="ranking-home">
     <div class="ranking-a9b4432c8e9b49bafa0a23e52d970016">
       <van-tabs
-        v-model="rankingTabsActive"
+        v-model="tabsModel"
         :border="false"
-        @change="$router.push({query: { type: rankingTabsActive, from: 'ee240fe51687ee66cca7493aedcc3c24' }})"
+        @change="$router.push({query: { type: tabsModel, from: 'ee240fe51687ee66cca7493aedcc3c24' }})"
         color="rgb(222,177,81)"
       >
         <van-tab title="巅峰赛 (日榜)">
@@ -99,7 +99,7 @@ export default {
   },
   data() {
     return {
-      rankingTabsActive: 0
+      tabsModel: 0
     };
   },
   mounted() {
@@ -107,7 +107,7 @@ export default {
     if (!type) {
       type = 0;
     }
-    this.rankingTabsActive = type;
+    this.tabsModel = type;
   }
 };
 </script>

@@ -3,12 +3,12 @@
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
       <van-dropdown-menu>
         <van-dropdown-item
-          v-model="areaType"
+          v-model="areaModel"
           :options="areaOptions"
           @change="onDropdownMenuChange"
         />
         <van-dropdown-item
-          v-model="heroType"
+          v-model="heroModel"
           :options="heroOptions"
           @change="onDropdownMenuChange"
         />
@@ -17,8 +17,7 @@
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-grid
-        ref="dfs-ff4a008470319a22d9cf3d14af485977"
-        :loading="loading"
+        :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
         :cell-class-name="cellClassName"
@@ -195,7 +194,7 @@
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
-        v-model="actionSheetShow"
+        v-model="show.actionSheet"
         :title="heroInfo.name + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
@@ -243,14 +242,14 @@ export default {
   name: "RankingDianFengSai",
   data() {
     return {
-      areaType: 0,
+      areaModel: 0,
       areaOptions: [
         { text: "全部大区", value: 0 },
         { text: "手 Q", value: 1 },
         { text: "微信", value: 2 },
         { text: "挨刀", value: 3 }
       ],
-      heroType: 0,
+      heroModel: 0,
       heroOptions: [
         { text: "全部分路", value: 0 },
         { text: "对抗 (战士)", value: 1 },
@@ -260,12 +259,13 @@ export default {
         { text: "发育", value: 5 },
         { text: "辅助", value: 6 }
       ],
-      listWidth: 0,
       tableData: {
         color: {},
         result: []
       },
-      actionSheetShow: false,
+      show: {
+        actionSheet: false
+      },
       actions: [
         { name: "趋势 & 职业对比", value: 0 },
         { name: "对局回顾", subname: "第一视角", value: 1 },
@@ -280,8 +280,9 @@ export default {
           updatePid: 0
         }
       },
+      listWidth: 0,
       clientHeight: 0,
-      loading: true
+      isLoading: true
     };
   },
   created() {
@@ -299,15 +300,15 @@ export default {
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
           this.tableData = ret.data.data;
-          this.loading = false;
+          this.isLoading = false;
         });
     },
     getHeroInfo: function(row) {
-      this.actionSheetShow = true;
+      this.show.actionSheet = true;
       this.heroInfo = row;
     },
     onDropdownMenuChange: function() {
-      this.getHeroRanking(this.areaType, this.heroType);
+      this.getHeroRanking(this.areaModel, this.heroModel);
     },
     onCellClick: function({ row }) {
       this.getHeroInfo(row);

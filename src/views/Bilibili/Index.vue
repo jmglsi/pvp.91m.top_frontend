@@ -2,7 +2,7 @@
   <div class="bilibili-home">
     <div class="bilibili-727f1cf32d65577632c02b9225ecbb67">
       <van-search
-        v-model="searchValue"
+        v-model="search.value"
         :placeholder="tableData.searchPlaceholder"
         @search="onSearch"
         @clear="onSearchClear"
@@ -13,7 +13,7 @@
 
     <div class="bilibili-8b0f547eb9990da1c540f7f31fb437b8">
       <van-checkbox
-        v-model="checked"
+        v-model="checkModel"
         class="bilibili-a47ba339330136bcab5b4c91d5d10882"
         @change="onCheckBoxChange"
       />
@@ -21,8 +21,7 @@
 
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
       <vxe-grid
-        ref="bilibili-ff4a008470319a22d9cf3d14af485977"
-        :loading="loading"
+        :isLoading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
         :sort-config="{trigger: 'cell'}"
@@ -46,7 +45,7 @@
 
     <div class="bilibili-71f262d796bed1ab30e8a2d5a8ddee6f">
       <van-pagination
-        v-model="currentPage"
+        v-model="paginationModel"
         :total-items="tableData.total"
         :items-per-page="tableData.pageSize"
         @change="onPaginationChange"
@@ -57,7 +56,7 @@
 
     <div class="bilibili-8fd741f0ce683493b1bed18a2ed32d4a">
       <van-action-sheet
-        v-model="actionSheetShow"
+        v-model="show.actionSheet"
         :title="orderInfo.uid + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
@@ -86,18 +85,21 @@ export default {
   name: "BilibiliHome",
   data() {
     return {
-      checked: true,
       getOrderInfoInterval: 0,
-      searchValue: "",
+      search: {
+        value: ""
+      },
       tableData: {
         searchPlaceholder: "请输入搜索关键词",
         result: [],
         total: 200,
         pageSize: 50
       },
-      currentPage: 1,
+      paginationModel: 1,
       listWidth: 0,
-      actionSheetShow: false,
+      show: {
+        actionSheet: false
+      },
       actions: [
         { name: "复制订单", value: 0 },
         { name: "查看相关", value: 1 }
@@ -106,7 +108,8 @@ export default {
       clientHeight: 0,
       copyAv: "",
       copyData: "",
-      loading: true
+      checkModel: true,
+      isLoading: true
     };
   },
   created() {
@@ -122,12 +125,12 @@ export default {
       : (this.listWidth = 100);
   },
   activated() {
-    this.searchValue = "";
+    this.search.value = "";
     let uid = this.$route.query.uid;
 
-    !uid ? (this.searchValue = "") : (this.searchValue = uid);
+    !uid ? (this.search.value = "") : (this.search.value = uid);
 
-    this.getOrderInfo(this.searchValue, 1);
+    this.getOrderInfo(this.search.value, 1);
   },
   methods: {
     getOrderInfo: function(uid, page) {
@@ -141,7 +144,7 @@ export default {
         )
         .then(ret => {
           this.tableData = ret.data.data;
-          this.loading = false;
+          this.isLoading = false;
 
           if (this.copyAv) {
             this.copyDataByAv(this.copyAv);
@@ -153,7 +156,7 @@ export default {
       this.copyAv = "";
     },
     onActionSheetClick: function(row) {
-      this.actionSheetShow = true;
+      this.show.actionSheet = true;
       this.orderInfo = row;
 
       this.axios
@@ -192,12 +195,12 @@ export default {
         });
     },
     onSearchClear: function() {
-      this.searchValue = "";
+      this.search.value = "";
       this.tableData = [];
       clearInterval(this.getOrderInfoInterval);
     },
     onSearch: function() {
-      let searchValue = this.searchValue;
+      let searchValue = this.search.value;
       if (!searchValue) return;
 
       let newValue;
@@ -206,23 +209,23 @@ export default {
         this.copyAv = newValue;
       }
 
-      this.getOrderInfo(this.searchValue, this.currentPage);
+      this.getOrderInfo(this.search.value, this.paginationModel);
 
       clearInterval(this.getOrderInfoInterval);
       this.getOrderInfoInterval = setInterval(() => {
-        this.getOrderInfo(this.searchValue, this.currentPage);
+        this.getOrderInfo(this.search.value, this.paginationModel);
       }, 1000 * 10);
     },
     onCheckBoxChange: function(e) {
       clearInterval(this.getOrderInfoInterval);
       if (e == true) {
         this.getOrderInfoInterval = setInterval(() => {
-          this.getOrderInfo(this.searchValue, this.currentPage);
+          this.getOrderInfo(this.search.value, this.paginationModel);
         }, 1000 * 10);
       }
     },
     onPaginationChange: function(e) {
-      this.getOrderInfo(this.searchValue, e);
+      this.getOrderInfo(this.search.value, e);
     },
     onCellClick: function({ row }) {
       this.onActionSheetClick(row);
@@ -235,7 +238,7 @@ export default {
       }
 
       if (item.value == 1) {
-        this.searchValue = orderInfo.uid;
+        this.search.value = orderInfo.uid;
         this.getOrderInfo(orderInfo.uid, 1);
       }
     }

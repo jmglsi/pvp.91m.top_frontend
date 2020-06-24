@@ -3,7 +3,7 @@
     <div class="game-c8d46d341bea4fd5bff866a65ff8aea9">
       <van-cell-group title="官方赛事">
         <van-cell
-          v-for="(data, index) in gameHomeInfo.officialShareInfo.result"
+          v-for="(data, index) in gameHomeInfo.officialShare.result"
           :border="false"
           :key="'official-b02986e365a0828581dffc56b591ffa9-' + index"
           @click="onGameCellClick(data.id)"
@@ -32,7 +32,7 @@
 
       <van-cell-group title="玩家分享">
         <van-cell
-          v-for="(data, index) in gameHomeInfo.playerShareInfo.result"
+          v-for="(data, index) in gameHomeInfo.playerShare.result"
           :border="false"
           :key="'player-da72e7ff477a6dbf4430a69af9576154-' + index"
           @click="onGameCellClick(data.id)"
@@ -102,8 +102,8 @@ export default {
   data() {
     return {
       gameHomeInfo: {
-        officialShareInfo: [],
-        playerShareInfo: []
+        officialShare: [],
+        playerShare: []
       }
     };
   },

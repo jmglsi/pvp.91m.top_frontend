@@ -2,8 +2,8 @@
   <div class="ranking-gx">
     <div class="ranking-a260d093db7878f26c178fc3d23829c6">
       <van-search
-        v-model="searchValue"
-        :placeholder="searchPlaceholder"
+        v-model="search.value"
+        :placeholder="search.placeholder"
         @search="onSearch"
         @clear="onSearchClear"
         shape="round"
@@ -13,8 +13,7 @@
 
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-grid
-        ref="gx-ff4a008470319a22d9cf3d14af485977"
-        :loading="loading"
+        :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
         :cell-class-name="cellClassName"
@@ -91,7 +90,7 @@
 
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
-        v-model="actionSheetShow"
+        v-model="show.actionSheet"
         :title="heroInfo.name_1 + ' & ' + heroInfo.name_2 + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
@@ -111,17 +110,21 @@
 
 <script>
 export default {
-  name: "RankingGuanxi",
+  name: "RankingGuanXi",
   data() {
     return {
-      searchValue: "",
-      searchPlaceholder: "请输入搜索关键词",
+      search: {
+        value: "",
+        placeholder: "请输入搜索关键词"
+      },
       tableData: {
         searchPlaceholder: [],
         color: {},
         result: []
       },
-      actionSheetShow: false,
+      show: {
+        actionSheet: false
+      },
       actions: [
         { name: "复制信息", value: 0 },
         { name: "对局回顾", value: 1 }
@@ -130,38 +133,28 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
-      loading: true
+      isLoading: true
     };
   },
   created() {
     this.appHeightInit(1440);
   },
   mounted() {
-    this.combinationInit();
+    let heroName = this.$route.query.heroName;
+
+    if (!heroName) {
+      heroName = "";
+    }
+    this.getHeroCombination(heroName);
+
+    setInterval(() => {
+      let text = this.tableData.searchPlaceholder;
+
+      this.search.placeholder = text[Math.floor(Math.random() * text.length)];
+    }, 1000 * 5);
   },
   methods: {
-    combinationInit: function() {
-      this.searchValue = "";
-
-      let heroName = this.$route.query.heroName;
-      if (!heroName) {
-        heroName = "";
-      } else {
-        heroName = decodeURIComponent(heroName);
-        this.searchValue = heroName;
-      }
-
-      this.getHeroCombination(heroName);
-
-      setInterval(() => {
-        let text = this.tableData.searchPlaceholder,
-          textNum = text.length,
-          index = Math.floor(Math.random() * textNum);
-
-        this.searchPlaceholder = text[index];
-      }, 1000 * 5);
-    },
-    getHeroCombination: function(heroName, type = 0) {
+    getHeroCombination: function(heroName) {
       this.axios
         .get(
           this.apiList.pvp.getHeroCombination +
@@ -170,25 +163,16 @@ export default {
         )
         .then(ret => {
           this.tableData = ret.data.data;
-
-          let from;
-          type == 1 ? (from = "search") : (from = this.$route.query.from);
-
-          this.$router.push({
-            path: "/ranking",
-            query: { type: 1, from: from, heroName: heroName }
-          });
+          this.isLoading = false;
 
           if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
-
-          this.loading = false;
         });
     },
     getHeroInfo: function(row) {
-      this.actionSheetShow = true;
+      this.show.actionSheet = true;
       this.heroInfo = row;
 
-      let heroName = this.searchValue;
+      let heroName = this.search.value;
       if (!heroName) heroName = this.heroInfo.name_1;
 
       this.axios
@@ -248,18 +232,18 @@ export default {
       }
     },
     onSearchClear: function() {
-      this.searchValue = "";
+      this.search.value = "";
 
-      this.getHeroCombination("", 1);
+      this.getHeroCombination("");
     },
     onSearch: function() {
-      if (!this.searchValue) return;
-      if (this.searchValue.indexOf(",") > -1) {
+      let searchValue = this.search.value;
+
+      if (!searchValue) return;
+      if (searchValue.indexOf(",") > -1) {
         this.axios
           .get(
-            this.apiList.pvp.addHeroByCombination +
-              "&heroName=" +
-              this.searchValue
+            this.apiList.pvp.addHeroByCombination + "&heroName=" + searchValue
           )
           .then(ret => {
             let code = ret.data.data.code,
@@ -267,7 +251,7 @@ export default {
             if (code == 1) {
               this.$message.success("添加成功");
 
-              this.getHeroCombination("", 1);
+              this.getHeroCombination("");
             } else {
               if (code == 0) {
                 msg = "关系已存在";
@@ -282,7 +266,7 @@ export default {
             }
           });
       } else {
-        this.getHeroCombination(this.searchValue, 1);
+        this.getHeroCombination(searchValue);
       }
     },
     onCellClick: function({ row }) {

@@ -3,13 +3,13 @@
     <div class="tuijian-b4558c68ce168dc8679358f047eea63b tuijian-447b7147e84be512208dcc0995d67ebc">
       <div class="tuijian-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col span="16" @click="calendarShow = true">
+          <van-col span="16" @click="show.calendar = true">
             <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{ dayTagInfo.tips }}</span>
           </van-col>
           <van-col span="8">
             <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
               <van-dropdown-menu direction="up" background="transparent">
-                <van-dropdown-item v-model="heroType" :options="heroOptions" />
+                <van-dropdown-item v-model="updateModel" :options="updateOptions" />
               </van-dropdown-menu>
             </div>
           </van-col>
@@ -20,7 +20,7 @@
         <a-timeline>
           <a-timeline-item
             v-for="(data, index) in dayTagInfo.result"
-            v-show="(heroType == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (heroType == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (heroType == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
+            v-show="(updateModel == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (updateModel == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (updateModel == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
             :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
             :color="data.calendarInfo.color"
           >
@@ -60,7 +60,7 @@
 
     <div class="tuijian-a0e7b2a565119c0a7ec3126a16016113">
       <van-calendar
-        v-model="calendarShow"
+        v-model="show.calendar"
         :title="dayTagInfo.title"
         :show-confirm="false"
         :formatter="onFormatter"
@@ -106,23 +106,31 @@ export default {
       default: 0
     }
   },
+  computed: {
+    listenChange() {
+      const { heroId } = this;
+      return { heroId };
+    }
+  },
   watch: {
-    heroId: {
+    listenChange: {
       immediate: true,
-      handler(val) {
-        this.init(val);
+      handler(newValue) {
+        this.getHeroUpdate(newValue.heroId);
       }
     }
   },
   data() {
     return {
-      heroType: 0,
-      heroOptions: [
+      updateModel: 0,
+      updateOptions: [
         { text: "体验服", value: 0 },
         { text: "正式服", value: 1 },
         { text: "全部", value: 2 }
       ],
-      calendarShow: false,
+      show: {
+        calendar: false
+      },
       minDate: new Date(),
       maxDate: new Date(),
       dayTagInfo: {
@@ -130,12 +138,11 @@ export default {
         tips: null,
         title: "",
         result: []
-      },
-      homeTuiJianIsLoading: false
+      }
     };
   },
   methods: {
-    init: function(heroId) {
+    getHeroUpdate: function(heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then(ret => {

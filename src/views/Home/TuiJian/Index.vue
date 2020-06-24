@@ -2,7 +2,7 @@
   <div class="tuijian-home app-margin">
     <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
       <van-pull-refresh
-        v-model="tuiJianIsLoading"
+        v-model="isLoading"
         :pulling-text="appHomeInfo.miniappInfo.pulling"
         :loosing-text="appHomeInfo.miniappInfo.loosing"
         :loading-text="appHomeInfo.miniappInfo.loading"
@@ -106,7 +106,7 @@ export default {
           success: null
         }
       },
-      tuiJianIsLoading: false
+      isLoading: false
     };
   },
   mounted() {
@@ -120,12 +120,12 @@ export default {
     },
     onTuiJianRefresh: function() {
       setTimeout(() => {
-        this.tuiJianIsLoading = false;
+        this.isLoading = false;
         this.$router.push({
           path: "/miniapp",
           query: { from: "9485e07d3fa6e237df83da7ff5f83bde" }
         });
-      }, 1500);
+      }, 2000);
     }
   }
 };

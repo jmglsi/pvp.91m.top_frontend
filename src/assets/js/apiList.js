@@ -1,6 +1,6 @@
 let host;
 
-location.host.indexOf("91m.top") > -1 ? host = "api.91m.top" : host = "localhost/api.91m.top"
+location.host.indexOf("91m.top") > -1 ? host = "api.91m.top" : host = "192.168.1.204/api.91m.top"
 
 const appApi = "//" + host + "/hero/v1/app.php"
 const gameApi = "//" + host + "/hero/v1/game.php"

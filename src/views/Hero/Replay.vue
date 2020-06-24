@@ -10,7 +10,7 @@
     </div>
 
     <div class="hero-9a7c47049573e03028c2e650b73f6252">
-      <van-collapse v-model="replayCollapseNames" :border="false">
+      <van-collapse v-model="collapseModel" :border="false">
         <van-collapse-item
           v-for="(data, index) in tableData.result"
           :key="'replay-1a721faf2df53972bfd0831c64b6146d-' + index"
@@ -71,7 +71,7 @@
 
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
-        v-model="actionSheetShow"
+        v-model="show.actionSheet"
         :title="nowData.gamePlayerName + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
@@ -82,7 +82,7 @@
 
     <div class="hero-face1cbe136c70e1fc08cff038596944">
       <van-pagination
-        v-model="currentPage"
+        v-model="paginationModel"
         :total-items="tableData.total"
         :items-per-page="tableData.pageSize"
         @change="onPaginationChange"
@@ -139,7 +139,7 @@ export default {
   data() {
     return {
       teammate: false,
-      replayCollapseNames: ["1"],
+      collapseModel: ["1"],
       heroInfo: {
         id: 0
       },
@@ -149,9 +149,11 @@ export default {
         total: 200,
         pageSize: 25
       },
-      currentPage: 1,
+      paginationModel: 1,
       nowData: {},
-      actionSheetShow: false,
+      show: {
+        actionSheet: false
+      },
       actions: [
         { name: "复制链接", value: 0 },
         { name: "详情", subname: "需要安装王者营地", value: 1 },
@@ -163,13 +165,8 @@ export default {
     let heroId = this.$route.params.id;
     this.heroInfo.id = heroId;
 
-    setTimeout(() => {
-      this.getHeroInfo(heroId);
-    }, 100);
-
-    setTimeout(() => {
-      this.getHeroReplayByHeroId(this.heroInfo.id, 1);
-    }, 100);
+    this.getHeroInfo(heroId);
+    this.getHeroReplayByHeroId(this.heroInfo.id, 1);
   },
   methods: {
     getHeroInfo: function(heroId) {
@@ -185,7 +182,7 @@ export default {
     },
     onGameActionSheetClick: function(row) {
       this.nowData = row;
-      this.actionSheetShow = true;
+      this.show.actionSheet = true;
 
       let url = row.url,
         urlIndex = url.indexOf("=");
