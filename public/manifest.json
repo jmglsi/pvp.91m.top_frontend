@@ -1,6 +1,6 @@
 {
-    "name": "苏苏的荣耀助手 - 全英雄可视化趋势",
-    "short_name": "苏苏的荣耀助手",
+    "name": "苏苏的荣耀助手 - 全局BP模拟器",
+    "short_name": "荣耀助手",
     "icons": [{
             "src": "./img/icons/android-chrome-192x192.png",
             "sizes": "192x192",
