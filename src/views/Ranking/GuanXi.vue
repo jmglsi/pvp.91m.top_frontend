@@ -91,7 +91,7 @@
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="heroInfo.name_1 + ' & ' + heroInfo.name_2 + ' 如何打开'"
+        :title="hero.row.name_1 + ' & ' + hero.row.name_2 + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -129,7 +129,12 @@ export default {
         { name: "复制信息", value: 0 },
         { name: "对局回顾", value: 1 }
       ],
-      heroInfo: {},
+      hero: {
+        row: {
+          name_1: "加载中",
+          name_2: "加载中"
+        }
+      },
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
@@ -170,10 +175,10 @@ export default {
     },
     getHeroInfo: function(row) {
       this.show.actionSheet = true;
-      this.heroInfo = row;
+      this.hero.row = row;
 
       let heroName = this.search.value;
-      if (!heroName) heroName = this.heroInfo.name_1;
+      if (!heroName) heroName = this.hero.row.name_1;
 
       this.axios
         .get(
@@ -273,7 +278,7 @@ export default {
       this.getHeroInfo(row);
     },
     onActionSheetSelect: function(item) {
-      let heroInfo = this.heroInfo;
+      let heroInfo = this.hero.row;
 
       if (item.value == 0) {
         this.appCopyData(this.copyData);

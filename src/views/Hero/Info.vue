@@ -10,10 +10,10 @@
             @click="$message.info('巅峰赛趋势、分路推荐 ;D')"
             class="info-632d142d7a508e86f6c35a044a17411e"
           >
-            <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfoTitle }}</span>
+            <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.title }}</span>
             <img
-              v-if="heroInfo.trend > 0"
-              v-lazy="'/img/app-icons/hot-' + heroInfo.trend + '.png'"
+              v-if="hero.info.trend > 0"
+              v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
               v-show="show.parameter"
               width="15"
               class="info-3d5f1ffeadf58eb64ef57aef7e53a31e"
@@ -21,7 +21,7 @@
             <span v-show="show.parameter" class="info-68adaff1d028a37f27fb33c483329cba">
               <ul>
                 <li
-                  v-for="(data, index) in heroInfo.type"
+                  v-for="(data, index) in hero.info.type"
                   :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
                   class="info-fd136b2a1c6099bfa0535fe944e0cdc6"
                 >
@@ -52,12 +52,12 @@
             <AppGold width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
             <span
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
-            >{{ heroInfo.equMoneyMin || 0 }}</span>
+            >{{ hero.info.equMoneyMin || 0 }}</span>
 
             <AppTime width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
             <span
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
-            >{{ heroInfo.usedtime || 0 }}</span>
+            >{{ hero.info.usedtime || 0 }}</span>
           </div>
 
           <span class="info-9726255eec083aa56dc0449a21b33190">
@@ -65,23 +65,23 @@
               round
               color="black"
               class="info-ff2364a0be3d20e46cc69efb36afe9a5"
-            >{{ heroInfo.equMoneyOverflow || 0 }}</van-tag>
+            >{{ hero.info.equMoneyOverflow || 0 }}</van-tag>
           </span>
         </van-grid-item>
         <van-grid-item @click="show.actionSheet = true">
           <van-circle
-            v-model="circleModel"
-            :rate="heroInfo.dominanceRate"
+            v-model="circle.model"
+            :rate="hero.info.dominanceRate"
             :speed="33"
             :clockwise="false"
             :color="{ '0%': '#3fecff', '100%': '#6149f6' }"
-            :text="circleInfo.text"
+            :text="circle.info.text"
             size="75"
           />
           <img
             width="50"
             v-show="show.heroImg"
-            v-lazy="heroInfo.img"
+            v-lazy="hero.info.img"
             class="info-b798abe6e1b1318ee36b0dcb3fb9e4d3"
           />
         </van-grid-item>
@@ -89,7 +89,7 @@
           <div class="info-f3412345b511c61986bba9a39793157f">
             <span
               class="info-713dd4d0b2e842c08da62ddeec872331"
-              v-for="(data, index) in heroInfo.skill"
+              v-for="(data, index) in hero.info.skill"
               :key="'hero-713dd4d0b2e842c08da62ddeec872331-' + index"
             >
               <img
@@ -119,33 +119,33 @@
         <van-tab title="同职业对比" />
         <van-tab title="自定义对比" />
         <div class="hero-e06398232dc80e41209489705546802c">
-          <HeroLine v-show="tabsModel == 0" :heroId="heroInfo.id" />
+          <HeroLine v-show="tabsModel == 0" :heroId="hero.info.id" />
         </div>
         <div class="hero-ea950cb092f4e99e2ccf981cf503e5e3">
-          <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="heroInfo.id" />
+          <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
         </div>
       </van-tabs>
     </div>
 
     <div class="app-margin">
-      <HeroUpdate v-if="isLoaded" v-show="show.parameter" :heroId="heroInfo.id" />
+      <HeroUpdate v-if="isLoaded" v-show="show.parameter" :heroId="hero.info.id" />
     </div>
 
     <div class="hero-16e1b9e46fe4483c6bc17aea9d20736a">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="heroInfo.name + ' 的 ' + circleInfo.text"
+        :title="hero.info.name + ' 的 ' + circle.info.text"
         :close-on-click-action="true"
         safe-area-inset-bottom
       >
         <van-grid :border="false" :column-num="2">
           <van-grid-item @click="onHeroVoteClick(1)">
             <AppCry width="50" height="50" />
-            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circleInfo.vote[0].text }}</span>
+            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circle.info.vote[0].text }}</span>
           </van-grid-item>
           <van-grid-item @click="onHeroVoteClick(2)">
             <AppSmile width="50" height="50" />
-            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circleInfo.vote[1].text }}</span>
+            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circle.info.vote[1].text }}</span>
           </van-grid-item>
           <van-cell
             title="注意事项"
@@ -253,32 +253,36 @@ export default {
   },
   data() {
     return {
-      isLoaded: false,
       show: {
         heroImg: true,
         parameter: true,
         actionSheet: false
       },
       tabsModel: 0,
-      heroInfoTitle: "加载中",
-      heroInfo: {
-        id: 0
+      hero: {
+        title: "加载中",
+        info: {
+          id: 0
+        }
       },
-      circleModel: 0,
-      circleInfo: {
-        text: "加载中",
-        tips: "加载中",
-        vote: [
-          {
-            img: "/img/app-icons/cry.png",
-            text: "加载中"
-          },
-          {
-            img: "/img/app-icons/smile.png",
-            text: "加载中"
-          }
-        ]
-      }
+      circle: {
+        model: 0,
+        info: {
+          text: "加载中",
+          tips: "加载中",
+          vote: [
+            {
+              img: "/img/app-icons/cry.png",
+              text: "加载中"
+            },
+            {
+              img: "/img/app-icons/smile.png",
+              text: "加载中"
+            }
+          ]
+        }
+      },
+      isLoaded: false
     };
   },
   mounted() {
@@ -299,20 +303,20 @@ export default {
           this.isLoaded = true;
           let data = ret.data.data;
 
-          this.circleInfo = data.circleInfo;
+          this.circle.info = data.circleInfo;
           this.positionInfo = data.positionInfo;
-          this.heroInfo = data.heroInfo;
+          this.hero.info = data.heroInfo;
 
-          let heroInfo = this.heroInfo;
+          let heroInfo = this.hero.info;
 
-          this.heroInfoTitle = heroInfo.name;
-          document.title = this.heroInfo.name + " | 苏苏的荣耀助手";
+          this.hero.title = heroInfo.name;
+          document.title = this.hero.info.name + " | 苏苏的荣耀助手";
         });
     },
     onTipsClick: function() {
       this.$dialog.alert({
         title: "请客观评价该英雄",
-        message: this.circleInfo.tips
+        message: this.circle.info.tips
       });
     },
     onHeroVoteClick: function(voteType) {
@@ -320,7 +324,7 @@ export default {
         .get(
           this.apiList.pvp.addHeroVote +
             "&heroId=" +
-            this.heroInfo.id +
+            this.hero.info.id +
             "&voteType=" +
             voteType
         )
@@ -337,22 +341,22 @@ export default {
     onTabsChange: function(e) {
       e == 0 ? (this.show.parameter = true) : (this.show.parameter = false);
 
-      let heroInfo = this.heroInfo,
+      let heroInfo = this.hero.info,
         dTitle;
 
       if (e == 0) {
         dTitle = heroInfo.name;
-        this.heroInfoTitle = dTitle;
+        this.hero.title = dTitle;
       }
 
       if (e == 1) {
         dTitle = "同职业对比";
-        this.heroInfoTitle = dTitle;
+        this.hero.title = dTitle;
       }
 
       if (e == 2) {
         dTitle = "自定义对比";
-        this.heroInfoTitle = dTitle;
+        this.hero.title = dTitle;
       }
 
       document.title = dTitle + " | 苏苏的荣耀助手";

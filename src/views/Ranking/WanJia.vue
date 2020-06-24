@@ -46,8 +46,8 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="playerInfo.gamePlayerName + ' 如何打开'"
-        :actions="playerInfo.area < 3 ? actions : []"
+        :title="player.row.gamePlayerName + ' 如何打开'"
+        :actions="player.row.area < 3 ? actions : []"
         :close-on-click-action="true"
         safe-area-inset-bottom
         @select="onActionSheetSelect"
@@ -80,7 +80,12 @@ export default {
         actionSheet: false
       },
       actions: [{ name: "查看QQ", value: 0 }],
-      playerInfo: {},
+      player: {
+        row: {
+          area: 0,
+          gamePlayerName: "加载中"
+        }
+      },
       clientHeight: 0,
       isLoading: true
     };

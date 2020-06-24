@@ -518,7 +518,6 @@ export default {
   },
   data() {
     return {
-      isPortrait: true,
       index: {
         ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
@@ -590,7 +589,8 @@ export default {
         apps: false,
         hero: true
       },
-      eye: "eye-o"
+      eye: "eye-o",
+      isPortrait: true
     };
   },
   created() {

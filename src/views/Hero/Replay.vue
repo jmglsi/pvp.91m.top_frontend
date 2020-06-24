@@ -3,7 +3,7 @@
     <div class="hero-3717f3cb4a2b2b688e50fb4f63170918">
       <van-nav-bar :border="false" @click-left="$router.go(-1)">
         <template #title>
-          <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ heroInfo.name }}</span>
+          <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>
         </template>
         <van-icon name="arrow-left" slot="left" />
       </van-nav-bar>
@@ -138,10 +138,11 @@ export default {
   },
   data() {
     return {
-      teammate: false,
       collapseModel: ["1"],
-      heroInfo: {
-        id: 0
+      hero: {
+        info: {
+          id: 0
+        }
       },
       copyData: "",
       tableData: {
@@ -158,24 +159,25 @@ export default {
         { name: "复制链接", value: 0 },
         { name: "详情", subname: "需要安装王者营地", value: 1 },
         { name: "回顾", subname: "需要安装王者营地", value: 2 }
-      ]
+      ],
+      teammate: false
     };
   },
   mounted() {
     let heroId = this.$route.params.id;
-    this.heroInfo.id = heroId;
+    this.hero.info.id = heroId;
 
     this.getHeroInfo(heroId);
-    this.getHeroReplayByHeroId(this.heroInfo.id, 1);
+    this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
   methods: {
     getHeroInfo: function(heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
-          this.heroInfo = ret.data.data.heroInfo;
+          this.hero.info = ret.data.data.heroInfo;
 
-          document.title = this.heroInfo.name + " | 苏苏的荣耀助手";
+          document.title = this.hero.info.name + " | 苏苏的荣耀助手";
 
           if (heroId.indexOf(",") > -1) this.teammate = true;
         });
@@ -191,7 +193,7 @@ export default {
         .get("//s.91m.top/?url=" + url.substr(urlIndex + 1, url.length))
         .then(ret => {
           this.copyData =
-            this.heroInfo.name + " 的对局回顾 ↓\r-\r" + ret.data.data.url;
+            this.hero.info.name + " 的对局回顾 ↓\r-\r" + ret.data.data.url;
         });
     },
     getHeroReplayByHeroId: function(heroId, page) {
@@ -208,7 +210,7 @@ export default {
         });
     },
     onPaginationChange: function(e) {
-      this.getHeroReplayByHeroId(this.heroInfo.id, e);
+      this.getHeroReplayByHeroId(this.hero.info.id, e);
     },
     onReplaySelect: function(item) {
       let nowData = this.nowData;

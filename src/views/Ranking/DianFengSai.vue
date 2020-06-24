@@ -3,13 +3,13 @@
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
       <van-dropdown-menu>
         <van-dropdown-item
-          v-model="areaModel"
-          :options="areaOptions"
+          v-model="area.model"
+          :options="area.options"
           @change="onDropdownMenuChange"
         />
         <van-dropdown-item
-          v-model="heroModel"
-          :options="heroOptions"
+          v-model="position.model"
+          :options="position.options"
           @change="onDropdownMenuChange"
         />
       </van-dropdown-menu>
@@ -195,7 +195,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="heroInfo.name + ' 如何打开'"
+        :title="hero.row.name + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -242,23 +242,27 @@ export default {
   name: "RankingDianFengSai",
   data() {
     return {
-      areaModel: 0,
-      areaOptions: [
-        { text: "全部大区", value: 0 },
-        { text: "手 Q", value: 1 },
-        { text: "微信", value: 2 },
-        { text: "挨刀", value: 3 }
-      ],
-      heroModel: 0,
-      heroOptions: [
-        { text: "全部分路", value: 0 },
-        { text: "对抗 (战士)", value: 1 },
-        { text: "中路", value: 2 },
-        { text: "对抗 (坦克)", value: 3 },
-        { text: "打野", value: 4 },
-        { text: "发育", value: 5 },
-        { text: "辅助", value: 6 }
-      ],
+      area: {
+        model: 0,
+        options: [
+          { text: "全部大区", value: 0 },
+          { text: "手 Q", value: 1 },
+          { text: "微信", value: 2 },
+          { text: "挨刀", value: 3 }
+        ]
+      },
+      position: {
+        model: 0,
+        options: [
+          { text: "全部分路", value: 0 },
+          { text: "对抗 (战士)", value: 1 },
+          { text: "中路", value: 2 },
+          { text: "对抗 (坦克)", value: 3 },
+          { text: "打野", value: 4 },
+          { text: "发育", value: 5 },
+          { text: "辅助", value: 6 }
+        ]
+      },
       tableData: {
         color: {},
         result: []
@@ -273,8 +277,8 @@ export default {
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 }
       ],
-      heroInfo: {
-        hero: {
+      hero: {
+        row: {
           id: 0,
           name: "加载中",
           updatePid: 0
@@ -305,10 +309,10 @@ export default {
     },
     getHeroInfo: function(row) {
       this.show.actionSheet = true;
-      this.heroInfo = row;
+      this.hero.row = row;
     },
     onDropdownMenuChange: function() {
-      this.getHeroRanking(this.areaModel, this.heroModel);
+      this.getHeroRanking(this.area.model, this.position.model);
     },
     onCellClick: function({ row }) {
       this.getHeroInfo(row);
@@ -339,7 +343,7 @@ export default {
     },
     onActionSheetSelect: function(item) {
       let from = "02dba815434bc4a42eeeaf3443227aa4";
-      let heroInfo = this.heroInfo;
+      let heroInfo = this.hero.row;
 
       if (item.value == 0) {
         this.$router.push({

@@ -9,7 +9,7 @@
           <van-col span="8">
             <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
               <van-dropdown-menu direction="up" background="transparent">
-                <van-dropdown-item v-model="updateModel" :options="updateOptions" />
+                <van-dropdown-item v-model="update.model" :options="update.options" />
               </van-dropdown-menu>
             </div>
           </van-col>
@@ -20,7 +20,7 @@
         <a-timeline>
           <a-timeline-item
             v-for="(data, index) in dayTagInfo.result"
-            v-show="(updateModel == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (updateModel == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (updateModel == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
+            v-show="(update.model == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (update.model == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (update.model == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
             :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
             :color="data.calendarInfo.color"
           >
@@ -64,8 +64,8 @@
         :title="dayTagInfo.title"
         :show-confirm="false"
         :formatter="onFormatter"
-        :min-date="minDate"
-        :max-date="maxDate"
+        :min-date="date.min"
+        :max-date="date.max"
       />
     </div>
   </div>
@@ -122,17 +122,21 @@ export default {
   },
   data() {
     return {
-      updateModel: 0,
-      updateOptions: [
-        { text: "体验服", value: 0 },
-        { text: "正式服", value: 1 },
-        { text: "全部", value: 2 }
-      ],
+      update: {
+        model: 0,
+        options: [
+          { text: "体验服", value: 0 },
+          { text: "正式服", value: 1 },
+          { text: "全部", value: 2 }
+        ]
+      },
       show: {
         calendar: false
       },
-      minDate: new Date(),
-      maxDate: new Date(),
+      date: {
+        min: new Date(),
+        max: new Date()
+      },
       dayTagInfo: {
         active: 0,
         tips: null,
@@ -150,8 +154,8 @@ export default {
         });
 
       let date = new Date();
-      this.minDate = new Date(date.setMonth(date.getMonth() - 4));
-      this.maxDate = new Date(date.setMonth(date.getMonth() + 5));
+      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.date.max = new Date(date.setMonth(date.getMonth() + 5));
     },
     onFormatter: function(day) {
       let oDay =
