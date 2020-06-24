@@ -1,7 +1,13 @@
 <template>
   <div class="hero-replay">
     <div class="hero-3717f3cb4a2b2b688e50fb4f63170918">
-      <van-nav-bar :border="false" @click-left="$router.go(-1)">
+      <van-nav-bar
+        :border="false"
+        :fixed="true"
+        :placeholder="true"
+        z-index="2"
+        @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
+      >
         <template #title>
           <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>
         </template>

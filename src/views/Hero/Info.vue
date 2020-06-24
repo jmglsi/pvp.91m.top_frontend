@@ -3,14 +3,17 @@
     <div class="hero-a8137b0fb1cc9dcb896ce9a091695877">
       <van-nav-bar
         :border="false"
+        :fixed="true"
+        :placeholder="true"
+        z-index="2"
         @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
       >
+        <van-icon name="arrow-left" slot="left" />
         <template #title>
           <div
             @click="$message.info('巅峰赛趋势、分路推荐 ;D')"
             class="info-632d142d7a508e86f6c35a044a17411e"
           >
-            <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.title }}</span>
             <img
               v-if="hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
@@ -18,25 +21,26 @@
               width="15"
               class="info-3d5f1ffeadf58eb64ef57aef7e53a31e"
             />
-            <span v-show="show.parameter" class="info-68adaff1d028a37f27fb33c483329cba">
-              <ul>
-                <li
-                  v-for="(data, index) in hero.info.type"
-                  :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
-                  class="info-fd136b2a1c6099bfa0535fe944e0cdc6"
-                >
-                  <van-tag
-                    v-if="data > 0"
-                    :color="positionInfo[data][1]"
-                    round
-                    class="info-ff2364a0be3d20e46cc69efb36afe9a5"
-                  >{{ positionInfo[data][0] }}</van-tag>
-                </li>
-              </ul>
-            </span>
+            <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.title }}</span>
           </div>
         </template>
-        <van-icon name="arrow-left" slot="left" />
+        <template #right>
+          <span v-show="show.parameter" class="info-68adaff1d028a37f27fb33c483329cba">
+            <ul>
+              <li
+                v-for="(data, index) in hero.info.type"
+                :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
+              >
+                <van-tag
+                  v-if="data > 0"
+                  :color="positionInfo[data][1]"
+                  round
+                  class="info-bc267281c62550407c9572aff2a45f69"
+                >{{ positionInfo[data][0] }}</van-tag>
+              </li>
+            </ul>
+          </span>
+        </template>
       </van-nav-bar>
     </div>
 
@@ -171,9 +175,17 @@ div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav,
 .info-d57ac45256849d9b13e2422d91580fb9 {
   z-index: 1;
 }
+
+div.van-nav-bar__right {
+  width: 35%;
+}
 </style>
 
 <style scoped>
+.info-68adaff1d028a37f27fb33c483329cba li {
+  float: left;
+}
+
 .hero-16e1b9e46fe4483c6bc17aea9d20736a {
   text-align: left;
 }
@@ -184,19 +196,17 @@ div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav,
 
 .info-d5d3db1765287eef77d7927cc956f50a {
   font-size: 20px;
-}
-.info-3d5f1ffeadf58eb64ef57aef7e53a31e {
   margin: 0 5px;
+}
+
+.info-3d5f1ffeadf58eb64ef57aef7e53a31e {
   margin-top: -5px;
 }
 
 .info-68adaff1d028a37f27fb33c483329cba {
   position: absolute;
   margin-top: -3px;
-}
-
-.info-fd136b2a1c6099bfa0535fe944e0cdc6 {
-  float: left;
+  right: 20px;
 }
 
 .app-ff4a008470319a22d9cf3d14af485977 {
@@ -228,6 +238,10 @@ div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav,
 
 .info-ff2364a0be3d20e46cc69efb36afe9a5 {
   margin: 0 3px;
+}
+
+.info-bc267281c62550407c9572aff2a45f69 {
+  margin-left: 3px;
 }
 </style>
 

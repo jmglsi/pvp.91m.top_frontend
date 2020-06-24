@@ -34,8 +34,8 @@ Vue.prototype.appHeightInit = function(uWidth) {
     const cWidth = document.documentElement.clientWidth
 
     cWidth > cHeight ?
-        (this.clientHeight = cHeight - 138) :
-        (this.clientHeight = cHeight - 178)
+        (this.clientHeight = cHeight - 133) :
+        (this.clientHeight = cHeight - 173)
 
     cWidth >= uWidth ? (this.listWidth = 0) : (this.listWidth = 100)
 }

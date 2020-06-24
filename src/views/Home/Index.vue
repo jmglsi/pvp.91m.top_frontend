@@ -6,6 +6,7 @@
         :border="false"
         :ellipsis="false"
         :swipeable="true"
+        :sticky="true"
         @change="$router.push({query: { type: tabsModel, from: '7964334078bf3863a2f7809c20df23a3' }})"
         color="rgb(222, 177, 81)"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"

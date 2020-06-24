@@ -4,6 +4,9 @@
       <van-tabs
         v-model="tabsModel"
         :border="false"
+        :ellipsis="false"
+        :swipeable="true"
+        :sticky="true"
         @change="$router.push({query: { type: tabsModel, from: 'ee240fe51687ee66cca7493aedcc3c24' }})"
         color="rgb(222,177,81)"
       >
