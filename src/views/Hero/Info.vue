@@ -5,7 +5,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="2"
+        z-index="99999999"
         @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
       >
         <van-icon name="arrow-left" slot="left" />
@@ -68,7 +68,7 @@
             <van-tag
               round
               color="black"
-              class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+              class="info-1d61d12b768d71c075477fd92281464d"
             >{{ hero.info.equMoneyOverflow || 0 }}</van-tag>
           </span>
         </van-grid-item>
@@ -238,6 +238,10 @@ div.van-nav-bar__right {
 
 .info-ff2364a0be3d20e46cc69efb36afe9a5 {
   margin: 0 3px;
+}
+
+.info-1d61d12b768d71c075477fd92281464d {
+  margin: 7px 0 0 0;
 }
 
 .info-bc267281c62550407c9572aff2a45f69 {
