@@ -1,7 +1,7 @@
 <template>
   <div class="game-bp-portrait" v-if="isPortrait">
     <div class="game-a76e75b5854094183e66c274e1d276e9">
-      <img width="100" height="100" src="/img/app-icons/landscape.png" />
+      <img width="100" height="100" v-lazy="'/img/app-icons/landscape.png'" />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
     </div>
   </div>
@@ -20,7 +20,7 @@
       <div class="ban-8c9cb4a232c7e88403dddc3a0e589162 ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3">
         <ul>
           <li
-            v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
+            v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
             :key="'ban-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(1, 1, index)"
           >
@@ -32,7 +32,7 @@
                 width="30"
                 height="30"
                 v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                :class="mode =='edit' && gameInfo.list[tabsModel].stepsNow == index  ? blueStepsClass : ''"
+                :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
                 class="ban-eee32796c3fdfc147115c9f6e875c090"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -44,7 +44,7 @@
       <div class="ban-c6a2f8b3941d7f91bc4e51839e5371e0 ban-ba9bced6af8121cf6413000a4274ac2b">
         <ul>
           <li
-            v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
+            v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
             :key="'ban-64621b00510adc52b301306824c89659-' + index"
             @click="onGameBanPickClick(2, 1, index)"
           >
@@ -56,7 +56,7 @@
                 width="30"
                 height="30"
                 v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                :class="mode =='edit' && gameInfo.list[tabsModel].stepsNow == index  ? redStepsClass : ''"
+                :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
                 class="ban-aa95efe1c5d39e5e9389ca5833e63fbe"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -72,7 +72,7 @@
           <div class="pick-8c9cb4a232c7e88403dddc3a0e589162">
             <ul>
               <li
-                v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
+                v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
                 :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 @click="onGameBanPickClick(1, 2, index)"
               >
@@ -84,7 +84,7 @@
                     width="40"
                     height="40"
                     v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                    :class="mode =='edit' && gameInfo.list[tabsModel].stepsNow == index  ? blueStepsClass : ''"
+                    :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
                     class="pick-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -118,14 +118,14 @@
                     class="hero-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
                     <van-grid-item
-                      v-for="(data, index) in tableData.heroList"
+                      v-for="(data, index) in tableData.result"
                       v-show="data.trend == 2 && data.type == tableData.active + 1"
                       :key="'hero-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                       :icon="data.img"
                       :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
                     />
-                    <!-- gameInfo.list[tabsModel].blueBan.includes(data.id) || gameInfo.list[tabsModel].redBan.includes(data.id) || -->
+                    <!-- gameInfo.result[tabsModel].blue.ban.includes(data.id) || gameInfo.result[tabsModel].red.ban.includes(data.id) || -->
                   </van-grid>
                 </van-cell-group>
 
@@ -140,10 +140,11 @@
                     class="hero-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
                     <van-grid-item
-                      v-for="(data, index) in tableData.heroList"
+                      v-for="(data, index) in tableData.result"
                       v-show="data.trend != 2 && data.type == tableData.active + 1"
                       :key="'hero-35368a19f307e4af02d0df055846840d-' + index"
                       :icon="data.img"
+                      text=" "
                       :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
                     />
@@ -157,7 +158,7 @@
           <div class="pick-c6a2f8b3941d7f91bc4e51839e5371e0">
             <ul>
               <li
-                v-for="(data, index) in gameInfo.list[tabsModel].bpOrder"
+                v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
                 :key="'pick-64621b00510adc52b301306824c89659-' + index"
                 @click="onGameBanPickClick(2, 2, index)"
               >
@@ -169,7 +170,7 @@
                     width="40"
                     height="40"
                     v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
-                    :class="mode =='edit' && gameInfo.list[tabsModel].stepsNow == index  ? redStepsClass : ''"
+                    :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
                     class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -230,7 +231,7 @@
               </a-menu-item>
               <a-menu-divider />
               <a-menu-item
-                v-if="mode == 'edit' && gameInfo.list.length > 1 && gameInfo.list.length - 1 == tabsModel"
+                v-if="mode == 'edit' && gameInfo.result.length > 1 && gameInfo.result.length - 1 == tabsModel"
                 @click="onToolsMenuClick(1)"
               >
                 <a-icon type="minus" />删除本局
@@ -268,12 +269,12 @@
         class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab
-          v-for="(data, index) in gameInfo.list"
+          v-for="(data, index) in gameInfo.result"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
         >
           <template #title>
             <van-icon
-              :name="gameInfo.list[index].winCamp == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
+              :name="gameInfo.result[index].winCamp == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
             />
             第 {{ index + 1 }} 局
           </template>
@@ -318,16 +319,17 @@ div.hero-f3cc17bc0d768ca60b8bb496a10b1990
   height: 30px;
 }
 
-div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
-  i.van-icon.van-grid-item__icon
-  img.van-icon__image {
-  width: 40px;
-  height: 40px;
-}
-
 .hero-99938282f04071859941e18f16efcf42 {
   border-radius: 10px;
   overflow: hidden;
+}
+
+div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
+  i.van-icon.van-grid-item__icon
+  img.van-icon__image {
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
 }
 </style>
 
@@ -533,7 +535,6 @@ export default {
       self: "",
       opponent: "",
       perspective: 1,
-      gameTime: null,
       gameLabel: "new",
       tabsModel: 0,
       authorInfo: {
@@ -554,11 +555,22 @@ export default {
         }
       },
       gameInfo: {
-        list: [
+        result: [
           {
-            type: 1,
-            time: null,
+            game: {
+              type: 1,
+              time: null
+            },
+            blue: {
+              ban: [0, 0, 0, 0],
+              pick: [0, 0, 0, 0, 0]
+            },
+            red: {
+              ban: [0, 0, 0, 0],
+              pick: [0, 0, 0, 0, 0]
+            },
             stepsNow: 0,
+            stepsActive: 0,
             bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ],
@@ -566,7 +578,7 @@ export default {
       },
       tableData: {
         active: 0,
-        heroList: []
+        result: []
       },
       show: {
         apps: false,
@@ -595,7 +607,9 @@ export default {
       } else {
         this.getGameBP(gameLabel);
       }
-      this.getHeroList();
+      setTimeout(() => {
+        this.getHeroList();
+      }, 500);
     } else {
       this.$router.push({
         query: {
@@ -647,16 +661,16 @@ export default {
 
       let used = [];
       for (let i = 0; i < type; i++) {
-        let orderList = this.gameInfo.list[i];
+        let orderList = this.gameInfo.result[i];
 
-        this.gameInfo.list[i].blueBan = [
+        this.gameInfo.result[i].blue.ban = [
           orderList.bpOrder[0],
           orderList.bpOrder[2],
           orderList.bpOrder[11],
           orderList.bpOrder[13]
         ];
 
-        this.gameInfo.list[i].bluePick = [
+        this.gameInfo.result[i].blue.pick = [
           orderList.bpOrder[4],
           orderList.bpOrder[7],
           orderList.bpOrder[8],
@@ -664,14 +678,14 @@ export default {
           orderList.bpOrder[16]
         ];
 
-        this.gameInfo.list[i].redBan = [
+        this.gameInfo.result[i].red.ban = [
           orderList.bpOrder[1],
           orderList.bpOrder[3],
           orderList.bpOrder[10],
           orderList.bpOrder[12]
         ];
 
-        this.gameInfo.list[i].redPick = [
+        this.gameInfo.result[i].red.pick = [
           orderList.bpOrder[5],
           orderList.bpOrder[6],
           orderList.bpOrder[9],
@@ -681,17 +695,17 @@ export default {
 
         if (perspective == 1) {
           if (i % 2 == 0) {
-            used.push.apply(used, this.gameInfo.list[i].redPick);
+            used.push.apply(used, this.gameInfo.result[i].red.pick);
           } else {
-            used.push.apply(used, this.gameInfo.list[i].bluePick);
+            used.push.apply(used, this.gameInfo.result[i].blue.pick);
           }
         }
 
         if (perspective == 2) {
           if (i % 2 == 0) {
-            used.push.apply(used, this.gameInfo.list[i].bluePick);
+            used.push.apply(used, this.gameInfo.result[i].blue.pick);
           } else {
-            used.push.apply(used, this.gameInfo.list[i].redPick);
+            used.push.apply(used, this.gameInfo.result[i].red.pick);
           }
         }
         //队伍视角,会交换位置
@@ -701,9 +715,13 @@ export default {
     },
     getHeroList: function() {
       this.axios
-        .get(this.apiList.pvp.getHeroRanking + "&gameTime=" + this.gameTime)
+        .get(
+          this.apiList.pvp.getHeroRanking +
+            "&gameTime=" +
+            this.gameInfo.result[this.tabsModel].game.time
+        )
         .then(ret => {
-          this.tableData.heroList = ret.data.data.result;
+          this.tableData.result = ret.data.data.result;
         });
     },
     getGameBP: function(gameLabel) {
@@ -719,14 +737,13 @@ export default {
             return;
           }
 
-          data.result[tabsModel].type > 0
+          data.result[tabsModel].game.type > 0
             ? (this.show.apps = true)
             : (this.show.apps = false);
 
-          this.gameTime = data.result[tabsModel].gameTime;
           this.authorInfo = data.authorInfo;
           this.campInfo = data.campInfo;
-          this.gameInfo.list = data.result;
+          this.gameInfo.result = data.result;
 
           this.bpOrderInit(this.perspective, tabsModel + 1);
         });
@@ -736,16 +753,27 @@ export default {
     },
     onCreateNewGameClick: function() {
       let newGame = {
-        type: 1,
-        time: null,
+        game: {
+          type: 1,
+          time: null
+        },
+        blue: {
+          ban: [0, 0, 0, 0],
+          pick: [0, 0, 0, 0, 0]
+        },
+        red: {
+          ban: [0, 0, 0, 0],
+          pick: [0, 0, 0, 0, 0]
+        },
         stepsNow: 0,
+        stepsActive: 0,
         bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       };
 
-      if (this.gameInfo.list.length > 5) {
+      if (this.gameInfo.result.length > 5) {
         this.$message.error("错误:1001,最多创建 6 局");
       } else {
-        this.gameInfo.list.push(newGame);
+        this.gameInfo.result.push(newGame);
         this.$message.success("创建成功");
       }
     },
@@ -792,12 +820,12 @@ export default {
 
       let tabsModel = this.tabsModel;
 
-      if (this.gameInfo.list[tabsModel].bpOrder[newIndex - 1] == 0) {
+      if (this.gameInfo.result[tabsModel].bpOrder[newIndex - 1] == 0) {
         this.$message.error("错误:1002,请按顺序BP");
         return;
       }
 
-      let oldIndex = this.gameInfo.list[tabsModel].stepsNow;
+      let oldIndex = this.gameInfo.result[tabsModel].stepsNow;
 
       if (this.mode == "edit") {
         if (
@@ -807,15 +835,15 @@ export default {
         }
         //切换阵容时初始化
 
-        this.gameInfo.list[tabsModel].stepsNow = newIndex;
+        this.gameInfo.result[tabsModel].stepsNow = newIndex;
       }
     },
     onGamePickHeroClick: function(hero) {
       let tabsModel = this.tabsModel;
 
       if (
-        this.gameInfo.list[tabsModel].blueBan.includes(hero.id) ||
-        this.gameInfo.list[tabsModel].redBan.includes(hero.id)
+        this.gameInfo.result[tabsModel].blue.ban.includes(hero.id) ||
+        this.gameInfo.result[tabsModel].red.ban.includes(hero.id)
       ) {
         this.$message.warning("警告:1003," + hero.name + " 已被禁用");
         return;
@@ -828,21 +856,21 @@ export default {
 
       if (this.mode == "view") return;
 
-      let oldIndex = this.gameInfo.list[tabsModel].stepsNow;
+      let oldIndex = this.gameInfo.result[tabsModel].stepsNow;
       let newIndex = 0;
       if (oldIndex > 17) {
         newIndex = 0;
       } else {
         newIndex = oldIndex + 1;
 
-        this.gameInfo.list[tabsModel].bpOrder.splice(oldIndex, 1, hero.id);
+        this.gameInfo.result[tabsModel].bpOrder.splice(oldIndex, 1, hero.id);
       }
 
       if (this.index.perspective[oldIndex] == 1) {
         this.onGamePerspectiveClick(0);
       }
 
-      this.gameInfo.list[tabsModel].stepsNow = newIndex;
+      this.gameInfo.result[tabsModel].stepsNow = newIndex;
 
       this.bpOrderInit(this.perspective, tabsModel + 1);
     },
@@ -872,7 +900,7 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.gameInfo.list.splice(tabsModel, 1);
+            this.gameInfo.result.splice(tabsModel, 1);
             this.tabsModel = tabsModel - 1;
           })
           .catch(() => {
@@ -889,7 +917,7 @@ export default {
           this.mode = "edit";
           this.$message.info("已进入编辑模式");
 
-          this.index.ban.includes(this.gameInfo.list[tabsModel].stepsNow) &&
+          this.index.ban.includes(this.gameInfo.result[tabsModel].stepsNow) &&
           tabsModel % 2 == 0
             ? (this.perspective = 2)
             : (this.perspective = 1);

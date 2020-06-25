@@ -195,7 +195,6 @@ div.van-nav-bar__right {
 }
 
 .info-d5d3db1765287eef77d7927cc956f50a {
-  font-size: 20px;
   margin: 0 5px;
 }
 

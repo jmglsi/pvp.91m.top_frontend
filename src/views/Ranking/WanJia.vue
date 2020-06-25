@@ -46,8 +46,8 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="player.row.gamePlayerName + ' 如何打开'"
-        :actions="player.row.area < 3 ? actions : []"
+        :title="tableData.row.gamePlayerName + ' 如何打开'"
+        :actions="tableData.row.area < 3 ? actions : []"
         :close-on-click-action="true"
         safe-area-inset-bottom
         @select="onActionSheetSelect"
@@ -74,18 +74,16 @@ export default {
         { text: "微信苹果", value: 4 }
       ],
       tableData: {
-        result: []
-      },
-      show: {
-        actionSheet: false
-      },
-      actions: [{ name: "查看QQ", value: 0 }],
-      player: {
+        result: [],
         row: {
           area: 0,
           gamePlayerName: "加载中"
         }
       },
+      show: {
+        actionSheet: false
+      },
+      actions: [{ name: "查看QQ", value: 0 }],
       clientHeight: 0,
       isLoading: true
     };
@@ -102,6 +100,10 @@ export default {
         .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
           this.tableData = ret.data.data;
+          this.tableData.row = {
+            area: 0,
+            gamePlayerName: "加载中"
+          };
           this.isLoading = false;
         });
     },
@@ -129,7 +131,7 @@ export default {
             "\r-\r更多玩家信息 ↓\r" +
             location.origin +
             location.pathname +
-            "?type=2&from=copyshare&userId=" +
+            "?type=2&from=71f24db02647f7d930444128c0b02003&userId=" +
             row.userId;
         });
     },

@@ -23,7 +23,7 @@
           :name="index"
           :value="data.time"
         >
-          <div slot="title" class="replay-d5d3db1765287eef77d7927cc956f50a">
+          <div slot="title" class="replay-a78656fbfb5b498e5cb80b5b13076e31">
             <van-tag
               :type="data.status"
               round
@@ -78,7 +78,7 @@
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="nowData.gamePlayerName + ' 如何打开'"
+        :title="tableData.row.gamePlayerName + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -105,15 +105,11 @@ div.van-collapse {
   margin-top: 3px;
 }
 
-.info-d5d3db1765287eef77d7927cc956f50a {
-  font-size: 20px;
-}
-
 .replay-ce50a09343724eb82df11390e2c1de18 {
   margin-right: 3px;
 }
 
-.replay-d5d3db1765287eef77d7927cc956f50a {
+.replay-a78656fbfb5b498e5cb80b5b13076e31 {
   text-align: left;
 }
 
@@ -154,10 +150,12 @@ export default {
       tableData: {
         result: [],
         total: 200,
-        pageSize: 25
+        pageSize: 25,
+        row: {
+          gamePlayerName: "加载中"
+        }
       },
       paginationModel: 1,
-      nowData: {},
       show: {
         actionSheet: false
       },
@@ -189,7 +187,7 @@ export default {
         });
     },
     onGameActionSheetClick: function(row) {
-      this.nowData = row;
+      this.tableData.row = row;
       this.show.actionSheet = true;
 
       let url = row.url,
@@ -213,24 +211,35 @@ export default {
         )
         .then(ret => {
           this.tableData = ret.data.data;
+          this.tableData.row = {
+            gamePlayerName: "加载中"
+          };
         });
     },
     onPaginationChange: function(e) {
       this.getHeroReplayByHeroId(this.hero.info.id, e);
     },
     onReplaySelect: function(item) {
-      let nowData = this.nowData;
+      let replayInfo = this.tableData.row;
 
       if (item.value == 0) {
         this.appCopyData(this.copyData);
       }
 
       if (item.value == 1) {
-        this.appOpenUrl("是否打开对局详情?", "需要安装王者营地", nowData.hippy);
+        this.appOpenUrl(
+          "是否打开对局详情?",
+          "需要安装王者营地",
+          replayInfo.hippy
+        );
       }
 
       if (item.value == 2) {
-        this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", nowData.url);
+        this.appOpenUrl(
+          "是否打开对局回顾?",
+          "需要安装王者营地",
+          replayInfo.url
+        );
       }
     }
   }

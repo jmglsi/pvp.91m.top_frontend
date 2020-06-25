@@ -50,14 +50,12 @@
         :items-per-page="tableData.pageSize"
         @change="onPaginationChange"
       />
-
-      <van-divider :style="{ color: '#1989fa', borderColor: '#1989fa' }">有问题请联系相关客服</van-divider>
     </div>
 
     <div class="bilibili-8fd741f0ce683493b1bed18a2ed32d4a">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="orderInfo.uid + ' 如何打开'"
+        :title="tableData.row.uid + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -90,10 +88,13 @@ export default {
         value: ""
       },
       tableData: {
-        searchPlaceholder: "请输入搜索关键词",
+        searchPlaceholder: "请输入【视频id】,例如:bv12345",
         result: [],
         total: 200,
-        pageSize: 50
+        pageSize: 50,
+        row: {
+          uid: 0
+        }
       },
       paginationModel: 1,
       listWidth: 0,
@@ -104,33 +105,24 @@ export default {
         { name: "复制订单", value: 0 },
         { name: "查看相关", value: 1 }
       ],
-      orderInfo: {},
       clientHeight: 0,
       copyAv: "",
       copyData: "",
-      checkModel: true,
+      checkModel: false,
       isLoading: true
     };
   },
   created() {
-    const cHeight = document.documentElement.clientHeight;
-    const cWidth = document.documentElement.clientWidth;
-
-    cWidth > cHeight
-      ? (this.clientHeight = cHeight - (84 + 125))
-      : (this.clientHeight = cHeight - (129 + 80));
-
-    cWidth > cHeight && cWidth >= 900
-      ? (this.listWidth = 0)
-      : (this.listWidth = 100);
+    this.appHeightInit(1440);
   },
-  activated() {
-    this.search.value = "";
+  mounted() {
     let uid = this.$route.query.uid;
 
     !uid ? (this.search.value = "") : (this.search.value = uid);
 
-    this.getOrderInfo(this.search.value, 1);
+    this.getOrderInfoInterval = setInterval(() => {
+      this.getOrderInfo(this.search.value, this.paginationModel);
+    }, 1000 * 10);
   },
   methods: {
     getOrderInfo: function(uid, page) {
@@ -144,6 +136,9 @@ export default {
         )
         .then(ret => {
           this.tableData = ret.data.data;
+          this.tableData.row = {
+            uid: 0
+          };
           this.isLoading = false;
 
           if (this.copyAv) {
@@ -157,7 +152,7 @@ export default {
     },
     onActionSheetClick: function(row) {
       this.show.actionSheet = true;
-      this.orderInfo = row;
+      this.tableData.row = row;
 
       this.axios
         .get(
@@ -200,6 +195,8 @@ export default {
       clearInterval(this.getOrderInfoInterval);
     },
     onSearch: function() {
+      clearInterval(this.getOrderInfoInterval);
+
       let searchValue = this.search.value;
       if (!searchValue) return;
 
@@ -210,18 +207,14 @@ export default {
       }
 
       this.getOrderInfo(this.search.value, this.paginationModel);
-
-      clearInterval(this.getOrderInfoInterval);
-      this.getOrderInfoInterval = setInterval(() => {
-        this.getOrderInfo(this.search.value, this.paginationModel);
-      }, 1000 * 10);
     },
     onCheckBoxChange: function(e) {
-      clearInterval(this.getOrderInfoInterval);
       if (e == true) {
         this.getOrderInfoInterval = setInterval(() => {
           this.getOrderInfo(this.search.value, this.paginationModel);
         }, 1000 * 10);
+      } else {
+        clearInterval(this.getOrderInfoInterval);
       }
     },
     onPaginationChange: function(e) {
@@ -231,7 +224,7 @@ export default {
       this.onActionSheetClick(row);
     },
     onActionSheetSelect: function(item) {
-      let orderInfo = this.orderInfo;
+      let orderInfo = this.tableData.row;
 
       if (item.value == 0) {
         this.appCopyData(this.copyData);

@@ -91,7 +91,7 @@
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="hero.row.name_1 + ' & ' + hero.row.name_2 + ' 如何打开'"
+        :title="tableData.row.name_1 + ' & ' + tableData.row.name_2 + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -120,7 +120,11 @@ export default {
       tableData: {
         searchPlaceholder: [],
         color: {},
-        result: []
+        result: [],
+        row: {
+          name_1: "加载中",
+          name_2: "加载中"
+        }
       },
       show: {
         actionSheet: false
@@ -129,12 +133,6 @@ export default {
         { name: "复制信息", value: 0 },
         { name: "对局回顾", value: 1 }
       ],
-      hero: {
-        row: {
-          name_1: "加载中",
-          name_2: "加载中"
-        }
-      },
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
@@ -168,6 +166,10 @@ export default {
         )
         .then(ret => {
           this.tableData = ret.data.data;
+          this.tableData.row = {
+            name_1: "加载中",
+            name_2: "加载中"
+          };
           this.isLoading = false;
 
           if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
@@ -175,10 +177,10 @@ export default {
     },
     getHeroInfo: function(row) {
       this.show.actionSheet = true;
-      this.hero.row = row;
+      this.tableData.row = row;
 
       let heroName = this.search.value;
-      if (!heroName) heroName = this.hero.row.name_1;
+      if (!heroName) heroName = this.tableData.row.name_1;
 
       this.axios
         .get(
@@ -186,7 +188,7 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?type=1&from=copyshare&heroName=" +
+                "?type=1&from=71f24db02647f7d930444128c0b02003&heroName=" +
                 encodeURIComponent(heroName) +
                 "&heroId1=" +
                 row.id_1 +
@@ -278,7 +280,7 @@ export default {
       this.getHeroInfo(row);
     },
     onActionSheetSelect: function(item) {
-      let heroInfo = this.hero.row;
+      let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
         this.appCopyData(this.copyData);

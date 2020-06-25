@@ -8,8 +8,8 @@
           </van-col>
           <van-col span="8">
             <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
-              <van-dropdown-menu direction="up" background="transparent">
-                <van-dropdown-item v-model="update.model" :options="update.options" />
+              <van-dropdown-menu direction="up">
+                <van-dropdown-item v-model="updateInfo.model" :options="updateInfo.options" />
               </van-dropdown-menu>
             </div>
           </van-col>
@@ -20,7 +20,7 @@
         <a-timeline>
           <a-timeline-item
             v-for="(data, index) in dayTagInfo.result"
-            v-show="(update.model == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (update.model == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (update.model == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
+            v-show="(updateInfo.model == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (updateInfo.model == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (updateInfo.model == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
             :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
             :color="data.calendarInfo.color"
           >
@@ -122,7 +122,7 @@ export default {
   },
   data() {
     return {
-      update: {
+      updateInfo: {
         model: 0,
         options: [
           { text: "体验服", value: 0 },

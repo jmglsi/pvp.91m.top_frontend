@@ -3,13 +3,13 @@
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
       <van-dropdown-menu>
         <van-dropdown-item
-          v-model="area.model"
-          :options="area.options"
+          v-model="areaInfo.model"
+          :options="areaInfo.options"
           @change="onDropdownMenuChange"
         />
         <van-dropdown-item
-          v-model="position.model"
-          :options="position.options"
+          v-model="positionInfo.model"
+          :options="positionInfo.options"
           @change="onDropdownMenuChange"
         />
       </van-dropdown-menu>
@@ -195,7 +195,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="hero.row.name + ' 如何打开'"
+        :title="tableData.row.name + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -242,7 +242,7 @@ export default {
   name: "RankingDianFengSai",
   data() {
     return {
-      area: {
+      areaInfo: {
         model: 0,
         options: [
           { text: "全部大区", value: 0 },
@@ -251,7 +251,7 @@ export default {
           { text: "挨刀", value: 3 }
         ]
       },
-      position: {
+      positionInfo: {
         model: 0,
         options: [
           { text: "全部分路", value: 0 },
@@ -265,7 +265,12 @@ export default {
       },
       tableData: {
         color: {},
-        result: []
+        result: [],
+        row: {
+          id: 0,
+          name: "加载中",
+          updatePid: 0
+        }
       },
       show: {
         actionSheet: false
@@ -277,13 +282,6 @@ export default {
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 }
       ],
-      hero: {
-        row: {
-          id: 0,
-          name: "加载中",
-          updatePid: 0
-        }
-      },
       listWidth: 0,
       clientHeight: 0,
       isLoading: true
@@ -304,15 +302,20 @@ export default {
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then(ret => {
           this.tableData = ret.data.data;
+          this.tableData.row = {
+            id: 0,
+            name: "加载中",
+            updatePid: 0
+          };
           this.isLoading = false;
         });
     },
     getHeroInfo: function(row) {
       this.show.actionSheet = true;
-      this.hero.row = row;
+      this.tableData.row = row;
     },
     onDropdownMenuChange: function() {
-      this.getHeroRanking(this.area.model, this.position.model);
+      this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
     },
     onCellClick: function({ row }) {
       this.getHeroInfo(row);
@@ -343,7 +346,7 @@ export default {
     },
     onActionSheetSelect: function(item) {
       let from = "02dba815434bc4a42eeeaf3443227aa4";
-      let heroInfo = this.hero.row;
+      let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
         this.$router.push({

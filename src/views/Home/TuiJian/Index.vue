@@ -23,7 +23,7 @@
               class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
               @click="data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null"
             >
-              <img :src="data.img" class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9" />
+              <img v-lazy="data.img" class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9" />
               <van-tag
                 :color="data.tag.color"
                 mark

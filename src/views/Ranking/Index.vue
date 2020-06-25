@@ -48,14 +48,6 @@ div.ranking div.van-dropdown-menu__bar {
   height: 54px;
 }
 
-/*
-div.van-nav-bar,
-div.van-cell-group,
-div.van-grid-item__content {
-  background-color: transparent;
-}
-*/
-
 td.vxe-body--column {
   padding: 13px 0;
 }

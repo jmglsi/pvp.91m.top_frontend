@@ -58,20 +58,26 @@ img {
 </style>
 
 <style>
-div.app-b5e3c0b9ac8b718b9b4cb60f4fabe214
-  div.van-grid-item__content
-  i.van-icon.van-grid-item__icon
-  img.van-icon__image {
+i.van-icon.van-grid-item__icon img.van-icon__image {
   border-radius: 100%;
   width: 40px;
   height: 40px;
+}
+
+div.van-grid-item__content.van-grid-item__content--center
+  span.van-grid-item__text {
+  font-weight: 600;
+}
+
+div.van-nav-bar__title {
+  font-size: 20px;
 }
 
 div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
   border-radius: 0;
 }
 
-.tuijian-447b7147e84be512208dcc0995d67ebc,
+div.tuijian-447b7147e84be512208dcc0995d67ebc,
 div.hero-f3cc17bc0d768ca60b8bb496a10b1990
   div.van-tabs__wrap.van-tabs__wrap--scrollable
   div.van-tabs__nav {
@@ -80,13 +86,13 @@ div.hero-f3cc17bc0d768ca60b8bb496a10b1990
 </style>
 
 <style>
-.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
+img.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
   width: 15px;
   height: 15px;
   margin-top: -3px;
 }
 
-.tuijian-447b7147e84be512208dcc0995d67ebc {
+div.tuijian-447b7147e84be512208dcc0995d67ebc {
   border-radius: 10px;
   padding: 15px 10px;
   margin: 20px 10px;
@@ -128,8 +134,8 @@ div.game-bp i.van-button__icon img.van-icon__image {
 </style>
 
 <style>
-.my-0162f4b7b2dbdf6aff3a25de02e49a8b,
-.my-4236a440a662cc8253d7536e5aa17942 {
+button.my-0162f4b7b2dbdf6aff3a25de02e49a8b,
+button.my-4236a440a662cc8253d7536e5aa17942 {
   width: 150px;
   height: 35px;
 }
