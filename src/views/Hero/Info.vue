@@ -7,13 +7,11 @@
         :placeholder="true"
         z-index="99999999"
         @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
+        @click-right="$message.info('分路推荐 ;D')"
       >
         <van-icon name="arrow-left" slot="left" />
         <template #title>
-          <div
-            @click="$message.info('巅峰赛趋势、分路推荐 ;D')"
-            class="info-632d142d7a508e86f6c35a044a17411e"
-          >
+          <div @click="$message.info('近期热度 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">
             <img
               v-if="hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
@@ -25,7 +23,7 @@
           </div>
         </template>
         <template #right>
-          <span v-show="show.parameter" class="info-68adaff1d028a37f27fb33c483329cba">
+          <div v-show="show.parameter" class="info-68adaff1d028a37f27fb33c483329cba">
             <ul>
               <li
                 v-for="(data, index) in hero.info.type"
@@ -39,7 +37,7 @@
                 >{{ positionInfo[data][0] }}</van-tag>
               </li>
             </ul>
-          </span>
+          </div>
         </template>
       </van-nav-bar>
     </div>
@@ -51,7 +49,7 @@
         v-show="show.parameter"
         class="app-ff4a008470319a22d9cf3d14af485977"
       >
-        <van-grid-item @click="$message.info('分均经济、场均时长、场均经济 XD')">
+        <van-grid-item @click="$message.info('分均经济、场均时长、场均经济 ;D')">
           <div class="info-795f3202b17cb6bc3d4b771d8c6c9eaf">
             <AppGold width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
             <span
