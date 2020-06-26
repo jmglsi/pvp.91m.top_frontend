@@ -17,6 +17,7 @@
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-grid
+        ref="dianfengsai"
         :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
@@ -33,17 +34,24 @@
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
             >{{ row.tag.text }}</van-tag>
-            <img v-lazy="row.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+            <img
+              v-lazy="row.img"
+              width="50"
+              height="50"
+              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            />
             <img
               v-if="row.trend > 0"
               v-lazy="'/img/app-icons/hot-' + row.trend + '.png'"
               width="15"
+              height="15"
               class="dfs-3d5f1ffeadf58eb64ef57aef7e53a31e"
             />
             <div class="dfs-713dd4d0b2e842c08da62ddeec872331">
               <img
-                width="20"
                 v-lazy="row.skill[0].img"
+                width="20"
+                height="20"
                 class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-35af5e6c0fc290aa4f2e38d4c8296a03"
               />
               <span
@@ -53,6 +61,7 @@
                 v-if="row.skill[1].id"
                 v-lazy="row.skill[1].img"
                 width="20"
+                height="20"
                 class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-fbfe7b256ce6b4df1d03d8022163c6d2"
               />
               <span
@@ -232,6 +241,7 @@
 .skill-043052eea2d064cab23119e56f4f640e {
   left: -20px;
 }
+
 .skill-dabb6e25dffefe5b4821b7062afbdaef {
   left: 25px;
 }

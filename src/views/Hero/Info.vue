@@ -17,6 +17,7 @@
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
               v-show="show.parameter"
               width="15"
+              height="15"
               class="info-3d5f1ffeadf58eb64ef57aef7e53a31e"
             />
             <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.title }}</span>
@@ -81,9 +82,10 @@
             size="75"
           />
           <img
-            width="50"
             v-show="show.heroImg"
             v-lazy="hero.info.img"
+            width="50"
+            height="50"
             class="info-b798abe6e1b1318ee36b0dcb3fb9e4d3"
           />
         </van-grid-item>
@@ -98,6 +100,7 @@
                 v-if="data.id > 0"
                 v-lazy="data.img"
                 width="25"
+                height="25"
                 class="info-ff2364a0be3d20e46cc69efb36afe9a5"
               />
               <span
@@ -169,8 +172,7 @@ div.van-circle__text {
   font-size: 10px;
 }
 
-div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav,
-.info-d57ac45256849d9b13e2422d91580fb9 {
+div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav {
   z-index: 1;
 }
 

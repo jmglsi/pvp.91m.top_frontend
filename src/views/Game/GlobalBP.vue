@@ -1,7 +1,7 @@
 <template>
   <div class="game-bp-portrait" v-if="isPortrait">
     <div class="game-a76e75b5854094183e66c274e1d276e9">
-      <img width="100" height="100" v-lazy="'/img/app-icons/landscape.png'" />
+      <img v-lazy="'/img/app-icons/landscape.png'" width="100" height="100" />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
     </div>
   </div>
@@ -29,10 +29,10 @@
               class="ban-4978748050a936d2f77fe718f1d81524"
             >
               <img
-                width="30"
-                height="30"
                 v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
+                width="30"
+                height="30"
                 class="ban-eee32796c3fdfc147115c9f6e875c090"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -53,10 +53,10 @@
               class="ban-6e9c0050fe873888fbf53ec6f7b21816"
             >
               <img
-                width="30"
-                height="30"
                 v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
+                width="30"
+                height="30"
                 class="ban-aa95efe1c5d39e5e9389ca5833e63fbe"
               />
               <AppLock width="25" height="25" class="ban-dce7c4174ce9323904a934a486c41288" />
@@ -81,10 +81,10 @@
                   class="pick-4978748050a936d2f77fe718f1d81524"
                 >
                   <img
-                    width="40"
-                    height="40"
                     v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
+                    width="40"
+                    height="40"
                     class="pick-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -167,10 +167,10 @@
                   class="pick-6e9c0050fe873888fbf53ec6f7b21816"
                 >
                   <img
-                    width="40"
-                    height="40"
                     v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
+                    width="40"
+                    height="40"
                     class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -317,6 +317,10 @@ div.hero-f3cc17bc0d768ca60b8bb496a10b1990
   div.van-tabs__wrap.van-tabs__wrap--scrollable {
   border-radius: 100px;
   height: 30px;
+}
+
+div.hero-f3cc17bc0d768ca60b8bb496a10b1990 span.van-tab__text {
+  margin: 6px 0;
 }
 
 .hero-99938282f04071859941e18f16efcf42 {

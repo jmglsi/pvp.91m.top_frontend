@@ -16,6 +16,7 @@
 
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-grid
+        ref="wanjia"
         :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
@@ -31,7 +32,12 @@
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
             >{{ row.tag.text }}</van-tag>
-            <img v-lazy="row.avatar" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+            <img
+              v-lazy="row.avatar"
+              width="50"
+              height="50"
+              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            />
           </template>
         </vxe-table-column>
 
@@ -111,7 +117,7 @@ export default {
       if (row.userId == 0) return;
 
       this.show.actionSheet = true;
-      this.playerInfo = row;
+      this.tableData.row = row;
 
       this.axios
         .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)

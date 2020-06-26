@@ -7,7 +7,7 @@
         :mark-line="markLine"
         :mark-point="markPoint"
         :data="tableData.result"
-        width="99%"
+        width="99.2%"
       />
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="game-home">
-    <div class="game-c8d46d341bea4fd5bff866a65ff8aea9">
+    <div class="game-c8d46d341bea4fd5bff866a65ff8aea9 grid-4eb2044800e2b7b9e5c44d370af22b27">
       <van-cell-group title="官方赛事">
         <van-cell
           v-for="(data, index) in tableData.official.result"

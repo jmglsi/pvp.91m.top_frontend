@@ -11,7 +11,7 @@
       <van-tabbar
         v-model="tabbar.active"
         v-show="tabbar.default.show"
-        :z-index="2"
+        :z-index="3"
         fixed
         safe-area-inset-bottom
         active-color="rgb(222, 177, 81)"
@@ -55,10 +55,16 @@ img {
   border-radius: 10px;
   object-fit: cover;
 }
+
+span.van-tab__text {
+  margin: 11px 0 12px 0;
+}
 </style>
 
 <style>
-i.van-icon.van-grid-item__icon img.van-icon__image {
+div.grid-4eb2044800e2b7b9e5c44d370af22b27
+  i.van-icon.van-grid-item__icon
+  img.van-icon__image {
   border-radius: 100%;
   width: 40px;
   height: 40px;

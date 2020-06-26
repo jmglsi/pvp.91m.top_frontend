@@ -13,6 +13,7 @@
 
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-grid
+        ref="guanxi"
         :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
@@ -22,22 +23,24 @@
       >
         <vxe-table-column title="英雄_1" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
-            <img v-lazy="row.hero_1.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
-            <div class="row-8d777f385d3dfec8815d20f7496026dc">
-              <span
-                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c row-d57964e1d6adcef4cf486eda0333b596"
-              >{{ row.hero_1.adaptationRate }}</span>
-            </div>
+            <img
+              v-lazy="row.hero_1.img"
+              width="50"
+              height="50"
+              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            />
+            <div class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c">{{ row.hero_1.adaptationRate }}</div>
           </template>
         </vxe-table-column>
         <vxe-table-column title="英雄_2" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
-            <img v-lazy="row.hero_2.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
-            <div class="row-8d777f385d3dfec8815d20f7496026dc">
-              <span
-                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c row-d57964e1d6adcef4cf486eda0333b596"
-              >{{ row.hero_2.adaptationRate }}</span>
-            </div>
+            <img
+              v-lazy="row.hero_2.img"
+              width="50"
+              height="50"
+              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            />
+            <div class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c">{{ row.hero_2.adaptationRate }}</div>
           </template>
         </vxe-table-column>
 
@@ -100,13 +103,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.row-d57964e1d6adcef4cf486eda0333b596 {
-  margin-left: -25px;
-  margin-top: -8px;
-}
-</style>
 
 <script>
 export default {

@@ -33,6 +33,7 @@ import './assets/import/vxe-table'
 
 import './assets/js/app'
 import './assets/js/bilibili'
+
 import apiList from './assets/js/apiList'
 Vue.prototype.apiList = apiList
 
