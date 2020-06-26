@@ -5,18 +5,20 @@ import {
     Icon,
     Column,
     Header,
-    Loading,
     Grid,
     Table
 } from 'vxe-table'
 
 VXETable.setup({
-    border: "none",
-    showOverflow: false,
-    highlightCurrentRow: true,
-    highlightHoverRow: true
+    table: {
+        align: "center",
+        border: "none",
+        showOverflow: null,
+        highlightCurrentRow: true,
+        highlightHoverRow: true
+    }
 });
 
-Vue.use(Column).use(Icon).use(Header).use(Loading).use(Grid).use(Table)
+Vue.use(Column).use(Icon).use(Header).use(Grid).use(Table)
 
 Vue.prototype.$XModal = VXETable.modal
