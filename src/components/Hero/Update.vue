@@ -4,7 +4,7 @@
       <div class="tuijian-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
           <van-col span="16" @click="show.calendar = true">
-            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{ dayTagInfo.tips }}</span>
+            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{ tableData.tips }}</span>
           </van-col>
           <van-col span="8">
             <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
@@ -19,16 +19,16 @@
       <div class="tuijian-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
-            v-for="(data, index) in dayTagInfo.result"
-            v-show="(updateInfo.model == 0 && dayTagInfo.result[index].calendarInfo.type <= 0) || (updateInfo.model == 1 && dayTagInfo.result[index].calendarInfo.type > 0) || (updateInfo.model == 2 && dayTagInfo.result[index].calendarInfo.type > -1)"
+            v-for="(data, index) in tableData.result"
+            v-show="(updateInfo.model == 0 && data.calendar.type <= 0) || (updateInfo.model == 1 && data.calendar.type > 0) || (updateInfo.model == 2 && data.calendar.type > -1)"
             :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
-            :color="data.calendarInfo.color"
+            :color="data.calendar.color"
           >
             <van-tag
-              v-if="data.calendarInfo.day"
-              :color="data.calendarInfo.color"
+              v-if="data.calendar.day"
+              :color="data.calendar.color"
               round
-            >{{ data.calendarInfo.day }}</van-tag>
+            >{{ data.calendar.day }}</van-tag>
             <div v-if="data.url" class="tuijian-5a5152e95445ede11c05f5fa898d8fd9">
               <a :href="data.url" target="_blank">
                 <img
@@ -42,7 +42,7 @@
             <div v-if="data.item.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
                 v-for="(dataItem, index) in data.item"
-                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { from: 'dayTag-' + data.calendarInfo.day } }"
+                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { from: 'dayTag-' + data.calendar.day } }"
                 :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
               >
                 <img
@@ -61,7 +61,7 @@
     <div class="tuijian-a0e7b2a565119c0a7ec3126a16016113">
       <van-calendar
         v-model="show.calendar"
-        :title="dayTagInfo.title"
+        :title="tableData.title"
         :show-confirm="false"
         :formatter="onFormatter"
         :min-date="date.min"
@@ -137,8 +137,7 @@ export default {
         min: new Date(),
         max: new Date()
       },
-      dayTagInfo: {
-        active: 0,
+      tableData: {
         tips: null,
         title: "",
         result: []
@@ -150,10 +149,11 @@ export default {
       this.axios
         .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then(ret => {
-          this.dayTagInfo = ret.data.data;
+          this.tableData = ret.data.data;
         });
 
       let date = new Date();
+
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
       this.date.max = new Date(date.setMonth(date.getMonth() + 5));
     },
@@ -164,10 +164,10 @@ export default {
         (day.date.getMonth() + 1) +
         "/" +
         day.date.getDate();
-      let dayTagResult = this.dayTagInfo.result;
+      let tableData = this.tableData.result;
 
-      for (let i = 0; i < dayTagResult.length; i++) {
-        let result = dayTagResult[i].calendarInfo;
+      for (let i = 0; i < tableData.length; i++) {
+        let result = tableData[i].calendar;
 
         if (!result.day) continue;
 

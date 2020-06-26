@@ -99,6 +99,7 @@ export default {
   },
   mounted() {
     let type = parseInt(this.$route.query.type);
+
     if (!type) {
       type = 0;
     }

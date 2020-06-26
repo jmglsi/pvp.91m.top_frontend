@@ -20,23 +20,23 @@
         :sort-config="{trigger: 'cell'}"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="英雄_1" field="adaptationRate_1" fixed="left" width="75" sortable>
+        <vxe-table-column title="英雄_1" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
-            <img v-lazy="row.img_1" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+            <img v-lazy="row.hero_1.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
             <div class="row-8d777f385d3dfec8815d20f7496026dc">
               <span
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c row-d57964e1d6adcef4cf486eda0333b596"
-              >{{ row.adaptationRate_1 }}</span>
+              >{{ row.hero_1.adaptationRate }}</span>
             </div>
           </template>
         </vxe-table-column>
-        <vxe-table-column title="英雄_2" field="adaptationRate_2" fixed="left" width="75" sortable>
+        <vxe-table-column title="英雄_2" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
-            <img v-lazy="row.img_2" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
+            <img v-lazy="row.hero_2.img" width="50" class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3" />
             <div class="row-8d777f385d3dfec8815d20f7496026dc">
               <span
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c row-d57964e1d6adcef4cf486eda0333b596"
-              >{{ row.adaptationRate_2 }}</span>
+              >{{ row.hero_2.adaptationRate }}</span>
             </div>
           </template>
         </vxe-table-column>
@@ -91,7 +91,7 @@
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.name_1 + ' & ' + tableData.row.name_2 + ' 如何打开'"
+        :title="tableData.row.hero_1.name + ' & ' + tableData.row.hero_2.name + ' 如何打开'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -122,8 +122,12 @@ export default {
         color: {},
         result: [],
         row: {
-          name_1: "加载中",
-          name_2: "加载中"
+          hero_1: {
+            name: "加载中"
+          },
+          hero_2: {
+            name: "加载中"
+          }
         }
       },
       show: {
@@ -167,8 +171,12 @@ export default {
         .then(ret => {
           this.tableData = ret.data.data;
           this.tableData.row = {
-            name_1: "加载中",
-            name_2: "加载中"
+            hero_1: {
+              name: "加载中"
+            },
+            hero_2: {
+              name: "加载中"
+            }
           };
           this.isLoading = false;
 
@@ -180,6 +188,7 @@ export default {
       this.tableData.row = row;
 
       let heroName = this.search.value;
+
       if (!heroName) heroName = this.tableData.row.name_1;
 
       this.axios
@@ -199,9 +208,9 @@ export default {
         .then(ret => {
           this.copyData =
             "英雄:" +
-            row.name_1 +
+            row.hero_1.name +
             " & " +
-            row.name_2 +
+            row.hero_2.name +
             "" +
             "\r-\r队友胜率:" +
             row.teammateWinRate +
@@ -255,6 +264,7 @@ export default {
           .then(ret => {
             let code = ret.data.data.code,
               msg;
+
             if (code == 1) {
               this.$message.success("添加成功");
 

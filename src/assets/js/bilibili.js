@@ -9,6 +9,7 @@ const add = 8728348608;
 
 Vue.prototype.av2bv = (av) => {
     let num = NaN;
+
     if (Object.prototype.toString.call(av) === '[object Number]') {
         num = av;
     } else if (Object.prototype.toString.call(av) === '[object String]') {
@@ -21,6 +22,7 @@ Vue.prototype.av2bv = (av) => {
     }
 
     num = (num ^ xor) + add;
+
     let result = [...
         'bv1  4 1 7  '
     ];
@@ -39,6 +41,7 @@ Vue.prototype.av2bv = (av) => {
 
 Vue.prototype.bv2av = (bv) => {
     let str = '';
+
     if (bv.length === 12) {
         str = bv;
     } else if (bv.length === 10) {
@@ -57,6 +60,7 @@ Vue.prototype.bv2av = (bv) => {
 
     let result = 0;
     let i = 0;
+
     while (i < 6) {
         result += table.indexOf(str[s[i]]) * 58 ** i;
         i += 1;

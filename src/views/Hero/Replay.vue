@@ -169,6 +169,7 @@ export default {
   },
   mounted() {
     let heroId = this.$route.params.id;
+
     this.hero.info.id = heroId;
 
     this.getHeroInfo(heroId);

@@ -103,9 +103,9 @@ export default {
         )
         .then(ret => {
           let data = ret.data.data;
-          let chartData = data.result;
-          if (chartData.rows.length != 0) {
-            this.tableData = ret.data.data;
+
+          if (data.result.rows.length != 0) {
+            this.tableData = data;
           }
         });
     }

@@ -107,9 +107,9 @@ export default {
         .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
         .then(ret => {
           let data = ret.data.data;
-          let chartData = data.result;
-          if (chartData.rows.length != 0) {
-            this.tableData = ret.data.data;
+
+          if (data.result.rows.length != 0) {
+            this.tableData = data;
           }
         });
     },
@@ -120,14 +120,15 @@ export default {
         )
         .then(ret => {
           let data = ret.data.data;
-          let chartData = data.result;
-          if (chartData.rows.length != 0) {
-            this.tableData = ret.data.data;
+
+          if (data.result.rows.length != 0) {
+            this.tableData = data;
           }
         });
     },
     getHeroChartsLogByCustomizeFromUrl: function(heroName) {
       let e, hero, newTags;
+
       e = heroName.split(",");
       for (let i = 0; i < e.length; i++) {
         hero = e[i];
@@ -144,6 +145,7 @@ export default {
         this.customize = "";
       } else {
         let hero, newTags;
+
         for (let i = 0; i < e.length; i++) {
           hero = e[i].text;
           newTags = newTags + "," + hero;
@@ -152,8 +154,8 @@ export default {
       }
     },
     onTagsBlur: function() {
-      let oldCustomize = this.customize.old;
-      let newCustomize = this.customize.new;
+      let oldCustomize = this.customize.old,
+        newCustomize = this.customize.new;
 
       if (oldCustomize != newCustomize) {
         this.getHeroChartsLogByCustomize(newCustomize);

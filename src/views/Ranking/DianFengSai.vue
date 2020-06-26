@@ -345,8 +345,8 @@ export default {
       }
     },
     onActionSheetSelect: function(item) {
-      let from = "02dba815434bc4a42eeeaf3443227aa4";
-      let heroInfo = this.tableData.row;
+      let from = "02dba815434bc4a42eeeaf3443227aa4",
+        heroInfo = this.tableData.row;
 
       if (item.value == 0) {
         this.$router.push({

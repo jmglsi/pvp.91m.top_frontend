@@ -132,8 +132,8 @@ export default {
       }
     },
     onLoginClick: function() {
-      let type = this.loginInfo.type;
-      let data = this.loginInfo.data;
+      let type = this.loginInfo.type,
+        data = this.loginInfo.data;
 
       let postData = {
         name: data.name,
@@ -151,11 +151,12 @@ export default {
           this.$qs.stringify(postData)
         )
         .then(ret => {
-          let data = ret.data.data;
-          let status = ret.data.status;
+          let data = ret.data.data,
+            status = ret.data.status;
 
           if (status.code == 200) {
             let msg;
+
             if (type == 0) msg = "注册成功";
             if (type == 1) msg = "登录成功";
             if (type == 2) msg = "修改成功";

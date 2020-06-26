@@ -141,8 +141,10 @@ export default {
           };
           this.isLoading = false;
 
-          if (this.copyAv) {
-            this.copyDataByAv(this.copyAv);
+          let copyAv = this.copyAv;
+
+          if (copyAv) {
+            this.copyDataByAv(copyAv);
           }
         });
     },
@@ -201,6 +203,7 @@ export default {
       if (!searchValue) return;
 
       let newValue;
+
       if (/[bv]{2}/i.test(searchValue.substr(0, 2))) {
         newValue = this.bv2av(searchValue);
         this.copyAv = newValue;

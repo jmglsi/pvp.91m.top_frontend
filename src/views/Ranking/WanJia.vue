@@ -108,7 +108,7 @@ export default {
         });
     },
     getPlayerInfo: function(row) {
-      if (row.userId == "0") return;
+      if (row.userId == 0) return;
 
       this.show.actionSheet = true;
       this.playerInfo = row;
@@ -116,14 +116,15 @@ export default {
       this.axios
         .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then(ret => {
-          let data = ret.data;
+          let data = ret.data.data,
+            status = ret.data.status;
 
-          if (data.status.code != 200) {
+          if (status.code != 200) {
             this.$message.error("错误:1005,玩家信息返回异常");
             return;
           }
 
-          this.qq = data.data.qq;
+          this.qq = data.qq;
           this.copyData =
             row.gamePlayerName +
             "\rQQ:" +

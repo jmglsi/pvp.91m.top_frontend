@@ -39,12 +39,13 @@ export default {
     };
   },
   mounted() {
-    let pwa = this.$route.query.pwa;
+    let pwa = this.$route.query.pwa,
+      type = parseInt(this.$route.query.type);
+
     if (pwa) {
       this.$cookie.set("pwa", parseInt(pwa), { expires: "1Y" });
     }
 
-    let type = parseInt(this.$route.query.type);
     if (!type) {
       type = 0;
     }

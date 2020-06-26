@@ -6,9 +6,7 @@ import router from './router'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-    let hello = "苏苏的荣耀助手"
-
-    document.title = to.meta.title + " | " + hello
+    document.title = to.meta.title + " | " + "苏苏的荣耀助手"
     next()
 })
 

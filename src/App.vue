@@ -229,6 +229,7 @@ export default {
           this.appInfo = ret.data.data;
 
           let tipsInfo = this.appInfo.tipsInfo;
+
           if (tipsInfo) {
             this.$notification.open({
               message: tipsInfo.title,

@@ -304,6 +304,7 @@ export default {
   },
   mounted() {
     let heroId = this.$route.params.id;
+
     this.getHeroInfo(heroId);
 
     setInterval(() => {
@@ -318,13 +319,13 @@ export default {
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
         .then(ret => {
           this.isLoaded = true;
-          let data = ret.data.data;
+
+          let data = ret.data.data,
+            heroInfo = data.heroInfo;
 
           this.circle.info = data.circleInfo;
           this.positionInfo = data.positionInfo;
-          this.hero.info = data.heroInfo;
-
-          let heroInfo = this.hero.info;
+          this.hero.info = heroInfo;
 
           this.hero.title = heroInfo.name;
           document.title = this.hero.info.name + " | 苏苏的荣耀助手";
@@ -346,11 +347,13 @@ export default {
             voteType
         )
         .then(ret => {
-          let code = ret.data.data.code;
-          if (code >= 0) {
-            this.$message.success("投票成功");
+          let status = ret.data.status;
+
+          if (status.code != 200) {
+            this.$message.error(status.msg);
+            return;
           } else {
-            this.$message.error("错误:1003,本周投过");
+            this.$message.success("投票成功");
           }
         });
       this.show.actionSheet = false;

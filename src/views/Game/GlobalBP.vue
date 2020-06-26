@@ -9,11 +9,11 @@
     <span class="game-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
-      >{{ tabsModel % 2 == 0 ? campInfo.camp_1.name : campInfo.camp_2.name }}</span>
+      >{{ tabsModel % 2 == 0 ? team.team_1.name : team.team_2.name }}</span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
-      >{{ tabsModel % 2 == 0 ? campInfo.camp_2.name : campInfo.camp_1.name }}</span>
+      >{{ tabsModel % 2 == 0 ? team.team_2.name : team.team_1.name }}</span>
     </span>
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
@@ -183,12 +183,12 @@
 
     <div class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917">
       <ul>
-        <li v-if="authorInfo.name">
+        <li v-if="author.name">
           <a-dropdown placement="bottomCenter" :trigger="['click']">
-            <van-button round :icon="authorInfo.img" size="small">{{ authorInfo.name }}</van-button>
+            <van-button round :icon="author.img" size="small">{{ author.name }}</van-button>
             <a-menu slot="overlay">
               <a-menu-item
-                v-for="(data, index) in authorInfo.actions"
+                v-for="(data, index) in author.actions"
                 :key="index"
                 @click="data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null"
               >
@@ -201,11 +201,11 @@
         <li>
           <van-button
             round
-            :icon="perspective == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
+            :icon="perspective == 1 ? team.team_1.img : team.team_2.img"
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
             @click="onGamePerspectiveClick(1)"
-          >以 {{ perspective == 1 ? campInfo.camp_1.name : campInfo.camp_2.name }} 的视角</van-button>
+          >以 {{ perspective == 1 ? team.team_1.name : team.team_2.name }} 的视角</van-button>
         </li>
         <li>
           <van-button
@@ -214,7 +214,7 @@
             size="small"
             color="linear-gradient(to right, #6874E8, #9708CC)"
             @click="onSeeHeroClick"
-          >查看 {{ perspective == 1 ? campInfo.camp_2.name : campInfo.camp_1.name }} 剩余英雄</van-button>
+          >查看 {{ perspective == 1 ? team.team_2.name : team.team_1.name }} 剩余英雄</van-button>
         </li>
       </ul>
     </div>
@@ -274,7 +274,7 @@
         >
           <template #title>
             <van-icon
-              :name="gameInfo.result[index].winCamp == 1 ? campInfo.camp_1.img : campInfo.camp_2.img"
+              :name="gameInfo.result[index].winCamp == 1 ? team.team_1.img : team.team_2.img"
             />
             第 {{ index + 1 }} 局
           </template>
@@ -537,18 +537,18 @@ export default {
       perspective: 1,
       gameLabel: "new",
       tabsModel: 0,
-      authorInfo: {
+      author: {
         name: null,
         img: null,
         actions: []
       },
-      campInfo: {
-        camp_1: {
+      team: {
+        team_1: {
           id: 1,
           name: "队伍_1",
           img: "/img/app-icons/camp_blue.png"
         },
-        camp_2: {
+        team_2: {
           id: 2,
           name: "队伍_2",
           img: "/img/app-icons/camp_red.png"
@@ -638,8 +638,9 @@ export default {
       }
     },
     renderResize: function() {
-      let width = document.documentElement.clientWidth;
-      let height = document.documentElement.clientHeight;
+      let width = document.documentElement.clientWidth,
+        height = document.documentElement.clientHeight;
+
       if (width < height) {
         this.isPortrait = true;
       } else {
@@ -652,14 +653,15 @@ export default {
     },
     bpOrderInit: function(perspective, type) {
       if (perspective == 1) {
-        this.self = this.campInfo.camp_1;
-        this.opponent = this.campInfo.camp_2;
+        this.self = this.team.team_1;
+        this.opponent = this.team.team_2;
       } else {
-        this.self = this.campInfo.camp_2;
-        this.opponent = this.campInfo.camp_1;
+        this.self = this.team.team_2;
+        this.opponent = this.team.team_1;
       }
 
       let used = [];
+
       for (let i = 0; i < type; i++) {
         let orderList = this.gameInfo.result[i];
 
@@ -714,12 +716,12 @@ export default {
       //console.log(perspective, this.gameInfo.used);
     },
     getHeroList: function() {
+      let postData = {
+        gameTime: this.gameInfo.result[this.tabsModel].game.time
+      };
+
       this.axios
-        .get(
-          this.apiList.pvp.getHeroRanking +
-            "&gameTime=" +
-            this.gameInfo.result[this.tabsModel].game.time
-        )
+        .post(this.apiList.pvp.getHeroRanking, this.$qs.stringify(postData))
         .then(ret => {
           this.tableData.result = ret.data.data.result;
         });
@@ -727,23 +729,28 @@ export default {
     getGameBP: function(gameLabel) {
       let tabsModel = this.tabsModel;
 
-      this.axios
-        .get(this.apiList.game.getGameBP + "&gameLabel=" + gameLabel)
-        .then(ret => {
-          let data = ret.data.data;
+      let postData = {
+        gameLabel: gameLabel
+      };
 
-          if (data.result.length == 0) {
+      this.axios
+        .post(this.apiList.game.getGameBP, this.$qs.stringify(postData))
+        .then(ret => {
+          let data = ret.data.data,
+            result = data.result;
+
+          if (result.length == 0) {
             this.$message.error("错误:1000,对局不存在");
             return;
           }
 
-          data.result[tabsModel].game.type > 0
+          result[tabsModel].game.type > 0
             ? (this.show.apps = true)
             : (this.show.apps = false);
 
-          this.authorInfo = data.authorInfo;
-          this.campInfo = data.campInfo;
-          this.gameInfo.result = data.result;
+          this.author = data.author;
+          this.team = data.team;
+          this.gameInfo.result = result;
 
           this.bpOrderInit(this.perspective, tabsModel + 1);
         });
@@ -856,8 +863,9 @@ export default {
 
       if (this.mode == "view") return;
 
-      let oldIndex = this.gameInfo.result[tabsModel].stepsNow;
-      let newIndex = 0;
+      let oldIndex = this.gameInfo.result[tabsModel].stepsNow,
+        newIndex = 0;
+
       if (oldIndex > 17) {
         newIndex = 0;
       } else {
@@ -875,7 +883,8 @@ export default {
       this.bpOrderInit(this.perspective, tabsModel + 1);
     },
     onGameShareClick: function() {
-      let vs = this.campInfo.camp_1.name + " vs " + this.campInfo.camp_2.name;
+      let vs = this.team.team_1.name + " vs " + this.team.team_2.name;
+
       this.copyData =
         "正在复盘【" +
         vs +
