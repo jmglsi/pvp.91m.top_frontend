@@ -19,7 +19,7 @@ message.config({
 
 notification.config({
     top: "50px",
-    duration: 5
+    duration: 10
 })
 
 Vue.prototype.$message = message

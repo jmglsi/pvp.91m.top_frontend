@@ -150,9 +150,9 @@ export default {
           this.apiList.pvp.loginWebAccount + "&aid=" + type,
           this.$qs.stringify(postData)
         )
-        .then(ret => {
-          let data = ret.data.data,
-            status = ret.data.status;
+        .then(res => {
+          let data = res.data.data,
+            status = res.data.status;
 
           if (status.code == 200) {
             let msg;

@@ -134,8 +134,8 @@ export default {
             "&page=" +
             page
         )
-        .then(ret => {
-          this.tableData = ret.data.data;
+        .then(res => {
+          this.tableData = res.data.data;
           this.tableData.row = {
             uid: 0
           };
@@ -166,7 +166,7 @@ export default {
                 row.uid
             )
         )
-        .then(ret => {
+        .then(res => {
           this.copyData =
             "id:" +
             row.uid +
@@ -188,7 +188,7 @@ export default {
             "\r备注:" +
             row.bz +
             "\r-\r" +
-            ret.data.data.url;
+            res.data.data.url;
         });
     },
     onSearchClear: function() {

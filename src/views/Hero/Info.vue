@@ -13,9 +13,8 @@
         <template #title>
           <div @click="$message.info('近期热度 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">
             <img
-              v-if="hero.info.trend > 0"
+              v-show="show.parameter && hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
-              v-show="show.parameter"
               width="15"
               height="15"
               class="info-3d5f1ffeadf58eb64ef57aef7e53a31e"
@@ -97,7 +96,7 @@
               :key="'hero-713dd4d0b2e842c08da62ddeec872331-' + index"
             >
               <img
-                v-if="data.id > 0"
+                v-show="data.id > 0"
                 v-lazy="data.img"
                 width="25"
                 height="25"
@@ -124,7 +123,7 @@
         <van-tab title="同职业对比" />
         <van-tab title="自定义对比" />
         <div class="hero-e06398232dc80e41209489705546802c">
-          <HeroLine v-show="tabsModel == 0" :heroId="hero.info.id" />
+          <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" />
         </div>
         <div class="hero-ea950cb092f4e99e2ccf981cf503e5e3">
           <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
@@ -176,7 +175,7 @@ div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav {
   z-index: 1;
 }
 
-div.van-nav-bar__right {
+div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__right {
   width: 35%;
 }
 </style>
@@ -317,10 +316,10 @@ export default {
     getHeroInfo: function(heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
-        .then(ret => {
+        .then(res => {
           this.isLoaded = true;
 
-          let data = ret.data.data,
+          let data = res.data.data,
             heroInfo = data.heroInfo;
 
           this.circle.info = data.circleInfo;
@@ -346,8 +345,8 @@ export default {
             "&voteType=" +
             voteType
         )
-        .then(ret => {
-          let status = ret.data.status;
+        .then(res => {
+          let status = res.data.status;
 
           if (status.code != 200) {
             this.$message.error(status.msg);

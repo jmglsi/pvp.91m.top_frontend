@@ -231,8 +231,8 @@ export default {
             "&url=" +
             encodeURIComponent(location.pathname + location.search)
         )
-        .then(ret => {
-          this.appInfo = ret.data.data;
+        .then(res => {
+          this.appInfo = res.data.data;
 
           let tipsInfo = this.appInfo.tipsInfo;
 

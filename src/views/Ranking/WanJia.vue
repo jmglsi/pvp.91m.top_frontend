@@ -26,7 +26,7 @@
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
           <template v-slot="{ row }">
             <van-tag
-              v-if="row.tag"
+              v-show="row.tag"
               :color="row.tag.color"
               mark
               type="primary"
@@ -104,8 +104,8 @@ export default {
     getPlayerRanking: function(aid, bid) {
       this.axios
         .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
-        .then(ret => {
-          this.tableData = ret.data.data;
+        .then(res => {
+          this.tableData = res.data.data;
           this.tableData.row = {
             area: 0,
             gamePlayerName: "加载中"
@@ -121,9 +121,9 @@ export default {
 
       this.axios
         .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
-        .then(ret => {
-          let data = ret.data.data,
-            status = ret.data.status;
+        .then(res => {
+          let data = res.data.data,
+            status = res.data.status;
 
           if (status.code != 200) {
             this.$message.error("错误:1005,玩家信息返回异常");

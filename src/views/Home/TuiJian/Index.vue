@@ -114,8 +114,8 @@ export default {
   },
   methods: {
     init: function() {
-      this.axios.get(this.apiList.pvp.getAppHome).then(ret => {
-        this.appHomeInfo = ret.data.data;
+      this.axios.get(this.apiList.pvp.getAppHome).then(res => {
+        this.appHomeInfo = res.data.data;
       });
     },
     onTuiJianRefresh: function() {

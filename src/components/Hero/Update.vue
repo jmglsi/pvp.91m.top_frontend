@@ -25,10 +25,11 @@
             :color="data.calendar.color"
           >
             <van-tag
-              v-if="data.calendar.day"
+              v-show="data.calendar.day"
               :color="data.calendar.color"
               round
             >{{ data.calendar.day }}</van-tag>
+
             <div v-if="data.url" class="tuijian-5a5152e95445ede11c05f5fa898d8fd9">
               <a :href="data.url" target="_blank">
                 <img
@@ -38,15 +39,21 @@
                 {{ data.title }}
               </a>
             </div>
-            <div v-else class="tuijian-5a5152e95445ede11c05f5fa898d8fd9" v-html="data.title"></div>
-            <div v-if="data.item.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
+
+            <div
+              v-else-if="!data.url"
+              v-html="data.title"
+              class="tuijian-5a5152e95445ede11c05f5fa898d8fd9"
+            ></div>
+
+            <div v-show="data.item.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
                 v-for="(dataItem, index) in data.item"
                 :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { from: 'dayTag-' + data.calendar.day } }"
                 :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
               >
                 <img
-                  v-if="dataItem"
+                  v-show="dataItem"
                   v-lazy="dataItem == 999 ? '/img/app-icons/hero.png' :'//game.gtimg.cn/images/yxzj/img201606/heroimg/' + dataItem + '/' + dataItem + '.jpg'"
                   @click="dataItem == 999 ? $message.info('还没上线正式服的新英雄') : ''"
                   class="tuijian-5d39f3848925994b52ec52fba934577c"
@@ -148,8 +155,8 @@ export default {
     getHeroUpdate: function(heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
-        .then(ret => {
-          this.tableData = ret.data.data;
+        .then(res => {
+          this.tableData = res.data.data;
         });
 
       let date = new Date();

@@ -1,10 +1,9 @@
 <template>
   <div class="my-home">
-    <div v-if="isLogin == false" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
+    <div v-show="isLogin == false" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
         <van-cell template #title>
           <van-button
-            v-if="isLogin == false"
             round
             size="small"
             color="linear-gradient(to right, #4bb0ff, #6149f6)"
@@ -17,9 +16,9 @@
 
     <div v-if="isLogin" class="my-cd77c40b62763f6adf5598bce7fceede">
       <img
+        v-lazy="loginInfo.img"
         width="100"
         height="100"
-        v-lazy="loginInfo.img"
         class="my-d5ca322453f2986b752e58b11af83d96"
       />
       <div class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
@@ -32,27 +31,27 @@
       </div>
     </div>
 
-    <div class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-grid v-if="isLogin" :border="false" :column-num="2">
+    <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
+      <van-grid :border="false" :column-num="2">
         <van-grid-item
           icon="/img/app-icons/team.png"
+          to="/game/dashboard?from=8e88848cecf2dfe586dab1e65a48850f"
           template
           #text
-          @click="onMyStatisticsClick(1)"
         >
           <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-            <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.teamNum }}</span>
+            <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.team }}</span>
             <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
           </div>
         </van-grid-item>
         <van-grid-item
           icon="/img/app-icons/bp_data.png"
+          to="/game/dashboard?from=491dd2c69c94f79fa96dabfe04582d04"
           template
           #text
-          @click="onMyStatisticsClick(2)"
         >
           <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-            <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.labelNum }}</span>
+            <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.label }}</span>
             <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
           </div>
         </van-grid-item>
@@ -73,11 +72,10 @@
       </van-cell-group>
     </div>
 
-    <div v-if="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
+    <div v-show="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
         <van-cell template #title>
           <van-button
-            v-if="isLogin"
             round
             size="small"
             color="rgb(245, 245, 245)"
@@ -159,18 +157,18 @@ export default {
   name: "MyHome",
   data() {
     return {
-      isLogin: false,
-      loginInfo: {}
+      loginInfo: {},
+      isLogin: false
     };
   },
   mounted() {
-    this.onLoginCheck();
+    let openId = this.$cookie.get("openId"),
+      accessToken = this.$cookie.get("accessToken");
+
+    this.onLoginCheck(openId, accessToken);
   },
   methods: {
-    onLoginCheck: function() {
-      let openId = this.$cookie.get("openId");
-      let accessToken = this.$cookie.get("accessToken");
-
+    onLoginCheck: function(openId, accessToken) {
       if (!openId || !accessToken) return;
 
       let postData = {
@@ -180,9 +178,9 @@ export default {
 
       this.axios
         .post(this.apiList.pvp.getWebAccountInfo, this.$qs.stringify(postData))
-        .then(ret => {
-          let data = ret.data.data;
-          let status = ret.data.status;
+        .then(res => {
+          let data = res.data.data,
+            status = res.data.status;
 
           if (status.code == 200) {
             this.isLogin = true;
@@ -207,12 +205,6 @@ export default {
         .catch(() => {
           // on cancel
         });
-    },
-    onMyStatisticsClick: function(e) {
-      this.$router.push({
-        path: "/game/dashboard",
-        query: { type: e }
-      });
     }
   }
 };

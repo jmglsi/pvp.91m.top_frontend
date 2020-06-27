@@ -28,7 +28,7 @@
         <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
             <van-tag
-              v-if="row.tag.text"
+              v-show="row.tag.text"
               :color="row.tag.color"
               mark
               type="primary"
@@ -310,8 +310,8 @@ export default {
 
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
-        .then(ret => {
-          this.tableData = ret.data.data;
+        .then(res => {
+          this.tableData = res.data.data;
           this.tableData.row = {
             id: 0,
             name: "加载中",

@@ -12,8 +12,8 @@
             <div class="game-a88ef988e9c52677b975726c94e54f5a">
               <van-grid :border="false" :column-num="3">
                 <van-grid-item
-                  :icon="data.team_1.img"
                   :text="data.team_1.name"
+                  :icon="data.team_1.logo"
                   class="game-447b7147e84be512208dcc0995d67ebc"
                 />
                 <van-grid-item>
@@ -21,8 +21,8 @@
                   <span class="game-f4842dcb685d490e2a43212b8072a6fe">VS</span>
                 </van-grid-item>
                 <van-grid-item
-                  :icon="data.team_2.img"
                   :text="data.team_2.name"
+                  :icon="data.team_2.logo"
                   class="game-447b7147e84be512208dcc0995d67ebc"
                 />
               </van-grid>
@@ -41,8 +41,8 @@
           <template #title>
             <van-grid :border="false" :column-num="3">
               <van-grid-item
-                :icon="data.team_1.img"
                 :text="data.team_1.name"
+                :icon="data.team_1.logo"
                 class="game-447b7147e84be512208dcc0995d67ebc"
               />
               <van-grid-item>
@@ -50,8 +50,8 @@
                 <span class="game-f4842dcb685d490e2a43212b8072a6fe">VS</span>
               </van-grid-item>
               <van-grid-item
-                :icon="data.team_2.img"
                 :text="data.team_2.name"
+                :icon="data.team_2.logo"
                 class="game-447b7147e84be512208dcc0995d67ebc"
               />
             </van-grid>
@@ -84,8 +84,8 @@ export default {
   },
   methods: {
     getGameHome() {
-      this.axios.get(this.apiList.game.getGameHome).then(ret => {
-        this.tableData = ret.data.data;
+      this.axios.get(this.apiList.game.getGameHome).then(res => {
+        this.tableData = res.data.data;
       });
     },
     onGameCellClick: function(e) {

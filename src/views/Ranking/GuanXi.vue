@@ -164,8 +164,8 @@ export default {
             "&heroName=" +
             encodeURIComponent(heroName)
         )
-        .then(ret => {
-          this.tableData = ret.data.data;
+        .then(res => {
+          this.tableData = res.data.data;
           this.tableData.row = {
             hero_1: {
               name: "加载中"
@@ -201,7 +201,7 @@ export default {
                 row.id_2
             )
         )
-        .then(ret => {
+        .then(res => {
           this.copyData =
             "英雄:" +
             row.hero_1.name +
@@ -215,7 +215,7 @@ export default {
             "%\r适配:" +
             row.adaptation +
             "\r-\r更多英雄关系 ↓\r" +
-            ret.data.data.url;
+            res.data.data.url;
         });
     },
     cellClassName: function({ row, column }) {
@@ -257,8 +257,8 @@ export default {
           .get(
             this.apiList.pvp.addHeroByCombination + "&heroName=" + searchValue
           )
-          .then(ret => {
-            let code = ret.data.data.code,
+          .then(res => {
+            let code = res.data.data.code,
               msg;
 
             if (code == 1) {

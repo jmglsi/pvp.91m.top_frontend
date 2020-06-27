@@ -105,8 +105,8 @@ export default {
     getHeroChartsLogBySimilar: function(heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
-        .then(ret => {
-          let data = ret.data.data;
+        .then(res => {
+          let data = res.data.data;
 
           if (data.result.rows.length != 0) {
             this.tableData = data;
@@ -118,8 +118,8 @@ export default {
         .get(
           this.apiList.pvp.getHeroChartsLogByCustomize + "&heroName=" + heroName
         )
-        .then(ret => {
-          let data = ret.data.data;
+        .then(res => {
+          let data = res.data.data;
 
           if (data.result.rows.length != 0) {
             this.tableData = data;

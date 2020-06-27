@@ -101,8 +101,8 @@ export default {
             "&detailed=" +
             detailed
         )
-        .then(ret => {
-          let data = ret.data.data;
+        .then(res => {
+          let data = res.data.data;
 
           if (data.result.rows.length != 0) {
             this.tableData = data;

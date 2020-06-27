@@ -30,7 +30,7 @@
               class="replay-01cac4e332fec6d6ecd331a00412712d replay-e4d23e841d8e8804190027bce3180fa5"
             >{{ data.usedtime }}</van-tag>
             <van-tag
-              v-if="!teammate"
+              v-show="!teammate"
               round
               color="black"
               class="replay-e4d23e841d8e8804190027bce3180fa5"
@@ -38,7 +38,7 @@
             <span class="replay-12d045cdd2c0b9b6bf64ab787d773ae6">{{ data.gamePlayerName }}</span>
           </div>
 
-          <div v-if="!teammate" class="replay-f01902c0d0136ca30fe1034f339964ba">
+          <div v-show="!teammate" class="replay-f01902c0d0136ca30fe1034f339964ba">
             <van-grid :border="false" :column-num="7">
               <van-grid-item
                 v-show="data.heroSkill > 0"
@@ -56,7 +56,7 @@
           </div>
 
           <van-button
-            v-if="!teammate"
+            v-show="!teammate"
             round
             disabled
             color="#000000"
@@ -179,8 +179,8 @@ export default {
     getHeroInfo: function(heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
-        .then(ret => {
-          this.hero.info = ret.data.data.heroInfo;
+        .then(res => {
+          this.hero.info = res.data.data.heroInfo;
 
           document.title = this.hero.info.name + " | 苏苏的荣耀助手";
 
@@ -196,9 +196,9 @@ export default {
 
       this.axios
         .get("//s.91m.top/?url=" + url.substr(urlIndex + 1, url.length))
-        .then(ret => {
+        .then(res => {
           this.copyData =
-            this.hero.info.name + " 的对局回顾 ↓\r-\r" + ret.data.data.url;
+            this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
     },
     getHeroReplayByHeroId: function(heroId, page) {
@@ -210,8 +210,8 @@ export default {
             "&page=" +
             page
         )
-        .then(ret => {
-          this.tableData = ret.data.data;
+        .then(res => {
+          this.tableData = res.data.data;
           this.tableData.row = {
             gamePlayerName: "加载中"
           };
