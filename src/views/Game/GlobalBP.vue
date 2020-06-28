@@ -1,11 +1,11 @@
 <template>
-  <div class="game-bp-portrait" v-if="isPortrait">
+  <div v-if="isPortrait" class="game-bp-portrait">
     <div class="game-a76e75b5854094183e66c274e1d276e9">
       <img v-lazy="'/img/app-icons/landscape.png'" width="100" height="100" />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
     </div>
   </div>
-  <div class="game-bp" v-else-if="isPortrait == false">
+  <div v-else-if="isPortrait == false" class="game-bp">
     <span class="game-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
@@ -20,9 +20,9 @@
       <div class="ban-8c9cb4a232c7e88403dddc3a0e589162 ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3">
         <ul>
           <li
-            v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
+            v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
             :key="'ban-2a47f410fffc64666ba4673bdc597f72a-' + index"
-            @click="onGameBanPickClick(1, 1, index)"
+            @click="onGameBanPickClick(index)"
           >
             <span
               v-show="index == 0 || index == 2 || index == 11 || index == 13"
@@ -44,9 +44,9 @@
       <div class="ban-c6a2f8b3941d7f91bc4e51839e5371e0 ban-ba9bced6af8121cf6413000a4274ac2b">
         <ul>
           <li
-            v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
+            v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
             :key="'ban-64621b00510adc52b301306824c89659-' + index"
-            @click="onGameBanPickClick(2, 1, index)"
+            @click="onGameBanPickClick(index)"
           >
             <span
               v-show="index == 1 || index == 3 || index == 10 || index == 12"
@@ -72,9 +72,9 @@
           <div class="pick-8c9cb4a232c7e88403dddc3a0e589162">
             <ul>
               <li
-                v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
+                v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
                 :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
-                @click="onGameBanPickClick(1, 2, index)"
+                @click="onGameBanPickClick(index)"
               >
                 <span
                   v-show="index == 4 || index == 7 || index == 8 || index == 15 || index == 16"
@@ -91,12 +91,18 @@
               </li>
             </ul>
           </div>
+          <div
+            v-show="mode == 'edit'"
+            @click="onWinCampClick(1)"
+            class="pick-d75e14b5c8f13e894fe9bf9d5426c198"
+          ></div>
         </van-col>
         <van-col span="18">
           <div v-show="show.hero" class="hero-99938282f04071859941e18f16efcf42">
             <van-tabs
               v-model="tableData.active"
               :border="false"
+              color="orange"
               class="hero-f3cc17bc0d768ca60b8bb496a10b1990"
             >
               <van-tab title="对抗 (战士)" />
@@ -158,9 +164,9 @@
           <div class="pick-c6a2f8b3941d7f91bc4e51839e5371e0">
             <ul>
               <li
-                v-for="(data, index) in gameInfo.result[tabsModel].bpOrder"
+                v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
                 :key="'pick-64621b00510adc52b301306824c89659-' + index"
-                @click="onGameBanPickClick(2, 2, index)"
+                @click="onGameBanPickClick(index)"
               >
                 <span
                   v-show="index == 5 || index == 6 || index == 9 || index == 14 || index == 17"
@@ -177,15 +183,20 @@
               </li>
             </ul>
           </div>
+          <div
+            v-show="mode == 'edit'"
+            @click="onWinCampClick(2)"
+            class="pick-251504ba219ea8c3175f47b73bdde6e6"
+          ></div>
         </van-col>
       </van-row>
     </div>
 
     <div class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917">
       <ul>
-        <li v-if="author.name">
+        <li>
           <a-dropdown placement="bottomCenter" :trigger="['click']">
-            <van-button round :icon="author.img" size="small">{{ author.name }}</van-button>
+            <van-button round :icon="author.logo" size="small">{{ author.name }}</van-button>
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in author.actions"
@@ -201,7 +212,7 @@
         <li>
           <van-button
             round
-            :icon="perspective == 1 ? team.team_1.img : team.team_2.img"
+            :icon="perspective == 1 ? team.team_1.logo : team.team_2.logo"
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
             @click="onGamePerspectiveClick(1)"
@@ -226,20 +237,16 @@
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" />
             <a-menu slot="overlay">
-              <a-menu-item @click="onToolsMenuClick(0)">
-                <a-icon type="setting" />设置
-              </a-menu-item>
-              <a-menu-divider />
               <a-menu-item
-                v-if="mode == 'edit' && gameInfo.result.length > 1 && gameInfo.result.length - 1 == tabsModel"
-                @click="onToolsMenuClick(1)"
+                v-show="mode == 'view' && gameInfo.result.length > 1 && gameInfo.result.length - 1 == tabsModel"
+                @click="onToolsMenuClick(0)"
               >
                 <a-icon type="minus" />删除本局
               </a-menu-item>
-              <a-menu-item @click="onToolsMenuClick(2)">
+              <a-menu-item v-show="mode == 'view'" @click="onToolsMenuClick(1)">
                 <a-icon type="plus" />再来一局
               </a-menu-item>
-              <a-menu-item @click="onToolsMenuClick(3)">
+              <a-menu-item @click="onToolsMenuClick(2)">
                 <a-icon :type="mode == 'view' ? 'edit' : 'cloud-upload'" />编辑
               </a-menu-item>
             </a-menu>
@@ -271,12 +278,21 @@
         <van-tab
           v-for="(data, index) in gameInfo.result"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
+          :disabled="mode == 'edit' && tabsModel != index ? true : false"
         >
           <template #title>
             <van-icon
-              :name="gameInfo.result[index].winCamp == 1 ? team.team_1.img : team.team_2.img"
+              v-if="index % 2 == 0"
+              :name="gameInfo.result[index].win.camp == 1 ? team.team_1.logo : team.team_2.logo"
             />
-            第 {{ index + 1 }} 局
+            <van-icon
+              v-else-if="index % 2 == 1"
+              :name="gameInfo.result[index].win.camp == 1 ? team.team_2.logo : team.team_1.logo"
+            />&nbsp;
+            <span
+              class="game-f88456e481c26446fec30dd5685e46f4"
+              :style="{ color: gameInfo.result[index].win.camp == 1 ? 'blue' : 'red' }"
+            >第 {{ index + 1 }} 局</span>
           </template>
         </van-tab>
       </van-tabs>
@@ -340,6 +356,22 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
 <style scoped>
 .game-bp-portrait {
   margin-top: 60%;
+}
+
+.pick-d75e14b5c8f13e894fe9bf9d5426c198,
+.pick-251504ba219ea8c3175f47b73bdde6e6 {
+  width: 30px;
+  height: 250px;
+  top: 80px;
+  position: absolute;
+}
+
+.pick-d75e14b5c8f13e894fe9bf9d5426c198 {
+  left: 0;
+}
+
+.pick-251504ba219ea8c3175f47b73bdde6e6 {
+  right: 0;
 }
 
 .game-b3d70a861f68652bf97d7a26bf421d4f {
@@ -492,6 +524,10 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
   margin-top: 50px;
 }
 
+.game-d67cd27426c41a017d0c0efd9ac172ea {
+  margin: 25px;
+}
+
 .game-4863c43e8743ebf1be3f48c5c4519627 {
   position: fixed;
   width: 100%;
@@ -507,6 +543,10 @@ export default {
   },
   data() {
     return {
+      loginInfo: {
+        openId: null,
+        accessToken: null
+      },
       index: {
         ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
@@ -539,23 +579,22 @@ export default {
       self: "",
       opponent: "",
       perspective: 1,
-      gameLabel: "new",
       tabsModel: 0,
       author: {
-        name: null,
-        img: null,
+        name: "加载中",
+        logo: "/img/app-icons/kpl.png",
         actions: []
       },
       team: {
         team_1: {
           id: 1,
           name: "队伍_1",
-          img: "/img/app-icons/camp_blue.png"
+          logo: "/img/app-icons/camp_blue.png"
         },
         team_2: {
           id: 2,
           name: "队伍_2",
-          img: "/img/app-icons/camp_red.png"
+          logo: "/img/app-icons/camp_red.png"
         }
       },
       gameInfo: {
@@ -573,9 +612,10 @@ export default {
               ban: [0, 0, 0, 0],
               pick: [0, 0, 0, 0, 0]
             },
+            win: {},
             stepsNow: 0,
             stepsActive: 0,
-            bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
           }
         ],
         used: []
@@ -605,15 +645,8 @@ export default {
 
     if (gameLabel) {
       this.gameLabel = gameLabel;
-      if (gameLabel == "new") {
-        this.initNewGame();
-        this.show.apps = true;
-      } else {
-        this.getGameBP(gameLabel);
-      }
-      setTimeout(() => {
-        this.getHeroList();
-      }, 500);
+
+      this.getGameBP(gameLabel);
     } else {
       this.$router.push({
         query: {
@@ -623,6 +656,9 @@ export default {
       });
       return;
     }
+
+    this.loginInfo.openId = this.$cookie.get("openId");
+    this.loginInfo.accessToken = this.$cookie.get("accessToken");
   },
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.beforeunload, false);
@@ -655,7 +691,7 @@ export default {
         }
       }
     },
-    bpOrderInit: function(perspective, type) {
+    BPOrderInit: function(perspective, index) {
       if (perspective == 1) {
         this.self = this.team.team_1;
         this.opponent = this.team.team_2;
@@ -666,37 +702,37 @@ export default {
 
       let used = [];
 
-      for (let i = 0; i < type; i++) {
+      for (let i = 0; i < index; i++) {
         let orderList = this.gameInfo.result[i];
 
         this.gameInfo.result[i].blue.ban = [
-          orderList.bpOrder[0],
-          orderList.bpOrder[2],
-          orderList.bpOrder[11],
-          orderList.bpOrder[13]
+          orderList.BPOrder[0],
+          orderList.BPOrder[2],
+          orderList.BPOrder[11],
+          orderList.BPOrder[13]
         ];
 
         this.gameInfo.result[i].blue.pick = [
-          orderList.bpOrder[4],
-          orderList.bpOrder[7],
-          orderList.bpOrder[8],
-          orderList.bpOrder[15],
-          orderList.bpOrder[16]
+          orderList.BPOrder[4],
+          orderList.BPOrder[7],
+          orderList.BPOrder[8],
+          orderList.BPOrder[15],
+          orderList.BPOrder[16]
         ];
 
         this.gameInfo.result[i].red.ban = [
-          orderList.bpOrder[1],
-          orderList.bpOrder[3],
-          orderList.bpOrder[10],
-          orderList.bpOrder[12]
+          orderList.BPOrder[1],
+          orderList.BPOrder[3],
+          orderList.BPOrder[10],
+          orderList.BPOrder[12]
         ];
 
         this.gameInfo.result[i].red.pick = [
-          orderList.bpOrder[5],
-          orderList.bpOrder[6],
-          orderList.bpOrder[9],
-          orderList.bpOrder[14],
-          orderList.bpOrder[17]
+          orderList.BPOrder[5],
+          orderList.BPOrder[6],
+          orderList.BPOrder[9],
+          orderList.BPOrder[14],
+          orderList.BPOrder[17]
         ];
 
         if (perspective == 1) {
@@ -719,28 +755,30 @@ export default {
       this.gameInfo.used = Array.from(new Set(used));
       //console.log(perspective, this.gameInfo.used);
     },
-    getHeroList: function() {
-      let postData = {
-        gameTime: this.gameInfo.result[this.tabsModel].game.time
-      };
-
+    getHeroList: function(gameTime) {
       this.axios
-        .post(this.apiList.pvp.getHeroRanking, this.$qs.stringify(postData))
-        .then(ret => {
-          this.tableData.result = ret.data.data.result;
+        .post(
+          this.apiList.pvp.getHeroRanking,
+          this.$qs.stringify({
+            gameTime: gameTime
+          })
+        )
+        .then(res => {
+          this.tableData.result = res.data.data.result;
         });
     },
     getGameBP: function(gameLabel) {
       let tabsModel = this.tabsModel;
 
-      let postData = {
-        gameLabel: gameLabel
-      };
-
       this.axios
-        .post(this.apiList.game.getGameBP, this.$qs.stringify(postData))
-        .then(ret => {
-          let data = ret.data.data,
+        .post(
+          this.apiList.game.getGameBP,
+          this.$qs.stringify({
+            gameLabel: gameLabel
+          })
+        )
+        .then(res => {
+          let data = res.data.data,
             result = data.result;
 
           if (result.length == 0) {
@@ -748,21 +786,20 @@ export default {
             return;
           }
 
-          result[tabsModel].game.type > 0
-            ? (this.show.apps = true)
-            : (this.show.apps = false);
-
           this.author = data.author;
           this.team = data.team;
           this.gameInfo.result = result;
 
-          this.bpOrderInit(this.perspective, tabsModel + 1);
+          this.BPOrderInit(this.perspective, tabsModel + 1);
+
+          this.getHeroList(result[0].game.time);
+
+          this.author.openId && this.author.openId == this.$cookie.get("openId")
+            ? (this.show.apps = true)
+            : (this.show.apps = false);
         });
     },
-    initNewGame: function() {
-      this.bpOrderInit(this.perspective, this.tabsModel + 1);
-    },
-    onCreateNewGameClick: function() {
+    onCreateGameBPClick: function() {
       let newGame = {
         game: {
           type: 1,
@@ -776,17 +813,99 @@ export default {
           ban: [0, 0, 0, 0],
           pick: [0, 0, 0, 0, 0]
         },
+        win: {},
         stepsNow: 0,
         stepsActive: 0,
-        bpOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
       };
 
-      if (this.gameInfo.result.length > 5) {
-        this.$message.error("错误:1001,最多创建 6 局");
-      } else {
-        this.gameInfo.result.push(newGame);
-        this.$message.success("创建成功");
+      let loginInfo = this.loginInfo;
+      let teamInfo = this.team;
+      let gameIndex = this.gameInfo.result.length;
+
+      this.axios
+        .post(
+          this.apiList.pvp.updateGameBP,
+          this.$qs.stringify({
+            openId: loginInfo.openId,
+            accessToken: loginInfo.accessToken,
+            gameLabel: this.gameLabel,
+            gameIndex: gameIndex,
+            teamId_1: teamInfo.team_1.id,
+            teamId_2: teamInfo.team_2.id
+          })
+        )
+        .then(res => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.gameInfo.result.push(newGame);
+
+            this.$message.success("创建成功");
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onUpdateGameBPClick: function(index) {
+      let loginInfo = this.loginInfo;
+      let teamInfo = this.team;
+      let gameInfo = this.gameInfo.result[index];
+
+      if (gameInfo.win.camp == null) {
+        this.$message.error("错误:1006,还未设置胜利方");
+        return;
       }
+
+      this.axios
+        .post(
+          this.apiList.pvp.updateGameBP,
+          this.$qs.stringify({
+            openId: loginInfo.openId,
+            accessToken: loginInfo.accessToken,
+            gameLabel: this.gameLabel,
+            gameIndex: index,
+            teamId_1: teamInfo.team_1.id,
+            teamId_2: teamInfo.team_2.id,
+            gameWinCamp: gameInfo.win.camp,
+            gameBPData: String(gameInfo.BPOrder)
+          })
+        )
+        .then(res => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.$message.success("已保存第 " + (index + 1) + " 局 ;D");
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onDelectGameBPClick: function(index) {
+      let loginInfo = this.loginInfo;
+
+      this.axios
+        .post(
+          this.apiList.pvp.delectGameBP,
+          this.$qs.stringify({
+            openId: loginInfo.openId,
+            accessToken: loginInfo.accessToken,
+            gameLabel: this.gameLabel,
+            gameIndex: index
+          })
+        )
+        .then(res => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.gameInfo.result.splice(index, 1);
+            this.tabsModel = index - 1;
+
+            this.$message.success("删除成功");
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     gameCampColor(color, index) {
       let ret = false;
@@ -804,34 +923,32 @@ export default {
     onSeeHeroClick: function() {
       if (this.eye == "eye-o") {
         this.eye = "closed-eye";
+
         this.show.hero = false;
       } else {
         this.eye = "eye-o";
+
         this.show.hero = true;
       }
     },
     onGamePerspectiveClick: function(mode) {
       this.perspective == 1 ? (this.perspective = 2) : (this.perspective = 1);
 
-      this.bpOrderInit(this.perspective, this.tabsModel + 1);
+      this.BPOrderInit(this.perspective, this.tabsModel + 1);
 
       mode == 1
         ? this.$message.success("初始化 " + this.self.name + " 的视角")
         : "";
     },
     onGameTabsChange: function(e) {
-      this.bpOrderInit(this.perspective, e + 1);
-
-      if (this.mode == "edit") {
-        this.$message.warning("警告:1001,编辑模式下切换对局记得保存");
-      }
+      this.BPOrderInit(this.perspective, e + 1);
     },
-    onGameBanPickClick: function(camp, type, newIndex) {
+    onGameBanPickClick: function(index) {
       if (this.mode == "view") return;
 
       let tabsModel = this.tabsModel;
 
-      if (this.gameInfo.result[tabsModel].bpOrder[newIndex - 1] == 0) {
+      if (this.gameInfo.result[tabsModel].BPOrder[index - 1] == 0) {
         this.$message.error("错误:1002,请按顺序BP");
         return;
       }
@@ -839,14 +956,12 @@ export default {
       let oldIndex = this.gameInfo.result[tabsModel].stepsNow;
 
       if (this.mode == "edit") {
-        if (
-          this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)
-        ) {
+        if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, index)) {
           this.onGamePerspectiveClick(0);
         }
         //切换阵容时初始化
 
-        this.gameInfo.result[tabsModel].stepsNow = newIndex;
+        this.gameInfo.result[tabsModel].stepsNow = index;
       }
     },
     onGamePickHeroClick: function(hero) {
@@ -875,7 +990,7 @@ export default {
       } else {
         newIndex = oldIndex + 1;
 
-        this.gameInfo.result[tabsModel].bpOrder.splice(oldIndex, 1, hero.id);
+        this.gameInfo.result[tabsModel].BPOrder.splice(oldIndex, 1, hero.id);
       }
 
       if (this.index.perspective[oldIndex] == 1) {
@@ -884,7 +999,11 @@ export default {
 
       this.gameInfo.result[tabsModel].stepsNow = newIndex;
 
-      this.bpOrderInit(this.perspective, tabsModel + 1);
+      this.BPOrderInit(this.perspective, tabsModel + 1);
+
+      if (newIndex >= 18) {
+        this.$message.warning("BP结束,注意保存");
+      }
     },
     onGameShareClick: function() {
       let vs = this.team.team_1.name + " vs " + this.team.team_2.name;
@@ -902,10 +1021,6 @@ export default {
       let tabsModel = this.tabsModel;
 
       if (type == 0) {
-        //
-      }
-
-      if (type == 1) {
         this.$dialog
           .confirm({
             title: "是否删除第 " + (tabsModel + 1) + " 局？",
@@ -913,19 +1028,18 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.gameInfo.result.splice(tabsModel, 1);
-            this.tabsModel = tabsModel - 1;
+            this.onDelectGameBPClick(tabsModel);
           })
           .catch(() => {
             // on cancel
           });
       }
 
-      if (type == 2) {
-        this.onCreateNewGameClick();
+      if (type == 1) {
+        this.onCreateGameBPClick();
       }
 
-      if (type == 3) {
+      if (type == 2) {
         if (this.mode == "view") {
           this.mode = "edit";
           this.$message.info("已进入编辑模式");
@@ -938,9 +1052,39 @@ export default {
           //tabsModel % 2 == 0
         } else {
           this.mode = "view";
-          this.$message.success("已保存第 " + (tabsModel + 1) + " 局 ;D");
+
+          this.onUpdateGameBPClick(tabsModel);
         }
       }
+    },
+    onWinCampClick: function(camp) {
+      let tabsModel = this.tabsModel;
+      let teamInfo = this.team;
+      let nowWinTeam;
+
+      if (camp == 1) {
+        tabsModel % 2 == 0
+          ? (nowWinTeam = teamInfo.team_1.name)
+          : (nowWinTeam = teamInfo.team_2.name);
+      } else {
+        tabsModel % 2 == 0
+          ? (nowWinTeam = teamInfo.team_2.name)
+          : (nowWinTeam = teamInfo.team_1.name);
+      }
+
+      this.$dialog
+        .confirm({
+          title: "是否将本局胜方设置为 " + nowWinTeam + " ？"
+        })
+        .then(() => {
+          // on confirm
+          this.gameInfo.result[tabsModel].win.camp = camp;
+
+          this.$message.success("设置成功");
+        })
+        .catch(() => {
+          // on cancel
+        });
     }
   }
 };
