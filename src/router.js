@@ -91,11 +91,18 @@ export default new Router({
             path: '/game',
             component: resolve => require(['./views/Game/Index.vue'], resolve),
             children: [{
-                path: 'dashboard',
-                name: 'GameDashboard',
-                component: resolve => require(['./views/Game/Dashboard.vue'], resolve),
+                path: 'team',
+                name: 'GameTeam',
+                component: resolve => require(['./views/Game/Team.vue'], resolve),
                 meta: {
-                    title: '仪表盘'
+                    title: '队伍'
+                }
+            }, {
+                path: 'engage',
+                name: 'GameEngage',
+                component: resolve => require(['./views/Game/Engage.vue'], resolve),
+                meta: {
+                    title: '交战'
                 }
             }, {
                 path: ':id/bp',
