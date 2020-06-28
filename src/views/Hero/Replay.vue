@@ -78,7 +78,7 @@
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.gamePlayerName + ' 如何打开'"
+        :title="tableData.row.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -189,7 +189,6 @@ export default {
     },
     onGameActionSheetClick: function(row) {
       this.tableData.row = row;
-      this.show.actionSheet = true;
 
       let url = row.url,
         urlIndex = url.indexOf("=");
@@ -200,6 +199,8 @@ export default {
           this.copyData =
             this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
+
+      this.show.actionSheet = true;
     },
     getHeroReplayByHeroId: function(heroId, page) {
       this.axios

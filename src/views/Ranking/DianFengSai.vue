@@ -204,7 +204,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.name + ' 如何打开'"
+        :title="tableData.row.name + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -321,8 +321,9 @@ export default {
         });
     },
     getHeroInfo: function(row) {
-      this.show.actionSheet = true;
       this.tableData.row = row;
+
+      this.show.actionSheet = true;
     },
     onDropdownMenuChange: function() {
       this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);

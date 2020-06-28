@@ -94,7 +94,7 @@
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.hero_1.name + ' & ' + tableData.row.hero_2.name + ' 如何打开'"
+        :title="tableData.row.hero_1.name + ' & ' + tableData.row.hero_2.name + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -180,7 +180,6 @@ export default {
         });
     },
     getHeroInfo: function(row) {
-      this.show.actionSheet = true;
       this.tableData.row = row;
 
       let heroName = this.search.value;
@@ -217,6 +216,8 @@ export default {
             "\r-\r更多英雄关系 ↓\r" +
             res.data.data.url;
         });
+
+      this.show.actionSheet = true;
     },
     cellClassName: function({ row, column }) {
       let pick = this.tableData.color.pick,

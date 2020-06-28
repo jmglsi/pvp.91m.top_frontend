@@ -35,7 +35,7 @@
       <van-grid :border="false" :column-num="2">
         <van-grid-item
           icon="/img/app-icons/team.png"
-          to="/game/dashboard?from=8e88848cecf2dfe586dab1e65a48850f"
+          to="/game/team?from=8e88848cecf2dfe586dab1e65a48850f"
           template
           #text
         >
@@ -45,8 +45,8 @@
           </div>
         </van-grid-item>
         <van-grid-item
-          icon="/img/app-icons/bp_data.png"
-          to="/game/dashboard?from=491dd2c69c94f79fa96dabfe04582d04"
+          icon="/img/app-icons/engage.png"
+          to="/game/engage?from=491dd2c69c94f79fa96dabfe04582d04"
           template
           #text
         >
@@ -171,13 +171,14 @@ export default {
     onLoginCheck: function(openId, accessToken) {
       if (!openId || !accessToken) return;
 
-      let postData = {
-        openId: openId,
-        accessToken: accessToken
-      };
-
       this.axios
-        .post(this.apiList.pvp.getWebAccountInfo, this.$qs.stringify(postData))
+        .post(
+          this.apiList.pvp.getWebAccountInfo,
+          this.$qs.stringify({
+            openId: openId,
+            accessToken: accessToken
+          })
+        )
         .then(res => {
           let data = res.data.data,
             status = res.data.status;

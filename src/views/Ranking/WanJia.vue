@@ -26,7 +26,7 @@
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
           <template v-slot="{ row }">
             <van-tag
-              v-show="row.tag"
+              v-if="row.tag"
               :color="row.tag.color"
               mark
               type="primary"
@@ -52,7 +52,7 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.gamePlayerName + ' 如何打开'"
+        :title="tableData.row.gamePlayerName + ' 如何操作'"
         :actions="tableData.row.area < 3 ? actions : []"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -116,7 +116,6 @@ export default {
     getPlayerInfo: function(row) {
       if (row.userId == 0) return;
 
-      this.show.actionSheet = true;
       this.tableData.row = row;
 
       this.axios
@@ -141,6 +140,8 @@ export default {
             "?type=2&from=71f24db02647f7d930444128c0b02003&userId=" +
             row.userId;
         });
+
+      this.show.actionSheet = true;
     },
     onPlayerOptionsChange: function(e) {
       this.getPlayerRanking(e, this.playerShield);

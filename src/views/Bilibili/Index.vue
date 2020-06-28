@@ -55,7 +55,7 @@
     <div class="bilibili-8fd741f0ce683493b1bed18a2ed32d4a">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.uid + ' 如何打开'"
+        :title="tableData.row.uid + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -153,7 +153,6 @@ export default {
       this.copyAv = "";
     },
     onActionSheetClick: function(row) {
-      this.show.actionSheet = true;
       this.tableData.row = row;
 
       this.axios
@@ -190,6 +189,8 @@ export default {
             "\r-\r" +
             res.data.data.url;
         });
+
+      this.show.actionSheet = true;
     },
     onSearchClear: function() {
       this.search.value = "";

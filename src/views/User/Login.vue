@@ -9,8 +9,8 @@
     <div class="login-2a642626758deefdc2989a73aae823d3">
       <van-cell-group>
         <van-field
-          v-show="loginInfo.type == 0"
           v-model="loginInfo.data.name"
+          v-show="loginInfo.type == 0"
           left-icon="user-o"
           placeholder="请输入用户名 (仅支持中英文数字)"
         />
@@ -26,15 +26,15 @@
           placeholder="请输入密码"
         />
         <van-field
-          v-show="loginInfo.type == 2"
           v-model="loginInfo.data.newPassword"
+          v-show="loginInfo.type == 2"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
         />
         <van-field
-          v-show="loginInfo.type == 0"
           v-model="loginInfo.data.qq"
+          v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
         />
@@ -135,20 +135,18 @@ export default {
       let type = this.loginInfo.type,
         data = this.loginInfo.data;
 
-      let postData = {
-        name: data.name,
-        email: data.email,
-        password: md5(data.password),
-        newPassword: data.newPassword ? md5(data.newPassword) : null,
-        qq: data.qq,
-        openId: data.openId,
-        accessToken: data.accessToken
-      };
-
       this.axios
         .post(
           this.apiList.pvp.loginWebAccount + "&aid=" + type,
-          this.$qs.stringify(postData)
+          this.$qs.stringify({
+            name: data.name,
+            email: data.email,
+            password: md5(data.password),
+            newPassword: data.newPassword ? md5(data.newPassword) : null,
+            qq: data.qq,
+            openId: data.openId,
+            accessToken: data.accessToken
+          })
         )
         .then(res => {
           let data = res.data.data,

@@ -44,9 +44,9 @@
 
     <div class="hero-9afffec6fe89b34b024d06907c006f36">
       <van-grid
+        v-show="show.parameter"
         :border="false"
         :column-num="3"
-        v-show="show.parameter"
         class="app-ff4a008470319a22d9cf3d14af485977"
       >
         <van-grid-item @click="$message.info('分均经济、场均时长、场均经济 ;D')">
@@ -355,11 +355,10 @@ export default {
             this.$message.success("投票成功");
           }
         });
+
       this.show.actionSheet = false;
     },
     onTabsChange: function(e) {
-      e == 0 ? (this.show.parameter = true) : (this.show.parameter = false);
-
       let heroInfo = this.hero.info,
         dTitle;
 
@@ -379,6 +378,8 @@ export default {
       }
 
       document.title = dTitle + " | 苏苏的荣耀助手";
+
+      e == 0 ? (this.show.parameter = true) : (this.show.parameter = false);
     }
   }
 };

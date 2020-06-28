@@ -110,10 +110,10 @@ export default {
     };
   },
   mounted() {
-    this.init();
+    this.getAppHome();
   },
   methods: {
-    init: function() {
+    getAppHome: function() {
       this.axios.get(this.apiList.pvp.getAppHome).then(res => {
         this.appHomeInfo = res.data.data;
       });
