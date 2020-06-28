@@ -158,6 +158,8 @@ export default {
   },
   methods: {
     getHeroCombination: function(heroName) {
+      this.search.value = heroName;
+
       this.axios
         .get(
           this.apiList.pvp.getHeroCombination +
@@ -184,7 +186,7 @@ export default {
 
       let heroName = this.search.value;
 
-      if (!heroName) heroName = this.tableData.row.name_1;
+      if (!heroName) heroName = this.tableData.row.hero_1.name;
 
       this.axios
         .get(
@@ -195,9 +197,9 @@ export default {
                 "?type=1&from=71f24db02647f7d930444128c0b02003&heroName=" +
                 encodeURIComponent(heroName) +
                 "&heroId1=" +
-                row.id_1 +
+                row.hero_1.id +
                 "&heroId2=" +
-                row.id_2
+                row.hero_2.id
             )
         )
         .then(res => {
@@ -295,7 +297,12 @@ export default {
 
       if (item.value == 1) {
         this.$router.push({
-          path: "/hero/" + heroInfo.id_1 + "," + heroInfo.id_2 + "/replay",
+          path:
+            "/hero/" +
+            heroInfo.hero_1.id +
+            "," +
+            heroInfo.hero_2.id +
+            "/replay",
           query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
         });
       }
