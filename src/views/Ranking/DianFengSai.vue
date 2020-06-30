@@ -305,8 +305,8 @@ export default {
   },
   methods: {
     getHeroRanking: function(aid, bid) {
-      if (aid == 3)
-        this.$message.info("禁用率越高越容易挨刀,挨过刀的几个月内不会再动 ;D");
+      if (aid == 3 && bid == 0)
+        this.$message.info("提示:1006,禁用率越高越容易挨刀,挨过刀的几个月内不会再动 ;D");
 
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)

@@ -26,7 +26,11 @@
           class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
         >{{ loginInfo.name }}</span>
         <span class="my-25930e3036f13852cb0b29694bbab611 my-293a35164a20c927b0fd61942fbc1cf2">
-          <van-tag round :color="loginInfo.certification.color">{{ loginInfo.certification.text }}</van-tag>
+          <van-tag
+            round
+            :color="loginInfo.certification.color"
+            @click="$message.warning('警告:1004,联系站长更改 (lll￢ω￢)')"
+          >{{ loginInfo.certification.text }}</van-tag>
         </span>
       </div>
     </div>

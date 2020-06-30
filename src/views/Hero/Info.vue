@@ -7,11 +7,14 @@
         :placeholder="true"
         z-index="99999999"
         @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
-        @click-right="$message.info('分路推荐 ;D')"
+        @click-right="$message.info('提示:1002,分路推荐 ;D')"
       >
         <van-icon name="arrow-left" slot="left" />
         <template #title>
-          <div @click="$message.info('近期热度 ;D')" class="info-632d142d7a508e86f6c35a044a17411e">
+          <div
+            @click="$message.info('提示:1003,近期热度 ;D')"
+            class="info-632d142d7a508e86f6c35a044a17411e"
+          >
             <img
               v-show="show.parameter && hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
@@ -30,11 +33,11 @@
                 :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
               >
                 <van-tag
-                  v-if="data > 0"
-                  :color="positionInfo[data][1]"
+                  v-if="data"
+                  :color="positionInfo[data - 1][1]"
                   round
                   class="info-bc267281c62550407c9572aff2a45f69"
-                >{{ positionInfo[data][0] }}</van-tag>
+                >{{ positionInfo[data - 1][0] }}</van-tag>
               </li>
             </ul>
           </div>
@@ -49,7 +52,7 @@
         :column-num="3"
         class="app-ff4a008470319a22d9cf3d14af485977"
       >
-        <van-grid-item @click="$message.info('分均经济、场均时长、场均经济 ;D')">
+        <van-grid-item @click="$message.info('提示:1004,分均经济、场均时长、场均经济 ;D')">
           <div class="info-795f3202b17cb6bc3d4b771d8c6c9eaf">
             <AppGold width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
             <span
@@ -88,7 +91,7 @@
             class="info-b798abe6e1b1318ee36b0dcb3fb9e4d3"
           />
         </van-grid-item>
-        <van-grid-item @click="$message.info('技能下面的数字是占比 ;D')">
+        <van-grid-item @click="$message.info('提示:1005,技能下面的数字是占比 ;D')">
           <div class="info-f3412345b511c61986bba9a39793157f">
             <span
               class="info-713dd4d0b2e842c08da62ddeec872331"

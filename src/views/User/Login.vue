@@ -1,7 +1,12 @@
 <template>
   <div class="login-home">
     <div class="login-9ffe6c014e6f06f1c218fde0ca3fc4ef">
-      <van-nav-bar :border="false" @click-left="onNavBarLeftClick">
+      <van-nav-bar
+        :border="false"
+        :fixed="true"
+        :placeholder="true"
+        @click-left="onNavBarLeftClick"
+      >
         <van-icon name="arrow-left" slot="left" />
       </van-nav-bar>
     </div>

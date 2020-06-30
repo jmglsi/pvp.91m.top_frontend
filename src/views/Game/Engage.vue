@@ -24,8 +24,8 @@
             >
               <van-col span="7">
                 <img
-                  width="50"
-                  height="50"
+                  width="40"
+                  height="40"
                   v-lazy="data.team_1.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
@@ -37,8 +37,8 @@
               </van-col>
               <van-col span="7">
                 <img
-                  width="50"
-                  height="50"
+                  width="40"
+                  height="40"
                   v-lazy="data.team_2.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />

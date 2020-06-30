@@ -125,7 +125,7 @@ export default {
             status = res.data.status;
 
           if (status.code != 200) {
-            this.$message.error("错误:1005,玩家信息返回异常");
+            this.$message.error("错误:1005,玩家信息异常");
             return;
           }
 

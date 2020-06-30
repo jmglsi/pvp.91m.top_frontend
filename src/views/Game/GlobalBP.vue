@@ -361,7 +361,7 @@ div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
 .pick-d75e14b5c8f13e894fe9bf9d5426c198,
 .pick-251504ba219ea8c3175f47b73bdde6e6 {
   width: 30px;
-  height: 250px;
+  height: 275px;
   top: 80px;
   position: absolute;
 }
@@ -853,7 +853,7 @@ export default {
       let gameInfo = this.gameInfo.result[index];
 
       if (gameInfo.win.camp == null) {
-        this.$message.error("错误:1006,还未设置胜利方");
+        this.$message.error("错误:1001,请点击左侧/右侧边缘设置胜利方");
         return;
       }
 
@@ -971,11 +971,11 @@ export default {
         this.gameInfo.result[tabsModel].blue.ban.includes(hero.id) ||
         this.gameInfo.result[tabsModel].red.ban.includes(hero.id)
       ) {
-        this.$message.warning("警告:1003," + hero.name + " 已被禁用");
+        this.$message.warning("警告:1001," + hero.name + " 已被禁用");
         return;
       } else if (this.gameInfo.used.includes(hero.id)) {
         this.$message.warning(
-          "警告:1004," + hero.name + " 已被 " + this.opponent.name + " 用过"
+          "警告:1002," + hero.name + " 已被 " + this.opponent.name + " 用过"
         );
         return;
       }
@@ -1042,7 +1042,7 @@ export default {
       if (type == 2) {
         if (this.mode == "view") {
           this.mode = "edit";
-          this.$message.info("已进入编辑模式");
+          this.$message.info("提示:1001,已进入编辑模式");
 
           this.index.ban.includes(this.gameInfo.result[tabsModel].stepsNow) &&
           tabsModel % 2 == 0

@@ -248,7 +248,7 @@ export default {
       this.show.team = false;
 
       if (teamId_1 == teamId_2) {
-        this.$message.error("错误:1006,俩队伍不能相同");
+        this.$message.error("错误:1003,两支队伍不能相同");
         return;
       }
 
