@@ -8573,10 +8573,10 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
 
-vxe-table@^2.9.13:
-  version "2.9.13"
-  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.13.tgz#619cd585160dde9b526b90ce552a358ecb3a6060"
-  integrity sha512-MOaJLLJtdgVbiZX8netLqG8+daB7IbjBM9+5Ppt+seyjBrNV2C4dd8JkGpGX5zPThSzkYPGz66vo404Yu5Q/EA==
+vxe-table@^2.9.14:
+  version "2.9.14"
+  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.14.tgz#d4366ff693f578c053e336cdd0e9739144f5ff8e"
+  integrity sha512-DoKHF+Aykw5LQ1LTX82Q0Bkv9plQH8iaMoLFXm6MFqcGh2RUIEQ0/202XpdqnweJGC5B3F8RBgIADqja/ue4pw==
 
 warning@^4.0.0:
   version "4.0.3"
@@ -8969,10 +8969,10 @@ ws@^6.0.0, ws@^6.2.1:
   dependencies:
     async-limiter "~1.0.0"
 
-xe-utils@^2.4.8:
-  version "2.4.8"
-  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-2.4.8.tgz#0efda3ca81f6b55f68a8a31e276fb17da59c98b3"
-  integrity sha512-/95ZaQK9GJE/EYrpMv9lgKdkEMQwWv4a4TF4dddi4gSzZ33vp/rZvzJNNV9XknaOkMizK9IBSX8CB/nL+SAk0Q==
+xe-utils@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-2.6.2.tgz#becf598266109e8144862721f93edcbe2caeb982"
+  integrity sha512-oucYwkmJzXkfnlog5uXVb45vbsr7Md7bcpuiOXMaUxsp2btRanE4WawgMOLUNrJgMuI2khWvCWXhaRT8aOmS8Q==
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"

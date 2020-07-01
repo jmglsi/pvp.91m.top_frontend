@@ -23,6 +23,7 @@
         :height="clientHeight"
         :cell-class-name="cellClassName"
         :sort-config="{trigger: 'cell'}"
+        auto-resize
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
@@ -75,129 +76,43 @@
         <vxe-table-column title="#" type="seq" width="75" />
 
         <vxe-table-column title="出场越低,波动越大 (%)">
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            sortable
-            title="禁用"
-            field="banRate"
-          />
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            sortable
-            title="出场"
-            field="pickRate"
-          />
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            sortable
-            title="胜率"
-            field="winRate"
-          />
+          <vxe-table-column title="禁用" field="banRate" :width="listWidth" sortable />
+          <vxe-table-column title="出场" field="pickRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜率" field="winRate" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            sortable
-            title="全部"
-            field="allMvpRate"
-          />
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            sortable
-            title="胜方"
-            field="winMvpRate"
-          />
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            sortable
-            title="败方"
-            field="loseMvpRate"
-          />
+          <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
+          <vxe-table-column title="败方" field="loseMvpRate" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 0]"
-          sortable
           title="承伤 (分)"
           field="totalBeHurtedCntPerMin"
+          :width="listWidth"
+          sortable
         />
 
         <vxe-table-column title="伤害">
           <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 0]"
-            sortable
             title="对人 (分)"
             field="totalHurtHeroCntPerMin"
-          />
-          <vxe-table-column
             :width="listWidth"
-            :formatter="['toFixedString', 0]"
             sortable
-            title="全部 (场)"
-            field="totalOutputPerMin"
           />
+          <vxe-table-column title="全部 (场)" field="totalOutputPerMin" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 0]"
-          sortable
-          title="金币 (分)"
-          field="equMoneyMin"
-        />
+        <vxe-table-column title="金币 (分)" field="equMoneyMin" :width="listWidth" sortable />
 
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 0]"
-          sortable
-          title="经济 (场)"
-          field="equMoneyOverflow"
-        />
+        <vxe-table-column sortable title="经济 (场)" field="equMoneyOverflow" :width="listWidth" />
 
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="击杀"
-          field="killCnt"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="死亡"
-          field="deadCnt"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="助攻"
-          field="assistCnt"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="参团"
-          field="joinGamePercent"
-        />
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          sortable
-          title="时长"
-          field="usedtime"
-        />
+        <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
+        <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
+        <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
+        <vxe-table-column title="参团" field="joinGamePercent" :width="listWidth" sortable />
+        <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
       </vxe-grid>
     </div>
 
@@ -306,7 +221,9 @@ export default {
   methods: {
     getHeroRanking: function(aid, bid) {
       if (aid == 3 && bid == 0)
-        this.$message.info("提示:1006,禁用率越高越容易挨刀,挨过刀的几个月内不会再动 ;D");
+        this.$message.info(
+          "提示:1006,禁用率越高越容易挨刀,挨过刀的几个月内不会再动 ;D"
+        );
 
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)

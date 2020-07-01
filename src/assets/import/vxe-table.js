@@ -12,7 +12,8 @@ import {
 VXETable.setup({
     table: {
         align: "center",
-        border: "none",
+        border: "inner",
+        resizable: true,
         showOverflow: null,
         highlightCurrentRow: true,
         highlightHoverRow: true

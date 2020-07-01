@@ -19,6 +19,7 @@
         :height="clientHeight"
         :cell-class-name="cellClassName"
         :sort-config="{trigger: 'cell'}"
+        auto-resize
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄_1" fixed="left" width="75" sortable>
@@ -47,45 +48,15 @@
         <vxe-table-column title="#" type="seq" width="75" />
 
         <vxe-table-column title="队友 (%)">
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            title="出场"
-            field="teammatePickRate"
-            sortable
-          />
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            title="胜率"
-            field="teammateWinRate"
-            sortable
-          />
+          <vxe-table-column title="出场" field="teammatePickRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜率" field="teammateWinRate" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column
-          :width="listWidth"
-          :formatter="['toFixedString', 2]"
-          title="适配"
-          field="adaptation"
-          sortable
-        />
+        <vxe-table-column title="适配" field="adaptation" :width="listWidth" sortable />
 
         <vxe-table-column title="对手 (%)">
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            title="出场"
-            field="opponentPickRate"
-            sortable
-          />
-          <vxe-table-column
-            :width="listWidth"
-            :formatter="['toFixedString', 2]"
-            title="胜率"
-            field="opponentWinRate"
-            sortable
-          />
+          <vxe-table-column title="出场" field="opponentPickRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜率" field="opponentWinRate" :width="listWidth" sortable />
         </vxe-table-column>
         <template v-slot:empty>暂无数据</template>
       </vxe-grid>

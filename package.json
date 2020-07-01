@@ -27,8 +27,8 @@
         "vue-cookie": "^1.1.4",
         "vue-meta": "^2.4.0",
         "vue-router": "^3.3.4",
-        "vxe-table": "^2.9.13",
-        "xe-utils": "^2.4.8"
+        "vxe-table": "^2.9.14",
+        "xe-utils": "^2.6.2"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.11.0",
