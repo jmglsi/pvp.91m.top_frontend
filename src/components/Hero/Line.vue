@@ -130,6 +130,8 @@ export default {
 
           if (data.result.rows.length != 0) {
             this.tableData = data;
+          } else {
+            this.$message.warning("无内容");
           }
         });
     }

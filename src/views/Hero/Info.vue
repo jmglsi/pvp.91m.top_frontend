@@ -123,7 +123,7 @@
         color="rgb(222,177,81)"
         class="info-d42f4851e770aa0f758b01388874f67b"
       >
-        <van-tab :title="hero.line == 0 ? '巅峰赛趋势' : '社区舆论'" />
+        <van-tab :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'" />
         <van-tab title="同职业对比" />
         <van-tab title="自定义对比" />
         <div class="hero-e06398232dc80e41209489705546802c">
