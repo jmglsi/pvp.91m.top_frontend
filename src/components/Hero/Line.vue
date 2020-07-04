@@ -33,23 +33,36 @@ export default {
     detailed: {
       type: Boolean,
       default: true
+    },
+    lineType: {
+      type: Number,
+      default: 0
     }
   },
   computed: {
     listenChange() {
-      const { heroId, detailed } = this;
-      return { heroId, detailed };
+      const { heroId, detailed, lineType } = this;
+      return { heroId, detailed, lineType };
     }
   },
   watch: {
     listenChange: {
-      immediate: false,
-      handler(newValue, oldValue) {
-        this.getHeroChartsLog(newValue.heroId, Number(newValue.detailed));
-        if (oldValue.heroId != 0) {
-          this.$message.success("切换成功");
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
+      immediate: true,
+      handler(newValue) {
+        if (newValue.heroId == 0) return;
+
+        if (newValue.lineType == 0) {
+          this.getHeroChartsLogByDfs(
+            newValue.heroId,
+            Number(newValue.detailed)
+          );
         }
+
+        if (newValue.lineType == 1) {
+          this.getHeroChartsLogByBbs(newValue.heroId);
+        }
+
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }
     }
   },
@@ -92,15 +105,26 @@ export default {
     };
   },
   methods: {
-    getHeroChartsLog: function(heroId, detailed) {
+    getHeroChartsLogByDfs: function(heroId, detailed) {
       this.axios
         .get(
-          this.apiList.pvp.getHeroChartsLog +
+          this.apiList.pvp.getHeroChartsLogByDfs +
             "&heroId=" +
             heroId +
             "&detailed=" +
             detailed
         )
+        .then(res => {
+          let data = res.data.data;
+
+          if (data.result.rows.length != 0) {
+            this.tableData = data;
+          }
+        });
+    },
+    getHeroChartsLogByBbs: function(heroId) {
+      this.axios
+        .get(this.apiList.pvp.getHeroChartsLogByBbs + "&heroId=" + heroId)
         .then(res => {
           let data = res.data.data;
 

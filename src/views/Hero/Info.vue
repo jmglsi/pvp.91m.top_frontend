@@ -119,14 +119,15 @@
         v-model="tabsModel"
         :border="false"
         @change="onTabsChange"
+        @click="hero.line == 0 ? hero.line = 1 : hero.line = 0"
         color="rgb(222,177,81)"
         class="info-d42f4851e770aa0f758b01388874f67b"
       >
-        <van-tab title="巅峰赛趋势" />
+        <van-tab :title="hero.line == 0 ? '巅峰赛趋势' : '社区舆论'" />
         <van-tab title="同职业对比" />
         <van-tab title="自定义对比" />
         <div class="hero-e06398232dc80e41209489705546802c">
-          <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" />
+          <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" :lineType="hero.line" />
         </div>
         <div class="hero-ea950cb092f4e99e2ccf981cf503e5e3">
           <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
@@ -279,6 +280,7 @@ export default {
       },
       tabsModel: 0,
       hero: {
+        line: 0,
         title: "加载中",
         info: {
           id: 0
