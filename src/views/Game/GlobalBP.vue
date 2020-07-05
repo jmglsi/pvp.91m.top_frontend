@@ -936,9 +936,8 @@ export default {
 
       this.BPOrderInit(this.perspective, this.tabsModel + 1);
 
-      mode == 1
-        ? this.$message.success("初始化 " + this.self.name + " 的视角")
-        : "";
+      if (mode == 1)
+        this.$message.success("初始化 " + this.self.name + " 的视角");
     },
     onGameTabsChange: function(e) {
       this.BPOrderInit(this.perspective, e + 1);

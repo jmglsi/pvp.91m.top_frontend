@@ -7,6 +7,7 @@ const gameApi = "//" + host + "/hero/v1/game.php"
 const biliApi = "//" + host + "/hero/v1/bilibili.php"
 
 const pvp = {
+    uploadImg: appApi + "?type=uploadImg",
     getAppInfo: appApi + "?type=getAppInfo",
     getAppHome: appApi + "?type=getAppHome",
     getMiniApp: appApi + "?type=getMiniApp",

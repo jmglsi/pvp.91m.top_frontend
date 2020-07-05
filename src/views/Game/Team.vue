@@ -44,13 +44,24 @@
                   <van-button
                     round
                     size="small"
-                    color="linear-gradient(to right, #4bb0ff, #6149f6)"
+                    color="black"
                     @click="onCreateEngageClick(teamInfo.row.id)"
                   >创建交战</van-button>
                 </template>
               </van-field>
+              <van-field v-model="teamInfo.row.logo" label="Logo" placeholder="输入图片链接" clearable>
+                <template #button>
+                  <van-uploader
+                    :after-read="onAfterRead"
+                    :before-read="onBeforeRead"
+                    :max-size="3 * 1024 * 1024"
+                    @oversize="onOversize"
+                  >
+                    <van-button round size="small" color="rgb(25, 137, 250)">上传图片</van-button>
+                  </van-uploader>
+                </template>
+              </van-field>
               <van-field v-model="teamInfo.row.name" label="名字" placeholder="输入队伍名字" clearable />
-              <van-field v-model="teamInfo.row.logo" label="Logo" placeholder="输入图片链接" clearable />
             </van-cell-group>
           </div>
 
@@ -143,6 +154,50 @@ export default {
           }
         });
     },
+    onAfterRead: function(file) {
+      let loginInfo = this.loginInfo,
+        data = file.content;
+
+      this.$message.info("正在上传");
+
+      this.axios
+        .post(
+          this.apiList.pvp.uploadImg,
+          this.$qs.stringify({
+            openId: loginInfo.openId,
+            accessToken: loginInfo.accessToken,
+            filePath: data
+          })
+        )
+        .then(res => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.$message.success("上传成功");
+
+            this.teamInfo.row.logo = data.img;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onBeforeRead: function(file) {
+      if (
+        file.type != "image/png" &&
+        file.type != "image/gif" &&
+        file.type != "image/jpg" &&
+        file.type != "image/jpeg"
+      ) {
+        this.$message.error("请上传 png/gif/jpg/jpeg 格式图片");
+        return false;
+      } else {
+        return true;
+      }
+    },
+    onOversize: function() {
+      this.$message.error("错误:1006,图片超过 3MB");
+    },
     onCreateTeamClick: function() {
       this.teamInfo.row = {
         name: null,
@@ -179,12 +234,12 @@ export default {
         this.axios
           .post(this.apiList.pvp.createTeam, this.$qs.stringify(postData))
           .then(res => {
-            let data = res.data.data,
-              status = res.data.status;
+            let status = res.data.status;
 
             if (status.code == 200) {
               this.$message.success("创建成功");
-              this.teamInfo.result.push(data);
+
+              this.getGameDashboard();
             } else {
               this.$message.error(status.msg);
             }
