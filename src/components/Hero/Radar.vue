@@ -38,6 +38,7 @@ div.ti-input {
   max-width: 500px;
   margin: 0 auto;
   margin-bottom: 25px;
+  z-index: 1;
 }
 </style>
 
