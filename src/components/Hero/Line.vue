@@ -8,6 +8,7 @@
         :mark-point="markPoint"
         :data="tableData.result"
         width="99.2%"
+        class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
     </div>
   </div>

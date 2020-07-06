@@ -21,13 +21,14 @@
           <a-timeline-item
             v-for="(data, index) in tableData.result"
             v-show="(updateInfo.model == 0 && data.calendar.type <= 0) || (updateInfo.model == 1 && data.calendar.type > 0) || (updateInfo.model == 2 && data.calendar.type > -1)"
-            :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
+            :key="'tuijian-587fa4ff436ed0ff2113cd87bb01967b-' + index"
             :color="data.calendar.color"
           >
             <van-tag
               v-show="data.calendar.day"
               :color="data.calendar.color"
               round
+              class="tuijian-5a0c2e4611419b82b55675d035764007"
             >{{ data.calendar.day }}</van-tag>
 
             <div v-if="data.url" class="tuijian-5a5152e95445ede11c05f5fa898d8fd9">
@@ -50,7 +51,7 @@
               <router-link
                 v-for="(dataItem, index) in data.item"
                 :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { from: 'dayTag-' + data.calendar.day } }"
-                :key="'tuijian-b4558c68ce168dc8679358f047eea63b-' + index"
+                :key="'tuijian-54099f84a9943b4b1eed932ec22066eb-' + index"
               >
                 <img
                   v-show="dataItem"

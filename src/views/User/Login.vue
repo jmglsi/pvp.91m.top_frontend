@@ -5,6 +5,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
         @click-left="onNavBarLeftClick"
       >
         <van-icon name="arrow-left" slot="left" />
@@ -12,23 +13,26 @@
     </div>
 
     <div class="login-2a642626758deefdc2989a73aae823d3">
-      <van-cell-group>
+      <van-cell-group class="login-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field
           v-model="loginInfo.data.name"
           v-show="loginInfo.type == 0"
           left-icon="user-o"
           placeholder="请输入用户名 (仅支持中英文数字)"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.email"
           left-icon="/img/app-icons/email.png"
           placeholder="请输入邮箱"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.password"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入密码"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.newPassword"
@@ -36,12 +40,14 @@
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.qq"
           v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
       </van-cell-group>
     </div>

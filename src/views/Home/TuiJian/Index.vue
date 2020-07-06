@@ -1,5 +1,5 @@
 <template>
-  <div class="tuijian-home app-margin">
+  <div class="tuijian-home app-d638615004bb2ff42ed26948aba89c80">
     <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
       <van-pull-refresh
         v-model="isLoading"
@@ -8,6 +8,7 @@
         :loading-text="appHomeInfo.miniappInfo.loading"
         :success-text="appHomeInfo.miniappInfo.success"
         @refresh="onTuiJianRefresh"
+        class="tuijian-af03857fe372b964b53ef3a082c2b518"
       >
         <div
           class="tuijian-a139b05b7f8e496c00991733ef7cd589 tuijian-447b7147e84be512208dcc0995d67ebc"
@@ -19,7 +20,7 @@
           >
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result"
-              :key="'tuijian-a139b05b7f8e496c00991733ef7cd589-' + index"
+              :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
               class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
               @click="data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null"
             >
@@ -40,6 +41,7 @@
             :to="appHomeInfo.tipsInfo.to"
             :url="appHomeInfo.tipsInfo.url"
             is-link
+            class="tuijian-06eab62dcb5a23b966a620807d78e66f"
           />
         </div>
       </van-pull-refresh>
@@ -70,14 +72,14 @@
   left: 0;
 }
 
-div.van-cell.van-cell--clickable {
-  background-color: rgb(245, 245, 245);
-  border-radius: 10px;
-}
-
 .tuijian-6a507ff2d5941aa4e30c98a8f3739ffe {
   text-align: left;
   margin: 0 10px;
+}
+
+div.van-cell.van-cell--clickable {
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
 }
 </style>
 

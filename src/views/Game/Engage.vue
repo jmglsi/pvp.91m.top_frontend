@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         title="我的交战"
+        class="game-7140a921b48604a7db01e6b676e34174"
         @click-left="$router.go(-1)"
       >
         <van-icon name="arrow-left" slot="left" />
@@ -13,10 +14,11 @@
     </div>
 
     <div class="game-71ddd6fc31e5033696c4a7f66111b5f9">
-      <van-grid :border="false" :column-num="1">
+      <van-grid :border="false" :column-num="1" class="game-b2ecdf6163952cf377f932aff4b736be">
         <van-grid-item
           v-for="(data, index) in engageInfo.result"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
+          class="game-f24a222ebfb0f6b85f63749653659063"
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
             <van-row

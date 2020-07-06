@@ -29,7 +29,7 @@
         @click="$message.warning('警告:1003,你在摸哪里,是上面啊喂 (lll￢ω￢)')"
       >
         点击&nbsp;
-        <van-tag round type="danger">上方数据</van-tag>&nbsp;查看更多信息
+        <van-tag round type="danger" class="ranking-4d09fbef1438e2b23375b87ba3e02942">上方数据</van-tag>&nbsp;查看更多信息
       </van-divider>
     </div>
   </div>

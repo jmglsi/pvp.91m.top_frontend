@@ -20,7 +20,7 @@
       >
         <van-tabbar-item
           v-for="(data, index) in tabbar.default.list"
-          :key="'app-e0c3b278eeb2cab05f548d7af0f2c949-' + index"
+          :key="'app-531814e80e16a27a837887308ee7c9ad-' + index"
           :icon="data.icon"
           :to="data.to"
           :name="data.name"
@@ -41,7 +41,16 @@
   height: 100%;
 }
 
-.app-margin {
+img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+span.van-tab__text {
+  margin: 11px 0 12px 0;
+}
+
+.app-d638615004bb2ff42ed26948aba89c80 {
   margin: 0 10px;
 }
 
@@ -51,13 +60,11 @@
   height: 100%;
 }
 
-img {
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-span.van-tab__text {
-  margin: 11px 0 12px 0;
+.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
+  position: absolute;
+  font-size: 10px;
+  width: 50px;
+  margin-top: -7px;
 }
 </style>
 
@@ -70,15 +77,6 @@ div.grid-4eb2044800e2b7b9e5c44d370af22b27
   height: 40px;
 }
 
-div.van-grid-item__content.van-grid-item__content--center
-  span.van-grid-item__text {
-  font-weight: 600;
-}
-
-div.van-nav-bar__title {
-  font-size: 20px;
-}
-
 div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
   border-radius: 0;
 }
@@ -88,6 +86,15 @@ div.hero-f3cc17bc0d768ca60b8bb496a10b1990
   div.van-tabs__wrap.van-tabs__wrap--scrollable
   div.van-tabs__nav {
   background-color: rgb(245, 245, 245);
+}
+
+div.van-grid-item__content.van-grid-item__content--center
+  span.van-grid-item__text {
+  font-weight: 600;
+}
+
+div.van-nav-bar__title {
+  font-size: 20px;
 }
 </style>
 
@@ -102,15 +109,6 @@ div.tuijian-447b7147e84be512208dcc0995d67ebc {
   border-radius: 10px;
   padding: 15px 10px;
   margin: 20px 10px;
-}
-</style>
-
-<style>
-.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
-  position: absolute;
-  font-size: 10px;
-  width: 50px;
-  margin-top: -7px;
 }
 </style>
 

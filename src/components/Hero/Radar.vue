@@ -19,6 +19,7 @@
         :height="appDevice ? '650px' : '750px'"
         :settings="tableData.settings"
         :data="tableData.result"
+        class="hero-ca6674b328707b5a1f0b012105a7e4e1"
       />
     </div>
   </div>

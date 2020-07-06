@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         z-index="2"
+        class="hero-6809da26e032292efff6ec78cdec8de2"
         @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
       >
         <template #title>
@@ -22,6 +23,7 @@
           :key="'replay-1a721faf2df53972bfd0831c64b6146d-' + index"
           :name="index"
           :value="data.time"
+          class="replay-90516fea1032f8332d81cb47f06c59f6"
         >
           <div slot="title" class="replay-a78656fbfb5b498e5cb80b5b13076e31">
             <van-tag
@@ -39,17 +41,23 @@
           </div>
 
           <div v-show="!teammate" class="replay-f01902c0d0136ca30fe1034f339964ba">
-            <van-grid :border="false" :column-num="7">
+            <van-grid
+              :border="false"
+              :column-num="7"
+              class="replay-c906a12df6d50e587b83a727416b5173"
+            >
               <van-grid-item
                 v-show="data.heroSkill > 0"
                 :icon="'//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'"
                 :text="data.heroPosition"
+                class="replay-0a96464cb313aab9cc51e5aa61b0193f"
               />
               <van-grid-item
+                v-show="data > 0"
                 v-for="(data, index) in data.equInfo"
                 :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
-                v-show="data > 0"
                 :icon="'//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png'"
+                class="replay-0a96464cb313aab9cc51e5aa61b0193f"
                 @click="appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', '//ngabbs.com/read.php?tid=19902976')"
               />
             </van-grid>
@@ -82,6 +90,7 @@
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
+        class="replay-4bc6fcee674cad1c5910499a6ad199b8"
         @select="onReplaySelect"
       />
     </div>

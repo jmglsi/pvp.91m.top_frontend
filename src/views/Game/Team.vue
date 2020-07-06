@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         title="我的队伍"
+        class="game-6fd4f92278806c6e544f958ba762c7a9"
         @click-left="$router.go(-1)"
         @click-right="onCreateTeamClick"
       >
@@ -15,12 +16,13 @@
     </div>
 
     <div class="game-c37237ae7770c5062ccad7a23572e282 grid-4eb2044800e2b7b9e5c44d370af22b27">
-      <van-grid :border="false">
+      <van-grid :border="false" class="game-40db4f618bd5c27e60368f891382ffd4">
         <van-grid-item
           v-for="(data, index) in teamInfo.result"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           :text="data.name"
           :icon="data.logo"
+          class="game-01d29acb32059f53e7a0297991662475"
           @click="onUpdateTeamClick(data, index)"
         />
       </van-grid>
@@ -33,12 +35,13 @@
       >
         <div class="content">
           <div class="game-350be0bb4350ca865ab9210d074875f1">
-            <van-cell-group>
+            <van-cell-group class="game-2ce081560b9cb8cdcd7472e639624e3e">
               <van-field
                 v-model="teamInfo.row.id"
                 v-show="teamInfo.row.id"
                 :disabled="true"
                 label="id"
+                class="game-3972b6d305454c0dd6bb3927cf9c8712"
               >
                 <template #button>
                   <van-button
@@ -49,7 +52,13 @@
                   >创建交战</van-button>
                 </template>
               </van-field>
-              <van-field v-model="teamInfo.row.logo" label="Logo" placeholder="输入图片链接" clearable>
+              <van-field
+                v-model="teamInfo.row.logo"
+                label="Logo"
+                placeholder="输入图片链接"
+                clearable
+                class="game-3972b6d305454c0dd6bb3927cf9c8712"
+              >
                 <template #button>
                   <van-uploader
                     :after-read="onAfterRead"
@@ -61,7 +70,13 @@
                   </van-uploader>
                 </template>
               </van-field>
-              <van-field v-model="teamInfo.row.name" label="名字" placeholder="输入队伍名字" clearable />
+              <van-field
+                v-model="teamInfo.row.name"
+                label="名字"
+                placeholder="输入队伍名字"
+                clearable
+                class="game-3972b6d305454c0dd6bb3927cf9c8712"
+              />
             </van-cell-group>
           </div>
 

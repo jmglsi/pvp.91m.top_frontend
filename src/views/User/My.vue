@@ -29,6 +29,7 @@
           <van-tag
             round
             :color="loginInfo.certification.color"
+            class="my-7eaa86d23ffacfb49464ee78252aa43a"
             @click="$message.warning('警告:1004,联系站长更改 (lll￢ω￢)')"
           >{{ loginInfo.certification.text }}</van-tag>
         </span>
@@ -36,10 +37,11 @@
     </div>
 
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-grid :border="false" :column-num="2">
+      <van-grid :border="false" :column-num="2" class="my-c3d90961c9bf155d11cbef9c57725aea">
         <van-grid-item
           icon="/img/app-icons/team.png"
           to="/game/team?from=8e88848cecf2dfe586dab1e65a48850f"
+          class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
           template
           #text
         >
@@ -51,6 +53,7 @@
         <van-grid-item
           icon="/img/app-icons/engage.png"
           to="/game/engage?from=491dd2c69c94f79fa96dabfe04582d04"
+          class="my-308ffde0dc5bd5718dcf0396fcc2a596"
           template
           #text
         >
@@ -91,7 +94,7 @@
     </div>
 
     <div class="my-111fb4d92036323891a140cd49383f86">
-      <van-cell-group :border="false">
+      <van-cell-group :border="false" class="my-b990d992f06c8db21d6b58c25f843529">
         <van-cell
           title="沪ICP备16031287号-2"
           url="http://beian.miit.gov.cn"

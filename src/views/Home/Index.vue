@@ -43,7 +43,7 @@ export default {
       type = parseInt(this.$route.query.type);
 
     if (pwa) {
-      this.$cookie.set("pwa", parseInt(pwa), { expires: "1Y" });
+      this.$cookie.set("pwa", 1, { expires: "1Y" });
     }
 
     if (!type) {

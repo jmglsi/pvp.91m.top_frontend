@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         z-index="99999999"
+        class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
         @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
       >
@@ -52,7 +53,10 @@
         :column-num="3"
         class="app-ff4a008470319a22d9cf3d14af485977"
       >
-        <van-grid-item @click="$message.info('提示:1004,分均经济、场均时长、场均经济 ;D')">
+        <van-grid-item
+          class="hero-c6e864acb6955eed0361921288d34149"
+          @click="$message.info('提示:1004,分均经济、场均时长、场均经济 ;D')"
+        >
           <div class="info-795f3202b17cb6bc3d4b771d8c6c9eaf">
             <AppGold width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
             <span
@@ -73,7 +77,10 @@
             >{{ hero.info.equMoneyOverflow || 0 }}</van-tag>
           </span>
         </van-grid-item>
-        <van-grid-item @click="show.actionSheet = true">
+        <van-grid-item
+          class="hero-c6e864acb6955eed0361921288d34149"
+          @click="show.actionSheet = true"
+        >
           <van-circle
             v-model="circle.model"
             :rate="hero.info.dominanceRate"
@@ -82,6 +89,7 @@
             :color="{ '0%': '#3fecff', '100%': '#6149f6' }"
             :text="circle.info.text"
             size="75"
+            class="hero-83444807ba7a7da23e12b17567d2d595"
           />
           <img
             v-show="show.heroImg"
@@ -91,12 +99,15 @@
             class="info-b798abe6e1b1318ee36b0dcb3fb9e4d3"
           />
         </van-grid-item>
-        <van-grid-item @click="$message.info('提示:1005,技能下面的数字是占比 ;D')">
+        <van-grid-item
+          class="hero-c6e864acb6955eed0361921288d34149"
+          @click="$message.info('提示:1005,技能下面的数字是占比 ;D')"
+        >
           <div class="info-f3412345b511c61986bba9a39793157f">
             <span
               class="info-713dd4d0b2e842c08da62ddeec872331"
               v-for="(data, index) in hero.info.skill"
-              :key="'hero-713dd4d0b2e842c08da62ddeec872331-' + index"
+              :key="'hero-d7768ef7449dfbbc6020f1dd0ae11593-' + index"
             >
               <img
                 v-show="data.id > 0"
@@ -123,9 +134,12 @@
         color="rgb(222,177,81)"
         class="info-d42f4851e770aa0f758b01388874f67b"
       >
-        <van-tab :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'" />
-        <van-tab title="同职业对比" />
-        <van-tab title="自定义对比" />
+        <van-tab
+          class="info-ab71021d21963773bfb8be80af65869f"
+          :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'"
+        />
+        <van-tab class="info-ab71021d21963773bfb8be80af65869f" title="同职业对比" />
+        <van-tab class="info-ab71021d21963773bfb8be80af65869f" title="自定义对比" />
         <div class="hero-e06398232dc80e41209489705546802c">
           <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" :lineType="hero.line" />
         </div>
@@ -135,7 +149,7 @@
       </van-tabs>
     </div>
 
-    <div class="app-margin">
+    <div class="app-d638615004bb2ff42ed26948aba89c80">
       <HeroUpdate v-if="isLoaded" v-show="show.parameter" :heroId="hero.info.id" />
     </div>
 
@@ -145,22 +159,23 @@
         :title="hero.info.name + ' 的 ' + circle.info.text"
         :close-on-click-action="true"
         safe-area-inset-bottom
+        class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
-        <van-grid :border="false" :column-num="2">
-          <van-grid-item @click="onHeroVoteClick(1)">
+        <van-grid class="vote-ed90360246f7e2ed71281819e0ca3623" :border="false" :column-num="2">
+          <van-grid-item class="vote-59c25466342abdb6746988b245f3a5a6" @click="onHeroVoteClick(1)">
             <AppCry width="50" height="50" />
             <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circle.info.vote[0].text }}</span>
           </van-grid-item>
-          <van-grid-item @click="onHeroVoteClick(2)">
+          <van-grid-item class="vote-59c25466342abdb6746988b245f3a5a6" @click="onHeroVoteClick(2)">
             <AppSmile width="50" height="50" />
             <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circle.info.vote[1].text }}</span>
           </van-grid-item>
           <van-cell
             title="注意事项"
             icon="question-o"
-            @click="onTipsClick"
-            class="hero-fc861e4a5806e7411f7860142244c917"
             is-link
+            class="hero-fc861e4a5806e7411f7860142244c917"
+            @click="onTipsClick"
           />
         </van-grid>
       </van-action-sheet>

@@ -45,7 +45,7 @@
         <ul>
           <li
             v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
-            :key="'ban-64621b00510adc52b301306824c89659-' + index"
+            :key="'ban-38dfd87b435ce58ee12baf01d6f23c73-' + index"
             @click="onGameBanPickClick(index)"
           >
             <span
@@ -128,6 +128,7 @@
                       v-show="data.trend == 2 && data.type == tableData.active + 1"
                       :key="'hero-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                       :icon="data.img"
+                      text=" "
                       :class="gameInfo.used.includes(data.id) ? banPickClass : ''"
                       @click="onGamePickHeroClick(data)"
                     />
@@ -165,7 +166,7 @@
             <ul>
               <li
                 v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
-                :key="'pick-64621b00510adc52b301306824c89659-' + index"
+                :key="'pick-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 @click="onGameBanPickClick(index)"
               >
                 <span
