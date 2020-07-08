@@ -8,6 +8,7 @@
         :mark-point="tableData.markPoint"
         :data="tableData.result"
         :loading="tableData.loading"
+        :after-config="afterConfig"
         width="99.2%"
         class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
@@ -85,6 +86,12 @@ export default {
     };
   },
   methods: {
+    afterConfig: function(e) {
+      e.series.map(x => {
+        x.symbol = "none";
+      });
+      return e;
+    },
     getHeroChartsLogByDfs: function(heroId, detailed) {
       this.tableData.loading = true;
 
