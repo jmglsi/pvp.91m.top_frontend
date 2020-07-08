@@ -15,10 +15,11 @@
     <div class="hero-00c0096b2f59afa06ea70de0e19fff29">
       <ve-radar
         legend-position="bottom"
-        :style="style"
-        :height="appDevice ? '650px' : '750px'"
+        :extend="tableData.extend"
         :settings="tableData.settings"
         :data="tableData.result"
+        :height="appDevice ? '650px' : '750px'"
+        :style="style"
         class="hero-ca6674b328707b5a1f0b012105a7e4e1"
       />
     </div>
@@ -90,6 +91,8 @@ export default {
         marginTop: 0
       },
       tableData: {
+        extend: {},
+        settings: {},
         result: []
       },
       customize: {

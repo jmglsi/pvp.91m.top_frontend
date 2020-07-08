@@ -130,7 +130,7 @@
         v-model="tabsModel"
         :border="false"
         @change="onTabsChange"
-        @click="hero.line == 0 ? hero.line = 1 : hero.line = 0"
+        @click="tabsModel == 0 && hero.line == 0 ? hero.line = 1 : hero.line = 0"
         color="rgb(222,177,81)"
         class="info-d42f4851e770aa0f758b01388874f67b"
       >

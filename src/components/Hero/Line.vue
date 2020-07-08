@@ -3,10 +3,11 @@
     <div class="hero-965f1a65ae362b02d244345afcbf542e">
       <ve-line
         :settings="tableData.settings"
-        :extend="extend"
-        :mark-line="markLine"
-        :mark-point="markPoint"
+        :extend="tableData.extend"
+        :mark-line="tableData.markLine"
+        :mark-point="tableData.markPoint"
         :data="tableData.result"
+        :not-set-unchange="['dataZoom']"
         width="99.2%"
         class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
@@ -68,39 +69,12 @@ export default {
     }
   },
   data() {
-    this.markLine = {
-      data: [
-        {
-          name: "平均线",
-          type: "average"
-        }
-      ]
-    };
-    this.markPoint = {
-      data: [
-        {
-          name: "最大值",
-          type: "max"
-        }
-      ]
-    };
-    this.extend = {
-      xAxis: {
-        axisLabel: {
-          rotate: 45
-        }
-      },
-      dataZoom: [
-        {
-          type: "slider",
-          show: true,
-          start: 80,
-          end: 100
-        }
-      ]
-    };
     return {
       tableData: {
+        markLine: {},
+        markPoint: {},
+        extend: {},
+        settings: {},
         result: []
       }
     };
