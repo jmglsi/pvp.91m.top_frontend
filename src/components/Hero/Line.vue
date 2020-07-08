@@ -2,12 +2,12 @@
   <div class="hero-line">
     <div class="hero-965f1a65ae362b02d244345afcbf542e">
       <ve-line
-        :settings="tableData.settings"
         :extend="tableData.extend"
+        :settings="tableData.settings"
         :mark-line="tableData.markLine"
         :mark-point="tableData.markPoint"
         :data="tableData.result"
-        :not-set-unchange="['dataZoom']"
+        :loading="tableData.loading"
         width="99.2%"
         class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
@@ -21,6 +21,8 @@ import VeLine from "v-charts/lib/line.common";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
 import "echarts/lib/component/dataZoom";
+
+import "v-charts/lib/style.css";
 
 export default {
   name: "HeroLine",
@@ -53,6 +55,8 @@ export default {
       handler(newValue) {
         if (newValue.heroId == 0) return;
 
+        this.tableData.result = [];
+
         if (newValue.lineType == 0) {
           this.getHeroChartsLogByDfs(
             newValue.heroId,
@@ -75,12 +79,15 @@ export default {
         markPoint: {},
         extend: {},
         settings: {},
+        loading: true,
         result: []
       }
     };
   },
   methods: {
     getHeroChartsLogByDfs: function(heroId, detailed) {
+      this.tableData.loading = true;
+
       this.axios
         .get(
           this.apiList.pvp.getHeroChartsLogByDfs +
@@ -95,9 +102,13 @@ export default {
           if (data.result.rows.length != 0) {
             this.tableData = data;
           }
+
+          this.tableData.loading = false;
         });
     },
     getHeroChartsLogByBbs: function(heroId) {
+      this.tableData.loading = true;
+
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogByBbs + "&heroId=" + heroId)
         .then(res => {
@@ -108,6 +119,8 @@ export default {
           } else {
             this.$message.warning("无内容");
           }
+
+          this.tableData.loading = false;
         });
     }
   }

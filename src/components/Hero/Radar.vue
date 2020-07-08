@@ -18,6 +18,7 @@
         :extend="tableData.extend"
         :settings="tableData.settings"
         :data="tableData.result"
+        :loading="tableData.loading"
         :height="appDevice ? '650px' : '750px'"
         :style="style"
         class="hero-ca6674b328707b5a1f0b012105a7e4e1"
@@ -72,6 +73,8 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
+        this.tableData.result = [];
+
         if (newValue.tabsModel == 1) {
           this.getHeroChartsLogBySimilar(newValue.heroId);
         } else {
@@ -93,6 +96,7 @@ export default {
       tableData: {
         extend: {},
         settings: {},
+        loading: true,
         result: []
       },
       customize: {
@@ -108,6 +112,8 @@ export default {
   },
   methods: {
     getHeroChartsLogBySimilar: function(heroId) {
+      this.tableData.loading = true;
+
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
         .then(res => {
@@ -116,9 +122,13 @@ export default {
           if (data.result.rows.length != 0) {
             this.tableData = data;
           }
+
+          this.tableData.loading = false;
         });
     },
     getHeroChartsLogByCustomize: function(heroName) {
+      this.tableData.loading = true;
+
       this.axios
         .get(
           this.apiList.pvp.getHeroChartsLogByCustomize + "&heroName=" + heroName
@@ -129,6 +139,8 @@ export default {
           if (data.result.rows.length != 0) {
             this.tableData = data;
           }
+
+          this.tableData.loading = false;
         });
     },
     getHeroChartsLogByCustomizeFromUrl: function(heroName) {
