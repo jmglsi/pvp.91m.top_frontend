@@ -50,7 +50,7 @@
             <div v-show="data.item.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
                 v-for="(dataItem, index) in data.item"
-                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { from: 'dayTag-' + data.calendar.day } }"
+                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { sign: appSign($options.name) } }"
                 :key="'tuijian-54099f84a9943b4b1eed932ec22066eb-' + index"
               >
                 <img

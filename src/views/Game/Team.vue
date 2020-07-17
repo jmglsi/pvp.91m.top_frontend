@@ -349,10 +349,7 @@ export default {
             this.$message.success("创建成功");
             this.$cookie.delete("teamId");
 
-            this.$router.push({
-              path: "/game/engage",
-              query: { from: "ea1ecdac3b835ad8350274daf8622418" }
-            });
+            this.appPush("/game/engage", this.$options.name);
           } else {
             this.$message.error(status.msg);
           }

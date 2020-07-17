@@ -7,7 +7,7 @@
             round
             size="small"
             color="linear-gradient(to right, #4bb0ff, #6149f6)"
-            @click="$router.push({path: '/login', query: { from: 'b1498f85b6e654f37af3901db4c13cc7' }})"
+            @click="appPush('/login', $options.name)"
             class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
           >登录</van-button>
         </van-cell>
@@ -40,7 +40,7 @@
       <van-grid :border="false" :column-num="2" class="my-c3d90961c9bf155d11cbef9c57725aea">
         <van-grid-item
           icon="/img/app-icons/team.png"
-          to="/game/team?from=8e88848cecf2dfe586dab1e65a48850f"
+          :to="'/game/team?sign=' + appSign($options.name)"
           class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
           template
           #text
@@ -52,7 +52,7 @@
         </van-grid-item>
         <van-grid-item
           icon="/img/app-icons/engage.png"
-          to="/game/engage?from=491dd2c69c94f79fa96dabfe04582d04"
+          :to="'/game/engage?sign=' + appSign($options.name)"
           class="my-308ffde0dc5bd5718dcf0396fcc2a596"
           template
           #text

@@ -7,7 +7,7 @@
         :placeholder="true"
         z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
-        @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
+        @click-left="appPush('/ranking', $options.name)"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
       >
         <van-icon name="arrow-left" slot="left" />

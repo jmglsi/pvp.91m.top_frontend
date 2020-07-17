@@ -13,6 +13,23 @@ Vue.prototype.appCopyData = function(data) {
     );
 }
 
+Vue.prototype.appSign = function(data) {
+    const token = "8df1317edf84af453e342962f9df87a4"
+    const time = Math.round(new Date().getTime() / 1000).toString()
+    const sign = this.$md5(token + time + data)
+    return sign
+}
+
+Vue.prototype.appPush = function(path, name, type = null) {
+    this.$router.push({
+        path: path,
+        query: {
+            type: type,
+            sign: this.appSign(name)
+        }
+    });
+}
+
 Vue.prototype.appOpenUrl = function(title, message, url) {
     this.$dialog
         .confirm({

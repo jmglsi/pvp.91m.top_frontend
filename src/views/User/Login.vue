@@ -108,8 +108,6 @@
 </style>
 
 <script>
-import md5 from "js-md5";
-
 export default {
   name: "LoginHome",
   data() {
@@ -152,8 +150,8 @@ export default {
           this.$qs.stringify({
             name: data.name,
             email: data.email,
-            password: md5(data.password),
-            newPassword: data.newPassword ? md5(data.newPassword) : null,
+            password: this.$md5(data.password),
+            newPassword: data.newPassword ? this.$md5(data.newPassword) : null,
             qq: data.qq,
             openId: data.openId,
             accessToken: data.accessToken
@@ -178,7 +176,7 @@ export default {
             });
 
             setTimeout(() => {
-              location.href = "/my?from=303e895c08b9161f632e872ed9844a15";
+              location.href = "/my?sign=" + this.appSign(this.$options.name);
             }, 500);
           } else {
             this.$message.error(status.msg);

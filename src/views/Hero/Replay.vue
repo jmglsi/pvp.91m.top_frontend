@@ -7,7 +7,7 @@
         :placeholder="true"
         z-index="2"
         class="hero-6809da26e032292efff6ec78cdec8de2"
-        @click-left="$router.push({ path: '/ranking', from: '0aec27ad03df08d2d0bb21bb41575a21' })"
+        @click-left="appPush('/ranking', $options.name)"
       >
         <template #title>
           <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>

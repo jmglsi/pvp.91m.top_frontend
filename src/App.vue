@@ -170,8 +170,7 @@ export default {
             {
               icon: "/img/app-icons/information.png",
               to: {
-                path: "/",
-                query: { from: "fa57e0725457a667d8dd6e9b0a4b3bd4" }
+                path: "/"
               },
               name: "/",
               text: "资讯"
@@ -179,8 +178,7 @@ export default {
             {
               icon: "/img/app-icons/ranking.png",
               to: {
-                path: "/ranking",
-                query: { from: "72b664ef95e47693fc2737cd3b0a0a92" }
+                path: "/ranking"
               },
               name: "/ranking",
               text: "排行"
@@ -188,8 +186,7 @@ export default {
             {
               icon: "/img/app-icons/user.png",
               to: {
-                path: "/my",
-                query: { from: "a5d041e8ffec04b0b5e1c26537364540" }
+                path: "/my"
               },
               name: "/my",
               text: "我的"

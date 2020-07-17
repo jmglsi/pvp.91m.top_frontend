@@ -10,7 +10,7 @@
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
       >{{ tabsModel % 2 == 0 ? team.team_1.name : team.team_2.name }}</span>
-      <span class="game-80653328482d7cba8da3f0fa033b0c12">vs</span>
+      <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
       >{{ tabsModel % 2 == 0 ? team.team_2.name : team.team_1.name }}</span>
@@ -649,12 +649,7 @@ export default {
 
       this.getGameBP(gameLabel);
     } else {
-      this.$router.push({
-        query: {
-          path: "/game",
-          from: "c083a9362c48884b161429aa0ccddc11"
-        }
-      });
+      this.appPush("/game", this.$options.name);
       return;
     }
 
@@ -1006,7 +1001,7 @@ export default {
       }
     },
     onGameShareClick: function() {
-      let vs = this.team.team_1.name + " vs " + this.team.team_2.name;
+      let vs = this.team.team_1.name + " Vs " + this.team.team_2.name;
 
       this.copyData =
         "正在复盘【" +

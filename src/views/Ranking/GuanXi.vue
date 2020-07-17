@@ -165,12 +165,14 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?type=1&from=71f24db02647f7d930444128c0b02003&heroName=" +
+                "?type=1&heroName=" +
                 encodeURIComponent(heroName) +
                 "&heroId1=" +
                 row.hero_1.id +
                 "&heroId2=" +
-                row.hero_2.id
+                row.hero_2.id +
+                "&sign=" +
+                this.appSign(this.$options.name)
             )
         )
         .then(res => {
@@ -267,15 +269,10 @@ export default {
       }
 
       if (item.value == 1) {
-        this.$router.push({
-          path:
-            "/hero/" +
-            heroInfo.hero_1.id +
-            "," +
-            heroInfo.hero_2.id +
-            "/replay",
-          query: { from: "ee240fe51687ee66cca7493aedcc3c24" }
-        });
+        this.appPush(
+          "/hero/" + heroInfo.hero_1.id + "," + heroInfo.hero_2.id + "/replay",
+          this.$options.name
+        );
       }
     }
   }

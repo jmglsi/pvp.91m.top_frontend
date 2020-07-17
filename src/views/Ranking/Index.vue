@@ -6,7 +6,7 @@
         :border="false"
         :ellipsis="false"
         :sticky="true"
-        @change="$router.push({query: { type: tabsModel, from: 'ee240fe51687ee66cca7493aedcc3c24' }})"
+        @change="appPush('', $options.name, tabsModel)"
         color="rgb(222,177,81)"
       >
         <van-tab title="巅峰赛 (日榜)">

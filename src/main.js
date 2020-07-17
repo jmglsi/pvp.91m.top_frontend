@@ -22,6 +22,9 @@ Vue.use(VueMeta)
 import qs from 'qs'
 Vue.prototype.$qs = qs
 
+import md5 from 'js-md5'
+Vue.prototype.$md5 = md5
+
 Vue.prototype.axios = require("axios")
 
 import './assets/import/ant'

@@ -69,8 +69,8 @@
 .bilibili-a47ba339330136bcab5b4c91d5d10882 {
   position: absolute;
   z-index: 2;
-  left: 55px;
-  margin-top: 13px;
+  left: 85px;
+  margin-top: 15px;
 }
 
 .bilibili-71f262d796bed1ab30e8a2d5a8ddee6f {
@@ -161,8 +161,10 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?from=71f24db02647f7d930444128c0b02003&uid=av" +
-                row.uid
+                "?uid=" +
+                row.uid +
+                "&sign=" +
+                this.appSign(this.$options.name)
             )
         )
         .then(res => {

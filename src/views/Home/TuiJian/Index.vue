@@ -123,10 +123,7 @@ export default {
     onTuiJianRefresh: function() {
       setTimeout(() => {
         this.isLoading = false;
-        this.$router.push({
-          path: "/miniapp",
-          query: { from: "9485e07d3fa6e237df83da7ff5f83bde" }
-        });
+        this.appPush("/miniapp", this.$options.name);
       }, 2000);
     }
   }

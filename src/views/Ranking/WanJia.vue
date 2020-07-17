@@ -138,8 +138,10 @@ export default {
             "\r-\r更多玩家信息 ↓\r" +
             location.origin +
             location.pathname +
-            "?type=2&from=71f24db02647f7d930444128c0b02003&userId=" +
-            row.userId;
+            "?type=2&userId=" +
+            row.userId +
+            "&sign=" +
+            this.appSign(this.$options.name);
         });
 
       this.show.actionSheet = true;

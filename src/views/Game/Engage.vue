@@ -22,7 +22,7 @@
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
             <van-row
-              @click="$router.push({path:'/game/' + data.engage.label + '/bp', query: { from: '289ccb94bf3dec52e01fd5b5503c4225' }})"
+              @click="appPush('/game/' + data.engage.label + '/bp', $options.name)"
             >
               <van-col span="7">
                 <img

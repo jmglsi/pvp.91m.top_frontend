@@ -23,7 +23,7 @@
                 />
                 <van-grid-item class="game-447b7147e84be512208dcc0995d67ebc">
                   <span class="game-07cc694b9b3fc636710fa08b6922c42b">{{ data.game.time}}</span>
-                  <span class="game-f4842dcb685d490e2a43212b8072a6fe">VS</span>
+                  <span class="game-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
                 </van-grid-item>
                 <van-grid-item
                   :text="data.team_2.name"
@@ -53,7 +53,7 @@
               />
               <van-grid-item class="game-447b7147e84be512208dcc0995d67ebc">
                 <span class="game-07cc694b9b3fc636710fa08b6922c42b">{{ data.game.time}}</span>
-                <span class="game-f4842dcb685d490e2a43212b8072a6fe">VS</span>
+                <span class="game-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
               </van-grid-item>
               <van-grid-item
                 :text="data.team_2.name"
@@ -95,10 +95,7 @@ export default {
       });
     },
     onGameCellClick: function(e) {
-      this.$router.push({
-        path: "/game/" + e + "/bp",
-        query: { from: "f34f122844890855d125cdfccd6bc973" }
-      });
+      this.appPush("/game/" + e + "/bp", this.$options.name);
     }
   }
 };

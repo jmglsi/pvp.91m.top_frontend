@@ -273,21 +273,15 @@ export default {
       }
     },
     onActionSheetSelect: function(item) {
-      let from = "02dba815434bc4a42eeeaf3443227aa4",
+      let name = this.$options.name,
         heroInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.$router.push({
-          path: "/hero/" + heroInfo.id + "/info",
-          query: { from: from }
-        });
+        this.appPush("/hero/" + heroInfo.id + "/info", name);
       }
 
       if (item.value == 1) {
-        this.$router.push({
-          path: "/hero/" + heroInfo.id + "/replay",
-          query: { from: from }
-        });
+        this.appPush("/hero/" + heroInfo.id + "/replay", name);
       }
 
       if (item.value == 2) {

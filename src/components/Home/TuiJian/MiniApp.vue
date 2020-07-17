@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="miniapp-1a721faf2df53972bfd0831c64b6146d" @click="$router.push({ path: '/' });">
+    <div class="miniapp-1a721faf2df53972bfd0831c64b6146d" @click="appPush('/', $options.name)">
       <AppCollapse width="25" height="25" />
     </div>
   </div>
