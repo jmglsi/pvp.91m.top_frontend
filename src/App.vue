@@ -46,21 +46,21 @@ img {
   object-fit: cover;
 }
 
-span.van-tab__text {
-  margin: 11px 0 12px 0;
-}
-
-.app-d638615004bb2ff42ed26948aba89c80 {
-  margin: 0 10px;
-}
-
 .app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
+span.van-tab__text {
+  margin: 11px 0 12px 0;
+}
+
+div.app-d638615004bb2ff42ed26948aba89c80 {
+  margin: 0 10px;
+}
+
+span.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
   position: absolute;
   font-size: 10px;
   width: 50px;
@@ -119,6 +119,12 @@ div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-menu__bar {
 
 div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-item {
   margin-bottom: 25px;
+}
+</style>
+
+<style>
+span.game-07cc694b9b3fc636710fa08b6922c42b {
+  font-size: 12px;
 }
 </style>
 

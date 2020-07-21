@@ -30,7 +30,9 @@
               height="50"
               class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
             />
-            <div class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c">{{ row.hero_1.adaptationRate }}</div>
+            <span
+              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c adaptation-f58cc48f5b942c91e57eff48accc5151"
+            >{{ row.hero_1.adaptationRate }}</span>
           </template>
         </vxe-table-column>
         <vxe-table-column title="英雄_2" fixed="left" width="75" sortable>
@@ -41,7 +43,9 @@
               height="50"
               class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
             />
-            <div class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c">{{ row.hero_2.adaptationRate }}</div>
+            <span
+              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c adaptation-f58cc48f5b942c91e57eff48accc5151"
+            >{{ row.hero_2.adaptationRate }}</span>
           </template>
         </vxe-table-column>
 
@@ -74,6 +78,13 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.adaptation-f58cc48f5b942c91e57eff48accc5151 {
+  margin-left: -50px;
+  top: 62px;
+}
+</style>
 
 <script>
 export default {
