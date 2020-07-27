@@ -2,7 +2,10 @@
   <div id="app">
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <keep-alive>
-        <router-view v-if="$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+        <router-view
+          v-if="$route.meta.keepAlive"
+          class="app-1bda80f2be4d3658e0baa43fbe7ae8c1"
+        />
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
     </div>
@@ -32,138 +35,16 @@
 </template>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
-
-img {
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-span.van-tab__text {
-  margin: 11px 0 12px 0;
-}
-
-div.app-d638615004bb2ff42ed26948aba89c80 {
-  margin: 0 10px;
-}
-
-span.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
-  position: absolute;
-  font-size: 10px;
-  width: 50px;
-  margin-top: -7px;
-}
+@import url("/css/app-style/app.css");
 </style>
 
-<style>
-div.grid-4eb2044800e2b7b9e5c44d370af22b27
-  i.van-icon.van-grid-item__icon
-  img.van-icon__image {
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
-}
-
-div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
-  border-radius: 0;
-}
-
-div.tuijian-447b7147e84be512208dcc0995d67ebc,
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990
-  div.van-tabs__wrap.van-tabs__wrap--scrollable
-  div.van-tabs__nav {
-  background-color: rgb(245, 245, 245);
-}
-
-div.van-grid-item__content.van-grid-item__content--center
-  span.van-grid-item__text {
-  font-weight: 600;
-}
-
-div.van-nav-bar__title {
-  font-size: 20px;
-}
-</style>
-
-<style>
-img.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
-  width: 15px;
-  height: 15px;
-  margin-top: -3px;
-}
-
-div.tuijian-447b7147e84be512208dcc0995d67ebc {
-  border-radius: 10px;
-  padding: 15px 10px;
-  margin: 20px 10px;
-}
-</style>
-
-<style>
-div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-menu__bar {
-  border-radius: 100px;
-}
-
-div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-item {
-  margin-bottom: 25px;
-}
-</style>
-
-<style>
-span.game-07cc694b9b3fc636710fa08b6922c42b {
-  font-size: 12px;
-}
-</style>
-
-<style>
-i.van-icon img.van-icon__image {
-  margin-top: -3px;
-}
-
-div.game-bp i.van-button__icon img.van-icon__image {
-  margin-top: -5px;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  margin-left: -12px;
-  margin-top: -7px;
-}
-</style>
-
-<style>
-button.my-0162f4b7b2dbdf6aff3a25de02e49a8b,
-button.my-4236a440a662cc8253d7536e5aa17942 {
-  width: 150px;
-  height: 35px;
-}
-</style>
-
-<style>
-div.van-tabs__nav {
-  height: unset;
-  overflow-x: unset;
-}
-</style>
 <script>
 export default {
   name: "App",
   metaInfo() {
     return {
       script: this.appInfo.homeInfo.script,
-      link: this.appInfo.homeInfo.link
+      link: this.appInfo.homeInfo.link,
     };
   },
   data() {
@@ -176,33 +57,33 @@ export default {
             {
               icon: "/img/app-icons/information.png",
               to: {
-                path: "/"
+                path: "/",
               },
               name: "/",
-              text: "资讯"
+              text: "资讯",
             },
             {
               icon: "/img/app-icons/ranking.png",
               to: {
-                path: "/ranking"
+                path: "/ranking",
               },
               name: "/ranking",
-              text: "排行"
+              text: "排行",
             },
             {
               icon: "/img/app-icons/user.png",
               to: {
-                path: "/my"
+                path: "/my",
               },
               name: "/my",
-              text: "我的"
-            }
-          ]
-        }
+              text: "我的",
+            },
+          ],
+        },
       },
       appInfo: {
-        homeInfo: {}
-      }
+        homeInfo: {},
+      },
     };
   },
   watch: {
@@ -219,20 +100,20 @@ export default {
         this.tabbar.default.show = true;
         this.tabbar.active = to.path;
       }
-    }
+    },
   },
   mounted() {
     this.getAppInfo();
   },
   methods: {
-    getAppInfo: function() {
+    getAppInfo: function () {
       this.axios
         .get(
           this.apiList.pvp.getAppInfo +
             "&url=" +
             encodeURIComponent(location.pathname + location.search)
         )
-        .then(res => {
+        .then((res) => {
           this.appInfo = res.data.data;
 
           let tipsInfo = this.appInfo.tipsInfo;
@@ -245,11 +126,11 @@ export default {
                 if (tipsInfo.url) {
                   this.appOpenUrl("是否打开外部链接?", null, tipsInfo.url);
                 }
-              }
+              },
             });
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>

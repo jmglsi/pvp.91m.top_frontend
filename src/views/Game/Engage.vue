@@ -21,9 +21,7 @@
           class="game-f24a222ebfb0f6b85f63749653659063"
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
-            <van-row
-              @click="appPush('/game/' + data.engage.label + '/bp', $options.name)"
-            >
+            <van-row @click="appPush('/game/' + data.engage.label + '/bp', $options.name)">
               <van-col span="7">
                 <img
                   width="40"
@@ -56,36 +54,25 @@
   </div>
 </template>
 
-<style scoped>
-.game-237b90fb6955b98328736810edefe6e7 {
-  width: 100%;
-}
-
-.game-1ab74bf7276acc5985f078fee7e63109 {
-  border-radius: 100%;
-}
-
-.game-f56ae939694a0488cc9e8ecdd47a46ab {
-  font-size: 12px;
-  margin-top: 5px;
-}
+<style>
+@import url("/css/app-style/game.css");
 </style>
 
 <script>
 export default {
   name: "GameEngage",
   components: {
-    AppBottomTabbar: resolve =>
-      require(["@/components/App/BottomTabbar.vue"], resolve)
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
       loginInfo: {
         openId: null,
-        accessToken: null
+        accessToken: null,
       },
       show: {
-        engage: false
+        engage: false,
       },
       engageInfo: {
         type: 0,
@@ -93,9 +80,9 @@ export default {
         row: {
           id: null,
           name: null,
-          logo: null
-        }
-      }
+          logo: null,
+        },
+      },
     };
   },
   mounted() {
@@ -105,7 +92,7 @@ export default {
     this.getGameDashboard();
   },
   methods: {
-    getGameDashboard: function() {
+    getGameDashboard: function () {
       let loginInfo = this.loginInfo;
 
       this.axios
@@ -113,10 +100,10 @@ export default {
           this.apiList.pvp.getGameDashboard + "&aid=1",
           this.$qs.stringify({
             openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken
+            accessToken: loginInfo.accessToken,
           })
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
@@ -126,7 +113,7 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>

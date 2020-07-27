@@ -109,35 +109,8 @@
   </div>
 </template>
 
-<style scoped>
-div.van-collapse {
-  margin-top: 3px;
-}
-
-.replay-ce50a09343724eb82df11390e2c1de18 {
-  margin-right: 3px;
-}
-
-.replay-a78656fbfb5b498e5cb80b5b13076e31 {
-  text-align: left;
-}
-
-.replay-e4d23e841d8e8804190027bce3180fa5 {
-  margin-right: 3px;
-}
-
-.replay-12d045cdd2c0b9b6bf64ab787d773ae6 {
-  margin-top: 2px;
-  position: absolute;
-}
-
-.replay-f01902c0d0136ca30fe1034f339964ba {
-  margin-bottom: 10px;
-}
-
-.replay-fe7cd4d1bf3fea9a0d921e224b3fa24c {
-  margin-top: 25px;
-}
+<style>
+@import url("/css/app-style/hero.css");
 </style>
 
 <script>

@@ -36,55 +36,7 @@
 </template>
 
 <style>
-.app-e4d23e841d8e8804190027bce3180fa5 {
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  margin-top: -13px;
-}
-
-div.vxe-table--main-wrapper {
-  margin-top: -3px;
-}
-
-td.vxe-body--column {
-  padding: 12px 0;
-}
-
-td.vxe-body--column div.vxe-cell {
-  font-size: 15px;
-}
-
-td.vxe-body--cloumn .vxe-table.virtual--x .col--ellipsis .vxe-cell,
-.vxe-table.virtual--y .col--ellipsis .vxe-cell {
-  max-height: unset;
-}
-
-.ranking-a260d093db7878f26c178fc3d23829c6 {
-  margin-top: -6px;
-}
-
-div.ranking div.van-dropdown-menu__bar {
-  height: 54px;
-}
-
-td.col-bda9643ac6601722a28f238714274da4 {
-  color: red;
-}
-
-td.col-48d6215903dff56238e52e8891380c8f {
-  color: blue;
-}
-
-td.col-9f27410725ab8cc8854a2769c7a516b8 {
-  color: green;
-}
-
-td.col-bda9643ac6601722a28f238714274da4 div.vxe-cell,
-td.col-48d6215903dff56238e52e8891380c8f div.vxe-cell,
-td.col-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
-  font-size: 20px;
-}
+@import url("/css/app-style/ranking.css");
 </style>
 
 <script>

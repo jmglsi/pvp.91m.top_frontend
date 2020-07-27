@@ -74,6 +74,7 @@
               <li
                 v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
                 :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
+                :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -94,28 +95,33 @@
           <div
             v-show="mode == 'edit'"
             @click="onWinCampClick(1)"
+            :style="appDevice ? { height: '275px' } : { height: '550px' }"
             class="pick-d75e14b5c8f13e894fe9bf9d5426c198"
           ></div>
         </van-col>
         <van-col span="18">
-          <div v-show="show.hero" class="hero-99938282f04071859941e18f16efcf42">
+          <div
+            v-show="show.hero"
+            :style="appDevice ? { height: '240px' } : { height: '560px' }"
+            class="hero-99938282f04071859941e18f16efcf42"
+          >
             <van-tabs
               v-model="tableData.active"
               :border="false"
+              :swipe-threshold="appDevice ? 4 : 7"
               color="orange"
               class="hero-f3cc17bc0d768ca60b8bb496a10b1990"
             >
-              <van-tab title="对抗 (战士)" />
-              <van-tab title="中路" />
-              <van-tab title="对抗 (坦克)" />
-              <van-tab title="打野" />
-              <van-tab title="发育" />
-              <van-tab title="辅助" />
+              <van-tab
+                v-for="(data, index) in heroType"
+                :key="'hero-687df0d960fe6dade3153dc0ba925e79-' + index"
+                :title="data"
+              ></van-tab>
 
               <div class="hero-87740aa9337e54dbad53ec95089dca77">
                 <van-cell-group
                   :border="false"
-                  title="热度上升"
+                  title="强度上升"
                   class="hero-27369b3bf4483e8dcfd85ba9a39a947f"
                 >
                   <van-grid
@@ -125,7 +131,7 @@
                   >
                     <van-grid-item
                       v-for="(data, index) in tableData.result"
-                      v-show="data.trend == 2 && data.type == tableData.active + 1"
+                      v-show="data.trend == 2 && (tableData.active == data.type || tableData.active == 0)"
                       :key="'hero-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                       :icon="data.img"
                       text=" "
@@ -148,7 +154,7 @@
                   >
                     <van-grid-item
                       v-for="(data, index) in tableData.result"
-                      v-show="data.trend != 2 && data.type == tableData.active + 1"
+                      v-show="data.trend != 2 && (tableData.active == data.type || tableData.active == 0)"
                       :key="'hero-35368a19f307e4af02d0df055846840d-' + index"
                       :icon="data.img"
                       text=" "
@@ -167,6 +173,7 @@
               <li
                 v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
                 :key="'pick-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
+                :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -187,6 +194,7 @@
           <div
             v-show="mode == 'edit'"
             @click="onWinCampClick(2)"
+            :style="appDevice ? { height: '275px' } : { height: '550px' }"
             class="pick-251504ba219ea8c3175f47b73bdde6e6"
           ></div>
         </van-col>
@@ -302,252 +310,30 @@
 </template>
 
 <style>
-div.van-tabs__wrap {
-  z-index: 2;
-}
-
-div.hero-99938282f04071859941e18f16efcf42
-  div.van-tabs__wrap.van-tabs__wrap--scrollable {
-  width: 40%;
-  max-width: 600px;
-  margin: 0 auto;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 20px;
-}
-
-div.hero-99938282f04071859941e18f16efcf42 span.van-tab__text {
-  font-size: 12px;
-}
-
-div.hero-99938282f04071859941e18f16efcf42
-  div.van-grid-item__content.van-grid-item__content--center {
-  padding: 8px 4px;
-}
-
-div.hero-99938282f04071859941e18f16efcf42 div.van-tab.van-ellipsis {
-  line-height: 30px;
-}
-
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990
-  div.van-tabs__wrap.van-tabs__wrap--scrollable {
-  border-radius: 100px;
-  height: 30px;
-}
-
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990 span.van-tab__text {
-  margin: 6px 0;
-}
-
-.hero-99938282f04071859941e18f16efcf42 {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5
-  i.van-icon.van-grid-item__icon
-  img.van-icon__image {
-  border-radius: 10px;
-  width: 40px;
-  height: 40px;
-}
-</style>
-
-<style scoped>
-.game-bp-portrait {
-  margin-top: 60%;
-}
-
-.pick-d75e14b5c8f13e894fe9bf9d5426c198,
-.pick-251504ba219ea8c3175f47b73bdde6e6 {
-  width: 30px;
-  height: 275px;
-  top: 80px;
-  position: absolute;
-}
-
-.pick-d75e14b5c8f13e894fe9bf9d5426c198 {
-  left: 0;
-}
-
-.pick-251504ba219ea8c3175f47b73bdde6e6 {
-  right: 0;
-}
-
-.game-b3d70a861f68652bf97d7a26bf421d4f {
-  font-size: 12px;
-  margin-top: 15px;
-}
-
-.game-f4842dcb685d490e2a43212b8072a6fe {
-  font-size: 10px;
-}
-
-.game-80653328482d7cba8da3f0fa033b0c12 {
-  margin: 0 5px;
-}
-
-.game-bd40579650e3f651e222aef268d5c8ae {
-  margin-top: 10px;
-}
-
-.hero-f3cc17bc0d768ca60b8bb496a10b1990 {
-  text-align: left;
-}
-
-.steps-1cf3b0809c3dde16d56153690bc902a2 {
-  border: 2px solid rgb(0, 0, 255, 0.5) !important;
-  animation: blueTwinkle 800ms ease-out infinite alternate;
-}
-
-@keyframes blueTwinkle {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.2), inset 0 0 5px rgba(0, 0, 255, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(0, 0, 255, 0.6),
-      inset 0 0 10px rgba(0, 0, 255, 0.4);
-  }
-}
-
-.steps-99b844b6785d8d7378bbc2b1401af365 {
-  border: 2px solid rgb(255, 0, 0, 0.5) !important;
-  animation: redTwinkle 800ms ease-out infinite alternate;
-}
-
-@keyframes redTwinkle {
-  0% {
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6),
-      inset 0 0 10px rgba(255, 0, 0, 0.4);
-  }
-}
-
-.hero-551270e8a38a84d3f0b214e6854357e3 {
-  filter: grayscale(1);
-}
-
-.hero-87740aa9337e54dbad53ec95089dca77 {
-  background-color: white;
-}
-
-.game-beedfb16b1c81d2901c32b6dcc2939d0,
-.game-173f312c43fe32a4f01c84d1cf0520b1 {
-  position: fixed;
-  margin: 3px;
-}
-
-.game-beedfb16b1c81d2901c32b6dcc2939d0,
-.game-173f312c43fe32a4f01c84d1cf0520b1 {
-  right: 95px;
-}
-
-.game-beedfb16b1c81d2901c32b6dcc2939d0 {
-  top: 67px;
-}
-
-.game-173f312c43fe32a4f01c84d1cf0520b1 {
-  bottom: 45px;
-}
-
-.game-e4e6288c92630a6c237c15442fdb0917 li {
-  margin: 3px 5px;
-  float: left;
-}
-
-.ban-dce7c4174ce9323904a934a486c41288 {
-  position: absolute;
-  margin-left: -20px;
-  margin-top: 17px;
-}
-
-.ban-8c9cb4a232c7e88403dddc3a0e589162,
-.ban-c6a2f8b3941d7f91bc4e51839e5371e0,
-.pick-8c9cb4a232c7e88403dddc3a0e589162,
-.pick-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  position: absolute;
-}
-
-.ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3 li {
-  float: left;
-}
-
-.ban-ba9bced6af8121cf6413000a4274ac2b li {
-  float: right;
-}
-
-.ban-8c9cb4a232c7e88403dddc3a0e589162,
-.ban-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  width: 165px;
-  top: 15px;
-}
-
-.ban-8c9cb4a232c7e88403dddc3a0e589162 {
-  left: 25px;
-}
-
-.ban-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  right: 25px;
-}
-
-.ban-eee32796c3fdfc147115c9f6e875c090,
-.ban-aa95efe1c5d39e5e9389ca5833e63fbe {
-  border-radius: 100%;
-  margin: 5px;
-}
-
-.pick-8c9cb4a232c7e88403dddc3a0e589162,
-.pick-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  margin-top: 53px;
-}
-
-.pick-8c9cb4a232c7e88403dddc3a0e589162 {
-  left: 35px;
-}
-
-.pick-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  right: 35px;
-}
-
-.pick-eee32796c3fdfc147115c9f6e875c090,
-.pick-aa95efe1c5d39e5e9389ca5833e63fbe {
-  border-radius: 10px;
-  margin: 5px 3px;
-}
-
-.hero-99938282f04071859941e18f16efcf42 {
-  height: 240px;
-  margin: 0 auto;
-  overflow-y: auto;
-  margin-top: 50px;
-}
-
-.game-d67cd27426c41a017d0c0efd9ac172ea {
-  margin: 25px;
-}
-
-.game-4863c43e8743ebf1be3f48c5c4519627 {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-}
+@import url("/css/app-style/globalBP.css");
 </style>
 
 <script>
 export default {
   name: "GlobalBP",
   components: {
-    AppLock: resolve => require(["@/assets/Icons/AppLock.vue"], resolve)
+    AppLock: (resolve) => require(["@/assets/Icons/AppLock.vue"], resolve),
   },
   data() {
     return {
       loginInfo: {
         openId: null,
-        accessToken: null
+        accessToken: null,
       },
+      heroType: [
+        "全部",
+        "对抗 (战士)",
+        "中路",
+        "对抗 (坦克)",
+        "打野",
+        "发育",
+        "辅助",
+      ],
       index: {
         ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
@@ -569,8 +355,8 @@ export default {
           0, // 13 - 14
           1, // 14 - 15
           0, // 15 - 16
-          1 // 16 -17
-        ]
+          1, // 16 -17
+        ],
       },
       blueStepsClass: "steps-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "steps-99b844b6785d8d7378bbc2b1401af365",
@@ -584,57 +370,57 @@ export default {
       author: {
         name: "加载中",
         logo: "/img/app-icons/kpl.png",
-        actions: []
+        actions: [],
       },
       team: {
         team_1: {
           id: 1,
           name: "队伍_1",
-          logo: "/img/app-icons/camp_blue.png"
+          logo: "/img/app-icons/camp_blue.png",
         },
         team_2: {
           id: 2,
           name: "队伍_2",
-          logo: "/img/app-icons/camp_red.png"
-        }
+          logo: "/img/app-icons/camp_red.png",
+        },
       },
       gameInfo: {
         result: [
           {
             game: {
               type: 1,
-              time: null
+              time: null,
             },
             blue: {
               ban: [0, 0, 0, 0],
-              pick: [0, 0, 0, 0, 0]
+              pick: [0, 0, 0, 0, 0],
             },
             red: {
               ban: [0, 0, 0, 0],
-              pick: [0, 0, 0, 0, 0]
+              pick: [0, 0, 0, 0, 0],
             },
             win: {},
             stepsNow: 0,
             stepsActive: 0,
-            BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-          }
+            BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          },
         ],
-        used: []
+        used: [],
       },
       tableData: {
         active: 0,
-        result: []
+        result: [],
       },
       show: {
         apps: false,
-        hero: true
+        hero: true,
       },
       eye: "eye-o",
-      isPortrait: true
+      isPortrait: true,
     };
   },
   created() {
-    window.addEventListener("beforeunload", e => this.beforeunload(e), false);
+    window.addEventListener("beforeunload", (e) => this.beforeunload(e), false);
     if (this.appDevice) {
       window.addEventListener("resize", this.renderResize, false);
     } else {
@@ -663,7 +449,7 @@ export default {
     }
   },
   methods: {
-    beforeunload: function(e) {
+    beforeunload: function (e) {
       e = e || window.event;
 
       if (this.mode == "edit") {
@@ -673,7 +459,7 @@ export default {
         return "关闭提示";
       }
     },
-    renderResize: function() {
+    renderResize: function () {
       let width = document.documentElement.clientWidth,
         height = document.documentElement.clientHeight;
 
@@ -687,7 +473,7 @@ export default {
         }
       }
     },
-    BPOrderInit: function(perspective, index) {
+    BPOrderInit: function (perspective, index) {
       if (perspective == 1) {
         this.self = this.team.team_1;
         this.opponent = this.team.team_2;
@@ -705,7 +491,7 @@ export default {
           orderList.BPOrder[0],
           orderList.BPOrder[2],
           orderList.BPOrder[11],
-          orderList.BPOrder[13]
+          orderList.BPOrder[13],
         ];
 
         this.gameInfo.result[i].blue.pick = [
@@ -713,14 +499,14 @@ export default {
           orderList.BPOrder[7],
           orderList.BPOrder[8],
           orderList.BPOrder[15],
-          orderList.BPOrder[16]
+          orderList.BPOrder[16],
         ];
 
         this.gameInfo.result[i].red.ban = [
           orderList.BPOrder[1],
           orderList.BPOrder[3],
           orderList.BPOrder[10],
-          orderList.BPOrder[12]
+          orderList.BPOrder[12],
         ];
 
         this.gameInfo.result[i].red.pick = [
@@ -728,7 +514,7 @@ export default {
           orderList.BPOrder[6],
           orderList.BPOrder[9],
           orderList.BPOrder[14],
-          orderList.BPOrder[17]
+          orderList.BPOrder[17],
         ];
 
         if (perspective == 1) {
@@ -751,29 +537,29 @@ export default {
       this.gameInfo.used = Array.from(new Set(used));
       //console.log(perspective, this.gameInfo.used);
     },
-    getHeroList: function(gameTime) {
+    getHeroList: function (gameTime) {
       this.axios
         .post(
           this.apiList.pvp.getHeroRanking,
           this.$qs.stringify({
-            gameTime: gameTime
+            gameTime: gameTime,
           })
         )
-        .then(res => {
+        .then((res) => {
           this.tableData.result = res.data.data.result;
         });
     },
-    getGameBP: function(gameLabel) {
+    getGameBP: function (gameLabel) {
       let tabsModel = this.tabsModel;
 
       this.axios
         .post(
           this.apiList.game.getGameBP,
           this.$qs.stringify({
-            gameLabel: gameLabel
+            gameLabel: gameLabel,
           })
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             result = data.result;
 
@@ -795,24 +581,24 @@ export default {
             : (this.show.apps = false);
         });
     },
-    onCreateGameBPClick: function() {
+    onCreateGameBPClick: function () {
       let newGame = {
         game: {
           type: 1,
-          time: null
+          time: null,
         },
         blue: {
           ban: [0, 0, 0, 0],
-          pick: [0, 0, 0, 0, 0]
+          pick: [0, 0, 0, 0, 0],
         },
         red: {
           ban: [0, 0, 0, 0],
-          pick: [0, 0, 0, 0, 0]
+          pick: [0, 0, 0, 0, 0],
         },
         win: {},
         stepsNow: 0,
         stepsActive: 0,
-        BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       };
 
       let loginInfo = this.loginInfo;
@@ -828,10 +614,10 @@ export default {
             gameLabel: this.gameLabel,
             gameIndex: gameIndex,
             teamId_1: teamInfo.team_1.id,
-            teamId_2: teamInfo.team_2.id
+            teamId_2: teamInfo.team_2.id,
           })
         )
-        .then(res => {
+        .then((res) => {
           let status = res.data.status;
 
           if (status.code == 200) {
@@ -843,7 +629,7 @@ export default {
           }
         });
     },
-    onUpdateGameBPClick: function(index) {
+    onUpdateGameBPClick: function (index) {
       let loginInfo = this.loginInfo;
       let teamInfo = this.team;
       let gameInfo = this.gameInfo.result[index];
@@ -864,10 +650,10 @@ export default {
             teamId_1: teamInfo.team_1.id,
             teamId_2: teamInfo.team_2.id,
             gameWinCamp: gameInfo.win.camp,
-            gameBPData: String(gameInfo.BPOrder)
+            gameBPData: String(gameInfo.BPOrder),
           })
         )
-        .then(res => {
+        .then((res) => {
           let status = res.data.status;
 
           if (status.code == 200) {
@@ -877,7 +663,7 @@ export default {
           }
         });
     },
-    onDelectGameBPClick: function(index) {
+    onDelectGameBPClick: function (index) {
       let loginInfo = this.loginInfo;
 
       this.axios
@@ -887,10 +673,10 @@ export default {
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
             gameLabel: this.gameLabel,
-            gameIndex: index
+            gameIndex: index,
           })
         )
-        .then(res => {
+        .then((res) => {
           let status = res.data.status;
 
           if (status.code == 200) {
@@ -916,7 +702,7 @@ export default {
 
       return ret;
     },
-    onSeeHeroClick: function() {
+    onSeeHeroClick: function () {
       if (this.eye == "eye-o") {
         this.eye = "closed-eye";
 
@@ -927,7 +713,7 @@ export default {
         this.show.hero = true;
       }
     },
-    onGamePerspectiveClick: function(mode) {
+    onGamePerspectiveClick: function (mode) {
       this.perspective == 1 ? (this.perspective = 2) : (this.perspective = 1);
 
       this.BPOrderInit(this.perspective, this.tabsModel + 1);
@@ -935,10 +721,10 @@ export default {
       if (mode == 1)
         this.$message.success("初始化 " + this.self.name + " 的视角");
     },
-    onGameTabsChange: function(e) {
+    onGameTabsChange: function (e) {
       this.BPOrderInit(this.perspective, e + 1);
     },
-    onGameBanPickClick: function(index) {
+    onGameBanPickClick: function (index) {
       if (this.mode == "view") return;
 
       let tabsModel = this.tabsModel;
@@ -959,7 +745,7 @@ export default {
         this.gameInfo.result[tabsModel].stepsNow = index;
       }
     },
-    onGamePickHeroClick: function(hero) {
+    onGamePickHeroClick: function (hero) {
       let tabsModel = this.tabsModel;
 
       if (
@@ -1000,7 +786,7 @@ export default {
         this.$message.warning("BP结束,注意保存");
       }
     },
-    onGameShareClick: function() {
+    onGameShareClick: function () {
       let vs = this.team.team_1.name + " Vs " + this.team.team_2.name;
 
       this.copyData =
@@ -1012,14 +798,14 @@ export default {
         location.href;
       this.appCopyData(this.copyData);
     },
-    onToolsMenuClick: function(type) {
+    onToolsMenuClick: function (type) {
       let tabsModel = this.tabsModel;
 
       if (type == 0) {
         this.$dialog
           .confirm({
             title: "是否删除第 " + (tabsModel + 1) + " 局？",
-            message: "此操作不可逆"
+            message: "此操作不可逆",
           })
           .then(() => {
             // on confirm
@@ -1052,7 +838,7 @@ export default {
         }
       }
     },
-    onWinCampClick: function(camp) {
+    onWinCampClick: function (camp) {
       let tabsModel = this.tabsModel;
       let teamInfo = this.team;
       let nowWinTeam;
@@ -1069,7 +855,7 @@ export default {
 
       this.$dialog
         .confirm({
-          title: "是否将本局胜方设置为 " + nowWinTeam + " ？"
+          title: "是否将本局胜方设置为 " + nowWinTeam + " ？",
         })
         .then(() => {
           // on confirm
@@ -1080,7 +866,7 @@ export default {
         .catch(() => {
           // on cancel
         });
-    }
-  }
+    },
+  },
 };
 </script>

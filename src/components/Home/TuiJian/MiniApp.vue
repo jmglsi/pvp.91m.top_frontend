@@ -42,49 +42,40 @@
       </div>
     </div>
 
-    <div class="miniapp-1a721faf2df53972bfd0831c64b6146d" @click="appPush('/', $options.name)">
+    <div class="miniapp-021a7599a708a3781fabe39f7631edfc" @click="appPush('/', $options.name)">
       <AppCollapse width="25" height="25" />
     </div>
   </div>
 </template>
 
-<style scoped>
-.miniapp-8d777f385d3dfec8815d20f7496026dc {
-  text-align: left;
-}
-
-.miniapp-1a721faf2df53972bfd0831c64b6146d {
-  position: fixed;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  bottom: 35px;
-}
+<style>
+@import url("/css/app-style/miniapp.css");
 </style>
 
 <script>
 export default {
   name: "MiniApp",
   components: {
-    AppCollapse: resolve => require(["@/assets/Icons/AppCollapse.vue"], resolve)
+    AppCollapse: (resolve) =>
+      require(["@/assets/Icons/AppCollapse.vue"], resolve),
   },
   data() {
     return {
       miniapp: {
         a: [],
-        b: []
-      }
+        b: [],
+      },
     };
   },
   mounted() {
     this.getMiniApp();
   },
   methods: {
-    getMiniApp: function() {
-      this.axios.get(this.apiList.pvp.getMiniApp).then(res => {
+    getMiniApp: function () {
+      this.axios.get(this.apiList.pvp.getMiniApp).then((res) => {
         this.miniapp = res.data.data;
       });
-    }
-  }
+    },
+  },
 };
 </script>

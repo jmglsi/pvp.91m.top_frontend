@@ -74,7 +74,7 @@ export default {
       qq: "",
       copyData: "",
       playerOptions: [
-        { text: "全部大区 (显示战绩)", value: 0 },
+        { text: "全部大区", value: 0 },
         { text: "手Q 安卓", value: 1 },
         { text: "手Q 苹果", value: 2 },
         { text: "微信安卓", value: 3 },

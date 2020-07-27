@@ -106,57 +106,7 @@
 </template>
 
 <style>
-div.my-7dc22b2c6a992f0232345df41303f5ea
-  div.van-grid
-  div.van-grid-item
-  div.van-grid-item__content
-  span.van-grid-item__text,
-.my-4646fa4296a7f5dea261e60e00ecd24b {
-  font-size: 20px;
-}
-
-button.my-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
-  color: red;
-}
-</style>
-
-<style scoped>
-.my-25930e3036f13852cb0b29694bbab611 {
-  margin: 0 3px;
-}
-
-.my-b068931cc450442b63f5b3d276ea4297 {
-  font-size: 10px;
-}
-
-.my-cd77c40b62763f6adf5598bce7fceede {
-  margin-top: 35px;
-  margin-bottom: 10px;
-}
-
-.my-d5ca322453f2986b752e58b11af83d96 {
-  border-radius: 100%;
-}
-
-.my-f9c7cabc13f359223ebc3ccf9cc104b8 {
-  margin-top: 20px;
-}
-
-.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
-  margin-left: 5px;
-}
-
-.my-058928a73f2a944d621b028eb9addd36 {
-  margin-top: -20px;
-}
-
-.my-7dc22b2c6a992f0232345df41303f5ea {
-  text-align: left;
-}
-
-.my-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
-  font-size: 10px;
-}
+@import url("/css/app-style/user.css");
 </style>
 
 <script>
@@ -165,7 +115,7 @@ export default {
   data() {
     return {
       loginInfo: {},
-      isLogin: false
+      isLogin: false,
     };
   },
   mounted() {
@@ -175,7 +125,7 @@ export default {
     this.onLoginCheck(openId, accessToken);
   },
   methods: {
-    onLoginCheck: function(openId, accessToken) {
+    onLoginCheck: function (openId, accessToken) {
       if (!openId || !accessToken) return;
 
       this.axios
@@ -183,10 +133,10 @@ export default {
           this.apiList.pvp.getWebAccountInfo,
           this.$qs.stringify({
             openId: openId,
-            accessToken: accessToken
+            accessToken: accessToken,
           })
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
@@ -199,10 +149,10 @@ export default {
           }
         });
     },
-    onLogotClick: function() {
+    onLogotClick: function () {
       this.$dialog
         .confirm({
-          title: "是否退出登录？"
+          title: "是否退出登录？",
         })
         .then(() => {
           // on confirm
@@ -213,7 +163,7 @@ export default {
         .catch(() => {
           // on cancel
         });
-    }
-  }
+    },
+  },
 };
 </script>

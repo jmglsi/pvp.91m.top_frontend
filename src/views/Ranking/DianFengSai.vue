@@ -129,37 +129,8 @@
   </div>
 </template>
 
-<style scoped>
-.dfs-3d5f1ffeadf58eb64ef57aef7e53a31e {
-  position: absolute;
-  margin-top: -10px;
-  margin-left: -2px;
-}
-
-.dfs-713dd4d0b2e842c08da62ddeec872331 {
-  position: absolute;
-}
-
-.dfs-95a25d46f98b0ec553d892cc45037d57 {
-  position: absolute;
-  margin-top: -21px;
-}
-
-.dfs-35af5e6c0fc290aa4f2e38d4c8296a03 {
-  left: -5px;
-}
-
-.dfs-fbfe7b256ce6b4df1d03d8022163c6d2 {
-  left: 40px;
-}
-
-.skill-043052eea2d064cab23119e56f4f640e {
-  left: -20px;
-}
-
-.skill-dabb6e25dffefe5b4821b7062afbdaef {
-  left: 25px;
-}
+<style>
+@import url("/css/app-style/ranking.css");
 </style>
 
 <script>
@@ -173,8 +144,8 @@ export default {
           { text: "全部大区", value: 0 },
           { text: "手 Q", value: 1 },
           { text: "微信", value: 2 },
-          { text: "挨刀", value: 3 }
-        ]
+          { text: "强度上升", value: 3 },
+        ],
       },
       positionInfo: {
         model: 0,
@@ -185,8 +156,8 @@ export default {
           { text: "对抗 (坦克)", value: 3 },
           { text: "打野", value: 4 },
           { text: "发育", value: 5 },
-          { text: "辅助", value: 6 }
-        ]
+          { text: "辅助", value: 6 },
+        ],
       },
       tableData: {
         color: {},
@@ -194,22 +165,22 @@ export default {
         row: {
           id: 0,
           name: "加载中",
-          updatePid: 0
-        }
+          updatePid: 0,
+        },
       },
       show: {
-        actionSheet: false
+        actionSheet: false,
       },
       actions: [
         { name: "趋势 & 职业对比", value: 0 },
         { name: "对局回顾", subname: "第一视角", value: 1 },
         { name: "赛事数据", subname: "玩加电竞", value: 2 },
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 }
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
       ],
       listWidth: 0,
       clientHeight: 0,
-      isLoading: true
+      isLoading: true,
     };
   },
   created() {
@@ -219,36 +190,36 @@ export default {
     this.getHeroRanking(0, 0);
   },
   methods: {
-    getHeroRanking: function(aid, bid) {
+    getHeroRanking: function (aid, bid) {
       if (aid == 3 && bid == 0)
         this.$message.info(
-          "提示:1006,禁用率越高越容易挨刀,挨过刀的几个月内不会再动 ;D"
+          "提示:1006,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
         );
 
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
-        .then(res => {
+        .then((res) => {
           this.tableData = res.data.data;
           this.tableData.row = {
             id: 0,
             name: "加载中",
-            updatePid: 0
+            updatePid: 0,
           };
           this.isLoading = false;
         });
     },
-    getHeroInfo: function(row) {
+    getHeroInfo: function (row) {
       this.tableData.row = row;
 
       this.show.actionSheet = true;
     },
-    onDropdownMenuChange: function() {
+    onDropdownMenuChange: function () {
       this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
     },
-    onCellClick: function({ row }) {
+    onCellClick: function ({ row }) {
       this.getHeroInfo(row);
     },
-    cellClassName: function({ row, column }) {
+    cellClassName: function ({ row, column }) {
       let color = this.tableData.color;
 
       if (column.property === "banRate") {
@@ -272,7 +243,7 @@ export default {
         }
       }
     },
-    onActionSheetSelect: function(item) {
+    onActionSheetSelect: function (item) {
       let name = this.$options.name,
         heroInfo = this.tableData.row;
 
@@ -309,7 +280,7 @@ export default {
           "//bbs.nga.cn/read.php?tid=12677614"
         );
       }
-    }
-  }
+    },
+  },
 };
 </script>

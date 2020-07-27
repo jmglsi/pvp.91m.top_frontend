@@ -6,9 +6,7 @@
 </template>
 
 <style>
-.game-f4842dcb685d490e2a43212b8072a6fe {
-  color: #969799;
-}
+@import url("/css/app-style/game.css");
 </style>
 
 <script>

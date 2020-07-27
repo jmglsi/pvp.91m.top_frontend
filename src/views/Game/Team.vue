@@ -103,14 +103,8 @@
   </div>
 </template>
 
-<style scoped>
-.game-04b8e72015730c5d62bb5f0cf379ff5e {
-  border-radius: unset;
-}
-
-.game-a066f238070a70cb531c9bd722c65b36 {
-  margin: 25px 0;
-}
+<style>
+@import url("/css/app-style/game.css");
 </style>
 
 <script>

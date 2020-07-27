@@ -1,6 +1,8 @@
 <template>
   <div class="hero-update">
-    <div class="tuijian-b4558c68ce168dc8679358f047eea63b tuijian-447b7147e84be512208dcc0995d67ebc">
+    <div
+      class="tuijian-b4558c68ce168dc8679358f047eea63b tuijian-447b7147e84be512208dcc0995d67ebc app-1e4b00d1b398e8a6551429b2a2f0e17c"
+    >
       <div class="tuijian-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
           <van-col span="16" @click="show.calendar = true">
@@ -79,30 +81,8 @@
   </div>
 </template>
 
-<style scoped>
-.tuijian-3490d5ece19a8f958d2be068e27f636a {
-  margin-bottom: 25px;
-}
-
-.tuijian-6b0325a49e13e1c8adc31a953f4bca63 {
-  line-height: 50px;
-}
-
-.tuijian-7d4e6768382f99a87a56cad0ac71b15b {
-  text-align: left;
-}
-
-.tuijian-5a5152e95445ede11c05f5fa898d8fd9 {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.tuijian-5d39f3848925994b52ec52fba934577c {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 3px;
-  margin-right: 3px;
-}
+<style>
+@import url("/css/app-style/hero.css");
 </style>
 
 <script>
@@ -111,22 +91,22 @@ export default {
   props: {
     heroId: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
       const { heroId } = this;
       return { heroId };
-    }
+    },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
         this.getHeroUpdate(newValue.heroId);
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -135,28 +115,28 @@ export default {
         options: [
           { text: "体验服", value: 0 },
           { text: "正式服", value: 1 },
-          { text: "全部", value: 2 }
-        ]
+          { text: "全部", value: 2 },
+        ],
       },
       show: {
-        calendar: false
+        calendar: false,
       },
       date: {
         min: new Date(),
-        max: new Date()
+        max: new Date(),
       },
       tableData: {
         tips: null,
         title: "",
-        result: []
-      }
+        result: [],
+      },
     };
   },
   methods: {
-    getHeroUpdate: function(heroId) {
+    getHeroUpdate: function (heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
-        .then(res => {
+        .then((res) => {
           this.tableData = res.data.data;
         });
 
@@ -165,7 +145,7 @@ export default {
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
       this.date.max = new Date(date.setMonth(date.getMonth() + 5));
     },
-    onFormatter: function(day) {
+    onFormatter: function (day) {
       let oDay =
         day.date.getFullYear() +
         "/" +
@@ -202,7 +182,7 @@ export default {
         }
       }
       return day;
-    }
-  }
+    },
+  },
 };
 </script>

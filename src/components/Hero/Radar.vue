@@ -28,20 +28,7 @@
 </template>
 
 <style>
-div.ti-input {
-  border-radius: 5px;
-}
-</style>
-
-<style scoped>
-.info-d57ac45256849d9b13e2422d91580fb9 {
-  text-align: center;
-  width: 85%;
-  max-width: 500px;
-  margin: 0 auto;
-  margin-bottom: 25px;
-  z-index: 1;
-}
+@import url("/css/app-style/hero.css");
 </style>
 
 <script>
@@ -51,23 +38,23 @@ export default {
   name: "HeroRadar",
   components: {
     VeRadar,
-    VueTagsInput: resolve => require(["@johmun/vue-tags-input"], resolve)
+    VueTagsInput: (resolve) => require(["@johmun/vue-tags-input"], resolve),
   },
   props: {
     tabsModel: {
       type: Number,
-      default: 0
+      default: 0,
     },
     heroId: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
       const { tabsModel, heroId } = this;
       return { tabsModel, heroId };
-    }
+    },
   },
   watch: {
     listenChange: {
@@ -80,29 +67,29 @@ export default {
         } else {
           this.tag.array = [];
         }
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       tag: {
         text: "",
         array: [],
-        placeholder: "输入对比的英雄,点击任意空白位置确认 😄"
+        placeholder: "输入对比的英雄,点击任意空白位置确认 😄",
       },
       style: {
-        marginTop: 0
+        marginTop: 0,
       },
       tableData: {
         extend: {},
         settings: {},
         loading: true,
-        result: []
+        result: [],
       },
       customize: {
         old: "",
-        new: ""
-      }
+        new: "",
+      },
     };
   },
   mounted() {
@@ -111,12 +98,12 @@ export default {
       : (this.style.marginTop = "-50px");
   },
   methods: {
-    getHeroChartsLogBySimilar: function(heroId) {
+    getHeroChartsLogBySimilar: function (heroId) {
       this.tableData.loading = true;
 
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
-        .then(res => {
+        .then((res) => {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
@@ -126,14 +113,14 @@ export default {
           this.tableData.loading = false;
         });
     },
-    getHeroChartsLogByCustomize: function(heroName) {
+    getHeroChartsLogByCustomize: function (heroName) {
       this.tableData.loading = true;
 
       this.axios
         .get(
           this.apiList.pvp.getHeroChartsLogByCustomize + "&heroName=" + heroName
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
@@ -143,7 +130,7 @@ export default {
           this.tableData.loading = false;
         });
     },
-    getHeroChartsLogByCustomizeFromUrl: function(heroName) {
+    getHeroChartsLogByCustomizeFromUrl: function (heroName) {
       let e, hero, newTags;
 
       e = heroName.split(",");
@@ -155,7 +142,7 @@ export default {
 
       this.getHeroChartsLogByCustomize(heroName);
     },
-    onTagsChanged: function(e) {
+    onTagsChanged: function (e) {
       if (e.length == 0) {
         this.chartSettings = {};
         this.chartData = [];
@@ -170,7 +157,7 @@ export default {
         this.customize.new = newTags.replace("undefined,", "");
       }
     },
-    onTagsBlur: function() {
+    onTagsBlur: function () {
       let oldCustomize = this.customize.old,
         newCustomize = this.customize.new;
 
@@ -178,7 +165,7 @@ export default {
         this.getHeroChartsLogByCustomize(newCustomize);
         this.customize.old = newCustomize;
       }
-    }
-  }
+    },
+  },
 };
 </script>

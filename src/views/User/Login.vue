@@ -76,35 +76,8 @@
   </div>
 </template>
 
-<style scoped>
-.login-6920626369b1f05844f5e3d6f93b5f6e,
-.login-61046f2f5eefe3dc179e52af32241062 {
-  margin-top: 25px;
-}
-
-.login-61046f2f5eefe3dc179e52af32241062 {
-  text-align: center;
-}
-
-.login-e4c9479b11955648dad558fe717a4eb2 {
-  font-size: 12px;
-  color: red;
-}
-
-.login-f01ae8c7f2d058ec6be00db589a32bea {
-  position: absolute;
-  bottom: 50px;
-}
-
-.login-60ae25445ac62d5ec51c776826888d9f {
-  color: #1989fa;
-  left: 25px;
-}
-
-.login-4ae1ffb5939d592986bed21d0913562d {
-  color: red;
-  right: 25px;
-}
+<style>
+@import url("/css/app-style/user.css");
 </style>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="tuijian-home app-d638615004bb2ff42ed26948aba89c80">
+  <div class="home-tuijian app-d638615004bb2ff42ed26948aba89c80">
     <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
       <van-pull-refresh
         v-model="isLoading"
@@ -10,9 +10,7 @@
         @refresh="onTuiJianRefresh"
         class="tuijian-af03857fe372b964b53ef3a082c2b518"
       >
-        <div
-          class="tuijian-a139b05b7f8e496c00991733ef7cd589 tuijian-447b7147e84be512208dcc0995d67ebc"
-        >
+        <div class="tuijian-a139b05b7f8e496c00991733ef7cd589 app-1e4b00d1b398e8a6551429b2a2f0e17c">
           <van-swipe
             :autoplay="3000"
             :height="175"
@@ -32,9 +30,7 @@
               >{{ data.tag.text }}</van-tag>
             </van-swipe-item>
           </van-swipe>
-        </div>
 
-        <div class="tuijian-6a507ff2d5941aa4e30c98a8f3739ffe">
           <van-cell
             :title="appHomeInfo.tipsInfo.title"
             :value="appHomeInfo.tipsInfo.des"
@@ -53,79 +49,53 @@
   </div>
 </template>
 
-<style scoped>
-.tuijian-a139b05b7f8e496c00991733ef7cd589 {
-  padding: 0;
-  overflow: hidden;
-  transform: translateY(0);
-}
-
-.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
-  height: 100%;
-  width: 100%;
-}
-
-.tuijian-a5a5c883f68e45baa83f140e218759f1 {
-  position: absolute;
-  bottom: 25px;
-  z-index: 1;
-  left: 0;
-}
-
-.tuijian-6a507ff2d5941aa4e30c98a8f3739ffe {
-  text-align: left;
-  margin: 0 10px;
-}
-
-div.van-cell.van-cell--clickable {
-  background-color: rgb(245, 245, 245);
-  border-radius: 10px;
-}
+<style>
+@import url("/css/app-style/home.css");
 </style>
 
 <script>
 export default {
   name: "TuiJianHome",
   components: {
-    HeroUpdate: resolve => require(["@/components/Hero/Update.vue"], resolve)
+    HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
   },
   data() {
     return {
       appHomeInfo: {
         swipeInfo: {
-          result: []
+          result: [],
         },
         tipsInfo: {
           title: null,
           des: null,
           to: null,
-          url: null
+          url: null,
         },
         miniappInfo: {
           pulling: "喵呜...",
           loosing: "奇迹什么时候女装呢...",
           loading: "加载中...",
-          success: null
-        }
+          success: null,
+        },
       },
-      isLoading: false
+      isLoading: false,
     };
   },
   mounted() {
     this.getAppHome();
   },
   methods: {
-    getAppHome: function() {
-      this.axios.get(this.apiList.pvp.getAppHome).then(res => {
+    getAppHome: function () {
+      this.axios.get(this.apiList.pvp.getAppHome).then((res) => {
         this.appHomeInfo = res.data.data;
       });
     },
-    onTuiJianRefresh: function() {
+    onTuiJianRefresh: function () {
       setTimeout(() => {
         this.isLoading = false;
         this.appPush("/miniapp", this.$options.name);
       }, 2000);
-    }
-  }
+    },
+  },
 };
 </script>

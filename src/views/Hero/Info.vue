@@ -21,7 +21,7 @@
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
               width="15"
               height="15"
-              class="info-3d5f1ffeadf58eb64ef57aef7e53a31e"
+              class="info-f90943c8968fa651d7e1b617ff046fe2"
             />
             <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.title }}</span>
           </div>
@@ -96,7 +96,7 @@
             v-lazy="hero.info.img"
             width="50"
             height="50"
-            class="info-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            class="info-48c8178c9726b2afcaf8c5ede5437746"
           />
         </van-grid-item>
         <van-grid-item
@@ -105,7 +105,7 @@
         >
           <div class="info-f3412345b511c61986bba9a39793157f">
             <span
-              class="info-713dd4d0b2e842c08da62ddeec872331"
+              class="info-cb4b556fe00d9a0da9d94f0bbf40e78c"
               v-for="(data, index) in hero.info.skill"
               :key="'hero-d7768ef7449dfbbc6020f1dd0ae11593-' + index"
             >
@@ -186,99 +186,22 @@
 </template>
 
 <style>
-div.van-circle__text {
-  font-size: 10px;
-}
-
-div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav {
-  z-index: 1;
-}
-
-div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__right {
-  width: 35%;
-}
-</style>
-
-<style scoped>
-.info-68adaff1d028a37f27fb33c483329cba li {
-  float: left;
-}
-
-.hero-16e1b9e46fe4483c6bc17aea9d20736a {
-  text-align: left;
-}
-
-.hero-e06398232dc80e41209489705546802c {
-  margin-top: 25px;
-}
-
-.info-d5d3db1765287eef77d7927cc956f50a {
-  margin: 0 5px;
-}
-
-.info-3d5f1ffeadf58eb64ef57aef7e53a31e {
-  margin-top: -5px;
-}
-
-.info-68adaff1d028a37f27fb33c483329cba {
-  position: absolute;
-  margin-top: -3px;
-  right: 20px;
-}
-
-.app-ff4a008470319a22d9cf3d14af485977 {
-  margin-top: 15px;
-}
-
-.info-d42f4851e770aa0f758b01388874f67b {
-  margin: 23px 0;
-}
-
-.info-9726255eec083aa56dc0449a21b33190 {
-  margin-top: 5px;
-}
-
-.info-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
-  position: absolute;
-  border-radius: 100%;
-}
-
-.info-0fc3cfbc27e91ea60a787de13dae3e3c {
-  margin-left: -40px;
-  margin-top: 26px;
-}
-
-.vote-ebd73ade48cb3e102d1dbbfbc0377c5f {
-  font-size: 10px;
-  margin-top: 10px;
-}
-
-.info-ff2364a0be3d20e46cc69efb36afe9a5 {
-  margin: 0 3px;
-}
-
-.info-1d61d12b768d71c075477fd92281464d {
-  margin: 7px 0 0 0;
-}
-
-.info-bc267281c62550407c9572aff2a45f69 {
-  margin-left: 3px;
-}
+@import url("/css/app-style/hero.css");
 </style>
 
 <script>
 export default {
   name: "HeroInfo",
   components: {
-    AppGold: resolve => require(["@/assets/Icons/AppGold.vue"], resolve),
-    AppTime: resolve => require(["@/assets/Icons/AppTime.vue"], resolve),
-    AppCry: resolve => require(["@/assets/Icons/AppCry.vue"], resolve),
-    AppSmile: resolve => require(["@/assets/Icons/AppSmile.vue"], resolve),
-    HeroLine: resolve => require(["@/components/Hero/Line.vue"], resolve),
-    HeroRadar: resolve => require(["@/components/Hero/Radar.vue"], resolve),
-    HeroUpdate: resolve => require(["@/components/Hero/Update.vue"], resolve),
-    AppBottomTabbar: resolve =>
-      require(["@/components/App/BottomTabbar.vue"], resolve)
+    AppGold: (resolve) => require(["@/assets/Icons/AppGold.vue"], resolve),
+    AppTime: (resolve) => require(["@/assets/Icons/AppTime.vue"], resolve),
+    AppCry: (resolve) => require(["@/assets/Icons/AppCry.vue"], resolve),
+    AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
+    HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
+    HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
+    HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   beforeRouteUpdate(to, from, next) {
     if (to.params.id != from.params.id) {
@@ -291,15 +214,15 @@ export default {
       show: {
         heroImg: true,
         parameter: true,
-        actionSheet: false
+        actionSheet: false,
       },
       tabsModel: 0,
       hero: {
         line: 0,
         title: "加载中",
         info: {
-          id: 0
-        }
+          id: 0,
+        },
       },
       circle: {
         model: 0,
@@ -309,16 +232,16 @@ export default {
           vote: [
             {
               img: "/img/app-icons/cry.png",
-              text: "加载中"
+              text: "加载中",
             },
             {
               img: "/img/app-icons/smile.png",
-              text: "加载中"
-            }
-          ]
-        }
+              text: "加载中",
+            },
+          ],
+        },
       },
-      isLoaded: false
+      isLoaded: false,
     };
   },
   mounted() {
@@ -333,10 +256,10 @@ export default {
     }, 1000 * 5);
   },
   methods: {
-    getHeroInfo: function(heroId) {
+    getHeroInfo: function (heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
-        .then(res => {
+        .then((res) => {
           this.isLoaded = true;
 
           let data = res.data.data,
@@ -350,13 +273,13 @@ export default {
           document.title = this.hero.info.name + " | 苏苏的荣耀助手";
         });
     },
-    onTipsClick: function() {
+    onTipsClick: function () {
       this.$dialog.alert({
         title: "请客观评价该英雄",
-        message: this.circle.info.tips
+        message: this.circle.info.tips,
       });
     },
-    onHeroVoteClick: function(voteType) {
+    onHeroVoteClick: function (voteType) {
       this.axios
         .get(
           this.apiList.pvp.addHeroVote +
@@ -365,7 +288,7 @@ export default {
             "&voteType=" +
             voteType
         )
-        .then(res => {
+        .then((res) => {
           let status = res.data.status;
 
           if (status.code != 200) {
@@ -378,7 +301,7 @@ export default {
 
       this.show.actionSheet = false;
     },
-    onTabsChange: function(e) {
+    onTabsChange: function (e) {
       let heroInfo = this.hero.info,
         dTitle;
 
@@ -400,7 +323,7 @@ export default {
       document.title = dTitle + " | 苏苏的荣耀助手";
 
       e == 0 ? (this.show.parameter = true) : (this.show.parameter = false);
-    }
-  }
+    },
+  },
 };
 </script>

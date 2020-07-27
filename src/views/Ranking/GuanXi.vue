@@ -79,11 +79,8 @@
   </div>
 </template>
 
-<style scoped>
-.adaptation-f58cc48f5b942c91e57eff48accc5151 {
-  margin-left: -50px;
-  top: 62px;
-}
+<style>
+@import url("/css/app-style/ranking.css");
 </style>
 
 <script>
@@ -93,7 +90,7 @@ export default {
     return {
       search: {
         value: "",
-        placeholder: "请输入搜索关键词"
+        placeholder: "请输入搜索关键词",
       },
       tableData: {
         searchPlaceholder: [],
@@ -101,24 +98,24 @@ export default {
         result: [],
         row: {
           hero_1: {
-            name: "加载中"
+            name: "加载中",
           },
           hero_2: {
-            name: "加载中"
-          }
-        }
+            name: "加载中",
+          },
+        },
       },
       show: {
-        actionSheet: false
+        actionSheet: false,
       },
       actions: [
         { name: "复制信息", value: 0 },
-        { name: "对局回顾", value: 1 }
+        { name: "对局回顾", value: 1 },
       ],
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
-      isLoading: true
+      isLoading: true,
     };
   },
   created() {
@@ -139,7 +136,7 @@ export default {
     }, 1000 * 5);
   },
   methods: {
-    getHeroCombination: function(heroName) {
+    getHeroCombination: function (heroName) {
       this.search.value = heroName;
 
       this.axios
@@ -148,22 +145,22 @@ export default {
             "&heroName=" +
             encodeURIComponent(heroName)
         )
-        .then(res => {
+        .then((res) => {
           this.tableData = res.data.data;
           this.tableData.row = {
             hero_1: {
-              name: "加载中"
+              name: "加载中",
             },
             hero_2: {
-              name: "加载中"
-            }
+              name: "加载中",
+            },
           };
           this.isLoading = false;
 
           if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
         });
     },
-    getHeroInfo: function(row) {
+    getHeroInfo: function (row) {
       this.tableData.row = row;
 
       let heroName = this.search.value;
@@ -186,7 +183,7 @@ export default {
                 this.appSign(this.$options.name)
             )
         )
-        .then(res => {
+        .then((res) => {
           this.copyData =
             "英雄:" +
             row.hero_1.name +
@@ -205,7 +202,7 @@ export default {
 
       this.show.actionSheet = true;
     },
-    cellClassName: function({ row, column }) {
+    cellClassName: function ({ row, column }) {
       let pick = this.tableData.color.pick,
         win = this.tableData.color.win;
 
@@ -230,12 +227,12 @@ export default {
         }
       }
     },
-    onSearchClear: function() {
+    onSearchClear: function () {
       this.search.value = "";
 
       this.getHeroCombination("");
     },
-    onSearch: function() {
+    onSearch: function () {
       let searchValue = this.search.value;
 
       if (!searchValue) return;
@@ -244,7 +241,7 @@ export default {
           .get(
             this.apiList.pvp.addHeroByCombination + "&heroName=" + searchValue
           )
-          .then(res => {
+          .then((res) => {
             let code = res.data.data.code,
               msg;
 
@@ -269,10 +266,10 @@ export default {
         this.getHeroCombination(searchValue);
       }
     },
-    onCellClick: function({ row }) {
+    onCellClick: function ({ row }) {
       this.getHeroInfo(row);
     },
-    onActionSheetSelect: function(item) {
+    onActionSheetSelect: function (item) {
       let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
@@ -285,7 +282,7 @@ export default {
           this.$options.name
         );
       }
-    }
-  }
+    },
+  },
 };
 </script>

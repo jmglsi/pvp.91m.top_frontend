@@ -65,17 +65,8 @@
   </div>
 </template>
 
-<style scoped>
-.bilibili-a47ba339330136bcab5b4c91d5d10882 {
-  position: absolute;
-  z-index: 2;
-  left: 85px;
-  margin-top: 15px;
-}
-
-.bilibili-71f262d796bed1ab30e8a2d5a8ddee6f {
-  margin-top: 25px;
-}
+<style>
+@import url("/css/app-style/bilibili.css");
 </style>
 
 <script>
@@ -85,7 +76,7 @@ export default {
     return {
       getOrderInfoInterval: 0,
       search: {
-        value: ""
+        value: "",
       },
       tableData: {
         searchPlaceholder: "请输入【视频id】,例如:bv12345",
@@ -93,23 +84,23 @@ export default {
         total: 200,
         pageSize: 50,
         row: {
-          uid: 0
-        }
+          uid: 0,
+        },
       },
       paginationModel: 1,
       listWidth: 0,
       show: {
-        actionSheet: false
+        actionSheet: false,
       },
       actions: [
         { name: "复制订单", value: 0 },
-        { name: "查看相关", value: 1 }
+        { name: "查看相关", value: 1 },
       ],
       clientHeight: 0,
       copyAv: "",
       copyData: "",
       checkModel: false,
-      isLoading: true
+      isLoading: true,
     };
   },
   created() {
@@ -125,7 +116,7 @@ export default {
     }, 1000 * 10);
   },
   methods: {
-    getOrderInfo: function(uid, page) {
+    getOrderInfo: function (uid, page) {
       this.axios
         .get(
           this.apiList.bili.getOrderInfo +
@@ -134,10 +125,10 @@ export default {
             "&page=" +
             page
         )
-        .then(res => {
+        .then((res) => {
           this.tableData = res.data.data;
           this.tableData.row = {
-            uid: 0
+            uid: 0,
           };
           this.isLoading = false;
 
@@ -148,11 +139,11 @@ export default {
           }
         });
     },
-    copyDataByAv: function(e) {
+    copyDataByAv: function (e) {
       this.appCopyData(e);
       this.copyAv = "";
     },
-    onActionSheetClick: function(row) {
+    onActionSheetClick: function (row) {
       this.tableData.row = row;
 
       this.axios
@@ -167,7 +158,7 @@ export default {
                 this.appSign(this.$options.name)
             )
         )
-        .then(res => {
+        .then((res) => {
           this.copyData =
             "id:" +
             row.uid +
@@ -194,12 +185,12 @@ export default {
 
       this.show.actionSheet = true;
     },
-    onSearchClear: function() {
+    onSearchClear: function () {
       this.search.value = "";
       this.tableData = [];
       clearInterval(this.getOrderInfoInterval);
     },
-    onSearch: function() {
+    onSearch: function () {
       clearInterval(this.getOrderInfoInterval);
 
       let searchValue = this.search.value;
@@ -214,7 +205,7 @@ export default {
 
       this.getOrderInfo(this.search.value, this.paginationModel);
     },
-    onCheckBoxChange: function(e) {
+    onCheckBoxChange: function (e) {
       if (e == true) {
         this.getOrderInfoInterval = setInterval(() => {
           this.getOrderInfo(this.search.value, this.paginationModel);
@@ -223,13 +214,13 @@ export default {
         clearInterval(this.getOrderInfoInterval);
       }
     },
-    onPaginationChange: function(e) {
+    onPaginationChange: function (e) {
       this.getOrderInfo(this.search.value, e);
     },
-    onCellClick: function({ row }) {
+    onCellClick: function ({ row }) {
       this.onActionSheetClick(row);
     },
-    onActionSheetSelect: function(item) {
+    onActionSheetSelect: function (item) {
       let orderInfo = this.tableData.row;
 
       if (item.value == 0) {
@@ -240,7 +231,7 @@ export default {
         this.search.value = orderInfo.uid;
         this.getOrderInfo(orderInfo.uid, 1);
       }
-    }
-  }
+    },
+  },
 };
 </script>
