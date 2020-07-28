@@ -4,8 +4,12 @@
   </div>
 </template>
 
+<style>
+@import url("/css/app-style/hero.css");
+</style>
+
 <script>
 export default {
-  name: "HeroHome"
+  name: "HeroHome",
 };
 </script>

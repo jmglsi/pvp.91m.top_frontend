@@ -24,12 +24,16 @@
   </div>
 </template>
 
+<style>
+@import url("/css/app-style/home.css");
+</style>
+
 <script>
 export default {
   name: "Home",
   components: {
-    TuiJian: resolve => require(["@/views/Home/TuiJian/Index.vue"], resolve),
-    Game: resolve => require(["@/views/Home/Game/Index.vue"], resolve),
+    TuiJian: resolve => require(["@/views/Home/TuiJian.vue"], resolve),
+    Game: resolve => require(["@/views/Home/Game.vue"], resolve),
     AppBottomTabbar: resolve =>
       require(["@/components/App/BottomTabbar.vue"], resolve)
   },

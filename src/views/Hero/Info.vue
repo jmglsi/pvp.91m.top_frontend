@@ -185,10 +185,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/hero.css");
-</style>
-
 <script>
 export default {
   name: "HeroInfo",

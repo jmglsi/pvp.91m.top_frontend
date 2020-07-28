@@ -5,7 +5,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="2"
+        z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
         @click-left="appPush('/ranking', $options.name)"
       >
@@ -108,10 +108,6 @@
     <AppBottomTabbar />
   </div>
 </template>
-
-<style>
-@import url("/css/app-style/hero.css");
-</style>
 
 <script>
 export default {

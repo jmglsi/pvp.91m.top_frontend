@@ -66,12 +66,8 @@ div.van-circle__text {
     font-size: 10px;
 }
 
-div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav {
-    z-index: 1;
-}
-
 div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__right {
-    width: 35%;
+    width: 40%;
 }
 
 div.info-68adaff1d028a37f27fb33c483329cba li {
@@ -92,12 +88,12 @@ div.info-68adaff1d028a37f27fb33c483329cba {
     right: 20px;
 }
 
-div.app-ff4a008470319a22d9cf3d14af485977 {
-    margin-top: 15px;
+div.info-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav {
+    z-index: 1;
 }
 
 div.info-d42f4851e770aa0f758b01388874f67b {
-    margin: 23px 0;
+    margin: 0 0 20px 0;
 }
 
 div.tuijian-3490d5ece19a8f958d2be068e27f636a {

@@ -5,8 +5,9 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        title="我的交战"
+        z-index="99999999"
         class="game-7140a921b48604a7db01e6b676e34174"
+        title="我的交战"
         @click-left="$router.go(-1)"
       >
         <van-icon name="arrow-left" slot="left" />
@@ -32,8 +33,9 @@
                 <div class="game-f56ae939694a0488cc9e8ecdd47a46ab">{{ data.team_1.name }}</div>
               </van-col>
               <van-col span="10">
-                <span class="game-77b1c148b592b279e2040a4d7832ce91">Vs</span>
-                <div class="game-2447b032a0df6ee75028bf69e901f526">{{ data.engage.time }}</div>
+                <span class="game-07cc694b9b3fc636710fa08b6922c42b">{{ data.engage.time}}</span>
+                <br />
+                <span class="game-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
               </van-col>
               <van-col span="7">
                 <img
@@ -53,10 +55,6 @@
     <AppBottomTabbar v-if="appDevice" :height="100" />
   </div>
 </template>
-
-<style>
-@import url("/css/app-style/game.css");
-</style>
 
 <script>
 export default {

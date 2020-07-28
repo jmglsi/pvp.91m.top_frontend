@@ -5,6 +5,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        z-index="99999999"
         class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
         @click-left="onNavBarLeftClick"
       >

@@ -39,10 +39,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/home.css");
-</style>
-
 <script>
 export default {
   name: "GameHome",

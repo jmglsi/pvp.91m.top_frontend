@@ -5,8 +5,9 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        title="我的队伍"
+        z-index="99999999"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
+        title="我的队伍"
         @click-left="$router.go(-1)"
         @click-right="onCreateTeamClick"
       >
@@ -102,10 +103,6 @@
     </div>
   </div>
 </template>
-
-<style>
-@import url("/css/app-style/game.css");
-</style>
 
 <script>
 export default {

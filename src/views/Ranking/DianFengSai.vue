@@ -129,10 +129,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/ranking.css");
-</style>
-
 <script>
 export default {
   name: "RankingDianFengSai",
