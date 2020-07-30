@@ -14,12 +14,12 @@
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-grid
         ref="guanxi"
+        auto-resize
         :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
         :cell-class-name="cellClassName"
-        :sort-config="{trigger: 'cell'}"
-        auto-resize
+        :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄_1" fixed="left" width="75" sortable>
@@ -115,7 +115,8 @@ export default {
     };
   },
   created() {
-    this.appTableInit(1440);
+    this.appInitTable();
+    this.initTable(1440);
   },
   mounted() {
     let heroName = this.$route.query.heroName;
@@ -132,6 +133,9 @@ export default {
     }, 1000 * 5);
   },
   methods: {
+    initTable: function (e) {
+      this.appWidth >= e ? (this.listWidth = 0) : (this.listWidth = 75);
+    },
     getHeroCombination: function (heroName) {
       this.search.value = heroName;
 

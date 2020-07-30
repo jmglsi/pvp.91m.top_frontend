@@ -1,6 +1,11 @@
 <template>
   <div class="hero-list">
-    <vxe-grid ref="heroSkill" :data="tableData.result" :sort-config="{trigger: 'cell'}" auto-resize>
+    <vxe-grid
+      ref="heroSkill"
+      :data="tableData.result"
+      :sort-config="{ trigger: 'cell' }"
+      auto-resize
+    >
       <vxe-table-column title="技能" field="score" fixed="left" sortable>
         <template v-slot="{ row }">
           <img
@@ -17,7 +22,10 @@
       <vxe-table-column title="比率 (%)">
         <vxe-table-column title="出场" field="pickRate" sortable />
         <vxe-table-column title="胜率" field="winRate" sortable />
-        <vxe-table-column title="MVP率" field="mvpRate" sortable />
+      </vxe-table-column>
+
+      <vxe-table-column title="MVP (%)">
+        <vxe-table-column title="胜方" field="mvpRate" sortable />
       </vxe-table-column>
     </vxe-grid>
   </div>

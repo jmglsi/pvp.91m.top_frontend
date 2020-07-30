@@ -17,11 +17,11 @@
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-grid
         ref="wanjia"
+        auto-resize
         :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
-        :sort-config="{trigger: 'cell'}"
-        auto-resize
+        :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
@@ -96,7 +96,7 @@ export default {
     };
   },
   created() {
-    this.appTableInit(350);
+    this.appInitTable();
   },
   mounted() {
     this.getPlayerRanking(0, 0);

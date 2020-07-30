@@ -24,7 +24,7 @@
         :isLoading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
-        :sort-config="{trigger: 'cell'}"
+        :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="id" field="uid" fixed="left" width="125" />
