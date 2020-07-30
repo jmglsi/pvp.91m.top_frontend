@@ -84,8 +84,8 @@
                   <img
                     v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
-                    width="40"
-                    height="40"
+                    :width="appDevice ? 40 : 55"
+                    :height="appDevice ? 40 : 55"
                     class="pick-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -95,14 +95,14 @@
           <div
             v-show="mode == 'edit'"
             @click="onWinCampClick(1)"
-            :style="appDevice ? { height: '275px' } : { height: '550px' }"
+            :style="appDevice ? { height: '275px' } : { height: (appHeight - 175) + 'px' }"
             class="pick-d75e14b5c8f13e894fe9bf9d5426c198"
           ></div>
         </van-col>
         <van-col span="18">
           <div
             v-show="show.hero"
-            :style="appDevice ? { height: '240px' } : { height: '560px' }"
+            :style="appDevice ? { height: '240px' } : { height: (appHeight - 175) + 'px' }"
             class="hero-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
@@ -183,8 +183,8 @@
                   <img
                     v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
-                    width="40"
-                    height="40"
+                    :width="appDevice ? 40 : 55"
+                    :height="appDevice ? 40 : 55"
                     class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -242,6 +242,15 @@
 
     <div class="game-173f312c43fe32a4f01c84d1cf0520b1 game-e4e6288c92630a6c237c15442fdb0917">
       <ul>
+        <li v-show="mode == 'edit'">
+          <div class="game-2d121e51de7a817bff612f1e16fadb8e">
+            倒计时:
+            <span
+              class="game-0db3e75efe3faa0cee4451fb55bc4c53"
+              :style="countdown < 10 ? { color: 'red' } : { color: 'blue' }"
+            >{{ countdown }}</span>秒
+          </div>
+        </li>
         <li v-show="show.apps">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" />
@@ -365,6 +374,8 @@ export default {
       mode: "view",
       self: "",
       opponent: "",
+      countdown: 60,
+      countdownHandle: "",
       perspective: 1,
       tabsModel: 0,
       author: {
@@ -473,7 +484,7 @@ export default {
         }
       }
     },
-    BPOrderInit: function (perspective, index) {
+    initBPOrder: function (perspective, index) {
       if (perspective == 1) {
         this.self = this.team.team_1;
         this.opponent = this.team.team_2;
@@ -537,6 +548,18 @@ export default {
       this.gameInfo.used = Array.from(new Set(used));
       //console.log(perspective, this.gameInfo.used);
     },
+    initCountdown: function () {
+      this.countdown = 60;
+      clearInterval(this.countdownHandle);
+
+      this.countdownHandle = setInterval(() => {
+        this.countdown--;
+        if (this.countdown == 0) {
+          this.$message.error("错误:1007,已超时");
+          clearInterval(this.countdownHandle);
+        }
+      }, 1000);
+    },
     getHeroList: function (gameTime) {
       this.axios
         .post(
@@ -572,7 +595,7 @@ export default {
           this.team = data.team;
           this.gameInfo.result = result;
 
-          this.BPOrderInit(this.perspective, tabsModel + 1);
+          this.initBPOrder(this.perspective, tabsModel + 1);
 
           this.getHeroList(result[0].game.time);
 
@@ -716,13 +739,13 @@ export default {
     onGamePerspectiveClick: function (mode) {
       this.perspective == 1 ? (this.perspective = 2) : (this.perspective = 1);
 
-      this.BPOrderInit(this.perspective, this.tabsModel + 1);
+      this.initBPOrder(this.perspective, this.tabsModel + 1);
 
       if (mode == 1)
         this.$message.success("初始化 " + this.self.name + " 的视角");
     },
     onGameTabsChange: function (e) {
-      this.BPOrderInit(this.perspective, e + 1);
+      this.initBPOrder(this.perspective, e + 1);
     },
     onGameBanPickClick: function (index) {
       if (this.mode == "view") return;
@@ -739,8 +762,10 @@ export default {
       if (this.mode == "edit") {
         if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, index)) {
           this.onGamePerspectiveClick(0);
+
+          this.initCountdown();
         }
-        //切换阵容时初始化
+        //点击触发:切换阵容时初始化
 
         this.gameInfo.result[tabsModel].stepsNow = index;
       }
@@ -777,10 +802,16 @@ export default {
       if (this.index.perspective[oldIndex] == 1) {
         this.onGamePerspectiveClick(0);
       }
+      //对照 index 视角表格,如果是 1 则初始化时间
+
+      if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)) {
+        this.initCountdown();
+      }
+      //自动触发:切换阵容时初始化
 
       this.gameInfo.result[tabsModel].stepsNow = newIndex;
 
-      this.BPOrderInit(this.perspective, tabsModel + 1);
+      this.initBPOrder(this.perspective, tabsModel + 1);
 
       if (newIndex >= 18) {
         this.$message.warning("BP结束,注意保存");
@@ -831,10 +862,15 @@ export default {
             : (this.perspective = 1);
           this.onGamePerspectiveClick(0);
           //tabsModel % 2 == 0
+
+          this.initCountdown();
         } else {
           this.mode = "view";
 
           this.onUpdateGameBPClick(tabsModel);
+
+          this.countdown = 60;
+          clearInterval(this.countdownHandle);
         }
       }
     },
