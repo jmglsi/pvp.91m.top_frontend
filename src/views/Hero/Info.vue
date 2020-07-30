@@ -189,7 +189,7 @@
       </van-action-sheet>
     </div>
 
-    <AppBottomTabbar v-if="appDevice" />
+    <AppBottomTabbar />
   </div>
 </template>
 
