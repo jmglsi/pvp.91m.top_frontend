@@ -12,11 +12,13 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" width="25" />
+      <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-column title="出场" field="pickRate" sortable />
-      <vxe-table-column title="胜率" field="winRate" sortable />
-      <vxe-table-column title="MVP率" field="mvpRate" sortable />
+      <vxe-table-column title="比率 (%)">
+        <vxe-table-column title="出场" field="pickRate" sortable />
+        <vxe-table-column title="胜率" field="winRate" sortable />
+        <vxe-table-column title="MVP率" field="mvpRate" sortable />
+      </vxe-table-column>
     </vxe-grid>
   </div>
 </template>
