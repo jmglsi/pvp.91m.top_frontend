@@ -134,7 +134,7 @@ export default {
   },
   methods: {
     initTable: function (e) {
-      this.appWidth >= e ? (this.listWidth = 0) : (this.listWidth = 75);
+      this.appWidth >= e ? (this.listWidth = 0) : (this.listWidth = 100);
     },
     getHeroCombination: function (heroName) {
       this.search.value = heroName;

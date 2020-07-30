@@ -155,7 +155,6 @@
       <van-action-sheet
         v-model="show.heroSkill"
         :title="hero.info.name + ' 的技能数据 (周榜)'"
-        :lock-scroll="false"
         safe-area-inset-bottom
       >
         <HeroList :heroSkill="hero.info.skill" />
@@ -229,6 +228,8 @@ export default {
         title: "加载中",
         info: {
           id: 0,
+          name: "加载中",
+          clockwise: false,
           skill: [],
         },
       },

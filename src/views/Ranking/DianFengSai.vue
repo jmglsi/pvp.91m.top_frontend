@@ -128,7 +128,6 @@
       <van-action-sheet
         v-model="show.heroSkill"
         :title="tableData.row.name + ' 的技能数据 (周榜)'"
-        :lock-scroll="false"
         safe-area-inset-bottom
       >
         <HeroList :heroSkill="tableData.row.skill" />
@@ -181,9 +180,12 @@ export default {
         color: {},
         columns: [],
         result: [],
+        clockwise: false,
         row: {
           id: 0,
           name: "加载中",
+          skill: [],
+          clockwise: false,
           updatePid: 0,
         },
       },
@@ -198,7 +200,7 @@ export default {
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
       ],
-      listWidth: 75,
+      listWidth: 100,
       clientHeight: 0,
       isLoading: true,
     };

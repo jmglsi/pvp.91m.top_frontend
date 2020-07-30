@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-list">
+  <div class="hero-skill">
     <vxe-grid
       ref="heroSkill"
       :data="tableData.result"
@@ -30,7 +30,6 @@
     </vxe-grid>
   </div>
 </template>
-
 
 <script>
 export default {
