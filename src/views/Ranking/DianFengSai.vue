@@ -57,7 +57,7 @@
               />
               <span
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-043052eea2d064cab23119e56f4f640e"
-              >{{ row.skill[0].pickRate }}</span>
+              >{{ (row.skill[0].pickRate).toFixed(2) }}</span>
               <img
                 v-if="row.skill[1].id"
                 v-lazy="row.skill[1].img"
@@ -68,7 +68,7 @@
               <span
                 v-if="row.skill[1].id"
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-dabb6e25dffefe5b4821b7062afbdaef"
-              >{{ row.skill[1].pickRate }}</span>
+              >{{ (row.skill[1].pickRate).toFixed(2) }}</span>
             </div>
           </template>
         </vxe-table-column>
@@ -81,32 +81,27 @@
           <vxe-table-column title="胜率" field="winRate" :width="listWidth" sortable />
         </vxe-table-column>
 
+        <vxe-table-column title="牌子 (%)">
+          <vxe-table-column title="金牌" field="evaluateGoldRate" :width="listWidth" sortable />
+          <vxe-table-column title="银牌" field="evaluateSilverRate" :width="listWidth" sortable />
+        </vxe-table-column>
+
         <vxe-table-column title="MVP (%)">
           <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
           <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
           <vxe-table-column title="败方" field="loseMvpRate" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column
-          title="承伤 (分)"
-          field="totalBeHurtedCntPerMin"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="承伤" field="totalBeHurtedCntPerMin" :width="listWidth" sortable />
 
         <vxe-table-column title="伤害">
-          <vxe-table-column
-            title="对人 (分)"
-            field="totalHurtHeroCntPerMin"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column title="全部 (场)" field="totalOutputPerMin" :width="listWidth" sortable />
+          <vxe-table-column title="对人" field="totalHurtHeroCntPerMin" :width="listWidth" sortable />
+          <vxe-table-column title="全部" field="totalOutputPerMin" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column title="金币 (分)" field="equMoneyMin" :width="listWidth" sortable />
+        <vxe-table-column title="金币" field="equMoneyMin" :width="listWidth" sortable />
 
-        <vxe-table-column sortable title="经济 (场)" field="equMoneyOverflow" :width="listWidth" />
+        <vxe-table-column sortable title="经济" field="equMoneyOverflow" :width="listWidth" />
 
         <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
         <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
@@ -116,14 +111,24 @@
       </vxe-grid>
     </div>
 
+    <div class="ranking-ffab85bb31b6936dee15c689b1581675">
+      <van-action-sheet
+        v-model="show.heroSkill"
+        :title="tableData.row.name + ' 的技能数据 (周榜)'"
+        safe-area-inset-bottom
+      >
+        <HeroList :heroSkill="tableData.row.skill" />
+      </van-action-sheet>
+    </div>
+
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
-        v-model="show.actionSheet"
+        v-model="show.heroMenu"
         :title="tableData.row.name + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
-        @select="onActionSheetSelect"
+        @select="onHeroMenuSelect"
       />
     </div>
   </div>
@@ -132,6 +137,9 @@
 <script>
 export default {
   name: "RankingDianFengSai",
+  components: {
+    HeroList: (resolve) => require(["@/components/Hero/List.vue"], resolve),
+  },
   data() {
     return {
       areaInfo: {
@@ -165,7 +173,8 @@ export default {
         },
       },
       show: {
-        actionSheet: false,
+        heroSkill: false,
+        heroMenu: false,
       },
       actions: [
         { name: "趋势 & 职业对比", value: 0 },
@@ -180,7 +189,7 @@ export default {
     };
   },
   created() {
-    this.appHeightInit(1440);
+    this.appTableInit(1440);
   },
   mounted() {
     this.getHeroRanking(0, 0);
@@ -204,16 +213,21 @@ export default {
           this.isLoading = false;
         });
     },
-    getHeroInfo: function (row) {
-      this.tableData.row = row;
-
-      this.show.actionSheet = true;
-    },
     onDropdownMenuChange: function () {
       this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
     },
-    onCellClick: function ({ row }) {
-      this.getHeroInfo(row);
+    onCellClick: function ({ row, column }) {
+      this.tableData.row = row;
+
+      if (column.property == "score") {
+        this.show.heroSkill = true;
+        this.show.heroMenu = false;
+        return;
+      } else {
+        this.show.heroSkill = false;
+        this.show.heroMenu = true;
+        return;
+      }
     },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.color;
@@ -239,7 +253,7 @@ export default {
         }
       }
     },
-    onActionSheetSelect: function (item) {
+    onHeroMenuSelect: function (item) {
       let name = this.$options.name,
         heroInfo = this.tableData.row;
 

@@ -13,8 +13,8 @@
 export default {
   name: "GameHome",
   components: {
-    AppBottomTabbar: resolve =>
-      require(["@/components/App/BottomTabbar.vue"], resolve)
-  }
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
+  },
 };
 </script>

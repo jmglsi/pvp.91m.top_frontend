@@ -2,10 +2,7 @@
   <div id="app">
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <keep-alive>
-        <router-view
-          v-if="$route.meta.keepAlive"
-          class="app-1bda80f2be4d3658e0baa43fbe7ae8c1"
-        />
+        <router-view v-if="$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
     </div>

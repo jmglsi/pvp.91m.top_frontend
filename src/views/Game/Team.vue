@@ -111,11 +111,11 @@ export default {
     return {
       loginInfo: {
         openId: null,
-        accessToken: null
+        accessToken: null,
       },
       show: {
         team: false,
-        delect: false
+        delect: false,
       },
       teamInfo: {
         type: 0,
@@ -124,9 +124,9 @@ export default {
         row: {
           id: null,
           name: null,
-          logo: null
-        }
-      }
+          logo: null,
+        },
+      },
     };
   },
   mounted() {
@@ -138,7 +138,7 @@ export default {
     this.getGameDashboard();
   },
   methods: {
-    getGameDashboard: function() {
+    getGameDashboard: function () {
       let loginInfo = this.loginInfo;
 
       this.axios
@@ -146,10 +146,10 @@ export default {
           this.apiList.pvp.getGameDashboard + "&aid=0",
           this.$qs.stringify({
             openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken
+            accessToken: loginInfo.accessToken,
           })
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
@@ -160,7 +160,7 @@ export default {
           }
         });
     },
-    onAfterRead: function(file) {
+    onAfterRead: function (file) {
       let loginInfo = this.loginInfo,
         data = file.content;
 
@@ -172,10 +172,10 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
-            filePath: data
+            filePath: data,
           })
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
@@ -188,7 +188,7 @@ export default {
           }
         });
     },
-    onBeforeRead: function(file) {
+    onBeforeRead: function (file) {
       if (
         file.type != "image/png" &&
         file.type != "image/gif" &&
@@ -201,13 +201,13 @@ export default {
         return true;
       }
     },
-    onOversize: function() {
+    onOversize: function () {
       this.$message.error("错误:1006,图片超过 3MB");
     },
-    onCreateTeamClick: function() {
+    onCreateTeamClick: function () {
       this.teamInfo.row = {
         name: null,
-        logo: null
+        logo: null,
       };
 
       this.teamInfo.type = 0;
@@ -215,7 +215,7 @@ export default {
       this.show.team = true;
       this.show.delect = false;
     },
-    onUpdateTeamClick: function(data, index) {
+    onUpdateTeamClick: function (data, index) {
       this.teamInfo.row = data;
 
       this.teamInfo.type = 1;
@@ -224,7 +224,7 @@ export default {
       this.show.team = true;
       this.show.delect = true;
     },
-    onSaveTeamInfoClick: function() {
+    onSaveTeamInfoClick: function () {
       let loginInfo = this.loginInfo,
         teamInfo = this.teamInfo;
 
@@ -233,13 +233,13 @@ export default {
         accessToken: loginInfo.accessToken,
         teamId: teamInfo.row.id,
         teamName: teamInfo.row.name,
-        teamLogo: teamInfo.row.logo
+        teamLogo: teamInfo.row.logo,
       };
 
       if (teamInfo.type == 0) {
         this.axios
           .post(this.apiList.pvp.createTeam, this.$qs.stringify(postData))
-          .then(res => {
+          .then((res) => {
             let status = res.data.status;
 
             if (status.code == 200) {
@@ -253,7 +253,7 @@ export default {
       } else {
         this.axios
           .post(this.apiList.pvp.updateTeamInfo, this.$qs.stringify(postData))
-          .then(res => {
+          .then((res) => {
             let status = res.data.status;
 
             if (status.code == 200) {
@@ -266,13 +266,13 @@ export default {
 
       this.show.team = false;
     },
-    onDelectTeamClick: function() {
+    onDelectTeamClick: function () {
       let loginInfo = this.loginInfo,
         teamInfo = this.teamInfo;
 
       this.$dialog
         .confirm({
-          title: "是否删除队伍？"
+          title: "是否删除队伍？",
         })
         .then(() => {
           // on confirm
@@ -282,10 +282,10 @@ export default {
               this.$qs.stringify({
                 openId: loginInfo.openId,
                 accessToken: loginInfo.accessToken,
-                teamId: teamInfo.row.id
+                teamId: teamInfo.row.id,
               })
             )
-            .then(res => {
+            .then((res) => {
               let status = res.data.status;
 
               if (status.code == 200) {
@@ -302,7 +302,7 @@ export default {
           // on cancel
         });
     },
-    onCreateEngageClick: function(data) {
+    onCreateEngageClick: function (data) {
       let teamId_1 = this.$cookie.get("teamId");
       let teamId_2 = data;
 
@@ -320,7 +320,7 @@ export default {
         this.onSaveEngageClick(teamId_1, teamId_2);
       }
     },
-    onSaveEngageClick: function(teamId_1, teamId_2) {
+    onSaveEngageClick: function (teamId_1, teamId_2) {
       let loginInfo = this.loginInfo;
 
       this.axios
@@ -330,10 +330,10 @@ export default {
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
             teamId_1: teamId_1,
-            teamId_2: teamId_2
+            teamId_2: teamId_2,
           })
         )
-        .then(res => {
+        .then((res) => {
           let status = res.data.status;
 
           if (status.code == 200) {
@@ -347,7 +347,7 @@ export default {
         });
 
       this.show.team = false;
-    }
-  }
+    },
+  },
 };
 </script>

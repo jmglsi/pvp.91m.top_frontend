@@ -28,27 +28,27 @@ import "v-charts/lib/style.css";
 export default {
   name: "HeroLine",
   components: {
-    VeLine
+    VeLine,
   },
   props: {
     heroId: {
       type: Number,
-      default: 0
+      default: 0,
     },
     detailed: {
       type: Boolean,
-      default: true
+      default: true,
     },
     lineType: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
       const { heroId, detailed, lineType } = this;
       return { heroId, detailed, lineType };
-    }
+    },
   },
   watch: {
     listenChange: {
@@ -70,8 +70,8 @@ export default {
         }
 
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-      }
-    }
+      },
+    },
   },
   data() {
     return {
@@ -81,18 +81,19 @@ export default {
         extend: {},
         settings: {},
         loading: true,
-        result: []
-      }
+        result: [],
+      },
     };
   },
   methods: {
-    afterConfig: function(e) {
-      e.series.map(x => {
+    afterConfig: function (e) {
+      e.series.map((x) => {
         x.symbol = "none";
       });
+      //去除折线图上的小圆点
       return e;
     },
-    getHeroChartsLogByDfs: function(heroId, detailed) {
+    getHeroChartsLogByDfs: function (heroId, detailed) {
       this.tableData.loading = true;
 
       this.axios
@@ -103,7 +104,7 @@ export default {
             "&detailed=" +
             detailed
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
@@ -113,12 +114,12 @@ export default {
           this.tableData.loading = false;
         });
     },
-    getHeroChartsLogByBbs: function(heroId) {
+    getHeroChartsLogByBbs: function (heroId) {
       this.tableData.loading = true;
 
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogByBbs + "&heroId=" + heroId)
-        .then(res => {
+        .then((res) => {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
@@ -129,7 +130,7 @@ export default {
 
           this.tableData.loading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,0 +1,65 @@
+<template>
+  <div class="hero-list">
+    <vxe-grid ref="heroSkill" :data="tableData.result" :sort-config="{trigger: 'cell'}" auto-resize>
+      <vxe-table-column title="技能" field="score" fixed="left" sortable>
+        <template v-slot="{ row }">
+          <img
+            v-lazy="row.img"
+            width="35"
+            height="35"
+            class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+          />
+        </template>
+      </vxe-table-column>
+
+      <vxe-table-column title="#" type="seq" width="25" />
+
+      <vxe-table-column title="出场" field="pickRate" sortable />
+      <vxe-table-column title="胜率" field="winRate" sortable />
+      <vxe-table-column title="MVP率" field="mvpRate" sortable />
+    </vxe-grid>
+  </div>
+</template>
+
+
+<script>
+export default {
+  name: "HeroList",
+  props: {
+    heroSkill: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  computed: {
+    listenChange() {
+      const { heroSkill } = this;
+      return { heroSkill };
+    },
+  },
+  watch: {
+    listenChange: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue.heroSkill == []) return;
+
+        this.getHeroSkill(newValue.heroSkill);
+
+        this.loading = false;
+      },
+    },
+  },
+  data() {
+    return {
+      tableData: {
+        result: [],
+      },
+    };
+  },
+  methods: {
+    getHeroSkill: function (e) {
+      this.tableData.result = e;
+    },
+  },
+};
+</script>

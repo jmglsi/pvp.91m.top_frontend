@@ -32,14 +32,14 @@
 export default {
   name: "Home",
   components: {
-    TuiJian: resolve => require(["@/views/Home/TuiJian.vue"], resolve),
-    Game: resolve => require(["@/views/Home/Game.vue"], resolve),
-    AppBottomTabbar: resolve =>
-      require(["@/components/App/BottomTabbar.vue"], resolve)
+    TuiJian: (resolve) => require(["@/views/Home/TuiJian.vue"], resolve),
+    Game: (resolve) => require(["@/views/Home/Game.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
-      tabsModel: 0
+      tabsModel: 0,
     };
   },
   mounted() {
@@ -54,6 +54,6 @@ export default {
       type = 0;
     }
     this.tabsModel = type;
-  }
+  },
 };
 </script>

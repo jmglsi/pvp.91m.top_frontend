@@ -118,7 +118,7 @@
               />
               <span
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
-              >{{ data.pickRate }}</span>
+              >{{ (data.pickRate).toFixed(2) }}</span>
             </span>
           </div>
         </van-grid-item>
@@ -139,7 +139,11 @@
           :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'"
         />
         <van-tab class="info-ab71021d21963773bfb8be80af65869f" title="同职业对比" />
-        <van-tab class="info-ab71021d21963773bfb8be80af65869f" title="自定义对比" />
+        <van-tab
+          class="info-ab71021d21963773bfb8be80af65869f"
+          title="自定义对比"
+          :disabled="tabsModel == 0 ? true : false"
+        />
         <div class="hero-e06398232dc80e41209489705546802c">
           <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" :lineType="hero.line" />
         </div>

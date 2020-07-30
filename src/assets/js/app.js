@@ -46,9 +46,12 @@ Vue.prototype.appOpenUrl = function(title, message, url) {
         });
 }
 
-Vue.prototype.appHeightInit = function(uWidth) {
-    const cHeight = document.documentElement.clientHeight
-    const cWidth = document.documentElement.clientWidth
+Vue.prototype.appHeight = document.documentElement.clientHeight
+Vue.prototype.appWidth = document.documentElement.clientWidth
+
+Vue.prototype.appTableInit = function(uWidth) {
+    const cHeight = this.appHeight
+    const cWidth = this.appWidth
 
     cWidth > cHeight ?
         (this.clientHeight = cHeight - 133) :

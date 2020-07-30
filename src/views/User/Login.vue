@@ -96,17 +96,17 @@ export default {
           newPassword: null,
           qq: null,
           openId: null,
-          accessToken: null
-        }
-      }
+          accessToken: null,
+        },
+      },
     };
   },
   methods: {
-    onRegisterClick: function() {
+    onRegisterClick: function () {
       this.loginInfo.type = 0;
       this.loginInfo.text = "注册";
     },
-    onNavBarLeftClick: function() {
+    onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
         this.$router.go(-1);
       } else {
@@ -114,7 +114,7 @@ export default {
         this.loginInfo.text = "登录";
       }
     },
-    onLoginClick: function() {
+    onLoginClick: function () {
       let type = this.loginInfo.type,
         data = this.loginInfo.data;
 
@@ -128,10 +128,10 @@ export default {
             newPassword: data.newPassword ? this.$md5(data.newPassword) : null,
             qq: data.qq,
             openId: data.openId,
-            accessToken: data.accessToken
+            accessToken: data.accessToken,
           })
         )
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
@@ -146,7 +146,7 @@ export default {
 
             this.$cookie.set("openId", data.openId, { expires: "1Y" });
             this.$cookie.set("accessToken", data.accessToken, {
-              expires: "1Y"
+              expires: "1Y",
             });
 
             setTimeout(() => {
@@ -157,10 +157,10 @@ export default {
           }
         });
     },
-    onUpdateClick: function() {
+    onUpdateClick: function () {
       this.loginInfo.type = 2;
       this.loginInfo.text = "修改密码";
-    }
-  }
+    },
+  },
 };
 </script>

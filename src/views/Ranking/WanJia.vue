@@ -78,50 +78,50 @@ export default {
         { text: "手Q 安卓", value: 1 },
         { text: "手Q 苹果", value: 2 },
         { text: "微信安卓", value: 3 },
-        { text: "微信苹果", value: 4 }
+        { text: "微信苹果", value: 4 },
       ],
       tableData: {
         result: [],
         row: {
           area: 0,
-          gamePlayerName: "加载中"
-        }
+          gamePlayerName: "加载中",
+        },
       },
       show: {
-        actionSheet: false
+        actionSheet: false,
       },
       actions: [{ name: "查看QQ", value: 0 }],
       clientHeight: 0,
-      isLoading: true
+      isLoading: true,
     };
   },
   created() {
-    this.appHeightInit(350);
+    this.appTableInit(350);
   },
   mounted() {
     this.getPlayerRanking(0, 0);
   },
   methods: {
-    getPlayerRanking: function(aid, bid) {
+    getPlayerRanking: function (aid, bid) {
       this.axios
         .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
-        .then(res => {
+        .then((res) => {
           this.tableData = res.data.data;
           this.tableData.row = {
             area: 0,
-            gamePlayerName: "加载中"
+            gamePlayerName: "加载中",
           };
           this.isLoading = false;
         });
     },
-    getPlayerInfo: function(row) {
+    getPlayerInfo: function (row) {
       if (row.userId == 0) return;
 
       this.tableData.row = row;
 
       this.axios
         .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
-        .then(res => {
+        .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
@@ -146,23 +146,23 @@ export default {
 
       this.show.actionSheet = true;
     },
-    onPlayerOptionsChange: function(e) {
+    onPlayerOptionsChange: function (e) {
       this.getPlayerRanking(e, this.playerShield);
     },
-    onDropdownConfirmClick: function() {
+    onDropdownConfirmClick: function () {
       this.$refs.item.toggle();
 
       this.playerShield = Number(this.switchModel);
       this.getPlayerRanking(this.areaModel, this.playerShield);
     },
-    onCellClick: function({ row }) {
+    onCellClick: function ({ row }) {
       this.getPlayerInfo(row);
     },
-    onActionSheetSelect: function(item) {
+    onActionSheetSelect: function (item) {
       if (item.value == 0) {
         this.appCopyData(this.copyData);
       }
-    }
-  }
+    },
+  },
 };
 </script>

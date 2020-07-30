@@ -43,14 +43,14 @@
 export default {
   name: "RankingHome",
   components: {
-    DianFengSai: resolve =>
+    DianFengSai: (resolve) =>
       require(["@/views/Ranking/DianFengSai.vue"], resolve),
-    GuanXi: resolve => require(["@/views/Ranking/GuanXi.vue"], resolve),
-    WanJia: resolve => require(["@/views/Ranking/WanJia.vue"], resolve)
+    GuanXi: (resolve) => require(["@/views/Ranking/GuanXi.vue"], resolve),
+    WanJia: (resolve) => require(["@/views/Ranking/WanJia.vue"], resolve),
   },
   data() {
     return {
-      tabsModel: 0
+      tabsModel: 0,
     };
   },
   mounted() {
@@ -60,6 +60,6 @@ export default {
       type = 0;
     }
     this.tabsModel = type;
-  }
+  },
 };
 </script>

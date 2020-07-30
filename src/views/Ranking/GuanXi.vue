@@ -115,7 +115,7 @@ export default {
     };
   },
   created() {
-    this.appHeightInit(1440);
+    this.appTableInit(1440);
   },
   mounted() {
     let heroName = this.$route.query.heroName;

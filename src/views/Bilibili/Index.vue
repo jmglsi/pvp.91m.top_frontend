@@ -104,7 +104,7 @@ export default {
     };
   },
   created() {
-    this.appHeightInit(1440);
+    this.appTableInit(1440);
   },
   mounted() {
     let uid = this.$route.query.uid;

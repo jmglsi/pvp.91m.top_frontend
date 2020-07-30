@@ -113,16 +113,16 @@
 export default {
   name: "HeroReplay",
   components: {
-    AppBottomTabbar: resolve =>
-      require(["@/components/App/BottomTabbar.vue"], resolve)
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
       collapseModel: ["1"],
       hero: {
         info: {
-          id: 0
-        }
+          id: 0,
+        },
       },
       copyData: "",
       tableData: {
@@ -130,19 +130,19 @@ export default {
         total: 200,
         pageSize: 25,
         row: {
-          gamePlayerName: "加载中"
-        }
+          gamePlayerName: "加载中",
+        },
       },
       paginationModel: 1,
       show: {
-        actionSheet: false
+        actionSheet: false,
       },
       actions: [
         { name: "复制链接", value: 0 },
         { name: "详情", subname: "需要安装王者营地", value: 1 },
-        { name: "回顾", subname: "需要安装王者营地", value: 2 }
+        { name: "回顾", subname: "需要安装王者营地", value: 2 },
       ],
-      teammate: false
+      teammate: false,
     };
   },
   mounted() {
@@ -154,10 +154,10 @@ export default {
     this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
   methods: {
-    getHeroInfo: function(heroId) {
+    getHeroInfo: function (heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
-        .then(res => {
+        .then((res) => {
           this.hero.info = res.data.data.heroInfo;
 
           document.title = this.hero.info.name + " | 苏苏的荣耀助手";
@@ -165,7 +165,7 @@ export default {
           if (heroId.indexOf(",") > -1) this.teammate = true;
         });
     },
-    onGameActionSheetClick: function(row) {
+    onGameActionSheetClick: function (row) {
       this.tableData.row = row;
 
       let url = row.url,
@@ -173,14 +173,14 @@ export default {
 
       this.axios
         .get("//s.91m.top/?url=" + url.substr(urlIndex + 1, url.length))
-        .then(res => {
+        .then((res) => {
           this.copyData =
             this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
 
       this.show.actionSheet = true;
     },
-    getHeroReplayByHeroId: function(heroId, page) {
+    getHeroReplayByHeroId: function (heroId, page) {
       this.axios
         .get(
           this.apiList.pvp.getHeroReplayByHeroId +
@@ -189,17 +189,17 @@ export default {
             "&page=" +
             page
         )
-        .then(res => {
+        .then((res) => {
           this.tableData = res.data.data;
           this.tableData.row = {
-            gamePlayerName: "加载中"
+            gamePlayerName: "加载中",
           };
         });
     },
-    onPaginationChange: function(e) {
+    onPaginationChange: function (e) {
       this.getHeroReplayByHeroId(this.hero.info.id, e);
     },
-    onReplaySelect: function(item) {
+    onReplaySelect: function (item) {
       let replayInfo = this.tableData.row;
 
       if (item.value == 0) {
@@ -221,7 +221,7 @@ export default {
           replayInfo.url
         );
       }
-    }
-  }
+    },
+  },
 };
 </script>
