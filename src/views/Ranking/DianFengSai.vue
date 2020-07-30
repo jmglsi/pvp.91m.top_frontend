@@ -15,15 +15,21 @@
       </van-dropdown-menu>
     </div>
 
+    <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
+      <vxe-toolbar ref="xToolbar" allTitle="1" custom />
+    </div>
+
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-grid
         ref="dianfengsai"
+        id="dianfengsai"
+        auto-resize
         :loading="isLoading"
         :data="tableData.result"
         :height="clientHeight"
         :cell-class-name="cellClassName"
-        :sort-config="{trigger: 'cell'}"
-        auto-resize
+        :sort-config="{ trigger: 'cell' }"
+        :custom-config="{ storage: true }"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
@@ -82,6 +88,7 @@
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
+          <vxe-table-column title="全部" field="allBrandRate" :width="listWidth" sortable />
           <vxe-table-column title="金牌" field="evaluateGoldRate" :width="listWidth" sortable />
           <vxe-table-column title="银牌" field="evaluateSilverRate" :width="listWidth" sortable />
         </vxe-table-column>
@@ -95,19 +102,25 @@
         <vxe-table-column title="承伤" field="totalBeHurtedCntPerMin" :width="listWidth" sortable />
 
         <vxe-table-column title="伤害">
-          <vxe-table-column title="对人" field="totalHurtHeroCntPerMin" :width="listWidth" sortable />
           <vxe-table-column title="全部" field="totalOutputPerMin" :width="listWidth" sortable />
+          <vxe-table-column title="对人" field="totalHurtHeroCntPerMin" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column title="金币" field="equMoneyMin" :width="listWidth" sortable />
+        <vxe-table-column title="经济">
+          <vxe-table-column title="全部" field="equMoneyOverflow" :width="listWidth" sortable />
+          <vxe-table-column title="分均" field="equMoneyMin" :width="listWidth" sortable />
+        </vxe-table-column>
 
-        <vxe-table-column sortable title="经济" field="equMoneyOverflow" :width="listWidth" />
+        <vxe-table-column title="KDA">
+          <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
+          <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
+          <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
+        </vxe-table-column>
 
-        <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
-        <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
-        <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
-        <vxe-table-column title="参团" field="joinGamePercent" :width="listWidth" sortable />
-        <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+        <vxe-table-column title="其它">
+          <vxe-table-column title="参团" field="joinGamePercent" :width="listWidth" sortable />
+          <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+        </vxe-table-column>
       </vxe-grid>
     </div>
 
@@ -115,6 +128,7 @@
       <van-action-sheet
         v-model="show.heroSkill"
         :title="tableData.row.name + ' 的技能数据 (周榜)'"
+        :lock-scroll="false"
         safe-area-inset-bottom
       >
         <HeroList :heroSkill="tableData.row.skill" />
@@ -165,6 +179,7 @@ export default {
       },
       tableData: {
         color: {},
+        columns: [],
         result: [],
         row: {
           id: 0,
@@ -183,13 +198,19 @@ export default {
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
       ],
-      listWidth: 0,
+      listWidth: 75,
       clientHeight: 0,
       isLoading: true,
     };
   },
   created() {
-    this.appTableInit(1440);
+    this.$nextTick(() => {
+      // 手动将表格和工具栏进行关联
+      this.$refs.dianfengsai.connect(this.$refs.xToolbar);
+    });
+
+    this.appInitTable();
+    this.clientHeight = this.clientHeight + 17;
   },
   mounted() {
     this.getHeroRanking(0, 0);
