@@ -77,10 +77,7 @@
             >{{ hero.info.equMoneyOverflow || 0 }}</van-tag>
           </span>
         </van-grid-item>
-        <van-grid-item
-          class="hero-c6e864acb6955eed0361921288d34149"
-          @click="show.actionSheet = true"
-        >
+        <van-grid-item class="hero-c6e864acb6955eed0361921288d34149" @click="show.heroMenu = true">
           <van-circle
             v-model="circle.model"
             :rate="hero.info.dominanceRate"
@@ -99,14 +96,11 @@
             class="info-48c8178c9726b2afcaf8c5ede5437746"
           />
         </van-grid-item>
-        <van-grid-item
-          class="hero-c6e864acb6955eed0361921288d34149"
-          @click="$message.info('提示:1005,技能下面的数字是占比 ;D')"
-        >
+        <van-grid-item class="hero-c6e864acb6955eed0361921288d34149" @click="show.heroSkill = true">
           <div class="info-f3412345b511c61986bba9a39793157f">
             <span
               class="info-cb4b556fe00d9a0da9d94f0bbf40e78c"
-              v-for="(data, index) in hero.info.skill"
+              v-for="(data, index) in hero.info.skill.slice(0, 2)"
               :key="'hero-d7768ef7449dfbbc6020f1dd0ae11593-' + index"
             >
               <img
@@ -157,9 +151,19 @@
       <HeroUpdate v-if="isLoaded" v-show="show.parameter" :heroId="hero.info.id" />
     </div>
 
+    <div class="hero-2882d594d0ac3524bffd5148791e96da">
+      <van-action-sheet
+        v-model="show.heroSkill"
+        :title="hero.info.name + ' 的技能数据 (周榜)'"
+        safe-area-inset-bottom
+      >
+        <HeroList :heroSkill="hero.info.skill" />
+      </van-action-sheet>
+    </div>
+
     <div class="hero-16e1b9e46fe4483c6bc17aea9d20736a">
       <van-action-sheet
-        v-model="show.actionSheet"
+        v-model="show.heroMenu"
         :title="hero.info.name + ' 的 ' + circle.info.text"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -197,6 +201,7 @@ export default {
     AppTime: (resolve) => require(["@/assets/Icons/AppTime.vue"], resolve),
     AppCry: (resolve) => require(["@/assets/Icons/AppCry.vue"], resolve),
     AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
+    HeroList: (resolve) => require(["@/components/Hero/List.vue"], resolve),
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
@@ -214,7 +219,8 @@ export default {
       show: {
         heroImg: true,
         parameter: true,
-        actionSheet: false,
+        heroSkill: false,
+        heroMenu: false,
       },
       tabsModel: 0,
       hero: {
@@ -222,6 +228,7 @@ export default {
         title: "加载中",
         info: {
           id: 0,
+          skill: [],
         },
       },
       circle: {
@@ -299,7 +306,7 @@ export default {
           }
         });
 
-      this.show.actionSheet = false;
+      this.show.heroMenu = false;
     },
     onTabsChange: function (e) {
       let heroInfo = this.hero.info,
