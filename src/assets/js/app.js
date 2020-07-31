@@ -49,15 +49,13 @@ Vue.prototype.appOpenUrl = function(title, message, url) {
 Vue.prototype.appHeight = document.documentElement.clientHeight
 Vue.prototype.appWidth = document.documentElement.clientWidth
 
-Vue.prototype.appInitTable = function(aHeight = 0) {
+Vue.prototype.appInitTable = function() {
     const cHeight = this.appHeight
     const cWidth = this.appWidth
 
     cWidth > cHeight ?
         (this.clientHeight = cHeight - 133) :
         (this.clientHeight = cHeight - 173)
-
-    if (aHeight > 0) this.clientHeight = this.clientHeight + 17;
 }
 
 Vue.prototype.appTs = Date.parse(new Date()).toString().slice(0, 10)

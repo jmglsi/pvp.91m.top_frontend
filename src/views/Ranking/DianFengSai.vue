@@ -208,7 +208,8 @@ export default {
     };
   },
   created() {
-    this.appInitTable(17);
+    this.appInitTable();
+    this.clientHeight = this.clientHeight + 17;
     this.initListWidth();
 
     this.$nextTick(() => {
