@@ -155,9 +155,10 @@ export default {
               name: "加载中",
             },
           };
-          this.isLoading = false;
 
           if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
+          
+          this.isLoading = false;
         });
     },
     getHeroInfo: function (row) {

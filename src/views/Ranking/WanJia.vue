@@ -111,6 +111,7 @@ export default {
             area: 0,
             gamePlayerName: "加载中",
           };
+
           this.isLoading = false;
         });
     },

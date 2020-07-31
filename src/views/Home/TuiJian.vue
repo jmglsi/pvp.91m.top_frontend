@@ -89,6 +89,7 @@ export default {
     onTuiJianRefresh: function () {
       setTimeout(() => {
         this.isLoading = false;
+
         this.appPush("/miniapp", this.$options.name);
       }, 2000);
     },
