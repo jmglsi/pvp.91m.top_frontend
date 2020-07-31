@@ -31,6 +31,7 @@
         :sort-config="{ trigger: 'cell' }"
         :custom-config="{ storage: true }"
         @cell-click="onCellClick"
+        @custom="toolbarCustomEvent"
       >
         <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
@@ -178,6 +179,7 @@ export default {
       },
       tableData: {
         color: {},
+        column: [],
         columns: [],
         result: [],
         clockwise: false,
@@ -200,24 +202,62 @@ export default {
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
       ],
-      listWidth: 100,
+      listWidth: 0,
       clientHeight: 0,
       isLoading: true,
     };
   },
   created() {
+    this.appInitTable(17);
+    this.initListWidth();
+
     this.$nextTick(() => {
-      // 手动将表格和工具栏进行关联
       this.$refs.dianfengsai.connect(this.$refs.xToolbar);
     });
-
-    this.appInitTable();
-    this.clientHeight = this.clientHeight + 17;
+    // 手动将表格和工具栏进行关联
   },
   mounted() {
     this.getHeroRanking(0, 0);
   },
   methods: {
+    initListWidth: function () {
+      if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) {
+        this.listWidth = 100;
+        return;
+      }
+
+      let tableColumn = JSON.parse(
+        localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE
+      );
+
+      if (tableColumn["dianfengsai"] == undefined) {
+        this.listWidth = 100;
+      } else {
+        let visibleColumn = tableColumn.dianfengsai.split(",");
+
+        visibleColumn.length > 6
+          ? (this.listWidth = 0)
+          : (this.listWidth = 100);
+      }
+    },
+    toolbarCustomEvent: function (params) {
+      this.initListWidth();
+
+      switch (params.type) {
+        case "confirm": {
+          //点击确认
+          break;
+        }
+        case "reset": {
+          //点击重置
+          break;
+        }
+        case "close": {
+          //关闭面板
+          break;
+        }
+      }
+    },
     getHeroRanking: function (aid, bid) {
       if (aid == 3 && bid == 0)
         this.$message.info(
@@ -227,12 +267,16 @@ export default {
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then((res) => {
-          this.tableData = res.data.data;
+          let data = res.data.data;
+          this.tableData = data;
           this.tableData.row = {
             id: 0,
             name: "加载中",
             updatePid: 0,
           };
+
+          this.$refs.dianfengsai.loadData(data.result);
+
           this.isLoading = false;
         });
     },
