@@ -238,6 +238,8 @@ export default {
         visibleColumn.length > 6
           ? (this.listWidth = 0)
           : (this.listWidth = 100);
+
+        if (this.appDevice) this.listWidth = 100;
       }
     },
     toolbarCustomEvent: function (params) {
