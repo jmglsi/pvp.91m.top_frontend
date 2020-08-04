@@ -142,7 +142,7 @@
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
-        @select="onHeroMenuSelect"
+        @select="onActionSheetSelect"
       />
     </div>
   </div>
@@ -197,10 +197,11 @@ export default {
       },
       actions: [
         { name: "趋势 & 职业对比", value: 0 },
-        { name: "对局回顾", subname: "第一视角", value: 1 },
-        { name: "赛事数据", subname: "玩加电竞", value: 2 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 3 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
+        { name: "战力排行", value: 1 },
+        { name: "对局回顾", value: 2 },
+        { name: "赛事数据", value: 3 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 4 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 5 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -208,8 +209,7 @@ export default {
     };
   },
   created() {
-    this.appInitTable();
-    this.clientHeight = this.clientHeight + 17;
+    this.initAppTable();
     this.initListWidth();
 
     this.$nextTick(() => {
@@ -323,7 +323,7 @@ export default {
         }
       }
     },
-    onHeroMenuSelect: function (item) {
+    onActionSheetSelect: function (item) {
       let name = this.$options.name,
         heroInfo = this.tableData.row;
 
@@ -332,10 +332,15 @@ export default {
       }
 
       if (item.value == 1) {
-        this.appPush("/hero/" + heroInfo.id + "/replay", name);
+        //this.appPush("/hero/" + heroInfo.id + "/fightpower", name);
+        this.$message.warning("警告:1002,待更新");
       }
 
       if (item.value == 2) {
+        this.appPush("/hero/" + heroInfo.id + "/replay", name);
+      }
+
+      if (item.value == 3) {
         this.appOpenUrl(
           "是否查看英雄赛事数据?",
           "玩加电竞",
@@ -345,7 +350,7 @@ export default {
         );
       }
 
-      if (item.value == 3) {
+      if (item.value == 4) {
         this.appOpenUrl(
           "是否查看英雄更新记录?",
           "NGA @EndMP",
@@ -353,7 +358,7 @@ export default {
         );
       }
 
-      if (item.value == 4) {
+      if (item.value == 5) {
         this.appOpenUrl(
           "是否查看英雄攻速阈值?",
           "NGA @小熊de大熊",

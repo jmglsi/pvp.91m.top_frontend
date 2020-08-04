@@ -91,7 +91,7 @@
         :close-on-click-action="true"
         safe-area-inset-bottom
         class="replay-4bc6fcee674cad1c5910499a6ad199b8"
-        @select="onReplaySelect"
+        @select="onActionSheetSelect"
       />
     </div>
 
@@ -199,7 +199,7 @@ export default {
     onPaginationChange: function (e) {
       this.getHeroReplayByHeroId(this.hero.info.id, e);
     },
-    onReplaySelect: function (item) {
+    onActionSheetSelect: function (item) {
       let replayInfo = this.tableData.row;
 
       if (item.value == 0) {

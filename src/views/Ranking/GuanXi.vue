@@ -115,8 +115,8 @@ export default {
     };
   },
   created() {
-    this.appInitTable();
-    this.initTable(1440);
+    this.initAppTable();
+    this.initGuanXiTable();
   },
   mounted() {
     let heroName = this.$route.query.heroName;
@@ -133,8 +133,8 @@ export default {
     }, 1000 * 5);
   },
   methods: {
-    initTable: function (e) {
-      this.appWidth >= e ? (this.listWidth = 0) : (this.listWidth = 100);
+    initGuanXiTable: function () {
+      this.appDevice ? (this.listWidth = 100) : (this.listWidth = 0);
     },
     getHeroCombination: function (heroName) {
       this.search.value = heroName;

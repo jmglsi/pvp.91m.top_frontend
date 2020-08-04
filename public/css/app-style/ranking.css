@@ -99,7 +99,6 @@ div.vxe-custom--option-wrapper {
 
 div.ranking-ebf09abeb7c3db44741d328324915725 {
     position: absolute;
-    bottom: 0;
     width: 100%;
-    z-index: 3;
+    margin-top: 5px;
 }

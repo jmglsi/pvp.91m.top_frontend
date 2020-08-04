@@ -137,3 +137,15 @@ div.info-d57ac45256849d9b13e2422d91580fb9 {
     margin-bottom: 25px;
     z-index: 1;
 }
+
+div.player-58907c2a2110e1bea63d5c822a7af9d0 {
+    font-size: 12px;
+    margin-bottom: -10px;
+}
+
+div.hero-18327e5b67b8072ab8cf020c4ef15c9c {
+    position: absolute;
+    width: 100%;
+    font-size: 12px;
+    margin-top: 20px;
+}

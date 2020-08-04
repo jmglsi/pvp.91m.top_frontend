@@ -49,7 +49,7 @@ Vue.prototype.appOpenUrl = function(title, message, url) {
 Vue.prototype.appHeight = document.documentElement.clientHeight
 Vue.prototype.appWidth = document.documentElement.clientWidth
 
-Vue.prototype.appInitTable = function() {
+Vue.prototype.initAppTable = function() {
     const cHeight = this.appHeight
     const cWidth = this.appWidth
 

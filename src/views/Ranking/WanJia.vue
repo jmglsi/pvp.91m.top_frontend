@@ -46,7 +46,7 @@
 
         <vxe-table-column title="昵称" field="gamePlayerName" :width="listWidth" />
 
-        <vxe-table-column title="分数" field="rankScore" :width="listWidth" sortable />
+        <vxe-table-column title="巅峰分" field="rankScore" :width="listWidth" sortable />
       </vxe-grid>
     </div>
 
@@ -54,7 +54,7 @@
       <van-action-sheet
         v-model="show.actionSheet"
         :title="tableData.row.gamePlayerName + ' 如何操作'"
-        :actions="tableData.row.area < 3 ? actions : []"
+        :actions="areaModel < 3 ? actions : []"
         :close-on-click-action="true"
         safe-area-inset-bottom
         @select="onActionSheetSelect"
@@ -71,19 +71,18 @@ export default {
       playerShield: 0,
       areaModel: 0,
       switchModel: false,
-      qq: "",
+      uin: "",
       copyData: "",
       playerOptions: [
         { text: "全部大区", value: 0 },
-        { text: "手Q 安卓", value: 1 },
-        { text: "手Q 苹果", value: 2 },
-        { text: "微信安卓", value: 3 },
-        { text: "微信苹果", value: 4 },
+        { text: "安卓 手Q", value: 1 },
+        { text: "苹果 手Q", value: 2 },
+        { text: "安卓微信", value: 3 },
+        { text: "苹果微信", value: 4 },
       ],
       tableData: {
         result: [],
         row: {
-          area: 0,
           gamePlayerName: "加载中",
         },
       },
@@ -96,7 +95,7 @@ export default {
     };
   },
   created() {
-    this.appInitTable();
+    this.initAppTable();
   },
   mounted() {
     this.getPlayerRanking(0, 0);
@@ -131,11 +130,11 @@ export default {
             return;
           }
 
-          this.qq = data.qq;
+          this.uin = data.uin;
           this.copyData =
             row.gamePlayerName +
             "\rQQ:" +
-            this.qq +
+            this.uin +
             "\r-\r更多玩家信息 ↓\r" +
             location.origin +
             location.pathname +
