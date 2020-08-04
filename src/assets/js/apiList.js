@@ -31,6 +31,7 @@ const pvp = {
     getHeroChartsLogByDfs: appApi + "?type=getHeroChartsLogByDfs",
     getHeroChartsLogByBbs: appApi + "?type=getHeroChartsLogByBbs",
     getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
+    getHeroFightPowerRanking: appApi + "?type=getHeroFightPowerRanking",
     getHeroChartsLogBySimilar: appApi + "?type=getHeroChartsLogBySimilar",
     getHeroChartsLogByCustomize: appApi + "?type=getHeroChartsLogByCustomize"
 }

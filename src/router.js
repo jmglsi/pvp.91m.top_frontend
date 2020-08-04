@@ -84,6 +84,14 @@ export default new Router({
                     meta: {
                         title: '回顾'
                     }
+                },
+                {
+                    path: ':id/fightpower',
+                    name: 'FightPower',
+                    component: (resolve) => require(['./views/Hero/FightPower.vue'], resolve),
+                    meta: {
+                        title: '战力'
+                    }
                 }
             ]
         },
