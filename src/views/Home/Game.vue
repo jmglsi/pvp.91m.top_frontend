@@ -1,5 +1,5 @@
 <template>
-  <div class="home-game">
+  <div class="app-game">
     <div class="game-c8d46d341bea4fd5bff866a65ff8aea9 grid-4eb2044800e2b7b9e5c44d370af22b27">
       <van-cell-group :border="false" title=" " class="game-11919d5ca20d292c64673bc807d852e2">
         <van-cell

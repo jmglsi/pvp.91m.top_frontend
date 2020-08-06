@@ -124,7 +124,7 @@ export default {
     };
   },
   created() {
-    this.appInitTable();
+    this.initAppTable();
     this.clientHeight = this.clientHeight - 15;
     this.initListWidth();
   },

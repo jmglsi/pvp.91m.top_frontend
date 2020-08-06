@@ -1,5 +1,5 @@
 <template>
-  <div class="home-tuijian app-d638615004bb2ff42ed26948aba89c80">
+  <div class="app-tuijian app-d638615004bb2ff42ed26948aba89c80">
     <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
       <van-pull-refresh
         v-model="isLoading"
@@ -12,7 +12,7 @@
       >
         <div class="tuijian-a139b05b7f8e496c00991733ef7cd589 app-1e4b00d1b398e8a6551429b2a2f0e17c">
           <van-swipe
-            :autoplay="3000"
+            :autoplay="5000"
             :height="175"
             class="tuijian-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >

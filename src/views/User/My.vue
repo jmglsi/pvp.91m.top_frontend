@@ -1,15 +1,17 @@
 <template>
-  <div class="my-home">
+  <div class="login-home">
     <div v-show="isLogin == false" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
-        <van-cell template #title>
-          <van-button
-            round
-            size="small"
-            color="linear-gradient(to right, #4bb0ff, #6149f6)"
-            @click="appPush('/login', $options.name)"
-            class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
-          >登录</van-button>
+        <van-cell>
+          <template #title>
+            <van-button
+              round
+              size="small"
+              color="linear-gradient(to right, #4bb0ff, #6149f6)"
+              @click="appPush('/login', $options.name)"
+              class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
+            >登录</van-button>
+          </template>
         </van-cell>
       </van-cell-group>
     </div>
@@ -42,25 +44,25 @@
           icon="/img/app-icons/team.png"
           :to="'/game/team?sign=' + appSign($options.name)"
           class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
-          template
-          #text
         >
-          <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-            <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.team }}</span>
-            <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
-          </div>
+          <template #text>
+            <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
+              <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.team }}</span>
+              <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
+            </div>
+          </template>
         </van-grid-item>
         <van-grid-item
           icon="/img/app-icons/engage.png"
           :to="'/game/engage?sign=' + appSign($options.name)"
           class="my-308ffde0dc5bd5718dcf0396fcc2a596"
-          template
-          #text
         >
-          <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-            <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.label }}</span>
-            <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
-          </div>
+          <template #text>
+            <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
+              <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{ loginInfo.statistics.label }}</span>
+              <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
+            </div>
+          </template>
         </van-grid-item>
       </van-grid>
     </div>
@@ -81,14 +83,16 @@
 
     <div v-show="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
-        <van-cell template #title>
-          <van-button
-            round
-            size="small"
-            color="rgb(245, 245, 245)"
-            @click="onLogotClick"
-            class="my-4236a440a662cc8253d7536e5aa17942"
-          >退出登录</van-button>
+        <van-cell>
+          <template #title>
+            <van-button
+              round
+              size="small"
+              color="rgb(245, 245, 245)"
+              @click="onLogotClick"
+              class="my-4236a440a662cc8253d7536e5aa17942"
+            >退出登录</van-button>
+          </template>
         </van-cell>
       </van-cell-group>
     </div>

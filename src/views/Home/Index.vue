@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="app-home">
     <div class="home-6db4dcff371b9397d894ed932d085444">
       <van-tabs
         v-model="tabsModel"
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "Home",
+  name: "AppHome",
   components: {
     TuiJian: (resolve) => require(["@/views/Home/TuiJian.vue"], resolve),
     Game: (resolve) => require(["@/views/Home/Game.vue"], resolve),
