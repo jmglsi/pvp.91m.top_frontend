@@ -37,6 +37,10 @@ span.skill-dabb6e25dffefe5b4821b7062afbdaef {
     left: 25px;
 }
 
+div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
+    padding: 6px 0;
+}
+
 td.vxe-body--column {
     padding: 12px 0;
 }
@@ -86,9 +90,9 @@ div.ranking div.van-dropdown-menu__bar {
 
 div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
     position: absolute;
-    z-index: 1;
-    left: 85px;
-    margin-top: 20px;
+    z-index: 2;
+    left: 70px;
+    margin-top: 5px;
 }
 
 div.vxe-custom--option-wrapper {
@@ -101,4 +105,8 @@ div.ranking-ebf09abeb7c3db44741d328324915725 {
     position: absolute;
     width: 100%;
     margin-top: 5px;
+}
+
+div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
+    bottom: 1px;
 }

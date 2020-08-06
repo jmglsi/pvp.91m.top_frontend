@@ -80,7 +80,7 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="#" type="seq" width="75" />
+        <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column title="出场越低,波动越大 (%)">
           <vxe-table-column title="禁用" field="banRate" :width="listWidth" sortable />
@@ -223,7 +223,7 @@ export default {
   methods: {
     initListWidth: function () {
       if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) {
-        this.listWidth = 100;
+        this.listWidth = 85;
         return;
       }
 
@@ -231,16 +231,18 @@ export default {
         localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE
       );
 
+      let listWidth = 85;
+
       if (tableColumn["dianfengsai"] == undefined) {
-        this.listWidth = 100;
+        this.listWidth = listWidth;
       } else {
         let visibleColumn = tableColumn.dianfengsai.split(",");
 
-        visibleColumn.length > 6
-          ? (this.listWidth = 0)
-          : (this.listWidth = 100);
+        visibleColumn.length > 6 ? (listWidth = 0) : (listWidth = 85);
 
-        if (this.appDevice) this.listWidth = 100;
+        if (this.appDevice) listWidth = 85;
+
+        this.listWidth = listWidth;
       }
     },
     toolbarCustomEvent: function (params) {

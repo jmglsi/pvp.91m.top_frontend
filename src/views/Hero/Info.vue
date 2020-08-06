@@ -5,10 +5,10 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
         @click-left="appPush('/ranking', $options.name)"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
+        z-index="99999999"
       >
         <van-icon name="arrow-left" slot="left" />
         <template #title>
@@ -123,9 +123,13 @@
       <van-tabs
         v-model="tabsModel"
         :border="false"
+        :ellipsis="false"
+        :sticky="true"
         @change="onTabsChange"
         @click="tabsModel == 0 && hero.line == 0 ? hero.line = 1 : hero.line = 0"
+        line-width="25px"
         color="rgb(222,177,81)"
+        title-active-color="rgb(222,177,81)"
         class="info-d42f4851e770aa0f758b01388874f67b"
       >
         <van-tab

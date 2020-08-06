@@ -7,7 +7,9 @@
         :ellipsis="false"
         :sticky="true"
         @change="appPush('', $options.name, tabsModel)"
+        line-width="25px"
         color="rgb(222,177,81)"
+        title-active-color="rgb(222,177,81)"
       >
         <van-tab title="巅峰赛 (日榜)">
           <DianFengSai />
@@ -26,10 +28,10 @@
     <div class="ranking-ebf09abeb7c3db44741d328324915725">
       <van-divider
         :style="{ padding: '0 16px', color: 'rgb(222, 177, 81)', marginTop: '-3px', borderColor: 'rgb(222, 177, 81)' }"
-        @click="$message.warning('警告:1003,你在摸哪里,是上面啊喂 (lll￢ω￢)')"
+        @click="$message.info('提示:1005,点击头像可快速对比技能,点击头像右侧数据可查看详情')"
       >
         点击&nbsp;
-        <van-tag round type="danger" class="ranking-4d09fbef1438e2b23375b87ba3e02942">上方</van-tag>&nbsp;查看更多信息
+        <van-tag round type="danger" class="ranking-4d09fbef1438e2b23375b87ba3e02942">上方数据</van-tag>&nbsp;查看更多
       </van-divider>
     </div>
   </div>
