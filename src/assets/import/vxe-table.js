@@ -20,7 +20,13 @@ VXETable.setup({
         resizable: true,
         showOverflow: false,
         highlightCurrentRow: true,
-        highlightHoverRow: true
+        highlightHoverRow: true,
+        scrollX: {
+            gt: -1
+        },
+        scrollY: {
+            gt: -1
+        }
     },
     i18n: (key, value) => XEUtils.get(zhCNLocat, key, value)
 });
