@@ -91,6 +91,7 @@ export default {
       },
       actions: [{ name: "查看QQ", value: 0 }],
       clientHeight: 0,
+      listWidth: 0,
       isLoading: true,
     };
   },
