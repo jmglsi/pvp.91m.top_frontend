@@ -164,7 +164,7 @@ export default {
       let loginInfo = this.loginInfo,
         data = file.content;
 
-      this.$message.info("正在上传");
+      this.$message.info("提示:1002,正在上传");
 
       this.axios
         .post(

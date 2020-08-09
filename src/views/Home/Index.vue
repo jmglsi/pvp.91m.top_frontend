@@ -45,11 +45,11 @@ export default {
     };
   },
   mounted() {
-    let pwa = this.$route.query.pwa,
+    let pwa = parseInt(this.$route.query.pwa),
       type = parseInt(this.$route.query.type);
 
     if (pwa) {
-      this.$cookie.set("pwa", 1, { expires: "1Y" });
+      this.$cookie.set("pwa", pwa, { expires: "1Y" });
     }
 
     if (!type) {
