@@ -197,11 +197,10 @@ export default {
       },
       actions: [
         { name: "趋势 & 职业对比", value: 0 },
-        { name: "战力排行", value: 1 },
-        { name: "对局回顾", value: 2 },
-        { name: "赛事数据", value: 3 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 4 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 5 },
+        { name: "对局回顾", value: 1 },
+        { name: "赛事数据", value: 2 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 3 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -265,9 +264,7 @@ export default {
     },
     getHeroRanking: function (aid, bid) {
       if (aid == 3 && bid == 0)
-        this.$message.info(
-          "提示:1006,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
-        );
+        this.$message.info("提示:1003,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D");
 
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
@@ -334,15 +331,10 @@ export default {
       }
 
       if (item.value == 1) {
-        //this.appPush("/hero/" + heroInfo.id + "/fightpower", name);
-        this.$message.warning("警告:1002,待更新");
-      }
-
-      if (item.value == 2) {
         this.appPush("/hero/" + heroInfo.id + "/replay", name);
       }
 
-      if (item.value == 3) {
+      if (item.value == 2) {
         this.appOpenUrl(
           "是否查看英雄赛事数据?",
           "玩加电竞",
@@ -352,7 +344,7 @@ export default {
         );
       }
 
-      if (item.value == 4) {
+      if (item.value == 3) {
         this.appOpenUrl(
           "是否查看英雄更新记录?",
           "NGA @EndMP",
@@ -360,7 +352,7 @@ export default {
         );
       }
 
-      if (item.value == 5) {
+      if (item.value == 4) {
         this.appOpenUrl(
           "是否查看英雄攻速阈值?",
           "NGA @小熊de大熊",
