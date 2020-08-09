@@ -125,16 +125,11 @@ export default {
           this.isLoading = false;
         });
     },
-    getPlayerInfo: function (row, type) {
+    getPlayerInfo: function (row) {
       if (row.userId == 0) return;
-
-      let loginInfo = this.loginInfo;
       this.tableData.row = row;
 
-      if (type == 1) {
-        this.show.actionSheet = true;
-        return;
-      }
+      let loginInfo = this.loginInfo;
 
       this.axios
         .post(
@@ -165,9 +160,9 @@ export default {
             row.userId +
             "&sign=" +
             this.appSign(this.$options.name);
-
-          this.appCopyData(this.copyData);
         });
+
+      this.show.actionSheet = true;
     },
     onPlayerOptionsChange: function (e) {
       this.getPlayerRanking(e, this.playerShield);
@@ -179,13 +174,13 @@ export default {
       this.getPlayerRanking(this.areaModel, this.playerShield);
     },
     onCellClick: function ({ row }) {
-      this.getPlayerInfo(row, 1);
+      this.getPlayerInfo(row);
     },
     onActionSheetSelect: function (item) {
       let playerInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.getPlayerInfo(playerInfo, 2);
+        this.appCopyData(this.copyData);
       }
 
       if (item.value == 1) {
