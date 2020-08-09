@@ -68,6 +68,10 @@ export default {
   name: "RankingWanJia",
   data() {
     return {
+      loginInfo: {
+        openId: null,
+        accessToken: null,
+      },
       playerShield: 0,
       areaModel: 0,
       switchModel: false,
@@ -89,7 +93,10 @@ export default {
       show: {
         actionSheet: false,
       },
-      actions: [{ name: "查看QQ", value: 0 }],
+      actions: [
+        { name: "查看QQ", value: 0 },
+        { name: "铭文", subname: "需要安装王者营地", value: 1 },
+      ],
       clientHeight: 0,
       listWidth: 0,
       isLoading: true,
@@ -99,6 +106,9 @@ export default {
     this.initAppTable();
   },
   mounted() {
+    this.loginInfo.openId = this.$cookie.get("openId");
+    this.loginInfo.accessToken = this.$cookie.get("accessToken");
+
     this.getPlayerRanking(0, 0);
   },
   methods: {
@@ -115,19 +125,31 @@ export default {
           this.isLoading = false;
         });
     },
-    getPlayerInfo: function (row) {
+    getPlayerInfo: function (row, type) {
       if (row.userId == 0) return;
 
+      let loginInfo = this.loginInfo;
       this.tableData.row = row;
 
+      if (type == 1) {
+        this.show.actionSheet = true;
+        return;
+      }
+
       this.axios
-        .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
+        .post(
+          this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId,
+          this.$qs.stringify({
+            openId: loginInfo.openId,
+            accessToken: loginInfo.accessToken,
+          })
+        )
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
           if (status.code != 200) {
-            this.$message.error("错误:1005,玩家信息异常");
+            this.$message.error(status.msg);
             return;
           }
 
@@ -143,9 +165,9 @@ export default {
             row.userId +
             "&sign=" +
             this.appSign(this.$options.name);
-        });
 
-      this.show.actionSheet = true;
+          this.appCopyData(this.copyData);
+        });
     },
     onPlayerOptionsChange: function (e) {
       this.getPlayerRanking(e, this.playerShield);
@@ -157,11 +179,25 @@ export default {
       this.getPlayerRanking(this.areaModel, this.playerShield);
     },
     onCellClick: function ({ row }) {
-      this.getPlayerInfo(row);
+      this.getPlayerInfo(row, 1);
     },
     onActionSheetSelect: function (item) {
+      let playerInfo = this.tableData.row;
+
       if (item.value == 0) {
-        this.appCopyData(this.copyData);
+        this.getPlayerInfo(playerInfo, 2);
+      }
+
+      if (item.value == 1) {
+        if (playerInfo.inscriptionUrl) {
+          this.appOpenUrl(
+            "是否查看玩家铭文?",
+            "需要安装王者营地",
+            playerInfo.inscriptionUrl
+          );
+        } else {
+          this.$message.info("提示:1005,未查询到,待更新");
+        }
       }
     },
   },

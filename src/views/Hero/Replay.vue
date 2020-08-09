@@ -141,6 +141,7 @@ export default {
         { name: "复制链接", value: 0 },
         { name: "详情", subname: "需要安装王者营地", value: 1 },
         { name: "回顾", subname: "需要安装王者营地", value: 2 },
+        { name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
       teammate: false,
     };
@@ -168,11 +169,14 @@ export default {
     onGameActionSheetClick: function (row) {
       this.tableData.row = row;
 
-      let url = row.url,
-        urlIndex = url.indexOf("=");
+      let replayUrl = row.replayUrl,
+        replayUrlIndex = replayUrl.indexOf("=");
 
       this.axios
-        .get("//s.91m.top/?url=" + url.substr(urlIndex + 1, url.length))
+        .get(
+          "//s.91m.top/?url=" +
+            replayUrl.substr(replayUrlIndex + 1, replayUrl.length)
+        )
         .then((res) => {
           this.copyData =
             this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
@@ -220,6 +224,18 @@ export default {
           "需要安装王者营地",
           replayInfo.url
         );
+      }
+
+      if (item.value == 3) {
+        if (replayInfo.inscriptionUrl) {
+          this.appOpenUrl(
+            "是否查看玩家铭文?",
+            "需要安装王者营地",
+            replayInfo.inscriptionUrl
+          );
+        } else {
+          this.$message.info("提示:1004,未查询到,建议从上方详情进入");
+        }
       }
     },
   },
