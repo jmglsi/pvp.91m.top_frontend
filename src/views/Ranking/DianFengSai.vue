@@ -128,7 +128,7 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="show.heroSkill"
-        :title="tableData.row.name + ' 的技能数据 (周榜)'"
+        :title="tableData.row.name + ' 的技能数据 (上周)'"
         safe-area-inset-bottom
       >
         <HeroList :heroSkill="tableData.row.skill" />
@@ -159,10 +159,12 @@ export default {
       areaInfo: {
         model: 0,
         options: [
-          { text: "全部大区", value: 0 },
-          { text: "手 Q", value: 1 },
-          { text: "微信", value: 2 },
-          { text: "强度上升", value: 3 },
+          { text: "全部 (昨日)", value: 0 },
+          { text: "手 Q (昨日)", value: 1 },
+          { text: "微信 (昨日)", value: 2 },
+          { text: "强度上升 (昨日)", value: 3 },
+          { text: "全部 (上周)", value: 4 },
+          { text: "全部 (上月)", value: 5 },
         ],
       },
       positionInfo: {
@@ -264,7 +266,9 @@ export default {
     },
     getHeroRanking: function (aid, bid) {
       if (aid == 3 && bid == 0)
-        this.$message.info("提示:1003,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D");
+        this.$message.info(
+          "提示:1003,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
+        );
 
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)

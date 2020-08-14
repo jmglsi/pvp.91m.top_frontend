@@ -48,7 +48,7 @@
             >
               <van-grid-item
                 v-show="data.heroSkill > 0"
-                :icon="'//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'"
+                :icon="data.heroSkill > 0 ? '//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png' : null"
                 :text="data.heroPosition"
                 class="replay-0a96464cb313aab9cc51e5aa61b0193f"
               />
@@ -56,7 +56,7 @@
                 v-show="data > 0"
                 v-for="(data, index) in data.equInfo"
                 :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
-                :icon="'//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png'"
+                :icon="data > 0 ? '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' + data + '.png' : null"
                 class="replay-0a96464cb313aab9cc51e5aa61b0193f"
                 @click="appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', '//ngabbs.com/read.php?tid=19902976')"
               />

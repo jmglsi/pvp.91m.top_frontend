@@ -158,7 +158,7 @@
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
         v-model="show.heroSkill"
-        :title="hero.info.name + ' 的技能数据 (周榜)'"
+        :title="hero.info.name + ' 的技能数据 (上周)'"
         safe-area-inset-bottom
       >
         <HeroList :heroSkill="hero.info.skill" />

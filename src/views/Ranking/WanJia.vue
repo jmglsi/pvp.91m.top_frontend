@@ -3,8 +3,8 @@
     <div class="ranking-479cba1b23b02eea72d4bdc9f59e8122">
       <van-dropdown-menu>
         <van-dropdown-item
-          v-model="areaModel"
-          :options="playerOptions"
+          v-model="areaInfo.model"
+          :options="areaInfo.options"
           @change="onPlayerOptionsChange"
         />
         <van-dropdown-item ref="item" title="筛选">
@@ -54,7 +54,7 @@
       <van-action-sheet
         v-model="show.actionSheet"
         :title="tableData.row.gamePlayerName + ' 如何操作'"
-        :actions="areaModel < 3 ? actions : []"
+        :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
         @select="onActionSheetSelect"
@@ -73,17 +73,19 @@ export default {
         accessToken: null,
       },
       playerShield: 0,
-      areaModel: 0,
       switchModel: false,
       uin: "",
       copyData: "",
-      playerOptions: [
-        { text: "全部大区", value: 0 },
-        { text: "安卓 手Q", value: 1 },
-        { text: "苹果 手Q", value: 2 },
-        { text: "安卓微信", value: 3 },
-        { text: "苹果微信", value: 4 },
-      ],
+      areaInfo: {
+        model: 0,
+        options: [
+          { text: "全部大区", value: 0 },
+          { text: "安卓 手Q", value: 1 },
+          { text: "苹果 手Q", value: 2 },
+          { text: "安卓微信", value: 3 },
+          { text: "苹果微信", value: 4 },
+        ],
+      },
       tableData: {
         result: [],
         row: {
@@ -128,8 +130,11 @@ export default {
     getPlayerInfo: function (row) {
       if (row.userId == 0) return;
       this.tableData.row = row;
+      this.show.actionSheet = true;
 
       let loginInfo = this.loginInfo;
+
+      if (this.areaInfo.model >= 3) return;
 
       this.axios
         .post(
@@ -161,8 +166,6 @@ export default {
             "&sign=" +
             this.appSign(this.$options.name);
         });
-
-      this.show.actionSheet = true;
     },
     onPlayerOptionsChange: function (e) {
       this.getPlayerRanking(e, this.playerShield);
@@ -171,7 +174,7 @@ export default {
       this.$refs.item.toggle();
 
       this.playerShield = Number(this.switchModel);
-      this.getPlayerRanking(this.areaModel, this.playerShield);
+      this.getPlayerRanking(this.areaInfo.model, this.playerShield);
     },
     onCellClick: function ({ row }) {
       this.getPlayerInfo(row);
