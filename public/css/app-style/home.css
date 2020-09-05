@@ -16,6 +16,11 @@ div.tuijian-06eab62dcb5a23b966a620807d78e66f {
     margin: 25px 0;
 }
 
-div.van-cell.van-cell--clickable {
+div.home-72ab9e07378f988922e6c91884048db0 {
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+div.tuijian-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable {
     border-radius: 10px;
 }

@@ -34,6 +34,13 @@
             >{{ data.calendar.day }}</van-tag>
 
             <div v-if="data.url" class="tuijian-5a5152e95445ede11c05f5fa898d8fd9">
+              <van-tag
+                v-for="(data, index) in data.tags"
+                :key="'tuijian-5e9c0708969ea62d890f9c9f063b6c44-' + index"
+                color="black"
+                round
+                class="tuijian-26edf9c6ae9f8356043d0e175516cab6"
+              >{{ data }}</van-tag>
               <a :href="data.url" target="_blank">
                 <img
                   v-lazy="'/img/app-icons/link_black.png'"
@@ -49,10 +56,10 @@
               class="tuijian-5a5152e95445ede11c05f5fa898d8fd9"
             ></div>
 
-            <div v-show="data.item.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
+            <div v-show="data.items.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
-                v-for="(dataItem, index) in data.item"
-                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info', query: { sign: appSign($options.name) } }"
+                v-for="(dataItem, index) in data.items"
+                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info' }"
                 :key="'tuijian-54099f84a9943b4b1eed932ec22066eb-' + index"
               >
                 <img
@@ -172,10 +179,15 @@ export default {
 
           if (result.type == 2) {
             day.text = result.text;
-            day.className = "dayTag-xp";
+            day.className = "dayTag-cz";
           }
 
           if (result.type == 3) {
+            day.text = result.text;
+            day.className = "dayTag-xp";
+          }
+
+          if (result.type == 4) {
             day.text = result.text;
             day.className = "dayTag-fc";
           }
