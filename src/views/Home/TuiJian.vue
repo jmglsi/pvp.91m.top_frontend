@@ -90,7 +90,7 @@ export default {
       setTimeout(() => {
         this.isLoading = false;
 
-        this.appPush("/miniapp", this.$options.name);
+        this.appPush("/miniapp");
       }, 2000);
     },
   },

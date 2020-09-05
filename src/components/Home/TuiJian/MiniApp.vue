@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="miniapp-021a7599a708a3781fabe39f7631edfc" @click="appPush('/', $options.name)">
+    <div class="miniapp-021a7599a708a3781fabe39f7631edfc" @click="appPush('/')">
       <AppCollapse width="25" height="25" />
     </div>
   </div>

@@ -8,7 +8,7 @@
               round
               size="small"
               color="linear-gradient(to right, #4bb0ff, #6149f6)"
-              @click="appPush('/login', $options.name)"
+              @click="appPush('/login')"
               class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
             >登录</van-button>
           </template>
@@ -42,7 +42,7 @@
       <van-grid :border="false" :column-num="2" class="my-c3d90961c9bf155d11cbef9c57725aea">
         <van-grid-item
           icon="/img/app-icons/team.png"
-          :to="'/game/team?sign=' + appSign($options.name)"
+          to="/game/team"
           class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
         >
           <template #text>
@@ -54,7 +54,7 @@
         </van-grid-item>
         <van-grid-item
           icon="/img/app-icons/engage.png"
-          :to="'/game/engage?sign=' + appSign($options.name)"
+          to="/game/engage"
           class="my-308ffde0dc5bd5718dcf0396fcc2a596"
         >
           <template #text>

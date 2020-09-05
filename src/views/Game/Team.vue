@@ -340,7 +340,7 @@ export default {
             this.$message.success("创建成功");
             this.$cookie.delete("teamId");
 
-            this.appPush("/game/engage", this.$options.name);
+            this.appPush("/game/engage");
           } else {
             this.$message.error(status.msg);
           }

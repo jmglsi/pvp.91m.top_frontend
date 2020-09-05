@@ -162,9 +162,7 @@ export default {
             location.origin +
             location.pathname +
             "?type=2&userId=" +
-            row.userId +
-            "&sign=" +
-            this.appSign(this.$options.name);
+            row.userId;
         });
     },
     onPlayerOptionsChange: function (e) {

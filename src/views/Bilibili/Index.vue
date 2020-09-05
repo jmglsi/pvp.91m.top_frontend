@@ -150,12 +150,7 @@ export default {
         .get(
           "//s.91m.top/?url=" +
             encodeURIComponent(
-              location.origin +
-                location.pathname +
-                "?uid=" +
-                row.uid +
-                "&sign=" +
-                this.appSign(this.$options.name)
+              location.origin + location.pathname + "?uid=" + row.uid
             )
         )
         .then((res) => {

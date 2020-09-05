@@ -157,7 +157,7 @@ export default {
   data() {
     return {
       areaInfo: {
-        model: 0,
+        model: 4,
         options: [
           { text: "全部 (昨日)", value: 0 },
           { text: "手 Q (昨日)", value: 1 },
@@ -327,15 +327,14 @@ export default {
       }
     },
     onActionSheetSelect: function (item) {
-      let name = this.$options.name,
-        heroInfo = this.tableData.row;
+      let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appPush("/hero/" + heroInfo.id + "/info", name);
+        this.appPush("/hero/" + heroInfo.id + "/info");
       }
 
       if (item.value == 1) {
-        this.appPush("/hero/" + heroInfo.id + "/replay", name);
+        this.appPush("/hero/" + heroInfo.id + "/replay");
       }
 
       if (item.value == 2) {

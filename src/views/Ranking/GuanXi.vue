@@ -157,7 +157,7 @@ export default {
           };
 
           if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
-          
+
           this.isLoading = false;
         });
     },
@@ -179,9 +179,7 @@ export default {
                 "&heroId1=" +
                 row.hero_1.id +
                 "&heroId2=" +
-                row.hero_2.id +
-                "&sign=" +
-                this.appSign(this.$options.name)
+                row.hero_2.id
             )
         )
         .then((res) => {
@@ -279,8 +277,7 @@ export default {
 
       if (item.value == 1) {
         this.appPush(
-          "/hero/" + heroInfo.hero_1.id + "," + heroInfo.hero_2.id + "/replay",
-          this.$options.name
+          "/hero/" + heroInfo.hero_1.id + "," + heroInfo.hero_2.id + "/replay"
         );
       }
     },

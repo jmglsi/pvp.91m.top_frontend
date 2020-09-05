@@ -7,7 +7,7 @@
         :ellipsis="false"
         :swipeable="true"
         :sticky="true"
-        @change="appPush('', $options.name, tabsModel)"
+        @change="appPush('', tabsModel)"
         line-width="25px"
         color="rgb(222, 177, 81)"
         title-active-color="rgb(222,177,81)"
@@ -20,6 +20,19 @@
           <Game />
         </van-tab>
       </van-tabs>
+    </div>
+
+    <div class="home-72ab9e07378f988922e6c91884048db0">
+      本站由
+      <a href="https://console.upyun.com/register/?invite=ryM-bovMm">
+        <img
+          width="100"
+          height="35"
+          data-src="img/app-icons/upyun_logo2.png"
+          src="img/app-icons/upyun_logo2.png"
+          lazy="loaded"
+        />
+      </a>提供CDN加速/云储存服务
     </div>
 
     <AppBottomTabbar :height="100" />

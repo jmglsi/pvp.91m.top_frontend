@@ -446,7 +446,7 @@ export default {
 
       this.getGameBP(gameLabel);
     } else {
-      this.appPush("/game", this.$options.name);
+      this.appPush("/game");
       return;
     }
 

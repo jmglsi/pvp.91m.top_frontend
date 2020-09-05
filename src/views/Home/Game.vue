@@ -59,7 +59,7 @@ export default {
       });
     },
     onGameCellClick: function (e) {
-      this.appPush("/game/" + e + "/bp", this.$options.name);
+      this.appPush("/game/" + e + "/bp");
     },
   },
 };

@@ -150,7 +150,7 @@ export default {
             });
 
             setTimeout(() => {
-              location.href = "/my?sign=" + this.appSign(this.$options.name);
+              location.href = "/my";
             }, 500);
           } else {
             this.$message.error(status.msg);

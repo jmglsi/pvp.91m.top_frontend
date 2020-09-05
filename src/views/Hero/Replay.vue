@@ -7,7 +7,7 @@
         :placeholder="true"
         z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
-        @click-left="appPush('/ranking', $options.name)"
+        @click-left="appPush('/ranking')"
       >
         <template #title>
           <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>

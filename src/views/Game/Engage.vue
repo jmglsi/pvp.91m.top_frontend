@@ -22,7 +22,7 @@
           class="game-f24a222ebfb0f6b85f63749653659063"
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
-            <van-row @click="appPush('/game/' + data.engage.label + '/bp', $options.name)">
+            <van-row @click="appPush('/game/' + data.engage.label + '/bp')">
               <van-col span="7">
                 <img
                   width="40"

@@ -6,7 +6,7 @@
         :fixed="true"
         :placeholder="true"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
-        @click-left="appPush('/ranking', $options.name)"
+        @click-left="appPush('/ranking')"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
         z-index="99999999"
       >

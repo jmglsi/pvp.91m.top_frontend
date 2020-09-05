@@ -6,7 +6,7 @@
         :border="false"
         :ellipsis="false"
         :sticky="true"
-        @change="appPush('', $options.name, tabsModel)"
+        @change="appPush('', tabsModel)"
         line-width="25px"
         color="rgb(222,177,81)"
         title-active-color="rgb(222,177,81)"
