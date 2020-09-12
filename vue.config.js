@@ -18,7 +18,7 @@ module.exports = {
         workboxOptions: {
             swSrc: 'src/service-worker.js',
             importWorkboxFrom: 'disabled',
-            importScripts: 'https: //api.91m.top/hero/v1/app/public/js/workbox-sw.js'
+            importScripts: 'https://api.91m.top/hero/v1/app/public/js/workbox-sw.js'
         }
     }
 }
