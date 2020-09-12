@@ -13,6 +13,12 @@ module.exports = {
         themeColor: '#000000',
         msTileColor: '#000000',
         appleMobileWebAppCapable: 'yes',
-        appleMobileWebAppStatusBarStyle: 'default'
+        appleMobileWebAppStatusBarStyle: 'default',
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+            swSrc: 'src/service-worker.js',
+            importWorkboxFrom: 'disabled',
+            importScripts: 'https: //api.91m.top/hero/v1/app/public/js/workbox-sw.js'
+        }
     }
 }
