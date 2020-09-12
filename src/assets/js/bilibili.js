@@ -17,7 +17,7 @@ Vue.prototype.av2bv = (av) => {
     }
 
     if (isNaN(num) || num <= 0) {
-        // 网页版直接输出这个结果了
+        //网页版直接输出这个结果了
         return -1;
     }
 
@@ -29,9 +29,9 @@ Vue.prototype.av2bv = (av) => {
 
     let i = 0;
     while (i < 6) {
-        // 这里改写差点犯了运算符优先级的坑
-        // 果然 Python 也不是特别熟练
-        // 说起来 ** 按照传统语法应该写成 Math.pow()，但是我个人更喜欢 ** 一些
+        //这里改写差点犯了运算符优先级的坑
+        //果然 Python 也不是特别熟练
+        //说起来 ** 按照传统语法应该写成 Math.pow(),但是我个人更喜欢 ** 一些
         result[s[i]] = table[Math.floor(num / 58 ** i) % 58];
         i += 1;
     }
@@ -46,8 +46,8 @@ Vue.prototype.bv2av = (bv) => {
         str = bv;
     } else if (bv.length === 10) {
         str = `BV${bv}`;
-        // 根据官方 API，BV 号开头的 BV1 其实可以省略
-        // 不过单独省略个 B 又不行（
+        //根据官方 API,BV 号开头的 BV1 其实可以省略
+        //不过单独省略个 B 又不行（
     } else if (bv.length === 9) {
         str = `BV1${bv}`;
     } else {
