@@ -2,15 +2,16 @@
   <div class="hero-info">
     <div class="hero-a8137b0fb1cc9dcb896ce9a091695877">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
-        class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
         @click-left="appPush('/ranking')"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
         z-index="99999999"
+        left-text="排行"
+        class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
-        <van-icon name="arrow-left" slot="left" />
         <template #title>
           <div
             @click="$message.info('提示:1003,近期热度 ;D')"
@@ -127,6 +128,7 @@
         :sticky="true"
         @change="onTabsChange"
         @click="tabsModel == 0 && hero.line == 0 ? hero.line = 1 : hero.line = 0"
+        duration="0.5"
         line-width="25px"
         color="rgb(222,177,81)"
         title-active-color="rgb(222,177,81)"

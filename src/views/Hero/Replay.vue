@@ -2,17 +2,18 @@
   <div class="hero-replay">
     <div class="hero-3717f3cb4a2b2b688e50fb4f63170918">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="99999999"
-        class="hero-6809da26e032292efff6ec78cdec8de2"
         @click-left="appPush('/ranking')"
+        z-index="99999999"
+        left-text="排行"
+        class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
           <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>
         </template>
-        <van-icon name="arrow-left" slot="left" />
       </van-nav-bar>
     </div>
 

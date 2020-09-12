@@ -2,13 +2,15 @@
   <div class="game-engage">
     <div class="game-25c0219f67e7581f29f4956d75fca11f">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="99999999"
-        class="game-7140a921b48604a7db01e6b676e34174"
-        title="我的交战"
         @click-left="$router.go(-1)"
+        z-index="99999999"
+        title="我的交战"
+        left-text="返回"
+        class="game-7140a921b48604a7db01e6b676e34174"
       >
         <van-icon name="arrow-left" slot="left" />
       </van-nav-bar>

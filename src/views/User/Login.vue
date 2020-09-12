@@ -2,15 +2,15 @@
   <div class="login-in">
     <div class="login-9ffe6c014e6f06f1c218fde0ca3fc4ef">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="99999999"
-        class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
         @click-left="onNavBarLeftClick"
-      >
-        <van-icon name="arrow-left" slot="left" />
-      </van-nav-bar>
+        z-index="99999999"
+        left-text="返回"
+        class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
+      />
     </div>
 
     <div class="login-2a642626758deefdc2989a73aae823d3">

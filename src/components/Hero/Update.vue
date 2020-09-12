@@ -58,14 +58,14 @@
 
             <div v-show="data.items.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
-                v-for="(dataItem, index) in data.items"
-                :to="dataItem == 999 ? '' : { path: '/hero/' + dataItem + '/info' }"
+                v-for="(heroId, index) in data.items"
+                :to="heroId == 999 ? '' : { path: '/hero/' + heroId + '/info' }"
                 :key="'tuijian-54099f84a9943b4b1eed932ec22066eb-' + index"
               >
                 <img
-                  v-show="dataItem"
-                  v-lazy="dataItem == 999 ? '/img/app-icons/hero.png' :'//game.gtimg.cn/images/yxzj/img201606/heroimg/' + dataItem + '/' + dataItem + '.jpg'"
-                  @click="dataItem == 999 ? $message.info('提示:1000,还没上线正式服的新英雄') : ''"
+                  v-show="heroId"
+                  v-lazy="heroId == 999 ? '/img/app-icons/hero.png' : '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg'"
+                  @click="heroId == 999 ? $message.info('提示:1000,还没上线正式服的新英雄') : ''"
                   class="tuijian-5d39f3848925994b52ec52fba934577c"
                 />
               </router-link>

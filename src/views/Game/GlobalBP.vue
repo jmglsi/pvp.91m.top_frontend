@@ -20,7 +20,7 @@
       <div class="ban-8c9cb4a232c7e88403dddc3a0e589162 ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3">
         <ul>
           <li
-            v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
+            v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
             :key="'ban-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(index)"
           >
@@ -29,7 +29,7 @@
               class="ban-4978748050a936d2f77fe718f1d81524"
             >
               <img
-                v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
                 width="30"
                 height="30"
@@ -44,7 +44,7 @@
       <div class="ban-c6a2f8b3941d7f91bc4e51839e5371e0 ban-ba9bced6af8121cf6413000a4274ac2b">
         <ul>
           <li
-            v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
+            v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
             :key="'ban-38dfd87b435ce58ee12baf01d6f23c73-' + index"
             @click="onGameBanPickClick(index)"
           >
@@ -53,7 +53,7 @@
               class="ban-6e9c0050fe873888fbf53ec6f7b21816"
             >
               <img
-                v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
                 width="30"
                 height="30"
@@ -72,7 +72,7 @@
           <div class="pick-8c9cb4a232c7e88403dddc3a0e589162">
             <ul>
               <li
-                v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
+                v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
                 :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
@@ -82,7 +82,7 @@
                   class="pick-4978748050a936d2f77fe718f1d81524"
                 >
                   <img
-                    v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                    v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
                     :width="appDevice ? 40 : 55"
                     :height="appDevice ? 40 : 55"
@@ -171,7 +171,7 @@
           <div class="pick-c6a2f8b3941d7f91bc4e51839e5371e0">
             <ul>
               <li
-                v-for="(data, index) in gameInfo.result[tabsModel].BPOrder"
+                v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
                 :key="'pick-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
@@ -181,7 +181,7 @@
                   class="pick-6e9c0050fe873888fbf53ec6f7b21816"
                 >
                   <img
-                    v-lazy="data ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg' : '/img/app-icons/hero.png'"
+                    v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
                     :width="appDevice ? 40 : 55"
                     :height="appDevice ? 40 : 55"

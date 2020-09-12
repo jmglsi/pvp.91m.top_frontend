@@ -216,7 +216,7 @@ export default {
     this.$nextTick(() => {
       this.$refs.dianfengsai.connect(this.$refs.xToolbar);
     });
-    // 手动将表格和工具栏进行关联
+    //手动将表格和工具栏进行关联
   },
   mounted() {
     this.getHeroRanking(0, 0);

@@ -5,11 +5,11 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        z-index="99999999"
-        class="game-6fd4f92278806c6e544f958ba762c7a9"
-        title="我的队伍"
         @click-left="$router.go(-1)"
         @click-right="onCreateTeamClick"
+        z-index="99999999"
+        title="我的队伍"
+        class="game-6fd4f92278806c6e544f958ba762c7a9"
       >
         <van-icon name="arrow-left" slot="left" />
         <van-icon name="add-o" slot="right" />

@@ -32,7 +32,7 @@
           </van-swipe>
 
           <van-cell
-            :title="appHomeInfo.tipsInfo.title"
+            :title="appHomeInfo.tipsInfo.title ? appHomeInfo.tipsInfo.title : '很高兴认识你~'"
             :value="appHomeInfo.tipsInfo.des"
             :to="appHomeInfo.tipsInfo.to"
             :url="appHomeInfo.tipsInfo.url"
