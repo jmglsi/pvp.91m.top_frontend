@@ -8,6 +8,7 @@
         :swipeable="true"
         :sticky="true"
         @change="appPush('', tabsModel)"
+        duration="0.5"
         line-width="25px"
         color="rgb(222, 177, 81)"
         title-active-color="rgb(222,177,81)"
