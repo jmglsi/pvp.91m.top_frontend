@@ -29,7 +29,7 @@
               class="ban-4978748050a936d2f77fe718f1d81524"
             >
               <img
-                v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
+                v-lazy="heroId ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
                 width="30"
                 height="30"
@@ -53,7 +53,7 @@
               class="ban-6e9c0050fe873888fbf53ec6f7b21816"
             >
               <img
-                v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
+                v-lazy="heroId ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                 :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
                 width="30"
                 height="30"
@@ -82,7 +82,7 @@
                   class="pick-4978748050a936d2f77fe718f1d81524"
                 >
                   <img
-                    v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
+                    v-lazy="heroId ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? blueStepsClass : ''"
                     :width="appDevice ? 40 : 55"
                     :height="appDevice ? 40 : 55"
@@ -181,7 +181,7 @@
                   class="pick-6e9c0050fe873888fbf53ec6f7b21816"
                 >
                   <img
-                    v-lazy="heroId ? '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
+                    v-lazy="heroId ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg' : '/img/app-icons/hero.png'"
                     :class="mode =='edit' && gameInfo.result[tabsModel].stepsNow == index  ? redStepsClass : ''"
                     :width="appDevice ? 40 : 55"
                     :height="appDevice ? 40 : 55"

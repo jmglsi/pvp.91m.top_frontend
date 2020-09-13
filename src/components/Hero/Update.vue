@@ -64,7 +64,7 @@
               >
                 <img
                   v-show="heroId"
-                  v-lazy="heroId == 999 ? '/img/app-icons/hero.png' : '//api.91m.top/hero/v1/app/public/img/hero-icons/' + heroId + '.jpg'"
+                  v-lazy="heroId == 999 ? '/img/app-icons/hero.png' : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg'"
                   @click="heroId == 999 ? $message.info('提示:1000,还没上线正式服的新英雄') : ''"
                   class="tuijian-5d39f3848925994b52ec52fba934577c"
                 />

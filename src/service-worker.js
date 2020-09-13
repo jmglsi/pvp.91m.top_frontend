@@ -37,7 +37,7 @@ workbox.routing.registerRoute(
 
 //我们很多资源在其他域名上,比如cdn、oss等,这里做单独处理,需要支持跨域,设置缓存有效期为 7 天
 workbox.routing.registerRoute(
-    /^https:\/\/api\.91m\.top\/.*|^https:\/\/img\.yzcdn\.cn\/.*|^https:\/\/game.gtimg.cn\/.*/,
+    /^https:\/\/game\.gtimg\.cn\/.*\.(jpe?g|png|gif|svg)/,
     workbox.strategies.staleWhileRevalidate({
         cacheName: 'cdn-images-cache',
         plugins: [
