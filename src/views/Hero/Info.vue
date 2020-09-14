@@ -5,7 +5,7 @@
         left-arrow
         :border="false"
         :fixed="true"
-        :placeholder="true"
+        :style="scroll >= 50 ? { backgroundColor: 'white' } : { backgroundColor: 'transparent' }"
         @click-left="appPush('/ranking')"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
         z-index="99999999"
@@ -24,7 +24,10 @@
               height="15"
               class="info-f90943c8968fa651d7e1b617ff046fe2"
             />
-            <span class="info-d5d3db1765287eef77d7927cc956f50a">{{ hero.title }}</span>
+            <span
+              :style="scroll >= 50 || tabsModel > 0 ? { color: 'black' } : { color: 'white' }"
+              class="info-d5d3db1765287eef77d7927cc956f50a"
+            >{{ hero.title }}</span>
           </div>
         </template>
         <template #right>
@@ -47,7 +50,30 @@
       </van-nav-bar>
     </div>
 
-    <div class="hero-9afffec6fe89b34b024d06907c006f36">
+    <div class="hero-e21ecc3330f7f3c382fc113f392368bd">
+      <van-swipe
+        v-show="show.parameter"
+        :autoplay="10000"
+        :height="250"
+        class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
+      >
+        <van-swipe-item
+          v-for="(data, index) in hero.info.skinNum"
+          :key="'hero-07ae211504ad5deba5d239525b888d59-' + index"
+          class="hero-5a0b1ba1b22eb336b55e70eb2abbac30"
+        >
+          <img
+            v-lazy="'//game.gtimg.cn/images/yxzj/img201606/heroimg/' + hero.info.id + '/' + hero.info.id + '-mobileskin-' + data + '.jpg'"
+            class="hero-44908c08b6c253a19ab6246e6eec857a"
+          />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+
+    <div
+      :style="tabsModel > 0 ? { marginTop: '50px' } : { marginTop: '0' }"
+      class="hero-9afffec6fe89b34b024d06907c006f36"
+    >
       <van-grid
         v-show="show.parameter"
         :border="false"
@@ -88,13 +114,6 @@
             :text="circle.info.text"
             size="75"
             class="hero-83444807ba7a7da23e12b17567d2d595"
-          />
-          <img
-            v-show="show.heroImg"
-            v-lazy="hero.info.img"
-            width="50"
-            height="50"
-            class="info-48c8178c9726b2afcaf8c5ede5437746"
           />
         </van-grid-item>
         <van-grid-item class="hero-c6e864acb6955eed0361921288d34149" @click="show.heroSkill = true">
@@ -147,7 +166,10 @@
         <div class="hero-e06398232dc80e41209489705546802c">
           <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" :lineType="hero.line" />
         </div>
-        <div class="hero-ea950cb092f4e99e2ccf981cf503e5e3">
+        <div
+          :style="tabsModel > 0 ? { marginTop: '50px' } : { marginTop: '0' }"
+          class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
+        >
           <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
         </div>
       </van-tabs>
@@ -227,6 +249,7 @@ export default {
   },
   data() {
     return {
+      scroll: 0,
       show: {
         heroImg: true,
         parameter: true,
@@ -269,13 +292,13 @@ export default {
 
     this.getHeroInfo(heroId);
 
-    setInterval(() => {
-      this.show.heroImg == true
-        ? (this.show.heroImg = false)
-        : (this.show.heroImg = true);
-    }, 1000 * 5);
+    window.addEventListener("scroll", this.scrollTop);
   },
   methods: {
+    scrollTop() {
+      this.scroll =
+        document.documentElement.scrollTop || document.body.scrollTop;
+    },
     getHeroInfo: function (heroId) {
       this.axios
         .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)

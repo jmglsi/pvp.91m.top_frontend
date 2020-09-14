@@ -6,9 +6,18 @@ img.info-f90943c8968fa651d7e1b617ff046fe2 {
     margin-top: -5px;
 }
 
+
+/*
 img.info-48c8178c9726b2afcaf8c5ede5437746 {
     position: absolute;
     border-radius: 100%;
+}
+*/
+
+img.hero-44908c08b6c253a19ab6246e6eec857a {
+    border-radius: unset;
+    height: 100%;
+    width: 100%;
 }
 
 img.tuijian-5d39f3848925994b52ec52fba934577c {
@@ -23,8 +32,13 @@ svg.info-ff2364a0be3d20e46cc69efb36afe9a5 {
     margin: 0 3px;
 }
 
-span.info-d5d3db1765287eef77d7927cc956f50a {
+div.info-632d142d7a508e86f6c35a044a17411e span.info-d5d3db1765287eef77d7927cc956f50a {
     margin: 0 5px;
+    color: white;
+}
+
+span.info-0fc3cfbc27e91ea60a787de13dae3e3c {
+    color: white;
 }
 
 span.info-9726255eec083aa56dc0449a21b33190 {
@@ -153,4 +167,16 @@ div.hero-18327e5b67b8072ab8cf020c4ef15c9c {
 div.tuijian-0b479089ade5d13a2c41830785ebac9d {
     text-align: center;
     margin: 10px 0;
+}
+
+div.app-ff4a008470319a22d9cf3d14af485977 {
+    margin-top: -125px;
+}
+
+div.hero-c6e864acb6955eed0361921288d34149 div.van-grid-item__content {
+    background-color: transparent;
+}
+
+div.hero-83444807ba7a7da23e12b17567d2d595 div.van-circle__text {
+    color: white;
 }
