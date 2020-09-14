@@ -190,7 +190,7 @@ export default {
           name: "加载中",
           skill: [],
           clockwise: false,
-          updatePid: 0,
+          updateId: 0,
         },
       },
       show: {
@@ -198,7 +198,7 @@ export default {
         heroMenu: false,
       },
       actions: [
-        { name: "趋势 & 职业对比", value: 0 },
+        { name: "英雄详情", value: 0 },
         { name: "对局回顾", value: 1 },
         { name: "赛事数据", value: 2 },
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
@@ -278,7 +278,7 @@ export default {
           this.tableData.row = {
             id: 0,
             name: "加载中",
-            updatePid: 0,
+            updateId: 0,
           };
 
           this.$refs.dianfengsai.loadData(data.result);
@@ -351,7 +351,7 @@ export default {
         this.appOpenUrl(
           "是否查看英雄更新记录?",
           "NGA @EndMP",
-          "//nga.178.com/read.php?pid=" + heroInfo.updatePid
+          "//nga.178.com/read.php?pid=" + heroInfo.updateId
         );
       }
 
