@@ -72,6 +72,14 @@
             </div>
           </a-timeline-item>
         </a-timeline>
+
+        <div
+          v-if="heroId != 0"
+          @click="appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', '//nga.178.com/read.php?pid=' + updateId)"
+          class="tuijian-0b479089ade5d13a2c41830785ebac9d"
+        >
+          <van-tag color="#1989fa" round class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067">更多更新记录</van-tag>
+        </div>
       </div>
     </div>
 
@@ -100,11 +108,15 @@ export default {
       type: Number,
       default: 0,
     },
+    updateId: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { heroId, updateId } = this;
+      return { heroId, updateId };
     },
   },
   watch: {

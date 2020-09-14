@@ -154,7 +154,12 @@
     </div>
 
     <div class="app-d638615004bb2ff42ed26948aba89c80">
-      <HeroUpdate v-if="isLoaded" v-show="show.parameter" :heroId="hero.info.id" />
+      <HeroUpdate
+        v-if="isLoaded"
+        v-show="show.parameter"
+        :heroId="hero.info.id"
+        :updateId="hero.info.updateId"
+      />
     </div>
 
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
