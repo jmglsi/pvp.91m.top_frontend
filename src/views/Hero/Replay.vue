@@ -64,22 +64,21 @@
             </van-grid>
           </div>
 
-          <van-button
+          <van-tag
             v-show="!teammate"
             round
             disabled
             color="#000000"
             size="mini"
             class="replay-ce50a09343724eb82df11390e2c1de18"
-          >{{ data.heroKda }}</van-button>
-
-          <van-button
+          >{{ data.heroKda }}</van-tag>&nbsp;
+          <van-tag
             round
-            type="info"
+            type="primary"
             size="mini"
             class="replay-ce50a09343724eb82df11390e2c1de18"
             @click="onGameActionSheetClick(data)"
-          >对局</van-button>
+          >对局</van-tag>
         </van-collapse-item>
       </van-collapse>
     </div>

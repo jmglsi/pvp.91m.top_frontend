@@ -12,11 +12,11 @@
         color="rgb(222,177,81)"
         title-active-color="rgb(222,177,81)"
       >
-        <van-tab title="巅峰赛">
+        <van-tab title="巅峰赛 (顶端局)">
           <DianFengSai />
         </van-tab>
 
-        <van-tab title="克制关系 (上周)">
+        <van-tab title="关系和克制 (上周)">
           <GuanXi />
         </van-tab>
 
