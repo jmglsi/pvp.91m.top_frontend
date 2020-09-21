@@ -25,6 +25,7 @@ const pvp = {
     getPlayerRanking: appApi + "?type=getPlayerRanking",
     getGameDashboard: appApi + "?type=getGameDashboard",
     getWebAccountInfo: appApi + "?type=getWebAccountInfo",
+    getHeroUpdateText: appApi + "?type=getHeroUpdateText",
     getHeroCombination: appApi + "?type=getHeroCombination",
     addHeroByCombination: appApi + "?type=addHeroByCombination",
     getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",

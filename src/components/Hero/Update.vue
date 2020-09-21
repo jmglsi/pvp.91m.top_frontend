@@ -22,7 +22,7 @@
         <a-timeline>
           <a-timeline-item
             v-for="(data, index) in tableData.result"
-            v-show="(updateInfo.model == 0 && data.calendar.type <= 0) || (updateInfo.model == 1 && data.calendar.type > 0) || (updateInfo.model == 2 && data.calendar.type > -1)"
+            v-show="(updateInfo.model == 0 && data.calendar.type <= 0) || (updateInfo.model == 1 && data.calendar.type > 0) || (updateInfo.model == 2 && data.calendar.type >= 0)"
             :key="'tuijian-587fa4ff436ed0ff2113cd87bb01967b-' + index"
             :color="data.calendar.color"
           >
@@ -30,6 +30,7 @@
               v-show="data.calendar.day"
               :color="data.calendar.color"
               round
+              @click="onHeroUpdateTextClick(heroId, data.articleId, data.calendar.day)"
               class="tuijian-5a0c2e4611419b82b55675d035764007"
             >{{ data.calendar.day }}</van-tag>
 
@@ -63,6 +64,7 @@
                 :key="'tuijian-54099f84a9943b4b1eed932ec22066eb-' + index"
               >
                 <img
+                  v-if="heroId != 155"
                   v-show="heroId"
                   v-lazy="heroId == 999 ? '/img/app-icons/hero.png' : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg'"
                   @click="heroId == 999 ? $message.info('提示:1000,还没上线正式服的新英雄') : ''"
@@ -92,6 +94,12 @@
         :min-date="date.min"
         :max-date="date.max"
       />
+    </div>
+
+    <div class="tuijian-3cc26c96de198245a3ee2d64e1f94ebf">
+      <van-dialog v-model="show.dialog" :title="updateInfo.title">
+        <div v-html="updateInfo.text" class="tuijian-288ac40c37c02b743c0c2cc51c650dd3" />
+      </van-dialog>
     </div>
   </div>
 </template>
@@ -136,9 +144,12 @@ export default {
           { text: "正式服", value: 1 },
           { text: "全部", value: 2 },
         ],
+        title: "",
+        text: "",
       },
       show: {
         calendar: false,
+        dialog: false,
       },
       date: {
         min: new Date(),
@@ -206,6 +217,24 @@ export default {
         }
       }
       return day;
+    },
+    onHeroUpdateTextClick: function (heroId, articleId, day) {
+      if (heroId == 0) return;
+
+      this.axios
+        .get(
+          this.apiList.pvp.getHeroUpdateText +
+            "&heroId=" +
+            heroId +
+            "&articleId=" +
+            articleId
+        )
+        .then((res) => {
+          this.updateInfo.title = day + " 的更新内容";
+          this.updateInfo.text = res.data.data;
+
+          this.show.dialog = true;
+        });
     },
   },
 };

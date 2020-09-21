@@ -219,7 +219,7 @@ export default {
     //手动将表格和工具栏进行关联
   },
   mounted() {
-    this.getHeroRanking(0, 0);
+    this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
   },
   methods: {
     initListWidth: function () {
