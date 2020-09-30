@@ -32,7 +32,8 @@
             />
             <span
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c adaptation-f58cc48f5b942c91e57eff48accc5151"
-            >{{ row.hero_1.adaptationRate }}</span>
+              >{{ row.hero_1.adaptationRate }}</span
+            >
           </template>
         </vxe-table-column>
         <vxe-table-column title="英雄_2" fixed="left" width="75" sortable>
@@ -45,22 +46,48 @@
             />
             <span
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c adaptation-f58cc48f5b942c91e57eff48accc5151"
-            >{{ row.hero_2.adaptationRate }}</span>
+              >{{ row.hero_2.adaptationRate }}</span
+            >
           </template>
         </vxe-table-column>
 
         <vxe-table-column title="#" type="seq" width="75" />
 
         <vxe-table-column title="队友 (%)">
-          <vxe-table-column title="出场" field="teammatePickRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜率" field="teammateWinRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="出场"
+            field="teammatePickRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="胜率"
+            field="teammateWinRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
-        <vxe-table-column title="适配" field="adaptation" :width="listWidth" sortable />
+        <vxe-table-column
+          title="适配"
+          field="adaptation"
+          :width="listWidth"
+          sortable
+        />
 
         <vxe-table-column title="对手 (%)">
-          <vxe-table-column title="出场" field="opponentPickRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜率" field="opponentWinRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="出场"
+            field="opponentPickRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="胜率"
+            field="opponentWinRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
         <template v-slot:empty>暂无数据</template>
       </vxe-grid>
@@ -69,7 +96,12 @@
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
         v-model="show.actionSheet"
-        :title="tableData.row.hero_1.name + ' & ' + tableData.row.hero_2.name + ' 如何操作'"
+        :title="
+          tableData.row.hero_1.name +
+          ' & ' +
+          tableData.row.hero_2.name +
+          ' 如何操作'
+        "
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom

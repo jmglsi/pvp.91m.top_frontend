@@ -28,11 +28,25 @@
 
     <div class="ranking-ebf09abeb7c3db44741d328324915725">
       <van-divider
-        :style="{ padding: '0 16px', color: 'rgb(222, 177, 81)', marginTop: '-3px', borderColor: 'rgb(222, 177, 81)' }"
-        @click="$message.info('提示:1005,点击头像可快速对比技能,点击头像右侧数据可查看详情')"
+        :style="{
+          padding: '0 16px',
+          color: 'rgb(222, 177, 81)',
+          marginTop: '-3px',
+          borderColor: 'rgb(222, 177, 81)',
+        }"
+        @click="
+          $message.info(
+            '提示:1005,点击头像可快速对比技能,点击头像右侧数据可查看详情'
+          )
+        "
       >
         点击&nbsp;
-        <van-tag round type="danger" class="ranking-4d09fbef1438e2b23375b87ba3e02942">上方数据</van-tag>&nbsp;查看更多
+        <van-tag
+          round
+          type="danger"
+          class="ranking-4d09fbef1438e2b23375b87ba3e02942"
+          >上方数据</van-tag
+        >&nbsp;查看更多
       </van-divider>
     </div>
   </div>

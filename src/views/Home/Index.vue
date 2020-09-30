@@ -32,8 +32,8 @@
           data-src="img/app-icons/upyun_logo2.png"
           src="img/app-icons/upyun_logo2.png"
           lazy="loaded"
-        />
-      </a>提供CDN加速/云储存服务
+        /> </a
+      >提供CDN加速/云储存服务
     </div>
 
     <AppBottomTabbar :height="100" />

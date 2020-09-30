@@ -1,8 +1,14 @@
 <template>
   <div class="miniapp">
-    <div class="miniapp-8d777f385d3dfec8815d20f7496026dc grid-4eb2044800e2b7b9e5c44d370af22b27">
+    <div
+      class="miniapp-8d777f385d3dfec8815d20f7496026dc grid-4eb2044800e2b7b9e5c44d370af22b27"
+    >
       <div class="miniapp-7c8fdd065963838acab323de542586ee">
-        <van-cell-group :border="false" title="本站" class="miniapp-e92a4998df8669fd2f0d92b7f3d41ac5">
+        <van-cell-group
+          :border="false"
+          title="本站"
+          class="miniapp-e92a4998df8669fd2f0d92b7f3d41ac5"
+        >
           <van-grid
             :border="false"
             :column-num="3"
@@ -22,7 +28,11 @@
       </div>
 
       <div class="miniapp-2a48f64e8081b260765b0c936932836a">
-        <van-cell-group :border="false" title="其它" class="miniapp-b377992f355a56a90c6120fb8559de59">
+        <van-cell-group
+          :border="false"
+          title="其它"
+          class="miniapp-b377992f355a56a90c6120fb8559de59"
+        >
           <van-grid
             :border="false"
             :column-num="3"

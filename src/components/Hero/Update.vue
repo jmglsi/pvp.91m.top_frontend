@@ -6,12 +6,17 @@
       <div class="tuijian-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
           <van-col span="16" @click="show.calendar = true">
-            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{ tableData.tips }}</span>
+            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{
+              tableData.tips
+            }}</span>
           </van-col>
           <van-col span="8">
             <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
               <van-dropdown-menu direction="up">
-                <van-dropdown-item v-model="updateInfo.model" :options="updateInfo.options" />
+                <van-dropdown-item
+                  v-model="updateInfo.model"
+                  :options="updateInfo.options"
+                />
               </van-dropdown-menu>
             </div>
           </van-col>
@@ -22,7 +27,11 @@
         <a-timeline>
           <a-timeline-item
             v-for="(data, index) in tableData.result"
-            v-show="(updateInfo.model == 0 && data.calendar.type <= 0) || (updateInfo.model == 1 && data.calendar.type > 0) || (updateInfo.model == 2 && data.calendar.type >= 0)"
+            v-show="
+              (updateInfo.model == 0 && data.calendar.type <= 0) ||
+              (updateInfo.model == 1 && data.calendar.type > 0) ||
+              (updateInfo.model == 2 && data.calendar.type >= 0)
+            "
             :key="'tuijian-587fa4ff436ed0ff2113cd87bb01967b-' + index"
             :color="data.calendar.color"
           >
@@ -30,18 +39,25 @@
               v-show="data.calendar.day"
               :color="data.calendar.color"
               round
-              @click="onHeroUpdateTextClick(heroId, data.articleId, data.calendar.day)"
+              @click="
+                onHeroUpdateTextClick(heroId, data.articleId, data.calendar.day)
+              "
               class="tuijian-5a0c2e4611419b82b55675d035764007"
-            >{{ data.calendar.day }}</van-tag>
+              >{{ data.calendar.day }}</van-tag
+            >
 
-            <div v-if="data.url" class="tuijian-5a5152e95445ede11c05f5fa898d8fd9">
+            <div
+              v-if="data.url"
+              class="tuijian-5a5152e95445ede11c05f5fa898d8fd9"
+            >
               <van-tag
                 v-for="(data, index) in data.tags"
                 :key="'tuijian-5e9c0708969ea62d890f9c9f063b6c44-' + index"
                 color="black"
                 round
                 class="tuijian-26edf9c6ae9f8356043d0e175516cab6"
-              >{{ data }}</van-tag>
+                >{{ data }}</van-tag
+              >
               <a :href="data.url" target="_blank">
                 <img
                   v-lazy="'/img/app-icons/link_black.png'"
@@ -57,7 +73,10 @@
               class="tuijian-5a5152e95445ede11c05f5fa898d8fd9"
             ></div>
 
-            <div v-show="data.items.length > 0" class="tuijian-c936f93d328137bba0ab32510a2e4fd0">
+            <div
+              v-show="data.items.length > 0"
+              class="tuijian-c936f93d328137bba0ab32510a2e4fd0"
+            >
               <router-link
                 v-for="(heroId, index) in data.items"
                 :to="heroId == 999 ? '' : { path: '/hero/' + heroId + '/info' }"
@@ -66,8 +85,20 @@
                 <img
                   v-if="heroId != 155"
                   v-show="heroId"
-                  v-lazy="heroId == 999 ? '/img/app-icons/hero.png' : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg'"
-                  @click="heroId == 999 ? $message.info('提示:1000,还没上线正式服的新英雄') : ''"
+                  v-lazy="
+                    heroId == 999
+                      ? '/img/app-icons/hero.png'
+                      : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                        heroId +
+                        '/' +
+                        heroId +
+                        '.jpg'
+                  "
+                  @click="
+                    heroId == 999
+                      ? $message.info('提示:1000,还没上线正式服的新英雄')
+                      : ''
+                  "
                   class="tuijian-5d39f3848925994b52ec52fba934577c"
                 />
               </router-link>
@@ -77,10 +108,21 @@
 
         <div
           v-if="heroId != 0"
-          @click="appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', '//nga.178.com/read.php?pid=' + updateId)"
+          @click="
+            appOpenUrl(
+              '是否查看英雄更多更新记录?',
+              'NGA @EndMP',
+              '//nga.178.com/read.php?pid=' + updateId
+            )
+          "
           class="tuijian-0b479089ade5d13a2c41830785ebac9d"
         >
-          <van-tag color="orange" round class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067">更多更新记录</van-tag>
+          <van-tag
+            color="orange"
+            round
+            class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067"
+            >更多更新记录</van-tag
+          >
         </div>
       </div>
     </div>
@@ -98,7 +140,10 @@
 
     <div class="tuijian-3cc26c96de198245a3ee2d64e1f94ebf">
       <van-dialog v-model="show.dialog" :title="updateInfo.title">
-        <div v-html="updateInfo.text" class="tuijian-288ac40c37c02b743c0c2cc51c650dd3" />
+        <div
+          v-html="updateInfo.text"
+          class="tuijian-288ac40c37c02b743c0c2cc51c650dd3"
+        />
       </van-dialog>
     </div>
   </div>

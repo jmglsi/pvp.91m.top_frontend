@@ -9,7 +9,9 @@
         />
         <van-dropdown-item ref="item" title="筛选">
           <van-switch-cell v-model="switchModel" title="隐藏战绩" />
-          <van-button type="info" block @click="onDropdownConfirmClick">确认</van-button>
+          <van-button type="info" block @click="onDropdownConfirmClick"
+            >确认</van-button
+          >
         </van-dropdown-item>
       </van-dropdown-menu>
     </div>
@@ -32,7 +34,8 @@
               mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
-            >{{ row.tag.text }}</van-tag>
+              >{{ row.tag.text }}</van-tag
+            >
             <img
               v-lazy="row.avatar"
               width="50"
@@ -44,9 +47,18 @@
 
         <vxe-table-column title="#" type="seq" width="75" />
 
-        <vxe-table-column title="昵称" field="gamePlayerName" :width="listWidth" />
+        <vxe-table-column
+          title="昵称"
+          field="gamePlayerName"
+          :width="listWidth"
+        />
 
-        <vxe-table-column title="巅峰分" field="rankScore" :width="listWidth" sortable />
+        <vxe-table-column
+          title="巅峰分"
+          field="rankScore"
+          :width="listWidth"
+          sortable
+        />
       </vxe-grid>
     </div>
 
@@ -79,7 +91,7 @@ export default {
       areaInfo: {
         model: 0,
         options: [
-          { text: "全部大区", value: 0 },
+          { text: "全部", value: 0 },
           { text: "安卓 手Q", value: 1 },
           { text: "苹果 手Q", value: 2 },
           { text: "安卓微信", value: 3 },

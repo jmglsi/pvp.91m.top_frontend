@@ -53,8 +53,13 @@
       </van-cell-group>
     </div>
 
-    <div v-show="loginInfo.type == 0" class="login-61046f2f5eefe3dc179e52af32241062">
-      <span class="login-e4c9479b11955648dad558fe717a4eb2">注:用户名和QQ将用于展示在BP界面以及修改密码,请不要瞎写</span>
+    <div
+      v-show="loginInfo.type == 0"
+      class="login-61046f2f5eefe3dc179e52af32241062"
+    >
+      <span class="login-e4c9479b11955648dad558fe717a4eb2"
+        >注:用户名和QQ将用于展示在BP界面以及修改密码,请不要瞎写</span
+      >
     </div>
 
     <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
@@ -64,14 +69,19 @@
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
         @click="onLoginClick"
         class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
-      >{{ loginInfo.text }}</van-button>
+        >{{ loginInfo.text }}</van-button
+      >
     </div>
 
-    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f">
+    <div
+      class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f"
+    >
       <span @click="onRegisterClick">注册</span>
     </div>
 
-    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d">
+    <div
+      class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d"
+    >
       <span @click="onUpdateClick">修改密码</span>
     </div>
   </div>

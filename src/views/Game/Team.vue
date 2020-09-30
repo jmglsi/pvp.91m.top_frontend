@@ -16,7 +16,9 @@
       </van-nav-bar>
     </div>
 
-    <div class="game-c37237ae7770c5062ccad7a23572e282 grid-4eb2044800e2b7b9e5c44d370af22b27">
+    <div
+      class="game-c37237ae7770c5062ccad7a23572e282 grid-4eb2044800e2b7b9e5c44d370af22b27"
+    >
       <van-grid :border="false" class="game-40db4f618bd5c27e60368f891382ffd4">
         <van-grid-item
           v-for="(data, index) in teamInfo.result"
@@ -32,7 +34,9 @@
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
         v-model="show.team"
-        :title="teamInfo.row.id != null ? teamInfo.row.name + ' 如何操作' : '新建队伍'"
+        :title="
+          teamInfo.row.id != null ? teamInfo.row.name + ' 如何操作' : '新建队伍'
+        "
       >
         <div class="content">
           <div class="game-350be0bb4350ca865ab9210d074875f1">
@@ -50,7 +54,8 @@
                     size="small"
                     color="black"
                     @click="onCreateEngageClick(teamInfo.row.id)"
-                  >创建交战</van-button>
+                    >创建交战</van-button
+                  >
                 </template>
               </van-field>
               <van-field
@@ -67,7 +72,9 @@
                     :max-size="3 * 1024 * 1024"
                     @oversize="onOversize"
                   >
-                    <van-button round size="small" color="rgb(25, 137, 250)">上传图片</van-button>
+                    <van-button round size="small" color="rgb(25, 137, 250)"
+                      >上传图片</van-button
+                    >
                   </van-uploader>
                 </template>
               </van-field>
@@ -89,14 +96,16 @@
               color="red"
               class="game-a066f238070a70cb531c9bd722c65b36"
               @click="onDelectTeamClick"
-            >删除队伍</van-button>&nbsp;
+              >删除队伍</van-button
+            >&nbsp;
             <van-button
               round
               size="small"
               color="rgb(7, 193, 96)"
               class="game-a066f238070a70cb531c9bd722c65b36"
               @click="onSaveTeamInfoClick"
-            >保存队伍信息</van-button>
+              >保存队伍信息</van-button
+            >
           </div>
         </div>
       </van-action-sheet>

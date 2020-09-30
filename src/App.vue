@@ -2,9 +2,15 @@
   <div id="app">
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <keep-alive>
-        <router-view v-if="$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+        <router-view
+          v-if="$route.meta.keepAlive"
+          class="app-1bda80f2be4d3658e0baa43fbe7ae8c1"
+        />
       </keep-alive>
-      <router-view v-if="!$route.meta.keepAlive" class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+      <router-view
+        v-if="!$route.meta.keepAlive"
+        class="app-1bda80f2be4d3658e0baa43fbe7ae8c1"
+      />
     </div>
 
     <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
@@ -25,7 +31,8 @@
           :to="data.to"
           :name="data.name"
           class="app-e0c3b278eeb2cab05f548d7af0f2c949"
-        >{{ data.text }}</van-tabbar-item>
+          >{{ data.text }}</van-tabbar-item
+        >
       </van-tabbar>
     </div>
   </div>

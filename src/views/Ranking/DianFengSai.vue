@@ -33,7 +33,13 @@
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
-        <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
+        <vxe-table-column
+          title="英雄"
+          field="score"
+          fixed="left"
+          width="75"
+          sortable
+        >
           <template v-slot="{ row }">
             <van-tag
               v-show="row.tag.text"
@@ -41,7 +47,8 @@
               mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
-            >{{ row.tag.text }}</van-tag>
+              >{{ row.tag.text }}</van-tag
+            >
             <img
               v-lazy="row.img"
               width="50"
@@ -64,7 +71,8 @@
               />
               <span
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-043052eea2d064cab23119e56f4f640e"
-              >{{ (row.skill[0].pickRate).toFixed(2) }}</span>
+                >{{ row.skill[0].pickRate.toFixed(2) }}</span
+              >
               <img
                 v-if="row.skill[1].id"
                 v-lazy="row.skill[1].img"
@@ -75,7 +83,8 @@
               <span
                 v-if="row.skill[1].id"
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-dabb6e25dffefe5b4821b7062afbdaef"
-              >{{ (row.skill[1].pickRate).toFixed(2) }}</span>
+                >{{ row.skill[1].pickRate.toFixed(2) }}</span
+              >
             </div>
           </template>
         </vxe-table-column>
@@ -83,44 +92,139 @@
         <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column title="出场越低,波动越大 (%)">
-          <vxe-table-column title="禁用" field="banRate" :width="listWidth" sortable />
-          <vxe-table-column title="出场" field="pickRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜率" field="winRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="禁用"
+            field="banRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="出场"
+            field="pickRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="胜率"
+            field="winRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
-          <vxe-table-column title="全部" field="allBrandRate" :width="listWidth" sortable />
-          <vxe-table-column title="金牌" field="evaluateGoldRate" :width="listWidth" sortable />
-          <vxe-table-column title="银牌" field="evaluateSilverRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="allBrandRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="金牌"
+            field="evaluateGoldRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="银牌"
+            field="evaluateSilverRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
-          <vxe-table-column title="败方" field="loseMvpRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="allMvpRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="胜方"
+            field="winMvpRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="败方"
+            field="loseMvpRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
-        <vxe-table-column title="承伤" field="totalBeHurtedCntPerMin" :width="listWidth" sortable />
+        <vxe-table-column
+          title="承伤"
+          field="totalBeHurtedCntPerMin"
+          :width="listWidth"
+          sortable
+        />
 
         <vxe-table-column title="伤害">
-          <vxe-table-column title="全部" field="totalOutputPerMin" :width="listWidth" sortable />
-          <vxe-table-column title="对人" field="totalHurtHeroCntPerMin" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="totalOutputPerMin"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="对人"
+            field="totalHurtHeroCntPerMin"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="经济">
-          <vxe-table-column title="全部" field="equMoneyOverflow" :width="listWidth" sortable />
-          <vxe-table-column title="分均" field="equMoneyMin" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="equMoneyOverflow"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="分均"
+            field="equMoneyMin"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="KDA">
-          <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
-          <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
-          <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
+          <vxe-table-column
+            title="击杀"
+            field="killCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="死亡"
+            field="deadCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="助攻"
+            field="assistCnt"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="其它">
-          <vxe-table-column title="参团" field="joinGamePercent" :width="listWidth" sortable />
-          <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+          <vxe-table-column
+            title="参团"
+            field="joinGamePercent"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="时长"
+            field="usedtime"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
       </vxe-grid>
     </div>
@@ -128,10 +232,26 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="show.heroSkill"
-        :title="tableData.row.name + ' 的技能数据 (上周)'"
+        :title="tableData.row.name + ' 的其它数据 (上周)'"
         safe-area-inset-bottom
       >
-        <HeroList :heroSkill="tableData.row.skill" />
+        <van-tabs>
+          <van-tab title="技能">
+            <HeroSkillList :heroSkill="tableData.row.skill"
+          /></van-tab>
+          <van-tab title="装备"
+            ><div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
+              <van-tag
+                @click="
+                  $router.push({ path: '/hero/' + tableData.row.id + '/info' })
+                "
+                type="primary"
+                size="large"
+                >前往查看</van-tag
+              >
+            </div></van-tab
+          >
+        </van-tabs>
       </van-action-sheet>
     </div>
 
@@ -152,7 +272,8 @@
 export default {
   name: "RankingDianFengSai",
   components: {
-    HeroList: (resolve) => require(["@/components/Hero/List.vue"], resolve),
+    HeroSkillList: (resolve) =>
+      require(["@/components/Hero/SkillList.vue"], resolve),
   },
   data() {
     return {
@@ -170,13 +291,13 @@ export default {
       positionInfo: {
         model: 0,
         options: [
-          { text: "全部分路", value: 0 },
-          { text: "对抗 (战士)", value: 1 },
+          { text: "全部 ٩( 'ω' )و", value: 0 },
+          { text: "对抗路 (战士)", value: 1 },
           { text: "中路", value: 2 },
-          { text: "对抗 (坦克)", value: 3 },
+          { text: "对抗路 (坦克)", value: 3 },
           { text: "打野", value: 4 },
-          { text: "发育", value: 5 },
-          { text: "辅助", value: 6 },
+          { text: "发育路", value: 5 },
+          { text: "游走", value: 6 },
         ],
       },
       tableData: {
