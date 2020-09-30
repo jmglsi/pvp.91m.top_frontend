@@ -200,7 +200,7 @@
         />
         <van-tab
           class="info-ab71021d21963773bfb8be80af65869f"
-          title="同职业对比"
+          title="同分路对比"
         />
         <van-tab
           class="info-ab71021d21963773bfb8be80af65869f"
@@ -430,7 +430,7 @@ export default {
       }
 
       if (e == 1) {
-        dTitle = "同职业对比";
+        dTitle = "同分路对比";
         this.hero.title = dTitle;
       }
 
