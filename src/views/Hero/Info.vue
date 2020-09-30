@@ -5,7 +5,11 @@
         left-arrow
         :border="false"
         :fixed="true"
-        :style="scroll >= 50 ? { backgroundColor: 'white' } : { backgroundColor: 'transparent' }"
+        :style="
+          scroll >= 50
+            ? { backgroundColor: 'white' }
+            : { backgroundColor: 'transparent' }
+        "
         @click-left="appPush('/ranking')"
         @click-right="$message.info('提示:1002,分路推荐 ;D')"
         z-index="99999999"
@@ -25,13 +29,21 @@
               class="info-f90943c8968fa651d7e1b617ff046fe2"
             />
             <span
-              :style="scroll >= 50 || tabsModel > 0 ? { color: 'black' } : { color: 'white' }"
+              :style="
+                scroll >= 50 || tabsModel > 0
+                  ? { color: 'black' }
+                  : { color: 'white' }
+              "
               class="info-d5d3db1765287eef77d7927cc956f50a"
-            >{{ hero.title }}</span>
+              >{{ hero.title }}</span
+            >
           </div>
         </template>
         <template #right>
-          <div v-show="show.parameter" class="info-68adaff1d028a37f27fb33c483329cba">
+          <div
+            v-show="show.parameter"
+            class="info-68adaff1d028a37f27fb33c483329cba"
+          >
             <ul>
               <li
                 v-for="(data, index) in hero.info.type"
@@ -42,7 +54,8 @@
                   :color="positionInfo[data - 1][1]"
                   round
                   class="info-bc267281c62550407c9572aff2a45f69"
-                >{{ positionInfo[data - 1][0] }}</van-tag>
+                  >{{ positionInfo[data - 1][0] }}</van-tag
+                >
               </li>
             </ul>
           </div>
@@ -63,7 +76,15 @@
           class="hero-5a0b1ba1b22eb336b55e70eb2abbac30"
         >
           <img
-            v-lazy="'//game.gtimg.cn/images/yxzj/img201606/heroimg/' + hero.info.id + '/' + hero.info.id + '-mobileskin-' + data + '.jpg'"
+            v-lazy="
+              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+              hero.info.id +
+              '/' +
+              hero.info.id +
+              '-mobileskin-' +
+              data +
+              '.jpg'
+            "
             class="hero-44908c08b6c253a19ab6246e6eec857a"
           />
         </van-swipe-item>
@@ -85,15 +106,25 @@
           @click="$message.info('提示:1004,分均经济、场均时长、场均经济 ;D')"
         >
           <div class="info-795f3202b17cb6bc3d4b771d8c6c9eaf">
-            <AppGold width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
+            <AppGold
+              width="25"
+              height="25"
+              class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+            />
             <span
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
-            >{{ hero.info.equMoneyMin || 0 }}</span>
+              >{{ hero.info.equMoneyMin || 0 }}</span
+            >
 
-            <AppTime width="25" height="25" class="info-ff2364a0be3d20e46cc69efb36afe9a5" />
+            <AppTime
+              width="25"
+              height="25"
+              class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+            />
             <span
               class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
-            >{{ hero.info.usedtime || 0 }}</span>
+              >{{ hero.info.usedtime || 0 }}</span
+            >
           </div>
 
           <span class="info-9726255eec083aa56dc0449a21b33190">
@@ -101,10 +132,14 @@
               round
               color="black"
               class="info-1d61d12b768d71c075477fd92281464d"
-            >{{ hero.info.equMoneyOverflow || 0 }}</van-tag>
+              >{{ hero.info.equMoneyOverflow || 0 }}</van-tag
+            >
           </span>
         </van-grid-item>
-        <van-grid-item class="hero-c6e864acb6955eed0361921288d34149" @click="show.heroMenu = true">
+        <van-grid-item
+          class="hero-c6e864acb6955eed0361921288d34149"
+          @click="show.heroMenu = true"
+        >
           <van-circle
             v-model="circle.model"
             :rate="hero.info.dominanceRate"
@@ -116,7 +151,10 @@
             class="hero-83444807ba7a7da23e12b17567d2d595"
           />
         </van-grid-item>
-        <van-grid-item class="hero-c6e864acb6955eed0361921288d34149" @click="show.heroSkill = true">
+        <van-grid-item
+          class="hero-c6e864acb6955eed0361921288d34149"
+          @click="show.heroSkill = true"
+        >
           <div class="info-f3412345b511c61986bba9a39793157f">
             <span
               class="info-cb4b556fe00d9a0da9d94f0bbf40e78c"
@@ -132,7 +170,8 @@
               />
               <span
                 class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
-              >{{ (data.pickRate).toFixed(2) }}</span>
+                >{{ data.pickRate.toFixed(2) }}</span
+              >
             </span>
           </div>
         </van-grid-item>
@@ -146,7 +185,9 @@
         :ellipsis="false"
         :sticky="true"
         @change="onTabsChange"
-        @click="tabsModel == 0 && hero.line == 0 ? hero.line = 1 : hero.line = 0"
+        @click="
+          tabsModel == 0 && hero.line == 0 ? (hero.line = 1) : (hero.line = 0)
+        "
         duration="0.5"
         line-width="25px"
         color="rgb(222,177,81)"
@@ -157,20 +198,31 @@
           class="info-ab71021d21963773bfb8be80af65869f"
           :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'"
         />
-        <van-tab class="info-ab71021d21963773bfb8be80af65869f" title="同职业对比" />
+        <van-tab
+          class="info-ab71021d21963773bfb8be80af65869f"
+          title="同职业对比"
+        />
         <van-tab
           class="info-ab71021d21963773bfb8be80af65869f"
           title="自定义对比"
           :disabled="tabsModel == 0 ? true : false"
         />
         <div class="hero-e06398232dc80e41209489705546802c">
-          <HeroLine v-if="tabsModel == 0" :heroId="hero.info.id" :lineType="hero.line" />
+          <HeroLine
+            v-if="tabsModel == 0"
+            :heroId="hero.info.id"
+            :lineType="hero.line"
+          />
         </div>
         <div
           :style="tabsModel > 0 ? { marginTop: '50px' } : { marginTop: '0' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
-          <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
+          <HeroRadar
+            v-if="tabsModel > 0"
+            :tabsModel="tabsModel"
+            :heroId="hero.info.id"
+          />
         </div>
       </van-tabs>
     </div>
@@ -187,10 +239,17 @@
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
         v-model="show.heroSkill"
-        :title="hero.info.name + ' 的技能数据 (上周)'"
+        :title="hero.info.name + ' 的其它数据 (上周)'"
         safe-area-inset-bottom
       >
-        <HeroList :heroSkill="hero.info.skill" />
+        <van-tabs>
+          <van-tab title="技能">
+            <HeroSkillList :heroSkill="hero.info.skill"
+          /></van-tab>
+          <van-tab title="装备"
+            ><HeroEquipmentList :heroEquipment="hero.info.equipment"
+          /></van-tab>
+        </van-tabs>
       </van-action-sheet>
     </div>
 
@@ -202,14 +261,28 @@
         safe-area-inset-bottom
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
-        <van-grid class="vote-ed90360246f7e2ed71281819e0ca3623" :border="false" :column-num="2">
-          <van-grid-item class="vote-59c25466342abdb6746988b245f3a5a6" @click="onHeroVoteClick(1)">
+        <van-grid
+          class="vote-ed90360246f7e2ed71281819e0ca3623"
+          :border="false"
+          :column-num="2"
+        >
+          <van-grid-item
+            class="vote-59c25466342abdb6746988b245f3a5a6"
+            @click="onHeroVoteClick(1)"
+          >
             <AppCry width="50" height="50" />
-            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circle.info.vote[0].text }}</span>
+            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+              circle.info.vote[0].text
+            }}</span>
           </van-grid-item>
-          <van-grid-item class="vote-59c25466342abdb6746988b245f3a5a6" @click="onHeroVoteClick(2)">
+          <van-grid-item
+            class="vote-59c25466342abdb6746988b245f3a5a6"
+            @click="onHeroVoteClick(2)"
+          >
             <AppSmile width="50" height="50" />
-            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{ circle.info.vote[1].text }}</span>
+            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+              circle.info.vote[1].text
+            }}</span>
           </van-grid-item>
           <van-cell
             title="注意事项"
@@ -234,7 +307,10 @@ export default {
     AppTime: (resolve) => require(["@/assets/Icons/AppTime.vue"], resolve),
     AppCry: (resolve) => require(["@/assets/Icons/AppCry.vue"], resolve),
     AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
-    HeroList: (resolve) => require(["@/components/Hero/List.vue"], resolve),
+    HeroSkillList: (resolve) =>
+      require(["@/components/Hero/SkillList.vue"], resolve),
+    HeroEquipmentList: (resolve) =>
+      require(["@/components/Hero/EquipmentList.vue"], resolve),
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
