@@ -236,21 +236,20 @@
         safe-area-inset-bottom
       >
         <van-tabs>
-          <van-tab title="技能">
-            <HeroSkillList :heroSkill="tableData.row.skill"
-          /></van-tab>
-          <van-tab title="装备"
-            ><div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
-              <van-tag
-                @click="
-                  $router.push({ path: '/hero/' + tableData.row.id + '/info' })
-                "
-                type="primary"
-                size="large"
-                >前往查看</van-tag
-              >
-            </div></van-tab
-          >
+          <van-tab title="技能" />
+          <van-tab title="装备" />
+          <div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
+            <van-button
+              round
+              @click="
+                $router.push({ path: '/hero/' + tableData.row.id + '/info' })
+              "
+              size="small"
+              color="linear-gradient(to right, #ff6034, #ee0a24)"
+            >
+              前往查看
+            </van-button>
+          </div>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -271,10 +270,6 @@
 <script>
 export default {
   name: "RankingDianFengSai",
-  components: {
-    HeroSkillList: (resolve) =>
-      require(["@/components/Hero/SkillList.vue"], resolve),
-  },
   data() {
     return {
       areaInfo: {
