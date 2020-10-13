@@ -19,14 +19,14 @@
         <template #title>
           <div
             @click="$message.info('提示:1003,近期热度 ;D')"
-            class="info-632d142d7a508e86f6c35a044a17411e"
+            class="hero-632d142d7a508e86f6c35a044a17411e"
           >
             <img
               v-show="show.parameter && hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
               width="15"
               height="15"
-              class="info-f90943c8968fa651d7e1b617ff046fe2"
+              class="hero-f90943c8968fa651d7e1b617ff046fe2"
             />
             <span
               :style="
@@ -34,7 +34,7 @@
                   ? { color: 'black' }
                   : { color: 'white' }
               "
-              class="info-d5d3db1765287eef77d7927cc956f50a"
+              class="hero-d5d3db1765287eef77d7927cc956f50a"
               >{{ hero.title }}</span
             >
           </div>
@@ -42,7 +42,7 @@
         <template #right>
           <div
             v-show="show.parameter"
-            class="info-68adaff1d028a37f27fb33c483329cba"
+            class="hero-68adaff1d028a37f27fb33c483329cba"
           >
             <ul>
               <li
@@ -53,7 +53,7 @@
                   v-if="data"
                   :color="positionInfo[data - 1][1]"
                   round
-                  class="info-bc267281c62550407c9572aff2a45f69"
+                  class="hero-bc267281c62550407c9572aff2a45f69"
                   >{{ positionInfo[data - 1][0] }}</van-tag
                 >
               </li>
@@ -71,24 +71,21 @@
         class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
       >
         <van-swipe-item
-          v-for="(data, index) in hero.info.skinNum"
+          v-for="(data, index) in hero.info.skin"
           :key="'hero-07ae211504ad5deba5d239525b888d59-' + index"
+          @click="show.imagePreview = true"
           class="hero-5a0b1ba1b22eb336b55e70eb2abbac30"
         >
-          <img
-            v-lazy="
-              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-              hero.info.id +
-              '/' +
-              hero.info.id +
-              '-mobileskin-' +
-              data +
-              '.jpg'
-            "
-            class="hero-44908c08b6c253a19ab6246e6eec857a"
-          />
+          <img v-lazy="data" class="hero-44908c08b6c253a19ab6246e6eec857a" />
         </van-swipe-item>
       </van-swipe>
+      <van-image-preview v-model="show.imagePreview" :images="hero.info.skin">
+        <template v-slot:cover
+          ><span class="hero-b5741c8457973b008c424c6f94ff3901"
+            >长按或右键可保存图片~</span
+          ></template
+        >
+      </van-image-preview>
     </div>
 
     <div
@@ -105,33 +102,33 @@
           class="hero-c6e864acb6955eed0361921288d34149"
           @click="$message.info('提示:1004,分均经济、场均时长、场均经济 ;D')"
         >
-          <div class="info-795f3202b17cb6bc3d4b771d8c6c9eaf">
+          <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <AppGold
               width="25"
               height="25"
-              class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+              class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
             />
             <span
-              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
+              class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
               >{{ hero.info.equMoneyMin || 0 }}</span
             >
 
             <AppTime
               width="25"
               height="25"
-              class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+              class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
             />
             <span
-              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
+              class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
               >{{ hero.info.usedtime || 0 }}</span
             >
           </div>
 
-          <span class="info-9726255eec083aa56dc0449a21b33190">
+          <span class="hero-9726255eec083aa56dc0449a21b33190">
             <van-tag
               round
               color="black"
-              class="info-1d61d12b768d71c075477fd92281464d"
+              class="hero-1d61d12b768d71c075477fd92281464d"
               >{{ hero.info.equMoneyOverflow || 0 }}</van-tag
             >
           </span>
@@ -155,22 +152,44 @@
           class="hero-c6e864acb6955eed0361921288d34149"
           @click="show.heroSkill = true"
         >
-          <div class="info-f3412345b511c61986bba9a39793157f">
+          <div
+            v-if="hero.info.skill && hero.info.equipment"
+            class="hero-f3412345b511c61986bba9a39793157f"
+          >
             <span
-              class="info-cb4b556fe00d9a0da9d94f0bbf40e78c"
-              v-for="(data, index) in hero.info.skill.slice(0, 2)"
+              v-for="(data, index) in hero.info.skill.slice(0, 1)"
               :key="'hero-d7768ef7449dfbbc6020f1dd0ae11593-' + index"
+              class="hero-cb4b556fe00d9a0da9d94f0bbf40e78c"
             >
               <img
-                v-show="data.id > 0"
                 v-lazy="data.img"
                 width="25"
                 height="25"
-                class="info-ff2364a0be3d20e46cc69efb36afe9a5"
+                class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
               />
               <span
-                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c info-0fc3cfbc27e91ea60a787de13dae3e3c"
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
                 >{{ data.pickRate.toFixed(2) }}</span
+              >
+            </span>
+            <span
+              v-for="(data, index) in hero.info.equipment.slice(0, 1)"
+              :key="'hero-7e44100739d2ecde9345b508ea311bbe-' + index"
+              class="hero-cb4b556fe00d9a0da9d94f0bbf40e78c"
+            >
+              <img
+                v-lazy="
+                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  data.list[0] +
+                  '.png'
+                "
+                width="25"
+                height="25"
+                class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
+              />
+              <span
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
+                >{{ data.pickTimes }}</span
               >
             </span>
           </div>
@@ -190,20 +209,20 @@
         "
         duration="0.5"
         line-width="25px"
-        color="rgb(222,177,81)"
-        title-active-color="rgb(222,177,81)"
-        class="info-d42f4851e770aa0f758b01388874f67b"
+        color="rgb(243,189,103)"
+        title-active-color="rgb(243,189,103)"
+        class="hero-d42f4851e770aa0f758b01388874f67b"
       >
         <van-tab
-          class="info-ab71021d21963773bfb8be80af65869f"
+          class="hero-ab71021d21963773bfb8be80af65869f"
           :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'"
         />
         <van-tab
-          class="info-ab71021d21963773bfb8be80af65869f"
+          class="hero-ab71021d21963773bfb8be80af65869f"
           title="同分路对比"
         />
         <van-tab
-          class="info-ab71021d21963773bfb8be80af65869f"
+          class="hero-ab71021d21963773bfb8be80af65869f"
           title="自定义对比"
           :disabled="tabsModel == 0 ? true : false"
         />
@@ -262,25 +281,25 @@
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
         <van-grid
-          class="vote-ed90360246f7e2ed71281819e0ca3623"
+          class="hero-ed90360246f7e2ed71281819e0ca3623"
           :border="false"
           :column-num="2"
         >
           <van-grid-item
-            class="vote-59c25466342abdb6746988b245f3a5a6"
+            class="hero-59c25466342abdb6746988b245f3a5a6"
             @click="onHeroVoteClick(1)"
           >
             <AppCry width="50" height="50" />
-            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
               circle.info.vote[0].text
             }}</span>
           </van-grid-item>
           <van-grid-item
-            class="vote-59c25466342abdb6746988b245f3a5a6"
+            class="hero-59c25466342abdb6746988b245f3a5a6"
             @click="onHeroVoteClick(2)"
           >
             <AppSmile width="50" height="50" />
-            <span class="vote-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
               circle.info.vote[1].text
             }}</span>
           </van-grid-item>
@@ -331,6 +350,7 @@ export default {
         parameter: true,
         heroSkill: false,
         heroMenu: false,
+        imagePreview: false,
       },
       tabsModel: 0,
       hero: {
@@ -340,6 +360,8 @@ export default {
           id: 0,
           name: "加载中",
           clockwise: false,
+          skin: [],
+          skinIndex: 0,
           skill: [],
         },
       },
