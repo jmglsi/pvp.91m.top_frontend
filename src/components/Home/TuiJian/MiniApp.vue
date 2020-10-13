@@ -1,7 +1,7 @@
 <template>
   <div class="miniapp">
     <div
-      class="miniapp-8d777f385d3dfec8815d20f7496026dc grid-4eb2044800e2b7b9e5c44d370af22b27"
+      class="miniapp-8d777f385d3dfec8815d20f7496026dc app-4eb2044800e2b7b9e5c44d370af22b27"
     >
       <div class="miniapp-7c8fdd065963838acab323de542586ee">
         <van-cell-group

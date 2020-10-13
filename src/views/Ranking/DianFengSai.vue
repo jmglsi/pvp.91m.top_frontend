@@ -53,24 +53,24 @@
               v-lazy="row.img"
               width="50"
               height="50"
-              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
             />
             <img
               v-if="row.trend > 0"
               v-lazy="'/img/app-icons/hot-' + row.trend + '.png'"
               width="15"
               height="15"
-              class="dfs-3d5f1ffeadf58eb64ef57aef7e53a31e"
+              class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
             />
-            <div class="dfs-713dd4d0b2e842c08da62ddeec872331">
+            <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
               <img
                 v-lazy="row.skill[0].img"
                 width="20"
                 height="20"
-                class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-35af5e6c0fc290aa4f2e38d4c8296a03"
+                class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
               />
               <span
-                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-043052eea2d064cab23119e56f4f640e"
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-043052eea2d064cab23119e56f4f640e"
                 >{{ row.skill[0].pickRate.toFixed(2) }}</span
               >
               <img
@@ -78,11 +78,11 @@
                 v-lazy="row.skill[1].img"
                 width="20"
                 height="20"
-                class="dfs-95a25d46f98b0ec553d892cc45037d57 dfs-fbfe7b256ce6b4df1d03d8022163c6d2"
+                class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
               />
               <span
                 v-if="row.skill[1].id"
-                class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c skill-dabb6e25dffefe5b4821b7062afbdaef"
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
                 >{{ row.skill[1].pickRate.toFixed(2) }}</span
               >
             </div>
@@ -423,13 +423,13 @@ export default {
 
       if (column.property === "banRate") {
         if (row.banRate >= color.ban) {
-          return "col-bda9643ac6601722a28f238714274da4";
+          return "ranking-bda9643ac6601722a28f238714274da4";
         }
       }
 
       if (column.property === "pickRate") {
         if (row.pickRate >= color.pick) {
-          return "col-48d6215903dff56238e52e8891380c8f";
+          return "ranking-48d6215903dff56238e52e8891380c8f";
         }
       }
 
@@ -438,7 +438,7 @@ export default {
           (row.banRate >= color.ban || row.pickRate >= color.pick) &&
           row.winRate >= color.win
         ) {
-          return "col-9f27410725ab8cc8854a2769c7a516b8";
+          return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
     },

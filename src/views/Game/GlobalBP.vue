@@ -5,8 +5,11 @@
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
     </div>
   </div>
-  <div v-else-if="isPortrait == false" class="game-bp">
-    <span class="game-f4842dcb685d490e2a43212b8072a6fe">
+  <div
+    v-else-if="isPortrait == false"
+    class="app-9fc0eb5a934dba03cc266a49b8ec51fb"
+  >
+    <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">{{
         tabsModel % 2 == 0 ? team.team_1.name : team.team_2.name
       }}</span>
@@ -18,17 +21,17 @@
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
       <div
-        class="ban-8c9cb4a232c7e88403dddc3a0e589162 ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3"
+        class="game-8c9cb4a232c7e88403dddc3a0e589162 game-bf2c7b7ad9bcf75cd72e0b4ce30500e3"
       >
         <ul>
           <li
             v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
-            :key="'ban-2a47f410fffc64666ba4673bdc597f72a-' + index"
+            :key="'game-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(index)"
           >
             <span
               v-show="index == 0 || index == 2 || index == 11 || index == 13"
-              class="ban-4978748050a936d2f77fe718f1d81524"
+              class="game-4978748050a936d2f77fe718f1d81524"
             >
               <img
                 v-lazy="
@@ -47,12 +50,12 @@
                 "
                 width="30"
                 height="30"
-                class="ban-eee32796c3fdfc147115c9f6e875c090"
+                class="game-5de9dd2a5714dd606db0e0fa1611c227"
               />
               <AppLock
                 width="25"
                 height="25"
-                class="ban-dce7c4174ce9323904a934a486c41288"
+                class="game-dce7c4174ce9323904a934a486c41288"
               />
             </span>
           </li>
@@ -60,17 +63,17 @@
       </div>
 
       <div
-        class="ban-c6a2f8b3941d7f91bc4e51839e5371e0 ban-ba9bced6af8121cf6413000a4274ac2b"
+        class="game-c6a2f8b3941d7f91bc4e51839e5371e0 game-ba9bced6af8121cf6413000a4274ac2b"
       >
         <ul>
           <li
             v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
-            :key="'ban-38dfd87b435ce58ee12baf01d6f23c73-' + index"
+            :key="'game-38dfd87b435ce58ee12baf01d6f23c73-' + index"
             @click="onGameBanPickClick(index)"
           >
             <span
               v-show="index == 1 || index == 3 || index == 10 || index == 12"
-              class="ban-6e9c0050fe873888fbf53ec6f7b21816"
+              class="game-6e9c0050fe873888fbf53ec6f7b21816"
             >
               <img
                 v-lazy="
@@ -89,12 +92,12 @@
                 "
                 width="30"
                 height="30"
-                class="ban-aa95efe1c5d39e5e9389ca5833e63fbe"
+                class="game-221cf04d9a9e32c6af24502f96e3ecfe"
               />
               <AppLock
                 width="25"
                 height="25"
-                class="ban-dce7c4174ce9323904a934a486c41288"
+                class="game-dce7c4174ce9323904a934a486c41288"
               />
             </span>
           </li>
@@ -105,11 +108,14 @@
     <div class="game-bd40579650e3f651e222aef268d5c8ae">
       <van-row>
         <van-col span="3">
-          <div class="pick-8c9cb4a232c7e88403dddc3a0e589162">
+          <div
+            :style="appDevice ? { marginTop: '50px' } : { marginTop: '100px' }"
+            class="game-be50d19d79d06b239c799bc2608239c6"
+          >
             <ul>
               <li
                 v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
-                :key="'pick-0da8f0c7ef089161786e997dfcd5474e-' + index"
+                :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
@@ -121,7 +127,7 @@
                     index == 15 ||
                     index == 16
                   "
-                  class="pick-4978748050a936d2f77fe718f1d81524"
+                  class="game-4978748050a936d2f77fe718f1d81524"
                 >
                   <img
                     v-lazy="
@@ -141,7 +147,7 @@
                     "
                     :width="appDevice ? 40 : 55"
                     :height="appDevice ? 40 : 55"
-                    class="pick-eee32796c3fdfc147115c9f6e875c090"
+                    class="game-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
               </li>
@@ -155,7 +161,7 @@
                 ? { height: '275px' }
                 : { height: appHeight - 175 + 'px' }
             "
-            class="pick-d75e14b5c8f13e894fe9bf9d5426c198"
+            class="game-d75e14b5c8f13e894fe9bf9d5426c198"
           ></div>
         </van-col>
         <van-col span="18">
@@ -166,31 +172,31 @@
                 ? { height: '240px' }
                 : { height: appHeight - 175 + 'px' }
             "
-            class="hero-99938282f04071859941e18f16efcf42"
+            class="app-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
               v-model="tableData.active"
               :border="false"
               :swipe-threshold="appDevice ? 4 : 7"
               color="orange"
-              class="hero-f3cc17bc0d768ca60b8bb496a10b1990"
+              class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
               <van-tab
                 v-for="(data, index) in heroType"
-                :key="'hero-687df0d960fe6dade3153dc0ba925e79-' + index"
+                :key="'game-687df0d960fe6dade3153dc0ba925e79-' + index"
                 :title="data"
               ></van-tab>
 
-              <div class="hero-87740aa9337e54dbad53ec95089dca77">
+              <div class="game-87740aa9337e54dbad53ec95089dca77">
                 <van-cell-group
                   :border="false"
                   title="强度上升"
-                  class="hero-27369b3bf4483e8dcfd85ba9a39a947f"
+                  class="game-27369b3bf4483e8dcfd85ba9a39a947f"
                 >
                   <van-grid
                     :border="false"
                     :column-num="8"
-                    class="hero-89ca797bdbd58d7a03cf37f2d2fd9ac5"
+                    class="game-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
                     <van-grid-item
                       v-for="(data, index) in tableData.result"
@@ -198,7 +204,7 @@
                         data.trend == 2 &&
                         (tableData.active == data.type || tableData.active == 0)
                       "
-                      :key="'hero-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
+                      :key="'game-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                       :icon="data.img"
                       text=" "
                       :class="
@@ -213,12 +219,12 @@
                 <van-cell-group
                   :border="false"
                   title="其它"
-                  class="hero-795f3202b17cb6bc3d4b771d8c6c9eaf"
+                  class="game-795f3202b17cb6bc3d4b771d8c6c9eaf"
                 >
                   <van-grid
                     :border="false"
                     :column-num="8"
-                    class="hero-89ca797bdbd58d7a03cf37f2d2fd9ac5"
+                    class="game-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
                     <van-grid-item
                       v-for="(data, index) in tableData.result"
@@ -226,7 +232,7 @@
                         data.trend != 2 &&
                         (tableData.active == data.type || tableData.active == 0)
                       "
-                      :key="'hero-35368a19f307e4af02d0df055846840d-' + index"
+                      :key="'game-35368a19f307e4af02d0df055846840d-' + index"
                       :icon="data.img"
                       text=" "
                       :class="
@@ -241,11 +247,14 @@
           </div>
         </van-col>
         <van-col span="3">
-          <div class="pick-c6a2f8b3941d7f91bc4e51839e5371e0">
+          <div
+            :style="appDevice ? { marginTop: '50px' } : { marginTop: '100px' }"
+            class="game-f382dd1c4a10b864c29d26d47249b570"
+          >
             <ul>
               <li
                 v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
-                :key="'pick-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
+                :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
@@ -257,7 +266,7 @@
                     index == 14 ||
                     index == 17
                   "
-                  class="pick-6e9c0050fe873888fbf53ec6f7b21816"
+                  class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
                   <img
                     v-lazy="
@@ -277,7 +286,7 @@
                     "
                     :width="appDevice ? 40 : 55"
                     :height="appDevice ? 40 : 55"
-                    class="pick-aa95efe1c5d39e5e9389ca5833e63fbe"
+                    class="game-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
               </li>
@@ -287,7 +296,7 @@
             v-show="mode == 'edit'"
             @click="onWinCampClick(2)"
             :style="appDevice ? { height: '275px' } : { height: '550px' }"
-            class="pick-251504ba219ea8c3175f47b73bdde6e6"
+            class="game-251504ba219ea8c3175f47b73bdde6e6"
           ></div>
         </van-col>
       </van-row>
@@ -326,9 +335,7 @@
             color="linear-gradient(to right, #43CBFF, #6874E8)"
             @click="onGamePerspectiveClick(1)"
             >以
-            {{
-              perspective == 1 ? team.team_1.name : team.team_2.name
-            }}
+            {{ perspective == 1 ? team.team_1.name : team.team_2.name }}
             的视角</van-button
           >
         </li>
@@ -340,9 +347,7 @@
             color="linear-gradient(to right, #6874E8, #9708CC)"
             @click="onSeeHeroClick"
             >查看
-            {{
-              perspective == 1 ? team.team_2.name : team.team_1.name
-            }}
+            {{ perspective == 1 ? team.team_2.name : team.team_1.name }}
             剩余英雄</van-button
           >
         </li>
@@ -413,7 +418,7 @@
         v-model="tabsModel"
         @change="onGameTabsChange"
         color="orange"
-        class="game-4863c43e8743ebf1be3f48c5c4519627"
+        class="app-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab
           v-for="(data, index) in gameInfo.result"
@@ -500,9 +505,9 @@ export default {
           1, // 16 -17
         ],
       },
-      blueStepsClass: "steps-1cf3b0809c3dde16d56153690bc902a2",
-      redStepsClass: "steps-99b844b6785d8d7378bbc2b1401af365",
-      banPickClass: "hero-551270e8a38a84d3f0b214e6854357e3",
+      blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
+      redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
+      banPickClass: "game-551270e8a38a84d3f0b214e6854357e3",
       copyData: "",
       mode: "view",
       self: "",
@@ -696,7 +701,7 @@ export default {
     getHeroList: function (gameTime) {
       this.axios
         .post(
-          this.apiList.pvp.getHeroRanking,
+          this.apiList.pvp.getHeroRanking + "&aid=4&bid=0",
           this.$qs.stringify({
             gameTime: gameTime,
           })

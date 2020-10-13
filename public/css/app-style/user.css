@@ -1,12 +1,8 @@
-button.my-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
-    color: red;
-}
-
 img.my-d5ca322453f2986b752e58b11af83d96 {
     border-radius: 100%;
 }
 
-span.login-e4c9479b11955648dad558fe717a4eb2 {
+span.my-e4c9479b11955648dad558fe717a4eb2 {
     font-size: 12px;
     color: red;
 }
@@ -23,22 +19,22 @@ span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
     margin-left: 5px;
 }
 
-div.login-6920626369b1f05844f5e3d6f93b5f6e,
-div.login-61046f2f5eefe3dc179e52af32241062 {
+div.my-6920626369b1f05844f5e3d6f93b5f6e,
+div.my-61046f2f5eefe3dc179e52af32241062 {
     margin-top: 25px;
 }
 
-div.login-f01ae8c7f2d058ec6be00db589a32bea {
+div.my-f01ae8c7f2d058ec6be00db589a32bea {
     position: absolute;
     bottom: 50px;
 }
 
-div.login-60ae25445ac62d5ec51c776826888d9f {
+div.my-60ae25445ac62d5ec51c776826888d9f {
     color: #1989fa;
     left: 25px;
 }
 
-div.login-4ae1ffb5939d592986bed21d0913562d {
+div.my-4ae1ffb5939d592986bed21d0913562d {
     color: red;
     right: 25px;
 }

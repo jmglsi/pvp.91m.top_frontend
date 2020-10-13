@@ -1,6 +1,6 @@
 <template>
   <div class="login-in">
-    <div class="login-9ffe6c014e6f06f1c218fde0ca3fc4ef">
+    <div class="my-9ffe6c014e6f06f1c218fde0ca3fc4ef">
       <van-nav-bar
         left-arrow
         :border="false"
@@ -9,31 +9,31 @@
         @click-left="onNavBarLeftClick"
         z-index="99999999"
         left-text="返回"
-        class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
+        class="my-f921d5768e1eb9ca4fe4e6b4692622e6"
       />
     </div>
 
-    <div class="login-2a642626758deefdc2989a73aae823d3">
-      <van-cell-group class="login-5e8eee748a3d14d6a380448d6d61a9cf">
+    <div class="my-2a642626758deefdc2989a73aae823d3">
+      <van-cell-group class="my-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field
           v-model="loginInfo.data.name"
           v-show="loginInfo.type == 0"
           left-icon="user-o"
           placeholder="请输入用户名 (仅支持中英文数字)"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="my-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.email"
           left-icon="/img/app-icons/email.png"
           placeholder="请输入邮箱"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="my-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.password"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入密码"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="my-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.newPassword"
@@ -41,46 +41,46 @@
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="my-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.qq"
           v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="my-e71832eb64a3978b00a7d37f407b158e"
         />
       </van-cell-group>
     </div>
 
     <div
       v-show="loginInfo.type == 0"
-      class="login-61046f2f5eefe3dc179e52af32241062"
+      class="my-61046f2f5eefe3dc179e52af32241062"
     >
-      <span class="login-e4c9479b11955648dad558fe717a4eb2"
+      <span class="my-e4c9479b11955648dad558fe717a4eb2"
         >注:用户名和QQ将用于展示在BP界面以及修改密码,请不要瞎写</span
       >
     </div>
 
-    <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
+    <div class="my-6920626369b1f05844f5e3d6f93b5f6e">
       <van-button
         round
         size="small"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
         @click="onLoginClick"
-        class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
+        class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
         >{{ loginInfo.text }}</van-button
       >
     </div>
 
     <div
-      class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f"
+      class="my-f01ae8c7f2d058ec6be00db589a32bea my-60ae25445ac62d5ec51c776826888d9f"
     >
       <span @click="onRegisterClick">注册</span>
     </div>
 
     <div
-      class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d"
+      class="my-f01ae8c7f2d058ec6be00db589a32bea my-4ae1ffb5939d592986bed21d0913562d"
     >
       <span @click="onUpdateClick">修改密码</span>
     </div>

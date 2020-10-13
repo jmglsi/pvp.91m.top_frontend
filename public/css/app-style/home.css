@@ -4,23 +4,7 @@ img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
     width: 100%;
 }
 
-span.tuijian-a5a5c883f68e45baa83f140e218759f1 {
-    position: absolute;
-    bottom: 25px;
-    z-index: 1;
-    left: 0;
-}
-
-div.tuijian-06eab62dcb5a23b966a620807d78e66f {
-    text-align: left;
-    margin: 25px 0;
-}
-
 div.home-72ab9e07378f988922e6c91884048db0 {
     font-size: 12px;
     margin-top: 25px;
-}
-
-div.tuijian-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable {
-    border-radius: 10px;
 }

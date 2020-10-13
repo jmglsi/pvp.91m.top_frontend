@@ -1,7 +1,7 @@
 //https://juejin.im/post/6844903971065167885
 
 workbox.core.setCacheNameDetails({
-    prefix: 'sw-9d79ef79232d9d11',
+    prefix: 'sw-dcdf3cc403dee57e',
     suffix: 'v1.0.0'
 });
 

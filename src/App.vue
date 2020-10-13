@@ -20,8 +20,7 @@
         :z-index="3"
         fixed
         safe-area-inset-bottom
-        active-color="rgb(222, 177, 81)"
-        inactive-color="rgb(67, 62, 52)"
+        active-color="rgb(243,189,103)"
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item

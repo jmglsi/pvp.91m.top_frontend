@@ -1,7 +1,7 @@
 <template>
   <div class="app-game">
     <div
-      class="game-c8d46d341bea4fd5bff866a65ff8aea9 grid-4eb2044800e2b7b9e5c44d370af22b27"
+      class="game-c8d46d341bea4fd5bff866a65ff8aea9 app-4eb2044800e2b7b9e5c44d370af22b27"
     >
       <van-cell-group
         :border="false"
@@ -10,10 +10,10 @@
       >
         <van-cell
           v-for="(data, index) in tableData.result"
-          :key="'official-b02986e365a0828581dffc56b591ffa9-' + index"
+          :key="'game-b02986e365a0828581dffc56b591ffa9-' + index"
           :border="false"
-          class="official-ed4838a6d4554b1829c7f86a58e3f20f"
           @click="onGameCellClick(data.game.label)"
+          class="game-ed4838a6d4554b1829c7f86a58e3f20f"
         >
           <template #title>
             <div class="game-a88ef988e9c52677b975726c94e54f5a">
@@ -28,10 +28,10 @@
                   class="game-8641f340ea40fb261780ef0eb048239a"
                 />
                 <van-grid-item class="game-8641f340ea40fb261780ef0eb048239a">
-                  <span class="game-07cc694b9b3fc636710fa08b6922c42b">{{
+                  <span class="app-07cc694b9b3fc636710fa08b6922c42b">{{
                     data.game.time
                   }}</span>
-                  <span class="game-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
+                  <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
                 </van-grid-item>
                 <van-grid-item
                   :text="data.team_2.name"

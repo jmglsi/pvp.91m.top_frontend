@@ -1,16 +1,16 @@
-img.pick-eee32796c3fdfc147115c9f6e875c090,
-img.pick-aa95efe1c5d39e5e9389ca5833e63fbe {
+img.game-eee32796c3fdfc147115c9f6e875c090,
+img.game-aa95efe1c5d39e5e9389ca5833e63fbe {
     border-radius: 10px;
-    margin: 5px 3px;
+    margin: 5px;
 }
 
-img.ban-eee32796c3fdfc147115c9f6e875c090,
-img.ban-aa95efe1c5d39e5e9389ca5833e63fbe {
+img.game-5de9dd2a5714dd606db0e0fa1611c227,
+img.game-221cf04d9a9e32c6af24502f96e3ecfe {
     border-radius: 100%;
     margin: 5px;
 }
 
-svg.ban-dce7c4174ce9323904a934a486c41288 {
+svg.game-dce7c4174ce9323904a934a486c41288 {
     position: absolute;
     margin-left: -20px;
     margin-top: 17px;
@@ -28,7 +28,7 @@ div.van-tabs__wrap {
     z-index: 2;
 }
 
-div.hero-89ca797bdbd58d7a03cf37f2d2fd9ac5 i.van-icon.van-grid-item__icon img.van-icon__image {
+div.game-89ca797bdbd58d7a03cf37f2d2fd9ac5 i.van-icon.van-grid-item__icon img.van-icon__image {
     border-radius: 10px;
     width: 40px;
     height: 40px;
@@ -38,18 +38,18 @@ div.game-bp-portrait {
     margin-top: 60%;
 }
 
-div.pick-d75e14b5c8f13e894fe9bf9d5426c198,
-div.pick-251504ba219ea8c3175f47b73bdde6e6 {
-    width: 30px;
+div.game-d75e14b5c8f13e894fe9bf9d5426c198,
+div.game-251504ba219ea8c3175f47b73bdde6e6 {
+    width: 50px;
     top: 80px;
     position: absolute;
 }
 
-div.pick-d75e14b5c8f13e894fe9bf9d5426c198 {
+div.game-d75e14b5c8f13e894fe9bf9d5426c198 {
     left: 0;
 }
 
-div.pick-251504ba219ea8c3175f47b73bdde6e6 {
+div.game-251504ba219ea8c3175f47b73bdde6e6 {
     right: 0;
 }
 
@@ -62,7 +62,7 @@ div.game-bd40579650e3f651e222aef268d5c8ae {
     margin-top: 10px;
 }
 
-img.steps-1cf3b0809c3dde16d56153690bc902a2 {
+img.game-1cf3b0809c3dde16d56153690bc902a2 {
     border: 2px solid rgb(0, 0, 255, 0.5) !important;
     animation: blueTwinkle 800ms ease-out infinite alternate;
 }
@@ -76,7 +76,7 @@ img.steps-1cf3b0809c3dde16d56153690bc902a2 {
     }
 }
 
-img.steps-99b844b6785d8d7378bbc2b1401af365 {
+img.game-99b844b6785d8d7378bbc2b1401af365 {
     border: 2px solid rgb(255, 0, 0, 0.5) !important;
     animation: redTwinkle 800ms ease-out infinite alternate;
 }
@@ -90,11 +90,11 @@ img.steps-99b844b6785d8d7378bbc2b1401af365 {
     }
 }
 
-div.hero-551270e8a38a84d3f0b214e6854357e3 {
+div.game-551270e8a38a84d3f0b214e6854357e3 {
     filter: grayscale(1);
 }
 
-div.hero-87740aa9337e54dbad53ec95089dca77 {
+div.game-87740aa9337e54dbad53ec95089dca77 {
     background-color: white;
 }
 
@@ -122,50 +122,31 @@ div.game-e4e6288c92630a6c237c15442fdb0917 li {
     float: left;
 }
 
-div.ban-8c9cb4a232c7e88403dddc3a0e589162,
-div.ban-c6a2f8b3941d7f91bc4e51839e5371e0,
-div.pick-8c9cb4a232c7e88403dddc3a0e589162,
-div.pick-c6a2f8b3941d7f91bc4e51839e5371e0 {
+div.game-8c9cb4a232c7e88403dddc3a0e589162,
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0,
+div.game-8c9cb4a232c7e88403dddc3a0e589162,
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
     position: absolute;
 }
 
-div.ban-bf2c7b7ad9bcf75cd72e0b4ce30500e3 li {
+div.game-bf2c7b7ad9bcf75cd72e0b4ce30500e3 li {
     float: left;
 }
 
-div.ban-ba9bced6af8121cf6413000a4274ac2b li {
+div.game-ba9bced6af8121cf6413000a4274ac2b li {
     float: right;
 }
 
-div.ban-8c9cb4a232c7e88403dddc3a0e589162,
-div.ban-c6a2f8b3941d7f91bc4e51839e5371e0 {
+div.game-8c9cb4a232c7e88403dddc3a0e589162,
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
     width: 165px;
     top: 15px;
 }
 
-div.ban-8c9cb4a232c7e88403dddc3a0e589162 {
+div.game-8c9cb4a232c7e88403dddc3a0e589162 {
     left: 25px;
 }
 
-div.ban-c6a2f8b3941d7f91bc4e51839e5371e0 {
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
     right: 25px;
-}
-
-div.pick-8c9cb4a232c7e88403dddc3a0e589162,
-div.pick-c6a2f8b3941d7f91bc4e51839e5371e0 {
-    margin-top: 53px;
-}
-
-div.pick-8c9cb4a232c7e88403dddc3a0e589162 {
-    left: 35px;
-}
-
-div.pick-c6a2f8b3941d7f91bc4e51839e5371e0 {
-    right: 35px;
-}
-
-div.game-4863c43e8743ebf1be3f48c5c4519627 {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }

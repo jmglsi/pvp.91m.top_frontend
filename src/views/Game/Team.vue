@@ -17,7 +17,7 @@
     </div>
 
     <div
-      class="game-c37237ae7770c5062ccad7a23572e282 grid-4eb2044800e2b7b9e5c44d370af22b27"
+      class="game-c37237ae7770c5062ccad7a23572e282 app-4eb2044800e2b7b9e5c44d370af22b27"
     >
       <van-grid :border="false" class="game-40db4f618bd5c27e60368f891382ffd4">
         <van-grid-item
@@ -72,7 +72,7 @@
                     :max-size="3 * 1024 * 1024"
                     @oversize="onOversize"
                   >
-                    <van-button round size="small" color="rgb(25, 137, 250)"
+                    <van-button round size="small" type="info"
                       >上传图片</van-button
                     >
                   </van-uploader>
@@ -101,7 +101,7 @@
             <van-button
               round
               size="small"
-              color="rgb(7, 193, 96)"
+              color="rgb(7,193,96)"
               class="game-a066f238070a70cb531c9bd722c65b36"
               @click="onSaveTeamInfoClick"
               >保存队伍信息</van-button

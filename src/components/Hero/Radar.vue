@@ -8,7 +8,7 @@
         :placeholder="tag.placeholder"
         @tags-changed="onTagsChanged"
         @blur="onTagsBlur"
-        class="info-d57ac45256849d9b13e2422d91580fb9"
+        class="hero-d57ac45256849d9b13e2422d91580fb9"
       />
     </div>
 

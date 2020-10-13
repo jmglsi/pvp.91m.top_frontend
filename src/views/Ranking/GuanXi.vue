@@ -28,10 +28,10 @@
               v-lazy="row.hero_1.img"
               width="50"
               height="50"
-              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
             />
             <span
-              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c adaptation-f58cc48f5b942c91e57eff48accc5151"
+              class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
               >{{ row.hero_1.adaptationRate }}</span
             >
           </template>
@@ -42,10 +42,10 @@
               v-lazy="row.hero_2.img"
               width="50"
               height="50"
-              class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
             />
             <span
-              class="bottom-0fc3cfbc27e91ea60a787de13dae3e3c adaptation-f58cc48f5b942c91e57eff48accc5151"
+              class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
               >{{ row.hero_2.adaptationRate }}</span
             >
           </template>
@@ -242,19 +242,19 @@ export default {
         column.property === "opponentPickRate"
       ) {
         if (row.teammatePickRate >= pick || row.opponentPickRate >= pick) {
-          return "col-48d6215903dff56238e52e8891380c8f";
+          return "ranking-48d6215903dff56238e52e8891380c8f";
         }
       }
 
       if (column.property === "teammateWinRate") {
         if (row.teammatePickRate >= pick && row.teammateWinRate >= win) {
-          return "col-9f27410725ab8cc8854a2769c7a516b8";
+          return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
 
       if (column.property === "opponentWinRate") {
         if (row.opponentPickRate >= pick && row.opponentWinRate >= win) {
-          return "col-9f27410725ab8cc8854a2769c7a516b8";
+          return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
     },

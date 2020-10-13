@@ -36,16 +36,16 @@
                   v-lazy="data.team_1.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="game-f56ae939694a0488cc9e8ecdd47a46ab">
+                <div class="app-f56ae939694a0488cc9e8ecdd47a46ab">
                   {{ data.team_1.name }}
                 </div>
               </van-col>
               <van-col span="10">
-                <span class="game-07cc694b9b3fc636710fa08b6922c42b">{{
+                <span class="app-07cc694b9b3fc636710fa08b6922c42b">{{
                   data.engage.time
                 }}</span>
                 <br />
-                <span class="game-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
+                <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
               </van-col>
               <van-col span="7">
                 <img
@@ -54,7 +54,7 @@
                   v-lazy="data.team_2.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="game-f56ae939694a0488cc9e8ecdd47a46ab">
+                <div class="app-f56ae939694a0488cc9e8ecdd47a46ab">
                   {{ data.team_2.name }}
                 </div>
               </van-col>

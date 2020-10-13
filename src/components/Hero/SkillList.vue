@@ -19,7 +19,7 @@
             v-lazy="row.img"
             width="35"
             height="35"
-            class="hero-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
           />
         </template>
       </vxe-table-column>

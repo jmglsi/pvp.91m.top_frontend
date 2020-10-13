@@ -10,8 +10,8 @@
         @change="appPush('', tabsModel)"
         duration="0.5"
         line-width="25px"
-        color="rgb(222, 177, 81)"
-        title-active-color="rgb(222,177,81)"
+        color="rgb(243,189,103)"
+        title-active-color="rgb(243,189,103)"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
         <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">

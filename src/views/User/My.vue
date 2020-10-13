@@ -13,7 +13,7 @@
               size="small"
               color="linear-gradient(to right, #4bb0ff, #6149f6)"
               @click="appPush('/login')"
-              class="my-0162f4b7b2dbdf6aff3a25de02e49a8b"
+              class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
               >登录</van-button
             >
           </template>
@@ -125,9 +125,9 @@
             <van-button
               round
               size="small"
-              color="rgb(245, 245, 245)"
+              color="rgb(245,245,245)"
               @click="onLogotClick"
-              class="my-4236a440a662cc8253d7536e5aa17942"
+              class="app-4236a440a662cc8253d7536e5aa17942"
               >退出登录</van-button
             >
           </template>

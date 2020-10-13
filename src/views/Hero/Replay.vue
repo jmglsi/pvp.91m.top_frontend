@@ -12,7 +12,7 @@
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
-          <span class="info-d5d3db1765287eef77d7927cc956f50a">{{
+          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{
             hero.info.name
           }}</span>
         </template>
@@ -23,38 +23,35 @@
       <van-collapse v-model="collapseModel" :border="false">
         <van-collapse-item
           v-for="(data, index) in tableData.result"
-          :key="'replay-1a721faf2df53972bfd0831c64b6146d-' + index"
+          :key="'hero-1a721faf2df53972bfd0831c64b6146d-' + index"
           :name="index"
           :value="data.time"
-          class="replay-90516fea1032f8332d81cb47f06c59f6"
+          class="hero-90516fea1032f8332d81cb47f06c59f6"
         >
-          <div slot="title" class="replay-a78656fbfb5b498e5cb80b5b13076e31">
+          <div slot="title" class="hero-a78656fbfb5b498e5cb80b5b13076e31">
             <van-tag
               :type="data.status"
               round
-              class="replay-01cac4e332fec6d6ecd331a00412712d replay-e4d23e841d8e8804190027bce3180fa5"
+              class="hero-01cac4e332fec6d6ecd331a00412712d hero-e4d23e841d8e8804190027bce3180fa5"
               >{{ data.usedtime }}</van-tag
             >
             <van-tag
               v-show="!teammate"
               round
               color="black"
-              class="replay-e4d23e841d8e8804190027bce3180fa5"
+              class="hero-e4d23e841d8e8804190027bce3180fa5"
               >{{ data.equMoney }}</van-tag
             >
-            <span class="replay-12d045cdd2c0b9b6bf64ab787d773ae6">{{
+            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">{{
               data.gamePlayerName
             }}</span>
           </div>
 
-          <div
-            v-show="!teammate"
-            class="replay-f01902c0d0136ca30fe1034f339964ba"
-          >
+          <div v-show="!teammate" class="hero-f01902c0d0136ca30fe1034f339964ba">
             <van-grid
               :border="false"
               :column-num="7"
-              class="replay-c906a12df6d50e587b83a727416b5173"
+              class="hero-c906a12df6d50e587b83a727416b5173"
             >
               <van-grid-item
                 v-show="data.heroSkill > 0"
@@ -66,7 +63,7 @@
                     : null
                 "
                 :text="data.heroPosition"
-                class="replay-0a96464cb313aab9cc51e5aa61b0193f"
+                class="hero-0a96464cb313aab9cc51e5aa61b0193f"
               />
               <van-grid-item
                 v-show="data > 0"
@@ -79,7 +76,6 @@
                       '.png'
                     : null
                 "
-                class="replay-0a96464cb313aab9cc51e5aa61b0193f"
                 @click="
                   appOpenUrl(
                     '是否查看装备更新记录?',
@@ -87,6 +83,7 @@
                     '//ngabbs.com/read.php?tid=19902976'
                   )
                 "
+                class="hero-0a96464cb313aab9cc51e5aa61b0193f"
               />
             </van-grid>
           </div>
@@ -97,14 +94,14 @@
             disabled
             color="#000000"
             size="mini"
-            class="replay-ce50a09343724eb82df11390e2c1de18"
+            class="hero-ce50a09343724eb82df11390e2c1de18"
             >{{ data.heroKda }}</van-tag
           >&nbsp;
           <van-tag
             round
             type="primary"
             size="mini"
-            class="replay-ce50a09343724eb82df11390e2c1de18"
+            class="hero-ce50a09343724eb82df11390e2c1de18"
             @click="onGameActionSheetClick(data)"
             >对局</van-tag
           >
@@ -119,7 +116,7 @@
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
-        class="replay-4bc6fcee674cad1c5910499a6ad199b8"
+        class="hero-4bc6fcee674cad1c5910499a6ad199b8"
         @select="onActionSheetSelect"
       />
     </div>
@@ -130,7 +127,7 @@
         :total-items="tableData.total"
         :items-per-page="tableData.pageSize"
         @change="onPaginationChange"
-        class="replay-fe7cd4d1bf3fea9a0d921e224b3fa24c"
+        class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
       />
     </div>
 

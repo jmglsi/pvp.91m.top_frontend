@@ -11,22 +11,22 @@
         class="tuijian-af03857fe372b964b53ef3a082c2b518"
       >
         <div
-          class="tuijian-a139b05b7f8e496c00991733ef7cd589 app-1e4b00d1b398e8a6551429b2a2f0e17c"
+          class="app-a139b05b7f8e496c00991733ef7cd589 app-1e4b00d1b398e8a6551429b2a2f0e17c"
         >
           <van-swipe
             :autoplay="5000"
             :height="175"
-            class="tuijian-f97c2ea77c6a08b3afd5a59851cbe0d8"
+            class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result"
               :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
-              class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
               @click="
                 data.url
                   ? appOpenUrl('是否打开外部链接？', null, data.url)
                   : null
               "
+              class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
             >
               <img
                 v-lazy="data.img"
@@ -35,7 +35,7 @@
               <van-tag
                 :color="data.tag.color"
                 mark
-                class="tuijian-a5a5c883f68e45baa83f140e218759f1"
+                class="update-a5a5c883f68e45baa83f140e218759f1"
                 >{{ data.tag.text }}</van-tag
               >
             </van-swipe-item>
@@ -51,7 +51,7 @@
             :to="appHomeInfo.tipsInfo.to"
             :url="appHomeInfo.tipsInfo.url"
             is-link
-            class="tuijian-06eab62dcb5a23b966a620807d78e66f"
+            class="app-06eab62dcb5a23b966a620807d78e66f"
           />
         </div>
       </van-pull-refresh>

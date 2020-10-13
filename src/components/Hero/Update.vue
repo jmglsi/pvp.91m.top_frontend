@@ -1,17 +1,17 @@
 <template>
   <div class="hero-update">
     <div
-      class="tuijian-b4558c68ce168dc8679358f047eea63b tuijian-447b7147e84be512208dcc0995d67ebc app-1e4b00d1b398e8a6551429b2a2f0e17c"
+      class="update-b4558c68ce168dc8679358f047eea63b update-447b7147e84be512208dcc0995d67ebc update-e1fade65183eeca567683609ebb7005f"
     >
-      <div class="tuijian-3490d5ece19a8f958d2be068e27f636a">
+      <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
           <van-col span="16" @click="show.calendar = true">
-            <span class="tuijian-6b0325a49e13e1c8adc31a953f4bca63">{{
+            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.tips
             }}</span>
           </van-col>
           <van-col span="8">
-            <div class="tuijian-c88c478fd2695c8b07740ccd247a28ae">
+            <div class="update-c88c478fd2695c8b07740ccd247a28ae">
               <van-dropdown-menu direction="up">
                 <van-dropdown-item
                   v-model="updateInfo.model"
@@ -23,7 +23,7 @@
         </van-row>
       </div>
 
-      <div class="tuijian-7d4e6768382f99a87a56cad0ac71b15b">
+      <div class="update-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
             v-for="(data, index) in tableData.result"
@@ -32,7 +32,7 @@
               (updateInfo.model == 1 && data.calendar.type > 0) ||
               (updateInfo.model == 2 && data.calendar.type >= 0)
             "
-            :key="'tuijian-587fa4ff436ed0ff2113cd87bb01967b-' + index"
+            :key="'update-587fa4ff436ed0ff2113cd87bb01967b-' + index"
             :color="data.calendar.color"
           >
             <van-tag
@@ -42,26 +42,26 @@
               @click="
                 onHeroUpdateTextClick(heroId, data.articleId, data.calendar.day)
               "
-              class="tuijian-5a0c2e4611419b82b55675d035764007"
+              class="update-5a0c2e4611419b82b55675d035764007"
               >{{ data.calendar.day }}</van-tag
             >
 
             <div
               v-if="data.url"
-              class="tuijian-5a5152e95445ede11c05f5fa898d8fd9"
+              class="update-5a5152e95445ede11c05f5fa898d8fd9"
             >
               <van-tag
                 v-for="(data, index) in data.tags"
                 :key="'tuijian-5e9c0708969ea62d890f9c9f063b6c44-' + index"
                 color="black"
                 round
-                class="tuijian-26edf9c6ae9f8356043d0e175516cab6"
+                class="update-26edf9c6ae9f8356043d0e175516cab6"
                 >{{ data }}</van-tag
               >
               <a :href="data.url" target="_blank">
                 <img
                   v-lazy="'/img/app-icons/link_black.png'"
-                  class="tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e"
+                  class="update-a1b6d48bbb668c1f71ac1fdd39fc7f4e"
                 />
                 {{ data.title }}
               </a>
@@ -70,17 +70,17 @@
             <div
               v-else-if="!data.url"
               v-html="data.title"
-              class="tuijian-5a5152e95445ede11c05f5fa898d8fd9"
+              class="update-5a5152e95445ede11c05f5fa898d8fd9"
             ></div>
 
             <div
               v-show="data.items.length > 0"
-              class="tuijian-c936f93d328137bba0ab32510a2e4fd0"
+              class="update-c936f93d328137bba0ab32510a2e4fd0"
             >
               <router-link
                 v-for="(heroId, index) in data.items"
                 :to="heroId == 999 ? '' : { path: '/hero/' + heroId + '/info' }"
-                :key="'tuijian-54099f84a9943b4b1eed932ec22066eb-' + index"
+                :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
               >
                 <img
                   v-if="heroId != 155"
@@ -99,7 +99,7 @@
                       ? $message.info('提示:1000,还没上线正式服的新英雄')
                       : ''
                   "
-                  class="tuijian-5d39f3848925994b52ec52fba934577c"
+                  class="update-5d39f3848925994b52ec52fba934577c"
                 />
               </router-link>
             </div>
@@ -115,7 +115,7 @@
               '//nga.178.com/read.php?pid=' + updateId
             )
           "
-          class="tuijian-0b479089ade5d13a2c41830785ebac9d"
+          class="update-0b479089ade5d13a2c41830785ebac9d"
         >
           <van-tag
             color="orange"
@@ -142,7 +142,7 @@
       <van-dialog v-model="show.dialog" :title="updateInfo.title">
         <div
           v-html="updateInfo.text"
-          class="tuijian-288ac40c37c02b743c0c2cc51c650dd3"
+          class="update-288ac40c37c02b743c0c2cc51c650dd3"
         />
       </van-dialog>
     </div>
@@ -150,7 +150,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/hero.css");
+@import url("/css/app-style/update.css");
 </style>
 
 <script>

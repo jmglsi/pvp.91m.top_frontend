@@ -1,30 +1,14 @@
-#app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-}
-
-button.my-0162f4b7b2dbdf6aff3a25de02e49a8b,
-button.my-4236a440a662cc8253d7536e5aa17942 {
+button.app-0162f4b7b2dbdf6aff3a25de02e49a8b,
+button.app-4236a440a662cc8253d7536e5aa17942 {
     width: 150px;
     height: 35px;
 }
 
+button.app-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
+    color: red;
+}
+
 i.van-icon img.van-icon__image {
-    margin-top: -3px;
-}
-
-img {
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-img.tuijian-a1b6d48bbb668c1f71ac1fdd39fc7f4e {
-    width: 15px;
-    height: 15px;
     margin-top: -3px;
 }
 
@@ -32,24 +16,36 @@ span.van-tab__text {
     margin: 11px 0 12px 0;
 }
 
-span.bottom-0fc3cfbc27e91ea60a787de13dae3e3c {
+span.app-e4d23e841d8e8804190027bce3180fa5 {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    margin-top: -13px;
+}
+
+span.app-0fc3cfbc27e91ea60a787de13dae3e3c {
     position: absolute;
     font-size: 10px;
     width: 50px;
     margin-top: -7px;
 }
 
-span.game-07cc694b9b3fc636710fa08b6922c42b {
+span.app-07cc694b9b3fc636710fa08b6922c42b {
     font-size: 12px;
 }
 
-span.game-f4842dcb685d490e2a43212b8072a6fe {
+span.app-f4842dcb685d490e2a43212b8072a6fe {
     color: #969799;
     font-size: 10px;
 }
 
-span.tuijian-26edf9c6ae9f8356043d0e175516cab6 {
-    margin-right: 2px;
+div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
+    padding: 6px 0;
+}
+
+div.van-tabs__nav {
+    height: unset;
+    overflow-x: unset;
 }
 
 div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
@@ -62,7 +58,7 @@ div.app-d638615004bb2ff42ed26948aba89c80 {
     margin: 0 10px;
 }
 
-div.grid-4eb2044800e2b7b9e5c44d370af22b27 i.van-icon.van-grid-item__icon img.van-icon__image {
+div.app-4eb2044800e2b7b9e5c44d370af22b27 i.van-icon.van-grid-item__icon img.van-icon__image {
     border-radius: 100%;
     width: 40px;
     height: 40px;
@@ -72,30 +68,29 @@ div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
     border-radius: 0;
 }
 
-div.tuijian-447b7147e84be512208dcc0995d67ebc,
-div.tuijian-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable,
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap div.van-tabs__nav {
-    background-color: rgb(245, 245, 245);
+div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable,
+div.app-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap div.van-tabs__nav {
+    background-color: rgb(248, 249, 252);
 }
 
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap {
+div.app-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap {
     border-radius: 100px;
     height: 32px;
 }
 
-div.game-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
+div.app-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
     bottom: 14px;
 }
 
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990 span.van-tab__text {
+div.app-f3cc17bc0d768ca60b8bb496a10b1990 span.van-tab__text {
     margin: 6px 0;
 }
 
-div.hero-f3cc17bc0d768ca60b8bb496a10b1990 {
+div.app-f3cc17bc0d768ca60b8bb496a10b1990 {
     text-align: left;
 }
 
-div.game-f56ae939694a0488cc9e8ecdd47a46ab,
+div.app-f56ae939694a0488cc9e8ecdd47a46ab,
 div.van-grid-item__content.van-grid-item__content--center span.van-grid-item__text {
     font-weight: 600;
 }
@@ -104,15 +99,7 @@ div.van-nav-bar__title {
     font-size: 20px;
 }
 
-div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-menu__bar {
-    border-radius: 100px;
-}
-
-div.tuijian-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-item {
-    margin-bottom: 25px;
-}
-
-div.game-bp i.van-button__icon img.van-icon__image {
+div.app-9fc0eb5a934dba03cc266a49b8ec51fb i.van-button__icon img.van-icon__image {
     margin-top: -5px;
     width: 40px;
     height: 40px;
@@ -121,29 +108,18 @@ div.game-bp i.van-button__icon img.van-icon__image {
     margin-top: -2px;
 }
 
-div.van-tabs__nav {
-    height: unset;
-    overflow-x: unset;
-}
-
-div.tuijian-b4558c68ce168dc8679358f047eea63b {
-    border-radius: 10px;
-    padding: 15px 10px;
-    margin: 0 10px;
-}
-
-div.tuijian-a139b05b7f8e496c00991733ef7cd589 {
+div.app-a139b05b7f8e496c00991733ef7cd589 {
     padding: 0;
     margin: 25px 10px 0 10px;
 }
 
-div.tuijian-f97c2ea77c6a08b3afd5a59851cbe0d8 {
+div.app-f97c2ea77c6a08b3afd5a59851cbe0d8 {
     border-radius: 10px;
     overflow: hidden;
     transform: translateY(0);
 }
 
-div.hero-99938282f04071859941e18f16efcf42 div.van-tabs__wrap {
+div.app-99938282f04071859941e18f16efcf42 div.van-tabs__wrap {
     width: 40%;
     margin: 0 auto;
     position: fixed;
@@ -152,33 +128,45 @@ div.hero-99938282f04071859941e18f16efcf42 div.van-tabs__wrap {
     top: 20px;
 }
 
-div.hero-99938282f04071859941e18f16efcf42 span.van-tab__text {
+div.app-99938282f04071859941e18f16efcf42 span.van-tab__text {
     font-size: 12px;
 }
 
-div.hero-99938282f04071859941e18f16efcf42 div.van-grid-item__content.van-grid-item__content--center {
+div.app-99938282f04071859941e18f16efcf42 div.van-grid-item__content.van-grid-item__content--center {
     padding: 8px 4px;
 }
 
-div.hero-99938282f04071859941e18f16efcf42 div.van-tab.van-ellipsis {
+div.app-99938282f04071859941e18f16efcf42 div.van-tab.van-ellipsis {
     line-height: 30px;
 }
 
-div.hero-99938282f04071859941e18f16efcf42 {
+div.app-99938282f04071859941e18f16efcf42 {
     border-radius: 10px;
     overflow: hidden;
 }
 
-div.hero-99938282f04071859941e18f16efcf42 {
+div.app-99938282f04071859941e18f16efcf42 {
     margin: 0 auto;
     overflow-y: auto;
     margin-top: 50px;
 }
 
-div.van-dropdown-menu__bar {
-    box-shadow: unset;
+div.app-f56ae939694a0488cc9e8ecdd47a46ab {
+    font-size: 12px;
+    margin-top: 5px;
 }
 
-div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
-    padding: 6px 0;
+div.app-4863c43e8743ebf1be3f48c5c4519627 {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+div.app-06eab62dcb5a23b966a620807d78e66f {
+    text-align: left;
+    margin: 25px 0;
+}
+
+div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable {
+    border-radius: 10px;
 }

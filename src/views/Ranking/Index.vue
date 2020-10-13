@@ -9,8 +9,8 @@
         @change="appPush('', tabsModel)"
         duration="0.5"
         line-width="25px"
-        color="rgb(222,177,81)"
-        title-active-color="rgb(222,177,81)"
+        color="rgb(243,189,103)"
+        title-active-color="rgb(243,189,103)"
       >
         <van-tab title="巅峰赛 (顶端局)">
           <DianFengSai />
@@ -30,9 +30,9 @@
       <van-divider
         :style="{
           padding: '0 16px',
-          color: 'rgb(222, 177, 81)',
+          color: 'rgb(243,189,103)',
           marginTop: '-3px',
-          borderColor: 'rgb(222, 177, 81)',
+          borderColor: 'rgb(243,189,103)',
         }"
         @click="
           $message.info(
