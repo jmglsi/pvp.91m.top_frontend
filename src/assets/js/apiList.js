@@ -7,34 +7,36 @@ const gameApi = "//" + host + "/hero/v1/game.php"
 const biliApi = "//" + host + "/hero/v1/bilibili.php"
 
 const pvp = {
-    uploadImg: appApi + "?type=uploadImg",
-    getAppInfo: appApi + "?type=getAppInfo",
-    getAppHome: appApi + "?type=getAppHome",
-    getMiniApp: appApi + "?type=getMiniApp",
-    createTeam: appApi + "?type=createTeam",
-    delectTeam: appApi + "?type=delectTeam",
-    addHeroVote: appApi + "?type=addHeroVote",
-    getHeroInfo: appApi + "?type=getHeroInfo",
-    createEngage: appApi + "?type=createEngage",
-    updateGameBP: appApi + "?type=updateGameBP",
-    delectGameBP: appApi + "?type=delectGameBP",
-    getHeroUpdate: appApi + "?type=getHeroUpdate",
-    updateTeamInfo: appApi + "?type=updateTeamInfo",
-    getHeroRanking: appApi + "?type=getHeroRanking",
-    loginWebAccount: appApi + "?type=loginWebAccount",
-    getPlayerRanking: appApi + "?type=getPlayerRanking",
-    getGameDashboard: appApi + "?type=getGameDashboard",
-    getWebAccountInfo: appApi + "?type=getWebAccountInfo",
-    getHeroUpdateText: appApi + "?type=getHeroUpdateText",
-    getHeroCombination: appApi + "?type=getHeroCombination",
     addHeroByCombination: appApi + "?type=addHeroByCombination",
-    getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
-    getHeroChartsLogByDfs: appApi + "?type=getHeroChartsLogByDfs",
+    addHeroVote: appApi + "?type=addHeroVote",
+    createEngage: appApi + "?type=createEngage",
+    createTeam: appApi + "?type=createTeam",
+    delectGameBP: appApi + "?type=delectGameBP",
+    delectTeam: appApi + "?type=delectTeam",
+    getAppHome: appApi + "?type=getAppHome",
+    getAppInfo: appApi + "?type=getAppInfo",
+    getGameDashboard: appApi + "?type=getGameDashboard",
     getHeroChartsLogByBbs: appApi + "?type=getHeroChartsLogByBbs",
-    getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
-    getHeroFightPowerRanking: appApi + "?type=getHeroFightPowerRanking",
+    getHeroChartsLogByCustomize: appApi + "?type=getHeroChartsLogByCustomize",
+    getHeroChartsLogByDfs: appApi + "?type=getHeroChartsLogByDfs",
     getHeroChartsLogBySimilar: appApi + "?type=getHeroChartsLogBySimilar",
-    getHeroChartsLogByCustomize: appApi + "?type=getHeroChartsLogByCustomize"
+    getHeroCombination: appApi + "?type=getHeroCombination",
+    getHeroFightPowerRanking: appApi + "?type=getHeroFightPowerRanking",
+    getHeroInfo: appApi + "?type=getHeroInfo",
+    getHeroRanking: appApi + "?type=getHeroRanking",
+    getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
+    getHeroUpdate: appApi + "?type=getHeroUpdate",
+    getHeroUpdateText: appApi + "?type=getHeroUpdateText",
+    getMiniApp: appApi + "?type=getMiniApp",
+    getPlayerRanking: appApi + "?type=getPlayerRanking",
+    getSkinEncore: appApi + "?type=getSkinEncore",
+    getSkinEncoreLog: appApi + "?type=getSkinEncoreLog",
+    getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
+    getWebAccountInfo: appApi + "?type=getWebAccountInfo",
+    loginWebAccount: appApi + "?type=loginWebAccount",
+    updateGameBP: appApi + "?type=updateGameBP",
+    updateTeamInfo: appApi + "?type=updateTeamInfo",
+    uploadImg: appApi + "?type=uploadImg"
 }
 
 const game = {
@@ -47,7 +49,7 @@ const bili = {
 }
 
 export default {
-    pvp,
+    bili,
     game,
-    bili
+    pvp
 }

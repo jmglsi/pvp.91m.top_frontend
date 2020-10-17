@@ -34,6 +34,14 @@ export default new Router({
                 keepAlive: true
             }
         }, {
+            path: '/skin/encore',
+            name: 'SkinEncore',
+            component: (resolve) => require(['./components/Skin/Encore.vue'], resolve),
+            meta: {
+                title: '皮肤返场',
+                keepAlive: true
+            }
+        }, {
             path: '/miniapp',
             name: 'MiniApp',
             component: (resolve) => require(['./components/Home/TuiJian/MiniApp.vue'], resolve),
