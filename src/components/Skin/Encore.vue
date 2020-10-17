@@ -59,7 +59,7 @@
         </vxe-table-column>
 
         <vxe-table-column title="#" type="seq" width="50" />
-        <vxe-table-column title="当前" field="allVoteNum" sortable />
+        <vxe-table-column title="当前 (万)" field="allVoteNum" sortable />
         <vxe-table-column title="分均" field="addNum" sortable />
         <vxe-table-column title="还需 (小时)" field="needtime" sortable />
       </vxe-grid>
