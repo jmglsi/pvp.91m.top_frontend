@@ -15,10 +15,10 @@
     <div class="hero-00c0096b2f59afa06ea70de0e19fff29">
       <ve-radar
         legend-position="bottom"
-        :extend="tableData.extend"
-        :settings="tableData.settings"
-        :data="tableData.result"
-        :loading="tableData.loading"
+        :extend="radarData.extend"
+        :settings="radarData.settings"
+        :data="radarData.result"
+        :loading="radarData.loading"
         :height="appDevice ? '650px' : '750px'"
         :style="style"
         class="hero-ca6674b328707b5a1f0b012105a7e4e1"
@@ -60,7 +60,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.tableData.result = [];
+        this.radarData.result = [];
 
         if (newValue.tabsModel == 1) {
           this.getHeroChartsLogBySimilar(newValue.heroId);
@@ -80,7 +80,7 @@ export default {
       style: {
         marginTop: 0,
       },
-      tableData: {
+      radarData: {
         extend: {},
         settings: {},
         loading: true,
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     getHeroChartsLogBySimilar: function (heroId) {
-      this.tableData.loading = true;
+      this.radarData.loading = true;
 
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
@@ -107,14 +107,14 @@ export default {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
-            this.tableData = data;
+            this.radarData = data;
           }
 
-          this.tableData.loading = false;
+          this.radarData.loading = false;
         });
     },
     getHeroChartsLogByCustomize: function (heroName) {
-      this.tableData.loading = true;
+      this.radarData.loading = true;
 
       this.axios
         .get(
@@ -124,10 +124,10 @@ export default {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
-            this.tableData = data;
+            this.radarData = data;
           }
 
-          this.tableData.loading = false;
+          this.radarData.loading = false;
         });
     },
     getHeroChartsLogByCustomizeFromUrl: function (heroName) {

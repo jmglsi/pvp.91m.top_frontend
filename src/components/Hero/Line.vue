@@ -2,12 +2,12 @@
   <div class="hero-line">
     <div class="hero-965f1a65ae362b02d244345afcbf542e">
       <ve-line
-        :extend="tableData.extend"
-        :settings="tableData.settings"
-        :mark-line="tableData.markLine"
-        :mark-point="tableData.markPoint"
-        :data="tableData.result"
-        :loading="tableData.loading"
+        :extend="lineData.extend"
+        :settings="lineData.settings"
+        :mark-line="lineData.markLine"
+        :mark-point="lineData.markPoint"
+        :data="lineData.result"
+        :loading="lineData.loading"
         :after-config="afterConfig"
         width="99.2%"
         class="hero-be4fa98d69734bbd05d093fc0010f826"
@@ -56,7 +56,7 @@ export default {
       handler(newValue) {
         if (newValue.heroId == 0) return;
 
-        this.tableData.result = [];
+        this.lineData.result = [];
 
         if (newValue.lineType == 0) {
           this.getHeroChartsLogByDfs(
@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      tableData: {
+      lineData: {
         markLine: {},
         markPoint: {},
         extend: {},
@@ -94,7 +94,7 @@ export default {
       return e;
     },
     getHeroChartsLogByDfs: function (heroId, detailed) {
-      this.tableData.loading = true;
+      this.lineData.loading = true;
 
       this.axios
         .get(
@@ -108,14 +108,14 @@ export default {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
-            this.tableData = data;
+            this.lineData = data;
           }
 
-          this.tableData.loading = false;
+          this.lineData.loading = false;
         });
     },
     getHeroChartsLogByBbs: function (heroId) {
-      this.tableData.loading = true;
+      this.lineData.loading = true;
 
       this.axios
         .get(this.apiList.pvp.getHeroChartsLogByBbs + "&heroId=" + heroId)
@@ -123,12 +123,12 @@ export default {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
-            this.tableData = data;
+            this.lineData = data;
           } else {
             this.$message.warning("无内容");
           }
 
-          this.tableData.loading = false;
+          this.lineData.loading = false;
         });
     },
   },
