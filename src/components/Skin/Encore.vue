@@ -70,6 +70,7 @@
         v-if="tableData.url"
         @click="appOpenUrl('是否打开外部链接?', null, tableData.url)"
         size="small"
+        :style="{ width: '100px' }"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
       >
         {{ tableData.title || "活动地址" }}
