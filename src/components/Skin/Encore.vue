@@ -3,7 +3,7 @@
     <div class="skin-8c35b9de834af969baf22173b9539eb9">
       <van-nav-bar
         :border="false"
-        :fixed="true"
+        title="每隔 5 分钟更新一次,切换视角 👉"
         z-index="99999999"
         class="skin-0229cfdc78c2b9da8e238c9c89967c70"
       >
@@ -42,13 +42,14 @@
         auto-resize
         :loading="tableData.isLoading"
         :data="tableData.result"
+        :height="clientHeight"
       >
         <vxe-table-column title="皮肤" field="skinName" fixed="left" width="75">
           <template v-slot="{ row }">
             <img
               v-lazy="row.skinImg"
               width="50"
-              height="100"
+              height="50"
               class="skin-52326308ff25a5e0ce86bdae53ff2c35"
             />
             <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">{{
@@ -70,7 +71,6 @@
         v-if="tableData.url"
         @click="appOpenUrl('是否打开外部链接?', null, tableData.url)"
         size="small"
-        :style="{ width: '100px' }"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
       >
         {{ tableData.title || "活动地址" }}
@@ -112,7 +112,11 @@ export default {
         loading: true,
         result: [],
       },
+      clientHeight: 0,
     };
+  },
+  created() {
+    this.initAppTable();
   },
   mounted() {
     this.getSkinEncore();
