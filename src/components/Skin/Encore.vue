@@ -44,7 +44,7 @@
         :data="tableData.result"
         :height="clientHeight"
       >
-        <vxe-table-column title="皮肤" field="skinName" fixed="left" width="75">
+        <vxe-table-column field="skinName" fixed="left" width="85">
           <template v-slot="{ row }">
             <img
               v-lazy="row.skinImg"
@@ -119,8 +119,8 @@ export default {
     this.initAppTable();
   },
   mounted() {
-    this.getSkinEncore();
     this.getSkinEncoreLog();
+    this.getSkinEncore();
   },
   methods: {
     afterConfig: function (e) {

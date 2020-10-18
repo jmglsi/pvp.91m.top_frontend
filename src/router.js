@@ -38,7 +38,7 @@ export default new Router({
             name: 'SkinEncore',
             component: (resolve) => require(['./components/Skin/Encore.vue'], resolve),
             meta: {
-                title: '皮肤返场',
+                title: '趋势',
                 keepAlive: true
             }
         }, {
