@@ -58,13 +58,16 @@
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
                 >{{ data }}</van-tag
               >
-              <a :href="data.url" target="_blank">
+              <span
+                @click="appOpenUrl('是否打开外部链接?', null, data.url)"
+                class="update-f0af832cbd923851be8557213d95dddc"
+              >
                 <img
                   v-lazy="'/img/app-icons/link_black.png'"
                   class="update-a1b6d48bbb668c1f71ac1fdd39fc7f4e"
                 />
                 {{ data.title }}
-              </a>
+              </span>
             </div>
 
             <div

@@ -95,21 +95,21 @@
           title="特别感谢"
           value="互相帮助过的伙伴们"
           is-link
-          url="//doc.91m.top"
+          @click="appOpenUrl('是否打开外部链接?', null, url.friends)"
         />
         <van-cell
           icon="question-o"
           title="常见问题"
           value="自豪的使用语雀"
           is-link
-          url="//doc.91m.top"
+          @click="appOpenUrl('是否打开外部链接?', null, url.question)"
         />
         <van-cell
           icon="comment-o"
           title="意见/建议/咨询/交友"
           value="jmglsi (苏苏)"
           is-link
-          url="//wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes"
+          @click="appOpenUrl('是否打开外部链接?', null, url.comment)"
         />
       </van-cell-group>
     </div>
@@ -142,7 +142,7 @@
       >
         <van-cell
           title="沪ICP备16031287号-2"
-          url="http://beian.miit.gov.cn"
+          @click="appOpenUrl('是否打开外部链接?', null, url.beian)"
           class="my-c0bdff9ec0fe8c0a83371c4573d7ecf4"
         />
       </van-cell-group>
@@ -161,6 +161,12 @@ export default {
     return {
       loginInfo: {},
       isLogin: false,
+      url: {
+        friends: "//doc.91m.top",
+        question: "//doc.91m.top",
+        comment: "//wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes",
+        beian: "http://beian.miit.gov.cn",
+      },
     };
   },
   mounted() {

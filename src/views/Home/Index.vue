@@ -23,17 +23,19 @@
       </van-tabs>
     </div>
 
-    <div class="home-72ab9e07378f988922e6c91884048db0">
+    <div
+      @click="appOpenUrl('是否打开外部链接?', null, url.upyun)"
+      class="home-72ab9e07378f988922e6c91884048db0"
+    >
       本站由
-      <a href="https://console.upyun.com/register/?invite=ryM-bovMm">
-        <img
-          width="100"
-          height="35"
-          data-src="img/app-icons/upyun_logo2.png"
-          src="img/app-icons/upyun_logo2.png"
-          lazy="loaded"
-        /> </a
-      >提供CDN加速/云储存服务
+      <img
+        width="100"
+        height="35"
+        data-src="img/app-icons/upyun_logo2.png"
+        src="img/app-icons/upyun_logo2.png"
+        lazy="loaded"
+      />
+      提供CDN加速/云储存服务
     </div>
 
     <AppBottomTabbar :height="100" />
@@ -56,6 +58,9 @@ export default {
   data() {
     return {
       tabsModel: 0,
+      url: {
+        upyun: "//console.upyun.com/register/?invite=ryM-bovMm",
+      },
     };
   },
   mounted() {

@@ -5,20 +5,20 @@
       :data="tableData.result"
       :sort-config="{ trigger: 'cell' }"
       auto-resize
-      height="363"
+      height="320"
     >
       <vxe-table-column
         title="技能"
         field="score"
         fixed="left"
-        width="55"
+        width="50"
         sortable
       >
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
-            width="35"
-            height="35"
+            width="25"
+            height="25"
             class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
           />
         </template>
