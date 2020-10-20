@@ -26,24 +26,28 @@ export default new Router({
             name: 'heroReplay',
             redirect: '/hero/:id/replay'
         }, {
+            path: '/skin/encore',
+            name: 'skinEncore',
+            redirect: '/skin/return'
+        }, {
             path: '/',
-            name: 'Home',
+            name: 'home',
             component: (resolve) => require(['./views/Home/Index.vue'], resolve),
             meta: {
                 title: '首页',
                 keepAlive: true
             }
         }, {
-            path: '/skin/encore',
-            name: 'SkinEncore',
-            component: (resolve) => require(['./components/Skin/Encore.vue'], resolve),
+            path: '/skin/return',
+            name: 'skinReturn',
+            component: (resolve) => require(['./components/Skin/Return.vue'], resolve),
             meta: {
                 title: '趋势',
                 keepAlive: true
             }
         }, {
             path: '/miniapp',
-            name: 'MiniApp',
+            name: 'miniApp',
             component: (resolve) => require(['./components/Home/TuiJian/MiniApp.vue'], resolve),
             meta: {
                 title: '小程序',
@@ -51,7 +55,7 @@ export default new Router({
             }
         }, {
             path: '/ranking',
-            name: 'Ranking',
+            name: 'ranking',
             component: (resolve) => require(['./views/Ranking/Index.vue'], resolve),
             meta: {
                 title: '排行',
@@ -59,7 +63,7 @@ export default new Router({
             }
         }, {
             path: '/my',
-            name: 'My',
+            name: 'my',
             component: (resolve) => require(['./views/User/My.vue'], resolve),
             meta: {
                 title: '我的',
@@ -67,7 +71,7 @@ export default new Router({
             }
         }, {
             path: '/login',
-            name: 'Login',
+            name: 'login',
             component: (resolve) => require(['./views/User/Login.vue'], resolve),
             meta: {
                 title: '登录',
@@ -79,7 +83,7 @@ export default new Router({
             component: (resolve) => require(['./views/Hero/Index.vue'], resolve),
             children: [{
                     path: ':id/info',
-                    name: 'HeroInfo',
+                    name: 'heroInfo',
                     component: (resolve) => require(['./views/Hero/Info.vue'], resolve),
                     meta: {
                         title: '信息'
@@ -87,7 +91,7 @@ export default new Router({
                 },
                 {
                     path: ':id/replay',
-                    name: 'HeroReplay',
+                    name: 'heroReplay',
                     component: (resolve) => require(['./views/Hero/Replay.vue'], resolve),
                     meta: {
                         title: '回顾'
@@ -100,21 +104,21 @@ export default new Router({
             component: (resolve) => require(['./views/Game/Index.vue'], resolve),
             children: [{
                 path: 'team',
-                name: 'GameTeam',
+                name: 'gameTeam',
                 component: (resolve) => require(['./views/Game/Team.vue'], resolve),
                 meta: {
                     title: '队伍'
                 }
             }, {
                 path: 'engage',
-                name: 'GameEngage',
+                name: 'gameEngage',
                 component: (resolve) => require(['./views/Game/Engage.vue'], resolve),
                 meta: {
                     title: '交战'
                 }
             }, {
                 path: ':id/bp',
-                name: 'GameBp',
+                name: 'gameGlobalBP',
                 component: (resolve) => require(['./views/Game/GlobalBP.vue'], resolve),
                 meta: {
                     title: '全局BP模拟器'
@@ -122,7 +126,7 @@ export default new Router({
             }]
         }, {
             path: '/bilibili',
-            name: 'Bilibili',
+            name: 'bilibili',
             component: (resolve) => require(['./views/Bilibili/Index.vue'], resolve),
             meta: {
                 title: 'bilibili',

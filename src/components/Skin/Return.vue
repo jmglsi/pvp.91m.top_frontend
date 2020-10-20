@@ -37,8 +37,8 @@
       class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
     >
       <vxe-grid
-        ref="skinEncore"
-        id="skinEncore"
+        ref="skinReturn"
+        id="skinReturn"
         auto-resize
         :loading="tableData.isLoading"
         :data="tableData.result"
@@ -119,8 +119,8 @@ export default {
     this.initAppTable();
   },
   mounted() {
-    this.getSkinEncoreLog();
-    this.getSkinEncore();
+    this.getSkinReturnLog();
+    this.getSkinReturn();
   },
   methods: {
     afterConfig: function (e) {
@@ -130,10 +130,10 @@ export default {
       //去除折线图上的小圆点
       return e;
     },
-    getSkinEncore: function () {
+    getSkinReturn: function () {
       this.tableData.loading = true;
 
-      this.axios.get(this.apiList.pvp.getSkinEncore).then((res) => {
+      this.axios.get(this.apiList.pvp.getSkinReturn).then((res) => {
         let data = res.data.data;
 
         if (data.result.length != 0) {
@@ -143,10 +143,10 @@ export default {
         this.tableData.loading = false;
       });
     },
-    getSkinEncoreLog: function () {
+    getSkinReturnLog: function () {
       this.lineData.loading = true;
 
-      this.axios.get(this.apiList.pvp.getSkinEncoreLog).then((res) => {
+      this.axios.get(this.apiList.pvp.getSkinReturnLog).then((res) => {
         let data = res.data.data;
 
         if (data.result.rows.length != 0) {
