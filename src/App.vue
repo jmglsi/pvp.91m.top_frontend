@@ -58,12 +58,20 @@ export default {
           show: false,
           list: [
             {
-              icon: "/img/app-icons/information.png",
+              icon: "/img/app-icons/dynamic.png",
               to: {
                 path: "/",
               },
               name: "/",
-              text: "资讯",
+              text: "动态",
+            },
+            {
+              icon: "/img/app-icons/social.png",
+              to: {
+                path: "/social",
+              },
+              name: "/social",
+              text: "扩列",
             },
             {
               icon: "/img/app-icons/ranking.png",

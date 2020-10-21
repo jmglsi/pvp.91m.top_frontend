@@ -18,14 +18,6 @@ export default new Router({
             name: 'game',
             redirect: '/ranking'
         }, {
-            path: '/heroInfo/:id',
-            name: 'heroInfo',
-            redirect: '/hero/:id/info'
-        }, {
-            path: '/heroReplay/:id',
-            name: 'heroReplay',
-            redirect: '/hero/:id/replay'
-        }, {
             path: '/skin/encore',
             name: 'skinEncore',
             redirect: '/skin/return'
@@ -35,6 +27,14 @@ export default new Router({
             component: (resolve) => require(['./views/Home/Index.vue'], resolve),
             meta: {
                 title: '首页',
+                keepAlive: true
+            }
+        }, {
+            path: '/social',
+            name: 'social',
+            component: (resolve) => require(['./views/Social/Index.vue'], resolve),
+            meta: {
+                title: '扩列',
                 keepAlive: true
             }
         }, {
