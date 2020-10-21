@@ -286,7 +286,7 @@ export default {
       positionInfo: {
         model: 0,
         options: [
-          { text: "全部 ٩( 'ω' )و", value: 0 },
+          { text: "全部分路 ω' )و", value: 0 },
           { text: "对抗路 (战士)", value: 1 },
           { text: "中路", value: 2 },
           { text: "对抗路 (坦克)", value: 3 },
