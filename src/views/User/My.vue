@@ -162,8 +162,8 @@ export default {
       loginInfo: {},
       isLogin: false,
       url: {
-        friends: "//doc.91m.top",
-        question: "//doc.91m.top",
+        friends: "//doc.91m.top/jmglsi/pvp",
+        question: "//doc.91m.top/jmglsi/pvp",
         comment: "//wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes",
         beian: "http://beian.miit.gov.cn",
       },

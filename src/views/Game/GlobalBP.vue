@@ -1,8 +1,10 @@
 <template>
-  <div v-if="isPortrait" class="game-bp-portrait">
-    <div class="game-a76e75b5854094183e66c274e1d276e9">
+  <div @click="isPortrait = false" v-if="isPortrait" class="game-bp-portrait">
+    <div slot-scope="" class="game-a76e75b5854094183e66c274e1d276e9">
       <img v-lazy="'/img/app-icons/landscape.png'" width="100" height="100" />
-      <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请把设备横过来 ;D</div>
+      <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
+        请把设备横过来 或 点击这里切换横屏 ;D
+      </div>
     </div>
   </div>
   <div
@@ -398,7 +400,7 @@
             :border="false"
             icon="question-o"
             size="small"
-            @click="appOpenUrl('是否查看常见问题?', null, '//doc.91m.top')"
+            @click="appOpenUrl('是否查看常见问题?', null, url.question)"
           />
         </li>
         <li>
@@ -565,11 +567,15 @@ export default {
         hero: true,
       },
       eye: "eye-o",
+      url: {
+        question: "//doc.91m.top/jmglsi/pvp",
+      },
       isPortrait: true,
     };
   },
   created() {
     window.addEventListener("beforeunload", (e) => this.beforeunload(e), false);
+
     if (this.appDevice) {
       window.addEventListener("resize", this.renderResize, false);
     } else {
@@ -593,6 +599,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.beforeunload, false);
+
     if (this.appDevice) {
       window.removeEventListener("resize", this.renderResize, false);
     }
