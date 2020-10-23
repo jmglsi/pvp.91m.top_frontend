@@ -72,6 +72,12 @@ export default {
   data() {
     return {
       appHomeInfo: {
+        miniappInfo: {
+          pulling: "喵呜...",
+          loosing: "奇迹什么时候女装呢...",
+          loading: "加载中...",
+          success: null,
+        },
         swipeInfo: {
           result: [],
         },
@@ -80,12 +86,6 @@ export default {
           des: null,
           to: null,
           url: null,
-        },
-        miniappInfo: {
-          pulling: "喵呜...",
-          loosing: "奇迹什么时候女装呢...",
-          loading: "加载中...",
-          success: null,
         },
       },
       isLoading: false,
@@ -105,7 +105,7 @@ export default {
         this.isLoading = false;
 
         this.appPush("/miniapp");
-      }, 2000);
+      }, 2500);
     },
   },
 };

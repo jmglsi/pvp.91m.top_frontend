@@ -44,7 +44,7 @@
           class="my-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
-          v-model="loginInfo.data.qq"
+          v-model="loginInfo.data.uin"
           v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
@@ -104,7 +104,7 @@ export default {
           email: null,
           password: null,
           newPassword: null,
-          qq: null,
+          uin: null,
           openId: null,
           accessToken: null,
         },
@@ -136,7 +136,7 @@ export default {
             email: data.email,
             password: this.$md5(data.password),
             newPassword: data.newPassword ? this.$md5(data.newPassword) : null,
-            qq: data.qq,
+            uin: data.uin,
             openId: data.openId,
             accessToken: data.accessToken,
           })
