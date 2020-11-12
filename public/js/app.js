@@ -1,6 +1,6 @@
 var _hmt = _hmt || [];
 
-(function () {
+(function() {
     var hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?9c74475df89fd16ec1c0f9f864fea292";
 
@@ -8,7 +8,7 @@ var _hmt = _hmt || [];
     s.parentNode.insertBefore(hm, s);
 })();
 
-(function () {
+(function() {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
 

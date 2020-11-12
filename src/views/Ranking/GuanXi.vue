@@ -16,7 +16,7 @@
         ref="guanxi"
         auto-resize
         :loading="isLoading"
-        :data="tableData.result"
+        :data="tableData.result.rows"
         :height="clientHeight"
         :cell-class-name="cellClassName"
         :sort-config="{ trigger: 'cell' }"
@@ -234,26 +234,34 @@ export default {
       this.show.actionSheet = true;
     },
     cellClassName: function ({ row, column }) {
-      let pick = this.tableData.color.pick,
-        win = this.tableData.color.win;
+      let color = this.tableData.result.color;
 
       if (
         column.property === "teammatePickRate" ||
         column.property === "opponentPickRate"
       ) {
-        if (row.teammatePickRate >= pick || row.opponentPickRate >= pick) {
+        if (
+          row.teammatePickRate >= color.pick ||
+          row.opponentPickRate >= color.pick
+        ) {
           return "ranking-48d6215903dff56238e52e8891380c8f";
         }
       }
 
       if (column.property === "teammateWinRate") {
-        if (row.teammatePickRate >= pick && row.teammateWinRate >= win) {
+        if (
+          row.teammatePickRate >= color.pick &&
+          row.teammateWinRate >= color.win
+        ) {
           return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
 
       if (column.property === "opponentWinRate") {
-        if (row.opponentPickRate >= pick && row.opponentWinRate >= win) {
+        if (
+          row.opponentPickRate >= color.pick &&
+          row.opponentWinRate >= color.win
+        ) {
           return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
       }

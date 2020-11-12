@@ -111,8 +111,13 @@ export default {
     },
   },
   created() {
-    this.appDevice ? (this.equipmentWidth = 60) : (this.listWidth = 0);
-    this.appDevice ? (this.listWidth = 85) : (this.listWidth = 0);
+    if (this.appDevice) {
+      this.equipmentWidth = 60;
+      this.listWidth = 85;
+    } else {
+      this.listWidth = 0;
+      this.listWidth = 0;
+    }
   },
   data() {
     return {

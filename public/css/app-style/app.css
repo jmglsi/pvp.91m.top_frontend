@@ -1,7 +1,7 @@
 button.app-0162f4b7b2dbdf6aff3a25de02e49a8b,
 button.app-4236a440a662cc8253d7536e5aa17942 {
-    width: 150px;
     height: 35px;
+    width: 150px;
 }
 
 button.app-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
@@ -17,17 +17,17 @@ span.van-tab__text {
 }
 
 span.app-e4d23e841d8e8804190027bce3180fa5 {
-    position: absolute;
     left: 0;
-    z-index: 1;
     margin-top: -13px;
+    position: absolute;
+    z-index: 1;
 }
 
 span.app-0fc3cfbc27e91ea60a787de13dae3e3c {
-    position: absolute;
     font-size: 10px;
-    width: 50px;
     margin-top: -7px;
+    position: absolute;
+    width: 50px;
 }
 
 span.app-07cc694b9b3fc636710fa08b6922c42b {
@@ -49,9 +49,9 @@ div.van-tabs__nav {
 }
 
 div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
+    height: 100%;
     position: absolute;
     width: 100%;
-    height: 100%;
 }
 
 div.app-d638615004bb2ff42ed26948aba89c80 {
@@ -60,8 +60,8 @@ div.app-d638615004bb2ff42ed26948aba89c80 {
 
 div.app-4eb2044800e2b7b9e5c44d370af22b27 i.van-icon.van-grid-item__icon img.van-icon__image {
     border-radius: 100%;
-    width: 40px;
     height: 40px;
+    width: 40px;
 }
 
 div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
@@ -100,17 +100,17 @@ div.van-nav-bar__title {
 }
 
 div.app-9fc0eb5a934dba03cc266a49b8ec51fb i.van-button__icon img.van-icon__image {
-    margin-top: -5px;
-    width: 40px;
-    height: 40px;
     border-radius: 100%;
+    height: 40px;
     margin-left: -12px;
     margin-top: -2px;
+    margin-top: -5px;
+    width: 40px;
 }
 
 div.app-a139b05b7f8e496c00991733ef7cd589 {
-    padding: 0;
     margin: 25px 10px 0 10px;
+    padding: 0;
 }
 
 div.app-f97c2ea77c6a08b3afd5a59851cbe0d8 {
@@ -120,12 +120,12 @@ div.app-f97c2ea77c6a08b3afd5a59851cbe0d8 {
 }
 
 div.app-99938282f04071859941e18f16efcf42 div.van-tabs__wrap {
-    width: 40%;
+    left: 0;
     margin: 0 auto;
     position: fixed;
-    left: 0;
     right: 0;
     top: 20px;
+    width: 40%;
 }
 
 div.app-99938282f04071859941e18f16efcf42 span.van-tab__text {
@@ -147,8 +147,8 @@ div.app-99938282f04071859941e18f16efcf42 {
 
 div.app-99938282f04071859941e18f16efcf42 {
     margin: 0 auto;
-    overflow-y: auto;
     margin-top: 50px;
+    overflow-y: auto;
 }
 
 div.app-f56ae939694a0488cc9e8ecdd47a46ab {
@@ -157,14 +157,14 @@ div.app-f56ae939694a0488cc9e8ecdd47a46ab {
 }
 
 div.app-4863c43e8743ebf1be3f48c5c4519627 {
+    bottom: 0;
     position: fixed;
     width: 100%;
-    bottom: 0;
 }
 
 div.app-06eab62dcb5a23b966a620807d78e66f {
-    text-align: left;
     margin: 25px 0;
+    text-align: left;
 }
 
 div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable {

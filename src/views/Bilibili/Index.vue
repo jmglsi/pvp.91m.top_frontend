@@ -22,7 +22,7 @@
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
       <vxe-grid
         :isLoading="isLoading"
-        :data="tableData.result"
+        :data="tableData.result.rows"
         :height="clientHeight"
         :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
@@ -71,8 +71,8 @@
     <div class="bilibili-71f262d796bed1ab30e8a2d5a8ddee6f">
       <van-pagination
         v-model="paginationModel"
-        :total-items="tableData.total"
-        :items-per-page="tableData.pageSize"
+        :total-items="tableData.result.total"
+        :items-per-page="tableData.result.pageSize"
         @change="onPaginationChange"
       />
     </div>
@@ -129,7 +129,8 @@ export default {
     };
   },
   created() {
-    this.initAppTable(1440);
+    this.initAppTable();
+    this.initBiliBiliTable();
   },
   mounted() {
     let uid = this.$route.query.uid;
@@ -141,6 +142,9 @@ export default {
     }, 1000 * 10);
   },
   methods: {
+    initBiliBiliTable: function () {
+      this.appDevice ? (this.listWidth = 100) : (this.listWidth = 0);
+    },
     getOrderInfo: function (uid, page) {
       this.axios
         .get(

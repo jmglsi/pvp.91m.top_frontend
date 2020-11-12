@@ -14,8 +14,8 @@ svg.hero-ff2364a0be3d20e46cc69efb36afe9a5 {
 }
 
 div.hero-632d142d7a508e86f6c35a044a17411e span.hero-d5d3db1765287eef77d7927cc956f50a {
-    margin: 0 5px;
     color: white;
+    margin: 0 5px;
 }
 
 span.hero-0fc3cfbc27e91ea60a787de13dae3e3c {
@@ -82,8 +82,8 @@ div.hero-e06398232dc80e41209489705546802c {
 }
 
 div.hero-68adaff1d028a37f27fb33c483329cba {
-    position: absolute;
     margin-top: -3px;
+    position: absolute;
     right: 20px;
 }
 
@@ -108,19 +108,19 @@ div.hero-face1cbe136c70e1fc08cff038596944 ul {
 }
 
 div.hero-d57ac45256849d9b13e2422d91580fb9 {
+    margin-bottom: 25px;
+    margin: 0 auto;
+    max-width: 500px;
     text-align: center;
     width: 85%;
-    max-width: 500px;
-    margin: 0 auto;
-    margin-bottom: 25px;
     z-index: 1;
 }
 
 div.hero-18327e5b67b8072ab8cf020c4ef15c9c {
-    position: absolute;
-    width: 100%;
     font-size: 12px;
     margin-top: 20px;
+    position: absolute;
+    width: 100%;
 }
 
 div.app-ff4a008470319a22d9cf3d14af485977 {
@@ -141,9 +141,9 @@ div.hero-e21ecc3330f7f3c382fc113f392368bd div.van-image-preview__index {
 }
 
 div.hero-e21ecc3330f7f3c382fc113f392368bd div.van-image-preview__cover {
-    top: unset;
     bottom: 35px;
     color: white;
+    top: unset;
     width: 100%;
 }
 

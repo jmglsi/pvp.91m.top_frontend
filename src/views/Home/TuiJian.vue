@@ -19,7 +19,7 @@
             class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >
             <van-swipe-item
-              v-for="(data, index) in appHomeInfo.swipeInfo.result"
+              v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
               :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
               @click="
                 data.url

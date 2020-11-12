@@ -22,7 +22,7 @@
     <div class="hero-9a7c47049573e03028c2e650b73f6252">
       <van-collapse v-model="collapseModel" :border="false">
         <van-collapse-item
-          v-for="(data, index) in tableData.result"
+          v-for="(data, index) in tableData.result.rows"
           :key="'hero-1a721faf2df53972bfd0831c64b6146d-' + index"
           :name="index"
           :value="data.time"
@@ -124,8 +124,8 @@
     <div class="hero-face1cbe136c70e1fc08cff038596944">
       <van-pagination
         v-model="paginationModel"
-        :total-items="tableData.total"
-        :items-per-page="tableData.pageSize"
+        :total-items="tableData.result.total"
+        :items-per-page="tableData.result.pageSize"
         @change="onPaginationChange"
         class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
       />

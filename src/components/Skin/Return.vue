@@ -16,7 +16,7 @@
     </div>
 
     <div
-      v-show="show.checked == false && lineData.result.length > 0"
+      v-show="show.checked == false && lineData.result.rows.length > 0"
       class="skin-9eff02d43a97619df7707398ec7099cb"
     >
       <ve-line
@@ -24,7 +24,7 @@
         :settings="lineData.settings"
         :mark-line="lineData.markLine"
         :mark-point="lineData.markPoint"
-        :data="lineData.result"
+        :data="lineData.result.rows"
         :loading="lineData.loading"
         :after-config="afterConfig"
         width="99.2%"
@@ -41,7 +41,7 @@
         id="skinReturn"
         auto-resize
         :loading="tableData.isLoading"
-        :data="tableData.result"
+        :data="tableData.result.rows"
         :height="clientHeight"
       >
         <vxe-table-column title="皮肤" field="skinName" fixed="left" width="85">
@@ -68,11 +68,11 @@
     <div class="skin-a47113818cd94f1f3221fed0a17e8588">
       <van-button
         round
-        @click="appOpenUrl('是否打开外部链接?', null, tableData.url)"
+        @click="appOpenUrl('是否打开外部链接?', null, tableData.result.url)"
         size="small"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
       >
-        {{ tableData.title || "活动地址" }}
+        {{ tableData.result.title || "活动地址" }}
       </van-button>
     </div>
   </div>
@@ -84,9 +84,7 @@
 
 <script>
 import VeLine from "v-charts/lib/line.common";
-
 import "echarts/lib/component/dataZoom";
-
 import "v-charts/lib/style.css";
 
 export default {

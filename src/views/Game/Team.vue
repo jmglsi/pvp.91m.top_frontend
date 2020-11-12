@@ -21,7 +21,7 @@
     >
       <van-grid :border="false" class="game-40db4f618bd5c27e60368f891382ffd4">
         <van-grid-item
-          v-for="(data, index) in teamInfo.result"
+          v-for="(data, index) in teamInfo.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           :text="data.name"
           :icon="data.logo"

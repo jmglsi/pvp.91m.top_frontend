@@ -8,7 +8,7 @@
           @change="onPlayerOptionsChange"
         />
         <van-dropdown-item ref="item" title="筛选">
-          <van-switch-cell v-model="switchModel" title="隐藏战绩" />
+          <van-switch-cell v-model="show.checked" title="隐藏战绩" />
           <van-button type="info" block @click="onDropdownConfirmClick"
             >确认</van-button
           >
@@ -21,7 +21,7 @@
         ref="wanjia"
         auto-resize
         :loading="isLoading"
-        :data="tableData.result"
+        :data="tableData.result.rows"
         :height="clientHeight"
         :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
@@ -85,7 +85,6 @@ export default {
         accessToken: null,
       },
       playerShield: 0,
-      switchModel: false,
       uin: "",
       copyData: "",
       areaInfo: {
@@ -106,6 +105,7 @@ export default {
       },
       show: {
         actionSheet: false,
+        checked: false,
       },
       actions: [
         { name: "查看QQ", value: 0 },
@@ -183,7 +183,7 @@ export default {
     onDropdownConfirmClick: function () {
       this.$refs.item.toggle();
 
-      this.playerShield = Number(this.switchModel);
+      this.playerShield = Number(this.show.checked);
       this.getPlayerRanking(this.areaInfo.model, this.playerShield);
     },
     onCellClick: function ({ row }) {

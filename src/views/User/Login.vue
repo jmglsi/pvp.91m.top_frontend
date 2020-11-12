@@ -148,9 +148,13 @@ export default {
           if (status.code == 200) {
             let msg;
 
-            if (type == 0) msg = "注册成功";
-            if (type == 1) msg = "登录成功";
-            if (type == 2) msg = "修改成功";
+            if (type == 0) {
+              msg = "注册成功";
+            } else if (type == 1) {
+              msg = "登录成功";
+            } else if (type == 2) {
+              msg = "修改成功";
+            }
 
             this.$message.success(msg);
 

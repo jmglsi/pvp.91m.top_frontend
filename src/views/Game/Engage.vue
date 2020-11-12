@@ -23,7 +23,7 @@
         class="game-b2ecdf6163952cf377f932aff4b736be"
       >
         <van-grid-item
-          v-for="(data, index) in engageInfo.result"
+          v-for="(data, index) in engageInfo.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           class="game-f24a222ebfb0f6b85f63749653659063"
         >

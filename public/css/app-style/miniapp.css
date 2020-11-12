@@ -3,9 +3,9 @@ div.miniapp-8d777f385d3dfec8815d20f7496026dc {
 }
 
 div.miniapp-021a7599a708a3781fabe39f7631edfc {
-    position: fixed;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
     bottom: 35px;
+    left: 0;
+    margin: 0 auto;
+    position: fixed;
+    right: 0;
 }

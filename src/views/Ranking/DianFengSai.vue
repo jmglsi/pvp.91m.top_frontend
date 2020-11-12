@@ -25,7 +25,7 @@
         id="dianfengsai"
         auto-resize
         :loading="isLoading"
-        :data="tableData.result"
+        :data="tableData.result.rows"
         :height="clientHeight"
         :cell-class-name="cellClassName"
         :sort-config="{ trigger: 'cell' }"
@@ -397,7 +397,7 @@ export default {
             updateId: 0,
           };
 
-          this.$refs.dianfengsai.loadData(data.result);
+          //this.$refs.dianfengsai.loadData(data.result.rows);
 
           this.isLoading = false;
         });
@@ -419,7 +419,7 @@ export default {
       }
     },
     cellClassName: function ({ row, column }) {
-      let color = this.tableData.color;
+      let color = this.tableData.result.color;
 
       if (column.property === "banRate") {
         if (row.banRate >= color.ban) {

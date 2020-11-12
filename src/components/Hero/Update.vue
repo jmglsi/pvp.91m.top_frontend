@@ -7,7 +7,7 @@
         <van-row>
           <van-col span="16" @click="show.calendar = true">
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
-              tableData.tips
+              tableData.result.tips
             }}</span>
           </van-col>
           <van-col span="8">
@@ -26,7 +26,7 @@
       <div class="update-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
-            v-for="(data, index) in tableData.result"
+            v-for="(data, index) in tableData.result.rows"
             v-show="
               (updateInfo.model == 0 && data.calendar.type <= 0) ||
               (updateInfo.model == 1 && data.calendar.type > 0) ||
@@ -39,9 +39,7 @@
               v-show="data.calendar.day"
               :color="data.calendar.color"
               round
-              @click="
-                onHeroUpdateTextClick(heroId, data.articleId, data.calendar.day)
-              "
+              @click="onOpenHeroUpdateTextClick(heroId, data)"
               class="update-5a0c2e4611419b82b55675d035764007"
               >{{ data.calendar.day }}</van-tag
             >
@@ -133,7 +131,7 @@
     <div class="tuijian-a0e7b2a565119c0a7ec3126a16016113">
       <van-calendar
         v-model="show.calendar"
-        :title="tableData.title"
+        :title="tableData.result.title"
         :show-confirm="false"
         :formatter="onFormatter"
         :min-date="date.min"
@@ -142,7 +140,22 @@
     </div>
 
     <div class="tuijian-3cc26c96de198245a3ee2d64e1f94ebf">
-      <van-dialog v-model="show.dialog" :title="updateInfo.title">
+      <van-dialog
+        v-model="show.dialog"
+        @close="onCloseHeroUpdateTextClick(heroId, now)"
+      >
+        <template #title>
+          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">{{
+            updateInfo.title
+          }}</span
+          >&nbsp;
+          <span class="update-50d683cbc99c635a03f18ca2fcfbe70b"
+            ><van-switch
+              size="15px"
+              class="update-0ae9adc9418f0f446d0b49ef7e49e94c"
+              v-model="show.checked"
+          /></span>
+        </template>
         <div
           v-html="updateInfo.text"
           class="update-288ac40c37c02b743c0c2cc51c650dd3"
@@ -185,6 +198,7 @@ export default {
   },
   data() {
     return {
+      copyData: "",
       updateInfo: {
         model: 0,
         options: [
@@ -195,9 +209,11 @@ export default {
         title: "",
         text: "",
       },
+      now: {},
       show: {
         calendar: false,
         dialog: false,
+        checked: false,
       },
       date: {
         min: new Date(),
@@ -230,7 +246,7 @@ export default {
         (day.date.getMonth() + 1) +
         "/" +
         day.date.getDate();
-      let tableData = this.tableData.result;
+      let tableData = this.tableData.result.rows;
 
       for (let i = 0; i < tableData.length; i++) {
         let result = tableData[i].calendar;
@@ -240,33 +256,33 @@ export default {
         if (oDay === result.day) {
           if (result.type == 0) {
             day.bottomInfo = result.text;
-            day.className = "dayTag-tyf";
+            day.className = "update-tyf";
           }
 
           if (result.type == 1) {
             day.topInfo = result.text;
-            day.className = "dayTag-zsf";
+            day.className = "update-zsf";
           }
 
           if (result.type == 2) {
             day.text = result.text;
-            day.className = "dayTag-cz";
+            day.className = "update-cz";
           }
 
           if (result.type == 3) {
             day.text = result.text;
-            day.className = "dayTag-xp";
+            day.className = "update-xp";
           }
 
           if (result.type == 4) {
             day.text = result.text;
-            day.className = "dayTag-fc";
+            day.className = "update-fc";
           }
         }
       }
       return day;
     },
-    onHeroUpdateTextClick: function (heroId, articleId, day) {
+    onOpenHeroUpdateTextClick: function (heroId, data) {
       if (heroId == 0) return;
 
       this.axios
@@ -275,14 +291,35 @@ export default {
             "&heroId=" +
             heroId +
             "&articleId=" +
-            articleId
+            data.articleId
         )
         .then((res) => {
-          this.updateInfo.title = day + " 的更新内容";
+          this.updateInfo.title = data.calendar.day + " 的更新内容";
           this.updateInfo.text = res.data.data;
 
           this.show.dialog = true;
+          this.now = data;
         });
+    },
+    onCloseHeroUpdateTextClick: function (heroId, data) {
+      if (this.show.checked == false) return;
+
+      let date = new Date(data.calendar.day);
+      let newDate =
+        date.getFullYear() +
+        "年" +
+        (date.getMonth() + 1) +
+        "月" +
+        date.getDate() +
+        "日";
+
+      this.copyData =
+        "[quote]\r[size=110%][b][url=" +
+        data.url +
+        "][color=blue]" +
+        newDate +
+        "[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
+      this.appCopyData(this.copyData);
     },
   },
 };

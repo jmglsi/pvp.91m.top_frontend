@@ -11,9 +11,9 @@ img.game-221cf04d9a9e32c6af24502f96e3ecfe {
 }
 
 svg.game-dce7c4174ce9323904a934a486c41288 {
-    position: absolute;
     margin-left: -20px;
     margin-top: 17px;
+    position: absolute;
 }
 
 span.game-80653328482d7cba8da3f0fa033b0c12 {
@@ -30,8 +30,8 @@ div.van-tabs__wrap {
 
 div.game-89ca797bdbd58d7a03cf37f2d2fd9ac5 i.van-icon.van-grid-item__icon img.van-icon__image {
     border-radius: 10px;
-    width: 40px;
     height: 40px;
+    width: 40px;
 }
 
 div.game-bp-portrait {
@@ -40,9 +40,9 @@ div.game-bp-portrait {
 
 div.game-d75e14b5c8f13e894fe9bf9d5426c198,
 div.game-251504ba219ea8c3175f47b73bdde6e6 {
-    width: 50px;
-    top: 80px;
     position: absolute;
+    top: 80px;
+    width: 50px;
 }
 
 div.game-d75e14b5c8f13e894fe9bf9d5426c198 {
@@ -54,9 +54,9 @@ div.game-251504ba219ea8c3175f47b73bdde6e6 {
 }
 
 div.game-b3d70a861f68652bf97d7a26bf421d4f {
+    color: red;
     font-size: 12px;
     margin-top: 15px;
-    color: red;
 }
 
 div.game-bd40579650e3f651e222aef268d5c8ae {
@@ -64,8 +64,8 @@ div.game-bd40579650e3f651e222aef268d5c8ae {
 }
 
 img.game-1cf3b0809c3dde16d56153690bc902a2 {
-    border: 2px solid rgb(0, 0, 255, 0.5) !important;
     animation: blueTwinkle 800ms ease-out infinite alternate;
+    border: 2px solid rgb(0, 0, 255, 0.5) !important;
 }
 
 @keyframes blueTwinkle {
@@ -78,8 +78,8 @@ img.game-1cf3b0809c3dde16d56153690bc902a2 {
 }
 
 img.game-99b844b6785d8d7378bbc2b1401af365 {
-    border: 2px solid rgb(255, 0, 0, 0.5) !important;
     animation: redTwinkle 800ms ease-out infinite alternate;
+    border: 2px solid rgb(255, 0, 0, 0.5) !important;
 }
 
 @keyframes redTwinkle {
@@ -101,8 +101,8 @@ div.game-87740aa9337e54dbad53ec95089dca77 {
 
 div.game-beedfb16b1c81d2901c32b6dcc2939d0,
 div.game-173f312c43fe32a4f01c84d1cf0520b1 {
-    position: fixed;
     margin: 3px;
+    position: fixed;
 }
 
 div.game-beedfb16b1c81d2901c32b6dcc2939d0,
@@ -119,8 +119,8 @@ div.game-173f312c43fe32a4f01c84d1cf0520b1 {
 }
 
 div.game-e4e6288c92630a6c237c15442fdb0917 li {
-    margin: 3px 5px;
     float: left;
+    margin: 3px 5px;
 }
 
 div.game-8c9cb4a232c7e88403dddc3a0e589162,
@@ -140,8 +140,8 @@ div.game-ba9bced6af8121cf6413000a4274ac2b li {
 
 div.game-8c9cb4a232c7e88403dddc3a0e589162,
 div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
-    width: 165px;
     top: 15px;
+    width: 165px;
 }
 
 div.game-8c9cb4a232c7e88403dddc3a0e589162 {

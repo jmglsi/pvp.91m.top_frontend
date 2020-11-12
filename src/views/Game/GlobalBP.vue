@@ -27,7 +27,7 @@
       >
         <ul>
           <li
-            v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
+            v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
             :key="'game-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(index)"
           >
@@ -46,7 +46,8 @@
                     : '/img/app-icons/hero.png'
                 "
                 :class="
-                  mode == 'edit' && gameInfo.result[tabsModel].stepsNow == index
+                  mode == 'edit' &&
+                  gameInfo.result.rows[tabsModel].stepsNow == index
                     ? blueStepsClass
                     : ''
                 "
@@ -69,7 +70,7 @@
       >
         <ul>
           <li
-            v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
+            v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
             :key="'game-38dfd87b435ce58ee12baf01d6f23c73-' + index"
             @click="onGameBanPickClick(index)"
           >
@@ -88,7 +89,8 @@
                     : '/img/app-icons/hero.png'
                 "
                 :class="
-                  mode == 'edit' && gameInfo.result[tabsModel].stepsNow == index
+                  mode == 'edit' &&
+                  gameInfo.result.rows[tabsModel].stepsNow == index
                     ? redStepsClass
                     : ''
                 "
@@ -116,7 +118,8 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
+                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
+                  .BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
@@ -143,7 +146,7 @@
                     "
                     :class="
                       mode == 'edit' &&
-                      gameInfo.result[tabsModel].stepsNow == index
+                      gameInfo.result.rows[tabsModel].stepsNow == index
                         ? blueStepsClass
                         : ''
                     "
@@ -201,7 +204,7 @@
                     class="game-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
                     <van-grid-item
-                      v-for="(data, index) in tableData.result"
+                      v-for="(data, index) in tableData.result.rows"
                       v-show="
                         data.trend == 2 &&
                         (tableData.active == data.type || tableData.active == 0)
@@ -214,7 +217,7 @@
                       "
                       @click="onGamePickHeroClick(data)"
                     />
-                    <!-- gameInfo.result[tabsModel].blue.ban.includes(data.id) || gameInfo.result[tabsModel].red.ban.includes(data.id) || -->
+                    <!-- gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) || gameInfo.result.rows[tabsModel].red.ban.includes(data.id) || -->
                   </van-grid>
                 </van-cell-group>
 
@@ -229,7 +232,7 @@
                     class="game-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
                     <van-grid-item
-                      v-for="(data, index) in tableData.result"
+                      v-for="(data, index) in tableData.result.rows"
                       v-show="
                         data.trend != 2 &&
                         (tableData.active == data.type || tableData.active == 0)
@@ -255,7 +258,8 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result[tabsModel].BPOrder"
+                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
+                  .BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
@@ -282,7 +286,7 @@
                     "
                     :class="
                       mode == 'edit' &&
-                      gameInfo.result[tabsModel].stepsNow == index
+                      gameInfo.result.rows[tabsModel].stepsNow == index
                         ? redStepsClass
                         : ''
                     "
@@ -378,8 +382,8 @@
               <a-menu-item
                 v-show="
                   mode == 'view' &&
-                  gameInfo.result.length > 1 &&
-                  gameInfo.result.length - 1 == tabsModel
+                  gameInfo.result.rows.length > 1 &&
+                  gameInfo.result.rows.length - 1 == tabsModel
                 "
                 @click="onToolsMenuClick(0)"
               >
@@ -423,7 +427,7 @@
         class="app-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab
-          v-for="(data, index) in gameInfo.result"
+          v-for="(data, index) in gameInfo.result.rows"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
           :disabled="mode == 'edit' && tabsModel != index ? true : false"
         >
@@ -431,7 +435,7 @@
             <van-icon
               v-if="index % 2 == 0"
               :name="
-                gameInfo.result[index].win.camp == 1
+                gameInfo.result.rows[index].win.camp == 1
                   ? team.team_1.logo
                   : team.team_2.logo
               "
@@ -439,7 +443,7 @@
             <van-icon
               v-else-if="index % 2 == 1"
               :name="
-                gameInfo.result[index].win.camp == 1
+                gameInfo.result.rows[index].win.camp == 1
                   ? team.team_2.logo
                   : team.team_1.logo
               "
@@ -447,7 +451,8 @@
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
               :style="{
-                color: gameInfo.result[index].win.camp == 1 ? 'blue' : 'red',
+                color:
+                  gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
               }"
               >第 {{ index + 1 }} 局</span
             >
@@ -536,26 +541,28 @@ export default {
         },
       },
       gameInfo: {
-        result: [
-          {
-            game: {
-              type: 1,
-              time: null,
+        result: {
+          rows: [
+            {
+              game: {
+                type: 1,
+                time: null,
+              },
+              blue: {
+                ban: [0, 0, 0, 0],
+                pick: [0, 0, 0, 0, 0],
+              },
+              red: {
+                ban: [0, 0, 0, 0],
+                pick: [0, 0, 0, 0, 0],
+              },
+              win: {},
+              stepsNow: 0,
+              stepsActive: 0,
+              BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             },
-            blue: {
-              ban: [0, 0, 0, 0],
-              pick: [0, 0, 0, 0, 0],
-            },
-            red: {
-              ban: [0, 0, 0, 0],
-              pick: [0, 0, 0, 0, 0],
-            },
-            win: {},
-            stepsNow: 0,
-            stepsActive: 0,
-            BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          },
-        ],
+          ],
+        },
         used: [],
       },
       tableData: {
@@ -641,16 +648,16 @@ export default {
       let used = [];
 
       for (let i = 0; i < index; i++) {
-        let orderList = this.gameInfo.result[i];
+        let orderList = this.gameInfo.result.rows[i];
 
-        this.gameInfo.result[i].blue.ban = [
+        this.gameInfo.result.rows[i].blue.ban = [
           orderList.BPOrder[0],
           orderList.BPOrder[2],
           orderList.BPOrder[11],
           orderList.BPOrder[13],
         ];
 
-        this.gameInfo.result[i].blue.pick = [
+        this.gameInfo.result.rows[i].blue.pick = [
           orderList.BPOrder[4],
           orderList.BPOrder[7],
           orderList.BPOrder[8],
@@ -658,14 +665,14 @@ export default {
           orderList.BPOrder[16],
         ];
 
-        this.gameInfo.result[i].red.ban = [
+        this.gameInfo.result.rows[i].red.ban = [
           orderList.BPOrder[1],
           orderList.BPOrder[3],
           orderList.BPOrder[10],
           orderList.BPOrder[12],
         ];
 
-        this.gameInfo.result[i].red.pick = [
+        this.gameInfo.result.rows[i].red.pick = [
           orderList.BPOrder[5],
           orderList.BPOrder[6],
           orderList.BPOrder[9],
@@ -675,17 +682,17 @@ export default {
 
         if (perspective == 1) {
           if (i % 2 == 0) {
-            used.push.apply(used, this.gameInfo.result[i].red.pick);
+            used.push.apply(used, this.gameInfo.result.rows[i].red.pick);
           } else {
-            used.push.apply(used, this.gameInfo.result[i].blue.pick);
+            used.push.apply(used, this.gameInfo.result.rows[i].blue.pick);
           }
         }
 
         if (perspective == 2) {
           if (i % 2 == 0) {
-            used.push.apply(used, this.gameInfo.result[i].blue.pick);
+            used.push.apply(used, this.gameInfo.result.rows[i].blue.pick);
           } else {
-            used.push.apply(used, this.gameInfo.result[i].red.pick);
+            used.push.apply(used, this.gameInfo.result.rows[i].red.pick);
           }
         }
         //队伍视角,会交换位置
@@ -742,7 +749,7 @@ export default {
 
           this.initBPOrder(this.perspective, tabsModel + 1);
 
-          this.getHeroList(result[0].game.time);
+          this.getHeroList(result.rows[0].game.time);
 
           this.author.openId && this.author.openId == this.$cookie.get("openId")
             ? (this.show.apps = true)
@@ -771,7 +778,7 @@ export default {
 
       let loginInfo = this.loginInfo;
       let teamInfo = this.team;
-      let gameIndex = this.gameInfo.result.length;
+      let gameIndex = this.gameInfo.result.rows.length;
 
       this.axios
         .post(
@@ -789,7 +796,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.gameInfo.result.push(newGame);
+            this.gameInfo.result.rows.push(newGame);
 
             this.$message.success("创建成功");
           } else {
@@ -800,7 +807,7 @@ export default {
     onUpdateGameBPClick: function (index) {
       let loginInfo = this.loginInfo;
       let teamInfo = this.team;
-      let gameInfo = this.gameInfo.result[index];
+      let gameInfo = this.gameInfo.result.rows[index];
 
       if (gameInfo.win.camp == null) {
         this.$message.error("错误:1001,请点击左侧/右侧边缘设置胜利方");
@@ -848,7 +855,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.gameInfo.result.splice(index, 1);
+            this.gameInfo.result.rows.splice(index, 1);
             this.tabsModel = index - 1;
 
             this.$message.success("删除成功");
@@ -897,12 +904,12 @@ export default {
 
       let tabsModel = this.tabsModel;
 
-      if (this.gameInfo.result[tabsModel].BPOrder[index - 1] == 0) {
+      if (this.gameInfo.result.rows[tabsModel].BPOrder[index - 1] == 0) {
         this.$message.error("错误:1002,请按顺序BP");
         return;
       }
 
-      let oldIndex = this.gameInfo.result[tabsModel].stepsNow;
+      let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
 
       if (this.mode == "edit") {
         if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, index)) {
@@ -912,15 +919,15 @@ export default {
         }
         //点击触发:切换阵容时初始化
 
-        this.gameInfo.result[tabsModel].stepsNow = index;
+        this.gameInfo.result.rows[tabsModel].stepsNow = index;
       }
     },
     onGamePickHeroClick: function (hero) {
       let tabsModel = this.tabsModel;
 
       if (
-        this.gameInfo.result[tabsModel].blue.ban.includes(hero.id) ||
-        this.gameInfo.result[tabsModel].red.ban.includes(hero.id)
+        this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
+        this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
       ) {
         this.$message.warning("警告:1001," + hero.name + " 已被禁用");
         return;
@@ -933,7 +940,7 @@ export default {
 
       if (this.mode == "view") return;
 
-      let oldIndex = this.gameInfo.result[tabsModel].stepsNow,
+      let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow,
         newIndex = 0;
 
       if (oldIndex > 17) {
@@ -941,7 +948,11 @@ export default {
       } else {
         newIndex = oldIndex + 1;
 
-        this.gameInfo.result[tabsModel].BPOrder.splice(oldIndex, 1, hero.id);
+        this.gameInfo.result.rows[tabsModel].BPOrder.splice(
+          oldIndex,
+          1,
+          hero.id
+        );
       }
 
       if (this.index.perspective[oldIndex] == 1) {
@@ -954,7 +965,7 @@ export default {
       }
       //自动触发:切换阵容时初始化
 
-      this.gameInfo.result[tabsModel].stepsNow = newIndex;
+      this.gameInfo.result.rows[tabsModel].stepsNow = newIndex;
 
       this.initBPOrder(this.perspective, tabsModel + 1);
 
@@ -1001,8 +1012,9 @@ export default {
           this.mode = "edit";
           this.$message.info("提示:1001,已进入编辑模式");
 
-          this.index.ban.includes(this.gameInfo.result[tabsModel].stepsNow) &&
-          tabsModel % 2 == 0
+          this.index.ban.includes(
+            this.gameInfo.result.rows[tabsModel].stepsNow
+          ) && tabsModel % 2 == 0
             ? (this.perspective = 2)
             : (this.perspective = 1);
           this.onGamePerspectiveClick(0);
@@ -1040,7 +1052,7 @@ export default {
         })
         .then(() => {
           // on confirm
-          this.gameInfo.result[tabsModel].win.camp = camp;
+          this.gameInfo.result.rows[tabsModel].win.camp = camp;
 
           this.$message.success("设置成功");
         })
