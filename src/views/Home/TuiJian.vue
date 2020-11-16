@@ -1,5 +1,5 @@
 <template>
-  <div class="app-tuijian app-d638615004bb2ff42ed26948aba89c80">
+  <div class="app-tuijian tuijian-b77f3080e567fd154c25b053042dcba9">
     <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
       <van-pull-refresh
         v-model="isLoading"

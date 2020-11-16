@@ -383,7 +383,7 @@ export default {
     getHeroRanking: function (aid, bid) {
       if (aid == 3 && bid == 0)
         this.$message.info(
-          "提示:1003,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
+          "提示:1010,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
         );
 
       this.axios

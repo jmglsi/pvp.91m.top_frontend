@@ -43,7 +43,7 @@
                       '/' +
                       heroId +
                       '.jpg'
-                    : '/img/app-icons/hero.png'
+                    : '/img/app-icons/hero_white.png'
                 "
                 :class="
                   mode == 'edit' &&
@@ -86,7 +86,7 @@
                       '/' +
                       heroId +
                       '.jpg'
-                    : '/img/app-icons/hero.png'
+                    : '/img/app-icons/hero_white.png'
                 "
                 :class="
                   mode == 'edit' &&
@@ -142,7 +142,7 @@
                           '/' +
                           heroId +
                           '.jpg'
-                        : '/img/app-icons/hero.png'
+                        : '/img/app-icons/hero_white.png'
                     "
                     :class="
                       mode == 'edit' &&
@@ -282,7 +282,7 @@
                           '/' +
                           heroId +
                           '.jpg'
-                        : '/img/app-icons/hero.png'
+                        : '/img/app-icons/hero_white.png'
                     "
                     :class="
                       mode == 'edit' &&

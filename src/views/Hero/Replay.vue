@@ -260,7 +260,7 @@ export default {
             replayInfo.inscriptionUrl
           );
         } else {
-          this.$message.info("提示:1004,未查询到,建议从上方详情进入");
+          this.$message.info("提示:1009,未查询到,建议从上方详情进入");
         }
       }
     },

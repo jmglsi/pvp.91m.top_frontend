@@ -1,7 +1,7 @@
 <template>
   <div class="hero-update">
     <div
-      class="update-b4558c68ce168dc8679358f047eea63b update-447b7147e84be512208dcc0995d67ebc update-e1fade65183eeca567683609ebb7005f"
+      class="app-0464ec62d5cba8a9ec29d0c4c89fc7c6 app-b4a64ecd008af42ba95bc20350599699 update-e1fade65183eeca567683609ebb7005f"
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
@@ -88,7 +88,7 @@
                   v-show="heroId"
                   v-lazy="
                     heroId == 999
-                      ? '/img/app-icons/hero.png'
+                      ? '/img/app-icons/hero_white.png'
                       : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                         heroId +
                         '/' +

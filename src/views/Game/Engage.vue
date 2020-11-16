@@ -64,7 +64,7 @@
       </van-grid>
     </div>
 
-    <AppBottomTabbar v-if="appDevice" :height="100" />
+    <AppBottomTabbar v-if="appDevice" height="100" />
   </div>
 </template>
 

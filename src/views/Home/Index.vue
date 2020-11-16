@@ -38,7 +38,7 @@
       提供CDN加速/云储存服务
     </div>
 
-    <AppBottomTabbar :height="100" />
+    <AppBottomTabbar height="100" />
   </div>
 </template>
 
