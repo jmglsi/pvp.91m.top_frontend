@@ -66,11 +66,11 @@ export default {
               text: "动态",
             },
             {
-              icon: "/img/app-icons/social.png",
+              icon: "/img/app-icons/friends.png",
               to: {
-                path: "/social",
+                path: "/friends",
               },
-              name: "/social",
+              name: "/friends",
               text: "扩列",
             },
             {
