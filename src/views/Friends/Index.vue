@@ -181,7 +181,9 @@ export default {
   data() {
     return {
       friendsInfo: {
-        img: "",
+        name: "苏苏",
+        uin: 50371140,
+        img: "//q.qlogo.cn/headimg_dl?dst_uin=50371140&spec=640",
         certification: {
           color: "",
           text: "",
