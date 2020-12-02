@@ -2,13 +2,13 @@ import Vue from 'vue'
 
 Vue.prototype.appDevice = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent)
 
-Vue.prototype.appCopyData = function(data) {
+Vue.prototype.appCopyData = function(data, successText = "复制成功", errorText = "复制失败") {
     this.$copyText(data).then(
         () => {
-            this.$message.success("复制成功");
+            this.$message.success(successText);
         },
         () => {
-            this.$message.error("复制失败");
+            this.$message.error(errorText);
         }
     );
 }
@@ -34,7 +34,6 @@ Vue.prototype.appOpenUrl = function(title, message, url) {
         })
         .catch(() => {
             // on cancel
-            //this.$message.error("已取消");
         });
 }
 

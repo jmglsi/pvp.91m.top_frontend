@@ -10,6 +10,10 @@ export default new Router({
             name: '404',
             redirect: '/ranking'
         }, {
+            path: '/bp',
+            name: 'bp',
+            redirect: '/my'
+        }, {
             path: '/hero',
             name: 'hero',
             redirect: '/ranking'
@@ -30,12 +34,11 @@ export default new Router({
                 keepAlive: true
             }
         }, {
-            path: '/social',
-            name: 'social',
-            component: (resolve) => require(['./views/Social/Index.vue'], resolve),
+            path: '/friends',
+            name: 'friends',
+            component: (resolve) => require(['./views/Friends/Index.vue'], resolve),
             meta: {
-                title: '扩列',
-                keepAlive: true
+                title: '扩列'
             }
         }, {
             path: '/skin/return',
