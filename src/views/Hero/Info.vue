@@ -11,19 +11,19 @@
             : { backgroundColor: 'transparent' }
         "
         @click-left="appPush('/ranking')"
-        @click-right="$message.info('提示:1002,分路推荐 ;D')"
+        @click-right="$message.info('提示:1004,分路推荐 ;D')"
         z-index="99999999"
         left-text="排行"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>
           <div
-            @click="$message.info('提示:1003,近期热度 ;D')"
+            @click="$message.info('提示:1005,近期热度 ;D')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
             <img
-              v-show="show.parameter && hero.info.trend > 0"
-              v-lazy="'/img/app-icons/hot-' + hero.info.trend + '.png'"
+              v-show="showInfo.parameter && hero.info.trend > 0"
+              v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
               width="15"
               height="15"
               class="hero-f90943c8968fa651d7e1b617ff046fe2"
@@ -41,7 +41,7 @@
         </template>
         <template #right>
           <div
-            v-show="show.parameter"
+            v-show="showInfo.parameter"
             class="hero-68adaff1d028a37f27fb33c483329cba"
           >
             <ul>
@@ -65,7 +65,7 @@
 
     <div class="hero-e21ecc3330f7f3c382fc113f392368bd">
       <van-swipe
-        v-show="show.parameter"
+        v-show="showInfo.parameter"
         :autoplay="10000"
         :height="250"
         class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
@@ -73,13 +73,17 @@
         <van-swipe-item
           v-for="(data, index) in hero.info.skin"
           :key="'hero-07ae211504ad5deba5d239525b888d59-' + index"
-          @click="show.imagePreview = true"
+          @click="onImagePreviewClick(index)"
           class="hero-5a0b1ba1b22eb336b55e70eb2abbac30"
         >
           <img v-lazy="data" class="hero-44908c08b6c253a19ab6246e6eec857a" />
         </van-swipe-item>
       </van-swipe>
-      <van-image-preview v-model="show.imagePreview" :images="hero.info.skin">
+      <van-image-preview
+        v-model="showInfo.imagePreview"
+        :images="hero.info.skin"
+        :startPosition="showInfo.imageIndex"
+      >
         <template v-slot:cover
           ><span class="hero-b5741c8457973b008c424c6f94ff3901"
             >长按或右键可保存图片~</span
@@ -93,14 +97,14 @@
       class="hero-9afffec6fe89b34b024d06907c006f36"
     >
       <van-grid
-        v-show="show.parameter"
+        v-show="showInfo.parameter"
         :border="false"
         :column-num="3"
         class="app-ff4a008470319a22d9cf3d14af485977"
       >
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="$message.info('提示:1004,分均经济、场均时长、场均经济 ;D')"
+          @click="$message.info('提示:1006,分均经济、场均时长、场均经济 ;D')"
         >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <AppGold
@@ -135,7 +139,7 @@
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="show.heroMenu = true"
+          @click="showInfo.heroMenu = true"
         >
           <van-circle
             v-model="circle.model"
@@ -150,7 +154,7 @@
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="show.heroSkill = true"
+          @click="showInfo.heroSkill = true"
         >
           <div
             v-if="hero.info.skill && hero.info.equipment"
@@ -204,19 +208,23 @@
         :ellipsis="false"
         :sticky="true"
         @change="onTabsChange"
-        @click="
-          tabsModel == 0 && hero.line == 0 ? (hero.line = 1) : (hero.line = 0)
-        "
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
         title-active-color="rgb(243,189,103)"
         class="hero-d42f4851e770aa0f758b01388874f67b"
       >
-        <van-tab
-          class="hero-ab71021d21963773bfb8be80af65869f"
-          :title="hero.line == 0 ? '巅峰赛趋势' : '论坛舆论'"
-        />
+        <van-tab class="hero-ab71021d21963773bfb8be80af65869f">
+          <template #title>
+            <van-dropdown-menu class="hero-385d73af791b8e7dc7e1209c3320ea26">
+              <van-dropdown-item
+                v-model="trendInfo.model"
+                :options="trendInfo.options"
+                :disabled="tabsModel == 0 ? false : true"
+              />
+            </van-dropdown-menu>
+          </template>
+        </van-tab>
         <van-tab
           class="hero-ab71021d21963773bfb8be80af65869f"
           title="同分路对比"
@@ -230,11 +238,11 @@
           <HeroLine
             v-if="tabsModel == 0"
             :heroId="hero.info.id"
-            :lineType="hero.line"
+            :trendType="trendInfo.model"
           />
         </div>
         <div
-          :style="tabsModel > 0 ? { marginTop: '50px' } : { marginTop: '0' }"
+          :style="appDevice ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
           <HeroRadar
@@ -246,18 +254,23 @@
       </van-tabs>
     </div>
 
-    <div class="app-d638615004bb2ff42ed26948aba89c80">
-      <HeroUpdate
-        v-if="isLoaded"
-        v-show="show.parameter"
-        :heroId="hero.info.id"
-        :updateId="hero.info.updateId"
-      />
+    <div
+      v-if="isLoaded"
+      v-show="showInfo.parameter"
+      class="hero-9393a9be63ea720a87e048d40caa03b5"
+    >
+      <div class="hero-b7b5e31b028440d2e0e0157baad49513">
+        <HeroSameHobby :heroId="hero.info.id" />
+      </div>
+
+      <div class="hero-b7b5e31b028440d2e0e0157baad49513">
+        <HeroUpdate :heroId="hero.info.id" :updateId="hero.info.updateId" />
+      </div>
     </div>
 
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
-        v-model="show.heroSkill"
+        v-model="showInfo.heroSkill"
         :title="hero.info.name + ' 的其它数据 (上周)'"
         safe-area-inset-bottom
       >
@@ -274,7 +287,7 @@
 
     <div class="hero-16e1b9e46fe4483c6bc17aea9d20736a">
       <van-action-sheet
-        v-model="show.heroMenu"
+        v-model="showInfo.heroMenu"
         :title="hero.info.name + ' 的 ' + circle.info.text"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -314,7 +327,41 @@
       </van-action-sheet>
     </div>
 
-    <AppBottomTabbar />
+    <div class="hero-79acd83e2dbb9d5b6de778dd5077db2c">
+      <van-tabbar
+        fixed
+        safe-area-inset-bottom
+        active-color="rgb(243,189,103)"
+        class="hero-d4a9092fd7b386904e4a2894044f2a9d"
+      >
+        <van-tabbar-item
+          icon="/img/app-icons/like_0.png"
+          name="/"
+          class="app-72383b9892bd1e6a2bd310dfb1fb2344"
+          @click="$message.info('提示:1007,正在开发')"
+          >喜欢</van-tabbar-item
+        >
+        <van-tabbar-item
+          icon="/img/app-icons/wiki.png"
+          name="/"
+          class="app-72383b9892bd1e6a2bd310dfb1fb2344"
+          @click="
+            hero.info.wikiId
+              ? appOpenUrl(
+                  '是否打开外部链接?',
+                  null,
+                  '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId
+                )
+              : $message.info(
+                  '提示:1008,暂时还没有该英雄的词条,您也想出力的话请加群:810191707,备注来自苏苏的荣耀助手'
+                )
+          "
+          >稷下图书馆</van-tabbar-item
+        >
+      </van-tabbar>
+    </div>
+
+    <AppBottomTabbar height="100" />
   </div>
 </template>
 
@@ -333,6 +380,8 @@ export default {
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
+    HeroSameHobby: (resolve) =>
+      require(["@/components/Hero/SameHobby.vue"], resolve),
     AppBottomTabbar: (resolve) =>
       require(["@/components/App/BottomTabbar.vue"], resolve),
   },
@@ -345,16 +394,16 @@ export default {
   data() {
     return {
       scroll: 0,
-      show: {
+      showInfo: {
         heroImg: true,
         parameter: true,
         heroSkill: false,
         heroMenu: false,
         imagePreview: false,
+        imageIndex: 0,
       },
       tabsModel: 0,
       hero: {
-        line: 0,
         title: "加载中",
         info: {
           id: 0,
@@ -381,6 +430,14 @@ export default {
             },
           ],
         },
+      },
+      trendInfo: {
+        model: 0,
+        options: [
+          { text: "巅峰赛趋势", value: 0 },
+          { text: "英雄强势期", value: 1 },
+          { text: "论坛舆论", value: 2 },
+        ],
       },
       isLoaded: false,
     };
@@ -440,7 +497,11 @@ export default {
           }
         });
 
-      this.show.heroMenu = false;
+      this.showInfo.heroMenu = false;
+    },
+    onImagePreviewClick: function (imageIndex) {
+      this.showInfo.imagePreview = true;
+      this.showInfo.imageIndex = imageIndex;
     },
     onTabsChange: function (e) {
       let heroInfo = this.hero.info,
@@ -463,7 +524,9 @@ export default {
 
       document.title = dTitle + " | 苏苏的荣耀助手";
 
-      e == 0 ? (this.show.parameter = true) : (this.show.parameter = false);
+      e == 0
+        ? (this.showInfo.parameter = true)
+        : (this.showInfo.parameter = false);
     },
   },
 };
