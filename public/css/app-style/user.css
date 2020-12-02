@@ -12,11 +12,17 @@ span.my-25930e3036f13852cb0b29694bbab611 {
 }
 
 span.my-b068931cc450442b63f5b3d276ea4297 {
-    font-size: 10px;
+    font-size: 13px;
 }
 
 span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
     margin-left: 5px;
+}
+
+span.my-af99c9298d1eb69981a035d0a15afa20 {
+    position: absolute;
+    right: 30px;
+    top: -5px;
 }
 
 div.my-6920626369b1f05844f5e3d6f93b5f6e,
@@ -44,23 +50,29 @@ span.my-4646fa4296a7f5dea261e60e00ecd24b {
     font-size: 20px;
 }
 
-div.my-cd77c40b62763f6adf5598bce7fceede {
-    margin-bottom: 10px;
-    margin-top: 35px;
-}
-
-div.my-f9c7cabc13f359223ebc3ccf9cc104b8 {
-    margin-top: 20px;
-}
-
-div.my-058928a73f2a944d621b028eb9addd36 {
-    margin-top: -20px;
-}
-
 div.my-7dc22b2c6a992f0232345df41303f5ea {
     text-align: left;
 }
 
+div.my-cd77c40b62763f6adf5598bce7fceede {
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+div.my-e422a8bb26c14c85f0046ff66e412df4 {
+    margin: 20px 15px;
+    color: #969799;
+}
+
+div.my-058928a73f2a944d621b028eb9addd36 {
+    margin-bottom: 25px;
+}
+
 div.my-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
     font-size: 10px;
+}
+
+div.my-e422a8bb26c14c85f0046ff66e412df4 img.van-icon__image,
+div.my-e71832eb64a3978b00a7d37f407b158e img.van-icon__image {
+    border-radius: unset;
 }

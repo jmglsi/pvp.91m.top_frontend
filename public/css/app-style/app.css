@@ -1,3 +1,30 @@
+img.app-d31cb1c15b091f41248935d88a8d0a45 {
+    border-radius: unset;
+    margin-bottom: -40px;
+    margin-left: -40px;
+    position: relative;
+}
+
+img.app-4ab161130e76571ab0c31aa23a6238c7 {
+    border-radius: 100%;
+    margin: 0 10px;
+}
+
+ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
+    list-style: none;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+ul.user-9e60d3ee1e1574cae90960f940c0a821 {
+    height: 70px;
+    width: 150px;
+}
+
+li.app-1951b6e7c82938dd7446a41e829b247b {
+    display: inline-block;
+}
+
 button.app-0162f4b7b2dbdf6aff3a25de02e49a8b,
 button.app-4236a440a662cc8253d7536e5aa17942 {
     height: 35px;
@@ -13,7 +40,7 @@ i.van-icon img.van-icon__image {
 }
 
 span.van-tab__text {
-    margin: 11px 0 12px 0;
+    margin: 11px 0 7px 0;
 }
 
 span.app-e4d23e841d8e8804190027bce3180fa5 {
@@ -54,8 +81,8 @@ div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
     width: 100%;
 }
 
-div.app-d638615004bb2ff42ed26948aba89c80 {
-    margin: 0 10px;
+div.app-c8b43ef685423e5746487b1446cfe47a {
+    margin: 25px 10px;
 }
 
 div.app-4eb2044800e2b7b9e5c44d370af22b27 i.van-icon.van-grid-item__icon img.van-icon__image {
@@ -64,8 +91,9 @@ div.app-4eb2044800e2b7b9e5c44d370af22b27 i.van-icon.van-grid-item__icon img.van-
     width: 40px;
 }
 
-div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image {
-    border-radius: 0;
+div.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image,
+div.app-72383b9892bd1e6a2bd310dfb1fb2344 img.van-icon__image {
+    border-radius: unset;
 }
 
 div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable,
@@ -169,4 +197,22 @@ div.app-06eab62dcb5a23b966a620807d78e66f {
 
 div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable {
     border-radius: 10px;
+}
+
+div.app-2f4ffa86e6dacd562859288aa6f4cad4,
+span.app-dac41b9450b77c3eb0ab7d8428d004f5 {
+    color: #969799;
+    font-size: 10px;
+}
+
+div.app-0464ec62d5cba8a9ec29d0c4c89fc7c6,
+div.app-6bdc6915ee08058392eafe0ef6e353fd {
+    border-radius: 10px;
+    margin: 0 10px;
+    padding: 15px 10px;
+}
+
+div.app-b4a64ecd008af42ba95bc20350599699,
+div.app-9b9faf4e737f5907995f767e0b345dab {
+    background-color: rgb(248, 249, 252);
 }
