@@ -33,7 +33,7 @@
 
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
-        v-model="show.team"
+        v-model="showInfo.team"
         :title="
           teamInfo.row.id != null ? teamInfo.row.name + ' 如何操作' : '新建队伍'
         "
@@ -90,12 +90,12 @@
 
           <div class="game-c97a3db05d13ebcb702c69bc6a42a226">
             <van-button
-              v-show="show.delect"
+              v-show="showInfo.delete"
               round
               size="small"
               color="red"
               class="game-a066f238070a70cb531c9bd722c65b36"
-              @click="onDelectTeamClick"
+              @click="onDeleteTeamClick"
               >删除队伍</van-button
             >&nbsp;
             <van-button
@@ -122,9 +122,9 @@ export default {
         openId: null,
         accessToken: null,
       },
-      show: {
+      showInfo: {
         team: false,
-        delect: false,
+        delete: false,
       },
       teamInfo: {
         type: 0,
@@ -142,13 +142,13 @@ export default {
     this.loginInfo.openId = this.$cookie.get("openId");
     this.loginInfo.accessToken = this.$cookie.get("accessToken");
 
-    this.$cookie.delete("teamId");
-
     this.getGameDashboard();
   },
   methods: {
     getGameDashboard: function () {
       let loginInfo = this.loginInfo;
+
+      this.$cookie.delete("teamId");
 
       this.axios
         .post(
@@ -189,9 +189,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("上传成功");
-
             this.teamInfo.row.logo = data.img;
+
+            this.$message.success("上传成功");
           } else {
             this.$message.error(status.msg);
           }
@@ -221,8 +221,8 @@ export default {
 
       this.teamInfo.type = 0;
 
-      this.show.team = true;
-      this.show.delect = false;
+      this.showInfo.team = true;
+      this.showInfo.delete = false;
     },
     onUpdateTeamClick: function (data, index) {
       this.teamInfo.row = data;
@@ -230,8 +230,8 @@ export default {
       this.teamInfo.type = 1;
       this.teamInfo.index = index;
 
-      this.show.team = true;
-      this.show.delect = true;
+      this.showInfo.team = true;
+      this.showInfo.delete = true;
     },
     onSaveTeamInfoClick: function () {
       let loginInfo = this.loginInfo,
@@ -252,9 +252,9 @@ export default {
             let status = res.data.status;
 
             if (status.code == 200) {
-              this.$message.success("创建成功");
-
               this.getGameDashboard();
+
+              this.$message.success("创建成功");
             } else {
               this.$message.error(status.msg);
             }
@@ -273,9 +273,9 @@ export default {
           });
       }
 
-      this.show.team = false;
+      this.showInfo.team = false;
     },
-    onDelectTeamClick: function () {
+    onDeleteTeamClick: function () {
       let loginInfo = this.loginInfo,
         teamInfo = this.teamInfo;
 
@@ -287,7 +287,7 @@ export default {
           // on confirm
           this.axios
             .post(
-              this.apiList.pvp.delectTeam,
+              this.apiList.pvp.deleteTeam,
               this.$qs.stringify({
                 openId: loginInfo.openId,
                 accessToken: loginInfo.accessToken,
@@ -298,14 +298,15 @@ export default {
               let status = res.data.status;
 
               if (status.code == 200) {
+                this.teamInfo.result.rows.splice(teamInfo.index, 1);
+
                 this.$message.success("删除成功");
-                this.teamInfo.result.splice(teamInfo.index, 1);
               } else {
                 this.$message.error(status.msg);
               }
             });
 
-          this.show.team = false;
+          this.showInfo.team = false;
         })
         .catch(() => {
           // on cancel
@@ -315,7 +316,7 @@ export default {
       let teamId_1 = this.$cookie.get("teamId");
       let teamId_2 = data;
 
-      this.show.team = false;
+      this.showInfo.team = false;
 
       if (teamId_1 == teamId_2) {
         this.$message.error("错误:1003,两支队伍不能相同");
@@ -324,6 +325,7 @@ export default {
 
       if (!teamId_1) {
         this.$cookie.set("teamId", data);
+
         this.$message.success("添加成功,请再选择一个");
       } else {
         this.onSaveEngageClick(teamId_1, teamId_2);
@@ -346,8 +348,9 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("创建成功");
             this.$cookie.delete("teamId");
+
+            this.$message.success("创建成功");
 
             this.appPush("/game/engage");
           } else {
@@ -355,7 +358,7 @@ export default {
           }
         });
 
-      this.show.team = false;
+      this.showInfo.team = false;
     },
   },
 };

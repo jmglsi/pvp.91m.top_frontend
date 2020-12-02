@@ -79,7 +79,7 @@
 
     <div class="bilibili-8fd741f0ce683493b1bed18a2ed32d4a">
       <van-action-sheet
-        v-model="show.actionSheet"
+        v-model="showInfo.actionSheet"
         :title="tableData.row.uid + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
@@ -114,7 +114,7 @@ export default {
       },
       paginationModel: 1,
       listWidth: 0,
-      show: {
+      showInfo: {
         actionSheet: false,
       },
       actions: [
@@ -172,7 +172,7 @@ export default {
       this.appCopyData(e);
       this.copyAv = "";
     },
-    onActionSheetClick: function (row) {
+    onBilibiliActionSheetClick: function (row) {
       this.tableData.row = row;
 
       this.axios
@@ -207,7 +207,7 @@ export default {
             res.data.data.url;
         });
 
-      this.show.actionSheet = true;
+      this.showInfo.actionSheet = true;
     },
     onSearchClear: function () {
       this.search.value = "";
@@ -242,7 +242,7 @@ export default {
       this.getOrderInfo(this.search.value, e);
     },
     onCellClick: function ({ row }) {
-      this.onActionSheetClick(row);
+      this.onBilibiliActionSheetClick(row);
     },
     onActionSheetSelect: function (item) {
       let orderInfo = this.tableData.row;

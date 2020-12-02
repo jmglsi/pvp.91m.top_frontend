@@ -77,10 +77,6 @@ export default {
   },
   data() {
     return {
-      loginInfo: {
-        openId: null,
-        accessToken: null,
-      },
       show: {
         engage: false,
       },
@@ -96,21 +92,19 @@ export default {
     };
   },
   mounted() {
-    this.loginInfo.openId = this.$cookie.get("openId");
-    this.loginInfo.accessToken = this.$cookie.get("accessToken");
-
     this.getGameDashboard();
   },
   methods: {
     getGameDashboard: function () {
-      let loginInfo = this.loginInfo;
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
 
       this.axios
         .post(
           this.apiList.pvp.getGameDashboard + "&aid=1",
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
+            openId: openId,
+            accessToken: accessToken,
           })
         )
         .then((res) => {

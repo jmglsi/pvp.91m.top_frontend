@@ -39,15 +39,15 @@ export default {
       type: Boolean,
       default: true,
     },
-    lineType: {
+    trendType: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId, detailed, lineType } = this;
-      return { heroId, detailed, lineType };
+      const { heroId, detailed, trendType } = this;
+      return { heroId, detailed, trendType };
     },
   },
   watch: {
@@ -58,16 +58,11 @@ export default {
 
         this.lineData.result = [];
 
-        if (newValue.lineType == 0) {
-          this.getHeroChartsLogByDfs(
-            newValue.heroId,
-            Number(newValue.detailed)
-          );
-        }
-
-        if (newValue.lineType == 1) {
-          this.getHeroChartsLogByBbs(newValue.heroId);
-        }
+        this.getHeroChartsLog(
+          newValue.heroId,
+          newValue.trendType,
+          Number(newValue.detailed)
+        );
 
         document.body.scrollTop = document.documentElement.scrollTop = 0;
       },
@@ -93,32 +88,19 @@ export default {
       //去除折线图上的小圆点
       return e;
     },
-    getHeroChartsLogByDfs: function (heroId, detailed) {
+    getHeroChartsLog: function (heroId, aid, detailed) {
       this.lineData.loading = true;
 
       this.axios
         .get(
-          this.apiList.pvp.getHeroChartsLogByDfs +
+          this.apiList.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
+            "&aid=" +
+            aid +
             "&detailed=" +
             detailed
         )
-        .then((res) => {
-          let data = res.data.data;
-
-          if (data.result.rows.length != 0) {
-            this.lineData = data;
-          }
-
-          this.lineData.loading = false;
-        });
-    },
-    getHeroChartsLogByBbs: function (heroId) {
-      this.lineData.loading = true;
-
-      this.axios
-        .get(this.apiList.pvp.getHeroChartsLogByBbs + "&heroId=" + heroId)
         .then((res) => {
           let data = res.data.data;
 

@@ -45,7 +45,7 @@
             :title="
               appHomeInfo.tipsInfo.title
                 ? appHomeInfo.tipsInfo.title
-                : '很高兴认识你~'
+                : '很高兴认识您~'
             "
             :value="appHomeInfo.tipsInfo.des"
             :to="appHomeInfo.tipsInfo.to"

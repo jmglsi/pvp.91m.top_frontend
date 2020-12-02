@@ -19,8 +19,8 @@
         :settings="radarData.settings"
         :data="radarData.result"
         :loading="radarData.loading"
-        :height="appDevice ? '650px' : '750px'"
         :style="style"
+        height="550px"
         class="hero-ca6674b328707b5a1f0b012105a7e4e1"
       />
     </div>
@@ -28,7 +28,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/hero.css");
+@import url("/css/app-style/hero-radar.css");
 </style>
 
 <script>
@@ -63,7 +63,7 @@ export default {
         this.radarData.result = [];
 
         if (newValue.tabsModel == 1) {
-          this.getHeroChartsLogBySimilar(newValue.heroId);
+          this.getHeroChartsLog(newValue.heroId, "", 10);
         } else {
           this.tag.array = [];
         }
@@ -77,76 +77,48 @@ export default {
         array: [],
         placeholder: "输入对比的英雄,点击任意空白位置确认 😄",
       },
-      style: {
-        marginTop: 0,
-      },
       radarData: {
         extend: {},
         settings: {},
         loading: true,
         result: [],
       },
-      customize: {
+      heroList: {
         old: "",
         new: "",
       },
     };
   },
-  mounted() {
-    this.appDevice
-      ? (this.style.marginTop = "-150px")
-      : (this.style.marginTop = "-50px");
-  },
   methods: {
-    getHeroChartsLogBySimilar: function (heroId) {
-      this.radarData.loading = true;
-
-      this.axios
-        .get(this.apiList.pvp.getHeroChartsLogBySimilar + "&heroId=" + heroId)
-        .then((res) => {
-          let data = res.data.data;
-
-          if (data.result.rows.length != 0) {
-            this.radarData = data;
-          }
-
-          this.radarData.loading = false;
-        });
-    },
-    getHeroChartsLogByCustomize: function (heroName) {
+    getHeroChartsLog: function (heroId, heroName, aid) {
       this.radarData.loading = true;
 
       this.axios
         .get(
-          this.apiList.pvp.getHeroChartsLogByCustomize + "&heroName=" + heroName
+          this.apiList.pvp.getHeroChartsLog +
+            "&heroId=" +
+            heroId +
+            "&heroName=" +
+            heroName +
+            "&aid=" +
+            aid
         )
         .then((res) => {
           let data = res.data.data;
 
           if (data.result.rows.length != 0) {
             this.radarData = data;
+          } else {
+            this.$message.warning("无内容");
           }
 
           this.radarData.loading = false;
         });
     },
-    getHeroChartsLogByCustomizeFromUrl: function (heroName) {
-      let e, hero, newTags;
-
-      e = heroName.split(",");
-      for (let i = 0; i < e.length; i++) {
-        hero = e[i];
-        newTags = newTags + "," + hero;
-        this.tag.array.push({ text: decodeURI(hero) });
-      }
-
-      this.getHeroChartsLogByCustomize(heroName);
-    },
     onTagsChanged: function (e) {
       if (e.length == 0) {
         this.chartSettings = {};
         this.chartData = [];
-        this.customize = "";
       } else {
         let hero, newTags;
 
@@ -154,16 +126,17 @@ export default {
           hero = e[i].text;
           newTags = newTags + "," + hero;
         }
-        this.customize.new = newTags.replace("undefined,", "");
+
+        this.heroList.new = newTags.replace("undefined,", "");
       }
     },
     onTagsBlur: function () {
-      let oldCustomize = this.customize.old,
-        newCustomize = this.customize.new;
+      let oldHeroList = this.heroList.old,
+        newHeroList = this.heroList.new;
 
-      if (oldCustomize != newCustomize) {
-        this.getHeroChartsLogByCustomize(newCustomize);
-        this.customize.old = newCustomize;
+      if (oldHeroList != newHeroList) {
+        this.getHeroChartsLog("", newHeroList, 11);
+        this.heroList.old = newHeroList;
       }
     },
   },

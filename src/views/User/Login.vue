@@ -124,6 +124,10 @@ export default {
         this.loginInfo.text = "登录";
       }
     },
+    onUpdateClick: function () {
+      this.loginInfo.type = 2;
+      this.loginInfo.text = "修改密码";
+    },
     onLoginClick: function () {
       let type = this.loginInfo.type,
         data = this.loginInfo.data;
@@ -170,10 +174,6 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    },
-    onUpdateClick: function () {
-      this.loginInfo.type = 2;
-      this.loginInfo.text = "修改密码";
     },
   },
 };

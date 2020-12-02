@@ -16,7 +16,7 @@
     </div>
 
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
-      <vxe-toolbar ref="xToolbar" allTitle="1" custom />
+      <vxe-toolbar ref="xToolbar" custom />
     </div>
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
@@ -231,7 +231,7 @@
 
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
-        v-model="show.heroSkill"
+        v-model="showInfo.heroSkill"
         :title="tableData.row.name + ' 的其它数据 (上周)'"
         safe-area-inset-bottom
       >
@@ -256,7 +256,7 @@
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
-        v-model="show.heroMenu"
+        v-model="showInfo.heroMenu"
         :title="tableData.row.name + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
@@ -309,7 +309,7 @@ export default {
           updateId: 0,
         },
       },
-      show: {
+      showInfo: {
         heroSkill: false,
         heroMenu: false,
       },
@@ -381,11 +381,6 @@ export default {
       }
     },
     getHeroRanking: function (aid, bid) {
-      if (aid == 3 && bid == 0)
-        this.$message.info(
-          "提示:1010,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
-        );
-
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then((res) => {
@@ -401,6 +396,12 @@ export default {
 
           this.isLoading = false;
         });
+
+      if (aid == 3 && bid == 0) {
+        this.$message.info(
+          "提示:1010,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
+        );
+      }
     },
     onDropdownMenuChange: function () {
       this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
@@ -409,12 +410,12 @@ export default {
       this.tableData.row = row;
 
       if (column.property == "score") {
-        this.show.heroSkill = true;
-        this.show.heroMenu = false;
+        this.showInfo.heroSkill = true;
+        this.showInfo.heroMenu = false;
         return;
       } else {
-        this.show.heroSkill = false;
-        this.show.heroMenu = true;
+        this.showInfo.heroSkill = false;
+        this.showInfo.heroMenu = true;
         return;
       }
     },

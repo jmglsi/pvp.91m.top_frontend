@@ -111,7 +111,7 @@
 
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
-        v-model="show.actionSheet"
+        v-model="showInfo.actionSheet"
         :title="tableData.row.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
@@ -160,7 +160,7 @@ export default {
         },
       },
       paginationModel: 1,
-      show: {
+      showInfo: {
         actionSheet: false,
       },
       actions: [
@@ -208,7 +208,7 @@ export default {
             this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
 
-      this.show.actionSheet = true;
+      this.showInfo.actionSheet = true;
     },
     getHeroReplayByHeroId: function (heroId, page) {
       this.axios

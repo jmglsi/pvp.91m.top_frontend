@@ -95,7 +95,7 @@
 
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
-        v-model="show.actionSheet"
+        v-model="showInfo.actionSheet"
         :title="
           tableData.row.hero_1.name +
           ' & ' +
@@ -133,7 +133,7 @@ export default {
           },
         },
       },
-      show: {
+      showInfo: {
         actionSheet: false,
       },
       actions: [
@@ -231,7 +231,7 @@ export default {
             res.data.data.url;
         });
 
-      this.show.actionSheet = true;
+      this.showInfo.actionSheet = true;
     },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
@@ -285,9 +285,9 @@ export default {
               msg;
 
             if (code == 1) {
-              this.$message.success("添加成功");
-
               this.getHeroCombination("");
+
+              this.$message.success("添加成功");
             } else {
               if (code == 0) {
                 msg = "关系已存在";
@@ -298,6 +298,7 @@ export default {
               if (code == -2) {
                 msg = "格式错误,小写逗号【,】";
               }
+
               this.$message.error("错误:1004," + msg);
             }
           });

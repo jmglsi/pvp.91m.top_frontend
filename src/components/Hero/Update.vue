@@ -5,7 +5,7 @@
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col span="16" @click="show.calendar = true">
+          <van-col span="16" @click="showInfo.calendar = true">
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.result.tips
             }}</span>
@@ -130,7 +130,7 @@
 
     <div class="tuijian-a0e7b2a565119c0a7ec3126a16016113">
       <van-calendar
-        v-model="show.calendar"
+        v-model="showInfo.calendar"
         :title="tableData.result.title"
         :show-confirm="false"
         :formatter="onFormatter"
@@ -141,7 +141,7 @@
 
     <div class="tuijian-3cc26c96de198245a3ee2d64e1f94ebf">
       <van-dialog
-        v-model="show.dialog"
+        v-model="showInfo.dialog"
         @close="onCloseHeroUpdateTextClick(heroId, now)"
       >
         <template #title>
@@ -153,7 +153,7 @@
             ><van-switch
               size="15px"
               class="update-0ae9adc9418f0f446d0b49ef7e49e94c"
-              v-model="show.checked"
+              v-model="showInfo.checked"
           /></span>
         </template>
         <div
@@ -166,7 +166,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/update.css");
+@import url("/css/app-style/hero-update.css");
 </style>
 
 <script>
@@ -210,7 +210,7 @@ export default {
         text: "",
       },
       now: {},
-      show: {
+      showInfo: {
         calendar: false,
         dialog: false,
         checked: false,
@@ -297,12 +297,12 @@ export default {
           this.updateInfo.title = data.calendar.day + " 的更新内容";
           this.updateInfo.text = res.data.data;
 
-          this.show.dialog = true;
+          this.showInfo.dialog = true;
           this.now = data;
         });
     },
     onCloseHeroUpdateTextClick: function (heroId, data) {
-      if (this.show.checked == false) return;
+      if (this.showInfo.checked == false) return;
 
       let date = new Date(data.calendar.day);
       let newDate =

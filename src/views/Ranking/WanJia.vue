@@ -8,7 +8,7 @@
           @change="onPlayerOptionsChange"
         />
         <van-dropdown-item ref="item" title="筛选">
-          <van-switch-cell v-model="show.checked" title="隐藏战绩" />
+          <van-switch-cell v-model="showInfo.shield" title="隐藏战绩" />
           <van-button type="info" block @click="onDropdownConfirmClick"
             >确认</van-button
           >
@@ -64,7 +64,7 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="show.actionSheet"
+        v-model="showInfo.actionSheet"
         :title="tableData.row.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
@@ -80,10 +80,6 @@ export default {
   name: "RankingWanJia",
   data() {
     return {
-      loginInfo: {
-        openId: null,
-        accessToken: null,
-      },
       playerShield: 0,
       uin: "",
       copyData: "",
@@ -103,9 +99,9 @@ export default {
           gamePlayerName: "加载中",
         },
       },
-      show: {
+      showInfo: {
+        shield: false,
         actionSheet: false,
-        checked: false,
       },
       actions: [
         { name: "查看QQ", value: 0 },
@@ -120,9 +116,6 @@ export default {
     this.initAppTable();
   },
   mounted() {
-    this.loginInfo.openId = this.$cookie.get("openId");
-    this.loginInfo.accessToken = this.$cookie.get("accessToken");
-
     this.getPlayerRanking(0, 0);
   },
   methods: {
@@ -142,18 +135,19 @@ export default {
     getPlayerInfo: function (row) {
       if (row.userId == 0) return;
       this.tableData.row = row;
-      this.show.actionSheet = true;
-
-      let loginInfo = this.loginInfo;
+      this.showInfo.actionSheet = true;
 
       if (this.areaInfo.model >= 3) return;
+
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
 
       this.axios
         .post(
           this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId,
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
+            openId: openId,
+            accessToken: accessToken,
           })
         )
         .then((res) => {
@@ -183,7 +177,7 @@ export default {
     onDropdownConfirmClick: function () {
       this.$refs.item.toggle();
 
-      this.playerShield = Number(this.show.checked);
+      this.playerShield = Number(this.showInfo.shield);
       this.getPlayerRanking(this.areaInfo.model, this.playerShield);
     },
     onCellClick: function ({ row }) {

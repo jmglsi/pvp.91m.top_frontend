@@ -11,14 +11,14 @@
       >
         <template #right>
           <div class="skin-921e37b78f1130768646531b655b7392">
-            <van-switch v-model="show.checked" />
+            <van-switch v-model="showInfo.checked" />
           </div>
         </template>
       </van-nav-bar>
     </div>
 
     <div
-      v-show="show.checked == false && lineData.result.rows.length > 0"
+      v-show="showInfo.checked == false && lineData.result.rows.length > 0"
       class="skin-9eff02d43a97619df7707398ec7099cb"
     >
       <ve-line
@@ -35,7 +35,7 @@
     </div>
 
     <div
-      v-show="show.checked == true"
+      v-show="showInfo.checked == true"
       class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
     >
       <vxe-grid
@@ -96,7 +96,7 @@ export default {
   },
   data() {
     return {
-      show: {
+      showInfo: {
         checked: false,
       },
       tableData: {

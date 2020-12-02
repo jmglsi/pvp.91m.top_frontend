@@ -171,7 +171,7 @@
         </van-col>
         <van-col span="18">
           <div
-            v-show="show.hero"
+            v-show="showInfo.hero"
             :style="
               appDevice
                 ? { height: '240px' }
@@ -375,7 +375,7 @@
             >秒
           </div>
         </li>
-        <li v-show="show.apps">
+        <li v-show="showInfo.apps">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" />
             <a-menu slot="overlay">
@@ -464,7 +464,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/globalBP.css");
+@import url("/css/app-style/game-globalBP.css");
 </style>
 
 <script>
@@ -569,7 +569,7 @@ export default {
         active: 0,
         result: [],
       },
-      show: {
+      showInfo: {
         apps: false,
         hero: true,
       },
@@ -707,8 +707,9 @@ export default {
       this.countdownHandle = setInterval(() => {
         this.countdown--;
         if (this.countdown == 0) {
-          this.$message.error("错误:1007,已超时");
           clearInterval(this.countdownHandle);
+
+          this.$message.error("错误:1007,已超时");
         }
       }, 1000);
     },
@@ -752,8 +753,8 @@ export default {
           this.getHeroList(result.rows[0].game.time);
 
           this.author.openId && this.author.openId == this.$cookie.get("openId")
-            ? (this.show.apps = true)
-            : (this.show.apps = false);
+            ? (this.showInfo.apps = true)
+            : (this.showInfo.apps = false);
         });
     },
     onCreateGameBPClick: function () {
@@ -838,12 +839,12 @@ export default {
           }
         });
     },
-    onDelectGameBPClick: function (index) {
+    onDeleteGameBPClick: function (index) {
       let loginInfo = this.loginInfo;
 
       this.axios
         .post(
-          this.apiList.pvp.delectGameBP,
+          this.apiList.pvp.deleteGameBP,
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
@@ -881,11 +882,11 @@ export default {
       if (this.eye == "eye-o") {
         this.eye = "closed-eye";
 
-        this.show.hero = false;
+        this.showInfo.hero = false;
       } else {
         this.eye = "eye-o";
 
-        this.show.hero = true;
+        this.showInfo.hero = true;
       }
     },
     onGamePerspectiveClick: function (mode) {
@@ -996,7 +997,7 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.onDelectGameBPClick(tabsModel);
+            this.onDeleteGameBPClick(tabsModel);
           })
           .catch(() => {
             // on cancel
@@ -1010,7 +1011,6 @@ export default {
       if (type == 2) {
         if (this.mode == "view") {
           this.mode = "edit";
-          this.$message.info("提示:1001,已进入编辑模式");
 
           this.index.ban.includes(
             this.gameInfo.result.rows[tabsModel].stepsNow
@@ -1021,6 +1021,8 @@ export default {
           //tabsModel % 2 == 0
 
           this.initCountdown();
+
+          this.$message.info("提示:1001,已进入编辑模式");
         } else {
           this.mode = "view";
 
