@@ -65,10 +65,32 @@ export default {
   },
   mounted() {
     let pwa = parseInt(this.$route.query.pwa),
-      type = parseInt(this.$route.query.type);
+      type = parseInt(this.$route.query.type),
+      version = parseInt(this.$route.query.v);
 
     if (pwa) {
       this.$cookie.set("pwa", pwa, { expires: "1Y" });
+
+      let updateDay = ((this.appTs - version) / 86400).toFixed(2);
+      if (updateDay >= 90) {
+        this.$dialog
+          .confirm({
+            title: "温馨提示【" + updateDay + "】",
+            message:
+              "您已经很久没有更新过本站辣\r页面有可能发生了较大的变化\r建议清除缓存重新添加到桌面",
+          })
+          .then(() => {
+            // on confirm
+            this.appCopyData(
+              location.origin,
+              "链接已复制,请清除缓存重新添加到桌面~"
+            );
+          })
+          .catch(() => {
+            // on cancel
+            //this.$message.error("已取消");
+          });
+      }
     }
 
     if (!type) {
