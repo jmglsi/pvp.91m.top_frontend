@@ -327,7 +327,7 @@
       </van-action-sheet>
     </div>
 
-    <div class="hero-79acd83e2dbb9d5b6de778dd5077db2c">
+    <div v-show="tabsModel == 0" class="hero-79acd83e2dbb9d5b6de778dd5077db2c">
       <van-tabbar
         fixed
         safe-area-inset-bottom

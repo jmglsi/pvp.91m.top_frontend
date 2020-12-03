@@ -9,6 +9,7 @@
         :data="lineData.result"
         :loading="lineData.loading"
         :after-config="afterConfig"
+        height="500px"
         width="99.2%"
         class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
@@ -19,6 +20,7 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
+import "echarts/lib/component/title";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
 import "echarts/lib/component/dataZoom";

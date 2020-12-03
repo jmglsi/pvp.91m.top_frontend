@@ -172,3 +172,7 @@ div.hero-385d73af791b8e7dc7e1209c3320ea26 div.van-dropdown-menu__bar {
     box-shadow: unset;
     height: unset;
 }
+
+div.hero-d4a9092fd7b386904e4a2894044f2a9d.van-tabbar {
+    z-index: 11;
+}
