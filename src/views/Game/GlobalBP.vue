@@ -424,7 +424,7 @@
         v-model="tabsModel"
         @change="onGameTabsChange"
         color="orange"
-        class="app-4863c43e8743ebf1be3f48c5c4519627"
+        class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab
           v-for="(data, index) in gameInfo.result.rows"

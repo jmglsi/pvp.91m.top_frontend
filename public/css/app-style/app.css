@@ -106,10 +106,6 @@ div.app-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap {
     height: 32px;
 }
 
-div.app-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
-    bottom: 9px;
-}
-
 div.app-f3cc17bc0d768ca60b8bb496a10b1990 span.van-tab__text {
     margin: 6px 0;
 }
@@ -182,12 +178,6 @@ div.app-99938282f04071859941e18f16efcf42 {
 div.app-f56ae939694a0488cc9e8ecdd47a46ab {
     font-size: 12px;
     margin-top: 5px;
-}
-
-div.app-4863c43e8743ebf1be3f48c5c4519627 {
-    bottom: 0;
-    position: fixed;
-    width: 100%;
 }
 
 div.app-06eab62dcb5a23b966a620807d78e66f {
