@@ -91,6 +91,7 @@ export default {
       return e;
     },
     getHeroChartsLog: function (heroId, aid, detailed) {
+      this.lineData = {};
       this.lineData.loading = true;
 
       this.axios
@@ -104,12 +105,13 @@ export default {
             detailed
         )
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
           if (data.result.rows.length != 0) {
             this.lineData = data;
           } else {
-            this.$message.warning("无内容");
+            this.$message.error(status.msg);
           }
 
           this.lineData.loading = false;

@@ -86,6 +86,7 @@ div.hero-16e1b9e46fe4483c6bc17aea9d20736a {
 
 div.hero-e06398232dc80e41209489705546802c {
     margin-top: 25px;
+    z-index: -1;
 }
 
 div.hero-68adaff1d028a37f27fb33c483329cba {
@@ -131,6 +132,10 @@ div.hero-c6e864acb6955eed0361921288d34149 div.van-grid-item__content {
 
 div.hero-83444807ba7a7da23e12b17567d2d595 div.van-circle__text {
     color: white;
+}
+
+div.hero-e21ecc3330f7f3c382fc113f392368bd {
+    z-index: -1;
 }
 
 div.hero-e21ecc3330f7f3c382fc113f392368bd div.van-image-preview__index {

@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     getHeroChartsLog: function (heroId, heroName, aid) {
+      this.radarData = {};
       this.radarData.loading = true;
 
       this.axios
@@ -103,12 +104,13 @@ export default {
             aid
         )
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
           if (data.result.rows.length != 0) {
             this.radarData = data;
           } else {
-            this.$message.warning("无内容");
+            this.$message.error(status.msg);
           }
 
           this.radarData.loading = false;
