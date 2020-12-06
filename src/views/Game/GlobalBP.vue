@@ -213,11 +213,18 @@
                       :icon="data.img"
                       text=" "
                       :class="
-                        gameInfo.used.includes(data.id) ? banPickClass : ''
+                        gameInfo.result.rows[tabsModel].blue.ban.includes(
+                          data.id
+                        ) ||
+                        gameInfo.result.rows[tabsModel].red.ban.includes(
+                          data.id
+                        ) ||
+                        gameInfo.used.includes(data.id)
+                          ? banPickClass
+                          : ''
                       "
                       @click="onGamePickHeroClick(data)"
                     />
-                    <!-- gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) || gameInfo.result.rows[tabsModel].red.ban.includes(data.id) || -->
                   </van-grid>
                 </van-cell-group>
 
@@ -241,7 +248,15 @@
                       :icon="data.img"
                       text=" "
                       :class="
-                        gameInfo.used.includes(data.id) ? banPickClass : ''
+                        gameInfo.result.rows[tabsModel].blue.ban.includes(
+                          data.id
+                        ) ||
+                        gameInfo.result.rows[tabsModel].red.ban.includes(
+                          data.id
+                        ) ||
+                        gameInfo.used.includes(data.id)
+                          ? banPickClass
+                          : ''
                       "
                       @click="onGamePickHeroClick(data)"
                     />
@@ -372,7 +387,8 @@
               class="game-0db3e75efe3faa0cee4451fb55bc4c53"
               :style="countdown < 10 ? { color: 'red' } : { color: 'blue' }"
               >{{ countdown }}</span
-            >秒
+            >
+            秒
           </div>
         </li>
         <li v-show="showInfo.apps">
@@ -389,10 +405,21 @@
               >
                 <a-icon type="minus" />删除本局
               </a-menu-item>
-              <a-menu-item v-show="mode == 'view'" @click="onToolsMenuClick(1)">
+              <a-menu-item
+                v-show="mode == 'view' && gameInfo.result.rows.length < 6"
+                @click="onToolsMenuClick(1)"
+              >
                 <a-icon type="plus" />再来一局
               </a-menu-item>
-              <a-menu-item @click="onToolsMenuClick(2)">
+              <a-menu-item
+                v-show="
+                  mode == 'edit' && gameInfo.result.rows.length - 1 == tabsModel
+                "
+                @click="onToolsMenuClick(2)"
+              >
+                <a-icon type="retweet" />重置
+              </a-menu-item>
+              <a-menu-item @click="onToolsMenuClick(3)">
                 <a-icon :type="mode == 'view' ? 'edit' : 'cloud-upload'" />编辑
               </a-menu-item>
             </a-menu>
@@ -519,7 +546,7 @@ export default {
       mode: "view",
       self: "",
       opponent: "",
-      countdown: 60,
+      countdown: 45,
       countdownHandle: "",
       perspective: 1,
       tabsModel: 0,
@@ -698,10 +725,9 @@ export default {
         //队伍视角,会交换位置
       }
       this.gameInfo.used = Array.from(new Set(used));
-      //console.log(perspective, this.gameInfo.used);
     },
     initCountdown: function () {
-      this.countdown = 60;
+      this.countdown = 45;
       clearInterval(this.countdownHandle);
 
       this.countdownHandle = setInterval(() => {
@@ -930,7 +956,7 @@ export default {
         this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
         this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
       ) {
-        this.$message.warning("警告:1001," + hero.name + " 已被禁用");
+        this.$message.error("警告:1005," + hero.name + " 已被禁用");
         return;
       } else if (this.gameInfo.used.includes(hero.id)) {
         this.$message.warning(
@@ -1009,6 +1035,42 @@ export default {
       }
 
       if (type == 2) {
+        let newGame = {
+          game: {
+            type: 1,
+            time: null,
+          },
+          blue: {
+            ban: [0, 0, 0, 0],
+            pick: [0, 0, 0, 0, 0],
+          },
+          red: {
+            ban: [0, 0, 0, 0],
+            pick: [0, 0, 0, 0, 0],
+          },
+          win: {},
+          stepsNow: 0,
+          stepsActive: 0,
+          BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        };
+
+        this.$dialog
+          .confirm({
+            title: "是否重置第 " + (tabsModel + 1) + " 局？",
+            message: "此操作不可逆",
+          })
+          .then(() => {
+            // on confirm
+            this.gameInfo.result.rows[tabsModel] = newGame;
+
+            this.$message.success("重置成功");
+          })
+          .catch(() => {
+            // on cancel
+          });
+      }
+
+      if (type == 3) {
         if (this.mode == "view") {
           this.mode = "edit";
 
