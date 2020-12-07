@@ -36,9 +36,9 @@
             :color="data.calendar.color"
           >
             <van-tag
+              round
               v-show="data.calendar.day"
               :color="data.calendar.color"
-              round
               @click="onOpenHeroUpdateTextClick(heroId, data)"
               class="update-5a0c2e4611419b82b55675d035764007"
               >{{ data.calendar.day }}</van-tag
@@ -49,10 +49,10 @@
               class="update-5a5152e95445ede11c05f5fa898d8fd9"
             >
               <van-tag
+                round
                 v-for="(data, index) in data.tags"
                 :key="'tuijian-5e9c0708969ea62d890f9c9f063b6c44-' + index"
                 color="black"
-                round
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
                 >{{ data }}</van-tag
               >
@@ -119,8 +119,8 @@
           class="update-0b479089ade5d13a2c41830785ebac9d"
         >
           <van-tag
-            color="orange"
             round
+            color="orange"
             class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067"
             >更多更新记录</van-tag
           >

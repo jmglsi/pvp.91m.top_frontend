@@ -1,8 +1,9 @@
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
     border-radius: unset;
     margin-bottom: -40px;
-    margin-left: -40px;
+    margin-left: -45px;
     position: relative;
+    width: 35px;
 }
 
 img.app-4ab161130e76571ab0c31aa23a6238c7 {
@@ -33,10 +34,6 @@ button.app-4236a440a662cc8253d7536e5aa17942 {
 
 button.app-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
     color: red;
-}
-
-i.van-icon img.van-icon__image {
-    margin-top: -3px;
 }
 
 span.van-tab__text {
@@ -127,8 +124,6 @@ div.app-9fc0eb5a934dba03cc266a49b8ec51fb i.van-button__icon img.van-icon__image 
     border-radius: 100%;
     height: 40px;
     margin-left: -12px;
-    margin-top: -2px;
-    margin-top: -5px;
     width: 40px;
 }
 
@@ -166,12 +161,9 @@ div.app-99938282f04071859941e18f16efcf42 div.van-tab.van-ellipsis {
 
 div.app-99938282f04071859941e18f16efcf42 {
     border-radius: 10px;
-    overflow: hidden;
-}
-
-div.app-99938282f04071859941e18f16efcf42 {
     margin: 0 auto;
     margin-top: 50px;
+    overflow: hidden;
     overflow-y: auto;
 }
 

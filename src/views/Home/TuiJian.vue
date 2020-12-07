@@ -33,8 +33,8 @@
                 class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag
-                :color="data.tag.color"
                 mark
+                :color="data.tag.color"
                 class="update-a5a5c883f68e45baa83f140e218759f1"
                 >{{ data.tag.text }}</van-tag
               >

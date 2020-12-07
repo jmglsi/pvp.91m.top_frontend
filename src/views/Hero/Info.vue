@@ -50,9 +50,9 @@
                 :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
               >
                 <van-tag
+                  round
                   v-if="data"
                   :color="positionInfo[data - 1][1]"
-                  round
                   class="hero-bc267281c62550407c9572aff2a45f69"
                   >{{ positionInfo[data - 1][0] }}</van-tag
                 >

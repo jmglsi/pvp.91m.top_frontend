@@ -29,9 +29,9 @@
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
           <template v-slot="{ row }">
             <van-tag
+              mark
               v-if="row.tag"
               :color="row.tag.color"
-              mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
               >{{ row.tag.text }}</van-tag
@@ -198,7 +198,7 @@ export default {
             playerInfo.inscriptionUrl
           );
         } else {
-          this.$message.info("提示:1012,未查询到,待更新");
+          this.$message.info("提示:1006,未查询到,待更新");
         }
       }
     },

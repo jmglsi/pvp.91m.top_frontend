@@ -30,14 +30,14 @@
         >
           <div slot="title" class="hero-a78656fbfb5b498e5cb80b5b13076e31">
             <van-tag
-              :type="data.status"
               round
+              :type="data.status"
               class="hero-01cac4e332fec6d6ecd331a00412712d hero-e4d23e841d8e8804190027bce3180fa5"
               >{{ data.usedtime }}</van-tag
             >
             <van-tag
-              v-show="!teammate"
               round
+              v-show="!teammate"
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
               >{{ data.equMoney }}</van-tag
@@ -89,10 +89,10 @@
           </div>
 
           <van-tag
-            v-show="!teammate"
             round
             disabled
-            color="#000000"
+            v-show="!teammate"
+            color="black"
             size="mini"
             class="hero-ce50a09343724eb82df11390e2c1de18"
             >{{ data.heroKda }}</van-tag
@@ -260,7 +260,7 @@ export default {
             replayInfo.inscriptionUrl
           );
         } else {
-          this.$message.info("提示:1009,未查询到,建议从上方详情进入");
+          this.$message.info("提示:1004,未查询到,建议从上方详情进入");
         }
       }
     },

@@ -54,13 +54,9 @@
           <template #right-icon>
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
               <img
+                v-lazy="friendsInfo.rank.starIcon"
                 width="50"
                 height="50"
-                v-lazy="
-                  '//camp.qq.com/battle/profile/roleJob/' +
-                  friendsInfo.rank.type +
-                  '.png'
-                "
               />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd"
                 >|</span
               >&nbsp;
@@ -94,10 +90,10 @@
                   class="app-4ab161130e76571ab0c31aa23a6238c7"
                 />
                 <img
-                  v-show="data.gfzq == 1"
+                  v-show="data.fightPowerIcon"
+                  v-lazy="data.fightPowerIcon"
                   width="25"
                   height="25"
-                  v-lazy="'/img/app-icons/gfzq.png'"
                   class="app-d31cb1c15b091f41248935d88a8d0a45"
                 />
               </li>

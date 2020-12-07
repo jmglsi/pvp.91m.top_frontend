@@ -42,9 +42,9 @@
         >
           <template v-slot="{ row }">
             <van-tag
+              mark
               v-show="row.tag.text"
               :color="row.tag.color"
-              mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
               >{{ row.tag.text }}</van-tag
@@ -399,7 +399,7 @@ export default {
 
       if (aid == 3 && bid == 0) {
         this.$message.info(
-          "提示:1010,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
+          "提示:1005,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
         );
       }
     },

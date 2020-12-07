@@ -121,13 +121,9 @@
           <template #right-icon>
             <span class="my-af99c9298d1eb69981a035d0a15afa20"
               ><img
+                v-lazy="loginInfo.rank.starIcon"
                 width="50"
                 height="50"
-                v-lazy="
-                  '//camp.qq.com/battle/profile/roleJob/' +
-                  loginInfo.rank.type +
-                  '.png'
-                "
               />&nbsp;<span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span
               >&nbsp;
               <span class="my-7121ba1bc1276c3bb6df96b333a16760">{{
@@ -169,10 +165,10 @@
                   @click="$router.push({ path: '/hero/' + data.id + '/info' })"
                 />
                 <img
-                  v-show="data.gfzq == 1"
+                  v-if="data.fightPowerIcon"
+                  v-lazy="data.fightPowerIcon"
                   width="25"
                   height="25"
-                  v-lazy="'/img/app-icons/gfzq.png'"
                   class="app-d31cb1c15b091f41248935d88a8d0a45"
                 />
               </li>
@@ -329,7 +325,7 @@ export default {
         });
     },
     onCopyLinkClick: function () {
-      this.appCopyData(location.origin + "/friends?" + this.loginInfo.openId);
+      this.appCopyData(location.origin + "/friends?openId=" + this.loginInfo.openId);
     },
     onLogoutClick: function () {
       this.$dialog

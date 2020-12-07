@@ -58,7 +58,7 @@
       class="my-61046f2f5eefe3dc179e52af32241062"
     >
       <span class="my-e4c9479b11955648dad558fe717a4eb2"
-        >注:用户名和QQ将用于展示在BP界面以及修改密码,请不要瞎写</span
+        >注:用户名和QQ将用于扩列、BP界面以及修改密码，请不要瞎写</span
       >
     </div>
 
@@ -131,6 +131,12 @@ export default {
     onLoginClick: function () {
       let type = this.loginInfo.type,
         data = this.loginInfo.data;
+
+      if (!data.email || !data.password) {
+        this.$message.error("错误:1008,邮箱或密码为空");
+
+        return;
+      }
 
       this.axios
         .post(

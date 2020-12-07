@@ -15,10 +15,10 @@
           "
         >
           <img
-            v-show="data.gfzq == 1"
+            v-if="data.fightPowerIcon"
+            v-lazy="data.fightPowerIcon"
             width="35"
             height="35"
-            v-lazy="'/img/app-icons/gfzq.png'"
             class="hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767"
           />
           <img
