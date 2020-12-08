@@ -24,6 +24,12 @@ span.game-0db3e75efe3faa0cee4451fb55bc4c53 {
     font-size: 20px;
 }
 
+span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
+    position: absolute;
+    top: 2px;
+    z-index: 1;
+}
+
 div.van-tabs__wrap {
     z-index: 2;
 }
@@ -91,10 +97,6 @@ img.game-99b844b6785d8d7378bbc2b1401af365 {
     }
 }
 
-div.game-551270e8a38a84d3f0b214e6854357e3 {
-    filter: grayscale(1);
-}
-
 div.game-87740aa9337e54dbad53ec95089dca77 {
     background-color: white;
 }
@@ -111,11 +113,13 @@ div.game-173f312c43fe32a4f01c84d1cf0520b1 {
 }
 
 div.game-beedfb16b1c81d2901c32b6dcc2939d0 {
-    top: 67px;
+    top: 55px;
+    z-index: 1;
 }
 
 div.game-173f312c43fe32a4f01c84d1cf0520b1 {
-    bottom: 45px;
+    bottom: 42px;
+    height: 35px;
 }
 
 div.game-e4e6288c92630a6c237c15442fdb0917 li {
@@ -156,6 +160,7 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 {
     bottom: 0;
     position: fixed;
     width: 100%;
+    z-index: 1;
 }
 
 div.game-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
