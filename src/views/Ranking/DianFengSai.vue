@@ -57,7 +57,7 @@
             />
             <img
               v-if="row.trend > 0"
-              v-lazy="'/img/app-icons/hot-' + row.trend + '.png'"
+              v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
               width="15"
               height="15"
               class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"

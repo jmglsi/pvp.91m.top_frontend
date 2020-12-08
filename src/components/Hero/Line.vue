@@ -108,7 +108,7 @@ export default {
           let data = res.data.data,
             status = res.data.status;
 
-          if (data.result.rows.length != 0) {
+          if (status.code == 200) {
             this.lineData = data;
           } else {
             this.$message.error(status.msg);
