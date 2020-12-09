@@ -9,9 +9,7 @@
         />
         <van-dropdown-item ref="item" title="筛选">
           <van-switch-cell v-model="showInfo.shield" title="隐藏战绩" />
-          <van-button type="info" block @click="onDropdownConfirmClick"
-            >确认</van-button
-          >
+          <van-button type="info" block @click="onDropdownConfirmClick">确认</van-button>
         </van-dropdown-item>
       </van-dropdown-menu>
     </div>
@@ -47,18 +45,9 @@
 
         <vxe-table-column title="#" type="seq" width="75" />
 
-        <vxe-table-column
-          title="昵称"
-          field="gamePlayerName"
-          :width="listWidth"
-        />
+        <vxe-table-column title="昵称" field="gamePlayerName" :width="listWidth" />
 
-        <vxe-table-column
-          title="巅峰分"
-          field="rankScore"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="巅峰分" field="rankScore" :width="listWidth" sortable />
       </vxe-grid>
     </div>
 

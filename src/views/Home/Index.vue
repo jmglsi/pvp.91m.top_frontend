@@ -52,8 +52,7 @@ export default {
   components: {
     TuiJian: (resolve) => require(["@/views/Home/TuiJian.vue"], resolve),
     Game: (resolve) => require(["@/views/Home/Game.vue"], resolve),
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
@@ -81,10 +80,7 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.appCopyData(
-              location.origin,
-              "链接已复制,请清除缓存重新添加到桌面~"
-            );
+            this.appCopyData(location.origin, "链接已复制,请清除缓存重新添加到桌面~");
           })
           .catch(() => {
             // on cancel

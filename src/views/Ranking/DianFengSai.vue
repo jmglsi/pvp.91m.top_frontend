@@ -33,13 +33,7 @@
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
-        <vxe-table-column
-          title="英雄"
-          field="score"
-          fixed="left"
-          width="75"
-          sortable
-        >
+        <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
             <van-tag
               mark
@@ -92,24 +86,9 @@
         <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column title="出场越低,波动越大 (%)">
-          <vxe-table-column
-            title="禁用"
-            field="banRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="出场"
-            field="pickRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="胜率"
-            field="winRate"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="禁用" field="banRate" :width="listWidth" sortable />
+          <vxe-table-column title="出场" field="pickRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜率" field="winRate" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
@@ -134,18 +113,8 @@
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column
-            title="全部"
-            field="allMvpRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="胜方"
-            field="winMvpRate"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
           <vxe-table-column
             title="败方"
             field="loseMvpRate"
@@ -192,24 +161,9 @@
         </vxe-table-column>
 
         <vxe-table-column title="KDA">
-          <vxe-table-column
-            title="击杀"
-            field="killCnt"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="死亡"
-            field="deadCnt"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="助攻"
-            field="assistCnt"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
+          <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
+          <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="其它">
@@ -219,12 +173,7 @@
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
-            title="时长"
-            field="usedtime"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
         </vxe-table-column>
       </vxe-grid>
     </div>
@@ -241,9 +190,7 @@
           <div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
             <van-button
               round
-              @click="
-                $router.push({ path: '/hero/' + tableData.row.id + '/info' })
-              "
+              @click="$router.push({ path: '/hero/' + tableData.row.id + '/info' })"
               size="small"
               color="linear-gradient(to right, #ff6034, #ee0a24)"
             >
@@ -344,9 +291,7 @@ export default {
         return;
       }
 
-      let tableColumn = JSON.parse(
-        localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE
-      );
+      let tableColumn = JSON.parse(localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE);
 
       let listWidth = 85;
 

@@ -120,11 +120,9 @@
         <van-cell icon="/img/game-icons/king.png" title="王者荣耀">
           <template #right-icon>
             <span class="my-af99c9298d1eb69981a035d0a15afa20"
-              ><img
-                v-lazy="loginInfo.rank.starIcon"
-                width="50"
-                height="50"
-              />&nbsp;<span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span
+              ><img v-lazy="loginInfo.rank.starIcon" width="50" height="50" />&nbsp;<span
+                class="app-dac41b9450b77c3eb0ab7d8428d004f5"
+                >|</span
               >&nbsp;
               <span class="my-7121ba1bc1276c3bb6df96b333a16760">{{
                 loginInfo.rank.score
@@ -136,9 +134,7 @@
           <template #title>
             <span
               class="my-1098203f6e0a3a981da7c9a8cd6bc85b"
-              @click="
-                $message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')
-              "
+              @click="$message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')"
               >常用英雄</span
             >
           </template>
@@ -176,9 +172,7 @@
             <span
               v-show="loginInfo.heroList.length == 0"
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
-              @click="
-                $message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')
-              "
+              @click="$message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')"
               >未设置</span
             >
           </template>
@@ -186,9 +180,7 @@
         <van-cell icon="friends">
           <template #title>
             <span class="my-94251204a6d395ca9fccad5eabe50b6c">扩列交友</span>
-            <div class="app-2f4ffa86e6dacd562859288aa6f4cad4">
-              打开别人就能找到您辣~
-            </div>
+            <div class="app-2f4ffa86e6dacd562859288aa6f4cad4">打开别人就能找到您辣~</div>
           </template>
           <template #right-icon>
             <span class="my-b60541e817018d568a58a70d5db7fb65"
@@ -242,10 +234,7 @@
     </div>
 
     <div class="my-111fb4d92036323891a140cd49383f86">
-      <van-cell-group
-        :border="false"
-        class="my-b990d992f06c8db21d6b58c25f843529"
-      >
+      <van-cell-group :border="false" class="my-b990d992f06c8db21d6b58c25f843529">
         <van-cell
           title="沪ICP备16031287号-2"
           @click="appOpenUrl('是否打开外部链接?', null, url.beian)"
@@ -266,8 +255,7 @@
 export default {
   name: "MyHome",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {

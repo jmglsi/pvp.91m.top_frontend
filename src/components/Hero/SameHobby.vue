@@ -10,9 +10,7 @@
           v-for="(data, index) in sameHobbyData.result.rows"
           :key="'hero-same-hobby-418bbf1206aab9cb337c42b4d2c1d6ec-' + index"
           class="app-1951b6e7c82938dd7446a41e829b247b"
-          @click="
-            $router.push({ path: '/friends', query: { openId: data.openId } })
-          "
+          @click="$router.push({ path: '/friends', query: { openId: data.openId } })"
         >
           <img
             v-if="data.fightPowerIcon"

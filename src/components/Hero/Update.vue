@@ -44,10 +44,7 @@
               >{{ data.calendar.day }}</van-tag
             >
 
-            <div
-              v-if="data.url"
-              class="update-5a5152e95445ede11c05f5fa898d8fd9"
-            >
+            <div v-if="data.url" class="update-5a5152e95445ede11c05f5fa898d8fd9">
               <van-tag
                 round
                 v-for="(data, index) in data.tags"
@@ -96,9 +93,7 @@
                         '.jpg'
                   "
                   @click="
-                    heroId == 999
-                      ? $message.info('提示:1000,还没上线正式服的新英雄')
-                      : ''
+                    heroId == 999 ? $message.info('提示:1000,还没上线正式服的新英雄') : ''
                   "
                   class="update-5d39f3848925994b52ec52fba934577c"
                 />
@@ -118,10 +113,7 @@
           "
           class="update-0b479089ade5d13a2c41830785ebac9d"
         >
-          <van-tag
-            round
-            color="orange"
-            class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067"
+          <van-tag round color="orange" class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067"
             >更多更新记录</van-tag
           >
         </div>
@@ -156,10 +148,7 @@
               v-model="showInfo.checked"
           /></span>
         </template>
-        <div
-          v-html="updateInfo.text"
-          class="update-288ac40c37c02b743c0c2cc51c650dd3"
-        />
+        <div v-html="updateInfo.text" class="update-288ac40c37c02b743c0c2cc51c650dd3" />
       </van-dialog>
     </div>
   </div>
@@ -228,11 +217,9 @@ export default {
   },
   methods: {
     getHeroUpdate: function (heroId) {
-      this.axios
-        .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
-        .then((res) => {
-          this.tableData = res.data.data;
-        });
+      this.axios.get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId).then((res) => {
+        this.tableData = res.data.data;
+      });
 
       let date = new Date();
 
@@ -306,12 +293,7 @@ export default {
 
       let date = new Date(data.calendar.day);
       let newDate =
-        date.getFullYear() +
-        "年" +
-        (date.getMonth() + 1) +
-        "月" +
-        date.getDate() +
-        "日";
+        date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
 
       this.copyData =
         "[quote]\r[size=110%][b][url=" +

@@ -66,8 +66,7 @@
 export default {
   name: "MiniApp",
   components: {
-    AppCollapse: (resolve) =>
-      require(["@/assets/Icons/AppCollapse.vue"], resolve),
+    AppCollapse: (resolve) => require(["@/assets/Icons/AppCollapse.vue"], resolve),
   },
   data() {
     return {

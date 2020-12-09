@@ -46,19 +46,17 @@
         title=" "
         class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f"
       >
-        <van-cell
-          v-if="friendsInfo"
-          icon="/img/game-icons/king.png"
-          title="王者荣耀"
-        >
+        <van-cell v-if="friendsInfo" icon="/img/game-icons/king.png" title="王者荣耀">
           <template #right-icon>
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
               <img
-                v-lazy="friendsInfo.rank.starIcon || '//camp.qq.com/battle/profile/roleJob/16.png'"
+                v-lazy="
+                  friendsInfo.rank.starIcon ||
+                  '//camp.qq.com/battle/profile/roleJob/16.png'
+                "
                 width="50"
                 height="50"
-              />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd"
-                >|</span
+              />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd">|</span
               >&nbsp;
               <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
                 friendsInfo.rank.score || 1200
@@ -129,9 +127,7 @@
     </div>
 
     <div class="friends-ae64b9ce80d3b20870647479c735eeb0">
-      <div class="friends-402e57c104da1741bd87140cc8e3633f">
-        有任何意见建议都可以加群
-      </div>
+      <div class="friends-402e57c104da1741bd87140cc8e3633f">有任何意见建议都可以加群</div>
       <div class="friends-2707770f6b9a7f3321a020d1bcd5dd9d">
         <a
           target="_blank"
@@ -168,8 +164,7 @@
 export default {
   name: "FriendsHome",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   mounted() {
     this.getWebAccountInfo(0);

@@ -12,9 +12,7 @@
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
-          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{
-            hero.info.name
-          }}</span>
+          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>
         </template>
       </van-nav-bar>
     </div>
@@ -57,9 +55,7 @@
                 v-show="data.heroSkill > 0"
                 :icon="
                   data.heroSkill > 0
-                    ? '//image.ttwz.qq.com/images/skill/' +
-                      data.heroSkill +
-                      '.png'
+                    ? '//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'
                     : null
                 "
                 :text="data.heroPosition"
@@ -139,8 +135,7 @@
 export default {
   name: "HeroReplay",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
@@ -182,15 +177,13 @@ export default {
   },
   methods: {
     getHeroInfo: function (heroId) {
-      this.axios
-        .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
-        .then((res) => {
-          this.hero.info = res.data.data.heroInfo;
+      this.axios.get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
+        this.hero.info = res.data.data.heroInfo;
 
-          document.title = this.hero.info.name + " | 苏苏的荣耀助手";
+        document.title = this.hero.info.name + " | 苏苏的荣耀助手";
 
-          if (heroId.indexOf(",") > -1) this.teammate = true;
-        });
+        if (heroId.indexOf(",") > -1) this.teammate = true;
+      });
     },
     onGameActionSheetClick: function (row) {
       this.tableData.row = row;
@@ -199,13 +192,9 @@ export default {
         replayUrlIndex = replayUrl.indexOf("=");
 
       this.axios
-        .get(
-          "//s.91m.top/?url=" +
-            replayUrl.substr(replayUrlIndex + 1, replayUrl.length)
-        )
+        .get("//s.91m.top/?url=" + replayUrl.substr(replayUrlIndex + 1, replayUrl.length))
         .then((res) => {
-          this.copyData =
-            this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
+          this.copyData = this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
 
       this.showInfo.actionSheet = true;
@@ -213,11 +202,7 @@ export default {
     getHeroReplayByHeroId: function (heroId, page) {
       this.axios
         .get(
-          this.apiList.pvp.getHeroReplayByHeroId +
-            "&heroId=" +
-            heroId +
-            "&page=" +
-            page
+          this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page
         )
         .then((res) => {
           this.tableData = res.data.data;
@@ -237,19 +222,11 @@ export default {
       }
 
       if (item.value == 1) {
-        this.appOpenUrl(
-          "是否打开对局详情?",
-          "需要安装王者营地",
-          replayInfo.hippy
-        );
+        this.appOpenUrl("是否打开对局详情?", "需要安装王者营地", replayInfo.hippy);
       }
 
       if (item.value == 2) {
-        this.appOpenUrl(
-          "是否打开对局回顾?",
-          "需要安装王者营地",
-          replayInfo.url
-        );
+        this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", replayInfo.url);
       }
 
       if (item.value == 3) {

@@ -7,13 +7,7 @@
       auto-resize
       height="320"
     >
-      <vxe-table-column
-        title="技能"
-        field="score"
-        fixed="left"
-        width="50"
-        sortable
-      >
+      <vxe-table-column title="技能" field="score" fixed="left" width="50" sortable>
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"

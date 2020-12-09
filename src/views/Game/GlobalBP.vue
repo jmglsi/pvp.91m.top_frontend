@@ -7,10 +7,7 @@
       </div>
     </div>
   </div>
-  <div
-    v-else-if="isPortrait == false"
-    class="app-9fc0eb5a934dba03cc266a49b8ec51fb"
-  >
+  <div v-else-if="isPortrait == false" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
     <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">{{
         tabsModel % 2 == 0 ? team.team_1.name : team.team_2.name
@@ -46,8 +43,7 @@
                     : '/img/app-icons/hero_white.png'
                 "
                 :class="
-                  mode == 'edit' &&
-                  gameInfo.result.rows[tabsModel].stepsNow == index
+                  mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
                     ? blueStepsClass
                     : ''
                 "
@@ -89,8 +85,7 @@
                     : '/img/app-icons/hero_white.png'
                 "
                 :class="
-                  mode == 'edit' &&
-                  gameInfo.result.rows[tabsModel].stepsNow == index
+                  mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
                     ? redStepsClass
                     : ''
                 "
@@ -118,19 +113,14 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
-                  .BPOrder"
+                v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
                   v-show="
-                    index == 4 ||
-                    index == 7 ||
-                    index == 8 ||
-                    index == 15 ||
-                    index == 16
+                    index == 4 || index == 7 || index == 8 || index == 15 || index == 16
                   "
                   class="game-4978748050a936d2f77fe718f1d81524"
                 >
@@ -145,8 +135,7 @@
                         : '/img/app-icons/hero_white.png'
                     "
                     :class="
-                      mode == 'edit' &&
-                      gameInfo.result.rows[tabsModel].stepsNow == index
+                      mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
                         ? blueStepsClass
                         : ''
                     "
@@ -161,22 +150,14 @@
           <div
             v-show="mode == 'edit'"
             @click="onWinCampClick(1)"
-            :style="
-              appDevice
-                ? { height: '275px' }
-                : { height: appHeight - 175 + 'px' }
-            "
+            :style="appDevice ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
             class="game-d75e14b5c8f13e894fe9bf9d5426c198"
           ></div>
         </van-col>
         <van-col span="18">
           <div
             v-show="showInfo.hero"
-            :style="
-              appDevice
-                ? { height: '240px' }
-                : { height: appHeight - 150 + 'px' }
-            "
+            :style="appDevice ? { height: '240px' } : { height: appHeight - 150 + 'px' }"
             class="app-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
@@ -216,12 +197,8 @@
                       <van-tag
                         round
                         v-if="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
-                            data.id
-                          )
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id)
                         "
                         color="red"
                         class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
@@ -239,12 +216,8 @@
                         height="40"
                         v-lazy="data.img"
                         :style="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
-                            data.id
-                          ) ||
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id) ||
                           gameInfo.used.includes(data.id)
                             ? { filter: 'grayscale(1)' }
                             : {}
@@ -278,12 +251,8 @@
                       <van-tag
                         round
                         v-if="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
-                            data.id
-                          )
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id)
                         "
                         color="red"
                         class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
@@ -301,12 +270,8 @@
                         height="40"
                         v-lazy="data.img"
                         :style="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
-                            data.id
-                          ) ||
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id) ||
                           gameInfo.used.includes(data.id)
                             ? { filter: 'grayscale(1)' }
                             : {}
@@ -327,19 +292,14 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
-                  .BPOrder"
+                v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 :style="appDevice ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
                   v-show="
-                    index == 5 ||
-                    index == 6 ||
-                    index == 9 ||
-                    index == 14 ||
-                    index == 17
+                    index == 5 || index == 6 || index == 9 || index == 14 || index == 17
                   "
                   class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
@@ -354,8 +314,7 @@
                         : '/img/app-icons/hero_white.png'
                     "
                     :class="
-                      mode == 'edit' &&
-                      gameInfo.result.rows[tabsModel].stepsNow == index
+                      mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
                         ? redStepsClass
                         : ''
                     "
@@ -370,11 +329,7 @@
           <div
             v-show="mode == 'edit'"
             @click="onWinCampClick(2)"
-            :style="
-              appDevice
-                ? { height: '275px' }
-                : { height: appHeight - 175 + 'px' }
-            "
+            :style="appDevice ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
             class="game-251504ba219ea8c3175f47b73bdde6e6"
           ></div>
         </van-col>
@@ -395,9 +350,7 @@
                 v-for="(data, index) in author.actions"
                 :key="index"
                 @click="
-                  data.url
-                    ? appOpenUrl('是否打开外部链接？', null, data.url)
-                    : null
+                  data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null
                 "
               >
                 <a-icon :type="data.icon" />
@@ -470,9 +423,7 @@
                 <a-icon type="plus" />再来一局
               </a-menu-item>
               <a-menu-item
-                v-show="
-                  mode == 'edit' && gameInfo.result.rows.length - 1 == tabsModel
-                "
+                v-show="mode == 'edit' && gameInfo.result.rows.length - 1 == tabsModel"
                 @click="onToolsMenuClick(2)"
               >
                 <a-icon type="retweet" />重置
@@ -493,12 +444,7 @@
           />
         </li>
         <li>
-          <van-button
-            round
-            icon="share"
-            size="small"
-            @click="onGameShareClick"
-          />
+          <van-button round icon="share" size="small" @click="onGameShareClick" />
         </li>
       </ul>
     </div>
@@ -536,8 +482,7 @@
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
               :style="{
-                color:
-                  gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
+                color: gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
               }"
               >第 {{ index + 1 }} 局</span
             >
@@ -564,15 +509,7 @@ export default {
         openId: null,
         accessToken: null,
       },
-      heroType: [
-        "全部",
-        "对抗 (战士)",
-        "中路",
-        "对抗 (坦克)",
-        "打野",
-        "发育",
-        "游走",
-      ],
+      heroType: ["全部", "对抗 (战士)", "中路", "对抗 (坦克)", "打野", "发育", "游走"],
       index: {
         ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
@@ -983,8 +920,7 @@ export default {
 
       this.initBPOrder(this.perspective, this.tabsModel + 1);
 
-      if (mode == 1)
-        this.$message.success("初始化 " + this.self.name + " 的视角");
+      if (mode == 1) this.$message.success("初始化 " + this.self.name + " 的视角");
     },
     onGameTabsChange: function (e) {
       this.initBPOrder(this.perspective, e + 1);
@@ -1038,11 +974,7 @@ export default {
       } else {
         newIndex = oldIndex + 1;
 
-        this.gameInfo.result.rows[tabsModel].BPOrder.splice(
-          oldIndex,
-          1,
-          hero.id
-        );
+        this.gameInfo.result.rows[tabsModel].BPOrder.splice(oldIndex, 1, hero.id);
       }
 
       if (this.index.perspective[oldIndex] == 1) {
@@ -1140,9 +1072,8 @@ export default {
         if (this.mode == "view") {
           this.mode = "edit";
 
-          this.index.ban.includes(
-            this.gameInfo.result.rows[tabsModel].stepsNow
-          ) && tabsModel % 2 == 0
+          this.index.ban.includes(this.gameInfo.result.rows[tabsModel].stepsNow) &&
+          tabsModel % 2 == 0
             ? (this.perspective = 2)
             : (this.perspective = 1);
           this.onGamePerspectiveClick(0);

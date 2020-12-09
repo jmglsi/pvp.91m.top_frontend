@@ -34,10 +34,7 @@
       />
     </div>
 
-    <div
-      v-show="showInfo.checked == true"
-      class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
-    >
+    <div v-show="showInfo.checked == true" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
       <vxe-grid
         ref="skinReturn"
         id="skinReturn"
@@ -54,9 +51,7 @@
               height="50"
               class="skin-52326308ff25a5e0ce86bdae53ff2c35"
             />
-            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">{{
-              row.skinName
-            }}</span>
+            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">{{ row.skinName }}</span>
           </template>
         </vxe-table-column>
 

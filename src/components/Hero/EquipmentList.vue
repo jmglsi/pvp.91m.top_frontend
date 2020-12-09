@@ -7,13 +7,7 @@
       auto-resize
       height="320"
     >
-      <vxe-table-column
-        title="技能"
-        field="score"
-        fixed="left"
-        width="50"
-        sortable
-      >
+      <vxe-table-column title="技能" field="score" fixed="left" width="50" sortable>
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
@@ -51,33 +45,13 @@
         </vxe-table-column>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="价格"
-        field="money"
-        :width="listWidth"
-        sortable
-      />
-      <vxe-table-column
-        title="场次"
-        field="pickTimes"
-        :width="listWidth"
-        sortable
-      />
+      <vxe-table-column title="价格" field="money" :width="listWidth" sortable />
+      <vxe-table-column title="场次" field="pickTimes" :width="listWidth" sortable />
       <vxe-table-column title="胜率 (%)" field="winRate" width="100" sortable />
-      <vxe-table-column
-        title="时长"
-        field="usedtime"
-        :width="listWidth"
-        sortable
-      />
+      <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column
-          title="胜方"
-          field="mvpRate"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="胜方" field="mvpRate" :width="listWidth" sortable />
       </vxe-table-column>
     </vxe-grid>
   </div>

@@ -34,9 +34,7 @@
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
         v-model="showInfo.team"
-        :title="
-          teamInfo.row.id != null ? teamInfo.row.name + ' 如何操作' : '新建队伍'
-        "
+        :title="teamInfo.row.id != null ? teamInfo.row.name + ' 如何操作' : '新建队伍'"
       >
         <div class="content">
           <div class="game-350be0bb4350ca865ab9210d074875f1">
@@ -72,9 +70,7 @@
                     :max-size="3 * 1024 * 1024"
                     @oversize="onOversize"
                   >
-                    <van-button round size="small" type="info"
-                      >上传图片</van-button
-                    >
+                    <van-button round size="small" type="info">上传图片</van-button>
                   </van-uploader>
                 </template>
               </van-field>

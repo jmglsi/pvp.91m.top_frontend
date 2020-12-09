@@ -35,16 +35,11 @@
           borderColor: 'rgb(243,189,103)',
         }"
         @click="
-          $message.info(
-            '提示:1011,点击头像可快速对比技能,点击头像右侧数据可查看详情'
-          )
+          $message.info('提示:1011,点击头像可快速对比技能,点击头像右侧数据可查看详情')
         "
       >
         点击&nbsp;
-        <van-tag
-          round
-          type="danger"
-          class="ranking-4d09fbef1438e2b23375b87ba3e02942"
+        <van-tag round type="danger" class="ranking-4d09fbef1438e2b23375b87ba3e02942"
           >上方数据</van-tag
         >&nbsp;查看更多
       </van-divider>
@@ -60,8 +55,7 @@
 export default {
   name: "RankingHome",
   components: {
-    DianFengSai: (resolve) =>
-      require(["@/views/Ranking/DianFengSai.vue"], resolve),
+    DianFengSai: (resolve) => require(["@/views/Ranking/DianFengSai.vue"], resolve),
     GuanXi: (resolve) => require(["@/views/Ranking/GuanXi.vue"], resolve),
     WanJia: (resolve) => require(["@/views/Ranking/WanJia.vue"], resolve),
   },

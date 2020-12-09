@@ -53,10 +53,7 @@
       </van-cell-group>
     </div>
 
-    <div
-      v-show="loginInfo.type == 0"
-      class="my-61046f2f5eefe3dc179e52af32241062"
-    >
+    <div v-show="loginInfo.type == 0" class="my-61046f2f5eefe3dc179e52af32241062">
       <span class="my-e4c9479b11955648dad558fe717a4eb2"
         >注:用户名和QQ将用于扩列、BP界面以及修改密码,请不要瞎写</span
       >
@@ -73,15 +70,11 @@
       >
     </div>
 
-    <div
-      class="my-f01ae8c7f2d058ec6be00db589a32bea my-60ae25445ac62d5ec51c776826888d9f"
-    >
+    <div class="my-f01ae8c7f2d058ec6be00db589a32bea my-60ae25445ac62d5ec51c776826888d9f">
       <span @click="onRegisterClick">注册</span>
     </div>
 
-    <div
-      class="my-f01ae8c7f2d058ec6be00db589a32bea my-4ae1ffb5939d592986bed21d0913562d"
-    >
+    <div class="my-f01ae8c7f2d058ec6be00db589a32bea my-4ae1ffb5939d592986bed21d0913562d">
       <span @click="onUpdateClick">修改密码</span>
     </div>
   </div>

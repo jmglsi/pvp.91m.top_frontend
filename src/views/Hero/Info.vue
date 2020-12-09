@@ -6,9 +6,7 @@
         :border="false"
         :fixed="true"
         :style="
-          scroll >= 50
-            ? { backgroundColor: 'white' }
-            : { backgroundColor: 'transparent' }
+          scroll >= 50 ? { backgroundColor: 'white' } : { backgroundColor: 'transparent' }
         "
         @click-left="appPush('/ranking')"
         @click-right="$message.info('提示:1004,分路推荐 ;D')"
@@ -30,9 +28,7 @@
             />
             <span
               :style="
-                scroll >= 50 || tabsModel > 0
-                  ? { color: 'black' }
-                  : { color: 'white' }
+                scroll >= 50 || tabsModel > 0 ? { color: 'black' } : { color: 'white' }
               "
               class="hero-d5d3db1765287eef77d7927cc956f50a"
               >{{ hero.title }}</span
@@ -40,10 +36,7 @@
           </div>
         </template>
         <template #right>
-          <div
-            v-show="showInfo.parameter"
-            class="hero-68adaff1d028a37f27fb33c483329cba"
-          >
+          <div v-show="showInfo.parameter" class="hero-68adaff1d028a37f27fb33c483329cba">
             <ul>
               <li
                 v-for="(data, index) in hero.info.type"
@@ -129,12 +122,9 @@
           </div>
 
           <span class="hero-9726255eec083aa56dc0449a21b33190">
-            <van-tag
-              round
-              color="black"
-              class="hero-1d61d12b768d71c075477fd92281464d"
-              >{{ hero.info.equMoneyOverflow || 0 }}</van-tag
-            >
+            <van-tag round color="black" class="hero-1d61d12b768d71c075477fd92281464d">{{
+              hero.info.equMoneyOverflow || 0
+            }}</van-tag>
           </span>
         </van-grid-item>
         <van-grid-item
@@ -225,10 +215,7 @@
             </van-dropdown-menu>
           </template>
         </van-tab>
-        <van-tab
-          class="hero-ab71021d21963773bfb8be80af65869f"
-          title="同分路对比"
-        />
+        <van-tab class="hero-ab71021d21963773bfb8be80af65869f" title="同分路对比" />
         <van-tab
           class="hero-ab71021d21963773bfb8be80af65869f"
           title="自定义对比"
@@ -245,11 +232,7 @@
           :style="appDevice ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
-          <HeroRadar
-            v-if="tabsModel > 0"
-            :tabsModel="tabsModel"
-            :heroId="hero.info.id"
-          />
+          <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
         </div>
       </van-tabs>
     </div>
@@ -275,9 +258,7 @@
         safe-area-inset-bottom
       >
         <van-tabs>
-          <van-tab title="技能">
-            <HeroSkillList :heroSkill="hero.info.skill"
-          /></van-tab>
+          <van-tab title="技能"> <HeroSkillList :heroSkill="hero.info.skill" /></van-tab>
           <van-tab title="装备"
             ><HeroEquipmentList :heroEquipment="hero.info.equipment"
           /></van-tab>
@@ -373,17 +354,14 @@ export default {
     AppTime: (resolve) => require(["@/assets/Icons/AppTime.vue"], resolve),
     AppCry: (resolve) => require(["@/assets/Icons/AppCry.vue"], resolve),
     AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
-    HeroSkillList: (resolve) =>
-      require(["@/components/Hero/SkillList.vue"], resolve),
+    HeroSkillList: (resolve) => require(["@/components/Hero/SkillList.vue"], resolve),
     HeroEquipmentList: (resolve) =>
       require(["@/components/Hero/EquipmentList.vue"], resolve),
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
-    HeroSameHobby: (resolve) =>
-      require(["@/components/Hero/SameHobby.vue"], resolve),
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    HeroSameHobby: (resolve) => require(["@/components/Hero/SameHobby.vue"], resolve),
+    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   beforeRouteUpdate(to, from, next) {
     if (to.params.id != from.params.id) {
@@ -451,25 +429,22 @@ export default {
   },
   methods: {
     scrollTop() {
-      this.scroll =
-        document.documentElement.scrollTop || document.body.scrollTop;
+      this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
-      this.axios
-        .get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
-        .then((res) => {
-          this.isLoaded = true;
+      this.axios.get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
+        this.isLoaded = true;
 
-          let data = res.data.data,
-            heroInfo = data.heroInfo;
+        let data = res.data.data,
+          heroInfo = data.heroInfo;
 
-          this.circle.info = data.circleInfo;
-          this.positionInfo = data.positionInfo;
-          this.hero.info = heroInfo;
+        this.circle.info = data.circleInfo;
+        this.positionInfo = data.positionInfo;
+        this.hero.info = heroInfo;
 
-          this.hero.title = heroInfo.name;
-          document.title = this.hero.info.name + " | 苏苏的荣耀助手";
-        });
+        this.hero.title = heroInfo.name;
+        document.title = this.hero.info.name + " | 苏苏的荣耀助手";
+      });
     },
     onTipsClick: function () {
       this.$dialog.alert({
@@ -524,9 +499,7 @@ export default {
 
       document.title = dTitle + " | 苏苏的荣耀助手";
 
-      e == 0
-        ? (this.showInfo.parameter = true)
-        : (this.showInfo.parameter = false);
+      e == 0 ? (this.showInfo.parameter = true) : (this.showInfo.parameter = false);
     },
   },
 };
