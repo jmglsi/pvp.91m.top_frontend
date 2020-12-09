@@ -130,8 +130,6 @@ export default {
       return e;
     },
     getSkinReturn: function () {
-      this.tableData.loading = true;
-
       this.axios.get(this.apiList.pvp.getSkinReturn).then((res) => {
         let data = res.data.data;
 
@@ -140,8 +138,6 @@ export default {
       });
     },
     getSkinReturnLog: function () {
-      this.lineData.loading = true;
-
       this.axios.get(this.apiList.pvp.getSkinReturnLog).then((res) => {
         let data = res.data.data;
 

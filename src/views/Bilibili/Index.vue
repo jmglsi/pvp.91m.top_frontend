@@ -105,6 +105,7 @@ export default {
       },
       tableData: {
         searchPlaceholder: "请输入【视频id】,例如:bv12345",
+        loading: true,
         result: [],
         total: 200,
         pageSize: 50,
@@ -125,7 +126,6 @@ export default {
       copyAv: "",
       copyData: "",
       checkModel: false,
-      isLoading: true,
     };
   },
   created() {
@@ -156,10 +156,10 @@ export default {
         )
         .then((res) => {
           this.tableData = res.data.data;
+          this.tableData.loading = false;
           this.tableData.row = {
             uid: 0,
           };
-          this.isLoading = false;
 
           let copyAv = this.copyAv;
 

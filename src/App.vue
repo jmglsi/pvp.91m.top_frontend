@@ -109,6 +109,7 @@ export default {
         this.tabbar.default.show = false;
       } else {
         this.tabbar.default.show = true;
+
         this.tabbar.active = to.path;
       }
     },

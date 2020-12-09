@@ -63,7 +63,7 @@
           class="my-d70e45bc5adaa1f581245e39579d828b"
           name="/img/app-icons/edit.png"
         />
-        {{ loginInfo.description || "这个人很懒，什么都没有留下。" }}
+        {{ loginInfo.description || "这个人很懒,什么都没有留下" }}
       </div>
     </div>
 
@@ -319,8 +319,6 @@ export default {
               : (this.showInfo.friendsType = false);
           } else {
             this.isLogin = false;
-
-            this.$message.error(status.msg);
           }
         });
     },
@@ -334,9 +332,10 @@ export default {
         })
         .then(() => {
           // on confirm
+          this.isLogin = false;
+
           this.$cookie.delete("openId");
           this.$cookie.delete("accessToken");
-          this.isLogin = false;
         })
         .catch(() => {
           // on cancel

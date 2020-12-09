@@ -968,14 +968,14 @@ export default {
       return ret;
     },
     onSeeHeroClick: function () {
+      this.showInfo.hero = false;
+
       if (this.eye == "eye-o") {
         this.eye = "closed-eye";
-
-        this.showInfo.hero = false;
       } else {
-        this.eye = "eye-o";
-
         this.showInfo.hero = true;
+
+        this.eye = "eye-o";
       }
     },
     onGamePerspectiveClick: function (mode) {

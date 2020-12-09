@@ -90,18 +90,26 @@ export default {
   },
   methods: {
     getHeroChartsLog: function (heroId, heroName, aid) {
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
+
       this.radarData = {};
       this.radarData.loading = true;
 
       this.axios
-        .get(
+        .post(
           this.apiList.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
             "&heroName=" +
             heroName +
             "&aid=" +
-            aid
+            aid,
+          this.$qs.stringify({
+            openId: openId,
+            accessToken: accessToken,
+            friendsOpenId: openId,
+          })
         )
         .then((res) => {
           let data = res.data.data,
@@ -109,11 +117,10 @@ export default {
 
           if (status.code == 200) {
             this.radarData = data;
+            this.radarData.loading = false;
           } else {
-            this.$message.error(status.msg);
+            this.appOpenUrl(status.msg, null, "/my", 1);
           }
-
-          this.radarData.loading = false;
         });
     },
     onTagsChanged: function (e) {

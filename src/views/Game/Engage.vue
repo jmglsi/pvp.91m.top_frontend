@@ -114,7 +114,7 @@ export default {
           if (status.code == 200) {
             this.engageInfo.result = data.result;
           } else {
-            this.$message.error(status.msg);
+            this.appOpenUrl(status.msg, null, "/my", 1);
           }
         });
     },

@@ -94,6 +94,7 @@ export default {
         ],
       },
       tableData: {
+        loading: true,
         result: [],
         row: {
           gamePlayerName: "加载中",
@@ -109,7 +110,6 @@ export default {
       ],
       clientHeight: 0,
       listWidth: 0,
-      isLoading: true,
     };
   },
   created() {
@@ -124,12 +124,11 @@ export default {
         .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
         .then((res) => {
           this.tableData = res.data.data;
+          this.tableData.loading = false;
           this.tableData.row = {
             area: 0,
             gamePlayerName: "加载中",
           };
-
-          this.isLoading = false;
         });
     },
     getPlayerInfo: function (row) {

@@ -384,6 +384,8 @@ export default {
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then((res) => {
+          this.isLoading = false;
+
           let data = res.data.data;
           this.tableData = data;
           this.tableData.row = {
@@ -393,8 +395,6 @@ export default {
           };
 
           //this.$refs.dianfengsai.loadData(data.result.rows);
-
-          this.isLoading = false;
         });
 
       if (aid == 3 && bid == 0) {

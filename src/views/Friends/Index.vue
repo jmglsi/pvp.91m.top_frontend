@@ -36,7 +36,7 @@
         class="friends-85e06e092b46386f58023d2ad27a8bb0"
       />
       <div class="friends-88bf7a95736562190270d51dc2cb3f42">
-        {{ friendsInfo.description || "这个人很懒，什么都没有留下。" }}
+        {{ friendsInfo.description || "这个人很懒,什么都没有留下" }}
       </div>
     </div>
 
@@ -54,14 +54,14 @@
           <template #right-icon>
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
               <img
-                v-lazy="friendsInfo.rank.starIcon"
+                v-lazy="friendsInfo.rank.starIcon || '//camp.qq.com/battle/profile/roleJob/16.png'"
                 width="50"
                 height="50"
               />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd"
                 >|</span
               >&nbsp;
               <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
-                friendsInfo.rank.score
+                friendsInfo.rank.score || 1200
               }}</span></span
             >
           </template>
@@ -212,15 +212,12 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.isLogin = true;
             this.friendsInfo = data;
 
             if (openId_1) this.$router.push({ path: "/friends" });
 
             if (tips == 1) this.$message.success("刷新成功");
           } else {
-            this.isLogin = false;
-
             this.$message.error(status.msg);
           }
         });

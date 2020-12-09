@@ -60,8 +60,6 @@ export default {
         if (newValue.heroSkill == []) return;
 
         this.getHeroSkill(newValue.heroSkill);
-
-        this.loading = false;
       },
     },
   },

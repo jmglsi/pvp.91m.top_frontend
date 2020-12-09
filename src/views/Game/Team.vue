@@ -165,7 +165,7 @@ export default {
           if (status.code == 200) {
             this.teamInfo.result = data.result;
           } else {
-            this.$message.error(status.msg);
+            this.appOpenUrl(status.msg, null, "/my", 1);
           }
         });
     },
@@ -214,15 +214,15 @@ export default {
       this.$message.error("错误:1006,图片超过 3MB");
     },
     onCreateTeamClick: function () {
+      this.showInfo.team = true;
+      this.showInfo.delete = false;
+
       this.teamInfo.row = {
         name: null,
         logo: null,
       };
 
       this.teamInfo.type = 0;
-
-      this.showInfo.team = true;
-      this.showInfo.delete = false;
     },
     onUpdateTeamClick: function (data, index) {
       this.teamInfo.row = data;
@@ -313,10 +313,10 @@ export default {
         });
     },
     onCreateEngageClick: function (data) {
+      this.showInfo.team = false;
+
       let teamId_1 = this.$cookie.get("teamId");
       let teamId_2 = data;
-
-      this.showInfo.team = false;
 
       if (teamId_1 == teamId_2) {
         this.$message.error("错误:1003,两支队伍不能相同");
