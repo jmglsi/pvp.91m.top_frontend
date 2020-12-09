@@ -7,7 +7,7 @@
         :ellipsis="false"
         :swipeable="true"
         :sticky="true"
-        @change="appPush('', tabsModel)"
+        @change="appPush('/', { type: tabsModel })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -84,7 +84,6 @@ export default {
           })
           .catch(() => {
             // on cancel
-            //this.$message.error("已取消");
           });
       }
     }

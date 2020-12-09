@@ -18,7 +18,7 @@
       <vxe-grid
         ref="wanjia"
         auto-resize
-        :loading="isLoading"
+        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
         :sort-config="{ trigger: 'cell' }"
@@ -121,14 +121,13 @@ export default {
         });
     },
     getPlayerInfo: function (row) {
-      if (row.userId == 0) return;
-      this.tableData.row = row;
-      this.showInfo.actionSheet = true;
-
-      if (this.areaInfo.model >= 3) return;
+      if (row.userId == 0 || this.areaInfo.model >= 3) return;
 
       let openId = this.$cookie.get("openId"),
         accessToken = this.$cookie.get("accessToken");
+
+      this.tableData.row = row;
+      this.showInfo.actionSheet = true;
 
       this.axios
         .post(
@@ -142,21 +141,20 @@ export default {
           let data = res.data.data,
             status = res.data.status;
 
-          if (status.code != 200) {
+          if (status.code == 200) {
+            this.uin = data.uin;
+            this.copyData =
+              row.gamePlayerName +
+              "\rQQ:" +
+              this.uin +
+              "\r-\r更多玩家信息 ↓\r" +
+              location.origin +
+              location.pathname +
+              "?type=2&userId=" +
+              row.userId;
+          } else {
             this.$message.error(status.msg);
-            return;
           }
-
-          this.uin = data.uin;
-          this.copyData =
-            row.gamePlayerName +
-            "\rQQ:" +
-            this.uin +
-            "\r-\r更多玩家信息 ↓\r" +
-            location.origin +
-            location.pathname +
-            "?type=2&userId=" +
-            row.userId;
         });
     },
     onPlayerOptionsChange: function (e) {

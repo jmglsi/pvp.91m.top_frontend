@@ -13,12 +13,10 @@ Vue.prototype.appCopyData = function(data, successText = "复制成功", errorTe
     );
 }
 
-Vue.prototype.appPush = function(urlPath, urlType = null) {
+Vue.prototype.appPush = function(urlPath, urlQuery = {}) {
     this.$router.push({
         path: urlPath,
-        query: {
-            type: urlType
-        }
+        query: urlQuery
     });
 }
 

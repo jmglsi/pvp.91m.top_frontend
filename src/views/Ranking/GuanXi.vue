@@ -15,7 +15,7 @@
       <vxe-grid
         ref="guanxi"
         auto-resize
-        :loading="isLoading"
+        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
         :cell-class-name="cellClassName"
@@ -115,6 +115,7 @@ export default {
       tableData: {
         searchPlaceholder: [],
         color: {},
+        loading: true,
         result: [],
         row: {
           hero_1: {
@@ -135,7 +136,6 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
-      isLoading: true,
     };
   },
   created() {
@@ -170,7 +170,10 @@ export default {
             encodeURIComponent(heroName)
         )
         .then((res) => {
+          if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
+
           this.tableData = res.data.data;
+          this.tableData.loading = false;
           this.tableData.row = {
             hero_1: {
               name: "加载中",
@@ -179,10 +182,6 @@ export default {
               name: "加载中",
             },
           };
-
-          if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
-
-          this.isLoading = false;
         });
     },
     getHeroInfo: function (row) {
@@ -266,17 +265,15 @@ export default {
               msg;
 
             if (code == 1) {
-              this.getHeroCombination("");
-
               this.$message.success("添加成功");
+
+              this.getHeroCombination("");
             } else {
               if (code == 0) {
                 msg = "关系已存在";
-              }
-              if (code == -1) {
+              } else if (code == -1) {
                 msg = "英雄名错误";
-              }
-              if (code == -2) {
+              } else if (code == -2) {
                 msg = "格式错误,小写逗号【,】";
               }
 
@@ -299,7 +296,11 @@ export default {
 
       if (item.value == 1) {
         this.appPush(
-          "/hero/" + heroInfo.hero_1.id + "," + heroInfo.hero_2.id + "/replay"
+          "/hero/" + heroInfo.hero_1.id + "," + heroInfo.hero_2.id + "/replay",
+          {
+            replayTitle: heroInfo.hero_1.name + " 和 " + heroInfo.hero_2.name,
+            teammate: "1",
+          }
         );
       }
     },

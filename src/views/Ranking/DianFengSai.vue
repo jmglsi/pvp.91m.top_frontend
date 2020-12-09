@@ -24,7 +24,7 @@
         ref="dianfengsai"
         id="dianfengsai"
         auto-resize
-        :loading="isLoading"
+        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
         :cell-class-name="cellClassName"
@@ -246,6 +246,7 @@ export default {
         color: {},
         column: [],
         columns: [],
+        loading: true,
         result: [],
         clockwise: false,
         row: {
@@ -269,7 +270,6 @@ export default {
       ],
       listWidth: 0,
       clientHeight: 0,
-      isLoading: true,
     };
   },
   created() {
@@ -329,10 +329,10 @@ export default {
       this.axios
         .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
         .then((res) => {
-          this.isLoading = false;
-
           let data = res.data.data;
+
           this.tableData = data;
+          this.tableData.loading = false;
           this.tableData.row = {
             id: 0,
             name: "加载中",
@@ -396,7 +396,10 @@ export default {
       }
 
       if (item.value == 1) {
-        this.appPush("/hero/" + heroInfo.id + "/replay");
+        this.appPush("/hero/" + heroInfo.id + "/replay", {
+          replayTitle: heroInfo.name,
+          teammate: "0",
+        });
       }
 
       if (item.value == 2) {

@@ -464,11 +464,10 @@ export default {
         .then((res) => {
           let status = res.data.status;
 
-          if (status.code != 200) {
-            this.$message.error(status.msg);
-            return;
-          } else {
+          if (status.code == 200) {
             this.$message.success("投票成功");
+          } else {
+            this.$message.error(status.msg);
           }
         });
 

@@ -5,7 +5,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="$router.go(-1)"
+        @click-left="appPush('/my')"
         @click-right="onCreateTeamClick"
         z-index="99999999"
         title="我的队伍"
@@ -185,9 +185,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.teamInfo.row.logo = data.img;
-
             this.$message.success("上传成功");
+
+            this.teamInfo.row.logo = data.img;
           } else {
             this.$message.error(status.msg);
           }
@@ -248,9 +248,9 @@ export default {
             let status = res.data.status;
 
             if (status.code == 200) {
-              this.getGameDashboard();
-
               this.$message.success("创建成功");
+
+              this.getGameDashboard();
             } else {
               this.$message.error(status.msg);
             }
@@ -294,9 +294,9 @@ export default {
               let status = res.data.status;
 
               if (status.code == 200) {
-                this.teamInfo.result.rows.splice(teamInfo.index, 1);
-
                 this.$message.success("删除成功");
+
+                this.teamInfo.result.rows.splice(teamInfo.index, 1);
               } else {
                 this.$message.error(status.msg);
               }
@@ -320,9 +320,9 @@ export default {
       }
 
       if (!teamId_1) {
-        this.$cookie.set("teamId", data);
-
         this.$message.success("添加成功,请再选择一个");
+
+        this.$cookie.set("teamId", data);
       } else {
         this.onSaveEngageClick(teamId_1, teamId_2);
       }
@@ -344,13 +344,15 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$cookie.delete("teamId");
-
             this.$message.success("创建成功");
+
+            this.$cookie.delete("teamId");
 
             this.appPush("/game/engage");
           } else {
             this.$message.error(status.msg);
+
+            this.appPush("/login");
           }
         });
 

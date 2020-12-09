@@ -77,6 +77,7 @@ export default {
       immediate: true,
       handler(newValue) {
         if (newValue.heroEquipment == []) return;
+
         this.loading = false;
 
         this.getHeroEquipment(newValue.heroEquipment);

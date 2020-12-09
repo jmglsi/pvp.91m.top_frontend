@@ -209,9 +209,9 @@ export default {
           if (status.code == 200) {
             this.friendsInfo = data;
 
-            if (openId_1) this.$router.push({ path: "/friends" });
-
             if (tips == 1) this.$message.success("刷新成功");
+
+            if (openId_1) this.$router.push({ path: "/friends" });
           } else {
             this.$message.error(status.msg);
           }

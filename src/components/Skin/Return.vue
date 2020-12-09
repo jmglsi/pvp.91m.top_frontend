@@ -39,7 +39,7 @@
         ref="skinReturn"
         id="skinReturn"
         auto-resize
-        :loading="tableData.isLoading"
+        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
       >

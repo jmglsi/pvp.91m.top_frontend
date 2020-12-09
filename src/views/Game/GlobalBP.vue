@@ -730,9 +730,9 @@ export default {
       this.countdownHandle = setInterval(() => {
         this.countdown--;
         if (this.countdown == 0) {
-          clearInterval(this.countdownHandle);
-
           this.$message.error("错误:1007,已超时");
+
+          clearInterval(this.countdownHandle);
         }
       }, 1000);
     },
@@ -823,9 +823,9 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.gameInfo.result.rows.push(newGame);
-
             this.$message.success("创建成功");
+
+            this.gameInfo.result.rows.push(newGame);
           } else {
             this.$message.error(status.msg);
           }
@@ -882,10 +882,10 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
+            this.$message.success("删除成功");
+
             this.gameInfo.result.rows.splice(index, 1);
             this.tabsModel = index - 1;
-
-            this.$message.success("删除成功");
           } else {
             this.$message.error(status.msg);
           }
@@ -916,11 +916,11 @@ export default {
       }
     },
     onGamePerspectiveClick: function (mode) {
+      if (mode == 1) this.$message.success("初始化 " + this.self.name + " 的视角");
+
       this.perspective == 1 ? (this.perspective = 2) : (this.perspective = 1);
 
       this.initBPOrder(this.perspective, this.tabsModel + 1);
-
-      if (mode == 1) this.$message.success("初始化 " + this.self.name + " 的视角");
     },
     onGameTabsChange: function (e) {
       this.initBPOrder(this.perspective, e + 1);
@@ -951,6 +951,7 @@ export default {
     onGamePickHeroClick: function (hero) {
       let tabsModel = this.tabsModel;
 
+      if (this.mode == "view") return;
       if (
         this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
         this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
@@ -963,8 +964,6 @@ export default {
         );
         return;
       }
-
-      if (this.mode == "view") return;
 
       let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow,
         newIndex = 0;
@@ -1059,9 +1058,9 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.gameInfo.result.rows[tabsModel] = newGame;
-
             this.$message.success("重置成功");
+
+            this.gameInfo.result.rows[tabsModel] = newGame;
           })
           .catch(() => {
             // on cancel
@@ -1070,6 +1069,8 @@ export default {
 
       if (type == 3) {
         if (this.mode == "view") {
+          this.$message.info("提示:1001,已进入编辑模式");
+
           this.mode = "edit";
 
           this.index.ban.includes(this.gameInfo.result.rows[tabsModel].stepsNow) &&
@@ -1080,8 +1081,6 @@ export default {
           //tabsModel % 2 == 0
 
           this.initCountdown();
-
-          this.$message.info("提示:1001,已进入编辑模式");
         } else {
           this.mode = "view";
 
@@ -1113,9 +1112,9 @@ export default {
         })
         .then(() => {
           // on confirm
-          this.gameInfo.result.rows[tabsModel].win.camp = camp;
-
           this.$message.success("设置成功");
+
+          this.gameInfo.result.rows[tabsModel].win.camp = camp;
         })
         .catch(() => {
           // on cancel

@@ -6,7 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="$router.go(-1)"
+        @click-left="appPush('/my')"
         z-index="99999999"
         title="我的交战"
         left-text="返回"
@@ -113,7 +113,9 @@ export default {
           if (status.code == 200) {
             this.engageInfo.result = data.result;
           } else {
-            this.appOpenUrl(status.msg, null, "/my", 1);
+            this.$message.error(status.msg);
+
+            this.appPush("/login");
           }
         });
     },

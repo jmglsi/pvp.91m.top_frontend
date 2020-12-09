@@ -111,7 +111,7 @@ export default {
     },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.$router.go(-1);
+        this.appPush("/my");
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = "登录";

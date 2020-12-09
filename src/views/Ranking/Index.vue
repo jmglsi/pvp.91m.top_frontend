@@ -6,7 +6,7 @@
         :border="false"
         :ellipsis="false"
         :sticky="true"
-        @change="appPush('', tabsModel)"
+        @change="appPush('/ranking', { type: tabsModel })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
