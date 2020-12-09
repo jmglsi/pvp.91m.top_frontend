@@ -12,7 +12,7 @@
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
-          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{ hero.info.name }}</span>
+          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{ replay.title }}</span>
         </template>
       </van-nav-bar>
     </div>
@@ -35,7 +35,7 @@
             >
             <van-tag
               round
-              v-show="!teammate"
+              v-show="!replay.teammate"
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
               >{{ data.equMoney }}</van-tag
@@ -45,7 +45,7 @@
             }}</span>
           </div>
 
-          <div v-show="!teammate" class="hero-f01902c0d0136ca30fe1034f339964ba">
+          <div v-show="!replay.teammate" class="hero-f01902c0d0136ca30fe1034f339964ba">
             <van-grid
               :border="false"
               :column-num="7"
@@ -87,7 +87,7 @@
           <van-tag
             round
             disabled
-            v-show="!teammate"
+            v-show="!replay.teammate"
             color="black"
             size="mini"
             class="hero-ce50a09343724eb82df11390e2c1de18"
@@ -164,15 +164,21 @@ export default {
         { name: "回顾", subname: "需要安装王者营地", value: 2 },
         { name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
-      teammate: false,
+      replay: {
+        title: "加载中",
+        teammate: false,
+      },
     };
   },
   mounted() {
-    let heroId = this.$route.params.id;
+    let heroId = this.$route.params.id,
+      replayTitle = this.$route.query.replayTitle,
+      teammate = this.$route.query.teammate;
 
     this.hero.info.id = heroId;
+    this.replay.title = replayTitle;
+    parseInt(teammate) == 1 ? (this.replay.teammate = true) : (this.replay.teammate = false);
 
-    this.getHeroInfo(heroId);
     this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
   methods: {
@@ -182,7 +188,7 @@ export default {
 
         document.title = this.hero.info.name + " | 苏苏的荣耀助手";
 
-        if (heroId.indexOf(",") > -1) this.teammate = true;
+        if (heroId.indexOf(",") > -1) this.replay.teammate = true;
       });
     },
     onGameActionSheetClick: function (row) {
@@ -201,14 +207,27 @@ export default {
     },
     getHeroReplayByHeroId: function (heroId, page) {
       this.axios
-        .get(
-          this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page
+        .post(
+          this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page,
+          this.$qs.stringify({
+            openId: this.$cookie.get("openId"),
+            accessToken: this.$cookie.get("accessToken"),
+          })
         )
         .then((res) => {
-          this.tableData = res.data.data;
-          this.tableData.row = {
-            gamePlayerName: "加载中",
-          };
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.row = {
+              gamePlayerName: "加载中",
+            };
+          } else {
+            this.$message.error(status.msg);
+
+            this.appPush("/login");
+          }
         });
     },
     onPaginationChange: function (e) {

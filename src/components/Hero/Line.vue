@@ -91,9 +91,6 @@ export default {
       return e;
     },
     getHeroChartsLog: function (heroId, aid, detailed) {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
-
       this.lineData = {};
       this.lineData.loading = true;
 
@@ -107,9 +104,8 @@ export default {
             "&detailed=" +
             detailed,
           this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
+            openId: this.$cookie.get("openId"),
+            accessToken: this.$cookie.get("accessToken"),
           })
         )
         .then((res) => {
