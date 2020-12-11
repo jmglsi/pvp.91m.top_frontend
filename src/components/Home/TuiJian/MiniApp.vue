@@ -59,7 +59,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/miniapp.css");
+@import url("/css/app-style/home-miniapp.css");
 </style>
 
 <script>

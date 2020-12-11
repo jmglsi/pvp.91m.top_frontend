@@ -104,6 +104,7 @@ export default {
           this.$qs.stringify({
             openId: openId,
             accessToken: accessToken,
+            friendsOpenId: openId,
           })
         )
         .then((res) => {

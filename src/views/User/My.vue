@@ -140,7 +140,8 @@
           </template>
           <template #right-icon>
             <ul
-              class="app-d865b50ce307751bdeb9a6ab16e7baf9 user-9e60d3ee1e1574cae90960f940c0a821"
+              class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
+              :style="loginInfo.heroList.length <= 3 ? {} : { width: '180px' }"
             >
               <li
                 v-for="(data, index) in loginInfo.heroList"
@@ -248,7 +249,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/user.css");
+@import url("/css/app-style/user-my.css");
 </style>
 
 <script>

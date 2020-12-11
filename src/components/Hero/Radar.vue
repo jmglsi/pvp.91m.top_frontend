@@ -90,6 +90,9 @@ export default {
   },
   methods: {
     getHeroChartsLog: function (heroId, heroName, aid) {
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
+
       this.radarData = {};
       this.radarData.loading = true;
 
@@ -103,8 +106,9 @@ export default {
             "&aid=" +
             aid,
           this.$qs.stringify({
-            openId: this.$cookie.get("openId"),
-            accessToken: this.$cookie.get("accessToken"),
+            openId: openId,
+            accessToken: accessToken,
+            friendsOpenId: openId,
           })
         )
         .then((res) => {

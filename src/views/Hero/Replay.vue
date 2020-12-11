@@ -177,7 +177,9 @@ export default {
 
     this.hero.info.id = heroId;
     this.replay.title = replayTitle;
-    parseInt(teammate) == 1 ? (this.replay.teammate = true) : (this.replay.teammate = false);
+    parseInt(teammate) == 1
+      ? (this.replay.teammate = true)
+      : (this.replay.teammate = false);
 
     this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
@@ -206,12 +208,16 @@ export default {
       this.showInfo.actionSheet = true;
     },
     getHeroReplayByHeroId: function (heroId, page) {
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
+
       this.axios
         .post(
           this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page,
           this.$qs.stringify({
-            openId: this.$cookie.get("openId"),
-            accessToken: this.$cookie.get("accessToken"),
+            openId: openId,
+            accessToken: accessToken,
+            friendsOpenId: openId,
           })
         )
         .then((res) => {

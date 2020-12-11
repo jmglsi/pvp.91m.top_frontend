@@ -43,7 +43,7 @@ export default new Router({
         }, {
             path: '/skin/return',
             name: 'skinReturn',
-            component: (resolve) => require(['./components/Skin/Return.vue'], resolve),
+            component: (resolve) => require(['./views/Hero/SkinReturn.vue'], resolve),
             meta: {
                 title: '趋势',
                 keepAlive: true

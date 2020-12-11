@@ -67,7 +67,8 @@
         <van-cell icon="/img/app-icons/hero_black.png" title="常用英雄">
           <template #right-icon>
             <ul
-              class="app-d865b50ce307751bdeb9a6ab16e7baf9 user-9e60d3ee1e1574cae90960f940c0a821"
+              class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
+              :style="friendsInfo.heroList.length <= 3 ? {} : { width: '180px' }"
             >
               <li
                 v-for="(data, index) in friendsInfo.heroList"
@@ -126,38 +127,12 @@
       >
     </div>
 
-    <div class="friends-ae64b9ce80d3b20870647479c735eeb0">
-      <div class="friends-402e57c104da1741bd87140cc8e3633f">有任何意见建议都可以加群</div>
-      <div class="friends-2707770f6b9a7f3321a020d1bcd5dd9d">
-        <a
-          target="_blank"
-          href="//qm.qq.com/cgi-bin/qm/qr?k=47VZ3jNzGKzf4SYjsYCWiOS4lqljpQww&jump_from=webapi"
-          ><img
-            border="0"
-            src="//pub.idqqimg.com/wpa/images/group.png"
-            alt="王者荣耀扯淡游戏1群"
-            title="王者荣耀扯淡游戏1群"
-            class="friends-414c54d9374ac490e9773a8c5f357427" /></a
-        >&nbsp;
-        <a
-          target="_blank"
-          href="//qm.qq.com/cgi-bin/qm/qr?k=CEFsriXK1TM2RJa9BioWhfWI4IYrAkJj&jump_from=webapi"
-          ><img
-            border="0"
-            src="//pub.idqqimg.com/wpa/images/group.png"
-            alt="奇迹的秘密小窝"
-            title="奇迹的秘密小窝"
-            class="friends-414c54d9374ac490e9773a8c5f357427"
-        /></a>
-      </div>
-    </div>
-
     <AppBottomTabbar height="100" />
   </div>
 </template>
 
 <style>
-@import url("/css/app-style/friends.css");
+@import url("/css/app-style/user-friends.css");
 </style>
 
 <script>

@@ -494,7 +494,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/game-globalBP.css");
+@import url("/css/app-style/game-global-BP.css");
 </style>
 
 <script>
@@ -553,12 +553,12 @@ export default {
         team_1: {
           id: 1,
           name: "队伍_1",
-          logo: "/img/app-icons/camp_blue.png",
+          logo: null,
         },
         team_2: {
           id: 2,
           name: "队伍_2",
-          logo: "/img/app-icons/camp_red.png",
+          logo: null,
         },
       },
       gameInfo: {
@@ -813,6 +813,7 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
+            friendsOpenId: loginInfo.openId,
             gameLabel: this.gameLabel,
             gameIndex: gameIndex,
             teamId_1: teamInfo.team_1.id,
@@ -847,6 +848,7 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
+            friendsOpenId: loginInfo.openId,
             gameLabel: this.gameLabel,
             gameIndex: index,
             teamId_1: teamInfo.team_1.id,
@@ -874,6 +876,7 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
+            friendsOpenId: loginInfo.openId,
             gameLabel: this.gameLabel,
             gameIndex: index,
           })
@@ -951,7 +954,6 @@ export default {
     onGamePickHeroClick: function (hero) {
       let tabsModel = this.tabsModel;
 
-      if (this.mode == "view") return;
       if (
         this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
         this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
@@ -963,7 +965,7 @@ export default {
           "警告:1002," + hero.name + " 已被 " + this.opponent.name + " 使用"
         );
         return;
-      }
+      } else if (this.mode == "view") return;
 
       let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow,
         newIndex = 0;

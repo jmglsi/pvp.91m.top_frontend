@@ -24,17 +24,11 @@
     </div>
 
     <div
-      @click="appOpenUrl('是否打开外部链接?', null, url.upyun)"
+      @click="appOpenUrl('是否打开外部链接?', null, upyun.url)"
       class="home-72ab9e07378f988922e6c91884048db0"
     >
       本站由
-      <img
-        width="100"
-        height="35"
-        data-src="img/app-icons/upyun_logo2.png"
-        src="img/app-icons/upyun_logo2.png"
-        lazy="loaded"
-      />
+      <img v-lazy="upyun.logo" width="100" height="35" />
       提供CDN加速/云储存服务
     </div>
 
@@ -57,8 +51,9 @@ export default {
   data() {
     return {
       tabsModel: 0,
-      url: {
-        upyun: "//console.upyun.com/register/?invite=ryM-bovMm",
+      upyun: {
+        url: "//console.upyun.com/register/?invite=ryM-bovMm",
+        logo: "//i.loli.net/2020/12/11/3u6pTZ9VMdiaA7I.png",
       },
     };
   },

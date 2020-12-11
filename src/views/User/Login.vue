@@ -1,6 +1,6 @@
 <template>
   <div class="login-in">
-    <div class="my-9ffe6c014e6f06f1c218fde0ca3fc4ef">
+    <div class="login-9ffe6c014e6f06f1c218fde0ca3fc4ef">
       <van-nav-bar
         left-arrow
         :border="false"
@@ -9,31 +9,31 @@
         @click-left="onNavBarLeftClick"
         z-index="99999999"
         left-text="返回"
-        class="my-f921d5768e1eb9ca4fe4e6b4692622e6"
+        class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
       />
     </div>
 
-    <div class="my-2a642626758deefdc2989a73aae823d3">
-      <van-cell-group class="my-5e8eee748a3d14d6a380448d6d61a9cf">
+    <div class="login-2a642626758deefdc2989a73aae823d3">
+      <van-cell-group class="login-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field
           v-model="loginInfo.data.name"
           v-show="loginInfo.type == 0"
           left-icon="user-o"
           placeholder="请输入用户名 (仅支持中英文数字)"
-          class="my-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.email"
           left-icon="/img/app-icons/email.png"
           placeholder="请输入邮箱"
-          class="my-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.password"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入密码"
-          class="my-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.newPassword"
@@ -41,25 +41,25 @@
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
-          class="my-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.uin"
           v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
-          class="my-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e"
         />
       </van-cell-group>
     </div>
 
-    <div v-show="loginInfo.type == 0" class="my-61046f2f5eefe3dc179e52af32241062">
-      <span class="my-e4c9479b11955648dad558fe717a4eb2"
+    <div v-show="loginInfo.type == 0" class="login-61046f2f5eefe3dc179e52af32241062">
+      <span class="login-e4c9479b11955648dad558fe717a4eb2"
         >注:用户名和QQ将用于扩列、BP界面以及修改密码,请不要瞎写</span
       >
     </div>
 
-    <div class="my-6920626369b1f05844f5e3d6f93b5f6e">
+    <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
       <van-button
         round
         size="small"
@@ -70,18 +70,44 @@
       >
     </div>
 
-    <div class="my-f01ae8c7f2d058ec6be00db589a32bea my-60ae25445ac62d5ec51c776826888d9f">
+    <div class="login-ae64b9ce80d3b20870647479c735eeb0">
+      <div class="login-402e57c104da1741bd87140cc8e3633f">有任何意见建议都可以加群</div>
+      <div class="login-2707770f6b9a7f3321a020d1bcd5dd9d">
+        <a
+          target="_blank"
+          href="//qm.qq.com/cgi-bin/qm/qr?k=47VZ3jNzGKzf4SYjsYCWiOS4lqljpQww&jump_from=webapi"
+          ><img
+            border="0"
+            src="//pub.idqqimg.com/wpa/images/group.png"
+            alt="王者荣耀扯淡游戏1群"
+            title="王者荣耀扯淡游戏1群"
+            class="login-414c54d9374ac490e9773a8c5f357427" /></a
+        >&nbsp;
+        <a
+          target="_blank"
+          href="//qm.qq.com/cgi-bin/qm/qr?k=CEFsriXK1TM2RJa9BioWhfWI4IYrAkJj&jump_from=webapi"
+          ><img
+            border="0"
+            src="//pub.idqqimg.com/wpa/images/group.png"
+            alt="奇迹的秘密小窝"
+            title="奇迹的秘密小窝"
+            class="login-414c54d9374ac490e9773a8c5f357427"
+        /></a>
+      </div>
+    </div>
+
+    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f">
       <span @click="onRegisterClick">注册</span>
     </div>
 
-    <div class="my-f01ae8c7f2d058ec6be00db589a32bea my-4ae1ffb5939d592986bed21d0913562d">
+    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d">
       <span @click="onUpdateClick">修改密码</span>
     </div>
   </div>
 </template>
 
 <style>
-@import url("/css/app-style/user.css");
+@import url("/css/app-style/user-login.css");
 </style>
 
 <script>
@@ -142,6 +168,7 @@ export default {
             uin: data.uin,
             openId: data.openId,
             accessToken: data.accessToken,
+            friendsOpenId: data.openId,
           })
         )
         .then((res) => {

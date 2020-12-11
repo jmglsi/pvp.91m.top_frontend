@@ -2,9 +2,9 @@ let host;
 
 location.host.indexOf("91m.top") > -1 ? host = "//api.91m.top" : host = "//localhost/api.91m.top"
 
-const appApi = host + "/hero/v1/app.php"
-const gameApi = host + "/hero/v1/game.php"
-const biliApi = host + "/hero/v1/bilibili.php"
+const appApi = host + "/hero/v1/app.php";
+const gameApi = host + "/hero/v1/game.php";
+const biliApi = host + "/hero/v1/bilibili.php";
 
 const pvp = {
     addHeroByCombination: appApi + "?type=addHeroByCombination",

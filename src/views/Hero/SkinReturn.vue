@@ -76,7 +76,7 @@
 </template>
 
 <style>
-@import url("/css/app-style/skin.css");
+@import url("/css/app-style/hero-skin-return.css");
 </style>
 
 <script>

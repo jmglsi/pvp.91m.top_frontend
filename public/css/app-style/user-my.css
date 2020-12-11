@@ -2,11 +2,6 @@ img.my-d5ca322453f2986b752e58b11af83d96 {
     border-radius: 100%;
 }
 
-span.my-e4c9479b11955648dad558fe717a4eb2 {
-    color: red;
-    font-size: 12px;
-}
-
 span.my-25930e3036f13852cb0b29694bbab611 {
     margin: 0 3px;
 }
@@ -25,26 +20,6 @@ span.my-af99c9298d1eb69981a035d0a15afa20 {
     top: -5px;
 }
 
-div.my-6920626369b1f05844f5e3d6f93b5f6e,
-div.my-61046f2f5eefe3dc179e52af32241062 {
-    margin-top: 25px;
-}
-
-div.my-f01ae8c7f2d058ec6be00db589a32bea {
-    bottom: 50px;
-    position: absolute;
-}
-
-div.my-60ae25445ac62d5ec51c776826888d9f {
-    color: #1989fa;
-    left: 25px;
-}
-
-div.my-4ae1ffb5939d592986bed21d0913562d {
-    color: red;
-    right: 25px;
-}
-
 div.my-7dc22b2c6a992f0232345df41303f5ea div.van-grid div.van-grid-item div.van-grid-item__content span.van-grid-item__text,
 span.my-4646fa4296a7f5dea261e60e00ecd24b {
     font-size: 20px;
@@ -60,8 +35,13 @@ div.my-cd77c40b62763f6adf5598bce7fceede {
 }
 
 div.my-e422a8bb26c14c85f0046ff66e412df4 {
-    margin: 20px 15px;
+    margin: 0 15px;
+    margin-top: 50px;
     color: #969799;
+}
+
+div.my-e422a8bb26c14c85f0046ff66e412df4 i.van-icon img.van-icon__image {
+    border-radius: unset;
 }
 
 div.my-058928a73f2a944d621b028eb9addd36 {
@@ -70,9 +50,4 @@ div.my-058928a73f2a944d621b028eb9addd36 {
 
 div.my-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
     font-size: 10px;
-}
-
-div.my-e422a8bb26c14c85f0046ff66e412df4 img.van-icon__image,
-div.my-e71832eb64a3978b00a7d37f407b158e img.van-icon__image {
-    border-radius: unset;
 }

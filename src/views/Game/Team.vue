@@ -152,6 +152,7 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
+            friendsOpenId: loginInfo.openId,
           })
         )
         .then((res) => {
@@ -177,6 +178,7 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
+            friendsOpenId: loginInfo.openId,
             filePath: data,
           })
         )
@@ -236,6 +238,7 @@ export default {
       let postData = {
         openId: loginInfo.openId,
         accessToken: loginInfo.accessToken,
+        friendsOpenId: loginInfo.openId,
         teamId: teamInfo.row.id,
         teamName: teamInfo.row.name,
         teamLogo: teamInfo.row.logo,
@@ -287,6 +290,7 @@ export default {
               this.$qs.stringify({
                 openId: loginInfo.openId,
                 accessToken: loginInfo.accessToken,
+                friendsOpenId: loginInfo.openId,
                 teamId: teamInfo.row.id,
               })
             )
@@ -336,6 +340,7 @@ export default {
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
+            friendsOpenId: loginInfo.openId,
             teamId_1: teamId_1,
             teamId_2: teamId_2,
           })
