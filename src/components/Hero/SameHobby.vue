@@ -38,7 +38,7 @@
           color="#000000"
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
-          @click="getHeroByWebAccount(heroId, 1)"
+          @click="getHeroByWebAccountList(heroId, 1)"
           >刷新</van-button
         >
       </div>
@@ -65,7 +65,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.getHeroByWebAccount(newValue.heroId, 0);
+        this.getHeroByWebAccountList(newValue.heroId, 0);
       },
     },
   },
@@ -79,9 +79,9 @@ export default {
     };
   },
   methods: {
-    getHeroByWebAccount: function (heroId, tips) {
+    getHeroByWebAccountList: function (heroId, tips) {
       this.axios
-        .get(this.apiList.pvp.getHeroByWebAccount + "&heroId=" + heroId)
+        .get(this.apiList.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
         .then((res) => {
           this.sameHobbyData = res.data.data;
 

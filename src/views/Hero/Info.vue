@@ -316,11 +316,15 @@
         class="hero-d4a9092fd7b386904e4a2894044f2a9d"
       >
         <van-tabbar-item
-          icon="/img/app-icons/like_0.png"
+          :icon="
+            hero.info.likeStatus == 1
+              ? '/img/app-icons/like_1.png'
+              : '/img/app-icons/like_0.png'
+          "
           name="/"
           class="app-72383b9892bd1e6a2bd310dfb1fb2344"
-          @click="$message.info('提示:1007,正在开发')"
-          >喜欢</van-tabbar-item
+          @click="onHeroLikeClick"
+          >{{ hero.info.likeStatus == 0 ? "喜欢" : "已喜欢" }}</van-tabbar-item
         >
         <van-tabbar-item
           icon="/img/app-icons/wiki.png"
@@ -414,7 +418,7 @@ export default {
         options: [
           { text: "巅峰赛趋势", value: 0 },
           { text: "英雄强势期", value: 1 },
-          { text: "论坛舆论", value: 2 },
+          { text: "论坛舆论趋势", value: 2 },
         ],
       },
       isLoaded: false,
@@ -432,19 +436,31 @@ export default {
       this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
-      this.axios.get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
-        this.isLoaded = true;
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
 
-        let data = res.data.data,
-          heroInfo = data.heroInfo;
+      this.axios
+        .post(
+          this.apiList.pvp.getHeroInfo + "&heroId=" + heroId,
+          this.$qs.stringify({
+            openId: openId,
+            accessToken: accessToken,
+            friendsOpenId: openId,
+          })
+        )
+        .then((res) => {
+          this.isLoaded = true;
 
-        this.circle.info = data.circleInfo;
-        this.positionInfo = data.positionInfo;
-        this.hero.info = heroInfo;
+          let data = res.data.data,
+            heroInfo = data.heroInfo;
 
-        this.hero.title = heroInfo.name;
-        document.title = this.hero.info.name + " | 苏苏的荣耀助手";
-      });
+          this.circle.info = data.circleInfo;
+          this.positionInfo = data.positionInfo;
+          this.hero.info = heroInfo;
+
+          this.hero.title = heroInfo.name;
+          document.title = this.hero.info.name + " | 苏苏的荣耀助手";
+        });
     },
     onTipsClick: function () {
       this.$dialog.alert({
@@ -472,6 +488,33 @@ export default {
         });
 
       this.showInfo.heroMenu = false;
+    },
+    onHeroLikeClick: function () {
+      let openId = this.$cookie.get("openId"),
+        accessToken = this.$cookie.get("accessToken");
+
+      this.axios
+        .post(
+          this.apiList.pvp.addWebAccountHeroLike + "&heroId=" + this.hero.info.id,
+          this.$qs.stringify({
+            openId: openId,
+            accessToken: accessToken,
+            friendsOpenId: openId,
+          })
+        )
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.$message.success("修改成功");
+
+            this.hero.info.likeStatus == 0
+              ? (this.hero.info.likeStatus = 1)
+              : (this.hero.info.likeStatus = 0);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     onImagePreviewClick: function (imageIndex) {
       this.showInfo.imagePreview = true;
