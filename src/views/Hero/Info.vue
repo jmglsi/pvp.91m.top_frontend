@@ -324,7 +324,7 @@
           name="/"
           class="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
-          >{{ hero.info.likeStatus == 0 ? "喜欢" : "已喜欢" }}</van-tabbar-item
+          >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
         <van-tabbar-item
           icon="/img/app-icons/wiki.png"

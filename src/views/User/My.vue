@@ -135,7 +135,7 @@
             <span
               class="my-1098203f6e0a3a981da7c9a8cd6bc85b"
               @click="$message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')"
-              >常用英雄</span
+              >喜欢列表</span
             >
           </template>
           <template #right-icon>

@@ -64,7 +64,7 @@
             >
           </template>
         </van-cell>
-        <van-cell icon="/img/app-icons/hero_black.png" title="常用英雄">
+        <van-cell icon="/img/app-icons/hero_black.png" title="喜欢列表">
           <template #right-icon>
             <ul
               class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
