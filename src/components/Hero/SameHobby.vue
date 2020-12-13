@@ -22,7 +22,7 @@
           <img
             width="75"
             height="75"
-            v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=' + data.uin + '&spec=640'"
+            v-lazy="data.img"
             class="app-4ab161130e76571ab0c31aa23a6238c7"
           />
           <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">
