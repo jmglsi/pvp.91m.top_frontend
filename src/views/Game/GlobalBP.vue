@@ -176,7 +176,7 @@
               <div class="game-87740aa9337e54dbad53ec95089dca77">
                 <van-cell-group
                   :border="false"
-                  title="热门"
+                  title="热门推荐"
                   class="game-27369b3bf4483e8dcfd85ba9a39a947f"
                 >
                   <van-grid

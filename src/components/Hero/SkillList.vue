@@ -26,7 +26,7 @@
       </vxe-table-column>
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column title="胜方" field="mvpRate" sortable />
+        <vxe-table-column title="净胜" field="mvpRate" sortable />
       </vxe-table-column>
     </vxe-grid>
   </div>

@@ -51,7 +51,7 @@
       <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column title="胜方" field="mvpRate" :width="listWidth" sortable />
+        <vxe-table-column title="净胜" field="mvpRate" :width="listWidth" sortable />
       </vxe-table-column>
     </vxe-grid>
   </div>

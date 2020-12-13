@@ -113,8 +113,8 @@
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
+          <vxe-table-column title="净胜" field="winMvpRate" :width="listWidth" sortable />
           <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
           <vxe-table-column
             title="败方"
             field="loseMvpRate"
@@ -225,7 +225,7 @@ export default {
           { text: "全部 (昨日)", value: 0 },
           { text: "手 Q (昨日)", value: 1 },
           { text: "微信 (昨日)", value: 2 },
-          { text: "强度上升 (昨日)", value: 3 },
+          { text: "热门推荐 (昨日)", value: 3 },
           { text: "全部 (上周)", value: 4 },
           { text: "全部 (上月)", value: 5 },
         ],
