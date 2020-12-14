@@ -113,8 +113,8 @@
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column title="净胜" field="winMvpRate" :width="listWidth" sortable />
           <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
+          <vxe-table-column title="净胜" field="winMvpRate" :width="listWidth" sortable />
           <vxe-table-column
             title="败方"
             field="loseMvpRate"
