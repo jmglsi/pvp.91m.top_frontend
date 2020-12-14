@@ -342,7 +342,7 @@ export default {
           //this.$refs.dianfengsai.loadData(data.result.rows);
         });
 
-      if (aid == 3 && bid == 0) {
+      if (bid == 3 && cid == 0) {
         this.$message.info(
           "提示:1005,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
         );

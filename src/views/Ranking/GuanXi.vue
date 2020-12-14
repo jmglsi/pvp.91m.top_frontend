@@ -199,7 +199,7 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?type=1&heroName=" +
+                "?type=2&heroName=" +
                 encodeURIComponent(heroName) +
                 "&heroId1=" +
                 row.hero_1.id +

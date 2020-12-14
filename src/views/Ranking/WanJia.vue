@@ -151,7 +151,7 @@ export default {
               "\r-\r更多玩家信息 ↓\r" +
               location.origin +
               location.pathname +
-              "?type=2&userId=" +
+              "?type=1&userId=" +
               row.userId;
           } else {
             this.$message.error(status.msg);
