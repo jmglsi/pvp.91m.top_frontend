@@ -105,12 +105,12 @@ export default {
     this.initAppTable();
   },
   mounted() {
-    this.getPlayerRanking(0, 0);
+    this.getRanking(0, 0);
   },
   methods: {
-    getPlayerRanking: function (aid, bid) {
+    getRanking: function (bid, cid, aid = 1) {
       this.axios
-        .get(this.apiList.pvp.getPlayerRanking + "&aid=" + aid + "&bid=" + bid)
+        .get(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
         .then((res) => {
           this.tableData = res.data.data;
           this.tableData.loading = false;
@@ -159,13 +159,13 @@ export default {
         });
     },
     onPlayerOptionsChange: function (e) {
-      this.getPlayerRanking(e, this.playerShield);
+      this.getRanking(e, this.playerShield);
     },
     onDropdownConfirmClick: function () {
       this.$refs.item.toggle();
 
       this.playerShield = Number(this.showInfo.shield);
-      this.getPlayerRanking(this.areaInfo.model, this.playerShield);
+      this.getRanking(this.areaInfo.model, this.playerShield);
     },
     onCellClick: function ({ row }) {
       this.getPlayerInfo(row);

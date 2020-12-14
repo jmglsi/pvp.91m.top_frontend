@@ -176,7 +176,7 @@
               <div class="game-87740aa9337e54dbad53ec95089dca77">
                 <van-cell-group
                   :border="false"
-                  title="热门推荐"
+                  title="推荐"
                   class="game-27369b3bf4483e8dcfd85ba9a39a947f"
                 >
                   <van-grid
@@ -736,10 +736,10 @@ export default {
         }
       }, 1000);
     },
-    getHeroList: function (gameTime) {
+    getHeroList: function (gameTime, aid = 0) {
       this.axios
         .post(
-          this.apiList.pvp.getHeroRanking + "&aid=4&bid=0",
+          this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=4&cid=0",
           this.$qs.stringify({
             gameTime: gameTime,
           })

@@ -16,12 +16,12 @@
           <DianFengSai />
         </van-tab>
 
-        <van-tab title="关系和克制 (上周)">
-          <GuanXi />
-        </van-tab>
-
         <van-tab title="玩家 (非实时)">
           <WanJia />
+        </van-tab>
+
+        <van-tab title="关系和克制 (上周)">
+          <GuanXi />
         </van-tab>
       </van-tabs>
     </div>

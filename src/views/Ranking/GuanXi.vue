@@ -148,7 +148,7 @@ export default {
     if (!heroName) {
       heroName = "";
     }
-    this.getHeroCombination(heroName);
+    this.getRanking(heroName);
 
     setInterval(() => {
       let text = this.tableData.searchPlaceholder;
@@ -160,12 +160,14 @@ export default {
     initGuanXiTable: function () {
       this.appDevice ? (this.listWidth = 100) : (this.listWidth = 0);
     },
-    getHeroCombination: function (heroName) {
+    getRanking: function (heroName, aid = 2) {
       this.search.value = heroName;
 
       this.axios
         .get(
-          this.apiList.pvp.getHeroCombination +
+          this.apiList.pvp.getRanking +
+            "&aid=" +
+            aid +
             "&heroName=" +
             encodeURIComponent(heroName)
         )
@@ -251,7 +253,7 @@ export default {
     onSearchClear: function () {
       this.search.value = "";
 
-      this.getHeroCombination("");
+      this.getRanking("");
     },
     onSearch: function () {
       let searchValue = this.search.value;
@@ -267,7 +269,7 @@ export default {
             if (code == 1) {
               this.$message.success("添加成功");
 
-              this.getHeroCombination("");
+              this.getRanking("");
             } else {
               if (code == 0) {
                 msg = "关系已存在";
@@ -281,7 +283,7 @@ export default {
             }
           });
       } else {
-        this.getHeroCombination(searchValue);
+        this.getRanking(searchValue);
       }
     },
     onCellClick: function ({ row }) {

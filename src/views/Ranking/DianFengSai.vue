@@ -225,7 +225,7 @@ export default {
           { text: "全部 (昨日)", value: 0 },
           { text: "手 Q (昨日)", value: 1 },
           { text: "微信 (昨日)", value: 2 },
-          { text: "热门推荐 (昨日)", value: 3 },
+          { text: "推荐 (昨日)", value: 3 },
           { text: "全部 (上周)", value: 4 },
           { text: "全部 (上月)", value: 5 },
         ],
@@ -282,7 +282,7 @@ export default {
     //手动将表格和工具栏进行关联
   },
   mounted() {
-    this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
+    this.getRanking(this.areaInfo.model, this.positionInfo.model);
   },
   methods: {
     initListWidth: function () {
@@ -325,9 +325,9 @@ export default {
         }
       }
     },
-    getHeroRanking: function (aid, bid) {
+    getRanking: function (bid, cid, aid = 0) {
       this.axios
-        .get(this.apiList.pvp.getHeroRanking + "&aid=" + aid + "&bid=" + bid)
+        .get(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
         .then((res) => {
           let data = res.data.data;
 
@@ -349,7 +349,7 @@ export default {
       }
     },
     onDropdownMenuChange: function () {
-      this.getHeroRanking(this.areaInfo.model, this.positionInfo.model);
+      this.getRanking(this.areaInfo.model, this.positionInfo.model);
     },
     onCellClick: function ({ row, column }) {
       this.tableData.row = row;
