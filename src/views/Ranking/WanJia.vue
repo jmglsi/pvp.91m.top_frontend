@@ -123,21 +123,11 @@ export default {
     getPlayerInfo: function (row) {
       if (row.userId == 0 || this.areaInfo.model >= 3) return;
 
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
-
       this.tableData.row = row;
       this.showInfo.actionSheet = true;
 
       this.axios
-        .post(
-          this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId,
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
-        )
+        .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;

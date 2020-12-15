@@ -436,31 +436,19 @@ export default {
       this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
+      this.axios.get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
+        this.isLoaded = true;
 
-      this.axios
-        .post(
-          this.apiList.pvp.getHeroInfo + "&heroId=" + heroId,
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
-        )
-        .then((res) => {
-          this.isLoaded = true;
+        let data = res.data.data,
+          heroInfo = data.heroInfo;
 
-          let data = res.data.data,
-            heroInfo = data.heroInfo;
+        this.circle.info = data.circleInfo;
+        this.positionInfo = data.positionInfo;
+        this.hero.info = heroInfo;
 
-          this.circle.info = data.circleInfo;
-          this.positionInfo = data.positionInfo;
-          this.hero.info = heroInfo;
-
-          this.hero.title = heroInfo.name;
-          document.title = this.hero.info.name + " | 苏苏的荣耀助手";
-        });
+        this.hero.title = heroInfo.name;
+        document.title = heroInfo.name + " | 苏苏的荣耀助手";
+      });
     },
     onTipsClick: function () {
       this.$dialog.alert({
@@ -490,18 +478,8 @@ export default {
       this.showInfo.heroMenu = false;
     },
     onHeroLikeClick: function () {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
-
       this.axios
-        .post(
-          this.apiList.pvp.addWebAccountHeroLike + "&heroId=" + this.hero.info.id,
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
-        )
+        .get(this.apiList.pvp.addWebAccountHeroLike + "&heroId=" + this.hero.info.id)
         .then((res) => {
           let status = res.data.status;
 

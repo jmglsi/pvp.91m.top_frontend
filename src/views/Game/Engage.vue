@@ -95,30 +95,18 @@ export default {
   },
   methods: {
     getGameDashboard: function () {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
+      this.axios.get(this.apiList.pvp.getGameDashboard + "&aid=1").then((res) => {
+        let data = res.data.data,
+          status = res.data.status;
 
-      this.axios
-        .post(
-          this.apiList.pvp.getGameDashboard + "&aid=1",
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
+        if (status.code == 200) {
+          this.engageInfo.result = data.result;
+        } else {
+          this.$message.error(status.msg);
 
-          if (status.code == 200) {
-            this.engageInfo.result = data.result;
-          } else {
-            this.$message.error(status.msg);
-
-            this.appPush("/login");
-          }
-        });
+          this.appPush("/login");
+        }
+      });
     },
   },
 };

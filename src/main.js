@@ -6,7 +6,7 @@ import router from './router'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-    document.title = to.meta.title + " | " + "苏苏的荣耀助手"
+    document.title = to.meta.title + " | 苏苏的荣耀助手"
     next()
 })
 
@@ -25,7 +25,9 @@ Vue.prototype.$qs = qs
 import md5 from 'js-md5'
 Vue.prototype.$md5 = md5
 
-Vue.prototype.axios = require("axios")
+import axios from 'axios'
+axios.defaults.withCredentials = true;
+Vue.prototype.axios = axios;
 
 import './assets/import/ant'
 

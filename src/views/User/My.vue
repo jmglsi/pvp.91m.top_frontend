@@ -282,34 +282,22 @@ export default {
     this.getWebAccountInfo();
   },
   methods: {
-    getWebAccountInfo: function () {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
+    getWebAccountInfo: function (aid = 0) {
+      this.axios.get(this.apiList.pvp.getWebAccountInfo + "&aid=" + aid).then((res) => {
+        let data = res.data.data,
+          status = res.data.status;
 
-      this.axios
-        .post(
-          this.apiList.pvp.getWebAccountInfo + "&aid=0",
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
+        if (status.code == 200) {
+          this.isLogin = true;
+          this.loginInfo = data;
 
-          if (status.code == 200) {
-            this.isLogin = true;
-            this.loginInfo = data;
-
-            data.friendsType == 1
-              ? (this.showInfo.friendsType = true)
-              : (this.showInfo.friendsType = false);
-          } else {
-            this.isLogin = false;
-          }
-        });
+          data.friendsType == 1
+            ? (this.showInfo.friendsType = true)
+            : (this.showInfo.friendsType = false);
+        } else {
+          this.isLogin = false;
+        }
+      });
     },
     onCopyLinkClick: function () {
       this.appCopyData(location.origin + "/friends?openId=" + this.loginInfo.openId);

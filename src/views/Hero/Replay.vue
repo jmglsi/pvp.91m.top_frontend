@@ -208,17 +208,9 @@ export default {
       this.showInfo.actionSheet = true;
     },
     getHeroReplayByHeroId: function (heroId, page) {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
-
       this.axios
-        .post(
-          this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page,
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
+        .get(
+          this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page
         )
         .then((res) => {
           let data = res.data.data,

@@ -51,7 +51,7 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="#" type="seq" width="75" />
+        <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column title="队友 (%)">
           <vxe-table-column
@@ -158,7 +158,7 @@ export default {
   },
   methods: {
     initGuanXiTable: function () {
-      this.appDevice ? (this.listWidth = 100) : (this.listWidth = 0);
+      this.appWidth < 500 ? (this.listWidth = 90) : (this.listWidth = 0);
     },
     getRanking: function (heroName, aid = 2) {
       this.search.value = heroName;

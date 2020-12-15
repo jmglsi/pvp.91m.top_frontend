@@ -190,7 +190,7 @@
           <div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
             <van-button
               round
-              @click="$router.push({ path: '/hero/' + tableData.row.id + '/info' })"
+              @click="onHeroInfoClick(tableData.row.id)"
               size="small"
               color="linear-gradient(to right, #ff6034, #ee0a24)"
             >
@@ -286,25 +286,20 @@ export default {
   },
   methods: {
     initListWidth: function () {
-      if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) {
-        this.listWidth = 85;
-        return;
-      }
+      this.listWidth = 90;
+
+      if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
 
       let tableColumn = JSON.parse(localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE);
 
-      let listWidth = 85;
-
       if (tableColumn["dianfengsai"] == undefined) {
-        this.listWidth = listWidth;
+        this.listWidth = 90;
       } else {
         let visibleColumn = tableColumn.dianfengsai.split(",");
 
-        visibleColumn.length > 6 ? (listWidth = 0) : (listWidth = 85);
-
-        if (this.appDevice) listWidth = 85;
-
-        this.listWidth = listWidth;
+        visibleColumn.length > 6 || !this.appDevice
+          ? (this.listWidth = 0)
+          : (this.listWidth = 90);
       }
     },
     toolbarCustomEvent: function (params) {
@@ -363,6 +358,11 @@ export default {
         this.showInfo.heroMenu = true;
         return;
       }
+    },
+    onHeroInfoClick: function (heroId) {
+      this.$message.info("提示:1003,点击右侧召唤师技能、出装即可查看顶端局热门推荐");
+
+      this.$router.push({ path: "/hero/" + heroId + "/info" });
     },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;

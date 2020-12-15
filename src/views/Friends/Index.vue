@@ -164,16 +164,12 @@ export default {
   },
   methods: {
     getWebAccountInfo: function (tips) {
-      let openId_1 = this.$route.query.openId,
-        openId_2 = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
+      let openId_1 = this.$route.query.openId
 
       this.axios
         .post(
           this.apiList.pvp.getWebAccountInfo + "&aid=1",
           this.$qs.stringify({
-            openId: openId_2,
-            accessToken: accessToken,
             friendsOpenId: openId_1,
           })
         )

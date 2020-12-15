@@ -90,26 +90,18 @@ export default {
   },
   methods: {
     getHeroChartsLog: function (heroId, heroName, aid) {
-      let openId = this.$cookie.get("openId"),
-        accessToken = this.$cookie.get("accessToken");
-
       this.radarData = {};
       this.radarData.loading = true;
 
       this.axios
-        .post(
+        .get(
           this.apiList.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
             "&heroName=" +
             heroName +
             "&aid=" +
-            aid,
-          this.$qs.stringify({
-            openId: openId,
-            accessToken: accessToken,
-            friendsOpenId: openId,
-          })
+            aid
         )
         .then((res) => {
           let data = res.data.data,

@@ -96,11 +96,15 @@
       </div>
     </div>
 
-    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f">
+    <div
+      class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f"
+    >
       <span @click="onRegisterClick">注册</span>
     </div>
 
-    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d">
+    <div
+      class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d"
+    >
       <span @click="onUpdateClick">修改密码</span>
     </div>
   </div>
@@ -166,9 +170,6 @@ export default {
             password: this.$md5(data.password),
             newPassword: data.newPassword ? this.$md5(data.newPassword) : null,
             uin: data.uin,
-            openId: data.openId,
-            accessToken: data.accessToken,
-            friendsOpenId: data.openId,
           })
         )
         .then((res) => {
