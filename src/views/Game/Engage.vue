@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     getGameDashboard: function () {
-      this.axios.get(this.apiList.pvp.getGameDashboard + "&aid=1").then((res) => {
+      this.axios.post(this.apiList.pvp.getGameDashboard + "&aid=1").then((res) => {
         let data = res.data.data,
           status = res.data.status;
 
