@@ -94,7 +94,7 @@ export default {
       this.radarData.loading = true;
 
       this.axios
-        .get(
+        .post(
           this.apiList.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +

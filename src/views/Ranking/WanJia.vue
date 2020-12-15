@@ -110,7 +110,7 @@ export default {
   methods: {
     getRanking: function (bid, cid, aid = 1) {
       this.axios
-        .get(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
+        .post(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
         .then((res) => {
           this.tableData = res.data.data;
           this.tableData.loading = false;

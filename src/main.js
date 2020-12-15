@@ -13,9 +13,6 @@ router.beforeEach((to, from, next) => {
 import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 
-import VueCookie from 'vue-cookie'
-Vue.use(VueCookie)
-
 import VueMeta from 'vue-meta'
 Vue.use(VueMeta)
 
@@ -25,9 +22,29 @@ Vue.prototype.$qs = qs
 import md5 from 'js-md5'
 Vue.prototype.$md5 = md5
 
+import cookie from 'vue-cookie'
+Vue.prototype.$cookie = cookie
+
 import axios from 'axios'
-axios.defaults.withCredentials = true;
-Vue.prototype.axios = axios;
+axios.interceptors.request.use(function(config) {
+    const openId = cookie.get("openId")
+    const accessToken = cookie.get("accessToken")
+
+    let data = qs.parse(config.data)
+
+    if (config.method == "post") {
+        config.data = qs.stringify({
+            openId: openId,
+            accessToken: accessToken,
+            ...data
+        })
+    }
+
+    return config;
+}, function(error) {
+    return Promise.reject(error);
+})
+Vue.prototype.axios = axios
 
 import './assets/import/ant'
 

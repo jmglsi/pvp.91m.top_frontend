@@ -283,7 +283,7 @@ export default {
   },
   methods: {
     getWebAccountInfo: function (aid = 0) {
-      this.axios.get(this.apiList.pvp.getWebAccountInfo + "&aid=" + aid).then((res) => {
+      this.axios.post(this.apiList.pvp.getWebAccountInfo + "&aid=" + aid).then((res) => {
         let data = res.data.data,
           status = res.data.status;
 

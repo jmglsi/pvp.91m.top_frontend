@@ -164,7 +164,7 @@ export default {
       this.search.value = heroName;
 
       this.axios
-        .get(
+        .post(
           this.apiList.pvp.getRanking +
             "&aid=" +
             aid +

@@ -209,7 +209,7 @@ export default {
     },
     getHeroReplayByHeroId: function (heroId, page) {
       this.axios
-        .get(
+        .post(
           this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page
         )
         .then((res) => {

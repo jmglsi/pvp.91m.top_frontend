@@ -322,7 +322,7 @@ export default {
     },
     getRanking: function (bid, cid, aid = 0) {
       this.axios
-        .get(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
+        .post(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
         .then((res) => {
           let data = res.data.data;
 

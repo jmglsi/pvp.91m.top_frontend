@@ -95,7 +95,7 @@ export default {
       this.lineData.loading = true;
 
       this.axios
-        .get(
+        .post(
           this.apiList.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
