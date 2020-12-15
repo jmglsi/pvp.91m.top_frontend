@@ -56,11 +56,7 @@
               <span
                 @click="appOpenUrl('是否打开外部链接?', null, data.url)"
                 class="update-f0af832cbd923851be8557213d95dddc"
-              >
-                <img
-                  v-lazy="'/img/app-icons/link_black.png'"
-                  class="update-a1b6d48bbb668c1f71ac1fdd39fc7f4e"
-                />
+                >&nbsp;🔗
                 {{ data.title }}
               </span>
             </div>
