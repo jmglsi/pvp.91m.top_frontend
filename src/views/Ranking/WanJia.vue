@@ -127,7 +127,7 @@ export default {
       this.showInfo.actionSheet = true;
 
       this.axios
-        .get(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
+        .post(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;

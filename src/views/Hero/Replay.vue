@@ -184,15 +184,6 @@ export default {
     this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
   methods: {
-    getHeroInfo: function (heroId) {
-      this.axios.get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
-        this.hero.info = res.data.data.heroInfo;
-
-        document.title = this.hero.info.name + " | 苏苏的荣耀助手";
-
-        if (heroId.indexOf(",") > -1) this.replay.teammate = true;
-      });
-    },
     onGameActionSheetClick: function (row) {
       this.tableData.row = row;
 

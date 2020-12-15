@@ -436,7 +436,7 @@ export default {
       this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
-      this.axios.get(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
+      this.axios.post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
         this.isLoaded = true;
 
         let data = res.data.data,
@@ -479,7 +479,7 @@ export default {
     },
     onHeroLikeClick: function () {
       this.axios
-        .get(this.apiList.pvp.addWebAccountHeroLike + "&heroId=" + this.hero.info.id)
+        .post(this.apiList.pvp.addWebAccountHeroLike + "&heroId=" + this.hero.info.id)
         .then((res) => {
           let status = res.data.status;
 
