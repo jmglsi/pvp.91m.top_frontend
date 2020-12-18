@@ -38,8 +38,8 @@ export default {
       default: 0,
     },
     detailed: {
-      type: Boolean,
-      default: true,
+      type: Number,
+      default: 1,
     },
     trendType: {
       type: Number,

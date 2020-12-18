@@ -59,6 +59,8 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
+        if (newValue.heroId == 0) return;
+
         this.radarData.result = [];
 
         if (newValue.tabsModel == 1) {

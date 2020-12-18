@@ -307,15 +307,15 @@ export default {
 
       switch (params.type) {
         case "confirm": {
-          //点击确认
+          //确认
           break;
         }
         case "reset": {
-          //点击重置
+          //重置
           break;
         }
         case "close": {
-          //关闭面板
+          //关闭
           break;
         }
       }
