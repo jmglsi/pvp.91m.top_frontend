@@ -1,6 +1,9 @@
 import Vue from 'vue'
 
-Vue.prototype.appDevice = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent)
+Vue.prototype.isMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
+Vue.prototype.appTs = Date.parse(new Date()).toString().slice(0, 10);
+Vue.prototype.appHeight = document.documentElement.clientHeight;
+Vue.prototype.appWidth = document.documentElement.clientWidth;
 
 Vue.prototype.appCopyData = function(data, successText = "复制成功", errorText = "复制失败") {
     this.$copyText(data).then(
@@ -40,16 +43,8 @@ Vue.prototype.appOpenUrl = function(title, message, urlPath, urlType = 0) {
         });
 }
 
-Vue.prototype.appHeight = document.documentElement.clientHeight;
-Vue.prototype.appWidth = document.documentElement.clientWidth;
-
-Vue.prototype.initAppTable = function() {
-    const cHeight = this.appHeight;
-    const cWidth = this.appWidth;
-
-    cWidth > cHeight ?
-        (this.clientHeight = cHeight - 133) :
-        (this.clientHeight = cHeight - 173)
+Vue.prototype.appInitTableHeight = function() {
+    this.appWidth > this.appHeight ?
+        (this.clientHeight = this.appHeight - 133) :
+        (this.clientHeight = this.appHeight - 173)
 }
-
-Vue.prototype.appTs = Date.parse(new Date()).toString().slice(0, 10);

@@ -43,7 +43,7 @@
                     : '/img/app-icons/hero_white.png'
                 "
                 :class="
-                  mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
+                  bpMode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
                     ? blueStepsClass
                     : ''
                 "
@@ -85,7 +85,7 @@
                     : '/img/app-icons/hero_white.png'
                 "
                 :class="
-                  mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
+                  bpMode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
                     ? redStepsClass
                     : ''
                 "
@@ -108,14 +108,14 @@
       <van-row>
         <van-col span="3">
           <div
-            :style="appDevice ? { marginTop: '50px' } : { marginTop: '100px' }"
+            :style="isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
             class="game-be50d19d79d06b239c799bc2608239c6"
           >
             <ul>
               <li
                 v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
-                :style="appDevice ? {} : { marginTop: '50px' }"
+                :style="isMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -135,12 +135,13 @@
                         : '/img/app-icons/hero_white.png'
                     "
                     :class="
-                      mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
+                      bpMode == 'edit' &&
+                      gameInfo.result.rows[tabsModel].stepsNow == index
                         ? blueStepsClass
                         : ''
                     "
-                    :width="appDevice ? 40 : 55"
-                    :height="appDevice ? 40 : 55"
+                    :width="isMobile ? 40 : 55"
+                    :height="isMobile ? 40 : 55"
                     class="game-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -148,22 +149,22 @@
             </ul>
           </div>
           <div
-            v-show="mode == 'edit'"
+            v-show="bpMode == 'edit'"
             @click="onWinCampClick(1)"
-            :style="appDevice ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
+            :style="isMobile ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
             class="game-d75e14b5c8f13e894fe9bf9d5426c198"
           ></div>
         </van-col>
         <van-col span="18">
           <div
             v-show="showInfo.hero"
-            :style="appDevice ? { height: '240px' } : { height: appHeight - 150 + 'px' }"
+            :style="isMobile ? { height: '240px' } : { height: appHeight - 150 + 'px' }"
             class="app-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
               v-model="tableData.active"
               :border="false"
-              :swipe-threshold="appDevice ? 4 : 7"
+              :swipe-threshold="isMobile ? 4 : 7"
               color="orange"
               class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
@@ -287,14 +288,14 @@
         </van-col>
         <van-col span="3">
           <div
-            :style="appDevice ? { marginTop: '50px' } : { marginTop: '100px' }"
+            :style="isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
             class="game-f382dd1c4a10b864c29d26d47249b570"
           >
             <ul>
               <li
                 v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
-                :style="appDevice ? {} : { marginTop: '50px' }"
+                :style="isMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -314,12 +315,13 @@
                         : '/img/app-icons/hero_white.png'
                     "
                     :class="
-                      mode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
+                      bpMode == 'edit' &&
+                      gameInfo.result.rows[tabsModel].stepsNow == index
                         ? redStepsClass
                         : ''
                     "
-                    :width="appDevice ? 40 : 55"
-                    :height="appDevice ? 40 : 55"
+                    :width="isMobile ? 40 : 55"
+                    :height="isMobile ? 40 : 55"
                     class="game-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -327,9 +329,9 @@
             </ul>
           </div>
           <div
-            v-show="mode == 'edit'"
+            v-show="bpMode == 'edit'"
             @click="onWinCampClick(2)"
-            :style="appDevice ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
+            :style="isMobile ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
             class="game-251504ba219ea8c3175f47b73bdde6e6"
           ></div>
         </van-col>
@@ -362,12 +364,12 @@
         <li>
           <van-button
             round
-            :icon="perspective == 1 ? team.team_1.logo : team.team_2.logo"
+            :icon="bpPerspective == 1 ? team.team_1.logo : team.team_2.logo"
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
             @click="onGamePerspectiveClick(1)"
             >以
-            {{ perspective == 1 ? team.team_1.name : team.team_2.name }}
+            {{ bpPerspective == 1 ? team.team_1.name : team.team_2.name }}
             的视角查看</van-button
           >
         </li>
@@ -379,7 +381,7 @@
             color="linear-gradient(to right, #6874E8, #9708CC)"
             @click="onSeeHeroClick"
           >
-            {{ perspective == 1 ? team.team_2.name : team.team_1.name }}
+            {{ bpPerspective == 1 ? team.team_2.name : team.team_1.name }}
             剩余英雄</van-button
           >
         </li>
@@ -391,24 +393,36 @@
       class="game-173f312c43fe32a4f01c84d1cf0520b1 game-e4e6288c92630a6c237c15442fdb0917"
     >
       <ul>
-        <li v-show="mode == 'edit'">
+        <li v-show="bpMode == 'edit'">
           <div class="game-2d121e51de7a817bff612f1e16fadb8e">
             倒计时:
             <span
               class="game-0db3e75efe3faa0cee4451fb55bc4c53"
-              :style="countdown < 10 ? { color: 'red' } : { color: 'blue' }"
-              >{{ countdown }}</span
+              :style="bpCountdown < 10 ? { color: 'red' } : { color: 'blue' }"
+              >{{ bpCountdown }}</span
             >
             秒
           </div>
         </li>
+        <li>
+          <div class="game-5b51012ae7490ea129b5d75ad9b1016c">
+            <van-button
+              round
+              :border="false"
+              icon="bar-chart-o"
+              size="small"
+              color="black"
+              @click="onGamePredictionClick"
+            />
+          </div>
+        </li>
         <li v-show="showInfo.apps">
           <a-dropdown placement="topCenter" :trigger="['click']">
-            <van-button round icon="apps-o" size="small" />
+            <van-button round icon="apps-o" size="small" color="black" />
             <a-menu slot="overlay">
               <a-menu-item
                 v-show="
-                  mode == 'view' &&
+                  bpMode == 'view' &&
                   gameInfo.result.rows.length > 1 &&
                   gameInfo.result.rows.length - 1 == tabsModel
                 "
@@ -417,19 +431,19 @@
                 <a-icon type="minus" />删除本局
               </a-menu-item>
               <a-menu-item
-                v-show="mode == 'view' && gameInfo.result.rows.length < 6"
+                v-show="bpMode == 'view' && gameInfo.result.rows.length < 6"
                 @click="onToolsMenuClick(1)"
               >
                 <a-icon type="plus" />再来一局
               </a-menu-item>
               <a-menu-item
-                v-show="mode == 'edit' && gameInfo.result.rows.length - 1 == tabsModel"
+                v-show="bpMode == 'edit' && gameInfo.result.rows.length - 1 == tabsModel"
                 @click="onToolsMenuClick(2)"
               >
                 <a-icon type="retweet" />重置
               </a-menu-item>
               <a-menu-item @click="onToolsMenuClick(3)">
-                <a-icon :type="mode == 'view' ? 'edit' : 'cloud-upload'" />编辑
+                <a-icon :type="bpMode == 'view' ? 'edit' : 'cloud-upload'" />编辑
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -440,15 +454,36 @@
             :border="false"
             icon="question-o"
             size="small"
+            color="black"
             @click="appOpenUrl('是否查看常见问题?', null, url.question)"
           />
         </li>
         <li>
-          <van-button round icon="share" size="small" @click="onGameShareClick" />
+          <van-button
+            round
+            icon="share"
+            size="small"
+            color="black"
+            @click="onGameShareClick"
+          />
         </li>
       </ul>
     </div>
     <!-- 右下角 -->
+
+    <van-popup
+      v-if="showInfo.trend"
+      v-model="showInfo.trend"
+      class="game-d50ac6153978bdf3870b68c8d66e8d53"
+    >
+      <GameLine
+        :gameBPData="
+          gameInfo.result.rows[tabsModel].blue.pick +
+          '|' +
+          gameInfo.result.rows[tabsModel].red.pick
+        "
+        :trendType="0"
+    /></van-popup>
 
     <div class="game-22b9550116c87c4fffd94a4271127d9c">
       <van-tabs
@@ -460,7 +495,7 @@
         <van-tab
           v-for="(data, index) in gameInfo.result.rows"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
-          :disabled="mode == 'edit' && tabsModel != index ? true : false"
+          :disabled="bpMode == 'edit' && tabsModel != index ? true : false"
         >
           <template #title>
             <van-icon
@@ -502,47 +537,43 @@ export default {
   name: "GlobalBP",
   components: {
     AppLock: (resolve) => require(["@/assets/Icons/AppLock.vue"], resolve),
+    GameLine: (resolve) => require(["@/components/Game/Line.vue"], resolve),
   },
   data() {
     return {
-      loginInfo: {
-        openId: null,
-        accessToken: null,
-      },
       heroType: ["全部", "对抗 (战士)", "中路", "对抗 (坦克)", "打野", "发育", "游走"],
-      index: {
+      bpCountdown: 45,
+      bpOpponent: {},
+      bpSelf: {},
+      bpIndex: {
         ban: [0, 1, 2, 3, 10, 11, 12, 13],
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
         red: [1, 3, 5, 6, 9, 10, 12, 14, 17],
-        perspective: [
+        bpPerspective: [
           1, // 0 - 1
           1, // 1 - 2
           1, // 2 - 3
-          0, // 3 - 4
+          2, // 3 - 4
           1, // 4 - 5
-          0, // 5 - 6
+          2, // 5 - 6
           1, // 6 - 7
-          0, // 7 - 8
+          2, // 7 - 8
           1, // 8 - 9
           1, // 9 - 10
           1, // 10 - 11
           1, // 11 - 12
           1, // 12 - 13
-          0, // 13 - 14
+          2, // 13 - 14
           1, // 14 - 15
-          0, // 15 - 16
+          2, // 15 - 16
           1, // 16 -17
         ],
       },
+      bpMode: "view",
+      bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
       copyData: "",
-      mode: "view",
-      self: "",
-      opponent: "",
-      countdown: 45,
-      countdownHandle: "",
-      perspective: 1,
       tabsModel: 0,
       author: {
         name: "加载中",
@@ -596,6 +627,7 @@ export default {
       showInfo: {
         apps: false,
         hero: true,
+        trend: false,
       },
       eye: "eye-o",
       url: {
@@ -607,7 +639,7 @@ export default {
   created() {
     window.addEventListener("beforeunload", (e) => this.beforeunload(e), false);
 
-    if (this.appDevice) {
+    if (this.isMobile) {
       window.addEventListener("resize", this.renderResize, false);
     } else {
       this.isPortrait = false;
@@ -621,17 +653,13 @@ export default {
 
       this.getGameBP(gameLabel);
     } else {
-      this.appPush("/game");
-      return;
+      return this.appPush("/game");
     }
-
-    this.loginInfo.openId = this.$cookie.get("openId");
-    this.loginInfo.accessToken = this.$cookie.get("accessToken");
   },
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.beforeunload, false);
 
-    if (this.appDevice) {
+    if (this.isMobile) {
       window.removeEventListener("resize", this.renderResize, false);
     }
   },
@@ -639,7 +667,7 @@ export default {
     beforeunload: function (e) {
       e = e || window.event;
 
-      if (this.mode == "edit") {
+      if (this.bpMode == "edit") {
         if (e) {
           e.returnValue = "关闭提示";
         }
@@ -660,13 +688,13 @@ export default {
         }
       }
     },
-    initBPOrder: function (perspective, index) {
-      if (perspective == 1) {
-        this.self = this.team.team_1;
-        this.opponent = this.team.team_2;
+    initBPOrder: function (bpPerspective, index) {
+      if (bpPerspective == 1) {
+        this.bpSelf = this.team.team_1;
+        this.bpOpponent = this.team.team_2;
       } else {
-        this.self = this.team.team_2;
-        this.opponent = this.team.team_1;
+        this.bpSelf = this.team.team_2;
+        this.bpOpponent = this.team.team_1;
       }
 
       let used = [];
@@ -704,7 +732,7 @@ export default {
           orderList.BPOrder[17],
         ];
 
-        if (perspective == 1) {
+        if (bpPerspective == 1) {
           if (i % 2 == 0) {
             used.push.apply(used, this.gameInfo.result.rows[i].red.pick);
           } else {
@@ -712,7 +740,7 @@ export default {
           }
         }
 
-        if (perspective == 2) {
+        if (bpPerspective == 2) {
           if (i % 2 == 0) {
             used.push.apply(used, this.gameInfo.result.rows[i].blue.pick);
           } else {
@@ -721,18 +749,19 @@ export default {
         }
         //队伍视角,会交换位置
       }
+
       this.gameInfo.used = Array.from(new Set(used));
     },
     initCountdown: function () {
-      this.countdown = 45;
-      clearInterval(this.countdownHandle);
+      this.bpCountdown = 45;
 
-      this.countdownHandle = setInterval(() => {
-        this.countdown--;
-        if (this.countdown == 0) {
+      clearInterval(this.bpCountdownInterval);
+      this.bpCountdownInterval = setInterval(() => {
+        this.bpCountdown--;
+        if (this.bpCountdown == 0) {
           this.$message.error("错误:1007,已超时");
 
-          clearInterval(this.countdownHandle);
+          clearInterval(this.bpCountdownInterval);
         }
       }, 1000);
     },
@@ -771,8 +800,7 @@ export default {
           this.team = data.team;
           this.gameInfo.result = result;
 
-          this.initBPOrder(this.perspective, tabsModel + 1);
-
+          this.initBPOrder(this.bpPerspective, tabsModel + 1);
           this.getHeroList(result.rows[0].game.time);
 
           this.author.openId && this.author.openId == this.$cookie.get("openId")
@@ -803,7 +831,6 @@ export default {
         BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       };
 
-      let loginInfo = this.loginInfo;
       let teamInfo = this.team;
       let gameIndex = this.gameInfo.result.rows.length;
 
@@ -811,9 +838,6 @@ export default {
         .post(
           this.apiList.pvp.updateGameBP,
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
-            friendsOpenId: loginInfo.openId,
             gameLabel: this.gameLabel,
             gameIndex: gameIndex,
             teamId_1: teamInfo.team_1.id,
@@ -833,7 +857,6 @@ export default {
         });
     },
     onUpdateGameBPClick: function (index) {
-      let loginInfo = this.loginInfo;
       let teamInfo = this.team;
       let gameInfo = this.gameInfo.result.rows[index];
 
@@ -846,9 +869,6 @@ export default {
         .post(
           this.apiList.pvp.updateGameBP,
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
-            friendsOpenId: loginInfo.openId,
             gameLabel: this.gameLabel,
             gameIndex: index,
             teamId_1: teamInfo.team_1.id,
@@ -868,15 +888,10 @@ export default {
         });
     },
     onDeleteGameBPClick: function (index) {
-      let loginInfo = this.loginInfo;
-
       this.axios
         .post(
           this.apiList.pvp.deleteGameBP,
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
-            friendsOpenId: loginInfo.openId,
             gameLabel: this.gameLabel,
             gameIndex: index,
           })
@@ -898,11 +913,11 @@ export default {
       let ret = false;
 
       if (color == 1) {
-        ret = this.index.blue.includes(index);
+        ret = this.bpIndex.blue.includes(index);
       }
 
       if (color == 2) {
-        ret = this.index.red.includes(index);
+        ret = this.bpIndex.red.includes(index);
       }
 
       return ret;
@@ -918,18 +933,18 @@ export default {
         this.eye = "eye-o";
       }
     },
-    onGamePerspectiveClick: function (mode) {
-      if (mode == 1) this.$message.success("初始化 " + this.self.name + " 的视角");
+    onGamePerspectiveClick: function (bpMode) {
+      if (bpMode == 1) this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
 
-      this.perspective == 1 ? (this.perspective = 2) : (this.perspective = 1);
+      this.bpPerspective == 1 ? (this.bpPerspective = 2) : (this.bpPerspective = 1);
 
-      this.initBPOrder(this.perspective, this.tabsModel + 1);
+      this.initBPOrder(this.bpPerspective, this.tabsModel + 1);
     },
     onGameTabsChange: function (e) {
-      this.initBPOrder(this.perspective, e + 1);
+      this.initBPOrder(this.bpPerspective, e + 1);
     },
     onGameBanPickClick: function (index) {
-      if (this.mode == "view") return;
+      if (this.bpMode == "view") return;
 
       let tabsModel = this.tabsModel;
 
@@ -940,7 +955,7 @@ export default {
 
       let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
 
-      if (this.mode == "edit") {
+      if (this.bpMode == "edit") {
         if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, index)) {
           this.onGamePerspectiveClick(0);
 
@@ -962,10 +977,10 @@ export default {
         return;
       } else if (this.gameInfo.used.includes(hero.id)) {
         this.$message.warning(
-          "警告:1002," + hero.name + " 已被 " + this.opponent.name + " 使用"
+          "警告:1002," + hero.name + " 已被 " + this.bpOpponent.name + " 使用"
         );
         return;
-      } else if (this.mode == "view") return;
+      } else if (this.bpMode == "view") return;
 
       let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow,
         newIndex = 0;
@@ -978,10 +993,10 @@ export default {
         this.gameInfo.result.rows[tabsModel].BPOrder.splice(oldIndex, 1, hero.id);
       }
 
-      if (this.index.perspective[oldIndex] == 1) {
+      if (this.bpMode == "edit" && this.bpIndex.bpPerspective[oldIndex] == 1) {
         this.onGamePerspectiveClick(0);
       }
-      //对照 index 视角表格,如果是 1 则初始化时间
+      //对照 bpIndex 视角表格,如果是 1 则初始化时间
 
       if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)) {
         this.initCountdown();
@@ -990,11 +1005,14 @@ export default {
 
       this.gameInfo.result.rows[tabsModel].stepsNow = newIndex;
 
-      this.initBPOrder(this.perspective, tabsModel + 1);
+      this.initBPOrder(this.bpPerspective, tabsModel + 1);
 
       if (newIndex >= 18) {
-        this.$message.warning("BP结束,注意保存");
+        this.$message.warning("警告:1001,BP结束,可点击两侧边缘设置胜利方,注意保存。");
       }
+    },
+    onGamePredictionClick: function () {
+      this.showInfo.trend = true;
     },
     onGameShareClick: function () {
       let vs = this.team.team_1.name + " Vs " + this.team.team_2.name;
@@ -1070,26 +1088,26 @@ export default {
       }
 
       if (type == 3) {
-        if (this.mode == "view") {
+        if (this.bpMode == "view") {
           this.$message.info("提示:1001,已进入编辑模式");
 
-          this.mode = "edit";
+          this.bpMode = "edit";
 
-          this.index.ban.includes(this.gameInfo.result.rows[tabsModel].stepsNow) &&
+          this.bpIndex.ban.includes(this.gameInfo.result.rows[tabsModel].stepsNow) &&
           tabsModel % 2 == 0
-            ? (this.perspective = 2)
-            : (this.perspective = 1);
+            ? (this.bpPerspective = 2)
+            : (this.bpPerspective = 1);
           this.onGamePerspectiveClick(0);
           //tabsModel % 2 == 0
 
           this.initCountdown();
         } else {
-          this.mode = "view";
+          this.bpMode = "view";
 
           this.onUpdateGameBPClick(tabsModel);
 
-          this.countdown = 60;
-          clearInterval(this.countdownHandle);
+          this.bpCountdown = 45;
+          clearInterval(this.bpCountdownInterval);
         }
       }
     },

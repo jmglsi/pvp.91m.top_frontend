@@ -120,6 +120,7 @@ div.game-beedfb16b1c81d2901c32b6dcc2939d0 {
 div.game-173f312c43fe32a4f01c84d1cf0520b1 {
     bottom: 42px;
     height: 35px;
+    z-index: 1;
 }
 
 div.game-e4e6288c92630a6c237c15442fdb0917 li {
@@ -167,6 +168,13 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
     bottom: 9px;
 }
 
+div.game-5b51012ae7490ea129b5d75ad9b1016c,
 div.game-2d121e51de7a817bff612f1e16fadb8e {
     font-size: 12px;
+}
+
+div.game-d50ac6153978bdf3870b68c8d66e8d53 {
+    border-radius: 5px;
+    padding: 10px;
+    width: 500px;
 }

@@ -37,7 +37,8 @@ const pvp = {
 
 const game = {
     getGameBP: gameApi + "?type=getGameBP",
-    getGameHome: gameApi + "?type=getGameHome"
+    getGameHome: gameApi + "?type=getGameHome",
+    getGamePrediction: gameApi + "?type=getGamePrediction"
 }
 
 const bili = {
