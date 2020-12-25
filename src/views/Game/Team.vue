@@ -2,16 +2,17 @@
   <div class="game-team">
     <div class="game-11738e2f54bf9290cf3aa2980f866c12">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
         @click-left="appPush('/my')"
         @click-right="onCreateTeamClick"
+        left-text="返回"
         z-index="99999999"
         title="我的队伍"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
       >
-        <van-icon name="arrow-left" slot="left" />
         <van-icon name="add-o" slot="right" />
       </van-nav-bar>
     </div>

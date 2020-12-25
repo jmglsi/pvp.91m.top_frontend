@@ -78,18 +78,16 @@ export default {
       handler(newValue) {
         if (newValue.heroEquipment == []) return;
 
-        this.loading = false;
-
-        this.getHeroEquipment(newValue.heroEquipment);
+        this.tableData.result = newValue.heroEquipment;
       },
     },
   },
   created() {
-    if (this.appDevice) {
+    if (this.isMobile) {
       this.equipmentWidth = 60;
       this.listWidth = 85;
     } else {
-      this.listWidth = 0;
+      this.equipmentWidth = 0;
       this.listWidth = 0;
     }
   },
@@ -101,11 +99,6 @@ export default {
         result: [],
       },
     };
-  },
-  methods: {
-    getHeroEquipment: function (e) {
-      this.tableData.result = e;
-    },
   },
 };
 </script>

@@ -205,9 +205,9 @@ export default {
         max: new Date(),
       },
       tableData: {
-        tips: null,
-        title: "",
         result: [],
+        tips: "",
+        title: "",
       },
     };
   },
@@ -220,7 +220,7 @@ export default {
       let date = new Date();
 
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
-      this.date.max = new Date(date.setMonth(date.getMonth() + 5));
+      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
     },
     onFormatter: function (day) {
       let oDay =
@@ -229,7 +229,8 @@ export default {
         (day.date.getMonth() + 1) +
         "/" +
         day.date.getDate();
-      let tableData = this.tableData.result.rows;
+      let tableData = this.tableData.result.rows,
+        maxType = -3;
 
       for (let i = 0; i < tableData.length; i++) {
         let result = tableData[i].calendar;
@@ -239,30 +240,76 @@ export default {
         if (oDay === result.day) {
           if (result.type == 0) {
             day.bottomInfo = result.text;
-            day.className = "update-tyf";
           }
 
           if (result.type == 1) {
             day.topInfo = result.text;
-            day.className = "update-zsf";
+          }
+
+          if (result.type == 1.1) {
+            day.text = result.text;
+          }
+
+          if (result.type == 1.2) {
+            day.text = result.text;
+          }
+
+          if (result.type == 1.3) {
+            day.text = result.text;
           }
 
           if (result.type == 2) {
             day.text = result.text;
-            day.className = "update-cz";
           }
 
           if (result.type == 3) {
             day.text = result.text;
-            day.className = "update-xp";
           }
 
           if (result.type == 4) {
             day.text = result.text;
-            day.className = "update-fc";
+          }
+
+          if (result.type > maxType) {
+            maxType = result.type;
           }
         }
       }
+
+      if (maxType > -3) {
+        if (maxType == 0) {
+          day.className = "update-tyf";
+        }
+
+        if (maxType == 1) {
+          day.className = "update-zsf";
+        }
+
+        if (maxType == 1.1) {
+          day.className = "update-sx";
+        }
+
+        if (maxType == 1.2) {
+          day.className = "update-pb";
+        }
+
+        if (maxType == 1.3) {
+          day.className = "update-cz";
+        }
+
+        if (maxType == 2) {
+          day.className = "update-fx";
+        }
+
+        if (maxType == 3) {
+          day.className = "update-xpf";
+        }
+
+        if (maxType == 4) {
+          day.className = "update-fc";
+        }
+      }
+
       return day;
     },
     onOpenHeroUpdateTextClick: function (heroId, data) {

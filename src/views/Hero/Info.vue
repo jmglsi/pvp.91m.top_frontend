@@ -10,13 +10,13 @@
         "
         @click-left="appPush('/ranking')"
         @click-right="$message.info('提示:1004,分路推荐 ;D')"
-        z-index="99999999"
         left-text="排行"
+        z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>
           <div
-            @click="$message.info('提示:1005,近期热度 ;D')"
+            @click="$message.info('提示:1005,英雄id:' + hero.info.id + ',近期热度 ;D')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
             <img
@@ -229,7 +229,7 @@
           />
         </div>
         <div
-          :style="appDevice ? { marginTop: '0' } : { marginTop: '25px' }"
+          :style="isMobile ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
           <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />

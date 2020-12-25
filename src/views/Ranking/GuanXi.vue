@@ -139,7 +139,7 @@ export default {
     };
   },
   created() {
-    this.initAppTable();
+    this.appInitTableHeight();
     this.initGuanXiTable();
   },
   mounted() {

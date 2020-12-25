@@ -2,9 +2,12 @@
   <div class="friends-home">
     <div class="friends-4b0f87c869518b7632257a1d66b8f9b8">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
+        @click-left="$router.go(-1)"
+        left-text="返回"
         z-index="99999999"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
@@ -163,15 +166,16 @@ export default {
     };
   },
   methods: {
-    getWebAccountInfo: function (tips) {
-      let openId_1 = this.$route.query.openId
+    getWebAccountInfo: function (tips, aid = 1) {
+      let openId = this.$route.query.openId,
+        postData;
+
+      tips == 0 ? (postData = { friendsOpenId: openId }) : (postData = {});
 
       this.axios
         .post(
-          this.apiList.pvp.getWebAccountInfo + "&aid=1",
-          this.$qs.stringify({
-            friendsOpenId: openId_1,
-          })
+          this.apiList.pvp.getWebAccountInfo + "&aid=" + aid,
+          this.$qs.stringify(postData)
         )
         .then((res) => {
           let data = res.data.data,
@@ -182,7 +186,9 @@ export default {
 
             if (tips == 1) this.$message.success("刷新成功");
 
-            if (openId_1) this.$router.push({ path: "/friends" });
+            if (postData != {} && data.openId != openId) {
+              this.$router.push({ path: "/friends", query: { openId: data.openId } });
+            }
           } else {
             this.$message.error(status.msg);
           }

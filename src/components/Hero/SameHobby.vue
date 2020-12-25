@@ -65,6 +65,8 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
+        if (newValue.heroId == 0) return;
+
         this.getHeroByWebAccountList(newValue.heroId, 0);
       },
     },

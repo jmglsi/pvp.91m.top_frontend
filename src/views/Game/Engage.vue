@@ -7,13 +7,11 @@
         :fixed="true"
         :placeholder="true"
         @click-left="appPush('/my')"
+        left-text="返回"
         z-index="99999999"
         title="我的交战"
-        left-text="返回"
         class="game-7140a921b48604a7db01e6b676e34174"
-      >
-        <van-icon name="arrow-left" slot="left" />
-      </van-nav-bar>
+      />
     </div>
 
     <div class="game-71ddd6fc31e5033696c4a7f66111b5f9">
@@ -64,7 +62,7 @@
       </van-grid>
     </div>
 
-    <AppBottomTabbar v-if="appDevice" height="100" />
+    <AppBottomTabbar v-if="isMobile" height="100" />
   </div>
 </template>
 

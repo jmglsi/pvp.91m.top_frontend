@@ -14,8 +14,21 @@
         class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
     </div>
+
+    <div class="hero-f6d50810d5b150ebd421cc944d2597a5">
+      <van-switch
+        v-show="trendType == 0"
+        v-model="lineInfo.checked"
+        @change="onSwitchChange"
+        size="15px"
+      />
+    </div>
   </div>
 </template>
+
+<style>
+@import url("/css/app-style/hero-line.css");
+</style>
 
 <script>
 import VeLine from "v-charts/lib/line.common";
@@ -57,16 +70,11 @@ export default {
       immediate: true,
       handler(newValue) {
         if (newValue.heroId == 0) return;
-
-        this.lineData.result = [];
-
         this.getHeroChartsLog(
           newValue.heroId,
           newValue.trendType,
           Number(newValue.detailed)
         );
-
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
       },
     },
   },
@@ -80,6 +88,10 @@ export default {
         loading: true,
         result: [],
       },
+      lineInfo: {
+        checked: false,
+      },
+      trendIndex: 0,
     };
   },
   methods: {
@@ -91,8 +103,9 @@ export default {
       return e;
     },
     getHeroChartsLog: function (heroId, aid, detailed) {
-      this.lineData = {};
       this.lineData.loading = true;
+
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
 
       this.axios
         .post(
@@ -115,6 +128,32 @@ export default {
             this.appOpenUrl(status.msg, null, "/my", 1);
           }
         });
+    },
+    onSwitchChange: function (e) {
+      let dataZoom = this.lineData.extend.dataZoom[0],
+        interval = dataZoom.end - dataZoom.start;
+
+      if (e == true) {
+        this.autoPlayTrend(interval);
+      } else {
+        clearInterval(this.autoPlayTrendInterval);
+      }
+    },
+    autoPlayTrend: function (interval) {
+      this.trendIndex = 0;
+
+      clearInterval(this.autoPlayTrendInterval);
+      this.autoPlayTrendInterval = setInterval(() => {
+        this.trendIndex++;
+        this.lineData.extend.dataZoom[0].start = this.trendIndex;
+        this.lineData.extend.dataZoom[0].end = this.trendIndex + interval;
+
+        if (this.trendIndex >= 100 - interval) {
+          this.lineInfo.checked = false;
+
+          clearInterval(this.autoPlayTrendInterval);
+        }
+      }, 250);
     },
   },
 };

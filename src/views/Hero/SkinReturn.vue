@@ -2,11 +2,14 @@
   <div class="skin-line">
     <div class="skin-8c35b9de834af969baf22173b9539eb9">
       <van-nav-bar
+        left-arrow
         :border="false"
         :fixed="true"
         :placeholder="true"
-        title="每隔 5 分钟更新一次,切换视角 👉"
+        @click-left="$router.go(-1)"
+        left-text="返回"
         z-index="99999999"
+        title="每隔 5 分钟更新一次,切换视角 👉"
         class="skin-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #right>
@@ -110,7 +113,7 @@ export default {
     };
   },
   created() {
-    this.initAppTable();
+    this.appInitTableHeight();
   },
   mounted() {
     this.getSkinReturnLog();

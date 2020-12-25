@@ -204,7 +204,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroMenu"
-        :title="tableData.row.name + ' 如何操作'"
+        :title="tableData.row.name + ' (' + tableData.row.id + ') 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         safe-area-inset-bottom
@@ -273,8 +273,8 @@ export default {
     };
   },
   created() {
-    this.initAppTable();
-    this.initListWidth();
+    this.appInitTableHeight();
+    this.appInitTableWidth();
 
     this.$nextTick(() => {
       this.$refs.dianfengsai.connect(this.$refs.xToolbar);
@@ -285,25 +285,23 @@ export default {
     this.getRanking(this.areaInfo.model, this.positionInfo.model);
   },
   methods: {
-    initListWidth: function () {
+    appInitTableWidth: function () {
       this.listWidth = 90;
 
       if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
 
       let tableColumn = JSON.parse(localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE);
 
-      if (tableColumn["dianfengsai"] == undefined) {
-        this.listWidth = 90;
-      } else {
-        let visibleColumn = tableColumn.dianfengsai.split(",");
+      if (tableColumn["dianfengsai"] == undefined) return;
 
-        visibleColumn.length > 6 || !this.appDevice
-          ? (this.listWidth = 0)
-          : (this.listWidth = 90);
-      }
+      let visibleColumn = tableColumn.dianfengsai.split(",");
+
+      !this.isMobile || visibleColumn.length > 6
+        ? (this.listWidth = 0)
+        : (this.listWidth = 90);
     },
     toolbarCustomEvent: function (params) {
-      this.initListWidth();
+      this.appInitTableWidth();
 
       switch (params.type) {
         case "confirm": {

@@ -102,7 +102,7 @@ export default {
     };
   },
   created() {
-    this.initAppTable();
+    this.appInitTableHeight();
   },
   mounted() {
     this.getRanking(0, 0);

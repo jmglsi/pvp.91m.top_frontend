@@ -79,7 +79,6 @@ export default {
   name: "BilibiliHome",
   data() {
     return {
-      getOrderInfoInterval: 0,
       search: {
         value: "",
       },
@@ -109,8 +108,8 @@ export default {
     };
   },
   created() {
-    this.initAppTable();
-    this.initBiliBiliTable();
+    this.appInitTableHeight();
+    this.appInitTableWidth();
   },
   mounted() {
     let uid = this.$route.query.uid;
@@ -122,8 +121,8 @@ export default {
     }, 1000 * 10);
   },
   methods: {
-    initBiliBiliTable: function () {
-      this.appDevice ? (this.listWidth = 100) : (this.listWidth = 0);
+    appInitTableWidth: function () {
+      this.isMobile ? (this.listWidth = 100) : (this.listWidth = 0);
     },
     getOrderInfo: function (uid, page) {
       this.axios
@@ -190,6 +189,7 @@ export default {
     onSearchClear: function () {
       this.search.value = "";
       this.tableData = [];
+
       clearInterval(this.getOrderInfoInterval);
     },
     onSearch: function () {

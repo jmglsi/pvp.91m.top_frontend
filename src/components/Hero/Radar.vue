@@ -61,8 +61,6 @@ export default {
       handler(newValue) {
         if (newValue.heroId == 0) return;
 
-        this.radarData.result = [];
-
         if (newValue.tabsModel == 1) {
           this.getHeroChartsLog(newValue.heroId, "", 10);
         } else {
@@ -92,7 +90,6 @@ export default {
   },
   methods: {
     getHeroChartsLog: function (heroId, heroName, aid) {
-      this.radarData = {};
       this.radarData.loading = true;
 
       this.axios

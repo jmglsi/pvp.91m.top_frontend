@@ -7,8 +7,8 @@
         :fixed="true"
         :placeholder="true"
         @click-left="appPush('/ranking')"
-        z-index="99999999"
         left-text="排行"
+        z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
@@ -193,7 +193,7 @@ export default {
       this.axios
         .get("//s.91m.top/?url=" + replayUrl.substr(replayUrlIndex + 1, replayUrl.length))
         .then((res) => {
-          this.copyData = this.hero.info.name + " 的对局回顾 ↓\r-\r" + res.data.data.url;
+          this.copyData = this.replay.title + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
 
       this.showInfo.actionSheet = true;

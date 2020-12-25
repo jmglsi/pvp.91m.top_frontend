@@ -53,7 +53,7 @@ export default {
       handler(newValue) {
         if (newValue.heroSkill == []) return;
 
-        this.getHeroSkill(newValue.heroSkill);
+        this.tableData.result = newValue.heroSkill;
       },
     },
   },
@@ -63,11 +63,6 @@ export default {
         result: [],
       },
     };
-  },
-  methods: {
-    getHeroSkill: function (e) {
-      this.tableData.result = e;
-    },
   },
 };
 </script>
