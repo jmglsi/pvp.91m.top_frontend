@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     getHeroChartsLog: function (heroId, heroName, aid) {
+      this.radarData = {};
       this.radarData.loading = true;
 
       this.axios

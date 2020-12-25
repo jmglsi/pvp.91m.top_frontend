@@ -103,6 +103,7 @@ export default {
       return e;
     },
     getHeroChartsLog: function (heroId, aid, detailed) {
+      this.lineData = {};
       this.lineData.loading = true;
 
       document.body.scrollTop = document.documentElement.scrollTop = 0;
