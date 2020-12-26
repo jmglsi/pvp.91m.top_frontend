@@ -134,16 +134,13 @@ export default {
       let dataZoom = this.lineData.extend.dataZoom[0],
         interval = dataZoom.end - dataZoom.start;
 
+      this.trendIndex = 0;
+      clearInterval(this.autoPlayTrendInterval);
       if (e == true) {
         this.autoPlayTrend(interval);
-      } else {
-        clearInterval(this.autoPlayTrendInterval);
       }
     },
     autoPlayTrend: function (interval) {
-      this.trendIndex = 0;
-
-      clearInterval(this.autoPlayTrendInterval);
       this.autoPlayTrendInterval = setInterval(() => {
         this.trendIndex++;
         this.lineData.extend.dataZoom[0].start = this.trendIndex;
@@ -154,7 +151,7 @@ export default {
 
           clearInterval(this.autoPlayTrendInterval);
         }
-      }, 250);
+      }, 10);
     },
   },
 };
