@@ -436,6 +436,8 @@ export default {
       this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+
       this.axios.post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
         this.isLoaded = true;
 

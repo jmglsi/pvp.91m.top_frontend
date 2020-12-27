@@ -106,8 +106,6 @@ export default {
       this.lineData = {};
       this.lineData.loading = true;
 
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
-
       this.axios
         .post(
           this.apiList.pvp.getHeroChartsLog +
@@ -151,7 +149,7 @@ export default {
 
           clearInterval(this.autoPlayTrendInterval);
         }
-      }, 10);
+      }, 150);
     },
   },
 };

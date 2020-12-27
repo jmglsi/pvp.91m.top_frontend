@@ -31,14 +31,14 @@
       </van-nav-bar>
     </div>
 
-    <div class="friends-d9833a1bc29f11d9ca39543dc46fcc58">
+    <div class="app-d9833a1bc29f11d9ca39543dc46fcc58">
       <img
         v-lazy="friendsInfo.img"
         width="100"
         height="100"
         class="friends-85e06e092b46386f58023d2ad27a8bb0"
       />
-      <div class="friends-88bf7a95736562190270d51dc2cb3f42">
+      <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ friendsInfo.description || "这个人很懒,什么都没有留下" }}
       </div>
     </div>
@@ -46,16 +46,21 @@
     <div class="friends-452abde170a4d98ca1ada465cac0eed5">
       <van-cell-group
         :border="false"
-        title=" "
+        title=""
         class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f"
       >
-        <van-cell v-if="friendsInfo" icon="/img/game-icons/king.png" title="王者荣耀">
+        <van-cell
+          v-if="friendsInfo"
+          title="王者荣耀"
+          icon="/img/game-icons/king.png"
+          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+        >
           <template #right-icon>
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
               <img
                 v-lazy="
                   friendsInfo.rank.starIcon ||
-                  '//camp.qq.com/battle/profile/roleJob/16.png'
+                  '//camp.qq.com/battle/profile/roleJob/1.png'
                 "
                 width="50"
                 height="50"
@@ -67,7 +72,11 @@
             >
           </template>
         </van-cell>
-        <van-cell icon="/img/app-icons/hero_black.png" title="喜欢列表">
+        <van-cell
+          title="喜欢列表"
+          icon="/img/app-icons/hero_black.png"
+          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+        >
           <template #right-icon>
             <ul
               class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"

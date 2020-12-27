@@ -45,7 +45,7 @@
       </van-cell-group>
     </div>
 
-    <div v-if="isLogin" class="my-cd77c40b62763f6adf5598bce7fceede">
+    <div v-if="isLogin" class="app-d9833a1bc29f11d9ca39543dc46fcc58">
       <img
         v-lazy="loginInfo.img"
         width="100"
@@ -58,56 +58,68 @@
           })
         "
       />
-      <div class="my-e422a8bb26c14c85f0046ff66e412df4">
-        <van-icon
-          class="my-d70e45bc5adaa1f581245e39579d828b"
-          name="/img/app-icons/edit.png"
-        />
+      <div
+        class="app-88bf7a95736562190270d51dc2cb3f42"
+      >
         {{ loginInfo.description || "这个人很懒,什么都没有留下" }}
       </div>
     </div>
 
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-grid
+      <van-cell-group
         :border="false"
-        :column-num="2"
-        class="my-c3d90961c9bf155d11cbef9c57725aea"
+        title=""
+        class="my-71c2fb64c38e4ee108607ca840607e48"
       >
-        <van-grid-item
-          icon="/img/app-icons/team.png"
-          to="/game/team"
-          class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
+        <van-cell
+          icon="/img/app-icons/game.png"
+          title="全局BP模拟器"
+          value="使用说明"
+          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          is-link
+          @click="appOpenUrl('是否打开外部链接?', null, url.globalBP)"
+        />
+        <van-grid
+          :border="false"
+          :column-num="2"
+          class="my-c3d90961c9bf155d11cbef9c57725aea"
         >
-          <template #text>
-            <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-              <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
-                loginInfo.statistics.team
-              }}</span>
-              <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
-            </div>
-          </template>
-        </van-grid-item>
-        <van-grid-item
-          icon="/img/app-icons/engage.png"
-          to="/game/engage"
-          class="my-308ffde0dc5bd5718dcf0396fcc2a596"
-        >
-          <template #text>
-            <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-              <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
-                loginInfo.statistics.label
-              }}</span>
-              <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
-            </div>
-          </template>
-        </van-grid-item>
-      </van-grid>
+          <van-grid-item
+            icon="/img/app-icons/team.png"
+            to="/game/team"
+            class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
+          >
+            <template #text>
+              <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
+                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
+                  loginInfo.statistics.team
+                }}</span>
+                <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
+              </div>
+            </template>
+          </van-grid-item>
+          <van-grid-item
+            icon="/img/app-icons/engage.png"
+            to="/game/engage"
+            class="my-308ffde0dc5bd5718dcf0396fcc2a596"
+          >
+            <template #text>
+              <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
+                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
+                  loginInfo.statistics.label
+                }}</span>
+                <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
+              </div>
+            </template>
+          </van-grid-item>
+        </van-grid>
+      </van-cell-group>
     </div>
 
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
-        title=" "
+        title=""
         class="my-abf7b3191e2a24c6fc3c008124bcf0d4"
       >
         <van-cell
@@ -117,7 +129,11 @@
           is-link
           @click="onCopyLinkClick"
         />
-        <van-cell icon="/img/game-icons/king.png" title="王者荣耀">
+        <van-cell
+          title="王者荣耀"
+          icon="/img/game-icons/king.png"
+          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+        >
           <template #right-icon>
             <span class="my-af99c9298d1eb69981a035d0a15afa20"
               ><img v-lazy="loginInfo.rank.starIcon" width="50" height="50" />&nbsp;<span
@@ -130,7 +146,10 @@
             >
           </template>
         </van-cell>
-        <van-cell icon="/img/app-icons/hero_black.png">
+        <van-cell
+          icon="/img/app-icons/hero_black.png"
+          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+        >
           <template #title>
             <span
               class="my-1098203f6e0a3a981da7c9a8cd6bc85b"
@@ -190,6 +209,22 @@
       </van-cell-group>
     </div>
 
+    <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-66e3a8a1303fb1fc8ce3249b23dbd268"
+      >
+        <van-cell
+          title="修改密码"
+          icon="/img/app-icons/password_edit.png"
+          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          is-link
+          @click="appPush('/login')"
+        />
+      </van-cell-group>
+    </div>
+
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
@@ -216,7 +251,7 @@
     <div v-show="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
       <van-cell-group
         :border="false"
-        title=" "
+        title=""
         class="my-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell>
@@ -235,7 +270,11 @@
     </div>
 
     <div class="my-111fb4d92036323891a140cd49383f86">
-      <van-cell-group :border="false" class="my-b990d992f06c8db21d6b58c25f843529">
+      <van-cell-group
+        :border="false"
+        title=""
+        class="my-b990d992f06c8db21d6b58c25f843529"
+      >
         <van-cell
           title="沪ICP备16031287号-2"
           @click="appOpenUrl('是否打开外部链接?', null, url.beian)"
@@ -269,6 +308,7 @@ export default {
       },
       isLogin: false,
       url: {
+        globalBP: "//www.yuque.com/jmglsi/pvp/gbpl91",
         friends: "//doc.91m.top/jmglsi/pvp",
         comment: "//wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes",
         beian: "http://beian.miit.gov.cn",

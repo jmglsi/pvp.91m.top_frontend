@@ -14,7 +14,7 @@
     </div>
 
     <div class="login-2a642626758deefdc2989a73aae823d3">
-      <van-cell-group class="login-5e8eee748a3d14d6a380448d6d61a9cf">
+      <van-cell-group title="" class="login-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field
           v-model="loginInfo.data.name"
           v-show="loginInfo.type == 0"
@@ -26,14 +26,14 @@
           v-model="loginInfo.data.email"
           left-icon="/img/app-icons/email.png"
           placeholder="请输入邮箱"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
         />
         <van-field
           v-model="loginInfo.data.password"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入密码"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
         />
         <van-field
           v-model="loginInfo.data.newPassword"
@@ -41,22 +41,16 @@
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
         />
         <van-field
           v-model="loginInfo.data.uin"
           v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
         />
       </van-cell-group>
-    </div>
-
-    <div v-show="loginInfo.type == 0" class="login-61046f2f5eefe3dc179e52af32241062">
-      <span class="login-e4c9479b11955648dad558fe717a4eb2"
-        >注:用户名和QQ将用于扩列、BP界面以及修改密码,请不要瞎写</span
-      >
     </div>
 
     <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
@@ -67,6 +61,12 @@
         @click="onLoginClick"
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
         >{{ loginInfo.text }}</van-button
+      >
+    </div>
+
+    <div v-show="loginInfo.type == 0" class="login-61046f2f5eefe3dc179e52af32241062">
+      <span class="login-e4c9479b11955648dad558fe717a4eb2"
+        >注:<br>1.信息是加密储存的<br>2.用户名和QQ将用于扩列、BP界面以及找回密码,请不要瞎写</span
       >
     </div>
 
