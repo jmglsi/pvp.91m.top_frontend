@@ -104,7 +104,7 @@ export default {
       handler(newValue) {
         if (newValue.heroEquipment == []) return;
 
-        this.tableData.result = newValue.heroEquipment;
+        this.tableData.result.rows = newValue.heroEquipment;
       },
     },
   },
@@ -122,7 +122,9 @@ export default {
       equipmentWidth: 0,
       listWidth: 0,
       tableData: {
-        result: [],
+        result: {
+          rows: [],
+        },
       },
     };
   },

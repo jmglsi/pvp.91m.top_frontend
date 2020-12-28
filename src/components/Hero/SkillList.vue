@@ -59,14 +59,16 @@ export default {
       handler(newValue) {
         if (newValue.heroSkill == []) return;
 
-        this.tableData.result = newValue.heroSkill;
+        this.tableData.result.rows = newValue.heroSkill;
       },
     },
   },
   data() {
     return {
       tableData: {
-        result: [],
+        result: {
+          rows: [],
+        },
       },
     };
   },

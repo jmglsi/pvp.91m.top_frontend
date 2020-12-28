@@ -153,7 +153,7 @@ export default {
       },
       copyData: "",
       tableData: {
-        result: [],
+        result: {},
         total: 200,
         pageSize: 25,
         row: {

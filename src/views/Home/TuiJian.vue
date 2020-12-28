@@ -75,7 +75,7 @@ export default {
           success: null,
         },
         swipeInfo: {
-          result: [],
+          result: {},
         },
         tipsInfo: {
           title: null,

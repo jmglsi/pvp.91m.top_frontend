@@ -68,7 +68,7 @@ export default {
         extend: {},
         settings: {},
         loading: true,
-        result: [],
+        result: {},
       },
     };
   },

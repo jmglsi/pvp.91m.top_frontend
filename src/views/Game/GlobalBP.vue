@@ -683,7 +683,7 @@ export default {
       },
       tableData: {
         active: 0,
-        result: [],
+        result: {},
       },
       showInfo: {
         apps: false,

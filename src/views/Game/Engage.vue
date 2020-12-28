@@ -82,7 +82,7 @@ export default {
       },
       engageInfo: {
         type: 0,
-        result: [],
+        result: {},
         row: {
           id: null,
           name: null,
