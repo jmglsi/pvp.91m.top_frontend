@@ -4,7 +4,7 @@
       ref="heroEquipment"
       :data="tableData.result"
       :sort-config="{ trigger: 'cell' }"
-      height="545"
+      height="547"
       auto-resize
     >
       <vxe-table-column

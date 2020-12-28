@@ -131,8 +131,7 @@
                 v-lazy="loginInfo.rank.starIcon"
                 width="50"
                 height="50"
-              />&nbsp;<span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span
-              >&nbsp;
+              /><span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
               <span class="my-7121ba1bc1276c3bb6df96b333a16760">{{
                 loginInfo.rank.score
               }}</span></span

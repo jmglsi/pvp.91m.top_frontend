@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <div class="tuijian-a0e7b2a565119c0a7ec3126a16016113">
+    <div class="app-e827ba0e6873e7ce7ef7c6c58e970609 tuijian-a0e7b2a565119c0a7ec3126a16016113">
       <van-calendar
         v-model="showInfo.calendar"
         :title="tableData.result.title"
@@ -296,7 +296,7 @@ export default {
         }
 
         if (maxType == 1.1) {
-          day.className = "update-sx";
+          day.className = "update-xyx";
         }
 
         if (maxType == 1.2) {

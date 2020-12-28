@@ -64,9 +64,7 @@
                 "
                 width="50"
                 height="50"
-              />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd"
-                >|</span
-              >&nbsp;
+              /><span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
               <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
                 friendsInfo.rank.score || 1200
               }}</span></span

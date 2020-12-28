@@ -14,7 +14,7 @@ Vue.use(Icon).use(Timeline).use(Dropdown).use(Menu).use(message).use(notificatio
 
 message.config({
     top: "50px",
-    duration: 5
+    duration: 10
 })
 
 notification.config({

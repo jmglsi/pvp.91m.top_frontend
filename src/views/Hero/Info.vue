@@ -257,7 +257,7 @@
     </div>
 
     <div
-      v-if="showInfo.parameter && isLoaded"
+      v-show="showInfo.parameter && isLoaded"
       class="hero-9393a9be63ea720a87e048d40caa03b5"
     >
       <div class="hero-b7b5e31b028440d2e0e0157baad49513">
@@ -269,7 +269,7 @@
       </div>
     </div>
 
-    <div class="hero-2882d594d0ac3524bffd5148791e96da">
+    <div class="app-e827ba0e6873e7ce7ef7c6c58e970609 hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
         v-model="showInfo.heroSkill"
         :title="hero.info.name + ' 的其它数据 (上周)'"
