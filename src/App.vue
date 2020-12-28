@@ -66,12 +66,12 @@ export default {
               text: "动态",
             },
             {
-              icon: "/img/app-icons/friends.png",
+              icon: "/img/app-icons/ranking.png",
               to: {
-                path: "/friends",
+                path: "/ranking",
               },
-              name: "/friends",
-              text: "扩列",
+              name: "/ranking",
+              text: "排行",
             },
             {
               icon: "/img/app-icons/search.png",
@@ -82,12 +82,12 @@ export default {
               text: "搜索",
             },
             {
-              icon: "/img/app-icons/ranking.png",
+              icon: "/img/app-icons/friends.png",
               to: {
-                path: "/ranking",
+                path: "/friends",
               },
-              name: "/ranking",
-              text: "排行",
+              name: "/friends",
+              text: "扩列",
             },
             {
               icon: "/img/app-icons/user.png",
