@@ -16,7 +16,7 @@
     <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
       <van-tabbar
         v-model="tabbar.active"
-        v-show="tabbar.default.show"
+        v-if="tabbar.default.show"
         :z-index="3"
         fixed
         safe-area-inset-bottom
@@ -72,6 +72,14 @@ export default {
               },
               name: "/friends",
               text: "扩列",
+            },
+            {
+              icon: "/img/app-icons/search.png",
+              to: {
+                path: "/friends",
+              },
+              name: "/search",
+              text: "搜索",
             },
             {
               icon: "/img/app-icons/ranking.png",
@@ -133,10 +141,12 @@ export default {
           if (tipsInfo) {
             this.$notification.open({
               message: tipsInfo.title,
-              description: tipsInfo.des,
+              description: tipsInfo.description,
               onClick: () => {
                 if (tipsInfo.url) {
-                  this.appOpenUrl("是否打开外部链接?", null, tipsInfo.url);
+                  this.appOpenUrl("是否打开外部链接?", null, {
+                    path: tipsInfo.url,
+                  });
                 }
               },
             });

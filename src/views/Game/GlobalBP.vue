@@ -7,7 +7,10 @@
       </div>
     </div>
   </div>
-  <div v-else-if="isPortrait == false" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
+  <div
+    v-else-if="isPortrait == false"
+    class="app-9fc0eb5a934dba03cc266a49b8ec51fb"
+  >
     <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">{{
         tabsModel % 2 == 0 ? team.team_1.name : team.team_2.name
@@ -43,7 +46,8 @@
                     : '/img/app-icons/hero_white.png'
                 "
                 :class="
-                  bpMode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
+                  bpMode == 'edit' &&
+                  gameInfo.result.rows[tabsModel].stepsNow == index
                     ? blueStepsClass
                     : ''
                 "
@@ -85,7 +89,8 @@
                     : '/img/app-icons/hero_white.png'
                 "
                 :class="
-                  bpMode == 'edit' && gameInfo.result.rows[tabsModel].stepsNow == index
+                  bpMode == 'edit' &&
+                  gameInfo.result.rows[tabsModel].stepsNow == index
                     ? redStepsClass
                     : ''
                 "
@@ -113,14 +118,19 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
+                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
+                  .BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 :style="isMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
                   v-show="
-                    index == 4 || index == 7 || index == 8 || index == 15 || index == 16
+                    index == 4 ||
+                    index == 7 ||
+                    index == 8 ||
+                    index == 15 ||
+                    index == 16
                   "
                   class="game-4978748050a936d2f77fe718f1d81524"
                 >
@@ -151,14 +161,22 @@
           <div
             v-show="bpMode == 'edit'"
             @click="onWinCampClick(1)"
-            :style="isMobile ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
+            :style="
+              isMobile
+                ? { height: '275px' }
+                : { height: appHeight - 175 + 'px' }
+            "
             class="game-d75e14b5c8f13e894fe9bf9d5426c198"
-          ></div>
+          />
         </van-col>
         <van-col span="18">
           <div
             v-show="showInfo.hero"
-            :style="isMobile ? { height: '240px' } : { height: appHeight - 150 + 'px' }"
+            :style="
+              isMobile
+                ? { height: '240px' }
+                : { height: appHeight - 150 + 'px' }
+            "
             class="app-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
@@ -198,8 +216,12 @@
                       <van-tag
                         round
                         v-if="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id)
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(
+                            data.id
+                          ) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                            data.id
+                          )
                         "
                         color="red"
                         class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
@@ -217,8 +239,12 @@
                         height="40"
                         v-lazy="data.img"
                         :style="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(
+                            data.id
+                          ) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                            data.id
+                          ) ||
                           gameInfo.used.includes(data.id)
                             ? { filter: 'grayscale(1)' }
                             : {}
@@ -252,8 +278,12 @@
                       <van-tag
                         round
                         v-if="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id)
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(
+                            data.id
+                          ) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                            data.id
+                          )
                         "
                         color="red"
                         class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
@@ -271,8 +301,12 @@
                         height="40"
                         v-lazy="data.img"
                         :style="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsModel].blue.ban.includes(
+                            data.id
+                          ) ||
+                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                            data.id
+                          ) ||
                           gameInfo.used.includes(data.id)
                             ? { filter: 'grayscale(1)' }
                             : {}
@@ -293,14 +327,19 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
+                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
+                  .BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 :style="isMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
                   v-show="
-                    index == 5 || index == 6 || index == 9 || index == 14 || index == 17
+                    index == 5 ||
+                    index == 6 ||
+                    index == 9 ||
+                    index == 14 ||
+                    index == 17
                   "
                   class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
@@ -331,9 +370,13 @@
           <div
             v-show="bpMode == 'edit'"
             @click="onWinCampClick(2)"
-            :style="isMobile ? { height: '275px' } : { height: appHeight - 175 + 'px' }"
+            :style="
+              isMobile
+                ? { height: '275px' }
+                : { height: appHeight - 175 + 'px' }
+            "
             class="game-251504ba219ea8c3175f47b73bdde6e6"
-          ></div>
+          />
         </van-col>
       </van-row>
     </div>
@@ -352,7 +395,9 @@
                 v-for="(data, index) in author.actions"
                 :key="index"
                 @click="
-                  data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null
+                  data.url
+                    ? appOpenUrl('是否打开外部链接？', null, { path: data.url })
+                    : null
                 "
               >
                 <a-icon :type="data.icon" />
@@ -437,13 +482,18 @@
                 <a-icon type="plus" />再来一局
               </a-menu-item>
               <a-menu-item
-                v-show="bpMode == 'edit' && gameInfo.result.rows.length - 1 == tabsModel"
+                v-show="
+                  bpMode == 'edit' &&
+                  gameInfo.result.rows.length - 1 == tabsModel
+                "
                 @click="onToolsMenuClick(2)"
               >
                 <a-icon type="retweet" />重置
               </a-menu-item>
               <a-menu-item @click="onToolsMenuClick(3)">
-                <a-icon :type="bpMode == 'view' ? 'edit' : 'cloud-upload'" />编辑
+                <a-icon
+                  :type="bpMode == 'view' ? 'edit' : 'cloud-upload'"
+                />编辑
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -455,7 +505,9 @@
             icon="question-o"
             size="small"
             color="black"
-            @click="appOpenUrl('是否查看常见问题?', null, url.question)"
+            @click="
+              appOpenUrl('是否查看常见问题?', null, { path: url.question })
+            "
           />
         </li>
         <li>
@@ -517,7 +569,8 @@
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
               :style="{
-                color: gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
+                color:
+                  gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
               }"
               >第 {{ index + 1 }} 局</span
             >
@@ -541,7 +594,15 @@ export default {
   },
   data() {
     return {
-      heroType: ["全部", "对抗 (战士)", "中路", "对抗 (坦克)", "打野", "发育", "游走"],
+      heroType: [
+        "全部",
+        "对抗 (战士)",
+        "中路",
+        "对抗 (坦克)",
+        "打野",
+        "发育",
+        "游走",
+      ],
       bpCountdown: 45,
       bpOpponent: {},
       bpSelf: {},
@@ -653,7 +714,7 @@ export default {
 
       this.getGameBP(gameLabel);
     } else {
-      return this.appPush("/game");
+      return this.appPush({ path: "/game" });
     }
   },
   beforeDestroy() {
@@ -934,9 +995,12 @@ export default {
       }
     },
     onGamePerspectiveClick: function (bpMode) {
-      if (bpMode == 1) this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
+      if (bpMode == 1)
+        this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
 
-      this.bpPerspective == 1 ? (this.bpPerspective = 2) : (this.bpPerspective = 1);
+      this.bpPerspective == 1
+        ? (this.bpPerspective = 2)
+        : (this.bpPerspective = 1);
 
       this.initBPOrder(this.bpPerspective, this.tabsModel + 1);
     },
@@ -990,7 +1054,11 @@ export default {
       } else {
         newIndex = oldIndex + 1;
 
-        this.gameInfo.result.rows[tabsModel].BPOrder.splice(oldIndex, 1, hero.id);
+        this.gameInfo.result.rows[tabsModel].BPOrder.splice(
+          oldIndex,
+          1,
+          hero.id
+        );
       }
 
       if (this.bpMode == "edit" && this.bpIndex.bpPerspective[oldIndex] == 1) {
@@ -1008,7 +1076,9 @@ export default {
       this.initBPOrder(this.bpPerspective, tabsModel + 1);
 
       if (newIndex >= 18) {
-        this.$message.warning("警告:1001,BP结束,可点击两侧边缘设置胜利方,注意保存。");
+        this.$message.warning(
+          "警告:1001,BP结束,可点击两侧边缘设置胜利方,注意保存。"
+        );
       }
     },
     onGamePredictionClick: function () {
@@ -1093,8 +1163,9 @@ export default {
 
           this.bpMode = "edit";
 
-          this.bpIndex.ban.includes(this.gameInfo.result.rows[tabsModel].stepsNow) &&
-          tabsModel % 2 == 0
+          this.bpIndex.ban.includes(
+            this.gameInfo.result.rows[tabsModel].stepsNow
+          ) && tabsModel % 2 == 0
             ? (this.bpPerspective = 2)
             : (this.bpPerspective = 1);
           this.onGamePerspectiveClick(0);

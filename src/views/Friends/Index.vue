@@ -64,7 +64,8 @@
                 "
                 width="50"
                 height="50"
-              />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd">|</span
+              />&nbsp;<span class="friends-2ba06b14345c9a61cff15b7f4e3c44dd"
+                >|</span
               >&nbsp;
               <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
                 friendsInfo.rank.score || 1200
@@ -80,13 +81,15 @@
           <template #right-icon>
             <ul
               class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
-              :style="friendsInfo.heroList.length <= 3 ? {} : { width: '180px' }"
+              :style="
+                friendsInfo.heroList.length <= 3 ? {} : { width: '180px' }
+              "
             >
               <li
                 v-for="(data, index) in friendsInfo.heroList"
                 :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
                 class="app-1951b6e7c82938dd7446a41e829b247b"
-                @click="$router.push({ path: '/hero/' + data.id + '/info' })"
+                @click="appPush({ path: '/hero/' + data.id + '/info' })"
               >
                 <img
                   v-lazy="
@@ -101,7 +104,7 @@
                   class="app-4ab161130e76571ab0c31aa23a6238c7"
                 />
                 <img
-                  v-show="data.fightPowerIcon"
+                  v-if="data.fightPowerIcon"
                   v-lazy="data.fightPowerIcon"
                   width="25"
                   height="25"
@@ -110,7 +113,7 @@
               </li>
             </ul>
             <span
-              v-show="friendsInfo.heroList.length == 0"
+              v-if="friendsInfo.heroList.length == 0"
               class="friends-d1dc130fa38d505fefbe9810d4790c8f"
               >未设置</span
             >
@@ -151,7 +154,8 @@
 export default {
   name: "FriendsHome",
   components: {
-    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   mounted() {
     this.getWebAccountInfo(0);
@@ -196,7 +200,10 @@ export default {
             if (tips == 1) this.$message.success("刷新成功");
 
             if (postData != {} && data.openId != openId) {
-              this.$router.push({ path: "/friends", query: { openId: data.openId } });
+              this.appPush({
+                path: "/friends",
+                query: { openId: data.openId },
+              });
             }
           } else {
             this.$message.error(status.msg);

@@ -32,17 +32,37 @@
           <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
         </vxe-table-column>
         <vxe-table-column title="#" type="seq" width="75" />
-        <vxe-table-column title="类型" field="type" sortable :width="listWidth" />
+        <vxe-table-column
+          title="类型"
+          field="type"
+          sortable
+          :width="listWidth"
+        />
         <vxe-table-column
           title="开始数量"
           field="start_num"
           sortable
           :width="listWidth"
         />
-        <vxe-table-column title="目标数量" field="num" sortable :width="listWidth" />
-        <vxe-table-column title="剩余数量" field="task_num" sortable :width="listWidth" />
+        <vxe-table-column
+          title="目标数量"
+          field="num"
+          sortable
+          :width="listWidth"
+        />
+        <vxe-table-column
+          title="剩余数量"
+          field="task_num"
+          sortable
+          :width="listWidth"
+        />
         <vxe-table-column title="实时数量" field="bz" :width="listWidth" />
-        <vxe-table-column title="更新时间" field="update_time" sortable width="200" />
+        <vxe-table-column
+          title="更新时间"
+          field="update_time"
+          sortable
+          width="200"
+        />
         <vxe-table-column title="状态" field="is_running" width="75" />
         <template v-slot:empty>暂无数据</template>
       </vxe-grid>
@@ -63,8 +83,8 @@
         :title="tableData.row.uid + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
-        safe-area-inset-bottom
         @select="onActionSheetSelect"
+        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -157,7 +177,9 @@ export default {
       this.axios
         .get(
           "//s.91m.top/?url=" +
-            encodeURIComponent(location.origin + location.pathname + "?uid=" + row.uid)
+            encodeURIComponent(
+              location.origin + location.pathname + "?uid=" + row.uid
+            )
         )
         .then((res) => {
           this.copyData =

@@ -6,13 +6,15 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="appPush('/ranking')"
+        @click-left="appPush({ path: '/ranking' })"
         left-text="排行"
         z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
-          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{ replay.title }}</span>
+          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{
+            replay.title
+          }}</span>
         </template>
       </van-nav-bar>
     </div>
@@ -34,8 +36,8 @@
               >{{ data.usedtime }}</van-tag
             >
             <van-tag
+              v-if="!replay.teammate"
               round
-              v-show="!replay.teammate"
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
               >{{ data.equMoney }}</van-tag
@@ -45,7 +47,10 @@
             }}</span>
           </div>
 
-          <div v-show="!replay.teammate" class="hero-f01902c0d0136ca30fe1034f339964ba">
+          <div
+            v-show="!replay.teammate"
+            class="hero-f01902c0d0136ca30fe1034f339964ba"
+          >
             <van-grid
               :border="false"
               :column-num="7"
@@ -55,7 +60,9 @@
                 v-show="data.heroSkill > 0"
                 :icon="
                   data.heroSkill > 0
-                    ? '//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'
+                    ? '//image.ttwz.qq.com/images/skill/' +
+                      data.heroSkill +
+                      '.png'
                     : null
                 "
                 :text="data.heroPosition"
@@ -73,11 +80,9 @@
                     : null
                 "
                 @click="
-                  appOpenUrl(
-                    '是否查看装备更新记录?',
-                    'NGA @破笼之鸟',
-                    '//ngabbs.com/read.php?tid=19902976'
-                  )
+                  appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', {
+                    path: '//ngabbs.com/read.php?tid=19902976',
+                  })
                 "
                 class="hero-0a96464cb313aab9cc51e5aa61b0193f"
               />
@@ -85,9 +90,9 @@
           </div>
 
           <van-tag
+            v-if="!replay.teammate"
             round
             disabled
-            v-show="!replay.teammate"
             color="black"
             size="mini"
             class="hero-ce50a09343724eb82df11390e2c1de18"
@@ -111,9 +116,9 @@
         :title="tableData.row.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
+        @select="onActionSheetSelect"
         safe-area-inset-bottom
         class="hero-4bc6fcee674cad1c5910499a6ad199b8"
-        @select="onActionSheetSelect"
       />
     </div>
 
@@ -135,7 +140,8 @@
 export default {
   name: "HeroReplay",
   components: {
-    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
@@ -191,9 +197,13 @@ export default {
         replayUrlIndex = replayUrl.indexOf("=");
 
       this.axios
-        .get("//s.91m.top/?url=" + replayUrl.substr(replayUrlIndex + 1, replayUrl.length))
+        .get(
+          "//s.91m.top/?url=" +
+            replayUrl.substr(replayUrlIndex + 1, replayUrl.length)
+        )
         .then((res) => {
-          this.copyData = this.replay.title + " 的对局回顾 ↓\r-\r" + res.data.data.url;
+          this.copyData =
+            this.replay.title + " 的对局回顾 ↓\r-\r" + res.data.data.url;
         });
 
       this.showInfo.actionSheet = true;
@@ -201,7 +211,11 @@ export default {
     getHeroReplayByHeroId: function (heroId, page) {
       this.axios
         .post(
-          this.apiList.pvp.getHeroReplayByHeroId + "&heroId=" + heroId + "&page=" + page
+          this.apiList.pvp.getHeroReplayByHeroId +
+            "&heroId=" +
+            heroId +
+            "&page=" +
+            page
         )
         .then((res) => {
           let data = res.data.data,
@@ -215,7 +229,7 @@ export default {
           } else {
             this.$message.error(status.msg);
 
-            this.appPush("/login");
+            this.appPush({ path: "/login" });
           }
         });
     },
@@ -230,20 +244,22 @@ export default {
       }
 
       if (item.value == 1) {
-        this.appOpenUrl("是否打开对局详情?", "需要安装王者营地", replayInfo.hippy);
+        this.appOpenUrl("是否打开对局详情?", "需要安装王者营地", {
+          path: replayInfo.hippy,
+        });
       }
 
       if (item.value == 2) {
-        this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", replayInfo.url);
+        this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", {
+          path: replayInfo.url,
+        });
       }
 
       if (item.value == 3) {
         if (replayInfo.inscriptionUrl) {
-          this.appOpenUrl(
-            "是否查看玩家铭文?",
-            "需要安装王者营地",
-            replayInfo.inscriptionUrl
-          );
+          this.appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
+            path: replayInfo.inscriptionUrl,
+          });
         } else {
           this.$message.info("提示:1004,未查询到,建议从上方详情进入");
         }

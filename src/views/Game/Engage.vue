@@ -6,7 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="appPush('/my')"
+        @click-left="appPush({ path: '/my' })"
         left-text="返回"
         z-index="99999999"
         title="我的交战"
@@ -26,7 +26,9 @@
           class="game-f24a222ebfb0f6b85f63749653659063"
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
-            <van-row @click="appPush('/game/' + data.engage.label + '/bp')">
+            <van-row
+              @click="appPush({ path: '/game/' + data.engage.label + '/bp' })"
+            >
               <van-col span="7">
                 <img
                   width="40"
@@ -70,7 +72,8 @@
 export default {
   name: "GameEngage",
   components: {
-    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
@@ -93,18 +96,20 @@ export default {
   },
   methods: {
     getGameDashboard: function () {
-      this.axios.post(this.apiList.pvp.getGameDashboard + "&aid=1").then((res) => {
-        let data = res.data.data,
-          status = res.data.status;
+      this.axios
+        .post(this.apiList.pvp.getGameDashboard + "&aid=1")
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
 
-        if (status.code == 200) {
-          this.engageInfo.result = data.result;
-        } else {
-          this.$message.error(status.msg);
+          if (status.code == 200) {
+            this.engageInfo.result = data.result;
+          } else {
+            this.$message.error(status.msg);
 
-          this.appPush("/login");
-        }
-      });
+            this.appPush({ path: "/login" });
+          }
+        });
     },
   },
 };

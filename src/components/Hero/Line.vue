@@ -15,9 +15,11 @@
       />
     </div>
 
-    <div class="hero-f6d50810d5b150ebd421cc944d2597a5">
+    <div
+      v-if="trendType == 0 && lineData.status.code == 200"
+      class="hero-f6d50810d5b150ebd421cc944d2597a5"
+    >
       <van-switch
-        v-show="trendType == 0"
         v-model="lineInfo.checked"
         @change="onSwitchChange"
         size="15px"
@@ -70,6 +72,7 @@ export default {
       immediate: true,
       handler(newValue) {
         if (newValue.heroId == 0) return;
+
         this.getHeroChartsLog(
           newValue.heroId,
           newValue.trendType,
@@ -86,7 +89,10 @@ export default {
         extend: {},
         settings: {},
         loading: true,
-        result: [],
+        result: {},
+        status: {
+          code: 200,
+        },
       },
       lineInfo: {
         checked: false,
@@ -104,6 +110,7 @@ export default {
     },
     getHeroChartsLog: function (heroId, aid, detailed) {
       this.lineData = {};
+      this.lineData.status = 200;
       this.lineData.loading = true;
 
       this.axios
@@ -122,9 +129,10 @@ export default {
 
           if (status.code == 200) {
             this.lineData = data;
+            this.lineData.status = status;
             this.lineData.loading = false;
           } else {
-            this.appOpenUrl(status.msg, null, "/my", 1);
+            this.appOpenUrl(status.msg, null, { path: "/login" }, 1);
           }
         });
     },

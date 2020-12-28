@@ -7,7 +7,7 @@
         :ellipsis="false"
         :swipeable="true"
         :sticky="true"
-        @change="appPush('/', { type: tabsModel })"
+        @change="appPush({ path: '/', query: { type: tabsModel } })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -24,7 +24,7 @@
     </div>
 
     <div
-      @click="appOpenUrl('是否打开外部链接?', null, upyun.url)"
+      @click="appOpenUrl('是否打开外部链接?', null, { path: upyun.url })"
       class="home-72ab9e07378f988922e6c91884048db0"
     >
       本站由
@@ -46,7 +46,8 @@ export default {
   components: {
     TuiJian: (resolve) => require(["@/views/Home/TuiJian.vue"], resolve),
     Game: (resolve) => require(["@/views/Home/Game.vue"], resolve),
-    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {
@@ -75,7 +76,10 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.appCopyData(location.origin, "链接已复制,请清除缓存重新添加到桌面~");
+            this.appCopyData(
+              location.origin,
+              "链接已复制,请清除缓存重新添加到桌面~"
+            );
           })
           .catch(() => {
             // on cancel

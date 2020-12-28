@@ -9,7 +9,9 @@
         />
         <van-dropdown-item ref="item" title="筛选">
           <van-switch-cell v-model="showInfo.shield" title="隐藏战绩" />
-          <van-button type="info" block @click="onDropdownConfirmClick">确认</van-button>
+          <van-button type="info" block @click="onDropdownConfirmClick"
+            >确认</van-button
+          >
         </van-dropdown-item>
       </van-dropdown-menu>
     </div>
@@ -45,9 +47,18 @@
 
         <vxe-table-column title="#" type="seq" width="75" />
 
-        <vxe-table-column title="昵称" field="gamePlayerName" :width="listWidth" />
+        <vxe-table-column
+          title="昵称"
+          field="gamePlayerName"
+          :width="listWidth"
+        />
 
-        <vxe-table-column title="巅峰分" field="rankScore" :width="listWidth" sortable />
+        <vxe-table-column
+          title="巅峰分"
+          field="rankScore"
+          :width="listWidth"
+          sortable
+        />
       </vxe-grid>
     </div>
 
@@ -57,8 +68,8 @@
         :title="tableData.row.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
-        safe-area-inset-bottom
         @select="onActionSheetSelect"
+        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -110,7 +121,15 @@ export default {
   methods: {
     getRanking: function (bid, cid, aid = 1) {
       this.axios
-        .post(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
+        .post(
+          this.apiList.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid
+        )
         .then((res) => {
           this.tableData = res.data.data;
           this.tableData.loading = false;
@@ -169,11 +188,9 @@ export default {
 
       if (item.value == 1) {
         if (playerInfo.inscriptionUrl) {
-          this.appOpenUrl(
-            "是否查看玩家铭文?",
-            "需要安装王者营地",
-            playerInfo.inscriptionUrl
-          );
+          this.appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
+            path: playerInfo.inscriptionUrl,
+          });
         } else {
           this.$message.info("提示:1006,未查询到,待更新");
         }

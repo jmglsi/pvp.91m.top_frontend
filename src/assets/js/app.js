@@ -16,14 +16,11 @@ Vue.prototype.appCopyData = function(data, successText = "复制成功", errorTe
     );
 }
 
-Vue.prototype.appPush = function(urlPath, urlQuery = {}) {
-    this.$router.push({
-        path: urlPath,
-        query: urlQuery
-    })
+Vue.prototype.appPush = function(url = { path: '/' }) {
+    this.$router.push(url)
 }
 
-Vue.prototype.appOpenUrl = function(title, message, urlPath, urlType = 0) {
+Vue.prototype.appOpenUrl = function(title, message, url = { path: '/' }, urlType = 0) {
     this.$dialog
         .confirm({
             title: title,
@@ -31,11 +28,10 @@ Vue.prototype.appOpenUrl = function(title, message, urlPath, urlType = 0) {
         })
         .then(() => {
             // on confirm
-
             if (urlType == 0) {
-                window.open(urlPath);
+                window.open(url.path);
             } else if (urlType == 1) {
-                this.$router.push({ path: urlPath });
+                this.$router.push(url);
             }
         })
         .catch(() => {

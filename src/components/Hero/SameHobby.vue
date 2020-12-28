@@ -1,5 +1,5 @@
 <template>
-  <div v-show="sameHobbyData.result.rows.length > 0" class="hero-same-hobby">
+  <div class="hero-same-hobby">
     <div
       class="app-a931c759bf506211221c0cc099e8d1c2 app-6bdc6915ee08058392eafe0ef6e353fd app-9b9faf4e737f5907995f767e0b345dab"
     >
@@ -10,7 +10,7 @@
           v-for="(data, index) in sameHobbyData.result.rows"
           :key="'hero-same-hobby-418bbf1206aab9cb337c42b4d2c1d6ec-' + index"
           class="app-1951b6e7c82938dd7446a41e829b247b"
-          @click="$router.push({ path: '/friends', query: { openId: data.openId } })"
+          @click="appPush({ path: '/friends', query: { openId: data.openId } })"
         >
           <img
             v-if="data.fightPowerIcon"

@@ -37,7 +37,10 @@
       />
     </div>
 
-    <div v-show="showInfo.checked == true" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
+    <div
+      v-show="showInfo.checked == true"
+      class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
+    >
       <vxe-grid
         ref="skinReturn"
         id="skinReturn"
@@ -54,7 +57,9 @@
               height="50"
               class="skin-52326308ff25a5e0ce86bdae53ff2c35"
             />
-            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">{{ row.skinName }}</span>
+            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">{{
+              row.skinName
+            }}</span>
           </template>
         </vxe-table-column>
 
@@ -68,7 +73,9 @@
     <div class="skin-a47113818cd94f1f3221fed0a17e8588">
       <van-button
         round
-        @click="appOpenUrl('是否打开外部链接?', null, tableData.result.url)"
+        @click="
+          appOpenUrl('是否打开外部链接?', null, { path: tableData.result.url })
+        "
         size="small"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
       >

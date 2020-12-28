@@ -67,7 +67,7 @@ export default {
       });
     },
     onGameCellClick: function (e) {
-      this.appPush("/game/" + e + "/bp");
+      this.appPush({ path: "/game/" + e + "/bp" });
     },
   },
 };

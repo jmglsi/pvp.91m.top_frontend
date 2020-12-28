@@ -52,7 +52,10 @@
       </div>
     </div>
 
-    <div class="miniapp-021a7599a708a3781fabe39f7631edfc" @click="appPush('/')">
+    <div
+      class="miniapp-021a7599a708a3781fabe39f7631edfc"
+      @click="appPush({ path: '/' })"
+    >
       <AppCollapse width="25" height="25" />
     </div>
   </div>
@@ -66,7 +69,8 @@
 export default {
   name: "MiniApp",
   components: {
-    AppCollapse: (resolve) => require(["@/assets/Icons/AppCollapse.vue"], resolve),
+    AppCollapse: (resolve) =>
+      require(["@/assets/Icons/AppCollapse.vue"], resolve),
   },
   data() {
     return {

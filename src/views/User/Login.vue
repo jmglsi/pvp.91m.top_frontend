@@ -64,14 +64,19 @@
       >
     </div>
 
-    <div v-show="loginInfo.type == 0" class="login-61046f2f5eefe3dc179e52af32241062">
+    <div
+      v-show="loginInfo.type == 0"
+      class="login-61046f2f5eefe3dc179e52af32241062"
+    >
       <span class="login-e4c9479b11955648dad558fe717a4eb2"
-        >注:<br>1.信息是加密储存的<br>2.用户名和QQ将用于扩列、BP界面以及找回密码,请不要瞎写</span
+        >注:<br />1.信息是加密储存的<br />2.用户名和QQ将用于扩列、BP界面以及找回密码,请不要瞎写</span
       >
     </div>
 
     <div class="login-ae64b9ce80d3b20870647479c735eeb0">
-      <div class="login-402e57c104da1741bd87140cc8e3633f">有任何意见建议都可以加群</div>
+      <div class="login-402e57c104da1741bd87140cc8e3633f">
+        有任何意见建议都可以加群
+      </div>
       <div class="login-2707770f6b9a7f3321a020d1bcd5dd9d">
         <a
           target="_blank"
@@ -141,7 +146,7 @@ export default {
     },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.appPush("/my");
+        this.appPush({ path: "/my" });
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = "登录";
@@ -195,7 +200,7 @@ export default {
             });
 
             setTimeout(() => {
-              location.href = "/my";
+              this.$router.go(-1);
             }, 500);
           } else {
             this.$message.error(status.msg);

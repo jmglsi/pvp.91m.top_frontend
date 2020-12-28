@@ -6,7 +6,7 @@
         :border="false"
         :ellipsis="false"
         :sticky="true"
-        @change="appPush('/ranking', { type: tabsModel })"
+        @change="appPush({ path: '/ranking', query: { type: tabsModel } })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -35,9 +35,14 @@
           borderColor: 'rgb(243,189,103)',
         }"
         @click="
-          $message.info('提示:1011,点击头像可快速对比技能,点击头像右侧数据可查看详情')
+          $message.info(
+            '提示:1011,点击头像可快速对比技能,点击头像右侧数据可查看详情'
+          )
         "
-        ><van-tag round type="danger" class="ranking-4d09fbef1438e2b23375b87ba3e02942"
+        ><van-tag
+          round
+          type="danger"
+          class="ranking-4d09fbef1438e2b23375b87ba3e02942"
           >游客部分功能将受限,登录后解锁</van-tag
         >
       </van-divider>
@@ -53,7 +58,8 @@
 export default {
   name: "RankingHome",
   components: {
-    DianFengSai: (resolve) => require(["@/views/Ranking/DianFengSai.vue"], resolve),
+    DianFengSai: (resolve) =>
+      require(["@/views/Ranking/DianFengSai.vue"], resolve),
     GuanXi: (resolve) => require(["@/views/Ranking/GuanXi.vue"], resolve),
     WanJia: (resolve) => require(["@/views/Ranking/WanJia.vue"], resolve),
   },

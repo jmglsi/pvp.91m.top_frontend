@@ -111,7 +111,7 @@ export default {
             this.radarData = data;
             this.radarData.loading = false;
           } else {
-            this.appOpenUrl(status.msg, null, "/my", 1);
+            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },

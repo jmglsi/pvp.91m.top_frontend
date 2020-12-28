@@ -33,12 +33,18 @@
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
-        <vxe-table-column title="英雄" field="score" fixed="left" width="75" sortable>
+        <vxe-table-column
+          title="英雄"
+          field="score"
+          fixed="left"
+          width="75"
+          sortable
+        >
           <template v-slot="{ row }">
             <van-tag
-              mark
-              v-show="row.tag.text"
+              v-if="row.tag.text"
               :color="row.tag.color"
+              mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
               >{{ row.tag.text }}</van-tag
@@ -86,9 +92,24 @@
         <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column title="出场越低,波动越大 (%)">
-          <vxe-table-column title="禁用" field="banRate" :width="listWidth" sortable />
-          <vxe-table-column title="出场" field="pickRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜率" field="winRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="禁用"
+            field="banRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="出场"
+            field="pickRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="胜率"
+            field="winRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
@@ -113,8 +134,18 @@
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
-          <vxe-table-column title="净胜" field="winMvpRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="allMvpRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="净胜"
+            field="winMvpRate"
+            :width="listWidth"
+            sortable
+          />
           <vxe-table-column
             title="败方"
             field="loseMvpRate"
@@ -161,9 +192,24 @@
         </vxe-table-column>
 
         <vxe-table-column title="KDA">
-          <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
-          <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
-          <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
+          <vxe-table-column
+            title="击杀"
+            field="killCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="死亡"
+            field="deadCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="助攻"
+            field="assistCnt"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="其它">
@@ -173,7 +219,12 @@
             :width="listWidth"
             sortable
           />
-          <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+          <vxe-table-column
+            title="时长"
+            field="usedtime"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
       </vxe-grid>
     </div>
@@ -186,11 +237,17 @@
       >
         <van-tabs>
           <van-tab title="技能" />
-          <van-tab title="装备" />
+          <van-tab title="装备 (单件)" />
+          <van-tab title="装备 (推荐)" />
           <div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
             <van-button
               round
-              @click="onHeroInfoClick(tableData.row.id)"
+              @click="
+                appPush({
+                  path: '/hero/' + tableData.row.id + '/info',
+                  query: { show: 'skill' },
+                })
+              "
               size="small"
               color="linear-gradient(to right, #ff6034, #ee0a24)"
             >
@@ -207,8 +264,8 @@
         :title="tableData.row.name + ' (' + tableData.row.id + ') 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
-        safe-area-inset-bottom
         @select="onActionSheetSelect"
+        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -290,7 +347,9 @@ export default {
 
       if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
 
-      let tableColumn = JSON.parse(localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE);
+      let tableColumn = JSON.parse(
+        localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE
+      );
 
       if (tableColumn["dianfengsai"] == undefined) return;
 
@@ -320,7 +379,15 @@ export default {
     },
     getRanking: function (bid, cid, aid = 0) {
       this.axios
-        .post(this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=" + bid + "&cid=" + cid)
+        .post(
+          this.apiList.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid
+        )
         .then((res) => {
           let data = res.data.data;
 
@@ -357,11 +424,6 @@ export default {
         return;
       }
     },
-    onHeroInfoClick: function (heroId) {
-      this.$message.info("提示:1003,点击右侧召唤师技能、出装即可查看顶端局热门推荐");
-
-      this.$router.push({ path: "/hero/" + heroId + "/info" });
-    },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
@@ -390,40 +452,38 @@ export default {
       let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appPush("/hero/" + heroInfo.id + "/info");
+        this.appPush({ path: "/hero/" + heroInfo.id + "/info" });
       }
 
       if (item.value == 1) {
-        this.appPush("/hero/" + heroInfo.id + "/replay", {
-          replayTitle: heroInfo.name,
-          teammate: "0",
+        this.appPush({
+          path: "/hero/" + heroInfo.id + "/replay",
+          query: {
+            replayTitle: heroInfo.name,
+            teammate: "0",
+          },
         });
       }
 
       if (item.value == 2) {
-        this.appOpenUrl(
-          "是否查看英雄赛事数据?",
-          "玩加电竞",
-          "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
+        this.appOpenUrl("是否查看英雄赛事数据?", "玩加电竞", {
+          path:
+            "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
-            "&tab_type=5&gm=kog&gametype=6&tag_id=0"
-        );
+            "&tab_type=5&gm=kog&gametype=6&tag_id=0",
+        });
       }
 
       if (item.value == 3) {
-        this.appOpenUrl(
-          "是否查看英雄更新记录?",
-          "NGA @EndMP",
-          "//nga.178.com/read.php?pid=" + heroInfo.updateId
-        );
+        this.appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
+          path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
+        });
       }
 
       if (item.value == 4) {
-        this.appOpenUrl(
-          "是否查看英雄攻速阈值?",
-          "NGA @小熊de大熊",
-          "//bbs.nga.cn/read.php?tid=12677614"
-        );
+        this.appOpenUrl("是否查看英雄攻速阈值?", "NGA @小熊de大熊", {
+          path: "//bbs.nga.cn/read.php?tid=12677614",
+        });
       }
     },
   },

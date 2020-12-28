@@ -6,7 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="appPush('/my')"
+        @click-left="appPush({ path: '/my' })"
         @click-right="onCreateTeamClick"
         left-text="返回"
         z-index="99999999"
@@ -20,7 +20,11 @@
     <div
       class="game-c37237ae7770c5062ccad7a23572e282 app-4eb2044800e2b7b9e5c44d370af22b27"
     >
-      <van-grid :border="false" class="game-40db4f618bd5c27e60368f891382ffd4">
+      <van-grid
+        :column-num="3"
+        :border="false"
+        class="game-40db4f618bd5c27e60368f891382ffd4"
+      >
         <van-grid-item
           v-for="(data, index) in teamInfo.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
@@ -35,14 +39,15 @@
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
         v-model="showInfo.team"
-        :title="teamInfo.row.id != null ? teamInfo.row.name + ' 如何操作' : '新建队伍'"
+        :title="teamInfo.row.id ? teamInfo.row.name + ' 如何操作' : '新建队伍'"
+        safe-area-inset-bottom
       >
         <div class="content">
           <div class="game-350be0bb4350ca865ab9210d074875f1">
             <van-cell-group class="game-2ce081560b9cb8cdcd7472e639624e3e">
               <van-field
                 v-model="teamInfo.row.id"
-                v-show="teamInfo.row.id"
+                v-if="teamInfo.row.id"
                 :disabled="true"
                 label="id"
                 class="game-3972b6d305454c0dd6bb3927cf9c8712"
@@ -71,7 +76,9 @@
                     :max-size="3 * 1024 * 1024"
                     @oversize="onOversize"
                   >
-                    <van-button round size="small" type="info">上传图片</van-button>
+                    <van-button round size="small" type="info"
+                      >上传图片</van-button
+                    >
                   </van-uploader>
                 </template>
               </van-field>
@@ -87,7 +94,7 @@
 
           <div class="game-c97a3db05d13ebcb702c69bc6a42a226">
             <van-button
-              v-show="showInfo.delete"
+              v-if="teamInfo.row.id"
               round
               size="small"
               color="red"
@@ -121,7 +128,6 @@ export default {
       },
       showInfo: {
         team: false,
-        delete: false,
       },
       teamInfo: {
         type: 0,
@@ -163,7 +169,7 @@ export default {
           if (status.code == 200) {
             this.teamInfo.result = data.result;
           } else {
-            this.appOpenUrl(status.msg, null, "/my", 1);
+            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },
@@ -214,7 +220,6 @@ export default {
     },
     onCreateTeamClick: function () {
       this.showInfo.team = true;
-      this.showInfo.delete = false;
 
       this.teamInfo.row = {
         name: null,
@@ -230,7 +235,6 @@ export default {
       this.teamInfo.index = index;
 
       this.showInfo.team = true;
-      this.showInfo.delete = true;
     },
     onSaveTeamInfoClick: function () {
       let loginInfo = this.loginInfo,
@@ -354,11 +358,11 @@ export default {
 
             this.$cookie.delete("teamId");
 
-            this.appPush("/game/engage");
+            this.appPush({ path: "/game/engage" });
           } else {
             this.$message.error(status.msg);
 
-            this.appPush("/login");
+            this.appPush({ path: "/login" });
           }
         });
 

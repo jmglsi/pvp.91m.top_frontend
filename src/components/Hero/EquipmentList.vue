@@ -4,10 +4,16 @@
       ref="heroEquipment"
       :data="tableData.result"
       :sort-config="{ trigger: 'cell' }"
+      height="545"
       auto-resize
-      height="320"
     >
-      <vxe-table-column title="技能" field="score" fixed="left" width="50" sortable>
+      <vxe-table-column
+        title="技能"
+        field="score"
+        fixed="left"
+        width="50"
+        sortable
+      >
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
@@ -20,7 +26,7 @@
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-column title="推荐出装 (最终结果,空的就是没出)">
+      <vxe-table-column title="最终结果,空的就是没出">
         <vxe-table-column
           v-for="(data, index) in 6"
           :key="'equipment-7b490eaa5fed310dd15f0dd710dce7cb-' + index"
@@ -45,13 +51,33 @@
         </vxe-table-column>
       </vxe-table-column>
 
-      <vxe-table-column title="价格" field="money" :width="listWidth" sortable />
-      <vxe-table-column title="场次" field="pickTimes" :width="listWidth" sortable />
+      <vxe-table-column
+        title="价格"
+        field="money"
+        :width="listWidth"
+        sortable
+      />
+      <vxe-table-column
+        title="场次"
+        field="pickTimes"
+        :width="listWidth"
+        sortable
+      />
       <vxe-table-column title="胜率 (%)" field="winRate" width="100" sortable />
-      <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+      <vxe-table-column
+        title="时长"
+        field="usedtime"
+        :width="listWidth"
+        sortable
+      />
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column title="净胜" field="mvpRate" :width="listWidth" sortable />
+        <vxe-table-column
+          title="净胜"
+          field="mvpRate"
+          :width="listWidth"
+          sortable
+        />
       </vxe-table-column>
     </vxe-grid>
   </div>

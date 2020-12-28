@@ -38,7 +38,8 @@ export default new Router({
             name: 'friends',
             component: (resolve) => require(['./views/Friends/Index.vue'], resolve),
             meta: {
-                title: '扩列'
+                title: '扩列',
+                keepAlive: false
             }
         }, {
             path: '/skin/return',
@@ -70,7 +71,7 @@ export default new Router({
             component: (resolve) => require(['./views/User/My.vue'], resolve),
             meta: {
                 title: '我的',
-                keepAlive: true
+                keepAlive: false
             }
         }, {
             path: '/login',
@@ -89,7 +90,8 @@ export default new Router({
                     name: 'heroInfo',
                     component: (resolve) => require(['./views/Hero/Info.vue'], resolve),
                     meta: {
-                        title: '信息'
+                        title: '信息',
+                        keepAlive: false
                     }
                 },
                 {
@@ -97,7 +99,8 @@ export default new Router({
                     name: 'heroReplay',
                     component: (resolve) => require(['./views/Hero/Replay.vue'], resolve),
                     meta: {
-                        title: '回顾'
+                        title: '回顾',
+                        keepAlive: false
                     }
                 }
             ]
@@ -110,21 +113,24 @@ export default new Router({
                 name: 'gameTeam',
                 component: (resolve) => require(['./views/Game/Team.vue'], resolve),
                 meta: {
-                    title: '队伍'
+                    title: '队伍',
+                    keepAlive: false
                 }
             }, {
                 path: 'engage',
                 name: 'gameEngage',
                 component: (resolve) => require(['./views/Game/Engage.vue'], resolve),
                 meta: {
-                    title: '交战'
+                    title: '交战',
+                    keepAlive: false
                 }
             }, {
                 path: ':id/bp',
                 name: 'gameGlobalBP',
                 component: (resolve) => require(['./views/Game/GlobalBP.vue'], resolve),
                 meta: {
-                    title: '全局BP模拟器'
+                    title: '全局BP模拟器',
+                    keepAlive: false
                 }
             }]
         }, {

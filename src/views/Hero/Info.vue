@@ -6,9 +6,11 @@
         :border="false"
         :fixed="true"
         :style="
-          scroll >= 50 ? { backgroundColor: 'white' } : { backgroundColor: 'transparent' }
+          scroll >= 50
+            ? { backgroundColor: 'white' }
+            : { backgroundColor: 'transparent' }
         "
-        @click-left="appPush('/ranking')"
+        @click-left="appPush({ path: '/ranking' })"
         @click-right="$message.info('提示:1004,分路推荐 ;D')"
         left-text="排行"
         z-index="99999999"
@@ -16,11 +18,13 @@
       >
         <template #title>
           <div
-            @click="$message.info('提示:1005,英雄id:' + hero.info.id + ',近期热度 ;D')"
+            @click="
+              $message.info('提示:1005,英雄id:' + hero.info.id + ',近期热度 ;D')
+            "
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
             <img
-              v-show="showInfo.parameter && hero.info.trend > 0"
+              v-if="showInfo.parameter && hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
               width="15"
               height="15"
@@ -28,7 +32,9 @@
             />
             <span
               :style="
-                scroll >= 50 || tabsModel > 0 ? { color: 'black' } : { color: 'white' }
+                scroll >= 50 || tabsModel > 0
+                  ? { color: 'black' }
+                  : { color: 'white' }
               "
               class="hero-d5d3db1765287eef77d7927cc956f50a"
               >{{ hero.title }}</span
@@ -36,7 +42,10 @@
           </div>
         </template>
         <template #right>
-          <div v-show="showInfo.parameter" class="hero-68adaff1d028a37f27fb33c483329cba">
+          <div
+            v-if="showInfo.parameter"
+            class="hero-68adaff1d028a37f27fb33c483329cba"
+          >
             <ul>
               <li
                 v-for="(data, index) in hero.info.type"
@@ -58,8 +67,8 @@
 
     <div class="hero-e21ecc3330f7f3c382fc113f392368bd">
       <van-swipe
-        v-show="showInfo.parameter"
-        :autoplay="10000"
+        v-if="showInfo.parameter"
+        :autoplay="7.5 * 1000"
         :height="250"
         class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
       >
@@ -90,7 +99,7 @@
       class="hero-9afffec6fe89b34b024d06907c006f36"
     >
       <van-grid
-        v-show="showInfo.parameter"
+        v-if="showInfo.parameter"
         :border="false"
         :column-num="3"
         class="app-ff4a008470319a22d9cf3d14af485977"
@@ -122,9 +131,12 @@
           </div>
 
           <span class="hero-9726255eec083aa56dc0449a21b33190">
-            <van-tag round color="black" class="hero-1d61d12b768d71c075477fd92281464d">{{
-              hero.info.equMoneyOverflow || 0
-            }}</van-tag>
+            <van-tag
+              round
+              color="black"
+              class="hero-1d61d12b768d71c075477fd92281464d"
+              >{{ hero.info.equMoneyOverflow || 0 }}</van-tag
+            >
           </span>
         </van-grid-item>
         <van-grid-item
@@ -215,7 +227,10 @@
             </van-dropdown-menu>
           </template>
         </van-tab>
-        <van-tab class="hero-ab71021d21963773bfb8be80af65869f" title="同分路对比" />
+        <van-tab
+          class="hero-ab71021d21963773bfb8be80af65869f"
+          title="同分路对比"
+        />
         <van-tab
           class="hero-ab71021d21963773bfb8be80af65869f"
           title="自定义对比"
@@ -232,14 +247,17 @@
           :style="isMobile ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
-          <HeroRadar v-if="tabsModel > 0" :tabsModel="tabsModel" :heroId="hero.info.id" />
+          <HeroRadar
+            v-if="tabsModel > 0"
+            :tabsModel="tabsModel"
+            :heroId="hero.info.id"
+          />
         </div>
       </van-tabs>
     </div>
 
     <div
-      v-if="isLoaded"
-      v-show="showInfo.parameter"
+      v-if="showInfo.parameter && isLoaded"
       class="hero-9393a9be63ea720a87e048d40caa03b5"
     >
       <div class="hero-b7b5e31b028440d2e0e0157baad49513">
@@ -258,8 +276,11 @@
         safe-area-inset-bottom
       >
         <van-tabs>
-          <van-tab title="技能"> <HeroSkillList :heroSkill="hero.info.skill" /></van-tab>
-          <van-tab title="装备"
+          <van-tab title="技能">
+            <HeroSkillList :heroSkill="hero.info.skill"
+          /></van-tab>
+          <van-tab title="装备 (单件)">即将上线</van-tab>
+          <van-tab title="装备 (推荐)"
             ><HeroEquipmentList :heroEquipment="hero.info.equipment"
           /></van-tab>
         </van-tabs>
@@ -332,11 +353,9 @@
           class="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId
-              ? appOpenUrl(
-                  '是否打开外部链接?',
-                  null,
-                  '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId
-                )
+              ? appOpenUrl('是否打开外部链接?', null, {
+                  path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
+                })
               : $message.info(
                   '提示:1008,暂时还没有该英雄的词条,您也想出力的话请加群:810191707,备注来自苏苏的荣耀助手'
                 )
@@ -358,14 +377,17 @@ export default {
     AppTime: (resolve) => require(["@/assets/Icons/AppTime.vue"], resolve),
     AppCry: (resolve) => require(["@/assets/Icons/AppCry.vue"], resolve),
     AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
-    HeroSkillList: (resolve) => require(["@/components/Hero/SkillList.vue"], resolve),
+    HeroSkillList: (resolve) =>
+      require(["@/components/Hero/SkillList.vue"], resolve),
     HeroEquipmentList: (resolve) =>
       require(["@/components/Hero/EquipmentList.vue"], resolve),
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
-    HeroSameHobby: (resolve) => require(["@/components/Hero/SameHobby.vue"], resolve),
-    AppBottomTabbar: (resolve) => require(["@/components/App/BottomTabbar.vue"], resolve),
+    HeroSameHobby: (resolve) =>
+      require(["@/components/Hero/SameHobby.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   beforeRouteUpdate(to, from, next) {
     if (to.params.id != from.params.id) {
@@ -425,32 +447,40 @@ export default {
     };
   },
   mounted() {
-    let heroId = this.$route.params.id;
+    let heroId = this.$route.params.id,
+      show = this.$route.query.show;
 
     this.getHeroInfo(heroId);
+
+    show == "skill"
+      ? (this.showInfo.heroSkill = true)
+      : (this.showInfo.heroSkill = false);
 
     window.addEventListener("scroll", this.scrollTop);
   },
   methods: {
     scrollTop() {
-      this.scroll = document.documentElement.scrollTop || document.body.scrollTop;
+      this.scroll =
+        document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
 
-      this.axios.post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId).then((res) => {
-        this.isLoaded = true;
+      this.axios
+        .post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
+        .then((res) => {
+          this.isLoaded = true;
 
-        let data = res.data.data,
-          heroInfo = data.heroInfo;
+          let data = res.data.data,
+            heroInfo = data.heroInfo;
 
-        this.circle.info = data.circleInfo;
-        this.positionInfo = data.positionInfo;
-        this.hero.info = heroInfo;
+          this.circle.info = data.circleInfo;
+          this.positionInfo = data.positionInfo;
+          this.hero.info = heroInfo;
 
-        this.hero.title = heroInfo.name;
-        document.title = heroInfo.name + " | 苏苏的荣耀助手";
-      });
+          this.hero.title = heroInfo.name;
+          document.title = heroInfo.name + " | 苏苏的荣耀助手";
+        });
     },
     onTipsClick: function () {
       this.$dialog.alert({
@@ -481,7 +511,11 @@ export default {
     },
     onHeroLikeClick: function () {
       this.axios
-        .post(this.apiList.pvp.addWebAccountHeroLike + "&heroId=" + this.hero.info.id)
+        .post(
+          this.apiList.pvp.addWebAccountHeroLike +
+            "&heroId=" +
+            this.hero.info.id
+        )
         .then((res) => {
           let status = res.data.status;
 
@@ -521,7 +555,9 @@ export default {
 
       document.title = dTitle + " | 苏苏的荣耀助手";
 
-      e == 0 ? (this.showInfo.parameter = true) : (this.showInfo.parameter = false);
+      e == 0
+        ? (this.showInfo.parameter = true)
+        : (this.showInfo.parameter = false);
     },
   },
 };

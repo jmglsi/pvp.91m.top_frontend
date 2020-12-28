@@ -15,16 +15,23 @@
         >
           <van-swipe
             :autoplay="5000"
-            :height="175"
+            :height="200"
             class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
               :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
-              @click="data.url ? appOpenUrl('是否打开外部链接？', null, data.url) : null"
+              @click="
+                data.url
+                  ? appOpenUrl('是否打开外部链接？', null, { path: data.url })
+                  : null
+              "
               class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
             >
-              <img v-lazy="data.img" class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9" />
+              <img
+                v-lazy="data.img"
+                class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9"
+              />
               <van-tag
                 mark
                 :color="data.tag.color"
@@ -35,10 +42,8 @@
           </van-swipe>
 
           <van-cell
-            :title="
-              appHomeInfo.tipsInfo.title ? appHomeInfo.tipsInfo.title : '很高兴认识您~'
-            "
-            :value="appHomeInfo.tipsInfo.des"
+            :title="appHomeInfo.tipsInfo.title || '很高兴认识您~'"
+            :value="appHomeInfo.tipsInfo.description"
             :to="appHomeInfo.tipsInfo.to"
             :url="appHomeInfo.tipsInfo.url"
             is-link
@@ -74,7 +79,7 @@ export default {
         },
         tipsInfo: {
           title: null,
-          des: null,
+          description: null,
           to: null,
           url: null,
         },
@@ -95,7 +100,7 @@ export default {
       setTimeout(() => {
         this.isLoading = false;
 
-        this.appPush("/miniapp");
+        this.appPush({ path: "/miniapp" });
       }, 2500);
     },
   },
