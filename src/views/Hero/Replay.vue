@@ -8,7 +8,6 @@
         :placeholder="true"
         @click-left="appPush({ path: '/ranking' })"
         left-text="排行"
-        z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>

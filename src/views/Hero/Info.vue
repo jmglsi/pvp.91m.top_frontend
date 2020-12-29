@@ -13,7 +13,6 @@
         @click-left="appPush({ path: '/ranking' })"
         @click-right="$message.info('提示:1004,分路推荐 ;D')"
         left-text="排行"
-        z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>
@@ -257,7 +256,7 @@
     </div>
 
     <div
-      v-show="showInfo.parameter && isLoaded"
+      v-show="showInfo.parameter"
       class="hero-9393a9be63ea720a87e048d40caa03b5"
     >
       <div class="hero-b7b5e31b028440d2e0e0157baad49513">
@@ -269,7 +268,9 @@
       </div>
     </div>
 
-    <div class="app-e827ba0e6873e7ce7ef7c6c58e970609 hero-2882d594d0ac3524bffd5148791e96da">
+    <div
+      class="app-e827ba0e6873e7ce7ef7c6c58e970609 hero-2882d594d0ac3524bffd5148791e96da"
+    >
       <van-action-sheet
         v-model="showInfo.heroSkill"
         :title="hero.info.name + ' 的其它数据 (上周)'"
@@ -443,7 +444,6 @@ export default {
           { text: "论坛舆论趋势", value: 2 },
         ],
       },
-      isLoaded: false,
     };
   },
   mounted() {
@@ -469,8 +469,6 @@ export default {
       this.axios
         .post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
         .then((res) => {
-          this.isLoaded = true;
-
           let data = res.data.data,
             heroInfo = data.heroInfo;
 

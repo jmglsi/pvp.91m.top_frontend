@@ -9,7 +9,6 @@
         @click-left="appPush({ path: '/my' })"
         @click-right="onCreateTeamClick"
         left-text="返回"
-        z-index="99999999"
         title="我的队伍"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
       >

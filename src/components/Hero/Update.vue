@@ -51,7 +51,7 @@
               <van-tag
                 round
                 v-for="(data, index) in data.tags"
-                :key="'tuijian-5e9c0708969ea62d890f9c9f063b6c44-' + index"
+                :key="'update-12c9bc92e856bdab7bc932b5d368f97e-' + index"
                 color="black"
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
                 >{{ data }}</van-tag
@@ -75,8 +75,8 @@
             <div class="update-c936f93d328137bba0ab32510a2e4fd0">
               <router-link
                 v-for="(heroId, index) in data.items"
-                :to="heroId == 999 ? '' : { path: '/hero/' + heroId + '/info' }"
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
+                :to="heroId == 999 ? '' : { path: '/hero/' + heroId + '/info' }"
               >
                 <img
                   v-if="heroId != 155"
@@ -113,7 +113,7 @@
           <van-tag
             round
             color="orange"
-            class="tuijian-4a4543f0a71a7c9f19600ef30bd3d067"
+            class="update-77ed43eb3bc38c0cb1a38367cfedd9d6"
             >更多更新记录</van-tag
           >
         </div>
@@ -121,7 +121,7 @@
     </div>
 
     <div
-      class="app-e827ba0e6873e7ce7ef7c6c58e970609 tuijian-a0e7b2a565119c0a7ec3126a16016113"
+      class="app-e827ba0e6873e7ce7ef7c6c58e970609 update-54d18ea9d2c044692d2df8b888792af8"
     >
       <van-calendar
         v-model="showInfo.calendar"
@@ -134,7 +134,7 @@
       />
     </div>
 
-    <div class="tuijian-3cc26c96de198245a3ee2d64e1f94ebf">
+    <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
         @close="onCloseHeroUpdateTextClick(heroId, now)"
