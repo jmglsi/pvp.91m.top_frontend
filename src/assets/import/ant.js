@@ -6,21 +6,21 @@ import {
     Timeline,
     Dropdown,
     Menu,
-    message,
-    notification
+    Message,
+    Notification
 } from 'ant-design-vue'
 
-Vue.use(Icon).use(Timeline).use(Dropdown).use(Menu).use(message).use(notification)
+Vue
+    .use(Icon)
+    .use(Timeline)
+    .use(Dropdown)
+    .use(Menu)
+    .use(Message, {
+        duration: 5
+    })
+    .use(Notification, {
+        duration: 10
+    })
 
-message.config({
-    top: "50px",
-    duration: 10
-})
-
-notification.config({
-    top: "50px",
-    duration: 10
-})
-
-Vue.prototype.$message = message
-Vue.prototype.$notification = notification
+Vue.prototype.$message = Message
+Vue.prototype.$notification = Notification

@@ -393,7 +393,7 @@
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in author.actions"
-                :key="index"
+                :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
                 @click="
                   data.url
                     ? appOpenUrl('是否打开外部链接？', null, { path: data.url })
@@ -995,14 +995,14 @@ export default {
       }
     },
     onGamePerspectiveClick: function (bpMode) {
-      if (bpMode == 1)
-        this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
-
       this.bpPerspective == 1
         ? (this.bpPerspective = 2)
         : (this.bpPerspective = 1);
 
       this.initBPOrder(this.bpPerspective, this.tabsModel + 1);
+
+      if (bpMode == 1)
+        this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
     },
     onGameTabsChange: function (e) {
       this.initBPOrder(this.bpPerspective, e + 1);

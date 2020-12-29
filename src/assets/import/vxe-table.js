@@ -9,9 +9,20 @@ import {
     Grid,
     Table,
     Toolbar,
-    Button
+    Button,
+    Filter
 } from 'vxe-table'
 import zhCNLocat from 'vxe-table/lib/locale/lang/zh-CN'
+
+Vue
+    .use(Column)
+    .use(Icon)
+    .use(Header)
+    .use(Grid)
+    .use(Table)
+    .use(Toolbar)
+    .use(Button)
+    .use(Filter)
 
 VXETable.setup({
     table: {
@@ -30,7 +41,5 @@ VXETable.setup({
     },
     i18n: (key, value) => XEUtils.get(zhCNLocat, key, value)
 });
-
-Vue.use(Column).use(Icon).use(Header).use(Grid).use(Table).use(Toolbar).use(Button)
 
 Vue.prototype.$XModal = VXETable.modal

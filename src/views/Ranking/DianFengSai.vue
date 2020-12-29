@@ -95,21 +95,60 @@
           <vxe-table-column
             title="禁用"
             field="banRate"
+            :filters="[{ data: '' }]"
+            :filter-method="filterBanRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
+                type="type"
+                placeholder="输入 0.00 ~ 99.99 进行筛选"
+                @input="$panel.changeOption($event, !!option.data, option)"
+              />
+            </template>
+          </vxe-table-column>
           <vxe-table-column
             title="出场"
             field="pickRate"
+            :filters="[{ data: '' }]"
+            :filter-method="filterPickRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-f55d5cafb56611ebf0534588e49d4121-' + index"
+                type="type"
+                placeholder="输入 0.00 ~ 99.99 进行筛选"
+                @input="$panel.changeOption($event, !!option.data, option)"
+              />
+            </template>
+          </vxe-table-column>
           <vxe-table-column
             title="胜率"
             field="winRate"
+            :filters="[{ data: '' }]"
+            :filter-method="filterWinRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-6b557157ba74177968c0e2cb78fa87b7-' + index"
+                type="type"
+                placeholder="输入 0.00 ~ 99.99 进行筛选"
+                @input="$panel.changeOption($event, !!option.data, option)"
+              />
+            </template>
+          </vxe-table-column>
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
@@ -407,6 +446,15 @@ export default {
           "提示:1005,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
         );
       }
+    },
+    filterBanRateMethod({ option, row }) {
+      return row.banRate > option.data;
+    },
+    filterPickRateMethod({ option, row }) {
+      return row.pickRate > option.data;
+    },
+    filterWinRateMethod({ option, row }) {
+      return row.winRate > option.data;
     },
     onDropdownMenuChange: function () {
       this.getRanking(this.areaInfo.model, this.positionInfo.model);

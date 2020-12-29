@@ -2,7 +2,7 @@
   <div class="hero-equipment">
     <vxe-grid
       ref="heroEquipment"
-      :data="tableData.result"
+      :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
       height="547"
       auto-resize
