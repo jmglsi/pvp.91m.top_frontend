@@ -28,9 +28,8 @@
         "vue-i18n": "^8.22.2",
         "vue-meta": "^2.4.0",
         "vue-router": "^3.4.5",
-        "vue-template-compiler": "^2.6.12",
-        "vxe-table": "^2.10.0",
-        "xe-utils": "^2.7.13"
+        "vxe-table": "^2.10.9",
+        "xe-utils": "^2.8.3"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^3.11.0",

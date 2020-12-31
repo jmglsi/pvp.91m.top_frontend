@@ -13,6 +13,7 @@
         @click-left="appPush({ path: '/ranking' })"
         @click-right="$message.info('提示:1004,分路推荐 ;D')"
         left-text="排行"
+        z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>
@@ -48,7 +49,7 @@
             <ul>
               <li
                 v-for="(data, index) in hero.info.type"
-                :key="'hero-e4d23e841d8e8804190027bce3180fa5-' + index"
+                :key="'hero-5b659d3a22bcdd20abf3405d43ae80a7-' + index"
               >
                 <van-tag
                   round
@@ -67,7 +68,7 @@
     <div class="hero-e21ecc3330f7f3c382fc113f392368bd">
       <van-swipe
         v-if="showInfo.parameter"
-        :autoplay="7.5 * 1000"
+        :autoplay="7500"
         :height="250"
         class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
       >
@@ -101,7 +102,7 @@
         v-if="showInfo.parameter"
         :border="false"
         :column-num="3"
-        class="app-ff4a008470319a22d9cf3d14af485977"
+        class="hero-d7eb5a86f1d4b50ea22711e1e60718e9"
       >
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
@@ -207,7 +208,6 @@
         v-model="tabsModel"
         :border="false"
         :ellipsis="false"
-        :sticky="true"
         @change="onTabsChange"
         duration="0.5"
         line-width="25px"
@@ -217,13 +217,15 @@
       >
         <van-tab class="hero-ab71021d21963773bfb8be80af65869f">
           <template #title>
-            <van-dropdown-menu class="hero-385d73af791b8e7dc7e1209c3320ea26">
-              <van-dropdown-item
-                v-model="trendInfo.model"
-                :options="trendInfo.options"
-                :disabled="tabsModel == 0 ? false : true"
-              />
-            </van-dropdown-menu>
+            <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
+              <van-dropdown-menu direction="up">
+                <van-dropdown-item
+                  v-model="trendInfo.model"
+                  :options="trendInfo.options"
+                  :disabled="tabsModel == 0 ? false : true"
+                />
+              </van-dropdown-menu>
+            </div>
           </template>
         </van-tab>
         <van-tab
@@ -259,13 +261,21 @@
       v-show="showInfo.parameter"
       class="hero-9393a9be63ea720a87e048d40caa03b5"
     >
-      <div class="hero-b7b5e31b028440d2e0e0157baad49513">
-        <HeroSameHobby :heroId="hero.info.id" />
-      </div>
+      <van-skeleton v-show="showInfo.heroUpdate" :row="30" />
 
-      <div class="hero-b7b5e31b028440d2e0e0157baad49513">
-        <HeroUpdate :heroId="hero.info.id" :updateId="hero.info.updateId" />
-      </div>
+      <lazy-component
+        :preLoad="1"
+        @show="onComponentShow"
+        class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
+      >
+        <div class="hero-b7b5e31b028440d2e0e0157baad49513">
+          <HeroSameHobby :heroId="hero.info.id" />
+        </div>
+
+        <div class="hero-b7b5e31b028440d2e0e0157baad49513">
+          <HeroUpdate :heroId="hero.info.id" :updateId="hero.info.updateId" />
+        </div>
+      </lazy-component>
     </div>
 
     <div
@@ -366,7 +376,7 @@
       </van-tabbar>
     </div>
 
-    <AppBottomTabbar height="100" />
+    <AppBottomTabbar v-if="isMobile" height="100" />
   </div>
 </template>
 
@@ -391,10 +401,8 @@ export default {
       require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   beforeRouteUpdate(to, from, next) {
-    if (to.params.id != from.params.id) {
-      this.getHeroInfo(to.params.id);
-      next();
-    }
+    this.getHeroInfo(to.params.id);
+    next();
   },
   data() {
     return {
@@ -406,6 +414,7 @@ export default {
         heroMenu: false,
         imagePreview: false,
         imageIndex: 0,
+        heroUpdate: true,
       },
       tabsModel: 0,
       hero: {
@@ -441,7 +450,7 @@ export default {
         options: [
           { text: "巅峰赛趋势", value: 0 },
           { text: "英雄强势期", value: 1 },
-          { text: "论坛舆论趋势", value: 2 },
+          { text: "舆论趋势", value: 2 },
         ],
       },
     };
@@ -464,8 +473,6 @@ export default {
         document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
-
       this.axios
         .post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
         .then((res) => {
@@ -479,6 +486,11 @@ export default {
           this.hero.title = heroInfo.name;
           document.title = heroInfo.name + " | 苏苏的荣耀助手";
         });
+    },
+    onComponentShow: function () {
+      setTimeout(() => {
+        this.showInfo.heroUpdate = false;
+      }, 1000);
     },
     onTipsClick: function () {
       this.$dialog.alert({
@@ -539,16 +551,12 @@ export default {
       if (e == 0) {
         dTitle = heroInfo.name;
         this.hero.title = dTitle;
-      }
-
-      if (e == 1) {
+      } else if (e == 1) {
         dTitle = "同分路对比";
-        this.hero.title = dTitle;
-      }
-
-      if (e == 2) {
+        this.hero.title = "";
+      } else if (e == 2) {
         dTitle = "自定义对比";
-        this.hero.title = dTitle;
+        this.hero.title = "";
       }
 
       document.title = dTitle + " | 苏苏的荣耀助手";

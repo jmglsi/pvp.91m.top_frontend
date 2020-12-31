@@ -22,7 +22,13 @@
         :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="英雄_1" fixed="left" width="75" sortable>
+        <vxe-table-column
+          title="英雄_1"
+          field="heroId_1"
+          fixed="left"
+          width="65"
+          sortable
+        >
           <template v-slot="{ row }">
             <img
               v-lazy="row.hero_1.img"
@@ -36,7 +42,13 @@
             >
           </template>
         </vxe-table-column>
-        <vxe-table-column title="英雄_2" fixed="left" width="75" sortable>
+        <vxe-table-column
+          title="英雄_2"
+          field="heroId_2"
+          fixed="left"
+          width="65"
+          sortable
+        >
           <template v-slot="{ row }">
             <img
               v-lazy="row.hero_2.img"
@@ -57,39 +69,117 @@
           <vxe-table-column
             title="出场"
             field="teammatePickRate"
+            :filters="[{ data: 0 }]"
+            :filter-method="filterTeammatePickRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-9fa4d8f5c751c67e15e1b44b680fe5a0-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
           <vxe-table-column
             title="胜率"
             field="teammateWinRate"
+            :filters="[{ data: 0 }]"
+            :filter-method="filterTeammateWinRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-39443bf307387782e1d78103a8853493-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
         </vxe-table-column>
 
         <vxe-table-column
           title="适配"
           field="adaptation"
+          :filters="[{ data: 0 }]"
+          :filter-method="filterAdaptationMethod"
           :width="listWidth"
           sortable
-        />
+        >
+          <template v-slot:filter="{ $panel, column }">
+            ≥
+            <input
+              v-model="option.data"
+              v-for="(option, index) in column.filters"
+              :key="'hero-37fbc8af6b6e2b2129d0a5462d2fe2dd-' + index"
+              type="type"
+              placeholder="0"
+              @input="$panel.changeOption($event, !!option.data, option)"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+            />
+          </template>
+        </vxe-table-column>
 
         <vxe-table-column title="对手 (%)">
           <vxe-table-column
             title="出场"
             field="opponentPickRate"
+            :filters="[{ data: 0 }]"
+            :filter-method="filterOpponentPickRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-7b5fe4548b7ec10f94494337d3698b67-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
           <vxe-table-column
             title="胜率"
             field="opponentWinRate"
+            :filters="[{ data: 0 }]"
+            :filter-method="filterOpponentWinRateMethod"
             :width="listWidth"
             sortable
-          />
+          >
+            <template v-slot:filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-9e27252bc4e939c2253951d3f6692fb2-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
         </vxe-table-column>
-        <template v-slot:empty>暂无数据</template>
       </vxe-grid>
     </div>
 
@@ -162,7 +252,7 @@ export default {
       let text = this.tableData.searchPlaceholder;
 
       this.search.placeholder = text[Math.floor(Math.random() * text.length)];
-    }, 1000 * 5);
+    }, 5000);
   },
   methods: {
     initGuanXiTable: function () {
@@ -234,6 +324,21 @@ export default {
 
       this.showInfo.actionSheet = true;
     },
+    filterTeammatePickRateMethod({ option, row }) {
+      return row.teammatePickRate >= option.data;
+    },
+    filterTeammateWinRateMethod({ option, row }) {
+      return row.teammateWinRate >= option.data;
+    },
+    filterAdaptationMethod({ option, row }) {
+      return row.adaptation >= option.data;
+    },
+    filterOpponentPickRateMethod({ option, row }) {
+      return row.opponentPickRate >= option.data;
+    },
+    filterOpponentWinRateMethod({ option, row }) {
+      return row.opponentWinRate >= option.data;
+    },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
@@ -276,6 +381,7 @@ export default {
       let searchValue = this.search.value;
 
       if (!searchValue) return;
+
       if (searchValue.indexOf(",") > -1) {
         this.axios
           .get(

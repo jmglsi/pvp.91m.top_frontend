@@ -95,58 +95,67 @@
           <vxe-table-column
             title="禁用"
             field="banRate"
-            :filters="[{ data: '' }]"
+            :filters="[{ data: 0 }]"
             :filter-method="filterBanRateMethod"
             :width="listWidth"
             sortable
           >
             <template v-slot:filter="{ $panel, column }">
+              ≥
               <input
                 v-model="option.data"
                 v-for="(option, index) in column.filters"
                 :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
                 type="type"
-                placeholder="输入 0.00 ~ 99.99 进行筛选"
+                placeholder="0"
                 @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
+              %
             </template>
           </vxe-table-column>
           <vxe-table-column
             title="出场"
             field="pickRate"
-            :filters="[{ data: '' }]"
+            :filters="[{ data: 3, checked: true }]"
             :filter-method="filterPickRateMethod"
             :width="listWidth"
             sortable
           >
             <template v-slot:filter="{ $panel, column }">
+              ≥
               <input
                 v-model="option.data"
                 v-for="(option, index) in column.filters"
                 :key="'hero-f55d5cafb56611ebf0534588e49d4121-' + index"
                 type="type"
-                placeholder="输入 0.00 ~ 99.99 进行筛选"
+                placeholder="0"
                 @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
+              %
             </template>
           </vxe-table-column>
           <vxe-table-column
             title="胜率"
             field="winRate"
-            :filters="[{ data: '' }]"
+            :filters="[{ data: 48, checked: true }]"
             :filter-method="filterWinRateMethod"
             :width="listWidth"
             sortable
           >
             <template v-slot:filter="{ $panel, column }">
+              ≥
               <input
                 v-model="option.data"
                 v-for="(option, index) in column.filters"
                 :key="'hero-6b557157ba74177968c0e2cb78fa87b7-' + index"
                 type="type"
-                placeholder="输入 0.00 ~ 99.99 进行筛选"
+                placeholder="0"
                 @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
+              %
             </template>
           </vxe-table-column>
         </vxe-table-column>
@@ -448,13 +457,13 @@ export default {
       }
     },
     filterBanRateMethod({ option, row }) {
-      return row.banRate > option.data;
+      return row.banRate >= option.data;
     },
     filterPickRateMethod({ option, row }) {
-      return row.pickRate > option.data;
+      return row.pickRate >= option.data;
     },
     filterWinRateMethod({ option, row }) {
-      return row.winRate > option.data;
+      return row.winRate >= option.data;
     },
     onDropdownMenuChange: function () {
       this.getRanking(this.areaInfo.model, this.positionInfo.model);

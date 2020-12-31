@@ -18,7 +18,7 @@ img.ranking-fbfe7b256ce6b4df1d03d8022163c6d2 {
 }
 
 span.ranking-f58cc48f5b942c91e57eff48accc5151 {
-    margin-left: -50px;
+    margin-left: -23px;
     top: 62px;
 }
 
@@ -83,17 +83,17 @@ div.ranking-a9b4432c8e9b49bafa0a23e52d970016 div.van-dropdown-menu__bar {
     box-shadow: unset;
 }
 
+div.ranking-ebf09abeb7c3db44741d328324915725 {
+    margin-top: 5px;
+    position: absolute;
+    width: 100%;
+}
+
 div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
     left: 72px;
     margin-top: 5px;
     position: absolute;
     z-index: 2;
-}
-
-div.ranking-ebf09abeb7c3db44741d328324915725 {
-    margin-top: 5px;
-    position: absolute;
-    width: 100%;
 }
 
 div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
@@ -102,4 +102,8 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
 
 div.ranking-3740dbf9ae65a19ad0cfdcc76918659d {
     margin: 25px 0;
+}
+
+div.ranking-038a25200255054bb358e9839b055f73 {
+    text-align: left;
 }

@@ -5,13 +5,13 @@
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col span="16" @click="showInfo.calendar = true">
+          <van-col :span="isMobile ? 14 : 20" @click="showInfo.calendar = true">
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.result.tips
             }}</span>
           </van-col>
-          <van-col span="8">
-            <div class="update-c88c478fd2695c8b07740ccd247a28ae">
+          <van-col :span="isMobile ? 10 : 4">
+            <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
               <van-dropdown-menu direction="up">
                 <van-dropdown-item
                   v-model="updateInfo.model"
@@ -73,36 +73,42 @@
             />
 
             <div class="update-c936f93d328137bba0ab32510a2e4fd0">
-              <router-link
-                v-for="(heroId, index) in data.items"
+              <span
+                v-for="(itemHeroId, index) in data.items"
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
-                :to="heroId == 999 ? '' : { path: '/hero/' + heroId + '/info' }"
+                v-show="itemHeroId != heroId"
+                @click="
+                  itemHeroId == 999
+                    ? ''
+                    : appPush({ path: '/hero/' + itemHeroId + '/info' })
+                "
+                class="update-704985931ce54a5350c733c036dfd8b2"
               >
                 <img
-                  v-if="heroId != 155"
+                  v-if="itemHeroId != 155"
                   v-lazy="
-                    heroId == 999
+                    itemHeroId == 999
                       ? '/img/app-icons/hero_white.png'
                       : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                        heroId +
+                        itemHeroId +
                         '/' +
-                        heroId +
+                        itemHeroId +
                         '.jpg'
                   "
                   @click="
-                    heroId == 999
+                    itemHeroId == 999
                       ? $message.info('提示:1000,还没上线正式服的新英雄')
                       : ''
                   "
                   class="update-5d39f3848925994b52ec52fba934577c"
                 />
-              </router-link>
+              </span>
             </div>
           </a-timeline-item>
         </a-timeline>
 
         <div
-          v-if="heroId != 0"
+          v-if="heroId > 0"
           @click="
             appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', {
               path: '//nga.178.com/read.php?pid=' + updateId,

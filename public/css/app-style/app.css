@@ -1,3 +1,9 @@
+input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
+    margin: 0 5px;
+    text-align: center;
+    width: 35px;
+}
+
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
     border-radius: unset;
     margin-bottom: -40px;
@@ -23,6 +29,7 @@ ul.app-9e60d3ee1e1574cae90960f940c0a821 {
 
 li.app-1951b6e7c82938dd7446a41e829b247b {
     display: inline-block;
+    margin-top: 10px;
 }
 
 button.app-0162f4b7b2dbdf6aff3a25de02e49a8b,
@@ -36,7 +43,7 @@ button.app-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
 }
 
 span.van-tab__text {
-    margin: 11px 0 7px 0;
+    margin: 11px 0;
 }
 
 span.app-e4d23e841d8e8804190027bce3180fa5 {
@@ -195,7 +202,7 @@ div.app-0464ec62d5cba8a9ec29d0c4c89fc7c6,
 div.app-6bdc6915ee08058392eafe0ef6e353fd {
     border-radius: 10px;
     margin: 0 10px;
-    padding: 15px 10px;
+    padding: 10px;
 }
 
 div.app-b4a64ecd008af42ba95bc20350599699,
@@ -223,4 +230,13 @@ div.app-e827ba0e6873e7ce7ef7c6c58e970609 div.van-popup {
 div.ant-message,
 div.ant-notification {
     z-index: 99999999;
+}
+
+div.app-f3b57b63e4f5f4e157fd45bdb8611005 div.van-dropdown-item {
+    margin-bottom: 10px;
+}
+
+div.app-f3b57b63e4f5f4e157fd45bdb8611005 div.van-dropdown-menu__bar {
+    border-radius: 50px;
+    width: 125px;
 }

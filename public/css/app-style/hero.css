@@ -8,14 +8,6 @@ img.hero-44908c08b6c253a19ab6246e6eec857a {
     width: 100%;
 }
 
-img.hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767 {
-    border-radius: unset;
-    margin-right: -35px;
-    margin-top: -45px;
-    position: relative;
-    width: 45px;
-}
-
 img.hero-ff2364a0be3d20e46cc69efb36afe9a5,
 svg.hero-ff2364a0be3d20e46cc69efb36afe9a5 {
     margin: 0 3px;
@@ -26,15 +18,12 @@ div.hero-632d142d7a508e86f6c35a044a17411e span.hero-d5d3db1765287eef77d7927cc956
     margin: 0 5px;
 }
 
-span.hero-0fc3cfbc27e91ea60a787de13dae3e3c {
-    color: white;
-}
-
 span.hero-9726255eec083aa56dc0449a21b33190 {
     margin-top: 5px;
 }
 
 span.hero-0fc3cfbc27e91ea60a787de13dae3e3c {
+    color: white;
     margin-left: -40px;
     margin-top: 26px;
 }
@@ -77,17 +66,8 @@ div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__right {
     width: 40%;
 }
 
-div.hero-68adaff1d028a37f27fb33c483329cba li {
-    float: left;
-}
-
 div.hero-16e1b9e46fe4483c6bc17aea9d20736a {
     text-align: left;
-}
-
-div.hero-e06398232dc80e41209489705546802c {
-    margin-top: 25px;
-    z-index: -1;
 }
 
 div.hero-68adaff1d028a37f27fb33c483329cba {
@@ -96,8 +76,8 @@ div.hero-68adaff1d028a37f27fb33c483329cba {
     right: 20px;
 }
 
-div.hero-d42f4851e770aa0f758b01388874f67b div.van-tabs__nav {
-    z-index: 1;
+div.hero-68adaff1d028a37f27fb33c483329cba li {
+    float: left;
 }
 
 div.hero-d42f4851e770aa0f758b01388874f67b {
@@ -112,18 +92,11 @@ div.hero-f01902c0d0136ca30fe1034f339964ba {
     margin-bottom: 10px;
 }
 
-div.hero-face1cbe136c70e1fc08cff038596944 ul {
+div.hero-face1cbe136c70e1fc08cff038596944 {
     margin-top: 25px;
 }
 
-div.hero-18327e5b67b8072ab8cf020c4ef15c9c {
-    font-size: 12px;
-    margin-top: 20px;
-    position: absolute;
-    width: 100%;
-}
-
-div.app-ff4a008470319a22d9cf3d14af485977 {
+div.hero-d7eb5a86f1d4b50ea22711e1e60718e9 {
     margin-top: -125px;
 }
 
@@ -159,26 +132,10 @@ div.hero-b7b5e31b028440d2e0e0157baad49513 {
     margin: 25px 0;
 }
 
-ul.hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7 {
-    width: 100%;
-    height: 115px;
+div.hero-d42f4851e770aa0f758b01388874f67b div.van-tabs__wrap {
+    height: 70px;
 }
 
-div.hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b {
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-div.hero-same-768072e388401bba973734e004d2ac51 {
-    margin-top: 5px;
-}
-
-div.hero-385d73af791b8e7dc7e1209c3320ea26 div.van-dropdown-menu__bar {
-    background-color: unset;
-    box-shadow: unset;
-    height: unset;
-}
-
-div.hero-d4a9092fd7b386904e4a2894044f2a9d.van-tabbar {
-    z-index: 11;
+div.hero-d42f4851e770aa0f758b01388874f67b div.van-tabs__line {
+    bottom: 33px
 }

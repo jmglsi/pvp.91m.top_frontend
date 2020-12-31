@@ -19,7 +19,7 @@
             v-lazy="row.img"
             width="25"
             height="25"
-            class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+            class="hero-equipment-d8dff643744fd7b25a4558d61e3470f0"
           />
         </template>
       </vxe-table-column>
@@ -45,7 +45,7 @@
               "
               width="25"
               height="25"
-              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              class="hero-equipment-22ea16b91b29bfb013f1b649b0c88396"
             />
           </template>
         </vxe-table-column>
@@ -63,7 +63,28 @@
         :width="listWidth"
         sortable
       />
-      <vxe-table-column title="胜率 (%)" field="winRate" width="100" sortable />
+      <vxe-table-column
+        title="胜率 (%)"
+        field="winRate"
+        :filters="[{ data: 0 }]"
+        :filter-method="filterWinRateMethod"
+        width="125"
+        sortable
+      >
+        <template v-slot:filter="{ $panel, column }">
+          ≥
+          <input
+            v-model="option.data"
+            v-for="(option, index) in column.filters"
+            :key="'hero-equipment-f0549be9f0aa36c46c0b2f76ed0a4f4f-' + index"
+            type="type"
+            placeholder="0"
+            @input="$panel.changeOption($event, !!option.data, option)"
+            class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+          />
+          %
+        </template>
+      </vxe-table-column>
       <vxe-table-column
         title="时长"
         field="usedtime"
@@ -108,15 +129,6 @@ export default {
       },
     },
   },
-  created() {
-    if (this.isMobile) {
-      this.equipmentWidth = 60;
-      this.listWidth = 85;
-    } else {
-      this.equipmentWidth = 0;
-      this.listWidth = 0;
-    }
-  },
   data() {
     return {
       equipmentWidth: 0,
@@ -127,6 +139,20 @@ export default {
         },
       },
     };
+  },
+  created() {
+    if (this.isMobile) {
+      this.equipmentWidth = 60;
+      this.listWidth = 85;
+    } else {
+      this.equipmentWidth = 0;
+      this.listWidth = 0;
+    }
+  },
+  methods: {
+    filterWinRateMethod({ option, row }) {
+      return row.winRate >= option.data;
+    },
   },
 };
 </script>
