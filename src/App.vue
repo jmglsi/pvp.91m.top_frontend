@@ -17,7 +17,6 @@
       <van-tabbar
         v-model="tabbar.active"
         v-if="tabbar.default.show"
-        :z-index="3"
         fixed
         safe-area-inset-bottom
         active-color="rgb(243,189,103)"

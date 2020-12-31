@@ -9,6 +9,7 @@
         @click-left="$router.go(-1)"
         left-text="返回"
         title="每隔 5 分钟更新一次,切换视角 👉"
+        z-index="99999999"
         class="skin-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #right>

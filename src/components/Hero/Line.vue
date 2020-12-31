@@ -16,7 +16,7 @@
     </div>
 
     <div
-      v-if="trendType == 0 && lineData.status.code == 200"
+      v-if="trendType == 0 && showInfo.autoPlayTrend == true"
       class="hero-f6d50810d5b150ebd421cc944d2597a5"
     >
       <van-switch
@@ -84,18 +84,18 @@ export default {
   data() {
     return {
       lineData: {
+        extend: {},
+        loading: true,
         markLine: {},
         markPoint: {},
-        extend: {},
-        settings: {},
-        loading: true,
         result: {},
-        status: {
-          code: 200,
-        },
+        settings: {},
       },
       lineInfo: {
         checked: false,
+      },
+      showInfo: {
+        autoPlayTrend: false,
       },
       trendIndex: 0,
     };
@@ -109,9 +109,11 @@ export default {
       return e;
     },
     getHeroChartsLog: function (heroId, aid, detailed) {
-      this.lineData = {};
-      this.lineData.status = 200;
-      this.lineData.loading = true;
+      this.lineData = {
+        loading: true,
+        result: {},
+        status: 200,
+      };
 
       this.axios
         .post(
@@ -127,10 +129,12 @@ export default {
           let data = res.data.data,
             status = res.data.status;
 
+          this.lineData.status = status;
+
           if (status.code == 200) {
             this.lineData = data;
-            this.lineData.status = status;
             this.lineData.loading = false;
+            this.showInfo.autoPlayTrend = true;
           } else {
             this.appOpenUrl(status.msg, null, { path: "/login" }, 1);
           }

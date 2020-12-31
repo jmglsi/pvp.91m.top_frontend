@@ -31,7 +31,7 @@
         </li>
       </ul>
 
-      <div class="hero-same-768072e388401bba973734e004d2ac51">
+      <div class="hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c">
         <van-button
           round
           icon="replay"
@@ -45,6 +45,10 @@
     </div>
   </div>
 </template>
+
+<style>
+@import url("/css/app-style/hero-same-hobby.css");
+</style>
 
 <script>
 export default {

@@ -64,7 +64,6 @@
           width="200"
         />
         <vxe-table-column title="状态" field="is_running" width="75" />
-        <template v-slot:empty>暂无数据</template>
       </vxe-grid>
     </div>
 
@@ -138,7 +137,7 @@ export default {
 
     this.getOrderInfoInterval = setInterval(() => {
       this.getOrderInfo(this.search.value, this.paginationModel);
-    }, 1000 * 10);
+    }, 10000);
   },
   methods: {
     appInitTableWidth: function () {
@@ -155,7 +154,6 @@ export default {
         )
         .then((res) => {
           this.tableData = res.data.data;
-          this.tableData.loading = false;
           this.tableData.row = {
             uid: 0,
           };
@@ -165,6 +163,8 @@ export default {
           if (copyAv) {
             this.copyDataByAv(copyAv);
           }
+          
+          this.tableData.loading = false;
         });
     },
     copyDataByAv: function (e) {
@@ -233,7 +233,7 @@ export default {
       if (e == true) {
         this.getOrderInfoInterval = setInterval(() => {
           this.getOrderInfo(this.search.value, this.paginationModel);
-        }, 1000 * 10);
+        }, 10000);
       } else {
         clearInterval(this.getOrderInfoInterval);
       }

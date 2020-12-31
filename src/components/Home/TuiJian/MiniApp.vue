@@ -15,7 +15,7 @@
             class="miniapp-074e15e6992043a4a47e781cc3008693"
           >
             <van-grid-item
-              v-for="(data, index) in miniapp.a"
+              v-for="(data, index) in miniapp.result.a"
               :key="'miniapp-0cc175b9c0f1b6a831c399e269772661-' + index"
               :icon="data.icon"
               :text="data.text"
@@ -39,7 +39,7 @@
             class="miniapp-a713c75193d032a9ea6df8a0665471eb"
           >
             <van-grid-item
-              v-for="(data, index) in miniapp.b"
+              v-for="(data, index) in miniapp.result.b"
               :key="'miniapp-92eb5ffee6ae2fec3ad71c777531578f-' + index"
               :icon="data.icon"
               :text="data.text"
@@ -75,8 +75,10 @@ export default {
   data() {
     return {
       miniapp: {
-        a: [],
-        b: [],
+        result: {
+          a: [],
+          b: [],
+        },
       },
     };
   },

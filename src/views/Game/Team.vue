@@ -9,7 +9,8 @@
         @click-left="appPush({ path: '/my' })"
         @click-right="onCreateTeamClick"
         left-text="返回"
-        title="我的队伍"
+        title="队伍"
+        z-index="99999999"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
       >
         <van-icon name="add-o" slot="right" />

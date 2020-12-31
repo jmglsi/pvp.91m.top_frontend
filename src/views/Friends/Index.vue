@@ -8,6 +8,7 @@
         :placeholder="true"
         @click-left="$router.go(-1)"
         left-text="返回"
+        z-index="99999999"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
         <template #title>
@@ -139,7 +140,7 @@
       >
     </div>
 
-    <AppBottomTabbar height="100" />
+    <AppBottomTabbar v-if="isMobile" height="100" />
   </div>
 </template>
 

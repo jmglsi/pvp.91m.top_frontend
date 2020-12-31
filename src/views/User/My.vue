@@ -1,7 +1,12 @@
 <template>
   <div class="login-home">
     <div class="my-8e35828097179076a177cfd25e3713db">
-      <van-nav-bar :border="false" :fixed="true" :placeholder="true">
+      <van-nav-bar
+        :border="false"
+        :fixed="true"
+        :placeholder="true"
+        z-index="99999999"
+      >
         <template #title>
           <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
             <span

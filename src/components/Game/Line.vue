@@ -81,8 +81,10 @@ export default {
       return e;
     },
     getGamePrediction: function (gameBPData, aid) {
-      this.lineData = {};
-      this.lineData.loading = true;
+      this.lineData = {
+        loading: true,
+        result: {},
+      };
 
       this.axios
         .post(
