@@ -1,83 +1,86 @@
 import Vue from 'vue'
 
-import {
-    PullRefresh,
-    Col,
-    Row,
-    SwitchCell,
-    NavBar,
-    ActionSheet,
-    Lazyload,
-    Calendar,
-    Loading,
-    Collapse,
-    CollapseItem,
-    Circle,
-    Field,
-    Button,
-    Swipe,
-    SwipeItem,
-    Grid,
-    GridItem,
-    Pagination,
-    Icon,
-    Dialog,
-    Tag,
-    Tab,
-    Tabs,
-    Divider,
-    Tabbar,
-    TabbarItem,
-    DropdownMenu,
-    DropdownItem,
-    Popup,
-    Cell,
-    CellGroup,
-    Search,
-    ShareSheet,
-    Uploader,
-    Checkbox,
-    ImagePreview,
-    Switch
-} from 'vant'
 import '@vant/touch-emulator'
 
+import {
+    ActionSheet,
+    Button,
+    Calendar,
+    Cell,
+    CellGroup,
+    Checkbox,
+    Circle,
+    Col,
+    Collapse,
+    CollapseItem,
+    Dialog,
+    Divider,
+    DropdownItem,
+    DropdownMenu,
+    Field,
+    Grid,
+    GridItem,
+    Icon,
+    ImagePreview,
+    Lazyload,
+    Loading,
+    NavBar,
+    Pagination,
+    Popup,
+    PullRefresh,
+    Row,
+    Search,
+    ShareSheet,
+    Skeleton,
+    Swipe,
+    SwipeItem,
+    Switch,
+    SwitchCell,
+    Tab,
+    Tabbar,
+    TabbarItem,
+    Tabs,
+    Tag,
+    Uploader
+} from 'vant'
+
 Vue
-    .use(PullRefresh)
-    .use(Col)
-    .use(Row)
-    .use(SwitchCell)
-    .use(NavBar)
     .use(ActionSheet)
-    .use(Lazyload)
-    .use(Calendar)
-    .use(Loading)
-    .use(Collapse)
-    .use(CollapseItem)
-    .use(Circle)
-    .use(Field)
     .use(Button)
-    .use(Swipe)
-    .use(SwipeItem)
-    .use(Grid)
-    .use(GridItem)
-    .use(Pagination)
-    .use(Icon)
-    .use(Dialog)
-    .use(Tag)
-    .use(Tab)
-    .use(Tabs)
-    .use(Divider)
-    .use(Tabbar)
-    .use(TabbarItem)
-    .use(DropdownMenu)
-    .use(DropdownItem)
-    .use(Popup)
+    .use(Calendar)
     .use(Cell)
     .use(CellGroup)
+    .use(Checkbox)
+    .use(Circle)
+    .use(Col)
+    .use(Collapse)
+    .use(CollapseItem)
+    .use(Dialog)
+    .use(Divider)
+    .use(DropdownItem)
+    .use(DropdownMenu)
+    .use(Field)
+    .use(Grid)
+    .use(GridItem)
+    .use(Icon)
+    .use(ImagePreview)
+    .use(Lazyload, { lazyComponent: true })
+    .use(Loading)
+    .use(NavBar)
+    .use(Pagination)
+    .use(Popup)
+    .use(PullRefresh)
+    .use(Row)
     .use(Search)
     .use(ShareSheet)
-    .use(Uploader)
-    .use(Checkbox)
-    .use(ImagePreview)
+    .use(Skeleton)
+    .use(Swipe)
+    .use(SwipeItem)
     .use(Switch)
+    .use(SwitchCell)
+    .use(Tab)
+    .use(Tabbar)
+    .use(TabbarItem)
+    .use(Tabs)
+    .use(Tag)
+    .use(Uploader)

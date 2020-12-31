@@ -2,18 +2,17 @@ import Vue from 'vue'
 
 import 'ant-design-vue/dist/antd.css'
 import {
-    Icon,
-    Timeline,
     Dropdown,
+    Icon,
     Menu,
     Message,
-    Notification
+    Notification,
+    Timeline
 } from 'ant-design-vue'
 
 Vue
-    .use(Icon)
-    .use(Timeline)
     .use(Dropdown)
+    .use(Icon)
     .use(Menu)
     .use(Message, {
         duration: 5
@@ -21,6 +20,7 @@ Vue
     .use(Notification, {
         duration: 10
     })
+    .use(Timeline)
 
 Vue.prototype.$message = Message
 Vue.prototype.$notification = Notification

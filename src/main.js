@@ -7,6 +7,8 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title + " | 苏苏的荣耀助手"
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+
     next()
 })
 
