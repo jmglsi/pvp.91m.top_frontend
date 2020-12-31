@@ -8,10 +8,24 @@
           @change="onPlayerOptionsChange"
         />
         <van-dropdown-item ref="item" title="筛选">
-          <van-switch-cell v-model="showInfo.shield" title="隐藏战绩" />
-          <van-button type="info" block @click="onDropdownConfirmClick"
-            >确认</van-button
+          <van-cell
+            title="隐藏战绩"
+            class="ranking-038a25200255054bb358e9839b055f73"
           >
+            <template #right-icon>
+              <van-switch v-model="showInfo.shield" />
+            </template>
+          </van-cell>
+          <div style="padding: 5px 16px">
+            <van-button
+              type="danger"
+              block
+              round
+              @click="onDropdownConfirmClick"
+            >
+              确认
+            </van-button>
+          </div>
         </van-dropdown-item>
       </van-dropdown-menu>
     </div>
