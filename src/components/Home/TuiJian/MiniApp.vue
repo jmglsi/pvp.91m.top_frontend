@@ -83,11 +83,11 @@ export default {
     };
   },
   mounted() {
-    this.getMiniApp();
+    this.getMiniAppInfo();
   },
   methods: {
-    getMiniApp: function () {
-      this.axios.get(this.apiList.pvp.getMiniApp).then((res) => {
+    getMiniAppInfo: function () {
+      this.axios.get(this.apiList.pvp.getMiniAppInfo).then((res) => {
         this.miniapp = res.data.data;
       });
     },
