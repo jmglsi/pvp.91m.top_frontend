@@ -5,12 +5,12 @@
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col :span="isMobile ? 14 : 20" @click="showInfo.calendar = true">
+          <van-col :span="isMobile ? 15 : 21" @click="showInfo.calendar = true">
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.result.tips
             }}</span>
           </van-col>
-          <van-col :span="isMobile ? 10 : 4">
+          <van-col :span="isMobile ? 9 : 3">
             <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
               <van-dropdown-menu direction="up">
                 <van-dropdown-item
@@ -78,16 +78,15 @@
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
                 v-show="itemHeroId != heroId"
                 @click="
-                  itemHeroId == 999
+                  itemHeroId > 900
                     ? ''
                     : appPush({ path: '/hero/' + itemHeroId + '/info' })
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"
               >
                 <img
-                  v-if="itemHeroId != 155"
                   v-lazy="
-                    itemHeroId == 999
+                    itemHeroId > 900
                       ? '/img/app-icons/hero_white.png'
                       : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                         itemHeroId +
@@ -96,7 +95,7 @@
                         '.jpg'
                   "
                   @click="
-                    itemHeroId == 999
+                    itemHeroId > 900
                       ? $message.info('提示:1000,还没上线正式服的新英雄')
                       : ''
                   "
