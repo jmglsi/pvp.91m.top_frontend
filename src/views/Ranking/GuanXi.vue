@@ -26,7 +26,7 @@
           title="英雄_1"
           field="heroId_1"
           fixed="left"
-          width="65"
+          width="75"
           sortable
         >
           <template v-slot="{ row }">
@@ -46,7 +46,7 @@
           title="英雄_2"
           field="heroId_2"
           fixed="left"
-          width="65"
+          width="75"
           sortable
         >
           <template v-slot="{ row }">
