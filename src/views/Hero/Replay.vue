@@ -199,7 +199,7 @@ export default {
       this.axios
         .get(
           "//s.91m.top/?url=" +
-            replayUrl.substr(replayUrlIndex + 1, replayUrl.length)
+            replayUrl.slice(replayUrlIndex + 1, replayUrl.length)
         )
         .then((res) => {
           this.copyData =

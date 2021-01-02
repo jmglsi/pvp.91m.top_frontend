@@ -8,7 +8,7 @@
         :mark-point="lineData.markPoint"
         :data="lineData.result"
         :loading="lineData.loading"
-        :height="isMobile ? '350px' : '475px'"
+        :height="isMobile ? '375px' : '475px'"
         width="100%"
         class="equipment-be4fa98d69734bbd05d093fc0010f826"
       />
@@ -44,9 +44,6 @@ export default {
     listenChange() {
       const { heroEquipment } = this;
       return { heroEquipment };
-    },
-    scrollerWidth: function () {
-      return this.appWidth - 75 + "px";
     },
   },
   watch: {
@@ -88,10 +85,10 @@ export default {
             },
           },
           grid: {
-            top: 125,
+            top: 120,
           },
           legend: {
-            top: 60,
+            top: 45,
           },
         },
         loading: true,

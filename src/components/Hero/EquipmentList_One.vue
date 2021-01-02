@@ -81,7 +81,7 @@
           "
           width="25"
           height="25"
-        />&nbsp;优先级趋势
+        />&nbsp;的契合度
       </div>
 
       <div class="hero-2acf2be2c6fdd22f4a6282a72817bdb1">
@@ -92,7 +92,7 @@
         class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4"
       >
         <span class="app-e4c9479b11955648dad558fe717a4eb2">
-          1.胜率 非常高 或 100% 是因为样本较少
+          1.场次不高但是胜率接近 100% 可能是因为样本较少 或 针对出的
           <br />
           2.核心装在前面可能是因为先买的小件后面合成的
           <br />
