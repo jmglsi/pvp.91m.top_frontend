@@ -32,7 +32,7 @@
             />
             <span
               :style="
-                scroll >= 50 || tabsModel > 0
+                scroll >= 50 || tabsInfo.model > 0
                   ? { color: 'black' }
                   : { color: 'white' }
               "
@@ -95,7 +95,7 @@
     </div>
 
     <div
-      :style="tabsModel > 0 ? { marginTop: '50px' } : { marginTop: '0' }"
+      :style="tabsInfo.model > 0 ? { marginTop: '50px' } : { marginTop: '0' }"
       class="hero-9afffec6fe89b34b024d06907c006f36"
     >
       <van-grid
@@ -159,7 +159,7 @@
           @click="showInfo.heroSkill = true"
         >
           <div
-            v-if="hero.info.skill && hero.info.equipment"
+            v-if="hero.info.skill && hero.info.equipmentListAll"
             class="hero-f3412345b511c61986bba9a39793157f"
           >
             <span
@@ -179,7 +179,7 @@
               >
             </span>
             <span
-              v-for="(data, index) in hero.info.equipment.slice(0, 1)"
+              v-for="(data, index) in hero.info.equipmentListAll.slice(0, 1)"
               :key="'hero-7e44100739d2ecde9345b508ea311bbe-' + index"
               class="hero-cb4b556fe00d9a0da9d94f0bbf40e78c"
             >
@@ -205,7 +205,7 @@
 
     <div class="hero-913337a345680aef86e5801f1a78596b">
       <van-tabs
-        v-model="tabsModel"
+        v-model="tabsInfo.model"
         :border="false"
         :ellipsis="false"
         @change="onTabsChange"
@@ -222,7 +222,7 @@
                 <van-dropdown-item
                   v-model="trendInfo.model"
                   :options="trendInfo.options"
-                  :disabled="tabsModel == 0 ? false : true"
+                  :disabled="tabsInfo.model == 0 ? false : true"
                 />
               </van-dropdown-menu>
             </div>
@@ -235,11 +235,11 @@
         <van-tab
           class="hero-ab71021d21963773bfb8be80af65869f"
           title="自定义对比"
-          :disabled="tabsModel == 0 ? true : false"
+          :disabled="tabsInfo.model == 0 ? true : false"
         />
         <div class="hero-e06398232dc80e41209489705546802c">
           <HeroLine
-            v-if="tabsModel == 0"
+            v-if="tabsInfo.model == 0"
             :heroId="hero.info.id"
             :trendType="trendInfo.model"
           />
@@ -249,8 +249,8 @@
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
           <HeroRadar
-            v-if="tabsModel > 0"
-            :tabsModel="tabsModel"
+            v-if="tabsInfo.model > 0"
+            :tabsModel="tabsInfo.model"
             :heroId="hero.info.id"
           />
         </div>
@@ -283,16 +283,18 @@
     >
       <van-action-sheet
         v-model="showInfo.heroSkill"
-        :title="hero.info.name + ' 的其它数据 (上周)'"
+        :title="hero.info.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs>
+        <van-tabs v-model="skillInfo.model" @change="onSkillChange">
           <van-tab title="技能">
             <HeroSkillList :heroSkill="hero.info.skill"
           /></van-tab>
-          <van-tab title="装备 (单件)">即将上线</van-tab>
           <van-tab title="装备 (推荐)"
-            ><HeroEquipmentList :heroEquipment="hero.info.equipment"
+            ><HeroEquipmentListALL :heroEquipment="hero.info.equipmentListAll"
+          /></van-tab>
+          <van-tab title="装备 (单件)"
+            ><HeroEquipmentListOne :heroEquipment="hero.info.equipmentListOne"
           /></van-tab>
         </van-tabs>
       </van-action-sheet>
@@ -340,7 +342,10 @@
       </van-action-sheet>
     </div>
 
-    <div v-show="tabsModel == 0" class="hero-79acd83e2dbb9d5b6de778dd5077db2c">
+    <div
+      v-show="tabsInfo.model == 0"
+      class="hero-79acd83e2dbb9d5b6de778dd5077db2c"
+    >
       <van-tabbar
         fixed
         safe-area-inset-bottom
@@ -390,8 +395,10 @@ export default {
     AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
     HeroSkillList: (resolve) =>
       require(["@/components/Hero/SkillList.vue"], resolve),
-    HeroEquipmentList: (resolve) =>
-      require(["@/components/Hero/EquipmentList.vue"], resolve),
+    HeroEquipmentListOne: (resolve) =>
+      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
+    HeroEquipmentListALL: (resolve) =>
+      require(["@/components/Hero/EquipmentList_All.vue"], resolve),
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
@@ -416,7 +423,9 @@ export default {
         imageIndex: 0,
         heroUpdate: true,
       },
-      tabsModel: 0,
+      tabsInfo: {
+        model: 0,
+      },
       hero: {
         title: "加载中",
         info: {
@@ -453,6 +462,10 @@ export default {
           { text: "舆论趋势", value: 2 },
         ],
       },
+      skillInfo: {
+        model: 0,
+      },
+      tipsInfo: [0, 0, 0],
     };
   },
   mounted() {
@@ -518,6 +531,25 @@ export default {
         });
 
       this.showInfo.heroMenu = false;
+    },
+    onSkillChange: function () {
+      let e = this.skillInfo.model,
+        tipsText;
+
+      if (e == 0) {
+        tipsText = "提示:1003,各个技能的占比";
+      } else if (e == 1) {
+        tipsText =
+          "提示:1012,少则几千、多则几万种组合,仅推荐 出场、胜率 较高的前几十组";
+      } else if (e == 2) {
+        tipsText =
+          "提示:1013,默认去除场次、胜率过低的装备,点击可查看单件的优先级趋势";
+      }
+
+      if (this.tipsInfo[e] == 0) {
+        this.$message.info(tipsText);
+        this.tipsInfo[e] = 1;
+      }
     },
     onHeroLikeClick: function () {
       this.axios

@@ -1,7 +1,7 @@
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
     margin: 0 5px;
     text-align: center;
-    width: 35px;
+    width: 45px;
 }
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
@@ -223,8 +223,12 @@ div.app-icon_ex-3079036920f9bee746cf7baffffb950b i.van-icon img.van-icon__image 
     margin-top: -5px;
 }
 
-div.app-e827ba0e6873e7ce7ef7c6c58e970609 div.van-popup {
+div.app-e827ba0e6873e7ce7ef7c6c58e970609.van-popup {
     height: 80%;
+}
+
+div.app-aaf877dc2d49f8e1494e6a7dcf8b475c.van-popup {
+    height: 73%;
 }
 
 div.ant-message,
@@ -233,7 +237,7 @@ div.ant-notification {
 }
 
 div.van-tabbar-item__text {
-    transform: scale(0.65);
+    transform: scale(0.75);
 }
 
 div.app-f3b57b63e4f5f4e157fd45bdb8611005 div.van-dropdown-item {
@@ -243,4 +247,14 @@ div.app-f3b57b63e4f5f4e157fd45bdb8611005 div.van-dropdown-item {
 div.app-f3b57b63e4f5f4e157fd45bdb8611005 div.van-dropdown-menu__bar {
     border-radius: 50px;
     width: 125px;
+}
+
+div.app-61046f2f5eefe3dc179e52af32241062 {
+    margin: 25px 15px;
+    text-align: left;
+}
+
+span.app-e4c9479b11955648dad558fe717a4eb2 {
+    color: red;
+    font-size: 12px;
 }

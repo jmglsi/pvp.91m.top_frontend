@@ -1,9 +1,8 @@
 <template>
-  <div class="hero-equipment">
+  <div class="hero-equipmentListAll">
     <vxe-grid
-      ref="heroEquipment"
+      ref="heroEquipmentListAll"
       :data="tableData.result.rows"
-      :sort-config="{ trigger: 'cell' }"
       height="547"
       auto-resize
     >
@@ -19,7 +18,7 @@
             v-lazy="row.img"
             width="25"
             height="25"
-            class="hero-equipment-d8dff643744fd7b25a4558d61e3470f0"
+            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
           />
         </template>
       </vxe-table-column>
@@ -29,7 +28,7 @@
       <vxe-table-column title="最终结果,空的就是没出">
         <vxe-table-column
           v-for="(data, index) in 6"
-          :key="'equipment-7b490eaa5fed310dd15f0dd710dce7cb-' + index"
+          :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
           :title="(index + 1).toString()"
           :field="'list[' + index + ']'"
           :width="equipmentWidth"
@@ -45,7 +44,7 @@
               "
               width="25"
               height="25"
-              class="hero-equipment-22ea16b91b29bfb013f1b649b0c88396"
+              class="hero-88473b8c633f40889fe2a0affd773691"
             />
           </template>
         </vxe-table-column>
@@ -76,7 +75,7 @@
           <input
             v-model="option.data"
             v-for="(option, index) in column.filters"
-            :key="'hero-equipment-f0549be9f0aa36c46c0b2f76ed0a4f4f-' + index"
+            :key="'hero-equipment-3884d17acbdfbe7dd4921e00606d4e93-' + index"
             type="type"
             placeholder="0"
             @input="$panel.changeOption($event, !!option.data, option)"
@@ -106,7 +105,7 @@
 
 <script>
 export default {
-  name: "HeroList",
+  name: "HeroEquipmentListAll",
   props: {
     heroEquipment: {
       type: Array,
