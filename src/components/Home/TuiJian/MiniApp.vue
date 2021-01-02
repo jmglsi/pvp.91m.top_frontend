@@ -30,7 +30,7 @@
       <div class="miniapp-2a48f64e8081b260765b0c936932836a">
         <van-cell-group
           :border="false"
-          title="其它"
+          title="其他"
           class="miniapp-b377992f355a56a90c6120fb8559de59"
         >
           <van-grid

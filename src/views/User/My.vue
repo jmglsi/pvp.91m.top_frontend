@@ -20,7 +20,7 @@
                 round
                 :color="loginInfo.certification.color"
                 class="my-7eaa86d23ffacfb49464ee78252aa43a"
-                @click="$message.info('提示:1015,称号联系站长更改')"
+                @click="$message.info('提示:1016,称号联系站长更改')"
                 >{{ loginInfo.certification.text }}</van-tag
               >
             </span>
@@ -192,7 +192,7 @@
               v-show="loginInfo.heroList.length == 0"
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
               @click="
-                $message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')
+                $message.info('提示:1017,请在英雄详情界面喜欢/取消喜欢。')
               "
               >未设置</span
             >

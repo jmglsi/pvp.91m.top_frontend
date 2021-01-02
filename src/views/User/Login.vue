@@ -66,11 +66,15 @@
 
     <div
       v-show="loginInfo.type == 0"
-      class="login-61046f2f5eefe3dc179e52af32241062"
+      class="app-61046f2f5eefe3dc179e52af32241062"
     >
-      <span class="login-e4c9479b11955648dad558fe717a4eb2"
-        >注:<br />1.信息是加密储存的<br />2.用户名和QQ将用于扩列、BP界面以及找回密码,请不要瞎写</span
-      >
+      <span class="app-e4c9479b11955648dad558fe717a4eb2">
+        注:
+        <br />
+        1.信息是加密储存的
+        <br />
+        2.用户名和QQ将用于扩列、BP界面以及找回密码,请不要瞎写
+      </span>
     </div>
 
     <div class="login-ae64b9ce80d3b20870647479c735eeb0">
@@ -161,7 +165,7 @@ export default {
         data = this.loginInfo.data;
 
       if (!data.email || !data.password) {
-        this.$message.error("错误:1008,邮箱或密码为空");
+        this.$message.error("错误:1007,邮箱或密码为空");
 
         return;
       }

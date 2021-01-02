@@ -206,7 +206,7 @@ export default {
             path: playerInfo.inscriptionUrl,
           });
         } else {
-          this.$message.info("提示:1006,未查询到,待更新");
+          this.$message.info("提示:1010,未查询到,待更新");
         }
       }
     },

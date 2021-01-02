@@ -5,15 +5,15 @@ import XEUtils from 'xe-utils'
 import zhCNLocat from 'vxe-table/lib/locale/lang/zh-CN'
 
 import {
+    VXETable,
     Button,
     Column,
     Filter,
     Grid,
     Header,
     Icon,
-    Table,
     Toolbar,
-    VXETable,
+    Table,
 } from 'vxe-table'
 
 Vue
@@ -23,8 +23,8 @@ Vue
     .use(Grid)
     .use(Header)
     .use(Icon)
-    .use(Table)
     .use(Toolbar)
+    .use(Table)
 
 
 VXETable.setup({

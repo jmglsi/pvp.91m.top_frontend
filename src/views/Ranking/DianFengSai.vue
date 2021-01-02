@@ -117,7 +117,7 @@
           <vxe-table-column
             title="出场"
             field="pickRate"
-            :filters="[{ data: 3, checked: true }]"
+            :filters="[{ data: 1.5, checked: true }]"
             :filter-method="filterPickRateMethod"
             :width="listWidth"
             sortable
@@ -260,7 +260,7 @@
           />
         </vxe-table-column>
 
-        <vxe-table-column title="其它">
+        <vxe-table-column title="其他">
           <vxe-table-column
             title="参团"
             field="joinGamePercent"
@@ -280,7 +280,7 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.heroSkill"
-        :title="tableData.row.name + ' 的其它数据 (上周)'"
+        :title="tableData.row.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
         <van-tabs>
@@ -452,7 +452,7 @@ export default {
 
       if (bid == 3 && cid == 0) {
         this.$message.info(
-          "提示:1005,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
+          "提示:1009,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
         );
       }
     },

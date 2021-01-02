@@ -216,7 +216,7 @@ export default {
       }
     },
     onOversize: function () {
-      this.$message.error("错误:1006,图片超过 3MB");
+      this.$message.error("错误:1005,图片超过 3MB");
     },
     onCreateTeamClick: function () {
       this.showInfo.team = true;

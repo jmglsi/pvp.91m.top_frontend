@@ -257,7 +257,7 @@
 
                 <van-cell-group
                   :border="false"
-                  title="其它"
+                  title="其他"
                   class="game-795f3202b17cb6bc3d4b771d8c6c9eaf"
                 >
                   <van-grid
@@ -820,7 +820,7 @@ export default {
       this.bpCountdownInterval = setInterval(() => {
         this.bpCountdown--;
         if (this.bpCountdown == 0) {
-          this.$message.error("错误:1007,已超时");
+          this.$message.error("错误:1006,已超时");
 
           clearInterval(this.bpCountdownInterval);
         }
@@ -1037,11 +1037,11 @@ export default {
         this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
         this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
       ) {
-        this.$message.error("警告:1005,本局 " + hero.name + " 已被禁用");
+        this.$message.error("错误:1008,本局 " + hero.name + " 已被禁用");
         return;
       } else if (this.gameInfo.used.includes(hero.id)) {
         this.$message.warning(
-          "警告:1002," + hero.name + " 已被 " + this.bpOpponent.name + " 使用"
+          "警告:1001," + hero.name + " 已被 " + this.bpOpponent.name + " 使用"
         );
         return;
       } else if (this.bpMode == "view") return;
@@ -1077,7 +1077,7 @@ export default {
 
       if (newIndex >= 18) {
         this.$message.warning(
-          "警告:1001,BP结束,可点击两侧边缘设置胜利方,注意保存。"
+          "警告:1002,BP结束,可点击两侧边缘设置胜利方,注意保存。"
         );
       }
     },
