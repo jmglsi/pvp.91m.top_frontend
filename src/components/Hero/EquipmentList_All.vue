@@ -108,24 +108,24 @@
 export default {
   name: "HeroEquipmentListAll",
   props: {
-    heroEquipment: {
-      type: Array,
-      default: () => [],
+    heroId: {
+      type: Number,
+      default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroEquipment } = this;
-      return { heroEquipment };
+      const { heroId } = this;
+      return { heroId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroEquipment == []) return;
+        if (newValue.heroId == 0) return;
 
-        this.tableData.result.rows = newValue.heroEquipment;
+        this.getHeroEquipment(newValue.heroId, 0);
       },
     },
   },
@@ -150,6 +150,23 @@ export default {
     }
   },
   methods: {
+    getHeroEquipment: function (id = 111, aid = 0) {
+      this.axios
+        .post(this.apiList.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
+        .then((res) => {
+
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData = data;
+
+            this.tableData.loading = false;
+          } else {
+            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+          }
+        });
+    },
     filterMethod({ option, row, column }) {
       if (column.property === "winRate") {
         return row.winRate >= option.data;

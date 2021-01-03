@@ -158,46 +158,31 @@
           class="hero-c6e864acb6955eed0361921288d34149"
           @click="showInfo.heroSkill = true"
         >
-          <div
-            v-if="hero.info.skill && hero.info.equipmentListAll"
-            class="hero-f3412345b511c61986bba9a39793157f"
-          >
-            <span
-              v-for="(data, index) in hero.info.skill.slice(0, 1)"
-              :key="'hero-d7768ef7449dfbbc6020f1dd0ae11593-' + index"
-              class="hero-cb4b556fe00d9a0da9d94f0bbf40e78c"
-            >
-              <img
-                v-lazy="data.img"
+          <div class="hero-f3412345b511c61986bba9a39793157f">
+            <span class="hero-5a7c3c141fd96e8559a5994bd1c63057"
+              ><img
+                v-lazy="hero.info.skill.preview[0].img"
                 width="25"
                 height="25"
                 class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ data.pickRate.toFixed(2) }}</span
-              >
-            </span>
-            <span
-              v-for="(data, index) in hero.info.equipmentListAll.slice(0, 1)"
-              :key="'hero-7e44100739d2ecde9345b508ea311bbe-' + index"
-              class="hero-cb4b556fe00d9a0da9d94f0bbf40e78c"
+                >{{ hero.info.skill.preview[0].pickRate }}</span
+              ></span
             >
-              <img
-                v-lazy="
-                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                  data.list[0] +
-                  '.png'
-                "
+            <span class="hero-5a7c3c141fd96e8559a5994bd1c63057"
+              ><img
+                v-lazy="hero.info.skill.preview[1].img"
                 width="25"
                 height="25"
                 class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ data.pickTimes }}</span
-              >
-            </span>
+                >{{ hero.info.skill.preview[1].pickTimes }}</span
+              ></span
+            >
           </div>
         </van-grid-item>
       </van-grid>
@@ -288,12 +273,14 @@
       >
         <van-tabs v-model="skillInfo.model" @change="onSkillChange">
           <van-tab title="技能">
-            <HeroSkillList :heroSkill="hero.info.skill"
+            <HeroSkillList :heroSkill="hero.info.skill.list"
           /></van-tab>
           <van-tab title="装备 (推荐)"
-            ><HeroEquipmentListALL :heroEquipment="hero.info.equipmentListAll"
+            ><HeroEquipmentListALL :heroId="hero.info.id"
           /></van-tab>
-          <van-tab title="装备 (单件)"><HeroEquipmentListOne /></van-tab>
+          <van-tab title="装备 (单件)"
+            ><HeroEquipmentListOne :heroId="hero.info.id"
+          /></van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -432,7 +419,21 @@ export default {
           clockwise: false,
           skin: [],
           skinIndex: 0,
-          skill: [],
+          skill: {
+            preview: [
+              {
+                id: 0,
+                img: "//image.ttwz.qq.com/images/skill/80102.png",
+                pickRate: 0,
+              },
+              {
+                id: 0,
+                img:
+                  "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1701.png",
+                pickTimes: 0,
+              },
+            ],
+          },
         },
       },
       circle: {

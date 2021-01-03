@@ -64,26 +64,24 @@
             />
             <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
               <img
-                v-lazy="row.skill[0].img"
+                v-lazy="row.skill.preview[0].img"
                 width="20"
                 height="20"
                 class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-043052eea2d064cab23119e56f4f640e"
-                >{{ row.skill[0].pickRate.toFixed(2) }}</span
+                >{{ row.skill.preview[0].pickRate }}</span
               >
               <img
-                v-if="row.skill[1].id"
-                v-lazy="row.skill[1].img"
+                v-lazy="row.skill.preview[1].img"
                 width="20"
                 height="20"
                 class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
               />
               <span
-                v-if="row.skill[1].id"
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
-                >{{ row.skill[1].pickRate.toFixed(2) }}</span
+                >{{ row.skill.preview[1].pickTimes }}</span
               >
             </div>
           </template>
@@ -460,11 +458,11 @@ export default {
       if (column.property === "banRate") {
         return row.banRate >= option.data;
       }
-      
+
       if (column.property === "pickRate") {
         return row.pickRate >= option.data;
       }
-      
+
       if (column.property === "winRate") {
         return row.winRate >= option.data;
       }

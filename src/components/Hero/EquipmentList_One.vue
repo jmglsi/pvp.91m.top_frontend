@@ -216,6 +216,28 @@
 <script>
 export default {
   name: "HeroEquipmentListOne",
+  props: {
+    heroId: {
+      type: Number,
+      default: 0,
+    },
+  },
+  computed: {
+    listenChange() {
+      const { heroId } = this;
+      return { heroId };
+    },
+  },
+  watch: {
+    listenChange: {
+      immediate: true,
+      handler(newValue) {
+        if (newValue.heroId == 0) return;
+
+        this.getHeroEquipment(newValue.heroId, 1);
+      },
+    },
+  },
   components: {
     EquipmentLine: (resolve) =>
       require(["@/components/Equipment/Line.vue"], resolve),
@@ -223,9 +245,6 @@ export default {
   data() {
     return {
       listWidth: 0,
-      heroInfo: {
-        id: 0,
-      },
       showInfo: {
         actionSheet: false,
       },
@@ -243,11 +262,6 @@ export default {
   created() {
     this.appInitTableWidth();
   },
-  mounted() {
-    this.heroInfo.id = this.$route.params.id;
-
-    this.getHeroEquipment(this.heroInfo.id, 1);
-  },
   methods: {
     getHeroEquipment: function (id = 111, aid = 1) {
       this.axios
@@ -259,18 +273,14 @@ export default {
 
           if (status.code == 200) {
             this.tableData = data;
-            this.tableData.loading = false;
-            this.tableData.row = {
-              id: 0,
-              name: "加载中",
-              updateId: 0,
-            };
 
             aid == 1
               ? (tipsText = "正在查看【该英雄】的装备数据")
               : (tipsText = "正在查看出【该装备】的英雄数据");
 
             this.$message.success(tipsText);
+
+            this.tableData.loading = false;
           } else {
             this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
