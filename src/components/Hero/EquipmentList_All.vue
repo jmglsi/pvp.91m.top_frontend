@@ -67,7 +67,7 @@
         title="胜率 (%)"
         field="winRate"
         :filters="[{ data: 0 }]"
-        :filter-method="filterWinRateMethod"
+        :filter-method="filterMethod"
         width="125"
         sortable
       >
@@ -150,8 +150,10 @@ export default {
     }
   },
   methods: {
-    filterWinRateMethod({ option, row }) {
-      return row.winRate >= option.data;
+    filterMethod({ option, row, column }) {
+      if (column.property === "winRate") {
+        return row.winRate >= option.data;
+      }
     },
   },
 };

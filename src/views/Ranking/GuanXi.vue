@@ -70,7 +70,7 @@
             title="出场"
             field="teammatePickRate"
             :filters="[{ data: 0 }]"
-            :filter-method="filterTeammatePickRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -92,7 +92,7 @@
             title="胜率"
             field="teammateWinRate"
             :filters="[{ data: 0 }]"
-            :filter-method="filterTeammateWinRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -116,7 +116,7 @@
           title="适配"
           field="adaptation"
           :filters="[{ data: 0 }]"
-          :filter-method="filterAdaptationMethod"
+          :filter-method="filterMethod"
           :width="listWidth"
           sortable
         >
@@ -139,7 +139,7 @@
             title="出场"
             field="opponentPickRate"
             :filters="[{ data: 0 }]"
-            :filter-method="filterOpponentPickRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -161,7 +161,7 @@
             title="胜率"
             field="opponentWinRate"
             :filters="[{ data: 0 }]"
-            :filter-method="filterOpponentWinRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -324,20 +324,26 @@ export default {
 
       this.showInfo.actionSheet = true;
     },
-    filterTeammatePickRateMethod({ option, row }) {
-      return row.teammatePickRate >= option.data;
-    },
-    filterTeammateWinRateMethod({ option, row }) {
-      return row.teammateWinRate >= option.data;
-    },
-    filterAdaptationMethod({ option, row }) {
-      return row.adaptation >= option.data;
-    },
-    filterOpponentPickRateMethod({ option, row }) {
-      return row.opponentPickRate >= option.data;
-    },
-    filterOpponentWinRateMethod({ option, row }) {
-      return row.opponentWinRate >= option.data;
+    filterMethod({ option, row, column }) {
+      if (column.property === "teammatePickRate") {
+        return row.teammatePickRate >= option.data;
+      }
+
+      if (column.property === "teammateWinRate") {
+        return row.teammateWinRate >= option.data;
+      }
+
+      if (column.property === "adaptation") {
+        return row.adaptation >= option.data;
+      }
+
+      if (column.property === "opponentPickRate") {
+        return row.opponentPickRate >= option.data;
+      }
+
+      if (column.property === "opponentWinRate") {
+        return row.opponentWinRate >= option.data;
+      }
     },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;

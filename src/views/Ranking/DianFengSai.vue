@@ -96,7 +96,7 @@
             title="禁用"
             field="banRate"
             :filters="[{ data: 0 }]"
-            :filter-method="filterBanRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -118,7 +118,7 @@
             title="出场"
             field="pickRate"
             :filters="[{ data: 1.5, checked: true }]"
-            :filter-method="filterPickRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -140,7 +140,7 @@
             title="胜率"
             field="winRate"
             :filters="[{ data: 47, checked: true }]"
-            :filter-method="filterWinRateMethod"
+            :filter-method="filterMethod"
             :width="listWidth"
             sortable
           >
@@ -456,14 +456,18 @@ export default {
         );
       }
     },
-    filterBanRateMethod({ option, row }) {
-      return row.banRate >= option.data;
-    },
-    filterPickRateMethod({ option, row }) {
-      return row.pickRate >= option.data;
-    },
-    filterWinRateMethod({ option, row }) {
-      return row.winRate >= option.data;
+    filterMethod({ option, row, column }) {
+      if (column.property === "banRate") {
+        return row.banRate >= option.data;
+      }
+      
+      if (column.property === "pickRate") {
+        return row.pickRate >= option.data;
+      }
+      
+      if (column.property === "winRate") {
+        return row.winRate >= option.data;
+      }
     },
     onDropdownMenuChange: function () {
       this.getRanking(this.areaInfo.model, this.positionInfo.model);
