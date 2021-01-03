@@ -26,10 +26,10 @@
         auto-resize
         :loading="tableData.loading"
         :data="tableData.result.rows"
-        :height="clientHeight"
         :cell-class-name="cellClassName"
-        :sort-config="{ trigger: 'cell' }"
         :custom-config="{ storage: true }"
+        :sort-config="{ trigger: 'cell' }"
+        :height="clientHeight"
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
@@ -139,7 +139,7 @@
           <vxe-table-column
             title="胜率"
             field="winRate"
-            :filters="[{ data: 48, checked: true }]"
+            :filters="[{ data: 47, checked: true }]"
             :filter-method="filterWinRateMethod"
             :width="listWidth"
             sortable
@@ -285,8 +285,8 @@
       >
         <van-tabs>
           <van-tab title="技能" />
-          <van-tab title="装备 (单件)" />
           <van-tab title="装备 (推荐)" />
+          <van-tab title="装备 (单件)" />
           <div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
             <van-button
               round

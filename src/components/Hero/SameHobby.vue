@@ -85,13 +85,13 @@ export default {
     };
   },
   methods: {
-    getHeroByWebAccountList: function (heroId, tips) {
+    getHeroByWebAccountList: function (heroId, tipsType) {
       this.axios
         .get(this.apiList.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
         .then((res) => {
           this.sameHobbyData = res.data.data;
 
-          if (tips == 1) this.$message.success("刷新成功");
+          if (tipsType == 1) this.$message.success("刷新成功");
         });
     },
   },

@@ -36,8 +36,8 @@
         auto-resize
         :loading="tableData.loading"
         :data="tableData.result.rows"
-        :height="clientHeight"
         :sort-config="{ trigger: 'cell' }"
+        :height="clientHeight"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">

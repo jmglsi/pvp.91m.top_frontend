@@ -2,12 +2,13 @@
   <div class="hero-equipmentListAll">
     <vxe-grid
       ref="heroEquipmentListAll"
-      :data="tableData.result.rows"
-      height="547"
       auto-resize
+      :data="tableData.result.rows"
+      :sort-config="{ trigger: 'cell' }"
+      height="547"
     >
       <vxe-table-column
-        title="技能"
+        title="热度"
         field="score"
         fixed="left"
         width="50"

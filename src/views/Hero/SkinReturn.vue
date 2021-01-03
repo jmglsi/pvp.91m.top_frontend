@@ -47,6 +47,7 @@
         auto-resize
         :loading="tableData.loading"
         :data="tableData.result.rows"
+        :sort-config="{ trigger: 'cell' }"
         :height="clientHeight"
       >
         <vxe-table-column title="皮肤" field="skinName" fixed="left" width="85">

@@ -90,7 +90,7 @@ export default new Router({
                     name: 'heroInfo',
                     component: (resolve) => require(['./views/Hero/Info.vue'], resolve),
                     meta: {
-                        title: '信息',
+                        title: '英雄',
                         keepAlive: false
                     }
                 },

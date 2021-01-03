@@ -177,11 +177,11 @@ export default {
     };
   },
   methods: {
-    getWebAccountInfo: function (tips, aid = 1) {
+    getWebAccountInfo: function (tipsType, aid = 1) {
       let openId = this.$route.query.openId,
         postData;
 
-      tips == 0 ? (postData = { friendsOpenId: openId }) : (postData = {});
+      tipsType == 0 ? (postData = { friendsOpenId: openId }) : (postData = {});
 
       this.axios
         .post(
@@ -195,7 +195,7 @@ export default {
           if (status.code == 200) {
             this.friendsInfo = data;
 
-            if (tips == 1) this.$message.success("刷新成功");
+            if (tipsType == 1) this.$message.success("刷新成功");
 
             if (postData != {} && data.openId != openId) {
               this.appPush({
