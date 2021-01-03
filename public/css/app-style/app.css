@@ -2,6 +2,7 @@ input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
     margin: 0 5px;
     text-align: center;
     width: 40px;
+    z-index: 1;
 }
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
@@ -228,7 +229,7 @@ div.app-e827ba0e6873e7ce7ef7c6c58e970609.van-popup {
 }
 
 div.app-aaf877dc2d49f8e1494e6a7dcf8b475c.van-popup {
-    height: 73%;
+    height: 75%;
 }
 
 div.ant-message,

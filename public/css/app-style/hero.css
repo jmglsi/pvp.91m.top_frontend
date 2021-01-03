@@ -1,3 +1,7 @@
+input.hero-dcbe629f0402b28b010742b30efe8bdf {
+    width: 60px;
+}
+
 img.hero-f90943c8968fa651d7e1b617ff046fe2 {
     margin-top: -5px;
 }
@@ -6,6 +10,10 @@ img.hero-44908c08b6c253a19ab6246e6eec857a {
     border-radius: unset;
     height: 100%;
     width: 100%;
+}
+
+img.hero-77f7a84f403e0f3c0366160c890e42c9 {
+    border-radius: 100%;
 }
 
 img.hero-ff2364a0be3d20e46cc69efb36afe9a5,

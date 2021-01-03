@@ -293,9 +293,7 @@
           <van-tab title="装备 (推荐)"
             ><HeroEquipmentListALL :heroEquipment="hero.info.equipmentListAll"
           /></van-tab>
-          <van-tab title="装备 (单件)"
-            ><HeroEquipmentListOne :heroEquipment="hero.info.equipmentListOne"
-          /></van-tab>
+          <van-tab title="装备 (单件)"><HeroEquipmentListOne /></van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -395,10 +393,10 @@ export default {
     AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
     HeroSkillList: (resolve) =>
       require(["@/components/Hero/SkillList.vue"], resolve),
-    HeroEquipmentListOne: (resolve) =>
-      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
     HeroEquipmentListALL: (resolve) =>
       require(["@/components/Hero/EquipmentList_All.vue"], resolve),
+    HeroEquipmentListOne: (resolve) =>
+      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
     HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
     HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
     HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
@@ -533,8 +531,8 @@ export default {
       this.showInfo.heroMenu = false;
     },
     onSkillChange: function () {
-      let e = this.skillInfo.model,
-        tipsText;
+      let tipsText,
+        e = this.skillInfo.model;
 
       if (e == 0) {
         tipsText = "提示:1003,各个技能的 出场、胜率";
@@ -543,7 +541,7 @@ export default {
           "提示:1012,少则几千、多则几万种组合,仅推荐 场次、胜率 较高的前几十组";
       } else if (e == 2) {
         tipsText =
-          "提示:1013,默认去除 场次、胜率 过低的装备,点击可查看单件的契合度";
+          "提示:1013,默认去除 场次、胜率 过低的装备,点击【英雄】或【装备】可查看相关信息";
       }
 
       if (this.tipsInfo[e] == 0) {
