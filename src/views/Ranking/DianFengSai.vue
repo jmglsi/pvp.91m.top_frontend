@@ -81,7 +81,7 @@
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
-                >{{ row.skill.preview[1].pickTimes }}</span
+                >{{ row.skill.preview[1].pickRate }}</span
               >
             </div>
           </template>

@@ -180,7 +180,7 @@
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ hero.info.skill.preview[1].pickTimes }}</span
+                >{{ hero.info.skill.preview[1].pickRate }}</span
               ></span
             >
           </div>
