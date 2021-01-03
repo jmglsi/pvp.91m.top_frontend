@@ -229,7 +229,7 @@ div.app-e827ba0e6873e7ce7ef7c6c58e970609.van-popup {
 }
 
 div.app-aaf877dc2d49f8e1494e6a7dcf8b475c.van-popup {
-    height: 75%;
+    height: calc(75% + 5px);
 }
 
 div.ant-message,
