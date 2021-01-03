@@ -110,7 +110,7 @@
       >
         <vxe-table-column
           title="出场"
-          :field="'pickRate_' + index"
+          :field="'allPickRate_' + index"
           :filters="[{ data: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
@@ -132,7 +132,7 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="胜率"
+          title="净胜"
           :field="'winRate_' + index"
           :filters="[{ data: 0 }]"
           :filter-method="filterMethod"
@@ -366,36 +366,42 @@ export default {
       this.lineData.equipmentId = row.equipmentId;
 
       this.lineData.row = {
-        columns: ["格子", "胜率", "占比"],
+        columns: ["格子", "胜率", "占比:净胜", "占比:全局"],
         rows: [
           {
             格子: "格子_1",
-            占比: row.pickRate_0 / 100,
+            "占比:净胜": row.allPickRate_0 / 100,
+            "占比:全局": row.winPickRate_0 / 100,
             胜率: row.winRate_0 / 100,
           },
           {
             格子: "格子_2",
-            占比: row.pickRate_1 / 100,
+            "占比:净胜": row.allPickRate_1 / 100,
+            "占比:全局": row.winPickRate_1 / 100,
             胜率: row.winRate_1 / 100,
           },
           {
             格子: "格子_3",
-            占比: row.pickRate_2 / 100,
+            "占比:净胜": row.allPickRate_2 / 100,
+            "占比:全局": row.winPickRate_2 / 100,
             胜率: row.winRate_2 / 100,
           },
           {
             格子: "格子_4",
-            占比: row.pickRate_3 / 100,
+            "占比:净胜": row.allPickRate_3 / 100,
+            "占比:全局": row.winPickRate_3 / 100,
             胜率: row.winRate_3 / 100,
           },
           {
             格子: "格子_5",
-            占比: row.pickRate_4 / 100,
+            "占比:净胜": row.allPickRate_4 / 100,
+            "占比:全局": row.winPickRate_4 / 100,
             胜率: row.winRate_4 / 100,
           },
           {
             格子: "格子_6",
-            占比: row.pickRate_5 / 100,
+            "占比:净胜": row.allPickRate_5 / 100,
+            "占比:全局": row.winPickRate_5 / 100,
             胜率: row.winRate_5 / 100,
           },
         ],
