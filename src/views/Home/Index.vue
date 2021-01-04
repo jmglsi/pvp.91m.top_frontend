@@ -28,11 +28,11 @@
       class="home-72ab9e07378f988922e6c91884048db0"
     >
       本站由
-      <img v-lazy="upyun.logo" width="100" height="35" />
+      <img v-lazy="upyun.logo" width="75" height="25" />
       提供CDN加速/云储存服务
     </div>
 
-    <AppBottomTabbar height="100" />
+    <AppBottomTabbar height="100px" />
   </div>
 </template>
 

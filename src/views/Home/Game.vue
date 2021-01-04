@@ -53,7 +53,9 @@ export default {
   data() {
     return {
       tableData: {
-        result: {},
+        result: {
+          rows: [],
+        },
       },
     };
   },

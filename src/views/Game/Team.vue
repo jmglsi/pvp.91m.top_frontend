@@ -132,7 +132,9 @@ export default {
       teamInfo: {
         type: 0,
         index: 0,
-        result: {},
+        result: {
+          rows: [],
+        },
         row: {
           id: null,
           name: null,

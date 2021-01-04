@@ -214,7 +214,9 @@ export default {
         searchPlaceholder: [],
         color: {},
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
         row: {
           hero_1: {
             name: "加载中",

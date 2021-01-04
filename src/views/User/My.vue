@@ -293,7 +293,7 @@
       </van-cell-group>
     </div>
 
-    <AppBottomTabbar height="100" />
+    <AppBottomTabbar height="100px" />
   </div>
 </template>
 

@@ -88,7 +88,9 @@ export default {
         loading: true,
         markLine: {},
         markPoint: {},
-        result: {},
+        result: {
+          rows: [],
+        },
         settings: {},
       },
       lineInfo: {
@@ -111,7 +113,9 @@ export default {
     getHeroChartsLog: function (heroId, aid, detailed) {
       this.lineData = {
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
         status: 200,
       };
 

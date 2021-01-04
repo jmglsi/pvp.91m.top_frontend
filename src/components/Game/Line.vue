@@ -68,7 +68,9 @@ export default {
         extend: {},
         settings: {},
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
       },
     };
   },
@@ -83,7 +85,9 @@ export default {
     getGamePrediction: function (gameBPData, aid) {
       this.lineData = {
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
       };
 
       this.axios

@@ -80,7 +80,9 @@ export default {
         extend: {},
         settings: {},
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
       },
       heroList: {
         old: "",
@@ -92,7 +94,9 @@ export default {
     getHeroChartsLog: function (heroId, heroName, aid) {
       this.radarData = {
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
       };
 
       this.axios

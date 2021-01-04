@@ -208,6 +208,8 @@
           <br />
           6.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
         </span>
+
+        <AppBottomTabbar v-if="isMobile" height="100px" />
       </div>
     </van-action-sheet>
   </div>
@@ -241,6 +243,8 @@ export default {
   components: {
     EquipmentLine: (resolve) =>
       require(["@/components/Equipment/Line.vue"], resolve),
+    AppBottomTabbar: (resolve) =>
+      require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   data() {
     return {

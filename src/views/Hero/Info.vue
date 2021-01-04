@@ -366,7 +366,7 @@
       </van-tabbar>
     </div>
 
-    <AppBottomTabbar v-if="isMobile" height="100" />
+    <AppBottomTabbar v-if="isMobile" height="100px" />
   </div>
 </template>
 

@@ -64,7 +64,7 @@
       </van-grid>
     </div>
 
-    <AppBottomTabbar v-if="isMobile" height="100" />
+    <AppBottomTabbar v-if="isMobile" height="100px" />
   </div>
 </template>
 
@@ -82,7 +82,9 @@ export default {
       },
       engageInfo: {
         type: 0,
-        result: {},
+        result: {
+          rows: [],
+        },
         row: {
           id: null,
           name: null,

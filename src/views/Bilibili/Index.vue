@@ -105,7 +105,9 @@ export default {
       tableData: {
         searchPlaceholder: "请输入【视频id】,例如:bv12345",
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
         total: 200,
         pageSize: 50,
         row: {

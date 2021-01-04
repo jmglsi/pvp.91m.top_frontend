@@ -350,7 +350,9 @@ export default {
         column: [],
         columns: [],
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
         clockwise: false,
         row: {
           id: 0,

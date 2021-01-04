@@ -107,7 +107,9 @@ export default {
       },
       tableData: {
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
       },
       lineData: {
         markLine: {},
@@ -115,7 +117,9 @@ export default {
         extend: {},
         settings: {},
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
       },
       clientHeight: 0,
     };

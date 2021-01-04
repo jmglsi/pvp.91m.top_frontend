@@ -93,6 +93,7 @@ export default {
         },
         loading: true,
         result: {
+          columns: ["格子", "胜率", "占比:净胜", "占比:全局"],
           rows: [],
         },
         settings: {

@@ -1,7 +1,7 @@
 <template>
   <div
     class="app-54a7c1ad8e5f84845a4fb88c222d209f"
-    :style="{ height: height + 'px' }"
+    :style="{ height: height }"
   />
 </template>
 
@@ -11,7 +11,7 @@ export default {
   props: {
     height: {
       type: String,
-      default: "35",
+      default: "35px",
     },
   },
 };

@@ -109,7 +109,9 @@ export default {
       },
       tableData: {
         loading: true,
-        result: {},
+        result: {
+          rows: [],
+        },
         row: {
           gamePlayerName: "加载中",
         },

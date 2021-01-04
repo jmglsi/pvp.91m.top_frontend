@@ -142,7 +142,7 @@
     <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
-        @close="onCloseHeroUpdateTextClick(heroId, now)"
+        @close="onCloseHeroUpdateTextClick(heroId, tableData.row)"
       >
         <template #title>
           <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">{{
@@ -192,8 +192,6 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == 0) return;
-
         this.getHeroUpdate(newValue.heroId);
       },
     },
@@ -211,7 +209,6 @@ export default {
         title: "",
         text: "",
       },
-      now: {},
       showInfo: {
         calendar: false,
         dialog: false,
@@ -222,7 +219,10 @@ export default {
         max: new Date(),
       },
       tableData: {
-        result: {},
+        row: {},
+        result: {
+          rows: [],
+        },
         tips: "",
         title: "",
       },
@@ -347,13 +347,13 @@ export default {
           this.updateInfo.text = res.data.data;
 
           this.showInfo.dialog = true;
-          this.now = data;
+          this.tableData.row = data;
         });
     },
-    onCloseHeroUpdateTextClick: function (heroId, data) {
+    onCloseHeroUpdateTextClick: function (heroId, row) {
       if (this.showInfo.checked == false) return;
 
-      let date = new Date(data.calendar.day);
+      let date = new Date(row.calendar.day);
       let newDate =
         date.getFullYear() +
         "年" +
@@ -364,7 +364,7 @@ export default {
 
       this.copyData =
         "[quote]\r[size=110%][b][url=" +
-        data.url +
+        row.url +
         "][color=blue]" +
         newDate +
         "[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
