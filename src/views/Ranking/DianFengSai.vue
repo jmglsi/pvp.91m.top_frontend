@@ -89,7 +89,7 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-column title="出场越低,波动越大 (%)">
+        <vxe-table-column title="BP率越低,波动越大 (%)">
           <vxe-table-column
             title="禁用"
             field="banRate"
@@ -115,7 +115,7 @@
           <vxe-table-column
             title="出场"
             field="pickRate"
-            :filters="[{ data: 1.5, checked: true }]"
+            :filters="[{ data: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -126,6 +126,28 @@
                 v-model="option.data"
                 v-for="(option, index) in column.filters"
                 :key="'hero-f55d5cafb56611ebf0534588e49d4121-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.data, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
+          <vxe-table-column
+            title="BP率"
+            field="bpRate"
+            :filters="[{ data: 1, checked: true }]"
+            :filter-method="filterMethod"
+            width="100"
+            sortable
+          >
+            <template v-slot:filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.data"
+                v-for="(option, index) in column.filters"
+                :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
                 type="type"
                 placeholder="0"
                 @input="$panel.changeOption($event, !!option.data, option)"
@@ -457,6 +479,10 @@ export default {
       }
     },
     filterMethod({ option, row, column }) {
+      if (column.property === "bpRate") {
+        return row.bpRate >= option.data;
+      }
+
       if (column.property === "banRate") {
         return row.banRate >= option.data;
       }
@@ -488,9 +514,15 @@ export default {
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
-      if (column.property === "banRate") {
-        if (row.banRate >= color.ban) {
+      if (column.property === "bpRate") {
+        if (row.bpRate >= color.bp) {
           return "ranking-bda9643ac6601722a28f238714274da4";
+        }
+      }
+
+      if (column.property === "banRate") {
+        if (row.banRate >= color.ban && row.winRate >= color.win) {
+          return "ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
         }
       }
 
