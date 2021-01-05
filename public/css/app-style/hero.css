@@ -1,7 +1,3 @@
-input.hero-dcbe629f0402b28b010742b30efe8bdf {
-    width: 60px;
-}
-
 img.hero-f90943c8968fa651d7e1b617ff046fe2 {
     margin-top: -5px;
 }
@@ -10,10 +6,6 @@ img.hero-44908c08b6c253a19ab6246e6eec857a {
     border-radius: unset;
     height: 100%;
     width: 100%;
-}
-
-img.hero-77f7a84f403e0f3c0366160c890e42c9 {
-    border-radius: 100%;
 }
 
 img.hero-ff2364a0be3d20e46cc69efb36afe9a5,
@@ -59,7 +51,7 @@ span.hero-e4d23e841d8e8804190027bce3180fa5 {
 }
 
 span.hero-5a7c3c141fd96e8559a5994bd1c63057 {
-    margin: 0 5px;
+    margin: 0 2px;
 }
 
 div.van-circle__text {
@@ -150,10 +142,6 @@ div.hero-d42f4851e770aa0f758b01388874f67b div.van-tabs__wrap {
 
 div.hero-d42f4851e770aa0f758b01388874f67b div.van-tabs__line {
     bottom: 33px
-}
-
-div.hero-b0465f9b8806e2e4f4c06dc5f3cba9c0 {
-    margin: 15px 0 5px 0px;
 }
 
 div.hero-386260160edfd75a6b62facc140fd3a4 {

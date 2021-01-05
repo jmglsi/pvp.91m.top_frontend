@@ -1,8 +1,9 @@
 <template>
-  <div class="hero-equipmentListAll">
+  <div class="hero-equipmentListAll app-equipmentListAll">
     <vxe-grid
       ref="heroEquipmentListAll"
       auto-resize
+      :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
       height="547"
@@ -24,7 +25,7 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" width="50" />
+      <vxe-table-column title="#" type="seq" />
 
       <vxe-table-column title="最终结果,空的就是没出">
         <vxe-table-column
@@ -32,7 +33,7 @@
           :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
           :title="(index + 1).toString()"
           :field="'list[' + index + ']'"
-          :width="equipmentWidth"
+          :width="isMobile ? 60 : 0"
           sortable
         >
           <template v-slot="{ row }">
@@ -131,9 +132,9 @@ export default {
   },
   data() {
     return {
-      equipmentWidth: 0,
       listWidth: 0,
       tableData: {
+        loading: true,
         result: {
           rows: [],
         },
@@ -141,20 +142,13 @@ export default {
     };
   },
   created() {
-    if (this.isMobile) {
-      this.equipmentWidth = 60;
-      this.listWidth = 85;
-    } else {
-      this.equipmentWidth = 0;
-      this.listWidth = 0;
-    }
+    this.listWidth = this.appInitTableWidth(750);
   },
   methods: {
     getHeroEquipment: function (id = 111, aid = 0) {
       this.axios
         .post(this.apiList.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
         .then((res) => {
-
           let data = res.data.data,
             status = res.data.status;
 

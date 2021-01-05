@@ -40,7 +40,20 @@ Vue.prototype.appOpenUrl = function(title, message, url = { path: '/' }, urlType
 }
 
 Vue.prototype.appInitTableHeight = function() {
+    let ret = 0;
+
     this.appWidth > this.appHeight ?
-        (this.clientHeight = this.appHeight - 133) :
-        (this.clientHeight = this.appHeight - 173)
+        (ret = this.appHeight - 133) :
+        (ret = this.appHeight - 173)
+
+    return ret;
+}
+
+Vue.prototype.appInitTableWidth = function(tableWidth) {
+    let ret = 0,
+        width = this.appWidth;
+
+    (!this.isMobile || width > 300) && width > tableWidth ? ret = 0 : ret = 90
+
+    return ret;
 }

@@ -53,22 +53,6 @@ td.vxe-body--cloumn .vxe-table.virtual--x .col--ellipsis .vxe-cell,
     max-height: unset;
 }
 
-td.ranking-bda9643ac6601722a28f238714274da4 {
-    color: red;
-}
-
-td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
-    color: orange;
-}
-
-td.ranking-48d6215903dff56238e52e8891380c8f {
-    color: blue;
-}
-
-td.ranking-9f27410725ab8cc8854a2769c7a516b8 {
-    color: green;
-}
-
 td.ranking-bda9643ac6601722a28f238714274da4 div.vxe-cell,
 td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.ranking-48d6215903dff56238e52e8891380c8f div.vxe-cell,
@@ -103,10 +87,6 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
 
 div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
     bottom: 1px;
-}
-
-div.ranking-3740dbf9ae65a19ad0cfdcc76918659d {
-    margin: 25px 0;
 }
 
 div.ranking-038a25200255054bb358e9839b055f73 {

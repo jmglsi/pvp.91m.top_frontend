@@ -303,25 +303,22 @@
         :title="tableData.row.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs>
-          <van-tab title="技能" />
-          <van-tab title="装备 (推荐)" />
-          <van-tab title="装备 (单件)" />
-          <div class="ranking-3740dbf9ae65a19ad0cfdcc76918659d">
-            <van-button
-              round
-              @click="
-                appPush({
-                  path: '/hero/' + tableData.row.id + '/info',
-                  query: { show: 'skill' },
-                })
-              "
-              size="small"
-              color="linear-gradient(to right, #ff6034, #ee0a24)"
-            >
-              前往查看
-            </van-button>
-          </div>
+        <van-tabs v-model="tabsInfo.model">
+          <van-tab title="技能">
+            <HeroSkillList
+              v-if="cellInfo.index == 0 && tabsInfo.model == 0"
+              :heroId="tableData.row.id"
+          /></van-tab>
+          <van-tab title="装备 (推荐)"
+            ><HeroEquipmentListALL
+              v-if="cellInfo.index == 0 && tabsInfo.model == 1"
+              :heroId="tableData.row.id"
+          /></van-tab>
+          <van-tab title="装备 (单件)"
+            ><HeroEquipmentListOne
+              v-if="cellInfo.index == 0 && tabsInfo.model == 2"
+              :heroId="tableData.row.id"
+          /></van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -342,6 +339,14 @@
 <script>
 export default {
   name: "RankingDianFengSai",
+  components: {
+    HeroSkillList: (resolve) =>
+      require(["@/components/Hero/SkillList.vue"], resolve),
+    HeroEquipmentListALL: (resolve) =>
+      require(["@/components/Hero/EquipmentList_All.vue"], resolve),
+    HeroEquipmentListOne: (resolve) =>
+      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
+  },
   data() {
     return {
       areaInfo: {
@@ -388,6 +393,12 @@ export default {
         heroSkill: false,
         heroMenu: false,
       },
+      cellInfo: {
+        index: 0,
+      },
+      tabsInfo: {
+        model: 0,
+      },
       actions: [
         { name: "英雄详情", value: 0 },
         { name: "对局回顾", value: 1 },
@@ -400,8 +411,8 @@ export default {
     };
   },
   created() {
-    this.appInitTableHeight();
-    this.appInitTableWidth();
+    this.clientHeight = this.appInitTableHeight();
+    this.initTableWidth();
 
     this.$nextTick(() => {
       this.$refs.dianfengsai.connect(this.$refs.xToolbar);
@@ -412,8 +423,8 @@ export default {
     this.getRanking(this.areaInfo.model, this.positionInfo.model);
   },
   methods: {
-    appInitTableWidth: function () {
-      this.listWidth = 90;
+    initTableWidth: function () {
+      this.listWidth = this.appInitTableWidth(1450);
 
       if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
 
@@ -425,12 +436,10 @@ export default {
 
       let visibleColumn = tableColumn.dianfengsai.split(",");
 
-      !this.isMobile || visibleColumn.length > 6
-        ? (this.listWidth = 0)
-        : (this.listWidth = 90);
+      visibleColumn.length > 12 ? (this.listWidth = 0) : (this.listWidth = 90);
     },
     toolbarCustomEvent: function (params) {
-      this.appInitTableWidth();
+      this.initTableWidth();
 
       switch (params.type) {
         case "confirm": {
@@ -504,35 +513,35 @@ export default {
       if (column.property == "score") {
         this.showInfo.heroSkill = true;
         this.showInfo.heroMenu = false;
-        return;
+        this.cellInfo.index = 0;
       } else {
         this.showInfo.heroSkill = false;
         this.showInfo.heroMenu = true;
-        return;
+        this.cellInfo.index = 1;
       }
     },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
-      if (column.property === "bpRate") {
-        if (row.bpRate >= color.bp) {
-          return "ranking-bda9643ac6601722a28f238714274da4";
-        }
-      }
-
-      if (column.property === "banRate") {
+      if (column.property == "banRate") {
         if (row.banRate >= color.ban && row.winRate >= color.win) {
           return "ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
         }
       }
 
-      if (column.property === "pickRate") {
+      if (column.property == "pickRate") {
         if (row.pickRate >= color.pick) {
           return "ranking-48d6215903dff56238e52e8891380c8f";
         }
       }
 
-      if (column.property === "winRate") {
+      if (column.property == "bpRate") {
+        if (row.bpRate >= color.bp) {
+          return "ranking-bda9643ac6601722a28f238714274da4";
+        }
+      }
+
+      if (column.property == "winRate") {
         if (
           (row.banRate >= color.ban || row.pickRate >= color.pick) &&
           row.winRate >= color.win

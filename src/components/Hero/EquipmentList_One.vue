@@ -1,10 +1,14 @@
 <template>
-  <div class="hero-equipmentListOne">
+  <div class="hero-equipmentListOne app-equipmentListOne">
     <vxe-grid
       ref="heroEquipmentListOne"
       auto-resize
+      :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
+      :show-footer="equipmentInfo.type == 2 ? true : false"
+      :footer-method="footerMethod"
+      :footer-cell-class-name="footerCellClassName"
       @cell-click="onCellClick"
       height="547"
     >
@@ -27,7 +31,7 @@
             "
             width="25"
             height="25"
-            class="hero-77f7a84f403e0f3c0366160c890e42c9"
+            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
           />
         </template>
       </vxe-table-column>
@@ -54,15 +58,15 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" width="50" />
+      <vxe-table-column title="#" type="seq" />
 
-      <vxe-table-column title="全部">
+      <vxe-table-column title="全部 (%)">
         <vxe-table-column
-          title="场次"
-          field="allPickTimes"
-          :filters="[{ data: 0 }]"
+          title="出场"
+          field="allPickRate"
+          :filters="[{ data: 2.5, checked: true }]"
           :filter-method="filterMethod"
-          width="100"
+          :width="listWidth"
           sortable
         >
           <template v-slot:filter="{ $panel, column }">
@@ -74,17 +78,17 @@
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.data, option)"
-              class="app-fa42596ed8c1eff3ed8b93bba913bde3 hero-dcbe629f0402b28b010742b30efe8bdf"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
+            %
           </template>
         </vxe-table-column>
-
         <vxe-table-column
-          title="胜率 (%)"
+          title="胜率"
           field="allWinRate"
           :filters="[{ data: 45, checked: true }]"
           :filter-method="filterMethod"
-          width="125"
+          :width="listWidth"
           sortable
         >
           <template v-slot:filter="{ $panel, column }">
@@ -110,7 +114,7 @@
       >
         <vxe-table-column
           title="出场"
-          :field="'allPickRate_' + index"
+          :field="'pickRate_' + index"
           :filters="[{ data: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
@@ -130,9 +134,8 @@
             %
           </template>
         </vxe-table-column>
-
         <vxe-table-column
-          title="净胜"
+          title="胜率"
           :field="'winRate_' + index"
           :filters="[{ data: 0 }]"
           :filter-method="filterMethod"
@@ -162,7 +165,7 @@
       safe-area-inset-bottom
       class="app-aaf877dc2d49f8e1494e6a7dcf8b475c"
     >
-      <div class="hero-b0465f9b8806e2e4f4c06dc5f3cba9c0">
+      <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
         <img
           v-if="lineData.heroId > 0"
           v-lazy="
@@ -174,7 +177,7 @@
           "
           width="25"
           height="25"
-          class="hero-77f7a84f403e0f3c0366160c890e42c9"
+          class="app-3b9655ab218c7f1a18f5dacd778a52f0"
         />&nbsp;和&nbsp;<img
           v-if="lineData.equipmentId > 0"
           v-lazy="
@@ -195,18 +198,20 @@
         class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4"
       >
         <span class="app-e4c9479b11955648dad558fe717a4eb2">
-          1.场次不高但是胜率接近 100%
+          1.格子出场不高但是胜率接近 100%
           可能是因为样本较少、针对出、还没出完就结束的
           <br />
-          2.核心装在前面可能是因为先买的小件后面合的
+          2.全部出场 > 100% 是因为买了多件,例如:双无尽蒙犽
           <br />
-          3.保命装在前面可能是因为最后卖了前几件换的
+          3.核心装在前面可能是因为先买的小件后面合的
           <br />
-          4.大小件胜率不一样说明合成也需要时间呀 ;(
+          4.保命装在前面可能是因为最后卖了前几件换的
           <br />
-          5.少数傻逼最后会卖装备甚至买其他职业的
+          5.大小件胜率不一样说明合成也需要时间呀 ;(
           <br />
-          6.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
+          6.少数傻逼最后会卖装备甚至买其他职业的
+          <br />
+          7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
         </span>
 
         <AppBottomTabbar v-if="isMobile" height="50px" />
@@ -216,6 +221,8 @@
 </template>
 
 <script>
+import XEUtils from "xe-utils";
+
 export default {
   name: "HeroEquipmentListOne",
   props: {
@@ -236,7 +243,8 @@ export default {
       handler(newValue) {
         if (newValue.heroId == 0) return;
 
-        this.getHeroEquipment(newValue.heroId, 1);
+        this.equipmentInfo.type = 1;
+        this.getHeroEquipment(newValue.heroId, this.equipmentInfo.type);
       },
     },
   },
@@ -253,6 +261,7 @@ export default {
         actionSheet: false,
       },
       tableData: {
+        loading: true,
         result: {
           rows: [],
         },
@@ -261,10 +270,13 @@ export default {
         equipmentId: 0,
         row: {},
       },
+      equipmentInfo: {
+        type: 1,
+      },
     };
   },
   created() {
-    this.appInitTableWidth();
+    this.listWidth = this.appInitTableWidth(1450);
   },
   methods: {
     getHeroEquipment: function (id = 111, aid = 1) {
@@ -290,26 +302,9 @@ export default {
           }
         });
     },
-    appInitTableWidth: function () {
-      this.listWidth = 90;
-
-      if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
-
-      let tableColumn = JSON.parse(
-        localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE
-      );
-
-      if (tableColumn["heroEquipmentListOne"] == undefined) return;
-
-      let visibleColumn = tableColumn.heroEquipmentListOne.split(",");
-
-      !this.isMobile || visibleColumn.length > 6
-        ? (this.listWidth = 0)
-        : (this.listWidth = 90);
-    },
     filterMethod({ option, row, column }) {
-      if (column.property === "allPickTimes") {
-        return row.allPickTimes >= option.data;
+      if (column.property === "allPickRate") {
+        return row.allPickRate >= option.data;
       }
 
       if (column.property === "allWinRate") {
@@ -364,14 +359,38 @@ export default {
         return row.winRate_5 >= option.data;
       }
     },
+    footerMethod({ columns, data }) {
+      let means = [];
+      columns.forEach((column, columnIndex) => {
+        if (columnIndex === 0) {
+          means.push("平均");
+        } else if (columnIndex == 3 || columnIndex == 4) {
+          means.push(XEUtils.mean(data, column.property).toFixed(2));
+        } else {
+          means.push(null);
+        }
+      });
+
+      return [means];
+    },
+    updateFooterEvent() {
+      this.$refs.heroEquipmentListOne.updateFooter();
+    },
+    footerCellClassName: function ({ column }) {
+      if (column.property == "heroId") {
+        return "ranking-ef96f47f5516788b4273bd9ff8c9fa19";
+      }
+    },
     onCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
-        this.getHeroEquipment(row.heroId, 1);
+        this.equipmentInfo.type = 1;
+        this.getHeroEquipment(row.heroId, this.equipmentInfo.type);
         return;
       }
 
       if (column.property == "equipmentId") {
-        this.getHeroEquipment(row.equipmentId, 2);
+        this.equipmentInfo.type = 2;
+        this.getHeroEquipment(row.equipmentId, this.equipmentInfo.type);
         return;
       }
       this.showInfo.actionSheet = true;
@@ -380,42 +399,36 @@ export default {
       this.lineData.equipmentId = row.equipmentId;
 
       this.lineData.row = {
-        columns: ["格子", "胜率", "占比:净胜", "占比:全局"],
+        columns: ["格子", "胜率", "占比"],
         rows: [
           {
             格子: "格子_1",
-            "占比:全局": row.allPickRate_0 / 100,
-            "占比:净胜": row.winPickRate_0 / 100,
+            占比: row.pickRate_0 / 100,
             胜率: row.winRate_0 / 100,
           },
           {
             格子: "格子_2",
-            "占比:全局": row.allPickRate_1 / 100,
-            "占比:净胜": row.winPickRate_1 / 100,
+            占比: row.pickRate_1 / 100,
             胜率: row.winRate_1 / 100,
           },
           {
             格子: "格子_3",
-            "占比:全局": row.allPickRate_2 / 100,
-            "占比:净胜": row.winPickRate_2 / 100,
+            占比: row.pickRate_2 / 100,
             胜率: row.winRate_2 / 100,
           },
           {
             格子: "格子_4",
-            "占比:全局": row.allPickRate_3 / 100,
-            "占比:净胜": row.winPickRate_3 / 100,
+            占比: row.pickRate_3 / 100,
             胜率: row.winRate_3 / 100,
           },
           {
             格子: "格子_5",
-            "占比:全局": row.allPickRate_4 / 100,
-            "占比:净胜": row.winPickRate_4 / 100,
+            占比: row.pickRate_4 / 100,
             胜率: row.winRate_4 / 100,
           },
           {
             格子: "格子_6",
-            "占比:全局": row.allPickRate_5 / 100,
-            "占比:净胜": row.winPickRate_5 / 100,
+            占比: row.pickRate_5 / 100,
             胜率: row.winRate_5 / 100,
           },
         ],

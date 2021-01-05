@@ -13,6 +13,7 @@ import {
     Header,
     Icon,
     Toolbar,
+    Footer,
     Table,
 } from 'vxe-table'
 
@@ -24,6 +25,7 @@ Vue
     .use(Header)
     .use(Icon)
     .use(Toolbar)
+    .use(Footer)
     .use(Table)
 
 

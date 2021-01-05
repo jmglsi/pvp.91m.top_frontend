@@ -1,8 +1,9 @@
 <template>
-  <div class="hero-skill">
+  <div class="hero-skill app-skill">
     <vxe-grid
       ref="heroSkill"
       auto-resize
+      :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
       height="547"
@@ -24,15 +25,30 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" width="50" />
+      <vxe-table-column title="#" type="seq" />
 
       <vxe-table-column title="比率 (%)">
-        <vxe-table-column title="出场" field="pickRate" sortable />
-        <vxe-table-column title="胜率" field="winRate" sortable />
+        <vxe-table-column
+          title="出场"
+          field="pickRate"
+          :width="listWidth"
+          sortable
+        />
+        <vxe-table-column
+          title="胜率"
+          field="winRate"
+          :width="listWidth"
+          sortable
+        />
       </vxe-table-column>
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column title="净胜" field="mvpRate" sortable />
+        <vxe-table-column
+          title="净胜"
+          field="mvpRate"
+          :width="listWidth"
+          sortable
+        />
       </vxe-table-column>
     </vxe-grid>
   </div>
@@ -42,35 +58,58 @@
 export default {
   name: "HeroList",
   props: {
-    heroSkill: {
-      type: Array,
-      default: () => [],
+    heroId: {
+      type: Number,
+      default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroSkill } = this;
-      return { heroSkill };
+      const { heroId } = this;
+      return { heroId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroSkill == []) return;
+        if (newValue.heroId == 0) return;
 
-        this.tableData.result.rows = newValue.heroSkill;
+        this.getHeroSkill(newValue.heroId);
       },
     },
   },
   data() {
     return {
+      listWidth: 0,
       tableData: {
+        loading: true,
         result: {
           rows: [],
         },
       },
     };
+  },
+  created() {
+    this.listWidth = this.appInitTableWidth(350);
+  },
+  methods: {
+    getHeroSkill: function (heroId = 111) {
+      this.axios
+        .post(this.apiList.pvp.getHeroSkill + "&heroId=" + heroId)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData = data;
+
+            this.tableData.loading = false;
+          } else {
+            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+          }
+        });
+    },
   },
 };
 </script>

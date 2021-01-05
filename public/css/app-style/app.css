@@ -1,3 +1,24 @@
+.ranking-bda9643ac6601722a28f238714274da4 {
+    color: red;
+}
+
+.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
+    color: orange;
+}
+
+.ranking-ef96f47f5516788b4273bd9ff8c9fa19 {
+    color: red;
+    font-size: 12px;
+}
+
+.ranking-48d6215903dff56238e52e8891380c8f {
+    color: blue;
+}
+
+.ranking-9f27410725ab8cc8854a2769c7a516b8 {
+    color: green;
+}
+
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
     margin: 0 5px;
     text-align: center;
@@ -16,6 +37,10 @@ img.app-d31cb1c15b091f41248935d88a8d0a45 {
 img.app-4ab161130e76571ab0c31aa23a6238c7 {
     border-radius: 100%;
     margin: 0 10px;
+}
+
+img.app-3b9655ab218c7f1a18f5dacd778a52f0 {
+    border-radius: 100%;
 }
 
 ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
@@ -72,6 +97,11 @@ span.app-f4842dcb685d490e2a43212b8072a6fe {
 
 span.app-dac41b9450b77c3eb0ab7d8428d004f5 {
     margin: 0 15px;
+}
+
+span.app-e4c9479b11955648dad558fe717a4eb2 {
+    color: red;
+    font-size: 12px;
 }
 
 div.app-2f4ffa86e6dacd562859288aa6f4cad4,
@@ -255,7 +285,12 @@ div.app-61046f2f5eefe3dc179e52af32241062 {
     text-align: left;
 }
 
-span.app-e4c9479b11955648dad558fe717a4eb2 {
-    color: red;
-    font-size: 12px;
+div.app-044a82dc9b34eebf2c54fe2c3c904368 {
+    margin: 15px 0 5px 0px;
+}
+
+div.app-skill,
+div.app-equipmentListAll,
+div.app-equipmentListOne {
+    margin-top: -3px;
 }
