@@ -161,7 +161,7 @@ export default {
         });
     },
     filterMethod({ option, row, column }) {
-      if (column.property === "winRate") {
+      if (column.property == "winRate") {
         return row.winRate >= option.data;
       }
     },

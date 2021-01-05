@@ -303,66 +303,66 @@ export default {
         });
     },
     filterMethod({ option, row, column }) {
-      if (column.property === "allPickRate") {
+      if (column.property == "allPickRate") {
         return row.allPickRate >= option.data;
       }
 
-      if (column.property === "allWinRate") {
+      if (column.property == "allWinRate") {
         return row.allWinRate >= option.data;
       }
 
-      if (column.property === "pickRate_0") {
+      if (column.property == "pickRate_0") {
         return row.pickRate_0 >= option.data;
       }
 
-      if (column.property === "winRate_0") {
+      if (column.property == "winRate_0") {
         return row.winRate_0 >= option.data;
       }
 
-      if (column.property === "pickRate_1") {
+      if (column.property == "pickRate_1") {
         return row.pickRate_1 >= option.data;
       }
 
-      if (column.property === "winRate_1") {
+      if (column.property == "winRate_1") {
         return row.winRate_1 >= option.data;
       }
 
-      if (column.property === "pickRate_2") {
+      if (column.property == "pickRate_2") {
         return row.pickRate_2 >= option.data;
       }
 
-      if (column.property === "winRate_2") {
+      if (column.property == "winRate_2") {
         return row.winRate_2 >= option.data;
       }
 
-      if (column.property === "pickRate_3") {
+      if (column.property == "pickRate_3") {
         return row.pickRate_3 >= option.data;
       }
 
-      if (column.property === "winRate_3") {
+      if (column.property == "winRate_3") {
         return row.winRate_3 >= option.data;
       }
 
-      if (column.property === "pickRate_4") {
+      if (column.property == "pickRate_4") {
         return row.pickRate_4 >= option.data;
       }
 
-      if (column.property === "winRate_4") {
+      if (column.property == "winRate_4") {
         return row.winRate_4 >= option.data;
       }
 
-      if (column.property === "pickRate_5") {
+      if (column.property == "pickRate_5") {
         return row.pickRate_5 >= option.data;
       }
 
-      if (column.property === "winRate_5") {
+      if (column.property == "winRate_5") {
         return row.winRate_5 >= option.data;
       }
     },
     footerMethod({ columns, data }) {
       let means = [];
       columns.forEach((column, columnIndex) => {
-        if (columnIndex === 0) {
+        if (columnIndex == 0) {
           means.push("平均");
         } else if (columnIndex == 3 || columnIndex == 4) {
           means.push(XEUtils.mean(data, column.property).toFixed(2));

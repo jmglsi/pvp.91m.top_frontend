@@ -256,7 +256,7 @@ export default {
 
         if (!result.day) continue;
 
-        if (oDay === result.day) {
+        if (oDay == result.day) {
           if (result.type == 0) {
             day.bottomInfo = result.text;
           }

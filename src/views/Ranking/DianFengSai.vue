@@ -487,19 +487,19 @@ export default {
       }
     },
     filterMethod({ option, row, column }) {
-      if (column.property === "bpRate") {
+      if (column.property == "bpRate") {
         return row.bpRate >= option.data;
       }
 
-      if (column.property === "banRate") {
+      if (column.property == "banRate") {
         return row.banRate >= option.data;
       }
 
-      if (column.property === "pickRate") {
+      if (column.property == "pickRate") {
         return row.pickRate >= option.data;
       }
 
-      if (column.property === "winRate") {
+      if (column.property == "winRate") {
         return row.winRate >= option.data;
       }
     },

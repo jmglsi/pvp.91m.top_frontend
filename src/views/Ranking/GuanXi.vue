@@ -325,23 +325,23 @@ export default {
       this.showInfo.actionSheet = true;
     },
     filterMethod({ option, row, column }) {
-      if (column.property === "teammatePickRate") {
+      if (column.property == "teammatePickRate") {
         return row.teammatePickRate >= option.data;
       }
 
-      if (column.property === "teammateWinRate") {
+      if (column.property == "teammateWinRate") {
         return row.teammateWinRate >= option.data;
       }
 
-      if (column.property === "adaptation") {
+      if (column.property == "adaptation") {
         return row.adaptation >= option.data;
       }
 
-      if (column.property === "opponentPickRate") {
+      if (column.property == "opponentPickRate") {
         return row.opponentPickRate >= option.data;
       }
 
-      if (column.property === "opponentWinRate") {
+      if (column.property == "opponentWinRate") {
         return row.opponentWinRate >= option.data;
       }
     },
@@ -349,8 +349,8 @@ export default {
       let color = this.tableData.result.color;
 
       if (
-        column.property === "teammatePickRate" ||
-        column.property === "opponentPickRate"
+        column.property == "teammatePickRate" ||
+        column.property == "opponentPickRate"
       ) {
         if (
           row.teammatePickRate >= color.pick ||
@@ -360,7 +360,7 @@ export default {
         }
       }
 
-      if (column.property === "teammateWinRate") {
+      if (column.property == "teammateWinRate") {
         if (
           row.teammatePickRate >= color.pick &&
           row.teammateWinRate >= color.win
@@ -369,7 +369,7 @@ export default {
         }
       }
 
-      if (column.property === "opponentWinRate") {
+      if (column.property == "opponentWinRate") {
         if (
           row.opponentPickRate >= color.pick &&
           row.opponentWinRate >= color.win
