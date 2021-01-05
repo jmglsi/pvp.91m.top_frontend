@@ -43,8 +43,6 @@
     >
       <vxe-grid
         ref="skinReturn"
-        id="skinReturn"
-        auto-resize
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :sort-config="{ trigger: 'cell' }"

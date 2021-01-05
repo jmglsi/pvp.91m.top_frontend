@@ -21,7 +21,7 @@
 
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
       <vxe-grid
-        auto-resize
+        ref="bilibili"
         :isLoading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"

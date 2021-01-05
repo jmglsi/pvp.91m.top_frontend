@@ -33,7 +33,6 @@
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-grid
         ref="wanjia"
-        auto-resize
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :sort-config="{ trigger: 'cell' }"

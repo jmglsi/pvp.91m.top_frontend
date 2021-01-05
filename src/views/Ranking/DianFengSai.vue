@@ -23,7 +23,6 @@
       <vxe-grid
         ref="dianfengsai"
         id="dianfengsai"
-        auto-resize
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :cell-class-name="cellClassName"

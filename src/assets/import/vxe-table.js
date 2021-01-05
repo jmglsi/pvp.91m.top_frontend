@@ -34,7 +34,8 @@ VXETable.setup({
         align: "center",
         border: "inner",
         resizable: true,
-        showOverflow: false,
+        autoResize: true,
+        showOverflow: true,
         highlightCurrentRow: true,
         highlightHoverRow: true,
         scrollX: {

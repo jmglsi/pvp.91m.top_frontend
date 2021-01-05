@@ -2,7 +2,6 @@
   <div class="hero-skill app-skill">
     <vxe-grid
       ref="heroSkill"
-      auto-resize
       :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"

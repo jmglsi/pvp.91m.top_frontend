@@ -2,7 +2,6 @@
   <div class="hero-equipmentListAll app-equipmentListAll">
     <vxe-grid
       ref="heroEquipmentListAll"
-      auto-resize
       :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"

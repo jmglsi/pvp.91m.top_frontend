@@ -2,7 +2,6 @@
   <div class="hero-equipmentListOne app-equipmentListOne">
     <vxe-grid
       ref="heroEquipmentListOne"
-      auto-resize
       :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
@@ -367,14 +366,16 @@ export default {
         } else if (columnIndex == 3 || columnIndex == 4) {
           means.push(XEUtils.mean(data, column.property).toFixed(2));
         } else {
-          means.push(null);
+          means.push("-");
         }
       });
 
       return [means];
     },
     updateFooterEvent() {
-      this.$refs.heroEquipmentListOne.updateFooter();
+      let xTable = this.$refs.heroEquipmentListOne;
+      console.log(xTable);
+      xTable.updateFooter();
     },
     footerCellClassName: function ({ column }) {
       if (column.property == "heroId") {
