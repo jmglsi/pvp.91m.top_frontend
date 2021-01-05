@@ -64,7 +64,7 @@
         <vxe-table-column
           title="昵称"
           field="gamePlayerName"
-          :width="listWidth"
+          :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
 
         <vxe-table-column
@@ -129,7 +129,8 @@ export default {
     };
   },
   created() {
-    this.appInitTableHeight();
+    this.clientHeight = this.appInitTableHeight();
+    this.listWidth = this.appInitTableWidth(350);
   },
   mounted() {
     this.getRanking(0, 0);

@@ -125,7 +125,7 @@ export default {
     };
   },
   created() {
-    this.appInitTableHeight();
+    this.clientHeight = this.appInitTableHeight();
   },
   mounted() {
     this.getSkinReturnLog();

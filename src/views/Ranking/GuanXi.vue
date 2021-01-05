@@ -22,45 +22,47 @@
         :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
-        <vxe-table-column
-          title="英雄_1"
-          field="heroId_1"
-          fixed="left"
-          width="75"
-          sortable
-        >
-          <template v-slot="{ row }">
-            <img
-              v-lazy="row.hero_1.img"
-              width="50"
-              height="50"
-              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-            />
-            <span
-              class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
-              >{{ row.hero_1.adaptationRate }}</span
-            >
-          </template>
-        </vxe-table-column>
-        <vxe-table-column
-          title="英雄_2"
-          field="heroId_2"
-          fixed="left"
-          width="75"
-          sortable
-        >
-          <template v-slot="{ row }">
-            <img
-              v-lazy="row.hero_2.img"
-              width="50"
-              height="50"
-              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-            />
-            <span
-              class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
-              >{{ row.hero_2.adaptationRate }}</span
-            >
-          </template>
+        <vxe-table-column title="英雄">
+          <vxe-table-column
+            title="1"
+            field="heroId_1"
+            fixed="left"
+            width="75"
+            sortable
+          >
+            <template v-slot="{ row }">
+              <img
+                v-lazy="row.hero_1.img"
+                width="50"
+                height="50"
+                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              />
+              <span
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
+                >{{ row.hero_1.adaptationRate }}</span
+              >
+            </template>
+          </vxe-table-column>
+          <vxe-table-column
+            title="2"
+            field="heroId_2"
+            fixed="left"
+            width="75"
+            sortable
+          >
+            <template v-slot="{ row }">
+              <img
+                v-lazy="row.hero_2.img"
+                width="50"
+                height="50"
+                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              />
+              <span
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
+                >{{ row.hero_2.adaptationRate }}</span
+              >
+            </template>
+          </vxe-table-column>
         </vxe-table-column>
 
         <vxe-table-column title="#" type="seq" width="50" />
@@ -239,8 +241,8 @@ export default {
     };
   },
   created() {
-    this.appInitTableHeight();
-    this.initGuanXiTable();
+    this.clientHeight = this.appInitTableHeight();
+    this.listWidth = this.appInitTableWidth(750);
   },
   mounted() {
     let heroName = this.$route.query.heroName;
@@ -257,9 +259,6 @@ export default {
     }, 5000);
   },
   methods: {
-    initGuanXiTable: function () {
-      this.appWidth < 500 ? (this.listWidth = 90) : (this.listWidth = 0);
-    },
     getRanking: function (heroName, aid = 2) {
       this.search.value = heroName;
 

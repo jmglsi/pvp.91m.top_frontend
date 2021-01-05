@@ -22,48 +22,57 @@
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
       <vxe-grid
         auto-resize
-        :isLoading="isLoading"
+        :isLoading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
         :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="id" field="uid" fixed="left" width="125" />
+
         <vxe-table-column title="bv" field="bv" width="150">
           <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
         </vxe-table-column>
+
         <vxe-table-column title="#" type="seq" width="75" />
+
         <vxe-table-column
           title="类型"
           field="type"
           sortable
           :width="listWidth"
         />
+
         <vxe-table-column
           title="开始数量"
           field="start_num"
           sortable
           :width="listWidth"
         />
+
         <vxe-table-column
           title="目标数量"
           field="num"
           sortable
           :width="listWidth"
         />
+
         <vxe-table-column
           title="剩余数量"
           field="task_num"
           sortable
           :width="listWidth"
         />
+
         <vxe-table-column title="实时数量" field="bz" :width="listWidth" />
+
         <vxe-table-column
           title="更新时间"
           field="update_time"
           sortable
           width="200"
         />
+
         <vxe-table-column title="状态" field="is_running" width="75" />
       </vxe-grid>
     </div>
@@ -115,7 +124,6 @@ export default {
         },
       },
       paginationModel: 1,
-      listWidth: 0,
       showInfo: {
         actionSheet: false,
       },
@@ -124,14 +132,15 @@ export default {
         { name: "查看相关", value: 1 },
       ],
       clientHeight: 0,
+      listWidth: 0,
       copyAv: "",
       copyData: "",
       checkModel: false,
     };
   },
   created() {
-    this.appInitTableHeight();
-    this.appInitTableWidth();
+    this.clientHeight = this.appInitTableHeight();
+    this.listWidth = this.appInitTableWidth(750);
   },
   mounted() {
     let uid = this.$route.query.uid;
@@ -143,9 +152,6 @@ export default {
     }, 10000);
   },
   methods: {
-    appInitTableWidth: function () {
-      this.isMobile ? (this.listWidth = 100) : (this.listWidth = 0);
-    },
     getOrderInfo: function (uid, page) {
       this.axios
         .get(

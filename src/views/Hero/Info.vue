@@ -273,7 +273,7 @@
       >
         <van-tabs v-model="skillInfo.model" @change="onSkillChange">
           <van-tab title="技能">
-            <HeroSkillList :heroSkill="hero.info.skill.list"
+            <HeroSkillList :heroId="hero.info.id"
           /></van-tab>
           <van-tab title="装备 (推荐)"
             ><HeroEquipmentListALL :heroId="hero.info.id"
@@ -394,6 +394,8 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     this.getHeroInfo(to.params.id);
+    //路由改变的时候更新英雄信息
+
     next();
   },
   data() {
@@ -542,7 +544,7 @@ export default {
           "提示:1012,少则几千、多则几万种组合,仅推荐 场次、胜率 较高的前几十组";
       } else if (e == 2) {
         tipsText =
-          "提示:1013,默认去除 场次、胜率 过低的装备,点击【英雄】或【装备】可查看相关信息";
+          "提示:1013,默认去除 出场、胜率 过低的装备,点击【英雄】或【装备】可查看相关信息";
       }
 
       if (this.tipsInfo[e] == 0) {
