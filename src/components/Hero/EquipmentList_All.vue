@@ -17,14 +17,14 @@
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
-            width="25"
-            height="25"
-            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
+            width="23"
+            height="23"
+            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f app-e56cff3ad6321a4fec672c0ecc2aa8e9"
           />
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" />
+      <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-column title="最终结果,空的就是没出">
         <vxe-table-column
@@ -43,9 +43,9 @@
                 row.list[index] +
                 '.png'
               "
-              width="25"
-              height="25"
-              class="hero-88473b8c633f40889fe2a0affd773691"
+              width="23"
+              height="23"
+              class="hero-88473b8c633f40889fe2a0affd773691 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
             />
           </template>
         </vxe-table-column>

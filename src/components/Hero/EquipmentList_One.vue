@@ -2,6 +2,7 @@
   <div class="hero-equipmentListOne app-equipmentListOne">
     <vxe-grid
       ref="heroEquipmentListOne"
+      show-overflow
       :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
@@ -28,9 +29,9 @@
               row.heroId +
               '.jpg'
             "
-            width="25"
-            height="25"
-            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+            width="23"
+            height="23"
+            class="app-3b9655ab218c7f1a18f5dacd778a52f0 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
           />
         </template>
       </vxe-table-column>
@@ -50,14 +51,14 @@
               row.equipmentId +
               '.png'
             "
-            width="25"
-            height="25"
-            class="hero-785aadb8cf1105bafaef41fd3e44a292"
+            width="23"
+            height="23"
+            class="hero-785aadb8cf1105bafaef41fd3e44a292 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
           />
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" />
+      <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-column title="全部 (%)">
         <vxe-table-column
@@ -374,7 +375,7 @@ export default {
     },
     updateFooterEvent() {
       let xTable = this.$refs.heroEquipmentListOne;
-      console.log(xTable);
+
       xTable.updateFooter();
     },
     footerCellClassName: function ({ column }) {

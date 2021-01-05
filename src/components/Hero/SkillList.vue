@@ -17,14 +17,14 @@
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
-            width="25"
-            height="25"
-            class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093"
+            width="23"
+            height="23"
+            class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
           />
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="#" type="seq" />
+      <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-column title="比率 (%)">
         <vxe-table-column
