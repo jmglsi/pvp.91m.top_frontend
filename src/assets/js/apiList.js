@@ -22,6 +22,7 @@ const pvp = {
     getHeroEquipment: appApi + "?type=getHeroEquipment",
     getHeroInfo: appApi + "?type=getHeroInfo",
     getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
+    getHeroSkill: appApi + "?type=getHeroSkill",
     getHeroUpdate: appApi + "?type=getHeroUpdate",
     getHeroUpdateText: appApi + "?type=getHeroUpdateText",
     getMiniAppInfo: appApi + "?type=getMiniAppInfo",
