@@ -113,7 +113,7 @@
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="tableData.row.gamePlayerName + ' 如何操作'"
+        :title="tableDataRow.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
@@ -158,9 +158,9 @@ export default {
         },
         total: 200,
         pageSize: 25,
-        row: {
-          gamePlayerName: "加载中",
-        },
+      },
+      tableDataRow: {
+        gamePlayerName: "加载中",
       },
       paginationModel: 1,
       actions: [
@@ -179,9 +179,9 @@ export default {
     };
   },
   mounted() {
-    let heroId = this.$route.params.id || 111,
-      replayTitle = this.$route.query.replayTitle || "加载中",
-      teammate = parseInt(this.$route.query.teammate) || 0;
+    let heroId = parseInt(this.$route.params.id) || 0,
+      teammate = parseInt(this.$route.query.teammate) || 0,
+      replayTitle = this.$route.query.replayTitle || "加载中";
 
     this.hero.info.id = heroId;
     this.replay.title = replayTitle;
@@ -193,8 +193,10 @@ export default {
   },
   methods: {
     onGameActionSheetClick: function (row) {
-      this.tableData.row = row;
-
+      this.tableDataRow = row;
+      this.showInfo.actionSheet = true;
+    },
+    onReplayCopy: function (row) {
       let replayUrl = row.replayUrl,
         replayUrlIndex = replayUrl.indexOf("=");
 
@@ -206,9 +208,9 @@ export default {
         .then((res) => {
           this.copyData =
             this.replay.title + " 的对局回顾 ↓\r-\r" + res.data.data.url;
-        });
 
-      this.showInfo.actionSheet = true;
+          this.$appCopyData(this.copyData);
+        });
     },
     getHeroReplayByHeroId: function (heroId, page) {
       this.$axios
@@ -225,9 +227,6 @@ export default {
 
           if (status.code == 200) {
             this.tableData = data;
-            this.tableData.row = {
-              gamePlayerName: "加载中",
-            };
           } else {
             this.$message.error(status.msg);
 
@@ -239,10 +238,10 @@ export default {
       this.getHeroReplayByHeroId(this.hero.info.id, e);
     },
     onActionSheetSelect: function (item) {
-      let replayInfo = this.tableData.row;
+      let replayInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.$appCopyData(this.copyData);
+        this.onReplayCopy(replayInfo);
       }
 
       if (item.value == 1) {

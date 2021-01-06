@@ -58,7 +58,7 @@
         round
         size="small"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
-        @click="onLoginClick"
+        @click="onLoginClick(loginInfo.type)"
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
         >{{ loginInfo.text }}</van-button
       >
@@ -160,9 +160,8 @@ export default {
       this.loginInfo.type = 2;
       this.loginInfo.text = "修改密码";
     },
-    onLoginClick: function () {
-      let type = this.loginInfo.type || 1,
-        data = this.loginInfo.data;
+    onLoginClick: function (loginType) {
+      let data = this.loginInfo.data;
 
       if (!data.email || !data.password) {
         this.$message.error(this.$appMsg.error[1007]);
@@ -172,7 +171,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.loginWebAccount + "&aid=" + type,
+          this.$appApi.pvp.loginWebAccount + "&aid=" + loginType,
           this.$qs.stringify({
             name: data.name,
             email: data.email,

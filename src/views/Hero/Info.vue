@@ -277,7 +277,7 @@
             ><HeroEquipmentListALL :heroId="hero.info.id"
           /></van-tab>
           <van-tab title="装备 (单件)"
-            ><HeroEquipmentListOne :heroId="hero.info.id"
+            ><HeroEquipmentListOne :equipmentId="hero.info.id" :equipmentType="1"
           /></van-tab>
         </van-tabs>
       </van-action-sheet>

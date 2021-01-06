@@ -8,13 +8,7 @@
       @cell-click="onCellClick"
       height="547"
     >
-      <vxe-table-column
-        title="英雄"
-        field="heroId"
-        fixed="left"
-        width="50"
-        sortable
-      >
+      <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
         <template v-slot="{ row }">
           <img
             v-if="row.heroId > 0"
@@ -37,7 +31,6 @@
         field="equipmentId"
         fixed="left"
         width="50"
-        sortable
       >
         <template v-slot="{ row }">
           <img
@@ -187,7 +180,7 @@
       </div>
 
       <div class="hero-2acf2be2c6fdd22f4a6282a72817bdb1">
-        <EquipmentLine :heroEquipment="lineData.row" />
+        <EquipmentLine :heroEquipment="lineDataRow" />
       </div>
 
       <div
@@ -220,25 +213,28 @@
 export default {
   name: "HeroEquipmentListOne",
   props: {
-    heroId: {
+    equipmentId: {
       type: Number,
       default: 0,
+    },
+    equipmentType: {
+      type: Number,
+      default: 1,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { equipmentId, equipmentType } = this;
+      return { equipmentId, equipmentType };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == 0) return;
+        if (newValue.equipmentId == 0) return;
 
-        this.equipmentInfo.type = 1;
-        this.getHeroEquipment(newValue.heroId, this.equipmentInfo.type);
+        this.getHeroEquipment(newValue.equipmentId, newValue.equipmentType);
       },
     },
   },
@@ -259,8 +255,8 @@ export default {
       },
       lineData: {
         equipmentId: 0,
-        row: {},
       },
+      lineDataRow: {},
       equipmentInfo: {
         type: 1,
       },
@@ -370,7 +366,7 @@ export default {
       this.lineData.heroId = row.heroId;
       this.lineData.equipmentId = row.equipmentId;
 
-      this.lineData.row = {
+      this.lineDataRow = {
         columns: ["格子", "胜率", "占比"],
         rows: [
           {

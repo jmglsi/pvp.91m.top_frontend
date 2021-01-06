@@ -21,7 +21,7 @@
         class="game-b2ecdf6163952cf377f932aff4b736be"
       >
         <van-grid-item
-          v-for="(data, index) in engageInfo.result.rows"
+          v-for="(data, index) in tableData.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           class="game-f24a222ebfb0f6b85f63749653659063"
         >
@@ -77,15 +77,10 @@ export default {
   },
   data() {
     return {
-      engageInfo: {
+      tableData: {
         type: 0,
         result: {
           rows: [],
-        },
-        row: {
-          id: null,
-          name: null,
-          logo: null,
         },
       },
     };
@@ -102,7 +97,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.engageInfo.result = data.result;
+            this.tableData.result = data.result;
           } else {
             this.$message.error(status.msg);
 

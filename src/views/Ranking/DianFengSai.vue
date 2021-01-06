@@ -299,24 +299,25 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.heroSkill"
-        :title="tableData.row.name + ' 的其他数据 (上周)'"
+        :title="tableDataRow.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
         <van-tabs v-model="skillInfo.model" @change="onSkillChange">
           <van-tab title="技能">
             <HeroSkillList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"
-              :heroId="tableData.row.id"
+              :heroId="tableDataRow.id"
           /></van-tab>
           <van-tab title="装备 (推荐)"
             ><HeroEquipmentListALL
               v-if="cellInfo.index == 0 && skillInfo.model == 1"
-              :heroId="tableData.row.id"
+              :heroId="tableDataRow.id"
           /></van-tab>
           <van-tab title="装备 (单件)"
             ><HeroEquipmentListOne
               v-if="cellInfo.index == 0 && skillInfo.model == 2"
-              :heroId="tableData.row.id"
+              :equipmentId="tableDataRow.id"
+              :equipmentType="1"
           /></van-tab>
         </van-tabs>
       </van-action-sheet>
@@ -325,7 +326,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroMenu"
-        :title="tableData.row.name + ' (' + tableData.row.id + ') 如何操作'"
+        :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
@@ -356,14 +357,10 @@ export default {
         result: {
           rows: [],
         },
-        clockwise: false,
-        row: {
-          id: 0,
-          name: "加载中",
-          skill: [],
-          clockwise: false,
-          updateId: 0,
-        },
+      },
+      tableDataRow: {
+        id: 0,
+        name: "加载中",
       },
       actions: [
         { name: "英雄详情", value: 0 },
@@ -444,8 +441,6 @@ export default {
         : (this.listWidth = 90);
     },
     toolbarCustomEvent: function (params) {
-      this.initTableWidth();
-
       switch (params.type) {
         case "confirm": {
           //确认
@@ -460,6 +455,8 @@ export default {
           break;
         }
       }
+
+      this.initTableWidth();
     },
     getRanking: function (bid, cid, aid = 0) {
       this.$axios
@@ -477,11 +474,6 @@ export default {
 
           this.tableData = data;
           this.tableData.loading = false;
-          this.tableData.row = {
-            id: 0,
-            name: "加载中",
-            updateId: 0,
-          };
 
           //this.$refs.dianfengsai.loadData(data.result.rows);
         });
@@ -511,7 +503,7 @@ export default {
       this.getRanking(this.areaInfo.model, this.positionInfo.model);
     },
     onCellClick: function ({ row, column }) {
-      this.tableData.row = row;
+      this.tableDataRow = row;
 
       if (column.property == "score") {
         this.showInfo.heroSkill = true;
@@ -571,7 +563,7 @@ export default {
       }
     },
     onActionSheetSelect: function (item) {
-      let heroInfo = this.tableData.row;
+      let heroInfo = this.tableDataRow;
 
       if (item.value == 0) {
         this.$appPush({ path: "/hero/" + heroInfo.id + "/info" });

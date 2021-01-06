@@ -26,7 +26,7 @@
         class="game-40db4f618bd5c27e60368f891382ffd4"
       >
         <van-grid-item
-          v-for="(data, index) in teamInfo.result.rows"
+          v-for="(data, index) in tableData.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           :text="data.name"
           :icon="data.logo"
@@ -39,15 +39,15 @@
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
         v-model="showInfo.team"
-        :title="teamInfo.row.id ? teamInfo.row.name + ' 如何操作' : '新建队伍'"
+        :title="tableDataRow.id ? tableDataRow.name + ' 如何操作' : '新建队伍'"
         safe-area-inset-bottom
       >
         <div class="content">
           <div class="game-350be0bb4350ca865ab9210d074875f1">
             <van-cell-group class="game-2ce081560b9cb8cdcd7472e639624e3e">
               <van-field
-                v-model="teamInfo.row.id"
-                v-if="teamInfo.row.id"
+                v-model="tableDataRow.id"
+                v-if="tableDataRow.id"
                 :disabled="true"
                 label="id"
                 class="game-3972b6d305454c0dd6bb3927cf9c8712"
@@ -57,13 +57,13 @@
                     round
                     size="small"
                     color="black"
-                    @click="onCreateEngageClick(teamInfo.row.id)"
+                    @click="onCreateEngageClick(tableDataRow.id)"
                     >创建交战</van-button
                   >
                 </template>
               </van-field>
               <van-field
-                v-model="teamInfo.row.logo"
+                v-model="tableDataRow.logo"
                 label="Logo"
                 placeholder="输入图片链接"
                 clearable
@@ -83,7 +83,7 @@
                 </template>
               </van-field>
               <van-field
-                v-model="teamInfo.row.name"
+                v-model="tableDataRow.name"
                 label="名字"
                 placeholder="输入队伍名字"
                 clearable
@@ -94,7 +94,7 @@
 
           <div class="game-c97a3db05d13ebcb702c69bc6a42a226">
             <van-button
-              v-if="teamInfo.row.id"
+              v-if="tableDataRow.id"
               round
               size="small"
               color="red"
@@ -129,17 +129,16 @@ export default {
       showInfo: {
         team: false,
       },
-      teamInfo: {
+      tableData: {
         type: 0,
         index: 0,
         result: {
           rows: [],
         },
-        row: {
-          id: null,
-          name: null,
-          logo: null,
-        },
+      },
+      tableDataRow: {
+        id: "",
+        name: "",
       },
     };
   },
@@ -169,7 +168,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.teamInfo.result = data.result;
+            this.tableData.result = data.result;
           } else {
             this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
@@ -198,7 +197,7 @@ export default {
           if (status.code == 200) {
             this.$message.success(this.$appMsg.success[1000]);
 
-            this.teamInfo.row.logo = data.img;
+            this.tableDataRow.logo = data.img;
           } else {
             this.$message.error(status.msg);
           }
@@ -223,35 +222,35 @@ export default {
     onCreateTeamClick: function () {
       this.showInfo.team = true;
 
-      this.teamInfo.row = {
+      this.tableDataRow = {
         name: null,
         logo: null,
       };
 
-      this.teamInfo.type = 0;
+      this.tableData.type = 0;
     },
     onUpdateTeamClick: function (data, index) {
-      this.teamInfo.row = data;
+      this.tableDataRow = data;
 
-      this.teamInfo.type = 1;
-      this.teamInfo.index = index;
+      this.tableData.type = 1;
+      this.tableData.index = index;
 
       this.showInfo.team = true;
     },
     onSaveTeamInfoClick: function () {
       let loginInfo = this.loginInfo,
-        teamInfo = this.teamInfo;
+        row = this.tableDataRow;
 
       let postData = {
         openId: loginInfo.openId,
         accessToken: loginInfo.accessToken,
         friendsOpenId: loginInfo.openId,
-        teamId: teamInfo.row.id,
-        teamName: teamInfo.row.name,
-        teamLogo: teamInfo.row.logo,
+        teamId: row.id,
+        teamName: row.name,
+        teamLogo: row.logo,
       };
 
-      if (teamInfo.type == 0) {
+      if (row.type == 0) {
         this.$axios
           .post(this.$appApi.pvp.createTeam, this.$qs.stringify(postData))
           .then((res) => {
@@ -283,7 +282,7 @@ export default {
     },
     onDeleteTeamClick: function () {
       let loginInfo = this.loginInfo,
-        teamInfo = this.teamInfo;
+        row = this.tableDataRow;
 
       this.$dialog
         .confirm({
@@ -298,7 +297,7 @@ export default {
                 openId: loginInfo.openId,
                 accessToken: loginInfo.accessToken,
                 friendsOpenId: loginInfo.openId,
-                teamId: teamInfo.row.id,
+                teamId: row.id,
               })
             )
             .then((res) => {
@@ -307,7 +306,7 @@ export default {
               if (status.code == 200) {
                 this.$message.success(this.$appMsg.success[1000]);
 
-                this.teamInfo.result.rows.splice(teamInfo.index, 1);
+                this.tableData.result.rows.splice(row.index, 1);
               } else {
                 this.$message.error(status.msg);
               }

@@ -162,7 +162,7 @@
             v-show="bpMode == 'edit'"
             @click="onWinCampClick(1)"
             :style="
-              isMobile
+              $isMobile
                 ? { height: '275px' }
                 : { height: $appHeight - 175 + 'px' }
             "
@@ -173,7 +173,7 @@
           <div
             v-show="showInfo.hero"
             :style="
-              isMobile
+              $isMobile
                 ? { height: '240px' }
                 : { height: $appHeight - 150 + 'px' }
             "
@@ -371,7 +371,7 @@
             v-show="bpMode == 'edit'"
             @click="onWinCampClick(2)"
             :style="
-              isMobile
+              $isMobile
                 ? { height: '275px' }
                 : { height: $appHeight - 175 + 'px' }
             "

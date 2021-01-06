@@ -9,12 +9,6 @@ Vue.prototype.$appInfo = {
     name: "苏苏的荣耀助手",
 }
 
-Vue.prototype.$appConfig = {
-    cookie: {
-        timeout: "1Y"
-    }
-}
-
 Vue.prototype.$appCopyData = function(data, successText = "复制成功", errorText = "复制失败") {
     this.$copyText(data).then(
         () => {

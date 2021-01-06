@@ -23,6 +23,10 @@
         <van-tab title="玩家 (非实时)">
           <WanJia />
         </van-tab>
+
+        <van-tab title="装备 (上周)">
+          <ZhuangBei />
+        </van-tab>
       </van-tabs>
     </div>
 
@@ -58,6 +62,7 @@ export default {
       require(["@/views/Ranking/DianFengSai.vue"], resolve),
     GuanXi: (resolve) => require(["@/views/Ranking/GuanXi.vue"], resolve),
     WanJia: (resolve) => require(["@/views/Ranking/WanJia.vue"], resolve),
+    ZhuangBei: (resolve) => require(["@/views/Ranking/ZhuangBei.vue"], resolve),
   },
   data() {
     return {

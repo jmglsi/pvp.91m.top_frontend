@@ -22,7 +22,7 @@
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄" fixed="left">
-          <vxe-table-column title="1" field="heroId_1" width="75" sortable>
+          <vxe-table-column title="1" field="heroId_1" width="75">
             <template v-slot="{ row }">
               <img
                 v-lazy="row.hero_1.img"
@@ -36,7 +36,7 @@
               >
             </template>
           </vxe-table-column>
-          <vxe-table-column title="2" field="heroId_2" width="75" sortable>
+          <vxe-table-column title="2" field="heroId_2" width="75">
             <template v-slot="{ row }">
               <img
                 v-lazy="row.hero_2.img"
@@ -174,11 +174,11 @@
 
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
-        v-model="showInfo.actionSheet"
+        v-model="showInfo.heroMenu"
         :title="
-          tableData.row.hero_1.name +
+          tableDataRow.hero_1.name +
           ' & ' +
-          tableData.row.hero_2.name +
+          tableDataRow.hero_2.name +
           ' 如何操作'
         "
         :actions="actions"
@@ -206,24 +206,24 @@ export default {
         result: {
           rows: [],
         },
-        row: {
-          hero_1: {
-            name: "加载中",
-          },
-          hero_2: {
-            name: "加载中",
-          },
+      },
+      tableDataRow: {
+        hero_1: {
+          name: "加载中",
+        },
+        hero_2: {
+          name: "加载中",
         },
       },
       actions: [
-        { name: "复制信息", value: 0 },
+        { name: "复制链接", value: 0 },
         { name: "对局回顾", value: 1 },
       ],
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
       showInfo: {
-        actionSheet: false,
+        heroMenu: false,
       },
     };
   },
@@ -232,12 +232,13 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    let heroName = this.$route.query.heroName || "",
-      text = this.tableData.searchPlaceholder || ["喵~", "嗷呜"];
+    let heroName = this.$route.query.heroName || "";
 
     this.getRanking(heroName);
 
     setInterval(() => {
+      let text = this.tableData.searchPlaceholder;
+
       this.search.placeholder = text[Math.floor(Math.random() * text.length)];
     }, 5000);
   },
@@ -257,21 +258,16 @@ export default {
           if (heroName) document.title = heroName + " | " + this.$appInfo.name;
 
           this.tableData = res.data.data;
+
           this.tableData.loading = false;
-          this.tableData.row = {
-            hero_1: {
-              name: "加载中",
-            },
-            hero_2: {
-              name: "加载中",
-            },
-          };
         });
     },
     getHeroInfo: function (row) {
-      this.tableData.row = row;
-
-      let heroName = this.search.value || this.tableData.row.hero_1.name;
+      this.tableDataRow = row;
+      this.showInfo.heroMenu = true;
+    },
+    onCopyHeroInfo: function (row) {
+      let heroName = this.search.value || row.hero_1.name;
 
       this.$axios
         .get(
@@ -279,7 +275,7 @@ export default {
             encodeURIComponent(
               location.origin +
                 location.pathname +
-                "?type=2&heroName=" +
+                "?type=1&heroName=" +
                 encodeURIComponent(heroName) +
                 "&heroId1=" +
                 row.hero_1.id +
@@ -302,9 +298,9 @@ export default {
             row.adaptation +
             "\r-\r更多英雄关系 ↓\r" +
             res.data.data.url;
-        });
 
-      this.showInfo.actionSheet = true;
+          this.$appCopyData(this.copyData);
+        });
     },
     filterMethod({ option, row, column }) {
       if (column.property == "teammatePickRate") {
@@ -374,10 +370,10 @@ export default {
       this.getHeroInfo(row);
     },
     onActionSheetSelect: function (item) {
-      let heroInfo = this.tableData.row;
+      let heroInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.$appCopyData(this.copyData);
+        this.onCopyHeroInfo(heroInfo);
       }
 
       if (item.value == 1) {

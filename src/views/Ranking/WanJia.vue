@@ -77,8 +77,8 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.actionSheet"
-        :title="tableData.row.gamePlayerName + ' 如何操作'"
+        v-model="showInfo.playerMenu"
+        :title="tableDataRow.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
@@ -101,9 +101,9 @@ export default {
         result: {
           rows: [],
         },
-        row: {
-          gamePlayerName: "加载中",
-        },
+      },
+      tableDataRow: {
+        gamePlayerName: "加载中",
       },
       actions: [
         { name: "查看QQ", value: 0 },
@@ -123,7 +123,7 @@ export default {
       },
       showInfo: {
         shield: false,
-        actionSheet: false,
+        playerMenu: false,
       },
     };
   },
@@ -148,19 +148,17 @@ export default {
         )
         .then((res) => {
           this.tableData = res.data.data;
+
           this.tableData.loading = false;
-          this.tableData.row = {
-            area: 0,
-            gamePlayerName: "加载中",
-          };
         });
     },
     getPlayerInfo: function (row) {
       if (row.userId == 0 || this.areaInfo.model >= 3) return;
 
-      this.tableData.row = row;
-      this.showInfo.actionSheet = true;
-
+      this.tableDataRow = row;
+      this.showInfo.playerMenu = true;
+    },
+    onCopyPlayerInfo: function (row) {
       this.$axios
         .post(this.$appApi.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then((res) => {
@@ -176,8 +174,12 @@ export default {
               "\r-\r更多玩家信息 ↓\r" +
               location.origin +
               location.pathname +
-              "?type=1&userId=" +
-              row.userId;
+              "?type=2&userId=" +
+              row.userId +
+              "&gamePlayerName=" +
+              encodeURIComponent(row.gamePlayerName);
+
+            this.$appCopyData(this.copyData);
           } else {
             this.$message.error(status.msg);
           }
@@ -196,10 +198,10 @@ export default {
       this.getPlayerInfo(row);
     },
     onActionSheetSelect: function (item) {
-      let playerInfo = this.tableData.row;
+      let playerInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.$appCopyData(this.copyData);
+        this.onCopyPlayerInfo(playerInfo);
       }
 
       if (item.value == 1) {

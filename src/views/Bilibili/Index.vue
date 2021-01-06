@@ -89,7 +89,7 @@
     <div class="bilibili-8fd741f0ce683493b1bed18a2ed32d4a">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="tableData.row.uid + ' 如何操作'"
+        :title="tableDataRow.uid + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
@@ -119,9 +119,9 @@ export default {
         },
         total: 200,
         pageSize: 50,
-        row: {
-          uid: 0,
-        },
+      },
+      tableDataRow: {
+        uid: 0,
       },
       paginationModel: 1,
       actions: [
@@ -161,9 +161,6 @@ export default {
         )
         .then((res) => {
           this.tableData = res.data.data;
-          this.tableData.row = {
-            uid: 0,
-          };
 
           let copyAv = this.copyAv;
 
@@ -179,8 +176,10 @@ export default {
       this.copyAv = "";
     },
     onBilibiliActionSheetClick: function (row) {
-      this.tableData.row = row;
-
+      this.tableDataRow = row;
+      this.showInfo.actionSheet = true;
+    },
+    onBilibiliCopy: function (row) {
       this.$axios
         .get(
           "//s.91m.top/?url=" +
@@ -211,9 +210,9 @@ export default {
             row.bz +
             "\r-\r" +
             res.data.data.url;
-        });
 
-      this.showInfo.actionSheet = true;
+          this.$appCopyData(this.copyData);
+        });
     },
     onSearchClear: function () {
       this.search.value = "";
@@ -251,10 +250,10 @@ export default {
       this.onBilibiliActionSheetClick(row);
     },
     onActionSheetSelect: function (item) {
-      let orderInfo = this.tableData.row;
+      let orderInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.$appCopyData(this.copyData);
+        this.onBilibiliCopy(orderInfo);
       }
 
       if (item.value == 1) {

@@ -5,7 +5,10 @@
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col :span="$isMobile ? 15 : 21" @click="showInfo.calendar = true">
+          <van-col
+            :span="$isMobile ? 15 : 21"
+            @click="showInfo.calendar = true"
+          >
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.result.tips
             }}</span>
@@ -95,9 +98,7 @@
                         '.jpg'
                   "
                   @click="
-                    itemHeroId > 900
-                      ? $message.info($appMsg.info[1000])
-                      : ''
+                    itemHeroId > 900 ? $message.info($appMsg.info[1000]) : ''
                   "
                   class="update-5d39f3848925994b52ec52fba934577c"
                 />
@@ -142,7 +143,7 @@
     <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
-        @close="onCloseHeroUpdateTextClick(heroId, tableData.row)"
+        @close="onCloseHeroUpdateTextClick(heroId, tableDataRow)"
       >
         <template #title>
           <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">{{
@@ -204,13 +205,13 @@ export default {
         max: new Date(),
       },
       tableData: {
-        row: {},
         result: {
           rows: [],
         },
         tips: "",
         title: "",
       },
+      tableDataRow: {},
       updateInfo: {
         model: 0,
         options: [
@@ -347,7 +348,7 @@ export default {
           this.updateInfo.text = res.data.data;
 
           this.showInfo.dialog = true;
-          this.tableData.row = data;
+          this.tableDataRow = data;
         });
     },
     onCloseHeroUpdateTextClick: function (heroId, row) {
