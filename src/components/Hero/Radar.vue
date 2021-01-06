@@ -99,9 +99,9 @@ export default {
         },
       };
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getHeroChartsLog +
+          this.$appApi.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
             "&heroName=" +
@@ -117,7 +117,7 @@ export default {
             this.radarData = data;
             this.radarData.loading = false;
           } else {
-            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },
@@ -126,14 +126,13 @@ export default {
         this.chartSettings = {};
         this.chartData = [];
       } else {
-        let hero, newTags;
+        let newTags = "";
 
         for (let i = 0; i < e.length; i++) {
-          hero = e[i].text;
-          newTags = newTags + "," + hero;
+          newTags += "," + e[i].text;
         }
 
-        this.heroList.new = newTags.replace("undefined,", "");
+        this.heroList.new = newTags.slice(1);
       }
     },
     onTagsBlur: function () {

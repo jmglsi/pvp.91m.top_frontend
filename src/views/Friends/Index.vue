@@ -23,7 +23,7 @@
               round
               :color="friendsInfo.certification.color"
               class="friends-e14d426045f0bd910a6606a7a11122eb"
-              @click="$message.info('提示:1015,更改称号需联系站长')"
+              @click="$message.info($appMsg.info[1003])"
               >{{ friendsInfo.certification.text }}</van-tag
             >
           </span>
@@ -87,7 +87,7 @@
                 v-for="(data, index) in friendsInfo.heroList"
                 :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
                 class="app-1951b6e7c82938dd7446a41e829b247b"
-                @click="appPush({ path: '/hero/' + data.id + '/info' })"
+                @click="$appPush({ path: '/hero/' + data.id + '/info' })"
               >
                 <img
                   v-lazy="
@@ -140,7 +140,7 @@
       >
     </div>
 
-    <AppBottomTabbar v-if="isMobile" height="100px" />
+    <AppBottomTabbar v-if="$isMobile" height="100px" />
   </div>
 </template>
 
@@ -178,14 +178,14 @@ export default {
   },
   methods: {
     getWebAccountInfo: function (tipsType, aid = 1) {
-      let openId = this.$route.query.openId,
+      let openId = this.$route.query.openId || "",
         postData;
 
       tipsType == 0 ? (postData = { friendsOpenId: openId }) : (postData = {});
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getWebAccountInfo + "&aid=" + aid,
+          this.$appApi.pvp.getWebAccountInfo + "&aid=" + aid,
           this.$qs.stringify(postData)
         )
         .then((res) => {
@@ -195,10 +195,10 @@ export default {
           if (status.code == 200) {
             this.friendsInfo = data;
 
-            if (tipsType == 1) this.$message.success("刷新成功");
+            if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
 
             if (postData != {} && data.openId != openId) {
-              this.appPush({
+              this.$appPush({
                 path: "/friends",
                 query: { openId: data.openId },
               });
@@ -210,7 +210,7 @@ export default {
     },
     onCopyInfoClick: function (name, uin) {
       this.copyData = "用户名:" + name + "\rQQ:" + uin;
-      this.appCopyData(this.copyData);
+      this.$appCopyData(this.copyData);
     },
   },
 };

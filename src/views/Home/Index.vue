@@ -7,7 +7,7 @@
         :ellipsis="false"
         :swipeable="true"
         :sticky="true"
-        @change="appPush({ path: '/', query: { type: tabsModel } })"
+        @change="$appPush({ path: '/', query: { type: tabsModel } })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -24,7 +24,7 @@
     </div>
 
     <div
-      @click="appOpenUrl('是否打开外部链接?', null, { path: upyun.url })"
+      @click="$appOpenUrl('是否打开外部链接?', null, { path: upyun.url })"
       class="home-72ab9e07378f988922e6c91884048db0"
     >
       本站由
@@ -59,14 +59,14 @@ export default {
     };
   },
   mounted() {
-    let pwa = parseInt(this.$route.query.pwa),
-      type = parseInt(this.$route.query.type),
-      version = parseInt(this.$route.query.v);
+    let pwa = parseInt(this.$route.query.pwa) || 0,
+      type = parseInt(this.$route.query.type) || 0,
+      version = parseInt(this.$route.query.v) || 1609430400;
 
-    if (pwa) {
+    if (pwa == 1) {
       this.$cookie.set("pwa", pwa, { expires: "1Y" });
 
-      let updateDay = ((this.appTs - version) / 86400).toFixed(2);
+      let updateDay = ((this.$appTs - version) / 86400).toFixed(2);
       if (updateDay >= 90) {
         this.$dialog
           .confirm({
@@ -76,7 +76,7 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.appCopyData(
+            this.$appCopyData(
               location.origin,
               "链接已复制,请清除缓存重新添加到桌面~"
             );
@@ -87,9 +87,6 @@ export default {
       }
     }
 
-    if (!type) {
-      type = 0;
-    }
     this.tabsModel = type;
   },
 };

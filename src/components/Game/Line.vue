@@ -90,9 +90,9 @@ export default {
         },
       };
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.game.getGamePrediction + "&aid=" + aid,
+          this.$appApi.game.getGamePrediction + "&aid=" + aid,
           this.$qs.stringify({
             gameBPData: gameBPData,
           })

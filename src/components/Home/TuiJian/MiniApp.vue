@@ -54,7 +54,7 @@
 
     <div
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
-      @click="appPush({ path: '/' })"
+      @click="$appPush({ path: '/' })"
     >
       <AppCollapse width="25" height="25" />
     </div>
@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     getMiniAppInfo: function () {
-      this.axios.get(this.apiList.pvp.getMiniAppInfo).then((res) => {
+      this.$axios.get(this.$appApi.pvp.getMiniAppInfo).then((res) => {
         this.miniapp = res.data.data;
       });
     },

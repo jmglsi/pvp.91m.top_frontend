@@ -158,7 +158,7 @@
           <vxe-table-column
             title="胜率"
             field="winRate"
-            :filters="[{ data: 47, checked: true }]"
+            :filters="[{ data: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -302,20 +302,20 @@
         :title="tableData.row.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs v-model="tabsInfo.model">
+        <van-tabs v-model="skillInfo.model" @change="onSkillChange">
           <van-tab title="技能">
             <HeroSkillList
-              v-if="cellInfo.index == 0 && tabsInfo.model == 0"
+              v-if="cellInfo.index == 0 && skillInfo.model == 0"
               :heroId="tableData.row.id"
           /></van-tab>
           <van-tab title="装备 (推荐)"
             ><HeroEquipmentListALL
-              v-if="cellInfo.index == 0 && tabsInfo.model == 1"
+              v-if="cellInfo.index == 0 && skillInfo.model == 1"
               :heroId="tableData.row.id"
           /></van-tab>
           <van-tab title="装备 (单件)"
             ><HeroEquipmentListOne
-              v-if="cellInfo.index == 0 && tabsInfo.model == 2"
+              v-if="cellInfo.index == 0 && skillInfo.model == 2"
               :heroId="tableData.row.id"
           /></van-tab>
         </van-tabs>
@@ -348,6 +348,32 @@ export default {
   },
   data() {
     return {
+      tableData: {
+        color: {},
+        column: [],
+        columns: [],
+        loading: true,
+        result: {
+          rows: [],
+        },
+        clockwise: false,
+        row: {
+          id: 0,
+          name: "加载中",
+          skill: [],
+          clockwise: false,
+          updateId: 0,
+        },
+      },
+      actions: [
+        { name: "英雄详情", value: 0 },
+        { name: "对局回顾", value: 1 },
+        { name: "赛事数据", value: 2 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 3 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
+      ],
+      listWidth: 0,
+      clientHeight: 0,
       areaInfo: {
         model: 4,
         options: [
@@ -371,23 +397,6 @@ export default {
           { text: "游走", value: 6 },
         ],
       },
-      tableData: {
-        color: {},
-        column: [],
-        columns: [],
-        loading: true,
-        result: {
-          rows: [],
-        },
-        clockwise: false,
-        row: {
-          id: 0,
-          name: "加载中",
-          skill: [],
-          clockwise: false,
-          updateId: 0,
-        },
-      },
       showInfo: {
         heroSkill: false,
         heroMenu: false,
@@ -398,19 +407,14 @@ export default {
       tabsInfo: {
         model: 0,
       },
-      actions: [
-        { name: "英雄详情", value: 0 },
-        { name: "对局回顾", value: 1 },
-        { name: "赛事数据", value: 2 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 3 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
-      ],
-      listWidth: 0,
-      clientHeight: 0,
+      skillInfo: {
+        model: 0,
+      },
+      tipsInfo: [0, 0, 0],
     };
   },
   created() {
-    this.clientHeight = this.appInitTableHeight();
+    this.clientHeight = this.$appInitTableHeight();
     this.initTableWidth();
 
     this.$nextTick(() => {
@@ -423,7 +427,7 @@ export default {
   },
   methods: {
     initTableWidth: function () {
-      this.listWidth = this.appInitTableWidth(1450);
+      this.listWidth = this.$appInitTableWidth(1450);
 
       if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
 
@@ -435,7 +439,9 @@ export default {
 
       let visibleColumn = tableColumn.dianfengsai.split(",");
 
-      visibleColumn.length > 12 ? (this.listWidth = 0) : (this.listWidth = 90);
+      !this.$isMobile && visibleColumn.length > 6
+        ? (this.listWidth = 0)
+        : (this.listWidth = 90);
     },
     toolbarCustomEvent: function (params) {
       this.initTableWidth();
@@ -456,9 +462,9 @@ export default {
       }
     },
     getRanking: function (bid, cid, aid = 0) {
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getRanking +
+          this.$appApi.pvp.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -481,9 +487,7 @@ export default {
         });
 
       if (bid == 3 && cid == 0) {
-        this.$message.info(
-          "提示:1009,近期热度有明显上升的。上升过快极有可能挨刀,调整过的几个月内不会再动 ;D"
-        );
+        this.$message.info(this.$appMsg.info[1011]);
       }
     },
     filterMethod({ option, row, column }) {
@@ -549,15 +553,32 @@ export default {
         }
       }
     },
+    onSkillChange: function () {
+      let tipsText,
+        e = this.skillInfo.model || 0;
+
+      if (e == 0) {
+        tipsText = this.$appMsg.info[1007];
+      } else if (e == 1) {
+        tipsText = this.$appMsg.info[1008];
+      } else if (e == 2) {
+        tipsText = this.$appMsg.info[1009];
+      }
+
+      if (this.tipsInfo[e] == 0) {
+        this.$message.info(tipsText);
+        this.tipsInfo[e] = 1;
+      }
+    },
     onActionSheetSelect: function (item) {
       let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appPush({ path: "/hero/" + heroInfo.id + "/info" });
+        this.$appPush({ path: "/hero/" + heroInfo.id + "/info" });
       }
 
       if (item.value == 1) {
-        this.appPush({
+        this.$appPush({
           path: "/hero/" + heroInfo.id + "/replay",
           query: {
             replayTitle: heroInfo.name,
@@ -567,7 +588,7 @@ export default {
       }
 
       if (item.value == 2) {
-        this.appOpenUrl("是否查看英雄赛事数据?", "玩加电竞", {
+        this.$appOpenUrl("是否查看英雄赛事数据?", "玩加电竞", {
           path:
             "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
@@ -576,13 +597,13 @@ export default {
       }
 
       if (item.value == 3) {
-        this.appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
+        this.$appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
           path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
         });
       }
 
       if (item.value == 4) {
-        this.appOpenUrl("是否查看英雄攻速阈值?", "NGA @小熊de大熊", {
+        this.$appOpenUrl("是否查看英雄攻速阈值?", "NGA @小熊de大熊", {
           path: "//bbs.nga.cn/read.php?tid=12677614",
         });
       }

@@ -150,7 +150,7 @@ export default {
     },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.appPush({ path: "/my" });
+        this.$appPush({ path: "/my" });
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = "登录";
@@ -161,18 +161,18 @@ export default {
       this.loginInfo.text = "修改密码";
     },
     onLoginClick: function () {
-      let type = this.loginInfo.type,
+      let type = this.loginInfo.type || 1,
         data = this.loginInfo.data;
 
       if (!data.email || !data.password) {
-        this.$message.error("错误:1007,邮箱或密码为空");
+        this.$message.error(this.$appMsg.error[1007]);
 
         return;
       }
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.loginWebAccount + "&aid=" + type,
+          this.$appApi.pvp.loginWebAccount + "&aid=" + type,
           this.$qs.stringify({
             name: data.name,
             email: data.email,
@@ -186,17 +186,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            let msg;
-
-            if (type == 0) {
-              msg = "注册成功";
-            } else if (type == 1) {
-              msg = "登录成功";
-            } else if (type == 2) {
-              msg = "修改成功";
-            }
-
-            this.$message.success(msg);
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.$cookie.set("openId", data.openId, { expires: "1Y" });
             this.$cookie.set("accessToken", data.accessToken, {

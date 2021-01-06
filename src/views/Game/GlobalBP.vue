@@ -113,7 +113,7 @@
       <van-row>
         <van-col span="3">
           <div
-            :style="isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
+            :style="$isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
             class="game-be50d19d79d06b239c799bc2608239c6"
           >
             <ul>
@@ -121,7 +121,7 @@
                 v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
                   .BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
-                :style="isMobile ? {} : { marginTop: '50px' }"
+                :style="$isMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -150,8 +150,8 @@
                         ? blueStepsClass
                         : ''
                     "
-                    :width="isMobile ? 40 : 55"
-                    :height="isMobile ? 40 : 55"
+                    :width="$isMobile ? 40 : 55"
+                    :height="$isMobile ? 40 : 55"
                     class="game-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -164,7 +164,7 @@
             :style="
               isMobile
                 ? { height: '275px' }
-                : { height: appHeight - 175 + 'px' }
+                : { height: $appHeight - 175 + 'px' }
             "
             class="game-d75e14b5c8f13e894fe9bf9d5426c198"
           />
@@ -175,14 +175,14 @@
             :style="
               isMobile
                 ? { height: '240px' }
-                : { height: appHeight - 150 + 'px' }
+                : { height: $appHeight - 150 + 'px' }
             "
             class="app-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
               v-model="tableData.active"
               :border="false"
-              :swipe-threshold="isMobile ? 4 : 7"
+              :swipe-threshold="$isMobile ? 4 : 7"
               color="orange"
               class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
@@ -322,7 +322,7 @@
         </van-col>
         <van-col span="3">
           <div
-            :style="isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
+            :style="$isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
             class="game-f382dd1c4a10b864c29d26d47249b570"
           >
             <ul>
@@ -330,7 +330,7 @@
                 v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
                   .BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
-                :style="isMobile ? {} : { marginTop: '50px' }"
+                :style="$isMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -359,8 +359,8 @@
                         ? redStepsClass
                         : ''
                     "
-                    :width="isMobile ? 40 : 55"
-                    :height="isMobile ? 40 : 55"
+                    :width="$isMobile ? 40 : 55"
+                    :height="$isMobile ? 40 : 55"
                     class="game-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -373,7 +373,7 @@
             :style="
               isMobile
                 ? { height: '275px' }
-                : { height: appHeight - 175 + 'px' }
+                : { height: $appHeight - 175 + 'px' }
             "
             class="game-251504ba219ea8c3175f47b73bdde6e6"
           />
@@ -396,7 +396,9 @@
                 :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
                 @click="
                   data.url
-                    ? appOpenUrl('是否打开外部链接？', null, { path: data.url })
+                    ? $appOpenUrl('是否打开外部链接？', null, {
+                        path: data.url,
+                      })
                     : null
                 "
               >
@@ -506,7 +508,7 @@
             size="small"
             color="black"
             @click="
-              appOpenUrl('是否查看常见问题?', null, { path: url.question })
+              $appOpenUrl('是否查看常见问题?', null, { path: url.question })
             "
           />
         </li>
@@ -587,7 +589,7 @@
 
 <script>
 export default {
-  name: "GlobalBP",
+  name: "GameGlobalBP",
   components: {
     AppLock: (resolve) => require(["@/assets/Icons/AppLock.vue"], resolve),
     GameLine: (resolve) => require(["@/components/Game/Line.vue"], resolve),
@@ -653,6 +655,17 @@ export default {
           logo: null,
         },
       },
+      tableData: {
+        active: 0,
+        result: {
+          rows: [],
+        },
+      },
+      eye: "eye-o",
+      url: {
+        question: "//doc.91m.top/jmglsi/pvp",
+      },
+      isPortrait: true,
       gameInfo: {
         result: {
           rows: [
@@ -681,48 +694,37 @@ export default {
         },
         used: [],
       },
-      tableData: {
-        active: 0,
-        result: {
-          rows: [],
-        },
-      },
       showInfo: {
         apps: false,
         hero: true,
         trend: false,
       },
-      eye: "eye-o",
-      url: {
-        question: "//doc.91m.top/jmglsi/pvp",
-      },
-      isPortrait: true,
     };
   },
   created() {
     window.addEventListener("beforeunload", (e) => this.beforeunload(e), false);
 
-    if (this.isMobile) {
+    if (this.$isMobile) {
       window.addEventListener("resize", this.renderResize, false);
     } else {
       this.isPortrait = false;
     }
   },
   mounted() {
-    let gameLabel = this.$route.params.id;
+    let gameLabel = this.$route.params.id || "";
 
     if (gameLabel) {
       this.gameLabel = gameLabel;
 
       this.getGameBP(gameLabel);
     } else {
-      return this.appPush({ path: "/game" });
+      return this.$appPush({ path: "/game" });
     }
   },
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.beforeunload, false);
 
-    if (this.isMobile) {
+    if (this.$isMobile) {
       window.removeEventListener("resize", this.renderResize, false);
     }
   },
@@ -747,7 +749,7 @@ export default {
         this.isPortrait = false;
 
         if (width < 700 || height < 375) {
-          this.$message.warning("警告:1000,分辨率过小,可能会挡住英雄");
+          this.$message.warning(this.$appMsg.warning[1000]);
         }
       }
     },
@@ -822,16 +824,16 @@ export default {
       this.bpCountdownInterval = setInterval(() => {
         this.bpCountdown--;
         if (this.bpCountdown == 0) {
-          this.$message.error("错误:1006,已超时");
+          this.$message.error(this.$appMsg.error[1000]);
 
           clearInterval(this.bpCountdownInterval);
         }
       }, 1000);
     },
     getHeroList: function (gameTime, aid = 0) {
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getRanking + "&aid=" + aid + "&bid=4&cid=0",
+          this.$appApi.pvp.getRanking + "&aid=" + aid + "&bid=4&cid=0",
           this.$qs.stringify({
             gameTime: gameTime,
           })
@@ -843,9 +845,9 @@ export default {
     getGameBP: function (gameLabel) {
       let tabsModel = this.tabsModel;
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.game.getGameBP,
+          this.$appApi.game.getGameBP,
           this.$qs.stringify({
             gameLabel: gameLabel,
           })
@@ -855,7 +857,7 @@ export default {
             result = data.result;
 
           if (result.length == 0) {
-            this.$message.error("错误:1000,对局不存在");
+            this.$message.error(this.$appMsg.error[1001]);
             return;
           }
 
@@ -897,9 +899,9 @@ export default {
       let teamInfo = this.team;
       let gameIndex = this.gameInfo.result.rows.length;
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.updateGameBP,
+          this.$appApi.pvp.updateGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: gameIndex,
@@ -911,7 +913,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("创建成功");
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.gameInfo.result.rows.push(newGame);
           } else {
@@ -924,13 +926,13 @@ export default {
       let gameInfo = this.gameInfo.result.rows[index];
 
       if (gameInfo.win.camp == null) {
-        this.$message.error("错误:1001,请点击左侧/右侧边缘设置胜利方");
+        this.$message.error(this.$appMsg.error[1002]);
         return;
       }
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.updateGameBP,
+          this.$appApi.pvp.updateGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: index,
@@ -951,9 +953,9 @@ export default {
         });
     },
     onDeleteGameBPClick: function (index) {
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.deleteGameBP,
+          this.$appApi.pvp.deleteGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: index,
@@ -963,7 +965,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("删除成功");
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.gameInfo.result.rows.splice(index, 1);
             this.tabsModel = index - 1;
@@ -977,9 +979,7 @@ export default {
 
       if (color == 1) {
         ret = this.bpIndex.blue.includes(index);
-      }
-
-      if (color == 2) {
+      } else if (color == 2) {
         ret = this.bpIndex.red.includes(index);
       }
 
@@ -1015,7 +1015,7 @@ export default {
       let tabsModel = this.tabsModel;
 
       if (this.gameInfo.result.rows[tabsModel].BPOrder[index - 1] == 0) {
-        this.$message.error("错误:1002,请按顺序BP");
+        this.$message.error(this.$appMsg.error[1003]);
         return;
       }
 
@@ -1039,11 +1039,11 @@ export default {
         this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
         this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
       ) {
-        this.$message.error("错误:1008,本局 " + hero.name + " 已被禁用");
+        this.$message.error("本局 " + hero.name + " 已被禁用");
         return;
       } else if (this.gameInfo.used.includes(hero.id)) {
         this.$message.warning(
-          "警告:1001," + hero.name + " 已被 " + this.bpOpponent.name + " 使用"
+          hero.name + " 已被 " + this.bpOpponent.name + " 使用"
         );
         return;
       } else if (this.bpMode == "view") return;
@@ -1078,9 +1078,7 @@ export default {
       this.initBPOrder(this.bpPerspective, tabsModel + 1);
 
       if (newIndex >= 18) {
-        this.$message.warning(
-          "警告:1002,BP结束,可点击两侧边缘设置胜利方,注意保存。"
-        );
+        this.$message.warning(this.$appMsg.warning[1001]);
       }
     },
     onGamePredictionClick: function () {
@@ -1096,7 +1094,7 @@ export default {
         (this.tabsModel + 1) +
         " 局比赛 ↓\r" +
         location.href;
-      this.appCopyData(this.copyData);
+      this.$appCopyData(this.copyData);
     },
     onToolsMenuClick: function (type) {
       let tabsModel = this.tabsModel;
@@ -1150,7 +1148,7 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.$message.success("重置成功");
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.gameInfo.result.rows[tabsModel] = newGame;
           })
@@ -1161,7 +1159,7 @@ export default {
 
       if (type == 3) {
         if (this.bpMode == "view") {
-          this.$message.info("提示:1001,已进入编辑模式");
+          this.$message.info(this.$appMsg.info[1001]);
 
           this.bpMode = "edit";
 
@@ -1205,7 +1203,7 @@ export default {
         })
         .then(() => {
           // on confirm
-          this.$message.success("设置成功");
+          this.$message.success(this.$appMsg.success[1000]);
 
           this.gameInfo.result.rows[tabsModel].win.camp = camp;
         })

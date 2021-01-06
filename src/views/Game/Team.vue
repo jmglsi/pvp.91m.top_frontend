@@ -6,7 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="appPush({ path: '/my' })"
+        @click-left="$appPush({ path: '/my' })"
         @click-right="onCreateTeamClick"
         left-text="返回"
         title="队伍"
@@ -119,7 +119,7 @@
 
 <script>
 export default {
-  name: "GameEngage",
+  name: "GameTeam",
   data() {
     return {
       loginInfo: {
@@ -155,9 +155,9 @@ export default {
 
       this.$cookie.delete("teamId");
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getGameDashboard + "&aid=0",
+          this.$appApi.pvp.getGameDashboard + "&aid=0",
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
@@ -171,7 +171,7 @@ export default {
           if (status.code == 200) {
             this.teamInfo.result = data.result;
           } else {
-            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },
@@ -179,11 +179,11 @@ export default {
       let loginInfo = this.loginInfo,
         data = file.content;
 
-      this.$message.info("提示:1002,正在上传");
+      this.$message.info(this.$appMsg.info[1002]);
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.uploadImg,
+          this.$appApi.pvp.uploadImg,
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
@@ -196,7 +196,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("上传成功");
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.teamInfo.row.logo = data.img;
           } else {
@@ -211,14 +211,14 @@ export default {
         file.type != "image/jpg" &&
         file.type != "image/jpeg"
       ) {
-        this.$message.error("请上传 png/gif/jpg/jpeg 格式图片");
+        this.$message.error(this.$appMsg.error[1004]);
         return false;
       } else {
         return true;
       }
     },
     onOversize: function () {
-      this.$message.error("错误:1005,图片超过 3MB");
+      this.$message.error(this.$appMsg.error[1005]);
     },
     onCreateTeamClick: function () {
       this.showInfo.team = true;
@@ -252,13 +252,13 @@ export default {
       };
 
       if (teamInfo.type == 0) {
-        this.axios
-          .post(this.apiList.pvp.createTeam, this.$qs.stringify(postData))
+        this.$axios
+          .post(this.$appApi.pvp.createTeam, this.$qs.stringify(postData))
           .then((res) => {
             let status = res.data.status;
 
             if (status.code == 200) {
-              this.$message.success("创建成功");
+              this.$message.success(this.$appMsg.success[1000]);
 
               this.getGameDashboard();
             } else {
@@ -266,13 +266,13 @@ export default {
             }
           });
       } else {
-        this.axios
-          .post(this.apiList.pvp.updateTeamInfo, this.$qs.stringify(postData))
+        this.$axios
+          .post(this.$appApi.pvp.updateTeamInfo, this.$qs.stringify(postData))
           .then((res) => {
             let status = res.data.status;
 
             if (status.code == 200) {
-              this.$message.success("更新成功");
+              this.$message.success(this.$appMsg.success[1000]);
             } else {
               this.$message.error(status.msg);
             }
@@ -291,9 +291,9 @@ export default {
         })
         .then(() => {
           // on confirm
-          this.axios
+          this.$axios
             .post(
-              this.apiList.pvp.deleteTeam,
+              this.$appApi.pvp.deleteTeam,
               this.$qs.stringify({
                 openId: loginInfo.openId,
                 accessToken: loginInfo.accessToken,
@@ -305,7 +305,7 @@ export default {
               let status = res.data.status;
 
               if (status.code == 200) {
-                this.$message.success("删除成功");
+                this.$message.success(this.$appMsg.success[1000]);
 
                 this.teamInfo.result.rows.splice(teamInfo.index, 1);
               } else {
@@ -322,16 +322,16 @@ export default {
     onCreateEngageClick: function (data) {
       this.showInfo.team = false;
 
-      let teamId_1 = this.$cookie.get("teamId");
-      let teamId_2 = data;
+      let teamId_1 = this.$cookie.get("teamId") || "",
+        teamId_2 = data;
 
       if (teamId_1 == teamId_2) {
-        this.$message.error("错误:1003,两支队伍不能相同");
+        this.$message.error(this.$appMsg.error[1006]);
         return;
       }
 
       if (!teamId_1) {
-        this.$message.success("添加成功,请再选择一个");
+        this.$message.success(this.$appMsg.success[1003]);
 
         this.$cookie.set("teamId", data);
       } else {
@@ -341,9 +341,9 @@ export default {
     onSaveEngageClick: function (teamId_1, teamId_2) {
       let loginInfo = this.loginInfo;
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.createEngage,
+          this.$appApi.pvp.createEngage,
           this.$qs.stringify({
             openId: loginInfo.openId,
             accessToken: loginInfo.accessToken,
@@ -356,15 +356,15 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("创建成功");
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.$cookie.delete("teamId");
 
-            this.appPush({ path: "/game/engage" });
+            this.$appPush({ path: "/game/engage" });
           } else {
             this.$message.error(status.msg);
 
-            this.appPush({ path: "/login" });
+            this.$appPush({ path: "/login" });
           }
         });
 

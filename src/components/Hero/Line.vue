@@ -83,6 +83,7 @@ export default {
   },
   data() {
     return {
+      trendIndex: 0,
       lineData: {
         extend: {},
         loading: true,
@@ -99,7 +100,6 @@ export default {
       showInfo: {
         autoPlayTrend: false,
       },
-      trendIndex: 0,
     };
   },
   methods: {
@@ -119,9 +119,9 @@ export default {
         status: 200,
       };
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getHeroChartsLog +
+          this.$appApi.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
             "&aid=" +
@@ -140,7 +140,7 @@ export default {
             this.lineData.loading = false;
             this.showInfo.autoPlayTrend = true;
           } else {
-            this.appOpenUrl(status.msg, null, { path: "/login" }, 1);
+            this.$appOpenUrl(status.msg, null, { path: "/login" }, 1);
           }
         });
     },

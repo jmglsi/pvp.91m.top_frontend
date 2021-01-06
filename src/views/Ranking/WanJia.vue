@@ -96,6 +96,21 @@ export default {
       playerShield: 0,
       uin: "",
       copyData: "",
+      tableData: {
+        loading: true,
+        result: {
+          rows: [],
+        },
+        row: {
+          gamePlayerName: "加载中",
+        },
+      },
+      actions: [
+        { name: "查看QQ", value: 0 },
+        { name: "铭文", subname: "需要安装王者营地", value: 1 },
+      ],
+      clientHeight: 0,
+      listWidth: 0,
       areaInfo: {
         model: 0,
         options: [
@@ -106,39 +121,24 @@ export default {
           { text: "苹果微信", value: 4 },
         ],
       },
-      tableData: {
-        loading: true,
-        result: {
-          rows: [],
-        },
-        row: {
-          gamePlayerName: "加载中",
-        },
-      },
       showInfo: {
         shield: false,
         actionSheet: false,
       },
-      actions: [
-        { name: "查看QQ", value: 0 },
-        { name: "铭文", subname: "需要安装王者营地", value: 1 },
-      ],
-      clientHeight: 0,
-      listWidth: 0,
     };
   },
   created() {
-    this.clientHeight = this.appInitTableHeight();
-    this.listWidth = this.appInitTableWidth(350);
+    this.clientHeight = this.$appInitTableHeight();
+    this.listWidth = this.$appInitTableWidth(350);
   },
   mounted() {
     this.getRanking(0, 0);
   },
   methods: {
     getRanking: function (bid, cid, aid = 1) {
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getRanking +
+          this.$appApi.pvp.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -161,8 +161,8 @@ export default {
       this.tableData.row = row;
       this.showInfo.actionSheet = true;
 
-      this.axios
-        .post(this.apiList.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
+      this.$axios
+        .post(this.$appApi.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -199,16 +199,16 @@ export default {
       let playerInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appCopyData(this.copyData);
+        this.$appCopyData(this.copyData);
       }
 
       if (item.value == 1) {
         if (playerInfo.inscriptionUrl) {
-          this.appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
+          this.$appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
             path: playerInfo.inscriptionUrl,
           });
         } else {
-          this.$message.info("提示:1010,未查询到,待更新");
+          this.$message.info(this.$appMsg.info[1013]);
         }
       }
     },

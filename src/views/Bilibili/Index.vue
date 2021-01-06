@@ -124,9 +124,6 @@ export default {
         },
       },
       paginationModel: 1,
-      showInfo: {
-        actionSheet: false,
-      },
       actions: [
         { name: "复制订单", value: 0 },
         { name: "查看相关", value: 1 },
@@ -136,16 +133,17 @@ export default {
       copyAv: "",
       copyData: "",
       checkModel: false,
+      showInfo: {
+        actionSheet: false,
+      },
     };
   },
   created() {
-    this.clientHeight = this.appInitTableHeight();
-    this.listWidth = this.appInitTableWidth(750);
+    this.clientHeight = this.$appInitTableHeight();
+    this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    let uid = this.$route.query.uid;
-
-    !uid ? (this.search.value = "") : (this.search.value = uid);
+    this.search.value = this.$route.query.uid || "";
 
     this.getOrderInfoInterval = setInterval(() => {
       this.getOrderInfo(this.search.value, this.paginationModel);
@@ -153,9 +151,9 @@ export default {
   },
   methods: {
     getOrderInfo: function (uid, page) {
-      this.axios
+      this.$axios
         .get(
-          this.apiList.bili.getOrderInfo +
+          this.$appApi.bili.getOrderInfo +
             "&uid=" +
             encodeURIComponent(uid) +
             "&page=" +
@@ -177,13 +175,13 @@ export default {
         });
     },
     copyDataByAv: function (e) {
-      this.appCopyData(e);
+      this.$appCopyData(e);
       this.copyAv = "";
     },
     onBilibiliActionSheetClick: function (row) {
       this.tableData.row = row;
 
-      this.axios
+      this.$axios
         .get(
           "//s.91m.top/?url=" +
             encodeURIComponent(
@@ -226,13 +224,12 @@ export default {
     onSearch: function () {
       clearInterval(this.getOrderInfoInterval);
 
-      let searchValue = this.search.value;
+      let searchValue = this.search.value || "";
+
       if (!searchValue) return;
 
-      let newValue;
-
       if (/[bv]{2}/i.test(searchValue.slice(0, 2))) {
-        newValue = this.bv2av(searchValue);
+        let newValue = this.bv2av(searchValue);
         this.copyAv = newValue;
       }
 
@@ -257,7 +254,7 @@ export default {
       let orderInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appCopyData(this.copyData);
+        this.$appCopyData(this.copyData);
       }
 
       if (item.value == 1) {

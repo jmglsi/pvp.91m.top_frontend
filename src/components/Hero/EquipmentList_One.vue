@@ -2,13 +2,9 @@
   <div class="hero-equipmentListOne app-equipmentListOne">
     <vxe-grid
       ref="heroEquipmentListOne"
-      show-overflow
       :loading="tableData.loading"
       :data="tableData.result.rows"
       :sort-config="{ trigger: 'cell' }"
-      :show-footer="equipmentInfo.type == 2 ? true : false"
-      :footer-method="footerMethod"
-      :footer-cell-class-name="footerCellClassName"
       @cell-click="onCellClick"
       height="547"
     >
@@ -29,9 +25,9 @@
               row.heroId +
               '.jpg'
             "
-            width="23"
-            height="23"
-            class="app-3b9655ab218c7f1a18f5dacd778a52f0 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
+            width="25"
+            height="25"
+            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
           />
         </template>
       </vxe-table-column>
@@ -51,9 +47,9 @@
               row.equipmentId +
               '.png'
             "
-            width="23"
-            height="23"
-            class="hero-785aadb8cf1105bafaef41fd3e44a292 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
+            width="25"
+            height="25"
+            class="hero-785aadb8cf1105bafaef41fd3e44a292"
           />
         </template>
       </vxe-table-column>
@@ -64,7 +60,7 @@
         <vxe-table-column
           title="出场"
           field="allPickRate"
-          :filters="[{ data: 2.5, checked: true }]"
+          :filters="[{ data: 0.5, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -86,7 +82,7 @@
         <vxe-table-column
           title="胜率"
           field="allWinRate"
-          :filters="[{ data: 45, checked: true }]"
+          :filters="[{ data: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -214,15 +210,13 @@
           7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
         </span>
 
-        <AppBottomTabbar v-if="isMobile" height="50px" />
+        <AppBottomTabbar v-if="$isMobile" height="50px" />
       </div>
     </van-action-sheet>
   </div>
 </template>
 
 <script>
-import XEUtils from "xe-utils";
-
 export default {
   name: "HeroEquipmentListOne",
   props: {
@@ -257,9 +251,6 @@ export default {
   data() {
     return {
       listWidth: 0,
-      showInfo: {
-        actionSheet: false,
-      },
       tableData: {
         loading: true,
         result: {
@@ -273,15 +264,18 @@ export default {
       equipmentInfo: {
         type: 1,
       },
+      showInfo: {
+        actionSheet: false,
+      },
     };
   },
   created() {
-    this.listWidth = this.appInitTableWidth(1450);
+    this.listWidth = this.$appInitTableWidth(1450);
   },
   methods: {
     getHeroEquipment: function (id = 111, aid = 1) {
-      this.axios
-        .post(this.apiList.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
+      this.$axios
+        .post(this.$appApi.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
         .then((res) => {
           let tipsText,
             data = res.data.data,
@@ -291,14 +285,14 @@ export default {
             this.tableData = data;
 
             aid == 1
-              ? (tipsText = "正在查看【该英雄】的装备数据")
-              : (tipsText = "正在查看出【该装备】的英雄数据");
+              ? (tipsText = this.$appMsg.success[1001])
+              : (tipsText = this.$appMsg.success[1002]);
 
             this.$message.success(tipsText);
 
             this.tableData.loading = false;
           } else {
-            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },
@@ -357,30 +351,6 @@ export default {
 
       if (column.property == "winRate_5") {
         return row.winRate_5 >= option.data;
-      }
-    },
-    footerMethod({ columns, data }) {
-      let means = [];
-      columns.forEach((column, columnIndex) => {
-        if (columnIndex == 0) {
-          means.push("平均");
-        } else if (columnIndex == 3 || columnIndex == 4) {
-          means.push(XEUtils.mean(data, column.property).toFixed(2));
-        } else {
-          means.push("-");
-        }
-      });
-
-      return [means];
-    },
-    updateFooterEvent() {
-      let xTable = this.$refs.heroEquipmentListOne;
-
-      xTable.updateFooter();
-    },
-    footerCellClassName: function ({ column }) {
-      if (column.property == "heroId") {
-        return "ranking-ef96f47f5516788b4273bd9ff8c9fa19";
       }
     },
     onCellClick: function ({ row, column }) {

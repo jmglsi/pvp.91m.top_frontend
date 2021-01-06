@@ -10,17 +10,15 @@
             ? { backgroundColor: 'white' }
             : { backgroundColor: 'transparent' }
         "
-        @click-left="appPush({ path: '/ranking' })"
-        @click-right="$message.info('提示:1004,分路推荐 ;D')"
+        @click-left="$appPush({ path: '/ranking' })"
+        @click-right="$message.info($appMsg.info[1004])"
         left-text="排行"
         z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>
           <div
-            @click="
-              $message.info('提示:1005,英雄id:' + hero.info.id + ',近期热度 ;D')
-            "
+            @click="$message.info('英雄id:' + hero.info.id + ',近期热度 ;D')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
             <img
@@ -106,7 +104,7 @@
       >
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="$message.info('提示:1006,分均经济、场均时长、场均经济 ;D')"
+          @click="$message.info($appMsg.info[1005])"
         >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <AppGold
@@ -230,7 +228,7 @@
           />
         </div>
         <div
-          :style="isMobile ? { marginTop: '0' } : { marginTop: '25px' }"
+          :style="$isMobile ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
           <HeroRadar
@@ -354,19 +352,17 @@
           class="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId
-              ? appOpenUrl('是否打开外部链接?', null, {
+              ? $appOpenUrl('是否打开外部链接?', null, {
                   path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
                 })
-              : $message.info(
-                  '提示:1008,暂时还没有该英雄的词条,您也想出力的话请加群:810191707,备注来自苏苏的荣耀助手'
-                )
+              : $message.info($appMsg.info[1006])
           "
           >稷下图书馆</van-tabbar-item
         >
       </van-tabbar>
     </div>
 
-    <AppBottomTabbar v-if="isMobile" height="100px" />
+    <AppBottomTabbar v-if="$isMobile" height="100px" />
   </div>
 </template>
 
@@ -401,18 +397,6 @@ export default {
   data() {
     return {
       scroll: 0,
-      showInfo: {
-        heroImg: true,
-        parameter: true,
-        heroSkill: false,
-        heroMenu: false,
-        imagePreview: false,
-        imageIndex: 0,
-        heroUpdate: true,
-      },
-      tabsInfo: {
-        model: 0,
-      },
       hero: {
         title: "加载中",
         info: {
@@ -455,6 +439,18 @@ export default {
           ],
         },
       },
+      showInfo: {
+        heroImg: true,
+        parameter: true,
+        heroSkill: false,
+        heroMenu: false,
+        imagePreview: false,
+        imageIndex: 0,
+        heroUpdate: true,
+      },
+      tabsInfo: {
+        model: 0,
+      },
       trendInfo: {
         model: 0,
         options: [
@@ -470,8 +466,8 @@ export default {
     };
   },
   mounted() {
-    let heroId = this.$route.params.id,
-      show = this.$route.query.show;
+    let heroId = parseInt(this.$route.params.id) || 111,
+      show = this.$route.query.show || "";
 
     this.getHeroInfo(heroId);
 
@@ -487,8 +483,8 @@ export default {
         document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (heroId) {
-      this.axios
-        .post(this.apiList.pvp.getHeroInfo + "&heroId=" + heroId)
+      this.$axios
+        .post(this.$appApi.pvp.getHeroInfo + "&heroId=" + heroId)
         .then((res) => {
           let data = res.data.data,
             heroInfo = data.heroInfo;
@@ -498,7 +494,7 @@ export default {
           this.hero.info = heroInfo;
 
           this.hero.title = heroInfo.name;
-          document.title = heroInfo.name + " | 苏苏的荣耀助手";
+          document.title = heroInfo.name + " | " + this.$appInfo.name;
         });
     },
     onComponentShow: function () {
@@ -513,9 +509,9 @@ export default {
       });
     },
     onHeroVoteClick: function (voteType) {
-      this.axios
+      this.$axios
         .get(
-          this.apiList.pvp.addHeroVote +
+          this.$appApi.pvp.addHeroVote +
             "&heroId=" +
             this.hero.info.id +
             "&voteType=" +
@@ -525,7 +521,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("投票成功");
+            this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }
@@ -535,16 +531,14 @@ export default {
     },
     onSkillChange: function () {
       let tipsText,
-        e = this.skillInfo.model;
+        e = this.skillInfo.model || 0;
 
       if (e == 0) {
-        tipsText = "提示:1003,各个技能的 出场、胜率";
+        tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText =
-          "提示:1012,少则几千、多则几万种组合,仅推荐 场次、胜率 较高的前几十组";
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 2) {
-        tipsText =
-          "提示:1013,默认去除 出场、胜率 过低的装备,点击【英雄】或【装备】可查看相关信息";
+        tipsText = this.$appMsg.info[1009];
       }
 
       if (this.tipsInfo[e] == 0) {
@@ -553,9 +547,9 @@ export default {
       }
     },
     onHeroLikeClick: function () {
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.addWebAccountHeroLike +
+          this.$appApi.pvp.addWebAccountHeroLike +
             "&heroId=" +
             this.hero.info.id
         )
@@ -563,7 +557,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("修改成功");
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.hero.info.likeStatus == 0
               ? (this.hero.info.likeStatus = 1)
@@ -579,7 +573,7 @@ export default {
     },
     onTabsChange: function (e) {
       let heroInfo = this.hero.info,
-        dTitle;
+        dTitle = "";
 
       if (e == 0) {
         dTitle = heroInfo.name;
@@ -592,7 +586,7 @@ export default {
         this.hero.title = "";
       }
 
-      document.title = dTitle + " | 苏苏的荣耀助手";
+      document.title = dTitle + " | " + this.$appInfo.name;
 
       e == 0
         ? (this.showInfo.parameter = true)

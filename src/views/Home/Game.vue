@@ -64,12 +64,12 @@ export default {
   },
   methods: {
     getGameHome() {
-      this.axios.get(this.apiList.game.getGameHome).then((res) => {
+      this.$axios.get(this.$appApi.game.getGameHome).then((res) => {
         this.tableData = res.data.data;
       });
     },
     onGameCellClick: function (e) {
-      this.appPush({ path: "/game/" + e + "/bp" });
+      this.$appPush({ path: "/game/" + e + "/bp" });
     },
   },
 };

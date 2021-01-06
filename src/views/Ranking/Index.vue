@@ -6,7 +6,7 @@
         :border="false"
         :ellipsis="false"
         :sticky="true"
-        @change="appPush({ path: '/ranking', query: { type: tabsModel } })"
+        @change="$appPush({ path: '/ranking', query: { type: tabsModel } })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -16,12 +16,12 @@
           <DianFengSai />
         </van-tab>
 
-        <van-tab title="玩家 (非实时)">
-          <WanJia />
-        </van-tab>
-
         <van-tab title="关系和克制 (上周)">
           <GuanXi />
+        </van-tab>
+
+        <van-tab title="玩家 (非实时)">
+          <WanJia />
         </van-tab>
       </van-tabs>
     </div>
@@ -34,11 +34,7 @@
           marginTop: '-3px',
           borderColor: 'rgb(243,189,103)',
         }"
-        @click="
-          $message.info(
-            '提示:1011,点击头像可快速对比技能,点击头像右侧数据可查看详情'
-          )
-        "
+        @click="$message.info(this.$appMsg.info[1012])"
         ><van-tag
           round
           type="danger"
@@ -69,11 +65,8 @@ export default {
     };
   },
   mounted() {
-    let type = parseInt(this.$route.query.type);
+    let type = parseInt(this.$route.query.type) || 0;
 
-    if (!type) {
-      type = 0;
-    }
     this.tabsModel = type;
   },
 };

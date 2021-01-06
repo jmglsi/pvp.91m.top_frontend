@@ -8,7 +8,7 @@
         :mark-point="lineData.markPoint"
         :data="lineData.result"
         :loading="lineData.loading"
-        :height="isMobile ? '375px' : '475px'"
+        :height="$isMobile ? '375px' : '475px'"
         width="100%"
         class="equipment-be4fa98d69734bbd05d093fc0010f826"
       />

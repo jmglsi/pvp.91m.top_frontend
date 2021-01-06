@@ -20,7 +20,7 @@
                 round
                 :color="loginInfo.certification.color"
                 class="my-7eaa86d23ffacfb49464ee78252aa43a"
-                @click="$message.info('提示:1016,称号联系站长更改')"
+                @click="$message.info($appMsg.info[1003])"
                 >{{ loginInfo.certification.text }}</van-tag
               >
             </span>
@@ -41,7 +41,7 @@
               round
               size="small"
               color="linear-gradient(to right, #4bb0ff, #6149f6)"
-              @click="appPush({ path: '/login' })"
+              @click="$appPush({ path: '/login' })"
               class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
               >注册/登录</van-button
             >
@@ -57,7 +57,7 @@
         height="100"
         class="my-d5ca322453f2986b752e58b11af83d96"
         @click="
-          appPush({
+          $appPush({
             path: '/friends',
             query: { openId: loginInfo.openId },
           })
@@ -80,7 +80,9 @@
           value="使用说明"
           class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
           is-link
-          @click="appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })
+          "
         />
         <van-grid
           :border="false"
@@ -150,9 +152,7 @@
           <template #title>
             <span
               class="my-1098203f6e0a3a981da7c9a8cd6bc85b"
-              @click="
-                $message.info('提示:1014,请在英雄详情界面喜欢/取消喜欢。')
-              "
+              @click="$message.info($appMsg.info[1015])"
               >喜欢列表</span
             >
           </template>
@@ -177,7 +177,7 @@
                   width="35"
                   height="35"
                   class="app-4ab161130e76571ab0c31aa23a6238c7"
-                  @click="appPush({ path: '/hero/' + data.id + '/info' })"
+                  @click="$appPush({ path: '/hero/' + data.id + '/info' })"
                 />
                 <img
                   v-if="data.fightPowerIcon"
@@ -191,9 +191,7 @@
             <span
               v-show="loginInfo.heroList.length == 0"
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
-              @click="
-                $message.info('提示:1017,请在英雄详情界面喜欢/取消喜欢。')
-              "
+              @click="$message.info($appMsg.info[1015])"
               >未设置</span
             >
           </template>
@@ -230,7 +228,7 @@
           icon="/img/app-icons/password_edit.png"
           class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
           is-link
-          @click="appPush({ path: '/login' })"
+          @click="$appPush({ path: '/login' })"
         />
       </van-cell-group>
     </div>
@@ -246,14 +244,14 @@
           title="感谢伙伴们"
           value="自豪的使用语雀"
           is-link
-          @click="appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
         />
         <van-cell
           icon="comment-o"
           title="意见/建议/咨询/交友"
           value="jmglsi (苏苏)"
           is-link
-          @click="appOpenUrl('是否打开外部链接?', null, { path: url.comment })"
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.comment })"
         />
       </van-cell-group>
     </div>
@@ -287,7 +285,7 @@
       >
         <van-cell
           title="沪ICP备16031287号-2"
-          @click="appOpenUrl('是否打开外部链接?', null, { path: url.beian })"
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.beian })"
           class="my-c0bdff9ec0fe8c0a83371c4573d7ecf4"
         />
       </van-cell-group>
@@ -310,19 +308,19 @@ export default {
   },
   data() {
     return {
-      loginInfo: {
-        certification: {
-          color: "",
-          text: "",
-        },
-        heroList: [],
-      },
       isLogin: false,
       url: {
         globalBP: "//www.yuque.com/jmglsi/pvp/gbpl91",
         friends: "//doc.91m.top/jmglsi/pvp",
         comment: "//wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes",
         beian: "http://beian.miit.gov.cn",
+      },
+      loginInfo: {
+        certification: {
+          color: "",
+          text: "",
+        },
+        heroList: [],
       },
       showInfo: {
         friendsType: true,
@@ -334,8 +332,8 @@ export default {
   },
   methods: {
     getWebAccountInfo: function (aid = 0) {
-      this.axios
-        .post(this.apiList.pvp.getWebAccountInfo + "&aid=" + aid)
+      this.$axios
+        .post(this.$appApi.pvp.getWebAccountInfo + "&aid=" + aid)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -353,7 +351,7 @@ export default {
         });
     },
     onCopyLinkClick: function () {
-      this.appCopyData(
+      this.$appCopyData(
         location.origin + "/friends?openId=" + this.loginInfo.openId
       );
     },

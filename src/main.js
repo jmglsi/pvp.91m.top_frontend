@@ -7,7 +7,7 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title + " | 苏苏的荣耀助手"
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    document.body.scrollTop = document.documentElement.scrollTop = 0
 
     next()
 })
@@ -29,12 +29,12 @@ Vue.prototype.$cookie = cookie
 
 import axios from 'axios'
 axios.interceptors.request.use(function(config) {
-    const openId = cookie.get("openId")
-    const accessToken = cookie.get("accessToken")
-
     let data = qs.parse(config.data)
 
     if (config.method == "post") {
+        const openId = cookie.get("openId")
+        const accessToken = cookie.get("accessToken")
+
         config.data = qs.stringify({
             openId: openId,
             accessToken: accessToken,
@@ -46,7 +46,7 @@ axios.interceptors.request.use(function(config) {
 }, function(error) {
     return Promise.reject(error);
 })
-Vue.prototype.axios = axios
+Vue.prototype.$axios = axios
 
 import './assets/import/ant'
 
@@ -55,11 +55,14 @@ import './assets/import/vant'
 import './assets/import/vxe-utils'
 import './assets/import/vxe-table'
 
-import './assets/js/app'
-import './assets/js/bilibili'
+import './assets/js/app.config'
+import './assets/js/bilibili.config'
 
-import apiList from './assets/js/apiList'
-Vue.prototype.apiList = apiList
+import appApi from './assets/js/api.config'
+Vue.prototype.$appApi = appApi
+
+import appMsg from './assets/js/code.config'
+Vue.prototype.$appMsg = appMsg
 
 new Vue({
     router,

@@ -6,7 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="appPush({ path: '/ranking' })"
+        @click-left="$appPush({ path: '/ranking' })"
         left-text="排行"
         z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
@@ -80,7 +80,7 @@
                     : null
                 "
                 @click="
-                  appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', {
+                  $appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', {
                     path: '//ngabbs.com/read.php?tid=19902976',
                   })
                 "
@@ -163,9 +163,6 @@ export default {
         },
       },
       paginationModel: 1,
-      showInfo: {
-        actionSheet: false,
-      },
       actions: [
         { name: "复制链接", value: 0 },
         { name: "详情", subname: "需要安装王者营地", value: 1 },
@@ -176,16 +173,19 @@ export default {
         title: "加载中",
         teammate: false,
       },
+      showInfo: {
+        actionSheet: false,
+      },
     };
   },
   mounted() {
-    let heroId = this.$route.params.id,
-      replayTitle = this.$route.query.replayTitle,
-      teammate = this.$route.query.teammate;
+    let heroId = this.$route.params.id || 111,
+      replayTitle = this.$route.query.replayTitle || "加载中",
+      teammate = parseInt(this.$route.query.teammate) || 0;
 
     this.hero.info.id = heroId;
     this.replay.title = replayTitle;
-    parseInt(teammate) == 1
+    teammate == 1
       ? (this.replay.teammate = true)
       : (this.replay.teammate = false);
 
@@ -198,7 +198,7 @@ export default {
       let replayUrl = row.replayUrl,
         replayUrlIndex = replayUrl.indexOf("=");
 
-      this.axios
+      this.$axios
         .get(
           "//s.91m.top/?url=" +
             replayUrl.slice(replayUrlIndex + 1, replayUrl.length)
@@ -211,9 +211,9 @@ export default {
       this.showInfo.actionSheet = true;
     },
     getHeroReplayByHeroId: function (heroId, page) {
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getHeroReplayByHeroId +
+          this.$appApi.pvp.getHeroReplayByHeroId +
             "&heroId=" +
             heroId +
             "&page=" +
@@ -231,7 +231,7 @@ export default {
           } else {
             this.$message.error(status.msg);
 
-            this.appPush({ path: "/login" });
+            this.$appPush({ path: "/login" });
           }
         });
     },
@@ -242,28 +242,28 @@ export default {
       let replayInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appCopyData(this.copyData);
+        this.$appCopyData(this.copyData);
       }
 
       if (item.value == 1) {
-        this.appOpenUrl("是否打开对局详情?", "需要安装王者营地", {
+        this.$appOpenUrl("是否打开对局详情?", "需要安装王者营地", {
           path: replayInfo.hippy,
         });
       }
 
       if (item.value == 2) {
-        this.appOpenUrl("是否打开对局回顾?", "需要安装王者营地", {
+        this.$appOpenUrl("是否打开对局回顾?", "需要安装王者营地", {
           path: replayInfo.url,
         });
       }
 
       if (item.value == 3) {
         if (replayInfo.inscriptionUrl) {
-          this.appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
+          this.$appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
             path: replayInfo.inscriptionUrl,
           });
         } else {
-          this.$message.info("提示:1007,未查询到,建议从上方详情进入");
+          this.$message.info(this.$appMsg.info[1010]);
         }
       }
     },

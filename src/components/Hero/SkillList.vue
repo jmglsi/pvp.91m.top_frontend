@@ -17,9 +17,9 @@
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
-            width="23"
-            height="23"
-            class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
+            width="25"
+            height="25"
+            class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093"
           />
         </template>
       </vxe-table-column>
@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: "HeroList",
+  name: "HeroSkill",
   props: {
     heroId: {
       type: Number,
@@ -90,12 +90,12 @@ export default {
     };
   },
   created() {
-    this.listWidth = this.appInitTableWidth(350);
+    this.listWidth = this.$appInitTableWidth(350);
   },
   methods: {
     getHeroSkill: function (heroId = 111) {
-      this.axios
-        .post(this.apiList.pvp.getHeroSkill + "&heroId=" + heroId)
+      this.$axios
+        .post(this.$appApi.pvp.getHeroSkill + "&heroId=" + heroId)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -105,7 +105,7 @@ export default {
 
             this.tableData.loading = false;
           } else {
-            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },

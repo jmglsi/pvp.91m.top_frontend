@@ -21,14 +21,8 @@
         :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="英雄">
-          <vxe-table-column
-            title="1"
-            field="heroId_1"
-            fixed="left"
-            width="75"
-            sortable
-          >
+        <vxe-table-column title="英雄" fixed="left">
+          <vxe-table-column title="1" field="heroId_1" width="75" sortable>
             <template v-slot="{ row }">
               <img
                 v-lazy="row.hero_1.img"
@@ -42,13 +36,7 @@
               >
             </template>
           </vxe-table-column>
-          <vxe-table-column
-            title="2"
-            field="heroId_2"
-            fixed="left"
-            width="75"
-            sortable
-          >
+          <vxe-table-column title="2" field="heroId_2" width="75" sortable>
             <template v-slot="{ row }">
               <img
                 v-lazy="row.hero_2.img"
@@ -227,9 +215,6 @@ export default {
           },
         },
       },
-      showInfo: {
-        actionSheet: false,
-      },
       actions: [
         { name: "复制信息", value: 0 },
         { name: "对局回顾", value: 1 },
@@ -237,23 +222,22 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       copyData: "",
+      showInfo: {
+        actionSheet: false,
+      },
     };
   },
   created() {
-    this.clientHeight = this.appInitTableHeight();
-    this.listWidth = this.appInitTableWidth(750);
+    this.clientHeight = this.$appInitTableHeight();
+    this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    let heroName = this.$route.query.heroName;
+    let heroName = this.$route.query.heroName || "",
+      text = this.tableData.searchPlaceholder || ["喵~", "嗷呜"];
 
-    if (!heroName) {
-      heroName = "";
-    }
     this.getRanking(heroName);
 
     setInterval(() => {
-      let text = this.tableData.searchPlaceholder;
-
       this.search.placeholder = text[Math.floor(Math.random() * text.length)];
     }, 5000);
   },
@@ -261,16 +245,16 @@ export default {
     getRanking: function (heroName, aid = 2) {
       this.search.value = heroName;
 
-      this.axios
+      this.$axios
         .post(
-          this.apiList.pvp.getRanking +
+          this.$appApi.pvp.getRanking +
             "&aid=" +
             aid +
             "&heroName=" +
             encodeURIComponent(heroName)
         )
         .then((res) => {
-          if (heroName) document.title = heroName + " | 苏苏的荣耀助手";
+          if (heroName) document.title = heroName + " | " + this.$appInfo.name;
 
           this.tableData = res.data.data;
           this.tableData.loading = false;
@@ -287,11 +271,9 @@ export default {
     getHeroInfo: function (row) {
       this.tableData.row = row;
 
-      let heroName = this.search.value;
+      let heroName = this.search.value || this.tableData.row.hero_1.name;
 
-      if (!heroName) heroName = this.tableData.row.hero_1.name;
-
-      this.axios
+      this.$axios
         .get(
           "//s.91m.top/?url=" +
             encodeURIComponent(
@@ -384,38 +366,9 @@ export default {
       this.getRanking("");
     },
     onSearch: function () {
-      let searchValue = this.search.value;
+      let searchValue = this.search.value || "";
 
-      if (!searchValue) return;
-
-      if (searchValue.indexOf(",") > -1) {
-        this.axios
-          .get(
-            this.apiList.pvp.addHeroByCombination + "&heroName=" + searchValue
-          )
-          .then((res) => {
-            let code = res.data.data.code,
-              msg;
-
-            if (code == 1) {
-              this.$message.success("添加成功");
-
-              this.getRanking("");
-            } else {
-              if (code == 0) {
-                msg = "关系已存在";
-              } else if (code == -1) {
-                msg = "英雄名错误";
-              } else if (code == -2) {
-                msg = "格式错误,小写逗号【,】";
-              }
-
-              this.$message.error("错误:1004," + msg);
-            }
-          });
-      } else {
-        this.getRanking(searchValue);
-      }
+      this.getRanking(searchValue);
     },
     onCellClick: function ({ row }) {
       this.getHeroInfo(row);
@@ -424,11 +377,11 @@ export default {
       let heroInfo = this.tableData.row;
 
       if (item.value == 0) {
-        this.appCopyData(this.copyData);
+        this.$appCopyData(this.copyData);
       }
 
       if (item.value == 1) {
-        this.appPush({
+        this.$appPush({
           path:
             "/hero/" +
             heroInfo.hero_1.id +

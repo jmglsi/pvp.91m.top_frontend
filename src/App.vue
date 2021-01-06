@@ -126,16 +126,17 @@ export default {
   },
   methods: {
     getAppInfo: function () {
-      this.axios
+      this.$axios
         .get(
-          this.apiList.pvp.getAppInfo +
+          this.$appApi.pvp.getAppInfo +
             "&url=" +
             encodeURIComponent(location.pathname + location.search)
         )
         .then((res) => {
-          this.appInfo = res.data.data;
+          let appInfo = res.data.data,
+            tipsInfo = appInfo.tipsInfo;
 
-          let tipsInfo = this.appInfo.tipsInfo;
+          this.appInfo = appInfo;
 
           if (tipsInfo) {
             this.$notification.open({
@@ -143,7 +144,7 @@ export default {
               description: tipsInfo.description,
               onClick: () => {
                 if (tipsInfo.url) {
-                  this.appOpenUrl("是否打开外部链接?", null, {
+                  this.$appOpenUrl("是否打开外部链接?", null, {
                     path: tipsInfo.url,
                   });
                 }

@@ -22,12 +22,8 @@
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
     margin: 0 5px;
     text-align: center;
-    width: 40px;
+    width: 50px;
     z-index: 1;
-}
-
-img.app-e56cff3ad6321a4fec672c0ecc2aa8e9 {
-    margin-top: -5px;
 }
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
@@ -297,4 +293,8 @@ div.app-skill,
 div.app-equipmentListAll,
 div.app-equipmentListOne {
     margin-top: -3px;
+}
+
+div.app-130a360689f8d613da10c94d53527a1b {
+    z-index: 2;
 }

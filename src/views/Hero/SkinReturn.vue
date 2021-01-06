@@ -73,7 +73,7 @@
       <van-button
         round
         @click="
-          appOpenUrl('是否打开外部链接?', null, { path: tableData.result.url })
+          $appOpenUrl('是否打开外部链接?', null, { path: tableData.result.url })
         "
         size="small"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
@@ -94,15 +94,12 @@ import "echarts/lib/component/dataZoom";
 import "v-charts/lib/style.css";
 
 export default {
-  name: "HeroLine",
+  name: "HeroSkinReturn",
   components: {
     VeLine,
   },
   data() {
     return {
-      showInfo: {
-        checked: false,
-      },
       tableData: {
         loading: true,
         result: {
@@ -120,10 +117,13 @@ export default {
         },
       },
       clientHeight: 0,
+      showInfo: {
+        checked: false,
+      },
     };
   },
   created() {
-    this.clientHeight = this.appInitTableHeight();
+    this.clientHeight = this.$appInitTableHeight();
   },
   mounted() {
     this.getSkinReturnLog();
@@ -138,7 +138,7 @@ export default {
       return e;
     },
     getSkinReturn: function () {
-      this.axios.get(this.apiList.pvp.getSkinReturn).then((res) => {
+      this.$axios.get(this.$appApi.pvp.getSkinReturn).then((res) => {
         let data = res.data.data;
 
         this.tableData = data;
@@ -146,7 +146,7 @@ export default {
       });
     },
     getSkinReturnLog: function () {
-      this.axios.get(this.apiList.pvp.getSkinReturnLog).then((res) => {
+      this.$axios.get(this.$appApi.pvp.getSkinReturnLog).then((res) => {
         let data = res.data.data;
 
         this.lineData = data;

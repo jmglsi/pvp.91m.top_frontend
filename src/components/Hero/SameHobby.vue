@@ -7,10 +7,10 @@
         class="app-d865b50ce307751bdeb9a6ab16e7baf9 hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7"
       >
         <li
-          v-for="(data, index) in sameHobbyData.result.rows"
+          v-for="(data, index) in tableData.result.rows"
           :key="'hero-same-hobby-418bbf1206aab9cb337c42b4d2c1d6ec-' + index"
           class="app-1951b6e7c82938dd7446a41e829b247b"
-          @click="appPush({ path: '/friends', query: { openId: data.openId } })"
+          @click="$appPush({ path: '/friends', query: { openId: data.openId } })"
         >
           <img
             v-if="data.fightPowerIcon"
@@ -77,7 +77,7 @@ export default {
   },
   data() {
     return {
-      sameHobbyData: {
+      tableData: {
         result: {
           rows: [],
         },
@@ -86,12 +86,12 @@ export default {
   },
   methods: {
     getHeroByWebAccountList: function (heroId, tipsType) {
-      this.axios
-        .get(this.apiList.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
+      this.$axios
+        .get(this.$appApi.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
         .then((res) => {
-          this.sameHobbyData = res.data.data;
+          this.tableData = res.data.data;
 
-          if (tipsType == 1) this.$message.success("刷新成功");
+          if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
         });
     },
   },

@@ -6,7 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="appPush({ path: '/my' })"
+        @click-left="$appPush({ path: '/my' })"
         left-text="返回"
         title="交战"
         z-index="99999999"
@@ -27,7 +27,7 @@
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
             <van-row
-              @click="appPush({ path: '/game/' + data.engage.label + '/bp' })"
+              @click="$appPush({ path: '/game/' + data.engage.label + '/bp' })"
             >
               <van-col span="7">
                 <img
@@ -64,7 +64,7 @@
       </van-grid>
     </div>
 
-    <AppBottomTabbar v-if="isMobile" height="100px" />
+    <AppBottomTabbar v-if="$isMobile" height="100px" />
   </div>
 </template>
 
@@ -77,9 +77,6 @@ export default {
   },
   data() {
     return {
-      show: {
-        engage: false,
-      },
       engageInfo: {
         type: 0,
         result: {
@@ -98,8 +95,8 @@ export default {
   },
   methods: {
     getGameDashboard: function () {
-      this.axios
-        .post(this.apiList.pvp.getGameDashboard + "&aid=1")
+      this.$axios
+        .post(this.$appApi.pvp.getGameDashboard + "&aid=1")
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -109,7 +106,7 @@ export default {
           } else {
             this.$message.error(status.msg);
 
-            this.appPush({ path: "/login" });
+            this.$appPush({ path: "/login" });
           }
         });
     },

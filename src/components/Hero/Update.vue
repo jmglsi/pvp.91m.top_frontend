@@ -5,12 +5,12 @@
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col :span="isMobile ? 15 : 21" @click="showInfo.calendar = true">
+          <van-col :span="$isMobile ? 15 : 21" @click="showInfo.calendar = true">
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.result.tips
             }}</span>
           </van-col>
-          <van-col :span="isMobile ? 9 : 3">
+          <van-col :span="$isMobile ? 9 : 3">
             <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
               <van-dropdown-menu direction="up">
                 <van-dropdown-item
@@ -58,7 +58,7 @@
               >
               <span
                 @click="
-                  appOpenUrl('是否打开外部链接?', null, { path: data.url })
+                  $appOpenUrl('是否打开外部链接?', null, { path: data.url })
                 "
                 class="update-f0af832cbd923851be8557213d95dddc"
                 >&nbsp;🔗
@@ -80,7 +80,7 @@
                 @click="
                   itemHeroId > 900
                     ? ''
-                    : appPush({ path: '/hero/' + itemHeroId + '/info' })
+                    : $appPush({ path: '/hero/' + itemHeroId + '/info' })
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"
               >
@@ -96,7 +96,7 @@
                   "
                   @click="
                     itemHeroId > 900
-                      ? $message.info('提示:1000,还没上线正式服的新英雄')
+                      ? $message.info($appMsg.info[1000])
                       : ''
                   "
                   class="update-5d39f3848925994b52ec52fba934577c"
@@ -109,7 +109,7 @@
         <div
           v-if="heroId > 0"
           @click="
-            appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', {
+            $appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', {
               path: '//nga.178.com/read.php?pid=' + updateId,
             })
           "
@@ -199,6 +199,18 @@ export default {
   data() {
     return {
       copyData: "",
+      date: {
+        min: new Date(),
+        max: new Date(),
+      },
+      tableData: {
+        row: {},
+        result: {
+          rows: [],
+        },
+        tips: "",
+        title: "",
+      },
       updateInfo: {
         model: 0,
         options: [
@@ -214,24 +226,12 @@ export default {
         dialog: false,
         checked: false,
       },
-      date: {
-        min: new Date(),
-        max: new Date(),
-      },
-      tableData: {
-        row: {},
-        result: {
-          rows: [],
-        },
-        tips: "",
-        title: "",
-      },
     };
   },
   methods: {
     getHeroUpdate: function (heroId) {
-      this.axios
-        .get(this.apiList.pvp.getHeroUpdate + "&heroId=" + heroId)
+      this.$axios
+        .get(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
         });
@@ -249,7 +249,7 @@ export default {
         "/" +
         day.date.getDate();
       let tableData = this.tableData.result.rows,
-        maxType = -3;
+        maxType = -5;
 
       for (let i = 0; i < tableData.length; i++) {
         let result = tableData[i].calendar;
@@ -334,9 +334,9 @@ export default {
     onOpenHeroUpdateTextClick: function (heroId, data) {
       if (heroId == 0) return;
 
-      this.axios
+      this.$axios
         .get(
-          this.apiList.pvp.getHeroUpdateText +
+          this.$appApi.pvp.getHeroUpdateText +
             "&heroId=" +
             heroId +
             "&articleId=" +
@@ -368,7 +368,7 @@ export default {
         "][color=blue]" +
         newDate +
         "[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
-      this.appCopyData(this.copyData);
+      this.$appCopyData(this.copyData);
     },
   },
 };

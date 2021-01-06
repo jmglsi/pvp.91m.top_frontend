@@ -17,9 +17,9 @@
         <template v-slot="{ row }">
           <img
             v-lazy="row.img"
-            width="23"
-            height="23"
-            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f app-e56cff3ad6321a4fec672c0ecc2aa8e9"
+            width="25"
+            height="25"
+            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
           />
         </template>
       </vxe-table-column>
@@ -32,7 +32,7 @@
           :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
           :title="(index + 1).toString()"
           :field="'list[' + index + ']'"
-          :width="isMobile ? 60 : 0"
+          :width="$isMobile ? 60 : 0"
           sortable
         >
           <template v-slot="{ row }">
@@ -43,9 +43,9 @@
                 row.list[index] +
                 '.png'
               "
-              width="23"
-              height="23"
-              class="hero-88473b8c633f40889fe2a0affd773691 app-e56cff3ad6321a4fec672c0ecc2aa8e9"
+              width="25"
+              height="25"
+              class="hero-88473b8c633f40889fe2a0affd773691"
             />
           </template>
         </vxe-table-column>
@@ -141,12 +141,12 @@ export default {
     };
   },
   created() {
-    this.listWidth = this.appInitTableWidth(750);
+    this.listWidth = this.$appInitTableWidth(1450);
   },
   methods: {
     getHeroEquipment: function (id = 111, aid = 0) {
-      this.axios
-        .post(this.apiList.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
+      this.$axios
+        .post(this.$appApi.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -156,7 +156,7 @@ export default {
 
             this.tableData.loading = false;
           } else {
-            this.appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }
         });
     },
