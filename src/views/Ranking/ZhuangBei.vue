@@ -5,23 +5,28 @@
         ref="zhuangbei"
         :loading="tableData.loading"
         :data="tableData.result.rows"
-        :sort-config="{ trigger: 'cell' }"
         :height="clientHeight"
         @cell-click="onCellClick"
       >
         <vxe-table-column
           title="装备"
-          field="equipmentId"
+          field="equipment.id"
           fixed="left"
           width="75"
-          :filters="[{ label: '不含鞋子' }]"
+          :filters="[
+            { label: '其他', value: 0, checked: true },
+            { label: '含鞋子', value: 1 },
+            { label: '含打野刀', value: 2 },
+            { label: '含辅助装', value: 3 },
+            { label: '含保命装', value: 4 },
+          ]"
           :filter-method="filterMethod"
         >
           <template v-slot="{ row }">
             <img
               v-lazy="
                 '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                row.equipmentId +
+                row.equipment.id +
                 '.png'
               "
               width="50"
@@ -35,7 +40,13 @@
 
         <vxe-table-column
           title="名字"
-          field="equipmentName"
+          field="equipment.name"
+          :width="listWidth > 0 ? listWidth + 25 : listWidth"
+        />
+
+        <vxe-table-column
+          title="价格"
+          field="equipment.money"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
 
@@ -68,12 +79,12 @@
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
         v-model="showInfo.heroSkill"
-        :title="tableDataRow.equipmentName + ' 的其他数据 (上周)'"
+        :title="tableDataRow.equipment.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
         <HeroEquipmentListOne
           v-if="showInfo.heroSkill"
-          :equipmentId="tableDataRow.equipmentId"
+          :equipmentId="tableDataRow.equipment.id"
           :equipmentType="2"
         />
       </van-action-sheet>
@@ -82,7 +93,7 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.equipmentMenu"
-        :title="tableDataRow.equipmentName + ' 如何操作'"
+        :title="tableDataRow.equipment.name + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
@@ -109,7 +120,9 @@ export default {
         },
       },
       tableDataRow: {
-        equipmentName: "加载中",
+        equipment: {
+          name: "加载中",
+        },
       },
       actions: [
         { name: "复制链接", value: 0 },
@@ -118,6 +131,7 @@ export default {
       ],
       clientHeight: 0,
       listWidth: 0,
+      filterValue: [],
       showInfo: {
         heroSkill: false,
         equipmentMenu: false,
@@ -137,8 +151,8 @@ export default {
       equipmentName = this.$route.query.equipmentName || "加载中";
 
     if (equipmentId) {
-      this.tableDataRow.equipmentId = equipmentId;
-      this.tableDataRow.equipmentName = equipmentName;
+      this.tableDataRow.equipment.id = equipmentId;
+      this.tableDataRow.equipment.name = equipmentName;
       this.showInfo.heroSkill = true;
     }
 
@@ -155,29 +169,23 @@ export default {
           this.tableData.loading = false;
         });
     },
-    filterMethod({ row, column }) {
-      if (column.property == "equipmentId") {
-        let shoes = [1421, 1422, 1423, 1424, 1425, 1426];
-
-        return shoes.indexOf(row.equipmentId) == -1;
-      }
+    filterMethod({ option, row }) {
+      return row.equipment.type == option.value;
     },
     onCellClick: function ({ row }) {
       this.tableDataRow = row;
       this.showInfo.equipmentMenu = true;
     },
     onCopyEquipmentInfo: function (row) {
-      this.copyData =
-        row.equipmentName +
-        "\r-\r更多装备信息 ↓\r" +
+      let longUrl =
         location.origin +
         location.pathname +
         "?type=3&equipmentId=" +
-        row.equipmentId +
+        row.equipment.id +
         "&equipmentName=" +
-        encodeURIComponent(row.equipmentName);
+        encodeURIComponent(row.equipment.name);
 
-      this.$appCopyData(this.copyData);
+      this.$appGetShortUrl(longUrl, row.equipment.name + " 的其他信息 ↓");
     },
     onActionSheetSelect: function (item) {
       let equipmentInfo = this.tableDataRow;

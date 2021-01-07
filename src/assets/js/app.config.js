@@ -61,3 +61,18 @@ Vue.prototype.$appInitTableWidth = function(tableWidth) {
 
     return ret;
 }
+
+Vue.prototype.$appGetShortUrl = function(longUrl, title = "") {
+    this.$axios
+        .post("https://s.91m.top/", {
+            url: longUrl
+        })
+        .then((res) => {
+            let copyData = "",
+                shortUrl = res.data.data.url;
+
+            title ? copyData = title + "\r-\r" + shortUrl : copyData = shortUrl;
+
+            this.$appCopyData(copyData);
+        });
+}
