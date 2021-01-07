@@ -52,9 +52,7 @@
       >
         <template v-slot="{ row }">
           <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
-            row.equipment.updateIndex == 0
-              ? "-"
-              : row.equipment.updateIndex * -1
+            row.equipment.updateIndex == 0 ? "-" : row.equipment.updateIndex
           }}</span>
           <img
             v-if="row.equipment.updateIndex > 0"
@@ -380,7 +378,7 @@ export default {
         return;
       }
 
-      if (column.property == "equipmentId") {
+      if (column.property == "equipment.id") {
         this.equipmentInfo.type = 2;
         this.getHeroEquipment(row.equipment.id, this.equipmentInfo.type);
         return;
