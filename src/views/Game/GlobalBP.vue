@@ -1085,16 +1085,13 @@ export default {
       this.showInfo.trend = true;
     },
     onGameShareClick: function () {
-      let vs = this.team.team_1.name + " Vs " + this.team.team_2.name;
+      let vs = this.team.team_1.name + " Vs " + this.team.team_2.name,
+        longUrl = location.href;
 
-      this.copyData =
-        "正在复盘【" +
-        vs +
-        "】的第 " +
-        (this.tabsModel + 1) +
-        " 局比赛 ↓\r" +
-        location.href;
-      this.$appCopyData(this.copyData);
+      this.$appGetShortUrl(
+        longUrl,
+        "正在复盘【" + vs + "】的第 " + (this.tabsModel + 1) + " 局比赛 ↓"
+      );
     },
     onToolsMenuClick: function (type) {
       let tabsModel = this.tabsModel;

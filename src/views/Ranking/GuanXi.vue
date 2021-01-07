@@ -18,7 +18,6 @@
         :data="tableData.result.rows"
         :height="clientHeight"
         :cell-class-name="cellClassName"
-        :sort-config="{ trigger: 'cell' }"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄" fixed="left">
@@ -267,40 +266,32 @@ export default {
       this.showInfo.heroMenu = true;
     },
     onCopyHeroInfo: function (row) {
-      let heroName = this.search.value || row.hero_1.name;
+      let heroName = this.search.value || row.hero_1.name,
+        longUrl =
+          location.origin +
+          location.pathname +
+          "?type=1&heroName=" +
+          encodeURIComponent(heroName) +
+          "&heroId1=" +
+          row.hero_1.id +
+          "&heroId2=" +
+          row.hero_2.id;
 
-      this.$axios
-        .get(
-          "//s.91m.top/?url=" +
-            encodeURIComponent(
-              location.origin +
-                location.pathname +
-                "?type=1&heroName=" +
-                encodeURIComponent(heroName) +
-                "&heroId1=" +
-                row.hero_1.id +
-                "&heroId2=" +
-                row.hero_2.id
-            )
-        )
-        .then((res) => {
-          this.copyData =
-            "英雄:" +
-            row.hero_1.name +
-            " & " +
-            row.hero_2.name +
-            "" +
-            "\r-\r队友胜率:" +
-            row.teammateWinRate +
-            "%\r对手胜率:" +
-            row.opponentWinRate +
-            "%\r适配:" +
-            row.adaptation +
-            "\r-\r更多英雄关系 ↓\r" +
-            res.data.data.url;
-
-          this.$appCopyData(this.copyData);
-        });
+      this.$appGetShortUrl(
+        longUrl,
+        "英雄:" +
+          row.hero_1.name +
+          " & " +
+          row.hero_2.name +
+          "" +
+          "\r-\r队友胜率:" +
+          row.teammateWinRate +
+          "%\r对手胜率:" +
+          row.opponentWinRate +
+          "%\r适配:" +
+          row.adaptation +
+          "\r-\r更多英雄关系 ↓"
+      );
     },
     filterMethod({ option, row, column }) {
       if (column.property == "teammatePickRate") {

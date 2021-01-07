@@ -35,7 +35,6 @@
         ref="wanjia"
         :loading="tableData.loading"
         :data="tableData.result.rows"
-        :sort-config="{ trigger: 'cell' }"
         :height="clientHeight"
         @cell-click="onCellClick"
       >
@@ -61,7 +60,7 @@
         <vxe-table-column title="#" type="seq" width="75" />
 
         <vxe-table-column
-          title="昵称"
+          title="名字"
           field="gamePlayerName"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
@@ -167,11 +166,8 @@ export default {
 
           if (status.code == 200) {
             this.uin = data.uin;
-            this.copyData =
-              row.gamePlayerName +
-              "\rQQ:" +
-              this.uin +
-              "\r-\r更多玩家信息 ↓\r" +
+
+            let longUrl =
               location.origin +
               location.pathname +
               "?type=2&userId=" +
@@ -179,7 +175,10 @@ export default {
               "&gamePlayerName=" +
               encodeURIComponent(row.gamePlayerName);
 
-            this.$appCopyData(this.copyData);
+            this.$appGetShortUrl(
+              longUrl,
+              row.gamePlayerName + "\rQQ:" + this.uin + "\r-\r更多玩家信息 ↓"
+            );
           } else {
             this.$message.error(status.msg);
           }

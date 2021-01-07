@@ -40,7 +40,7 @@
               round
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
-              >{{ data.equMoney }}</van-tag
+              >{{ data.equipment.allMoney }}</van-tag
             >
             <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">{{
               data.gamePlayerName
@@ -70,7 +70,7 @@
               />
               <van-grid-item
                 v-show="data > 0"
-                v-for="(data, index) in data.equInfo"
+                v-for="(data, index) in data.equipment.list"
                 :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
                 :icon="
                   data > 0
@@ -198,19 +198,12 @@ export default {
     },
     onReplayCopy: function (row) {
       let replayUrl = row.replayUrl,
-        replayUrlIndex = replayUrl.indexOf("=");
+        replayUrlIndex = replayUrl.indexOf("="),
+        longUrl = decodeURIComponent(
+          replayUrl.slice(replayUrlIndex + 1, replayUrl.length)
+        );
 
-      this.$axios
-        .get(
-          "//s.91m.top/?url=" +
-            replayUrl.slice(replayUrlIndex + 1, replayUrl.length)
-        )
-        .then((res) => {
-          this.copyData =
-            this.replay.title + " 的对局回顾 ↓\r-\r" + res.data.data.url;
-
-          this.$appCopyData(this.copyData);
-        });
+      this.$appGetShortUrl(longUrl, this.replay.title + " 的对局回顾 ↓");
     },
     getHeroReplayByHeroId: function (heroId, page) {
       this.$axios

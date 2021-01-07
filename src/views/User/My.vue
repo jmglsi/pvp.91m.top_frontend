@@ -351,9 +351,10 @@ export default {
         });
     },
     onCopyLinkClick: function () {
-      this.$appCopyData(
-        location.origin + "/friends?openId=" + this.loginInfo.openId
-      );
+      let longUrl =
+        location.origin + "/friends?openId=" + this.loginInfo.openId;
+
+      this.$appGetShortUrl(longUrl);
     },
     onLogoutClick: function () {
       this.$dialog
