@@ -211,9 +211,9 @@ export default {
     },
     onUpdateTeamClick: function (data, index) {
       this.tableDataRow = data;
+      this.tableDataRow.index = index;
 
       this.tableData.type = 1;
-      this.tableData.index = index;
 
       this.showInfo.team = true;
     },
