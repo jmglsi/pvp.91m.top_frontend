@@ -36,6 +36,9 @@ VXETable.setup({
         showOverflow: false,
         highlightCurrentRow: true,
         highlightHoverRow: true,
+        sortConfig: {
+            trigger: 'cell',
+        },
         scrollX: {
             gt: -1
         },
