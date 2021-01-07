@@ -27,7 +27,6 @@
         :data="tableData.result.rows"
         :cell-class-name="cellClassName"
         :custom-config="{ storage: true }"
-        :sort-config="{ trigger: 'cell' }"
         :height="clientHeight"
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"

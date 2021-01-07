@@ -4,7 +4,6 @@
       ref="heroEquipmentListOne"
       :loading="tableData.loading"
       :data="tableData.result.rows"
-      :sort-config="{ trigger: 'cell' }"
       @cell-click="onCellClick"
       height="547"
     >

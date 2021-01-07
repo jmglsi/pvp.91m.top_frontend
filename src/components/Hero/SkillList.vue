@@ -4,7 +4,6 @@
       ref="heroSkill"
       :loading="tableData.loading"
       :data="tableData.result.rows"
-      :sort-config="{ trigger: 'cell' }"
       height="547"
     >
       <vxe-table-column title="技能" field="score" fixed="left" width="50">
