@@ -48,6 +48,7 @@
           title="价格"
           field="equipment.money"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
+          sortable
         />
 
         <vxe-table-column title="英雄">
@@ -79,7 +80,12 @@
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
         v-model="showInfo.heroSkill"
-        :title="tableDataRow.equipment.name + ' 的其他数据 (上周)'"
+        :title="
+          tableDataRow.equipment.name +
+          ' (' +
+          tableDataRow.equipment.id +
+          ') 的其他数据 (上周)'
+        "
         safe-area-inset-bottom
       >
         <HeroEquipmentListOne
@@ -121,6 +127,7 @@ export default {
       },
       tableDataRow: {
         equipment: {
+          id: 0,
           name: "加载中",
         },
       },

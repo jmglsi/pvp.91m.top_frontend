@@ -10,7 +10,6 @@
       <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
         <template v-slot="{ row }">
           <img
-            v-if="row.heroId > 0"
             v-lazy="
               '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
               row.heroId +
@@ -27,21 +26,49 @@
 
       <vxe-table-column
         title="装备"
-        field="equipmentId"
+        field="equipment.id"
         fixed="left"
         width="50"
       >
         <template v-slot="{ row }">
           <img
-            v-if="row.equipmentId > 0"
             v-lazy="
               '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-              row.equipmentId +
+              row.equipment.id +
               '.png'
             "
             width="25"
             height="25"
             class="hero-785aadb8cf1105bafaef41fd3e44a292"
+          />
+        </template>
+      </vxe-table-column>
+
+      <vxe-table-column
+        title="优先级"
+        field="equipment.updateIndex"
+        :width="listWidth"
+        sortable
+      >
+        <template v-slot="{ row }">
+          <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
+            row.equipment.updateIndex == 0
+              ? "-"
+              : row.equipment.updateIndex * -1
+          }}</span>
+          <img
+            v-if="row.equipment.updateIndex > 0"
+            v-lazy="'/img/app-icons/hot_2.png'"
+            width="15"
+            height="15"
+            class="app-db21bca782a535e91eb87f56b8abdc45"
+          />
+          <img
+            v-if="row.equipment.updateIndex < 0"
+            v-lazy="'/img/app-icons/hot_1.png'"
+            width="15"
+            height="15"
+            class="app-db21bca782a535e91eb87f56b8abdc45"
           />
         </template>
       </vxe-table-column>
@@ -155,7 +182,6 @@
     >
       <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
         <img
-          v-if="lineData.heroId > 0"
           v-lazy="
             '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
             lineData.heroId +
@@ -167,7 +193,6 @@
           height="25"
           class="app-3b9655ab218c7f1a18f5dacd778a52f0"
         />&nbsp;和&nbsp;<img
-          v-if="lineData.equipmentId > 0"
           v-lazy="
             '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
             lineData.equipmentId +
@@ -357,13 +382,13 @@ export default {
 
       if (column.property == "equipmentId") {
         this.equipmentInfo.type = 2;
-        this.getHeroEquipment(row.equipmentId, this.equipmentInfo.type);
+        this.getHeroEquipment(row.equipment.id, this.equipmentInfo.type);
         return;
       }
       this.showInfo.actionSheet = true;
 
       this.lineData.heroId = row.heroId;
-      this.lineData.equipmentId = row.equipmentId;
+      this.lineData.equipmentId = row.equipment.id;
 
       this.lineDataRow = {
         columns: ["格子", "胜率", "占比"],
