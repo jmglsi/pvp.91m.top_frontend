@@ -519,7 +519,7 @@ export default {
 
       if (column.property == "banRate") {
         if (row.banRate >= color.ban && row.winRate >= color.win) {
-          return "ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
+          return "ranking-bda9643ac6601722a28f238714274da4";
         }
       }
 
@@ -531,7 +531,7 @@ export default {
 
       if (column.property == "bpRate") {
         if (row.bpRate >= color.bp) {
-          return "ranking-bda9643ac6601722a28f238714274da4";
+          return "ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
         }
       }
 

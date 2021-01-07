@@ -48,7 +48,7 @@
           </div>
 
           <div
-            v-show="!replay.teammate"
+            v-if="!replay.teammate"
             class="hero-f01902c0d0136ca30fe1034f339964ba"
           >
             <van-grid
@@ -57,19 +57,13 @@
               class="hero-c906a12df6d50e587b83a727416b5173"
             >
               <van-grid-item
-                v-show="data.heroSkill > 0"
                 :icon="
-                  data.heroSkill > 0
-                    ? '//image.ttwz.qq.com/images/skill/' +
-                      data.heroSkill +
-                      '.png'
-                    : null
+                  '//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'
                 "
                 :text="data.heroPosition"
                 class="hero-0a96464cb313aab9cc51e5aa61b0193f"
               />
               <van-grid-item
-                v-show="data > 0"
                 v-for="(data, index) in data.equipment.list"
                 :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
                 :icon="
