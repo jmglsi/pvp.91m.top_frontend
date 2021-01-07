@@ -122,10 +122,6 @@ export default {
   name: "GameTeam",
   data() {
     return {
-      loginInfo: {
-        openId: null,
-        accessToken: null,
-      },
       showInfo: {
         team: false,
       },
@@ -143,26 +139,14 @@ export default {
     };
   },
   mounted() {
-    this.loginInfo.openId = this.$cookie.get("openId");
-    this.loginInfo.accessToken = this.$cookie.get("accessToken");
-
     this.getGameDashboard();
   },
   methods: {
     getGameDashboard: function () {
-      let loginInfo = this.loginInfo;
-
       this.$cookie.delete("teamId");
 
       this.$axios
-        .post(
-          this.$appApi.pvp.getGameDashboard + "&aid=0",
-          this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
-            friendsOpenId: loginInfo.openId,
-          })
-        )
+        .post(this.$appApi.pvp.getGameDashboard + "&aid=0")
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -175,8 +159,7 @@ export default {
         });
     },
     onAfterRead: function (file) {
-      let loginInfo = this.loginInfo,
-        data = file.content;
+      let data = file.content;
 
       this.$message.info(this.$appMsg.info[1002]);
 
@@ -184,9 +167,6 @@ export default {
         .post(
           this.$appApi.pvp.uploadImg,
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
-            friendsOpenId: loginInfo.openId,
             filePath: data,
           })
         )
@@ -223,8 +203,8 @@ export default {
       this.showInfo.team = true;
 
       this.tableDataRow = {
-        name: null,
-        logo: null,
+        name: "",
+        logo: "",
       };
 
       this.tableData.type = 0;
@@ -238,19 +218,16 @@ export default {
       this.showInfo.team = true;
     },
     onSaveTeamInfoClick: function () {
-      let loginInfo = this.loginInfo,
+      let tableData = this.tableData,
         row = this.tableDataRow;
 
       let postData = {
-        openId: loginInfo.openId,
-        accessToken: loginInfo.accessToken,
-        friendsOpenId: loginInfo.openId,
         teamId: row.id,
         teamName: row.name,
         teamLogo: row.logo,
       };
 
-      if (row.type == 0) {
+      if (tableData.type == 0) {
         this.$axios
           .post(this.$appApi.pvp.createTeam, this.$qs.stringify(postData))
           .then((res) => {
@@ -281,8 +258,7 @@ export default {
       this.showInfo.team = false;
     },
     onDeleteTeamClick: function () {
-      let loginInfo = this.loginInfo,
-        row = this.tableDataRow;
+      let row = this.tableDataRow;
 
       this.$dialog
         .confirm({
@@ -294,9 +270,6 @@ export default {
             .post(
               this.$appApi.pvp.deleteTeam,
               this.$qs.stringify({
-                openId: loginInfo.openId,
-                accessToken: loginInfo.accessToken,
-                friendsOpenId: loginInfo.openId,
                 teamId: row.id,
               })
             )
@@ -338,15 +311,10 @@ export default {
       }
     },
     onSaveEngageClick: function (teamId_1, teamId_2) {
-      let loginInfo = this.loginInfo;
-
       this.$axios
         .post(
           this.$appApi.pvp.createEngage,
           this.$qs.stringify({
-            openId: loginInfo.openId,
-            accessToken: loginInfo.accessToken,
-            friendsOpenId: loginInfo.openId,
             teamId_1: teamId_1,
             teamId_2: teamId_2,
           })
