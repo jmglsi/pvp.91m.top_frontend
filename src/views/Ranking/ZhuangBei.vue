@@ -14,11 +14,11 @@
           fixed="left"
           width="75"
           :filters="[
-            { label: '其他', value: 0, checked: true },
-            { label: '含鞋子', value: 1 },
-            { label: '含打野刀', value: 2 },
-            { label: '含辅助装', value: 3 },
-            { label: '含保命装', value: 4 },
+            { label: '其他', value: 0 },
+            { label: '鞋子', value: 1 },
+            { label: '打野刀', value: 2 },
+            { label: '辅助装', value: 3 },
+            { label: '保命装', value: 4 },
           ]"
           :filter-method="filterMethod"
         >
