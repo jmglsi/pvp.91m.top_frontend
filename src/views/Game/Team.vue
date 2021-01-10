@@ -262,7 +262,8 @@ export default {
 
       this.$dialog
         .confirm({
-          title: "是否删除队伍？",
+          title: "是否删除队伍?",
+          message: "此操作不可逆",
         })
         .then(() => {
           // on confirm

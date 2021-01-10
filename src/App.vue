@@ -127,7 +127,7 @@ export default {
   methods: {
     getAppInfo: function () {
       this.$axios
-        .get(
+        .post(
           this.$appApi.pvp.getAppInfo +
             "&url=" +
             encodeURIComponent(location.pathname + location.search)

@@ -58,7 +58,11 @@
         round
         size="small"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
-        @click="onLoginClick(loginInfo.type)"
+        @click="
+          loginInfo.data.email && loginInfo.data.password
+            ? onLoginClick(loginInfo.type)
+            : $message.error($appMsg.error[1007])
+        "
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
         >{{ loginInfo.text }}</van-button
       >
@@ -162,12 +166,6 @@ export default {
     },
     onLoginClick: function (loginType) {
       let data = this.loginInfo.data;
-
-      if (!data.email || !data.password) {
-        this.$message.error(this.$appMsg.error[1007]);
-
-        return;
-      }
 
       this.$axios
         .post(

@@ -1,10 +1,22 @@
-let host = "";
+let apiHost = "",
+    sHost = "";
 
-location.host.indexOf("91m.top") > -1 ? host = "//api.91m.top" : host = "//localhost/api.91m.top"
+if (location.host.indexOf("91m.top") > -1) {
+    sHost = "//s.91m.top";
+    apiHost = "//api.91m.top";
+} else {
+    sHost = "https://s.91m.top";
+    apiHost = "//localhost/api.91m.top";
+}
 
-const pvpApi = host + "/hero/v1/app.php";
-const gameApi = host + "/hero/v1/game.php";
-const biliApi = host + "/hero/v1/bilibili.php";
+const sApi = sHost;
+const pvpApi = apiHost + "/hero/v1/app.php";
+const gameApi = apiHost + "/hero/v1/game.php";
+const biliApi = apiHost + "/hero/v1/bilibili.php";
+
+const s = {
+    url: sApi + "/"
+}
 
 const pvp = {
     addHeroByCombination: pvpApi + "?type=addHeroByCombination",
@@ -48,6 +60,7 @@ const bili = {
 }
 
 export default {
+    s,
     bili,
     game,
     pvp

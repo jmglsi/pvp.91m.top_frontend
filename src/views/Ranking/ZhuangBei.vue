@@ -2,7 +2,7 @@
   <div class="ranking-zb">
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
       <vxe-grid
-        ref="zhuangbei"
+        ref="refZhuangBei"
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
@@ -14,11 +14,11 @@
           fixed="left"
           width="75"
           :filters="[
-            { label: '其他', value: 0 },
-            { label: '鞋子', value: 1 },
-            { label: '打野刀', value: 2 },
-            { label: '辅助装', value: 3 },
-            { label: '保命装', value: 4 },
+            { label: '其他', data: 0 },
+            { label: '鞋子', data: 1 },
+            { label: '打野刀', data: 2 },
+            { label: '辅助装', data: 3 },
+            { label: '保命装', data: 4 },
           ]"
           :filter-method="filterMethod"
         >
@@ -77,15 +77,26 @@
       </vxe-grid>
     </div>
 
-    <div class="ranking-84226baebc9c90dd5bba99237b39725a">
+    <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.heroSkill"
+        v-model="showInfo.equipmentMenu"
         :title="
           tableDataRow.equipment.name +
           ' (' +
           tableDataRow.equipment.id +
-          ') 的其他数据 (上周)'
+          ') 如何操作'
         "
+        :actions="actions"
+        :close-on-click-action="true"
+        @select="onActionSheetSelect"
+        safe-area-inset-bottom
+      />
+    </div>
+
+    <div class="ranking-84226baebc9c90dd5bba99237b39725a">
+      <van-action-sheet
+        v-model="showInfo.heroSkill"
+        :title="tableDataRow.equipment.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
         <HeroEquipmentListOne
@@ -94,17 +105,6 @@
           :equipmentType="2"
         />
       </van-action-sheet>
-    </div>
-
-    <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
-      <van-action-sheet
-        v-model="showInfo.equipmentMenu"
-        :title="tableDataRow.equipment.name + ' 如何操作'"
-        :actions="actions"
-        :close-on-click-action="true"
-        @select="onActionSheetSelect"
-        safe-area-inset-bottom
-      />
     </div>
   </div>
 </template>
@@ -176,14 +176,16 @@ export default {
           this.tableData.loading = false;
         });
     },
-    filterMethod({ option, row }) {
-      return row.equipment.type == option.value;
+    filterMethod({ option, row, column }) {
+      if (column.property == "equipment.id") {
+        return row.equipment.type == option.data;
+      }
     },
     onCellClick: function ({ row }) {
       this.tableDataRow = row;
       this.showInfo.equipmentMenu = true;
     },
-    onCopyEquipmentInfo: function (row) {
+    onZhuangBeiCopy: function (row) {
       let longUrl =
         location.origin +
         location.pathname +
@@ -192,13 +194,29 @@ export default {
         "&equipmentName=" +
         encodeURIComponent(row.equipment.name);
 
-      this.$appGetShortUrl(longUrl, row.equipment.name + " 的其他信息 ↓");
+      this.$axios
+        .post(this.$appApi.s.url, {
+          url: longUrl,
+        })
+        .then((res) => {
+          let shortUrl = res.data.data.url;
+
+          this.copyData = row.equipment.name + " 的其他信息 ↓\r" + shortUrl;
+
+          setTimeout(
+            (copyData) => {
+              this.$appCopyData(copyData);
+            },
+            750,
+            this.copyData
+          );
+        });
     },
     onActionSheetSelect: function (item) {
       let equipmentInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onCopyEquipmentInfo(equipmentInfo);
+        this.onZhuangBeiCopy(equipmentInfo);
       }
 
       if (item.value == 1) {

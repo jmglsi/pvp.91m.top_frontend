@@ -16,13 +16,13 @@
     </div>
 
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
-      <vxe-toolbar ref="xToolbar" custom />
+      <vxe-toolbar ref="refXToolbar" custom />
     </div>
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-grid
-        ref="dianfengsai"
-        id="dianfengsai"
+        ref="refDianFengSai"
+        id="refDianFengSai"
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :cell-class-name="cellClassName"
@@ -87,7 +87,7 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-column title="BP率越低,波动越大 (%)">
+        <vxe-table-column title="出场越低,波动越大 (%)">
           <vxe-table-column
             title="禁用"
             field="banRate"
@@ -301,7 +301,7 @@
         :title="tableDataRow.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs v-model="skillInfo.model" @change="onSkillChange">
+        <van-tabs v-model="skillInfo.model" @change="onSkillTabsChange">
           <van-tab title="技能">
             <HeroSkillList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"
@@ -414,7 +414,7 @@ export default {
     this.initTableWidth();
 
     this.$nextTick(() => {
-      this.$refs.dianfengsai.connect(this.$refs.xToolbar);
+      this.$refs.refDianFengSai.connect(this.$refs.refXToolbar);
     });
     //手动将表格和工具栏进行关联
   },
@@ -431,9 +431,9 @@ export default {
         localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE
       );
 
-      if (tableColumn["dianfengsai"] == undefined) return;
+      if (tableColumn["refDianFengSai"] == undefined) return;
 
-      let visibleColumn = tableColumn.dianfengsai.split(",");
+      let visibleColumn = tableColumn.refDianFengSai.split(",");
 
       !this.$isMobile && visibleColumn.length > 6
         ? (this.listWidth = 0)
@@ -474,7 +474,7 @@ export default {
           this.tableData = data;
           this.tableData.loading = false;
 
-          //this.$refs.dianfengsai.loadData(data.result.rows);
+          //this.$refs.refDianFengSai.loadData(data.result.rows);
         });
 
       if (bid == 3 && cid == 0) {
@@ -544,9 +544,8 @@ export default {
         }
       }
     },
-    onSkillChange: function () {
-      let tipsText,
-        e = this.skillInfo.model || 0;
+    onSkillTabsChange: function (e) {
+      let tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];

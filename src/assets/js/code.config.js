@@ -34,6 +34,7 @@ error[1004] = "请上传 png/gif/jpg/jpeg 格式的图片";
 error[1005] = "图片超过 3MB";
 error[1006] = "两支队伍不能相同";
 error[1007] = "邮箱或密码为空";
+error[1008] = "操作失败";
 
 export default {
     info,

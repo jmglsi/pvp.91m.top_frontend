@@ -39,10 +39,12 @@
             :color="data.calendar.color"
           >
             <van-tag
+              round
               v-show="data.calendar.day"
               :color="data.calendar.color"
-              round
-              @click="onOpenHeroUpdateTextClick(heroId, data)"
+              @click="
+                heroId > 0 ? onOpenHeroUpdateTextClick(heroId, data) : null
+              "
               class="update-5a0c2e4611419b82b55675d035764007"
               >{{ data.calendar.day }}</van-tag
             >
@@ -143,7 +145,11 @@
     <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
-        @close="onCloseHeroUpdateTextClick(heroId, tableDataRow)"
+        @close="
+          showInfo.checked == true
+            ? onHeroUpdateTextCopy(heroId, tableDataRow)
+            : null
+        "
       >
         <template #title>
           <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">{{
@@ -232,7 +238,7 @@ export default {
   methods: {
     getHeroUpdate: function (heroId) {
       this.$axios
-        .get(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
+        .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
         });
@@ -243,14 +249,15 @@ export default {
       this.date.max = new Date(date.setMonth(date.getMonth() + 4));
     },
     onFormatter: function (day) {
+      let tableData = this.tableData.result.rows,
+        maxType = -5;
+
       let oDay =
         day.date.getFullYear() +
         "/" +
         (day.date.getMonth() + 1) +
         "/" +
         day.date.getDate();
-      let tableData = this.tableData.result.rows,
-        maxType = -5;
 
       for (let i = 0; i < tableData.length; i++) {
         let result = tableData[i].calendar;
@@ -333,10 +340,8 @@ export default {
       return day;
     },
     onOpenHeroUpdateTextClick: function (heroId, data) {
-      if (heroId == 0) return;
-
       this.$axios
-        .get(
+        .post(
           this.$appApi.pvp.getHeroUpdateText +
             "&heroId=" +
             heroId +
@@ -351,25 +356,27 @@ export default {
           this.tableDataRow = data;
         });
     },
-    onCloseHeroUpdateTextClick: function (heroId, row) {
-      if (this.showInfo.checked == false) return;
-
+    onHeroUpdateTextCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);
-      let newDate =
-        date.getFullYear() +
-        "年" +
-        (date.getMonth() + 1) +
-        "月" +
-        date.getDate() +
-        "日";
 
       this.copyData =
         "[quote]\r[size=110%][b][url=" +
         row.url +
         "][color=blue]" +
-        newDate +
-        "[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
-      this.$appCopyData(this.copyData);
+        date.getFullYear() +
+        "年" +
+        (date.getMonth() + 1) +
+        "月" +
+        date.getDate() +
+        "日[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
+
+      setTimeout(
+        (copyData) => {
+          this.$appCopyData(copyData);
+        },
+        750,
+        this.copyData
+      );
     },
   },
 };

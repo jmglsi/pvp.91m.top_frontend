@@ -13,7 +13,7 @@
 
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-grid
-        ref="guanxi"
+        ref="refGuanXi"
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
@@ -194,6 +194,7 @@ export default {
   name: "RankingGuanXi",
   data() {
     return {
+      copyData: "",
       search: {
         value: "",
         placeholder: "请输入搜索关键词",
@@ -220,7 +221,6 @@ export default {
       ],
       clientHeight: 0,
       listWidth: 0,
-      copyData: "",
       showInfo: {
         heroMenu: false,
       },
@@ -265,8 +265,9 @@ export default {
       this.tableDataRow = row;
       this.showInfo.heroMenu = true;
     },
-    onCopyHeroInfo: function (row) {
-      let heroName = this.search.value || row.hero_1.name,
+    onGuanXiCopy: function () {
+      let row = this.tableDataRow,
+        heroName = this.search.value || row.hero_1.name,
         longUrl =
           location.origin +
           location.pathname +
@@ -277,21 +278,36 @@ export default {
           "&heroId2=" +
           row.hero_2.id;
 
-      this.$appGetShortUrl(
-        longUrl,
-        "英雄:" +
-          row.hero_1.name +
-          " & " +
-          row.hero_2.name +
-          "" +
-          "\r-\r队友胜率:" +
-          row.teammateWinRate +
-          "%\r对手胜率:" +
-          row.opponentWinRate +
-          "%\r适配:" +
-          row.adaptation +
-          "\r-\r更多英雄关系 ↓"
-      );
+      this.$axios
+        .post(this.$appApi.s.url, {
+          url: longUrl,
+        })
+        .then((res) => {
+          let shortUrl = res.data.data.url;
+
+          this.copyData =
+            "英雄:" +
+            row.hero_1.name +
+            " & " +
+            row.hero_2.name +
+            "" +
+            "\r-\r队友胜率:" +
+            row.teammateWinRate +
+            "%\r对手胜率:" +
+            row.opponentWinRate +
+            "%\r适配:" +
+            row.adaptation +
+            "\r-\r更多英雄关系 ↓\r" +
+            shortUrl;
+
+          setTimeout(
+            (copyData) => {
+              this.$appCopyData(copyData);
+            },
+            750,
+            this.copyData
+          );
+        });
     },
     filterMethod({ option, row, column }) {
       if (column.property == "teammatePickRate") {
@@ -364,7 +380,7 @@ export default {
       let heroInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onCopyHeroInfo(heroInfo);
+        this.onGuanXiCopy();
       }
 
       if (item.value == 1) {

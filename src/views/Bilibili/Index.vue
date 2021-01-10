@@ -4,7 +4,7 @@
       <van-search
         v-model="search.value"
         :placeholder="tableData.searchPlaceholder"
-        @search="onSearch"
+        @search="search.value ? onSearch : null"
         @clear="onSearchClear"
         shape="round"
         class="app-c1130d301aabe8d6a9d46c322fd6150a"
@@ -12,16 +12,16 @@
     </div>
 
     <div class="bilibili-8b0f547eb9990da1c540f7f31fb437b8">
-      <van-checkbox
-        v-model="checkModel"
+      <van-switch
+        v-model="orderInfo.checked"
+        @change="onSwitchChange"
         class="bilibili-a47ba339330136bcab5b4c91d5d10882"
-        @change="onCheckBoxChange"
       />
     </div>
 
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
       <vxe-grid
-        ref="bilibili"
+        ref="refBilibili"
         :isLoading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
@@ -107,6 +107,7 @@ export default {
   name: "BilibiliHome",
   data() {
     return {
+      copyData: "",
       search: {
         value: "",
       },
@@ -130,8 +131,9 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       copyAv: "",
-      copyData: "",
-      checkModel: false,
+      orderInfo: {
+        checked: false,
+      },
       showInfo: {
         actionSheet: false,
       },
@@ -151,7 +153,7 @@ export default {
   methods: {
     getOrderInfo: function (uid, page) {
       this.$axios
-        .get(
+        .post(
           this.$appApi.bili.getOrderInfo +
             "&uid=" +
             encodeURIComponent(uid) +
@@ -159,34 +161,39 @@ export default {
             page
         )
         .then((res) => {
-          this.tableData = res.data.data;
-
           let copyAv = this.copyAv;
 
+          this.tableData = res.data.data;
+
           if (copyAv) {
-            this.copyDataByAv(copyAv);
+            setTimeout(
+              (copyData) => {
+                this.$appCopyData(copyData);
+              },
+              750,
+              this.copyData
+            );
+
+            this.copyAv = "";
           }
 
           this.tableData.loading = false;
         });
-    },
-    copyDataByAv: function (e) {
-      this.$appCopyData(e);
-      this.copyAv = "";
     },
     onBilibiliActionSheetClick: function (row) {
       this.tableDataRow = row;
       this.showInfo.actionSheet = true;
     },
     onBilibiliCopy: function (row) {
+      let longUrl = location.origin + location.pathname + "?uid=" + row.uid;
+
       this.$axios
-        .get(
-          "//s.91m.top/?url=" +
-            encodeURIComponent(
-              location.origin + location.pathname + "?uid=" + row.uid
-            )
-        )
+        .post(this.$appApi.s.url, {
+          url: longUrl,
+        })
         .then((res) => {
+          let shortUrl = res.data.data.url;
+
           this.copyData =
             "id:" +
             row.uid +
@@ -208,9 +215,15 @@ export default {
             "\r备注:" +
             row.bz +
             "\r-\r" +
-            res.data.data.url;
+            shortUrl;
 
-          this.$appCopyData(this.copyData);
+          setTimeout(
+            (copyData) => {
+              this.$appCopyData(copyData);
+            },
+            750,
+            this.copyData
+          );
         });
     },
     onSearchClear: function () {
@@ -223,8 +236,6 @@ export default {
       clearInterval(this.getOrderInfoInterval);
 
       let searchValue = this.search.value || "";
-
-      if (!searchValue) return;
 
       if (/[bv]{2}/i.test(searchValue.slice(0, 2))) {
         let newValue = this.bv2av(searchValue);

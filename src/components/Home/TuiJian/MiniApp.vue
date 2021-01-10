@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     getMiniAppInfo: function () {
-      this.$axios.get(this.$appApi.pvp.getMiniAppInfo).then((res) => {
+      this.$axios.post(this.$appApi.pvp.getMiniAppInfo).then((res) => {
         this.miniapp = res.data.data;
       });
     },

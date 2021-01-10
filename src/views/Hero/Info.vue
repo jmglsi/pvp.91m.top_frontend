@@ -191,7 +191,7 @@
         v-model="tabsInfo.model"
         :border="false"
         :ellipsis="false"
-        @change="onTabsChange"
+        @change="onHeroTabsChange"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -269,7 +269,7 @@
         :title="hero.info.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs v-model="skillInfo.model" @change="onSkillChange">
+        <van-tabs v-model="skillInfo.model" @change="onSkillTabsChange">
           <van-tab title="技能">
             <HeroSkillList :heroId="hero.info.id"
           /></van-tab>
@@ -277,7 +277,9 @@
             ><HeroEquipmentListALL :heroId="hero.info.id"
           /></van-tab>
           <van-tab title="装备 (单件)"
-            ><HeroEquipmentListOne :equipmentId="hero.info.id" :equipmentType="1"
+            ><HeroEquipmentListOne
+              :equipmentId="hero.info.id"
+              :equipmentType="1"
           /></van-tab>
         </van-tabs>
       </van-action-sheet>
@@ -319,7 +321,12 @@
             icon="question-o"
             is-link
             class="hero-fc861e4a5806e7411f7860142244c917"
-            @click="onTipsClick"
+            @click="
+              $dialog.alert({
+                title: '请客观评价该英雄',
+                message: circle.info.tips,
+              })
+            "
           />
         </van-grid>
       </van-action-sheet>
@@ -502,15 +509,9 @@ export default {
         this.showInfo.heroUpdate = false;
       }, 1000);
     },
-    onTipsClick: function () {
-      this.$dialog.alert({
-        title: "请客观评价该英雄",
-        message: this.circle.info.tips,
-      });
-    },
     onHeroVoteClick: function (voteType) {
       this.$axios
-        .get(
+        .post(
           this.$appApi.pvp.addHeroVote +
             "&heroId=" +
             this.hero.info.id +
@@ -529,9 +530,8 @@ export default {
 
       this.showInfo.heroMenu = false;
     },
-    onSkillChange: function () {
-      let tipsText,
-        e = this.skillInfo.model || 0;
+    onSkillTabsChange: function (e) {
+      let tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
@@ -571,9 +571,9 @@ export default {
       this.showInfo.imagePreview = true;
       this.showInfo.imageIndex = imageIndex;
     },
-    onTabsChange: function (e) {
-      let heroInfo = this.hero.info,
-        dTitle = "";
+    onHeroTabsChange: function (e) {
+      let dTitle = "",
+        heroInfo = this.hero.info;
 
       if (e == 0) {
         dTitle = heroInfo.name;

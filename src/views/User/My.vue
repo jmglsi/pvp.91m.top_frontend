@@ -212,7 +212,7 @@
           title="扩列链接"
           value="点击复制"
           is-link
-          @click="onCopyLinkClick"
+          @click="onMyLinkCopy"
         />
       </van-cell-group>
     </div>
@@ -308,6 +308,7 @@ export default {
   },
   data() {
     return {
+      copyData: "",
       isLogin: false,
       url: {
         globalBP: "//www.yuque.com/jmglsi/pvp/gbpl91",
@@ -350,16 +351,24 @@ export default {
           }
         });
     },
-    onCopyLinkClick: function () {
+    onMyLinkCopy: function () {
       let longUrl =
         location.origin + "/friends?openId=" + this.loginInfo.openId;
 
-      this.$appGetShortUrl(longUrl);
+      this.copyData = longUrl;
+
+      setTimeout(
+        (copyData) => {
+          this.$appCopyData(copyData);
+        },
+        750,
+        this.copyData
+      );
     },
     onLogoutClick: function () {
       this.$dialog
         .confirm({
-          title: "是否退出登录？",
+          title: "是否退出登录?",
         })
         .then(() => {
           // on confirm

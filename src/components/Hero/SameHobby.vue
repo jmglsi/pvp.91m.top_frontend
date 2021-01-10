@@ -87,7 +87,7 @@ export default {
   methods: {
     getHeroByWebAccountList: function (heroId, tipsType) {
       this.$axios
-        .get(this.$appApi.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
+        .post(this.$appApi.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
 

@@ -396,7 +396,7 @@
                 :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
                 @click="
                   data.url
-                    ? $appOpenUrl('是否打开外部链接？', null, {
+                    ? $appOpenUrl('是否打开外部链接?', null, {
                         path: data.url,
                       })
                     : null
@@ -459,7 +459,7 @@
               icon="bar-chart-o"
               size="small"
               color="black"
-              @click="onGamePredictionClick"
+              @click="showInfo.trend = true"
             />
           </div>
         </li>
@@ -518,7 +518,7 @@
             icon="share"
             size="small"
             color="black"
-            @click="onGameShareClick"
+            @click="onGameShareCopy"
           />
         </li>
       </ul>
@@ -596,6 +596,7 @@ export default {
   },
   data() {
     return {
+      copyData: "",
       heroType: [
         "全部",
         "对抗 (战士)",
@@ -636,7 +637,6 @@ export default {
       bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
-      copyData: "",
       tabsModel: 0,
       author: {
         name: "加载中",
@@ -896,8 +896,8 @@ export default {
         BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       };
 
-      let teamInfo = this.team;
-      let gameIndex = this.gameInfo.result.rows.length;
+      let teamInfo = this.team,
+        gameIndex = this.gameInfo.result.rows.length;
 
       this.$axios
         .post(
@@ -922,8 +922,8 @@ export default {
         });
     },
     onUpdateGameBPClick: function (index) {
-      let teamInfo = this.team;
-      let gameInfo = this.gameInfo.result.rows[index];
+      let teamInfo = this.team,
+        gameInfo = this.gameInfo.result.rows[index];
 
       if (gameInfo.win.camp == null) {
         this.$message.error(this.$appMsg.error[1002]);
@@ -1081,17 +1081,33 @@ export default {
         this.$message.warning(this.$appMsg.warning[1001]);
       }
     },
-    onGamePredictionClick: function () {
-      this.showInfo.trend = true;
-    },
-    onGameShareClick: function () {
+    onGameShareCopy: function () {
       let vs = this.team.team_1.name + " Vs " + this.team.team_2.name,
         longUrl = location.href;
 
-      this.$appGetShortUrl(
-        longUrl,
-        "正在复盘【" + vs + "】的第 " + (this.tabsModel + 1) + " 局比赛 ↓"
-      );
+      this.$axios
+        .post(this.$appApi.s.url, {
+          url: longUrl,
+        })
+        .then((res) => {
+          let shortUrl = res.data.data.url;
+
+          this.copyData =
+            "正在复盘【" +
+            vs +
+            "】的第 " +
+            (this.tabsModel + 1) +
+            " 局比赛 ↓\r" +
+            shortUrl;
+
+          setTimeout(
+            (copyData) => {
+              this.$appCopyData(copyData);
+            },
+            750,
+            this.copyData
+          );
+        });
     },
     onToolsMenuClick: function (type) {
       let tabsModel = this.tabsModel;
@@ -1099,7 +1115,7 @@ export default {
       if (type == 0) {
         this.$dialog
           .confirm({
-            title: "是否删除第 " + (tabsModel + 1) + " 局？",
+            title: "是否删除第 " + (tabsModel + 1) + " 局?",
             message: "此操作不可逆",
           })
           .then(() => {
@@ -1140,7 +1156,7 @@ export default {
 
         this.$dialog
           .confirm({
-            title: "是否重置第 " + (tabsModel + 1) + " 局？",
+            title: "是否重置第 " + (tabsModel + 1) + " 局?",
             message: "此操作不可逆",
           })
           .then(() => {
@@ -1180,9 +1196,9 @@ export default {
       }
     },
     onWinCampClick: function (camp) {
-      let tabsModel = this.tabsModel;
-      let teamInfo = this.team;
-      let nowWinTeam;
+      let nowWinTeam = "",
+        tabsModel = this.tabsModel,
+        teamInfo = this.team;
 
       if (camp == 1) {
         tabsModel % 2 == 0
@@ -1196,7 +1212,7 @@ export default {
 
       this.$dialog
         .confirm({
-          title: "是否将本局胜方设置为 " + nowWinTeam + " ？",
+          title: "是否将本局胜方设置为 " + nowWinTeam + " ?",
         })
         .then(() => {
           // on confirm

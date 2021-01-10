@@ -42,7 +42,7 @@
       class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
     >
       <vxe-grid
-        ref="skinReturn"
+        ref="refSkinReturn"
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
@@ -137,7 +137,7 @@ export default {
       return e;
     },
     getSkinReturn: function () {
-      this.$axios.get(this.$appApi.pvp.getSkinReturn).then((res) => {
+      this.$axios.post(this.$appApi.pvp.getSkinReturn).then((res) => {
         let data = res.data.data;
 
         this.tableData = data;
@@ -145,7 +145,7 @@ export default {
       });
     },
     getSkinReturnLog: function () {
-      this.$axios.get(this.$appApi.pvp.getSkinReturnLog).then((res) => {
+      this.$axios.post(this.$appApi.pvp.getSkinReturnLog).then((res) => {
         let data = res.data.data;
 
         this.lineData = data;

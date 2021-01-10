@@ -6,22 +6,11 @@ Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
 Vue.prototype.$appInfo = {
-    name: "苏苏的荣耀助手",
-}
-
-Vue.prototype.$appCopyData = function(data, successText = "复制成功", errorText = "复制失败") {
-    this.$copyText(data).then(
-        () => {
-            this.$message.success(successText);
-        },
-        () => {
-            this.$message.error(errorText);
-        }
-    );
+    name: "苏苏的荣耀助手"
 }
 
 Vue.prototype.$appPush = function(url = { path: '/' }) {
-    this.$router.push(url)
+    this.$router.push(url);
 }
 
 Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlType = 0) {
@@ -35,7 +24,7 @@ Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlTyp
             if (urlType == 0) {
                 window.open(url.path);
             } else if (urlType == 1) {
-                this.$router.push(url);
+                this.$appPush(url);
             }
         })
         .catch(() => {
@@ -44,11 +33,11 @@ Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlTyp
 }
 
 Vue.prototype.$appInitTableHeight = function() {
-    let ret = 0;
+    let ret = 0,
+        width = this.$appWidth,
+        height = this.$appHeight;
 
-    this.$appWidth > this.$appHeight ?
-        (ret = this.$appHeight - 133) :
-        (ret = this.$appHeight - 173)
+    width > height ? (ret = height - 133) : (ret = height - 173);
 
     return ret;
 }
@@ -57,22 +46,18 @@ Vue.prototype.$appInitTableWidth = function(tableWidth) {
     let ret = 0,
         width = this.$appWidth;
 
-    (!this.$isMobile || width > 300) && width > tableWidth ? ret = 0 : ret = 90
+    (!this.$isMobile || width > 300) && width > tableWidth ? ret = 0 : ret = 90;
 
     return ret;
 }
 
-Vue.prototype.$appGetShortUrl = function(longUrl, title = "") {
-    this.$axios
-        .post("https://s.91m.top/", {
-            url: longUrl
-        })
-        .then((res) => {
-            let copyData = "",
-                shortUrl = res.data.data.url;
-
-            title ? copyData = title + "\r-\r" + shortUrl : copyData = shortUrl;
-
-            this.$appCopyData(copyData);
-        });
+Vue.prototype.$appCopyData = function(data, successText = "复制成功", errorText = "复制失败") {
+    this.$copyText(data).then(
+        () => {
+            this.$message.success(successText);
+        },
+        () => {
+            this.$message.error(errorText);
+        }
+    );
 }

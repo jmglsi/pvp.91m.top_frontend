@@ -3,6 +3,11 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 
+import './assets/import/ant'
+import './assets/import/vant'
+import './assets/import/vxe-utils'
+import './assets/import/vxe-table'
+
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
@@ -48,21 +53,14 @@ axios.interceptors.request.use(function(config) {
 })
 Vue.prototype.$axios = axios
 
-import './assets/import/ant'
-
-import './assets/import/vant'
-
-import './assets/import/vxe-utils'
-import './assets/import/vxe-table'
-
-import './assets/js/app.config'
-import './assets/js/bilibili.config'
-
 import appApi from './assets/js/api.config'
 Vue.prototype.$appApi = appApi
 
 import appMsg from './assets/js/code.config'
 Vue.prototype.$appMsg = appMsg
+
+import './assets/js/app.config'
+import './assets/js/bilibili.config'
 
 new Vue({
     router,

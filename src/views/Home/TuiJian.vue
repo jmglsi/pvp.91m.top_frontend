@@ -23,7 +23,7 @@
               :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
               @click="
                 data.url
-                  ? $appOpenUrl('是否打开外部链接？', null, { path: data.url })
+                  ? $appOpenUrl('是否打开外部链接?', null, { path: data.url })
                   : null
               "
               class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     getAppHome: function () {
-      this.$axios.get(this.$appApi.pvp.getAppHome).then((res) => {
+      this.$axios.post(this.$appApi.pvp.getAppHome).then((res) => {
         this.appHomeInfo = res.data.data;
       });
     },

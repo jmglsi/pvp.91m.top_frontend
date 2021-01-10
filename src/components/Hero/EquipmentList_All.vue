@@ -1,7 +1,7 @@
 <template>
   <div class="hero-equipmentListAll app-equipmentListAll">
     <vxe-grid
-      ref="heroEquipmentListAll"
+      ref="refHeroEquipmentListAll"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       height="547"

@@ -51,6 +51,7 @@ export default {
   },
   data() {
     return {
+      copyData: "",
       tabsModel: 0,
       upyun: {
         url: "//console.upyun.com/register/?invite=ryM-bovMm",
@@ -76,9 +77,17 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.$appCopyData(
-              location.origin,
-              "链接已复制,请清除缓存重新添加到桌面~"
+            this.copyData = location.origin;
+
+            setTimeout(
+              (copyData) => {
+                this.$appCopyData(
+                  copyData,
+                  "链接已复制,请清除缓存重新添加到桌面~"
+                );
+              },
+              750,
+              this.copyData
             );
           })
           .catch(() => {

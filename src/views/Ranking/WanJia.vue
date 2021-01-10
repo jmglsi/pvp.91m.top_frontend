@@ -5,9 +5,9 @@
         <van-dropdown-item
           v-model="areaInfo.model"
           :options="areaInfo.options"
-          @change="onPlayerOptionsChange"
+          @change="onPlayerMenuChange"
         />
-        <van-dropdown-item ref="item" title="筛选">
+        <van-dropdown-item ref="refWanJiaMenu" title="筛选">
           <van-cell
             title="隐藏战绩"
             class="ranking-038a25200255054bb358e9839b055f73"
@@ -32,7 +32,7 @@
 
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-grid
-        ref="wanjia"
+        ref="refWanJia"
         :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
@@ -92,9 +92,9 @@ export default {
   name: "RankingWanJia",
   data() {
     return {
+      copyData: "",
       playerShield: 0,
       uin: "",
-      copyData: "",
       tableData: {
         loading: true,
         result: {
@@ -152,12 +152,10 @@ export default {
         });
     },
     getPlayerInfo: function (row) {
-      if (row.userId == 0 || this.areaInfo.model >= 3) return;
-
       this.tableDataRow = row;
       this.showInfo.playerMenu = true;
     },
-    onCopyPlayerInfo: function (row) {
+    onWanJiaCopy: function (row) {
       this.$axios
         .post(this.$appApi.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
         .then((res) => {
@@ -175,32 +173,52 @@ export default {
               "&gamePlayerName=" +
               encodeURIComponent(row.gamePlayerName);
 
-            this.$appGetShortUrl(
-              longUrl,
-              row.gamePlayerName + "\rQQ:" + this.uin + "\r-\r更多玩家信息 ↓"
-            );
+            this.$axios
+              .post(this.$appApi.s.url, {
+                url: longUrl,
+              })
+              .then((res) => {
+                let shortUrl = res.data.data.url;
+
+                this.copyData =
+                  row.gamePlayerName +
+                  "\rQQ:" +
+                  this.uin +
+                  "\r-\r更多玩家信息 ↓\r" +
+                  shortUrl;
+
+                setTimeout(
+                  (copyData) => {
+                    this.$appCopyData(copyData);
+                  },
+                  750,
+                  this.copyData
+                );
+              });
           } else {
             this.$message.error(status.msg);
           }
         });
     },
-    onPlayerOptionsChange: function (e) {
+    onPlayerMenuChange: function (e) {
       this.getRanking(e, this.playerShield);
     },
     onDropdownConfirmClick: function () {
-      this.$refs.item.toggle();
+      this.$refs.refWanJiaMenu.toggle();
 
       this.playerShield = Number(this.showInfo.shield);
       this.getRanking(this.areaInfo.model, this.playerShield);
     },
     onCellClick: function ({ row }) {
+      if (row.userId == 0 || this.areaInfo.model >= 3) return;
+
       this.getPlayerInfo(row);
     },
     onActionSheetSelect: function (item) {
       let playerInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onCopyPlayerInfo(playerInfo);
+        this.onWanJiaCopy(playerInfo);
       }
 
       if (item.value == 1) {

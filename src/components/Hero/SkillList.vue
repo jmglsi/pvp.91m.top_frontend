@@ -1,7 +1,7 @@
 <template>
   <div class="hero-skill app-skill">
     <vxe-grid
-      ref="heroSkill"
+      ref="refHeroSkill"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       height="547"

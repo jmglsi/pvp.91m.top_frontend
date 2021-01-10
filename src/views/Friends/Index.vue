@@ -135,7 +135,7 @@
         icon="description"
         type="info"
         size="small"
-        @click="onCopyInfoClick(friendsInfo.name, friendsInfo.uin)"
+        @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
         >复制QQ</van-button
       >
     </div>
@@ -160,6 +160,7 @@ export default {
   },
   data() {
     return {
+      copyData: "",
       friendsInfo: {
         name: "苏苏",
         uin: 50371140,
@@ -195,7 +196,8 @@ export default {
           if (status.code == 200) {
             this.friendsInfo = data;
 
-            if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
+            if (tipsType == 1)
+              this.$message.success(this.$appMsg.success[1000]);
 
             if (postData != {} && data.openId != openId) {
               this.$appPush({
@@ -208,9 +210,16 @@ export default {
           }
         });
     },
-    onCopyInfoClick: function (name, uin) {
+    onFriendsCopy: function (name, uin) {
       this.copyData = "用户名:" + name + "\rQQ:" + uin;
-      this.$appCopyData(this.copyData);
+
+      setTimeout(
+        (copyData) => {
+          this.$appCopyData(copyData);
+        },
+        750,
+        this.copyData
+      );
     },
   },
 };

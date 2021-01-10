@@ -1,7 +1,7 @@
 <template>
   <div class="hero-equipmentListOne app-equipmentListOne">
     <vxe-grid
-      ref="heroEquipmentListOne"
+      ref="refHeroEquipmentListOne"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       @cell-click="onCellClick"
@@ -52,18 +52,13 @@
       >
         <template v-slot="{ row }">
           <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
-            row.equipment.updateIndex == 0 ? "-" : row.equipment.updateIndex
+            row.equipment.updateType == 0
+              ? "-"
+              : Math.abs(row.equipment.updateIndex)
           }}</span>
           <img
-            v-if="row.equipment.updateIndex > 0"
-            v-lazy="'/img/app-icons/hot_2.png'"
-            width="15"
-            height="15"
-            class="app-db21bca782a535e91eb87f56b8abdc45"
-          />
-          <img
-            v-if="row.equipment.updateIndex < 0"
-            v-lazy="'/img/app-icons/hot_1.png'"
+            v-if="row.equipment.updateType != 0"
+            v-lazy="'/img/app-icons/hot_' + row.equipment.updateType + '.png'"
             width="15"
             height="15"
             class="app-db21bca782a535e91eb87f56b8abdc45"
@@ -77,7 +72,7 @@
         <vxe-table-column
           title="出场"
           field="allPickRate"
-          :filters="[{ data: 0.5, checked: true }]"
+          :filters="[{ data: 1, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable

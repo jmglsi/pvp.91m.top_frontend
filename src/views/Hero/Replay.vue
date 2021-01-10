@@ -139,13 +139,13 @@ export default {
   },
   data() {
     return {
+      copyData: "",
       collapseModel: ["1"],
       hero: {
         info: {
           id: 0,
         },
       },
-      copyData: "",
       tableData: {
         result: {
           rows: [],
@@ -197,7 +197,23 @@ export default {
           replayUrl.slice(replayUrlIndex + 1, replayUrl.length)
         );
 
-      this.$appGetShortUrl(longUrl, this.replay.title + " 的对局回顾 ↓");
+      this.$axios
+        .post(this.$appApi.s.url, {
+          url: longUrl,
+        })
+        .then((res) => {
+          let shortUrl = res.data.data.url;
+
+          this.copyData = this.replay.title + " 的对局回顾 ↓\r" + shortUrl;
+
+          setTimeout(
+            (copyData) => {
+              this.$appCopyData(copyData);
+            },
+            750,
+            this.copyData
+          );
+        });
     },
     getHeroReplayByHeroId: function (heroId, page) {
       this.$axios
