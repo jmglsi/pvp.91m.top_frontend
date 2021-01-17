@@ -154,7 +154,7 @@
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="showInfo.heroSkill = true"
+          @click="showInfo.skillMenu = true"
         >
           <div class="hero-f3412345b511c61986bba9a39793157f">
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057"
@@ -265,7 +265,7 @@
       class="app-e827ba0e6873e7ce7ef7c6c58e970609 hero-2882d594d0ac3524bffd5148791e96da"
     >
       <van-action-sheet
-        v-model="showInfo.heroSkill"
+        v-model="showInfo.skillMenu"
         :title="hero.info.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
@@ -300,7 +300,7 @@
         >
           <van-grid-item
             class="hero-59c25466342abdb6746988b245f3a5a6"
-            @click="onHeroVoteClick(1)"
+            @click="onHeroVoteClick(0)"
           >
             <AppCry width="50" height="50" />
             <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
@@ -309,7 +309,7 @@
           </van-grid-item>
           <van-grid-item
             class="hero-59c25466342abdb6746988b245f3a5a6"
-            @click="onHeroVoteClick(2)"
+            @click="onHeroVoteClick(1)"
           >
             <AppSmile width="50" height="50" />
             <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
@@ -353,6 +353,7 @@
           @click="onHeroLikeClick"
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
+        <van-tabbar-item>最低省分</van-tabbar-item>
         <van-tabbar-item
           icon="/img/app-icons/wiki.png"
           name="/"
@@ -449,7 +450,7 @@ export default {
       showInfo: {
         heroImg: true,
         parameter: true,
-        heroSkill: false,
+        skillMenu: false,
         heroMenu: false,
         imagePreview: false,
         imageIndex: 0,
@@ -479,8 +480,8 @@ export default {
     this.getHeroInfo(heroId);
 
     show == "skill"
-      ? (this.showInfo.heroSkill = true)
-      : (this.showInfo.heroSkill = false);
+      ? (this.showInfo.skillMenu = true)
+      : (this.showInfo.skillMenu = false);
 
     window.addEventListener("scroll", this.scrollTop);
   },

@@ -8,7 +8,6 @@ import {
     Calendar,
     Cell,
     CellGroup,
-    Checkbox,
     Circle,
     Col,
     Collapse,
@@ -41,7 +40,8 @@ import {
     TabbarItem,
     Tabs,
     Tag,
-    Uploader
+    Uploader,
+    Picker
 } from 'vant'
 
 Vue
@@ -50,7 +50,6 @@ Vue
     .use(Calendar)
     .use(Cell)
     .use(CellGroup)
-    .use(Checkbox)
     .use(Circle)
     .use(Col)
     .use(Collapse)
@@ -83,4 +82,4 @@ Vue
     .use(TabbarItem)
     .use(Tabs)
     .use(Tag)
-    .use(Uploader)
+    .use(Uploader).use(Picker)

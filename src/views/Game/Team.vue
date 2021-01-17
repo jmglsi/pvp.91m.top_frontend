@@ -38,7 +38,7 @@
 
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
-        v-model="showInfo.team"
+        v-model="showInfo.teamMenu"
         :title="tableDataRow.id ? tableDataRow.name + ' 如何操作' : '新建队伍'"
         safe-area-inset-bottom
       >
@@ -97,18 +97,18 @@
               v-if="tableDataRow.id"
               round
               size="small"
-              color="red"
-              class="game-a066f238070a70cb531c9bd722c65b36"
+              type="danger"
+              class="app-a066f238070a70cb531c9bd722c65b36"
               @click="onDeleteTeamClick"
-              >删除队伍</van-button
+              >删除信息</van-button
             >&nbsp;
             <van-button
               round
               size="small"
-              color="rgb(7,193,96)"
-              class="game-a066f238070a70cb531c9bd722c65b36"
+              type="primary"
+              class="app-a066f238070a70cb531c9bd722c65b36"
               @click="onSaveTeamInfoClick"
-              >保存队伍信息</van-button
+              >保存信息</van-button
             >
           </div>
         </div>
@@ -123,7 +123,7 @@ export default {
   data() {
     return {
       showInfo: {
-        team: false,
+        teamMenu: false,
       },
       tableData: {
         type: 0,
@@ -200,7 +200,7 @@ export default {
       this.$message.error(this.$appMsg.error[1005]);
     },
     onCreateTeamClick: function () {
-      this.showInfo.team = true;
+      this.showInfo.teamMenu = true;
 
       this.tableDataRow = {
         name: "",
@@ -215,7 +215,7 @@ export default {
 
       this.tableData.type = 1;
 
-      this.showInfo.team = true;
+      this.showInfo.teamMenu = true;
     },
     onSaveTeamInfoClick: function () {
       let tableData = this.tableData,
@@ -255,7 +255,7 @@ export default {
           });
       }
 
-      this.showInfo.team = false;
+      this.showInfo.teamMenu = false;
     },
     onDeleteTeamClick: function () {
       let row = this.tableDataRow;
@@ -286,14 +286,14 @@ export default {
               }
             });
 
-          this.showInfo.team = false;
+          this.showInfo.teamMenu = false;
         })
         .catch(() => {
           // on cancel
         });
     },
     onCreateEngageClick: function (data) {
-      this.showInfo.team = false;
+      this.showInfo.teamMenu = false;
 
       let teamId_1 = this.$cookie.get("teamId") || "",
         teamId_2 = data;
@@ -336,7 +336,7 @@ export default {
           }
         });
 
-      this.showInfo.team = false;
+      this.showInfo.teamMenu = false;
     },
   },
 };

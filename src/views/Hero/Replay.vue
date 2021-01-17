@@ -106,7 +106,7 @@
 
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
-        v-model="showInfo.actionSheet"
+        v-model="showInfo.replayMenu"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
@@ -168,7 +168,7 @@ export default {
         teammate: false,
       },
       showInfo: {
-        actionSheet: false,
+        replayMenu: false,
       },
     };
   },
@@ -188,7 +188,7 @@ export default {
   methods: {
     onGameActionSheetClick: function (row) {
       this.tableDataRow = row;
-      this.showInfo.actionSheet = true;
+      this.showInfo.replayMenu = true;
     },
     onReplayCopy: function (row) {
       let replayUrl = row.replayUrl,

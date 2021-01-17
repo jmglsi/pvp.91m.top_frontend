@@ -297,7 +297,7 @@
 
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
-        v-model="showInfo.heroSkill"
+        v-model="showInfo.skillMenu"
         :title="tableDataRow.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
@@ -371,7 +371,7 @@ export default {
       listWidth: 0,
       clientHeight: 0,
       areaInfo: {
-        model: 4,
+        model: 0,
         options: [
           { text: "全部 (昨日)", value: 0 },
           { text: "手 Q (昨日)", value: 1 },
@@ -394,7 +394,7 @@ export default {
         ],
       },
       showInfo: {
-        heroSkill: false,
+        skillMenu: false,
         heroMenu: false,
       },
       cellInfo: {
@@ -505,11 +505,11 @@ export default {
       this.tableDataRow = row;
 
       if (column.property == "score") {
-        this.showInfo.heroSkill = true;
+        this.showInfo.skillMenu = true;
         this.showInfo.heroMenu = false;
         this.cellInfo.index = 0;
       } else {
-        this.showInfo.heroSkill = false;
+        this.showInfo.skillMenu = false;
         this.showInfo.heroMenu = true;
         this.cellInfo.index = 1;
       }

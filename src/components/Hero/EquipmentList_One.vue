@@ -121,7 +121,7 @@
         :title="'格子_' + (index + 1).toString() + ' (%)'"
       >
         <vxe-table-column
-          title="出场"
+          title="占比"
           :field="'pickRate_' + index"
           :filters="[{ data: 0 }]"
           :filter-method="filterMethod"
@@ -168,7 +168,7 @@
     </vxe-grid>
 
     <van-action-sheet
-      v-model="showInfo.actionSheet"
+      v-model="showInfo.equipmentMenu"
       :round="false"
       safe-area-inset-bottom
       class="app-aaf877dc2d49f8e1494e6a7dcf8b475c"
@@ -278,7 +278,7 @@ export default {
         type: 1,
       },
       showInfo: {
-        actionSheet: false,
+        equipmentMenu: false,
       },
     };
   },
@@ -378,7 +378,7 @@ export default {
         this.getHeroEquipment(row.equipment.id, this.equipmentInfo.type);
         return;
       }
-      this.showInfo.actionSheet = true;
+      this.showInfo.equipmentMenu = true;
 
       this.lineData.heroId = row.heroId;
       this.lineData.equipmentId = row.equipment.id;
@@ -419,7 +419,7 @@ export default {
         ],
       };
 
-      this.showInfo.actionSheet = true;
+      this.showInfo.equipmentMenu = true;
     },
   },
 };
