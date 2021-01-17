@@ -19,6 +19,7 @@
             { label: '打野刀', data: 2 },
             { label: '辅助装', data: 3 },
             { label: '保命装', data: 4 },
+            { label: '神装', data: 5 },
           ]"
           :filter-method="filterMethod"
         >
@@ -95,12 +96,12 @@
 
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
-        v-model="showInfo.heroSkill"
+        v-model="showInfo.skillMenu"
         :title="tableDataRow.equipment.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
         <HeroEquipmentListOne
-          v-if="showInfo.heroSkill"
+          v-if="showInfo.skillMenu"
           :equipmentId="tableDataRow.equipment.id"
           :equipmentType="2"
         />
@@ -140,7 +141,7 @@ export default {
       listWidth: 0,
       filterValue: [],
       showInfo: {
-        heroSkill: false,
+        skillMenu: false,
         equipmentMenu: false,
       },
       skillInfo: {
@@ -160,7 +161,7 @@ export default {
     if (equipmentId) {
       this.tableDataRow.equipment.id = equipmentId;
       this.tableDataRow.equipment.name = equipmentName;
-      this.showInfo.heroSkill = true;
+      this.showInfo.skillMenu = true;
     }
 
     this.getRanking();
@@ -220,7 +221,7 @@ export default {
       }
 
       if (item.value == 1) {
-        this.showInfo.heroSkill = true;
+        this.showInfo.skillMenu = true;
       }
 
       if (item.value == 2) {
