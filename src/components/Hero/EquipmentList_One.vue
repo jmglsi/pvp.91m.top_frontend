@@ -220,7 +220,7 @@
           7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
         </span>
 
-        <AppBottomTabbar v-if="$isMobile" height="50px" />
+        <AppBottomTabbar v-if="$appIsMobile" height="50px" />
       </div>
     </van-action-sheet>
   </div>

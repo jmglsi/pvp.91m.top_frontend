@@ -33,7 +33,7 @@
       >
         <vxe-table-column
           title="英雄"
-          field="score"
+          field="allScore"
           fixed="left"
           width="75"
           sortable
@@ -90,7 +90,7 @@
         <vxe-table-column title="出场越低,波动越大 (%)">
           <vxe-table-column
             title="禁用"
-            field="banRate"
+            field="allBanRate"
             :filters="[{ data: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
@@ -112,7 +112,7 @@
           </vxe-table-column>
           <vxe-table-column
             title="出场"
-            field="pickRate"
+            field="allPickRate"
             :filters="[{ data: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
@@ -134,7 +134,7 @@
           </vxe-table-column>
           <vxe-table-column
             title="BP率"
-            field="bpRate"
+            field="allBPRate"
             :filters="[{ data: 1, checked: true }]"
             :filter-method="filterMethod"
             width="100"
@@ -156,7 +156,7 @@
           </vxe-table-column>
           <vxe-table-column
             title="胜率"
-            field="winRate"
+            field="allWinRate"
             :filters="[{ data: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
@@ -435,7 +435,7 @@ export default {
 
       let visibleColumn = tableColumn.refDianFengSai.split(",");
 
-      !this.$isMobile && visibleColumn.length > 6
+      !this.$appIsMobile && visibleColumn.length > 6
         ? (this.listWidth = 0)
         : (this.listWidth = 90);
     },
@@ -482,20 +482,20 @@ export default {
       }
     },
     filterMethod({ option, row, column }) {
-      if (column.property == "bpRate") {
-        return row.bpRate >= option.data;
+      if (column.property == "allBanRate") {
+        return row.allBanRate >= option.data;
       }
 
-      if (column.property == "banRate") {
-        return row.banRate >= option.data;
+      if (column.property == "allBPRate") {
+        return row.allBPRate >= option.data;
       }
 
-      if (column.property == "pickRate") {
-        return row.pickRate >= option.data;
+      if (column.property == "allPickRate") {
+        return row.allPickRate >= option.data;
       }
 
-      if (column.property == "winRate") {
-        return row.winRate >= option.data;
+      if (column.property == "allWinRate") {
+        return row.allWinRate >= option.data;
       }
     },
     onDropdownMenuChange: function () {
@@ -504,7 +504,7 @@ export default {
     onCellClick: function ({ row, column }) {
       this.tableDataRow = row;
 
-      if (column.property == "score") {
+      if (column.property == "allScore") {
         this.showInfo.skillMenu = true;
         this.showInfo.heroMenu = false;
         this.cellInfo.index = 0;
@@ -517,28 +517,28 @@ export default {
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
-      if (column.property == "banRate") {
-        if (row.banRate >= color.ban && row.winRate >= color.win) {
+      if (column.property == "allBanRate") {
+        if (row.allBanRate >= color.ban && row.allWinRate >= color.win) {
           return "ranking-bda9643ac6601722a28f238714274da4";
         }
       }
 
-      if (column.property == "pickRate") {
-        if (row.pickRate >= color.pick) {
+      if (column.property == "allPickRate") {
+        if (row.allPickRate >= color.pick) {
           return "ranking-48d6215903dff56238e52e8891380c8f";
         }
       }
 
-      if (column.property == "bpRate") {
-        if (row.bpRate >= color.bp) {
+      if (column.property == "allBPRate") {
+        if (row.allBPRate >= color.bp) {
           return "ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
         }
       }
 
-      if (column.property == "winRate") {
+      if (column.property == "allWinRate") {
         if (
-          (row.banRate >= color.ban || row.pickRate >= color.pick) &&
-          row.winRate >= color.win
+          (row.allBanRate >= color.ban || row.allPickRate >= color.pick) &&
+          row.allWinRate >= color.win
         ) {
           return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }

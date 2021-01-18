@@ -25,7 +25,7 @@
           :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
           :title="(index + 1).toString()"
           :field="'list[' + index + ']'"
-          :width="$isMobile ? 60 : 0"
+          :width="$appIsMobile ? 60 : 0"
           sortable
         >
           <template v-slot="{ row }">

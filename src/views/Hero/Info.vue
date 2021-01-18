@@ -228,7 +228,7 @@
           />
         </div>
         <div
-          :style="$isMobile ? { marginTop: '0' } : { marginTop: '25px' }"
+          :style="$appIsMobile ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
           <HeroRadar
@@ -370,7 +370,7 @@
       </van-tabbar>
     </div>
 
-    <AppBottomTabbar v-if="$isMobile" height="100px" />
+    <AppBottomTabbar height="100px" />
   </div>
 </template>
 

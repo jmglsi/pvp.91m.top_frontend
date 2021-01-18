@@ -6,14 +6,14 @@
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
           <van-col
-            :span="$isMobile ? 15 : 21"
+            :span="$appIsMobile ? 15 : 21"
             @click="showInfo.calendar = true"
           >
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
               tableData.result.tips
             }}</span>
           </van-col>
-          <van-col :span="$isMobile ? 9 : 3">
+          <van-col :span="$appIsMobile ? 9 : 3">
             <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
               <van-dropdown-menu direction="up">
                 <van-dropdown-item

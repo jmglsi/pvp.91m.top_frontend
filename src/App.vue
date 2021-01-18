@@ -143,6 +143,17 @@ export default {
               message: tipsInfo.title,
               description: tipsInfo.description,
               onClick: () => {
+                if (tipsInfo.to) {
+                  this.$appOpenUrl(
+                    "是否打开外部链接?",
+                    null,
+                    {
+                      path: tipsInfo.to,
+                    },
+                    1
+                  );
+                }
+
                 if (tipsInfo.url) {
                   this.$appOpenUrl("是否打开外部链接?", null, {
                     path: tipsInfo.url,

@@ -113,7 +113,9 @@
       <van-row>
         <van-col span="3">
           <div
-            :style="$isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
+            :style="
+              $appIsMobile ? { marginTop: '50px' } : { marginTop: '100px' }
+            "
             class="game-be50d19d79d06b239c799bc2608239c6"
           >
             <ul>
@@ -121,7 +123,7 @@
                 v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
                   .BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
-                :style="$isMobile ? {} : { marginTop: '50px' }"
+                :style="$appIsMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -150,8 +152,8 @@
                         ? blueStepsClass
                         : ''
                     "
-                    :width="$isMobile ? 40 : 55"
-                    :height="$isMobile ? 40 : 55"
+                    :width="$appIsMobile ? 40 : 55"
+                    :height="$appIsMobile ? 40 : 55"
                     class="game-eee32796c3fdfc147115c9f6e875c090"
                   />
                 </span>
@@ -162,7 +164,7 @@
             v-show="bpMode == 'edit'"
             @click="onWinCampClick(1)"
             :style="
-              $isMobile
+              $appIsMobile
                 ? { height: '275px' }
                 : { height: $appHeight - 175 + 'px' }
             "
@@ -173,7 +175,7 @@
           <div
             v-show="showInfo.hero"
             :style="
-              $isMobile
+              $appIsMobile
                 ? { height: '240px' }
                 : { height: $appHeight - 150 + 'px' }
             "
@@ -182,7 +184,7 @@
             <van-tabs
               v-model="tableData.active"
               :border="false"
-              :swipe-threshold="$isMobile ? 4 : 7"
+              :swipe-threshold="$appIsMobile ? 4 : 7"
               color="orange"
               class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
@@ -322,7 +324,9 @@
         </van-col>
         <van-col span="3">
           <div
-            :style="$isMobile ? { marginTop: '50px' } : { marginTop: '100px' }"
+            :style="
+              $appIsMobile ? { marginTop: '50px' } : { marginTop: '100px' }
+            "
             class="game-f382dd1c4a10b864c29d26d47249b570"
           >
             <ul>
@@ -330,7 +334,7 @@
                 v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
                   .BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
-                :style="$isMobile ? {} : { marginTop: '50px' }"
+                :style="$appIsMobile ? {} : { marginTop: '50px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -359,8 +363,8 @@
                         ? redStepsClass
                         : ''
                     "
-                    :width="$isMobile ? 40 : 55"
-                    :height="$isMobile ? 40 : 55"
+                    :width="$appIsMobile ? 40 : 55"
+                    :height="$appIsMobile ? 40 : 55"
                     class="game-aa95efe1c5d39e5e9389ca5833e63fbe"
                   />
                 </span>
@@ -371,7 +375,7 @@
             v-show="bpMode == 'edit'"
             @click="onWinCampClick(2)"
             :style="
-              $isMobile
+              $appIsMobile
                 ? { height: '275px' }
                 : { height: $appHeight - 175 + 'px' }
             "
@@ -704,7 +708,7 @@ export default {
   created() {
     window.addEventListener("beforeunload", (e) => this.beforeunload(e), false);
 
-    if (this.$isMobile) {
+    if (this.$appIsMobile) {
       window.addEventListener("resize", this.renderResize, false);
     } else {
       this.isPortrait = false;
@@ -724,7 +728,7 @@ export default {
   beforeDestroy() {
     window.removeEventListener("beforeunload", this.beforeunload, false);
 
-    if (this.$isMobile) {
+    if (this.$appIsMobile) {
       window.removeEventListener("resize", this.renderResize, false);
     }
   },
@@ -853,24 +857,26 @@ export default {
           })
         )
         .then((res) => {
-          let data = res.data.data,
-            result = data.result;
+          let status = res.data.status;
 
-          if (result.length == 0) {
-            this.$message.error(this.$appMsg.error[1001]);
-            return;
+          if (status.code == 200) {
+            let data = res.data.data,
+              result = data.result;
+
+            this.author = data.author;
+            this.team = data.team;
+            this.gameInfo.result = result;
+
+            this.initBPOrder(this.bpPerspective, tabsModel + 1);
+            this.getHeroList(result.rows[0].game.time);
+
+            this.author.openId &&
+            this.author.openId == this.$cookie.get("openId")
+              ? (this.showInfo.apps = true)
+              : (this.showInfo.apps = false);
+          } else {
+            this.$message.error(status.msg);
           }
-
-          this.author = data.author;
-          this.team = data.team;
-          this.gameInfo.result = result;
-
-          this.initBPOrder(this.bpPerspective, tabsModel + 1);
-          this.getHeroList(result.rows[0].game.time);
-
-          this.author.openId && this.author.openId == this.$cookie.get("openId")
-            ? (this.showInfo.apps = true)
-            : (this.showInfo.apps = false);
         });
     },
     onCreateGameBPClick: function () {

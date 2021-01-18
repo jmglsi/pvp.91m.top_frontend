@@ -64,7 +64,7 @@
       </van-grid>
     </div>
 
-    <AppBottomTabbar v-if="$isMobile" height="100px" />
+    <AppBottomTabbar v-if="$appIsMobile" height="100px" />
   </div>
 </template>
 
