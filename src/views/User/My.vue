@@ -2,13 +2,19 @@
   <div class="login-home">
     <div class="my-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
+        :right-text="showInfo.editType == false ? '编辑' : '编辑中'"
         :border="false"
         :fixed="true"
         :placeholder="true"
+        @click-right="onUpdateInfoClick"
         z-index="99999999"
       >
         <template #title>
           <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
+            <span
+              class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
+              >&lt;{{ $appColumnsInfo.area[loginInfo.areaType] }}&gt;</span
+            >
             <span
               class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
               >{{ loginInfo.name }}</span
@@ -205,7 +211,9 @@
           </template>
           <template #right-icon>
             <span class="my-b60541e817018d568a58a70d5db7fb65"
-              ><van-switch v-model="showInfo.friendsType" /></span></template
+              ><van-switch
+                v-model="showInfo.friendsType"
+                disabled /></span></template
         ></van-cell>
         <van-cell
           icon="manager"
@@ -291,6 +299,126 @@
       </van-cell-group>
     </div>
 
+    <div class="my-56fe8eb767404084edadf3ca37055338">
+      <van-popup v-model="showInfo.pickerMenu" round position="bottom">
+        <van-picker
+          show-toolbar
+          :columns="$appColumnsInfo.now"
+          @confirm="onPickerConfirm"
+          @cancel="onPickerCancel"
+        />
+      </van-popup>
+    </div>
+
+    <div class="my-0b8eeb7297d7691797414caa1ec92c8e">
+      <van-action-sheet
+        v-model="showInfo.editMenu"
+        @close="showInfo.editType = false"
+        safe-area-inset-bottom
+        title="我的信息"
+      >
+        <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">
+          <van-cell-group
+            :border="false"
+            title=""
+            class="my-3c5bcb72d710faf0c301750abeb5704f"
+          >
+            <van-field
+              v-model="$appColumnsInfo.area[newInfo.areaType]"
+              readonly
+              input-align="right"
+              label="大区"
+            >
+              <template #button>
+                <van-button
+                  round
+                  size="small"
+                  type="info"
+                  class="my-e06af146fff27b9e4b20bda71a291f9f"
+                  @click="onUpdateColumnsInfoClick(0)"
+                  >修改大区</van-button
+                >
+              </template>
+            </van-field>
+            <van-field
+              v-model="$appColumnsInfo.province[newInfo.provinceType]"
+              readonly
+              input-align="right"
+              label="省份"
+            >
+              <template #button>
+                <van-button
+                  round
+                  size="small"
+                  type="info"
+                  class="my-e06af146fff27b9e4b20bda71a291f9f"
+                  @click="onUpdateColumnsInfoClick(1)"
+                  >修改省份</van-button
+                >
+              </template>
+            </van-field>
+            <van-field readonly label="段位">
+              <template #button>
+                <span class="my-35494217d6a01388d07eccf816b6ea39"
+                  ><img v-lazy="newInfo.rank.starIcon" width="50" height="50"
+                /></span>
+                <van-button
+                  round
+                  size="small"
+                  type="info"
+                  class="my-e06af146fff27b9e4b20bda71a291f9f"
+                  @click="onUpdateColumnsInfoClick(2)"
+                  >修改段位</van-button
+                >
+              </template>
+            </van-field>
+            <van-field
+              v-model="newInfo.rank.score"
+              type="number"
+              input-align="right"
+              label="巅峰分"
+            />
+          </van-cell-group>
+
+          <van-cell-group
+            :border="false"
+            title=" "
+            class="my-3c5bcb72d710faf0c301750abeb5704f"
+          >
+            <van-field readonly label="扩列">
+              <template #button>
+                <span class="my-35494217d6a01388d07eccf816b6ea39"
+                  ><van-switch v-model="showInfo.friendsType"
+                /></span>
+              </template>
+            </van-field>
+
+            <van-field
+              v-model="newInfo.description"
+              autosize
+              label="签名"
+              rows="2"
+              maxlength="255"
+              type="textarea"
+              input-align="right"
+              placeholder="请输入签名"
+              @click="$message.warning($appMsg.warning[1002])"
+              show-word-limit
+            />
+          </van-cell-group>
+
+          <van-button
+            round
+            size="small"
+            type="primary"
+            class="app-a066f238070a70cb531c9bd722c65b36"
+            @click="updateWebAccountInfo"
+            >保存信息</van-button
+          >
+        </div>
+      </van-action-sheet>
+    </div>
+
     <AppBottomTabbar height="100px" />
   </div>
 </template>
@@ -321,10 +449,38 @@ export default {
           color: "",
           text: "",
         },
+        description: null,
         heroList: [],
+        areaType: 1,
+        provinceType: 1,
+        friendsType: 1,
+        rank: {
+          starType: 1,
+          starIcon: "//camp.qq.com/battle/profile/roleJob/1.png",
+          score: 1200,
+        },
+      },
+      newInfo: {
+        certification: {
+          color: "",
+          text: "",
+        },
+        description: null,
+        heroList: [],
+        areaType: 1,
+        provinceType: 1,
+        friendsType: 1,
+        rank: {
+          starType: 1,
+          starIcon: "//camp.qq.com/battle/profile/roleJob/1.png",
+          score: 1200,
+        },
       },
       showInfo: {
         friendsType: true,
+        editType: false,
+        editMenu: false,
+        pickerMenu: false,
       },
     };
   },
@@ -340,14 +496,43 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.isLogin = true;
             this.loginInfo = data;
+            this.newInfo = data;
 
             data.friendsType == 1
               ? (this.showInfo.friendsType = true)
               : (this.showInfo.friendsType = false);
+
+            this.isLogin = true;
           } else {
             this.isLogin = false;
+          }
+        });
+    },
+    updateWebAccountInfo: function () {
+      let postData = {
+        areaType: this.newInfo.areaType,
+        provinceType: this.newInfo.provinceType,
+        starType: this.newInfo.rank.starType,
+        nowRankScore: this.newInfo.rank.score,
+        friendsType: Number(this.showInfo.friendsType),
+        description: this.newInfo.description,
+      };
+
+      this.$axios
+        .post(
+          this.$appApi.pvp.updateWebAccountInfo,
+          this.$qs.stringify(postData)
+        )
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.loginInfo = this.newInfo;
+
+            this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
           }
         });
     },
@@ -364,6 +549,47 @@ export default {
         750,
         this.copyData
       );
+    },
+    onUpdateColumnsInfoClick: function (e) {
+      let columns = [];
+
+      if (e == 0) {
+        columns = this.$appColumnsInfo.area;
+      } else if (e == 1) {
+        columns = this.$appColumnsInfo.province;
+      } else if (e == 2) {
+        columns = this.$appColumnsInfo.rank.text;
+      }
+
+      this.$appColumnsInfo.now = columns;
+      this.$appColumnsInfo.type = e;
+
+      this.showInfo.pickerMenu = true;
+    },
+    onUpdateInfoClick: function () {
+      this.showInfo.editType = true;
+      this.showInfo.editMenu = true;
+    },
+    onPickerConfirm: function (value, index) {
+      let columnsInfo = this.$appColumnsInfo,
+        starIndex = 0;
+
+      if (columnsInfo.type == 0) {
+        this.newInfo.areaType = index;
+      } else if (columnsInfo.type == 1) {
+        this.newInfo.provinceType = index;
+      } else if (columnsInfo.type == 2) {
+        starIndex = this.$appColumnsInfo.rank.type[index];
+
+        this.newInfo.rank.starType = index;
+        this.newInfo.rank.starIcon =
+          "//camp.qq.com/battle/profile/roleJob/" + starIndex + ".png";
+      }
+
+      this.showInfo.pickerMenu = false;
+    },
+    onPickerCancel: function () {
+      this.showInfo.pickerMenu = false;
     },
     onLogoutClick: function () {
       this.$dialog

@@ -43,6 +43,7 @@ const pvp = {
     getSkinReturnLog: pvpApi + "?type=getSkinReturnLog",
     getSmobaHelperUserInfo: pvpApi + "?type=getSmobaHelperUserInfo",
     getWebAccountInfo: pvpApi + "?type=getWebAccountInfo",
+    updateWebAccountInfo: pvpApi + "?type=updateWebAccountInfo",
     loginWebAccount: pvpApi + "?type=loginWebAccount",
     updateGameBP: pvpApi + "?type=updateGameBP",
     updateTeamInfo: pvpApi + "?type=updateTeamInfo",
