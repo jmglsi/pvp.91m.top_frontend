@@ -75,7 +75,7 @@ export default {
             {
               icon: "/img/app-icons/search.png",
               to: {
-                path: "/friends",
+                path: "/search",
               },
               name: "/search",
               text: "搜索",
@@ -109,6 +109,7 @@ export default {
       if (
         to.path == "/login" ||
         to.path == "/miniapp" ||
+        to.path == "/search" ||
         to.path == "/bilibili" ||
         to.path.indexOf("/hero/") > -1 ||
         to.path.indexOf("/game/") > -1

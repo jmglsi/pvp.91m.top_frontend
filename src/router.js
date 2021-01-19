@@ -1,6 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location, onResolve, onReject) {
+    if (onResolve || onReject) {
+        return originalPush.call(this, location, onResolve, onReject);
+    }
+
+    return originalPush.call(this, location).catch(err => err);
+}
+
 Vue.use(Router)
 
 export default new Router({
@@ -59,10 +68,17 @@ export default new Router({
             }
         }, {
             path: '/ranking',
-            name: 'ranking',
             component: (resolve) => require(['./views/Ranking/Index.vue'], resolve),
             meta: {
                 title: '排行',
+                keepAlive: false
+            }
+        }, {
+            path: '/search',
+            name: 'search',
+            component: (resolve) => require(['./views/Search/Index.vue'], resolve),
+            meta: {
+                title: '搜索',
                 keepAlive: true
             }
         }, {

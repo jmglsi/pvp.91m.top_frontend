@@ -39,14 +39,15 @@ const pvp = {
     getHeroUpdateText: pvpApi + "?type=getHeroUpdateText",
     getMiniAppInfo: pvpApi + "?type=getMiniAppInfo",
     getRanking: pvpApi + "?type=getRanking",
+    getSearch: pvpApi + "?type=getSearch",
     getSkinReturn: pvpApi + "?type=getSkinReturn",
     getSkinReturnLog: pvpApi + "?type=getSkinReturnLog",
     getSmobaHelperUserInfo: pvpApi + "?type=getSmobaHelperUserInfo",
     getWebAccountInfo: pvpApi + "?type=getWebAccountInfo",
-    updateWebAccountInfo: pvpApi + "?type=updateWebAccountInfo",
     loginWebAccount: pvpApi + "?type=loginWebAccount",
     updateGameBP: pvpApi + "?type=updateGameBP",
     updateTeamInfo: pvpApi + "?type=updateTeamInfo",
+    updateWebAccountInfo: pvpApi + "?type=updateWebAccountInfo",
     uploadImg: pvpApi + "?type=uploadImg"
 }
 
