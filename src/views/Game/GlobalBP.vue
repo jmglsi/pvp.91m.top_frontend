@@ -13,11 +13,11 @@
   >
     <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">{{
-        tabsModel % 2 == 0 ? team.team_1.name : team.team_2.name
+        tabsInfo.model % 2 == 0 ? team.team_1.name : team.team_2.name
       }}</span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
       <span class="game-1426b22460332d802aedd4d54d35f3ee">{{
-        tabsModel % 2 == 0 ? team.team_2.name : team.team_1.name
+        tabsInfo.model % 2 == 0 ? team.team_2.name : team.team_1.name
       }}</span>
     </span>
 
@@ -27,7 +27,8 @@
       >
         <ul>
           <li
-            v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
+            v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
+              .BPOrder"
             :key="'game-2a47f410fffc64666ba4673bdc597f72a-' + index"
             @click="onGameBanPickClick(index)"
           >
@@ -47,7 +48,7 @@
                 "
                 :class="
                   bpMode == 'edit' &&
-                  gameInfo.result.rows[tabsModel].stepsNow == index
+                  gameInfo.result.rows[tabsInfo.model].stepsNow == index
                     ? blueStepsClass
                     : ''
                 "
@@ -70,7 +71,8 @@
       >
         <ul>
           <li
-            v-for="(heroId, index) in gameInfo.result.rows[tabsModel].BPOrder"
+            v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
+              .BPOrder"
             :key="'game-38dfd87b435ce58ee12baf01d6f23c73-' + index"
             @click="onGameBanPickClick(index)"
           >
@@ -90,7 +92,7 @@
                 "
                 :class="
                   bpMode == 'edit' &&
-                  gameInfo.result.rows[tabsModel].stepsNow == index
+                  gameInfo.result.rows[tabsInfo.model].stepsNow == index
                     ? redStepsClass
                     : ''
                 "
@@ -120,7 +122,7 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
+                v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
                   .BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
                 :style="$appIsMobile ? {} : { marginTop: '50px' }"
@@ -148,7 +150,7 @@
                     "
                     :class="
                       bpMode == 'edit' &&
-                      gameInfo.result.rows[tabsModel].stepsNow == index
+                      gameInfo.result.rows[tabsInfo.model].stepsNow == index
                         ? blueStepsClass
                         : ''
                     "
@@ -218,10 +220,10 @@
                       <van-tag
                         round
                         v-if="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                          gameInfo.result.rows[
+                            tabsInfo.model
+                          ].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
                             data.id
                           )
                         "
@@ -241,10 +243,10 @@
                         height="40"
                         v-lazy="data.img"
                         :style="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                          gameInfo.result.rows[
+                            tabsInfo.model
+                          ].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
                             data.id
                           ) ||
                           gameInfo.used.includes(data.id)
@@ -280,10 +282,10 @@
                       <van-tag
                         round
                         v-if="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                          gameInfo.result.rows[
+                            tabsInfo.model
+                          ].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
                             data.id
                           )
                         "
@@ -303,10 +305,10 @@
                         height="40"
                         v-lazy="data.img"
                         :style="
-                          gameInfo.result.rows[tabsModel].blue.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.result.rows[tabsModel].red.ban.includes(
+                          gameInfo.result.rows[
+                            tabsInfo.model
+                          ].blue.ban.includes(data.id) ||
+                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
                             data.id
                           ) ||
                           gameInfo.used.includes(data.id)
@@ -331,7 +333,7 @@
           >
             <ul>
               <li
-                v-for="(heroId, index) in gameInfo.result.rows[tabsModel]
+                v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
                   .BPOrder"
                 :key="'game-efc78a7d5ce15f3dbe5ec48eabdba117-' + index"
                 :style="$appIsMobile ? {} : { marginTop: '50px' }"
@@ -359,7 +361,7 @@
                     "
                     :class="
                       bpMode == 'edit' &&
-                      gameInfo.result.rows[tabsModel].stepsNow == index
+                      gameInfo.result.rows[tabsInfo.model].stepsNow == index
                         ? redStepsClass
                         : ''
                     "
@@ -475,7 +477,7 @@
                 v-show="
                   bpMode == 'view' &&
                   gameInfo.result.rows.length > 1 &&
-                  gameInfo.result.rows.length - 1 == tabsModel
+                  gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
                 @click="onToolsMenuClick(0)"
               >
@@ -490,7 +492,7 @@
               <a-menu-item
                 v-show="
                   bpMode == 'edit' &&
-                  gameInfo.result.rows.length - 1 == tabsModel
+                  gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
                 @click="onToolsMenuClick(2)"
               >
@@ -536,16 +538,16 @@
     >
       <GameLine
         :gameBPData="
-          gameInfo.result.rows[tabsModel].blue.pick +
+          gameInfo.result.rows[tabsInfo.model].blue.pick +
           '|' +
-          gameInfo.result.rows[tabsModel].red.pick
+          gameInfo.result.rows[tabsInfo.model].red.pick
         "
         :trendType="0"
     /></van-popup>
 
     <div class="game-22b9550116c87c4fffd94a4271127d9c">
       <van-tabs
-        v-model="tabsModel"
+        v-model="tabsInfo.model"
         @change="onGameTabsChange"
         color="orange"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
@@ -553,7 +555,7 @@
         <van-tab
           v-for="(data, index) in gameInfo.result.rows"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
-          :disabled="bpMode == 'edit' && tabsModel != index ? true : false"
+          :disabled="bpMode == 'edit' && tabsInfo.model != index ? true : false"
         >
           <template #title>
             <van-icon
@@ -641,7 +643,9 @@ export default {
       bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
-      tabsModel: 0,
+      tabsInfo: {
+        model: 0,
+      },
       author: {
         name: "加载中",
         logo: "/img/app-icons/kpl.png",
@@ -847,7 +851,7 @@ export default {
         });
     },
     getGameBP: function (gameLabel) {
-      let tabsModel = this.tabsModel;
+      let tabsModel = this.tabsInfo.model;
 
       this.$axios
         .post(
@@ -974,7 +978,7 @@ export default {
             this.$message.success(this.$appMsg.success[1000]);
 
             this.gameInfo.result.rows.splice(index, 1);
-            this.tabsModel = index - 1;
+            this.tabsInfo.model = index - 1;
           } else {
             this.$message.error(status.msg);
           }
@@ -1007,7 +1011,7 @@ export default {
         ? (this.bpPerspective = 2)
         : (this.bpPerspective = 1);
 
-      this.initBPOrder(this.bpPerspective, this.tabsModel + 1);
+      this.initBPOrder(this.bpPerspective, this.tabsInfo.model + 1);
 
       if (bpMode == 1)
         this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
@@ -1018,7 +1022,7 @@ export default {
     onGameBanPickClick: function (index) {
       if (this.bpMode == "view") return;
 
-      let tabsModel = this.tabsModel;
+      let tabsModel = this.tabsInfo.model;
 
       if (this.gameInfo.result.rows[tabsModel].BPOrder[index - 1] == 0) {
         this.$message.error(this.$appMsg.error[1003]);
@@ -1039,7 +1043,7 @@ export default {
       }
     },
     onGamePickHeroClick: function (hero) {
-      let tabsModel = this.tabsModel;
+      let tabsModel = this.tabsInfo.model;
 
       if (
         this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
@@ -1102,7 +1106,7 @@ export default {
             "正在复盘【" +
             vs +
             "】的第 " +
-            (this.tabsModel + 1) +
+            (this.tabsInfo.model + 1) +
             " 局比赛 ↓\r" +
             shortUrl;
 
@@ -1116,7 +1120,7 @@ export default {
         });
     },
     onToolsMenuClick: function (type) {
-      let tabsModel = this.tabsModel;
+      let tabsModel = this.tabsInfo.model;
 
       if (type == 0) {
         this.$dialog
@@ -1203,7 +1207,7 @@ export default {
     },
     onWinCampClick: function (camp) {
       let nowWinTeam = "",
-        tabsModel = this.tabsModel,
+        tabsModel = this.tabsInfo.model,
         teamInfo = this.team;
 
       if (camp == 1) {

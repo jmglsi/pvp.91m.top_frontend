@@ -353,7 +353,7 @@
           @click="onHeroLikeClick"
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
-        <van-tabbar-item>最低省分</van-tabbar-item>
+        <!--<van-tabbar-item>最低省分</van-tabbar-item>-->
         <van-tabbar-item
           icon="/img/app-icons/wiki.png"
           name="/"

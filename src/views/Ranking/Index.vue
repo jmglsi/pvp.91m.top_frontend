@@ -2,11 +2,13 @@
   <div class="ranking-home">
     <div class="ranking-a9b4432c8e9b49bafa0a23e52d970016">
       <van-tabs
-        v-model="tabsModel"
+        v-model="tabsInfo.model"
         :border="false"
         :ellipsis="false"
         :sticky="true"
-        @change="$appPush({ path: '/ranking', query: { type: tabsModel } })"
+        @change="
+          $appPush({ path: '/ranking', query: { type: tabsInfo.model } })
+        "
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -17,7 +19,7 @@
         </van-tab>
 
         <van-tab title="关系和克制 (上周)">
-          <GuanXi />
+          <GuanXi :heroName="heroName" />
         </van-tab>
 
         <van-tab title="玩家 (非实时)">
@@ -66,13 +68,15 @@ export default {
   },
   data() {
     return {
-      tabsModel: 0,
+      heroName: "",
+      tabsInfo: {
+        model: 0,
+      },
     };
   },
   mounted() {
-    let type = parseInt(this.$route.query.type) || 0;
-
-    this.tabsModel = type;
+    this.heroName = this.$route.query.heroName || "";
+    this.tabsInfo.model = parseInt(this.$route.query.type) || 0;
   },
 };
 </script>

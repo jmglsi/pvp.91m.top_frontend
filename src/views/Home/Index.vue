@@ -2,12 +2,12 @@
   <div class="app-home">
     <div class="home-6db4dcff371b9397d894ed932d085444">
       <van-tabs
-        v-model="tabsModel"
+        v-model="tabsInfo.model"
         :border="false"
         :ellipsis="false"
         :swipeable="true"
         :sticky="true"
-        @change="$appPush({ path: '/', query: { type: tabsModel } })"
+        @change="$appPush({ path: '/', query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
         color="rgb(243,189,103)"
@@ -52,10 +52,12 @@ export default {
   data() {
     return {
       copyData: "",
-      tabsModel: 0,
       upyun: {
         url: "//console.upyun.com/register/?invite=ryM-bovMm",
         logo: "//i.loli.net/2020/12/11/3u6pTZ9VMdiaA7I.png",
+      },
+      tabsInfo: {
+        model: 0,
       },
     };
   },
@@ -63,6 +65,8 @@ export default {
     let pwa = parseInt(this.$route.query.pwa) || 0,
       type = parseInt(this.$route.query.type) || 0,
       version = parseInt(this.$route.query.v) || 1609430400;
+
+    this.tabsInfo.model = type;
 
     if (pwa == 1) {
       this.$cookie.set("pwa", pwa, { expires: "1Y" });
@@ -95,8 +99,6 @@ export default {
           });
       }
     }
-
-    this.tabsModel = type;
   },
 };
 </script>

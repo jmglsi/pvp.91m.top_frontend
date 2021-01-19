@@ -256,10 +256,10 @@
         />
         <van-cell
           icon="comment-o"
-          title="意见/建议/咨询/交友"
+          title="吐个槽"
           value="jmglsi (苏苏)"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.comment })"
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
         />
       </van-cell-group>
     </div>
@@ -304,6 +304,7 @@
         <van-picker
           show-toolbar
           :columns="$appColumnsInfo.now"
+          :default-index="$appColumnsInfo.index"
           @confirm="onPickerConfirm"
           @cancel="onPickerCancel"
         />
@@ -336,7 +337,7 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(0)"
-                  >修改大区</van-button
+                  >修改</van-button
                 >
               </template>
             </van-field>
@@ -353,7 +354,7 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(1)"
-                  >修改省份</van-button
+                  >修改</van-button
                 >
               </template>
             </van-field>
@@ -368,7 +369,7 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(2)"
-                  >修改段位</van-button
+                  >修改</van-button
                 >
               </template>
             </van-field>
@@ -441,7 +442,7 @@ export default {
       url: {
         globalBP: "//www.yuque.com/jmglsi/pvp/gbpl91",
         friends: "//doc.91m.top/jmglsi/pvp",
-        comment: "//wpa.qq.com/msgrd?v=3&uin=947065098&site=qq&menu=yes",
+        support: "//support.qq.com/products/305514",
         beian: "http://beian.miit.gov.cn",
       },
       loginInfo: {
@@ -551,14 +552,18 @@ export default {
       );
     },
     onUpdateColumnsInfoClick: function (e) {
-      let columns = [];
+      let columns = [],
+        newInfo = this.newInfo;
 
       if (e == 0) {
         columns = this.$appColumnsInfo.area;
+        this.$appColumnsInfo.index = newInfo.areaType;
       } else if (e == 1) {
         columns = this.$appColumnsInfo.province;
+        this.$appColumnsInfo.index = newInfo.provinceType;
       } else if (e == 2) {
         columns = this.$appColumnsInfo.rank.text;
+        this.$appColumnsInfo.index = newInfo.rankType;
       }
 
       this.$appColumnsInfo.now = columns;

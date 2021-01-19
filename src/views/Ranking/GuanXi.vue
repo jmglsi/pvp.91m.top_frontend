@@ -1,22 +1,11 @@
 <template>
   <div class="ranking-gx">
-    <div class="ranking-a260d093db7878f26c178fc3d23829c6">
-      <van-search
-        v-model="search.value"
-        :placeholder="search.placeholder"
-        @search="onSearch"
-        @clear="onSearchClear"
-        shape="round"
-        class="app-c1130d301aabe8d6a9d46c322fd6150a"
-      />
-    </div>
-
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-grid
         ref="refGuanXi"
         :loading="tableData.loading"
         :data="tableData.result.rows"
-        :height="clientHeight"
+        :height="clientHeight + 48"
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
@@ -192,15 +181,30 @@
 <script>
 export default {
   name: "RankingGuanXi",
+  props: {
+    heroName: {
+      type: String,
+      default: "",
+    },
+  },
+  computed: {
+    listenChange() {
+      const { heroName } = this;
+      return { heroName };
+    },
+  },
+  watch: {
+    listenChange: {
+      immediate: false,
+      handler(newValue) {
+        this.getRanking(newValue.heroName);
+      },
+    },
+  },
   data() {
     return {
       copyData: "",
-      search: {
-        value: "",
-        placeholder: "请输入搜索关键词",
-      },
       tableData: {
-        searchPlaceholder: [],
         color: {},
         loading: true,
         result: {
@@ -231,20 +235,10 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    let heroName = this.$route.query.heroName || "";
-
-    this.getRanking(heroName);
-
-    setInterval(() => {
-      let text = this.tableData.searchPlaceholder;
-
-      this.search.placeholder = text[Math.floor(Math.random() * text.length)];
-    }, 5000);
+    this.getRanking(this.heroName);
   },
   methods: {
     getRanking: function (heroName, aid = 2) {
-      this.search.value = heroName;
-
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
@@ -267,7 +261,7 @@ export default {
     },
     onGuanXiCopy: function () {
       let row = this.tableDataRow,
-        heroName = this.search.value || row.hero_1.name,
+        heroName = row.hero_1.name,
         longUrl =
           location.origin +
           location.pathname +
@@ -362,16 +356,6 @@ export default {
           return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
-    },
-    onSearchClear: function () {
-      this.search.value = "";
-
-      this.getRanking("");
-    },
-    onSearch: function () {
-      let searchValue = this.search.value || "";
-
-      this.getRanking(searchValue);
     },
     onCellClick: function ({ row }) {
       this.getHeroInfo(row);
