@@ -12,7 +12,7 @@
       >
         <template #action>
           <span
-            @click="onSearch(search.value)"
+            @click="search.value ? onSearch(search.value) : null"
             class="search-2a142bf567826652e30779a4be011b04"
             >搜索</span
           >
@@ -185,7 +185,7 @@
             :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
           />
         </van-grid>
-        <van-cell title="" value="更新自昨日巅峰赛 (顶端局)" />
+        <van-cell title="" value="更新时间:昨日巅峰赛 (顶端局)" />
       </van-cell-group>
     </div>
 
@@ -246,7 +246,7 @@ export default {
       },
       showInfo: {
         searchData: false,
-        searchHistory: true,
+        searchHistory: false,
       },
     };
   },
@@ -314,9 +314,13 @@ export default {
     initSearchHistory: function () {
       let searchData = this.$cookie.get("searchData");
 
-      searchData
-        ? (this.tableData.search.history = searchData.split(",").reverse())
-        : (this.tableData.search.history = []);
+      if (searchData) {
+        this.tableData.search.history = searchData.split(",").reverse();
+        this.showInfo.searchHistory = true;
+      } else {
+        this.tableData.search.history = [];
+        this.showInfo.searchHistory = false;
+      }
     },
     addSearchData: function (value) {
       let searchData = this.$cookie.get("searchData"),
