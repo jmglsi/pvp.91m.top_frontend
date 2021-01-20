@@ -256,7 +256,11 @@
         </div>
 
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
-          <HeroUpdate v-if="hero.info.id" :heroId="hero.info.id" :updateId="hero.info.updateId" />
+          <HeroUpdate
+            v-if="hero.info.id"
+            :heroId="hero.info.id"
+            :updateId="hero.info.updateId"
+          />
         </div>
       </lazy-component>
     </div>
@@ -353,7 +357,6 @@
           @click="onHeroLikeClick"
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
-        <!--<van-tabbar-item>最低省分</van-tabbar-item>-->
         <van-tabbar-item
           icon="/img/app-icons/wiki.png"
           name="/"

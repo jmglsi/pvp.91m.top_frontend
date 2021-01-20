@@ -109,7 +109,6 @@ export default {
       if (
         to.path == "/login" ||
         to.path == "/miniapp" ||
-        to.path == "/search" ||
         to.path == "/bilibili" ||
         to.path.indexOf("/hero/") > -1 ||
         to.path.indexOf("/game/") > -1
@@ -146,7 +145,7 @@ export default {
               onClick: () => {
                 if (tipsInfo.to) {
                   this.$appOpenUrl(
-                    "是否打开外部链接?",
+                    "是否打开内部链接?",
                     null,
                     {
                       path: tipsInfo.to,

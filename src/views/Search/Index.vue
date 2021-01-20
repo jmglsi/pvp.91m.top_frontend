@@ -11,9 +11,11 @@
         show-action
       >
         <template #action>
-          <div @click="onSearch(search.value)">
-            {{ search.value ? "搜索" : "取消" }}
-          </div>
+          <span
+            @click="onSearch(search.value)"
+            class="search-2a142bf567826652e30779a4be011b04"
+            >搜索</span
+          >
         </template>
       </van-search>
     </div>
@@ -84,6 +86,110 @@
     </div>
 
     <div
+      v-show="showInfo.searchData && tableData.heroInfo.id > 0"
+      class="search-f63b407c95e4f2db4c44e27b3a8d136b"
+    >
+      <van-cell-group
+        :border="false"
+        title=""
+        class="search-5d555cae6745619e13c5488c119d2a14"
+      >
+        <van-cell
+          :icon="tableData.heroInfo.img"
+          :title="tableData.heroInfo.name"
+          value="英雄趋势"
+          is-link
+          :to="'/hero/' + tableData.heroInfo.id + '/info'"
+          class="search-a5adc7030676fcdc76c583f1b2684822"
+        />
+        <van-grid :border="false">
+          <van-grid-item>
+            <div
+              :class="
+                tableData.heroInfo.allBanRate >= 20 &&
+                tableData.heroInfo.allWinRate >= 50
+                  ? 'ranking-bda9643ac6601722a28f238714274da4'
+                  : ''
+              "
+              class="search-0c27228425c2ec1dd01a785b6e9a0437"
+            >
+              {{ tableData.heroInfo.allBanRate }}%
+            </div>
+            <div>禁用率</div>
+          </van-grid-item>
+          <van-grid-item>
+            <div
+              :class="
+                tableData.heroInfo.allPickRate >= 30
+                  ? 'ranking-48d6215903dff56238e52e8891380c8f'
+                  : ''
+              "
+              class="search-0c27228425c2ec1dd01a785b6e9a0437"
+            >
+              {{ tableData.heroInfo.allPickRate }}%
+            </div>
+            <div>出场率</div>
+          </van-grid-item>
+          <van-grid-item>
+            <div
+              :class="
+                (tableData.heroInfo.allBanRate >= 20 ||
+                  tableData.heroInfo.allPickRate >= 30) &&
+                tableData.heroInfo.allWinRate >= 50
+                  ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
+                  : ''
+              "
+              class="search-0c27228425c2ec1dd01a785b6e9a0437"
+            >
+              {{ tableData.heroInfo.allWinRate }}%
+            </div>
+            <div>胜率</div>
+          </van-grid-item>
+          <van-grid-item>
+            <div
+              :class="
+                tableData.heroInfo.allBanRate +
+                  tableData.heroInfo.allPickRate >=
+                95
+                  ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                  : ''
+              "
+              class="search-0c27228425c2ec1dd01a785b6e9a0437"
+            >
+              {{ tableData.heroInfo.allScore }}
+            </div>
+            <div>热度 {{ tableData.heroInfo.trendIcon }}</div>
+          </van-grid-item>
+
+          <van-grid-item
+            text="更新调整"
+            :to="'/hero/' + tableData.heroInfo.id + '/info'"
+            @click="$message.info($appMsg.info[1016])"
+          />
+          <van-grid-item
+            text="出装推荐"
+            :to="'/hero/' + tableData.heroInfo.id + '/info?show=skill'"
+          />
+          <van-grid-item
+            text="对局回顾"
+            :to="
+              '/hero/' +
+              tableData.heroInfo.id +
+              '/replay?replayTitle=' +
+              tableData.heroInfo.name +
+              '&teammate=0'
+            "
+          />
+          <van-grid-item
+            text="关系和克制"
+            :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
+          />
+        </van-grid>
+        <van-cell title="" value="更新自昨日巅峰赛 (顶端局)" />
+      </van-cell-group>
+    </div>
+
+    <div
       v-show="showInfo.searchData"
       class="search-db4665e1908869c6354106ce00ff95ba"
     >
@@ -98,8 +204,7 @@
           :title="data.title"
           :value="data.value"
           :is-link="data.isLink"
-          :to="data.to"
-          :url="data.url"
+          @click="onCellClick(data.isLink, data.to, data.url)"
         />
       </van-cell-group>
     </div>
@@ -135,6 +240,9 @@ export default {
         result: {
           rows: [],
         },
+        heroInfo: {
+          id: 0,
+        },
       },
       showInfo: {
         searchData: false,
@@ -163,6 +271,9 @@ export default {
         this.addSearchData(value);
 
         this.$appPush({ query: { q: value } });
+      } else {
+        this.showInfo.searchData = false;
+        this.showInfo.searchHistory = true;
       }
     },
     getSearch: function (value) {
@@ -180,7 +291,11 @@ export default {
           this.tableData = data;
 
           if (status.code == 200) {
-            if (value && data.result.rows.length == 0) {
+            if (
+              value &&
+              data.result.heroInfo == {} &&
+              data.result.rows.length == 0
+            ) {
               this.$message.warning(this.$appMsg.warning[1003]);
             }
 
@@ -189,6 +304,12 @@ export default {
             this.$message.error(status.msg);
           }
         });
+    },
+    onCellClick: function (isLink, to, url) {
+      if (isLink) {
+        if (to) this.$appPush({ path: to });
+        if (url) this.$appOpenUrl("是否打开外部链接?", null, { path: url });
+      }
     },
     initSearchHistory: function () {
       let searchData = this.$cookie.get("searchData");
@@ -223,6 +344,7 @@ export default {
       if (this.search.value.length == 0) {
         this.showInfo.searchData = false;
         this.showInfo.searchHistory = true;
+
         this.initSearchHistory();
 
         this.$appPush({ path: "/search" });

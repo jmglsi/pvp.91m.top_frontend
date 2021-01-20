@@ -4,8 +4,13 @@ span.search-34690b06683636425980897b6bcd33d4 {
 }
 
 div.search-843c48c53bd40c7f476497c030fb0e92,
+div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
     text-align: left;
+}
+
+div.search-db4665e1908869c6354106ce00ff95ba {
+    margin-top: 25px;
 }
 
 div.search-88cf8ac86e2afc51906e60c7025f522b {
@@ -14,5 +19,19 @@ div.search-88cf8ac86e2afc51906e60c7025f522b {
 
 div.search-93aea4a321bd36aefe85b2b0526e52e8 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 25px;
+}
+
+div.search-0c27228425c2ec1dd01a785b6e9a0437 {
+    font-size: 20px;
+}
+
+div.search-a5adc7030676fcdc76c583f1b2684822.van-cell {
+    height: 75px;
+}
+
+div.search-a5adc7030676fcdc76c583f1b2684822 img.van-icon__image {
+    height: 50px;
+    margin-right: 10px;
+    width: 50px;
 }
