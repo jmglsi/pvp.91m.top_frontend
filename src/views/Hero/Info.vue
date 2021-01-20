@@ -256,7 +256,7 @@
         </div>
 
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
-          <HeroUpdate :heroId="hero.info.id" :updateId="hero.info.updateId" />
+          <HeroUpdate v-if="hero.info.id" :heroId="hero.info.id" :updateId="hero.info.updateId" />
         </div>
       </lazy-component>
     </div>
@@ -396,19 +396,13 @@ export default {
     AppBottomTabbar: (resolve) =>
       require(["@/components/App/BottomTabbar.vue"], resolve),
   },
-  beforeRouteUpdate(to, from, next) {
-    this.getHeroInfo(to.params.id);
-    //路由改变的时候更新英雄信息
-
-    next();
-  },
   data() {
     return {
       scroll: 0,
       hero: {
         title: "加载中",
         info: {
-          id: 0,
+          id: null,
           name: "加载中",
           clockwise: false,
           skin: [],

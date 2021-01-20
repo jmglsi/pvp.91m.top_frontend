@@ -249,7 +249,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.equipmentId == 0) return;
+        if (newValue.equipmentId == null) return;
 
         this.getHeroEquipment(newValue.equipmentId, newValue.equipmentType);
       },

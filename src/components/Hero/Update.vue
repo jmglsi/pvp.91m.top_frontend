@@ -199,6 +199,8 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
+        if (newValue.heroId == null) return;
+
         this.getHeroUpdate(newValue.heroId);
       },
     },
