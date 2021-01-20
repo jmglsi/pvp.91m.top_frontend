@@ -5,7 +5,8 @@
         v-model="search.value"
         :placeholder="search.placeholder"
         shape="round"
-        @input="onInput"
+        @input="onClearInputData"
+        @clear="onClearInputData"
         @cancel="$router.go(-1)"
         show-action
       >
@@ -47,7 +48,7 @@
         </div>
 
         <div
-          v-show="tableData.search.history.length > 0"
+          v-show="showInfo.searchHistory == true"
           class="search-a79b6044b2b3a5a9bce4cb65bd80e774"
         >
           <van-cell-group
@@ -83,7 +84,7 @@
     </div>
 
     <div
-      v-show="showInfo.search"
+      v-show="showInfo.searchData"
       class="search-db4665e1908869c6354106ce00ff95ba"
     >
       <van-cell-group
@@ -127,28 +128,22 @@ export default {
       },
       tableData: {
         search: {
-          hotRecommend: ["才子九夜"],
           history: [],
-          placeholder: ["预览1", "预览2", "预览3"],
+          hotRecommend: [],
+          placeholder: [],
         },
         result: {
           rows: [],
         },
       },
       showInfo: {
-        search: false,
+        searchData: false,
+        searchHistory: true,
       },
     };
   },
   mounted() {
-    let searchData = this.search.data,
-      searchValue = this.search.value;
-
-    searchData
-      ? (this.tableData.search.history = searchData.split(",").reverse())
-      : (this.tableData.search.history = []);
-
-    if (searchValue) this.onSearch(searchValue);
+    this.onSearch(this.search.value);
 
     setInterval(() => {
       let text = this.tableData.search.placeholder;
@@ -158,15 +153,16 @@ export default {
   },
   methods: {
     onSearch: function (value) {
+      this.search.value = value.toString();
+
+      this.getSearch(value);
+
       if (value) {
+        this.showInfo.searchData = true;
+        this.showInfo.searchHistory = false;
         this.addSearchData(value);
 
-        this.showInfo.search = true;
-        this.search.value = value.toString();
-        this.getSearch(value);
         this.$appPush({ query: { q: value } });
-      } else {
-        this.$appPush({ path: "/" });
       }
     },
     getSearch: function (value) {
@@ -178,8 +174,28 @@ export default {
           })
         )
         .then((res) => {
-          this.tableData = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
+
+          this.tableData = data;
+
+          if (status.code == 200) {
+            if (value && data.result.rows.length == 0) {
+              this.$message.warning(this.$appMsg.warning[1003]);
+            }
+
+            this.initSearchHistory();
+          } else {
+            this.$message.error(status.msg);
+          }
         });
+    },
+    initSearchHistory: function () {
+      let searchData = this.$cookie.get("searchData");
+
+      searchData
+        ? (this.tableData.search.history = searchData.split(",").reverse())
+        : (this.tableData.search.history = []);
     },
     addSearchData: function (value) {
       let searchData = this.$cookie.get("searchData"),
@@ -190,17 +206,24 @@ export default {
       } else if (searchData.indexOf(value) == -1) {
         setValue = searchData + "," + value;
       }
+
       this.$cookie.set("searchData", setValue, { expires: "1Y" });
     },
     onClearSearchData: function () {
       this.$cookie.delete("searchData");
+
       this.search.data = "";
+      this.showInfo.searchData = false;
       this.tableData.search.history = [];
+      this.showInfo.searchHistory = false;
+
       this.$message.success(this.$appMsg.success[1000]);
     },
-    onInput: function () {
+    onClearInputData: function () {
       if (this.search.value.length == 0) {
-        this.showInfo.search = false;
+        this.showInfo.searchData = false;
+        this.showInfo.searchHistory = true;
+        this.initSearchHistory();
 
         this.$appPush({ path: "/search" });
       }

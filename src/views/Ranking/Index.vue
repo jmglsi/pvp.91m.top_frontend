@@ -66,6 +66,12 @@ export default {
     WanJia: (resolve) => require(["@/views/Ranking/WanJia.vue"], resolve),
     ZhuangBei: (resolve) => require(["@/views/Ranking/ZhuangBei.vue"], resolve),
   },
+  watch: {
+    $route: function (route) {
+      this.heroName = route.query.heroName || "";
+      this.tabsInfo.model = parseInt(this.$route.query.type) || 0;
+    },
+  },
   data() {
     return {
       heroName: "",
@@ -73,10 +79,6 @@ export default {
         model: 0,
       },
     };
-  },
-  mounted() {
-    this.heroName = this.$route.query.heroName || "";
-    this.tabsInfo.model = parseInt(this.$route.query.type) || 0;
   },
 };
 </script>

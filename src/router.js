@@ -23,17 +23,17 @@ export default new Router({
             name: 'bp',
             redirect: '/my'
         }, {
-            path: '/hero',
-            name: 'hero',
-            redirect: '/ranking'
-        }, {
-            path: '/game',
-            name: 'game',
-            redirect: '/ranking'
-        }, {
             path: '/skin/encore',
             name: 'skinEncore',
             redirect: '/skin/return'
+        }, {
+            path: '/bilibili',
+            name: 'bilibili',
+            component: (resolve) => require(['./views/Bilibili/Index.vue'], resolve),
+            meta: {
+                title: 'bilibili',
+                keepAlive: true
+            }
         }, {
             path: '/',
             name: 'home',
@@ -41,14 +41,6 @@ export default new Router({
             meta: {
                 title: '首页',
                 keepAlive: true
-            }
-        }, {
-            path: '/friends',
-            name: 'friends',
-            component: (resolve) => require(['./views/Friends/Index.vue'], resolve),
-            meta: {
-                title: '扩列',
-                keepAlive: false
             }
         }, {
             path: '/skin/return',
@@ -71,6 +63,22 @@ export default new Router({
             component: (resolve) => require(['./views/Ranking/Index.vue'], resolve),
             meta: {
                 title: '排行',
+                keepAlive: true
+            }
+        }, {
+            path: '/login',
+            name: 'login',
+            component: (resolve) => require(['./views/User/Login.vue'], resolve),
+            meta: {
+                title: '登录',
+                keepAlive: true
+            }
+        }, {
+            path: '/friends',
+            name: 'friends',
+            component: (resolve) => require(['./views/Friends/Index.vue'], resolve),
+            meta: {
+                title: '扩列',
                 keepAlive: false
             }
         }, {
@@ -79,7 +87,7 @@ export default new Router({
             component: (resolve) => require(['./views/Search/Index.vue'], resolve),
             meta: {
                 title: '搜索',
-                keepAlive: true
+                keepAlive: false
             }
         }, {
             path: '/my',
@@ -90,16 +98,8 @@ export default new Router({
                 keepAlive: false
             }
         }, {
-            path: '/login',
-            name: 'login',
-            component: (resolve) => require(['./views/User/Login.vue'], resolve),
-            meta: {
-                title: '登录',
-                keepAlive: true
-            }
-        },
-        {
             path: '/hero',
+            redirect: '/ranking',
             component: (resolve) => require(['./views/Hero/Index.vue'], resolve),
             children: [{
                     path: ':id/info',
@@ -123,6 +123,7 @@ export default new Router({
         },
         {
             path: '/game',
+            redirect: '/my',
             component: (resolve) => require(['./views/Game/Index.vue'], resolve),
             children: [{
                 path: 'team',
@@ -149,14 +150,6 @@ export default new Router({
                     keepAlive: false
                 }
             }]
-        }, {
-            path: '/bilibili',
-            name: 'bilibili',
-            component: (resolve) => require(['./views/Bilibili/Index.vue'], resolve),
-            meta: {
-                title: 'bilibili',
-                keepAlive: true
-            }
         }
     ]
 })
