@@ -185,7 +185,11 @@
             :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
           />
         </van-grid>
-        <van-cell title="" value="更新时间:昨日巅峰赛 (顶端局)" />
+        <span class="search-399841f840f75044108804ec30d37405"
+          ><van-icon name="underway-o" />&nbsp;昨日&nbsp;<van-icon
+            name="todo-list-o"
+          />&nbsp;基于巅峰赛 (顶端局)</span
+        >
       </van-cell-group>
     </div>
 
