@@ -184,10 +184,13 @@
             class="app-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
-              v-model="tableData.active"
+              v-model="tableData.model"
+              v-if="tableData.model > -1"
               :border="false"
+              :ellipsis="false"
               :swipe-threshold="$appIsMobile ? 4 : 7"
               color="orange"
+              title-active-color="orange"
               class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
               <van-tab
@@ -211,7 +214,7 @@
                       v-for="(data, index) in tableData.result.rows"
                       v-show="
                         data.trend == 2 &&
-                        (tableData.active == data.type || tableData.active == 0)
+                        (tableData.model == data.type || tableData.model == 0)
                       "
                       :key="'game-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                       text=" "
@@ -273,7 +276,7 @@
                       v-for="(data, index) in tableData.result.rows"
                       v-show="
                         data.trend != 2 &&
-                        (tableData.active == data.type || tableData.active == 0)
+                        (tableData.model == data.type || tableData.model == 0)
                       "
                       :key="'game-35368a19f307e4af02d0df055846840d-' + index"
                       text=" "
@@ -548,6 +551,8 @@
     <div class="game-22b9550116c87c4fffd94a4271127d9c">
       <van-tabs
         v-model="tabsInfo.model"
+        v-if="tabsInfo.model > -1"
+        :ellipsis="false"
         @change="onGameTabsChange"
         color="orange"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
@@ -643,9 +648,6 @@ export default {
       bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
-      tabsInfo: {
-        model: 0,
-      },
       author: {
         name: "加载中",
         logo: "/img/app-icons/kpl.png",
@@ -664,7 +666,7 @@ export default {
         },
       },
       tableData: {
-        active: 0,
+        model: 0,
         result: {
           rows: [],
         },
@@ -701,6 +703,9 @@ export default {
           ],
         },
         used: [],
+      },
+      tabsInfo: {
+        model: 0,
       },
       showInfo: {
         apps: false,

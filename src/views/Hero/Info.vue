@@ -10,9 +10,9 @@
             ? { backgroundColor: 'white' }
             : { backgroundColor: 'transparent' }
         "
-        @click-left="$appPush({ path: '/ranking' })"
+        @click-left="$router.go(-1)"
         @click-right="$message.info($appMsg.info[1004])"
-        left-text="排行"
+        left-text="返回"
         z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
@@ -189,13 +189,14 @@
     <div class="hero-913337a345680aef86e5801f1a78596b">
       <van-tabs
         v-model="tabsInfo.model"
+        v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
         @change="onHeroTabsChange"
         duration="0.5"
         line-width="25px"
-        color="rgb(243,189,103)"
-        title-active-color="rgb(243,189,103)"
+        color="orange"
+        title-active-color="orange"
         class="hero-d42f4851e770aa0f758b01388874f67b"
       >
         <van-tab class="hero-ab71021d21963773bfb8be80af65869f">
@@ -273,7 +274,14 @@
         :title="hero.info.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs v-model="skillInfo.model" @change="onSkillTabsChange">
+        <van-tabs
+          v-model="skillInfo.model"
+          v-if="skillInfo.model > -1"
+          :ellipsis="false"
+          @change="onSkillTabsChange"
+          color="orange"
+          title-active-color="orange"
+        >
           <van-tab title="技能">
             <HeroSkillList :heroId="hero.info.id"
           /></van-tab>
@@ -343,7 +351,7 @@
       <van-tabbar
         fixed
         safe-area-inset-bottom
-        active-color="rgb(243,189,103)"
+        active-color="orange"
         class="hero-d4a9092fd7b386904e4a2894044f2a9d"
       >
         <van-tabbar-item
@@ -476,9 +484,15 @@ export default {
 
     this.getHeroInfo(heroId);
 
-    show == "skill"
-      ? (this.showInfo.skillMenu = true)
-      : (this.showInfo.skillMenu = false);
+    if (show == "heroUpdate") {
+      this.$message.info(this.$appMsg.info[1016]);
+    }
+
+    if (show == "heroSkill") {
+      this.showInfo.skillMenu = true;
+    } else {
+      this.showInfo.skillMenu = false;
+    }
 
     window.addEventListener("scroll", this.scrollTop);
   },

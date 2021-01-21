@@ -74,19 +74,19 @@ export default new Router({
                 keepAlive: true
             }
         }, {
-            path: '/friends',
-            name: 'friends',
-            component: (resolve) => require(['./views/Friends/Index.vue'], resolve),
-            meta: {
-                title: '扩列',
-                keepAlive: false
-            }
-        }, {
             path: '/search',
             name: 'search',
             component: (resolve) => require(['./views/Search/Index.vue'], resolve),
             meta: {
                 title: '搜索',
+                keepAlive: true
+            }
+        }, {
+            path: '/friends',
+            name: 'friends',
+            component: (resolve) => require(['./views/Friends/Index.vue'], resolve),
+            meta: {
+                title: '扩列',
                 keepAlive: false
             }
         }, {

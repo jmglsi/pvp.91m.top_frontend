@@ -6,8 +6,8 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-left="$appPush({ path: '/ranking' })"
-        left-text="排行"
+        @click-left="$router.go(-1)"
+        left-text="返回"
         z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
@@ -36,7 +36,7 @@
               >{{ data.usedtime }}</van-tag
             >
             <van-tag
-              v-if="!replay.teammate"
+              v-if="replay.teammate == false"
               round
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
@@ -48,7 +48,7 @@
           </div>
 
           <div
-            v-if="!replay.teammate"
+            v-if="replay.teammate == false"
             class="hero-f01902c0d0136ca30fe1034f339964ba"
           >
             <van-grid
@@ -143,7 +143,7 @@ export default {
       collapseModel: ["1"],
       hero: {
         info: {
-          id: 0,
+          id: parseInt(this.$route.params.id) || 0,
         },
       },
       tableData: {
@@ -164,8 +164,8 @@ export default {
         { name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
       replay: {
-        title: "加载中",
-        teammate: false,
+        title: this.$route.query.replayTitle || "加载中",
+        teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
       },
       showInfo: {
         replayMenu: false,
@@ -173,16 +173,6 @@ export default {
     };
   },
   mounted() {
-    let heroId = parseInt(this.$route.params.id) || 0,
-      teammate = parseInt(this.$route.query.teammate) || 0,
-      replayTitle = this.$route.query.replayTitle || "加载中";
-
-    this.hero.info.id = heroId;
-    this.replay.title = replayTitle;
-    teammate == 1
-      ? (this.replay.teammate = true)
-      : (this.replay.teammate = false);
-
     this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
   methods: {

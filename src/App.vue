@@ -19,7 +19,7 @@
         v-if="tabbar.default.show"
         fixed
         safe-area-inset-bottom
-        active-color="rgb(243,189,103)"
+        active-color="orange"
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item

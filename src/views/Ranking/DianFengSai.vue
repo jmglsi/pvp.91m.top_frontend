@@ -301,7 +301,14 @@
         :title="tableDataRow.name + ' 的其他数据 (上周)'"
         safe-area-inset-bottom
       >
-        <van-tabs v-model="skillInfo.model" @change="onSkillTabsChange">
+        <van-tabs
+          v-model="skillInfo.model"
+          v-if="skillInfo.model > -1"
+          :ellipsis="false"
+          @change="onSkillTabsChange"
+          color="orange"
+          title-active-color="orange"
+        >
           <van-tab title="技能">
             <HeroSkillList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"

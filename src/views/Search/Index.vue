@@ -86,7 +86,7 @@
     </div>
 
     <div
-      v-show="showInfo.searchData && tableData.heroInfo.id > 0"
+      v-if="showInfo.searchData == true && tableData.heroInfo.id != null"
       class="search-f63b407c95e4f2db4c44e27b3a8d136b"
     >
       <van-cell-group
@@ -97,11 +97,42 @@
         <van-cell
           :icon="tableData.heroInfo.img"
           :title="tableData.heroInfo.name"
-          value="英雄趋势"
+          value="趋势"
           is-link
           :to="'/hero/' + tableData.heroInfo.id + '/info'"
           class="search-a5adc7030676fcdc76c583f1b2684822"
         />
+
+        <van-tabs
+          v-model="dataInfo.model"
+          v-if="dataInfo.model > -1"
+          :ellipsis="false"
+          @click="onDataTabsClick"
+          color="orange"
+          title-active-color="orange"
+        >
+          <van-tab title="综合" />
+          <van-tab
+            :to="'/hero/' + tableData.heroInfo.id + '/info?show=heroUpdate'"
+            title="更新调整"
+          />
+          <van-tab title="技能和出装" />
+          <van-tab
+            :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
+            title="关系和克制"
+          />
+          <van-tab
+            :to="
+              '/hero/' +
+              tableData.heroInfo.id +
+              '/replay?replayTitle=' +
+              tableData.heroInfo.name +
+              '&teammate=0'
+            "
+            title="对局回顾"
+          />
+        </van-tabs>
+
         <van-grid :border="false">
           <van-grid-item>
             <div
@@ -160,35 +191,11 @@
             </div>
             <div>热度 {{ tableData.heroInfo.trendIcon }}</div>
           </van-grid-item>
-
-          <van-grid-item
-            text="更新调整"
-            :to="'/hero/' + tableData.heroInfo.id + '/info'"
-            @click="$message.info($appMsg.info[1016])"
-          />
-          <van-grid-item
-            text="出装推荐"
-            :to="'/hero/' + tableData.heroInfo.id + '/info?show=skill'"
-          />
-          <van-grid-item
-            text="对局回顾"
-            :to="
-              '/hero/' +
-              tableData.heroInfo.id +
-              '/replay?replayTitle=' +
-              tableData.heroInfo.name +
-              '&teammate=0'
-            "
-          />
-          <van-grid-item
-            text="关系和克制"
-            :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
-          />
         </van-grid>
         <span class="search-399841f840f75044108804ec30d37405"
-          ><van-icon name="underway-o" />&nbsp;昨日&nbsp;<van-icon
-            name="todo-list-o"
-          />&nbsp;基于巅峰赛 (顶端局)</span
+          ><van-icon name="underway-o" />&nbsp;每天中午和晚上的
+          11:30&nbsp;<van-icon name="todo-list-o" />&nbsp;基于巅峰赛
+          (顶端局)</span
         >
       </van-cell-group>
     </div>
@@ -199,7 +206,7 @@
     >
       <van-cell-group
         :border="false"
-        title=""
+        title=" "
         class="search-7eb8c85291f87604bb87a151d0dc5d88"
       >
         <van-cell
@@ -211,6 +218,40 @@
           @click="onCellClick(data.isLink, data.to, data.url)"
         />
       </van-cell-group>
+    </div>
+
+    <div class="search-52c594123f7e3908fcfbf69d69c94dff">
+      <van-action-sheet
+        v-model="showInfo.skillMenu"
+        :title="tableData.heroInfo.name + ' 的其他数据 (上周)'"
+        safe-area-inset-bottom
+      >
+        <van-tabs
+          v-model="skillInfo.model"
+          v-if="skillInfo.model > -1"
+          :ellipsis="false"
+          @change="onSkillTabsChange"
+          color="orange"
+          title-active-color="orange"
+        >
+          <van-tab title="技能">
+            <HeroSkillList
+              v-if="skillInfo.model == 0"
+              :heroId="tableData.heroInfo.id"
+          /></van-tab>
+          <van-tab title="装备 (推荐)"
+            ><HeroEquipmentListALL
+              v-if="skillInfo.model == 1"
+              :heroId="tableData.heroInfo.id"
+          /></van-tab>
+          <van-tab title="装备 (单件)"
+            ><HeroEquipmentListOne
+              v-if="skillInfo.model == 2"
+              :equipmentId="tableData.heroInfo.id"
+              :equipmentType="1"
+          /></van-tab>
+        </van-tabs>
+      </van-action-sheet>
     </div>
 
     <AppBottomTabbar height="100px" />
@@ -225,8 +266,22 @@
 export default {
   name: "SearchHome",
   components: {
+    HeroSkillList: (resolve) =>
+      require(["@/components/Hero/SkillList.vue"], resolve),
+    HeroEquipmentListALL: (resolve) =>
+      require(["@/components/Hero/EquipmentList_All.vue"], resolve),
+    HeroEquipmentListOne: (resolve) =>
+      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
     AppBottomTabbar: (resolve) =>
       require(["@/components/App/BottomTabbar.vue"], resolve),
+  },
+  watch: {
+    $route: function () {
+      if (this.tableData.heroInfo.id > 0) {
+        this.showInfo.searchData = true;
+        this.showInfo.searchHistory = false;
+      }
+    },
   },
   data() {
     return {
@@ -245,13 +300,21 @@ export default {
           rows: [],
         },
         heroInfo: {
-          id: 0,
+          id: null,
         },
+      },
+      dataInfo: {
+        model: 0,
+      },
+      skillInfo: {
+        model: 0,
       },
       showInfo: {
         searchData: false,
         searchHistory: false,
+        skillMenu: false,
       },
+      tipsInfo: [0, 0, 0],
     };
   },
   mounted() {
@@ -272,6 +335,7 @@ export default {
       if (value) {
         this.showInfo.searchData = true;
         this.showInfo.searchHistory = false;
+
         this.addSearchData(value);
 
         this.$appPush({ query: { q: value } });
@@ -308,6 +372,27 @@ export default {
             this.$message.error(status.msg);
           }
         });
+    },
+    onDataTabsClick: function (e) {
+      if (e == 2) {
+        this.showInfo.skillMenu = true;
+      }
+    },
+    onSkillTabsChange: function (e) {
+      let tipsText;
+
+      if (e == 0) {
+        tipsText = this.$appMsg.info[1007];
+      } else if (e == 1) {
+        tipsText = this.$appMsg.info[1008];
+      } else if (e == 2) {
+        tipsText = this.$appMsg.info[1009];
+      }
+
+      if (this.tipsInfo[e] == 0) {
+        this.$message.info(tipsText);
+        this.tipsInfo[e] = 1;
+      }
     },
     onCellClick: function (isLink, to, url) {
       if (isLink) {
@@ -352,6 +437,8 @@ export default {
       if (this.search.value.length == 0) {
         this.showInfo.searchData = false;
         this.showInfo.searchHistory = true;
+
+        this.tableData.heroInfo.id = 0;
 
         this.initSearchHistory();
 

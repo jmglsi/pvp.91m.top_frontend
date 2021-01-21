@@ -5,7 +5,7 @@
       :loading="tableData.loading"
       :data="tableData.result.rows"
       @cell-click="onCellClick"
-      height="547"
+      height="543"
     >
       <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
         <template v-slot="{ row }">

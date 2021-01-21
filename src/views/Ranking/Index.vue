@@ -3,6 +3,7 @@
     <div class="ranking-a9b4432c8e9b49bafa0a23e52d970016">
       <van-tabs
         v-model="tabsInfo.model"
+        v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
         :sticky="true"
@@ -11,8 +12,8 @@
         "
         duration="0.5"
         line-width="25px"
-        color="rgb(243,189,103)"
-        title-active-color="rgb(243,189,103)"
+        color="orange"
+        title-active-color="orange"
       >
         <van-tab title="巅峰赛 (顶端局)">
           <DianFengSai />
@@ -67,9 +68,9 @@ export default {
     ZhuangBei: (resolve) => require(["@/views/Ranking/ZhuangBei.vue"], resolve),
   },
   watch: {
-    $route: function (route) {
-      this.heroName = route.query.heroName || "";
-      this.tabsInfo.model = parseInt(this.$route.query.type) || 0;
+    $route: function (to) {
+      this.heroName = to.query.heroName || "";
+      this.tabsInfo.model = parseInt(to.query.type) || 0;
     },
   },
   data() {

@@ -3,6 +3,7 @@
     <div class="home-6db4dcff371b9397d894ed932d085444">
       <van-tabs
         v-model="tabsInfo.model"
+        v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
         :swipeable="true"
@@ -10,8 +11,8 @@
         @change="$appPush({ path: '/', query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
-        color="rgb(243,189,103)"
-        title-active-color="rgb(243,189,103)"
+        color="orange"
+        title-active-color="orange"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
         <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
