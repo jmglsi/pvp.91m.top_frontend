@@ -1,23 +1,25 @@
 <template>
   <div class="search-home">
     <div class="search-9420e49425fc3d6dcfe7b9f8d62b1b6b">
-      <van-search
-        v-model="search.value"
-        :placeholder="search.placeholder"
-        shape="round"
-        @input="onClearInputData"
-        @clear="onClearInputData"
-        @cancel="$router.go(-1)"
-        show-action
-      >
-        <template #action>
-          <span
-            @click="search.value ? onSearch(search.value) : null"
-            class="search-2a142bf567826652e30779a4be011b04"
-            >搜索</span
-          >
-        </template>
-      </van-search>
+      <van-sticky>
+        <van-search
+          v-model="search.value"
+          :placeholder="search.placeholder"
+          shape="round"
+          @input="onClearInputData"
+          @clear="onClearInputData"
+          @cancel="$router.go(-1)"
+          show-action
+        >
+          <template #action>
+            <span
+              @click="search.value ? onSearch(search.value) : null"
+              class="search-2a142bf567826652e30779a4be011b04"
+              >搜索</span
+            >
+          </template>
+        </van-search>
+      </van-sticky>
     </div>
 
     <div v-show="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
@@ -97,9 +99,10 @@
         <van-cell
           :icon="tableData.heroInfo.img"
           :title="tableData.heroInfo.name + ' (' + tableData.heroInfo.id + ')'"
-          value="趋势"
-          is-link
+          :label="tableData.heroInfo.label"
           :to="'/hero/' + tableData.heroInfo.id + '/info'"
+          is-link
+          value="趋势"
           class="search-a5adc7030676fcdc76c583f1b2684822"
         />
 
@@ -112,12 +115,12 @@
           title-active-color="orange"
         >
           <van-tab title="综合" />
-          <van-tab v-if="tableData.heroInfo.wikiId > 0" title="稷下图书馆" />
           <van-tab
             :to="'/hero/' + tableData.heroInfo.id + '/info?show=heroUpdate'"
             title="更新调整"
           />
           <van-tab title="技能和出装" />
+          <van-tab v-if="tableData.heroInfo.wikiId > 0" title="稷下图书馆" />
           <van-tab
             :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
             title="关系和克制"
@@ -381,12 +384,12 @@ export default {
     onDataTabsClick: function (e) {
       let wikiId = this.tableData.heroInfo.wikiId;
 
-      if (e == 1 && wikiId > 0) {
-        this.$appOpenUrl("是否打开外部链接?", null, {
-          path: "//bbs.nga.cn/read.php?tid=" + wikiId,
-        });
-      } else if (e == 2) {
+      if (e == 2) {
         this.showInfo.skillMenu = true;
+      } else if (e == 3 && wikiId > 0) {
+        this.$appOpenUrl("是否打开外部链接?", null, {
+          path: "https://bbs.nga.cn/read.php?tid=" + wikiId,
+        });
       }
     },
     onSkillTabsChange: function (e) {
