@@ -359,14 +359,6 @@ export default {
           this.tableData = data;
 
           if (status.code == 200) {
-            if (
-              value &&
-              data.result.heroInfo == {} &&
-              data.result.rows.length == 0
-            ) {
-              this.$message.warning(this.$appMsg.warning[1003]);
-            }
-
             this.initSearchHistory();
           } else {
             this.$message.error(status.msg);

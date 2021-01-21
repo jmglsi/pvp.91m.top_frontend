@@ -20,7 +20,6 @@ const warning = new Array();
 warning[1000] = "分辨率过小,可能会挡住英雄";
 warning[1001] = "BP结束,可点击两侧边缘设置胜利方,注意保存";
 warning[1002] = "不可提交黄赌毒以及违反国家法律的任何东西,违者直接封号 ;D";
-warning[1003] = "似乎没有诶,换个关键词再试试吧 ;(";
 
 const success = new Array();
 success[1000] = "操作成功";
