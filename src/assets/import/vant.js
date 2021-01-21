@@ -41,7 +41,8 @@ import {
     Tabs,
     Tag,
     Uploader,
-    Picker
+    Picker,
+    Sticky
 } from 'vant'
 
 Vue
@@ -82,4 +83,6 @@ Vue
     .use(TabbarItem)
     .use(Tabs)
     .use(Tag)
-    .use(Uploader).use(Picker)
+    .use(Uploader)
+    .use(Picker)
+    .use(Sticky)

@@ -15,15 +15,15 @@
 
     <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
       <van-tabbar
-        v-model="tabbar.active"
-        v-if="tabbar.default.show"
+        v-model="tableData.model"
+        v-if="showInfo.tabbar == true"
         fixed
         safe-area-inset-bottom
         active-color="orange"
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
-          v-for="(data, index) in tabbar.default.list"
+          v-for="(data, index) in tableData.result.rows"
           :key="'app-531814e80e16a27a837887308ee7c9ad-' + index"
           :icon="data.icon"
           :to="data.to"
@@ -45,62 +45,56 @@ export default {
   name: "App",
   metaInfo() {
     return {
-      script: this.appInfo.homeInfo.script,
-      link: this.appInfo.homeInfo.link,
+      script: this.tableData.homeInfo.script || [],
+      link: this.tableData.homeInfo.link || [],
     };
   },
   data() {
     return {
-      tabbar: {
-        active: "/",
-        default: {
-          show: false,
-          list: [
+      tableData: {
+        model: "/",
+        result: {
+          rows: [
             {
               icon: "/img/app-icons/dynamic.png",
-              to: {
-                path: "/",
-              },
+              to: "/",
               name: "/",
-              text: "动态",
+              text: "首页",
             },
             {
               icon: "/img/app-icons/ranking.png",
-              to: {
-                path: "/ranking",
-              },
+              to: "/ranking",
               name: "/ranking",
               text: "排行",
             },
             {
               icon: "/img/app-icons/search.png",
-              to: {
-                path: "/search",
-              },
+              to: "/search",
               name: "/search",
-              text: "搜索",
+              text: "发现",
             },
             {
               icon: "/img/app-icons/friends.png",
-              to: {
-                path: "/friends",
-              },
+              to: "/friends",
               name: "/friends",
               text: "扩列",
             },
             {
               icon: "/img/app-icons/user.png",
-              to: {
-                path: "/my",
-              },
+              to: "/my",
               name: "/my",
               text: "我的",
             },
           ],
         },
+        homeInfo: {
+          script: [],
+          link: [],
+        },
+        tipsInfo: {},
       },
-      appInfo: {
-        homeInfo: {},
+      showInfo: {
+        tabbar: true,
       },
     };
   },
@@ -113,11 +107,11 @@ export default {
         to.path.indexOf("/hero/") > -1 ||
         to.path.indexOf("/game/") > -1
       ) {
-        this.tabbar.default.show = false;
+        this.showInfo.tabbar = false;
       } else {
-        this.tabbar.default.show = true;
+        this.showInfo.tabbar = true;
 
-        this.tabbar.active = to.path;
+        this.tableData.model = to.path;
       }
     },
   },
@@ -133,10 +127,10 @@ export default {
             encodeURIComponent(location.pathname + location.search)
         )
         .then((res) => {
-          let appInfo = res.data.data,
-            tipsInfo = appInfo.tipsInfo;
+          let data = res.data.data,
+            tipsInfo = data.tipsInfo;
 
-          this.appInfo = appInfo;
+          this.tableData = data;
 
           if (tipsInfo) {
             this.$notification.open({

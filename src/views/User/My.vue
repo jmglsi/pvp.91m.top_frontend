@@ -202,19 +202,13 @@
             >
           </template>
         </van-cell>
-        <van-cell icon="friends">
-          <template #title>
-            <span class="my-94251204a6d395ca9fccad5eabe50b6c">扩列交友</span>
-            <div class="app-2f4ffa86e6dacd562859288aa6f4cad4">
-              打开别人就能找到您辣~
-            </div>
-          </template>
+        <van-cell icon="friends" title="扩列交友" label="打开别人就能找到您辣~">
           <template #right-icon>
-            <span class="my-b60541e817018d568a58a70d5db7fb65"
-              ><van-switch
-                v-model="showInfo.friendsType"
-                disabled /></span></template
-        ></van-cell>
+            <span class="my-b60541e817018d568a58a70d5db7fb65">
+              <van-switch v-model="showInfo.friendsType" disabled />
+            </span>
+          </template>
+        </van-cell>
         <van-cell
           icon="manager"
           title="扩列链接"

@@ -372,7 +372,7 @@
           @click="
             hero.info.wikiId
               ? $appOpenUrl('是否打开外部链接?', null, {
-                  path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
+                  path: 'https://bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
                 })
               : $message.info($appMsg.info[1006])
           "
