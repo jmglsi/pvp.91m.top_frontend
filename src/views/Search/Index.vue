@@ -212,6 +212,7 @@
         <van-cell
           v-for="(data, index) in tableData.result.rows"
           :key="'search-4047b92d726d15c081d00f3520c76b5b-' + index"
+          :icon="data.icon"
           :title="data.title"
           :value="data.value"
           :is-link="data.isLink"
