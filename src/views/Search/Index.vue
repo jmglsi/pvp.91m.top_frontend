@@ -189,7 +189,18 @@
             >
               {{ tableData.heroInfo.allScore }}
             </div>
-            <div>热度 {{ tableData.heroInfo.trendIcon }}</div>
+            <div>
+              <span class="search-4add4f40b6d738b8822053b5c51f4723">热度</span
+              >&nbsp;<img
+                v-if="tableData.heroInfo.trend > 0"
+                v-lazy="
+                  '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
+                "
+                width="15"
+                height="15"
+                class="search-05a36d9069f1023c8432de89b15a83af"
+              />
+            </div>
           </van-grid-item>
         </van-grid>
         <span class="search-399841f840f75044108804ec30d37405"
