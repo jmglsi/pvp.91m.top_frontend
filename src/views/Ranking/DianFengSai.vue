@@ -373,7 +373,6 @@ export default {
         { name: "对局回顾", value: 1 },
         { name: "赛事数据", value: 2 },
         { name: "更新记录", subname: "NGA @EndMP", value: 3 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 4 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -596,12 +595,6 @@ export default {
       if (item.value == 3) {
         this.$appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
           path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
-        });
-      }
-
-      if (item.value == 4) {
-        this.$appOpenUrl("是否查看英雄攻速阈值?", "NGA @小熊de大熊", {
-          path: "//bbs.nga.cn/read.php?tid=12677614",
         });
       }
     },

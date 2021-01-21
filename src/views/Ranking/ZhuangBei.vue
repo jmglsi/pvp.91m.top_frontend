@@ -134,7 +134,7 @@ export default {
       },
       actions: [
         { name: "复制链接", value: 0 },
-        { name: "查看英雄", value: 1 },
+        { name: "装备详情", value: 1 },
         { name: "更新记录", subname: "NGA @破笼之鸟", value: 2 },
       ],
       clientHeight: 0,

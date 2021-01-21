@@ -96,7 +96,7 @@
       >
         <van-cell
           :icon="tableData.heroInfo.img"
-          :title="tableData.heroInfo.name"
+          :title="tableData.heroInfo.name + ' (' + tableData.heroInfo.id + ')'"
           value="趋势"
           is-link
           :to="'/hero/' + tableData.heroInfo.id + '/info'"
@@ -112,6 +112,7 @@
           title-active-color="orange"
         >
           <van-tab title="综合" />
+          <van-tab v-if="tableData.heroInfo.wikiId > 0" title="稷下图书馆" />
           <van-tab
             :to="'/hero/' + tableData.heroInfo.id + '/info?show=heroUpdate'"
             title="更新调整"
@@ -190,16 +191,16 @@
               {{ tableData.heroInfo.allScore }}
             </div>
             <div>
-              <span class="search-4add4f40b6d738b8822053b5c51f4723">热度</span
-              >&nbsp;<img
-                v-if="tableData.heroInfo.trend > 0"
-                v-lazy="
-                  '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
-                "
-                width="15"
-                height="15"
-                class="search-05a36d9069f1023c8432de89b15a83af"
-              />
+              <span class="search-4add4f40b6d738b8822053b5c51f4723">热度</span>
+              <span v-if="tableData.heroInfo.trend > 0"
+                >&nbsp;<img
+                  v-lazy="
+                    '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
+                  "
+                  width="15"
+                  height="15"
+                  class="search-05a36d9069f1023c8432de89b15a83af"
+              /></span>
             </div>
           </van-grid-item>
         </van-grid>
@@ -378,7 +379,13 @@ export default {
         });
     },
     onDataTabsClick: function (e) {
-      if (e == 2) {
+      let wikiId = this.tableData.heroInfo.wikiId;
+
+      if (e == 1 && wikiId > 0) {
+        this.$appOpenUrl("是否打开外部链接?", null, {
+          path: "//bbs.nga.cn/read.php?tid=" + wikiId,
+        });
+      } else if (e == 2) {
         this.showInfo.skillMenu = true;
       }
     },
