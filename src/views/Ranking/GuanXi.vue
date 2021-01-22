@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-gx">
+  <div class="ranking-gx app-gx">
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-grid
         ref="refGuanXi"

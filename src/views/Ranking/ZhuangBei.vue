@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-zb">
+  <div class="ranking-zb app-zb">
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
       <vxe-grid
         ref="refZhuangBei"
