@@ -81,5 +81,9 @@ export default {
       },
     };
   },
+  mounted() {
+    this.heroName = this.$route.query.heroName || "";
+    this.tabsInfo.model = parseInt(this.$route.query.type) || 0;
+  },
 };
 </script>

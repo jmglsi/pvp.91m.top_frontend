@@ -185,7 +185,7 @@
               :class="
                 tableData.heroInfo.allBanRate +
                   tableData.heroInfo.allPickRate >=
-                95
+                  50 || tableData.heroInfo.allScore >= 50
                   ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                   : ''
               "
@@ -209,8 +209,8 @@
         </van-grid>
         <span class="search-399841f840f75044108804ec30d37405"
           ><van-icon name="underway-o" />&nbsp;每天中午和晚上的
-          11:30&nbsp;<van-icon name="todo-list-o" />&nbsp;基于巅峰赛
-          (顶端局)</span
+          11:30&nbsp;<van-icon name="todo-list-o" />&nbsp;基于 巅峰赛 (顶端局)
+          统计</span
         >
       </van-cell-group>
     </div>
@@ -229,6 +229,7 @@
           :key="'search-4047b92d726d15c081d00f3520c76b5b-' + index"
           :icon="data.icon"
           :title="data.title"
+          :label="data.label"
           :value="data.value"
           :is-link="data.isLink"
           @click="onCellClick(data.isLink, data.to, data.url)"
@@ -292,7 +293,11 @@ export default {
       require(["@/components/App/BottomTabbar.vue"], resolve),
   },
   watch: {
-    $route: function () {
+    $route: function (to) {
+      if (parseInt(to.query.refresh) == 1) {
+        this.onSearch(to.query.q);
+      }
+
       if (this.tableData.heroInfo.id > 0) {
         this.showInfo.searchData = true;
         this.showInfo.searchHistory = false;
@@ -334,6 +339,9 @@ export default {
     };
   },
   mounted() {
+    this.showInfo.searchData = true;
+    this.showInfo.searchHistory = false;
+
     this.onSearch(this.search.value);
 
     setInterval(() => {

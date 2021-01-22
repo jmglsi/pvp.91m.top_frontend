@@ -15,7 +15,7 @@
 
     <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
       <van-tabbar
-        v-model="tableData.model"
+        v-model="tableData.result.model"
         v-if="showInfo.tabbar == true"
         fixed
         safe-area-inset-bottom
@@ -52,8 +52,8 @@ export default {
   data() {
     return {
       tableData: {
-        model: "/",
         result: {
+          model: "/",
           rows: [
             {
               icon: "/img/app-icons/dynamic.png",
@@ -110,8 +110,6 @@ export default {
         this.showInfo.tabbar = false;
       } else {
         this.showInfo.tabbar = true;
-
-        this.tableData.model = to.path;
       }
     },
   },
@@ -131,6 +129,7 @@ export default {
             tipsInfo = data.tipsInfo;
 
           this.tableData = data;
+          this.tableData.result.model = this.$route.path;
 
           if (tipsInfo) {
             this.$notification.open({
