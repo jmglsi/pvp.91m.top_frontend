@@ -88,14 +88,14 @@ Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlTyp
         });
 }
 
-Vue.prototype.$appInitTableHeight = function() {
+Vue.prototype.$appInitTableHeight = function(newHeight = 0) {
     let ret = 0,
         width = this.$appWidth,
         height = this.$appHeight;
 
-    width > height ? (ret = height - 133) : (ret = height - 173);
+    width > height ? (ret = height - 103) : (ret = height - 138);
 
-    return ret;
+    return ret + newHeight;
 }
 
 Vue.prototype.$appInitTableWidth = function(tableWidth) {

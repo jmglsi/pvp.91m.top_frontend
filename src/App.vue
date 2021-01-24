@@ -28,9 +28,10 @@
           :icon="data.icon"
           :to="data.to"
           :name="data.name"
-          class="app-e0c3b278eeb2cab05f548d7af0f2c949"
-          >{{ data.text }}</van-tabbar-item
+          icon-prefix="app-e0c3b278eeb2cab05f548d7af0f2c949"
         >
+          {{ data.text }}
+        </van-tabbar-item>
       </van-tabbar>
     </div>
   </div>
@@ -111,6 +112,8 @@ export default {
       } else {
         this.showInfo.tabbar = true;
       }
+
+      this.tableData.result.model = to.path;
     },
   },
   mounted() {
