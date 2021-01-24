@@ -368,9 +368,13 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
-        this.getRanking(newValue.bid, newValue.cid);
+        let refresh = parseInt(this.$route.query.refresh) || 0;
+
+        if (refresh == 1) {
+          this.getRanking(newValue.bid, newValue.cid);
+        }
       },
     },
   },

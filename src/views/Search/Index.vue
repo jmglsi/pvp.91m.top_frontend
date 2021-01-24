@@ -32,7 +32,7 @@
           >
             <van-grid :border="false" :column-num="2">
               <van-grid-item
-                v-for="(data, index) in tableData.search.hotRecommend"
+                v-for="(data, index) in tableData.search.hotKeywords"
                 :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
                 @click="onSearch(data)"
               >
@@ -149,7 +149,11 @@
             title="更新调整"
           />
           <van-tab
-            :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
+            :to="
+              '/ranking?type=1&heroName=' +
+              tableData.heroInfo.name +
+              '&refresh=1'
+            "
             title="关系和克制"
           />
           <van-tab
@@ -316,7 +320,7 @@ export default {
       tableData: {
         search: {
           history: [],
-          hotRecommend: [],
+          hotKeywords: [],
           placeholder: [],
         },
         result: {
@@ -354,7 +358,7 @@ export default {
   },
   methods: {
     onSearch: function (value) {
-      this.search.value = value.toString();
+      this.search.value = value;
 
       this.getSearch(value);
 

@@ -17,20 +17,37 @@
           <template #title
             >巅峰赛 (顶端局) <a-icon type="caret-down"
           /></template>
-          <DianFengSai :isSmallMobile="isSmallMobile" :bid="bid" :cid="cid" />
+          <DianFengSai
+            v-if="tabsInfo.model == 0"
+            :isSmallMobile="isSmallMobile"
+            :bid="dfsAreaInfo.model"
+            :cid="dfsPositionInfo.model"
+          />
         </van-tab>
 
         <van-tab title="关系和克制 (上周)">
-          <GuanXi :isSmallMobile="isSmallMobile" :heroName="heroName" />
+          <GuanXi
+            v-if="tabsInfo.model == 1"
+            :isSmallMobile="isSmallMobile"
+            :heroName="heroName"
+          />
         </van-tab>
 
         <van-tab>
           <template #title>玩家 (非实时) <a-icon type="caret-down" /></template>
-          <WanJia :isSmallMobile="isSmallMobile" :bid="bid" :cid="cid" />
+          <WanJia
+            v-if="tabsInfo.model == 2"
+            :isSmallMobile="isSmallMobile"
+            :bid="wjAreaInfo.model"
+            :cid="wjShieldInfo.model"
+          />
         </van-tab>
 
         <van-tab title="装备 (上周)">
-          <ZhuangBei :isSmallMobile="isSmallMobile" />
+          <ZhuangBei
+            v-if="tabsInfo.model == 3"
+            :isSmallMobile="isSmallMobile"
+          />
         </van-tab>
       </van-tabs>
     </div>
@@ -57,7 +74,7 @@
         </div>
         <div class="ranking-5728d19b81c17607842cb7befeef3152">
           <span class="ranking-4da12add5b0c1920dcde6c5627d30422"
-            >您的分享是我更新的动力 ( •̀ ω •́ )y</span
+            >您的分享是我更新的动力</span
           >
         </div>
       </van-action-sheet>
@@ -200,13 +217,6 @@ export default {
   },
   methods: {
     onRankingTabsClick: function (e) {
-      let tabsInfo = this.tabsInfo;
-
-      this.$appPush({
-        path: "/ranking",
-        query: { type: tabsInfo.model, bid: 0, cid: 0 },
-      });
-
       if (e == 0) {
         this.bidInfo = this.dfsAreaInfo;
         this.cidInfo = this.dfsPositionInfo;
@@ -224,8 +234,32 @@ export default {
       }, 1000);
     },
     onDropdownMenuChange: function () {
+      let tabsInfo = this.tabsInfo;
+
       this.bid = this.bidInfo.model;
       this.cid = this.cidInfo.model;
+
+      if (tabsInfo.model == 0) {
+        this.dfsAreaInfo.model = this.bid;
+        this.dfsPositionInfo.model = this.cid;
+      }
+
+      if (tabsInfo.model == 2) {
+        this.wjAreaInfo.model = this.bid;
+        this.wjShieldInfo.model = this.cid;
+      }
+
+      this.$appPush({
+        path: "/ranking",
+        query: {
+          type: tabsInfo.model,
+          bid: this.bid,
+          cid: this.cid,
+          refresh: 1,
+        },
+      });
+
+      this.showInfo.filterMenu = false;
     },
   },
 };

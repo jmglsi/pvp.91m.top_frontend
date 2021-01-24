@@ -95,15 +95,20 @@ div.ranking-713dd4d0b2e842c08da62ddeec872331 img.ranking-fbfe7b256ce6b4df1d03d80
 }
 
 div.ranking-713dd4d0b2e842c08da62ddeec872331 span.ranking-043052eea2d064cab23119e56f4f640e {
-    left: -24px;
+    left: -23px;
 }
 
 div.ranking-713dd4d0b2e842c08da62ddeec872331 span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
-    left: 31px;
+    left: 28px;
 }
 
 div.ranking-713dd4d0b2e842c08da62ddeec872331 {
     position: absolute;
+}
+
+div.ranking-78117a02d15f1dffe5263f47a220c56b span.ranking-f58cc48f5b942c91e57eff48accc5151 {
+    margin-left: -50px;
+    top: 62px;
 }
 
 
@@ -125,4 +130,9 @@ div.ranking-0b22b207c2b785ceff7a241980f23d14 span.ranking-043052eea2d064cab23119
 
 div.ranking-0b22b207c2b785ceff7a241980f23d14 span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
     left: 27px;
+}
+
+div.ranking-5d308b6a0da77ffb33c63fc542f58746 span.ranking-f58cc48f5b942c91e57eff48accc5151 {
+    margin-left: -43px;
+    top: 47px;
 }

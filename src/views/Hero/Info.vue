@@ -308,7 +308,6 @@
       <van-action-sheet
         v-model="showInfo.heroMenu"
         :title="hero.info.name + ' 的 ' + circle.info.text"
-        :close-on-click-action="true"
         safe-area-inset-bottom
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
