@@ -5,37 +5,53 @@
         ref="refGuanXi"
         :loading="tableData.loading"
         :data="tableData.result.rows"
-        :height="clientHeight + 48"
+        :height="clientHeight"
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="英雄" fixed="left">
           <vxe-table-column title="1" field="heroId_1" width="75">
             <template v-slot="{ row }">
-              <img
-                v-lazy="row.hero_1.img"
-                width="50"
-                height="50"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-              />
-              <span
-                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
-                >{{ row.hero_1.adaptationRate }}</span
+              <div
+                :class="
+                  isSmallMobile == 1
+                    ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
+                    : null
+                "
               >
+                <img
+                  v-lazy="row.hero_1.img"
+                  :width="50"
+                  height="50"
+                  class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                />
+                <span
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
+                  >{{ row.hero_1.adaptationRate }}</span
+                >
+              </div>
             </template>
           </vxe-table-column>
           <vxe-table-column title="2" field="heroId_2" width="75">
             <template v-slot="{ row }">
-              <img
-                v-lazy="row.hero_2.img"
-                width="50"
-                height="50"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-              />
-              <span
-                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
-                >{{ row.hero_2.adaptationRate }}</span
+              <div
+                :class="
+                  isSmallMobile == 1
+                    ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
+                    : null
+                "
               >
+                <img
+                  v-lazy="row.hero_2.img"
+                  width="50"
+                  height="50"
+                  class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                />
+                <span
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
+                  >{{ row.hero_2.adaptationRate }}</span
+                >
+              </div>
             </template>
           </vxe-table-column>
         </vxe-table-column>
@@ -182,6 +198,10 @@
 export default {
   name: "RankingGuanXi",
   props: {
+    isSmallMobile: {
+      type: Number,
+      default: 0,
+    },
     heroName: {
       type: String,
       default: "",
@@ -189,8 +209,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { heroName } = this;
-      return { heroName };
+      const { heroName, isSmallMobile } = this;
+      return { heroName, isSmallMobile };
     },
   },
   watch: {
@@ -231,7 +251,7 @@ export default {
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight();
+    this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {

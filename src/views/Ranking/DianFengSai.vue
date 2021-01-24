@@ -1,20 +1,5 @@
 <template>
-  <div class="ranking-dfs">
-    <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
-      <van-dropdown-menu>
-        <van-dropdown-item
-          v-model="areaInfo.model"
-          :options="areaInfo.options"
-          @change="onDropdownMenuChange"
-        />
-        <van-dropdown-item
-          v-model="positionInfo.model"
-          :options="positionInfo.options"
-          @change="onDropdownMenuChange"
-        />
-      </van-dropdown-menu>
-    </div>
-
+  <div class="ranking-dfs app-dfs">
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
       <vxe-toolbar ref="refXToolbar" custom />
     </div>
@@ -39,48 +24,56 @@
           sortable
         >
           <template v-slot="{ row }">
-            <van-tag
-              v-if="row.tag.text"
-              :color="row.tag.color"
-              mark
-              type="primary"
-              class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.tag.text }}</van-tag
+            <div
+              :class="
+                isSmallMobile == 1
+                  ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-0b22b207c2b785ceff7a241980f23d14'
+                  : null
+              "
             >
-            <img
-              v-lazy="row.img"
-              width="50"
-              height="50"
-              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-            />
-            <img
-              v-if="row.trend > 0"
-              v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
-              width="15"
-              height="15"
-              class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
-            />
-            <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
-              <img
-                v-lazy="row.skill.preview[0].img"
-                width="20"
-                height="20"
-                class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
-              />
-              <span
-                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-043052eea2d064cab23119e56f4f640e"
-                >{{ row.skill.preview[0].pickRate }}</span
+              <van-tag
+                v-if="row.tag.text"
+                :color="row.tag.color"
+                mark
+                type="primary"
+                class="app-e4d23e841d8e8804190027bce3180fa5"
+                >{{ row.tag.text }}</van-tag
               >
               <img
-                v-lazy="row.skill.preview[1].img"
-                width="20"
-                height="20"
-                class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
+                v-lazy="row.img"
+                width="50"
+                height="50"
+                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
-              <span
-                class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
-                >{{ row.skill.preview[1].pickRate }}</span
-              >
+              <img
+                v-if="row.trend > 0"
+                v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
+                width="15"
+                height="15"
+                class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
+              />
+              <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                <img
+                  v-lazy="row.skill.preview[0].img"
+                  width="15"
+                  height="15"
+                  class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
+                />
+                <span
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-043052eea2d064cab23119e56f4f640e"
+                  >{{ row.skill.preview[0].pickRate }}%</span
+                >
+                <img
+                  v-lazy="row.skill.preview[1].img"
+                  width="15"
+                  height="15"
+                  class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
+                />
+                <span
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
+                  >{{ row.skill.preview[1].pickRate }}%</span
+                >
+              </div>
             </div>
           </template>
         </vxe-table-column>
@@ -353,6 +346,34 @@ export default {
     HeroEquipmentListOne: (resolve) =>
       require(["@/components/Hero/EquipmentList_One.vue"], resolve),
   },
+  props: {
+    isSmallMobile: {
+      type: Number,
+      default: 0,
+    },
+    bid: {
+      type: Number,
+      default: 0,
+    },
+    cid: {
+      type: Number,
+      default: 0,
+    },
+  },
+  computed: {
+    listenChange() {
+      const { isSmallMobile, bid, cid } = this;
+      return { isSmallMobile, bid, cid };
+    },
+  },
+  watch: {
+    listenChange: {
+      immediate: true,
+      handler(newValue) {
+        this.getRanking(newValue.bid, newValue.cid);
+      },
+    },
+  },
   data() {
     return {
       tableData: {
@@ -369,36 +390,12 @@ export default {
         name: "加载中",
       },
       actions: [
-        { name: "英雄详情", value: 0 },
-        { name: "对局回顾", value: 1 },
-        { name: "赛事数据", value: 2 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 3 },
+        { name: "趋势", value: 0 },
+        { name: "搜一搜", value: 1 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
       ],
       listWidth: 0,
       clientHeight: 0,
-      areaInfo: {
-        model: 0,
-        options: [
-          { text: "全部 (昨日)", value: 0 },
-          { text: "手 Q (昨日)", value: 1 },
-          { text: "微信 (昨日)", value: 2 },
-          { text: "推荐 (昨日)", value: 3 },
-          { text: "全部 (上周)", value: 4 },
-          { text: "全部 (上月)", value: 5 },
-        ],
-      },
-      positionInfo: {
-        model: 0,
-        options: [
-          { text: "全部分路 ω' )و", value: 0 },
-          { text: "对抗路 (战士)", value: 1 },
-          { text: "中路", value: 2 },
-          { text: "对抗路 (坦克)", value: 3 },
-          { text: "打野", value: 4 },
-          { text: "发育路", value: 5 },
-          { text: "游走", value: 6 },
-        ],
-      },
       showInfo: {
         skillMenu: false,
         heroMenu: false,
@@ -416,7 +413,7 @@ export default {
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight();
+    this.clientHeight = this.$appInitTableHeight(10);
     this.initTableWidth();
 
     this.$nextTick(() => {
@@ -425,7 +422,7 @@ export default {
     //手动将表格和工具栏进行关联
   },
   mounted() {
-    this.getRanking(this.areaInfo.model, this.positionInfo.model);
+    this.getRanking(this.bid, this.cid);
   },
   methods: {
     initTableWidth: function () {
@@ -504,9 +501,6 @@ export default {
         return row.allWinRate >= option.data;
       }
     },
-    onDropdownMenuChange: function () {
-      this.getRanking(this.areaInfo.model, this.positionInfo.model);
-    },
     onCellClick: function ({ row, column }) {
       this.tableDataRow = row;
 
@@ -575,24 +569,15 @@ export default {
 
       if (item.value == 1) {
         this.$appPush({
-          path: "/hero/" + heroInfo.id + "/replay",
+          path: "/search?q=" + heroInfo.name,
           query: {
-            replayTitle: heroInfo.name,
-            teammate: "0",
+            from: "ranking",
+            refresh: 1,
           },
         });
       }
 
       if (item.value == 2) {
-        this.$appOpenUrl("是否查看英雄赛事数据?", "玩加电竞", {
-          path:
-            "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
-            heroInfo.id +
-            "&tab_type=5&gm=kog&gametype=6&tag_id=0",
-        });
-      }
-
-      if (item.value == 3) {
         this.$appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
           path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
         });

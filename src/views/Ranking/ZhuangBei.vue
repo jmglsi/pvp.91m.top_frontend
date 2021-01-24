@@ -24,16 +24,24 @@
           :filter-method="filterMethod"
         >
           <template v-slot="{ row }">
-            <img
-              v-lazy="
-                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                row.equipment.id +
-                '.png'
+            <div
+              :class="
+                isSmallMobile == 1
+                  ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4'
+                  : null
               "
-              width="50"
-              height="50"
-              class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-            />
+            >
+              <img
+                v-lazy="
+                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  row.equipment.id +
+                  '.png'
+                "
+                width="50"
+                height="50"
+                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+              />
+            </div>
           </template>
         </vxe-table-column>
 
@@ -117,6 +125,18 @@ export default {
     HeroEquipmentListOne: (resolve) =>
       require(["@/components/Hero/EquipmentList_One.vue"], resolve),
   },
+  props: {
+    isSmallMobile: {
+      type: Number,
+      default: 0,
+    },
+  },
+  computed: {
+    listenChange() {
+      const { isSmallMobile } = this;
+      return { isSmallMobile };
+    },
+  },
   data() {
     return {
       copyData: "",
@@ -151,7 +171,7 @@ export default {
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight() + 48;
+    this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
