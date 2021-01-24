@@ -103,7 +103,18 @@
           :to="'/hero/' + tableData.heroInfo.id + '/info'"
           is-link
           value="趋势"
-          class="search-a5adc7030676fcdc76c583f1b2684822"
+          icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
+          class="search-a64976150427434c778228d76650f6fb"
+        />
+        <van-cell
+          :icon="tableData.heroInfo.jixia.icon"
+          :title="tableData.heroInfo.jixia.title"
+          :label="tableData.heroInfo.jixia.label"
+          :value="tableData.heroInfo.jixia.value"
+          is-link
+          @click="onJiXiaClick(tableData.heroInfo.wikiId)"
+          icon-prefix="search-a64976150427434c778228d76650f6fb"
+          class="search-869ab9bf85478a49725209693c5760e5"
         />
 
         <van-tabs
@@ -114,13 +125,29 @@
           color="orange"
           title-active-color="orange"
         >
-          <van-tab title="综合" />
+          <van-tab title="综合">
+            <template #title>
+              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">综合</span>
+              <img
+                v-if="tableData.heroInfo.trend > 0"
+                v-lazy="
+                  '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
+                "
+                width="15"
+                height="15"
+                class="search-05a36d9069f1023c8432de89b15a83af"
+              />
+              <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420"
+                >-</span
+              >
+            </template></van-tab
+          >
+          <van-tab title="赛事" />
+          <van-tab title="技能和出装" />
           <van-tab
             :to="'/hero/' + tableData.heroInfo.id + '/info?show=heroUpdate'"
             title="更新调整"
           />
-          <van-tab title="技能和出装" />
-          <van-tab v-if="tableData.heroInfo.wikiId > 0" title="稷下图书馆" />
           <van-tab
             :to="'/ranking?type=1&heroName=' + tableData.heroInfo.name"
             title="关系和克制"
@@ -137,7 +164,7 @@
           />
         </van-tabs>
 
-        <van-grid :border="false">
+        <van-grid :border="false" :column-num="3">
           <van-grid-item>
             <div
               :class="
@@ -150,7 +177,7 @@
             >
               {{ tableData.heroInfo.allBanRate }}%
             </div>
-            <div>禁用率</div>
+            <div>禁用</div>
           </van-grid-item>
           <van-grid-item>
             <div
@@ -163,7 +190,7 @@
             >
               {{ tableData.heroInfo.allPickRate }}%
             </div>
-            <div>出场率</div>
+            <div>出场</div>
           </van-grid-item>
           <van-grid-item>
             <div
@@ -180,37 +207,11 @@
             </div>
             <div>胜率</div>
           </van-grid-item>
-          <van-grid-item>
-            <div
-              :class="
-                tableData.heroInfo.allBanRate +
-                  tableData.heroInfo.allPickRate >=
-                  50 || tableData.heroInfo.allScore >= 50
-                  ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
-                  : ''
-              "
-              class="search-0c27228425c2ec1dd01a785b6e9a0437"
-            >
-              {{ tableData.heroInfo.allScore }}
-            </div>
-            <div>
-              <span class="search-4add4f40b6d738b8822053b5c51f4723">热度</span>
-              <span v-if="tableData.heroInfo.trend > 0"
-                >&nbsp;<img
-                  v-lazy="
-                    '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
-                  "
-                  width="15"
-                  height="15"
-                  class="search-05a36d9069f1023c8432de89b15a83af"
-              /></span>
-            </div>
-          </van-grid-item>
         </van-grid>
         <span class="search-399841f840f75044108804ec30d37405"
-          ><van-icon name="underway-o" />&nbsp;每天中午和晚上的
-          11:30&nbsp;<van-icon name="todo-list-o" />&nbsp;基于 巅峰赛 (顶端局)
-          统计</span
+          ><van-icon name="underway-o" />&nbsp;每天 11:30&nbsp;<van-icon
+            name="todo-list-o"
+          />&nbsp;基于 巅峰赛 (顶端局) 统计</span
         >
       </van-cell-group>
     </div>
@@ -233,6 +234,7 @@
           :value="data.value"
           :is-link="data.isLink"
           @click="onCellClick(data.isLink, data.to, data.url)"
+          icon-prefix="search-a64976150427434c778228d76650f6fb"
         />
       </van-cell-group>
     </div>
@@ -389,15 +391,29 @@ export default {
           }
         });
     },
-    onDataTabsClick: function (e) {
-      let wikiId = this.tableData.heroInfo.wikiId;
+    onJiXiaClick: function (wikiId) {
+      let url = "";
 
-      if (e == 2) {
-        this.showInfo.skillMenu = true;
-      } else if (e == 3 && wikiId > 0) {
-        this.$appOpenUrl("是否打开外部链接?", null, {
-          path: "https://bbs.nga.cn/read.php?tid=" + wikiId,
+      wikiId > 0
+        ? (url = "https://bbs.nga.cn/read.php?tid=" + wikiId)
+        : (url = "https://bbs.nga.cn/thread.php?fid=648");
+
+      this.$appOpenUrl("是否打开外部链接?", "NGA @稷下图书馆", {
+        path: url,
+      });
+    },
+    onDataTabsClick: function (e) {
+      let heroInfo = this.tableData.heroInfo;
+
+      if (e == 1) {
+        this.$appOpenUrl("是否打开外部链接?", "玩加电竞", {
+          path:
+            "http://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
+            heroInfo.id +
+            "&tab_type=5&gm=kog&gametype=6&tag_id=0",
         });
+      } else if (e == 2) {
+        this.showInfo.skillMenu = true;
       }
     },
     onSkillTabsChange: function (e) {
