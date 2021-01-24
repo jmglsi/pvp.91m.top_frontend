@@ -10,7 +10,12 @@
             ? { backgroundColor: 'white' }
             : { backgroundColor: 'transparent' }
         "
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: '/search',
+            query: { q: routeInfo.from.heroName, from: 'heroInfo' },
+          })
+        "
         @click-right="$message.info($appMsg.info[1004])"
         left-text="返回"
         z-index="99999999"
@@ -21,13 +26,6 @@
             @click="$message.info('英雄id:' + hero.info.id + ',近期热度 ;D')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
-            <img
-              v-if="showInfo.parameter && hero.info.trend > 0"
-              v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
-              width="15"
-              height="15"
-              class="hero-f90943c8968fa651d7e1b617ff046fe2"
-            />
             <span
               :style="
                 scroll >= 50 || tabsInfo.model > 0
@@ -35,8 +33,16 @@
                   : { color: 'white' }
               "
               class="hero-d5d3db1765287eef77d7927cc956f50a"
-              >{{ hero.title }}</span
             >
+              {{ hero.title }}
+            </span>
+            <img
+              v-if="showInfo.parameter && hero.info.trend > 0"
+              v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
+              width="15"
+              height="15"
+              class="hero-f90943c8968fa651d7e1b617ff046fe2"
+            />
           </div>
         </template>
         <template #right>
@@ -83,6 +89,7 @@
         v-model="showInfo.imagePreview"
         :images="hero.info.skin"
         :startPosition="showInfo.imageIndex"
+        className="hero-c8c469026f350858cfa8f2e5bb6596df"
       >
         <template v-slot:cover
           ><span class="hero-b5741c8457973b008c424c6f94ff3901"
@@ -166,7 +173,7 @@
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ hero.info.skill.preview[0].pickRate }}</span
+                >{{ hero.info.skill.preview[0].pickRate }}%</span
               ></span
             >
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057"
@@ -178,7 +185,7 @@
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ hero.info.skill.preview[1].pickRate }}</span
+                >{{ hero.info.skill.preview[1].pickRate }}%</span
               ></span
             >
           </div>
@@ -361,14 +368,14 @@
               : '/img/app-icons/like_0.png'
           "
           name="/"
-          class="app-72383b9892bd1e6a2bd310dfb1fb2344"
+          icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
         <van-tabbar-item
           icon="/img/app-icons/wiki.png"
           name="/"
-          class="app-72383b9892bd1e6a2bd310dfb1fb2344"
+          icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId
               ? $appOpenUrl('是否打开外部链接?', null, {
@@ -406,6 +413,13 @@ export default {
       require(["@/components/Hero/SameHobby.vue"], resolve),
     AppBottomTabbar: (resolve) =>
       require(["@/components/App/BottomTabbar.vue"], resolve),
+  },
+  watch: {
+    $route: function (to) {
+      let heroId = parseInt(to.params.id) || 111;
+
+      this.getHeroInfo(heroId);
+    },
   },
   data() {
     return {
@@ -476,6 +490,11 @@ export default {
         model: 0,
       },
       tipsInfo: [0, 0, 0],
+      routeInfo: {
+        from: {
+          heroName: "",
+        },
+      },
     };
   },
   mounted() {
@@ -511,6 +530,9 @@ export default {
           this.circle.info = data.circleInfo;
           this.positionInfo = data.positionInfo;
           this.hero.info = heroInfo;
+
+          if (!this.routeInfo.from.heroName)
+            this.routeInfo.from.heroName = heroInfo.name;
 
           this.hero.title = heroInfo.name;
           document.title = heroInfo.name + " | " + this.$appInfo.name;
