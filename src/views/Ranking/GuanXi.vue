@@ -217,7 +217,11 @@ export default {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        this.getRanking(newValue.heroName);
+        let refresh = parseInt(this.$route.query.refresh) || 0;
+
+        if (refresh == 1) {
+          this.getRanking(newValue.heroName);
+        }
       },
     },
   },
