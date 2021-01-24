@@ -21,7 +21,7 @@
               :text="data.text"
               :to="data.to"
               :url="data.url"
-              class="app-b5e3c0b9ac8b718b9b4cb60f4fabe214"
+              icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
             />
           </van-grid>
         </van-cell-group>
@@ -45,7 +45,7 @@
               :text="data.text"
               :to="data.to"
               :url="data.url"
-              class="app-b5e3c0b9ac8b718b9b4cb60f4fabe214"
+              icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
             />
           </van-grid>
         </van-cell-group>

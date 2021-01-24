@@ -396,9 +396,13 @@
       <ul>
         <li>
           <a-dropdown placement="bottomCenter" :trigger="['click']">
-            <van-button round :icon="author.logo" size="small">{{
-              author.name
-            }}</van-button>
+            <van-button
+              round
+              :icon="author.logo"
+              size="small"
+              icon-prefix="app-8e4f204791d1b591b6a6f93b572f9b2d"
+              >{{ author.name }}</van-button
+            >
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in author.actions"
@@ -423,6 +427,7 @@
             :icon="bpPerspective == 1 ? team.team_1.logo : team.team_2.logo"
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
+            icon-prefix="app-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onGamePerspectiveClick(1)"
             >以
             {{ bpPerspective == 1 ? team.team_1.name : team.team_2.name }}
@@ -435,6 +440,7 @@
             :icon="eye"
             size="small"
             color="linear-gradient(to right, #6874E8, #9708CC)"
+            icon-prefix="app-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onSeeHeroClick"
           >
             {{ bpPerspective == 1 ? team.team_2.name : team.team_1.name }}
@@ -570,6 +576,7 @@
                   ? team.team_1.logo
                   : team.team_2.logo
               "
+              class-prefix="game-8d74837b1dc10576d7757cfd35b4661d"
             />
             <van-icon
               v-else-if="index % 2 == 1"
@@ -578,6 +585,7 @@
                   ? team.team_2.logo
                   : team.team_1.logo
               "
+              class-prefix="game-8d74837b1dc10576d7757cfd35b4661d"
             />&nbsp;
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"

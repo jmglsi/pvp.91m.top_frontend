@@ -57,7 +57,7 @@
           v-if="friendsInfo"
           title="王者荣耀"
           icon="/img/game-icons/king.png"
-          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
@@ -75,7 +75,7 @@
         <van-cell
           title="喜欢列表"
           icon="/img/app-icons/hero_black.png"
-          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
             <ul

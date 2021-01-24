@@ -84,11 +84,11 @@
           icon="/img/app-icons/game.png"
           title="全局BP模拟器"
           value="使用说明"
-          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })
           "
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-grid
           :border="false"
@@ -98,6 +98,7 @@
           <van-grid-item
             icon="/img/app-icons/team.png"
             to="/game/team"
+            icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
           >
             <template #text>
@@ -112,6 +113,7 @@
           <van-grid-item
             icon="/img/app-icons/engage.png"
             to="/game/engage"
+            icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-308ffde0dc5bd5718dcf0396fcc2a596"
           >
             <template #text>
@@ -136,7 +138,7 @@
         <van-cell
           title="王者荣耀"
           icon="/img/game-icons/king.png"
-          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
             <span class="my-af99c9298d1eb69981a035d0a15afa20"
@@ -153,7 +155,7 @@
         </van-cell>
         <van-cell
           icon="/img/app-icons/hero_black.png"
-          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #title>
             <span
@@ -202,7 +204,7 @@
             >
           </template>
         </van-cell>
-        <van-cell icon="friends" title="扩列交友" label="打开别人就能找到您辣~">
+        <van-cell icon="friends" title="扩列交友" label="打开别人就能找到您啦~">
           <template #right-icon>
             <span class="my-b60541e817018d568a58a70d5db7fb65">
               <van-switch v-model="showInfo.friendsType" disabled />
@@ -226,11 +228,25 @@
         class="my-66e3a8a1303fb1fc8ce3249b23dbd268"
       >
         <van-cell
+          title="适配小屏"
+          label="屏幕小的话可以手动开启"
+          icon="graphic"
+        >
+          <template #right-icon>
+            <span class="my-087fed58eae1e19dec1f2efffe80d047">
+              <van-switch
+                v-model="mobileInfo.isSmallMobile"
+                @change="onMobileInfoChange"
+              />
+            </span>
+          </template>
+        </van-cell>
+        <van-cell
           title="修改密码"
           icon="/img/app-icons/password_edit.png"
-          class="app-icon_ex-3079036920f9bee746cf7baffffb950b"
           is-link
           @click="$appPush({ path: '/login' })"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
       </van-cell-group>
     </div>
@@ -331,7 +347,7 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(0)"
-                  >修改</van-button
+                  >修改大区</van-button
                 >
               </template>
             </van-field>
@@ -348,7 +364,7 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(1)"
-                  >修改</van-button
+                  >修改省份</van-button
                 >
               </template>
             </van-field>
@@ -363,7 +379,7 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(2)"
-                  >修改</van-button
+                  >修改段位</van-button
                 >
               </template>
             </van-field>
@@ -477,9 +493,15 @@ export default {
         editMenu: false,
         pickerMenu: false,
       },
+      mobileInfo: {
+        isSmallMobile: false,
+      },
     };
   },
   mounted() {
+    this.mobileInfo.isSmallMobile =
+      Boolean(parseInt(this.$cookie.get("isSmallMobile"))) || false;
+
     this.getWebAccountInfo();
   },
   methods: {
@@ -544,6 +566,23 @@ export default {
         750,
         this.copyData
       );
+    },
+    onMobileInfoChange: function (e) {
+      let isSmallMobileInt = 0,
+        isSmallMobileBool = false;
+
+      if (e == false) {
+        isSmallMobileInt = 0;
+        isSmallMobileBool = false;
+      } else {
+        isSmallMobileInt = 1;
+        isSmallMobileBool = true;
+      }
+
+      this.mobileInfo.isSmallMobile = isSmallMobileBool;
+      this.$cookie.set("isSmallMobile", isSmallMobileInt, { expires: "1Y" });
+
+      this.$message.success(this.$appMsg.success[1004]);
     },
     onUpdateColumnsInfoClick: function (e) {
       let columns = [],

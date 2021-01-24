@@ -20,20 +20,20 @@
           v-show="loginInfo.type == 0"
           left-icon="user-o"
           placeholder="请输入用户名 (仅支持中英文数字)"
-          class="login-e71832eb64a3978b00a7d37f407b158e"
+          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e"
         />
         <van-field
           v-model="loginInfo.data.email"
           left-icon="/img/app-icons/email.png"
           placeholder="请输入邮箱"
-          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.password"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入密码"
-          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.newPassword"
@@ -41,14 +41,14 @@
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
-          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.uin"
           v-show="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
-          class="login-e71832eb64a3978b00a7d37f407b158e app-icon_ex-3079036920f9bee746cf7baffffb950b"
+          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
         />
       </van-cell-group>
     </div>

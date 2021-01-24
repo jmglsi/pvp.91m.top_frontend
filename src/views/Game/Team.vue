@@ -30,7 +30,7 @@
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           :text="data.name"
           :icon="data.logo"
-          class="game-01d29acb32059f53e7a0297991662475"
+          icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
           @click="onUpdateTeamClick(data, index)"
         />
       </van-grid>

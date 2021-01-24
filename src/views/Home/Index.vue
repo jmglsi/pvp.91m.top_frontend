@@ -78,7 +78,7 @@ export default {
           .confirm({
             title: "温馨提示【" + updateDay + "】",
             message:
-              "您已经很久没有更新过本站辣\r页面有可能发生了较大的变化\r建议清除缓存重新添加到桌面",
+              "您已经很久没有更新过本站啦\r页面有可能发生了较大的变化\r建议清除缓存重新添加到桌面",
           })
           .then(() => {
             // on confirm
