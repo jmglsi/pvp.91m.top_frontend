@@ -5,6 +5,7 @@ import {
     Dropdown,
     Icon,
     Menu,
+    Tooltip,
     Message,
     Notification,
     Timeline
@@ -14,6 +15,7 @@ Vue
     .use(Dropdown)
     .use(Icon)
     .use(Menu)
+    .use(Tooltip)
     .use(Message, {
         duration: 5
     })

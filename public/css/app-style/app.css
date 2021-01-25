@@ -116,7 +116,7 @@ span.app-e4d23e841d8e8804190027bce3180fa5 {
 
 span.app-0fc3cfbc27e91ea60a787de13dae3e3c {
     font-size: 10px;
-    margin-top: -7px;
+    margin-top: -6px;
     position: absolute;
     width: 50px;
 }
@@ -142,6 +142,11 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
 span.app-dac41b9450b77c3eb0ab7d8428d004f5 {
     color: #969799;
     font-size: 10px;
+}
+
+div.ant-message,
+div.ant-notification {
+    z-index: 99999999;
 }
 
 div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
@@ -266,11 +271,6 @@ div.app-e827ba0e6873e7ce7ef7c6c58e970609.van-popup {
 
 div.app-aaf877dc2d49f8e1494e6a7dcf8b475c.van-popup {
     height: calc(75% - 3px);
-}
-
-div.ant-message,
-div.ant-notification {
-    z-index: 99999999;
 }
 
 div.van-tabbar-item__text {

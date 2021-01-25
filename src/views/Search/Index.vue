@@ -13,7 +13,7 @@
         >
           <template #action>
             <span
-              @click="search.value ? onSearch(search.value) : null"
+              @click="search.value ? getSearch(search.value) : null"
               class="search-2a142bf567826652e30779a4be011b04"
               >搜索</span
             >
@@ -34,7 +34,7 @@
               <van-grid-item
                 v-for="(data, index) in tableData.search.hotKeywords"
                 :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
-                @click="onSearch(data)"
+                @click="getSearch(data)"
               >
                 <span class="search-8fd6a51f93ef7b5379535e63a5e071cd"
                   ><span
@@ -67,7 +67,7 @@
                 size="medium"
                 color="#ffe1e1"
                 text-color="#ad0000"
-                @click="onSearch(data)"
+                @click="getSearch(data)"
                 class="search-34690b06683636425980897b6bcd33d4"
                 >{{ data }}</van-tag
               >
@@ -121,6 +121,7 @@
           v-model="dataInfo.model"
           v-if="dataInfo.model > -1"
           :ellipsis="false"
+          :before-change="onDataTabsBeforeChange"
           @click="onDataTabsClick"
           color="orange"
           title-active-color="orange"
@@ -144,28 +145,9 @@
           >
           <van-tab title="赛事" />
           <van-tab title="技能和出装" />
-          <van-tab
-            :to="'/hero/' + tableData.heroInfo.id + '/info?show=heroUpdate'"
-            title="更新调整"
-          />
-          <van-tab
-            :to="
-              '/ranking?type=1&heroName=' +
-              tableData.heroInfo.name +
-              '&refresh=1'
-            "
-            title="关系和克制"
-          />
-          <van-tab
-            :to="
-              '/hero/' +
-              tableData.heroInfo.id +
-              '/replay?replayTitle=' +
-              tableData.heroInfo.name +
-              '&teammate=0'
-            "
-            title="对局回顾"
-          />
+          <van-tab title="更新调整" />
+          <van-tab title="关系和克制" />
+          <van-tab title="对局回顾" />
         </van-tabs>
 
         <van-grid :border="false" :column-num="3">
@@ -300,13 +282,13 @@ export default {
   },
   watch: {
     $route: function (to) {
-      if (parseInt(to.query.refresh) == 1) {
-        this.onSearch(to.query.q);
-      }
+      if (to.query.q && parseInt(to.query.refresh) == 1) {
+        this.getSearch(to.query.q);
 
-      if (this.tableData.heroInfo.id > 0) {
-        this.showInfo.searchData = true;
-        this.showInfo.searchHistory = false;
+        if (this.tableData.heroInfo.id > 0) {
+          this.showInfo.searchData = true;
+          this.showInfo.searchHistory = false;
+        }
       }
     },
   },
@@ -345,36 +327,24 @@ export default {
     };
   },
   mounted() {
-    this.showInfo.searchData = true;
-    this.showInfo.searchHistory = false;
-
-    this.onSearch(this.search.value);
-
     setInterval(() => {
       let text = this.tableData.search.placeholder;
 
       this.search.placeholder = text[Math.floor(Math.random() * text.length)];
     }, 5000);
+
+    let searchValue = this.search.value;
+    if (searchValue) {
+      this.showInfo.searchData = true;
+      this.showInfo.searchHistory = false;
+    }
+
+    this.getSearch(searchValue);
   },
   methods: {
-    onSearch: function (value) {
+    getSearch: function (value) {
       this.search.value = value;
 
-      this.getSearch(value);
-
-      if (value) {
-        this.showInfo.searchData = true;
-        this.showInfo.searchHistory = false;
-
-        this.addSearchData(value);
-
-        this.$appPush({ query: { q: value } });
-      } else {
-        this.showInfo.searchData = false;
-        this.showInfo.searchHistory = true;
-      }
-    },
-    getSearch: function (value) {
       this.$axios
         .post(
           this.$appApi.pvp.getSearch,
@@ -389,8 +359,18 @@ export default {
           this.tableData = data;
 
           if (status.code == 200) {
+            this.showInfo.searchData = true;
+            this.showInfo.searchHistory = false;
+
+            this.addSearchData(value);
+
+            this.$appPush({ query: { q: value } });
+
             this.initSearchHistory();
           } else {
+            this.showInfo.searchData = false;
+            this.showInfo.searchHistory = true;
+
             this.$message.error(status.msg);
           }
         });
@@ -418,7 +398,31 @@ export default {
         });
       } else if (e == 2) {
         this.showInfo.skillMenu = true;
+      } else if (e == 3) {
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate",
+        });
+      } else if (e == 4) {
+        this.$appPush({
+          path: "/ranking?type=1&heroName=" + heroInfo.name + "&refresh=1",
+        });
+      } else if (e == 5) {
+        this.$appPush({
+          path:
+            "/hero/" +
+            heroInfo.id +
+            "/replay?replayTitle=" +
+            heroInfo.name +
+            "&teammate=0",
+        });
       }
+    },
+    onDataTabsBeforeChange: function (e) {
+      let change = false;
+
+      e == 0 || e == 2 ? (change = true) : (change = false);
+
+      return change;
     },
     onSkillTabsChange: function (e) {
       let tipsText;

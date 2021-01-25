@@ -14,9 +14,16 @@
         title-active-color="orange"
       >
         <van-tab>
-          <template #title
-            >巅峰赛 (顶端局) <a-icon type="caret-down"
-          /></template>
+          <template #title>
+            巅峰赛 (顶端局) <i class="vxe-icon--funnel" />
+            <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
+              <a-tooltip :visible="showInfo.filterTips" placement="bottomLeft">
+                <template slot="title">
+                  <span>筛选移到这里了哦</span>
+                </template>
+              </a-tooltip>
+            </div>
+          </template>
           <DianFengSai
             v-if="tabsInfo.model == 0"
             :isSmallMobile="isSmallMobile"
@@ -34,7 +41,9 @@
         </van-tab>
 
         <van-tab>
-          <template #title>玩家 (非实时) <a-icon type="caret-down" /></template>
+          <template #title
+            >玩家 (非实时) <i class="vxe-icon--funnel"
+          /></template>
           <WanJia
             v-if="tabsInfo.model == 2"
             :isSmallMobile="isSmallMobile"
@@ -72,9 +81,17 @@
             />
           </van-dropdown-menu>
         </div>
-        <div class="ranking-5728d19b81c17607842cb7befeef3152">
+        <div
+          @click="
+            $appPush({
+              path: '/search',
+              query: { q: '大佬们快来加群', refresh: 1 },
+            })
+          "
+          class="ranking-5728d19b81c17607842cb7befeef3152"
+        >
           <span class="ranking-4da12add5b0c1920dcde6c5627d30422"
-            >您的分享是我更新的动力</span
+            >您的分享是我更新的动力 ( •̀ ω •́ )y</span
           >
         </div>
       </van-action-sheet>
@@ -132,6 +149,7 @@ export default {
         model: 0,
       },
       showInfo: {
+        filterTips: true,
         filterMenu: false,
         shield: false,
       },
@@ -187,6 +205,7 @@ export default {
   },
   mounted() {
     let route = this.$route.query,
+      rankingFilterTips = this.$cookie.get("rankingFilterTips"),
       isSmallMobile = this.$cookie.get("isSmallMobile"),
       isSmallMobileInt = parseInt(isSmallMobile) || 0;
 
@@ -194,6 +213,16 @@ export default {
     this.tabsInfo.model = parseInt(route.type) || 0;
     this.bid = parseInt(route.bid) || 0;
     this.cid = parseInt(route.cid) || 0;
+
+    if (rankingFilterTips == undefined) {
+      this.$cookie.set("rankingFilterTips", 1, { expires: "1Y" });
+
+      setTimeout(() => {
+        this.showInfo.filterTips = false;
+      }, 5000);
+    } else {
+      this.showInfo.filterTips = false;
+    }
 
     if (isSmallMobile == undefined && this.$appHeight < 575) {
       this.$dialog
@@ -231,22 +260,24 @@ export default {
         e == 0 || e == 2
           ? (this.showInfo.filterMenu = true)
           : (this.showInfo.filterMenu = false);
-      }, 1000);
+      }, 500);
     },
     onDropdownMenuChange: function () {
-      let tabsInfo = this.tabsInfo;
+      let tabsInfo = this.tabsInfo,
+        bidInfo = this.bidInfo,
+        cidInfo = this.cidInfo;
 
-      this.bid = this.bidInfo.model;
-      this.cid = this.cidInfo.model;
+      this.bid = bidInfo.model;
+      this.cid = cidInfo.model;
 
       if (tabsInfo.model == 0) {
-        this.dfsAreaInfo.model = this.bid;
-        this.dfsPositionInfo.model = this.cid;
+        this.dfsAreaInfo = bidInfo;
+        this.dfsPositionInfo = cidInfo;
       }
 
       if (tabsInfo.model == 2) {
-        this.wjAreaInfo.model = this.bid;
-        this.wjShieldInfo.model = this.cid;
+        this.wjAreaInfo.model = bidInfo;
+        this.wjShieldInfo.model = cidInfo;
       }
 
       this.$appPush({

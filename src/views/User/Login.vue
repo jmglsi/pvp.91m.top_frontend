@@ -82,30 +82,24 @@
     </div>
 
     <div class="login-ae64b9ce80d3b20870647479c735eeb0">
-      <div class="login-402e57c104da1741bd87140cc8e3633f">
-        有任何意见建议都可以加群
-      </div>
-      <div class="login-2707770f6b9a7f3321a020d1bcd5dd9d">
-        <a
-          target="_blank"
-          href="//qm.qq.com/cgi-bin/qm/qr?k=47VZ3jNzGKzf4SYjsYCWiOS4lqljpQww&jump_from=webapi"
-          ><img
-            border="0"
-            src="//pub.idqqimg.com/wpa/images/group.png"
-            alt="王者荣耀扯淡游戏1群"
-            title="王者荣耀扯淡游戏1群"
-            class="login-414c54d9374ac490e9773a8c5f357427" /></a
-        >&nbsp;
-        <a
-          target="_blank"
-          href="//qm.qq.com/cgi-bin/qm/qr?k=CEFsriXK1TM2RJa9BioWhfWI4IYrAkJj&jump_from=webapi"
-          ><img
-            border="0"
-            src="//pub.idqqimg.com/wpa/images/group.png"
-            alt="奇迹的秘密小窝"
-            title="奇迹的秘密小窝"
-            class="login-414c54d9374ac490e9773a8c5f357427"
-        /></a>
+      <div
+        @click="
+          $appPush({
+            path: '/search',
+            query: { q: '大佬们快来加群', refresh: 1 },
+          })
+        "
+        class="login-2707770f6b9a7f3321a020d1bcd5dd9d"
+      >
+        <div class="login-402e57c104da1741bd87140cc8e3633f">
+          有任何意见建议都可以加群
+        </div>
+        <img
+          src="//pub.idqqimg.com/wpa/images/group.png"
+          alt="游戏群"
+          title="游戏群"
+          class="login-414c54d9374ac490e9773a8c5f357427"
+        />
       </div>
     </div>
 
