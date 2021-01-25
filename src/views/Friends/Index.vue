@@ -204,7 +204,6 @@ export default {
 
             if (postData != {} && data.openId != openId) {
               this.$appPush({
-                path: "/friends",
                 query: { openId: data.openId },
               });
             }

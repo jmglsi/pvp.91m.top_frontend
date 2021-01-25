@@ -246,6 +246,12 @@ export default {
   },
   methods: {
     onRankingTabsClick: function (e) {
+      let tabsInfo = this.tabsInfo;
+
+      this.$appPush({
+        query: { type: tabsInfo.model },
+      });
+
       if (e == 0) {
         this.bidInfo = this.dfsAreaInfo;
         this.cidInfo = this.dfsPositionInfo;
@@ -267,25 +273,21 @@ export default {
         bidInfo = this.bidInfo,
         cidInfo = this.cidInfo;
 
-      this.bid = bidInfo.model;
-      this.cid = cidInfo.model;
-
       if (tabsInfo.model == 0) {
-        this.dfsAreaInfo = bidInfo;
-        this.dfsPositionInfo = cidInfo;
+        this.dfsAreaInfo.model = bidInfo.model;
+        this.dfsPositionInfo.model = cidInfo.model;
       }
 
       if (tabsInfo.model == 2) {
-        this.wjAreaInfo.model = bidInfo;
-        this.wjShieldInfo.model = cidInfo;
+        this.wjAreaInfo.model = bidInfo.model;
+        this.wjShieldInfo.model = cidInfo.model;
       }
 
       this.$appPush({
-        path: "/ranking",
         query: {
           type: tabsInfo.model,
-          bid: this.bid,
-          cid: this.cid,
+          bid: bidInfo.model,
+          cid: cidInfo.model,
           refresh: 1,
         },
       });

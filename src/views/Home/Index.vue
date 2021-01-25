@@ -8,7 +8,7 @@
         :ellipsis="false"
         :swipeable="true"
         :sticky="true"
-        @change="$appPush({ path: '/', query: { type: tabsInfo.model } })"
+        @change="$appPush({ query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
         color="orange"
