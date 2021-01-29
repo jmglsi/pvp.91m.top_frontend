@@ -13,7 +13,7 @@
         @click-left="
           $appPush({
             path: '/search',
-            query: { q: routeInfo.from.heroName, from: 'heroInfo' },
+            query: { q: routeInfo.from.heroName, from: 'heroInfo', refresh: 1 },
           })
         "
         @click-right="$message.info($appMsg.info[1004])"

@@ -80,7 +80,7 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-column title="出场率越低,波动越大 (%)">
+        <vxe-table-column title="出场越低,波动越大 (%)">
           <vxe-table-column
             title="禁用"
             field="allBanRate"

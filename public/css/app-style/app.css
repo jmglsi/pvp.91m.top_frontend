@@ -319,3 +319,15 @@ div.app-1de7efdd403ec02d55f5c1d9557a2fc4 img.ranking-b798abe6e1b1318ee36b0dcb3fb
     width: 35px;
     height: 35px;
 }
+
+div.app-0353ac5a7e2d6e9a6a0e652c63b2832a {
+    z-index: 1;
+}
+
+div.app-0353ac5a7e2d6e9a6a0e652c63b2832a img.van-icon__image {
+    width: 40px;
+    height: 40px;
+    margin-top: -21px;
+    border: 3px solid white;
+    border-radius: 100%;
+}

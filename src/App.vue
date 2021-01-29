@@ -28,6 +28,9 @@
           :icon="data.icon"
           :to="data.to"
           :name="data.name"
+          :class="
+            data.isBig == true ? 'app-0353ac5a7e2d6e9a6a0e652c63b2832a' : null
+          "
           icon-prefix="app-e0c3b278eeb2cab05f548d7af0f2c949"
         >
           {{ data.text }}
