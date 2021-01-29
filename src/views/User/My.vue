@@ -453,7 +453,7 @@ export default {
         globalBP: "//www.yuque.com/jmglsi/pvp/gbpl91",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
-        beian: "http://beian.miit.gov.cn",
+        beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
       loginInfo: {
         certification: {

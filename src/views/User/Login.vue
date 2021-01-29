@@ -91,9 +91,6 @@
         "
         class="login-2707770f6b9a7f3321a020d1bcd5dd9d"
       >
-        <div class="login-402e57c104da1741bd87140cc8e3633f">
-          有任何意见建议都可以加群
-        </div>
         <img
           src="//pub.idqqimg.com/wpa/images/group.png"
           alt="游戏群"
