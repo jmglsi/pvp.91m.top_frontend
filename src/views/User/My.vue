@@ -132,7 +132,7 @@
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
-        title=""
+        title=" "
         class="my-abf7b3191e2a24c6fc3c008124bcf0d4"
       >
         <van-cell
@@ -258,18 +258,18 @@
         class="my-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell
-          icon="question-o"
-          title="感谢伙伴们"
+          icon="comment-o"
+          title="意见建议反馈"
+          value="自豪的使用吐槽"
+          is-link
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
+        />
+        <van-cell
+          icon="friends-o"
+          title="感谢各位伙伴"
           value="自豪的使用语雀"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
-        />
-        <van-cell
-          icon="comment-o"
-          title="吐个槽"
-          value="jmglsi (苏苏)"
-          is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
         />
       </van-cell-group>
     </div>
@@ -450,7 +450,7 @@ export default {
       copyData: "",
       isLogin: false,
       url: {
-        globalBP: "//www.yuque.com/jmglsi/pvp/gbpl91",
+        globalBP: "//support.qq.com/products/305514/faqs-more/#classifyId=50848",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
