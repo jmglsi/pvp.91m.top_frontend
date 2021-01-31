@@ -36,7 +36,7 @@
               >{{ data.usedtime }}</van-tag
             >
             <van-tag
-              v-if="replay.teammate == false"
+              v-if="!replay.teammate"
               round
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
@@ -48,7 +48,7 @@
           </div>
 
           <div
-            v-if="replay.teammate == false"
+            v-if="!replay.teammate"
             class="hero-f01902c0d0136ca30fe1034f339964ba"
           >
             <van-grid

@@ -2,7 +2,8 @@
   <div class="login-home">
     <div class="my-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
-        :right-text="showInfo.editType == false ? '编辑' : '编辑中'"
+        v-if="isLogin"
+        :right-text="!showInfo.editType ? '编辑' : '编辑中'"
         :border="false"
         :fixed="true"
         :placeholder="true"
@@ -35,7 +36,7 @@
       </van-nav-bar>
     </div>
 
-    <div v-show="isLogin == false" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
+    <div v-if="!isLogin" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
       <van-cell-group
         :border="false"
         title=" "
@@ -197,7 +198,7 @@
               </li>
             </ul>
             <span
-              v-show="loginInfo.heroList.length == 0"
+              v-if="loginInfo.heroList.length == 0"
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
               @click="$message.info($appMsg.info[1015])"
               >未设置</span
@@ -260,24 +261,22 @@
         <van-cell
           icon="comment-o"
           title="意见建议反馈"
-          value="自豪的使用吐槽"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
         />
         <van-cell
           icon="friends-o"
           title="感谢各位伙伴"
-          value="自豪的使用语雀"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
         />
       </van-cell-group>
     </div>
 
-    <div v-show="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
+    <div v-if="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
       <van-cell-group
         :border="false"
-        title=""
+        title=" "
         class="my-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell>
@@ -298,7 +297,7 @@
     <div class="my-111fb4d92036323891a140cd49383f86">
       <van-cell-group
         :border="false"
-        title=""
+        title=" "
         class="my-b990d992f06c8db21d6b58c25f843529"
       >
         <van-cell
@@ -450,7 +449,8 @@ export default {
       copyData: "",
       isLogin: false,
       url: {
-        globalBP: "//support.qq.com/products/305514/faqs-more/#classifyId=50848",
+        globalBP:
+          "//support.qq.com/products/305514/faqs-more/#classifyId=50848",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
         beian: "//beian.miit.gov.cn/#/Integrated/index",

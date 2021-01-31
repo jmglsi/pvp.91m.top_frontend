@@ -49,7 +49,7 @@
         </div>
 
         <div
-          v-show="showInfo.searchHistory == true"
+          v-show="showInfo.searchHistory"
           class="search-a79b6044b2b3a5a9bce4cb65bd80e774"
         >
           <van-cell-group
@@ -85,7 +85,7 @@
     </div>
 
     <div
-      v-if="showInfo.searchData == true && tableData.heroInfo.id != null"
+      v-if="showInfo.searchData && tableData.heroInfo.id"
       class="search-f63b407c95e4f2db4c44e27b3a8d136b"
     >
       <van-cell-group
@@ -154,7 +154,7 @@
                 tableData.heroInfo.allBanRate >= 20 &&
                 tableData.heroInfo.allWinRate >= 50
                   ? 'ranking-bda9643ac6601722a28f238714274da4'
-                  : ''
+                  : null
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
@@ -167,7 +167,7 @@
               :class="
                 tableData.heroInfo.allPickRate >= 30
                   ? 'ranking-48d6215903dff56238e52e8891380c8f'
-                  : ''
+                  : null
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
@@ -182,7 +182,7 @@
                   tableData.heroInfo.allPickRate >= 30) &&
                 tableData.heroInfo.allWinRate >= 50
                   ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
-                  : ''
+                  : null
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >

@@ -1,5 +1,5 @@
 <template>
-  <div @click="isPortrait = false" v-if="isPortrait" class="game-bp-portrait">
+  <div v-if="isPortrait" @click="isPortrait = false" class="game-bp-portrait">
     <div slot-scope="" class="game-a76e75b5854094183e66c274e1d276e9">
       <img v-lazy="'/img/app-icons/landscape.png'" width="100" height="100" />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
@@ -7,10 +7,7 @@
       </div>
     </div>
   </div>
-  <div
-    v-else-if="isPortrait == false"
-    class="app-9fc0eb5a934dba03cc266a49b8ec51fb"
-  >
+  <div v-else-if="!isPortrait" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
     <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">{{
         tabsInfo.model % 2 == 0 ? team.team_1.name : team.team_2.name
@@ -50,7 +47,7 @@
                   bpMode == 'edit' &&
                   gameInfo.result.rows[tabsInfo.model].stepsNow == index
                     ? blueStepsClass
-                    : ''
+                    : null
                 "
                 width="30"
                 height="30"
@@ -94,7 +91,7 @@
                   bpMode == 'edit' &&
                   gameInfo.result.rows[tabsInfo.model].stepsNow == index
                     ? redStepsClass
-                    : ''
+                    : null
                 "
                 width="30"
                 height="30"
@@ -152,7 +149,7 @@
                       bpMode == 'edit' &&
                       gameInfo.result.rows[tabsInfo.model].stepsNow == index
                         ? blueStepsClass
-                        : ''
+                        : null
                     "
                     :width="$appIsMobile ? 40 : 55"
                     :height="$appIsMobile ? 40 : 55"
@@ -164,12 +161,12 @@
           </div>
           <div
             v-show="bpMode == 'edit'"
-            @click="onWinCampClick(1)"
             :style="
               $appIsMobile
                 ? { height: '275px' }
                 : { height: $appHeight - 175 + 'px' }
             "
+            @click="onWinCampClick(1)"
             class="game-d75e14b5c8f13e894fe9bf9d5426c198"
           />
         </van-col>
@@ -221,7 +218,6 @@
                       @click="onGamePickHeroClick(data)"
                     >
                       <van-tag
-                        round
                         v-if="
                           gameInfo.result.rows[
                             tabsInfo.model
@@ -230,6 +226,7 @@
                             data.id
                           )
                         "
+                        round
                         color="red"
                         class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
                         >已禁</van-tag
@@ -283,7 +280,6 @@
                       @click="onGamePickHeroClick(data)"
                     >
                       <van-tag
-                        round
                         v-if="
                           gameInfo.result.rows[
                             tabsInfo.model
@@ -292,6 +288,7 @@
                             data.id
                           )
                         "
+                        round
                         color="red"
                         class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
                         >已禁</van-tag
@@ -366,7 +363,7 @@
                       bpMode == 'edit' &&
                       gameInfo.result.rows[tabsInfo.model].stepsNow == index
                         ? redStepsClass
-                        : ''
+                        : null
                     "
                     :width="$appIsMobile ? 40 : 55"
                     :height="$appIsMobile ? 40 : 55"
@@ -378,12 +375,12 @@
           </div>
           <div
             v-show="bpMode == 'edit'"
-            @click="onWinCampClick(2)"
             :style="
               $appIsMobile
                 ? { height: '275px' }
                 : { height: $appHeight - 175 + 'px' }
             "
+            @click="onWinCampClick(2)"
             class="game-251504ba219ea8c3175f47b73bdde6e6"
           />
         </van-col>
@@ -541,8 +538,8 @@
     <!-- 右下角 -->
 
     <van-popup
-      v-if="showInfo.trend"
       v-model="showInfo.trend"
+      v-if="showInfo.trend"
       class="game-d50ac6153978bdf3870b68c8d66e8d53"
     >
       <GameLine

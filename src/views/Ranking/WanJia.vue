@@ -18,9 +18,9 @@
               "
             >
               <van-tag
-                mark
                 v-if="row.tag"
                 :color="row.tag.color"
+                mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
                 >{{ row.tag.text }}</van-tag

@@ -16,7 +16,7 @@
     </div>
 
     <div
-      v-if="trendType == 0 && showInfo.autoPlayTrend == true"
+      v-if="showInfo.autoPlayTrend && trendType == 0"
       class="hero-f6d50810d5b150ebd421cc944d2597a5"
     >
       <van-switch

@@ -39,12 +39,12 @@
             :color="data.calendar.color"
           >
             <van-tag
-              round
               v-show="data.calendar.day"
               :color="data.calendar.color"
               @click="
                 heroId > 0 ? onOpenHeroUpdateTextClick(heroId, data) : null
               "
+              round
               class="update-5a0c2e4611419b82b55675d035764007"
               >{{ data.calendar.day }}</van-tag
             >
@@ -81,11 +81,10 @@
               <span
                 v-for="(itemHeroId, index) in data.items"
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
-                v-show="itemHeroId != heroId"
                 @click="
-                  itemHeroId > 900
-                    ? ''
-                    : $appPush({ path: '/hero/' + itemHeroId + '/info' })
+                  itemHeroId < 900 && itemHeroId != heroId
+                    ? $appPush({ path: '/hero/' + itemHeroId + '/info' })
+                    : null
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"
               >
@@ -100,7 +99,7 @@
                         '.jpg'
                   "
                   @click="
-                    itemHeroId > 900 ? $message.info($appMsg.info[1000]) : ''
+                    itemHeroId > 900 ? $message.info($appMsg.info[1000]) : null
                   "
                   class="update-5d39f3848925994b52ec52fba934577c"
                 />
@@ -146,9 +145,7 @@
       <van-dialog
         v-model="showInfo.dialog"
         @close="
-          showInfo.checked == true
-            ? onHeroUpdateTextCopy(heroId, tableDataRow)
-            : null
+          showInfo.checked ? onHeroUpdateTextCopy(heroId, tableDataRow) : null
         "
       >
         <template #title>
@@ -158,9 +155,9 @@
           >&nbsp;
           <span class="update-50d683cbc99c635a03f18ca2fcfbe70b"
             ><van-switch
+              v-model="showInfo.checked"
               size="15px"
               class="update-0ae9adc9418f0f446d0b49ef7e49e94c"
-              v-model="showInfo.checked"
           /></span>
         </template>
         <div
