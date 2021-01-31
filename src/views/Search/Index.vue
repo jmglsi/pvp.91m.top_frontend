@@ -10,12 +10,7 @@
           @clear="onClearInputData"
           @cancel="$router.go(-1)"
           @search="search.value ? getSearch(search.value) : null"
-          show-action
-        >
-          <template #action>
-            <span class="search-2a142bf567826652e30779a4be011b04">搜索</span>
-          </template>
-        </van-search>
+        />
       </van-sticky>
     </div>
 
