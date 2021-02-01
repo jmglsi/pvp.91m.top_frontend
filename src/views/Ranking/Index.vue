@@ -180,10 +180,10 @@ export default {
         model: 0,
         options: [
           { text: "全部", value: 0 },
-          { text: "安卓 手Q", value: 1 },
-          { text: "苹果 手Q", value: 2 },
-          { text: "安卓微信", value: 3 },
-          { text: "苹果微信", value: 4 },
+          { text: "安卓QQ", value: 1 },
+          { text: "苹果QQ", value: 2 },
+          { text: "安卓WX", value: 3 },
+          { text: "苹果WX", value: 4 },
         ],
       },
       wjShieldInfo: {

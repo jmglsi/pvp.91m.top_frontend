@@ -10,7 +10,7 @@ Vue.prototype.$appInfo = {
 }
 
 Vue.prototype.$appColumnsInfo = {
-    area: ["安卓手Q", "苹果手Q", "安卓微信", "苹果微信"],
+    area: ["安卓QQ", "苹果QQ", "安卓WX", "苹果WX"],
     province: [
         "安徽省",
         "澳门特别行政区",
