@@ -26,10 +26,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/hero-radar.css");
-</style>
-
 <script>
 import VeRadar from "v-charts/lib/radar.common";
 
@@ -147,3 +143,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+div.hero-d57ac45256849d9b13e2422d91580fb9 {
+  margin: 25px auto;
+  max-width: 500px;
+  text-align: center;
+  width: 85%;
+  z-index: 1;
+}
+</style>

@@ -1,7 +1,13 @@
 <template>
   <div v-if="isPortrait" @click="isPortrait = false" class="game-bp-portrait">
     <div slot-scope="" class="game-a76e75b5854094183e66c274e1d276e9">
-      <img v-lazy="'/img/app-icons/landscape.png'" width="100" height="100" />
+      <img
+        v-lazy="
+          '//img06.mifile.cn/v1/MI_542ED8B1722DC/a04acc27d66ac47618f6c48652c2c25f.png'
+        "
+        width="100"
+        height="100"
+      />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
         请把设备横过来 或 点击这里切换横屏 ;D
       </div>
@@ -53,9 +59,12 @@
                 height="30"
                 class="game-5de9dd2a5714dd606db0e0fa1611c227"
               />
-              <AppLock
-                width="25"
-                height="25"
+              <img
+                v-lazy="
+                  '//img07.mifile.cn/v1/MI_542ED8B1722DC/2141e6eeea75f51e749297dafa6716b4.png'
+                "
+                width="20"
+                height="20"
                 class="game-dce7c4174ce9323904a934a486c41288"
               />
             </span>
@@ -97,9 +106,12 @@
                 height="30"
                 class="game-221cf04d9a9e32c6af24502f96e3ecfe"
               />
-              <AppLock
-                width="25"
-                height="25"
+              <img
+                v-lazy="
+                  '//img07.mifile.cn/v1/MI_542ED8B1722DC/2141e6eeea75f51e749297dafa6716b4.png'
+                "
+                width="20"
+                height="20"
                 class="game-dce7c4174ce9323904a934a486c41288"
               />
             </span>
@@ -599,15 +611,10 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/game-global-BP.css");
-</style>
-
 <script>
 export default {
   name: "GameGlobalBP",
   components: {
-    AppLock: (resolve) => require(["@/assets/Icons/AppLock.vue"], resolve),
     GameLine: (resolve) => require(["@/components/Game/Line.vue"], resolve),
   },
   data() {
@@ -655,7 +662,7 @@ export default {
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
       author: {
         name: "加载中",
-        logo: "/img/app-icons/kpl.png",
+        logo: "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
         actions: [],
       },
       team: {
@@ -1247,3 +1254,186 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img.game-eee32796c3fdfc147115c9f6e875c090,
+img.game-aa95efe1c5d39e5e9389ca5833e63fbe {
+  border-radius: 10px;
+  margin: 5px;
+}
+
+img.game-5de9dd2a5714dd606db0e0fa1611c227,
+img.game-221cf04d9a9e32c6af24502f96e3ecfe {
+  border-radius: 100%;
+  margin: 5px;
+}
+
+img.game-dce7c4174ce9323904a934a486c41288 {
+    margin-left: -15px;
+    margin-top: 20px;
+    position: absolute;
+}
+
+span.game-80653328482d7cba8da3f0fa033b0c12 {
+  margin: 0 5px;
+}
+
+span.game-0db3e75efe3faa0cee4451fb55bc4c53 {
+  font-size: 20px;
+}
+
+span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
+  position: absolute;
+  top: 2px;
+  z-index: 1;
+}
+
+div.van-tabs__wrap {
+  z-index: 2;
+}
+
+div.game-bp-portrait {
+  margin-top: 60%;
+}
+
+div.game-d75e14b5c8f13e894fe9bf9d5426c198,
+div.game-251504ba219ea8c3175f47b73bdde6e6 {
+  position: absolute;
+  top: 80px;
+  width: 50px;
+}
+
+div.game-d75e14b5c8f13e894fe9bf9d5426c198 {
+  left: 0;
+}
+
+div.game-251504ba219ea8c3175f47b73bdde6e6 {
+  right: 0;
+}
+
+div.game-b3d70a861f68652bf97d7a26bf421d4f {
+  color: red;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+div.game-bd40579650e3f651e222aef268d5c8ae {
+  margin-top: 10px;
+}
+
+img.game-1cf3b0809c3dde16d56153690bc902a2 {
+  animation: blueTwinkle 800ms ease-out infinite alternate;
+  border: 2px solid rgb(0, 0, 255, 0.5) !important;
+}
+
+@keyframes blueTwinkle {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.2), inset 0 0 5px rgba(0, 0, 255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.6),
+      inset 0 0 10px rgba(0, 0, 255, 0.4);
+  }
+}
+
+img.game-99b844b6785d8d7378bbc2b1401af365 {
+  animation: redTwinkle 800ms ease-out infinite alternate;
+  border: 2px solid rgb(255, 0, 0, 0.5) !important;
+}
+
+@keyframes redTwinkle {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6),
+      inset 0 0 10px rgba(255, 0, 0, 0.4);
+  }
+}
+
+i.game-8d74837b1dc10576d7757cfd35b4661d img.van-icon__image {
+  margin-top: -3px;
+}
+
+div.game-87740aa9337e54dbad53ec95089dca77 {
+  background-color: white;
+}
+
+div.game-beedfb16b1c81d2901c32b6dcc2939d0,
+div.game-173f312c43fe32a4f01c84d1cf0520b1 {
+  margin: 3px;
+  position: fixed;
+}
+
+div.game-beedfb16b1c81d2901c32b6dcc2939d0,
+div.game-173f312c43fe32a4f01c84d1cf0520b1 {
+  right: 95px;
+}
+
+div.game-beedfb16b1c81d2901c32b6dcc2939d0 {
+  top: 65px;
+  z-index: 1;
+}
+
+div.game-173f312c43fe32a4f01c84d1cf0520b1 {
+  bottom: 42px;
+  height: 35px;
+  z-index: 1;
+}
+
+div.game-e4e6288c92630a6c237c15442fdb0917 li {
+  float: left;
+  margin: 3px 5px;
+}
+
+div.game-8c9cb4a232c7e88403dddc3a0e589162,
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0,
+div.game-8c9cb4a232c7e88403dddc3a0e589162,
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
+  position: absolute;
+}
+
+div.game-bf2c7b7ad9bcf75cd72e0b4ce30500e3 li {
+  float: left;
+}
+
+div.game-ba9bced6af8121cf6413000a4274ac2b li {
+  float: right;
+}
+
+div.game-8c9cb4a232c7e88403dddc3a0e589162,
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
+  top: 15px;
+  width: 165px;
+}
+
+div.game-8c9cb4a232c7e88403dddc3a0e589162 {
+  left: 25px;
+}
+
+div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
+  right: 25px;
+}
+
+div.game-4863c43e8743ebf1be3f48c5c4519627 {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+div.game-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
+  bottom: 13px;
+}
+
+div.game-5b51012ae7490ea129b5d75ad9b1016c,
+div.game-2d121e51de7a817bff612f1e16fadb8e {
+  font-size: 12px;
+}
+
+div.game-d50ac6153978bdf3870b68c8d66e8d53 {
+  border-radius: 5px;
+  padding: 10px;
+  width: 500px;
+}
+</style>

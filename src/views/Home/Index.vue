@@ -28,18 +28,18 @@
       @click="$appOpenUrl('是否打开外部链接?', null, { path: upyun.url })"
       class="home-72ab9e07378f988922e6c91884048db0"
     >
-      本站由
-      <img v-lazy="upyun.logo" width="75" height="25" />
-      提供CDN加速/云储存服务
+      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">
+        网站由<img
+          v-lazy="upyun.logo"
+          width="75"
+          height="25"
+        />提供CDN加速/云储存服务
+      </span>
     </div>
 
     <AppBottomTabbar height="100px" />
   </div>
 </template>
-
-<style>
-@import url("/css/app-style/home.css");
-</style>
 
 <script>
 export default {
@@ -55,7 +55,7 @@ export default {
       copyData: "",
       upyun: {
         url: "//console.upyun.com/register/?invite=ryM-bovMm",
-        logo: "//i.loli.net/2020/12/11/3u6pTZ9VMdiaA7I.png",
+        logo: "//img03.mifile.cn/v1/MI_542ED8B1722DC/a3d267a418b5913be9e3254efe14532f.png",
       },
       tabsInfo: {
         model: 0,
@@ -103,3 +103,16 @@ export default {
   },
 };
 </script>
+
+<style>
+img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
+  border-radius: unset;
+  height: 100%;
+  width: 100%;
+}
+
+div.home-72ab9e07378f988922e6c91884048db0 {
+  font-size: 12px;
+  margin: 25px;
+}
+</style>

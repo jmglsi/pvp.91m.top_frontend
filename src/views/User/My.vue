@@ -97,7 +97,7 @@
           class="my-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
-            icon="/img/app-icons/team.png"
+            icon="//img06.mifile.cn/v1/MI_542ED8B1722DC/9c36dd7e015e0cbff074365092baee11.png"
             to="/game/team"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
@@ -112,7 +112,7 @@
             </template>
           </van-grid-item>
           <van-grid-item
-            icon="/img/app-icons/engage.png"
+            icon="//img08.mifile.cn/v1/MI_542ED8B1722DC/42b83c2748743e42808d847e9953f1cc.png"
             to="/game/engage"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-308ffde0dc5bd5718dcf0396fcc2a596"
@@ -433,10 +433,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/user-my.css");
-</style>
-
 <script>
 export default {
   name: "MyHome",
@@ -450,7 +446,7 @@ export default {
       isLogin: false,
       url: {
         globalBP:
-          "//support.qq.com/products/305514/faqs-more/#classifyId=50848",
+          "//doc.91m.top/jmglsi/pvp",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
@@ -648,3 +644,52 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img.my-d5ca322453f2986b752e58b11af83d96 {
+  border-radius: 100%;
+}
+
+span.my-25930e3036f13852cb0b29694bbab611 {
+  margin: 0 3px;
+}
+
+span.my-b068931cc450442b63f5b3d276ea4297 {
+  font-size: 13px;
+}
+
+span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
+  margin-left: 5px;
+}
+
+span.my-af99c9298d1eb69981a035d0a15afa20 {
+  position: absolute;
+  right: 30px;
+  top: -5px;
+}
+
+span.my-b60541e817018d568a58a70d5db7fb65 {
+  margin-top: 5px;
+}
+
+span.my-35494217d6a01388d07eccf816b6ea39 {
+  margin-right: 10px;
+}
+
+div.my-7dc22b2c6a992f0232345df41303f5ea
+  div.van-grid
+  div.van-grid-item
+  div.van-grid-item__content
+  span.van-grid-item__text,
+span.my-4646fa4296a7f5dea261e60e00ecd24b {
+  font-size: 20px;
+}
+
+div.my-7dc22b2c6a992f0232345df41303f5ea {
+  text-align: left;
+}
+
+div.my-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
+  font-size: 10px;
+}
+</style>

@@ -28,10 +28,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/hero-line.css");
-</style>
-
 <script>
 import VeLine from "v-charts/lib/line.common";
 
@@ -170,3 +166,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+div.hero-f6d50810d5b150ebd421cc944d2597a5 {
+  left: 7px;
+  margin-top: -30px;
+  position: absolute;
+}
+</style>

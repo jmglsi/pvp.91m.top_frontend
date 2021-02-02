@@ -3,7 +3,6 @@ import Vue from 'vue'
 import 'ant-design-vue/dist/antd.css'
 import {
     Dropdown,
-    Icon,
     Menu,
     Tooltip,
     Message,
@@ -13,7 +12,6 @@ import {
 
 Vue
     .use(Dropdown)
-    .use(Icon)
     .use(Menu)
     .use(Tooltip)
     .use(Message, {

@@ -13,6 +13,7 @@
         "ant-design-vue": "^1.7.2",
         "axios": "^0.20.0",
         "babel-plugin-import": "^1.13.0",
+        "compression-webpack-plugin": "^5.0.1",
         "core-js": "^2.6.5",
         "echarts": "^4.9.0",
         "js-md5": "^0.7.3",
@@ -29,6 +30,7 @@
         "vue-meta": "^2.4.0",
         "vue-router": "^3.4.5",
         "vxe-table": "^2.10.9",
+        "webpack-bundle-analyzer": "^4.4.0",
         "xe-utils": "^2.8.3"
     },
     "devDependencies": {

@@ -117,10 +117,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/ranking.css");
-</style>
-
 <script>
 export default {
   name: "RankingHome",
@@ -219,7 +215,7 @@ export default {
 
       setTimeout(() => {
         this.showInfo.filterTips = false;
-      }, 5000);
+      }, 7500);
     } else {
       this.showInfo.filterTips = false;
     }
@@ -297,3 +293,154 @@ export default {
   },
 };
 </script>
+
+<style>
+img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
+  border-radius: 100%;
+}
+
+span.ranking-f58cc48f5b942c91e57eff48accc5151 {
+  margin-left: -50px;
+  top: 62px;
+}
+
+span.ranking-4da12add5b0c1920dcde6c5627d30422 {
+  margin-top: 25px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+div.vxe-table--main-wrapper {
+  margin-top: -3px;
+}
+
+div.vxe-custom--option-wrapper {
+  left: 0;
+  margin: 15px 0 0 0;
+  width: 215px;
+}
+
+td.vxe-body--column {
+  padding: 12px 0;
+}
+
+td.vxe-body--column div.vxe-cell {
+  font-size: 15px;
+}
+
+td.vxe-body--cloumn .vxe-table.virtual--x .col--ellipsis .vxe-cell,
+.vxe-table.virtual--y .col--ellipsis .vxe-cell {
+  max-height: unset;
+}
+
+td.ranking-bda9643ac6601722a28f238714274da4 div.vxe-cell,
+td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
+td.ranking-48d6215903dff56238e52e8891380c8f div.vxe-cell,
+td.ranking-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
+  font-size: 20px;
+}
+
+div.ranking-home div.van-dropdown-menu__bar {
+  box-shadow: unset;
+}
+
+div.ranking-ebf09abeb7c3db44741d328324915725 {
+  margin-top: 5px;
+  position: absolute;
+  width: 100%;
+}
+
+div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
+  left: -3px;
+  margin-top: 12px;
+  position: absolute;
+  z-index: 2;
+}
+
+div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
+  bottom: 1px;
+}
+
+div.ranking-5728d19b81c17607842cb7befeef3152 {
+  height: 400px;
+}
+
+/*
+缩小前的
+*/
+
+div.ranking-e10ca73b79369d2183f81ca10fb587af
+  img.ranking-3d5f1ffeadf58eb64ef57aef7e53a31e {
+  margin-left: -2px;
+  margin-top: -12px;
+  position: absolute;
+  z-index: 1;
+}
+
+div.ranking-713dd4d0b2e842c08da62ddeec872331
+  img.ranking-95a25d46f98b0ec553d892cc45037d57 {
+  margin-top: -15px;
+  position: absolute;
+}
+
+div.ranking-713dd4d0b2e842c08da62ddeec872331
+  img.ranking-35af5e6c0fc290aa4f2e38d4c8296a03 {
+  left: -7px;
+}
+
+div.ranking-713dd4d0b2e842c08da62ddeec872331
+  img.ranking-fbfe7b256ce6b4df1d03d8022163c6d2 {
+  left: 47px;
+}
+
+div.ranking-713dd4d0b2e842c08da62ddeec872331
+  span.ranking-043052eea2d064cab23119e56f4f640e {
+  left: -22px;
+}
+
+div.ranking-713dd4d0b2e842c08da62ddeec872331
+  span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
+  left: 28px;
+}
+
+div.ranking-713dd4d0b2e842c08da62ddeec872331 {
+  position: absolute;
+}
+
+div.ranking-78117a02d15f1dffe5263f47a220c56b
+  span.ranking-f58cc48f5b942c91e57eff48accc5151 {
+  margin-left: -50px;
+  top: 62px;
+}
+
+/*
+缩小后的
+*/
+
+div.ranking-0b22b207c2b785ceff7a241980f23d14
+  img.ranking-35af5e6c0fc290aa4f2e38d4c8296a03 {
+  left: -3px;
+}
+
+div.ranking-0b22b207c2b785ceff7a241980f23d14
+  img.ranking-fbfe7b256ce6b4df1d03d8022163c6d2 {
+  left: 43px;
+}
+
+div.ranking-0b22b207c2b785ceff7a241980f23d14
+  span.ranking-043052eea2d064cab23119e56f4f640e {
+  left: -20px;
+}
+
+div.ranking-0b22b207c2b785ceff7a241980f23d14
+  span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
+  left: 27px;
+}
+
+div.ranking-5d308b6a0da77ffb33c63fc542f58746
+  span.ranking-f58cc48f5b942c91e57eff48accc5151 {
+  margin-left: -43px;
+  top: 47px;
+}
+</style>

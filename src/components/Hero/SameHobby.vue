@@ -10,7 +10,9 @@
           v-for="(data, index) in tableData.result.rows"
           :key="'hero-same-hobby-418bbf1206aab9cb337c42b4d2c1d6ec-' + index"
           class="app-1951b6e7c82938dd7446a41e829b247b"
-          @click="$appPush({ path: '/friends', query: { openId: data.openId } })"
+          @click="
+            $appPush({ path: '/friends', query: { openId: data.openId } })
+          "
         >
           <img
             v-if="data.fightPowerIcon"
@@ -45,10 +47,6 @@
     </div>
   </div>
 </template>
-
-<style>
-@import url("/css/app-style/hero-same-hobby.css");
-</style>
 
 <script>
 export default {
@@ -97,3 +95,27 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+img.hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767 {
+  border-radius: unset;
+  margin-right: -35px;
+  margin-top: -45px;
+  position: relative;
+  width: 45px;
+}
+
+ul.hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7 {
+  width: 100%;
+  height: 115px;
+}
+
+div.hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+div.hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c {
+  margin-top: 5px;
+}
+</style>

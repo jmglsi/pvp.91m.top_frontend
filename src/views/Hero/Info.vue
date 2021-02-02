@@ -114,7 +114,10 @@
           @click="$message.info($appMsg.info[1005])"
         >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
-            <AppGold
+            <img
+              v-lazy="
+                '//img06.mifile.cn/v1/MI_542ED8B1722DC/65d2ff54aa494198a72119fe39627e3c.png'
+              "
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -124,7 +127,10 @@
               >{{ hero.info.equMoneyMin || 0 }}</span
             >
 
-            <AppTime
+            <img
+              v-lazy="
+                '//img06.mifile.cn/v1/MI_542ED8B1722DC/57f4613bdb1a0f3e40b154a87b1538a4.png'
+              "
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -320,7 +326,13 @@
             class="hero-59c25466342abdb6746988b245f3a5a6"
             @click="onHeroVoteClick(0)"
           >
-            <AppCry width="50" height="50" />
+            <img
+              v-lazy="
+                '//img06.mifile.cn/v1/MI_542ED8B1722DC/775ce210e6ab76e03cc5a0ff43e46141.png'
+              "
+              width="50"
+              height="50"
+            />
             <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
               circle.info.vote[0].text
             }}</span>
@@ -329,7 +341,13 @@
             class="hero-59c25466342abdb6746988b245f3a5a6"
             @click="onHeroVoteClick(1)"
           >
-            <AppSmile width="50" height="50" />
+            <img
+              v-lazy="
+                '//img08.mifile.cn/v1/MI_542ED8B1722DC/2dfa18ec81ff43a63abf94798f431e8d.png'
+              "
+              width="50"
+              height="50"
+            />
             <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
               circle.info.vote[1].text
             }}</span>
@@ -372,7 +390,7 @@
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
         <van-tabbar-item
-          icon="/img/app-icons/wiki.png"
+          icon="//img07.mifile.cn/v1/MI_542ED8B1722DC/09e4d71b4fc218baad6fcc97ce0b8a96.png"
           name="/"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
@@ -395,10 +413,6 @@
 export default {
   name: "HeroInfo",
   components: {
-    AppGold: (resolve) => require(["@/assets/Icons/AppGold.vue"], resolve),
-    AppTime: (resolve) => require(["@/assets/Icons/AppTime.vue"], resolve),
-    AppCry: (resolve) => require(["@/assets/Icons/AppCry.vue"], resolve),
-    AppSmile: (resolve) => require(["@/assets/Icons/AppSmile.vue"], resolve),
     HeroSkillList: (resolve) =>
       require(["@/components/Hero/SkillList.vue"], resolve),
     HeroEquipmentListALL: (resolve) =>

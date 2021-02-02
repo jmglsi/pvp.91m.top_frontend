@@ -98,10 +98,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/bilibili.css");
-</style>
-
 <script>
 export default {
   name: "BilibiliHome",
@@ -274,3 +270,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+div.bilibili-a47ba339330136bcab5b4c91d5d10882 {
+  left: 30px;
+  margin-top: 18px;
+  position: absolute;
+  z-index: 2;
+}
+
+div.bilibili-71f262d796bed1ab30e8a2d5a8ddee6f {
+  margin-top: 25px;
+}
+</style>

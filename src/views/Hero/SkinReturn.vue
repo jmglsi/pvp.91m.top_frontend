@@ -83,10 +83,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/hero-skin-return.css");
-</style>
-
 <script>
 import VeLine from "v-charts/lib/line.common";
 import "echarts/lib/component/dataZoom";
@@ -155,3 +151,21 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+span.skin-6ccfe2c5d635aa134880d67af43cb1dd {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+div.skin-9eff02d43a97619df7707398ec7099cb {
+  margin-top: 50px;
+}
+
+div.skin-a47113818cd94f1f3221fed0a17e8588 {
+  bottom: 90px;
+  position: fixed;
+  width: 100%;
+  z-index: 99999999;
+}
+</style>
