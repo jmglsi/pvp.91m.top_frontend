@@ -63,7 +63,7 @@
 export default {
   name: "TuiJianHome",
   components: {
-    HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
+    HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   data() {
     return {

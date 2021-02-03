@@ -45,17 +45,17 @@
 export default {
   name: "AppHome",
   components: {
-    TuiJian: (resolve) => require(["@/views/Home/TuiJian.vue"], resolve),
-    Game: (resolve) => require(["@/views/Home/Game.vue"], resolve),
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    TuiJian: () => import("@/views/Home/TuiJian.vue"),
+    Game: () => import("@/views/Home/Game.vue"),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   data() {
     return {
       copyData: "",
       upyun: {
         url: "//console.upyun.com/register/?invite=ryM-bovMm",
-        logo: "//img03.mifile.cn/v1/MI_542ED8B1722DC/a3d267a418b5913be9e3254efe14532f.png",
+        logo:
+          "//img03.mifile.cn/v1/MI_542ED8B1722DC/a3d267a418b5913be9e3254efe14532f.png",
       },
       tabsInfo: {
         model: 0,

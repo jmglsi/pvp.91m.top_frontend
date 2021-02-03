@@ -33,7 +33,7 @@ export default {
   name: "HeroRadar",
   components: {
     VeRadar,
-    VueTagsInput: (resolve) => require(["@johmun/vue-tags-input"], resolve),
+    VueTagsInput: () => import("@johmun/vue-tags-input"),
   },
   props: {
     tabsModel: {

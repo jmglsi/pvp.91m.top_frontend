@@ -72,8 +72,7 @@
 export default {
   name: "GameEngage",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   data() {
     return {

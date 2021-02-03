@@ -121,11 +121,10 @@
 export default {
   name: "RankingHome",
   components: {
-    DianFengSai: (resolve) =>
-      require(["@/views/Ranking/DianFengSai.vue"], resolve),
-    GuanXi: (resolve) => require(["@/views/Ranking/GuanXi.vue"], resolve),
-    WanJia: (resolve) => require(["@/views/Ranking/WanJia.vue"], resolve),
-    ZhuangBei: (resolve) => require(["@/views/Ranking/ZhuangBei.vue"], resolve),
+    DianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
+    GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
+    WanJia: () => import("@/views/Ranking/WanJia.vue"),
+    ZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
   },
   watch: {
     $route: function (to) {

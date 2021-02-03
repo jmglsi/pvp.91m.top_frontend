@@ -16,10 +16,6 @@
   </div>
 </template>
 
-<style>
-@import url("/css/app-style/hero-line.css");
-</style>
-
 <script>
 import VeLine from "v-charts/lib/line.common";
 

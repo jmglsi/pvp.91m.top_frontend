@@ -149,8 +149,7 @@
 export default {
   name: "FriendsHome",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   mounted() {
     this.getWebAccountInfo(0);

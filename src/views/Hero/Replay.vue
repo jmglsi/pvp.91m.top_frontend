@@ -134,8 +134,7 @@
 export default {
   name: "HeroReplay",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   data() {
     return {

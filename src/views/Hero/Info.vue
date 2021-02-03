@@ -413,19 +413,16 @@
 export default {
   name: "HeroInfo",
   components: {
-    HeroSkillList: (resolve) =>
-      require(["@/components/Hero/SkillList.vue"], resolve),
-    HeroEquipmentListALL: (resolve) =>
-      require(["@/components/Hero/EquipmentList_All.vue"], resolve),
-    HeroEquipmentListOne: (resolve) =>
-      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
-    HeroLine: (resolve) => require(["@/components/Hero/Line.vue"], resolve),
-    HeroRadar: (resolve) => require(["@/components/Hero/Radar.vue"], resolve),
-    HeroUpdate: (resolve) => require(["@/components/Hero/Update.vue"], resolve),
-    HeroSameHobby: (resolve) =>
-      require(["@/components/Hero/SameHobby.vue"], resolve),
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
+    HeroEquipmentListALL: () =>
+      import("@/components/Hero/EquipmentList_All.vue"),
+    HeroEquipmentListOne: () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
+    HeroLine: () => import("@/components/Hero/Line.vue"),
+    HeroRadar: () => import("@/components/Hero/Radar.vue"),
+    HeroUpdate: () => import("@/components/Hero/Update.vue"),
+    HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   watch: {
     $route: function (to) {

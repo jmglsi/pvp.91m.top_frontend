@@ -259,14 +259,12 @@
 export default {
   name: "SearchHome",
   components: {
-    HeroSkillList: (resolve) =>
-      require(["@/components/Hero/SkillList.vue"], resolve),
-    HeroEquipmentListALL: (resolve) =>
-      require(["@/components/Hero/EquipmentList_All.vue"], resolve),
-    HeroEquipmentListOne: (resolve) =>
-      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
+    HeroEquipmentListALL: () =>
+      import("@/components/Hero/EquipmentList_All.vue"),
+    HeroEquipmentListOne: () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   watch: {
     $route: function (to) {

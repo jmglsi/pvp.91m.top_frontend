@@ -256,10 +256,8 @@ export default {
     },
   },
   components: {
-    EquipmentLine: (resolve) =>
-      require(["@/components/Equipment/Line.vue"], resolve),
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    EquipmentLine: () => import("@/components/Equipment/Line.vue"),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   data() {
     return {

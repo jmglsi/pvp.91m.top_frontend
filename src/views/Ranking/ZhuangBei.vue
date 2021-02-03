@@ -122,8 +122,8 @@
 export default {
   name: "RankingZhuangBei",
   components: {
-    HeroEquipmentListOne: (resolve) =>
-      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
+    HeroEquipmentListOne: () => () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
   },
   props: {
     isSmallMobile: {

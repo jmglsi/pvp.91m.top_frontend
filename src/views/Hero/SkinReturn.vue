@@ -85,6 +85,7 @@
 
 <script>
 import VeLine from "v-charts/lib/line.common";
+
 import "echarts/lib/component/dataZoom";
 import "v-charts/lib/style.css";
 

@@ -437,16 +437,14 @@
 export default {
   name: "MyHome",
   components: {
-    AppBottomTabbar: (resolve) =>
-      require(["@/components/App/BottomTabbar.vue"], resolve),
+    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   data() {
     return {
       copyData: "",
       isLogin: false,
       url: {
-        globalBP:
-          "//doc.91m.top/jmglsi/pvp",
+        globalBP: "//doc.91m.top/jmglsi/pvp",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
         beian: "//beian.miit.gov.cn/#/Integrated/index",

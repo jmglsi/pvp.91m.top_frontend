@@ -424,7 +424,6 @@
                     : null
                 "
               >
-                <a-icon :type="data.icon" />
                 {{ data.title }}
               </a-menu-item>
             </a-menu>
@@ -490,7 +489,10 @@
         <li v-show="showInfo.apps">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" color="black" />
-            <a-menu slot="overlay">
+            <a-menu
+              slot="overlay"
+              class="game-c22cea301eff6baea51a9da08c0a680a"
+            >
               <a-menu-item
                 v-show="
                   bpMode == 'view' &&
@@ -499,13 +501,13 @@
                 "
                 @click="onToolsMenuClick(0)"
               >
-                <a-icon type="minus" />删除本局
+                删除本局
               </a-menu-item>
               <a-menu-item
                 v-show="bpMode == 'view' && gameInfo.result.rows.length < 6"
                 @click="onToolsMenuClick(1)"
               >
-                <a-icon type="plus" />再来一局
+                再来一局
               </a-menu-item>
               <a-menu-item
                 v-show="
@@ -514,12 +516,10 @@
                 "
                 @click="onToolsMenuClick(2)"
               >
-                <a-icon type="retweet" />重置
+                重置本局
               </a-menu-item>
               <a-menu-item @click="onToolsMenuClick(3)">
-                <a-icon
-                  :type="bpMode == 'view' ? 'edit' : 'cloud-upload'"
-                />编辑
+                {{ bpMode == "view" ? "编辑" : "保存" }}本局
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -615,7 +615,7 @@
 export default {
   name: "GameGlobalBP",
   components: {
-    GameLine: (resolve) => require(["@/components/Game/Line.vue"], resolve),
+    GameLine: () => import("@/components/Game/Line.vue"),
   },
   data() {
     return {
@@ -662,7 +662,8 @@ export default {
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
       author: {
         name: "加载中",
-        logo: "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
+        logo:
+          "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
         actions: [],
       },
       team: {
@@ -1269,9 +1270,9 @@ img.game-221cf04d9a9e32c6af24502f96e3ecfe {
 }
 
 img.game-dce7c4174ce9323904a934a486c41288 {
-    margin-left: -15px;
-    margin-top: 20px;
-    position: absolute;
+  margin-left: -15px;
+  margin-top: 20px;
+  position: absolute;
 }
 
 span.game-80653328482d7cba8da3f0fa033b0c12 {
@@ -1420,10 +1421,6 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 {
   position: fixed;
   width: 100%;
   z-index: 1;
-}
-
-div.game-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
-  bottom: 13px;
 }
 
 div.game-5b51012ae7490ea129b5d75ad9b1016c,

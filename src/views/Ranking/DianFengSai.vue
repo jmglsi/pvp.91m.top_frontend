@@ -339,12 +339,11 @@
 export default {
   name: "RankingDianFengSai",
   components: {
-    HeroSkillList: (resolve) =>
-      require(["@/components/Hero/SkillList.vue"], resolve),
-    HeroEquipmentListALL: (resolve) =>
-      require(["@/components/Hero/EquipmentList_All.vue"], resolve),
-    HeroEquipmentListOne: (resolve) =>
-      require(["@/components/Hero/EquipmentList_One.vue"], resolve),
+    HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
+    HeroEquipmentListALL: () =>
+      import("@/components/Hero/EquipmentList_All.vue"),
+    HeroEquipmentListOne: () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
   },
   props: {
     isSmallMobile: {
