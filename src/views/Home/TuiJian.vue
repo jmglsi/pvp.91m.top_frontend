@@ -35,7 +35,7 @@
               <van-tag
                 mark
                 :color="data.tag.color"
-                class="update-a5a5c883f68e45baa83f140e218759f1"
+                class="app-a5a5c883f68e45baa83f140e218759f1"
                 >{{ data.tag.text }}</van-tag
               >
             </van-swipe-item>

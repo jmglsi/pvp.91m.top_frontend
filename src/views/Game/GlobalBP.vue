@@ -555,7 +555,7 @@
       class="game-d50ac6153978bdf3870b68c8d66e8d53"
     >
       <GameLine
-        :gameBPData="
+        :arrData="
           gameInfo.result.rows[tabsInfo.model].blue.pick +
           '|' +
           gameInfo.result.rows[tabsInfo.model].red.pick
@@ -967,7 +967,7 @@ export default {
             teamId_1: teamInfo.team_1.id,
             teamId_2: teamInfo.team_2.id,
             gameWinCamp: gameInfo.win.camp,
-            gameBPData: String(gameInfo.BPOrder),
+            arrData: String(gameInfo.BPOrder),
           })
         )
         .then((res) => {

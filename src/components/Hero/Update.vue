@@ -394,13 +394,6 @@ span.update-26edf9c6ae9f8356043d0e175516cab6 {
   margin-right: 2px;
 }
 
-span.update-a5a5c883f68e45baa83f140e218759f1 {
-  position: absolute;
-  bottom: 25px;
-  z-index: 1;
-  left: 0;
-}
-
 span.update-50d683cbc99c635a03f18ca2fcfbe70b {
   margin-top: 3px;
   position: absolute;

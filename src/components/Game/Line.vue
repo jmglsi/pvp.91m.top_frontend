@@ -33,7 +33,7 @@ export default {
     VeLine,
   },
   props: {
-    gameBPData: {
+    arrData: {
       type: String,
       default: "",
     },
@@ -44,19 +44,19 @@ export default {
   },
   computed: {
     listenChange() {
-      const { gameBPData, trendType } = this;
-      return { gameBPData, trendType };
+      const { arrData, trendType } = this;
+      return { arrData, trendType };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.gameBPData == "") return;
+        if (newValue.arrData == "") return;
 
         this.lineData.result = [];
 
-        this.getGamePrediction(newValue.gameBPData, newValue.trendType);
+        this.getGamePrediction(newValue.arrData, newValue.trendType);
       },
     },
   },
@@ -82,7 +82,7 @@ export default {
       //去除折线图上的小圆点
       return e;
     },
-    getGamePrediction: function (gameBPData, aid) {
+    getGamePrediction: function (arrData, aid) {
       this.lineData = {
         loading: true,
         result: {
@@ -94,7 +94,7 @@ export default {
         .post(
           this.$appApi.game.getGamePrediction + "&aid=" + aid,
           this.$qs.stringify({
-            gameBPData: gameBPData,
+            arrData: arrData,
           })
         )
         .then((res) => {

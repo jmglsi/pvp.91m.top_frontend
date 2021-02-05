@@ -54,31 +54,36 @@ export default {
           model: "/",
           rows: [
             {
-              icon: "//img07.mifile.cn/v1/MI_542ED8B1722DC/817e2d3745bc5e780073f8db30e67fd7.png",
+              icon:
+                "//img07.mifile.cn/v1/MI_542ED8B1722DC/817e2d3745bc5e780073f8db30e67fd7.png",
               to: "/",
               name: "/",
               text: "首页",
             },
             {
-              icon: "//img06.mifile.cn/v1/MI_542ED8B1722DC/0f2deea7f990b594e9db2594a1e681a3.png",
+              icon:
+                "//img06.mifile.cn/v1/MI_542ED8B1722DC/0f2deea7f990b594e9db2594a1e681a3.png",
               to: "/ranking",
               name: "/ranking",
               text: "排行",
             },
             {
-              icon: "//img06.mifile.cn/v1/MI_542ED8B1722DC/053c8e1dd5759f876c75be34cc557edc.png",
+              icon:
+                "//img06.mifile.cn/v1/MI_542ED8B1722DC/053c8e1dd5759f876c75be34cc557edc.png",
               to: "/search",
               name: "/search",
               text: "发现",
             },
             {
-              icon: "//img06.mifile.cn/v1/MI_542ED8B1722DC/245e02223e244ef7adf77912859095ee.png",
+              icon:
+                "//img06.mifile.cn/v1/MI_542ED8B1722DC/245e02223e244ef7adf77912859095ee.png",
               to: "/friends",
               name: "/friends",
               text: "扩列",
             },
             {
-              icon: "//img07.mifile.cn/v1/MI_542ED8B1722DC/a9b17909b07f133a8adb2946be61655f.png",
+              icon:
+                "//img07.mifile.cn/v1/MI_542ED8B1722DC/a9b17909b07f133a8adb2946be61655f.png",
               to: "/my",
               name: "/my",
               text: "我的",
@@ -278,6 +283,13 @@ button.app-4236a440a662cc8253d7536e5aa17942 {
 
 button.app-4236a440a662cc8253d7536e5aa17942 span.van-button__text {
   color: red;
+}
+
+span.app-a5a5c883f68e45baa83f140e218759f1 {
+  position: absolute;
+  bottom: 25px;
+  z-index: 1;
+  left: 0;
 }
 
 span.van-tab__text {
