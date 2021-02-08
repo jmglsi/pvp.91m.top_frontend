@@ -1002,7 +1002,7 @@ export default {
           }
         });
     },
-    gameCampColor(color, index) {
+    gameCampColor: function (color, index) {
       let ret = false;
 
       if (color == 1) {

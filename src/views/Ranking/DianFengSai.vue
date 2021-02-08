@@ -487,7 +487,7 @@ export default {
         this.$message.info(this.$appMsg.info[1011]);
       }
     },
-    filterMethod({ option, row, column }) {
+    filterMethod: function ({ option, row, column }) {
       if (column.property == "allBanRate") {
         return row.allBanRate >= option.data;
       }

@@ -112,6 +112,15 @@ export default new Router({
             component: () =>
                 import ('./views/Hero/Index.vue'),
             children: [{
+                    path: ':id/fightPower',
+                    name: 'heroFightPower',
+                    component: () =>
+                        import ('./views/Hero/FightPower.vue'),
+                    meta: {
+                        title: '牌子',
+                        keepAlive: false
+                    }
+                }, {
                     path: ':id/info',
                     name: 'heroInfo',
                     component: () =>

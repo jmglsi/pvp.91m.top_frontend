@@ -197,7 +197,7 @@ export default {
           this.tableData.loading = false;
         });
     },
-    filterMethod({ option, row, column }) {
+    filterMethod: function ({ option, row, column }) {
       if (column.property == "equipment.id") {
         return row.equipment.type == option.data;
       }

@@ -526,7 +526,7 @@ export default {
     window.addEventListener("scroll", this.scrollTop);
   },
   methods: {
-    scrollTop() {
+    scrollTop: function () {
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop;
     },

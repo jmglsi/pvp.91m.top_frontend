@@ -307,7 +307,7 @@ export default {
           }
         });
     },
-    filterMethod({ option, row, column }) {
+    filterMethod: function ({ option, row, column }) {
       if (column.property == "allPickRate") {
         return row.allPickRate >= option.data;
       }

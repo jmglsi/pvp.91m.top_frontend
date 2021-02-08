@@ -63,7 +63,7 @@ export default {
     this.getGameHome();
   },
   methods: {
-    getGameHome() {
+    getGameHome: function () {
       this.$axios.post(this.$appApi.game.getGameHome).then((res) => {
         this.tableData = res.data.data;
       });
