@@ -17,7 +17,7 @@
           })
         "
         @click-right="$message.info($appMsg.info[1004])"
-        left-text="返回"
+        left-text="搜一搜"
         z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >

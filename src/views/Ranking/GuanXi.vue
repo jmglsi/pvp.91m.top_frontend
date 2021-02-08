@@ -192,7 +192,7 @@
         v-model="showInfo.heroMenu"
         :title="
           tableDataRow.hero_1.name +
-          ' & ' +
+          ' 和 ' +
           tableDataRow.hero_2.name +
           ' 如何操作'
         "
@@ -319,7 +319,7 @@ export default {
           this.copyData =
             "英雄:" +
             row.hero_1.name +
-            " & " +
+            " 和 " +
             row.hero_2.name +
             "" +
             "\r-\r队友胜率:" +

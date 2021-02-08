@@ -122,7 +122,7 @@
 export default {
   name: "RankingZhuangBei",
   components: {
-    HeroEquipmentListOne: () => () =>
+    HeroEquipmentListOne: () => 
       import("@/components/Hero/EquipmentList_One.vue"),
   },
   props: {
