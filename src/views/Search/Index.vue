@@ -186,11 +186,14 @@
             <div>胜率</div>
           </van-grid-item>
         </van-grid>
-        <span class="search-399841f840f75044108804ec30d37405"
-          ><van-icon name="underway-o" />&nbsp;每天 11:30&nbsp;<van-icon
-            name="todo-list-o"
-          />&nbsp;基于 巅峰赛 (顶端局) 统计</span
-        >
+        <span class="search-399841f840f75044108804ec30d37405">
+          <van-icon name="underway-o" />&nbsp;<span
+            class="search-c27c140f08b0252f3027cf077cee2358"
+            >11:30</span
+          >&nbsp;更新&nbsp;&nbsp;
+          <van-icon name="todo-list-o" />
+          基于 巅峰赛 (顶端局) 统计
+        </span>
       </van-cell-group>
     </div>
 
@@ -491,6 +494,10 @@ i.search-a0edf16f0e677f3e28dfd77595f437be img.van-icon__image {
   height: 50px;
   margin-right: 10px;
   width: 50px;
+}
+
+span.search-c27c140f08b0252f3027cf077cee2358 {
+  color: orange;
 }
 
 span.search-34690b06683636425980897b6bcd33d4 {

@@ -129,9 +129,12 @@ export default {
   watch: {
     $route: function (to) {
       this.heroName = to.query.heroName || "";
-      this.tabsInfo.model = parseInt(to.query.type) || 0;
       this.bid = parseInt(to.query.bid) || 0;
       this.cid = parseInt(to.query.cid) || 0;
+
+      if (parseInt(to.query.refresh) == 1) {
+        this.tabsInfo.model = parseInt(to.query.type) || 0;
+      }
     },
   },
   data() {

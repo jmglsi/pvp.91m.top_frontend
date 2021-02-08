@@ -9,8 +9,15 @@
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="英雄" fixed="left">
-          <vxe-table-column title="1" field="heroId_1" width="75">
+        <vxe-table-column
+          :title="heroName == '' ? '英雄' : heroName"
+          fixed="left"
+        >
+          <vxe-table-column
+            :title="heroName == '' ? '1' : '和'"
+            field="heroId_1"
+            width="75"
+          >
             <template v-slot="{ row }">
               <div
                 :class="
@@ -32,7 +39,11 @@
               </div>
             </template>
           </vxe-table-column>
-          <vxe-table-column title="2" field="heroId_2" width="75">
+          <vxe-table-column
+            :title="heroName == '' ? '2' : '↓'"
+            field="heroId_2"
+            width="75"
+          >
             <template v-slot="{ row }">
               <div
                 :class="
@@ -221,6 +232,8 @@ export default {
 
         if (refresh == 1) {
           this.getRanking(newValue.heroName);
+
+          this.$refs.refGuanXi.refreshColumn();
         }
       },
     },
@@ -327,7 +340,7 @@ export default {
           );
         });
     },
-    filterMethod({ option, row, column }) {
+    filterMethod: function ({ option, row, column }) {
       if (column.property == "teammatePickRate") {
         return row.teammatePickRate >= option.data;
       }
