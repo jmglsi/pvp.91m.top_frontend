@@ -321,14 +321,16 @@ export default {
           })
         )
         .then((res) => {
-          let status = res.data.status;
+          let data = res.data,
+            status = data.status;
 
           if (status.code == 200) {
+            let label = data.data.label;
             this.$message.success(this.$appMsg.success[1000]);
 
             this.$cookie.delete("teamId");
 
-            this.$appPush({ path: "/game/engage" });
+            this.$appPush({ path: "/game/" + label + "/bp" });
           } else {
             this.$message.error(status.msg);
 

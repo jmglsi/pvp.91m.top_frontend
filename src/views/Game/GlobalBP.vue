@@ -474,18 +474,6 @@
             秒
           </div>
         </li>
-        <li>
-          <div class="game-5b51012ae7490ea129b5d75ad9b1016c">
-            <van-button
-              round
-              :border="false"
-              icon="bar-chart-o"
-              size="small"
-              color="black"
-              @click="showInfo.trend = true"
-            />
-          </div>
-        </li>
         <li v-show="showInfo.apps">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" color="black" />
@@ -496,7 +484,6 @@
               <a-menu-item
                 v-show="
                   bpMode == 'view' &&
-                  gameInfo.result.rows.length > 1 &&
                   gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
                 @click="onToolsMenuClick(0)"
@@ -525,6 +512,27 @@
           </a-dropdown>
         </li>
         <li>
+          <div class="game-5b51012ae7490ea129b5d75ad9b1016c">
+            <van-button
+              round
+              :border="false"
+              icon="bar-chart-o"
+              size="small"
+              color="black"
+              @click="showInfo.trend = true"
+            />
+          </div>
+        </li>
+        <li>
+          <van-button
+            round
+            icon="share"
+            size="small"
+            color="black"
+            @click="onGameShareCopy"
+          />
+        </li>
+        <li>
           <van-button
             round
             :border="false"
@@ -534,15 +542,6 @@
             @click="
               $appOpenUrl('是否查看常见问题?', null, { path: url.question })
             "
-          />
-        </li>
-        <li>
-          <van-button
-            round
-            icon="share"
-            size="small"
-            color="black"
-            @click="onGameShareCopy"
           />
         </li>
       </ul>
@@ -1149,6 +1148,10 @@ export default {
           .then(() => {
             // on confirm
             this.onDeleteGameBPClick(tabsModel);
+
+            if (tabsModel == 0) {
+              this.$appPush({ path: "/game/engage" });
+            }
           })
           .catch(() => {
             // on cancel

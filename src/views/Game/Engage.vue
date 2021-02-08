@@ -85,7 +85,9 @@ export default {
     };
   },
   mounted() {
-    this.getGameDashboard();
+    setTimeout(() => {
+      this.getGameDashboard();
+    }, 250);
   },
   methods: {
     getGameDashboard: function () {
