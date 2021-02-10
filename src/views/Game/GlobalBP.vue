@@ -918,7 +918,6 @@ export default {
 
       if (ranking) {
         this.tableData = ranking;
-        this.tableData.loading = false;
 
         return;
       }
@@ -942,6 +941,7 @@ export default {
           this.tableData = data;
           this.tableData.model = 0;
           this.tableData.loading = false;
+          this.tableData.time = this.$appTs;
 
           this.$appSetLocalStorage("gameBP", this.tableData);
 

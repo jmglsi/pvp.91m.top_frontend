@@ -1,8 +1,7 @@
 import Vue from 'vue'
 
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
-Vue.prototype.$appTs = Date.parse(new Date()).toString().slice(0, 10);
-Vue.prototype.$appTs_H = new Date().getHours();
+Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
@@ -26,12 +25,19 @@ if (!appConfigInfo) {
             rankingFilter: 0,
         },
         updateInfo: {
-            time: Vue.prototype.$appTs,
-            timeout: 3600
+            timeout: 900
         }
     });
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
+
+Vue.prototype.$appDelectRankingCache = function() {
+    for (let key in localStorage) {
+        if (key.indexOf("ranking") > -1) {
+            localStorage.removeItem(key);
+        }
+    }
+}
 
 Vue.prototype.$appColumnsInfo = {
     area: ["安卓QQ", "苹果QQ", "安卓WX", "苹果WX"],

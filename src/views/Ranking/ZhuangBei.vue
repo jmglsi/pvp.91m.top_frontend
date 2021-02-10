@@ -184,7 +184,7 @@ export default {
       this.showInfo.skillMenu = true;
     }
 
-    this.getRanking();
+    this.getRanking(3);
   },
   methods: {
     getRanking: function (aid = 3, bid = 0, cid = 0) {
@@ -195,12 +195,9 @@ export default {
 
       if (
         ranking &&
-        this.$appTs - appConfigInfo.updateInfo.time <
-          appConfigInfo.updateInfo.timeout &&
-        this.$appTs_H != 11 && this.$appTs_H != 23
+        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = ranking;
-        this.tableData.loading = false;
 
         return;
       }
@@ -220,14 +217,12 @@ export default {
 
           this.tableData = data;
           this.tableData.loading = false;
+          this.tableData.time = this.$appTs;
 
           this.$appSetLocalStorage(
             "ranking-" + aid + "-" + bid + "-" + cid,
             this.tableData
           );
-
-          appConfigInfo.updateInfo.time = this.$appTs;
-          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
           this.$message.success(this.$appMsg.success[1005]);
         });

@@ -236,10 +236,7 @@ export default {
       if (
         heroUpdate &&
         heroId == 0 &&
-        this.$appTs - appConfigInfo.updateInfo.time <
-          appConfigInfo.updateInfo.timeout &&
-        this.$appTs_H != 11 &&
-        this.$appTs_H != 23
+        this.$appTs - heroUpdate.time < appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = heroUpdate;
 
@@ -250,6 +247,7 @@ export default {
         .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
+          this.tableData.time = this.$appTs;
 
           if (heroId == 0) {
             this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);

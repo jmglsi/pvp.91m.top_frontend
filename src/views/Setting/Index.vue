@@ -72,10 +72,7 @@ export default {
       },
       cacheInfo: [
         { title: "清空程序缓存", label: null },
-        {
-          title: "清空排行缓存",
-          label: "自动缓存 (11、23 点除外)",
-        },
+        { title: "清空排行缓存", label: null },
         { title: "清空全局BP模拟器缓存", label: "清空后自定义排序将丢失" },
       ],
     };
@@ -116,19 +113,12 @@ export default {
         localStorage.removeItem("heroUpdate-0");
         localStorage.removeItem("searchData");
       } else if (e == 1) {
-        this.getRankingCache();
+        this.$appDelectRankingCache();
       } else if (e == 2) {
         localStorage.removeItem("ranking-0-4-0");
       }
 
       this.$message.success(this.$appMsg.success[1000]);
-    },
-    getRankingCache: function () {
-      for (let key in localStorage) {
-        if (key.indexOf("ranking") > -1) {
-          localStorage.removeItem(key);
-        }
-      }
     },
   },
 };

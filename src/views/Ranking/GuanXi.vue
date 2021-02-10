@@ -272,15 +272,19 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    this.getRanking(this.heroName);
+    this.getRanking(2, 0, 0, this.heroName);
   },
   methods: {
-    getRanking: function (heroName, aid = 2) {
+    getRanking: function (aid = 2, bid = 0, cid = 0, heroName = "") {
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
             "&aid=" +
             aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
             "&heroName=" +
             encodeURIComponent(heroName)
         )

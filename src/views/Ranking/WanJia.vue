@@ -95,7 +95,7 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(newValue.bid, newValue.cid);
+          this.getRanking(1, newValue.bid, newValue.cid);
         }
       },
     },
@@ -129,10 +129,10 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
   },
   mounted() {
-    this.getRanking(this.bid, this.cid);
+    this.getRanking(1, this.bid, this.cid);
   },
   methods: {
-    getRanking: function (bid, cid, aid = 1) {
+    getRanking: function (aid = 1, bid = 0, cid = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid
@@ -140,12 +140,9 @@ export default {
 
       if (
         ranking &&
-        this.$appTs - appConfigInfo.updateInfo.time <
-          appConfigInfo.updateInfo.timeout &&
-        this.$appTs_H != 11 && this.$appTs_H != 23
+        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = ranking;
-        this.tableData.loading = false;
 
         return;
       }
@@ -165,14 +162,12 @@ export default {
 
           this.tableData = data;
           this.tableData.loading = false;
+          this.tableData.time = this.$appTs;
 
           this.$appSetLocalStorage(
             "ranking-" + aid + "-" + bid + "-" + cid,
             this.tableData
           );
-
-          appConfigInfo.updateInfo.time = this.$appTs;
-          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
           this.$message.success(this.$appMsg.success[1005]);
         });

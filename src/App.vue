@@ -143,7 +143,9 @@ export default {
             appConfigInfo.appInfo.name = appInfo.name;
             appConfigInfo.appInfo.version = appInfo.version;
 
+            localStorage.removeItem("appConfigInfo");
             this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+            this.$appDelectRankingCache();
           }
 
           if (tipsInfo) {

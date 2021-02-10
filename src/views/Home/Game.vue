@@ -65,22 +65,20 @@ export default {
   methods: {
     getGameHome: function () {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
-        ranking = this.$appGetLocalStorage("gameHome");
+        gameHome = this.$appGetLocalStorage("gameHome");
 
       if (
-        ranking &&
-        this.$appTs - appConfigInfo.updateInfo.time <
-          appConfigInfo.updateInfo.timeout &&
-        this.$appTs_H != 11 &&
-        this.$appTs_H != 23
+        gameHome &&
+        this.$appTs - gameHome.time < appConfigInfo.updateInfo.timeout
       ) {
-        this.tableData = ranking;
+        this.tableData = gameHome;
 
         return;
       }
 
       this.$axios.post(this.$appApi.game.getGameHome).then((res) => {
         this.tableData = res.data.data;
+        this.tableData.time = this.$appTs;
 
         this.$appSetLocalStorage("gameHome", this.tableData);
       });

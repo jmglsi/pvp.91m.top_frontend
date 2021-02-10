@@ -372,7 +372,7 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(newValue.bid, newValue.cid);
+          this.getRanking(0, newValue.bid, newValue.cid);
         }
       },
     },
@@ -425,7 +425,7 @@ export default {
     //手动将表格和工具栏进行关联
   },
   mounted() {
-    this.getRanking(this.bid, this.cid);
+    this.getRanking(0, this.bid, this.cid);
   },
   methods: {
     initTableWidth: function () {
@@ -463,7 +463,7 @@ export default {
 
       this.initTableWidth();
     },
-    getRanking: function (bid, cid, aid = 0) {
+    getRanking: function (aid = 0, bid = 0, cid = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid
@@ -471,12 +471,9 @@ export default {
 
       if (
         ranking &&
-        this.$appTs - appConfigInfo.updateInfo.time <
-          appConfigInfo.updateInfo.timeout &&
-        this.$appTs_H != 11 && this.$appTs_H != 23
+        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = ranking;
-        this.tableData.loading = false;
 
         return;
       }
@@ -496,6 +493,7 @@ export default {
 
           this.tableData = data;
           this.tableData.loading = false;
+          this.tableData.time = this.$appTs;
 
           //this.$refs.refDianFengSai.loadData(data.result.rows);
 
@@ -503,9 +501,6 @@ export default {
             "ranking-" + aid + "-" + bid + "-" + cid,
             this.tableData
           );
-
-          appConfigInfo.updateInfo.time = this.$appTs;
-          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
           this.$message.success(this.$appMsg.success[1005]);
         });
