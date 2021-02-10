@@ -70,7 +70,7 @@ export default {
     this.tabsInfo.model = type;
 
     if (pwa == 1) {
-      this.$cookie.set("pwa", pwa, { expires: "1Y" });
+      localStorage.setItem("pwa", pwa);
 
       let updateDay = ((this.$appTs - version) / 86400).toFixed(2);
       if (updateDay >= 90) {

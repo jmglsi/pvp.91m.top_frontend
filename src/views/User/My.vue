@@ -3,11 +3,11 @@
     <div class="my-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
         v-if="isLogin"
-        :right-text="!showInfo.editType ? '编辑' : '编辑中'"
+        :left-text="!showInfo.editType ? '编辑' : '编辑中'"
         :border="false"
         :fixed="true"
         :placeholder="true"
-        @click-right="onUpdateInfoClick"
+        @click-left="onUpdateInfoClick"
         z-index="99999999"
       >
         <template #title>
@@ -205,13 +205,6 @@
             >
           </template>
         </van-cell>
-        <van-cell icon="friends" title="扩列交友" label="打开别人就能找到您啦~">
-          <template #right-icon>
-            <span class="my-b60541e817018d568a58a70d5db7fb65">
-              <van-switch v-model="showInfo.friendsType" disabled />
-            </span>
-          </template>
-        </van-cell>
         <van-cell
           icon="manager"
           title="扩列链接"
@@ -229,25 +222,26 @@
         class="my-66e3a8a1303fb1fc8ce3249b23dbd268"
       >
         <van-cell
-          title="适配小屏"
-          label="屏幕小的话可以手动开启"
-          icon="graphic"
-        >
-          <template #right-icon>
-            <span class="my-087fed58eae1e19dec1f2efffe80d047">
-              <van-switch
-                v-model="mobileInfo.isSmallMobile"
-                @change="onMobileInfoChange"
-              />
-            </span>
-          </template>
-        </van-cell>
-        <van-cell
           title="修改密码"
           icon="/img/app-icons/password_edit.png"
           is-link
           @click="$appPush({ path: '/login' })"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
+        />
+      </van-cell-group>
+    </div>
+
+    <div class="my-7dc22b2c6a992f0232345df41303f5ea">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-35382d1952f0fb4d86744b11faf01d07"
+      >
+        <van-cell
+          icon="setting-o"
+          title="设置"
+          is-link
+          @click="$appPush({ path: '/setting' })"
         />
       </van-cell-group>
     </div>
@@ -395,7 +389,11 @@
             title=" "
             class="my-3c5bcb72d710faf0c301750abeb5704f"
           >
-            <van-field readonly label="扩列">
+            <van-field
+              readonly
+              label="扩列"
+              @click="$message.warning($appMsg.warning[1002])"
+            >
               <template #button>
                 <span class="my-35494217d6a01388d07eccf816b6ea39"
                   ><van-switch v-model="showInfo.friendsType"
@@ -412,7 +410,7 @@
               type="textarea"
               input-align="right"
               placeholder="请输入签名"
-              @click="$message.warning($appMsg.warning[1002])"
+              @click="$message.warning($appMsg.warning[1003])"
               show-word-limit
             />
           </van-cell-group>
@@ -494,7 +492,7 @@ export default {
   },
   mounted() {
     this.mobileInfo.isSmallMobile =
-      Boolean(parseInt(this.$cookie.get("isSmallMobile"))) || false;
+      Boolean(parseInt(localStorage.getItem("isSmallMobile"))) || false;
 
     this.getWebAccountInfo();
   },
@@ -541,6 +539,8 @@ export default {
           if (status.code == 200) {
             this.loginInfo = this.newInfo;
 
+            this.showInfo.editMenu = false;
+
             this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
@@ -560,23 +560,6 @@ export default {
         750,
         this.copyData
       );
-    },
-    onMobileInfoChange: function (e) {
-      let isSmallMobileInt = 0,
-        isSmallMobileBool = false;
-
-      if (e == false) {
-        isSmallMobileInt = 0;
-        isSmallMobileBool = false;
-      } else {
-        isSmallMobileInt = 1;
-        isSmallMobileBool = true;
-      }
-
-      this.mobileInfo.isSmallMobile = isSmallMobileBool;
-      this.$cookie.set("isSmallMobile", isSmallMobileInt, { expires: "1Y" });
-
-      this.$message.success(this.$appMsg.success[1004]);
     },
     onUpdateColumnsInfoClick: function (e) {
       let columns = [],
@@ -664,10 +647,6 @@ span.my-af99c9298d1eb69981a035d0a15afa20 {
   position: absolute;
   right: 30px;
   top: -5px;
-}
-
-span.my-b60541e817018d568a58a70d5db7fb65 {
-  margin-top: 5px;
 }
 
 span.my-35494217d6a01388d07eccf816b6ea39 {

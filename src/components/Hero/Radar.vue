@@ -3,7 +3,7 @@
     <div class="hero-b86b97a57d04d7096b93b34cea410cfe">
       <vue-tags-input
         v-model="tag.text"
-        v-show="tabsModel == 2"
+        v-if="tabsModel == 2"
         :tags="tag.array"
         :placeholder="tag.placeholder"
         @tags-changed="onTagsChanged"

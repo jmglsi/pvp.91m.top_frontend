@@ -17,8 +17,8 @@
       <van-cell-group title="" class="login-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field
           v-model="loginInfo.data.name"
-          v-show="loginInfo.type == 0"
-          left-icon="user-o"
+          v-if="loginInfo.type == 0"
+          left-icon="/img/app-icons/user.png"
           placeholder="请输入用户名 (仅支持中英文数字)"
           icon-prefix="login-e71832eb64a3978b00a7d37f407b158e"
         />
@@ -37,7 +37,7 @@
         />
         <van-field
           v-model="loginInfo.data.newPassword"
-          v-show="loginInfo.type == 2"
+          v-if="loginInfo.type == 2"
           type="password"
           left-icon="/img/app-icons/password.png"
           placeholder="请输入新密码"
@@ -45,7 +45,7 @@
         />
         <van-field
           v-model="loginInfo.data.uin"
-          v-show="loginInfo.type == 0"
+          v-if="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
           placeholder="请输入QQ"
           icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
@@ -69,7 +69,7 @@
     </div>
 
     <div
-      v-show="loginInfo.type == 0"
+      v-if="loginInfo.type == 0"
       class="app-61046f2f5eefe3dc179e52af32241062"
     >
       <span class="app-e4c9479b11955648dad558fe717a4eb2">
@@ -170,16 +170,16 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success(this.$appMsg.success[1000]);
-
-            this.$cookie.set("openId", data.openId, { expires: "1Y" });
+            this.$cookie.set("openId", data.openId, { expires: "7D" });
             this.$cookie.set("accessToken", data.accessToken, {
-              expires: "1Y",
+              expires: "7D",
             });
 
             setTimeout(() => {
               this.$router.go(-1);
             }, 500);
+
+            this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }

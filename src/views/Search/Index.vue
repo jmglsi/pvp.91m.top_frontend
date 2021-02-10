@@ -14,7 +14,7 @@
       </van-sticky>
     </div>
 
-    <div v-show="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
+    <div v-if="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
       <div class="search-4b9ca1bc335daf2e137b6c468a2c39b4">
         <div class="search-3c00205f941124762c6c5e000e7e2bde">
           <van-cell-group
@@ -44,7 +44,7 @@
         </div>
 
         <div
-          v-show="showInfo.searchHistory"
+          v-if="showInfo.searchHistory"
           class="search-a79b6044b2b3a5a9bce4cb65bd80e774"
         >
           <van-cell-group
@@ -198,7 +198,7 @@
     </div>
 
     <div
-      v-show="showInfo.searchData"
+      v-if="showInfo.searchData"
       class="search-db4665e1908869c6354106ce00ff95ba"
     >
       <van-cell-group
@@ -284,7 +284,7 @@ export default {
   data() {
     return {
       search: {
-        data: this.$cookie.get("searchData") || "",
+        data: localStorage.getItem("searchData") || "",
         value: this.$route.query.q || "",
         placeholder: "搜索",
       },
@@ -425,8 +425,9 @@ export default {
       }
 
       if (this.tipsInfo[e] == 0) {
-        this.$message.info(tipsText);
         this.tipsInfo[e] = 1;
+
+        this.$message.info(tipsText);
       }
     },
     onCellClick: function (isLink, to, url) {
@@ -436,7 +437,7 @@ export default {
       }
     },
     initSearchHistory: function () {
-      let searchData = this.$cookie.get("searchData");
+      let searchData = localStorage.getItem("searchData");
 
       if (searchData) {
         this.tableData.search.history = searchData.split(",").reverse();
@@ -447,7 +448,7 @@ export default {
       }
     },
     addSearchData: function (value) {
-      let searchData = this.$cookie.get("searchData"),
+      let searchData = localStorage.getItem("searchData"),
         setValue = searchData;
 
       if (!searchData) {
@@ -456,10 +457,10 @@ export default {
         setValue = searchData + "," + value;
       }
 
-      this.$cookie.set("searchData", setValue, { expires: "1Y" });
+      localStorage.setItem("searchData", setValue);
     },
     onClearSearchData: function () {
-      this.$cookie.delete("searchData");
+      localStorage.removeItem("searchData");
 
       this.search.data = "";
       this.showInfo.searchData = false;

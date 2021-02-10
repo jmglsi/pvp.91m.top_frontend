@@ -123,6 +123,8 @@ export default {
   },
   methods: {
     getAppInfo: function () {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo");
+
       this.$axios
         .post(
           this.$appApi.pvp.getAppInfo +
@@ -131,10 +133,18 @@ export default {
         )
         .then((res) => {
           let data = res.data.data,
+            appInfo = data.appInfo,
             tipsInfo = data.tipsInfo;
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;
+
+          if (appInfo.version != appConfigInfo.appInfo.version) {
+            appConfigInfo.appInfo.name = appInfo.name;
+            appConfigInfo.appInfo.version = appInfo.version;
+
+            this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+          }
 
           if (tipsInfo) {
             this.$notification.open({
@@ -246,14 +256,6 @@ i.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image,
 i.app-72383b9892bd1e6a2bd310dfb1fb2344 img.van-icon__image {
   border-radius: unset;
   transform: scale(1.25);
-}
-
-i.app-8e4f204791d1b591b6a6f93b572f9b2d img.van-icon__image {
-  border-radius: 100%;
-  height: 40px;
-  margin-left: -12px;
-  margin-top: -2px;
-  width: 40px;
 }
 
 ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
@@ -376,10 +378,6 @@ div.app-f56ae939694a0488cc9e8ecdd47a46ab,
 div.van-grid-item__content.van-grid-item__content--center
   span.van-grid-item__text {
   font-weight: 600;
-}
-
-div.van-nav-bar__title {
-  font-size: 20px;
 }
 
 div.app-a139b05b7f8e496c00991733ef7cd589 {

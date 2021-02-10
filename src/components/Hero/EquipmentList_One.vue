@@ -294,14 +294,13 @@ export default {
 
           if (status.code == 200) {
             this.tableData = data;
+            this.tableData.loading = false;
 
             aid == 1
               ? (tipsText = this.$appMsg.success[1001])
               : (tipsText = this.$appMsg.success[1002]);
 
             this.$message.success(tipsText);
-
-            this.tableData.loading = false;
           } else {
             this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }

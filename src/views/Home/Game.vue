@@ -64,8 +64,25 @@ export default {
   },
   methods: {
     getGameHome: function () {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        ranking = this.$appGetLocalStorage("gameHome");
+
+      if (
+        ranking &&
+        this.$appTs - appConfigInfo.updateInfo.time <
+          appConfigInfo.updateInfo.timeout &&
+        this.$appTs_H != 11 &&
+        this.$appTs_H != 23
+      ) {
+        this.tableData = ranking;
+
+        return;
+      }
+
       this.$axios.post(this.$appApi.game.getGameHome).then((res) => {
         this.tableData = res.data.data;
+
+        this.$appSetLocalStorage("gameHome", this.tableData);
       });
     },
     onGameCellClick: function (e) {

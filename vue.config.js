@@ -9,13 +9,6 @@ module.exports = {
                 splitChunks: {
                     chunks: 'all',
                     cacheGroups: {
-                        vue: {
-                            name: 'vue',
-                            test: /[\\/]node_modules[\\/]_?vue(.*)/,
-                            reuseExistingChunk: true,
-                            enforce: true,
-                            priority: 30
-                        },
                         vant: {
                             name: 'vant',
                             test: /[\\/]node_modules[\\/]_?vant(.*)/,
@@ -49,14 +42,14 @@ module.exports = {
                             test: /[\\/]node_modules[\\/]/,
                             reuseExistingChunk: true,
                             enforce: true,
-                            priority: -10
+                            priority: 20
                         },
                         commons: {
                             name: 'commons',
                             chunks: 'async',
                             reuseExistingChunk: true,
                             enforce: true,
-                            priority: -20
+                            priority: 10
                         }
                     }
                 }

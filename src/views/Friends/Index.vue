@@ -194,13 +194,14 @@ export default {
           if (status.code == 200) {
             this.friendsInfo = data;
 
-            if (tipsType == 1)
-              this.$message.success(this.$appMsg.success[1000]);
-
             if (postData != {} && data.openId != openId) {
               this.$appPush({
                 query: { openId: data.openId },
               });
+            }
+
+            if (tipsType == 1) {
+              this.$message.success(this.$appMsg.success[1000]);
             }
           } else {
             this.$message.error(status.msg);

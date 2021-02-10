@@ -2,12 +2,36 @@ import Vue from 'vue'
 
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
 Vue.prototype.$appTs = Date.parse(new Date()).toString().slice(0, 10);
+Vue.prototype.$appTs_H = new Date().getHours();
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
-Vue.prototype.$appInfo = {
-    name: "苏苏的荣耀助手"
+Vue.prototype.$appSetLocalStorage = function(key, value = {}) {
+    localStorage.setItem(key, JSON.stringify(value));
 }
+
+Vue.prototype.$appGetLocalStorage = function(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+let appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
+if (!appConfigInfo) {
+    Vue.prototype.$appSetLocalStorage("appConfigInfo", {
+        appInfo: {
+            name: "苏苏的荣耀助手",
+            isSmallMobile: 0,
+            version: 20210210111300
+        },
+        tipsInfo: {
+            rankingFilter: 0,
+        },
+        updateInfo: {
+            time: Vue.prototype.$appTs,
+            timeout: 3600
+        }
+    });
+}
+Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
 Vue.prototype.$appColumnsInfo = {
     area: ["安卓QQ", "苹果QQ", "安卓WX", "苹果WX"],

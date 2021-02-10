@@ -122,7 +122,7 @@
 export default {
   name: "RankingZhuangBei",
   components: {
-    HeroEquipmentListOne: () => 
+    HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
   },
   props: {
@@ -187,14 +187,49 @@ export default {
     this.getRanking();
   },
   methods: {
-    getRanking: function (aid = 3) {
+    getRanking: function (aid = 3, bid = 0, cid = 0) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        ranking = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid
+        );
+
+      if (
+        ranking &&
+        this.$appTs - appConfigInfo.updateInfo.time <
+          appConfigInfo.updateInfo.timeout &&
+        this.$appTs_H != 11 && this.$appTs_H != 23
+      ) {
+        this.tableData = ranking;
+        this.tableData.loading = false;
+
+        return;
+      }
+
       this.$axios
-        .post(this.$appApi.pvp.getRanking + "&aid=" + aid)
+        .post(
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid
+        )
         .then((res) => {
           let data = res.data.data;
 
           this.tableData = data;
           this.tableData.loading = false;
+
+          this.$appSetLocalStorage(
+            "ranking-" + aid + "-" + bid + "-" + cid,
+            this.tableData
+          );
+
+          appConfigInfo.updateInfo.time = this.$appTs;
+          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+
+          this.$message.success(this.$appMsg.success[1005]);
         });
     },
     filterMethod: function ({ option, row, column }) {

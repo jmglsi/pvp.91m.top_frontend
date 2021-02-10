@@ -285,7 +285,9 @@ export default {
             encodeURIComponent(heroName)
         )
         .then((res) => {
-          if (heroName) document.title = heroName + " | " + this.$appInfo.name;
+          if (heroName)
+            document.title =
+              heroName + " | " + this.$appConfigInfo.appInfo.name;
 
           this.tableData = res.data.data;
 

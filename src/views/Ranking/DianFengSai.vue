@@ -235,7 +235,7 @@
           />
         </vxe-table-column>
 
-        <vxe-table-column title="经济">
+        <vxe-table-column title="金币">
           <vxe-table-column
             title="全部"
             field="equMoneyOverflow"
@@ -464,6 +464,23 @@ export default {
       this.initTableWidth();
     },
     getRanking: function (bid, cid, aid = 0) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        ranking = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid
+        );
+
+      if (
+        ranking &&
+        this.$appTs - appConfigInfo.updateInfo.time <
+          appConfigInfo.updateInfo.timeout &&
+        this.$appTs_H != 11 && this.$appTs_H != 23
+      ) {
+        this.tableData = ranking;
+        this.tableData.loading = false;
+
+        return;
+      }
+
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
@@ -481,6 +498,16 @@ export default {
           this.tableData.loading = false;
 
           //this.$refs.refDianFengSai.loadData(data.result.rows);
+
+          this.$appSetLocalStorage(
+            "ranking-" + aid + "-" + bid + "-" + cid,
+            this.tableData
+          );
+
+          appConfigInfo.updateInfo.time = this.$appTs;
+          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+
+          this.$message.success(this.$appMsg.success[1005]);
         });
 
       if (bid == 3 && cid == 0) {
@@ -559,8 +586,9 @@ export default {
       }
 
       if (this.tipsInfo[e] == 0) {
-        this.$message.info(tipsText);
         this.tipsInfo[e] = 1;
+
+        this.$message.info(tipsText);
       }
     },
     onActionSheetSelect: function (item) {

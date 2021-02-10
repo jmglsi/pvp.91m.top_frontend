@@ -39,7 +39,7 @@
             :color="data.calendar.color"
           >
             <van-tag
-              v-show="data.calendar.day"
+              v-if="data.calendar.day"
               :color="data.calendar.color"
               @click="
                 heroId > 0 ? onOpenHeroUpdateTextClick(heroId, data) : null
@@ -192,8 +192,6 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == null) return;
-
         this.getHeroUpdate(newValue.heroId);
       },
     },
@@ -232,10 +230,30 @@ export default {
   },
   methods: {
     getHeroUpdate: function (heroId) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId);
+
+      if (
+        heroUpdate &&
+        heroId == 0 &&
+        this.$appTs - appConfigInfo.updateInfo.time <
+          appConfigInfo.updateInfo.timeout &&
+        this.$appTs_H != 11 &&
+        this.$appTs_H != 23
+      ) {
+        this.tableData = heroUpdate;
+
+        return;
+      }
+
       this.$axios
         .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
+
+          if (heroId == 0) {
+            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
+          }
         });
 
       let date = new Date();

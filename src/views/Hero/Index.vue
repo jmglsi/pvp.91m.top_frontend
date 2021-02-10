@@ -21,7 +21,7 @@ img.hero-44908c08b6c253a19ab6246e6eec857a {
   width: 100%;
 }
 
-img.hero-ff2364a0be3d20e46cc69efb36afe9a5{
+img.hero-ff2364a0be3d20e46cc69efb36afe9a5 {
   margin: 0 3px;
 }
 
@@ -76,6 +76,10 @@ div.van-collapse {
 
 div.ti-input {
   border-radius: 5px;
+}
+
+div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__title {
+  font-size: 20px;
 }
 
 div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__right {

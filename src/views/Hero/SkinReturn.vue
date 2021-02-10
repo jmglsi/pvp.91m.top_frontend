@@ -21,7 +21,7 @@
     </div>
 
     <div
-      v-show="!showInfo.checked && lineData.result.rows.length > 0"
+      v-if="!showInfo.checked && lineData.result.rows.length > 0"
       class="skin-9eff02d43a97619df7707398ec7099cb"
     >
       <ve-line
@@ -37,10 +37,7 @@
       />
     </div>
 
-    <div
-      v-show="showInfo.checked"
-      class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
-    >
+    <div v-if="showInfo.checked" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
       <vxe-grid
         ref="refSkinReturn"
         :loading="tableData.loading"

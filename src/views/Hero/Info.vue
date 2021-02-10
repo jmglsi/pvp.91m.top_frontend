@@ -255,10 +255,10 @@
     </div>
 
     <div
-      v-show="showInfo.parameter"
+      v-if="showInfo.parameter"
       class="hero-9393a9be63ea720a87e048d40caa03b5"
     >
-      <van-skeleton v-show="showInfo.heroUpdate" :row="30" />
+      <van-skeleton v-if="showInfo.heroUpdate" :row="30" />
 
       <lazy-component
         :preLoad="1"
@@ -369,7 +369,7 @@
     </div>
 
     <div
-      v-show="tabsInfo.model == 0"
+      v-if="tabsInfo.model == 0"
       class="hero-79acd83e2dbb9d5b6de778dd5077db2c"
     >
       <van-tabbar
@@ -545,7 +545,8 @@ export default {
             this.routeInfo.from.heroName = heroInfo.name;
 
           this.hero.title = heroInfo.name;
-          document.title = heroInfo.name + " | " + this.$appInfo.name;
+          document.title =
+            heroInfo.name + " | " + this.$appConfigInfo.appInfo.name;
         });
     },
     onComponentShow: function () {
@@ -586,8 +587,9 @@ export default {
       }
 
       if (this.tipsInfo[e] == 0) {
-        this.$message.info(tipsText);
         this.tipsInfo[e] = 1;
+
+        this.$message.info(tipsText);
       }
     },
     onHeroLikeClick: function () {
@@ -601,11 +603,11 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success(this.$appMsg.success[1000]);
-
             this.hero.info.likeStatus == 0
               ? (this.hero.info.likeStatus = 1)
               : (this.hero.info.likeStatus = 0);
+
+            this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }
@@ -630,7 +632,7 @@ export default {
         this.hero.title = "";
       }
 
-      document.title = dTitle + " | " + this.$appInfo.name;
+      document.title = dTitle + " | " + this.$appConfigInfo.appInfo.name;
 
       e == 0
         ? (this.showInfo.parameter = true)

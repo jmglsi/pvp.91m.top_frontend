@@ -203,26 +203,25 @@ export default {
   },
   mounted() {
     let route = this.$route.query,
-      rankingFilterTips = this.$cookie.get("rankingFilterTips"),
-      isSmallMobile = this.$cookie.get("isSmallMobile"),
-      isSmallMobileInt = parseInt(isSmallMobile) || 0;
+      appConfigInfo = this.$appGetLocalStorage("appConfigInfo");
 
     this.heroName = route.heroName || "";
     this.tabsInfo.model = parseInt(route.type) || 0;
     this.bid = parseInt(route.bid) || 0;
     this.cid = parseInt(route.cid) || 0;
 
-    if (rankingFilterTips == undefined) {
-      this.$cookie.set("rankingFilterTips", 1, { expires: "1Y" });
+    if (appConfigInfo.tipsInfo.rankingFilter == 0) {
+      appConfigInfo.tipsInfo.rankingFilter = 1;
+      this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
       setTimeout(() => {
         this.showInfo.filterTips = false;
-      }, 7500);
+      }, 10000);
     } else {
       this.showInfo.filterTips = false;
     }
 
-    if (isSmallMobile == undefined && this.$appHeight < 575) {
+    if (appConfigInfo.appInfo.isSmallMobile == 0 && this.$appHeight < 575) {
       this.$dialog
         .confirm({
           title: "是否适配小屏?",
@@ -231,15 +230,19 @@ export default {
         .then(() => {
           // on confirm
           this.isSmallMobile = 1;
-          this.$cookie.set("isSmallMobile", 1, { expires: "1Y" });
+
+          appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
+          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
         })
         .catch(() => {
           // on cancel
           this.isSmallMobile = 0;
-          this.$cookie.set("isSmallMobile", 0, { expires: "1Y" });
+
+          appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
+          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
         });
     } else {
-      this.isSmallMobile = isSmallMobileInt;
+      this.isSmallMobile = appConfigInfo.appInfo.isSmallMobile;
     }
   },
   methods: {

@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     getGameDashboard: function () {
-      this.$cookie.delete("teamId");
+      localStorage.removeItem("tempTeamId");
 
       this.$axios
         .post(this.$appApi.pvp.getGameDashboard + "&aid=0")
@@ -175,9 +175,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success(this.$appMsg.success[1000]);
-
             this.tableDataRow.logo = data.img;
+
+            this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }
@@ -234,9 +234,9 @@ export default {
             let status = res.data.status;
 
             if (status.code == 200) {
-              this.$message.success(this.$appMsg.success[1000]);
-
               this.getGameDashboard();
+
+              this.$message.success(this.$appMsg.success[1000]);
             } else {
               this.$message.error(status.msg);
             }
@@ -278,9 +278,9 @@ export default {
               let status = res.data.status;
 
               if (status.code == 200) {
-                this.$message.success(this.$appMsg.success[1000]);
-
                 this.tableData.result.rows.splice(row.index, 1);
+
+                this.$message.success(this.$appMsg.success[1000]);
               } else {
                 this.$message.error(status.msg);
               }
@@ -295,20 +295,20 @@ export default {
     onCreateEngageClick: function (data) {
       this.showInfo.teamMenu = false;
 
-      let teamId_1 = this.$cookie.get("teamId") || "",
-        teamId_2 = data;
+      let oldTeamId = localStorage.getItem("tempTeamId") || "",
+        newTeamId = data;
 
-      if (teamId_1 == teamId_2) {
+      if (oldTeamId == newTeamId) {
         this.$message.error(this.$appMsg.error[1006]);
         return;
       }
 
-      if (!teamId_1) {
+      if (!oldTeamId) {
         this.$message.success(this.$appMsg.success[1003]);
 
-        this.$cookie.set("teamId", data);
+        localStorage.setItem("tempTeamId", data);
       } else {
-        this.onSaveEngageClick(teamId_1, teamId_2);
+        this.onSaveEngageClick(oldTeamId, newTeamId);
       }
     },
     onSaveEngageClick: function (teamId_1, teamId_2) {
@@ -326,9 +326,10 @@ export default {
 
           if (status.code == 200) {
             let label = data.data.label;
-            this.$message.success(this.$appMsg.success[1000]);
 
-            this.$cookie.delete("teamId");
+            localStorage.removeItem("tempTeamId");
+
+            this.$message.success(this.$appMsg.success[1000]);
 
             this.$appPush({ path: "/game/" + label + "/bp" });
           } else {

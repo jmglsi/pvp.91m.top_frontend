@@ -89,6 +89,15 @@ export default new Router({
                 keepAlive: true
             }
         }, {
+            path: '/setting',
+            name: 'setting',
+            component: () =>
+                import ('./views/Setting/Index.vue'),
+            meta: {
+                title: '设置',
+                keepAlive: true
+            }
+        }, {
             path: '/friends',
             name: 'friends',
             component: () =>
