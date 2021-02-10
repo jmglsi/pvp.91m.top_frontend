@@ -9,7 +9,7 @@
         height="100"
       />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
-        请把设备横过来 或 点击这里切换横屏 ;D
+        请将设备横过来 或 点击这里切换横屏 ;D
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@
             @click="onGameBanPickClick(index)"
           >
             <span
-              v-show="index == 0 || index == 2 || index == 11 || index == 13"
+              v-if="index == 0 || index == 2 || index == 11 || index == 13"
               class="game-4978748050a936d2f77fe718f1d81524"
             >
               <img
@@ -83,7 +83,7 @@
             @click="onGameBanPickClick(index)"
           >
             <span
-              v-show="index == 1 || index == 3 || index == 10 || index == 12"
+              v-if="index == 1 || index == 3 || index == 10 || index == 12"
               class="game-6e9c0050fe873888fbf53ec6f7b21816"
             >
               <img
@@ -138,7 +138,7 @@
                 @click="onGameBanPickClick(index)"
               >
                 <span
-                  v-show="
+                  v-if="
                     index == 4 ||
                     index == 7 ||
                     index == 8 ||
@@ -172,7 +172,7 @@
             </ul>
           </div>
           <div
-            v-show="bpMode == 'edit'"
+            v-if="bpMode == 'edit'"
             :style="
               $appIsMobile
                 ? { height: '275px' }
@@ -184,7 +184,7 @@
         </van-col>
         <van-col span="18">
           <div
-            v-show="showInfo.hero"
+            v-if="showInfo.hero"
             :style="
               $appIsMobile
                 ? { height: '240px' }
@@ -211,7 +211,7 @@
               <div class="game-87740aa9337e54dbad53ec95089dca77">
                 <van-cell-group
                   :border="false"
-                  title="推荐"
+                  title="置顶"
                   class="game-27369b3bf4483e8dcfd85ba9a39a947f"
                 >
                   <van-grid
@@ -219,55 +219,67 @@
                     :column-num="8"
                     class="game-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
-                    <van-grid-item
-                      v-for="(data, index) in tableData.result.rows"
-                      v-show="
-                        data.trend == 2 &&
-                        (tableData.model == data.type || tableData.model == 0)
-                      "
-                      :key="'game-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
-                      text=" "
-                      @click="onGamePickHeroClick(data)"
+                    <draggable
+                      :list="tableData.result.rows"
+                      :disabled="bpMode == 'sort' ? false : true"
+                      class="game-2c9118a482fe35d5ab2b6cb01c1985be"
                     >
-                      <van-tag
-                        v-if="
-                          gameInfo.result.rows[
-                            tabsInfo.model
-                          ].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
-                            data.id
-                          )
+                      <van-grid-item
+                        v-for="(data, index) in tableData.result.rows"
+                        v-show="
+                          data.trend == 2 &&
+                          (tableData.model == data.type || tableData.model == 0)
                         "
-                        round
-                        color="red"
-                        class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                        >已禁</van-tag
+                        :key="'game-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
+                        text=" "
+                        @click="onGamePickHeroClick(data, index)"
                       >
-                      <van-tag
-                        round
-                        v-else-if="gameInfo.used.includes(data.id)"
-                        color="orange"
-                        class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                        >已用</van-tag
-                      >
-                      <img
-                        width="40"
-                        height="40"
-                        v-lazy="data.img"
-                        :style="
-                          gameInfo.result.rows[
-                            tabsInfo.model
-                          ].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.used.includes(data.id)
-                            ? { filter: 'grayscale(1)' }
-                            : {}
-                        "
-                        class="game-ae47f38706d42938ff1dbd5960a08056"
-                      />
-                    </van-grid-item>
+                        <span
+                          v-if="tabsInfo.model < 6"
+                          class="game-f3ebcda14817d8dbbc6e7c33e7ee3969"
+                        >
+                          <van-tag
+                            v-if="
+                              gameInfo.result.rows[
+                                tabsInfo.model
+                              ].blue.ban.includes(data.id) ||
+                              gameInfo.result.rows[
+                                tabsInfo.model
+                              ].red.ban.includes(data.id)
+                            "
+                            round
+                            color="red"
+                            class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
+                            >已禁</van-tag
+                          >
+                          <van-tag
+                            round
+                            v-else-if="gameInfo.used.includes(data.id)"
+                            color="orange"
+                            class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
+                            >已用</van-tag
+                          ></span
+                        >
+                        <img
+                          width="40"
+                          height="40"
+                          v-lazy="data.img"
+                          :style="
+                            tabsInfo.model < 6 &&
+                            (gameInfo.result.rows[
+                              tabsInfo.model
+                            ].blue.ban.includes(data.id) ||
+                              gameInfo.result.rows[
+                                tabsInfo.model
+                              ].red.ban.includes(data.id) ||
+                              gameInfo.used.includes(data.id))
+                              ? { filter: 'grayscale(1)' }
+                              : {}
+                          "
+                          class="game-ae47f38706d42938ff1dbd5960a08056"
+                        />
+                      </van-grid-item>
+                    </draggable>
                   </van-grid>
                 </van-cell-group>
 
@@ -281,55 +293,67 @@
                     :column-num="8"
                     class="game-89ca797bdbd58d7a03cf37f2d2fd9ac5"
                   >
-                    <van-grid-item
-                      v-for="(data, index) in tableData.result.rows"
-                      v-show="
-                        data.trend != 2 &&
-                        (tableData.model == data.type || tableData.model == 0)
-                      "
-                      :key="'game-35368a19f307e4af02d0df055846840d-' + index"
-                      text=" "
-                      @click="onGamePickHeroClick(data)"
+                    <draggable
+                      :list="tableData.result.rows"
+                      :disabled="bpMode == 'sort' ? false : true"
+                      class="game-2c9118a482fe35d5ab2b6cb01c1985be"
                     >
-                      <van-tag
-                        v-if="
-                          gameInfo.result.rows[
-                            tabsInfo.model
-                          ].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
-                            data.id
-                          )
+                      <van-grid-item
+                        v-for="(data, index) in tableData.result.rows"
+                        v-show="
+                          data.trend != 2 &&
+                          (tableData.model == data.type || tableData.model == 0)
                         "
-                        round
-                        color="red"
-                        class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                        >已禁</van-tag
+                        :key="'game-35368a19f307e4af02d0df055846840d-' + index"
+                        text=" "
+                        @click="onGamePickHeroClick(data, index)"
                       >
-                      <van-tag
-                        round
-                        v-else-if="gameInfo.used.includes(data.id)"
-                        color="orange"
-                        class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                        >已用</van-tag
-                      >
-                      <img
-                        width="40"
-                        height="40"
-                        v-lazy="data.img"
-                        :style="
-                          gameInfo.result.rows[
-                            tabsInfo.model
-                          ].blue.ban.includes(data.id) ||
-                          gameInfo.result.rows[tabsInfo.model].red.ban.includes(
-                            data.id
-                          ) ||
-                          gameInfo.used.includes(data.id)
-                            ? { filter: 'grayscale(1)' }
-                            : {}
-                        "
-                        class="game-ae47f38706d42938ff1dbd5960a08056"
-                      />
-                    </van-grid-item>
+                        <span
+                          v-if="tabsInfo.model < 6"
+                          class="game-f3ebcda14817d8dbbc6e7c33e7ee3969"
+                        >
+                          <van-tag
+                            v-if="
+                              gameInfo.result.rows[
+                                tabsInfo.model
+                              ].blue.ban.includes(data.id) ||
+                              gameInfo.result.rows[
+                                tabsInfo.model
+                              ].red.ban.includes(data.id)
+                            "
+                            round
+                            color="red"
+                            class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
+                            >已禁</van-tag
+                          >
+                          <van-tag
+                            round
+                            v-else-if="gameInfo.used.includes(data.id)"
+                            color="orange"
+                            class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
+                            >已用</van-tag
+                          >
+                        </span>
+                        <img
+                          width="40"
+                          height="40"
+                          v-lazy="data.img"
+                          :style="
+                            tabsInfo.model < 6 &&
+                            (gameInfo.result.rows[
+                              tabsInfo.model
+                            ].blue.ban.includes(data.id) ||
+                              gameInfo.result.rows[
+                                tabsInfo.model
+                              ].red.ban.includes(data.id) ||
+                              gameInfo.used.includes(data.id))
+                              ? { filter: 'grayscale(1)' }
+                              : {}
+                          "
+                          class="game-ae47f38706d42938ff1dbd5960a08056"
+                        />
+                      </van-grid-item>
+                    </draggable>
                   </van-grid>
                 </van-cell-group>
               </div>
@@ -352,7 +376,7 @@
                 @click="onGameBanPickClick(index)"
               >
                 <span
-                  v-show="
+                  v-if="
                     index == 5 ||
                     index == 6 ||
                     index == 9 ||
@@ -386,7 +410,7 @@
             </ul>
           </div>
           <div
-            v-show="bpMode == 'edit'"
+            v-if="bpMode == 'edit'"
             :style="
               $appIsMobile
                 ? { height: '275px' }
@@ -403,13 +427,24 @@
       class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917"
     >
       <ul>
-        <li>
+        <li v-if="bpMode == 'edit'">
+          <div class="game-2d121e51de7a817bff612f1e16fadb8e">
+            倒计时:
+            <span
+              class="game-0db3e75efe3faa0cee4451fb55bc4c53"
+              :style="bpCountdown < 10 ? { color: 'red' } : { color: 'blue' }"
+              >{{ bpCountdown }}</span
+            >
+            秒
+          </div>
+        </li>
+        <li v-if="bpMode == 'view'">
           <a-dropdown placement="bottomCenter" :trigger="['click']">
             <van-button
               round
               :icon="author.logo"
               size="small"
-              icon-prefix="app-8e4f204791d1b591b6a6f93b572f9b2d"
+              class="game-8e4f204791d1b591b6a6f93b572f9b2d"
               >{{ author.name }}</van-button
             >
             <a-menu slot="overlay">
@@ -435,7 +470,7 @@
             :icon="bpPerspective == 1 ? team.team_1.logo : team.team_2.logo"
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
-            icon-prefix="app-8e4f204791d1b591b6a6f93b572f9b2d"
+            class="game-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onGamePerspectiveClick(1)"
             >以
             {{ bpPerspective == 1 ? team.team_1.name : team.team_2.name }}
@@ -448,7 +483,7 @@
             :icon="eye"
             size="small"
             color="linear-gradient(to right, #6874E8, #9708CC)"
-            icon-prefix="app-8e4f204791d1b591b6a6f93b572f9b2d"
+            class="game-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onSeeHeroClick"
           >
             {{ bpPerspective == 1 ? team.team_2.name : team.team_1.name }}
@@ -463,18 +498,7 @@
       class="game-173f312c43fe32a4f01c84d1cf0520b1 game-e4e6288c92630a6c237c15442fdb0917"
     >
       <ul>
-        <li v-show="bpMode == 'edit'">
-          <div class="game-2d121e51de7a817bff612f1e16fadb8e">
-            倒计时:
-            <span
-              class="game-0db3e75efe3faa0cee4451fb55bc4c53"
-              :style="bpCountdown < 10 ? { color: 'red' } : { color: 'blue' }"
-              >{{ bpCountdown }}</span
-            >
-            秒
-          </div>
-        </li>
-        <li v-show="showInfo.apps">
+        <li v-if="showInfo.apps && (bpMode == 'view' || bpMode == 'edit')">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" color="black" />
             <a-menu
@@ -482,7 +506,7 @@
               class="game-c22cea301eff6baea51a9da08c0a680a"
             >
               <a-menu-item
-                v-show="
+                v-if="
                   bpMode == 'view' &&
                   gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
@@ -491,13 +515,13 @@
                 删除本局
               </a-menu-item>
               <a-menu-item
-                v-show="bpMode == 'view' && gameInfo.result.rows.length < 6"
+                v-if="bpMode == 'view' && gameInfo.result.rows.length < 7"
                 @click="onToolsMenuClick(1)"
               >
                 再来一局
               </a-menu-item>
               <a-menu-item
-                v-show="
+                v-if="
                   bpMode == 'edit' &&
                   gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
@@ -511,7 +535,7 @@
             </a-menu>
           </a-dropdown>
         </li>
-        <li>
+        <li v-if="bpMode == 'view'">
           <div class="game-5b51012ae7490ea129b5d75ad9b1016c">
             <van-button
               round
@@ -523,10 +547,19 @@
             />
           </div>
         </li>
-        <li>
+        <li v-if="gameInfo.game.type == 1 && bpMode != 'edit'">
           <van-button
             round
-            icon="share"
+            icon="setting-o"
+            size="small"
+            color="black"
+            @click="showInfo.setting = true"
+          />
+        </li>
+        <li v-if="bpMode == 'view'">
+          <van-button
+            round
+            icon="share-o"
             size="small"
             color="black"
             @click="onGameShareCopy"
@@ -547,6 +580,23 @@
       </ul>
     </div>
     <!-- 右下角 -->
+
+    <van-popup
+      v-model="showInfo.setting"
+      v-if="showInfo.setting"
+      class="game-d50ac6153978bdf3870b68c8d66e8d53"
+    >
+      <div class="game-d26ecf27da6e3263cf318adbb8b5f00a">
+        <van-button
+          round
+          :type="bpMode == 'sort' ? 'primary' : 'info'"
+          size="small"
+          @click="onSortClick"
+        >
+          {{ bpMode == "sort" ? "保存" : "修改" }}排序
+        </van-button>
+      </div>
+    </van-popup>
 
     <van-popup
       v-model="showInfo.trend"
@@ -574,7 +624,7 @@
         <van-tab
           v-for="(data, index) in gameInfo.result.rows"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
-          :disabled="bpMode == 'edit' && tabsInfo.model != index ? true : false"
+          :disabled="tabsInfo.model != index && bpMode == 'sort' ? true : false"
         >
           <template #title>
             <van-icon
@@ -601,7 +651,7 @@
                 color:
                   gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
               }"
-              >第 {{ index + 1 }} 局</span
+              >{{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}</span
             >
           </template>
         </van-tab>
@@ -611,9 +661,12 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
+
 export default {
   name: "GameGlobalBP",
   components: {
+    draggable,
     GameLine: () => import("@/components/Game/Line.vue"),
   },
   data() {
@@ -689,6 +742,10 @@ export default {
       },
       isPortrait: true,
       gameInfo: {
+        game: {
+          type: 0,
+          time: null,
+        },
         result: {
           rows: [
             {
@@ -722,6 +779,7 @@ export default {
       showInfo: {
         apps: false,
         hero: true,
+        setting: false,
         trend: false,
       },
     };
@@ -757,7 +815,7 @@ export default {
     beforeunload: function (e) {
       e = e || window.event;
 
-      if (this.bpMode == "edit") {
+      if (this.bpMode != "view") {
         if (e) {
           e.returnValue = "关闭提示";
         }
@@ -849,22 +907,45 @@ export default {
       this.bpCountdownInterval = setInterval(() => {
         this.bpCountdown--;
         if (this.bpCountdown == 0) {
-          this.$message.error(this.$appMsg.error[1000]);
-
           clearInterval(this.bpCountdownInterval);
+
+          this.$message.error(this.$appMsg.error[1000]);
         }
       }, 1000);
     },
-    getHeroList: function (gameTime, aid = 0) {
+    getRanking: function (gameTime = null, aid = 0, bid = 4, cid = 0) {
+      let ranking = this.$appGetLocalStorage("gameBP");
+
+      if (ranking) {
+        this.tableData = ranking;
+        this.tableData.loading = false;
+
+        return;
+      }
+
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking + "&aid=" + aid + "&bid=4&cid=0",
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid,
           this.$qs.stringify({
             gameTime: gameTime,
           })
         )
         .then((res) => {
-          this.tableData.result = res.data.data.result;
+          let data = res.data.data;
+
+          this.tableData = data;
+          this.tableData.model = 0;
+          this.tableData.loading = false;
+
+          this.$appSetLocalStorage("gameBP", this.tableData);
+
+          this.$message.success(this.$appMsg.success[1005]);
         });
     },
     getGameBP: function (gameLabel) {
@@ -881,16 +962,17 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            let data = res.data.data,
-              result = data.result;
+            let data = res.data.data;
 
             this.author = data.author;
             this.team = data.team;
-            this.gameInfo.result = result;
+            this.gameInfo = data;
 
             this.initBPOrder(this.bpPerspective, tabsModel + 1);
-            this.getHeroList(result.rows[0].game.time);
 
+            this.getRanking(data.game.time);
+
+            this.gameInfo.game.type == 1 &&
             this.author.openId &&
             this.author.openId == this.$cookie.get("openId")
               ? (this.showInfo.apps = true)
@@ -940,9 +1022,9 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success(this.$appMsg.success[1000]);
-
             this.gameInfo.result.rows.push(newGame);
+
+            this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }
@@ -992,10 +1074,10 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success(this.$appMsg.success[1000]);
-
             this.gameInfo.result.rows.splice(index, 1);
             this.tabsInfo.model = index - 1;
+
+            this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }
@@ -1024,11 +1106,13 @@ export default {
       }
     },
     onGamePerspectiveClick: function (bpMode) {
+      let tabsModel = this.tabsInfo.model;
+
       this.bpPerspective == 1
         ? (this.bpPerspective = 2)
         : (this.bpPerspective = 1);
 
-      this.initBPOrder(this.bpPerspective, this.tabsInfo.model + 1);
+      this.initBPOrder(this.bpPerspective, tabsModel + 1);
 
       if (bpMode == 1)
         this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
@@ -1059,30 +1143,69 @@ export default {
         this.gameInfo.result.rows[tabsModel].stepsNow = index;
       }
     },
-    onGamePickHeroClick: function (hero) {
-      let tabsModel = this.tabsInfo.model;
+    onGamePickHeroClick: function (hero, index) {
+      let tabsModel = this.tabsInfo.model,
+        bpMode = this.bpMode;
 
-      if (
-        this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
-        this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
-      ) {
-        this.$message.error("本局 " + hero.name + " 已被禁用");
+      if (bpMode == "sort") {
+        let sortText = "",
+          newTrend = -1;
+
+        if (hero.trend == 2) {
+          sortText = "其他";
+          newTrend = 0;
+        } else {
+          sortText = "置顶";
+          newTrend = 2;
+        }
+
+        this.$dialog
+          .confirm({
+            title: "是否将【" + hero.name + "】标记为【" + sortText + "】?",
+          })
+          .then(() => {
+            // on confirm
+            this.tableData.result.rows[index].trend = newTrend;
+
+            this.$appSetLocalStorage("gameBP", this.tableData.result);
+          })
+          .catch(() => {
+            // on cancel
+          });
+
         return;
-      } else if (this.gameInfo.used.includes(hero.id)) {
-        this.$message.warning(
-          hero.name + " 已被 " + this.bpOpponent.name + " 使用"
-        );
-        return;
-      } else if (this.bpMode == "view") return;
+      }
 
-      let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow,
-        newIndex = 0;
+      if (bpMode != "edit") return;
 
-      if (oldIndex > 17) {
-        newIndex = 0;
+      if (tabsModel < 6) {
+        if (
+          this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
+          this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
+        ) {
+          this.$message.error("本局 " + hero.name + " 已被禁用");
+
+          return;
+        } else if (this.gameInfo.used.includes(hero.id)) {
+          this.$message.warning(
+            hero.name + " 已被 " + this.bpOpponent.name + " 使用"
+          );
+
+          return;
+        }
       } else {
-        newIndex = oldIndex + 1;
+        //巅峰对局
+      }
 
+      let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
+
+      if (oldIndex == 16) {
+        this.$message.warning(this.$appMsg.warning[1001]);
+      }
+
+      if (oldIndex >= 18) {
+        oldIndex = 0;
+      } else {
         this.gameInfo.result.rows[tabsModel].BPOrder.splice(
           oldIndex,
           1,
@@ -1090,22 +1213,35 @@ export default {
         );
       }
 
-      if (this.bpMode == "edit" && this.bpIndex.bpPerspective[oldIndex] == 1) {
+      if (this.bpIndex.bpPerspective[oldIndex] == 1) {
         this.onGamePerspectiveClick(0);
       }
       //对照 bpIndex 视角表格,如果是 1 则初始化时间
 
-      if (this.gameCampColor(1, oldIndex) != this.gameCampColor(1, newIndex)) {
+      if (
+        this.gameCampColor(1, oldIndex) != this.gameCampColor(1, oldIndex + 1)
+      ) {
         this.initCountdown();
       }
       //自动触发:切换阵容时初始化
 
-      this.gameInfo.result.rows[tabsModel].stepsNow = newIndex;
+      this.gameInfo.result.rows[tabsModel].stepsNow = oldIndex + 1;
 
       this.initBPOrder(this.bpPerspective, tabsModel + 1);
+    },
+    onSortClick: function () {
+      if (this.bpMode == "sort") {
+        this.$appSetLocalStorage("gameBP", this.tableData);
 
-      if (newIndex >= 18) {
-        this.$message.warning(this.$appMsg.warning[1001]);
+        this.bpMode = "view";
+        this.showInfo.setting = false;
+
+        this.$message.success(this.$appMsg.success[1000]);
+      } else {
+        this.bpMode = "sort";
+        this.showInfo.setting = false;
+
+        this.$message.info(this.$appMsg.info[1017]);
       }
     },
     onGameShareCopy: function () {
@@ -1192,9 +1328,9 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.$message.success(this.$appMsg.success[1000]);
-
             this.gameInfo.result.rows[tabsModel] = newGame;
+
+            this.$message.success(this.$appMsg.success[1000]);
           })
           .catch(() => {
             // on cancel
@@ -1203,8 +1339,6 @@ export default {
 
       if (type == 3) {
         if (this.bpMode == "view") {
-          this.$message.info(this.$appMsg.info[1001]);
-
           this.bpMode = "edit";
 
           this.bpIndex.ban.includes(
@@ -1216,6 +1350,8 @@ export default {
           //tabsModel % 2 == 0
 
           this.initCountdown();
+
+          this.$message.info(this.$appMsg.info[1001]);
         } else {
           this.bpMode = "view";
 
@@ -1243,13 +1379,13 @@ export default {
 
       this.$dialog
         .confirm({
-          title: "是否将本局胜方设置为 " + nowWinTeam + " ?",
+          title: "是否将本局胜方标记为【" + nowWinTeam + "】?",
         })
         .then(() => {
           // on confirm
-          this.$message.success(this.$appMsg.success[1000]);
-
           this.gameInfo.result.rows[tabsModel].win.camp = camp;
+
+          this.$message.success(this.$appMsg.success[1000]);
         })
         .catch(() => {
           // on cancel
@@ -1287,9 +1423,18 @@ span.game-0db3e75efe3faa0cee4451fb55bc4c53 {
 }
 
 span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
+  margin-left: -15px;
   position: absolute;
-  top: 2px;
+  top: -1px;
   z-index: 1;
+}
+
+button.game-8e4f204791d1b591b6a6f93b572f9b2d img.van-icon__image {
+  border-radius: 100%;
+  height: 40px;
+  margin-left: -12px;
+  margin-top: -2px;
+  width: 40px;
 }
 
 div.van-tabs__wrap {
@@ -1298,6 +1443,14 @@ div.van-tabs__wrap {
 
 div.game-bp-portrait {
   margin-top: 60%;
+}
+
+div.game-d26ecf27da6e3263cf318adbb8b5f00a {
+  text-align: left;
+}
+
+div.game-2c9118a482fe35d5ab2b6cb01c1985be {
+  display: contents;
 }
 
 div.game-d75e14b5c8f13e894fe9bf9d5426c198,
