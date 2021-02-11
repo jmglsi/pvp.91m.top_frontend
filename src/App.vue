@@ -140,11 +140,13 @@ export default {
           this.tableData.result.model = this.$route.path;
 
           if (appInfo.version != appConfigInfo.appInfo.version) {
-            appConfigInfo.appInfo.name = appInfo.name;
-            appConfigInfo.appInfo.version = appInfo.version;
+            this.$appConfigInfo.appInfo.isSmallMobile =
+              appConfigInfo.appInfo.isSmallMobile || 0;
+            this.$appConfigInfo.appInfo.isSmallMobile =
+              appConfigInfo.appInfo.isReducedMode || 0;
 
             localStorage.removeItem("appConfigInfo");
-            this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
             this.$appDelectRankingCache();
           }
 

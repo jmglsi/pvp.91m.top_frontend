@@ -17,9 +17,13 @@
           <template #title>
             巅峰赛 (顶端局) <i class="vxe-icon--funnel" />
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
-              <a-tooltip :visible="showInfo.filterTips" placement="bottomLeft">
+              <a-tooltip
+                :visible="showInfo.rankingFilterTips"
+                placement="bottomLeft"
+                overlayClassName="ranking-dfd57c5513a2fbff7cc5a97731a5e2b8"
+              >
                 <template slot="title">
-                  <span>筛选移到这里了哦</span>
+                  <span>筛选移到这里了</span>
                 </template>
               </a-tooltip>
             </div>
@@ -63,7 +67,7 @@
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
       <van-action-sheet
-        v-model="showInfo.filterMenu"
+        v-model="showInfo.rankingFilterMenu"
         title="请选择"
         safe-area-inset-bottom
       >
@@ -147,8 +151,8 @@ export default {
         model: 0,
       },
       showInfo: {
-        filterTips: true,
-        filterMenu: false,
+        rankingFilterTips: true,
+        rankingFilterMenu: false,
         shield: false,
       },
       dfsAreaInfo: {
@@ -203,22 +207,23 @@ export default {
   },
   mounted() {
     let route = this.$route.query,
-      appConfigInfo = this.$appGetLocalStorage("appConfigInfo");
+      appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      rankingFilterTips = appConfigInfo.tipsInfo.rankingFilter || 0;
 
     this.heroName = route.heroName || "";
     this.tabsInfo.model = parseInt(route.type) || 0;
     this.bid = parseInt(route.bid) || 0;
     this.cid = parseInt(route.cid) || 0;
 
-    if (appConfigInfo.tipsInfo.rankingFilter == 0) {
+    if (rankingFilterTips == 0) {
       appConfigInfo.tipsInfo.rankingFilter = 1;
       this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
       setTimeout(() => {
-        this.showInfo.filterTips = false;
+        this.showInfo.rankingFilterTips = false;
       }, 10000);
     } else {
-      this.showInfo.filterTips = false;
+      this.showInfo.rankingFilterTips = false;
     }
 
     if (appConfigInfo.appInfo.isSmallMobile == 0 && this.$appHeight < 575) {
@@ -265,8 +270,8 @@ export default {
 
       setTimeout(() => {
         e == 0 || e == 2
-          ? (this.showInfo.filterMenu = true)
-          : (this.showInfo.filterMenu = false);
+          ? (this.showInfo.rankingFilterMenu = true)
+          : (this.showInfo.rankingFilterMenu = false);
       }, 500);
     },
     onDropdownMenuChange: function () {
@@ -293,7 +298,7 @@ export default {
         },
       });
 
-      this.showInfo.filterMenu = false;
+      this.showInfo.rankingFilterMenu = false;
     },
   },
 };
@@ -344,6 +349,10 @@ td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.ranking-48d6215903dff56238e52e8891380c8f div.vxe-cell,
 td.ranking-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
   font-size: 20px;
+}
+
+div.ranking-dfd57c5513a2fbff7cc5a97731a5e2b8 {
+  top: 27.5px !important;
 }
 
 div.ranking-home div.van-dropdown-menu__bar {

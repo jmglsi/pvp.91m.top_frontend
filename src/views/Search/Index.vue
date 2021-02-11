@@ -24,20 +24,29 @@
           >
             <van-grid :border="false" :column-num="2">
               <van-grid-item
-                v-for="(data, index) in tableData.search.hotKeywords"
+                v-for="(data, index) in tableData.search.hotKeywords.rows"
                 :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
-                @click="getSearch(data)"
+                @click="getSearch(data.value)"
               >
-                <span class="search-8fd6a51f93ef7b5379535e63a5e071cd"
-                  ><span
+                <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
+                  <span
+                    v-if="data.isTop"
+                    :style="{ color: 'orange' }"
                     class="search-f43418d85f50da28b3a9c1e780237105"
+                  >
+                    <van-icon name="back-top" />
+                  </span>
+                  <span
+                    v-else
                     :style="index < 4 ? { color: 'red' } : {}"
-                    >{{ index + 1 }}</span
+                    class="search-f43418d85f50da28b3a9c1e780237105"
+                  >
+                    {{ index + 1 - tableData.search.hotKeywords.topNum }} </span
                   >&nbsp;
                   <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">{{
-                    data
-                  }}</span></span
-                >
+                    data.value
+                  }}</span>
+                </span>
               </van-grid-item>
             </van-grid>
           </van-cell-group>
@@ -523,6 +532,12 @@ span.search-399841f840f75044108804ec30d37405 {
 span.search-b0958af6a9b2591433e50ff9eb7f3420 {
   margin-left: 6px;
   margin-right: 4px;
+}
+
+span.search-f43418d85f50da28b3a9c1e780237105 {
+  display: inline-block;
+  text-align: center;
+  width: 15px;
 }
 
 div.search-843c48c53bd40c7f476497c030fb0e92,
