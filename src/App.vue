@@ -144,11 +144,15 @@ export default {
               appConfigInfo.appInfo.isSmallMobile || 0;
             this.$appConfigInfo.appInfo.isSmallMobile =
               appConfigInfo.appInfo.isReducedMode || 0;
+            this.$appConfigInfo.appInfo.version =
+              appInfo.version || this.$appTs;
 
-            localStorage.removeItem("appConfigInfo");
-            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
             this.$appDelectRankingCache("heroUpdate");
             this.$appDelectRankingCache("ranking");
+
+            localStorage.removeItem("appConfigInfo");
+
+            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
 
           if (tipsInfo) {

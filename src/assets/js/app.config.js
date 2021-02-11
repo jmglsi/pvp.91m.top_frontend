@@ -10,7 +10,7 @@ Vue.prototype.$appConfigInfo = {
         isSmallMobile: 0,
         isReducedMode: 0,
         name: "苏苏的荣耀助手",
-        version: 20210210111300
+        version: 0
     },
     tipsInfo: {
         rankingFilter: 0,
