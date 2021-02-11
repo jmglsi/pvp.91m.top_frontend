@@ -153,6 +153,8 @@ export default {
         localStorage.removeItem("heroUpdate-0");
         localStorage.removeItem("searchData");
 
+        localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
+
         this.isSmallMobile = false;
         this.isReducedMode = false;
 

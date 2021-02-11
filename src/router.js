@@ -94,7 +94,7 @@ export default new Router({
             component: () =>
                 import ('./views/Setting/Index.vue'),
             meta: {
-                title: '设置',
+                title: '通用',
                 keepAlive: true
             }
         }, {

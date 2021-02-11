@@ -239,7 +239,7 @@
       >
         <van-cell
           icon="setting-o"
-          title="设置"
+          title="通用"
           is-link
           @click="$appPush({ path: '/setting' })"
         />
