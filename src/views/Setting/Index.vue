@@ -148,7 +148,6 @@ export default {
     onDelectClick: function (e) {
       if (e == 0) {
         localStorage.removeItem("appConfigInfo");
-        localStorage.removeItem("gameBP");
         localStorage.removeItem("gameHome");
         localStorage.removeItem("heroUpdate-0");
         localStorage.removeItem("searchData");
@@ -162,7 +161,7 @@ export default {
       } else if (e == 1) {
         this.$appDelectRankingCache("ranking");
       } else if (e == 2) {
-        localStorage.removeItem("ranking-0-4-0");
+        localStorage.removeItem("gameBP");
       }
 
       this.$message.success(this.$appMsg.success[1000]);
