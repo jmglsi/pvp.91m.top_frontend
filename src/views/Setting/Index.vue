@@ -19,16 +19,22 @@
         title="设置"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
-        <van-cell
-          title="适配小屏"
-          label="打开后部分页面将自动缩小图片"
-          icon="graphic"
-        >
+        <van-cell title="精简模式" label="优化排行界面的加载速度">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
-                v-model="appInfo.isSmallMobile"
-                @change="onMobileInfoChange"
+                v-model="appConfigInfo.appInfo.isReducedMode"
+                @change="onReducedModeChange"
+              />
+            </span>
+          </template>
+        </van-cell>
+        <van-cell title="适配小屏" label="打开后部分页面将自动缩小图片">
+          <template #right-icon>
+            <span class="setting-a833c0959e80ada90f239fb707903be2">
+              <van-switch
+                v-model="appConfigInfo.appInfo.isSmallMobile"
+                @change="onSmallMobileChange"
               />
             </span>
           </template>
@@ -55,7 +61,7 @@
         title="其他"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
-        <van-cell title="当前版本" :value="appInfo.version" />
+        <van-cell title="当前版本" :value="appConfigInfo.appInfo.version" />
       </van-cell-group>
     </div>
   </div>
@@ -66,9 +72,12 @@ export default {
   name: "Setting",
   data() {
     return {
-      appInfo: {
-        isSmallMobile: false,
-        version: 0,
+      appConfigInfo: {
+        appInfo: {
+          isSmallMobile: false,
+          isReducedMode: false,
+          version: 0,
+        },
       },
       cacheInfo: [
         { title: "清空程序缓存", label: null },
@@ -78,30 +87,61 @@ export default {
     };
   },
   mounted() {
-    let appConfigInfo = this.$appGetLocalStorage("appConfigInfo");
-
-    this.appInfo = appConfigInfo.appInfo;
-    appConfigInfo.appInfo.isSmallMobile == 1
-      ? (this.appInfo.isSmallMobile = true)
-      : (this.appInfo.isSmallMobile = false);
+    this.initAppConfigInfo();
   },
   methods: {
-    onMobileInfoChange: function (e) {
-      let isSmallMobileInt = 0,
-        isSmallMobileBool = false;
+    initAppConfigInfo: function () {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        isReducedMode = false,
+        isSmallMobile = false;
+
+      this.appConfigInfo.appInfo = appConfigInfo.appInfo;
+
+      appConfigInfo.appInfo.isReducedMode == 1
+        ? (isReducedMode = true)
+        : (isReducedMode = false);
+      this.appConfigInfo.appInfo.isReducedMode = isReducedMode;
+
+      appConfigInfo.appInfo.isSmallMobile == 1
+        ? (isSmallMobile = true)
+        : (isSmallMobile = false);
+      this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
+    },
+    onReducedModeChange: function (e) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        isReducedMode = false;
 
       if (e == false) {
-        isSmallMobileInt = 0;
-        isSmallMobileBool = false;
+        localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
+
+        isReducedMode = false;
       } else {
-        isSmallMobileInt = 1;
-        isSmallMobileBool = true;
+        this.$appSetLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE", {
+          _v: 0,
+          refDianFengSai:
+            "allBrandRate,evaluateGoldRate,evaluateSilverRate,allMvpRate,winMvpRate,loseMvpRate,totalBeHurtedCntPerMin,totalOutputPerMin,totalHurtHeroCntPerMin,equMoneyOverflow,equMoneyMin,killCnt,deadCnt,assistCnt,joinGamePercent,usedtime",
+        });
+
+        isReducedMode = true;
       }
 
-      this.appInfo.isSmallMobile = isSmallMobileBool;
-      this.$appConfigInfo.appInfo.isSmallMobile = isSmallMobileInt;
+      this.appConfigInfo.appInfo.isReducedMode = isReducedMode;
+      appConfigInfo.appInfo.isReducedMode = Number(isReducedMode);
 
-      this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+      this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+
+      this.$message.success(this.$appMsg.success[1004]);
+    },
+    onSmallMobileChange: function (e) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        isSmallMobile = false;
+
+      e == false ? (isSmallMobile = false) : (isSmallMobile = true);
+
+      this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
+      appConfigInfo.appInfo.isSmallMobile = Number(isSmallMobile);
+
+      this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
       this.$message.success(this.$appMsg.success[1004]);
     },
