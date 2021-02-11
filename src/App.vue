@@ -147,7 +147,8 @@ export default {
 
             localStorage.removeItem("appConfigInfo");
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
-            this.$appDelectRankingCache();
+            this.$appDelectRankingCache("heroUpdate");
+            this.$appDelectRankingCache("ranking");
           }
 
           if (tipsInfo) {

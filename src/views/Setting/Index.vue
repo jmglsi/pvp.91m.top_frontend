@@ -152,8 +152,13 @@ export default {
         localStorage.removeItem("gameHome");
         localStorage.removeItem("heroUpdate-0");
         localStorage.removeItem("searchData");
+
+        this.isSmallMobile = false;
+        this.isReducedMode = false;
+
+        this.$router.go(0);
       } else if (e == 1) {
-        this.$appDelectRankingCache();
+        this.$appDelectRankingCache("ranking");
       } else if (e == 2) {
         localStorage.removeItem("ranking-0-4-0");
       }
