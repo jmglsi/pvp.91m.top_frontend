@@ -6,7 +6,6 @@
         v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
-        :sticky="true"
         @click="onRankingTabsClick"
         duration="0.5"
         line-width="25px"
@@ -19,8 +18,12 @@
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
               <a-tooltip
                 :visible="showInfo.rankingFilterTips"
+                :overlayStyle="
+                  $appConfigInfo.appInfo.pwa == 1
+                    ? { top: '78px !important' }
+                    : { top: '28px !important' }
+                "
                 placement="bottomLeft"
-                overlayClassName="ranking-dfd57c5513a2fbff7cc5a97731a5e2b8"
               >
                 <template slot="title">
                   <span>筛选移到这里了</span>
@@ -254,10 +257,6 @@ export default {
     onRankingTabsClick: function (e) {
       let tabsInfo = this.tabsInfo;
 
-      this.$appPush({
-        query: { type: tabsInfo.model },
-      });
-
       if (e == 0) {
         this.bidInfo = this.dfsAreaInfo;
         this.cidInfo = this.dfsPositionInfo;
@@ -267,6 +266,8 @@ export default {
         this.bidInfo = this.wjAreaInfo;
         this.cidInfo = this.wjShieldInfo;
       }
+
+      this.$appPush({ query: { type: tabsInfo.model } });
 
       setTimeout(() => {
         e == 0 || e == 2
@@ -349,10 +350,6 @@ td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.ranking-48d6215903dff56238e52e8891380c8f div.vxe-cell,
 td.ranking-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
   font-size: 20px;
-}
-
-div.ranking-dfd57c5513a2fbff7cc5a97731a5e2b8 {
-  top: 27.5px !important;
 }
 
 div.ranking-home div.van-dropdown-menu__bar {

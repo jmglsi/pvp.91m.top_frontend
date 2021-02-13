@@ -1,19 +1,19 @@
 {
     "name": "苏苏的荣耀助手 - 全局BP模拟器",
     "short_name": "苏苏的荣耀助手",
+    "start_url": "/?pwa=1&v=1613064470",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
     "icons": [{
-            "src": "./img/icons/android-chrome-192x192.png",
+            "src": "/img/icons/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "./img/icons/android-chrome-512x512.png",
+            "src": "/img/icons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "start_url": "./?pwa=1&v=2021210105510",
-    "display": "standalone",
-    "theme_color": "#000000",
-    "background_color": "#000000"
+    ]
 }

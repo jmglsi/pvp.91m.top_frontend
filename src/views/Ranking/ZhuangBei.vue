@@ -181,6 +181,7 @@ export default {
     if (equipmentId) {
       this.tableDataRow.equipment.id = equipmentId;
       this.tableDataRow.equipment.name = equipmentName;
+
       this.showInfo.skillMenu = true;
     }
 
@@ -234,6 +235,7 @@ export default {
     },
     onCellClick: function ({ row }) {
       this.tableDataRow = row;
+
       this.showInfo.equipmentMenu = true;
     },
     onZhuangBeiCopy: function (row) {

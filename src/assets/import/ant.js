@@ -14,13 +14,19 @@ Vue
     .use(Dropdown)
     .use(Menu)
     .use(Tooltip)
-    .use(Message, {
-        duration: 5
-    })
-    .use(Notification, {
-        duration: 10
-    })
+    .use(Message)
+    .use(Notification)
     .use(Timeline)
+
+Message.config({
+    top: "50px",
+    duration: 5
+})
+
+Notification.config({
+    top: "50px",
+    duration: 5
+})
 
 Vue.prototype.$message = Message
 Vue.prototype.$notification = Notification

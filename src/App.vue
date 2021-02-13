@@ -1,16 +1,33 @@
 <template>
   <div id="app">
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
-      <keep-alive>
-        <router-view
-          v-if="$route.meta.keepAlive"
-          class="app-1bda80f2be4d3658e0baa43fbe7ae8c1"
-        />
-      </keep-alive>
-      <router-view
-        v-if="!$route.meta.keepAlive"
-        class="app-1bda80f2be4d3658e0baa43fbe7ae8c1"
-      />
+      <div
+        class="app-8de1f001663ee713d24888bb422e3881"
+        :style="
+          $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
+            ? {
+                background:
+                  'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36)) repeat scroll 0% 0%',
+              }
+            : {}
+        "
+      ></div>
+
+      <div
+        v-if="$route.meta.keepAlive"
+        class="app-3d1b70e46d0b6cd9cfa43d743da14266"
+      >
+        <keep-alive>
+          <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+        </keep-alive>
+      </div>
+
+      <div
+        v-else-if="!$route.meta.keepAlive"
+        class="app-3d1b70e46d0b6cd9cfa43d743da14266"
+      >
+        <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+      </div>
     </div>
 
     <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
@@ -97,25 +114,32 @@ export default {
         tipsInfo: {},
       },
       showInfo: {
+        hello: true,
+        statusBar: true,
         tabbar: true,
       },
     };
   },
   watch: {
     $route(to) {
-      if (
-        to.path == "/login" ||
-        to.path == "/miniapp" ||
-        to.path == "/bilibili" ||
-        to.path.indexOf("/hero/") > -1 ||
-        to.path.indexOf("/game/") > -1
-      ) {
-        this.showInfo.tabbar = false;
-      } else {
-        this.showInfo.tabbar = true;
-      }
+      let hello = false,
+        statusBar = false,
+        tabbar = false;
 
       this.tableData.result.model = to.path;
+
+      /(ranking|game(.*?)bp)/i.test(to.path) ? (hello = false) : (hello = true);
+      this.showInfo.hello = hello;
+
+      /search/i.test(to.path) || to.path == "/"
+        ? (statusBar = true)
+        : (statusBar = false);
+      this.showInfo.statusBar = statusBar;
+
+      /(login|miniapp|bilibili|hero|game)/i.test(to.path)
+        ? (tabbar = false)
+        : (tabbar = true);
+      this.showInfo.tabbar = tabbar;
     },
   },
   mounted() {
@@ -140,18 +164,17 @@ export default {
           this.tableData.result.model = this.$route.path;
 
           if (appInfo.version != appConfigInfo.appInfo.version) {
-            this.$appConfigInfo.appInfo.isSmallMobile =
-              appConfigInfo.appInfo.isSmallMobile || 0;
-            this.$appConfigInfo.appInfo.isSmallMobile =
-              appConfigInfo.appInfo.isReducedMode || 0;
-            this.$appConfigInfo.appInfo.version =
-              appInfo.version || this.$appTs;
-
-            this.$appDelectRankingCache("heroUpdate");
-            this.$appDelectRankingCache("ranking");
+            this.$appConfigInfo.appInfo = {
+              pwa: appConfigInfo.appInfo.pwa || 0,
+              isSmallMobile: appConfigInfo.appInfo.isSmallMobile || 0,
+              isReducedMode: appConfigInfo.appInfo.isReducedMode || 0,
+              version: appInfo.version || this.$appTs,
+            };
 
             localStorage.removeItem("appConfigInfo");
 
+            this.$appDelectRankingCache("heroUpdate");
+            this.$appDelectRankingCache("ranking");
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
 
@@ -354,9 +377,21 @@ div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
 
+div.app-home div.van-tabs__nav,
+div.van-search {
+  background-color: transparent;
+}
+
 div.van-tabs__nav {
   height: unset;
   overflow-x: unset;
+}
+
+div.app-8de1f001663ee713d24888bb422e3881 {
+  height: 100px;
+  margin-top: -50px;
+  position: fixed;
+  width: 100%;
 }
 
 div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
@@ -454,10 +489,6 @@ div.app-6bdc6915ee08058392eafe0ef6e353fd {
 div.app-b4a64ecd008af42ba95bc20350599699,
 div.app-9b9faf4e737f5907995f767e0b345dab {
   background-color: rgb(248, 249, 252);
-}
-
-div.app-d9833a1bc29f11d9ca39543dc46fcc58 {
-  margin-top: 40px;
 }
 
 div.app-88bf7a95736562190270d51dc2cb3f42 {

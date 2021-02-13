@@ -134,6 +134,7 @@ export default {
           if (status.code == 200) {
             this.lineData = data;
             this.lineData.loading = false;
+
             this.showInfo.autoPlayTrend = true;
           } else {
             this.$appOpenUrl(status.msg, null, { path: "/login" }, 1);

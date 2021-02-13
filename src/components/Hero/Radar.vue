@@ -122,7 +122,7 @@ export default {
         this.chartSettings = {};
         this.chartData = [];
       } else {
-        let newTags = "";
+        let newTags = null;
 
         for (let i = 0; i < e.length; i++) {
           newTags += "," + e[i].text;

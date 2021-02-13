@@ -1,7 +1,19 @@
 <template>
   <div class="miniapp">
+    <div class="miniapp-5acbc85c0ac59d5f69197b9fdb893b00">
+      <van-nav-bar
+        :border="false"
+        :fixed="true"
+        :placeholder="true"
+        :safe-area-inset-top="true"
+        z-index="99999999"
+        title="小程序"
+        class="miniapp-cce79bfde37d3f930a50bbaed2d29135"
+      ></van-nav-bar>
+    </div>
     <div
       class="miniapp-8d777f385d3dfec8815d20f7496026dc app-4eb2044800e2b7b9e5c44d370af22b27"
+      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
     >
       <div class="miniapp-7c8fdd065963838acab323de542586ee">
         <van-cell-group

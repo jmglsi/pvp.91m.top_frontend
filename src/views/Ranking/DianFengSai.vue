@@ -530,13 +530,15 @@ export default {
       this.tableDataRow = row;
 
       if (column.property == "allScore") {
+        this.cellInfo.index = 0;
+
         this.showInfo.skillMenu = true;
         this.showInfo.heroMenu = false;
-        this.cellInfo.index = 0;
       } else {
+        this.cellInfo.index = 1;
+
         this.showInfo.skillMenu = false;
         this.showInfo.heroMenu = true;
-        this.cellInfo.index = 1;
       }
     },
     cellClassName: function ({ row, column }) {

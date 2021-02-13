@@ -4,13 +4,15 @@ Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(nav
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
+Vue.prototype.$appScrollTop = 0;
 
 Vue.prototype.$appConfigInfo = {
     appInfo: {
-        isSmallMobile: 0,
-        isReducedMode: 0,
         name: "苏苏的荣耀助手",
-        version: 0
+        pwa: 0,
+        version: 0,
+        isSmallMobile: 0,
+        isReducedMode: 0
     },
     tipsInfo: {
         rankingFilter: 0,
@@ -113,7 +115,9 @@ Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlTyp
             // on confirm
             if (urlType == 0) {
                 window.open(url.path);
-            } else if (urlType == 1) {
+            }
+
+            if (urlType == 1) {
                 this.$appPush(url);
             }
         })

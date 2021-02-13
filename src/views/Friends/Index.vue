@@ -6,6 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
         left-text="返回"
         z-index="99999999"
@@ -35,7 +36,13 @@
       </van-nav-bar>
     </div>
 
-    <div class="app-d9833a1bc29f11d9ca39543dc46fcc58">
+    <div
+      :style="
+        $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-10px' }
+          : { marginTop: '40px' }
+      "
+    >
       <img
         v-lazy="friendsInfo.img"
         width="100"
@@ -127,7 +134,7 @@
         icon="replay"
         type="primary"
         size="small"
-        @click="getWebAccountInfo(1)"
+        @click="getWebAccountInfo(1, 1)"
         >刷新</van-button
       >
       &nbsp;
@@ -140,19 +147,14 @@
         >复制QQ</van-button
       >
     </div>
-
-    <AppBottomTabbar v-if="$appIsMobile" height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "FriendsHome",
-  components: {
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
-  },
   mounted() {
-    this.getWebAccountInfo(0);
+    this.getWebAccountInfo(0, 1);
   },
   data() {
     return {

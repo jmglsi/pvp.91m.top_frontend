@@ -231,7 +231,7 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(newValue.heroName);
+          this.getRanking(2, 0, 0,newValue.heroName);
 
           this.$refs.refGuanXi.refreshColumn();
         }
@@ -275,7 +275,7 @@ export default {
     this.getRanking(2, 0, 0, this.heroName);
   },
   methods: {
-    getRanking: function (aid = 2, bid = 0, cid = 0, heroName = "") {
+    getRanking: function (aid = 2, bid = 0, cid = 0, heroName = null) {
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
@@ -300,6 +300,7 @@ export default {
     },
     getHeroInfo: function (row) {
       this.tableDataRow = row;
+
       this.showInfo.heroMenu = true;
     },
     onGuanXiCopy: function () {

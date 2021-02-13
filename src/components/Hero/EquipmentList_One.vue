@@ -219,8 +219,6 @@
           <br />
           7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
         </span>
-
-        <AppBottomTabbar v-if="$appIsMobile" height="50px" />
       </div>
     </van-action-sheet>
   </div>
@@ -257,7 +255,6 @@ export default {
   },
   components: {
     EquipmentLine: () => import("@/components/Equipment/Line.vue"),
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   data() {
     return {
@@ -375,7 +372,6 @@ export default {
         this.getHeroEquipment(row.equipment.id, this.equipmentInfo.type);
         return;
       }
-      this.showInfo.equipmentMenu = true;
 
       this.lineData.heroId = row.heroId;
       this.lineData.equipmentId = row.equipment.id;

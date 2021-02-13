@@ -1,5 +1,5 @@
-let apiHost = "",
-    sHost = "";
+let apiHost = null,
+    sHost = null;
 
 if (location.host.indexOf("91m.top") > -1) {
     sHost = "//s.91m.top";

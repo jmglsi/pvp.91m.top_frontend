@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "AppBottomTabbar",
+  name: "AppHello",
   props: {
     height: {
       type: String,

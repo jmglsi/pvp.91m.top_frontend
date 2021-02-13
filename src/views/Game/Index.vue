@@ -1,7 +1,8 @@
 <template>
   <div class="game-home">
     <router-view />
-    <AppBottomTabbar />
+
+    <AppHello v-if="showInfo.hello" height="100px" />
   </div>
 </template>
 
@@ -9,7 +10,22 @@
 export default {
   name: "GameHome",
   components: {
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
+  data() {
+    return {
+      showInfo: {
+        hello: true,
+      },
+    };
+  },
+  watch: {
+    $route(to) {
+      let hello = false;
+
+      /game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
+      this.showInfo.hello = hello;
+    },
   },
 };
 </script>

@@ -7,7 +7,6 @@
         :border="false"
         :ellipsis="false"
         :swipeable="true"
-        :sticky="true"
         @change="$appPush({ query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
@@ -37,7 +36,7 @@
       </span>
     </div>
 
-    <AppBottomTabbar height="100px" />
+    <AppHello height="100px" />
   </div>
 </template>
 
@@ -47,7 +46,7 @@ export default {
   components: {
     TuiJian: () => import("@/views/Home/TuiJian.vue"),
     Game: () => import("@/views/Home/Game.vue"),
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   data() {
     return {
@@ -63,14 +62,21 @@ export default {
     };
   },
   mounted() {
-    let pwa = parseInt(this.$route.query.pwa) || 0,
-      type = parseInt(this.$route.query.type) || 0,
-      version = parseInt(this.$route.query.v) || 1609430400;
+    this.initApp();
+  },
+  methods: {
+    initApp: function () {
+      let pwa = parseInt(this.$route.query.pwa) || 0,
+        type = parseInt(this.$route.query.type) || 0,
+        version = parseInt(this.$route.query.v) || 1609430400;
 
-    this.tabsInfo.model = type;
+      this.tabsInfo.model = type;
 
-    if (pwa == 1) {
-      localStorage.setItem("pwa", pwa);
+      if (pwa == 0) return;
+
+      this.$appConfigInfo.appInfo.pwa = 1;
+
+      this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
 
       let updateDay = ((this.$appTs - version) / 86400).toFixed(2);
       if (updateDay >= 90) {
@@ -99,7 +105,7 @@ export default {
             // on cancel
           });
       }
-    }
+    },
   },
 };
 </script>

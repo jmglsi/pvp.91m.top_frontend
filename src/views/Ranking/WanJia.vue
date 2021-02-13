@@ -174,6 +174,7 @@ export default {
     },
     getPlayerInfo: function (row) {
       this.tableDataRow = row;
+
       this.showInfo.playerMenu = true;
     },
     onWanJiaCopy: function (row) {

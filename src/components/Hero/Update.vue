@@ -360,11 +360,12 @@ export default {
             data.articleId
         )
         .then((res) => {
+          this.tableDataRow = data;
+
           this.updateInfo.title = data.calendar.day + " 的更新内容";
           this.updateInfo.text = res.data.data;
 
           this.showInfo.dialog = true;
-          this.tableDataRow = data;
         });
     },
     onHeroUpdateTextCopy: function (heroId, row) {

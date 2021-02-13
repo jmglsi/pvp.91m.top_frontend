@@ -6,6 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
         z-index="99999999"
         left-text="返回"
@@ -13,7 +14,10 @@
       />
     </div>
 
-    <div class="setting-b401c55622473cb5f8e0cf4e19901f39">
+    <div
+      class="setting-b401c55622473cb5f8e0cf4e19901f39"
+      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+    >
       <van-cell-group
         :border="false"
         title="设置"

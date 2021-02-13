@@ -969,7 +969,6 @@ export default {
             this.gameInfo = data;
 
             this.initBPOrder(this.bpPerspective, tabsModel + 1);
-
             this.getRanking(data.game.time);
 
             this.gameInfo.game.type == 1 &&
@@ -1095,14 +1094,14 @@ export default {
       return ret;
     },
     onSeeHeroClick: function () {
-      this.showInfo.hero = false;
-
       if (this.eye == "eye-o") {
         this.eye = "closed-eye";
-      } else {
-        this.showInfo.hero = true;
 
+        this.showInfo.hero = false;
+      } else {
         this.eye = "eye-o";
+
+        this.showInfo.hero = true;
       }
     },
     onGamePerspectiveClick: function (bpMode) {
@@ -1148,7 +1147,7 @@ export default {
         bpMode = this.bpMode;
 
       if (bpMode == "sort") {
-        let sortText = "",
+        let sortText = null,
           newTrend = -1;
 
         if (hero.trend == 2) {
@@ -1234,11 +1233,13 @@ export default {
         this.$appSetLocalStorage("gameBP", this.tableData);
 
         this.bpMode = "view";
+
         this.showInfo.setting = false;
 
         this.$message.success(this.$appMsg.success[1000]);
       } else {
         this.bpMode = "sort";
+
         this.showInfo.setting = false;
 
         this.$message.info(this.$appMsg.info[1017]);
@@ -1363,7 +1364,7 @@ export default {
       }
     },
     onWinCampClick: function (camp) {
-      let nowWinTeam = "",
+      let nowWinTeam = null,
         tabsModel = this.tabsInfo.model,
         teamInfo = this.team;
 

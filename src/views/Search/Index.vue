@@ -1,7 +1,7 @@
 <template>
   <div class="search-home">
     <div class="search-9420e49425fc3d6dcfe7b9f8d62b1b6b">
-      <van-sticky>
+      <van-sticky :offset-top="$appConfigInfo.appInfo.pwa == 1 ? 50 : 0">
         <van-search
           v-model="search.value"
           :placeholder="search.placeholder"
@@ -212,7 +212,7 @@
     >
       <van-cell-group
         :border="false"
-        title=" "
+        :title="tableData.heroInfo.id ? ' ' : ''"
         class="search-7eb8c85291f87604bb87a151d0dc5d88"
       >
         <van-cell
@@ -263,7 +263,7 @@
       </van-action-sheet>
     </div>
 
-    <AppBottomTabbar height="100px" />
+    <AppHello height="100px" />
   </div>
 </template>
 
@@ -276,7 +276,7 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {
@@ -357,14 +357,12 @@ export default {
           this.tableData = data;
 
           if (status.code == 200) {
-            this.showInfo.searchData = true;
-            this.showInfo.searchHistory = false;
-
             this.addSearchData(value);
-
+            this.initSearchHistory();
             this.$appPush({ query: { q: value } });
 
-            this.initSearchHistory();
+            this.showInfo.searchData = true;
+            this.showInfo.searchHistory = false;
           } else {
             this.showInfo.searchData = false;
             this.showInfo.searchHistory = true;
@@ -374,7 +372,7 @@ export default {
         });
     },
     onJiXiaClick: function (wikiId) {
-      let url = "";
+      let url = null;
 
       wikiId > 0
         ? (url = "https://bbs.nga.cn/read.php?tid=" + wikiId)
@@ -450,9 +448,11 @@ export default {
 
       if (searchData) {
         this.tableData.search.history = searchData.split(",").reverse();
+
         this.showInfo.searchHistory = true;
       } else {
         this.tableData.search.history = [];
+
         this.showInfo.searchHistory = false;
       }
     },
@@ -471,23 +471,24 @@ export default {
     onClearSearchData: function () {
       localStorage.removeItem("searchData");
 
-      this.search.data = "";
-      this.showInfo.searchData = false;
+      this.search.data = null;
       this.tableData.search.history = [];
+
+      this.showInfo.searchData = false;
       this.showInfo.searchHistory = false;
 
       this.$message.success(this.$appMsg.success[1000]);
     },
     onClearInputData: function () {
       if (this.search.value.length == 0) {
-        this.showInfo.searchData = false;
-        this.showInfo.searchHistory = true;
-
         this.tableData.heroInfo.id = 0;
 
         this.initSearchHistory();
 
         this.$appPush({ path: "/search" });
+
+        this.showInfo.searchData = false;
+        this.showInfo.searchHistory = true;
       }
     },
   },

@@ -5,6 +5,7 @@
         left-arrow
         :border="false"
         :fixed="true"
+        :safe-area-inset-top="true"
         :style="
           scroll >= 50
             ? { backgroundColor: 'white' }
@@ -73,7 +74,8 @@
       <van-swipe
         v-if="showInfo.parameter"
         :autoplay="7500"
-        :height="250"
+        :height="$appConfigInfo.appInfo.pwa == 1 ? '300' : '250'"
+        :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
         class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
       >
         <van-swipe-item
@@ -404,8 +406,6 @@
         >
       </van-tabbar>
     </div>
-
-    <AppBottomTabbar height="100px" />
   </div>
 </template>
 
@@ -422,7 +422,6 @@ export default {
     HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
   },
   watch: {
     $route: function (to) {
@@ -506,6 +505,9 @@ export default {
         },
       },
     };
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollTop);
   },
   mounted() {
     let heroId = parseInt(this.$route.params.id) || 111,
@@ -618,7 +620,7 @@ export default {
       this.showInfo.imageIndex = imageIndex;
     },
     onHeroTabsChange: function (e) {
-      let dTitle = "",
+      let dTitle = null,
         heroInfo = this.hero.info;
 
       if (e == 0) {
@@ -626,10 +628,10 @@ export default {
         this.hero.title = dTitle;
       } else if (e == 1) {
         dTitle = "同分路对比";
-        this.hero.title = "";
+        this.hero.title = null;
       } else if (e == 2) {
         dTitle = "自定义对比";
-        this.hero.title = "";
+        this.hero.title = null;
       }
 
       document.title = dTitle + " | " + this.$appConfigInfo.appInfo.name;

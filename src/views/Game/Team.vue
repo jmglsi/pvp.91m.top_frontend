@@ -6,6 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
         @click-left="$appPush({ path: '/my' })"
         @click-right="onCreateTeamClick"
         left-text="返回"
@@ -19,6 +20,7 @@
 
     <div
       class="game-c37237ae7770c5062ccad7a23572e282 app-4eb2044800e2b7b9e5c44d370af22b27"
+      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
     >
       <van-grid
         :column-num="3"
@@ -200,20 +202,18 @@ export default {
       this.$message.error(this.$appMsg.error[1005]);
     },
     onCreateTeamClick: function () {
-      this.showInfo.teamMenu = true;
-
+      this.tableData.type = 0;
       this.tableDataRow = {
         name: "",
         logo: "",
       };
 
-      this.tableData.type = 0;
+      this.showInfo.teamMenu = true;
     },
     onUpdateTeamClick: function (data, index) {
+      this.tableData.type = 1;
       this.tableDataRow = data;
       this.tableDataRow.index = index;
-
-      this.tableData.type = 1;
 
       this.showInfo.teamMenu = true;
     },
@@ -295,7 +295,7 @@ export default {
     onCreateEngageClick: function (data) {
       this.showInfo.teamMenu = false;
 
-      let oldTeamId = localStorage.getItem("tempTeamId") || "",
+      let oldTeamId = localStorage.getItem("tempTeamId") || null,
         newTeamId = data;
 
       if (oldTeamId == newTeamId) {
@@ -328,14 +328,13 @@ export default {
             let label = data.data.label;
 
             localStorage.removeItem("tempTeamId");
+            this.$appPush({ path: "/game/" + label + "/bp" });
 
             this.$message.success(this.$appMsg.success[1000]);
-
-            this.$appPush({ path: "/game/" + label + "/bp" });
           } else {
-            this.$message.error(status.msg);
-
             this.$appPush({ path: "/login" });
+
+            this.$message.error(status.msg);
           }
         });
 

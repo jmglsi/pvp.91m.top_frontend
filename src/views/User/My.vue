@@ -3,10 +3,11 @@
     <div class="my-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
         v-if="isLogin"
-        :left-text="!showInfo.editType ? '编辑' : '编辑中'"
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
+        :left-text="!showInfo.editType ? '编辑' : '编辑中'"
         @click-left="onUpdateInfoClick"
         z-index="99999999"
       >
@@ -57,7 +58,14 @@
       </van-cell-group>
     </div>
 
-    <div v-if="isLogin" class="app-d9833a1bc29f11d9ca39543dc46fcc58">
+    <div
+      v-if="isLogin"
+      :style="
+        $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-10px' }
+          : { marginTop: '40px' }
+      "
+    >
       <img
         v-lazy="loginInfo.img"
         width="100"
@@ -427,7 +435,7 @@
       </van-action-sheet>
     </div>
 
-    <AppBottomTabbar height="100px" />
+    <AppHello height="100px" />
   </div>
 </template>
 
@@ -435,7 +443,7 @@
 export default {
   name: "MyHome",
   components: {
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   data() {
     return {

@@ -170,7 +170,7 @@ export default {
               this.copyData
             );
 
-            this.copyAv = "";
+            this.copyAv = null;
           }
 
           this.tableData.loading = false;
@@ -178,6 +178,7 @@ export default {
     },
     onBilibiliActionSheetClick: function (row) {
       this.tableDataRow = row;
+
       this.showInfo.actionSheet = true;
     },
     onBilibiliCopy: function (row) {
@@ -223,7 +224,7 @@ export default {
         });
     },
     onSearchClear: function () {
-      this.search.value = "";
+      this.search.value = null;
       this.tableData = [];
 
       clearInterval(this.getOrderInfoInterval);

@@ -6,6 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
         left-text="返回"
         title="每隔 5 分钟更新一次,切换视角 👉"

@@ -6,6 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
         @click-left="$appPush({ path: '/my' })"
         left-text="返回"
         title="交战"
@@ -14,7 +15,10 @@
       />
     </div>
 
-    <div class="game-71ddd6fc31e5033696c4a7f66111b5f9">
+    <div
+      class="game-71ddd6fc31e5033696c4a7f66111b5f9"
+      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+    >
       <van-grid
         :border="false"
         :column-num="1"
@@ -63,17 +67,12 @@
         </van-grid-item>
       </van-grid>
     </div>
-
-    <AppBottomTabbar v-if="$appIsMobile" height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "GameEngage",
-  components: {
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
-  },
   data() {
     return {
       tableData: {

@@ -6,6 +6,7 @@
         :border="false"
         :fixed="true"
         :placeholder="true"
+        :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
         left-text="返回"
         z-index="99999999"
@@ -19,8 +20,11 @@
       </van-nav-bar>
     </div>
 
-    <div class="hero-9a7c47049573e03028c2e650b73f6252">
-      <van-collapse v-model="collapseModel" :border="false">
+    <div
+      class="hero-9a7c47049573e03028c2e650b73f6252"
+      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+    >
+      <van-collapse v-model="collapseInfo.model" :border="false">
         <van-collapse-item
           v-for="(data, index) in tableData.result.rows"
           :key="'hero-1a721faf2df53972bfd0831c64b6146d-' + index"
@@ -118,28 +122,22 @@
 
     <div class="hero-face1cbe136c70e1fc08cff038596944">
       <van-pagination
-        v-model="paginationModel"
+        v-model="paginationInfo.model"
         :total-items="tableData.result.total"
         :items-per-page="tableData.result.pageSize"
         @change="onPaginationChange"
         class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
       />
     </div>
-
-    <AppBottomTabbar />
   </div>
 </template>
 
 <script>
 export default {
   name: "HeroReplay",
-  components: {
-    AppBottomTabbar: () => import("@/components/App/BottomTabbar.vue"),
-  },
   data() {
     return {
       copyData: "",
-      collapseModel: ["1"],
       hero: {
         info: {
           id: parseInt(this.$route.params.id) || 0,
@@ -155,7 +153,6 @@ export default {
       tableDataRow: {
         gamePlayerName: "加载中",
       },
-      paginationModel: 1,
       actions: [
         { name: "复制链接", value: 0 },
         { name: "详情", subname: "需要安装王者营地", value: 1 },
@@ -165,6 +162,12 @@ export default {
       replay: {
         title: this.$route.query.replayTitle || "加载中",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
+      },
+      collapseInfo: {
+        model: ["1"],
+      },
+      paginationInfo: {
+        model: 1,
       },
       showInfo: {
         replayMenu: false,
@@ -177,6 +180,7 @@ export default {
   methods: {
     onGameActionSheetClick: function (row) {
       this.tableDataRow = row;
+
       this.showInfo.replayMenu = true;
     },
     onReplayCopy: function (row) {
