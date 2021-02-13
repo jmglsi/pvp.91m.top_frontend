@@ -38,7 +38,11 @@
                   </span>
                   <span
                     v-else
-                    :style="index < 4 ? { color: 'red' } : {}"
+                    :style="
+                      index < 4 + tableData.search.hotKeywords.topNum
+                        ? { color: 'red' }
+                        : {}
+                    "
                     class="search-f43418d85f50da28b3a9c1e780237105"
                   >
                     {{ index + 1 - tableData.search.hotKeywords.topNum }} </span
