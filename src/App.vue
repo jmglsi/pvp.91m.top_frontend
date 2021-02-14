@@ -131,9 +131,7 @@ export default {
       /(ranking|game(.*?)bp)/i.test(to.path) ? (hello = false) : (hello = true);
       this.showInfo.hello = hello;
 
-      /search/i.test(to.path) || to.path == "/"
-        ? (statusBar = true)
-        : (statusBar = false);
+      /search/i.test(to.path) ? (statusBar = true) : (statusBar = false);
       this.showInfo.statusBar = statusBar;
 
       /(login|miniapp|bilibili|hero|game)/i.test(to.path)
@@ -377,7 +375,6 @@ div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
 
-div.app-home div.van-tabs__nav,
 div.van-search {
   background-color: transparent;
 }

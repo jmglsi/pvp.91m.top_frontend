@@ -71,10 +71,8 @@ export default {
         version = parseInt(this.$route.query.v) || 1609430400;
 
       this.tabsInfo.model = type;
-
       if (pwa == 0) return;
-
-      this.$appConfigInfo.appInfo.pwa = 1;
+      this.$appConfigInfo.appInfo.pwa = pwa;
 
       this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
 
