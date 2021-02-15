@@ -430,6 +430,23 @@ export default {
       this.getHeroInfo(heroId);
     },
   },
+  metaInfo() {
+    return {
+      meta: [
+        {
+          vmid: "keyWords",
+          name: "keyWords",
+          content:
+            this.hero.info.name + ",顶端局,趋势,预测,出装,组队,更新,胜率",
+        },
+        {
+          vmid: "description",
+          name: "description",
+          content: this.hero.info.name + " 王者荣耀 巅峰赛 (顶端局) 的趋势",
+        },
+      ],
+    };
+  },
   data() {
     return {
       scroll: 0,

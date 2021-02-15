@@ -66,6 +66,21 @@
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
         <van-cell
+          title="当前地区"
+          label="国外的玩家可以尝试切换一下"
+          :value="$appCountry ? '国内' : '国外'"
+          @click="
+            $appCountry
+              ? $appOpenUrl('是否切至国外?', null, {
+                  path: '//pvp.r18.games',
+                })
+              : $appOpenUrl('是否切至国内?', null, {
+                  path: '//pvp.91m.top',
+                })
+          "
+          is-link
+        />
+        <van-cell
           title="访问类型"
           :value="appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
           @click="$message.info($appMsg.info[1018])"

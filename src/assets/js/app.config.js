@@ -1,5 +1,6 @@
 import Vue from 'vue'
 
+Vue.prototype.$appCountry = location.host.match(/127\.0\.0\.1|localhost|pvp\.91m\.top/)
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
@@ -22,28 +23,6 @@ Vue.prototype.$appConfigInfo = {
         timeout: 900
     }
 };
-
-Vue.prototype.$appSetLocalStorage = function(key, value = {}) {
-    localStorage.setItem(key, JSON.stringify(value));
-}
-
-Vue.prototype.$appGetLocalStorage = function(key) {
-    return JSON.parse(localStorage.getItem(key));
-}
-
-let appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
-if (!appConfigInfo) {
-    Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);
-}
-Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
-
-Vue.prototype.$appDelectRankingCache = function(key = "ranking") {
-    for (let cache in localStorage) {
-        if (cache.indexOf(key) > -1) {
-            localStorage.removeItem(cache);
-        }
-    }
-}
 
 Vue.prototype.$appColumnsInfo = {
     area: ["安卓QQ", "苹果QQ", "安卓WX", "苹果WX"],
@@ -99,6 +78,28 @@ Vue.prototype.$appColumnsInfo = {
     now: [],
     index: 0,
     type: 0,
+}
+
+Vue.prototype.$appSetLocalStorage = function(key, value = {}) {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+Vue.prototype.$appGetLocalStorage = function(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+let appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
+if (!appConfigInfo) {
+    Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);
+}
+Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
+
+Vue.prototype.$appDelectRankingCache = function(key = "ranking") {
+    for (let cache in localStorage) {
+        if (cache.indexOf(key) > -1) {
+            localStorage.removeItem(cache);
+        }
+    }
 }
 
 Vue.prototype.$appPush = function(url = { path: '/' }) {

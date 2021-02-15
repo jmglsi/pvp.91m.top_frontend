@@ -12,13 +12,6 @@ export default {
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },
-  data() {
-    return {
-      showInfo: {
-        hello: true,
-      },
-    };
-  },
   watch: {
     $route(to) {
       let hello = false;
@@ -26,6 +19,13 @@ export default {
       /game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
       this.showInfo.hello = hello;
     },
+  },
+  data() {
+    return {
+      showInfo: {
+        hello: true,
+      },
+    };
   },
 };
 </script>

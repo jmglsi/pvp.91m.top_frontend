@@ -1,15 +1,8 @@
-let apiHost = null,
-    sHost = null;
+let apiHost = null;
 
-if (location.host.indexOf("91m.top") > -1) {
-    sHost = "//s.91m.top";
-    apiHost = "//api.91m.top";
-} else {
-    sHost = "https://s.91m.top";
-    apiHost = "//localhost/api.91m.top";
-}
+location.host.match(/127\.0\.0\.1|localhost/) ? apiHost = "//localhost/api.91m.top" : apiHost = "//api.91m.top";
 
-const sApi = sHost;
+const sApi = "//s.91m.top";
 const pvpApi = apiHost + "/hero/v1/app.php";
 const gameApi = apiHost + "/hero/v1/game.php";
 const biliApi = apiHost + "/hero/v1/bilibili.php";

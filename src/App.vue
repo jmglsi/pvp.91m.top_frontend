@@ -58,8 +58,62 @@
 <script>
 export default {
   name: "App",
+  watch: {
+    $route(to) {
+      let hello = false,
+        statusBar = false,
+        tabbar = false;
+
+      this.tableData.result.model = to.path;
+
+      /(ranking|game(.*?)bp)/i.test(to.path) ? (hello = false) : (hello = true);
+      this.showInfo.hello = hello;
+
+      /search/i.test(to.path) ? (statusBar = true) : (statusBar = false);
+      this.showInfo.statusBar = statusBar;
+
+      /(login|miniapp|bilibili|hero|game)/i.test(to.path)
+        ? (tabbar = false)
+        : (tabbar = true);
+      this.showInfo.tabbar = tabbar;
+    },
+  },
   metaInfo() {
     return {
+      meta: [
+        {
+          vmid: "keyWords",
+          name: "keyWords",
+          content:
+            "ban,BP模拟,暴走的老刘备,榜单,比赛,版本之子,策划,对局回顾,对手,对抗,对比,打野,队友,顶端,分路,发育,辅助,非ban必选,返场,关系,国服,高分局,攻速阈值,观赛助手,黄刀,教练,金刀,交友,尖端局,KPL,克制,开黑,扩列,老刘备,路人局,模拟器,闷声发财,opgg,pick,排位,皮肤,全局BP,全局BP模拟器,强势,弱势,上分助手,数据,赛事,同分路,同职业,推荐,体验,万战,王者荣耀,王者营地,玩家,英雄,永夜,中路,主播,战力,正式,职业",
+        },
+        {
+          vmid: "description",
+          name: "description",
+          content:
+            "在这,可以找到自己心仪的英雄。在这,可以看到每个英雄的巅峰时刻。在这,还可以模拟全局BP！",
+        },
+        {
+          vmid: "format-detection-telephone",
+          name: "format-detection",
+          content: "telephone=no",
+        },
+        {
+          vmid: "format-detection-address",
+          name: "format-detection",
+          content: "address=no",
+        },
+        {
+          vmid: "format-detection-date",
+          name: "format-detection",
+          content: "date=no",
+        },
+        {
+          vmid: "format-detection-email",
+          name: "format-detection",
+          content: "email=no",
+        },
+      ],
       script: this.tableData.homeInfo.script || [],
       link: this.tableData.homeInfo.link || [],
     };
@@ -119,26 +173,6 @@ export default {
         tabbar: true,
       },
     };
-  },
-  watch: {
-    $route(to) {
-      let hello = false,
-        statusBar = false,
-        tabbar = false;
-
-      this.tableData.result.model = to.path;
-
-      /(ranking|game(.*?)bp)/i.test(to.path) ? (hello = false) : (hello = true);
-      this.showInfo.hello = hello;
-
-      /search/i.test(to.path) ? (statusBar = true) : (statusBar = false);
-      this.showInfo.statusBar = statusBar;
-
-      /(login|miniapp|bilibili|hero|game)/i.test(to.path)
-        ? (tabbar = false)
-        : (tabbar = true);
-      this.showInfo.tabbar = tabbar;
-    },
   },
   mounted() {
     this.getAppInfo();

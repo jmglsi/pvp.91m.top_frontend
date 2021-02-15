@@ -294,6 +294,22 @@ export default {
       }
     },
   },
+  metaInfo() {
+    return {
+      meta: [
+        {
+          vmid: "keyWords",
+          name: "keyWords",
+          content: (this.search.value || "英雄") + ",搜索,社区,舆论,NGA,虎扑",
+        },
+        {
+          vmid: "description",
+          name: "description",
+          content: (this.search.value || "英雄") + " 相关的信息",
+        },
+      ],
+    };
+  },
   data() {
     return {
       search: {
