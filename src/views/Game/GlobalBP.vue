@@ -14,14 +14,27 @@
     </div>
   </div>
   <div v-else-if="!isPortrait" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
-    <span class="app-f4842dcb685d490e2a43212b8072a6fe">
-      <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">{{
-        tabsInfo.model % 2 == 0 ? team.team_1.name : team.team_2.name
-      }}</span>
+    <span
+      v-if="tabsInfo.model < 6"
+      class="app-f4842dcb685d490e2a43212b8072a6fe"
+    >
+      <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">
+        {{ tabsInfo.model % 2 == 0 ? team.team_1.name : team.team_2.name }}
+      </span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
-      <span class="game-1426b22460332d802aedd4d54d35f3ee">{{
-        tabsInfo.model % 2 == 0 ? team.team_2.name : team.team_1.name
-      }}</span>
+      <span class="game-1426b22460332d802aedd4d54d35f3ee">
+        {{ tabsInfo.model % 2 == 0 ? team.team_2.name : team.team_1.name }}
+      </span>
+    </span>
+
+    <span v-else class="app-f4842dcb685d490e2a43212b8072a6fe">
+      <span class="game-d4f94e5b8f23a1755b438ff70ed16fc6">
+        {{ team.team_1.name }}
+      </span>
+      <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
+      <span class="game-1426b22460332d802aedd4d54d35f3ee">
+        {{ team.team_2.name }}
+      </span>
     </span>
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
@@ -424,6 +437,7 @@
     </div>
 
     <div
+      v-if="tabsInfo.model < 6"
       class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917"
     >
       <ul>
@@ -595,6 +609,16 @@
         >
           {{ bpMode == "sort" ? "保存" : "修改" }}排序
         </van-button>
+        &nbsp;
+        <van-button
+          v-if="tabsInfo.model == 6"
+          round
+          type="info"
+          size="small"
+          @click="onSwapPositionClick"
+        >
+          交换巅峰对决位置
+        </van-button>
       </div>
     </van-popup>
 
@@ -628,31 +652,16 @@
         >
           <template #title>
             <van-icon
-              v-if="index % 2 == 0"
-              :name="
-                gameInfo.result.rows[index].win.camp == 1
-                  ? team.team_1.logo
-                  : team.team_2.logo
-              "
+              :name="gameInfo.result.rows[index].win.logo"
               class-prefix="game-8d74837b1dc10576d7757cfd35b4661d"
             />
-            <van-icon
-              v-else-if="index % 2 == 1"
-              :name="
-                gameInfo.result.rows[index].win.camp == 1
-                  ? team.team_2.logo
-                  : team.team_1.logo
-              "
-              class-prefix="game-8d74837b1dc10576d7757cfd35b4661d"
-            />&nbsp;
+            &nbsp;
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
-              :style="{
-                color:
-                  gameInfo.result.rows[index].win.camp == 1 ? 'blue' : 'red',
-              }"
-              >{{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}</span
+              :style="{ color: gameInfo.result.rows[index].win.color }"
             >
+              {{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}
+            </span>
           </template>
         </van-tab>
       </van-tabs>
@@ -938,10 +947,7 @@ export default {
         .then((res) => {
           let data = res.data.data;
 
-          this.tableData = data;
-          this.tableData.model = 0;
-          this.tableData.loading = false;
-          this.tableData.time = this.$appTs;
+          this.tableData.result = data.result;
 
           this.$appSetLocalStorage("gameBP", this.tableData);
 
@@ -949,8 +955,6 @@ export default {
         });
     },
     getGameBP: function (gameLabel) {
-      let tabsModel = this.tabsInfo.model;
-
       this.$axios
         .post(
           this.$appApi.game.getGameBP,
@@ -968,7 +972,7 @@ export default {
             this.team = data.team;
             this.gameInfo = data;
 
-            this.initBPOrder(this.bpPerspective, tabsModel + 1);
+            this.initBPOrder(this.bpPerspective, 0 + 1);
             this.getRanking(data.game.time);
 
             this.gameInfo.game.type == 1 &&
@@ -997,7 +1001,10 @@ export default {
         },
         win: {
           camp: 1,
-          teamId: null,
+          color: "blue",
+          id: null,
+          name: null,
+          logo: null,
         },
         stepsNow: 0,
         stepsActive: 0,
@@ -1245,6 +1252,17 @@ export default {
         this.$message.info(this.$appMsg.info[1017]);
       }
     },
+    onSwapPositionClick() {
+      let teamInfo = this.team,
+        tempTeamInfo = null;
+
+      tempTeamInfo = teamInfo.team_1;
+
+      this.team.team_1 = teamInfo.team_2;
+      this.team.team_2 = tempTeamInfo;
+
+      this.$message.success(this.$appMsg.success[1000]);
+    },
     onGameShareCopy: function () {
       let vs = this.team.team_1.name + " Vs " + this.team.team_2.name,
         longUrl = location.href;
@@ -1370,21 +1388,23 @@ export default {
 
       if (camp == 1) {
         tabsModel % 2 == 0
-          ? (nowWinTeam = teamInfo.team_1.name)
-          : (nowWinTeam = teamInfo.team_2.name);
+          ? (nowWinTeam = teamInfo.team_1)
+          : (nowWinTeam = teamInfo.team_2);
       } else {
         tabsModel % 2 == 0
-          ? (nowWinTeam = teamInfo.team_2.name)
-          : (nowWinTeam = teamInfo.team_1.name);
+          ? (nowWinTeam = teamInfo.team_2)
+          : (nowWinTeam = teamInfo.team_1);
       }
 
       this.$dialog
         .confirm({
-          title: "是否将本局胜方标记为【" + nowWinTeam + "】?",
+          title: "是否将本局胜方标记为【" + nowWinTeam.name + "】?",
         })
         .then(() => {
           // on confirm
-          this.gameInfo.result.rows[tabsModel].win.camp = camp;
+          nowWinTeam.camp = camp;
+          camp == 1 ? (nowWinTeam.color = "blue") : (nowWinTeam.color = "red");
+          this.gameInfo.result.rows[tabsModel].win = nowWinTeam;
 
           this.$message.success(this.$appMsg.success[1000]);
         })
