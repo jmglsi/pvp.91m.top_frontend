@@ -1,4 +1,4 @@
-const path = require('path')
+const Path = require('path')
 const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
@@ -80,7 +80,7 @@ module.exports = {
                 config.plugins.delete('prefetch')
 
                 config.resolve.alias
-                    .set('@ant-design/icons/lib/dist$', path.resolve(__dirname, './src/assets/import/ant-icons.js'))
+                    .set('@ant-design/icons/lib/dist$', Path.resolve(__dirname, './src/assets/import/ant-icons.js'))
             }
         }
     },
