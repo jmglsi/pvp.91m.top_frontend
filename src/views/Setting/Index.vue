@@ -65,6 +65,11 @@
         title="其他"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
+        <van-cell
+          title="访问类型"
+          :value="appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
+          @click="$message.info($appMsg.info[1018])"
+        />
         <van-cell title="当前版本" :value="appConfigInfo.appInfo.version" />
       </van-cell-group>
     </div>

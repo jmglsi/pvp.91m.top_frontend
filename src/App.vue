@@ -163,6 +163,7 @@ export default {
 
           if (appInfo.version != appConfigInfo.appInfo.version) {
             this.$appConfigInfo.appInfo = {
+              name: "苏苏的荣耀助手",
               pwa: appConfigInfo.appInfo.pwa || 0,
               isSmallMobile: appConfigInfo.appInfo.isSmallMobile || 0,
               isReducedMode: appConfigInfo.appInfo.isReducedMode || 0,
