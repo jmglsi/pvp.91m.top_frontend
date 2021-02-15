@@ -116,12 +116,17 @@
         </div>
       </van-action-sheet>
     </div>
+    
+    <AppHello height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "GameTeam",
+  components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
   data() {
     return {
       showInfo: {

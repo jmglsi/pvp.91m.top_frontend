@@ -1,32 +1,12 @@
 <template>
   <div class="game-home">
     <router-view />
-
-    <AppHello v-if="showInfo.hello" height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "GameHome",
-  components: {
-    AppHello: () => import("@/components/App/Hello.vue"),
-  },
-  watch: {
-    $route(to) {
-      let hello = false;
-
-      /game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
-      this.showInfo.hello = hello;
-    },
-  },
-  data() {
-    return {
-      showInfo: {
-        hello: true,
-      },
-    };
-  },
 };
 </script>
 

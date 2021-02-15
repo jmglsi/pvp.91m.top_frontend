@@ -67,12 +67,17 @@
         </van-grid-item>
       </van-grid>
     </div>
+    
+    <AppHello height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "GameEngage",
+  components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
   data() {
     return {
       tableData: {
