@@ -240,8 +240,7 @@
                       <van-grid-item
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
-                          data.trend == 2 &&
-                          (tableData.model == data.type || tableData.model == 0)
+                          data.trend == 2 && data.type.includes(tableData.model)
                         "
                         :key="'game-f6bf37efedbc0a2dfffc1caf5088d86e-' + index"
                         text=" "
@@ -314,8 +313,7 @@
                       <van-grid-item
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
-                          data.trend != 2 &&
-                          (tableData.model == data.type || tableData.model == 0)
+                          data.trend != 2 && data.type.includes(tableData.model)
                         "
                         :key="'game-35368a19f307e4af02d0df055846840d-' + index"
                         text=" "
