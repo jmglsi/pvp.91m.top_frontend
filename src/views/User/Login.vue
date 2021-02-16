@@ -139,10 +139,6 @@ export default {
     };
   },
   methods: {
-    onRegisterClick: function () {
-      this.loginInfo.type = 0;
-      this.loginInfo.text = "注册";
-    },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
         this.$appPush({ path: "/my" });
@@ -150,6 +146,10 @@ export default {
         this.loginInfo.type = 1;
         this.loginInfo.text = "登录";
       }
+    },
+    onRegisterClick: function () {
+      this.loginInfo.type = 0;
+      this.loginInfo.text = "注册";
     },
     onUpdateClick: function () {
       this.loginInfo.type = 2;

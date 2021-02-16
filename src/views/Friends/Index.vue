@@ -153,9 +153,6 @@
 <script>
 export default {
   name: "FriendsHome",
-  mounted() {
-    this.getWebAccountInfo(0, 1);
-  },
   data() {
     return {
       copyData: "",
@@ -176,6 +173,9 @@ export default {
         },
       },
     };
+  },
+  mounted() {
+    this.getWebAccountInfo(0, 1);
   },
   methods: {
     getWebAccountInfo: function (tipsType, aid = 1) {

@@ -985,6 +985,34 @@ export default {
           }
         });
     },
+    onGameShareCopy: function () {
+      let vs = this.team.team_1.name + " Vs " + this.team.team_2.name,
+        longUrl = location.href;
+
+      this.$axios
+        .post(this.$appApi.s.url, {
+          url: longUrl,
+        })
+        .then((res) => {
+          let shortUrl = res.data.data.url;
+
+          this.copyData =
+            "正在复盘【" +
+            vs +
+            "】的第 " +
+            (this.tabsInfo.model + 1) +
+            " 局比赛 ↓\r" +
+            shortUrl;
+
+          setTimeout(
+            (copyData) => {
+              this.$appCopyData(copyData);
+            },
+            750,
+            this.copyData
+          );
+        });
+    },
     onCreateGameBPClick: function () {
       let newGame = {
         game: {
@@ -1262,34 +1290,6 @@ export default {
       this.team.team_2 = tempTeamInfo;
 
       this.$message.success(this.$appMsg.success[1000]);
-    },
-    onGameShareCopy: function () {
-      let vs = this.team.team_1.name + " Vs " + this.team.team_2.name,
-        longUrl = location.href;
-
-      this.$axios
-        .post(this.$appApi.s.url, {
-          url: longUrl,
-        })
-        .then((res) => {
-          let shortUrl = res.data.data.url;
-
-          this.copyData =
-            "正在复盘【" +
-            vs +
-            "】的第 " +
-            (this.tabsInfo.model + 1) +
-            " 局比赛 ↓\r" +
-            shortUrl;
-
-          setTimeout(
-            (copyData) => {
-              this.$appCopyData(copyData);
-            },
-            750,
-            this.copyData
-          );
-        });
     },
     onToolsMenuClick: function (type) {
       let tabsModel = this.tabsInfo.model;

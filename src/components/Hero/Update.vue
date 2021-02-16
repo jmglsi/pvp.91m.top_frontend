@@ -229,36 +229,6 @@ export default {
     };
   },
   methods: {
-    getHeroUpdate: function (heroId) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
-        heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId);
-
-      if (
-        heroUpdate &&
-        heroId == 0 &&
-        this.$appTs - heroUpdate.time < appConfigInfo.updateInfo.timeout
-      ) {
-        this.tableData = heroUpdate;
-
-        return;
-      }
-
-      this.$axios
-        .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
-        .then((res) => {
-          this.tableData = res.data.data;
-          this.tableData.time = this.$appTs;
-
-          if (heroId == 0) {
-            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
-          }
-        });
-
-      let date = new Date();
-
-      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
-      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
-    },
     onFormatter: function (day) {
       let tableData = this.tableData.result.rows,
         maxType = -5;
@@ -350,23 +320,35 @@ export default {
 
       return day;
     },
-    onOpenHeroUpdateTextClick: function (heroId, data) {
+    getHeroUpdate: function (heroId) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId);
+
+      if (
+        heroUpdate &&
+        heroId == 0 &&
+        this.$appTs - heroUpdate.time < appConfigInfo.updateInfo.timeout
+      ) {
+        this.tableData = heroUpdate;
+
+        return;
+      }
+
       this.$axios
-        .post(
-          this.$appApi.pvp.getHeroUpdateText +
-            "&heroId=" +
-            heroId +
-            "&articleId=" +
-            data.articleId
-        )
+        .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
-          this.tableDataRow = data;
+          this.tableData = res.data.data;
+          this.tableData.time = this.$appTs;
 
-          this.updateInfo.title = data.calendar.day + " 的更新内容";
-          this.updateInfo.text = res.data.data;
-
-          this.showInfo.dialog = true;
+          if (heroId == 0) {
+            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
+          }
         });
+
+      let date = new Date();
+
+      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
     },
     onHeroUpdateTextCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);
@@ -389,6 +371,24 @@ export default {
         750,
         this.copyData
       );
+    },
+    onOpenHeroUpdateTextClick: function (heroId, data) {
+      this.$axios
+        .post(
+          this.$appApi.pvp.getHeroUpdateText +
+            "&heroId=" +
+            heroId +
+            "&articleId=" +
+            data.articleId
+        )
+        .then((res) => {
+          this.tableDataRow = data;
+
+          this.updateInfo.title = data.calendar.day + " 的更新内容";
+          this.updateInfo.text = res.data.data;
+
+          this.showInfo.dialog = true;
+        });
     },
   },
 };

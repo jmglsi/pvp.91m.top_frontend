@@ -148,10 +148,10 @@ export default {
       this.trendIndex = 0;
       clearInterval(this.autoPlayTrendInterval);
       if (e == true) {
-        this.autoPlayTrend(interval);
+        this.autoPlayTrendClick(interval);
       }
     },
-    autoPlayTrend: function (interval) {
+    autoPlayTrendClick: function (interval) {
       this.autoPlayTrendInterval = setInterval(() => {
         this.trendIndex++;
         this.lineData.extend.dataZoom[0].start = this.trendIndex;

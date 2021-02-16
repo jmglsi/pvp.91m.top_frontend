@@ -526,21 +526,6 @@ export default {
         return row.allWinRate >= option.data;
       }
     },
-    onCellClick: function ({ row, column }) {
-      this.tableDataRow = row;
-
-      if (column.property == "allScore") {
-        this.cellInfo.index = 0;
-
-        this.showInfo.skillMenu = true;
-        this.showInfo.heroMenu = false;
-      } else {
-        this.cellInfo.index = 1;
-
-        this.showInfo.skillMenu = false;
-        this.showInfo.heroMenu = true;
-      }
-    },
     cellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
@@ -569,6 +554,21 @@ export default {
         ) {
           return "ranking-9f27410725ab8cc8854a2769c7a516b8";
         }
+      }
+    },
+    onCellClick: function ({ row, column }) {
+      this.tableDataRow = row;
+
+      if (column.property == "allScore") {
+        this.cellInfo.index = 0;
+
+        this.showInfo.skillMenu = true;
+        this.showInfo.heroMenu = false;
+      } else {
+        this.cellInfo.index = 1;
+
+        this.showInfo.skillMenu = false;
+        this.showInfo.heroMenu = true;
       }
     },
     onSkillTabsChange: function (e) {

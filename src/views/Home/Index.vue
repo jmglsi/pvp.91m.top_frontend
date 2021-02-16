@@ -62,10 +62,10 @@ export default {
     };
   },
   mounted() {
-    this.initApp();
+    this.initPage();
   },
   methods: {
-    initApp: function () {
+    initPage: function () {
       let pwa = parseInt(this.$route.query.pwa) || 0,
         type = parseInt(this.$route.query.type) || 0,
         version = parseInt(this.$route.query.v) || 1609430400;
@@ -77,6 +77,7 @@ export default {
       this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
 
       let updateDay = ((this.$appTs - version) / 86400).toFixed(2);
+
       if (updateDay >= 90) {
         this.$dialog
           .confirm({

@@ -7,7 +7,7 @@
         :loosing-text="appHomeInfo.miniappInfo.loosing"
         :loading-text="appHomeInfo.miniappInfo.loading"
         :success-text="appHomeInfo.miniappInfo.success"
-        @refresh="onTuiJianRefresh"
+        @refresh="onDropdownRefreshClick"
         class="tuijian-af03857fe372b964b53ef3a082c2b518"
       >
         <div
@@ -98,7 +98,7 @@ export default {
         this.appHomeInfo = res.data.data;
       });
     },
-    onTuiJianRefresh: function () {
+    onDropdownRefreshClick: function () {
       setTimeout(() => {
         this.isLoading = false;
 

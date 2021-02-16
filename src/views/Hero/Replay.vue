@@ -101,7 +101,7 @@
             type="primary"
             size="mini"
             class="hero-ce50a09343724eb82df11390e2c1de18"
-            @click="onGameActionSheetClick(data)"
+            @click="getGameInfo(data)"
             >对局</van-tag
           >
         </van-collapse-item>
@@ -178,7 +178,7 @@ export default {
     this.getHeroReplayByHeroId(this.hero.info.id, 1);
   },
   methods: {
-    onGameActionSheetClick: function (row) {
+    getGameInfo: function (row) {
       this.tableDataRow = row;
 
       this.showInfo.replayMenu = true;

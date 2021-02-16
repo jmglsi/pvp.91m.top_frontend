@@ -569,6 +569,27 @@ export default {
         this.copyData
       );
     },
+    onPickerConfirm: function (value, index) {
+      let columnsInfo = this.$appColumnsInfo,
+        starIndex = 0;
+
+      if (columnsInfo.type == 0) {
+        this.newInfo.areaType = index;
+      } else if (columnsInfo.type == 1) {
+        this.newInfo.provinceType = index;
+      } else if (columnsInfo.type == 2) {
+        starIndex = this.$appColumnsInfo.rank.type[index];
+
+        this.newInfo.rank.starType = index;
+        this.newInfo.rank.starIcon =
+          "//camp.qq.com/battle/profile/roleJob/" + starIndex + ".png";
+      }
+
+      this.showInfo.pickerMenu = false;
+    },
+    onPickerCancel: function () {
+      this.showInfo.pickerMenu = false;
+    },
     onUpdateColumnsInfoClick: function (e) {
       let columns = [],
         newInfo = this.newInfo;
@@ -592,27 +613,6 @@ export default {
     onUpdateInfoClick: function () {
       this.showInfo.editType = true;
       this.showInfo.editMenu = true;
-    },
-    onPickerConfirm: function (value, index) {
-      let columnsInfo = this.$appColumnsInfo,
-        starIndex = 0;
-
-      if (columnsInfo.type == 0) {
-        this.newInfo.areaType = index;
-      } else if (columnsInfo.type == 1) {
-        this.newInfo.provinceType = index;
-      } else if (columnsInfo.type == 2) {
-        starIndex = this.$appColumnsInfo.rank.type[index];
-
-        this.newInfo.rank.starType = index;
-        this.newInfo.rank.starIcon =
-          "//camp.qq.com/battle/profile/roleJob/" + starIndex + ".png";
-      }
-
-      this.showInfo.pickerMenu = false;
-    },
-    onPickerCancel: function () {
-      this.showInfo.pickerMenu = false;
     },
     onLogoutClick: function () {
       this.$dialog

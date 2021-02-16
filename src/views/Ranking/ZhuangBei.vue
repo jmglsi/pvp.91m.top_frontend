@@ -175,19 +175,22 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    let equipmentId = parseInt(this.$route.query.equipmentId) || 0,
-      equipmentName = this.$route.query.equipmentName || "加载中";
-
-    if (equipmentId) {
-      this.tableDataRow.equipment.id = equipmentId;
-      this.tableDataRow.equipment.name = equipmentName;
-
-      this.showInfo.skillMenu = true;
-    }
-
-    this.getRanking(3);
+    this.initPage();
   },
   methods: {
+    initPage: function () {
+      let equipmentId = parseInt(this.$route.query.equipmentId) || 0,
+        equipmentName = this.$route.query.equipmentName || "加载中";
+
+      if (equipmentId) {
+        this.tableDataRow.equipment.id = equipmentId;
+        this.tableDataRow.equipment.name = equipmentName;
+
+        this.showInfo.skillMenu = true;
+      }
+
+      this.getRanking(3, 0, 0);
+    },
     getRanking: function (aid = 3, bid = 0, cid = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
@@ -233,11 +236,6 @@ export default {
         return row.equipment.type == option.data;
       }
     },
-    onCellClick: function ({ row }) {
-      this.tableDataRow = row;
-
-      this.showInfo.equipmentMenu = true;
-    },
     onZhuangBeiCopy: function (row) {
       let longUrl =
         location.origin +
@@ -264,6 +262,11 @@ export default {
             this.copyData
           );
         });
+    },
+    onCellClick: function ({ row }) {
+      this.tableDataRow = row;
+
+      this.showInfo.equipmentMenu = true;
     },
     onActionSheetSelect: function (item) {
       let equipmentInfo = this.tableDataRow;

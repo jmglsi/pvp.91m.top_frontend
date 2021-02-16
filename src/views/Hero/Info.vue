@@ -524,28 +524,31 @@ export default {
     };
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.scrollTop);
+    window.removeEventListener("scroll", this.listenerScrollTop);
   },
   mounted() {
-    let heroId = parseInt(this.$route.params.id) || 111,
-      show = this.$route.query.show || "";
-
-    this.getHeroInfo(heroId);
-
-    if (show == "heroUpdate") {
-      this.$message.info(this.$appMsg.info[1016]);
-    }
-
-    if (show == "heroSkill") {
-      this.showInfo.skillMenu = true;
-    } else {
-      this.showInfo.skillMenu = false;
-    }
-
-    window.addEventListener("scroll", this.scrollTop);
+    this.initPage();
   },
   methods: {
-    scrollTop: function () {
+    initPage: function () {
+      let heroId = parseInt(this.$route.params.id) || 111,
+        show = this.$route.query.show || "";
+
+      this.getHeroInfo(heroId);
+
+      if (show == "heroUpdate") {
+        this.$message.info(this.$appMsg.info[1016]);
+      }
+
+      if (show == "heroSkill") {
+        this.showInfo.skillMenu = true;
+      } else {
+        this.showInfo.skillMenu = false;
+      }
+
+      window.addEventListener("scroll", this.listenerScrollTop);
+    },
+    listenerScrollTop: function () {
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop;
     },

@@ -111,10 +111,10 @@ export default {
     };
   },
   mounted() {
-    this.initAppConfigInfo();
+    this.initPage();
   },
   methods: {
-    initAppConfigInfo: function () {
+    initPage: function () {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         isReducedMode = false,
         isSmallMobile = false;

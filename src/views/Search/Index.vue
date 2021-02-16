@@ -286,11 +286,6 @@ export default {
     $route: function (to) {
       if (to.query.q && parseInt(to.query.refresh) == 1) {
         this.getSearch(to.query.q);
-
-        if (this.tableData.heroInfo.id > 0) {
-          this.showInfo.searchData = true;
-          this.showInfo.searchHistory = false;
-        }
       }
     },
   },
@@ -345,21 +340,24 @@ export default {
     };
   },
   mounted() {
-    setInterval(() => {
-      let text = this.tableData.search.placeholder;
-
-      this.search.placeholder = text[Math.floor(Math.random() * text.length)];
-    }, 5000);
-
-    let searchValue = this.search.value;
-    if (searchValue) {
-      this.showInfo.searchData = true;
-      this.showInfo.searchHistory = false;
-    }
-
-    this.getSearch(searchValue);
+    this.initPage();
   },
   methods: {
+    initPage: function () {
+      setInterval(() => {
+        let text = this.tableData.search.placeholder;
+
+        this.search.placeholder = text[Math.floor(Math.random() * text.length)];
+      }, 5000);
+
+      let searchValue = this.search.value;
+      if (searchValue) {
+        this.showInfo.searchData = true;
+        this.showInfo.searchHistory = false;
+      }
+
+      this.getSearch(searchValue);
+    },
     getSearch: function (value) {
       this.search.value = value;
 
@@ -381,8 +379,10 @@ export default {
             this.initSearchHistory();
             this.$appPush({ query: { q: value } });
 
-            this.showInfo.searchData = true;
-            this.showInfo.searchHistory = false;
+            if (data.result.rows.length > 0) {
+              this.showInfo.searchData = true;
+              this.showInfo.searchHistory = false;
+            }
           } else {
             this.showInfo.searchData = false;
             this.showInfo.searchHistory = true;
@@ -390,6 +390,54 @@ export default {
             this.$message.error(status.msg);
           }
         });
+    },
+    initSearchHistory: function () {
+      let searchData = localStorage.getItem("searchData");
+
+      if (searchData) {
+        this.tableData.search.history = searchData.split(",").reverse();
+
+        this.showInfo.searchHistory = true;
+      } else {
+        this.tableData.search.history = [];
+
+        this.showInfo.searchHistory = false;
+      }
+    },
+    addSearchData: function (value) {
+      let searchData = localStorage.getItem("searchData"),
+        setValue = searchData;
+
+      if (!searchData) {
+        setValue = value;
+      } else if (searchData.indexOf(value) == -1) {
+        setValue = searchData + "," + value;
+      }
+
+      localStorage.setItem("searchData", setValue);
+    },
+    onClearSearchData: function () {
+      localStorage.removeItem("searchData");
+
+      this.search.data = null;
+      this.tableData.search.history = [];
+
+      this.showInfo.searchData = false;
+      this.showInfo.searchHistory = false;
+
+      this.$message.success(this.$appMsg.success[1000]);
+    },
+    onClearInputData: function () {
+      if (this.search.value.length == 0) {
+        this.tableData.heroInfo.id = 0;
+
+        this.initSearchHistory();
+
+        this.$appPush({ path: "/search" });
+
+        this.showInfo.searchData = false;
+        this.showInfo.searchHistory = true;
+      }
     },
     onJiXiaClick: function (wikiId) {
       let url = null;
@@ -401,6 +449,12 @@ export default {
       this.$appOpenUrl("是否打开外部链接?", "NGA @稷下图书馆", {
         path: url,
       });
+    },
+    onCellClick: function (isLink, to, url) {
+      if (isLink) {
+        if (to) this.$appPush({ path: to });
+        if (url) this.$appOpenUrl("是否打开外部链接?", null, { path: url });
+      }
     },
     onDataTabsClick: function (e) {
       let heroInfo = this.tableData.heroInfo;
@@ -455,60 +509,6 @@ export default {
         this.tipsInfo[e] = 1;
 
         this.$message.info(tipsText);
-      }
-    },
-    onCellClick: function (isLink, to, url) {
-      if (isLink) {
-        if (to) this.$appPush({ path: to });
-        if (url) this.$appOpenUrl("是否打开外部链接?", null, { path: url });
-      }
-    },
-    initSearchHistory: function () {
-      let searchData = localStorage.getItem("searchData");
-
-      if (searchData) {
-        this.tableData.search.history = searchData.split(",").reverse();
-
-        this.showInfo.searchHistory = true;
-      } else {
-        this.tableData.search.history = [];
-
-        this.showInfo.searchHistory = false;
-      }
-    },
-    addSearchData: function (value) {
-      let searchData = localStorage.getItem("searchData"),
-        setValue = searchData;
-
-      if (!searchData) {
-        setValue = value;
-      } else if (searchData.indexOf(value) == -1) {
-        setValue = searchData + "," + value;
-      }
-
-      localStorage.setItem("searchData", setValue);
-    },
-    onClearSearchData: function () {
-      localStorage.removeItem("searchData");
-
-      this.search.data = null;
-      this.tableData.search.history = [];
-
-      this.showInfo.searchData = false;
-      this.showInfo.searchHistory = false;
-
-      this.$message.success(this.$appMsg.success[1000]);
-    },
-    onClearInputData: function () {
-      if (this.search.value.length == 0) {
-        this.tableData.heroInfo.id = 0;
-
-        this.initSearchHistory();
-
-        this.$appPush({ path: "/search" });
-
-        this.showInfo.searchData = false;
-        this.showInfo.searchHistory = true;
       }
     },
   },

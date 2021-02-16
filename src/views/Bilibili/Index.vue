@@ -142,12 +142,12 @@ export default {
   mounted() {
     this.search.value = this.$route.query.uid || "";
 
-    this.getOrderInfoInterval = setInterval(() => {
-      this.getOrderInfo(this.search.value, this.paginationModel);
+    this.getRankingInterval = setInterval(() => {
+      this.getRanking(this.search.value, this.paginationModel);
     }, 10000);
   },
   methods: {
-    getOrderInfo: function (uid, page) {
+    getRanking: function (uid, page) {
       this.$axios
         .post(
           this.$appApi.bili.getOrderInfo +
@@ -176,7 +176,7 @@ export default {
           this.tableData.loading = false;
         });
     },
-    onBilibiliActionSheetClick: function (row) {
+    getOrderInfo: function (row) {
       this.tableDataRow = row;
 
       this.showInfo.actionSheet = true;
@@ -254,7 +254,7 @@ export default {
       this.getOrderInfo(this.search.value, e);
     },
     onCellClick: function ({ row }) {
-      this.onBilibiliActionSheetClick(row);
+      this.getOrderInfo(row);
     },
     onActionSheetSelect: function (item) {
       let orderInfo = this.tableDataRow;

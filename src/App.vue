@@ -69,13 +69,13 @@ export default {
       /(ranking|game(.*?)bp)/i.test(to.path) ? (hello = false) : (hello = true);
       this.showInfo.hello = hello;
 
-      /search/i.test(to.path) ? (statusBar = true) : (statusBar = false);
-      this.showInfo.statusBar = statusBar;
-
       /(login|miniapp|bilibili|hero|game)/i.test(to.path)
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
+
+      /search/i.test(to.path) ? (statusBar = true) : (statusBar = false);
+      this.showInfo.statusBar = statusBar;
     },
   },
   metaInfo() {
@@ -220,9 +220,7 @@ export default {
                   this.$appOpenUrl(
                     "是否打开内部链接?",
                     null,
-                    {
-                      path: tipsInfo.to,
-                    },
+                    { path: tipsInfo.to },
                     1
                   );
                 }

@@ -48,9 +48,9 @@
         </van-tab>
 
         <van-tab>
-          <template #title
-            >玩家 (非实时) <i class="vxe-icon--funnel"
-          /></template>
+          <template #title>
+            玩家 (非实时) <i class="vxe-icon--funnel" />
+          </template>
           <WanJia
             v-if="tabsInfo.model == 2"
             :isSmallMobile="isSmallMobile"
@@ -97,9 +97,9 @@
           "
           class="ranking-5728d19b81c17607842cb7befeef3152"
         >
-          <span class="ranking-4da12add5b0c1920dcde6c5627d30422"
-            >您的分享是我更新的动力 ( •̀ ω •́ )y</span
-          >
+          <span class="ranking-4da12add5b0c1920dcde6c5627d30422">
+            您的分享是我更新的动力 ( •̀ ω •́ )y
+          </span>
         </div>
       </van-action-sheet>
     </div>
@@ -113,12 +113,14 @@
           borderColor: 'rgb(243,189,103)',
         }"
         @click="$message.info(this.$appMsg.info[1012])"
-        ><van-tag
+      >
+        <van-tag
           round
           type="danger"
           class="ranking-4d09fbef1438e2b23375b87ba3e02942"
-          >游客部分功能将受限,登录后解锁</van-tag
         >
+          游客部分功能将受限,登录后解锁
+        </van-tag>
       </van-divider>
     </div>
   </div>
@@ -209,51 +211,54 @@ export default {
     };
   },
   mounted() {
-    let route = this.$route.query,
-      appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
-      rankingFilterTips = appConfigInfo.tipsInfo.rankingFilter || 0;
-
-    this.heroName = route.heroName || "";
-    this.tabsInfo.model = parseInt(route.type) || 0;
-    this.bid = parseInt(route.bid) || 0;
-    this.cid = parseInt(route.cid) || 0;
-
-    if (rankingFilterTips == 0) {
-      appConfigInfo.tipsInfo.rankingFilter = 1;
-      this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
-
-      setTimeout(() => {
-        this.showInfo.rankingFilterTips = false;
-      }, 10000);
-    } else {
-      this.showInfo.rankingFilterTips = false;
-    }
-
-    if (appConfigInfo.appInfo.isSmallMobile == 0 && this.$appHeight < 575) {
-      this.$dialog
-        .confirm({
-          title: "是否适配小屏?",
-          message: "稍后可在【我的 - 适配小屏】修改",
-        })
-        .then(() => {
-          // on confirm
-          this.isSmallMobile = 1;
-
-          appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
-          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
-        })
-        .catch(() => {
-          // on cancel
-          this.isSmallMobile = 0;
-
-          appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
-          this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
-        });
-    } else {
-      this.isSmallMobile = appConfigInfo.appInfo.isSmallMobile;
-    }
+    this.initPage();
   },
   methods: {
+    initPage: function () {
+      let route = this.$route.query,
+        appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        rankingFilterTips = appConfigInfo.tipsInfo.rankingFilter || 0;
+
+      this.heroName = route.heroName || "";
+      this.tabsInfo.model = parseInt(route.type) || 0;
+      this.bid = parseInt(route.bid) || 0;
+      this.cid = parseInt(route.cid) || 0;
+
+      if (rankingFilterTips == 0) {
+        appConfigInfo.tipsInfo.rankingFilter = 1;
+        this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+
+        setTimeout(() => {
+          this.showInfo.rankingFilterTips = false;
+        }, 10000);
+      } else {
+        this.showInfo.rankingFilterTips = false;
+      }
+
+      if (appConfigInfo.appInfo.isSmallMobile == 0 && this.$appHeight < 575) {
+        this.$dialog
+          .confirm({
+            title: "是否适配小屏?",
+            message: "稍后可在【我的 - 通用 - 适配小屏】修改",
+          })
+          .then(() => {
+            // on confirm
+            this.isSmallMobile = 1;
+
+            appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
+            this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+          })
+          .catch(() => {
+            // on cancel
+            this.isSmallMobile = 0;
+
+            appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
+            this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+          });
+      } else {
+        this.isSmallMobile = appConfigInfo.appInfo.isSmallMobile;
+      }
+    },
     onRankingTabsClick: function (e) {
       let tabsInfo = this.tabsInfo;
 
