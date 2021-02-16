@@ -180,7 +180,7 @@ export default {
           { text: "对抗路 (坦克)", value: 3 },
           { text: "打野", value: 4 },
           { text: "发育路", value: 5 },
-          { text: "游走", value: 6 },
+          { text: "辅助", value: 6 },
         ],
       },
       wjAreaInfo: {

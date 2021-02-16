@@ -684,13 +684,13 @@ export default {
     return {
       copyData: "",
       heroType: [
-        "全部",
-        "对抗 (战士)",
+        "全部分路",
+        "对抗路 (战士)",
         "中路",
-        "对抗 (坦克)",
+        "对抗路 (坦克)",
         "打野",
-        "发育",
-        "游走",
+        "发育路",
+        "辅助",
       ],
       bpCountdown: 45,
       bpOpponent: {},
