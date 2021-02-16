@@ -690,7 +690,7 @@ export default {
         "对抗路 (坦克)",
         "打野",
         "发育路",
-        "辅助",
+        "游走",
       ],
       bpCountdown: 45,
       bpOpponent: {},
