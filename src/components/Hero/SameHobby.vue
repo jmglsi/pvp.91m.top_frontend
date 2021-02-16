@@ -40,7 +40,7 @@
           color="#000000"
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
-          @click="getHeroByWebAccountList(heroId, 1)"
+          @click="getHeroInfoByWebAccountList(heroId, 1)"
           >刷新</van-button
         >
       </div>
@@ -69,7 +69,7 @@ export default {
       handler(newValue) {
         if (newValue.heroId == null) return;
 
-        this.getHeroByWebAccountList(newValue.heroId, 0);
+        this.getHeroInfoByWebAccountList(newValue.heroId, 0);
       },
     },
   },
@@ -83,9 +83,9 @@ export default {
     };
   },
   methods: {
-    getHeroByWebAccountList: function (heroId, tipsType) {
+    getHeroInfoByWebAccountList: function (heroId, tipsType) {
       this.$axios
-        .post(this.$appApi.pvp.getHeroByWebAccountList + "&heroId=" + heroId)
+        .post(this.$appApi.pvp.getHeroInfoByWebAccountList + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
 
