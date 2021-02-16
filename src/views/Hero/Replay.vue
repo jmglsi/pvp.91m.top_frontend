@@ -160,7 +160,7 @@ export default {
         { name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
       replay: {
-        title: this.$route.query.replayTitle || "加载中",
+        title: this.$route.query.title || "加载中",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
       },
       collapseInfo: {

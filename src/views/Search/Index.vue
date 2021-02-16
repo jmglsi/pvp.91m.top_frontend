@@ -481,7 +481,7 @@ export default {
           path:
             "/hero/" +
             heroInfo.id +
-            "/replay?replayTitle=" +
+            "/replay?title=" +
             heroInfo.name +
             "&teammate=0",
         });

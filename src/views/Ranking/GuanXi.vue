@@ -420,7 +420,7 @@ export default {
             heroInfo.hero_2.id +
             "/replay",
           query: {
-            replayTitle: heroInfo.hero_1.name + " 和 " + heroInfo.hero_2.name,
+            title: heroInfo.hero_1.name + " 和 " + heroInfo.hero_2.name,
             teammate: "1",
           },
         });
