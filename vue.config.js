@@ -1,5 +1,5 @@
-const Path = require('path')
-const CompressionPlugin = require("compression-webpack-plugin")
+const zlib = require("zlib")
+const CompressionWebpackPlugin = require("compression-webpack-plugin")
 
 module.exports = {
     productionSourceMap: false,
@@ -54,19 +54,6 @@ module.exports = {
                     }
                 }
             }
-
-            return {
-                plugins: [
-                    new CompressionPlugin({
-                        filename: '[path].gz[query]',
-                        algorithm: 'gzip',
-                        test: /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i,
-                        threshold: 10240,
-                        minRatio: 0.8,
-                        deleteOriginalAssets: false
-                    })
-                ]
-            }
         }
     },
     chainWebpack: config => {
@@ -76,12 +63,26 @@ module.exports = {
                     .plugin('webpack-bundle-analyzer')
                     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
                     .end()
-
-                config.plugins.delete('prefetch')
-
-                config.resolve.alias
-                    .set('@ant-design/icons/lib/dist$', Path.resolve(__dirname, './src/assets/import/ant-icons.js'))
             }
+
+            config.plugins.delete('prefetch')
+
+            config
+                .plugin('compression-webpack-plugin')
+                .use(new CompressionWebpackPlugin({
+                    filename: '[path].br[query]',
+                    algorithm: 'brotliCompress',
+                    test: /\.(js|css|html)$/i,
+                    compressionOptions: {
+                        params: {
+                            [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+                        },
+                    },
+                    threshold: 10240,
+                    minRatio: 0.5,
+                    deleteOriginalAssets: false
+                }))
+                .end()
         }
     },
     css: {
