@@ -25,8 +25,15 @@ Vue.prototype.$appConfigInfo = {
 };
 
 Vue.prototype.$appColumnsInfo = {
-    area: ["安卓QQ", "苹果QQ", "安卓WX", "苹果WX"],
+    area: [
+        "请选择大区",
+        "安卓QQ",
+        "苹果QQ",
+        "安卓WX",
+        "苹果WX"
+    ],
     province: [
+        "请选择省份",
         "安徽省",
         "澳门特别行政区",
         "北京市",
@@ -63,8 +70,9 @@ Vue.prototype.$appColumnsInfo = {
         "浙江省",
     ],
     rank: {
-        type: [0, 16, 22, 20, 18, 17, 4, 1],
+        type: [1, 0, 16, 22, 20, 18, 17, 4, 1],
         text: [
+            "请选择段位",
             "荣耀王者",
             "最强王者",
             "至尊星耀",

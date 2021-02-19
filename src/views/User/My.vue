@@ -602,7 +602,7 @@ export default {
         this.$appColumnsInfo.index = newInfo.provinceType;
       } else if (e == 2) {
         columns = this.$appColumnsInfo.rank.text;
-        this.$appColumnsInfo.index = newInfo.rankType;
+        this.$appColumnsInfo.index = newInfo.rank.starType;
       }
 
       this.$appColumnsInfo.now = columns;
