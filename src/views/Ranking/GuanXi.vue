@@ -226,7 +226,7 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: false,
+      immediate: true,
       handler(newValue) {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 

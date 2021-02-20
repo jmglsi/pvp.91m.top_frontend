@@ -21,15 +21,16 @@
     </div>
 
     <div
-      class="hero-9a7c47049573e03028c2e650b73f6252"
       :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+      class="hero-9a7c47049573e03028c2e650b73f6252"
     >
       <van-collapse v-model="collapseInfo.model" :border="false">
         <van-collapse-item
           v-for="(data, index) in tableData.result.rows"
           :key="'hero-1a721faf2df53972bfd0831c64b6146d-' + index"
           :name="index"
-          :value="data.time"
+          :label="'更新时间:' + data.time"
+          :value="data.usedtime"
           class="hero-90516fea1032f8332d81cb47f06c59f6"
         >
           <div slot="title" class="hero-a78656fbfb5b498e5cb80b5b13076e31">
@@ -37,18 +38,20 @@
               round
               :type="data.status"
               class="hero-01cac4e332fec6d6ecd331a00412712d hero-e4d23e841d8e8804190027bce3180fa5"
-              >{{ data.usedtime }}</van-tag
             >
+              {{ data.status == "success" ? "胜利" : "失败" }}
+            </van-tag>
             <van-tag
               v-if="!replay.teammate"
               round
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
-              >{{ data.equipment.allMoney }}</van-tag
             >
-            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">{{
-              data.gamePlayerName
-            }}</span>
+              {{ data.equipment.allMoney }}
+            </van-tag>
+            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">
+              {{ data.gamePlayerName }}
+            </span>
           </div>
 
           <div
@@ -265,3 +268,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+div.hero-9a7c47049573e03028c2e650b73f6252 {
+  text-align: left;
+}
+</style>
