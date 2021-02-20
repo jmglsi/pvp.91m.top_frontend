@@ -129,26 +129,6 @@ div.hero-c6e864acb6955eed0361921288d34149 div.van-grid-item__content {
   background-color: transparent;
 }
 
-div.hero-c8c469026f350858cfa8f2e5bb6596df img.van-image__img {
-  border-radius: unset;
-}
-
-div.hero-83444807ba7a7da23e12b17567d2d595 div.van-circle__text {
-  color: white;
-}
-
-div.hero-c8c469026f350858cfa8f2e5bb6596df div.van-image-preview__index {
-  top: unset;
-  bottom: 75px;
-}
-
-div.hero-c8c469026f350858cfa8f2e5bb6596df div.van-image-preview__cover {
-  bottom: 35px;
-  color: white;
-  top: unset;
-  width: 100%;
-}
-
 div.hero-b7b5e31b028440d2e0e0157baad49513 {
   margin: 25px 0;
 }

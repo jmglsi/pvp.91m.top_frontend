@@ -189,12 +189,12 @@ export default {
         this.showInfo.skillMenu = true;
       }
 
-      this.getRanking(3, 0, 0);
+      this.getRanking(3, 0, 0, 0);
     },
-    getRanking: function (aid = 3, bid = 0, cid = 0) {
+    getRanking: function (aid = 3, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (
@@ -214,7 +214,9 @@ export default {
             "&bid=" +
             bid +
             "&cid=" +
-            cid
+            cid +
+            "&did=" +
+            did
         )
         .then((res) => {
           let data = res.data.data;
@@ -224,7 +226,7 @@ export default {
           this.tableData.time = this.$appTs;
 
           this.$appSetLocalStorage(
-            "ranking-" + aid + "-" + bid + "-" + cid,
+            "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
             this.tableData
           );
 

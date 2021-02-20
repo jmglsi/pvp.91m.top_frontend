@@ -81,11 +81,15 @@ export default {
       type: Number,
       default: 0,
     },
+    did: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid } = this;
-      return { isSmallMobile, bid, cid };
+      const { isSmallMobile, bid, cid, did } = this;
+      return { isSmallMobile, bid, cid, did };
     },
   },
   watch: {
@@ -95,7 +99,7 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(1, newValue.bid, newValue.cid);
+          this.getRanking(1, newValue.bid, newValue.cid, 0);
         }
       },
     },
@@ -129,13 +133,13 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
   },
   mounted() {
-    this.getRanking(1, this.bid, this.cid);
+    this.getRanking(1, this.bid, this.cid, 0);
   },
   methods: {
-    getRanking: function (aid = 1, bid = 0, cid = 0) {
+    getRanking: function (aid = 1, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (
@@ -155,7 +159,9 @@ export default {
             "&bid=" +
             bid +
             "&cid=" +
-            cid
+            cid +
+            "&did=" +
+            did
         )
         .then((res) => {
           let data = res.data.data;
@@ -165,7 +171,7 @@ export default {
           this.tableData.time = this.$appTs;
 
           this.$appSetLocalStorage(
-            "ranking-" + aid + "-" + bid + "-" + cid,
+            "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
             this.tableData
           );
 

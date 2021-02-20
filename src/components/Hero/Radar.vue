@@ -1,6 +1,6 @@
 <template>
   <div class="hero-radar">
-    <div class="hero-b86b97a57d04d7096b93b34cea410cfe">
+    <div class="hero-radar-b86b97a57d04d7096b93b34cea410cfe">
       <vue-tags-input
         v-model="tag.text"
         v-if="tabsModel == 2"
@@ -8,11 +8,11 @@
         :placeholder="tag.placeholder"
         @tags-changed="onTagsChanged"
         @blur="onTagsBlur"
-        class="hero-d57ac45256849d9b13e2422d91580fb9"
+        class="hero-radar-d57ac45256849d9b13e2422d91580fb9"
       />
     </div>
 
-    <div class="hero-00c0096b2f59afa06ea70de0e19fff29">
+    <div class="hero-radar-00c0096b2f59afa06ea70de0e19fff29">
       <ve-radar
         :extend="radarData.extend"
         :settings="radarData.settings"
@@ -20,7 +20,7 @@
         :loading="radarData.loading"
         legend-position="bottom"
         height="550px"
-        class="hero-ca6674b328707b5a1f0b012105a7e4e1"
+        class="hero-radar-ca6674b328707b5a1f0b012105a7e4e1"
       />
     </div>
   </div>
@@ -145,7 +145,7 @@ export default {
 </script>
 
 <style scoped>
-div.hero-d57ac45256849d9b13e2422d91580fb9 {
+div.hero-radar-d57ac45256849d9b13e2422d91580fb9 {
   margin: 25px auto;
   max-width: 500px;
   text-align: center;

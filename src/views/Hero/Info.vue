@@ -87,17 +87,18 @@
           <img v-lazy="data" class="hero-44908c08b6c253a19ab6246e6eec857a" />
         </van-swipe-item>
       </van-swipe>
+
       <van-image-preview
         v-model="showInfo.imagePreview"
         :images="hero.info.skin"
         :startPosition="showInfo.imageIndex"
-        className="hero-c8c469026f350858cfa8f2e5bb6596df"
+        className="app-0ca41257ee36e86e5d89591c82113263"
       >
-        <template v-slot:cover
-          ><span class="hero-b5741c8457973b008c424c6f94ff3901"
-            >长按或右键可保存图片~</span
-          ></template
-        >
+        <template v-slot:cover>
+          <span class="hero-b5741c8457973b008c424c6f94ff3901">
+            长按或右键可保存图片~
+          </span>
+        </template>
       </van-image-preview>
     </div>
 

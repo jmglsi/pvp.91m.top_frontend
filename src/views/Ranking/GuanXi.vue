@@ -231,7 +231,7 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(2, 0, 0,newValue.heroName);
+          this.getRanking(2, 0, 0, newValue.heroName, 0);
 
           this.$refs.refGuanXi.refreshColumn();
         }
@@ -272,10 +272,10 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    this.getRanking(2, 0, 0, this.heroName);
+    this.getRanking(2, 0, 0, this.heroName, 0);
   },
   methods: {
-    getRanking: function (aid = 2, bid = 0, cid = 0, heroName = null) {
+    getRanking: function (aid = 2, bid = 0, cid = 0, heroName = null, did = 0) {
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
@@ -286,7 +286,9 @@ export default {
             "&cid=" +
             cid +
             "&heroName=" +
-            encodeURIComponent(heroName)
+            encodeURIComponent(heroName) +
+            "&did=" +
+            did
         )
         .then((res) => {
           if (heroName)

@@ -405,6 +405,26 @@ div.van-tabs__nav {
   overflow-x: unset;
 }
 
+div.app-0ca41257ee36e86e5d89591c82113263 img.van-image__img {
+  border-radius: unset;
+}
+
+div.hero-83444807ba7a7da23e12b17567d2d595 div.van-circle__text {
+  color: white;
+}
+
+div.app-0ca41257ee36e86e5d89591c82113263 div.van-image-preview__index {
+  top: unset;
+  bottom: 75px;
+}
+
+div.app-0ca41257ee36e86e5d89591c82113263 div.van-image-preview__cover {
+  bottom: 35px;
+  color: white;
+  top: unset;
+  width: 100%;
+}
+
 div.app-8de1f001663ee713d24888bb422e3881 {
   height: 100px;
   margin-top: -50px;
@@ -547,6 +567,7 @@ div.app-044a82dc9b34eebf2c54fe2c3c904368 {
 div.app-dfs,
 div.app-gx,
 div.app-wj,
+div.app-pz,
 div.app-zb,
 div.app-skill,
 div.app-equipmentListAll,

@@ -15,7 +15,7 @@
           <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
             <span
               class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
-              >&lt;{{ $appColumnsInfo.area[loginInfo.areaType] }}&gt;</span
+              >&lt;{{ $appColumnsInfo.areaType[loginInfo.areaType] }}&gt;</span
             >
             <span
               class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
@@ -336,7 +336,7 @@
             class="my-3c5bcb72d710faf0c301750abeb5704f"
           >
             <van-field
-              v-model="$appColumnsInfo.area[newInfo.areaType]"
+              v-model="$appColumnsInfo.areaType[newInfo.areaType]"
               readonly
               input-align="right"
               label="大区"
@@ -353,7 +353,7 @@
               </template>
             </van-field>
             <van-field
-              v-model="$appColumnsInfo.province[newInfo.provinceType]"
+              v-model="$appColumnsInfo.provinceType[newInfo.provinceType]"
               readonly
               input-align="right"
               label="省份"
@@ -578,7 +578,7 @@ export default {
       } else if (columnsInfo.type == 1) {
         this.newInfo.provinceType = index;
       } else if (columnsInfo.type == 2) {
-        starIndex = this.$appColumnsInfo.rank.type[index];
+        starIndex = this.$appColumnsInfo.starType.value[index];
 
         this.newInfo.rank.starType = index;
         this.newInfo.rank.starIcon =
@@ -595,13 +595,13 @@ export default {
         newInfo = this.newInfo;
 
       if (e == 0) {
-        columns = this.$appColumnsInfo.area;
+        columns = this.$appColumnsInfo.areaType;
         this.$appColumnsInfo.index = newInfo.areaType;
       } else if (e == 1) {
-        columns = this.$appColumnsInfo.province;
+        columns = this.$appColumnsInfo.provinceType;
         this.$appColumnsInfo.index = newInfo.provinceType;
       } else if (e == 2) {
-        columns = this.$appColumnsInfo.rank.text;
+        columns = this.$appColumnsInfo.starType.text;
         this.$appColumnsInfo.index = newInfo.rank.starType;
       }
 

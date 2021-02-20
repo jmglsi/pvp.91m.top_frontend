@@ -358,11 +358,15 @@ export default {
       type: Number,
       default: 0,
     },
+    did: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid } = this;
-      return { isSmallMobile, bid, cid };
+      const { isSmallMobile, bid, cid, did } = this;
+      return { isSmallMobile, bid, cid, did };
     },
   },
   watch: {
@@ -372,7 +376,7 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(0, newValue.bid, newValue.cid);
+          this.getRanking(0, newValue.bid, newValue.cid, 0);
         }
       },
     },
@@ -425,7 +429,7 @@ export default {
     //手动将表格和工具栏进行关联
   },
   mounted() {
-    this.getRanking(0, this.bid, this.cid);
+    this.getRanking(0, this.bid, this.cid, 0);
   },
   methods: {
     initTableWidth: function () {
@@ -463,10 +467,10 @@ export default {
 
       this.initTableWidth();
     },
-    getRanking: function (aid = 0, bid = 0, cid = 0) {
+    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (
@@ -486,7 +490,9 @@ export default {
             "&bid=" +
             bid +
             "&cid=" +
-            cid
+            cid +
+            "&did=" +
+            did
         )
         .then((res) => {
           let data = res.data.data;
@@ -498,7 +504,7 @@ export default {
           //this.$refs.refDianFengSai.loadData(data.result.rows);
 
           this.$appSetLocalStorage(
-            "ranking-" + aid + "-" + bid + "-" + cid,
+            "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
             this.tableData
           );
 
