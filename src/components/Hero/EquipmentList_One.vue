@@ -324,7 +324,7 @@ export default {
               this.tableData
             );
 
-            aid == 1
+            bid == 1
               ? (tipsText = this.$appMsg.success[1001])
               : (tipsText = this.$appMsg.success[1002]);
 
