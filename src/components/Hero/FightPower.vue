@@ -310,7 +310,7 @@ export default {
           }
         });
     },
-    getRanking: function (heroId, aid = 5, bid = 0, cid = 0, did = 0) {
+    getRanking: function (heroId, aid = 7, bid = 0, cid = 0, did = 0) {
       if (heroId == 0 || did == 0) return;
 
       this.$axios
@@ -343,7 +343,7 @@ export default {
     },
     onTabsChange: function (e) {
       if (e == 1) {
-        this.getRanking(this.heroId, 5, 0, 0, this.fightPowerType);
+        this.getRanking(this.heroId, 7, 0, 0, this.fightPowerType);
       }
     },
     onImagePreviewClick: function (index) {
