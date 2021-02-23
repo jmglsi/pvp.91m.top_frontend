@@ -157,23 +157,29 @@ export default {
             page
         )
         .then((res) => {
-          let copyAv = this.copyAv;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.tableData = res.data.data;
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
 
-          if (copyAv) {
-            setTimeout(
-              (copyData) => {
-                this.$appCopyData(copyData);
-              },
-              750,
-              this.copyData
-            );
+            let copyAv = this.copyAv;
 
-            this.copyAv = null;
+            if (copyAv) {
+              setTimeout(
+                (copyData) => {
+                  this.$appCopyData(copyData);
+                },
+                750,
+                this.copyData
+              );
+
+              this.copyAv = null;
+            }
+          } else {
+            this.$message.error(status.msg);
           }
-
-          this.tableData.loading = false;
         });
     },
     getOrderInfo: function (row) {

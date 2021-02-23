@@ -171,7 +171,6 @@
       v-model="showInfo.equipmentMenu"
       :round="false"
       safe-area-inset-bottom
-      class="app-aaf877dc2d49f8e1494e6a7dcf8b475c"
     >
       <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
         <img
@@ -249,7 +248,7 @@ export default {
       handler(newValue) {
         if (newValue.equipmentId == null) return;
 
-        this.getHeroEquipment(newValue.equipmentId, newValue.equipmentType);
+        this.getRanking(newValue.equipmentId, 6, newValue.equipmentType, 0, 0);
       },
     },
   },
@@ -281,9 +280,35 @@ export default {
     this.listWidth = this.$appInitTableWidth(1450);
   },
   methods: {
-    getHeroEquipment: function (id = 111, aid = 1) {
+    getRanking: function (id = 111, aid = 6, bid = 1, cid = 0, did = 0) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        ranking = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + id
+        );
+
+      if (
+        ranking &&
+        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
+      ) {
+        this.tableData = ranking;
+
+        return;
+      }
+
       this.$axios
-        .post(this.$appApi.pvp.getHeroEquipment + "&aid=" + aid + "&id=" + id)
+        .post(
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did +
+            "&id=" +
+            id
+        )
         .then((res) => {
           let tipsText,
             data = res.data.data,
@@ -292,6 +317,12 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
+            this.tableData.time = this.$appTs;
+
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + id,
+              this.tableData
+            );
 
             aid == 1
               ? (tipsText = this.$appMsg.success[1001])
@@ -363,13 +394,13 @@ export default {
     onCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
         this.equipmentInfo.type = 1;
-        this.getHeroEquipment(row.heroId, this.equipmentInfo.type);
+        this.getRanking(row.heroId, 6, this.equipmentInfo.type, 0, 0);
         return;
       }
 
       if (column.property == "equipment.id") {
         this.equipmentInfo.type = 2;
-        this.getHeroEquipment(row.equipment.id, this.equipmentInfo.type);
+        this.getRanking(row.equipment.id, 6, this.equipmentInfo.type, 0, 0);
         return;
       }
 

@@ -211,12 +211,17 @@ export default {
                     { path: tipsInfo.to },
                     1
                   );
-                }
-
+                } 
+                
                 if (tipsInfo.url) {
-                  this.$appOpenUrl("是否打开外部链接?", null, {
-                    path: tipsInfo.url,
-                  });
+                  this.$appOpenUrl(
+                    "是否打开外部链接?",
+                    null,
+                    {
+                      path: tipsInfo.url,
+                    },
+                    0
+                  );
                 }
               },
             });
@@ -533,14 +538,6 @@ div.app-88bf7a95736562190270d51dc2cb3f42 {
   margin: 50px 15px 40px 15px;
 }
 
-div.app-e827ba0e6873e7ce7ef7c6c58e970609.van-popup {
-  height: 80%;
-}
-
-div.app-aaf877dc2d49f8e1494e6a7dcf8b475c.van-popup {
-  height: calc(75% - 3px);
-}
-
 div.van-tabbar-item__text {
   transform: scale(0.75);
   margin-top: 3px;
@@ -571,7 +568,8 @@ div.app-pz,
 div.app-zb,
 div.app-skill,
 div.app-equipmentListAll,
-div.app-equipmentListOne {
+div.app-equipmentListOne,
+div.app-pzOne {
   margin-top: 3px;
 }
 

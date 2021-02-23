@@ -127,9 +127,7 @@
       </div>
     </div>
 
-    <div
-      class="app-e827ba0e6873e7ce7ef7c6c58e970609 update-54d18ea9d2c044692d2df8b888792af8"
-    >
+    <div class="update-54d18ea9d2c044692d2df8b888792af8">
       <van-calendar
         v-model="showInfo.calendar"
         :title="tableData.result.title"

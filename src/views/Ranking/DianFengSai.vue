@@ -377,6 +377,16 @@ export default {
 
         if (refresh == 1) {
           this.getRanking(0, newValue.bid, newValue.cid, 0);
+
+          this.$appPush({
+            query: {
+              type: 0,
+              bid: newValue.bid,
+              cid: newValue.cid,
+              did: newValue.did,
+              refresh: 0,
+            },
+          });
         }
       },
     },
@@ -495,20 +505,25 @@ export default {
             did
         )
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.tableData = data;
-          this.tableData.loading = false;
-          this.tableData.time = this.$appTs;
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
+            this.tableData.time = this.$appTs;
 
-          //this.$refs.refDianFengSai.loadData(data.result.rows);
+            //this.$refs.refDianFengSai.loadData(data.result.rows);
 
-          this.$appSetLocalStorage(
-            "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
-            this.tableData
-          );
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
+              this.tableData
+            );
 
-          this.$message.success(this.$appMsg.success[1005]);
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
 
       if (bid == 3 && cid == 0) {

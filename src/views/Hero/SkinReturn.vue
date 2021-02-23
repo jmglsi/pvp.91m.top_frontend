@@ -69,9 +69,7 @@
     <div class="skin-a47113818cd94f1f3221fed0a17e8588">
       <van-button
         round
-        @click="
-          $appOpenUrl('是否打开外部链接?', null, { path: tableData.result.url })
-        "
+        @click="onActivityUrlclick"
         size="small"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
       >
@@ -121,7 +119,7 @@ export default {
   },
   mounted() {
     this.getSkinReturnLog();
-    this.getSkinReturn();
+    this.getRanking(-1, 0, 0, 0);
   },
   methods: {
     afterConfig: function (e) {
@@ -131,13 +129,32 @@ export default {
       //去除折线图上的小圆点
       return e;
     },
-    getSkinReturn: function () {
-      this.$axios.post(this.$appApi.pvp.getSkinReturn).then((res) => {
-        let data = res.data.data;
+    getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {
+      this.$axios
+        .post(
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
 
-        this.tableData = data;
-        this.tableData.loading = false;
-      });
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
+
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     getSkinReturnLog: function () {
       this.$axios.post(this.$appApi.pvp.getSkinReturnLog).then((res) => {
@@ -146,6 +163,24 @@ export default {
         this.lineData = data;
         this.lineData.loading = false;
       });
+    },
+    onActivityUrlclick: function () {
+      let tipsInfo = this.tableData.result;
+
+      if (tipsInfo.to) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: tipsInfo.to }, 1);
+      }
+
+      if (tipsInfo.url) {
+        this.$appOpenUrl(
+          "是否打开外部链接?",
+          null,
+          {
+            path: tipsInfo.url,
+          },
+          0
+        );
+      }
     },
   },
 };

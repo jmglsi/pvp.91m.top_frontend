@@ -190,6 +190,16 @@ export default {
       }
 
       this.getRanking(3, 0, 0, 0);
+
+      this.$appPush({
+        query: {
+          type: 3,
+          bid: 0,
+          cid: 0,
+          did: 0,
+          refresh: 0,
+        },
+      });
     },
     getRanking: function (aid = 3, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
@@ -219,18 +229,23 @@ export default {
             did
         )
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.tableData = data;
-          this.tableData.loading = false;
-          this.tableData.time = this.$appTs;
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
+            this.tableData.time = this.$appTs;
 
-          this.$appSetLocalStorage(
-            "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
-            this.tableData
-          );
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
+              this.tableData
+            );
 
-          this.$message.success(this.$appMsg.success[1005]);
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     filterMethod: function ({ option, row, column }) {

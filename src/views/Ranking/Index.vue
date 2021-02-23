@@ -34,8 +34,8 @@
           <DianFengSai
             v-if="tabsInfo.model == 0"
             :isSmallMobile="isSmallMobile"
-            :bid="dfsAreaInfo.model"
-            :cid="dfsPositionInfo.model"
+            :bid="dfsAreaTypeInfo.model"
+            :cid="dfsPositionTypeInfo.model"
           />
         </van-tab>
 
@@ -54,8 +54,8 @@
           <WanJia
             v-if="tabsInfo.model == 2"
             :isSmallMobile="isSmallMobile"
-            :bid="wjAreaInfo.model"
-            :cid="wjShieldInfo.model"
+            :bid="wjAreaTypeInfo.model"
+            :cid="wjShieldTypeInfo.model"
           />
         </van-tab>
 
@@ -63,6 +63,19 @@
           <ZhuangBei
             v-if="tabsInfo.model == 3"
             :isSmallMobile="isSmallMobile"
+          />
+        </van-tab>
+
+        <van-tab>
+          <template #title>
+            牌子 (测试中) <i class="vxe-icon--funnel" />
+          </template>
+          <PaiZi
+            v-if="tabsInfo.model == 4"
+            :isSmallMobile="isSmallMobile"
+            :bid="pzAreaTypeInfo.model"
+            :cid="pzProvinceTypeInfo.model"
+            :did="pzFightPowerTypeInfo.model"
           />
         </van-tab>
       </van-tabs>
@@ -84,6 +97,12 @@
             <van-dropdown-item
               v-model="cidInfo.model"
               :options="cidInfo.options"
+              @change="onDropdownMenuChange"
+            />
+            <van-dropdown-item
+              v-model="didInfo.model"
+              v-if="tabsInfo.model == 4"
+              :options="didInfo.options"
               @change="onDropdownMenuChange"
             />
           </van-dropdown-menu>
@@ -134,6 +153,7 @@ export default {
     GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
     WanJia: () => import("@/views/Ranking/WanJia.vue"),
     ZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
+    PaiZi: () => import("@/views/Ranking/PaiZi.vue"),
   },
   watch: {
     $route: function (to) {
@@ -160,7 +180,7 @@ export default {
         rankingFilterMenu: false,
         shield: false,
       },
-      dfsAreaInfo: {
+      dfsAreaTypeInfo: {
         model: 0,
         options: [
           { text: "全部 (昨日)", value: 0 },
@@ -171,7 +191,7 @@ export default {
           { text: "全部 (上月)", value: 5 },
         ],
       },
-      dfsPositionInfo: {
+      dfsPositionTypeInfo: {
         model: 0,
         options: [
           { text: "全部分路 ω' )و", value: 0 },
@@ -183,7 +203,7 @@ export default {
           { text: "游走", value: 6 },
         ],
       },
-      wjAreaInfo: {
+      wjAreaTypeInfo: {
         model: 0,
         options: [
           { text: "全部", value: 0 },
@@ -193,18 +213,34 @@ export default {
           { text: "苹果WX", value: 4 },
         ],
       },
-      wjShieldInfo: {
+      wjShieldTypeInfo: {
         model: 0,
         options: [
           { text: "打开战绩", value: 0 },
           { text: "隐藏战绩", value: 1 },
         ],
       },
+      pzAreaTypeInfo: {
+        model: 0,
+        options: [],
+      },
+      pzProvinceTypeInfo: {
+        model: 0,
+        options: [],
+      },
+      pzFightPowerTypeInfo: {
+        model: 0,
+        options: [],
+      },
       bidInfo: {
         model: 0,
         options: [],
       },
       cidInfo: {
+        model: 0,
+        options: [],
+      },
+      didInfo: {
         model: 0,
         options: [],
       },
@@ -223,6 +259,7 @@ export default {
       this.tabsInfo.model = parseInt(route.type) || 0;
       this.bid = parseInt(route.bid) || 0;
       this.cid = parseInt(route.cid) || 0;
+      this.did = parseInt(route.cid) || 0;
 
       if (rankingFilterTips == 0) {
         appConfigInfo.tipsInfo.rankingFilter = 1;
@@ -263,19 +300,43 @@ export default {
       let tabsInfo = this.tabsInfo;
 
       if (e == 0) {
-        this.bidInfo = this.dfsAreaInfo;
-        this.cidInfo = this.dfsPositionInfo;
+        this.bidInfo = this.dfsAreaTypeInfo;
+        this.cidInfo = this.dfsPositionTypeInfo;
       }
 
       if (e == 2) {
-        this.bidInfo = this.wjAreaInfo;
-        this.cidInfo = this.wjShieldInfo;
+        this.bidInfo = this.wjAreaTypeInfo;
+        this.cidInfo = this.wjShieldTypeInfo;
+      }
+
+      if (e == 4) {
+        let arrData_1 = [],
+          arrData_2 = [],
+          arrData_3 = [];
+        this.$appColumnsInfo.areaType.map((x, i) => {
+          arrData_1.push({ text: x, value: i });
+        });
+        this.pzAreaTypeInfo.options = arrData_1;
+
+        this.$appColumnsInfo.provinceType.map((x, i) => {
+          arrData_2.push({ text: x, value: i });
+        });
+        this.pzProvinceTypeInfo.options = arrData_2;
+
+        this.$appColumnsInfo.fightPowerType.text.map((x, i) => {
+          arrData_3.push({ text: x, value: i });
+        });
+        this.pzFightPowerTypeInfo.options = arrData_3;
+
+        this.bidInfo = this.pzAreaTypeInfo;
+        this.cidInfo = this.pzProvinceTypeInfo;
+        this.didInfo = this.pzFightPowerTypeInfo;
       }
 
       this.$appPush({ query: { type: tabsInfo.model } });
 
       setTimeout(() => {
-        e == 0 || e == 2
+        e == 0 || e == 2 || e == 4
           ? (this.showInfo.rankingFilterMenu = true)
           : (this.showInfo.rankingFilterMenu = false);
       }, 500);
@@ -283,16 +344,23 @@ export default {
     onDropdownMenuChange: function () {
       let tabsInfo = this.tabsInfo,
         bidInfo = this.bidInfo,
-        cidInfo = this.cidInfo;
+        cidInfo = this.cidInfo,
+        didInfo = this.didInfo;
 
       if (tabsInfo.model == 0) {
-        this.dfsAreaInfo.model = bidInfo.model;
-        this.dfsPositionInfo.model = cidInfo.model;
+        this.dfsAreaTypeInfo.model = bidInfo.model;
+        this.dfsPositionTypeInfo.model = cidInfo.model;
       }
 
       if (tabsInfo.model == 2) {
-        this.wjAreaInfo.model = bidInfo.model;
-        this.wjShieldInfo.model = cidInfo.model;
+        this.wjAreaTypeInfo.model = bidInfo.model;
+        this.wjShieldTypeInfo.model = cidInfo.model;
+      }
+
+      if (tabsInfo.model == 4) {
+        this.pzAreaTypeInfo.model = bidInfo.model;
+        this.pzProvinceTypeInfo.model = cidInfo.model;
+        this.pzFightPowerTypeInfo.model = didInfo.model;
       }
 
       this.$appPush({
@@ -300,11 +368,14 @@ export default {
           type: tabsInfo.model,
           bid: bidInfo.model,
           cid: cidInfo.model,
+          did: didInfo.model,
           refresh: 1,
         },
       });
 
-      this.showInfo.rankingFilterMenu = false;
+      if (tabsInfo.model != 4) {
+        this.showInfo.rankingFilterMenu = false;
+      }
     },
   },
 };

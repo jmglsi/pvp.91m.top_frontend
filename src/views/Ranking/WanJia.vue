@@ -99,7 +99,17 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(1, newValue.bid, newValue.cid, 0);
+          this.getRanking(2, newValue.bid, newValue.cid, 0);
+
+          this.$appPush({
+            query: {
+              type: 2,
+              bid: newValue.bid,
+              cid: newValue.cid,
+              did: newValue.did,
+              refresh: 0,
+            },
+          });
         }
       },
     },
@@ -133,10 +143,10 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
   },
   mounted() {
-    this.getRanking(1, this.bid, this.cid, 0);
+    this.getRanking(2, this.bid, this.cid, 0);
   },
   methods: {
-    getRanking: function (aid = 1, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         ranking = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
@@ -164,18 +174,23 @@ export default {
             did
         )
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.tableData = data;
-          this.tableData.loading = false;
-          this.tableData.time = this.$appTs;
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
+            this.tableData.time = this.$appTs;
 
-          this.$appSetLocalStorage(
-            "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
-            this.tableData
-          );
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
+              this.tableData
+            );
 
-          this.$message.success(this.$appMsg.success[1005]);
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     getPlayerInfo: function (row) {

@@ -58,7 +58,7 @@ export default {
         if (newValue.heroId == null) return;
 
         if (newValue.tabsModel == 1) {
-          this.getHeroChartsLog(newValue.heroId, "", 10);
+          this.getHeroChartsLog(newValue.heroId, "", 3);
         } else {
           this.tag.array = [];
         }
@@ -87,7 +87,7 @@ export default {
     };
   },
   methods: {
-    getHeroChartsLog: function (heroId, heroName, aid) {
+    getHeroChartsLog: function (heroId, heroName, aid = 3) {
       this.radarData = {
         loading: true,
         result: {
@@ -122,7 +122,7 @@ export default {
         this.chartSettings = {};
         this.chartData = [];
       } else {
-        let newTags = null;
+        let newTags = "";
 
         for (let i = 0; i < e.length; i++) {
           newTags += "," + e[i].text;
@@ -136,7 +136,7 @@ export default {
         newHeroList = this.heroList.new;
 
       if (oldHeroList != newHeroList) {
-        this.getHeroChartsLog("", newHeroList, 11);
+        this.getHeroChartsLog("", newHeroList, 4);
         this.heroList.old = newHeroList;
       }
     },

@@ -67,7 +67,7 @@ export default {
       handler(newValue) {
         if (newValue.heroId == null) return;
 
-        this.getHeroSkill(newValue.heroId);
+        this.getRanking(newValue.heroId, 5, 0, 0, 0);
       },
     },
   },
@@ -86,17 +86,57 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
   },
   methods: {
-    getHeroSkill: function (heroId = 111) {
+    getRanking: function (heroId = 111, aid = 5, bid = 0, cid = 0, did = 0) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        ranking = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroId
+        );
+
+      if (
+        ranking &&
+        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
+      ) {
+        this.tableData = ranking;
+
+        return;
+      }
+
       this.$axios
-        .post(this.$appApi.pvp.getHeroSkill + "&heroId=" + heroId)
+        .post(
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did +
+            "&heroId=" +
+            heroId
+        )
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
           if (status.code == 200) {
             this.tableData = data;
-
             this.tableData.loading = false;
+            this.tableData.time = this.$appTs;
+
+            this.$appSetLocalStorage(
+              "ranking-" +
+                aid +
+                "-" +
+                bid +
+                "-" +
+                cid +
+                "-" +
+                did +
+                "-" +
+                heroId,
+              this.tableData
+            );
           } else {
             this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
           }

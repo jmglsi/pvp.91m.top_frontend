@@ -282,9 +282,7 @@
       </lazy-component>
     </div>
 
-    <div
-      class="app-e827ba0e6873e7ce7ef7c6c58e970609 hero-2882d594d0ac3524bffd5148791e96da"
-    >
+    <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
         v-model="showInfo.skillMenu"
         :title="hero.info.name + ' 的其他数据 (上周)'"

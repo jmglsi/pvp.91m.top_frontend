@@ -231,9 +231,18 @@ export default {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
-          this.getRanking(2, 0, 0, newValue.heroName, 0);
+          this.getRanking(1, 0, 0, 0, newValue.heroName);
 
-          this.$refs.refGuanXi.refreshColumn();
+          this.$appPush({
+            query: {
+              type: 1,
+              bid: newValue.bid,
+              cid: newValue.cid,
+              did: newValue.did,
+              heroName: newValue.heroName,
+              refresh: 0,
+            },
+          });
         }
       },
     },
@@ -272,10 +281,10 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    this.getRanking(2, 0, 0, this.heroName, 0);
+    this.getRanking(1, 0, 0, 0, this.heroName);
   },
   methods: {
-    getRanking: function (aid = 2, bid = 0, cid = 0, heroName = null, did = 0) {
+    getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
@@ -285,19 +294,28 @@ export default {
             bid +
             "&cid=" +
             cid +
-            "&heroName=" +
-            encodeURIComponent(heroName) +
             "&did=" +
-            did
+            did +
+            "&heroName=" +
+            encodeURIComponent(heroName)
         )
         .then((res) => {
-          if (heroName)
-            document.title =
-              heroName + " | " + this.$appConfigInfo.appInfo.name;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.tableData = res.data.data;
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
 
-          this.tableData.loading = false;
+            if (heroName) {
+              document.title =
+                heroName + " | " + this.$appConfigInfo.appInfo.name;
+            }
+
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     getHeroInfo: function (row) {

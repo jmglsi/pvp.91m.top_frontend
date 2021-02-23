@@ -947,13 +947,18 @@ export default {
           })
         )
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.tableData.result = data.result;
+          if (status.code == 200) {
+            this.tableData.result = data.result;
 
-          this.$appSetLocalStorage("gameBP", this.tableData);
+            this.$appSetLocalStorage("gameBP", this.tableData);
 
-          this.$message.success(this.$appMsg.success[1005]);
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     getGameBP: function (gameLabel) {

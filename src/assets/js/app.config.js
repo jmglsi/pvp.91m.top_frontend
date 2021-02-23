@@ -25,14 +25,14 @@ Vue.prototype.$appConfigInfo = {
 };
 
 Vue.prototype.$appColumnsInfo = {
-    area: [
+    areaType: [
         "请选择大区",
         "安卓QQ",
         "苹果QQ",
         "安卓WX",
         "苹果WX"
     ],
-    province: [
+    provinceType: [
         "请选择省份",
         "安徽省",
         "澳门特别行政区",
@@ -69,8 +69,8 @@ Vue.prototype.$appColumnsInfo = {
         "云南省",
         "浙江省",
     ],
-    rank: {
-        type: [1, 0, 16, 22, 20, 18, 17, 4, 1],
+    starType: {
+        value: [1, 0, 16, 22, 20, 18, 17, 4, 1],
         text: [
             "请选择段位",
             "荣耀王者",
@@ -82,6 +82,14 @@ Vue.prototype.$appColumnsInfo = {
             "秩序白银",
             "倔强青铜",
         ],
+    },
+    fightPowerType: {
+        value: [0, 1, 2],
+        text: [
+            "请选择类型",
+            "省1",
+            "省100"
+        ]
     },
     now: [],
     index: 0,
