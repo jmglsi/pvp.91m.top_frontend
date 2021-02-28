@@ -94,22 +94,12 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
           this.getRanking(2, newValue.bid, newValue.cid, 0);
-
-          this.$appPush({
-            query: {
-              type: 2,
-              bid: newValue.bid,
-              cid: newValue.cid,
-              did: newValue.did,
-              refresh: 0,
-            },
-          });
         }
       },
     },

@@ -92,7 +92,8 @@
         <van-cell
           icon="/img/app-icons/game.png"
           title="全局BP模拟器"
-          value="使用说明"
+          label="第一次使用务必看一下"
+          value="自豪的使用语雀"
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })

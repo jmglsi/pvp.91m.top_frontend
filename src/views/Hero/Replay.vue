@@ -90,23 +90,25 @@
             </van-grid>
           </div>
 
-          <van-tag
-            v-if="!replay.teammate"
-            round
-            disabled
-            color="black"
-            size="mini"
-            class="hero-ce50a09343724eb82df11390e2c1de18"
-            >{{ data.heroKda }}</van-tag
-          >&nbsp;
-          <van-tag
-            round
-            type="primary"
-            size="mini"
-            class="hero-ce50a09343724eb82df11390e2c1de18"
-            @click="getGameInfo(data)"
-            >对局</van-tag
-          >
+          <div class="hero-75c8e1c4a51a48edb54306fb640fdc4f">
+            <van-tag
+              v-if="!replay.teammate"
+              round
+              disabled
+              color="black"
+              size="mini"
+              class="hero-ce50a09343724eb82df11390e2c1de18"
+              >{{ data.heroKda }}</van-tag
+            >&nbsp;
+            <van-tag
+              round
+              type="primary"
+              size="mini"
+              class="hero-ce50a09343724eb82df11390e2c1de18"
+              @click="getGameInfo(data)"
+              >对局</van-tag
+            >
+          </div>
         </van-collapse-item>
       </van-collapse>
     </div>
@@ -141,11 +143,6 @@ export default {
   data() {
     return {
       copyData: "",
-      hero: {
-        info: {
-          id: parseInt(this.$route.params.id) || 0,
-        },
-      },
       tableData: {
         result: {
           rows: [],
@@ -163,6 +160,7 @@ export default {
         { name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
       replay: {
+        id: this.$route.params.id || 111,
         title: this.$route.query.title || "加载中",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
       },
@@ -178,7 +176,7 @@ export default {
     };
   },
   mounted() {
-    this.getHeroReplayByHeroId(this.hero.info.id, 1);
+    this.getHeroReplayByHeroId(this.replay.id, 1);
   },
   methods: {
     getGameInfo: function (row) {
@@ -211,14 +209,10 @@ export default {
           );
         });
     },
-    getHeroReplayByHeroId: function (heroId, page) {
+    getHeroReplayByHeroId: function (id, page) {
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroReplayByHeroId +
-            "&heroId=" +
-            heroId +
-            "&page=" +
-            page
+          this.$appApi.pvp.getHeroReplayByHeroId + "&id=" + id + "&page=" + page
         )
         .then((res) => {
           let data = res.data.data,
@@ -234,7 +228,7 @@ export default {
         });
     },
     onPaginationChange: function (e) {
-      this.getHeroReplayByHeroId(this.hero.info.id, e);
+      this.getHeroReplayByHeroId(this.replay.id, e);
     },
     onActionSheetSelect: function (item) {
       let replayInfo = this.tableDataRow;
@@ -245,13 +239,13 @@ export default {
 
       if (item.value == 1) {
         this.$appOpenUrl("是否打开对局详情?", "需要安装王者营地", {
-          path: replayInfo.hippy,
+          path: replayInfo.hippyUrl,
         });
       }
 
       if (item.value == 2) {
         this.$appOpenUrl("是否打开对局回顾?", "需要安装王者营地", {
-          path: replayInfo.url,
+          path: replayInfo.replayUrl,
         });
       }
 
@@ -272,5 +266,8 @@ export default {
 <style scoped>
 div.hero-9a7c47049573e03028c2e650b73f6252 {
   text-align: left;
+}
+div.hero-75c8e1c4a51a48edb54306fb640fdc4f {
+  text-align: center;
 }
 </style>

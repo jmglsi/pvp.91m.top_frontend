@@ -122,19 +122,9 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
-
-        this.$appPush({
-          query: {
-            type: 4,
-            bid: newValue.bid,
-            cid: newValue.cid,
-            did: newValue.did,
-            refresh: 0,
-          },
-        });
       },
     },
   },

@@ -7,6 +7,7 @@ import {
     Tooltip,
     Message,
     Notification,
+    Input,
     Timeline
 } from 'ant-design-vue'
 
@@ -16,6 +17,7 @@ Vue
     .use(Tooltip)
     .use(Message)
     .use(Notification)
+    .use(Input)
     .use(Timeline)
 
 Message.config({

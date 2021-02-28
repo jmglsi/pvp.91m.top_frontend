@@ -600,7 +600,7 @@
     <van-popup
       v-model="showInfo.setting"
       v-if="showInfo.setting"
-      class="game-d50ac6153978bdf3870b68c8d66e8d53"
+      class="app-69df17da0044a6e876b2afd3217d2564"
     >
       <div class="game-d26ecf27da6e3263cf318adbb8b5f00a">
         <van-button
@@ -627,7 +627,7 @@
     <van-popup
       v-model="showInfo.trend"
       v-if="showInfo.trend"
-      class="game-d50ac6153978bdf3870b68c8d66e8d53"
+      class="app-69df17da0044a6e876b2afd3217d2564"
     >
       <GameLine
         :arrData="
@@ -1035,8 +1035,8 @@ export default {
           pick: [0, 0, 0, 0, 0],
         },
         win: {
-          camp: 1,
-          color: "blue",
+          camp: null,
+          color: null,
           id: null,
           name: null,
           logo: null,
@@ -1390,6 +1390,8 @@ export default {
     },
     onWinCampClick: function (camp) {
       let nowWinTeam = null,
+        nowWinCamp = null,
+        nowWinColor = null,
         tabsModel = this.tabsInfo.model,
         teamInfo = this.team;
 
@@ -1409,9 +1411,15 @@ export default {
         })
         .then(() => {
           // on confirm
-          nowWinTeam.camp = camp;
-          camp == 1 ? (nowWinTeam.color = "blue") : (nowWinTeam.color = "red");
-          this.gameInfo.result.rows[tabsModel].win = nowWinTeam;
+          nowWinCamp = camp;
+          camp == 1 ? (nowWinColor = "blue") : (nowWinColor = "red");
+          this.gameInfo.result.rows[tabsModel].win = {
+            camp: nowWinCamp,
+            color: nowWinColor,
+            id: nowWinTeam.id,
+            logo: nowWinTeam.logo,
+            name: nowWinTeam.name,
+          };
 
           this.$message.success(this.$appMsg.success[1000]);
         })
@@ -1610,11 +1618,5 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 {
 div.game-5b51012ae7490ea129b5d75ad9b1016c,
 div.game-2d121e51de7a817bff612f1e16fadb8e {
   font-size: 12px;
-}
-
-div.game-d50ac6153978bdf3870b68c8d66e8d53 {
-  border-radius: 5px;
-  padding: 10px;
-  width: 500px;
 }
 </style>

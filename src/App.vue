@@ -211,8 +211,8 @@ export default {
                     { path: tipsInfo.to },
                     1
                   );
-                } 
-                
+                }
+
                 if (tipsInfo.url) {
                   this.$appOpenUrl(
                     "是否打开外部链接?",
@@ -428,6 +428,13 @@ div.app-0ca41257ee36e86e5d89591c82113263 div.van-image-preview__cover {
   color: white;
   top: unset;
   width: 100%;
+}
+
+div.app-69df17da0044a6e876b2afd3217d2564 {
+  border-radius: 5px;
+  padding: 10px;
+  width: 75%;
+  max-width: 500px;
 }
 
 div.app-8de1f001663ee713d24888bb422e3881 {

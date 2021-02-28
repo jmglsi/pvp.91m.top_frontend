@@ -15,7 +15,16 @@
         >
           <vxe-table-column
             :title="heroName == '' ? '1' : '和'"
-            field="heroId_1"
+            :filters="[
+              { label: '对抗路 (战士)', data: 1 },
+              { label: '中路', data: 2 },
+              { label: '对抗路 (坦克)', data: 3 },
+              { label: '打野', data: 4 },
+              { label: '发育路', data: 5 },
+              { label: '游走', data: 6 },
+            ]"
+            :filter-method="filterMethod"
+            field="hero_1"
             width="75"
           >
             <template v-slot="{ row }">
@@ -41,7 +50,16 @@
           </vxe-table-column>
           <vxe-table-column
             :title="heroName == '' ? '2' : '↓'"
-            field="heroId_2"
+            :filters="[
+              { label: '对抗路 (战士)', data: 1 },
+              { label: '中路', data: 2 },
+              { label: '对抗路 (坦克)', data: 3 },
+              { label: '打野', data: 4 },
+              { label: '发育路', data: 5 },
+              { label: '游走', data: 6 },
+            ]"
+            :filter-method="filterMethod"
+            field="hero_2"
             width="75"
           >
             <template v-slot="{ row }">
@@ -226,23 +244,12 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
         if (refresh == 1) {
           this.getRanking(1, 0, 0, 0, newValue.heroName);
-
-          this.$appPush({
-            query: {
-              type: 1,
-              bid: newValue.bid,
-              cid: newValue.cid,
-              did: newValue.did,
-              heroName: newValue.heroName,
-              refresh: 0,
-            },
-          });
         }
       },
     },
@@ -285,6 +292,20 @@ export default {
   },
   methods: {
     getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        ranking = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroName
+        );
+
+      if (
+        ranking &&
+        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
+      ) {
+        this.tableData = ranking;
+
+        return;
+      }
+
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +
@@ -306,6 +327,12 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
+            this.tableData.time = this.$appTs;
+
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroName,
+              this.tableData
+            );
 
             if (heroName) {
               document.title =
@@ -368,6 +395,14 @@ export default {
         });
     },
     filterMethod: function ({ option, row, column }) {
+      if (column.property == "hero_1") {
+        return row.hero_1.type === option.data;
+      }
+
+      if (column.property == "hero_2") {
+        return row.hero_2.type === option.data;
+      }
+
       if (column.property == "teammatePickRate") {
         return row.teammatePickRate >= option.data;
       }

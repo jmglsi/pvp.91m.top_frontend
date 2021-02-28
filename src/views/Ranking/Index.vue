@@ -39,7 +39,10 @@
           />
         </van-tab>
 
-        <van-tab title="关系和克制 (上周)">
+        <van-tab>
+          <template #title>
+            关系和克制 (上周) <i class="vxe-icon--search" />
+          </template>
           <GuanXi
             v-if="tabsInfo.model == 1"
             :isSmallMobile="isSmallMobile"
@@ -80,6 +83,19 @@
         </van-tab>
       </van-tabs>
     </div>
+
+    <van-popup
+      v-model="showInfo.rankingSearch"
+      v-if="showInfo.rankingSearch"
+      class="app-69df17da0044a6e876b2afd3217d2564 ranking-31c631534a3cec9ed2c5283f653a06aa"
+    >
+      <a-input-search
+        :defaultValue="searchInfo.defaultValue"
+        @search="onRankingSearch"
+        enter-button
+        placeholder="支持别名搜索~"
+      />
+    </van-popup>
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
       <van-action-sheet
@@ -172,13 +188,16 @@ export default {
       bid: 0,
       cid: 0,
       isSmallMobile: 0,
+      searchInfo: {
+        defaultValue: "",
+      },
       tabsInfo: {
         model: 0,
       },
       showInfo: {
         rankingFilterTips: true,
         rankingFilterMenu: false,
-        shield: false,
+        rankingSearch: false,
       },
       dfsAreaTypeInfo: {
         model: 0,
@@ -302,11 +321,19 @@ export default {
       if (e == 0) {
         this.bidInfo = this.dfsAreaTypeInfo;
         this.cidInfo = this.dfsPositionTypeInfo;
+
+        this.showInfo.rankingFilterMenu = true;
+      }
+
+      if (e == 1) {
+        this.showInfo.rankingSearch = true;
       }
 
       if (e == 2) {
         this.bidInfo = this.wjAreaTypeInfo;
         this.cidInfo = this.wjShieldTypeInfo;
+
+        this.showInfo.rankingFilterMenu = true;
       }
 
       if (e == 4) {
@@ -331,15 +358,11 @@ export default {
         this.bidInfo = this.pzAreaTypeInfo;
         this.cidInfo = this.pzProvinceTypeInfo;
         this.didInfo = this.pzFightPowerTypeInfo;
+
+        this.showInfo.rankingFilterMenu = true;
       }
 
       this.$appPush({ query: { type: tabsInfo.model } });
-
-      setTimeout(() => {
-        e == 0 || e == 2 || e == 4
-          ? (this.showInfo.rankingFilterMenu = true)
-          : (this.showInfo.rankingFilterMenu = false);
-      }, 500);
     },
     onDropdownMenuChange: function () {
       let tabsInfo = this.tabsInfo,
@@ -376,6 +399,16 @@ export default {
       if (tabsInfo.model != 4) {
         this.showInfo.rankingFilterMenu = false;
       }
+    },
+    onRankingSearch: function (value) {
+      this.$appPush({
+        path: "/ranking",
+        query: { type: 1, heroName: value, refresh: 1 },
+      });
+
+      this.searchInfo.defaultValue = value;
+
+      this.showInfo.rankingSearch = false;
     },
   },
 };
@@ -451,6 +484,10 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
 
 div.ranking-5728d19b81c17607842cb7befeef3152 {
   height: 400px;
+}
+
+div.ranking-31c631534a3cec9ed2c5283f653a06aa {
+  top: 150px;
 }
 
 /*
