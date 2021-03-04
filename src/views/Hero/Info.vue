@@ -424,9 +424,9 @@ export default {
   },
   watch: {
     $route: function (to) {
-      let heroId = parseInt(to.params.id) || 111;
+      let id = to.params.id || 111;
 
-      this.getHeroInfo(heroId);
+      this.getHeroInfo(id);
     },
   },
   metaInfo() {
@@ -530,10 +530,10 @@ export default {
   },
   methods: {
     initPage: function () {
-      let heroId = parseInt(this.$route.params.id) || 111,
+      let id = this.$route.params.id || 111,
         show = this.$route.query.show || "";
 
-      this.getHeroInfo(heroId);
+      this.getHeroInfo(id);
 
       if (show == "heroUpdate") {
         this.$message.info(this.$appMsg.info[1016]);
@@ -551,9 +551,9 @@ export default {
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop;
     },
-    getHeroInfo: function (heroId) {
+    getHeroInfo: function (id) {
       this.$axios
-        .post(this.$appApi.pvp.getHeroInfo + "&heroId=" + heroId)
+        .post(this.$appApi.pvp.getHeroInfo + "&id=" + id)
         .then((res) => {
           let data = res.data.data,
             heroInfo = data.heroInfo;

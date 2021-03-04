@@ -159,42 +159,42 @@
           <van-grid-item>
             <div
               :class="
-                tableData.heroInfo.allBanRate >= 20 &&
-                tableData.heroInfo.allWinRate >= 50
+                tableData.heroInfo.banRate[2] >= 20 &&
+                tableData.heroInfo.winRate[2] >= 50
                   ? 'ranking-bda9643ac6601722a28f238714274da4'
                   : null
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
-              {{ tableData.heroInfo.allBanRate }}%
+              {{ tableData.heroInfo.banRate[2] }}%
             </div>
             <div>禁用</div>
           </van-grid-item>
           <van-grid-item>
             <div
               :class="
-                tableData.heroInfo.allPickRate >= 30
+                tableData.heroInfo.pickRate[2] >= 30
                   ? 'ranking-48d6215903dff56238e52e8891380c8f'
                   : null
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
-              {{ tableData.heroInfo.allPickRate }}%
+              {{ tableData.heroInfo.pickRate[2] }}%
             </div>
             <div>出场</div>
           </van-grid-item>
           <van-grid-item>
             <div
               :class="
-                (tableData.heroInfo.allBanRate >= 20 ||
-                  tableData.heroInfo.allPickRate >= 30) &&
-                tableData.heroInfo.allWinRate >= 50
+                (tableData.heroInfo.banRate[2] >= 20 ||
+                  tableData.heroInfo.pickRate[2] >= 30) &&
+                tableData.heroInfo.winRate[2] >= 50
                   ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
                   : null
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
-              {{ tableData.heroInfo.allWinRate }}%
+              {{ tableData.heroInfo.winRate[2] }}%
             </div>
             <div>胜率</div>
           </van-grid-item>
