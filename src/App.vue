@@ -74,7 +74,9 @@ export default {
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
 
-      /search/i.test(to.path) ? (statusBar = true) : (statusBar = false);
+      to.path == "/" || /search/i.test(to.path)
+        ? (statusBar = true)
+        : (statusBar = false);
       this.showInfo.statusBar = statusBar;
     },
   },

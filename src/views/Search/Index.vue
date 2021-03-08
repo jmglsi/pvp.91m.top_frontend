@@ -13,8 +13,20 @@
           @input="onClearInputData"
           @clear="onClearInputData"
           @search="search.value ? getSearch(search.value) : null"
-          @cancel="$appPush({ path: '/' })"
-        />
+        >
+          <template #action>
+            <div
+              :style="
+                $appIsApple && $appConfigInfo.appInfo.pwa == 1
+                  ? { color: '#fff' }
+                  : {}
+              "
+              @click="$appPush({ path: '/' })"
+            >
+              取消
+            </div>
+          </template>
+        </van-search>
       </van-sticky>
     </div>
 
