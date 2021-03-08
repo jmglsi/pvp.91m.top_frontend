@@ -181,9 +181,12 @@ export default {
             };
 
             localStorage.removeItem("appConfigInfo");
+            localStorage.removeItem("appHome");
+            localStorage.removeItem("gameHome");
+            localStorage.removeItem("searchData");
+            this.$appDelectCache("heroUpdate");
+            this.$appDelectCache("ranking");
 
-            this.$appDelectRankingCache("heroUpdate");
-            this.$appDelectRankingCache("ranking");
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
 

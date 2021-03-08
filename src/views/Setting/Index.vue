@@ -175,17 +175,18 @@ export default {
     },
     onDelectClick: function (e) {
       if (e == 0) {
-        localStorage.removeItem("appConfigInfo");
-        localStorage.removeItem("gameHome");
-        localStorage.removeItem("heroUpdate-0");
-        localStorage.removeItem("searchData");
-
         localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
+
+        localStorage.removeItem("appConfigInfo");
+        localStorage.removeItem("appHome");
+        localStorage.removeItem("gameHome");
+        localStorage.removeItem("searchData");
+        this.$appDelectCache("heroUpdate");
 
         this.isSmallMobile = false;
         this.isReducedMode = false;
       } else if (e == 1) {
-        this.$appDelectRankingCache("ranking");
+        this.$appDelectCache("ranking");
       } else if (e == 2) {
         localStorage.removeItem("gameBP");
       }

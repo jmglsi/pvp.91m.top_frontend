@@ -111,7 +111,7 @@ if (!appConfigInfo) {
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
-Vue.prototype.$appDelectRankingCache = function(key = "ranking") {
+Vue.prototype.$appDelectCache = function(key = "ranking") {
     for (let cache in localStorage) {
         if (cache.indexOf(key) > -1) {
             localStorage.removeItem(cache);

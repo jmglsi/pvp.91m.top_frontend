@@ -183,7 +183,7 @@ export default {
               expires: "7D",
             });
 
-            this.$appDelectRankingCache("ranking");
+            this.$appDelectCache("ranking");
 
             setTimeout(() => {
               this.$router.go(-1);
