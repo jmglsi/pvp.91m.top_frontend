@@ -338,9 +338,7 @@ export default {
           this.tableData = res.data.data;
           this.tableData.time = this.$appTs;
 
-          if (heroId == 0) {
-            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
-          }
+          this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
         });
 
       let date = new Date();

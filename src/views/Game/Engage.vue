@@ -78,7 +78,6 @@
         :total-items="tableData.result.total"
         :items-per-page="tableData.result.pageSize"
         @change="onPaginationChange"
-        class="game-28a7e0a14d337be608132e3bd1c686d0"
       />
     </div>
 

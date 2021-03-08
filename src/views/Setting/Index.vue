@@ -184,8 +184,6 @@ export default {
 
         this.isSmallMobile = false;
         this.isReducedMode = false;
-
-        this.$router.go(0);
       } else if (e == 1) {
         this.$appDelectRankingCache("ranking");
       } else if (e == 2) {
@@ -193,6 +191,12 @@ export default {
       }
 
       this.$message.success(this.$appMsg.success[1000]);
+
+      if (e == 0) {
+        setTimeout(() => {
+          this.$router.go(0);
+        }, 500);
+      }
     },
   },
 };
