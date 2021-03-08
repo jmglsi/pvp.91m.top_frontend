@@ -74,8 +74,12 @@
       <van-swipe
         v-if="showInfo.parameter"
         :autoplay="7500"
-        :height="$appConfigInfo.appInfo.pwa == 1 ? '300' : '250'"
-        :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+        :height="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? '300' : '250'"
+        :style="
+          $appIsApple && $appConfigInfo.appInfo.pwa == 1
+            ? { marginTop: '-50px' }
+            : {}
+        "
         class="hero-f39c862bd8ca3cf1c9c09bc84129c5dd"
       >
         <van-swipe-item

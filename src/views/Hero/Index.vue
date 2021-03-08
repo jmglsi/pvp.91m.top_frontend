@@ -117,10 +117,6 @@ div.hero-f01902c0d0136ca30fe1034f339964ba {
   margin-bottom: 10px;
 }
 
-div.hero-face1cbe136c70e1fc08cff038596944 {
-  margin-top: 25px;
-}
-
 div.hero-d7eb5a86f1d4b50ea22711e1e60718e9 {
   margin-top: -125px;
 }

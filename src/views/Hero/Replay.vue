@@ -21,7 +21,11 @@
     </div>
 
     <div
-      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-50px' }
+          : {}
+      "
       class="hero-9a7c47049573e03028c2e650b73f6252"
     >
       <van-collapse v-model="collapseInfo.model" :border="false">
@@ -125,7 +129,7 @@
       />
     </div>
 
-    <div class="hero-face1cbe136c70e1fc08cff038596944">
+    <div class="app-face1cbe136c70e1fc08cff038596944">
       <van-pagination
         v-model="paginationInfo.model"
         :total-items="tableData.result.total"
@@ -162,6 +166,8 @@ export default {
       replay: {
         id: this.$route.params.id || 111,
         title: this.$route.query.title || "加载中",
+        userId: this.$route.query.userId || "",
+        roleId: this.$route.query.roleId || "",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
       },
       collapseInfo: {
@@ -176,7 +182,7 @@ export default {
     };
   },
   mounted() {
-    this.getHeroReplayByHeroId(this.replay.id, 1);
+    this.getHeroReplayByHeroId(0);
   },
   methods: {
     getGameInfo: function (row) {
@@ -209,10 +215,20 @@ export default {
           );
         });
     },
-    getHeroReplayByHeroId: function (id, page) {
+    getHeroReplayByHeroId: function (page) {
+      let replayInfo = this.replay;
+
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroReplayByHeroId + "&id=" + id + "&page=" + page
+          this.$appApi.pvp.getHeroReplayByHeroId +
+            "&id=" +
+            replayInfo.id +
+            "&userId=" +
+            replayInfo.userId +
+            "&roleId=" +
+            replayInfo.roleId +
+            "&page=" +
+            page
         )
         .then((res) => {
           let data = res.data.data,
@@ -228,7 +244,7 @@ export default {
         });
     },
     onPaginationChange: function (e) {
-      this.getHeroReplayByHeroId(this.replay.id, e);
+      this.getHeroReplayByHeroId(e - 1);
     },
     onActionSheetSelect: function (item) {
       let replayInfo = this.tableDataRow;

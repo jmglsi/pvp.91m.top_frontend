@@ -105,7 +105,7 @@ export default {
     return {
       copyData: "",
       search: {
-        value: "",
+        value: this.$route.query.uid || "",
       },
       tableData: {
         searchPlaceholder: "请输入【视频id】,例如:bv12345",
@@ -140,8 +140,6 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    this.search.value = this.$route.query.uid || "";
-
     this.getRankingInterval = setInterval(() => {
       this.getRanking(this.search.value, this.paginationModel);
     }, 10000);

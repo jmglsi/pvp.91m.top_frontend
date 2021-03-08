@@ -132,7 +132,9 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
   },
-  mounted() {},
+  mounted() {
+    this.getRanking(4, this.bid, this.cid, this.did);
+  },
   methods: {
     getRanking: function (aid = 4, bid = 0, cid = 0, did = 0) {
       if (bid == 0 || cid == 0 || did == 0) return;

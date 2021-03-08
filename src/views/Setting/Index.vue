@@ -16,7 +16,11 @@
 
     <div
       class="setting-b401c55622473cb5f8e0cf4e19901f39"
-      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-50px' }
+          : {}
+      "
     >
       <van-cell-group
         :border="false"

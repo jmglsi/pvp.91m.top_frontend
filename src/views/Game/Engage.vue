@@ -17,7 +17,11 @@
 
     <div
       class="game-71ddd6fc31e5033696c4a7f66111b5f9"
-      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-50px' }
+          : {}
+      "
     >
       <van-grid
         :border="false"
@@ -67,7 +71,17 @@
         </van-grid-item>
       </van-grid>
     </div>
-    
+
+    <div class="app-face1cbe136c70e1fc08cff038596944">
+      <van-pagination
+        v-model="paginationInfo.model"
+        :total-items="tableData.result.total"
+        :items-per-page="tableData.result.pageSize"
+        @change="onPaginationChange"
+        class="game-28a7e0a14d337be608132e3bd1c686d0"
+      />
+    </div>
+
     <AppHello height="100px" />
   </div>
 </template>
@@ -86,17 +100,20 @@ export default {
           rows: [],
         },
       },
+      paginationInfo: {
+        model: 1,
+      },
     };
   },
   mounted() {
     setTimeout(() => {
-      this.getGameDashboard();
+      this.getGameDashboard(0);
     }, 250);
   },
   methods: {
-    getGameDashboard: function () {
+    getGameDashboard: function (page = 0) {
       this.$axios
-        .post(this.$appApi.pvp.getGameDashboard + "&aid=1")
+        .post(this.$appApi.pvp.getGameDashboard + "&aid=1&page=" + page)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -109,6 +126,9 @@ export default {
             this.$appPush({ path: "/login" });
           }
         });
+    },
+    onPaginationChange: function (e) {
+      this.getGameDashboard(e - 1);
     },
   },
 };

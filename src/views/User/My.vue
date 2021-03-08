@@ -61,7 +61,7 @@
     <div
       v-if="isLogin"
       :style="
-        $appConfigInfo.appInfo.pwa == 1
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
           ? { marginTop: '-10px' }
           : { marginTop: '40px' }
       "

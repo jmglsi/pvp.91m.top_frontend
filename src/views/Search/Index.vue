@@ -1,15 +1,19 @@
 <template>
   <div class="search-home">
     <div class="search-9420e49425fc3d6dcfe7b9f8d62b1b6b">
-      <van-sticky :offset-top="$appConfigInfo.appInfo.pwa == 1 ? 50 : 0">
+      <van-sticky
+        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
+      >
         <van-search
           v-model="search.value"
-          :placeholder="search.placeholder"
+          autofocus
+          show-action
           shape="round"
+          :placeholder="search.placeholder"
           @input="onClearInputData"
           @clear="onClearInputData"
-          @cancel="$router.go(-1)"
           @search="search.value ? getSearch(search.value) : null"
+          @cancel="$appPush({ path: '/' })"
         />
       </van-sticky>
     </div>
@@ -166,7 +170,8 @@
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
-              {{ tableData.heroInfo.banRate[2] }}%
+              <span>{{ tableData.heroInfo.banRate[2] }}</span>
+              <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
             </div>
             <div>禁用</div>
           </van-grid-item>
@@ -179,7 +184,8 @@
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
-              {{ tableData.heroInfo.pickRate[2] }}%
+              <span>{{ tableData.heroInfo.pickRate[2] }}</span>
+              <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
             </div>
             <div>出场</div>
           </van-grid-item>
@@ -194,7 +200,8 @@
               "
               class="search-0c27228425c2ec1dd01a785b6e9a0437"
             >
-              {{ tableData.heroInfo.winRate[2] }}%
+              <span>{{ tableData.heroInfo.winRate[2] }}</span>
+              <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
             </div>
             <div>胜率</div>
           </van-grid-item>
@@ -436,7 +443,6 @@ export default {
         this.$appPush({ path: "/search" });
 
         this.showInfo.searchData = false;
-        this.showInfo.searchHistory = true;
       }
     },
     onJiXiaClick: function (wikiId) {
@@ -527,6 +533,11 @@ i.search-a0edf16f0e677f3e28dfd77595f437be img.van-icon__image {
   width: 50px;
 }
 
+span.search-d427af48bbd4a36972ce659cd329dd38 {
+  margin-left: 3px;
+  font-size: 15px;
+}
+
 span.search-c27c140f08b0252f3027cf077cee2358 {
   color: orange;
 }
@@ -545,9 +556,11 @@ span.search-399841f840f75044108804ec30d37405 {
   color: #969799;
   font-size: 10px;
   position: absolute;
-  right: 15px;
   text-align: right;
   width: 100%;
+  height: 50px;
+  background: #fff;
+  padding-right: 15px;
 }
 
 span.search-b0958af6a9b2591433e50ff9eb7f3420 {

@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="$appPush({ path: '/' })"
         left-text="返回"
         z-index="99999999"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
@@ -38,7 +38,7 @@
 
     <div
       :style="
-        $appConfigInfo.appInfo.pwa == 1
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
           ? { marginTop: '-10px' }
           : { marginTop: '40px' }
       "

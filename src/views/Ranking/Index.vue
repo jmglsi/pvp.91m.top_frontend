@@ -19,7 +19,7 @@
               <a-tooltip
                 :visible="showInfo.rankingFilterTips"
                 :overlayStyle="
-                  $appConfigInfo.appInfo.pwa == 1
+                  $appIsApple && $appConfigInfo.appInfo.pwa == 1
                     ? { top: '78px !important' }
                     : { top: '28px !important' }
                 "
@@ -34,8 +34,8 @@
           <DianFengSai
             v-if="tabsInfo.model == 0"
             :isSmallMobile="isSmallMobile"
-            :bid="dfsAreaTypeInfo.model"
-            :cid="dfsPositionTypeInfo.model"
+            :bid="bid || dfsAreaTypeInfo.model"
+            :cid="cid || dfsPositionTypeInfo.model"
           />
         </van-tab>
 
@@ -57,8 +57,8 @@
           <WanJia
             v-if="tabsInfo.model == 2"
             :isSmallMobile="isSmallMobile"
-            :bid="wjAreaTypeInfo.model"
-            :cid="wjShieldTypeInfo.model"
+            :bid="bid || wjAreaTypeInfo.model"
+            :cid="cid || wjShieldTypeInfo.model"
           />
         </van-tab>
 
@@ -76,9 +76,9 @@
           <PaiZi
             v-if="tabsInfo.model == 4"
             :isSmallMobile="isSmallMobile"
-            :bid="pzAreaTypeInfo.model"
-            :cid="pzProvinceTypeInfo.model"
-            :did="pzFightPowerTypeInfo.model"
+            :bid="bid || pzAreaTypeInfo.model"
+            :cid="cid || pzProvinceTypeInfo.model"
+            :did="did || pzFightPowerTypeInfo.model"
           />
         </van-tab>
       </van-tabs>
@@ -123,16 +123,16 @@
             />
           </van-dropdown-menu>
         </div>
-        <div
-          @click="
-            $appPush({
-              path: '/search',
-              query: { q: '大佬们快来加群', refresh: 1 },
-            })
-          "
-          class="ranking-5728d19b81c17607842cb7befeef3152"
-        >
-          <span class="ranking-4da12add5b0c1920dcde6c5627d30422">
+        <div class="ranking-5728d19b81c17607842cb7befeef3152">
+          <span
+            class="ranking-4da12add5b0c1920dcde6c5627d30422"
+            @click="
+              $appPush({
+                path: '/search',
+                query: { q: '大佬们快来加群', refresh: 1 },
+              })
+            "
+          >
             您的分享是我更新的动力 ( •̀ ω •́ )y
           </span>
         </div>
@@ -187,6 +187,7 @@ export default {
       heroName: "",
       bid: 0,
       cid: 0,
+      did: 0,
       isSmallMobile: 0,
       searchInfo: {
         defaultValue: "",
@@ -276,9 +277,9 @@ export default {
 
       this.heroName = route.heroName || "";
       this.tabsInfo.model = parseInt(route.type) || 0;
-      this.bid = parseInt(route.bid) || 0;
-      this.cid = parseInt(route.cid) || 0;
-      this.did = parseInt(route.cid) || 0;
+      route.bid ? (this.bid = parseInt(route.bid)) : (this.bid = 0);
+      route.cid ? (this.cid = parseInt(route.cid)) : (this.cid = 0);
+      route.did ? (this.did = parseInt(route.did)) : (this.did = 0);
 
       if (rankingFilterTips == 0) {
         appConfigInfo.tipsInfo.rankingFilter = 1;
@@ -425,7 +426,7 @@ span.ranking-f58cc48f5b942c91e57eff48accc5151 {
 }
 
 span.ranking-4da12add5b0c1920dcde6c5627d30422 {
-  margin-top: 25px;
+  margin: 50px 0;
   left: 0;
   position: absolute;
   width: 100%;
@@ -483,7 +484,8 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
 }
 
 div.ranking-5728d19b81c17607842cb7befeef3152 {
-  height: 400px;
+  padding-top: 25px;
+  height: 375px;
 }
 
 div.ranking-31c631534a3cec9ed2c5283f653a06aa {

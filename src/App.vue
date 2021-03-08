@@ -4,7 +4,7 @@
       <div
         class="app-8de1f001663ee713d24888bb422e3881"
         :style="
-          $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
+          $appIsApple && $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
             ? {
                 background:
                   'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36)) repeat scroll 0% 0%',
@@ -117,7 +117,7 @@ export default {
                 "//img07.mifile.cn/v1/MI_542ED8B1722DC/817e2d3745bc5e780073f8db30e67fd7.png",
               to: "/",
               name: "/",
-              text: "首页",
+              text: "发现",
             },
             {
               icon:
@@ -125,20 +125,6 @@ export default {
               to: "/ranking",
               name: "/ranking",
               text: "排行",
-            },
-            {
-              icon:
-                "//img06.mifile.cn/v1/MI_542ED8B1722DC/053c8e1dd5759f876c75be34cc557edc.png",
-              to: "/search",
-              name: "/search",
-              text: "发现",
-            },
-            {
-              icon:
-                "//img06.mifile.cn/v1/MI_542ED8B1722DC/245e02223e244ef7adf77912859095ee.png",
-              to: "/friends",
-              name: "/friends",
-              text: "扩列",
             },
             {
               icon:
@@ -430,6 +416,10 @@ div.app-0ca41257ee36e86e5d89591c82113263 div.van-image-preview__cover {
   width: 100%;
 }
 
+div.app-face1cbe136c70e1fc08cff038596944 {
+  margin-top: 25px;
+}
+
 div.app-69df17da0044a6e876b2afd3217d2564 {
   border-radius: 5px;
   padding: 10px;
@@ -450,7 +440,8 @@ div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
   width: 100%;
 }
 
-div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable,
+div.app-18e05b8e51e3beb49ba55397d11cb8ce div.van-grid-item__content,
+div.app-06eab62dcb5a23b966a620807d78e66f.van-cell,
 div.app-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap div.van-tabs__nav {
   background-color: rgb(248, 249, 252);
 }
@@ -521,12 +512,7 @@ div.app-f56ae939694a0488cc9e8ecdd47a46ab {
 }
 
 div.app-06eab62dcb5a23b966a620807d78e66f {
-  margin: 25px 0;
   text-align: left;
-}
-
-div.app-06eab62dcb5a23b966a620807d78e66f.van-cell.van-cell--clickable {
-  border-radius: 10px;
 }
 
 div.app-0464ec62d5cba8a9ec29d0c4c89fc7c6,

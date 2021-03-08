@@ -16,7 +16,11 @@
 
     <div
       class="login-2a642626758deefdc2989a73aae823d3"
-      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-50px' }
+          : {}
+      "
     >
       <van-cell-group title="" class="login-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field

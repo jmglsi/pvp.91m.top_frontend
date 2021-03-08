@@ -20,7 +20,11 @@
 
     <div
       class="game-c37237ae7770c5062ccad7a23572e282 app-4eb2044800e2b7b9e5c44d370af22b27"
-      :style="$appConfigInfo.appInfo.pwa == 1 ? { marginTop: '-50px' } : {}"
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-50px' }
+          : {}
+      "
     >
       <van-grid
         :column-num="3"
@@ -116,7 +120,7 @@
         </div>
       </van-action-sheet>
     </div>
-    
+
     <AppHello height="100px" />
   </div>
 </template>

@@ -1,5 +1,30 @@
 <template>
   <div class="app-home">
+    <div class="home-3edeff15047c21ac6441301927306137">
+      <van-sticky
+        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
+      >
+        <van-search
+          show-action
+          shape="round"
+          placeholder="搜索"
+          @click="$appPush({ path: '/search' })"
+        >
+          <template #action>
+            <img
+              width="25"
+              height="25"
+              v-lazy="
+                '//img06.mifile.cn/v1/MI_542ED8B1722DC/245e02223e244ef7adf77912859095ee.png'
+              "
+              class="home-47ee6ad584172f967b674131cb948a87"
+              @click="$appPush({ path: '/friends' })"
+            />
+          </template>
+        </van-search>
+      </van-sticky>
+    </div>
+
     <div class="home-6db4dcff371b9397d894ed932d085444">
       <van-tabs
         v-model="tabsInfo.model"
@@ -127,15 +152,21 @@ export default {
 };
 </script>
 
-<style>
-img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
+<style scoped>
+img.home-47ee6ad584172f967b674131cb948a87 {
   border-radius: unset;
-  height: 100%;
-  width: 100%;
 }
 
 div.home-72ab9e07378f988922e6c91884048db0 {
   font-size: 12px;
   margin: 25px;
+}
+</style>
+
+<style>
+img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
+  border-radius: unset;
+  height: 100%;
+  width: 100%;
 }
 </style>
