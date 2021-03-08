@@ -41,20 +41,50 @@
             </van-swipe-item>
           </van-swipe>
 
-          <van-cell
-            :title="appHomeInfo.tipsInfo.title || '很高兴认识您~'"
-            :value="appHomeInfo.tipsInfo.description"
-            :to="appHomeInfo.tipsInfo.to"
-            :url="appHomeInfo.tipsInfo.url"
-            is-link
-            class="app-06eab62dcb5a23b966a620807d78e66f"
-          />
+          <div class="tuijian-f9bac98cdc7e851893f0c1a3bc9664ed">
+            <van-grid
+              :border="false"
+              :column-num="3"
+              class="app-18e05b8e51e3beb49ba55397d11cb8ce"
+            >
+              <van-grid-item
+                v-for="(data, index) in appHomeInfo.indexInfo"
+                :key="'tuijian-ea25beed04733529ada26478f028b97e-' + index"
+                :to="data.to"
+              >
+                <span v-if="data.img">
+                  <img
+                    width="50"
+                    height="50"
+                    v-lazy="data.img"
+                    class="tuijian-6bea2af1a0662ae3049c2b1c5a60f302"
+                  />
+                </span>
+                <div
+                  v-if="data.title"
+                  class="tuijian-f55b83381f479ed4c1203b80f891d83a"
+                >
+                  {{ data.title }}
+                </div>
+              </van-grid-item>
+            </van-grid>
+
+            <van-cell
+              :title="appHomeInfo.tipsInfo.title || '嗨~'"
+              :label="appHomeInfo.tipsInfo.label || '你好鸭♥'"
+              :value="appHomeInfo.tipsInfo.value"
+              :to="appHomeInfo.tipsInfo.to"
+              :url="appHomeInfo.tipsInfo.url"
+              :is-link="appHomeInfo.tipsInfo.isLink"
+              class="app-06eab62dcb5a23b966a620807d78e66f"
+            />
+          </div>
+        </div>
+
+        <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
+          <HeroUpdate :heroId="0" />
         </div>
       </van-pull-refresh>
-    </div>
-
-    <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
-      <HeroUpdate :heroId="0" />
     </div>
   </div>
 </template>
@@ -70,6 +100,7 @@ export default {
       isLoading: false,
       appHomeInfo: {
         miniappInfo: {
+          to: "/miniapp",
           pulling: "喵呜...",
           loosing: "奇迹什么时候女装呢...",
           loading: "加载中...",
@@ -80,9 +111,12 @@ export default {
             rows: [],
           },
         },
+        indexInfo: [],
         tipsInfo: {
           title: null,
-          description: null,
+          label: null,
+          value: null,
+          isLink: false,
           to: null,
           url: null,
         },
@@ -102,9 +136,26 @@ export default {
       setTimeout(() => {
         this.isLoading = false;
 
-        this.$appPush({ path: "/miniapp" });
+        this.$appPush({ path: this.appHomeInfo.miniappInfo.to });
       }, 2500);
     },
   },
 };
 </script>
+
+<style scoped>
+img.tuijian-6bea2af1a0662ae3049c2b1c5a60f302 {
+  border-radius: 100%;
+}
+
+div.tuijian-f9bac98cdc7e851893f0c1a3bc9664ed {
+  border-radius: 10px;
+  margin: 25px 0;
+  overflow: hidden;
+}
+
+div.tuijian-f55b83381f479ed4c1203b80f891d83a {
+  font-size: 12px;
+  margin-top: 5px;
+}
+</style>
