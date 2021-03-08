@@ -6,7 +6,6 @@
       >
         <van-search
           v-model="search.value"
-          autofocus
           show-action
           shape="round"
           :placeholder="search.placeholder"
