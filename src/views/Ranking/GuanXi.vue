@@ -292,14 +292,15 @@ export default {
   },
   methods: {
     getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         ranking = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroName
         );
 
       if (
         ranking &&
-        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = ranking;
 
@@ -327,10 +328,18 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
-            this.tableData.time = this.$appTs;
 
             this.$appSetLocalStorage(
-              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroName,
+              "ranking-" +
+                aid +
+                "-" +
+                bid +
+                "-" +
+                cid +
+                "-" +
+                did +
+                "-" +
+                heroName,
               this.tableData
             );
 

@@ -25,7 +25,7 @@
       </van-sticky>
     </div>
 
-    <div class="home-6db4dcff371b9397d894ed932d085444">
+    <div class="app-6db4dcff371b9397d894ed932d085444">
       <van-tabs
         v-model="tabsInfo.model"
         v-if="tabsInfo.model > -1"

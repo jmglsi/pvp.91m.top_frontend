@@ -200,7 +200,7 @@
             sortable
           />
           <vxe-table-column
-            title="净胜"
+            title="胜方"
             field="winMvpRate"
             :width="listWidth"
             sortable
@@ -468,14 +468,15 @@ export default {
       this.initTableWidth();
     },
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         ranking = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (
         ranking &&
-        this.$appTs - ranking.time < appConfigInfo.updateInfo.timeout
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = ranking;
 
@@ -501,7 +502,6 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
-            this.tableData.time = this.$appTs;
 
             //this.$refs.refDianFengSai.loadData(data.result.rows);
 

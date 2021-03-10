@@ -128,12 +128,13 @@ export default {
   },
   methods: {
     getAppHome: function () {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         appHome = this.$appGetLocalStorage("appHome");
 
       if (
         appHome &&
-        this.$appTs - appHome.time < appConfigInfo.updateInfo.timeout
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout
       ) {
         this.appHomeInfo = appHome;
 
@@ -144,7 +145,6 @@ export default {
         let data = res.data.data;
 
         this.appHomeInfo = data;
-        this.appHomeInfo.time = this.$appTs;
 
         this.$appSetLocalStorage("appHome", this.appHomeInfo);
       });

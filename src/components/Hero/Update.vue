@@ -319,13 +319,13 @@ export default {
       return day;
     },
     getHeroUpdate: function (heroId) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId);
 
       if (
         heroUpdate &&
-        heroId == 0 &&
-        this.$appTs - heroUpdate.time < appConfigInfo.updateInfo.timeout
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout
       ) {
         this.tableData = heroUpdate;
 
@@ -336,7 +336,6 @@ export default {
         .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
-          this.tableData.time = this.$appTs;
 
           this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
         });

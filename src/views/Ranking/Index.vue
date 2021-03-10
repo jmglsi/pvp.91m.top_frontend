@@ -93,7 +93,7 @@
         :defaultValue="searchInfo.defaultValue"
         @search="onRankingSearch"
         enter-button
-        placeholder="支持别名搜索~"
+        placeholder="试试搜索英雄的外号~"
       />
     </van-popup>
 

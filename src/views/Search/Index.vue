@@ -29,226 +29,240 @@
       </van-sticky>
     </div>
 
-    <div v-if="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
-      <div class="search-4b9ca1bc335daf2e137b6c468a2c39b4">
-        <div class="search-3c00205f941124762c6c5e000e7e2bde">
-          <van-cell-group
-            :border="false"
-            title="热门推荐"
-            class="search-dea6590081d28a153cc325fdaeb10c43"
-          >
-            <van-grid :border="false" :column-num="2">
-              <van-grid-item
-                v-for="(data, index) in tableData.search.hotKeywords.rows"
-                :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
-                @click="getSearch(data.value)"
-              >
-                <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
-                  <span
-                    v-if="data.isTop"
-                    :style="{ color: 'orange' }"
-                    class="search-f43418d85f50da28b3a9c1e780237105"
-                  >
-                    <van-icon name="back-top" />
+    <div
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1 ? { marginTop: '10px' } : {}
+      "
+      class="search-881fe153c6b26bc75a8f0ab057501629"
+    >
+      <div v-if="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
+        <div class="search-4b9ca1bc335daf2e137b6c468a2c39b4">
+          <div class="search-3c00205f941124762c6c5e000e7e2bde">
+            <van-cell-group
+              :border="false"
+              title="热门推荐"
+              class="search-dea6590081d28a153cc325fdaeb10c43"
+            >
+              <van-grid :border="false" :column-num="2">
+                <van-grid-item
+                  v-for="(data, index) in tableData.search.hotKeywords.rows"
+                  :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
+                  @click="getSearch(data.value)"
+                >
+                  <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
+                    <span
+                      v-if="data.isTop"
+                      :style="{ color: 'orange' }"
+                      class="search-f43418d85f50da28b3a9c1e780237105"
+                    >
+                      <van-icon name="back-top" />
+                    </span>
+                    <span
+                      v-else
+                      :style="
+                        index < 4 + tableData.search.hotKeywords.topNum
+                          ? { color: 'red' }
+                          : {}
+                      "
+                      class="search-f43418d85f50da28b3a9c1e780237105"
+                    >
+                      {{
+                        index + 1 - tableData.search.hotKeywords.topNum
+                      }} </span
+                    >&nbsp;
+                    <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">{{
+                      data.value
+                    }}</span>
                   </span>
-                  <span
-                    v-else
-                    :style="
-                      index < 4 + tableData.search.hotKeywords.topNum
-                        ? { color: 'red' }
-                        : {}
-                    "
-                    class="search-f43418d85f50da28b3a9c1e780237105"
-                  >
-                    {{ index + 1 - tableData.search.hotKeywords.topNum }} </span
-                  >&nbsp;
-                  <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">{{
-                    data.value
-                  }}</span>
-                </span>
-              </van-grid-item>
-            </van-grid>
-          </van-cell-group>
-        </div>
+                </van-grid-item>
+              </van-grid>
+            </van-cell-group>
+          </div>
 
-        <div
-          v-if="showInfo.searchHistory"
-          class="search-a79b6044b2b3a5a9bce4cb65bd80e774"
-        >
-          <van-cell-group
-            :border="false"
-            title="历史搜索"
-            class="search-827ba321df0f99b511a783406dd7e82f"
+          <div
+            v-if="showInfo.searchHistory"
+            class="search-a79b6044b2b3a5a9bce4cb65bd80e774"
           >
-            <div class="search-88cf8ac86e2afc51906e60c7025f522b">
-              <van-tag
-                v-for="(data, index) in tableData.search.history"
-                :key="'search-167cdfdc117a16ef2b47014355f7daad-' + index"
-                size="medium"
-                color="#ffe1e1"
-                text-color="#ad0000"
-                @click="getSearch(data)"
-                class="search-34690b06683636425980897b6bcd33d4"
-                >{{ data }}</van-tag
-              >
-            </div>
-            <div class="search-93aea4a321bd36aefe85b2b0526e52e8">
-              <van-button
-                round
-                @click="onClearSearchData"
-                icon="clear"
-                size="small"
-                type="danger"
-                >清除历史搜索</van-button
-              >
-            </div>
-          </van-cell-group>
+            <van-cell-group
+              :border="false"
+              title="历史搜索"
+              class="search-827ba321df0f99b511a783406dd7e82f"
+            >
+              <div class="search-88cf8ac86e2afc51906e60c7025f522b">
+                <van-tag
+                  v-for="(data, index) in tableData.search.history"
+                  :key="'search-167cdfdc117a16ef2b47014355f7daad-' + index"
+                  size="medium"
+                  color="#ffe1e1"
+                  text-color="#ad0000"
+                  @click="getSearch(data)"
+                  class="search-34690b06683636425980897b6bcd33d4"
+                  >{{ data }}</van-tag
+                >
+              </div>
+              <div class="search-93aea4a321bd36aefe85b2b0526e52e8">
+                <van-button
+                  round
+                  @click="onClearSearchData"
+                  icon="clear"
+                  size="small"
+                  type="danger"
+                  >清除历史搜索</van-button
+                >
+              </div>
+            </van-cell-group>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div
-      v-if="showInfo.searchData && tableData.heroInfo.id"
-      class="search-f63b407c95e4f2db4c44e27b3a8d136b"
-    >
-      <van-cell-group
-        :border="false"
-        title=""
-        class="search-5d555cae6745619e13c5488c119d2a14"
+      <div
+        v-if="showInfo.searchData && tableData.heroInfo.id"
+        class="search-f63b407c95e4f2db4c44e27b3a8d136b"
       >
-        <van-cell
-          :icon="tableData.heroInfo.img"
-          :title="tableData.heroInfo.name + ' (' + tableData.heroInfo.id + ')'"
-          :label="tableData.heroInfo.label"
-          :to="'/hero/' + tableData.heroInfo.id + '/info'"
-          is-link
-          value="趋势"
-          icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
-          class="search-a64976150427434c778228d76650f6fb"
-        />
-        <van-cell
-          :icon="tableData.heroInfo.jixia.icon"
-          :title="tableData.heroInfo.jixia.title"
-          :label="tableData.heroInfo.jixia.label"
-          :value="tableData.heroInfo.jixia.value"
-          is-link
-          @click="onJiXiaClick(tableData.heroInfo.wikiId)"
-          icon-prefix="search-a64976150427434c778228d76650f6fb"
-          class="search-869ab9bf85478a49725209693c5760e5"
-        />
-
-        <van-tabs
-          v-model="dataInfo.model"
-          v-if="dataInfo.model > -1"
-          :ellipsis="false"
-          :before-change="onDataTabsBeforeChange"
-          @click="onDataTabsClick"
-          color="orange"
-          title-active-color="orange"
+        <van-cell-group
+          :border="false"
+          title=""
+          class="search-5d555cae6745619e13c5488c119d2a14"
         >
-          <van-tab title="综合">
-            <template #title>
-              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">综合</span>
-              <img
-                v-if="tableData.heroInfo.trend > 0"
-                v-lazy="
-                  '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
-                "
-                width="15"
-                height="15"
-                class="search-05a36d9069f1023c8432de89b15a83af"
-              />
-              <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420"
-                >-</span
-              >
-            </template></van-tab
+          <van-cell
+            :icon="tableData.heroInfo.img"
+            :title="
+              tableData.heroInfo.name + ' (' + tableData.heroInfo.id + ')'
+            "
+            :label="tableData.heroInfo.label"
+            :to="'/hero/' + tableData.heroInfo.id + '/info'"
+            is-link
+            value="趋势"
+            icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
+            class="search-a64976150427434c778228d76650f6fb"
+          />
+          <van-cell
+            :icon="tableData.heroInfo.jixia.icon"
+            :title="tableData.heroInfo.jixia.title"
+            :label="tableData.heroInfo.jixia.label"
+            :value="tableData.heroInfo.jixia.value"
+            is-link
+            @click="onJiXiaClick(tableData.heroInfo.wikiId)"
+            icon-prefix="search-a64976150427434c778228d76650f6fb"
+            class="search-869ab9bf85478a49725209693c5760e5"
+          />
+
+          <van-tabs
+            v-model="dataInfo.model"
+            v-if="dataInfo.model > -1"
+            :ellipsis="false"
+            :before-change="onDataTabsBeforeChange"
+            @click="onDataTabsClick"
+            color="orange"
+            title-active-color="orange"
           >
-          <van-tab title="赛事" />
-          <van-tab title="技能和出装" />
-          <van-tab title="更新调整" />
-          <van-tab title="关系和克制" />
-          <van-tab title="对局回顾" />
-        </van-tabs>
+            <van-tab title="综合">
+              <template #title>
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff"
+                  >综合</span
+                >
+                <img
+                  v-if="tableData.heroInfo.trend > 0"
+                  v-lazy="
+                    '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
+                  "
+                  width="15"
+                  height="15"
+                  class="search-05a36d9069f1023c8432de89b15a83af"
+                />
+                <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420"
+                  >-</span
+                >
+              </template></van-tab
+            >
+            <van-tab title="赛事" />
+            <van-tab title="技能和出装" />
+            <van-tab title="更新调整" />
+            <van-tab title="关系和克制" />
+            <van-tab title="对局回顾" />
+          </van-tabs>
 
-        <van-grid :border="false" :column-num="3">
-          <van-grid-item>
-            <div
-              :class="
-                tableData.heroInfo.banRate[2] >= 20 &&
-                tableData.heroInfo.winRate[2] >= 50
-                  ? 'ranking-bda9643ac6601722a28f238714274da4'
-                  : null
-              "
-              class="search-0c27228425c2ec1dd01a785b6e9a0437"
-            >
-              <span>{{ tableData.heroInfo.banRate[2] }}</span>
-              <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
-            </div>
-            <div>禁用</div>
-          </van-grid-item>
-          <van-grid-item>
-            <div
-              :class="
-                tableData.heroInfo.pickRate[2] >= 30
-                  ? 'ranking-48d6215903dff56238e52e8891380c8f'
-                  : null
-              "
-              class="search-0c27228425c2ec1dd01a785b6e9a0437"
-            >
-              <span>{{ tableData.heroInfo.pickRate[2] }}</span>
-              <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
-            </div>
-            <div>出场</div>
-          </van-grid-item>
-          <van-grid-item>
-            <div
-              :class="
-                (tableData.heroInfo.banRate[2] >= 20 ||
-                  tableData.heroInfo.pickRate[2] >= 30) &&
-                tableData.heroInfo.winRate[2] >= 50
-                  ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
-                  : null
-              "
-              class="search-0c27228425c2ec1dd01a785b6e9a0437"
-            >
-              <span>{{ tableData.heroInfo.winRate[2] }}</span>
-              <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
-            </div>
-            <div>胜率</div>
-          </van-grid-item>
-        </van-grid>
-        <span class="search-399841f840f75044108804ec30d37405">
-          <van-icon name="underway-o" />&nbsp;<span
-            class="search-c27c140f08b0252f3027cf077cee2358"
-            >11:30</span
-          >&nbsp;更新&nbsp;&nbsp;
-          <van-icon name="todo-list-o" />
-          基于 巅峰赛 (顶端局) 统计
-        </span>
-      </van-cell-group>
-    </div>
+          <van-grid :border="false" :column-num="3">
+            <van-grid-item>
+              <div
+                :class="
+                  tableData.heroInfo.banRate[2] >= 20 &&
+                  tableData.heroInfo.winRate[2] >= 50
+                    ? 'ranking-bda9643ac6601722a28f238714274da4'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.banRate[2] }}</span>
+                <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
+              </div>
+              <div>禁用</div>
+            </van-grid-item>
+            <van-grid-item>
+              <div
+                :class="
+                  tableData.heroInfo.pickRate[2] >= 30
+                    ? 'ranking-48d6215903dff56238e52e8891380c8f'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.pickRate[2] }}</span>
+                <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
+              </div>
+              <div>出场</div>
+            </van-grid-item>
+            <van-grid-item>
+              <div
+                :class="
+                  (tableData.heroInfo.banRate[2] >= 20 ||
+                    tableData.heroInfo.pickRate[2] >= 30) &&
+                  tableData.heroInfo.winRate[2] >= 50
+                    ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.winRate[2] }}</span>
+                <span class="search-d427af48bbd4a36972ce659cd329dd38">%</span>
+              </div>
+              <div>胜率</div>
+            </van-grid-item>
+          </van-grid>
+          <span class="search-399841f840f75044108804ec30d37405">
+            <van-icon name="underway-o" />&nbsp;<span
+              class="search-c27c140f08b0252f3027cf077cee2358"
+              >11:30</span
+            >&nbsp;更新&nbsp;&nbsp;
+            <van-icon name="todo-list-o" />
+            基于 巅峰赛 (顶端局) 统计
+          </span>
+        </van-cell-group>
+      </div>
 
-    <div
-      v-if="showInfo.searchData"
-      class="search-db4665e1908869c6354106ce00ff95ba"
-    >
-      <van-cell-group
-        :border="false"
-        :title="tableData.heroInfo.id ? ' ' : ''"
-        class="search-7eb8c85291f87604bb87a151d0dc5d88"
+      <div
+        v-if="showInfo.searchData"
+        :style="tableData.heroInfo.id ? { marginTop: '25px' } : {}"
+        class="search-db4665e1908869c6354106ce00ff95ba"
       >
-        <van-cell
-          v-for="(data, index) in tableData.result.rows"
-          :key="'search-4047b92d726d15c081d00f3520c76b5b-' + index"
-          :icon="data.icon"
-          :title="data.title"
-          :label="data.label"
-          :value="data.value"
-          :is-link="data.isLink"
-          @click="onCellClick(data.isLink, data.to, data.url)"
-          icon-prefix="search-a64976150427434c778228d76650f6fb"
-        />
-      </van-cell-group>
+        <van-cell-group
+          :border="false"
+          :title="tableData.heroInfo.id ? ' ' : ''"
+          class="search-7eb8c85291f87604bb87a151d0dc5d88"
+        >
+          <van-cell
+            v-for="(data, index) in tableData.result.rows"
+            :key="'search-4047b92d726d15c081d00f3520c76b5b-' + index"
+            :icon="data.icon"
+            :title="data.title"
+            :label="data.label"
+            :value="data.value"
+            :is-link="data.isLink"
+            @click="onCellClick(data.isLink, data.to, data.url)"
+            icon-prefix="search-a64976150427434c778228d76650f6fb"
+          />
+        </van-cell-group>
+      </div>
     </div>
 
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
@@ -269,18 +283,21 @@
             <HeroSkillList
               v-if="skillInfo.model == 0"
               :heroId="tableData.heroInfo.id"
-          /></van-tab>
-          <van-tab title="装备 (推荐)"
-            ><HeroEquipmentListALL
+            />
+          </van-tab>
+          <van-tab title="装备 (推荐)">
+            <HeroEquipmentListALL
               v-if="skillInfo.model == 1"
               :heroId="tableData.heroInfo.id"
-          /></van-tab>
-          <van-tab title="装备 (单件)"
-            ><HeroEquipmentListOne
+            />
+          </van-tab>
+          <van-tab title="装备 (单件)">
+            <HeroEquipmentListOne
               v-if="skillInfo.model == 2"
               :equipmentId="tableData.heroInfo.id"
               :equipmentType="1"
-          /></van-tab>
+            />
+          </van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -589,10 +606,6 @@ div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: left;
-}
-
-div.search-db4665e1908869c6354106ce00ff95ba {
-  margin-top: 25px;
 }
 
 div.search-88cf8ac86e2afc51906e60c7025f522b {

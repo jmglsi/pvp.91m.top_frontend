@@ -74,7 +74,7 @@ export default {
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
 
-      to.path == "/" || /search/i.test(to.path)
+      to.path == "/" || /search|ranking/i.test(to.path)
         ? (statusBar = true)
         : (statusBar = false);
       this.showInfo.statusBar = statusBar;
@@ -171,21 +171,29 @@ export default {
           this.tableData = data;
           this.tableData.result.model = this.$route.path;
 
-          if (appInfo.version != appConfigInfo.appInfo.version) {
-            this.$appConfigInfo.appInfo = {
-              name: "苏苏的荣耀助手",
-              pwa: appConfigInfo.appInfo.pwa || 0,
-              isSmallMobile: appConfigInfo.appInfo.isSmallMobile || 0,
-              isReducedMode: appConfigInfo.appInfo.isReducedMode || 0,
-              version: appInfo.version || this.$appTs,
-            };
+          this.$appConfigInfo.appInfo = {
+            isReducedMode: appConfigInfo.appInfo.isReducedMode || 0,
+            isSmallMobile: appConfigInfo.appInfo.isSmallMobile || 0,
+            name: appInfo.name || "苏苏的荣耀助手",
+            pwa: appConfigInfo.appInfo.pwa || 0,
+            updateTime: appInfo.updateTime || this.$appTs,
+            version: appInfo.version || 0,
+          };
 
+          if (appInfo.version != appConfigInfo.appInfo.version) {
             localStorage.removeItem("appConfigInfo");
             localStorage.removeItem("appHome");
             localStorage.removeItem("gameHome");
             localStorage.removeItem("searchData");
             this.$appDelectCache("heroUpdate");
+
+            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+          }
+
+          if (appInfo.updateTime != appConfigInfo.appInfo.updateTime) {
             this.$appDelectCache("ranking");
+
+            if (appInfo.updateText) this.$message.info(appInfo.updateText);
 
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
@@ -236,6 +244,38 @@ export default {
 img {
   border-radius: 10px;
   object-fit: cover;
+}
+
+.update-tyf {
+  color: purple;
+}
+
+.update-zsf {
+  color: rgb(222, 177, 81);
+}
+
+.update-xyx {
+  color: rgb(35, 124, 123);
+}
+
+.update-pb {
+  color: black;
+}
+
+.update-cz {
+  color: red;
+}
+
+.update-fx {
+  color: orange;
+}
+
+.update-xpf {
+  color: green;
+}
+
+.update-fc {
+  color: blue;
 }
 
 .ranking-bda9643ac6601722a28f238714274da4 {
@@ -392,8 +432,13 @@ div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
 
+div.app-6db4dcff371b9397d894ed932d085444 div.van-tabs__nav,
 div.van-search {
   background-color: transparent;
+}
+
+div.app-6db4dcff371b9397d894ed932d085444 {
+  margin-top: 10px;
 }
 
 div.van-tabs__nav {
@@ -433,8 +478,8 @@ div.app-69df17da0044a6e876b2afd3217d2564 {
 }
 
 div.app-8de1f001663ee713d24888bb422e3881 {
-  height: 100px;
-  margin-top: -50px;
+  height: 120px;
+  margin-top: -60px;
   position: fixed;
   width: 100%;
 }

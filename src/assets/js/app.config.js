@@ -10,18 +10,19 @@ Vue.prototype.$appScrollTop = 0;
 
 Vue.prototype.$appConfigInfo = {
     appInfo: {
+        isReducedMode: 0,
+        isSmallMobile: 0,
         name: "苏苏的荣耀助手",
         pwa: 0,
-        version: 0,
-        isSmallMobile: 0,
-        isReducedMode: 0
+        updateTime: 0,
+        version: 0
     },
     tipsInfo: {
         rankingFilter: 0,
         reducedFilter: 0,
     },
     updateInfo: {
-        timeout: 900
+        timeout: 43200
     }
 };
 
