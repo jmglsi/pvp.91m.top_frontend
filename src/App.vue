@@ -176,24 +176,28 @@ export default {
             isSmallMobile: appConfigInfo.appInfo.isSmallMobile || 0,
             name: appInfo.name || "苏苏的荣耀助手",
             pwa: appConfigInfo.appInfo.pwa || 0,
-            updateTime: appInfo.updateTime || this.$appTs,
+            updateTime: appInfo.updateTime || 0,
             version: appInfo.version || 0,
           };
-
-          if (appInfo.version != appConfigInfo.appInfo.version) {
-            localStorage.removeItem("appConfigInfo");
-            localStorage.removeItem("appHome");
-            localStorage.removeItem("gameHome");
-            localStorage.removeItem("searchData");
-            this.$appDelectCache("heroUpdate");
-
-            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
-          }
 
           if (appInfo.updateTime != appConfigInfo.appInfo.updateTime) {
             this.$appDelectCache("ranking");
 
             if (appInfo.updateText) this.$message.info(appInfo.updateText);
+
+            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+          }
+
+          if (appInfo.version != appConfigInfo.appInfo.version) {
+            this.$appConfigInfo.tipsInfo.rankingFilter = 0;
+
+            localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
+
+            localStorage.removeItem("appConfigInfo");
+            localStorage.removeItem("appHome");
+            localStorage.removeItem("gameHome");
+            localStorage.removeItem("searchData");
+            this.$appDelectCache("heroUpdate");
 
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }

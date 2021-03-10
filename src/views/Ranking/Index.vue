@@ -272,7 +272,7 @@ export default {
   methods: {
     initPage: function () {
       let route = this.$route.query,
-        appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+        appConfigInfo = this.$appConfigInfo,
         rankingFilterTips = appConfigInfo.tipsInfo.rankingFilter || 0;
 
       this.heroName = route.heroName || "";

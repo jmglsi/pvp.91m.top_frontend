@@ -84,7 +84,15 @@
     </div>
 
     <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
-      <HeroUpdate :heroId="0" />
+      <van-skeleton v-if="showInfo.heroUpdate" :row="30" />
+
+      <lazy-component
+        :preLoad="1"
+        @show="onComponentShow"
+        class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
+      >
+        <HeroUpdate :heroId="0" />
+      </lazy-component>
     </div>
   </div>
 </template>
@@ -98,6 +106,9 @@ export default {
   data() {
     return {
       isLoading: false,
+      showInfo: {
+        heroUpdate: true,
+      },
       appHomeInfo: {
         miniappInfo: {
           to: "/miniapp",
@@ -148,6 +159,11 @@ export default {
 
         this.$appSetLocalStorage("appHome", this.appHomeInfo);
       });
+    },
+    onComponentShow: function () {
+      setTimeout(() => {
+        this.showInfo.heroUpdate = false;
+      }, 1000);
     },
     onDropdownRefreshClick: function () {
       setTimeout(() => {
