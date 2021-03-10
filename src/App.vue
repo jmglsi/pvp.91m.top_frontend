@@ -191,8 +191,6 @@ export default {
           if (appInfo.version != appConfigInfo.appInfo.version) {
             this.$appConfigInfo.tipsInfo.rankingFilter = 0;
 
-            localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
-
             localStorage.removeItem("appConfigInfo");
             localStorage.removeItem("appHome");
             localStorage.removeItem("gameHome");
