@@ -41,7 +41,7 @@
             </van-swipe-item>
           </van-swipe>
 
-          <div class="tuijian-f9bac98cdc7e851893f0c1a3bc9664ed">
+          <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
             <van-grid
               :border="false"
               :column-num="3"
@@ -179,12 +179,6 @@ export default {
 <style scoped>
 img.tuijian-6bea2af1a0662ae3049c2b1c5a60f302 {
   border-radius: 100%;
-}
-
-div.tuijian-f9bac98cdc7e851893f0c1a3bc9664ed {
-  border-radius: 10px;
-  margin: 25px 0;
-  overflow: hidden;
 }
 
 div.tuijian-f55b83381f479ed4c1203b80f891d83a {

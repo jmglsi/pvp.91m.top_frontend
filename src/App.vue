@@ -486,6 +486,7 @@ div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
   width: 100%;
 }
 
+div.app-609a820218e58b4ea5a5f7656e61a0ad,
 div.app-18e05b8e51e3beb49ba55397d11cb8ce div.van-grid-item__content,
 div.app-06eab62dcb5a23b966a620807d78e66f.van-cell,
 div.app-f3cc17bc0d768ca60b8bb496a10b1990 div.van-tabs__wrap div.van-tabs__nav {
@@ -510,7 +511,12 @@ div.app-a139b05b7f8e496c00991733ef7cd589 {
   padding: 0;
 }
 
-div.app-f97c2ea77c6a08b3afd5a59851cbe0d8 {
+div.app-609a820218e58b4ea5a5f7656e61a0ad {
+  margin: 25px 0;
+}
+
+div.app-f97c2ea77c6a08b3afd5a59851cbe0d8,
+div.app-609a820218e58b4ea5a5f7656e61a0ad {
   border-radius: 10px;
   overflow: hidden;
   transform: translateY(0);
