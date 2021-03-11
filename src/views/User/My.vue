@@ -645,7 +645,7 @@ span.my-25930e3036f13852cb0b29694bbab611 {
 }
 
 span.my-b068931cc450442b63f5b3d276ea4297 {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {

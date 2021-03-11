@@ -39,12 +39,12 @@
             >
               <van-col span="7">
                 <img
-                  width="40"
-                  height="40"
+                  width="50"
+                  height="50"
                   v-lazy="data.team_1.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="app-f56ae939694a0488cc9e8ecdd47a46ab">
+                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
                   {{ data.team_1.name }}
                 </div>
               </van-col>
@@ -57,12 +57,12 @@
               </van-col>
               <van-col span="7">
                 <img
-                  width="40"
-                  height="40"
+                  width="50"
+                  height="50"
                   v-lazy="data.team_2.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="app-f56ae939694a0488cc9e8ecdd47a46ab">
+                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
                   {{ data.team_2.name }}
                 </div>
               </van-col>

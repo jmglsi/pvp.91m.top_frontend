@@ -98,6 +98,8 @@
                         itemHeroId +
                         '.jpg'
                   "
+                  width="40"
+                  height="40"
                   @click="
                     itemHeroId > 900 ? $message.info($appMsg.info[1000]) : null
                   "
@@ -392,10 +394,8 @@ export default {
 <style scoped>
 img.update-5d39f3848925994b52ec52fba934577c {
   border-radius: 100%;
-  width: 50px;
-  height: 50px;
-  margin-bottom: 3px;
-  margin-right: 3px;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 span.update-6b0325a49e13e1c8adc31a953f4bca63 {

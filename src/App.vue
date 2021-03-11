@@ -181,7 +181,10 @@ export default {
           };
 
           if (appInfo.updateTime != appConfigInfo.appInfo.updateTime) {
+            localStorage.removeItem("appHome");
+            localStorage.removeItem("gameHome");
             this.$appDelectCache("ranking");
+            this.$appDelectCache("heroUpdate");
 
             if (appInfo.updateText) this.$message.info(appInfo.updateText);
 
@@ -192,10 +195,6 @@ export default {
             this.$appConfigInfo.tipsInfo.rankingFilter = 0;
 
             localStorage.removeItem("appConfigInfo");
-            localStorage.removeItem("appHome");
-            localStorage.removeItem("gameHome");
-            localStorage.removeItem("searchData");
-            this.$appDelectCache("heroUpdate");
 
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
@@ -288,11 +287,6 @@ img {
   color: orange;
 }
 
-.ranking-ef96f47f5516788b4273bd9ff8c9fa19 {
-  color: red;
-  font-size: 12px;
-}
-
 .ranking-48d6215903dff56238e52e8891380c8f {
   color: blue;
 }
@@ -337,8 +331,8 @@ i.app-6de102c0bc4dc7f72ce287d6b0828052 img.van-icon__image {
 
 i.app-b10034712510883e9d2c45b4ec90772d img.van-icon__image {
   border-radius: 100%;
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
 }
 
 i.app-e0c3b278eeb2cab05f548d7af0f2c949 img.van-icon__image,
@@ -511,12 +505,6 @@ div.app-f3cc17bc0d768ca60b8bb496a10b1990 {
   text-align: left;
 }
 
-div.app-f56ae939694a0488cc9e8ecdd47a46ab,
-div.van-grid-item__content.van-grid-item__content--center
-  span.van-grid-item__text {
-  font-weight: 600;
-}
-
 div.app-a139b05b7f8e496c00991733ef7cd589 {
   margin: 25px 10px 0 10px;
   padding: 0;
@@ -556,11 +544,6 @@ div.app-99938282f04071859941e18f16efcf42 {
   margin-top: 50px;
   overflow: hidden;
   overflow-y: auto;
-}
-
-div.app-f56ae939694a0488cc9e8ecdd47a46ab {
-  font-size: 12px;
-  margin-top: 5px;
 }
 
 div.app-06eab62dcb5a23b966a620807d78e66f {

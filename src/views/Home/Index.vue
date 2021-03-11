@@ -152,6 +152,14 @@ export default {
 };
 </script>
 
+<style>
+img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
+  border-radius: unset;
+  height: 100%;
+  width: 100%;
+}
+</style>
+
 <style scoped>
 img.home-47ee6ad584172f967b674131cb948a87 {
   border-radius: unset;
@@ -160,13 +168,5 @@ img.home-47ee6ad584172f967b674131cb948a87 {
 div.home-72ab9e07378f988922e6c91884048db0 {
   font-size: 12px;
   margin: 25px;
-}
-</style>
-
-<style>
-img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
-  border-radius: unset;
-  height: 100%;
-  width: 100%;
 }
 </style>

@@ -37,7 +37,7 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="适配小屏" label="打开后部分页面将自动缩小图片">
+        <van-cell title="适配小屏" label="部分页面将自动缩小图片">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -71,7 +71,7 @@
       >
         <van-cell
           title="当前地区"
-          label="国外的玩家可以尝试切换一下"
+          label="国外访问卡的可以尝试切换下"
           :value="$appCountry ? '国内' : '国外'"
           @click="
             $appCountry
@@ -89,7 +89,16 @@
           :value="appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
           @click="$message.info($appMsg.info[1018])"
         />
-        <van-cell title="当前版本" :value="appConfigInfo.appInfo.version" />
+        <van-cell
+          title="更新时间"
+          label="数据更新时间"
+          :value="appConfigInfo.appInfo.updateTime"
+        />
+        <van-cell
+          title="当前版本"
+          label="主程序版本"
+          :value="appConfigInfo.appInfo.version"
+        />
       </van-cell-group>
     </div>
   </div>
@@ -110,7 +119,7 @@ export default {
       cacheInfo: [
         { title: "清空程序缓存", label: null },
         { title: "清空排行缓存", label: null },
-        { title: "清空全局BP模拟器缓存", label: "清空后自定义排序将丢失" },
+        { title: "清空全局BP模拟器缓存", label: "自定义排序将丢失，谨慎操作" },
       ],
     };
   },
@@ -119,7 +128,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         isReducedMode = false,
         isSmallMobile = false;
 
@@ -136,7 +145,7 @@ export default {
       this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
     },
     onReducedModeChange: function (e) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         isReducedMode = false;
 
       if (e == false) {
@@ -161,7 +170,7 @@ export default {
       this.$message.success(this.$appMsg.success[1004]);
     },
     onSmallMobileChange: function (e) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
+      let appConfigInfo = this.$appConfigInfo,
         isSmallMobile = false;
 
       e == false ? (isSmallMobile = false) : (isSmallMobile = true);
@@ -203,7 +212,7 @@ export default {
 };
 </script>
 
-<style  scoped>
+<style scoped>
 div.setting-b401c55622473cb5f8e0cf4e19901f39 {
   text-align: left;
 }

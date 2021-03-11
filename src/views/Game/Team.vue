@@ -27,8 +27,8 @@
       "
     >
       <van-grid
-        :column-num="3"
         :border="false"
+        :column-num="3"
         class="game-40db4f618bd5c27e60368f891382ffd4"
       >
         <van-grid-item
