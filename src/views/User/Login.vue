@@ -184,6 +184,7 @@ export default {
             });
 
             this.$appDelectCache("ranking");
+            this.$appDelectCache("charts");
 
             setTimeout(() => {
               this.$router.go(-1);

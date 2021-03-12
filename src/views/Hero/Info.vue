@@ -57,11 +57,11 @@
                 :key="'hero-5b659d3a22bcdd20abf3405d43ae80a7-' + index"
               >
                 <van-tag
-                  round
                   v-if="data"
-                  :color="positionInfo[data - 1][1]"
+                  round
+                  :color="positionInfo[data][1]"
                   class="hero-bc267281c62550407c9572aff2a45f69"
-                  >{{ positionInfo[data - 1][0] }}</van-tag
+                  >{{ positionInfo[data][0] }}</van-tag
                 >
               </li>
             </ul>
@@ -245,7 +245,7 @@
           <HeroLine
             v-if="tabsInfo.model == 0"
             :heroId="hero.info.id"
-            :trendType="trendInfo.model"
+            :aid="trendInfo.model"
           />
         </div>
         <div

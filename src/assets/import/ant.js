@@ -4,6 +4,7 @@ import 'ant-design-vue/dist/antd.css'
 import {
     Dropdown,
     Menu,
+    Radio,
     Tooltip,
     Message,
     Notification,
@@ -14,6 +15,7 @@ import {
 Vue
     .use(Dropdown)
     .use(Menu)
+    .use(Radio)
     .use(Tooltip)
     .use(Message)
     .use(Notification)

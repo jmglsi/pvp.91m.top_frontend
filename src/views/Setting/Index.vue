@@ -91,22 +91,23 @@
         />
         <van-cell
           title="更新时间"
-          label="数据更新时间"
+          label="最后一次数据更新的时间"
           :value="appConfigInfo.appInfo.updateTime"
         />
-        <van-cell
-          title="当前版本"
-          label="主程序版本"
-          :value="appConfigInfo.appInfo.version"
-        />
+        <van-cell title="程序版本" :value="appConfigInfo.appInfo.version" />
       </van-cell-group>
     </div>
+
+    <AppHello height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "Setting",
+  components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
   data() {
     return {
       appConfigInfo: {
@@ -128,7 +129,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let appConfigInfo = this.$appConfigInfo,
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         isReducedMode = false,
         isSmallMobile = false;
 
@@ -145,7 +146,7 @@ export default {
       this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
     },
     onReducedModeChange: function (e) {
-      let appConfigInfo = this.$appConfigInfo,
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         isReducedMode = false;
 
       if (e == false) {
@@ -170,7 +171,7 @@ export default {
       this.$message.success(this.$appMsg.success[1004]);
     },
     onSmallMobileChange: function (e) {
-      let appConfigInfo = this.$appConfigInfo,
+      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         isSmallMobile = false;
 
       e == false ? (isSmallMobile = false) : (isSmallMobile = true);
@@ -196,6 +197,7 @@ export default {
         this.isReducedMode = false;
       } else if (e == 1) {
         this.$appDelectCache("ranking");
+        this.$appDelectCache("charts");
       } else if (e == 2) {
         localStorage.removeItem("gameBP");
       }

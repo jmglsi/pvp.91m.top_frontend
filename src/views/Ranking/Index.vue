@@ -32,11 +32,32 @@
             </div>
           </template>
           <DianFengSai
-            v-if="tabsInfo.model == 0"
+            v-if="tabsInfo.model == 0 && viewType == 0"
             :isSmallMobile="isSmallMobile"
             :bid="bid || dfsAreaTypeInfo.model"
             :cid="cid || dfsPositionTypeInfo.model"
           />
+
+          <RankingLine
+            v-else-if="tabsInfo.model == 0 && viewType == 1"
+            :bid="cid || dfsPositionTypeInfo.model"
+          />
+
+          <div
+            v-if="dfsPositionTypeInfo.model > 0"
+            class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
+          >
+            <van-button
+              round
+              icon="exchange"
+              size="small"
+              color="linear-gradient(to right, #fd6585, #0d25b9)"
+              @click="viewType == 0 ? (viewType = 1) : (viewType = 0)"
+            >
+              切换为 {{ viewType == 0 ? "图表" : "列表" }}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </van-button>
+          </div>
         </van-tab>
 
         <van-tab>
@@ -139,7 +160,7 @@
       </van-action-sheet>
     </div>
 
-    <div class="ranking-ebf09abeb7c3db44741d328324915725">
+    <div v-if="viewType == 0" class="ranking-ebf09abeb7c3db44741d328324915725">
       <van-divider
         :style="{
           padding: '0 15px',
@@ -166,6 +187,7 @@ export default {
   name: "RankingHome",
   components: {
     DianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
+    RankingLine: () => import("@/components/Ranking/Line.vue"),
     GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
     WanJia: () => import("@/views/Ranking/WanJia.vue"),
     ZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
@@ -188,6 +210,7 @@ export default {
       bid: 0,
       cid: 0,
       did: 0,
+      viewType: 0,
       isSmallMobile: 0,
       searchInfo: {
         defaultValue: "",
@@ -568,5 +591,12 @@ div.ranking-5d308b6a0da77ffb33c63fc542f58746
   span.ranking-f58cc48f5b942c91e57eff48accc5151 {
   margin-left: -43px;
   top: 47px;
+}
+
+div.ranking-87714e7bd6c0d80c7bbdb69629b5a80d {
+  top: 5px;
+  position: fixed;
+  right: -20px;
+  z-index: 10;
 }
 </style>

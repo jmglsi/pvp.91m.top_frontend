@@ -1,6 +1,14 @@
 <template>
-  <div class="hero-line">
-    <div class="hero-965f1a65ae362b02d244345afcbf542e">
+  <div class="ranking-line">
+    <div class="ranking-63559bd374a437b89b36762811e4b809">
+      <a-radio-group
+        :options="viewInfo"
+        :default-value="0"
+        @change="onViewChange"
+      />
+    </div>
+
+    <div class="ranking-47a721d2dcdc9a9875507e9f389e6409">
       <ve-line
         :extend="lineData.extend"
         :settings="lineData.settings"
@@ -9,22 +17,13 @@
         :data="lineData.result"
         :loading="lineData.loading"
         :after-config="afterConfig"
-        height="500px"
+        height="650px"
         width="99.2%"
-        class="hero-be4fa98d69734bbd05d093fc0010f826"
+        class="ranking-1ef625581088ffc24d94e052d9ebc61d"
       />
     </div>
 
-    <div
-      v-if="showInfo.autoPlayTrend && aid == 0"
-      class="hero-f6d50810d5b150ebd421cc944d2597a5"
-    >
-      <van-switch
-        v-model="lineInfo.checked"
-        @change="onSwitchChange"
-        size="15px"
-      />
-    </div>
+    <AppHello v-if="$appIsMobile" height="100px" />
   </div>
 </template>
 
@@ -42,38 +41,25 @@ export default {
   name: "HeroLine",
   components: {
     VeLine,
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   props: {
-    heroId: {
+    bid: {
       type: Number,
       default: 0,
-    },
-    aid: {
-      type: Number,
-      default: 0,
-    },
-    detailed: {
-      type: Number,
-      default: 1,
     },
   },
   computed: {
     listenChange() {
-      const { heroId, aid, detailed } = this;
-      return { heroId, aid, detailed };
+      const { bid } = this;
+      return { bid };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == null) return;
-
-        this.getHeroChartsLog(
-          newValue.heroId,
-          newValue.aid,
-          Number(newValue.detailed)
-        );
+        this.getHeroChartsLog(5, newValue.bid, 0, 0);
       },
     },
   },
@@ -90,12 +76,10 @@ export default {
         },
         settings: {},
       },
-      lineInfo: {
-        checked: false,
-      },
-      showInfo: {
-        autoPlayTrend: false,
-      },
+      viewInfo: [
+        { label: "禁用率", value: 0 },
+        { label: "出场率", value: 1 },
+      ],
     };
   },
   methods: {
@@ -106,24 +90,38 @@ export default {
       //去除折线图上的小圆点
       return e;
     },
-    getHeroChartsLog: function (heroId, aid, detailed) {
+    getHeroChartsLog: function (aid, bid, cid, did) {
+      let appConfigInfo = this.$appConfigInfo,
+        charts = this.$appGetLocalStorage(
+          "charts-" + aid + "-" + bid + "-" + cid + "-" + did
+        );
+
+      if (
+        charts &&
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout
+      ) {
+        this.lineData = charts;
+
+        return;
+      }
+
       this.lineData = {
         loading: true,
         result: {
           rows: [],
         },
-        status: 200,
       };
 
       this.$axios
         .post(
           this.$appApi.pvp.getHeroChartsLog +
-            "&heroId=" +
-            heroId +
             "&aid=" +
             aid +
-            "&detailed=" +
-            detailed
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid
         )
         .then((res) => {
           let data = res.data.data,
@@ -135,43 +133,30 @@ export default {
             this.lineData = data;
             this.lineData.loading = false;
 
-            this.showInfo.autoPlayTrend = true;
+            this.$appSetLocalStorage(
+              "charts-" + aid + "-" + bid + "-" + cid + "-" + did,
+              this.lineData
+            );
           } else {
             this.$appOpenUrl(status.msg, null, { path: "/login" }, 1);
           }
         });
     },
-    onSwitchChange: function (e) {
-      let dataZoom = this.lineData.extend.dataZoom[0],
-        interval = dataZoom.end - dataZoom.start;
-
-      this.trendIndex = 0;
-      clearInterval(this.autoPlayTrendInterval);
-      if (e == true) {
-        this.autoPlayTrendClick(interval);
-      }
-    },
-    autoPlayTrendClick: function (interval) {
-      this.autoPlayTrendInterval = setInterval(() => {
-        this.trendIndex++;
-        this.lineData.extend.dataZoom[0].start = this.trendIndex;
-        this.lineData.extend.dataZoom[0].end = this.trendIndex + interval;
-
-        if (this.trendIndex >= 100 - interval) {
-          this.lineInfo.checked = false;
-
-          clearInterval(this.autoPlayTrendInterval);
-        }
-      }, 150);
+    onViewChange(e) {
+      this.getHeroChartsLog(5, this.bid, e.target.value, 0);
     },
   },
 };
 </script>
 
 <style scoped>
-div.hero-f6d50810d5b150ebd421cc944d2597a5 {
-  left: 7px;
-  margin-top: -30px;
+div.ranking-line {
+  margin: 25px 0;
+}
+
+div.ranking-63559bd374a437b89b36762811e4b809 {
+  width: 200px;
   position: absolute;
+  right: 0;
 }
 </style>

@@ -184,6 +184,7 @@ export default {
             localStorage.removeItem("appHome");
             localStorage.removeItem("gameHome");
             this.$appDelectCache("ranking");
+            this.$appDelectCache("charts");
             this.$appDelectCache("heroUpdate");
 
             if (appInfo.updateText) this.$message.info(appInfo.updateText);
