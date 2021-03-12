@@ -98,6 +98,8 @@ export default {
       return e;
     },
     getHeroChartsLog: function (aid, bid, cid, did) {
+      if (bid == 0 && cid == 0) return;
+
       let appConfigInfo = this.$appConfigInfo,
         charts = this.$appGetLocalStorage(
           "charts-" + aid + "-" + bid + "-" + cid + "-" + did

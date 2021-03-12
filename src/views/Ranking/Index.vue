@@ -44,7 +44,9 @@
           />
 
           <div
-            v-if="dfsPositionTypeInfo.model > 0"
+            v-if="
+              tabsInfo.model == 0 && (cid > 0 || dfsPositionTypeInfo.model > 0)
+            "
             :style="
               $appIsApple && $appConfigInfo.appInfo.pwa == 1
                 ? {
@@ -207,6 +209,7 @@ export default {
       this.heroName = to.query.heroName || "";
       this.bid = parseInt(to.query.bid) || 0;
       this.cid = parseInt(to.query.cid) || 0;
+      this.did = parseInt(to.query.did) || 0;
 
       if (parseInt(to.query.refresh) == 1) {
         this.tabsInfo.model = parseInt(to.query.type) || 0;
