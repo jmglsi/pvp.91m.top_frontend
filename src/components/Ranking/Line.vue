@@ -64,7 +64,7 @@ export default {
       handler(newValue) {
         this.viewInfo.model = 0;
 
-        this.getHeroChartsLog(5, newValue.bid, newValue.cid, 0);
+        this.getHeroChartsLog(5, newValue.bid, 0, 0);
       },
     },
   },
