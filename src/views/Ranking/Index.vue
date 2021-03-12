@@ -45,6 +45,15 @@
 
           <div
             v-if="dfsPositionTypeInfo.model > 0"
+            :style="
+              $appIsApple && $appConfigInfo.appInfo.pwa == 1
+                ? {
+                    top: '55px',
+                  }
+                : {
+                    top: '5px',
+                  }
+            "
             class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
           >
             <van-button
@@ -594,7 +603,6 @@ div.ranking-5d308b6a0da77ffb33c63fc542f58746
 }
 
 div.ranking-87714e7bd6c0d80c7bbdb69629b5a80d {
-  top: 5px;
   position: fixed;
   right: -20px;
   z-index: 10;

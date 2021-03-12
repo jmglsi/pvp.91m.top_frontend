@@ -1,8 +1,11 @@
 <template>
   <div class="ranking-line">
+    <div class="ranking-4789d9440d92b2647ea8a52c2f5b31b5">&nbsp;</div>
+
     <div class="ranking-63559bd374a437b89b36762811e4b809">
       <a-radio-group
-        :options="viewInfo"
+        :value="viewInfo.model"
+        :options="viewOptions"
         :default-value="0"
         @change="onViewChange"
       />
@@ -59,13 +62,14 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.getHeroChartsLog(5, newValue.bid, 0, 0);
+        this.viewInfo.model = 0;
+
+        this.getHeroChartsLog(5, newValue.bid, newValue.cid, 0);
       },
     },
   },
   data() {
     return {
-      trendIndex: 0,
       lineData: {
         extend: {},
         loading: true,
@@ -76,7 +80,10 @@ export default {
         },
         settings: {},
       },
-      viewInfo: [
+      viewInfo: {
+        model: 0,
+      },
+      viewOptions: [
         { label: "禁用率", value: 0 },
         { label: "出场率", value: 1 },
       ],
@@ -143,7 +150,9 @@ export default {
         });
     },
     onViewChange(e) {
-      this.getHeroChartsLog(5, this.bid, e.target.value, 0);
+      this.viewInfo.model = e.target.value;
+
+      this.getHeroChartsLog(5, this.bid, this.viewInfo.model, 0);
     },
   },
 };
@@ -152,6 +161,14 @@ export default {
 <style scoped>
 div.ranking-line {
   margin: 25px 0;
+}
+
+div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  margin-top: -25px;
+  height: 50px;
 }
 
 div.ranking-63559bd374a437b89b36762811e4b809 {
