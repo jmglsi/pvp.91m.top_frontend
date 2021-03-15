@@ -175,8 +175,8 @@ div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
 }
 
 div.ranking-63559bd374a437b89b36762811e4b809 {
-  width: 275px;
+  width: 225px;
   position: absolute;
-  right: -25px;
+  right: 0;
 }
 </style>
