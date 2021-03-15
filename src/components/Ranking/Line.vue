@@ -6,7 +6,7 @@
       <a-radio-group
         :value="viewInfo.model"
         :options="viewOptions"
-        :default-value="0"
+        :default-value="2"
         @change="onViewChange"
       />
     </div>
@@ -62,9 +62,9 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.viewInfo.model = 0;
+        this.viewInfo.model = 2;
 
-        this.getHeroChartsLog(5, newValue.bid, 0, 0);
+        this.getHeroChartsLog(5, newValue.bid, this.viewInfo.model, 0);
       },
     },
   },
@@ -81,11 +81,12 @@ export default {
         settings: {},
       },
       viewInfo: {
-        model: 0,
+        model: 2,
       },
       viewOptions: [
-        { label: "禁用率", value: 0 },
-        { label: "出场率", value: 1 },
+        { label: "禁用", value: 0 },
+        { label: "出场", value: 1 },
+        { label: "禁选", value: 2 },
       ],
     };
   },
@@ -174,8 +175,8 @@ div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
 }
 
 div.ranking-63559bd374a437b89b36762811e4b809 {
-  width: 200px;
+  width: 275px;
   position: absolute;
-  right: 0;
+  right: -25px;
 }
 </style>
