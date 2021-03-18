@@ -332,7 +332,8 @@ export default {
       } else {
         this.search.value = "";
         this.showInfo.searchData = false;
-        this.showInfo.searchHistory = true;
+
+        this.initSearchHistory();
       }
     },
   },
@@ -423,7 +424,6 @@ export default {
             this.tableData = data;
 
             this.addSearchData(value);
-            this.initSearchHistory();
 
             let searchQ = null;
             value ? (searchQ = { q: value }) : (searchQ = {});
@@ -432,15 +432,15 @@ export default {
 
             if (data.result.rows.length > 0) {
               this.showInfo.searchData = true;
-              this.showInfo.searchHistory = false;
             }
           } else {
             this.search.value = "";
             this.showInfo.searchData = false;
-            this.showInfo.searchHistory = true;
 
             this.$message.error(status.msg);
           }
+
+          this.initSearchHistory();
         });
     },
     initSearchHistory: function () {
