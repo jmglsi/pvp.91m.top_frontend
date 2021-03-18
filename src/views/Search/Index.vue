@@ -31,7 +31,9 @@
 
     <div
       :style="
-        $appIsApple && $appConfigInfo.appInfo.pwa == 1 ? { marginTop: '10px' } : {}
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '10px' }
+          : {}
       "
       class="search-881fe153c6b26bc75a8f0ab057501629"
     >
@@ -238,11 +240,14 @@
             基于 巅峰赛 (顶端局) 统计
           </span>
         </van-cell-group>
+
+        <div class="search-cbf8ce69d638243d800b392c8d298b16">
+          <HeroSameHobby :heroId="tableData.heroInfo.id" />
+        </div>
       </div>
 
       <div
         v-if="showInfo.searchData"
-        :style="tableData.heroInfo.id ? { marginTop: '25px' } : {}"
         class="search-db4665e1908869c6354106ce00ff95ba"
       >
         <van-cell-group
@@ -315,12 +320,19 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {
-      if (to.query.q && parseInt(to.query.refresh) == 1) {
-        this.getSearch(to.query.q);
+      if (to.query.q) {
+        if (parseInt(to.query.refresh) == 1) {
+          this.getSearch(to.query.q);
+        }
+      } else {
+        this.search.value = "";
+        this.showInfo.searchData = false;
+        this.showInfo.searchHistory = true;
       }
     },
   },
@@ -407,18 +419,23 @@ export default {
           let data = res.data.data,
             status = res.data.status;
 
-          this.tableData = data;
-
           if (status.code == 200) {
+            this.tableData = data;
+
             this.addSearchData(value);
             this.initSearchHistory();
-            this.$appPush({ query: { q: value } });
+
+            let searchQ = null;
+            value ? (searchQ = { q: value }) : (searchQ = {});
+
+            this.$appPush({ query: searchQ });
 
             if (data.result.rows.length > 0) {
               this.showInfo.searchData = true;
               this.showInfo.searchHistory = false;
             }
           } else {
+            this.search.value = "";
             this.showInfo.searchData = false;
             this.showInfo.searchHistory = true;
 
@@ -589,6 +606,7 @@ span.search-399841f840f75044108804ec30d37405 {
   height: 50px;
   background: #fff;
   padding-right: 15px;
+  z-index: -1;
 }
 
 span.search-b0958af6a9b2591433e50ff9eb7f3420 {
@@ -606,6 +624,10 @@ div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: left;
+}
+
+div.search-cbf8ce69d638243d800b392c8d298b16 {
+  margin-top: 40px;
 }
 
 div.search-88cf8ac86e2afc51906e60c7025f522b {

@@ -36,13 +36,27 @@
       <div class="hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c">
         <van-button
           round
+          icon="question-o"
+          color="red"
+          size="mini"
+          class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
+          @click="
+            $appPush({ path: '/search', query: { q: '国服认证', refresh: 1 } })
+          "
+        >
+          国服认证
+        </van-button>
+        &nbsp;
+        <van-button
+          round
           icon="replay"
           color="#000000"
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="getHeroInfoByWebAccountList(heroId, 1)"
-          >刷新</van-button
         >
+          刷新一下
+        </van-button>
       </div>
     </div>
   </div>
@@ -85,7 +99,9 @@ export default {
   methods: {
     getHeroInfoByWebAccountList: function (heroId, tipsType) {
       this.$axios
-        .post(this.$appApi.pvp.getHeroInfoByWebAccountList + "&heroId=" + heroId)
+        .post(
+          this.$appApi.pvp.getHeroInfoByWebAccountList + "&heroId=" + heroId
+        )
         .then((res) => {
           this.tableData = res.data.data;
 
@@ -97,6 +113,10 @@ export default {
 </script>
 
 <style scoped>
+div.hero-same-hobby {
+  text-align: center;
+}
+
 img.hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767 {
   border-radius: unset;
   margin-right: -35px;

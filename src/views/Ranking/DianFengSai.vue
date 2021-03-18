@@ -126,7 +126,7 @@
             </template>
           </vxe-table-column>
           <vxe-table-column
-            title="BP率"
+            title="禁选"
             field="allBPRate"
             :filters="[{ data: 1, checked: true }]"
             :filter-method="filterMethod"

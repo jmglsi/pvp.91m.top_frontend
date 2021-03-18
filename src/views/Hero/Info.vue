@@ -265,7 +265,7 @@
       v-if="showInfo.parameter"
       class="hero-9393a9be63ea720a87e048d40caa03b5"
     >
-      <van-skeleton v-if="showInfo.heroUpdate" :row="30" />
+      <van-skeleton v-if="showInfo.skeleton" :row="30" />
 
       <lazy-component
         :preLoad="1"
@@ -502,7 +502,7 @@ export default {
         heroMenu: false,
         imagePreview: false,
         imageIndex: 0,
-        heroUpdate: true,
+        skeleton: true,
       },
       tabsInfo: {
         model: 0,
@@ -576,7 +576,7 @@ export default {
     },
     onComponentShow: function () {
       setTimeout(() => {
-        this.showInfo.heroUpdate = false;
+        this.showInfo.skeleton = false;
       }, 1000);
     },
     onHeroVoteClick: function (voteType) {

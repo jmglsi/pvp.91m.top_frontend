@@ -84,7 +84,7 @@
     </div>
 
     <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
-      <van-skeleton v-if="showInfo.heroUpdate" :row="30" />
+      <van-skeleton v-if="showInfo.skeleton" :row="30" />
 
       <lazy-component
         :preLoad="1"
@@ -107,7 +107,7 @@ export default {
     return {
       isLoading: false,
       showInfo: {
-        heroUpdate: true,
+        skeleton: true,
       },
       appHomeInfo: {
         miniappInfo: {
@@ -162,7 +162,7 @@ export default {
     },
     onComponentShow: function () {
       setTimeout(() => {
-        this.showInfo.heroUpdate = false;
+        this.showInfo.skeleton = false;
       }, 1000);
     },
     onDropdownRefreshClick: function () {
