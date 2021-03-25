@@ -10,9 +10,7 @@
           v-for="(data, index) in tableData.result.rows"
           :key="'hero-same-hobby-418bbf1206aab9cb337c42b4d2c1d6ec-' + index"
           class="app-1951b6e7c82938dd7446a41e829b247b"
-          @click="
-            $appPush({ path: '/friends', query: { openId: data.openId } })
-          "
+          @click="$appPush({ path: data.to })"
         >
           <img
             v-if="data.fightPowerIcon"
@@ -98,12 +96,28 @@ export default {
   },
   methods: {
     getHeroInfoByWebAccountList: function (heroId, tipsType) {
+      let appConfigInfo = this.$appConfigInfo,
+        heroSameHobby = this.$appGetLocalStorage("heroSameHobby-" + heroId);
+
+      if (
+        heroSameHobby &&
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout &&
+        tipsType == 0
+      ) {
+        this.tableData = heroSameHobby;
+
+        return;
+      }
+
       this.$axios
         .post(
           this.$appApi.pvp.getHeroInfoByWebAccountList + "&heroId=" + heroId
         )
         .then((res) => {
           this.tableData = res.data.data;
+
+          this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
 
           if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
         });

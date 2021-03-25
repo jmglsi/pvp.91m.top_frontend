@@ -144,7 +144,7 @@
         type="info"
         size="small"
         @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
-        >复制QQ</van-button
+        >复制 QQ</van-button
       >
     </div>
   </div>
@@ -202,9 +202,7 @@ export default {
               });
             }
 
-            if (tipsType == 1) {
-              this.$message.success(this.$appMsg.success[1000]);
-            }
+            //this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }

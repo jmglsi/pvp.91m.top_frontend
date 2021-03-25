@@ -192,6 +192,7 @@ export default {
         localStorage.removeItem("gameHome");
         localStorage.removeItem("searchData");
         this.$appDelectCache("heroUpdate");
+        this.$appDelectCache("heroSameHobby");
 
         this.isSmallMobile = false;
         this.isReducedMode = false;

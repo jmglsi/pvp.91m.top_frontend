@@ -186,6 +186,7 @@ export default {
             this.$appDelectCache("ranking");
             this.$appDelectCache("charts");
             this.$appDelectCache("heroUpdate");
+            this.$appDelectCache("heroSameHobby");
 
             if (appInfo.updateText) this.$message.info(appInfo.updateText);
 
