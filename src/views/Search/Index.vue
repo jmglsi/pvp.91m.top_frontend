@@ -11,7 +11,11 @@
           :placeholder="search.placeholder"
           @input="onClearInputData"
           @clear="onClearInputData"
-          @search="search.value ? getSearch(search.value) : null"
+          @search="
+            search.value
+              ? getSearch(search.value)
+              : getSearch(search.placeholder)
+          "
         >
           <template #action>
             <div
@@ -407,6 +411,8 @@ export default {
       this.getSearch(searchValue);
     },
     getSearch: function (value) {
+      if (value == "搜索") return;
+
       this.search.value = value;
 
       this.$axios

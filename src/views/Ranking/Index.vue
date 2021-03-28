@@ -239,9 +239,9 @@ export default {
         model: 0,
         options: [
           { text: "全部 (昨日)", value: 0 },
-          { text: "手 Q (昨日)", value: 1 },
-          { text: "微信 (昨日)", value: 2 },
-          { text: "推荐 (昨日)", value: 3 },
+          { text: "QQ (昨日)", value: 1 },
+          { text: "WX (昨日)", value: 2 },
+          { text: "版本答案 (昨日)", value: 3 },
           { text: "全部 (上周)", value: 4 },
           { text: "全部 (上月)", value: 5 },
         ],

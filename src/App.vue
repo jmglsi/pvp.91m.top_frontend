@@ -7,7 +7,7 @@
           $appIsApple && $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
             ? {
                 background:
-                  'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(255, 96, 52), rgb(238, 10, 36)) repeat scroll 0% 0%',
+                  'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(236, 119, 171), rgb(120, 115, 245)) repeat scroll 0% 0%',
               }
             : {}
         "
@@ -184,9 +184,10 @@ export default {
             localStorage.removeItem("appHome");
             localStorage.removeItem("gameHome");
             this.$appDelectCache("ranking");
-            this.$appDelectCache("charts");
+            this.$appDelectCache("heroInfo");
             this.$appDelectCache("heroUpdate");
             this.$appDelectCache("heroSameHobby");
+            this.$appDelectCache("heroChartsLog");
 
             if (appInfo.updateText) this.$message.info(appInfo.updateText);
 

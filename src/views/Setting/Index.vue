@@ -188,9 +188,10 @@ export default {
         localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
 
         localStorage.removeItem("appConfigInfo");
+        localStorage.removeItem("searchData");
         localStorage.removeItem("appHome");
         localStorage.removeItem("gameHome");
-        localStorage.removeItem("searchData");
+        this.$appDelectCache("heroInfo");
         this.$appDelectCache("heroUpdate");
         this.$appDelectCache("heroSameHobby");
 
@@ -198,7 +199,7 @@ export default {
         this.isReducedMode = false;
       } else if (e == 1) {
         this.$appDelectCache("ranking");
-        this.$appDelectCache("charts");
+        this.$appDelectCache("heroChartsLog");
       } else if (e == 2) {
         localStorage.removeItem("gameBP");
       }

@@ -512,7 +512,7 @@ export default {
         options: [
           { text: "巅峰赛趋势", value: 0 },
           { text: "英雄强势期", value: 1 },
-          { text: "舆论趋势", value: 2 },
+          { text: "舆论趋势图", value: 2 },
         ],
       },
       skillInfo: {
@@ -556,22 +556,45 @@ export default {
         document.documentElement.scrollTop || document.body.scrollTop;
     },
     getHeroInfo: function (id) {
+      let appConfigInfo = this.$appConfigInfo,
+        heroData = this.$appGetLocalStorage("heroInfo-" + id);
+
+      if (
+        heroData &&
+        this.$appTs - appConfigInfo.appInfo.updateTime <
+          appConfigInfo.updateInfo.timeout
+      ) {
+        let heroInfoData = heroData.heroInfo;
+
+        this.circle.info = heroData.circleInfo;
+        this.positionInfo = heroData.positionInfo;
+        this.hero.info = heroInfoData;
+
+        this.hero.title = heroInfoData.name;
+        document.title =
+          heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name;
+
+        return;
+      }
+
       this.$axios
         .post(this.$appApi.pvp.getHeroInfo + "&id=" + id)
         .then((res) => {
-          let data = res.data.data,
-            heroInfo = data.heroInfo;
+          let heroData = res.data.data,
+            heroInfoData = heroData.heroInfo;
 
-          this.circle.info = data.circleInfo;
-          this.positionInfo = data.positionInfo;
-          this.hero.info = heroInfo;
+          this.circle.info = heroData.circleInfo;
+          this.positionInfo = heroData.positionInfo;
+          this.hero.info = heroInfoData;
+
+          this.$appSetLocalStorage("heroInfo-" + id, heroData);
 
           if (!this.routeInfo.from.heroName)
-            this.routeInfo.from.heroName = heroInfo.name;
+            this.routeInfo.from.heroName = heroInfoData.name;
 
-          this.hero.title = heroInfo.name;
+          this.hero.title = heroInfoData.name;
           document.title =
-            heroInfo.name + " | " + this.$appConfigInfo.appInfo.name;
+            heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name;
         });
     },
     onComponentShow: function () {
