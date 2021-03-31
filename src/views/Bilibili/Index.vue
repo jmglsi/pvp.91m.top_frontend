@@ -4,8 +4,8 @@
       <van-search
         v-model="search.value"
         :placeholder="tableData.searchPlaceholder"
-        @search="search.value ? onSearch : null"
-        @clear="onSearchClear"
+        @clear="onClearInputData"
+        @search="search.value ? getSearch(search.value) : null"
         shape="round"
         class="app-c1130d301aabe8d6a9d46c322fd6150a"
       />
@@ -28,10 +28,6 @@
         @cell-click="onCellClick"
       >
         <vxe-table-column title="id" field="uid" fixed="left" width="125" />
-
-        <vxe-table-column title="bv" field="bv" width="150">
-          <template v-slot="{ row }">{{ av2bv(row.uid) }}</template>
-        </vxe-table-column>
 
         <vxe-table-column title="#" type="seq" width="75" />
 
@@ -63,7 +59,7 @@
           :width="listWidth"
         />
 
-        <vxe-table-column title="实时数量" field="bz" :width="listWidth" />
+        <vxe-table-column title="备注" field="bz" :width="listWidth" />
 
         <vxe-table-column
           title="更新时间"
@@ -105,7 +101,7 @@ export default {
     return {
       copyData: "",
       search: {
-        value: this.$route.query.uid || "",
+        value: this.$route.query.q || "",
       },
       tableData: {
         searchPlaceholder: "请输入【视频id】,例如:bv12345",
@@ -136,21 +132,19 @@ export default {
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight();
+    this.clientHeight = this.$appInitTableHeight() - 50;
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
-    this.getRankingInterval = setInterval(() => {
-      this.getRanking(this.search.value, this.paginationModel);
-    }, 10000);
+    this.getRanking(this.search.value, 0);
   },
   methods: {
-    getRanking: function (uid, page) {
+    getRanking: function (id, page) {
       this.$axios
         .post(
           this.$appApi.bili.getOrderInfo +
-            "&uid=" +
-            encodeURIComponent(uid) +
+            "&id=" +
+            encodeURIComponent(id) +
             "&page=" +
             page
         )
@@ -186,7 +180,7 @@ export default {
       this.showInfo.actionSheet = true;
     },
     onBilibiliCopy: function (row) {
-      let longUrl = location.origin + location.pathname + "?uid=" + row.uid;
+      let longUrl = location.origin + location.pathname + "?q=" + row.uid;
 
       this.$axios
         .post(this.$appApi.s.url, {
@@ -195,13 +189,8 @@ export default {
         .then((res) => {
           let shortUrl = res.data.data.url;
 
-          this.copyData =
-            "id:" +
-            row.uid +
-            "(" +
-            this.av2bv(row.uid) +
-            ")" +
-            "\r类型:" +
+          this.copyData = "id:" + row.uid;
+          "\r类型:" +
             row.type +
             "\r开始:" +
             row.start_num +
@@ -227,35 +216,30 @@ export default {
           );
         });
     },
-    onSearchClear: function () {
+    onClearInputData: function () {
       this.search.value = null;
       this.tableData = [];
 
       clearInterval(this.getOrderInfoInterval);
     },
-    onSearch: function () {
-      clearInterval(this.getOrderInfoInterval);
+    getSearch: function () {
+      clearInterval(this.getRankingInterval);
 
-      let searchValue = this.search.value || "";
-
-      if (/[bv]{2}/i.test(searchValue.slice(0, 2))) {
-        let newValue = this.bv2av(searchValue);
-        this.copyAv = newValue;
-      }
-
-      this.getOrderInfo(this.search.value, this.paginationModel);
+      this.getRanking(this.search.value, 0);
     },
-    onCheckBoxChange: function (e) {
+    onSwitchChange: function (e) {
       if (e == true) {
-        this.getOrderInfoInterval = setInterval(() => {
-          this.getOrderInfo(this.search.value, this.paginationModel);
+        this.getRankingInterval = setInterval(() => {
+          this.getRanking(this.search.value, this.paginationModel);
         }, 10000);
+
+        this.$message.success(this.$appMsg.success[1000]);
       } else {
         clearInterval(this.getOrderInfoInterval);
       }
     },
     onPaginationChange: function (e) {
-      this.getOrderInfo(this.search.value, e);
+      this.getRanking(this.search.value, e - 1);
     },
     onCellClick: function ({ row }) {
       this.getOrderInfo(row);
@@ -279,7 +263,6 @@ export default {
 <style scoped>
 div.bilibili-a47ba339330136bcab5b4c91d5d10882 {
   left: 30px;
-  margin-top: 18px;
   position: absolute;
   z-index: 2;
 }

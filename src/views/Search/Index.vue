@@ -7,7 +7,6 @@
         <van-search
           v-model="search.value"
           show-action
-          shape="round"
           :placeholder="search.placeholder"
           @input="onClearInputData"
           @clear="onClearInputData"
@@ -16,6 +15,7 @@
               ? getSearch(search.value)
               : getSearch(search.placeholder)
           "
+          shape="round"
         >
           <template #action>
             <div
