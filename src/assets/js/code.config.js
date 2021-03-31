@@ -47,8 +47,8 @@ error[1008] = "操作失败";
 error[1009] = "请确认分数";
 
 export default {
-    info,
-    warning,
-    success,
-    error
+  info,
+  warning,
+  success,
+  error
 }

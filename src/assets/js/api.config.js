@@ -8,53 +8,53 @@ const gameApi = apiHost + "/hero/v1/game.php";
 const biliApi = apiHost + "/hero/v1/bilibili.php";
 
 const s = {
-    url: sApi + "/"
+  url: sApi + "/"
 }
 
 const pvp = {
-    addHeroByCombination: pvpApi + "?type=addHeroByCombination",
-    addHeroFightPowerByWebAccount: pvpApi + "?type=addHeroFightPowerByWebAccount",
-    addHeroVote: pvpApi + "?type=addHeroVote",
-    addWebAccountHeroLike: pvpApi + "?type=addWebAccountHeroLike",
-    createEngage: pvpApi + "?type=createEngage",
-    createTeam: pvpApi + "?type=createTeam",
-    deleteGameBP: pvpApi + "?type=deleteGameBP",
-    deleteTeam: pvpApi + "?type=deleteTeam",
-    getAppHome: pvpApi + "?type=getAppHome",
-    getAppInfo: pvpApi + "?type=getAppInfo",
-    getGameDashboard: pvpApi + "?type=getGameDashboard",
-    getHeroChartsLog: pvpApi + "?type=getHeroChartsLog",
-    getHeroInfo: pvpApi + "?type=getHeroInfo",
-    getHeroInfoByWebAccountList: pvpApi + "?type=getHeroInfoByWebAccountList",
-    getHeroReplayByHeroId: pvpApi + "?type=getHeroReplayByHeroId",
-    getHeroUpdate: pvpApi + "?type=getHeroUpdate",
-    getHeroUpdateText: pvpApi + "?type=getHeroUpdateText",
-    getMiniAppInfo: pvpApi + "?type=getMiniAppInfo",
-    getRanking: pvpApi + "?type=getRanking",
-    getSearch: pvpApi + "?type=getSearch",
-    getSkinReturnLog: pvpApi + "?type=getSkinReturnLog",
-    getSmobaHelperUserInfo: pvpApi + "?type=getSmobaHelperUserInfo",
-    getWebAccountInfo: pvpApi + "?type=getWebAccountInfo",
-    loginWebAccount: pvpApi + "?type=loginWebAccount",
-    updateGameBP: pvpApi + "?type=updateGameBP",
-    updateTeamInfo: pvpApi + "?type=updateTeamInfo",
-    updateWebAccountInfo: pvpApi + "?type=updateWebAccountInfo",
-    uploadImg: pvpApi + "?type=uploadImg"
+  addHeroByCombination: pvpApi + "?type=addHeroByCombination",
+  addHeroFightPowerByWebAccount: pvpApi + "?type=addHeroFightPowerByWebAccount",
+  addHeroVote: pvpApi + "?type=addHeroVote",
+  addWebAccountHeroLike: pvpApi + "?type=addWebAccountHeroLike",
+  createEngage: pvpApi + "?type=createEngage",
+  createTeam: pvpApi + "?type=createTeam",
+  deleteGameBP: pvpApi + "?type=deleteGameBP",
+  deleteTeam: pvpApi + "?type=deleteTeam",
+  getAppHome: pvpApi + "?type=getAppHome",
+  getAppInfo: pvpApi + "?type=getAppInfo",
+  getGameDashboard: pvpApi + "?type=getGameDashboard",
+  getHeroChartsLog: pvpApi + "?type=getHeroChartsLog",
+  getHeroInfo: pvpApi + "?type=getHeroInfo",
+  getHeroInfoByWebAccountList: pvpApi + "?type=getHeroInfoByWebAccountList",
+  getHeroReplayByHeroId: pvpApi + "?type=getHeroReplayByHeroId",
+  getHeroUpdate: pvpApi + "?type=getHeroUpdate",
+  getHeroUpdateText: pvpApi + "?type=getHeroUpdateText",
+  getMiniAppInfo: pvpApi + "?type=getMiniAppInfo",
+  getRanking: pvpApi + "?type=getRanking",
+  getSearch: pvpApi + "?type=getSearch",
+  getSkinReturnLog: pvpApi + "?type=getSkinReturnLog",
+  getSmobaHelperUserInfo: pvpApi + "?type=getSmobaHelperUserInfo",
+  getWebAccountInfo: pvpApi + "?type=getWebAccountInfo",
+  loginWebAccount: pvpApi + "?type=loginWebAccount",
+  updateGameBP: pvpApi + "?type=updateGameBP",
+  updateTeamInfo: pvpApi + "?type=updateTeamInfo",
+  updateWebAccountInfo: pvpApi + "?type=updateWebAccountInfo",
+  uploadImg: pvpApi + "?type=uploadImg"
 }
 
 const game = {
-    getGameBP: gameApi + "?type=getGameBP",
-    getGameHome: gameApi + "?type=getGameHome",
-    getGamePrediction: gameApi + "?type=getGamePrediction"
+  getGameBP: gameApi + "?type=getGameBP",
+  getGameHome: gameApi + "?type=getGameHome",
+  getGamePrediction: gameApi + "?type=getGamePrediction"
 }
 
 const bili = {
-    getOrderInfo: biliApi + "?type=getOrderInfo"
+  getOrderInfo: biliApi + "?type=getOrderInfo"
 }
 
 export default {
-    s,
-    bili,
-    game,
-    pvp
+  s,
+  bili,
+  game,
+  pvp
 }

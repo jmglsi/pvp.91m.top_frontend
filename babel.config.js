@@ -1,10 +1,10 @@
 module.exports = {
-    presets: [
-        '@vue/app'
-    ],
-    plugins: [
-        ['import', { libraryName: 'vxe-table', style: true }],
-        ['import', { libraryName: 'vant', libraryDirectory: 'es', style: true }, 'vant'],
-        ['import', { libraryName: 'ant-design-vue', libraryDirectory: "es", style: true }, 'ant-design-vue']
-    ]
+  presets: [
+    '@vue/app'
+  ],
+  plugins: [
+    ['import', { libraryName: 'vxe-table', style: true }],
+    ['import', { libraryName: 'vant', libraryDirectory: 'es', style: true }, 'vant'],
+    ['import', { libraryName: 'ant-design-vue', libraryDirectory: "es", style: true }, 'ant-design-vue']
+  ]
 }

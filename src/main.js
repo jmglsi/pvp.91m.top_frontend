@@ -33,7 +33,7 @@ import cookie from 'vue-cookie'
 Vue.prototype.$cookie = cookie
 
 import axios from 'axios'
-axios.interceptors.request.use(function(config) {
+axios.interceptors.request.use(function (config) {
     let data = qs.parse(config.data)
 
     if (config.method == "post") {
@@ -48,7 +48,7 @@ axios.interceptors.request.use(function(config) {
     }
 
     return config;
-}, function(error) {
+}, function (error) {
     return Promise.reject(error);
 })
 Vue.prototype.$axios = axios
