@@ -283,6 +283,7 @@ export default {
 
       if (fightPower.value == 0 || fightPower.img > 30000) {
         this.$message.error(this.$appMsg.error[1009]);
+
         return;
       }
 

@@ -27,9 +27,9 @@
         :height="clientHeight"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="id" field="uid" fixed="left" width="125" />
+        <vxe-table-column title="id" field="uid" fixed="left" width="150" />
 
-        <vxe-table-column title="#" type="seq" width="75" />
+        <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column
           title="类型"
@@ -189,8 +189,10 @@ export default {
         .then((res) => {
           let shortUrl = res.data.data.url;
 
-          this.copyData = "id:" + row.uid;
-          "\r类型:" +
+          this.copyData =
+            "id:" +
+            row.uid +
+            "\r类型:" +
             row.type +
             "\r开始:" +
             row.start_num +

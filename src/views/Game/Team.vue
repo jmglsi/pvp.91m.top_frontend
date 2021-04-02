@@ -309,6 +309,7 @@ export default {
 
       if (oldTeamId == newTeamId) {
         this.$message.error(this.$appMsg.error[1006]);
+
         return;
       }
 
