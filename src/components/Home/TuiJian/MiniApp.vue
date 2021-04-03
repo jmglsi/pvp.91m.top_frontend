@@ -20,11 +20,7 @@
       "
     >
       <div class="miniapp-7c8fdd065963838acab323de542586ee">
-        <van-cell-group
-          :border="false"
-          title="本站"
-          class="miniapp-e92a4998df8669fd2f0d92b7f3d41ac5"
-        >
+        <van-cell-group :border="false" title="本站" class="miniapp-e92a4998df8669fd2f0d92b7f3d41ac5">
           <van-grid
             :border="false"
             :column-num="3"
@@ -44,11 +40,7 @@
       </div>
 
       <div class="miniapp-2a48f64e8081b260765b0c936932836a">
-        <van-cell-group
-          :border="false"
-          title="其他"
-          class="miniapp-b377992f355a56a90c6120fb8559de59"
-        >
+        <van-cell-group :border="false" title="其他" class="miniapp-b377992f355a56a90c6120fb8559de59">
           <van-grid
             :border="false"
             :column-num="3"
@@ -68,10 +60,7 @@
       </div>
     </div>
 
-    <div
-      class="miniapp-021a7599a708a3781fabe39f7631edfc"
-      @click="$appPush({ path: '/' })"
-    >
+    <div class="miniapp-021a7599a708a3781fabe39f7631edfc" @click="$appPush({ path: '/' })">
       <img
         v-lazy="
           '//img06.mifile.cn/v1/MI_542ED8B1722DC/b97e76e5df98fbfd8b25ad527f9aadb5.png'

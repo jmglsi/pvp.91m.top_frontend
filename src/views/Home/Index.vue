@@ -1,9 +1,7 @@
 <template>
   <div class="app-home">
     <div class="home-3edeff15047c21ac6441301927306137">
-      <van-sticky
-        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
-      >
+      <van-sticky :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0">
         <van-search
           show-action
           shape="round"
@@ -53,11 +51,9 @@
       class="home-72ab9e07378f988922e6c91884048db0"
     >
       <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">
-        网站由<img
-          v-lazy="upyun.logo"
-          width="75"
-          height="25"
-        />提供CDN加速/云储存服务
+        网站由
+        <img v-lazy="upyun.logo" width="75" height="25" />
+        提供CDN加速/云储存服务
       </span>
     </div>
 

@@ -1,9 +1,7 @@
 <template>
   <div class="search-home">
     <div class="search-9420e49425fc3d6dcfe7b9f8d62b1b6b">
-      <van-sticky
-        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
-      >
+      <van-sticky :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0">
         <van-search
           v-model="search.value"
           show-action
@@ -25,9 +23,7 @@
                   : {}
               "
               @click="$appPush({ path: '/' })"
-            >
-              取消
-            </div>
+            >取消</div>
           </template>
         </van-search>
       </van-sticky>
@@ -73,22 +69,21 @@
                       class="search-f43418d85f50da28b3a9c1e780237105"
                     >
                       {{
-                        index + 1 - tableData.search.hotKeywords.topNum
-                      }} </span
-                    >&nbsp;
-                    <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">{{
+                      index + 1 - tableData.search.hotKeywords.topNum
+                      }}
+                    </span>&nbsp;
+                    <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
+                      {{
                       data.value
-                    }}</span>
+                      }}
+                    </span>
                   </span>
                 </van-grid-item>
               </van-grid>
             </van-cell-group>
           </div>
 
-          <div
-            v-if="showInfo.searchHistory"
-            class="search-a79b6044b2b3a5a9bce4cb65bd80e774"
-          >
+          <div v-if="showInfo.searchHistory" class="search-a79b6044b2b3a5a9bce4cb65bd80e774">
             <van-cell-group
               :border="false"
               title="历史搜索"
@@ -103,8 +98,7 @@
                   text-color="#ad0000"
                   @click="getSearch(data)"
                   class="search-34690b06683636425980897b6bcd33d4"
-                  >{{ data }}</van-tag
-                >
+                >{{ data }}</van-tag>
               </div>
               <div class="search-93aea4a321bd36aefe85b2b0526e52e8">
                 <van-button
@@ -113,8 +107,7 @@
                   icon="clear"
                   size="small"
                   type="danger"
-                  >清除历史搜索</van-button
-                >
+                >清除历史搜索</van-button>
               </div>
             </van-cell-group>
           </div>
@@ -125,11 +118,7 @@
         v-if="showInfo.searchData && tableData.heroInfo.id"
         class="search-f63b407c95e4f2db4c44e27b3a8d136b"
       >
-        <van-cell-group
-          :border="false"
-          title=""
-          class="search-5d555cae6745619e13c5488c119d2a14"
-        >
+        <van-cell-group :border="false" title class="search-5d555cae6745619e13c5488c119d2a14">
           <van-cell
             :icon="tableData.heroInfo.img"
             :title="
@@ -164,9 +153,7 @@
           >
             <van-tab title="综合">
               <template #title>
-                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff"
-                  >综合</span
-                >
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">综合</span>
                 <img
                   v-if="tableData.heroInfo.trend > 0"
                   v-lazy="
@@ -176,11 +163,9 @@
                   height="15"
                   class="search-05a36d9069f1023c8432de89b15a83af"
                 />
-                <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420"
-                  >-</span
-                >
-              </template></van-tab
-            >
+                <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420">-</span>
+              </template>
+            </van-tab>
             <van-tab title="赛事" />
             <van-tab title="技能和出装" />
             <van-tab title="更新调整" />
@@ -236,12 +221,9 @@
             </van-grid-item>
           </van-grid>
           <span class="search-399841f840f75044108804ec30d37405">
-            <van-icon name="underway-o" />&nbsp;<span
-              class="search-c27c140f08b0252f3027cf077cee2358"
-              >11:30</span
-            >&nbsp;更新&nbsp;&nbsp;
-            <van-icon name="todo-list-o" />
-            基于 巅峰赛 (顶端局) 统计
+            <van-icon name="underway-o" />&nbsp;
+            <span class="search-c27c140f08b0252f3027cf077cee2358">11:30</span>&nbsp;更新&nbsp;&nbsp;
+            <van-icon name="todo-list-o" />基于 巅峰赛 (顶端局) 统计
           </span>
         </van-cell-group>
 
@@ -250,10 +232,7 @@
         </div>
       </div>
 
-      <div
-        v-if="showInfo.searchData"
-        class="search-db4665e1908869c6354106ce00ff95ba"
-      >
+      <div v-if="showInfo.searchData" class="search-db4665e1908869c6354106ce00ff95ba">
         <van-cell-group
           :border="false"
           :title="tableData.heroInfo.id ? ' ' : ''"
@@ -289,16 +268,10 @@
           title-active-color="orange"
         >
           <van-tab title="技能">
-            <HeroSkillList
-              v-if="skillInfo.model == 0"
-              :heroId="tableData.heroInfo.id"
-            />
+            <HeroSkillList v-if="skillInfo.model == 0" :heroId="tableData.heroInfo.id" />
           </van-tab>
           <van-tab title="装备 (推荐)">
-            <HeroEquipmentListALL
-              v-if="skillInfo.model == 1"
-              :heroId="tableData.heroInfo.id"
-            />
+            <HeroEquipmentListALL v-if="skillInfo.model == 1" :heroId="tableData.heroInfo.id" />
           </van-tab>
           <van-tab title="装备 (单件)">
             <HeroEquipmentListOne

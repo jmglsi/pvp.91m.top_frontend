@@ -65,8 +65,6 @@ module.exports = {
           .end()
       }
 
-      config.plugins.delete('prefetch')
-
       config
         .plugin('compression-webpack-plugin')
         .use(new CompressionWebpackPlugin({
@@ -83,6 +81,8 @@ module.exports = {
           deleteOriginalAssets: false
         }))
         .end()
+
+        config.plugins.delete('prefetch')
     }
   },
   css: {

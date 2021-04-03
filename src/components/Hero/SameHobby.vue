@@ -25,9 +25,7 @@
             v-lazy="data.img"
             class="app-4ab161130e76571ab0c31aa23a6238c7"
           />
-          <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">
-            {{ data.name }}
-          </div>
+          <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">{{ data.name }}</div>
         </li>
       </ul>
 
@@ -41,10 +39,7 @@
           @click="
             $appPush({ path: '/search', query: { q: '国服认证', refresh: 1 } })
           "
-        >
-          国服认证
-        </van-button>
-        &nbsp;
+        >国服认证</van-button>&nbsp;
         <van-button
           round
           icon="replay"
@@ -52,9 +47,7 @@
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="getHeroInfoByWebAccountList(heroId, 1)"
-        >
-          刷新一下
-        </van-button>
+        >刷新一下</van-button>
       </div>
     </div>
   </div>

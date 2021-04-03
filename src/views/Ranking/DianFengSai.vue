@@ -16,13 +16,7 @@
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
-        <vxe-table-column
-          title="英雄"
-          field="allScore"
-          fixed="left"
-          width="75"
-          sortable
-        >
+        <vxe-table-column title="英雄" field="allScore" fixed="left" width="75" sortable>
           <template v-slot="{ row }">
             <div
               :class="
@@ -37,8 +31,7 @@
                 mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
-                >{{ row.tag.text }}</van-tag
-              >
+              >{{ row.tag.text }}</van-tag>
               <img
                 v-lazy="row.img"
                 width="50"
@@ -61,8 +54,7 @@
                 />
                 <span
                   class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-043052eea2d064cab23119e56f4f640e"
-                  >{{ row.skill.preview[0].pickRate }}%</span
-                >
+                >{{ row.skill.preview[0].pickRate }}%</span>
                 <img
                   v-lazy="row.skill.preview[1].img"
                   width="15"
@@ -71,8 +63,7 @@
                 />
                 <span
                   class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
-                  >{{ row.skill.preview[1].pickRate }}%</span
-                >
+                >{{ row.skill.preview[1].pickRate }}%</span>
               </div>
             </div>
           </template>
@@ -172,118 +163,38 @@
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
-          <vxe-table-column
-            title="全部"
-            field="allBrandRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="金牌"
-            field="evaluateGoldRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="银牌"
-            field="evaluateSilverRate"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="全部" field="allBrandRate" :width="listWidth" sortable />
+          <vxe-table-column title="金牌" field="evaluateGoldRate" :width="listWidth" sortable />
+          <vxe-table-column title="银牌" field="evaluateSilverRate" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column
-            title="全部"
-            field="allMvpRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="胜方"
-            field="winMvpRate"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="败方"
-            field="loseMvpRate"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
+          <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
+          <vxe-table-column title="败方" field="loseMvpRate" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column
-          title="承伤"
-          field="totalBeHurtedCntPerMin"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="承伤" field="totalBeHurtedCntPerMin" :width="listWidth" sortable />
 
         <vxe-table-column title="伤害">
-          <vxe-table-column
-            title="全部"
-            field="totalOutputPerMin"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="对人"
-            field="totalHurtHeroCntPerMin"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="全部" field="totalOutputPerMin" :width="listWidth" sortable />
+          <vxe-table-column title="对人" field="totalHurtHeroCntPerMin" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="金币">
-          <vxe-table-column
-            title="全部"
-            field="equMoneyOverflow"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="分均"
-            field="equMoneyMin"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="全部" field="equMoneyOverflow" :width="listWidth" sortable />
+          <vxe-table-column title="分均" field="equMoneyMin" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="KDA">
-          <vxe-table-column
-            title="击杀"
-            field="killCnt"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="死亡"
-            field="deadCnt"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="助攻"
-            field="assistCnt"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
+          <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
+          <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
         </vxe-table-column>
 
         <vxe-table-column title="其他">
-          <vxe-table-column
-            title="参团"
-            field="joinGamePercent"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-table-column
-            title="时长"
-            field="usedtime"
-            :width="listWidth"
-            sortable
-          />
+          <vxe-table-column title="参团" field="joinGamePercent" :width="listWidth" sortable />
+          <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
         </vxe-table-column>
       </vxe-grid>
     </div>
@@ -306,18 +217,21 @@
             <HeroSkillList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"
               :heroId="tableDataRow.id"
-          /></van-tab>
-          <van-tab title="装备 (推荐)"
-            ><HeroEquipmentListALL
+            />
+          </van-tab>
+          <van-tab title="装备 (推荐)">
+            <HeroEquipmentListALL
               v-if="cellInfo.index == 0 && skillInfo.model == 1"
               :heroId="tableDataRow.id"
-          /></van-tab>
-          <van-tab title="装备 (单件)"
-            ><HeroEquipmentListOne
+            />
+          </van-tab>
+          <van-tab title="装备 (单件)">
+            <HeroEquipmentListOne
               v-if="cellInfo.index == 0 && skillInfo.model == 2"
               :equipmentId="tableDataRow.id"
               :equipmentType="1"
-          /></van-tab>
+            />
+          </van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>

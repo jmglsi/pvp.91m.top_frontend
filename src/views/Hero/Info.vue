@@ -34,9 +34,7 @@
                   : { color: 'white' }
               "
               class="hero-d5d3db1765287eef77d7927cc956f50a"
-            >
-              {{ hero.title }}
-            </span>
+            >{{ hero.title }}</span>
             <img
               v-if="showInfo.parameter && hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
@@ -47,10 +45,7 @@
           </div>
         </template>
         <template #right>
-          <div
-            v-if="showInfo.parameter"
-            class="hero-68adaff1d028a37f27fb33c483329cba"
-          >
+          <div v-if="showInfo.parameter" class="hero-68adaff1d028a37f27fb33c483329cba">
             <ul>
               <li
                 v-for="(data, index) in hero.info.type"
@@ -61,8 +56,7 @@
                   round
                   :color="positionInfo[data][1]"
                   class="hero-bc267281c62550407c9572aff2a45f69"
-                  >{{ positionInfo[data][0] }}</van-tag
-                >
+                >{{ positionInfo[data][0] }}</van-tag>
               </li>
             </ul>
           </div>
@@ -96,12 +90,10 @@
         v-model="showInfo.imagePreview"
         :images="hero.info.skin"
         :startPosition="showInfo.imageIndex"
-        className="app-0ca41257ee36e86e5d89591c82113263"
+        class="app-0ca41257ee36e86e5d89591c82113263"
       >
         <template v-slot:cover>
-          <span class="hero-b5741c8457973b008c424c6f94ff3901">
-            长按或右键可保存图片~
-          </span>
+          <span class="hero-b5741c8457973b008c424c6f94ff3901">长按或右键可保存图片~</span>
         </template>
       </van-image-preview>
     </div>
@@ -131,8 +123,7 @@
             />
             <span
               class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-              >{{ hero.info.equMoneyMin || 0 }}</span
-            >
+            >{{ hero.info.equMoneyMin || 0 }}</span>
 
             <img
               v-lazy="
@@ -144,8 +135,7 @@
             />
             <span
               class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-              >{{ hero.info.usedtime || 0 }}</span
-            >
+            >{{ hero.info.usedtime || 0 }}</span>
           </div>
 
           <span class="hero-9726255eec083aa56dc0449a21b33190">
@@ -153,8 +143,7 @@
               round
               color="black"
               class="hero-1d61d12b768d71c075477fd92281464d"
-              >{{ hero.info.equMoneyOverflow || 0 }}</van-tag
-            >
+            >{{ hero.info.equMoneyOverflow || 0 }}</van-tag>
           </span>
         </van-grid-item>
         <van-grid-item
@@ -177,8 +166,8 @@
           @click="showInfo.skillMenu = true"
         >
           <div class="hero-f3412345b511c61986bba9a39793157f">
-            <span class="hero-5a7c3c141fd96e8559a5994bd1c63057"
-              ><img
+            <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
+              <img
                 v-lazy="hero.info.skill.preview[0].img"
                 width="25"
                 height="25"
@@ -186,11 +175,10 @@
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ hero.info.skill.preview[0].pickRate }}%</span
-              ></span
-            >
-            <span class="hero-5a7c3c141fd96e8559a5994bd1c63057"
-              ><img
+              >{{ hero.info.skill.preview[0].pickRate }}%</span>
+            </span>
+            <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
+              <img
                 v-lazy="hero.info.skill.preview[1].img"
                 width="25"
                 height="25"
@@ -198,9 +186,8 @@
               />
               <span
                 class="app-0fc3cfbc27e91ea60a787de13dae3e3c hero-0fc3cfbc27e91ea60a787de13dae3e3c"
-                >{{ hero.info.skill.preview[1].pickRate }}%</span
-              ></span
-            >
+              >{{ hero.info.skill.preview[1].pickRate }}%</span>
+            </span>
           </div>
         </van-grid-item>
       </van-grid>
@@ -232,39 +219,25 @@
             </div>
           </template>
         </van-tab>
-        <van-tab
-          class="hero-ab71021d21963773bfb8be80af65869f"
-          title="同分路对比"
-        />
+        <van-tab class="hero-ab71021d21963773bfb8be80af65869f" title="同分路对比" />
         <van-tab
           class="hero-ab71021d21963773bfb8be80af65869f"
           title="自定义对比"
           :disabled="tabsInfo.model == 0 ? true : false"
         />
         <div class="hero-e06398232dc80e41209489705546802c">
-          <HeroLine
-            v-if="tabsInfo.model == 0"
-            :heroId="hero.info.id"
-            :aid="trendInfo.model"
-          />
+          <HeroLine v-if="tabsInfo.model == 0" :heroId="hero.info.id" :aid="trendInfo.model" />
         </div>
         <div
           :style="$appIsMobile ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
-          <HeroRadar
-            v-if="tabsInfo.model > 0"
-            :tabsModel="tabsInfo.model"
-            :heroId="hero.info.id"
-          />
+          <HeroRadar v-if="tabsInfo.model > 0" :tabsModel="tabsInfo.model" :heroId="hero.info.id" />
         </div>
       </van-tabs>
     </div>
 
-    <div
-      v-if="showInfo.parameter"
-      class="hero-9393a9be63ea720a87e048d40caa03b5"
-    >
+    <div v-if="showInfo.parameter" class="hero-9393a9be63ea720a87e048d40caa03b5">
       <van-skeleton v-if="showInfo.skeleton" :row="30" />
 
       <lazy-component
@@ -277,11 +250,7 @@
         </div>
 
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
-          <HeroUpdate
-            v-if="hero.info.id"
-            :heroId="hero.info.id"
-            :updateId="hero.info.updateId"
-          />
+          <HeroUpdate v-if="hero.info.id" :heroId="hero.info.id" :updateId="hero.info.updateId" />
         </div>
       </lazy-component>
     </div>
@@ -301,16 +270,14 @@
           title-active-color="orange"
         >
           <van-tab title="技能">
-            <HeroSkillList :heroId="hero.info.id"
-          /></van-tab>
-          <van-tab title="装备 (推荐)"
-            ><HeroEquipmentListALL :heroId="hero.info.id"
-          /></van-tab>
-          <van-tab title="装备 (单件)"
-            ><HeroEquipmentListOne
-              :equipmentId="hero.info.id"
-              :equipmentType="1"
-          /></van-tab>
+            <HeroSkillList :heroId="hero.info.id" />
+          </van-tab>
+          <van-tab title="装备 (推荐)">
+            <HeroEquipmentListALL :heroId="hero.info.id" />
+          </van-tab>
+          <van-tab title="装备 (单件)">
+            <HeroEquipmentListOne :equipmentId="hero.info.id" :equipmentType="1" />
+          </van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -322,15 +289,8 @@
         safe-area-inset-bottom
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
-        <van-grid
-          class="hero-ed90360246f7e2ed71281819e0ca3623"
-          :border="false"
-          :column-num="2"
-        >
-          <van-grid-item
-            class="hero-59c25466342abdb6746988b245f3a5a6"
-            @click="onHeroVoteClick(0)"
-          >
+        <van-grid class="hero-ed90360246f7e2ed71281819e0ca3623" :border="false" :column-num="2">
+          <van-grid-item class="hero-59c25466342abdb6746988b245f3a5a6" @click="onHeroVoteClick(0)">
             <img
               v-lazy="
                 '//img06.mifile.cn/v1/MI_542ED8B1722DC/775ce210e6ab76e03cc5a0ff43e46141.png'
@@ -338,14 +298,13 @@
               width="50"
               height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
+              {{
               circle.info.vote[0].text
-            }}</span>
+              }}
+            </span>
           </van-grid-item>
-          <van-grid-item
-            class="hero-59c25466342abdb6746988b245f3a5a6"
-            @click="onHeroVoteClick(1)"
-          >
+          <van-grid-item class="hero-59c25466342abdb6746988b245f3a5a6" @click="onHeroVoteClick(1)">
             <img
               v-lazy="
                 '//img08.mifile.cn/v1/MI_542ED8B1722DC/2dfa18ec81ff43a63abf94798f431e8d.png'
@@ -353,9 +312,11 @@
               width="50"
               height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
+              {{
               circle.info.vote[1].text
-            }}</span>
+              }}
+            </span>
           </van-grid-item>
           <van-cell
             title="注意事项"
@@ -373,10 +334,7 @@
       </van-action-sheet>
     </div>
 
-    <div
-      v-if="tabsInfo.model == 0"
-      class="hero-79acd83e2dbb9d5b6de778dd5077db2c"
-    >
+    <div v-if="tabsInfo.model == 0" class="hero-79acd83e2dbb9d5b6de778dd5077db2c">
       <van-tabbar
         fixed
         safe-area-inset-bottom
@@ -392,8 +350,7 @@
           name="/"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
-          >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
-        >
+        >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item>
         <van-tabbar-item
           icon="//img07.mifile.cn/v1/MI_542ED8B1722DC/09e4d71b4fc218baad6fcc97ce0b8a96.png"
           name="/"
@@ -405,8 +362,7 @@
                 })
               : $message.info($appMsg.info[1006])
           "
-          >稷下图书馆</van-tabbar-item
-        >
+        >稷下图书馆</van-tabbar-item>
       </van-tabbar>
     </div>
   </div>

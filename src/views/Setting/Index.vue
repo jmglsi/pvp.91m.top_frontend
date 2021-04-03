@@ -22,11 +22,7 @@
           : {}
       "
     >
-      <van-cell-group
-        :border="false"
-        title="设置"
-        class="setting-ea4d5993952f38933e7cced73b900ad7"
-      >
+      <van-cell-group :border="false" title="设置" class="setting-ea4d5993952f38933e7cced73b900ad7">
         <van-cell title="精简模式" label="优化排行界面的加载速度">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
@@ -49,11 +45,7 @@
         </van-cell>
       </van-cell-group>
 
-      <van-cell-group
-        :border="false"
-        title="缓存"
-        class="setting-ea4d5993952f38933e7cced73b900ad7"
-      >
+      <van-cell-group :border="false" title="缓存" class="setting-ea4d5993952f38933e7cced73b900ad7">
         <van-cell
           v-for="(data, index) in cacheInfo"
           :key="'setting-7e40a645babda019f1204a81365179fc-' + index"
@@ -64,11 +56,7 @@
         />
       </van-cell-group>
 
-      <van-cell-group
-        :border="false"
-        title="其他"
-        class="setting-ea4d5993952f38933e7cced73b900ad7"
-      >
+      <van-cell-group :border="false" title="其他" class="setting-ea4d5993952f38933e7cced73b900ad7">
         <van-cell
           title="当前地区"
           label="国外访问卡的可以尝试切换下"
@@ -89,11 +77,7 @@
           :value="appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
           @click="$message.info($appMsg.info[1018])"
         />
-        <van-cell
-          title="更新时间"
-          label="最后一次数据更新的时间"
-          :value="appConfigInfo.appInfo.updateTime"
-        />
+        <van-cell title="更新时间" label="最后一次数据更新的时间" :value="appConfigInfo.appInfo.updateTime" />
         <van-cell title="程序版本" :value="appConfigInfo.appInfo.version" />
       </van-cell-group>
     </div>
@@ -149,7 +133,7 @@ export default {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         isReducedMode = false;
 
-      if (e == false) {
+      if (!e) {
         localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
 
         isReducedMode = false;
@@ -174,7 +158,7 @@ export default {
       let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
         isSmallMobile = false;
 
-      e == false ? (isSmallMobile = false) : (isSmallMobile = true);
+      e ? (isSmallMobile = true) : (isSmallMobile = false);
 
       this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
       appConfigInfo.appInfo.isSmallMobile = Number(isSmallMobile);

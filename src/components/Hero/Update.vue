@@ -5,21 +5,17 @@
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
-          <van-col
-            :span="$appIsMobile ? 15 : 21"
-            @click="showInfo.calendar = true"
-          >
-            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
+          <van-col :span="$appIsMobile ? 15 : 21" @click="showInfo.calendar = true">
+            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">
+              {{
               tableData.result.tips
-            }}</span>
+              }}
+            </span>
           </van-col>
           <van-col :span="$appIsMobile ? 9 : 3">
             <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
               <van-dropdown-menu direction="up">
-                <van-dropdown-item
-                  v-model="updateInfo.model"
-                  :options="updateInfo.options"
-                />
+                <van-dropdown-item v-model="updateInfo.model" :options="updateInfo.options" />
               </van-dropdown-menu>
             </div>
           </van-col>
@@ -46,27 +42,23 @@
               "
               round
               class="update-5a0c2e4611419b82b55675d035764007"
-              >{{ data.calendar.day }}</van-tag
-            >
+            >{{ data.calendar.day }}</van-tag>
 
-            <div
-              v-if="data.url"
-              class="update-5a5152e95445ede11c05f5fa898d8fd9"
-            >
+            <div v-if="data.url" class="update-5a5152e95445ede11c05f5fa898d8fd9">
               <van-tag
                 round
                 v-for="(data, index) in data.tags"
                 :key="'update-12c9bc92e856bdab7bc932b5d368f97e-' + index"
                 color="black"
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
-                >{{ data }}</van-tag
-              >
+              >{{ data }}</van-tag>
               <span
                 @click="
                   $appOpenUrl('是否打开外部链接?', null, { path: data.url })
                 "
                 class="update-f0af832cbd923851be8557213d95dddc"
-                >&nbsp;🔗
+              >
+                &nbsp;🔗
                 {{ data.title }}
               </span>
             </div>
@@ -119,12 +111,7 @@
           "
           class="update-0b479089ade5d13a2c41830785ebac9d"
         >
-          <van-tag
-            round
-            color="orange"
-            class="update-77ed43eb3bc38c0cb1a38367cfedd9d6"
-            >更多更新记录</van-tag
-          >
+          <van-tag round color="orange" class="update-77ed43eb3bc38c0cb1a38367cfedd9d6">更多更新记录</van-tag>
         </div>
       </div>
     </div>
@@ -149,21 +136,20 @@
         "
       >
         <template #title>
-          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">{{
+          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">
+            {{
             updateInfo.title
-          }}</span
-          >&nbsp;
-          <span class="update-50d683cbc99c635a03f18ca2fcfbe70b"
-            ><van-switch
+            }}
+          </span>&nbsp;
+          <span class="update-50d683cbc99c635a03f18ca2fcfbe70b">
+            <van-switch
               v-model="showInfo.checked"
               size="15px"
               class="update-0ae9adc9418f0f446d0b49ef7e49e94c"
-          /></span>
+            />
+          </span>
         </template>
-        <div
-          v-html="updateInfo.text"
-          class="update-288ac40c37c02b743c0c2cc51c650dd3"
-        />
+        <div v-html="updateInfo.text" class="update-288ac40c37c02b743c0c2cc51c650dd3" />
       </van-dialog>
     </div>
   </div>

@@ -23,8 +23,7 @@
                 mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
-                >{{ row.tag.text }}</van-tag
-              >
+              >{{ row.tag.text }}</van-tag>
               <img
                 v-lazy="row.avatar"
                 width="50"
@@ -43,12 +42,7 @@
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
 
-        <vxe-table-column
-          title="巅峰分"
-          field="rankScore"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="巅峰分" field="rankScore" :width="listWidth" sortable />
       </vxe-grid>
     </div>
 

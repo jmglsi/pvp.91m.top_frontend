@@ -53,9 +53,11 @@
               height="50"
               class="skin-52326308ff25a5e0ce86bdae53ff2c35"
             />
-            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">{{
+            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">
+              {{
               row.skinName
-            }}</span>
+              }}
+            </span>
           </template>
         </vxe-table-column>
 
@@ -72,9 +74,7 @@
         @click="onActivityUrlclick"
         size="small"
         color="linear-gradient(to right, #ff6034, #ee0a24)"
-      >
-        {{ tableData.result.title || "活动地址" }}
-      </van-button>
+      >{{ tableData.result.title || "活动地址" }}</van-button>
     </div>
   </div>
 </template>

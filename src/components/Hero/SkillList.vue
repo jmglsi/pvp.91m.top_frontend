@@ -20,27 +20,12 @@
       <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-column title="比率 (%)">
-        <vxe-table-column
-          title="出场"
-          field="pickRate"
-          :width="listWidth"
-          sortable
-        />
-        <vxe-table-column
-          title="胜率"
-          field="winRate"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="出场" field="pickRate" :width="listWidth" sortable />
+        <vxe-table-column title="胜率" field="winRate" :width="listWidth" sortable />
       </vxe-table-column>
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column
-          title="净胜"
-          field="mvpRate"
-          :width="listWidth"
-          sortable
-        />
+        <vxe-table-column title="净胜" field="mvpRate" :width="listWidth" sortable />
       </vxe-table-column>
     </vxe-grid>
   </div>

@@ -24,12 +24,7 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="装备"
-        field="equipment.id"
-        fixed="left"
-        width="50"
-      >
+      <vxe-table-column title="装备" field="equipment.id" fixed="left" width="50">
         <template v-slot="{ row }">
           <img
             v-lazy="
@@ -44,18 +39,15 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="优先级"
-        field="equipment.updateIndex"
-        :width="listWidth"
-        sortable
-      >
+      <vxe-table-column title="优先级" field="equipment.updateIndex" :width="listWidth" sortable>
         <template v-slot="{ row }">
-          <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
+          <span class="hero-b1bd56e896540535e327e5a177ede4a8">
+            {{
             row.equipment.updateType == 0
-              ? "-"
-              : Math.abs(row.equipment.updateIndex)
-          }}</span>
+            ? "-"
+            : Math.abs(row.equipment.updateIndex)
+            }}
+          </span>
           <img
             v-if="row.equipment.updateType != 0"
             v-lazy="'/img/app-icons/hot_' + row.equipment.updateType + '.png'"
@@ -167,11 +159,7 @@
       </vxe-table-column>
     </vxe-grid>
 
-    <van-action-sheet
-      v-model="showInfo.equipmentMenu"
-      :round="false"
-      safe-area-inset-bottom
-    >
+    <van-action-sheet v-model="showInfo.equipmentMenu" :round="false" safe-area-inset-bottom>
       <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
         <img
           v-lazy="
@@ -184,7 +172,8 @@
           width="25"
           height="25"
           class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-        />&nbsp;和&nbsp;<img
+        />&nbsp;和&nbsp;
+        <img
           v-lazy="
             '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
             lineData.equipmentId +
@@ -199,24 +188,16 @@
         <EquipmentLine :heroEquipment="lineDataRow" />
       </div>
 
-      <div
-        class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4"
-      >
+      <div class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4">
         <span class="app-e4c9479b11955648dad558fe717a4eb2">
           1.格子出场不高但是胜率接近 100%
           可能是因为样本较少、针对出、还没出完就结束的
-          <br />
-          2.全部出场 > 100% 是因为买了多件,例如:双无尽蒙犽
-          <br />
-          3.核心装在前面可能是因为先买的小件后面合的
-          <br />
-          4.保命装在前面可能是因为最后卖了前几件换的
-          <br />
-          5.大小件胜率不一样说明合成也需要时间呀 ;(
-          <br />
-          6.少数傻逼最后会卖装备甚至买其他职业的
-          <br />
-          7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
+          <br />2.全部出场 > 100% 是因为买了多件,例如:双无尽蒙犽
+          <br />3.核心装在前面可能是因为先买的小件后面合的
+          <br />4.保命装在前面可能是因为最后卖了前几件换的
+          <br />5.大小件胜率不一样说明合成也需要时间呀 ;(
+          <br />6.少数傻逼最后会卖装备甚至买其他职业的
+          <br />7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
         </span>
       </div>
     </van-action-sheet>

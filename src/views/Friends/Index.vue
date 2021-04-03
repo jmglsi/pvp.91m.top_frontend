@@ -15,12 +15,10 @@
         <template #title>
           <span
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
-            >&lt;{{ $appColumnsInfo.areaType[friendsInfo.areaType] }}&gt;</span
-          >
+          >&lt;{{ $appColumnsInfo.areaType[friendsInfo.areaType] }}&gt;</span>
           <span
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
-            >{{ friendsInfo.name }}</span
-          >
+          >{{ friendsInfo.name }}</span>
           <span
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-0a862f895f636cb1313fefe4eb09810f"
           >
@@ -29,8 +27,7 @@
               :color="friendsInfo.certification.color"
               class="friends-e14d426045f0bd910a6606a7a11122eb"
               @click="$message.info($appMsg.info[1003])"
-              >{{ friendsInfo.certification.text }}</van-tag
-            >
+            >{{ friendsInfo.certification.text }}</van-tag>
           </span>
         </template>
       </van-nav-bar>
@@ -49,17 +46,13 @@
         height="100"
         class="friends-85e06e092b46386f58023d2ad27a8bb0"
       />
-      <div class="app-88bf7a95736562190270d51dc2cb3f42">
-        {{ friendsInfo.description || "这个人很懒,什么都没有留下" }}
-      </div>
+      <div
+        class="app-88bf7a95736562190270d51dc2cb3f42"
+      >{{ friendsInfo.description || "这个人很懒,什么都没有留下" }}</div>
     </div>
 
     <div class="friends-452abde170a4d98ca1ada465cac0eed5">
-      <van-cell-group
-        :border="false"
-        title=""
-        class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f"
-      >
+      <van-cell-group :border="false" title class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f">
         <van-cell
           v-if="friendsInfo"
           title="王者荣耀"
@@ -68,15 +61,14 @@
         >
           <template #right-icon>
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
-              <img
-                v-lazy="friendsInfo.rank.starIcon"
-                width="50"
-                height="50"
-              /><span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
+              <img v-lazy="friendsInfo.rank.starIcon" width="50" height="50" />
+              <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
+              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">
+                {{
                 friendsInfo.rank.score
-              }}</span></span
-            >
+                }}
+              </span>
+            </span>
           </template>
         </van-cell>
         <van-cell
@@ -121,8 +113,7 @@
             <span
               v-if="friendsInfo.heroList.length == 0"
               class="friends-d1dc130fa38d505fefbe9810d4790c8f"
-              >未设置</span
-            >
+            >未设置</span>
           </template>
         </van-cell>
       </van-cell-group>
@@ -135,17 +126,14 @@
         type="primary"
         size="small"
         @click="getWebAccountInfo(1, 1)"
-        >刷新</van-button
-      >
-      &nbsp;
+      >刷新</van-button>&nbsp;
       <van-button
         round
         icon="description"
         type="info"
         size="small"
         @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
-        >复制 QQ</van-button
-      >
+      >复制 QQ</van-button>
     </div>
   </div>
 </template>

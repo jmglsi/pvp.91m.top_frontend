@@ -45,57 +45,42 @@
                   query: { q: '大佬们快来加群', refresh: 1 },
                 })
               "
-            >
-              交流群
-            </van-button>
-            &nbsp; &nbsp; &nbsp;
+            >交流群</van-button>&nbsp; &nbsp; &nbsp;
             <van-button
               round
               size="small"
               color="linear-gradient(to right, #6874E8, #9708CC)"
               @click="onExampleClick"
-            >
-              示例图片
-            </van-button>
-            &nbsp; &nbsp; &nbsp;
+            >示例图片</van-button>&nbsp; &nbsp; &nbsp;
             <van-button
               round
               size="small"
               type="primary"
               :disabled="disabledInfo.addFightPower"
               @click="onAddFightPowerClick"
-            >
-              提交分数
-            </van-button>
+            >提交分数</van-button>
           </div>
 
           <div
             class="app-61046f2f5eefe3dc179e52af32241062 hero-fightPower-1fcc988ce1403e447b81fe06cbaf7e66"
           >
             1.默认保存在【我的 - 左上角编辑】填的信息下,
-            <span class="app-e4c9479b11955648dad558fe717a4eb2"
-              >如果您的大区、省份有变化,请及时修改</span
-            >
-            <br />
-            2.<span class="app-e4c9479b11955648dad558fe717a4eb2">
-              查询的是 xx区xx省的省100 xx,那就上传自己所在地区的 xx 省100 图片 </span
-            >,上方有示例
-            <br />
-            3.<span class="app-e4c9479b11955648dad558fe717a4eb2"
-              >上传无响应、提示接口频繁</span
-            >可能是图片太大了,可以在QQ、WX发一下 (压缩图片),保存到手机再上传
-            <br />
-            4.<span class="app-e4c9479b11955648dad558fe717a4eb2"
-              >频繁上传错误战力图片,将禁止查询 ;D</span
-            >
-            <br />
-            5.需要大家一起参与进来更新维护,就别光想着白嫖查询了 ;(
+            <span
+              class="app-e4c9479b11955648dad558fe717a4eb2"
+            >如果您的大区、省份有变化,请及时修改</span>
+            <br />2.
+            <span
+              class="app-e4c9479b11955648dad558fe717a4eb2"
+            >查询的是 xx区xx省的省100 xx,那就上传自己所在地区的 xx 省100 图片</span>,上方有示例
+            <br />3.
+            <span class="app-e4c9479b11955648dad558fe717a4eb2">上传无响应、提示接口频繁</span>可能是图片太大了,可以在QQ、WX发一下 (压缩图片),保存到手机再上传
+            <br />4.
+            <span class="app-e4c9479b11955648dad558fe717a4eb2">频繁上传错误战力图片,将禁止查询 ;D</span>
+            <br />5.需要大家一起参与进来更新维护,就别光想着白嫖查询了 ;(
           </div>
         </van-tab>
         <van-tab title="其他大区、省份信息">
-          <div
-            class="hero-fightPower-8198feb840dbc4a19c84ebfab63d9515 app-pzOne"
-          >
+          <div class="hero-fightPower-8198feb840dbc4a19c84ebfab63d9515 app-pzOne">
             <vxe-grid
               ref="refPaiZiOne"
               :loading="tableData.loading"
@@ -112,12 +97,7 @@
                     @click="onImagePreviewClick(rowIndex)"
                     class="hero-fightPower-559b72e1d0f69118d849a535f9000646"
                   />
-                  <span
-                    v-else
-                    class="hero-fightPower-768607b02a407038d55cbdc241ef8df2"
-                  >
-                    没有图片
-                  </span>
+                  <span v-else class="hero-fightPower-768607b02a407038d55cbdc241ef8df2">没有图片</span>
                 </template>
               </vxe-table-column>
 
@@ -135,26 +115,11 @@
                 sortable
               />
 
-              <vxe-table-column
-                title="省份"
-                field="provinceText"
-                width="175"
-                sortable
-              />
+              <vxe-table-column title="省份" field="provinceText" width="175" sortable />
 
-              <vxe-table-column
-                title="分数"
-                field="fightPowerValue"
-                :width="listWidth"
-                sortable
-              />
+              <vxe-table-column title="分数" field="fightPowerValue" :width="listWidth" sortable />
 
-              <vxe-table-column
-                title="更新时间"
-                field="updateTime"
-                width="200"
-                sortable
-              />
+              <vxe-table-column title="更新时间" field="updateTime" width="200" sortable />
             </vxe-grid>
           </div>
         </van-tab>

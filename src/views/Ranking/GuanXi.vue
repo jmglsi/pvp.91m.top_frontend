@@ -9,10 +9,7 @@
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
-        <vxe-table-column
-          :title="heroName == '' ? '英雄' : heroName"
-          fixed="left"
-        >
+        <vxe-table-column :title="heroName == '' ? '英雄' : heroName" fixed="left">
           <vxe-table-column
             :title="heroName == '' ? '1' : '和'"
             :filters="[
@@ -43,8 +40,7 @@
                 />
                 <span
                   class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
-                  >{{ row.hero_1.adaptationRate }}</span
-                >
+                >{{ row.hero_1.adaptationRate }}</span>
               </div>
             </template>
           </vxe-table-column>
@@ -78,8 +74,7 @@
                 />
                 <span
                   class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-f58cc48f5b942c91e57eff48accc5151"
-                  >{{ row.hero_2.adaptationRate }}</span
-                >
+                >{{ row.hero_2.adaptationRate }}</span>
               </div>
             </template>
           </vxe-table-column>
