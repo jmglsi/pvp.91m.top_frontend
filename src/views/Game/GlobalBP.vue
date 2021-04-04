@@ -14,7 +14,7 @@
   <div v-else-if="!isPortrait" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
     <span
       class="app-f4842dcb685d490e2a43212b8072a6fe"
-      @click="showInfo.allBP ? showInfo.allBP = false : showInfo.allBP = true"
+      @click="showInfo.isUsed ? showInfo.isUsed = false : showInfo.isUsed = true"
     >
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
@@ -227,7 +227,8 @@
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
                           data.trend == 2 && 
-                          (showInfo.allBP == true || (showInfo.allBP == false && data.isUsed == false)) &&
+                          (showInfo.isBan == true || (showInfo.isBan == false && data.isBan == false)) &&
+                          (showInfo.isUsed == true || (showInfo.isUsed == false && data.isUsed == false)) &&
                           (data.type.includes(tableData.model) ||
                             tableData.model == 0)
                         "
@@ -283,7 +284,8 @@
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
                           data.trend != 2 &&
-                          (showInfo.allBP == true || (showInfo.allBP == false && data.isUsed == false)) &&
+                          (showInfo.isBan == true || (showInfo.isBan == false && data.isBan == false)) &&
+                          (showInfo.isUsed == true || (showInfo.isUsed == false && data.isUsed == false)) &&
                           (data.type.includes(tableData.model) ||
                             tableData.model == 0)
                         "
@@ -466,9 +468,17 @@
       <ul>
         <li>
           <span>
-            <span :style="{ color: 'black' }" class="game-59b9fd83bc5ce802ee9ace7db0e22522">全部</span>
+            <span class="game-59b9fd83bc5ce802ee9ace7db0e22522" :style="{ color : 'red' }">已禁</span>
             <span>
-              <van-switch v-model="showInfo.allBP" active-color="black" size="13px" />
+              <van-switch v-model="showInfo.isBan" active-color="red" size="13px" />
+            </span>
+          </span>
+          &nbsp;
+          &nbsp;
+          <span>
+            <span class="game-59b9fd83bc5ce802ee9ace7db0e22522" :style="{ color : 'orange' }">已用</span>
+            <span>
+              <van-switch v-model="showInfo.isUsed" active-color="orange" size="13px" />
             </span>
           </span>
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
@@ -598,7 +608,7 @@
         <van-tab
           v-for="(data, index) in gameInfo.result.rows"
           :key="'game-00b19058a88981bf8bab664835da4ecf-' + index"
-          :disabled="tabsInfo.model != index && bpMode == 'sort' ? true : false"
+          :disabled="tabsInfo.model != index && bpMode != 'view' ? true : false"
         >
           <template #title>
             <van-icon
@@ -763,7 +773,8 @@ export default {
         heroList: true,
         setting: false,
         trend: false,
-        allBP: true,
+        isBan: true,
+        isUsed: true,
       },
     };
   },
@@ -1316,7 +1327,8 @@ export default {
     },
     onToolsMenuClick: function (toolType) {
       let tabsModel = this.tabsInfo.model,
-        gameInfo = this.gameInfo;
+        gameInfo = this.gameInfo.result.rows,
+        teamInfo = gameInfo[tabsModel].team;
 
       if (toolType == 0) {
         this.$dialog
@@ -1342,18 +1354,15 @@ export default {
       }
 
       if (toolType == 2) {
-        let teamInfo = this.teamInfo,
-          gameIndex = gameInfo.result.rows.length;
-
         let newGameInfo = {
           game: {
             type: 1,
             time: null,
           },
-          team:
-            gameIndex % 2 == 0
-              ? { team_1: teamInfo.team_1, team_2: teamInfo.team_2 }
-              : { team_1: teamInfo.team_2, team_2: teamInfo.team_1 },
+          team: {
+            team_1: teamInfo.team_1,
+            team_2: teamInfo.team_2,
+          },
           blue: {
             ban: [0, 0, 0, 0],
             pick: [0, 0, 0, 0, 0],
@@ -1394,7 +1403,7 @@ export default {
         if (this.bpMode == "view") {
           this.bpMode = "edit";
 
-          this.isBlueCamp(gameInfo.result.rows[tabsModel].team.team_1)
+          this.isBlueCamp(teamInfo.team_1)
             ? (this.bpPerspective = 2)
             : (this.bpPerspective = 1);
 
@@ -1473,13 +1482,17 @@ img.game-dce7c4174ce9323904a934a486c41288 {
   position: absolute;
 }
 
+span.game-9f200fbaabc11df2f193d590bc7b3f5b {
+  font-size: 12px;
+}
+
 span.game-99e127c3f9d57b5d03327ebe8b1e4982 {
   margin-left: 20px;
   margin-right: 10px;
 }
 
 span.game-59b9fd83bc5ce802ee9ace7db0e22522 {
-  bottom: -3px;
+  bottom: -4px;
   position: absolute;
 }
 

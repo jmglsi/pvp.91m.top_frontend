@@ -64,7 +64,7 @@
           <vxe-table-column title="数量" field="heroNum" :width="listWidth" sortable />
         </vxe-table-column>
 
-        <vxe-table-column title="装备 (%)">
+        <vxe-table-column title="出场越低,波动越大 (%)">
           <vxe-table-column title="出场" field="allPickRate" :width="listWidth" sortable />
           <vxe-table-column title="胜率" field="allWinRate" :width="listWidth" sortable />
         </vxe-table-column>

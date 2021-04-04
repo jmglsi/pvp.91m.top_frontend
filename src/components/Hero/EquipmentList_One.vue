@@ -41,13 +41,9 @@
 
       <vxe-table-column title="优先级" field="equipment.updateIndex" :width="listWidth" sortable>
         <template v-slot="{ row }">
-          <span class="hero-b1bd56e896540535e327e5a177ede4a8">
-            {{
-            row.equipment.updateType == 0
-            ? "-"
-            : Math.abs(row.equipment.updateIndex)
-            }}
-          </span>
+          <span
+            class="hero-b1bd56e896540535e327e5a177ede4a8"
+          >{{row.equipment.updateType == 0? "-": Math.abs(row.equipment.updateIndex)}}</span>
           <img
             v-if="row.equipment.updateType != 0"
             v-lazy="'/img/app-icons/hot_' + row.equipment.updateType + '.png'"
