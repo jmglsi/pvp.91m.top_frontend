@@ -48,7 +48,7 @@ export default new Router({
     path: '/miniapp',
     name: 'miniApp',
     component: () =>
-      import('./components/Home/TuiJian/MiniApp.vue'),
+      import('./views/MiniApp/Index.vue'),
     meta: {
       title: '小程序',
       keepAlive: true

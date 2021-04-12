@@ -137,7 +137,7 @@
             :label="tableData.heroInfo.jixia.label"
             :value="tableData.heroInfo.jixia.value"
             is-link
-            @click="onJiXiaClick(tableData.heroInfo.wikiId)"
+            @click="$appOpenUrl('是否打开外部链接?', 'NGA @稷下图书馆', { path: tableData.heroInfo.jixia.url })"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
             class="search-869ab9bf85478a49725209693c5760e5"
           />
@@ -468,17 +468,6 @@ export default {
 
         this.showInfo.searchData = false;
       }
-    },
-    onJiXiaClick: function (wikiId) {
-      let url = null;
-
-      wikiId > 0
-        ? (url = "https://bbs.nga.cn/read.php?tid=" + wikiId)
-        : (url = "https://bbs.nga.cn/thread.php?fid=648");
-
-      this.$appOpenUrl("是否打开外部链接?", "NGA @稷下图书馆", {
-        path: url,
-      });
     },
     onCellClick: function (isLink, to, url) {
       if (isLink) {

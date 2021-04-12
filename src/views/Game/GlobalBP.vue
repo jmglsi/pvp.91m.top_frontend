@@ -1279,6 +1279,8 @@ export default {
     },
     onNewSortClick: function () {
       if (this.bpMode == "sort") {
+        this.tableData.model = 0;
+
         this.$appSetLocalStorage("gameBP", this.tableData);
 
         this.bpMode = "view";

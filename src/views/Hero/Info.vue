@@ -604,12 +604,15 @@ export default {
             this.hero.info.id
         )
         .then((res) => {
-          let status = res.data.status;
+          let heroData = this.hero,
+            status = res.data.status;
 
           if (status.code == 200) {
-            this.hero.info.likeStatus == 0
+            heroData.info.likeStatus == 0
               ? (this.hero.info.likeStatus = 1)
               : (this.hero.info.likeStatus = 0);
+
+            localStorage.removeItem("heroInfo-" + heroData.info.id);
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {

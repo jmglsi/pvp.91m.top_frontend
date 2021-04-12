@@ -229,6 +229,12 @@
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
         />
+        <van-cell
+          title="请我喝咖啡☕☕"
+          value="爱发电"
+          is-link
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.afdian })"
+        />
       </van-cell-group>
     </div>
 
@@ -381,6 +387,7 @@ export default {
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
+        afdian: "//afdian.net/@jmglsi",
       },
       loginInfo: {
         certification: {
