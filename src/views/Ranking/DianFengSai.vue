@@ -71,6 +71,21 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
+        <vxe-table-column title="优先级" field="updateIndex" :width="listWidth" sortable>
+          <template v-slot="{ row }">
+            <span
+              class="hero-b1bd56e896540535e327e5a177ede4a8"
+            >{{ row.updateType == 0 ? "-" : Math.abs(row.updateIndex) }}</span>
+            <img
+              v-if="row.updateType != 0"
+              v-lazy="'/img/app-icons/hot_' + row.updateType + '.png'"
+              width="15"
+              height="15"
+              class="app-db21bca782a535e91eb87f56b8abdc45"
+            />
+          </template>
+        </vxe-table-column>
+
         <vxe-table-column title="出场越低,波动越大 (%)">
           <vxe-table-column
             title="禁用"
