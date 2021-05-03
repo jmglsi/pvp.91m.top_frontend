@@ -417,9 +417,7 @@
                 :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
                 @click="
                   data.url
-                    ? $appOpenUrl('是否打开外部链接?', null, {
-                        path: data.url,
-                      })
+                    ? $appOpenUrl('是否打开外部链接?', null, { path: data.url })
                     : null
                 "
               >{{ data.title }}</a-menu-item>

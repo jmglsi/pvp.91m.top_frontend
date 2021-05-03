@@ -96,8 +96,8 @@ export default {
           content: "email=no",
         },
       ],
-      script: this.tableData.homeInfo.script || [],
-      link: this.tableData.homeInfo.link || [],
+      script: this.tableData.appInfo.script || [],
+      link: this.tableData.appInfo.link || [],
     };
   },
   data() {
@@ -129,7 +129,7 @@ export default {
             },
           ],
         },
-        homeInfo: {
+        appInfo: {
           script: [],
           link: [],
         },
@@ -170,6 +170,14 @@ export default {
             pwa: appConfigInfo.appInfo.pwa || 0,
             updateTime: appInfo.updateTime || 0,
             version: appInfo.version || 0,
+            script: appInfo.script,
+            link: appInfo.link,
+            search: {
+              placeholder: appInfo.search.placeholder,
+              img: appInfo.search.img,
+              to: appInfo.search.to,
+              url: appInfo.search.url,
+            },
           };
 
           if (appInfo.updateTime != appConfigInfo.appInfo.updateTime) {
@@ -212,9 +220,7 @@ export default {
                   this.$appOpenUrl(
                     "是否打开外部链接?",
                     null,
-                    {
-                      path: tipsInfo.url,
-                    },
+                    { path: tipsInfo.url },
                     0
                   );
                 }

@@ -347,13 +347,11 @@
               ? '/img/app-icons/like_1.png'
               : '/img/app-icons/like_0.png'
           "
-          name="/"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
         >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item>
         <van-tabbar-item
           icon="//img07.mifile.cn/v1/MI_542ED8B1722DC/09e4d71b4fc218baad6fcc97ce0b8a96.png"
-          name="/"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId
@@ -363,6 +361,11 @@
               : $message.info($appMsg.info[1006])
           "
         >稷下图书馆</van-tabbar-item>
+        <van-tabbar-item
+          icon="//pic.iask.cn/fimg/461863542001.jpg"
+          to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4"
+          icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
+        >加群讨论</van-tabbar-item>
       </van-tabbar>
     </div>
   </div>
@@ -525,6 +528,10 @@ export default {
         this.circle.info = heroData.circleInfo;
         this.positionInfo = heroData.positionInfo;
         this.hero.info = heroInfoData;
+
+        heroInfoData.id == 999
+          ? (this.trendInfo.model = 2)
+          : (this.trendInfo.model = 0);
 
         this.hero.title = heroInfoData.name;
         document.title =

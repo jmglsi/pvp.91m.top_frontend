@@ -25,7 +25,7 @@
       <div class="update-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
-            v-for="(data, index) in tableData.result.rows"
+            v-for="(data, index) in tableData.result.rows.slice(0, heroId == 0 ? 10 : 25)"
             v-show="
               (updateInfo.model == 0 && data.calendar.type <= 0) ||
               (updateInfo.model == 1 && data.calendar.type > 0) ||
@@ -53,9 +53,7 @@
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
               >{{ data }}</van-tag>
               <span
-                @click="
-                  $appOpenUrl('是否打开外部链接?', null, { path: data.url })
-                "
+                @click="$appOpenUrl('是否打开外部链接?', null, { path: data.url })"
                 class="update-f0af832cbd923851be8557213d95dddc"
               >
                 &nbsp;🔗
@@ -73,11 +71,7 @@
               <span
                 v-for="(itemHeroId, index) in data.items"
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
-                @click="
-                  itemHeroId < 900 && itemHeroId != heroId
-                    ? $appPush({ path: '/hero/' + itemHeroId + '/info' })
-                    : null
-                "
+                @click="itemHeroId != heroId? $appPush({ path: '/hero/' + itemHeroId + '/info' }): null"
                 class="update-704985931ce54a5350c733c036dfd8b2"
               >
                 <img
@@ -92,9 +86,6 @@
                   "
                   width="40"
                   height="40"
-                  @click="
-                    itemHeroId > 900 ? $message.info($appMsg.info[1000]) : null
-                  "
                   class="update-5d39f3848925994b52ec52fba934577c"
                 />
               </span>
@@ -107,8 +98,7 @@
           @click="
             $appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', {
               path: '//nga.178.com/read.php?pid=' + updateId,
-            })
-          "
+            })"
           class="update-0b479089ade5d13a2c41830785ebac9d"
         >
           <van-tag round color="orange" class="update-77ed43eb3bc38c0cb1a38367cfedd9d6">更多更新记录</van-tag>
@@ -308,7 +298,11 @@ export default {
     },
     getHeroUpdate: function (heroId) {
       let appConfigInfo = this.$appConfigInfo,
-        heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId);
+        heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId),
+        date = new Date();
+
+      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
 
       if (
         heroUpdate &&
@@ -327,11 +321,6 @@ export default {
 
           this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
         });
-
-      let date = new Date();
-
-      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
-      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
     },
     onHeroUpdateTextCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);

@@ -82,7 +82,7 @@ module.exports = {
         }))
         .end()
 
-        config.plugins.delete('prefetch')
+      config.plugins.delete('prefetch')
     }
   },
   css: {

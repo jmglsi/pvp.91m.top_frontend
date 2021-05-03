@@ -63,12 +63,8 @@
           :value="$appCountry ? '国内' : '国外'"
           @click="
             $appCountry
-              ? $appOpenUrl('是否切至国外?', null, {
-                  path: '//pvp.r18.games',
-                })
-              : $appOpenUrl('是否切至国内?', null, {
-                  path: '//pvp.91m.top',
-                })
+              ? $appOpenUrl('是否切至国外?', null, { path: '//pvp.r18.games' })
+              : $appOpenUrl('是否切至国内?', null, { path: '//pvp.91m.top' })
           "
           is-link
         />

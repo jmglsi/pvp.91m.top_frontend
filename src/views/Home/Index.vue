@@ -5,18 +5,20 @@
         <van-search
           show-action
           shape="round"
-          placeholder="搜索"
+          :placeholder="appInfo.search.placeholder"
           @click="$appPush({ path: '/search' })"
         >
           <template #action>
             <img
-              width="25"
-              height="25"
-              v-lazy="
-                '//img06.mifile.cn/v1/MI_542ED8B1722DC/245e02223e244ef7adf77912859095ee.png'
-              "
+              width="35"
+              height="35"
+              v-lazy="appInfo.search.img"
               class="home-47ee6ad584172f967b674131cb948a87"
-              @click="$appPush({ path: '/friends' })"
+              @click="
+                appInfo.search.to 
+                ? $appOpenUrl('是否打开内部链接?', null, { path: appInfo.search.to }, 1) 
+                : $appOpenUrl('是否打开外部链接?', null, { path: appInfo.search.url }, 0)
+              "
             />
           </template>
         </van-search>
@@ -95,6 +97,14 @@ export default {
         logo:
           "//img03.mifile.cn/v1/MI_542ED8B1722DC/a3d267a418b5913be9e3254efe14532f.png",
       },
+      appInfo: {
+        search: {
+          placeholder: "搜索",
+          img: "//pic.iask.cn/fimg/724763542645.jpg",
+          to: "/friends",
+          url: null,
+        },
+      },
       tabsInfo: {
         model: 0,
       },
@@ -110,6 +120,11 @@ export default {
         version = parseInt(this.$route.query.v) || 1609430400;
 
       this.tabsInfo.model = type;
+
+      if (this.$appConfigInfo.appInfo.version > 0) {
+        this.appInfo = this.$appConfigInfo.appInfo;
+      }
+
       if (pwa == 0) return;
       this.$appConfigInfo.appInfo.pwa = pwa;
 
@@ -158,7 +173,7 @@ img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
 
 <style scoped>
 img.home-47ee6ad584172f967b674131cb948a87 {
-  border-radius: unset;
+  border-radius: 100%;
 }
 
 div.home-72ab9e07378f988922e6c91884048db0 {

@@ -172,14 +172,7 @@ export default {
       }
 
       if (tipsInfo.url) {
-        this.$appOpenUrl(
-          "是否打开外部链接?",
-          null,
-          {
-            path: tipsInfo.url,
-          },
-          0
-        );
+        this.$appOpenUrl("是否打开外部链接?", null, { path: tipsInfo.url }, 0);
       }
     },
   },

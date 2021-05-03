@@ -166,11 +166,12 @@
                 <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420">-</span>
               </template>
             </van-tab>
-            <van-tab title="赛事" />
-            <van-tab title="技能和出装" />
+            <van-tab :disabled="tableData.heroInfo.id == 999" title="战力 (牌子)" />
+            <van-tab :disabled="tableData.heroInfo.id == 999" title="赛事" />
+            <van-tab :disabled="tableData.heroInfo.id == 999" title="技能和出装" />
             <van-tab title="更新调整" />
-            <van-tab title="关系和克制" />
-            <van-tab title="对局回顾" />
+            <van-tab :disabled="tableData.heroInfo.id == 999" title="关系和克制" />
+            <van-tab :disabled="tableData.heroInfo.id == 999" title="对局回顾" />
           </van-tabs>
 
           <van-grid :border="false" :column-num="3">
@@ -284,6 +285,20 @@
       </van-action-sheet>
     </div>
 
+    <div class="search-914f478e623fb19a2937274e72d82551">
+      <van-action-sheet
+        v-model="showInfo.fightPowerMenu"
+        :title="tableData.heroInfo.name + ' 如何操作'"
+        safe-area-inset-bottom
+      >
+        <HeroFightPower
+          v-if="showInfo.fightPowerMenu"
+          :heroId="tableData.heroInfo.id"
+          :fightPowerType="2"
+        />
+      </van-action-sheet>
+    </div>
+
     <AppHello height="100px" />
   </div>
 </template>
@@ -298,6 +313,7 @@ export default {
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+    HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
@@ -360,6 +376,7 @@ export default {
         searchData: false,
         searchHistory: false,
         skillMenu: false,
+        fightPowerMenu: false,
       },
       tipsInfo: [0, 0, 0],
     };
@@ -479,23 +496,25 @@ export default {
       let heroInfo = this.tableData.heroInfo;
 
       if (e == 1) {
+        this.showInfo.fightPowerMenu = true;
+      } else if (e == 2) {
         this.$appOpenUrl("是否打开外部链接?", "玩加电竞", {
           path:
             "http://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
             "&tab_type=5&gm=kog&gametype=6&tag_id=0",
         });
-      } else if (e == 2) {
-        this.showInfo.skillMenu = true;
       } else if (e == 3) {
+        this.showInfo.skillMenu = true;
+      } else if (e == 4) {
         this.$appPush({
           path: "/hero/" + heroInfo.id + "/info?show=heroUpdate",
         });
-      } else if (e == 4) {
+      } else if (e == 5) {
         this.$appPush({
           path: "/ranking?type=1&heroName=" + heroInfo.name + "&refresh=1",
         });
-      } else if (e == 5) {
+      } else if (e == 6) {
         this.$appPush({
           path:
             "/hero/" +

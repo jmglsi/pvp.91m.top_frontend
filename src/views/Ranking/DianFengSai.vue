@@ -502,8 +502,13 @@ export default {
       if (column.property == "allScore") {
         this.cellInfo.index = 0;
 
-        this.showInfo.skillMenu = true;
-        this.showInfo.heroMenu = false;
+        if (row.id == 999) {
+          this.showInfo.skillMenu = false;
+          this.showInfo.heroMenu = true;
+        } else {
+          this.showInfo.skillMenu = true;
+          this.showInfo.heroMenu = false;
+        }
       } else {
         this.cellInfo.index = 1;
 

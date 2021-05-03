@@ -81,9 +81,7 @@
           label="第一次使用务必看一下"
           value="自豪的使用语雀"
           is-link
-          @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })
-          "
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-grid :border="false" :column-num="2" class="my-c3d90961c9bf155d11cbef9c57725aea">

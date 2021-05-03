@@ -64,19 +64,19 @@
             />
           </div>
         </div>
+
+        <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
+          <van-skeleton v-if="showInfo.skeleton" :row="30" />
+
+          <lazy-component
+            :preLoad="1"
+            @show="onComponentShow"
+            class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
+          >
+            <HeroUpdate :heroId="0" />
+          </lazy-component>
+        </div>
       </van-pull-refresh>
-    </div>
-
-    <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
-      <van-skeleton v-if="showInfo.skeleton" :row="30" />
-
-      <lazy-component
-        :preLoad="1"
-        @show="onComponentShow"
-        class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
-      >
-        <HeroUpdate :heroId="0" />
-      </lazy-component>
     </div>
   </div>
 </template>
