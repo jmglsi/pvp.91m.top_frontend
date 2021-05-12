@@ -258,7 +258,7 @@
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
         v-model="showInfo.skillMenu"
-        :title="hero.info.name + ' 的其他数据 (上周)'"
+        :title="hero.info.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
         <van-tabs

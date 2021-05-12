@@ -90,7 +90,7 @@
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
         v-model="showInfo.skillMenu"
-        :title="tableDataRow.equipment.name + ' 的其他数据 (上周)'"
+        :title="tableDataRow.equipment.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
         <HeroEquipmentListOne

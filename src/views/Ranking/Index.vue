@@ -444,6 +444,10 @@ img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
   border-radius: 100%;
 }
 
+span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
+  margin: 0 5px;
+}
+
 span.ranking-f58cc48f5b942c91e57eff48accc5151 {
   margin-left: -50px;
   top: 62px;

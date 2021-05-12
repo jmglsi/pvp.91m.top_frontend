@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="$appPush({ path: '/ranking' })"
         left-text="返回"
         title="每隔 5 分钟更新一次,切换视角 👉"
         z-index="99999999"
@@ -15,73 +15,109 @@
       >
         <template #right>
           <div class="skin-921e37b78f1130768646531b655b7392">
-            <van-switch v-model="showInfo.checked" />
+            <van-switch
+              v-model="showInfo.checked"
+              size="15px"
+              @click="showInfo.checked ? getSkinReturnLog() : getRanking(-1, 0, 0, 0)"
+            />
           </div>
         </template>
       </van-nav-bar>
     </div>
 
     <div
-      v-if="!showInfo.checked && lineData.result.rows.length > 0"
-      class="skin-9eff02d43a97619df7707398ec7099cb"
+      :style="
+        $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '-50px' }
+          : {}
+      "
+      class="skin-0c81212fbe656b4245967fe1fba3413e"
     >
-      <ve-line
-        :extend="lineData.extend"
-        :settings="lineData.settings"
-        :mark-line="lineData.markLine"
-        :mark-point="lineData.markPoint"
-        :data="lineData.result.rows"
-        :loading="lineData.loading"
-        :after-config="afterConfig"
-        width="99.2%"
-        class="skin-f3581151f1ec81c0c0a0226b4aa6e2d5"
-      />
-    </div>
-
-    <div v-if="showInfo.checked" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
-      <vxe-grid
-        ref="refSkinReturn"
-        :loading="tableData.loading"
-        :data="tableData.result.rows"
-        :height="clientHeight"
+      <div
+        v-if="!showInfo.checked && lineData.result.rows.length > 0"
+        class="skin-9eff02d43a97619df7707398ec7099cb"
       >
-        <vxe-table-column title="皮肤" field="skinName" fixed="left" width="85">
-          <template v-slot="{ row }">
-            <img
-              v-lazy="row.skinImg"
-              width="50"
-              height="50"
-              class="skin-52326308ff25a5e0ce86bdae53ff2c35"
-            />
-            <span class="skin-6ccfe2c5d635aa134880d67af43cb1dd">
-              {{
-              row.skinName
-              }}
-            </span>
-          </template>
-        </vxe-table-column>
+        <ve-line
+          :extend="lineData.extend"
+          :settings="lineData.settings"
+          :mark-line="lineData.markLine"
+          :mark-point="lineData.markPoint"
+          :data="lineData.result"
+          :loading="lineData.loading"
+          :after-config="afterConfig"
+          width="99.2%"
+          height="650px"
+          class="skin-f3581151f1ec81c0c0a0226b4aa6e2d5"
+        />
+      </div>
 
-        <vxe-table-column title="#" type="seq" width="50" />
-        <vxe-table-column title="当前 (万)" field="allVoteNum" sortable />
-        <vxe-table-column title="分均" field="addNum" sortable />
-        <vxe-table-column title="还需 (小时)" field="needtime" sortable />
-      </vxe-grid>
+      <div v-if="showInfo.checked" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
+        <vxe-grid
+          ref="refSkinReturn"
+          :loading="tableData.loading"
+          :data="tableData.result.rows"
+          :height="clientHeight"
+        >
+          <vxe-table-column title="皮肤" field="skinName" fixed="left" width="75">
+            <template v-slot="{ row }">
+              <img
+                v-lazy="row.skinImg"
+                width="50"
+                height="50"
+                class="skin-52326308ff25a5e0ce86bdae53ff2c35"
+              />
+              <van-tag
+                :color="row.tag.color"
+                mark
+                type="primary"
+                class="app-e4d23e841d8e8804190027bce3180fa5"
+              >{{ row.skinName }}</van-tag>
+            </template>
+          </vxe-table-column>
+
+          <vxe-table-column title="#" type="seq" width="50" />
+          <vxe-table-column title="当前 (万)" field="allVoteNum" :width="listWidth" sortable>
+            <template v-slot="{ row }">
+              <div class="ranking-4ecf07e237f77d5efb6719a37ad40f4a">{{row.allVoteNum}}</div>
+              <span
+                v-if="row.needVote > 0"
+                :style="row.needVote < 10 ? { color : 'red' } : { color : 'blue' }"
+                class="ranking-ad602d217564b616b293eac07fc53138"
+              >还差 {{row.needVote}}</span>
+            </template>
+          </vxe-table-column>
+          <vxe-table-column title="分均" field="addNum" :width="listWidth" sortable />
+          <vxe-table-column title="还需 (时)" field="needTime" :width="listWidth" sortable />
+        </vxe-grid>
+      </div>
+
+      <div v-if="showInfo.checked" class="skin-a47113818cd94f1f3221fed0a17e8588">
+        <van-button
+          round
+          @click="getRanking(-1, 0, 0, 0)"
+          size="small"
+          color="linear-gradient(to right, #ff6034, #f7372c)"
+        >刷新一下</van-button>&nbsp;
+        <van-button
+          round
+          @click="onActivityUrlclick"
+          size="small"
+          color="linear-gradient(to right, #f7372c, #ee0a24)"
+        >
+          {{ tableData.result.title || "活动地址" }}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </van-button>
+      </div>
     </div>
 
-    <div class="skin-a47113818cd94f1f3221fed0a17e8588">
-      <van-button
-        round
-        @click="onActivityUrlclick"
-        size="small"
-        color="linear-gradient(to right, #ff6034, #ee0a24)"
-      >{{ tableData.result.title || "活动地址" }}</van-button>
-    </div>
+    <AppHello v-if="!showInfo.checked" height="100px" />
   </div>
 </template>
 
 <script>
 import VeLine from "v-charts/lib/line.common";
 
+import "echarts/lib/component/title";
 import "echarts/lib/component/dataZoom";
 import "v-charts/lib/style.css";
 
@@ -89,6 +125,7 @@ export default {
   name: "HeroSkinReturn",
   components: {
     VeLine,
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   data() {
     return {
@@ -108,17 +145,20 @@ export default {
           rows: [],
         },
       },
+      listWidth: 0,
       clientHeight: 0,
       showInfo: {
-        checked: false,
+        checked: true,
       },
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight();
+    this.clientHeight = this.$appInitTableHeight(10);
+    let tableWidth = this.$appInitTableWidth(750);
+
+    tableWidth > 0 ? (this.listWidth = tableWidth + 10) : (this.listWidth = 0);
   },
   mounted() {
-    this.getSkinReturnLog();
     this.getRanking(-1, 0, 0, 0);
   },
   methods: {
@@ -158,10 +198,28 @@ export default {
     },
     getSkinReturnLog: function () {
       this.$axios.post(this.$appApi.pvp.getSkinReturnLog).then((res) => {
-        let data = res.data.data;
+        let data = res.data.data,
+          status = res.data.status;
 
-        this.lineData = data;
-        this.lineData.loading = false;
+        if (status.code == 200) {
+          this.lineData = data;
+          this.lineData.loading = false;
+          this.lineData.extend.yAxis.axisLabel = {
+            formatter: function (v) {
+              if (v >= 10000 && v < 10000000) {
+                v = v / 10000 + " w";
+              } else if (v >= 10000000) {
+                v = v / 10000000 + " kw";
+              }
+
+              return v;
+            },
+          };
+
+          this.$message.success(this.$appMsg.success[1005]);
+        } else {
+          this.$message.error(status.msg);
+        }
       });
     },
     onActivityUrlclick: function () {
@@ -180,19 +238,21 @@ export default {
 </script>
 
 <style scoped>
-span.skin-6ccfe2c5d635aa134880d67af43cb1dd {
-  font-size: 12px;
-  white-space: nowrap;
+img.skin-52326308ff25a5e0ce86bdae53ff2c35 {
+  border-radius: 100%;
 }
 
-div.skin-9eff02d43a97619df7707398ec7099cb {
-  margin-top: 50px;
+span.ranking-ad602d217564b616b293eac07fc53138 {
+  font-size: 10px;
+  margin-top: -3px;
+  position: absolute;
+  right: 0;
 }
 
 div.skin-a47113818cd94f1f3221fed0a17e8588 {
-  bottom: 90px;
+  bottom: 100px;
+  right: -20px;
   position: fixed;
-  width: 100%;
   z-index: 99999999;
 }
 </style>

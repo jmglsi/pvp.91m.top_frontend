@@ -257,7 +257,7 @@
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
         v-model="showInfo.skillMenu"
-        :title="tableData.heroInfo.name + ' 的其他数据 (上周)'"
+        :title="tableData.heroInfo.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
         <van-tabs
