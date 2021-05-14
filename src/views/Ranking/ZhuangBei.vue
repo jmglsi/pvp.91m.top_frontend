@@ -182,7 +182,7 @@ export default {
           bid: 0,
           cid: 0,
           did: 0,
-          refresh: 0,
+          refresh: 1,
         },
       });
     },

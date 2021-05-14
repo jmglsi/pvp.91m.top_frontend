@@ -304,7 +304,7 @@ export default {
       handler(newValue) {
         let refresh = parseInt(this.$route.query.refresh) || 0;
 
-        if (refresh == 1) {
+        if (newValue.bid > -1 && newValue.cid > -1 && refresh == 1) {
           this.getRanking(0, newValue.bid, newValue.cid, 0);
         }
       },
@@ -543,10 +543,7 @@ export default {
       if (item.value == 1) {
         this.$appPush({
           path: "/search?q=" + heroInfo.name,
-          query: {
-            from: "ranking",
-            refresh: 1,
-          },
+          query: { refresh: 1 },
         });
       }
 

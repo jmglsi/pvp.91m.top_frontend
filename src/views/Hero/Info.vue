@@ -339,7 +339,7 @@
         fixed
         safe-area-inset-bottom
         active-color="orange"
-        class="hero-d4a9092fd7b386904e4a2894044f2a9d"
+        class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
           :icon="

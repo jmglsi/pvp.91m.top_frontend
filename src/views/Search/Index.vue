@@ -137,7 +137,7 @@
             :label="tableData.heroInfo.jixia.label"
             :value="tableData.heroInfo.jixia.value"
             is-link
-            @click="$appOpenUrl('是否打开外部链接?', 'NGA @稷下图书馆', { path: tableData.heroInfo.jixia.url })"
+            @click="$appOpenUrl('是否打开外部链接?', NULL, { path: tableData.heroInfo.jixia.url })"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
             class="search-869ab9bf85478a49725209693c5760e5"
           />
@@ -221,11 +221,11 @@
               <div>胜率</div>
             </van-grid-item>
           </van-grid>
-          <span class="search-399841f840f75044108804ec30d37405">
-            <van-icon name="underway-o" />&nbsp;
+          <div class="search-399841f840f75044108804ec30d37405">
+            <van-icon name="underway-o" />
             <span class="search-c27c140f08b0252f3027cf077cee2358">11:30</span>&nbsp;更新&nbsp;&nbsp;
             <van-icon name="todo-list-o" />基于 巅峰赛 (顶端局) 统计
-          </span>
+          </div>
         </van-cell-group>
 
         <div class="search-cbf8ce69d638243d800b392c8d298b16">
@@ -512,7 +512,8 @@ export default {
         });
       } else if (e == 5) {
         this.$appPush({
-          path: "/ranking?type=1&heroName=" + heroInfo.name + "&refresh=1",
+          path: "/ranking",
+          query: { type: 1, heroName: heroInfo.name, refresh: 1 },
         });
       } else if (e == 6) {
         this.$appPush({
@@ -584,7 +585,7 @@ span.search-8fd6a51f93ef7b5379535e63a5e071cd {
   position: absolute;
 }
 
-span.search-399841f840f75044108804ec30d37405 {
+div.search-399841f840f75044108804ec30d37405 {
   color: #969799;
   font-size: 10px;
   position: absolute;

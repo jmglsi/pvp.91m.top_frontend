@@ -427,7 +427,6 @@ export default {
     },
     onRankingSearch: function (value) {
       this.$appPush({
-        path: "/ranking",
         query: { type: 1, heroName: value, refresh: 1 },
       });
 
