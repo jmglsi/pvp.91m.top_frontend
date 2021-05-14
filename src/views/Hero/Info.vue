@@ -14,7 +14,7 @@
         @click-left="
           $appPush({
             path: '/search',
-            query: { q: routeInfo.from.heroName, from: 'heroInfo', refresh: 1 },
+            query: { q: routeInfo.from.heroName, refresh: 1 },
           })
         "
         @click-right="$message.info($appMsg.info[1004])"
@@ -24,6 +24,11 @@
       >
         <template #title>
           <div
+            :style="
+                scroll >= 50 || tabsInfo.model > 0
+                  ? null
+                  : { display: 'none' }
+              "
             @click="$message.info('英雄id:' + hero.info.id + ',近期热度 ;D')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
@@ -533,6 +538,9 @@ export default {
           ? (this.trendInfo.model = 2)
           : (this.trendInfo.model = 0);
 
+        if (!this.routeInfo.from.heroName)
+          this.routeInfo.from.heroName = heroInfoData.name;
+
         this.hero.title = heroInfoData.name;
         document.title =
           heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name;
@@ -551,6 +559,10 @@ export default {
           this.hero.info = heroInfoData;
 
           this.$appSetLocalStorage("heroInfo-" + id, heroData);
+
+          heroInfoData.id == 999
+            ? (this.trendInfo.model = 2)
+            : (this.trendInfo.model = 0);
 
           if (!this.routeInfo.from.heroName)
             this.routeInfo.from.heroName = heroInfoData.name;
