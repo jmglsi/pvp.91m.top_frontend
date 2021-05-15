@@ -174,6 +174,7 @@ export default {
             });
 
             this.$appDelectCache("ranking");
+            this.$appDelectCache("heroInfo");
             this.$appDelectCache("charts");
 
             setTimeout(() => {
