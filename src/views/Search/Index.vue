@@ -22,7 +22,11 @@
                   ? { color: '#fff' }
                   : {}
               "
-              @click="$appPush({ path: '/search' })"
+              @click="
+                search.value
+                  ? $appPush({ path: '/search' })
+                  : $appPush({ path: '/' })
+              "
             >取消</div>
           </template>
         </van-search>
