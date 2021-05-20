@@ -48,15 +48,8 @@
       </van-tabs>
     </div>
 
-    <div
-      @click="$appOpenUrl('是否打开外部链接?', null, { path: upyun.url })"
-      class="home-72ab9e07378f988922e6c91884048db0"
-    >
-      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">
-        网站由
-        <img v-lazy="upyun.logo" width="75" height="25" />
-        提供CDN加速/云储存服务
-      </span>
+    <div class="home-72ab9e07378f988922e6c91884048db0">
+      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">数据随意引用，注明出处即可 ;D</span>
     </div>
 
     <AppHello height="100px" />
@@ -92,11 +85,6 @@ export default {
   data() {
     return {
       copyData: "",
-      upyun: {
-        url: "//console.upyun.com/register/?invite=ryM-bovMm",
-        logo:
-          "//img03.mifile.cn/v1/MI_542ED8B1722DC/a3d267a418b5913be9e3254efe14532f.png",
-      },
       appInfo: {
         search: {
           placeholder: "搜索",

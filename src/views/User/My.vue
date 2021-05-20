@@ -557,6 +557,8 @@ export default {
 
           this.$cookie.delete("openId");
           this.$cookie.delete("accessToken");
+          this.$cookie.delete("tempOpenId");
+          this.$cookie.delete("tempAccessToken");
         })
         .catch(() => {
           // on cancel

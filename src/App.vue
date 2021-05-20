@@ -144,6 +144,19 @@ export default {
   },
   mounted() {
     this.getAppInfo();
+
+    setTimeout(() => {
+      let tempOpenId = this.$route.query.tempOpenId || "",
+        tempAccessToken = this.$route.query.tempAccessToken || "",
+        appInfo = this.$appConfigInfo.appInfo;
+
+      if (tempOpenId) {
+        this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
+        this.$cookie.set("tempAccessToken", tempAccessToken, { expires: "1H" });
+
+          if (appInfo.tempText) this.$message.info(appInfo.tempText);
+      }
+    }, 2500);
   },
   methods: {
     getAppInfo: function () {
@@ -169,6 +182,7 @@ export default {
             name: appInfo.name || "苏苏的荣耀助手",
             pwa: appConfigInfo.appInfo.pwa || 0,
             updateTime: appInfo.updateTime || 0,
+            tempText: appInfo.tempText || null,
             version: appInfo.version || 0,
             script: appInfo.script,
             link: appInfo.link,

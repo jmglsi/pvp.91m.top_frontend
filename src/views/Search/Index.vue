@@ -425,11 +425,6 @@ export default {
 
             this.addSearchData(value);
 
-            let searchQ = null;
-            value ? (searchQ = { q: value }) : (searchQ = {});
-
-            this.$appPush({ query: searchQ });
-
             if (data.result.rows.length > 0) {
               this.showInfo.searchData = true;
             }

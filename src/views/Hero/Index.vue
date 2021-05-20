@@ -83,10 +83,6 @@ div.ti-input {
   border-radius: 5px;
 }
 
-div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__title {
-  font-size: 20px;
-}
-
 div.hero-a8137b0fb1cc9dcb896ce9a091695877 div.van-nav-bar__right {
   width: 40%;
 }
