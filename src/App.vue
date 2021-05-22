@@ -4,10 +4,11 @@
       <div
         class="app-8de1f001663ee713d24888bb422e3881"
         :style="
-          $appIsApple && $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
+          $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
             ? {
                 background:
                   'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(236, 119, 171), rgb(120, 115, 245)) repeat scroll 0% 0%',
+                zIndex: -1
               }
             : {}
         "
@@ -154,7 +155,7 @@ export default {
         this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
         this.$cookie.set("tempAccessToken", tempAccessToken, { expires: "1H" });
 
-          if (appInfo.tempText) this.$message.info(appInfo.tempText);
+        if (appInfo.tempText) this.$message.info(appInfo.tempText);
       }
     }, 2500);
   },

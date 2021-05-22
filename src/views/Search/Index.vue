@@ -24,7 +24,7 @@
               "
               @click="
                 search.value
-                  ? $appPush({ path: '/search' })
+                  ? search.value = null
                   : $appPush({ path: '/' })
               "
             >取消</div>
@@ -593,7 +593,6 @@ div.search-399841f840f75044108804ec30d37405 {
   height: 50px;
   background: #fff;
   padding-right: 15px;
-  z-index: -1;
 }
 
 span.search-b0958af6a9b2591433e50ff9eb7f3420 {
@@ -615,6 +614,7 @@ div.search-db4665e1908869c6354106ce00ff95ba {
 
 div.search-cbf8ce69d638243d800b392c8d298b16 {
   margin-top: 40px;
+  background-color: white;
 }
 
 div.search-88cf8ac86e2afc51906e60c7025f522b {
