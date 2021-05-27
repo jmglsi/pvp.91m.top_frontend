@@ -9,8 +9,6 @@
         @click="onRankingTabsClick"
         duration="0.5"
         line-width="25px"
-        color="orange"
-        title-active-color="orange"
       >
         <van-tab>
           <template #title>
@@ -74,7 +72,7 @@
 
         <van-tab>
           <template #title>
-            关系和克制 (上周)
+            关系和克制 (近期)
             <i class="vxe-icon--search" />
           </template>
           <GuanXi v-if="tabsInfo.model == 1" :isSmallMobile="isSmallMobile" :heroName="heroName" />
@@ -93,7 +91,7 @@
           />
         </van-tab>
 
-        <van-tab title="装备 (上周)">
+        <van-tab title="装备 (近期)">
           <ZhuangBei v-if="tabsInfo.model == 3" :isSmallMobile="isSmallMobile" />
         </van-tab>
 

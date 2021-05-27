@@ -6,8 +6,6 @@
         :border="false"
         :ellipsis="false"
         @change="onTabsChange"
-        color="orange"
-        title-active-color="orange"
       >
         <van-tab title="我为人人，人人为我">
           <van-field

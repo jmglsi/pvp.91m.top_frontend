@@ -31,7 +31,6 @@
         v-if="showInfo.tabbar"
         fixed
         safe-area-inset-bottom
-        active-color="orange"
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
@@ -462,10 +461,6 @@ div.app-0ca41257ee36e86e5d89591c82113263 img.van-image__img {
   border-radius: unset;
 }
 
-div.hero-83444807ba7a7da23e12b17567d2d595 div.van-circle__text {
-  color: white;
-}
-
 div.app-0ca41257ee36e86e5d89591c82113263 div.van-image-preview__index {
   top: unset;
   bottom: 75px;
@@ -538,36 +533,6 @@ div.app-609a820218e58b4ea5a5f7656e61a0ad {
   transform: translateY(0);
 }
 
-div.app-99938282f04071859941e18f16efcf42 div.van-tabs__wrap {
-  left: 0;
-  margin: 0 auto;
-  position: fixed;
-  right: 0;
-  top: 20px;
-  width: 40%;
-}
-
-div.app-99938282f04071859941e18f16efcf42 span.van-tab__text {
-  font-size: 12px;
-}
-
-div.app-99938282f04071859941e18f16efcf42
-  div.van-grid-item__content.van-grid-item__content--center {
-  padding: 8px 4px;
-}
-
-div.app-99938282f04071859941e18f16efcf42 div.van-tab.van-ellipsis {
-  line-height: 30px;
-}
-
-div.app-99938282f04071859941e18f16efcf42 {
-  border-radius: 10px;
-  margin: 0 auto;
-  margin-top: 50px;
-  overflow: hidden;
-  overflow-y: auto;
-}
-
 div.app-06eab62dcb5a23b966a620807d78e66f {
   text-align: left;
 }
@@ -628,7 +593,6 @@ div.app-130a360689f8d613da10c94d53527a1b {
 }
 
 div.app-130a360689f8d613da10c94d53527a1b.van-tabbar {
-  height: 53px;
   padding-top: 3px;
 }
 

@@ -152,8 +152,6 @@
             :ellipsis="false"
             :before-change="onDataTabsBeforeChange"
             @click="onDataTabsClick"
-            color="orange"
-            title-active-color="orange"
           >
             <van-tab title="综合">
               <template #title>
@@ -269,8 +267,6 @@
           v-if="skillInfo.model > -1"
           :ellipsis="false"
           @change="onSkillTabsChange"
-          color="orange"
-          title-active-color="orange"
         >
           <van-tab title="技能">
             <HeroSkillList v-if="skillInfo.model == 0" :heroId="tableData.heroInfo.id" />

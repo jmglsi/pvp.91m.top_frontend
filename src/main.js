@@ -3,6 +3,9 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 
+
+import 'vant/lib/index.less'
+
 import './assets/import/ant'
 import './assets/import/vant'
 import './assets/import/vxe-utils'

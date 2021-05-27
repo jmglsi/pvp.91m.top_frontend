@@ -27,4 +27,34 @@ div.game-82f6ee2b57fb59b0b7b3803164d6b9d8 {
 div.game-4863c43e8743ebf1be3f48c5c4519627 div.van-tabs__line {
   bottom: 13px;
 }
+
+div.game-99938282f04071859941e18f16efcf42 div.van-tabs__wrap {
+  left: 0;
+  margin: 0 auto;
+  position: fixed;
+  right: 0;
+  top: 20px;
+  width: 40%;
+}
+
+div.game-99938282f04071859941e18f16efcf42 span.van-tab__text {
+  font-size: 12px;
+}
+
+div.game-99938282f04071859941e18f16efcf42
+  div.van-grid-item__content.van-grid-item__content--center {
+  padding: 8px 4px;
+}
+
+div.game-99938282f04071859941e18f16efcf42 div.van-tab.van-ellipsis {
+  line-height: 30px;
+}
+
+div.game-99938282f04071859941e18f16efcf42 {
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 50px;
+  overflow: hidden;
+  overflow-y: auto;
+}
 </style>

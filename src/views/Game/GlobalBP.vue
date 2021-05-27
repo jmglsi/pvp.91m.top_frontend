@@ -189,7 +189,7 @@
                 ? { height: '240px' }
                 : { height: $appHeight - 150 + 'px' }
             "
-            class="app-99938282f04071859941e18f16efcf42"
+            class="game-99938282f04071859941e18f16efcf42"
           >
             <van-tabs
               v-model="tableData.model"
@@ -197,8 +197,6 @@
               :border="false"
               :ellipsis="false"
               :swipe-threshold="$appIsMobile ? 4 : 7"
-              color="orange"
-              title-active-color="orange"
               class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
               <van-tab
@@ -600,7 +598,6 @@
         v-if="tabsInfo.model > -1"
         :ellipsis="false"
         @change="onGameTabsChange"
-        color="orange"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab

@@ -207,8 +207,6 @@
         @change="onHeroTabsChange"
         duration="0.5"
         line-width="25px"
-        color="orange"
-        title-active-color="orange"
         class="hero-d42f4851e770aa0f758b01388874f67b"
       >
         <van-tab class="hero-ab71021d21963773bfb8be80af65869f">
@@ -271,8 +269,6 @@
           v-if="skillInfo.model > -1"
           :ellipsis="false"
           @change="onSkillTabsChange"
-          color="orange"
-          title-active-color="orange"
         >
           <van-tab title="技能">
             <HeroSkillList :heroId="hero.info.id" />
@@ -343,7 +339,6 @@
       <van-tabbar
         fixed
         safe-area-inset-bottom
-        active-color="orange"
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item

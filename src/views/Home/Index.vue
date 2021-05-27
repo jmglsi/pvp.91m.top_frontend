@@ -35,8 +35,6 @@
         @change="$appPush({ query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
-        color="orange"
-        title-active-color="orange"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
         <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
@@ -152,14 +150,6 @@ export default {
 </script>
 
 <style>
-img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
-  border-radius: unset;
-  height: 100%;
-  width: 100%;
-}
-</style>
-
-<style scoped>
 img.home-47ee6ad584172f967b674131cb948a87 {
   border-radius: 100%;
 }

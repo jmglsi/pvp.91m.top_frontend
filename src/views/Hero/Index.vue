@@ -133,6 +133,10 @@ div.hero-d42f4851e770aa0f758b01388874f67b div.van-tabs__line {
   bottom: 33px;
 }
 
+div.hero-83444807ba7a7da23e12b17567d2d595 div.van-circle__text {
+  color: white;
+}
+
 div.hero-386260160edfd75a6b62facc140fd3a4 {
   margin-top: -25px;
 }

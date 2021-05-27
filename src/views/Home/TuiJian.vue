@@ -165,6 +165,12 @@ img.tuijian-6bea2af1a0662ae3049c2b1c5a60f302 {
   border-radius: 100%;
 }
 
+img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
+  border-radius: unset;
+  height: 100%;
+  width: 100%;
+}
+
 div.tuijian-f55b83381f479ed4c1203b80f891d83a {
   font-size: 12px;
   margin-top: 5px;

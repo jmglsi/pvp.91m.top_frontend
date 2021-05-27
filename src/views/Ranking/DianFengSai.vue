@@ -225,8 +225,6 @@
           v-if="skillInfo.model > -1"
           :ellipsis="false"
           @change="onSkillTabsChange"
-          color="orange"
-          title-active-color="orange"
         >
           <van-tab title="技能">
             <HeroSkillList

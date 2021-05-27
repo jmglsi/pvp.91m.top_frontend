@@ -216,16 +216,22 @@
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
         <van-cell
+          icon="friends-o"
+          title="感谢各位伙伴"
+          is-link
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
+        />
+        <van-cell
           icon="comment-o"
           title="意见建议反馈"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
         />
         <van-cell
-          icon="friends-o"
-          title="感谢各位伙伴"
+          icon="good-job-o"
+          title="前端开源地址"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.nga[0] })"
         />
         <van-cell
           title="请我喝咖啡☕☕"
@@ -384,8 +390,9 @@ export default {
         globalBP: "//doc.91m.top/jmglsi/pvp",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
-        beian: "//beian.miit.gov.cn/#/Integrated/index",
+        nga: ["//ngabbs.com/read.php?tid=26200132"],
         afdian: "//afdian.net/@jmglsi",
+        beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
       loginInfo: {
         certification: {
