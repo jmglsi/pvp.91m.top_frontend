@@ -91,7 +91,7 @@ module.exports = {
             less: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    'hack': `true; @import "${path.join(__dirname, 'src/assets/css/vant.less')}";`,
+                    'hack': `true; @import "${path.join(__dirname, './src/assets/css/config.less')}";`,
                 }
             }
         }

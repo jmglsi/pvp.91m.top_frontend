@@ -160,9 +160,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.tuijian-6bea2af1a0662ae3049c2b1c5a60f302 {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
@@ -172,7 +172,7 @@ img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
 }
 
 div.tuijian-f55b83381f479ed4c1203b80f891d83a {
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
   margin-top: 5px;
 }
 </style>

@@ -113,7 +113,7 @@ export default {
             this.radarData = data;
             this.radarData.loading = false;
           } else {
-            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/my" }, 1);
           }
         });
     },
@@ -144,12 +144,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 div.hero-radar-d57ac45256849d9b13e2422d91580fb9 {
   margin: 25px auto;
   max-width: 500px;
   text-align: center;
   width: 85%;
-  z-index: 1;
+  z-index: @app-z-index;
 }
 </style>

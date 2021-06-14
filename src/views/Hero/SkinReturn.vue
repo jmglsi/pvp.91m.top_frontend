@@ -237,13 +237,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.skin-52326308ff25a5e0ce86bdae53ff2c35 {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 span.ranking-ad602d217564b616b293eac07fc53138 {
-  font-size: 10px;
+  font-size: @app-font-size;
   margin-top: -3px;
   position: absolute;
   right: 0;

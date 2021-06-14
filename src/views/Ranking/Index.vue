@@ -436,9 +436,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
@@ -469,10 +469,10 @@ div.vxe-custom--option-wrapper {
 
 td.vxe-body--column {
   padding: 12px 0;
-}
 
-td.vxe-body--column div.vxe-cell {
-  font-size: 15px;
+  div.vxe-cell {
+    font-size: @app-font-size + 5px;
+  }
 }
 
 td.vxe-body--cloumn .vxe-table.virtual--x .col--ellipsis .vxe-cell,
@@ -484,11 +484,13 @@ td.ranking-bda9643ac6601722a28f238714274da4 div.vxe-cell,
 td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.ranking-48d6215903dff56238e52e8891380c8f div.vxe-cell,
 td.ranking-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
-  font-size: 20px;
+  font-size: @app-font-size + 10px;
 }
 
-div.ranking-home div.van-dropdown-menu__bar {
-  box-shadow: unset;
+div.ranking-home {
+  div.van-dropdown-menu__bar {
+    box-shadow: unset;
+  }
 }
 
 div.ranking-ebf09abeb7c3db44741d328324915725 {
@@ -502,10 +504,10 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
   margin-top: 12px;
   position: absolute;
   z-index: 2;
-}
 
-div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f i.vxe-button--icon.vxe-icon--menu {
-  bottom: 1px;
+  i.vxe-button--icon.vxe-icon--menu {
+    bottom: 1px;
+  }
 }
 
 div.ranking-5728d19b81c17607842cb7befeef3152 {
@@ -518,81 +520,81 @@ div.ranking-31c631534a3cec9ed2c5283f653a06aa {
 }
 
 /*
-缩小前的
+*
+* 缩小前的
+*
 */
 
-div.ranking-e10ca73b79369d2183f81ca10fb587af
+div.ranking-e10ca73b79369d2183f81ca10fb587af {
   img.ranking-3d5f1ffeadf58eb64ef57aef7e53a31e {
-  margin-left: -2px;
-  margin-top: -12px;
-  position: absolute;
-  z-index: 1;
-}
-
-div.ranking-713dd4d0b2e842c08da62ddeec872331
-  img.ranking-95a25d46f98b0ec553d892cc45037d57 {
-  margin-top: -15px;
-  position: absolute;
-}
-
-div.ranking-713dd4d0b2e842c08da62ddeec872331
-  img.ranking-35af5e6c0fc290aa4f2e38d4c8296a03 {
-  left: -7px;
-}
-
-div.ranking-713dd4d0b2e842c08da62ddeec872331
-  img.ranking-fbfe7b256ce6b4df1d03d8022163c6d2 {
-  left: 47px;
-}
-
-div.ranking-713dd4d0b2e842c08da62ddeec872331
-  span.ranking-043052eea2d064cab23119e56f4f640e {
-  left: -22px;
-}
-
-div.ranking-713dd4d0b2e842c08da62ddeec872331
-  span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
-  left: 28px;
+    margin-left: -2px;
+    margin-top: -12px;
+    position: absolute;
+    z-index: @app-z-index;
+  }
 }
 
 div.ranking-713dd4d0b2e842c08da62ddeec872331 {
   position: absolute;
+
+  img.ranking-95a25d46f98b0ec553d892cc45037d57 {
+    margin-top: -15px;
+    position: absolute;
+  }
+
+  img.ranking-35af5e6c0fc290aa4f2e38d4c8296a03 {
+    left: -7px;
+  }
+
+  img.ranking-fbfe7b256ce6b4df1d03d8022163c6d2 {
+    left: 47px;
+  }
+
+  span.ranking-043052eea2d064cab23119e56f4f640e {
+    left: -22px;
+  }
+
+  span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
+    left: 28px;
+  }
 }
 
-div.ranking-78117a02d15f1dffe5263f47a220c56b
+div.ranking-78117a02d15f1dffe5263f47a220c56b {
   span.ranking-f58cc48f5b942c91e57eff48accc5151 {
-  margin-left: -50px;
-  top: 62px;
+    margin-left: -50px;
+    top: 62px;
+  }
 }
 
 /*
-缩小后的
+*
+* 缩小后的
+*
 */
 
-div.ranking-0b22b207c2b785ceff7a241980f23d14
+div.ranking-0b22b207c2b785ceff7a241980f23d14 {
   img.ranking-35af5e6c0fc290aa4f2e38d4c8296a03 {
-  left: -3px;
-}
+    left: -3px;
+  }
 
-div.ranking-0b22b207c2b785ceff7a241980f23d14
   img.ranking-fbfe7b256ce6b4df1d03d8022163c6d2 {
-  left: 43px;
-}
+    left: 43px;
+  }
 
-div.ranking-0b22b207c2b785ceff7a241980f23d14
   span.ranking-043052eea2d064cab23119e56f4f640e {
-  left: -20px;
-}
+    left: -20px;
+  }
 
-div.ranking-0b22b207c2b785ceff7a241980f23d14
   span.ranking-dabb6e25dffefe5b4821b7062afbdaef {
-  left: 27px;
+    left: 27px;
+  }
 }
 
-div.ranking-5d308b6a0da77ffb33c63fc542f58746
+div.ranking-5d308b6a0da77ffb33c63fc542f58746 {
   span.ranking-f58cc48f5b942c91e57eff48accc5151 {
-  margin-left: -43px;
-  top: 47px;
+    margin-left: -43px;
+    top: 47px;
+  }
 }
 
 div.ranking-87714e7bd6c0d80c7bbdb69629b5a80d {

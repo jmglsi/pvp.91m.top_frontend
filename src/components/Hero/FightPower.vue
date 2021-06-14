@@ -1,12 +1,7 @@
 <template>
   <div class="hero-fightPower">
     <div class="hero-fightPower-02d0b3f345c4fd4e2e0d14b24deb1992">
-      <van-tabs
-        v-model="tabsInfo.model"
-        :border="false"
-        :ellipsis="false"
-        @change="onTabsChange"
-      >
+      <van-tabs v-model="tabsInfo.model" :border="false" :ellipsis="false" @change="onTabsChange">
         <van-tab title="我为人人，人人为我">
           <van-field
             v-model="fightPower.value"
@@ -324,7 +319,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.hero-fightPower-559b72e1d0f69118d849a535f9000646 {
   width: 100%;
 }
@@ -334,7 +329,7 @@ div.hero-fightPower-cb2772c8daa27828fc2ed77540c1bba1 {
 }
 
 div.hero-fightPower-1fcc988ce1403e447b81fe06cbaf7e66 {
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
   margin: 125px 25px;
 }
 </style>

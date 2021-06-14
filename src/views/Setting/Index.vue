@@ -196,8 +196,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 div.setting-b401c55622473cb5f8e0cf4e19901f39 {
-  text-align: left;
+  text-align: @app-text-align;
 }
 </style>

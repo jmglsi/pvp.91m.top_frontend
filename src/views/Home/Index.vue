@@ -16,7 +16,7 @@
               class="home-47ee6ad584172f967b674131cb948a87"
               @click="
                 appInfo.search.to 
-                ? $appOpenUrl('是否打开内部链接?', null, { path: appInfo.search.to }, 1) 
+                ? $appOpenUrl('是否打开内部链接?', '网络交友需谨慎,涉及金钱莫轻信', { path: appInfo.search.to }, 1) 
                 : $appOpenUrl('是否打开外部链接?', null, { path: appInfo.search.url }, 0)
               "
             />
@@ -149,13 +149,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less">
 img.home-47ee6ad584172f967b674131cb948a87 {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 div.home-72ab9e07378f988922e6c91884048db0 {
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
   margin: 25px;
 }
 </style>

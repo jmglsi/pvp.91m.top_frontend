@@ -153,37 +153,39 @@
             >喜欢列表</span>
           </template>
           <template #right-icon>
-            <ul
-              class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
-              :style="loginInfo.heroList.length <= 3 ? {} : { width: '180px' }"
-            >
-              <li
-                v-for="(data, index) in loginInfo.heroList"
-                :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
-                class="app-1951b6e7c82938dd7446a41e829b247b"
+            <div class="app-c1351782c9c93025d72864180d0cf28c">
+              <ul
+                class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
+                :style="loginInfo.heroList.length <= 3 ? {} : { width: '180px' }"
               >
-                <img
-                  v-lazy="
+                <li
+                  v-for="(data, index) in loginInfo.heroList"
+                  :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
+                  class="app-1951b6e7c82938dd7446a41e829b247b"
+                >
+                  <img
+                    v-lazy="
                     '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                     data.id +
                     '/' +
                     data.id +
                     '.jpg'
                   "
-                  width="35"
-                  height="35"
-                  class="app-4ab161130e76571ab0c31aa23a6238c7"
-                  @click="$appPush({ path: '/hero/' + data.id + '/info' })"
-                />
-                <img
-                  v-if="data.fightPowerIcon"
-                  v-lazy="data.fightPowerIcon"
-                  width="25"
-                  height="25"
-                  class="app-d31cb1c15b091f41248935d88a8d0a45"
-                />
-              </li>
-            </ul>
+                    width="35"
+                    height="35"
+                    class="app-4ab161130e76571ab0c31aa23a6238c7"
+                    @click="$appPush({ path: '/hero/' + data.id + '/info' })"
+                  />
+                  <img
+                    v-if="data.fightPowerIcon"
+                    v-lazy="data.fightPowerIcon"
+                    width="25"
+                    height="25"
+                    class="app-d31cb1c15b091f41248935d88a8d0a45"
+                  />
+                </li>
+              </ul>
+            </div>
             <span
               v-if="loginInfo.heroList.length == 0"
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
@@ -575,9 +577,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.my-d5ca322453f2986b752e58b11af83d96 {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 span.my-25930e3036f13852cb0b29694bbab611 {
@@ -585,7 +587,7 @@ span.my-25930e3036f13852cb0b29694bbab611 {
 }
 
 span.my-b068931cc450442b63f5b3d276ea4297 {
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
 }
 
 span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
@@ -602,20 +604,15 @@ span.my-35494217d6a01388d07eccf816b6ea39 {
   margin-right: 10px;
 }
 
-div.my-7dc22b2c6a992f0232345df41303f5ea
-  div.van-grid
-  div.van-grid-item
-  div.van-grid-item__content
-  span.van-grid-item__text,
-span.my-4646fa4296a7f5dea261e60e00ecd24b {
-  font-size: 20px;
-}
-
 div.my-7dc22b2c6a992f0232345df41303f5ea {
-  text-align: left;
+  text-align: @app-text-align;
+
+  span.my-4646fa4296a7f5dea261e60e00ecd24b {
+    font-size: @app-font-size + 10px;
+  }
 }
 
 div.my-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
-  font-size: 10px;
+  font-size: @app-font-size;
 }
 </style>

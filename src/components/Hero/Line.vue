@@ -130,7 +130,7 @@ export default {
 
             this.showInfo.autoPlayTrend = true;
           } else {
-            this.$appOpenUrl(status.msg, null, { path: "/login" }, 1);
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },
@@ -161,7 +161,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 div.hero-f6d50810d5b150ebd421cc944d2597a5 {
   left: 7px;
   margin-top: -30px;

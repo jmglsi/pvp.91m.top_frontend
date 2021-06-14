@@ -237,7 +237,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 div.bilibili-a47ba339330136bcab5b4c91d5d10882 {
   left: 30px;
   position: absolute;

@@ -191,7 +191,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.login-414c54d9374ac490e9773a8c5f357427,
 i.my-c1d8fd0f00bccc16b2cf5d07bfc3c96f img.van-icon__image {
   border-radius: unset;

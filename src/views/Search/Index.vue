@@ -44,47 +44,143 @@
       <div v-if="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
         <div class="search-4b9ca1bc335daf2e137b6c468a2c39b4">
           <div class="search-3c00205f941124762c6c5e000e7e2bde">
-            <van-cell-group
-              :border="false"
-              title="热门推荐"
-              class="search-dea6590081d28a153cc325fdaeb10c43"
-            >
-              <van-grid :border="false" :column-num="2">
-                <van-grid-item
-                  v-for="(data, index) in tableData.search.hotKeywords.rows"
-                  :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
-                  @click="getSearch(data.value)"
+            <ul class="app-d865b50ce307751bdeb9a6ab16e7baf9">
+              <li
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
+              >
+                <van-cell-group
+                  :border="false"
+                  title="热门搜索 🔍"
+                  class="search-dea6590081d28a153cc325fdaeb10c43"
                 >
-                  <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
-                    <span
-                      v-if="data.isTop"
-                      :style="{ color: 'orange' }"
-                      class="search-f43418d85f50da28b3a9c1e780237105"
+                  <van-grid :border="false" :column-num="1">
+                    <van-grid-item
+                      v-for="(data, index) in tableData.search.hotKeywords[0].rows"
+                      :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
+                      @click="getSearch(data.value)"
                     >
-                      <van-icon name="back-top" />
-                    </span>
-                    <span
-                      v-else
-                      :style="
-                        index < 4 + tableData.search.hotKeywords.topNum
+                      <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
+                        <span
+                          v-if="data.isTop"
+                          :style="{ color: 'orange' }"
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          <van-icon name="back-top" />
+                        </span>
+                        <span
+                          v-else
+                          :style="
+                        index < 3 + tableData.search.hotKeywords[0].topNum
                           ? { color: 'red' }
                           : {}
                       "
-                      class="search-f43418d85f50da28b3a9c1e780237105"
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          {{
+                          index + 1 - tableData.search.hotKeywords[0].topNum
+                          }}
+                        </span>&nbsp;
+                        <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
+                          {{
+                          data.value
+                          }}
+                        </span>
+                      </span>
+                    </van-grid-item>
+                  </van-grid>
+                </van-cell-group>
+              </li>
+              <li
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
+              >
+                <van-cell-group
+                  :border="false"
+                  title="暂未调整 🆕"
+                  class="search-dea6590081d28a153cc325fdaeb10c43"
+                >
+                  <van-grid :border="false" :column-num="1">
+                    <van-grid-item
+                      v-for="(data, index) in tableData.search.hotKeywords[1].rows"
+                      :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
+                      @click="getSearch(data.value)"
                     >
-                      {{
-                      index + 1 - tableData.search.hotKeywords.topNum
-                      }}
-                    </span>&nbsp;
-                    <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
-                      {{
-                      data.value
-                      }}
-                    </span>
-                  </span>
-                </van-grid-item>
-              </van-grid>
-            </van-cell-group>
+                      <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
+                        <span
+                          v-if="data.isTop"
+                          :style="{ color: 'orange' }"
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          <van-icon name="back-top" />
+                        </span>
+                        <span
+                          v-else
+                          :style="
+                        index < 3 + tableData.search.hotKeywords[1].topNum
+                          ? { color: 'red' }
+                          : {}
+                      "
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          {{
+                          index + 1 - tableData.search.hotKeywords[1].topNum
+                          }}
+                        </span>&nbsp;
+                        <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
+                          {{
+                          data.value
+                          }}
+                        </span>
+                      </span>
+                    </van-grid-item>
+                  </van-grid>
+                </van-cell-group>
+              </li>
+              <li
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
+              >
+                <van-cell-group
+                  :border="false"
+                  title="衣柜空空 👔"
+                  class="search-dea6590081d28a153cc325fdaeb10c43"
+                >
+                  <van-grid :border="false" :column-num="1">
+                    <van-grid-item
+                      v-for="(data, index) in tableData.search.hotKeywords[2].rows"
+                      :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
+                      @click="getSearch(data.value)"
+                    >
+                      <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
+                        <span
+                          v-if="data.isTop"
+                          :style="{ color: 'orange' }"
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          <van-icon name="back-top" />
+                        </span>
+                        <span
+                          v-else
+                          :style="
+                        index < 3 + tableData.search.hotKeywords[2].topNum
+                          ? { color: 'red' }
+                          : {}
+                      "
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          {{
+                          index + 1 - tableData.search.hotKeywords[2].topNum
+                          }}
+                        </span>&nbsp;
+                        <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
+                          {{
+                          data.value
+                          }}
+                        </span>
+                      </span>
+                    </van-grid-item>
+                  </van-grid>
+                </van-cell-group>
+              </li>
+            </ul>
           </div>
 
           <div v-if="showInfo.searchHistory" class="search-a79b6044b2b3a5a9bce4cb65bd80e774">
@@ -136,12 +232,14 @@
             class="search-a64976150427434c778228d76650f6fb"
           />
           <van-cell
-            :icon="tableData.heroInfo.jixia.icon"
-            :title="tableData.heroInfo.jixia.title"
-            :label="tableData.heroInfo.jixia.label"
-            :value="tableData.heroInfo.jixia.value"
+            v-for="(data, index) in tableData.heroInfo.more"
+            :key="'search-2c05f043426380f092ad26111c3a490d-' + index"
+            :icon="data.icon"
+            :title="data.title"
+            :label="data.label"
+            :value="data.value"
             is-link
-            @click="$appOpenUrl('是否打开外部链接?', NULL, { path: tableData.heroInfo.jixia.url })"
+            @click="$appOpenUrl('是否打开外部链接?', NULL, { path: data.url })"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
             class="search-869ab9bf85478a49725209693c5760e5"
           />
@@ -356,7 +454,20 @@ export default {
       tableData: {
         search: {
           history: [],
-          hotKeywords: [],
+          hotKeywords: [
+            {
+              topNum: 0,
+              rows: [{ isTop: false, value: "test1" }],
+            },
+            {
+              topNum: 0,
+              rows: [{ isTop: false, value: "test2" }],
+            },
+            {
+              topNum: 0,
+              rows: [{ isTop: false, value: "test3" }],
+            },
+          ],
           placeholder: [],
         },
         result: {
@@ -549,21 +660,27 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.search-05a36d9069f1023c8432de89b15a83af {
   margin-top: -2px;
 }
 
-i.search-a0edf16f0e677f3e28dfd77595f437be img.van-icon__image {
-  border-radius: 100%;
-  height: 50px;
-  margin-right: 10px;
-  width: 50px;
+i.search-a0edf16f0e677f3e28dfd77595f437be {
+  img.van-icon__image {
+    border-radius: @app-border-radius;
+    height: @app-height;
+    margin-right: 10px;
+    width: @app-width;
+  }
+}
+
+li.search-9eca81635365b5dcc7960ad26bb0b714 {
+  width: 150px;
 }
 
 span.search-d427af48bbd4a36972ce659cd329dd38 {
   margin-left: 3px;
-  font-size: 15px;
+  font-size: @app-font-size + 5px;
 }
 
 span.search-c27c140f08b0252f3027cf077cee2358 {
@@ -582,11 +699,11 @@ span.search-8fd6a51f93ef7b5379535e63a5e071cd {
 
 div.search-399841f840f75044108804ec30d37405 {
   color: #969799;
-  font-size: 10px;
+  font-size: @app-font-size;
   position: absolute;
   text-align: right;
   width: 100%;
-  height: 50px;
+  height: @app-height;
   background: #fff;
   padding-right: 15px;
 }
@@ -605,7 +722,7 @@ span.search-f43418d85f50da28b3a9c1e780237105 {
 div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
-  text-align: left;
+  text-align: @app-text-align;
 }
 
 div.search-cbf8ce69d638243d800b392c8d298b16 {
@@ -623,10 +740,6 @@ div.search-93aea4a321bd36aefe85b2b0526e52e8 {
 }
 
 div.search-0c27228425c2ec1dd01a785b6e9a0437 {
-  font-size: 20px;
-}
-
-div.search-a5adc7030676fcdc76c583f1b2684822.van-cell {
-  height: 75px;
+  font-size: @app-font-size + 10px;
 }
 </style>

@@ -148,7 +148,7 @@ export default {
               this.lineData
             );
           } else {
-            this.$appOpenUrl(status.msg, null, { path: "/login" }, 1);
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },
@@ -161,7 +161,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 div.ranking-line {
   margin: 25px 0;
 }
@@ -171,7 +171,7 @@ div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
   position: absolute;
   width: 100%;
   margin-top: -25px;
-  height: 50px;
+  height: @app-height;
 }
 
 div.ranking-63559bd374a437b89b36762811e4b809 {

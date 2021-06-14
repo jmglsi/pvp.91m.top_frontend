@@ -366,9 +366,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 img.update-5d39f3848925994b52ec52fba934577c {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
   margin-bottom: 5px;
   margin-right: 5px;
 }
@@ -395,7 +395,7 @@ div.update-3490d5ece19a8f958d2be068e27f636a {
 }
 
 div.update-7d4e6768382f99a87a56cad0ac71b15b {
-  text-align: left;
+  text-align: @app-text-align;
 }
 
 div.update-5a5152e95445ede11c05f5fa898d8fd9 {
@@ -409,12 +409,14 @@ div.update-0b479089ade5d13a2c41830785ebac9d {
 }
 
 div.update-288ac40c37c02b743c0c2cc51c650dd3 {
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
   padding: 20px;
-  text-align: left;
+  text-align: @app-text-align;
 }
 
-div.update-c88c478fd2695c8b07740ccd247a28ae div.van-dropdown-menu__bar {
-  border-radius: 100px;
+div.update-c88c478fd2695c8b07740ccd247a28ae {
+  div.van-dropdown-menu__bar {
+    border-radius: 100px;
+  }
 }
 </style>

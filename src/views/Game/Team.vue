@@ -156,7 +156,7 @@ export default {
           if (status.code == 200) {
             this.tableData.result = data.result;
           } else {
-            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/my" }, 1);
           }
         });
     },

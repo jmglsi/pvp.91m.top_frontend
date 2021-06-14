@@ -98,9 +98,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 div.miniapp-8d777f385d3dfec8815d20f7496026dc {
-  text-align: left;
+  text-align: @app-text-align;
 }
 
 div.miniapp-021a7599a708a3781fabe39f7631edfc {

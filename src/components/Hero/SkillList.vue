@@ -123,7 +123,7 @@ export default {
               this.tableData
             );
           } else {
-            this.$appOpenUrl(status.msg, null, { path: "/my" }, 1);
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/my" }, 1);
           }
         });
     },
