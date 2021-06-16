@@ -8,19 +8,25 @@
             ? {
                 background:
                   'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(236, 119, 171), rgb(120, 115, 245)) repeat scroll 0% 0%',
-                zIndex: -1
+                zIndex: -1,
               }
             : {}
         "
       ></div>
 
-      <div v-if="$route.meta.keepAlive" class="app-3d1b70e46d0b6cd9cfa43d743da14266">
+      <div
+        v-if="$route.meta.keepAlive"
+        class="app-3d1b70e46d0b6cd9cfa43d743da14266"
+      >
         <keep-alive>
           <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
         </keep-alive>
       </div>
 
-      <div v-else-if="!$route.meta.keepAlive" class="app-3d1b70e46d0b6cd9cfa43d743da14266">
+      <div
+        v-else-if="!$route.meta.keepAlive"
+        class="app-3d1b70e46d0b6cd9cfa43d743da14266"
+      >
         <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
       </div>
     </div>
@@ -41,7 +47,8 @@
           :name="data.name"
           :class="data.isBig ? 'app-0353ac5a7e2d6e9a6a0e652c63b2832a' : null"
           icon-prefix="app-e0c3b278eeb2cab05f548d7af0f2c949"
-        >{{ data.text }}</van-tabbar-item>
+          >{{ data.text }}</van-tabbar-item
+        >
       </van-tabbar>
     </div>
   </div>

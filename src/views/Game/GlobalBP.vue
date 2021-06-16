@@ -8,27 +8,38 @@
         width="100"
         height="100"
       />
-      <div class="game-b3d70a861f68652bf97d7a26bf421d4f">请将设备横过来 或 点击这里切换横屏 ;D</div>
+      <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
+        请将设备横过来 或 点击这里切换横屏 ;D
+      </div>
     </div>
   </div>
   <div v-else-if="!isPortrait" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
     <span
       class="app-f4842dcb685d490e2a43212b8072a6fe"
-      @click="showInfo.isUsed ? showInfo.isUsed = false : showInfo.isUsed = true"
+      @click="
+        showInfo.isUsed ? (showInfo.isUsed = false) : (showInfo.isUsed = true)
+      "
     >
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
         :style="{ color: 'blue' }"
-      >{{ gameInfo.result.rows[tabsInfo.model].team.team_1.name }}</span>
+        >{{ gameInfo.result.rows[tabsInfo.model].team.team_1.name }}</span
+      >
       <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
         :style="{ color: 'red' }"
-      >{{ gameInfo.result.rows[tabsInfo.model].team.team_2.name }}</span>
+        >{{ gameInfo.result.rows[tabsInfo.model].team.team_2.name }}</span
+      >
     </span>
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
-      <div class="game-8c9cb4a232c7e88403dddc3a0e589162 game-bf2c7b7ad9bcf75cd72e0b4ce30500e3">
+      <div
+        class="
+          game-8c9cb4a232c7e88403dddc3a0e589162
+          game-bf2c7b7ad9bcf75cd72e0b4ce30500e3
+        "
+      >
         <ul>
           <li
             v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
@@ -73,7 +84,12 @@
         </ul>
       </div>
 
-      <div class="game-c6a2f8b3941d7f91bc4e51839e5371e0 game-ba9bced6af8121cf6413000a4274ac2b">
+      <div
+        class="
+          game-c6a2f8b3941d7f91bc4e51839e5371e0
+          game-ba9bced6af8121cf6413000a4274ac2b
+        "
+      >
         <ul>
           <li
             v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
@@ -224,9 +240,12 @@
                       <van-grid-item
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
-                          data.trend == 2 && 
-                          (showInfo.isBan == true || (showInfo.isBan == false && data.isBan == false)) &&
-                          (showInfo.isUsed == true || (showInfo.isUsed == false && data.isUsed == false)) &&
+                          data.trend == 2 &&
+                          (showInfo.isBan == true ||
+                            (showInfo.isBan == false && data.isBan == false)) &&
+                          (showInfo.isUsed == true ||
+                            (showInfo.isUsed == false &&
+                              data.isUsed == false)) &&
                           (data.type.includes(tableData.model) ||
                             tableData.model == 0)
                         "
@@ -243,19 +262,25 @@
                             round
                             color="red"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                          >已禁</van-tag>
+                            >已禁</van-tag
+                          >
                           <van-tag
                             round
                             v-else-if="data.isUsed"
                             color="orange"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                          >已用</van-tag>
+                            >已用</van-tag
+                          >
                         </span>
                         <img
                           width="40"
                           height="40"
                           v-lazy="data.img"
-                          :style="tabsInfo.model < 6 && (data.isBan || data.isUsed) ? { filter: 'grayscale(1)' } : {}"
+                          :style="
+                            tabsInfo.model < 6 && (data.isBan || data.isUsed)
+                              ? { filter: 'grayscale(1)' }
+                              : {}
+                          "
                           class="game-ae47f38706d42938ff1dbd5960a08056"
                         />
                       </van-grid-item>
@@ -282,8 +307,11 @@
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
                           data.trend != 2 &&
-                          (showInfo.isBan == true || (showInfo.isBan == false && data.isBan == false)) &&
-                          (showInfo.isUsed == true || (showInfo.isUsed == false && data.isUsed == false)) &&
+                          (showInfo.isBan == true ||
+                            (showInfo.isBan == false && data.isBan == false)) &&
+                          (showInfo.isUsed == true ||
+                            (showInfo.isUsed == false &&
+                              data.isUsed == false)) &&
                           (data.type.includes(tableData.model) ||
                             tableData.model == 0)
                         "
@@ -300,19 +328,25 @@
                             round
                             color="red"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                          >已禁</van-tag>
+                            >已禁</van-tag
+                          >
                           <van-tag
                             round
                             v-else-if="data.isUsed"
                             color="orange"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                          >已用</van-tag>
+                            >已用</van-tag
+                          >
                         </span>
                         <img
                           width="40"
                           height="40"
                           v-lazy="data.img"
-                          :style="tabsInfo.model < 6 && (data.isBan || data.isUsed) ? { filter: 'grayscale(1)' } : {}"
+                          :style="
+                            tabsInfo.model < 6 && (data.isBan || data.isUsed)
+                              ? { filter: 'grayscale(1)' }
+                              : {}
+                          "
                           class="game-ae47f38706d42938ff1dbd5960a08056"
                         />
                       </van-grid-item>
@@ -388,7 +422,10 @@
 
     <div
       v-if="tabsInfo.model < 6"
-      class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917"
+      class="
+        game-beedfb16b1c81d2901c32b6dcc2939d0
+        game-e4e6288c92630a6c237c15442fdb0917
+      "
     >
       <ul>
         <li v-if="bpMode == 'edit'">
@@ -397,7 +434,8 @@
             <span
               class="game-0db3e75efe3faa0cee4451fb55bc4c53"
               :style="bpCountdown < 10 ? { color: 'red' } : { color: 'blue' }"
-            >{{ bpCountdown }}</span>
+              >{{ bpCountdown }}</span
+            >
             秒
           </div>
         </li>
@@ -408,7 +446,8 @@
               :icon="authorInfo.logo"
               size="small"
               class="game-8e4f204791d1b591b6a6f93b572f9b2d"
-            >{{ authorInfo.name }}</van-button>
+              >{{ authorInfo.name }}</van-button
+            >
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in authorInfo.actions"
@@ -418,7 +457,8 @@
                     ? $appOpenUrl('是否打开外部链接?', null, { path: data.url })
                     : null
                 "
-              >{{ data.title }}</a-menu-item>
+                >{{ data.title }}</a-menu-item
+              >
             </a-menu>
           </a-dropdown>
         </li>
@@ -434,11 +474,11 @@
             @click="onGamePerspectiveClick(1)"
           >
             以&nbsp;{{
-            bpPerspective == 1 ? teamInfo.team_1.name : teamInfo.team_2.name
+              bpPerspective == 1 ? teamInfo.team_1.name : teamInfo.team_2.name
             }}&nbsp;的视角
           </van-button>
         </li>
-        <li :style="{ marginTop:'7px' }">
+        <li :style="{ marginTop: '7px' }">
           <span class="game-9f200fbaabc11df2f193d590bc7b3f5b">查看</span>
         </li>
         <li>
@@ -451,7 +491,7 @@
             @click="onSeeHeroClick"
           >
             {{
-            bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
+              bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
             }}
             剩余英雄
           </van-button>
@@ -460,21 +500,41 @@
     </div>
     <!-- 右上角 -->
 
-    <div class="game-173f312c43fe32a4f01c84d1cf0520b1 game-e4e6288c92630a6c237c15442fdb0917">
+    <div
+      class="
+        game-173f312c43fe32a4f01c84d1cf0520b1
+        game-e4e6288c92630a6c237c15442fdb0917
+      "
+    >
       <ul>
         <li>
           <span>
-            <span class="game-59b9fd83bc5ce802ee9ace7db0e22522" :style="{ color : 'red' }">已禁</span>
+            <span
+              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+              :style="{ color: 'red' }"
+              >已禁</span
+            >
             <span>
-              <van-switch v-model="showInfo.isBan" active-color="red" size="13px" />
+              <van-switch
+                v-model="showInfo.isBan"
+                active-color="red"
+                size="13px"
+              />
             </span>
           </span>
-          &nbsp;
-          &nbsp;
+          &nbsp; &nbsp;
           <span>
-            <span class="game-59b9fd83bc5ce802ee9ace7db0e22522" :style="{ color : 'orange' }">已用</span>
+            <span
+              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+              :style="{ color: 'orange' }"
+              >已用</span
+            >
             <span>
-              <van-switch v-model="showInfo.isUsed" active-color="orange" size="13px" />
+              <van-switch
+                v-model="showInfo.isUsed"
+                active-color="orange"
+                size="13px"
+              />
             </span>
           </span>
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
@@ -482,14 +542,18 @@
         <li v-if="showInfo.apps && (bpMode == 'view' || bpMode == 'edit')">
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" color="black" />
-            <a-menu slot="overlay" class="game-c22cea301eff6baea51a9da08c0a680a">
+            <a-menu
+              slot="overlay"
+              class="game-c22cea301eff6baea51a9da08c0a680a"
+            >
               <a-menu-item
                 v-if="
                   bpMode == 'view' &&
                   gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
                 @click="onToolsMenuClick(0)"
-              >删除本局</a-menu-item>
+                >删除本局</a-menu-item
+              >
               <a-menu-item
                 v-if="
                   bpMode == 'view' &&
@@ -497,15 +561,19 @@
                   gameInfo.result.rows.length < 7
                 "
                 @click="onToolsMenuClick(1)"
-              >再来一局</a-menu-item>
+                >再来一局</a-menu-item
+              >
               <a-menu-item
                 v-if="
                   bpMode == 'edit' &&
                   gameInfo.result.rows.length - 1 == tabsInfo.model
                 "
                 @click="onToolsMenuClick(2)"
-              >重置本局</a-menu-item>
-              <a-menu-item @click="onToolsMenuClick(3)">{{ bpMode == "view" ? "编辑" : "保存" }}本局</a-menu-item>
+                >重置本局</a-menu-item
+              >
+              <a-menu-item @click="onToolsMenuClick(3)"
+                >{{ bpMode == "view" ? "编辑" : "保存" }}本局</a-menu-item
+              >
             </a-menu>
           </a-dropdown>
         </li>
@@ -531,7 +599,13 @@
           />
         </li>
         <li v-if="bpMode == 'view'">
-          <van-button round icon="share-o" size="small" color="black" @click="onGameShareCopy" />
+          <van-button
+            round
+            icon="share-o"
+            size="small"
+            color="black"
+            @click="onGameShareCopy"
+          />
         </li>
         <li>
           <van-button
@@ -561,18 +635,24 @@
             :type="bpMode == 'sort' ? 'primary' : 'info'"
             size="small"
             @click="onNewSortClick"
-          >{{ bpMode == "sort" ? "保存" : "修改" }}排序</van-button>&nbsp;
+            >{{ bpMode == "sort" ? "保存" : "修改" }}排序</van-button
+          >&nbsp;
           <van-button
             v-if="bpMode == 'edit'"
             round
             type="info"
             size="small"
             @click="onSwapPositionClick"
-          >交换位置</van-button>
+            >交换位置</van-button
+          >
         </div>
-        <van-divider :style="{ color: 'red', borderColor: 'red' }">以下功能慎用</van-divider>
+        <van-divider :style="{ color: 'red', borderColor: 'red' }"
+          >以下功能慎用</van-divider
+        >
         <div class="game-b517e39eb99fd590ac1df412b5c84007">
-          <van-button round type="danger" size="small" @click="onResetSortClick">重置排序</van-button>
+          <van-button round type="danger" size="small" @click="onResetSortClick"
+            >重置排序</van-button
+          >
         </div>
       </div>
     </van-popup>
@@ -613,7 +693,8 @@
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
               :style="{ color: gameInfo.result.rows[index].win.color }"
-            >{{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}</span>
+              >{{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}</span
+            >
           </template>
         </van-tab>
       </van-tabs>
@@ -744,8 +825,7 @@ export default {
       },
       authorInfo: {
         name: "加载中",
-        logo:
-          "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
+        logo: "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
         actions: [],
       },
       teamInfo: {

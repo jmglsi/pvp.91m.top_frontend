@@ -16,7 +16,13 @@
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
-        <vxe-table-column title="英雄" field="allScore" fixed="left" width="75" sortable>
+        <vxe-table-column
+          title="英雄"
+          field="allScore"
+          fixed="left"
+          width="75"
+          sortable
+        >
           <template v-slot="{ row }">
             <div
               :class="
@@ -31,7 +37,8 @@
                 mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.tag.text }}</van-tag>
+                >{{ row.tag.text }}</van-tag
+              >
               <img
                 v-lazy="row.img"
                 width="50"
@@ -50,20 +57,34 @@
                   v-lazy="row.skill.preview[0].img"
                   width="15"
                   height="15"
-                  class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
+                  class="
+                    ranking-95a25d46f98b0ec553d892cc45037d57
+                    ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                  "
                 />
                 <span
-                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-043052eea2d064cab23119e56f4f640e"
-                >{{ row.skill.preview[0].pickRate }}%</span>
+                  class="
+                    app-0fc3cfbc27e91ea60a787de13dae3e3c
+                    ranking-043052eea2d064cab23119e56f4f640e
+                  "
+                  >{{ row.skill.preview[0].pickRate }}%</span
+                >
                 <img
                   v-lazy="row.skill.preview[1].img"
                   width="15"
                   height="15"
-                  class="ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
+                  class="
+                    ranking-95a25d46f98b0ec553d892cc45037d57
+                    ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                  "
                 />
                 <span
-                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c ranking-dabb6e25dffefe5b4821b7062afbdaef"
-                >{{ row.skill.preview[1].pickRate }}%</span>
+                  class="
+                    app-0fc3cfbc27e91ea60a787de13dae3e3c
+                    ranking-dabb6e25dffefe5b4821b7062afbdaef
+                  "
+                  >{{ row.skill.preview[1].pickRate }}%</span
+                >
               </div>
             </div>
           </template>
@@ -71,11 +92,16 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-column title="优先级" field="updateIndex" :width="listWidth" sortable>
+        <vxe-table-column
+          title="优先级"
+          field="updateIndex"
+          :width="listWidth"
+          sortable
+        >
           <template v-slot="{ row }">
-            <span
-              class="hero-b1bd56e896540535e327e5a177ede4a8"
-            >{{ row.updateType == 0 ? "-" : Math.abs(row.updateIndex) }}</span>
+            <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
+              row.updateType == 0 ? "-" : Math.abs(row.updateIndex)
+            }}</span>
             <img
               v-if="row.updateType != 0"
               v-lazy="'/img/app-icons/hot_' + row.updateType + '.png'"
@@ -178,38 +204,118 @@
         </vxe-table-column>
 
         <vxe-table-column title="牌子 (%)">
-          <vxe-table-column title="全部" field="allBrandRate" :width="listWidth" sortable />
-          <vxe-table-column title="金牌" field="evaluateGoldRate" :width="listWidth" sortable />
-          <vxe-table-column title="银牌" field="evaluateSilverRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="allBrandRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="金牌"
+            field="evaluateGoldRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="银牌"
+            field="evaluateSilverRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="MVP (%)">
-          <vxe-table-column title="全部" field="allMvpRate" :width="listWidth" sortable />
-          <vxe-table-column title="胜方" field="winMvpRate" :width="listWidth" sortable />
-          <vxe-table-column title="败方" field="loseMvpRate" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="allMvpRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="胜方"
+            field="winMvpRate"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="败方"
+            field="loseMvpRate"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
-        <vxe-table-column title="承伤" field="totalBeHurtedCntPerMin" :width="listWidth" sortable />
+        <vxe-table-column
+          title="承伤"
+          field="totalBeHurtedCntPerMin"
+          :width="listWidth"
+          sortable
+        />
 
         <vxe-table-column title="伤害">
-          <vxe-table-column title="全部" field="totalOutputPerMin" :width="listWidth" sortable />
-          <vxe-table-column title="对人" field="totalHurtHeroCntPerMin" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="totalOutputPerMin"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="对人"
+            field="totalHurtHeroCntPerMin"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="金币">
-          <vxe-table-column title="全部" field="equMoneyOverflow" :width="listWidth" sortable />
-          <vxe-table-column title="分均" field="equMoneyMin" :width="listWidth" sortable />
+          <vxe-table-column
+            title="全部"
+            field="equMoneyOverflow"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="分均"
+            field="equMoneyMin"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="KDA">
-          <vxe-table-column title="击杀" field="killCnt" :width="listWidth" sortable />
-          <vxe-table-column title="死亡" field="deadCnt" :width="listWidth" sortable />
-          <vxe-table-column title="助攻" field="assistCnt" :width="listWidth" sortable />
+          <vxe-table-column
+            title="击杀"
+            field="killCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="死亡"
+            field="deadCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="助攻"
+            field="assistCnt"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
 
         <vxe-table-column title="其他">
-          <vxe-table-column title="参团" field="joinGamePercent" :width="listWidth" sortable />
-          <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+          <vxe-table-column
+            title="参团"
+            field="joinGamePercent"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="时长"
+            field="usedtime"
+            :width="listWidth"
+            sortable
+          />
         </vxe-table-column>
       </vxe-grid>
     </div>

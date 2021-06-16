@@ -24,7 +24,12 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="装备" field="equipment.id" fixed="left" width="50">
+      <vxe-table-column
+        title="装备"
+        field="equipment.id"
+        fixed="left"
+        width="50"
+      >
         <template v-slot="{ row }">
           <img
             v-lazy="
@@ -39,11 +44,18 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="优先级" field="equipment.updateIndex" :width="listWidth" sortable>
+      <vxe-table-column
+        title="优先级"
+        field="equipment.updateIndex"
+        :width="listWidth"
+        sortable
+      >
         <template v-slot="{ row }">
-          <span
-            class="hero-b1bd56e896540535e327e5a177ede4a8"
-          >{{row.equipment.updateType == 0 ? "-" : Math.abs(row.equipment.updateIndex)}}</span>
+          <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
+            row.equipment.updateType == 0
+              ? "-"
+              : Math.abs(row.equipment.updateIndex)
+          }}</span>
           <img
             v-if="row.equipment.updateType != 0"
             v-lazy="'/img/app-icons/hot_' + row.equipment.updateType + '.png'"
@@ -155,7 +167,11 @@
       </vxe-table-column>
     </vxe-grid>
 
-    <van-action-sheet v-model="showInfo.equipmentMenu" :round="false" safe-area-inset-bottom>
+    <van-action-sheet
+      v-model="showInfo.equipmentMenu"
+      :round="false"
+      safe-area-inset-bottom
+    >
       <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
         <img
           v-lazy="
@@ -184,7 +200,12 @@
         <EquipmentLine :heroEquipment="lineDataRow" />
       </div>
 
-      <div class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4">
+      <div
+        class="
+          app-61046f2f5eefe3dc179e52af32241062
+          hero-386260160edfd75a6b62facc140fd3a4
+        "
+      >
         <span class="app-e4c9479b11955648dad558fe717a4eb2">
           1.格子出场不高但是胜率接近 100%
           可能是因为样本较少、针对出、还没出完就结束的

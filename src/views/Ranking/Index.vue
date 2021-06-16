@@ -75,7 +75,11 @@
             关系和克制 (近期)
             <i class="vxe-icon--search" />
           </template>
-          <GuanXi v-if="tabsInfo.model == 1" :isSmallMobile="isSmallMobile" :heroName="heroName" />
+          <GuanXi
+            v-if="tabsInfo.model == 1"
+            :isSmallMobile="isSmallMobile"
+            :heroName="heroName"
+          />
         </van-tab>
 
         <van-tab>
@@ -92,7 +96,10 @@
         </van-tab>
 
         <van-tab title="装备 (近期)">
-          <ZhuangBei v-if="tabsInfo.model == 3" :isSmallMobile="isSmallMobile" />
+          <ZhuangBei
+            v-if="tabsInfo.model == 3"
+            :isSmallMobile="isSmallMobile"
+          />
         </van-tab>
 
         <van-tab>
@@ -114,7 +121,10 @@
     <van-popup
       v-model="showInfo.rankingSearch"
       v-if="showInfo.rankingSearch"
-      class="app-69df17da0044a6e876b2afd3217d2564 ranking-31c631534a3cec9ed2c5283f653a06aa"
+      class="
+        app-69df17da0044a6e876b2afd3217d2564
+        ranking-31c631534a3cec9ed2c5283f653a06aa
+      "
     >
       <a-input-search
         :defaultValue="searchInfo.defaultValue"
@@ -125,7 +135,11 @@
     </van-popup>
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
-      <van-action-sheet v-model="showInfo.rankingFilterMenu" title="请选择" safe-area-inset-bottom>
+      <van-action-sheet
+        v-model="showInfo.rankingFilterMenu"
+        title="请选择"
+        safe-area-inset-bottom
+      >
         <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
           <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">
             <van-dropdown-item
@@ -155,7 +169,8 @@
                 query: { q: '大佬们快来加群', refresh: 1 },
               })
             "
-          >您的分享是我更新的动力 ( •̀ ω •́ )y</span>
+            >您的分享是我更新的动力 ( •̀ ω •́ )y</span
+          >
         </div>
       </van-action-sheet>
     </div>
@@ -174,7 +189,8 @@
           round
           type="danger"
           class="ranking-4d09fbef1438e2b23375b87ba3e02942"
-        >游客部分功能将受限,登录后解锁</van-tag>
+          >游客部分功能将受限,登录后解锁</van-tag
+        >
       </van-divider>
     </div>
   </div>

@@ -31,17 +31,42 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-column title="类型" field="type" sortable :width="listWidth" />
+        <vxe-table-column
+          title="类型"
+          field="type"
+          sortable
+          :width="listWidth"
+        />
 
-        <vxe-table-column title="开始数量" field="start_num" sortable :width="listWidth" />
+        <vxe-table-column
+          title="开始数量"
+          field="start_num"
+          sortable
+          :width="listWidth"
+        />
 
-        <vxe-table-column title="目标数量" field="num" sortable :width="listWidth" />
+        <vxe-table-column
+          title="目标数量"
+          field="num"
+          sortable
+          :width="listWidth"
+        />
 
-        <vxe-table-column title="剩余数量" field="task_num" sortable :width="listWidth" />
+        <vxe-table-column
+          title="剩余数量"
+          field="task_num"
+          sortable
+          :width="listWidth"
+        />
 
         <vxe-table-column title="备注" field="bz" :width="listWidth" />
 
-        <vxe-table-column title="更新时间" field="update_time" sortable width="200" />
+        <vxe-table-column
+          title="更新时间"
+          field="update_time"
+          sortable
+          width="200"
+        />
 
         <vxe-table-column title="状态" field="is_running" width="75" />
       </vxe-grid>

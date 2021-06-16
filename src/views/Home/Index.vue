@@ -1,7 +1,9 @@
 <template>
   <div class="app-home">
     <div class="home-3edeff15047c21ac6441301927306137">
-      <van-sticky :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0">
+      <van-sticky
+        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
+      >
         <van-search
           show-action
           shape="round"
@@ -15,9 +17,19 @@
               v-lazy="appInfo.search.img"
               class="home-47ee6ad584172f967b674131cb948a87"
               @click="
-                appInfo.search.to 
-                ? $appOpenUrl('是否打开内部链接?', '网络交友需谨慎,涉及金钱莫轻信', { path: appInfo.search.to }, 1) 
-                : $appOpenUrl('是否打开外部链接?', null, { path: appInfo.search.url }, 0)
+                appInfo.search.to
+                  ? $appOpenUrl(
+                      '是否打开内部链接?',
+                      '网络交友需谨慎,涉及金钱莫轻信',
+                      { path: appInfo.search.to },
+                      1
+                    )
+                  : $appOpenUrl(
+                      '是否打开外部链接?',
+                      null,
+                      { path: appInfo.search.url },
+                      0
+                    )
               "
             />
           </template>
@@ -47,7 +59,9 @@
     </div>
 
     <div class="home-72ab9e07378f988922e6c91884048db0">
-      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">数据随意引用，注明出处即可 ;D</span>
+      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de"
+        >数据随意引用，注明出处即可 ;D</span
+      >
     </div>
 
     <AppHello height="100px" />

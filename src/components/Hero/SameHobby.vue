@@ -1,11 +1,18 @@
 <template>
   <div class="hero-same-hobby">
     <div
-      class="app-a931c759bf506211221c0cc099e8d1c2 app-6bdc6915ee08058392eafe0ef6e353fd app-9b9faf4e737f5907995f767e0b345dab"
+      class="
+        app-a931c759bf506211221c0cc099e8d1c2
+        app-6bdc6915ee08058392eafe0ef6e353fd
+        app-9b9faf4e737f5907995f767e0b345dab
+      "
     >
       <div class="hero-same-hobby-1a67ccb40b81a7318620c55405993a5d">
         <ul
-          class="app-d865b50ce307751bdeb9a6ab16e7baf9 hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7"
+          class="
+            app-d865b50ce307751bdeb9a6ab16e7baf9
+            hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7
+          "
         >
           <li
             v-for="(data, index) in tableData.result.rows"
@@ -26,7 +33,9 @@
               v-lazy="data.img"
               class="app-4ab161130e76571ab0c31aa23a6238c7"
             />
-            <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">{{ data.name }}</div>
+            <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">
+              {{ data.name }}
+            </div>
           </li>
         </ul>
       </div>
@@ -41,7 +50,8 @@
           @click="
             $appPush({ path: '/search', query: { q: '国服认证', refresh: 1 } })
           "
-        >国服认证</van-button>&nbsp;
+          >国服认证</van-button
+        >&nbsp;
         <van-button
           round
           icon="replay"
@@ -49,7 +59,8 @@
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="getHeroInfoByWebAccountList(heroId, 1)"
-        >刷新一下</van-button>
+          >刷新一下</van-button
+        >
       </div>
     </div>
   </div>

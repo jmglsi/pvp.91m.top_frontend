@@ -72,10 +72,14 @@
             : $message.error($appMsg.error[1007])
         "
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-      >{{ loginInfo.text }}</van-button>
+        >{{ loginInfo.text }}</van-button
+      >
     </div>
 
-    <div v-if="loginInfo.type == 0" class="app-61046f2f5eefe3dc179e52af32241062">
+    <div
+      v-if="loginInfo.type == 0"
+      class="app-61046f2f5eefe3dc179e52af32241062"
+    >
       <span class="app-e4c9479b11955648dad558fe717a4eb2">
         注:
         <br />1.信息是加密储存的
@@ -102,11 +106,21 @@
       </div>
     </div>
 
-    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f">
+    <div
+      class="
+        login-f01ae8c7f2d058ec6be00db589a32bea
+        login-60ae25445ac62d5ec51c776826888d9f
+      "
+    >
       <span @click="onRegisterClick">注册</span>
     </div>
 
-    <div class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d">
+    <div
+      class="
+        login-f01ae8c7f2d058ec6be00db589a32bea
+        login-4ae1ffb5939d592986bed21d0913562d
+      "
+    >
       <span @click="onUpdateClick">修改密码</span>
     </div>
   </div>

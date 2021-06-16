@@ -14,9 +14,7 @@
       >
         <template #title>
           <span class="hero-d5d3db1765287eef77d7927cc956f50a">
-            {{
-            replay.title
-            }}
+            {{ replay.title }}
           </span>
         </template>
       </van-nav-bar>
@@ -43,19 +41,33 @@
             <van-tag
               round
               :type="data.status"
-              class="hero-01cac4e332fec6d6ecd331a00412712d hero-e4d23e841d8e8804190027bce3180fa5"
-            >{{ data.status == "success" ? "胜利" : "失败" }}</van-tag>
+              class="
+                hero-01cac4e332fec6d6ecd331a00412712d
+                hero-e4d23e841d8e8804190027bce3180fa5
+              "
+              >{{ data.status == "success" ? "胜利" : "失败" }}</van-tag
+            >
             <van-tag
               v-if="!replay.teammate"
               round
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
-            >{{ data.equipment.allMoney }}</van-tag>
-            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">{{ data.gamePlayerName }}</span>
+              >{{ data.equipment.allMoney }}</van-tag
+            >
+            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">{{
+              data.gamePlayerName
+            }}</span>
           </div>
 
-          <div v-if="!replay.teammate" class="hero-f01902c0d0136ca30fe1034f339964ba">
-            <van-grid :border="false" :column-num="7" class="hero-c906a12df6d50e587b83a727416b5173">
+          <div
+            v-if="!replay.teammate"
+            class="hero-f01902c0d0136ca30fe1034f339964ba"
+          >
+            <van-grid
+              :border="false"
+              :column-num="7"
+              class="hero-c906a12df6d50e587b83a727416b5173"
+            >
               <van-grid-item
                 :icon="
                   '//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'
@@ -91,14 +103,16 @@
               color="black"
               size="mini"
               class="hero-ce50a09343724eb82df11390e2c1de18"
-            >{{ data.heroKda }}</van-tag>&nbsp;
+              >{{ data.heroKda }}</van-tag
+            >&nbsp;
             <van-tag
               round
               type="primary"
               size="mini"
               class="hero-ce50a09343724eb82df11390e2c1de18"
               @click="getGameInfo(data)"
-            >对局</van-tag>
+              >对局</van-tag
+            >
           </div>
         </van-collapse-item>
       </van-collapse>

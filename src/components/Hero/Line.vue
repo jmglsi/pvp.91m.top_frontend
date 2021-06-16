@@ -15,8 +15,15 @@
       />
     </div>
 
-    <div v-if="showInfo.autoPlayTrend && aid == 0" class="hero-f6d50810d5b150ebd421cc944d2597a5">
-      <van-switch v-model="lineInfo.checked" @change="onSwitchChange" size="15px" />
+    <div
+      v-if="showInfo.autoPlayTrend && aid == 0"
+      class="hero-f6d50810d5b150ebd421cc944d2597a5"
+    >
+      <van-switch
+        v-model="lineInfo.checked"
+        @change="onSwitchChange"
+        size="15px"
+      />
     </div>
   </div>
 </template>

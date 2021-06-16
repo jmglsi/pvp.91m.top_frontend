@@ -14,18 +14,32 @@
         <template #title>
           <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
             <span
-              class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
-            >&lt;{{ $appColumnsInfo.areaType[loginInfo.areaType] }}&gt;</span>
+              class="
+                my-25930e3036f13852cb0b29694bbab611
+                my-b068931cc450442b63f5b3d276ea4297
+              "
+              >&lt;{{ $appColumnsInfo.areaType[loginInfo.areaType] }}&gt;</span
+            >
             <span
-              class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
-            >{{ loginInfo.name }}</span>
-            <span class="my-25930e3036f13852cb0b29694bbab611 my-293a35164a20c927b0fd61942fbc1cf2">
+              class="
+                my-25930e3036f13852cb0b29694bbab611
+                my-b068931cc450442b63f5b3d276ea4297
+              "
+              >{{ loginInfo.name }}</span
+            >
+            <span
+              class="
+                my-25930e3036f13852cb0b29694bbab611
+                my-293a35164a20c927b0fd61942fbc1cf2
+              "
+            >
               <van-tag
                 round
                 :color="loginInfo.certification.color"
                 class="my-7eaa86d23ffacfb49464ee78252aa43a"
                 @click="$message.info($appMsg.info[1003])"
-              >{{ loginInfo.certification.text }}</van-tag>
+                >{{ loginInfo.certification.text }}</van-tag
+              >
             </span>
           </div>
         </template>
@@ -33,7 +47,11 @@
     </div>
 
     <div v-if="!isLogin" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
-      <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-058928a73f2a944d621b028eb9addd36"
+      >
         <van-cell>
           <template #title>
             <van-button
@@ -42,7 +60,8 @@
               color="linear-gradient(to right, #4bb0ff, #6149f6)"
               @click="$appPush({ path: '/login' })"
               class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-            >注册/登录</van-button>
+              >注册/登录</van-button
+            >
           </template>
         </van-cell>
       </van-cell-group>
@@ -68,23 +87,33 @@
           })
         "
       />
-      <div
-        class="app-88bf7a95736562190270d51dc2cb3f42"
-      >{{ loginInfo.description || "这个人很懒,什么都没有留下" }}</div>
+      <div class="app-88bf7a95736562190270d51dc2cb3f42">
+        {{ loginInfo.description || "这个人很懒,什么都没有留下" }}
+      </div>
     </div>
 
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-cell-group :border="false" title class="my-71c2fb64c38e4ee108607ca840607e48">
+      <van-cell-group
+        :border="false"
+        title
+        class="my-71c2fb64c38e4ee108607ca840607e48"
+      >
         <van-cell
           icon="/img/app-icons/game.png"
           title="全局BP模拟器"
           label="第一次使用务必看一下"
           value="自豪的使用语雀"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })
+          "
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
-        <van-grid :border="false" :column-num="2" class="my-c3d90961c9bf155d11cbef9c57725aea">
+        <van-grid
+          :border="false"
+          :column-num="2"
+          class="my-c3d90961c9bf155d11cbef9c57725aea"
+        >
           <van-grid-item
             icon="//img06.mifile.cn/v1/MI_542ED8B1722DC/9c36dd7e015e0cbff074365092baee11.png"
             to="/game/team"
@@ -94,9 +123,7 @@
             <template #text>
               <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
                 <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
-                  {{
-                  loginInfo.statistics.team
-                  }}
+                  {{ loginInfo.statistics.team }}
                 </span>
                 <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
               </div>
@@ -111,9 +138,7 @@
             <template #text>
               <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
                 <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
-                  {{
-                  loginInfo.statistics.label
-                  }}
+                  {{ loginInfo.statistics.label }}
                 </span>
                 <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
               </div>
@@ -124,7 +149,11 @@
     </div>
 
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-cell-group :border="false" title=" " class="my-abf7b3191e2a24c6fc3c008124bcf0d4">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-abf7b3191e2a24c6fc3c008124bcf0d4"
+      >
         <van-cell
           title="王者荣耀"
           icon="/img/game-icons/king.png"
@@ -135,9 +164,7 @@
               <img v-lazy="loginInfo.rank.starIcon" width="50" height="50" />
               <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
               <span class="my-7121ba1bc1276c3bb6df96b333a16760">
-                {{
-                loginInfo.rank.score
-                }}
+                {{ loginInfo.rank.score }}
               </span>
             </span>
           </template>
@@ -150,13 +177,19 @@
             <span
               class="my-1098203f6e0a3a981da7c9a8cd6bc85b"
               @click="$message.info($appMsg.info[1015])"
-            >喜欢列表</span>
+              >喜欢列表</span
+            >
           </template>
           <template #right-icon>
             <div class="app-c1351782c9c93025d72864180d0cf28c">
               <ul
-                class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
-                :style="loginInfo.heroList.length <= 3 ? {} : { width: '180px' }"
+                class="
+                  app-d865b50ce307751bdeb9a6ab16e7baf9
+                  app-9e60d3ee1e1574cae90960f940c0a821
+                "
+                :style="
+                  loginInfo.heroList.length <= 3 ? {} : { width: '180px' }
+                "
               >
                 <li
                   v-for="(data, index) in loginInfo.heroList"
@@ -165,12 +198,12 @@
                 >
                   <img
                     v-lazy="
-                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                    data.id +
-                    '/' +
-                    data.id +
-                    '.jpg'
-                  "
+                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                      data.id +
+                      '/' +
+                      data.id +
+                      '.jpg'
+                    "
                     width="35"
                     height="35"
                     class="app-4ab161130e76571ab0c31aa23a6238c7"
@@ -190,15 +223,26 @@
               v-if="loginInfo.heroList.length == 0"
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
               @click="$message.info($appMsg.info[1015])"
-            >未设置</span>
+              >未设置</span
+            >
           </template>
         </van-cell>
-        <van-cell icon="manager" title="扩列链接" value="点击复制" is-link @click="onMyLinkCopy" />
+        <van-cell
+          icon="manager"
+          title="扩列链接"
+          value="点击复制"
+          is-link
+          @click="onMyLinkCopy"
+        />
       </van-cell-group>
     </div>
 
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-cell-group :border="false" title=" " class="my-66e3a8a1303fb1fc8ce3249b23dbd268">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-66e3a8a1303fb1fc8ce3249b23dbd268"
+      >
         <van-cell
           title="修改密码"
           icon="/img/app-icons/password_edit.png"
@@ -210,13 +254,26 @@
     </div>
 
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-cell-group :border="false" title=" " class="my-35382d1952f0fb4d86744b11faf01d07">
-        <van-cell icon="setting-o" title="通用" is-link @click="$appPush({ path: '/setting' })" />
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-35382d1952f0fb4d86744b11faf01d07"
+      >
+        <van-cell
+          icon="setting-o"
+          title="通用"
+          is-link
+          @click="$appPush({ path: '/setting' })"
+        />
       </van-cell-group>
     </div>
 
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-058928a73f2a944d621b028eb9addd36"
+      >
         <van-cell
           icon="friends-o"
           title="感谢各位伙伴"
@@ -245,7 +302,11 @@
     </div>
 
     <div v-if="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
-      <van-cell-group :border="false" title=" " class="my-058928a73f2a944d621b028eb9addd36">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-058928a73f2a944d621b028eb9addd36"
+      >
         <van-cell>
           <template #title>
             <van-button
@@ -254,14 +315,19 @@
               color="rgb(245,245,245)"
               @click="onLogoutClick"
               class="app-4236a440a662cc8253d7536e5aa17942"
-            >退出登录</van-button>
+              >退出登录</van-button
+            >
           </template>
         </van-cell>
       </van-cell-group>
     </div>
 
     <div class="my-111fb4d92036323891a140cd49383f86">
-      <van-cell-group :border="false" title=" " class="my-b990d992f06c8db21d6b58c25f843529">
+      <van-cell-group
+        :border="false"
+        title=" "
+        class="my-b990d992f06c8db21d6b58c25f843529"
+      >
         <van-cell
           title="沪ICP备16031287号-2"
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.beian })"
@@ -290,7 +356,11 @@
         title="我的信息"
       >
         <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">
-          <van-cell-group :border="false" title class="my-3c5bcb72d710faf0c301750abeb5704f">
+          <van-cell-group
+            :border="false"
+            title
+            class="my-3c5bcb72d710faf0c301750abeb5704f"
+          >
             <van-field
               v-model="$appColumnsInfo.areaType[newInfo.areaType]"
               readonly
@@ -304,7 +374,8 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(0)"
-                >修改大区</van-button>
+                  >修改大区</van-button
+                >
               </template>
             </van-field>
             <van-field
@@ -320,7 +391,8 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(1)"
-                >修改省份</van-button>
+                  >修改省份</van-button
+                >
               </template>
             </van-field>
             <van-field readonly label="段位">
@@ -334,14 +406,28 @@
                   type="info"
                   class="my-e06af146fff27b9e4b20bda71a291f9f"
                   @click="onUpdateColumnsInfoClick(2)"
-                >修改段位</van-button>
+                  >修改段位</van-button
+                >
               </template>
             </van-field>
-            <van-field v-model="newInfo.rank.score" type="number" input-align="right" label="巅峰分" />
+            <van-field
+              v-model="newInfo.rank.score"
+              type="number"
+              input-align="right"
+              label="巅峰分"
+            />
           </van-cell-group>
 
-          <van-cell-group :border="false" title=" " class="my-3c5bcb72d710faf0c301750abeb5704f">
-            <van-field readonly label="扩列" @click="$message.warning($appMsg.warning[1002])">
+          <van-cell-group
+            :border="false"
+            title=" "
+            class="my-3c5bcb72d710faf0c301750abeb5704f"
+          >
+            <van-field
+              readonly
+              label="扩列"
+              @click="$message.warning($appMsg.warning[1002])"
+            >
               <template #button>
                 <span class="my-35494217d6a01388d07eccf816b6ea39">
                   <van-switch v-model="showInfo.friendsType" />
@@ -369,7 +455,8 @@
             type="primary"
             class="app-a066f238070a70cb531c9bd722c65b36"
             @click="updateWebAccountInfo"
-          >保存信息</van-button>
+            >保存信息</van-button
+          >
         </div>
       </van-action-sheet>
     </div>

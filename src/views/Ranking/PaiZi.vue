@@ -9,7 +9,13 @@
         empty-text="点击上方筛选"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="英雄" field="name" fixed="left" width="75" sortable>
+        <vxe-table-column
+          title="英雄"
+          field="name"
+          fixed="left"
+          width="75"
+          sortable
+        >
           <template v-slot="{ row }">
             <div
               :class="
@@ -30,9 +36,19 @@
 
         <vxe-table-column title="#" type="seq" width="75" />
 
-        <vxe-table-column title="战力" field="fightPowerValue" width="75" sortable />
+        <vxe-table-column
+          title="战力"
+          field="fightPowerValue"
+          width="75"
+          sortable
+        />
 
-        <vxe-table-column title="更新时间" field="updateTime" :width="listWidth" sortable />
+        <vxe-table-column
+          title="更新时间"
+          field="updateTime"
+          :width="listWidth"
+          sortable
+        />
       </vxe-grid>
     </div>
 

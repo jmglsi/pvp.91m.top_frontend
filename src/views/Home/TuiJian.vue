@@ -10,8 +10,17 @@
         @refresh="onDropdownRefreshClick"
         class="tuijian-af03857fe372b964b53ef3a082c2b518"
       >
-        <div class="app-a139b05b7f8e496c00991733ef7cd589 app-1e4b00d1b398e8a6551429b2a2f0e17c">
-          <van-swipe :autoplay="5000" :height="200" class="app-f97c2ea77c6a08b3afd5a59851cbe0d8">
+        <div
+          class="
+            app-a139b05b7f8e496c00991733ef7cd589
+            app-1e4b00d1b398e8a6551429b2a2f0e17c
+          "
+        >
+          <van-swipe
+            :autoplay="5000"
+            :height="200"
+            class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
+          >
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
               :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
@@ -22,17 +31,25 @@
               "
               class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
             >
-              <img v-lazy="data.img" class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9" />
+              <img
+                v-lazy="data.img"
+                class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9"
+              />
               <van-tag
                 mark
                 :color="data.tag.color"
                 class="app-a5a5c883f68e45baa83f140e218759f1"
-              >{{ data.tag.text }}</van-tag>
+                >{{ data.tag.text }}</van-tag
+              >
             </van-swipe-item>
           </van-swipe>
 
           <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
-            <van-grid :border="false" :column-num="3" class="app-18e05b8e51e3beb49ba55397d11cb8ce">
+            <van-grid
+              :border="false"
+              :column-num="3"
+              class="app-18e05b8e51e3beb49ba55397d11cb8ce"
+            >
               <van-grid-item
                 v-for="(data, index) in appHomeInfo.indexInfo"
                 :key="'tuijian-ea25beed04733529ada26478f028b97e-' + index"
@@ -49,7 +66,9 @@
                 <div
                   v-if="data.title"
                   class="tuijian-f55b83381f479ed4c1203b80f891d83a"
-                >{{ data.title }}</div>
+                >
+                  {{ data.title }}
+                </div>
               </van-grid-item>
             </van-grid>
 

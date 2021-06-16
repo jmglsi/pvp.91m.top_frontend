@@ -23,7 +23,8 @@
                 mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.tag.text }}</van-tag>
+                >{{ row.tag.text }}</van-tag
+              >
               <img
                 v-lazy="row.avatar"
                 width="50"
@@ -42,8 +43,17 @@
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
 
-        <vxe-table-column title="巅峰分" field="rankScore" :width="listWidth" sortable />
-        <vxe-table-column title="常用英雄 (最近前 5 个)" field="commonlyUsed" width="350">
+        <vxe-table-column
+          title="巅峰分"
+          field="rankScore"
+          :width="listWidth"
+          sortable
+        />
+        <vxe-table-column
+          title="常用英雄 (最近前 5 个)"
+          field="commonlyUsed"
+          width="350"
+        >
           <template v-slot="{ row }">
             <div
               :class="
@@ -59,7 +69,13 @@
               >
                 <img
                   v-if="data"
-                  v-lazy="'//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data + '/' + data + '.jpg'"
+                  v-lazy="
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    data +
+                    '/' +
+                    data +
+                    '.jpg'
+                  "
                   width="50"
                   height="50"
                   class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"

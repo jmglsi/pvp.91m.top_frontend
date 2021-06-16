@@ -18,7 +18,9 @@
             <van-switch
               v-model="showInfo.checked"
               size="15px"
-              @click="showInfo.checked ? getSkinReturnLog() : getRanking(-1, 0, 0, 0)"
+              @click="
+                showInfo.checked ? getSkinReturnLog() : getRanking(-1, 0, 0, 0)
+              "
             />
           </div>
         </template>
@@ -51,14 +53,22 @@
         />
       </div>
 
-      <div v-if="showInfo.checked" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
+      <div
+        v-if="showInfo.checked"
+        class="skin-32cf2eae6fcd7e91e52572c57b0dfed2"
+      >
         <vxe-grid
           ref="refSkinReturn"
           :loading="tableData.loading"
           :data="tableData.result.rows"
           :height="clientHeight"
         >
-          <vxe-table-column title="皮肤" field="skinName" fixed="left" width="75">
+          <vxe-table-column
+            title="皮肤"
+            field="skinName"
+            fixed="left"
+            width="75"
+          >
             <template v-slot="{ row }">
               <img
                 v-lazy="row.skinImg"
@@ -71,33 +81,58 @@
                 mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.skinName }}</van-tag>
+                >{{ row.skinName }}</van-tag
+              >
             </template>
           </vxe-table-column>
 
           <vxe-table-column title="#" type="seq" width="50" />
-          <vxe-table-column title="当前 (万)" field="allVoteNum" :width="listWidth" sortable>
+          <vxe-table-column
+            title="当前 (万)"
+            field="allVoteNum"
+            :width="listWidth"
+            sortable
+          >
             <template v-slot="{ row }">
-              <div class="ranking-4ecf07e237f77d5efb6719a37ad40f4a">{{row.allVoteNum}}</div>
+              <div class="ranking-4ecf07e237f77d5efb6719a37ad40f4a">
+                {{ row.allVoteNum }}
+              </div>
               <span
                 v-if="row.needVote > 0"
-                :style="row.needVote < 10 ? { color : 'red' } : { color : 'blue' }"
+                :style="
+                  row.needVote < 10 ? { color: 'red' } : { color: 'blue' }
+                "
                 class="ranking-ad602d217564b616b293eac07fc53138"
-              >还差 {{row.needVote}}</span>
+                >还差 {{ row.needVote }}</span
+              >
             </template>
           </vxe-table-column>
-          <vxe-table-column title="分均" field="addNum" :width="listWidth" sortable />
-          <vxe-table-column title="还需 (时)" field="needTime" :width="listWidth" sortable />
+          <vxe-table-column
+            title="分均"
+            field="addNum"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="还需 (时)"
+            field="needTime"
+            :width="listWidth"
+            sortable
+          />
         </vxe-grid>
       </div>
 
-      <div v-if="showInfo.checked" class="skin-a47113818cd94f1f3221fed0a17e8588">
+      <div
+        v-if="showInfo.checked"
+        class="skin-a47113818cd94f1f3221fed0a17e8588"
+      >
         <van-button
           round
           @click="getRanking(-1, 0, 0, 0)"
           size="small"
           color="linear-gradient(to right, #ff6034, #f7372c)"
-        >刷新一下</van-button>&nbsp;
+          >刷新一下</van-button
+        >&nbsp;
         <van-button
           round
           @click="onActivityUrlclick"

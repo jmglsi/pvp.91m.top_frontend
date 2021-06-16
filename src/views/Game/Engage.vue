@@ -23,14 +23,20 @@
           : {}
       "
     >
-      <van-grid :border="false" :column-num="1" class="game-b2ecdf6163952cf377f932aff4b736be">
+      <van-grid
+        :border="false"
+        :column-num="1"
+        class="game-b2ecdf6163952cf377f932aff4b736be"
+      >
         <van-grid-item
           v-for="(data, index) in tableData.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
           class="game-f24a222ebfb0f6b85f63749653659063"
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
-            <van-row @click="$appPush({ path: '/game/' + data.engage.label + '/bp' })">
+            <van-row
+              @click="$appPush({ path: '/game/' + data.engage.label + '/bp' })"
+            >
               <van-col span="7">
                 <img
                   width="50"
@@ -38,13 +44,13 @@
                   v-lazy="data.team_1.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">{{ data.team_1.name }}</div>
+                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
+                  {{ data.team_1.name }}
+                </div>
               </van-col>
               <van-col span="10">
                 <span class="app-07cc694b9b3fc636710fa08b6922c42b">
-                  {{
-                  data.engage.time
-                  }}
+                  {{ data.engage.time }}
                 </span>
                 <br />
                 <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
@@ -56,7 +62,9 @@
                   v-lazy="data.team_2.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">{{ data.team_2.name }}</div>
+                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
+                  {{ data.team_2.name }}
+                </div>
               </van-col>
             </van-row>
           </div>

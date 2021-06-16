@@ -44,8 +44,18 @@
         </vxe-table-column>
       </vxe-table-column>
 
-      <vxe-table-column title="价格" field="money" :width="listWidth" sortable />
-      <vxe-table-column title="场次" field="pickTimes" :width="listWidth" sortable />
+      <vxe-table-column
+        title="价格"
+        field="money"
+        :width="listWidth"
+        sortable
+      />
+      <vxe-table-column
+        title="场次"
+        field="pickTimes"
+        :width="listWidth"
+        sortable
+      />
       <vxe-table-column
         title="胜率 (%)"
         field="winRate"
@@ -68,10 +78,20 @@
           %
         </template>
       </vxe-table-column>
-      <vxe-table-column title="时长" field="usedtime" :width="listWidth" sortable />
+      <vxe-table-column
+        title="时长"
+        field="usedtime"
+        :width="listWidth"
+        sortable
+      />
 
       <vxe-table-column title="MVP (%)">
-        <vxe-table-column title="净胜" field="mvpRate" :width="listWidth" sortable />
+        <vxe-table-column
+          title="净胜"
+          field="mvpRate"
+          :width="listWidth"
+          sortable
+        />
       </vxe-table-column>
     </vxe-grid>
   </div>

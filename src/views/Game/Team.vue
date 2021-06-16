@@ -19,14 +19,21 @@
     </div>
 
     <div
-      class="game-c37237ae7770c5062ccad7a23572e282 app-4eb2044800e2b7b9e5c44d370af22b27"
+      class="
+        game-c37237ae7770c5062ccad7a23572e282
+        app-4eb2044800e2b7b9e5c44d370af22b27
+      "
       :style="
         $appIsApple && $appConfigInfo.appInfo.pwa == 1
           ? { marginTop: '-50px' }
           : {}
       "
     >
-      <van-grid :border="false" :column-num="3" class="game-40db4f618bd5c27e60368f891382ffd4">
+      <van-grid
+        :border="false"
+        :column-num="3"
+        class="game-40db4f618bd5c27e60368f891382ffd4"
+      >
         <van-grid-item
           v-for="(data, index) in tableData.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
@@ -60,7 +67,8 @@
                     size="small"
                     color="black"
                     @click="onCreateEngageClick(tableDataRow.id)"
-                  >创建交战</van-button>
+                    >创建交战</van-button
+                  >
                 </template>
               </van-field>
               <van-field
@@ -77,7 +85,9 @@
                     :max-size="3 * 1024 * 1024"
                     @oversize="onOversize"
                   >
-                    <van-button round size="small" type="info">上传图片</van-button>
+                    <van-button round size="small" type="info"
+                      >上传图片</van-button
+                    >
                   </van-uploader>
                 </template>
               </van-field>
@@ -99,14 +109,16 @@
               type="danger"
               class="app-a066f238070a70cb531c9bd722c65b36"
               @click="onDeleteTeamClick"
-            >删除信息</van-button>&nbsp;
+              >删除信息</van-button
+            >&nbsp;
             <van-button
               round
               size="small"
               type="primary"
               class="app-a066f238070a70cb531c9bd722c65b36"
               @click="onSaveTeamInfoClick"
-            >保存信息</van-button>
+              >保存信息</van-button
+            >
           </div>
         </div>
       </van-action-sheet>

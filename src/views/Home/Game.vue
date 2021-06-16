@@ -1,7 +1,16 @@
 <template>
   <div class="app-game">
-    <div class="game-c8d46d341bea4fd5bff866a65ff8aea9 app-4eb2044800e2b7b9e5c44d370af22b27">
-      <van-cell-group :border="false" title class="game-11919d5ca20d292c64673bc807d852e2">
+    <div
+      class="
+        game-c8d46d341bea4fd5bff866a65ff8aea9
+        app-4eb2044800e2b7b9e5c44d370af22b27
+      "
+    >
+      <van-cell-group
+        :border="false"
+        title
+        class="game-11919d5ca20d292c64673bc807d852e2"
+      >
         <van-cell
           v-for="(data, index) in tableData.result.rows"
           :key="'game-b02986e365a0828581dffc56b591ffa9-' + index"
@@ -22,7 +31,9 @@
                   icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
                 />
                 <van-grid-item>
-                  <span class="app-07cc694b9b3fc636710fa08b6922c42b">{{ data.game.time }}</span>
+                  <span class="app-07cc694b9b3fc636710fa08b6922c42b">{{
+                    data.game.time
+                  }}</span>
                   <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
                 </van-grid-item>
                 <van-grid-item
