@@ -84,6 +84,10 @@ module.exports = {
                 .end()
 
             config.plugins.delete('prefetch')
+
+            config.resolve.alias
+                .set('@ant-design/icons/lib/dist$', path.resolve("./src/assets/import/ant-icon.js"))
+                .end()
         }
     },
     css: {
@@ -91,7 +95,7 @@ module.exports = {
             less: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    'hack': `true; @import "${path.join(__dirname, './src/assets/css/config.less')}";`,
+                    'hack': `true; @import "${path.join(__dirname, './src/assets/less/config.less')}";`,
                 }
             }
         }
