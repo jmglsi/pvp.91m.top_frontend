@@ -39,7 +39,7 @@
         <van-field
           v-model="loginInfo.data.password"
           type="password"
-          left-icon="/img/app-icons/password.png"
+          left-icon="/img/app-icons/password_lock.png"
           placeholder="请输入密码"
           icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
         />
@@ -47,7 +47,7 @@
           v-model="loginInfo.data.newPassword"
           v-if="loginInfo.type == 2"
           type="password"
-          left-icon="/img/app-icons/password.png"
+          left-icon="/img/app-icons/password_lock.png"
           placeholder="请输入新密码"
           icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
         />
