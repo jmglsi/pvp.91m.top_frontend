@@ -22,4 +22,9 @@ export { // warning
     default as ExclamationCircleFill
 }
 from '@ant-design/icons/lib/fill/ExclamationCircleFill'
-    // 导出 $message 组件中需要的图标
+
+export {
+    default as SearchOutline
+}
+from '@ant-design/icons/lib/outline/SearchOutline'
+    // 导出需要的图标
