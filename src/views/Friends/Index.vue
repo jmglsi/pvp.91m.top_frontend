@@ -85,27 +85,27 @@
             </span>
           </template>
         </van-cell>
-        <van-cell
-          title="喜欢列表"
-          icon="/img/app-icons/hero_black.png"
-          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-        >
-          <template #right-icon>
-            <div class="app-c1351782c9c93025d72864180d0cf28c">
+        <van-collapse v-model="collapseInfo.model" :border="false">
+          <van-collapse-item
+            icon="/img/app-icons/hero_black.png"
+            title="喜欢列表"
+            value="快速访问"
+            name="1"
+          >
+            <div
+              v-if="friendsInfo.heroList.length > 0"
+              class="app-c1351782c9c93025d72864180d0cf28c"
+            >
               <ul
                 class="
                   app-d865b50ce307751bdeb9a6ab16e7baf9
                   app-9e60d3ee1e1574cae90960f940c0a821
-                "
-                :style="
-                  friendsInfo.heroList.length <= 3 ? {} : { width: '180px' }
                 "
               >
                 <li
                   v-for="(data, index) in friendsInfo.heroList"
                   :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
                   class="app-1951b6e7c82938dd7446a41e829b247b"
-                  @click="$appPush({ path: '/hero/' + data.id + '/info' })"
                 >
                   <img
                     v-lazy="
@@ -118,6 +118,7 @@
                     width="35"
                     height="35"
                     class="app-4ab161130e76571ab0c31aa23a6238c7"
+                    @click="$appPush({ path: '/hero/' + data.id + '/info' })"
                   />
                   <img
                     v-if="data.fightPowerIcon"
@@ -130,12 +131,13 @@
               </ul>
             </div>
             <span
-              v-if="friendsInfo.heroList.length == 0"
-              class="friends-d1dc130fa38d505fefbe9810d4790c8f"
+              v-else
+              class="my-65d7dd3f74769ce2ba0009e9eb25c675"
+              @click="$message.info($appMsg.info[1015])"
               >未设置</span
             >
-          </template>
-        </van-cell>
+          </van-collapse-item>
+        </van-collapse>
       </van-cell-group>
     </div>
 
@@ -181,6 +183,9 @@ export default {
           starIcon: "//camp.qq.com/battle/profile/roleJob/1.png",
           score: 1200,
         },
+      },
+      collapseInfo: {
+        model: ["1"],
       },
     };
   },

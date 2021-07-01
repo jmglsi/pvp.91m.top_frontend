@@ -169,26 +169,21 @@
             </span>
           </template>
         </van-cell>
-        <van-cell
-          icon="/img/app-icons/hero_black.png"
-          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-        >
-          <template #title>
-            <span
-              class="my-1098203f6e0a3a981da7c9a8cd6bc85b"
-              @click="$message.info($appMsg.info[1015])"
-              >喜欢列表</span
+        <van-collapse v-model="collapseInfo.model" :border="false">
+          <van-collapse-item
+            icon="/img/app-icons/hero_black.png"
+            title="喜欢列表"
+            value="快速访问"
+            name="1"
+          >
+            <div
+              v-if="loginInfo.heroList.length > 0"
+              class="app-c1351782c9c93025d72864180d0cf28c"
             >
-          </template>
-          <template #right-icon>
-            <div class="app-c1351782c9c93025d72864180d0cf28c">
               <ul
                 class="
                   app-d865b50ce307751bdeb9a6ab16e7baf9
                   app-9e60d3ee1e1574cae90960f940c0a821
-                "
-                :style="
-                  loginInfo.heroList.length <= 3 ? {} : { width: '180px' }
                 "
               >
                 <li
@@ -220,13 +215,13 @@
               </ul>
             </div>
             <span
-              v-if="loginInfo.heroList.length == 0"
+              v-else
               class="my-65d7dd3f74769ce2ba0009e9eb25c675"
               @click="$message.info($appMsg.info[1015])"
               >未设置</span
             >
-          </template>
-        </van-cell>
+          </van-collapse-item>
+        </van-collapse>
         <van-cell
           icon="manager"
           title="扩列链接"
@@ -523,6 +518,9 @@ export default {
       },
       mobileInfo: {
         isSmallMobile: false,
+      },
+      collapseInfo: {
+        model: ["1"],
       },
     };
   },
