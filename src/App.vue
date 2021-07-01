@@ -102,6 +102,11 @@ export default {
           name: "format-detection",
           content: "email=no",
         },
+        {
+          vmid: "format-full-screen",
+          name: "full-screen",
+          content: "yes",
+        },
       ],
       script: this.tableData.appInfo.script || [],
       link: this.tableData.appInfo.link || [],
