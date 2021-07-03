@@ -508,12 +508,58 @@
     >
       <ul>
         <li>
+          <a-popover
+            :visible="
+              recommendHeroId != 0 && showInfo.recommend && showInfo.popover
+            "
+          >
+            <div slot="title">
+              <img
+                v-lazy="
+                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                  recommendHeroId +
+                  '/' +
+                  recommendHeroId +
+                  '.jpg'
+                "
+                width="25"
+                height="25"
+                class="game-1ab74bf7276acc5985f078fee7e63109"
+              />
+              <span class="game-07b120eca6da2e9c7115d4ccae824cca">
+                智能推荐
+              </span>
+              <span class="game-45949fe72cfc70cc6a7bd3870cabc397">
+                仅供参考
+              </span>
+            </div>
+            <div slot="content">
+              <GameRecommend :heroId="recommendHeroId" />
+            </div>
+            <span>
+              <span
+                class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+                :style="{ color: '#1989fa' }"
+              >
+                推荐
+              </span>
+              <span>
+                <van-switch
+                  v-model="showInfo.recommend"
+                  active-color="#1989fa"
+                  size="13px"
+                />
+              </span>
+            </span>
+          </a-popover>
+          &nbsp; &nbsp;
           <span>
             <span
               class="game-59b9fd83bc5ce802ee9ace7db0e22522"
               :style="{ color: 'red' }"
-              >已禁</span
             >
+              已禁
+            </span>
             <span>
               <van-switch
                 v-model="showInfo.isBan"
@@ -527,8 +573,9 @@
             <span
               class="game-59b9fd83bc5ce802ee9ace7db0e22522"
               :style="{ color: 'orange' }"
-              >已用</span
             >
+              已用
+            </span>
             <span>
               <van-switch
                 v-model="showInfo.isUsed"
@@ -635,24 +682,32 @@
             :type="bpMode == 'sort' ? 'primary' : 'info'"
             size="small"
             @click="onNewSortClick"
-            >{{ bpMode == "sort" ? "保存" : "修改" }}排序</van-button
-          >&nbsp;
+          >
+            {{ bpMode == "sort" ? "保存" : "修改" }}排序
+          </van-button>
+          &nbsp;
           <van-button
             v-if="bpMode == 'edit'"
             round
             type="info"
             size="small"
             @click="onSwapPositionClick"
-            >交换位置</van-button
           >
+            交换位置
+          </van-button>
         </div>
-        <van-divider :style="{ color: 'red', borderColor: 'red' }"
-          >以下功能慎用</van-divider
-        >
+        <van-divider :style="{ color: 'red', borderColor: 'red' }">
+          以下功能慎用
+        </van-divider>
         <div class="game-b517e39eb99fd590ac1df412b5c84007">
-          <van-button round type="danger" size="small" @click="onResetSortClick"
-            >重置排序</van-button
+          <van-button
+            round
+            type="danger"
+            size="small"
+            @click="onResetSortClick"
           >
+            重置排序
+          </van-button>
         </div>
       </div>
     </van-popup>
@@ -710,6 +765,7 @@ export default {
   components: {
     draggable,
     GameLine: () => import("@/components/Game/Line.vue"),
+    GameRecommend: () => import("@/components/Game/Recommend.vue"),
   },
   data() {
     return {
@@ -765,6 +821,7 @@ export default {
         question: "//doc.91m.top/jmglsi/pvp",
       },
       isPortrait: true,
+      recommendHeroId: 0,
       newGameInfo: {},
       gameInfo: {
         game: {
@@ -848,6 +905,8 @@ export default {
         heroList: true,
         setting: false,
         trend: false,
+        popover: true,
+        recommend: true,
         isBan: true,
         isUsed: true,
       },
@@ -994,9 +1053,7 @@ export default {
       let ranking = this.$appGetLocalStorage("gameBP");
 
       if (ranking) {
-        this.tableData = ranking;
-
-        return;
+        return (this.tableData = ranking);
       }
 
       this.$axios
@@ -1024,6 +1081,7 @@ export default {
               x.isUsed = false;
             });
 
+            this.initBPOrder(this.bpPerspective, 0);
             this.$appSetLocalStorage("gameBP", this.tableData);
 
             this.$message.success(this.$appMsg.success[1005]);
@@ -1253,9 +1311,7 @@ export default {
       let tabsModel = this.tabsInfo.model;
 
       if (this.gameInfo.result.rows[tabsModel].BPOrder[nowIndex - 1] == 0) {
-        this.$message.error(this.$appMsg.error[1003]);
-
-        return;
+        return this.$message.error(this.$appMsg.error[1003]);
       }
 
       let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
@@ -1279,6 +1335,8 @@ export default {
         let sortText = null,
           newTrend = -1;
 
+        this.recommendHeroId = 0;
+
         if (hero.trend == 2) {
           sortText = "其他";
           newTrend = 0;
@@ -1295,68 +1353,64 @@ export default {
             // on confirm
             this.tableData.result.rows[nowIndex].trend = newTrend;
 
-            this.$appSetLocalStorage("gameBP", this.tableData.result);
+            this.$appSetLocalStorage("gameBP", this.tableData);
           })
           .catch(() => {
             // on cancel
           });
 
         return;
-      }
+      } else {
+        this.recommendHeroId = hero.id;
 
-      if (tabsModel < 6) {
-        if (
-          this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
-          this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
-        ) {
-          this.$message.error("本局 " + hero.name + " 已被禁用");
-
-          return;
-        } else if (this.gameInfo.used.includes(hero.id)) {
-          this.$message.warning(
-            hero.name + " 已被 " + this.bpOpponent.name + " 使用"
-          );
-
-          return;
+        if (tabsModel < 6) {
+          if (
+            this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
+            this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
+          ) {
+            return this.$message.error("本局 " + hero.name + " 已被禁用");
+          } else if (this.gameInfo.used.includes(hero.id)) {
+            return this.$message.warning(
+              hero.name + " 已被 " + this.bpOpponent.name + " 使用"
+            );
+          }
+        } else {
+          //巅峰对局
         }
-      } else {
-        //巅峰对局
       }
 
-      if (bpMode != "edit") return;
+      if (bpMode == "edit") {
+        let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
 
-      let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
+        if (oldIndex == 16) {
+          this.$message.warning(this.$appMsg.warning[1001]);
+        }
 
-      if (oldIndex == 16) {
-        this.$message.warning(this.$appMsg.warning[1001]);
+        if (oldIndex >= 18) {
+          oldIndex = 0;
+        } else {
+          this.gameInfo.result.rows[tabsModel].BPOrder.splice(
+            oldIndex,
+            1,
+            hero.id
+          );
+        }
+
+        if (this.bpIndex.bpPerspective[oldIndex] == 1) {
+          this.onGamePerspectiveClick();
+
+          this.initCountdown();
+        }
+        //对照 bpIndex 视角表格,如果是 1 则初始化
+
+        this.gameInfo.result.rows[tabsModel].stepsNow = oldIndex + 1;
+
+        this.initBPOrder(this.bpPerspective, tabsModel);
       }
-
-      if (oldIndex >= 18) {
-        oldIndex = 0;
-      } else {
-        this.gameInfo.result.rows[tabsModel].BPOrder.splice(
-          oldIndex,
-          1,
-          hero.id
-        );
-      }
-
-      if (this.bpIndex.bpPerspective[oldIndex] == 1) {
-        this.onGamePerspectiveClick();
-
-        this.initCountdown();
-      }
-      //对照 bpIndex 视角表格,如果是 1 则初始化
-
-      this.gameInfo.result.rows[tabsModel].stepsNow = oldIndex + 1;
-
-      this.initBPOrder(this.bpPerspective, tabsModel);
     },
     onNewSortClick: function () {
       if (this.bpMode == "sort") {
         this.tableData.model = 0;
-
-        this.$appSetLocalStorage("gameBP", this.tableData);
 
         this.bpMode = "view";
 
@@ -1374,9 +1428,8 @@ export default {
     onResetSortClick: function () {
       this.$dialog
         .confirm({
-          title: "是否重置排序?",
-          message:
-            "此操作不可逆\r-\r保存在本地的排序将被清除\r有新英雄的时候可能需要 ;D",
+          title: "是否重置排序?此操作不可逆!",
+          message: "保存在本地的排序将被清除\r有新英雄的时候可能需要 ;D",
         })
         .then(() => {
           // on confirm
@@ -1586,6 +1639,11 @@ span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
   position: absolute;
   top: -1px;
   z-index: @app-z-index;
+}
+
+span.game-45949fe72cfc70cc6a7bd3870cabc397 {
+  font-size: 10px;
+  color: red;
 }
 
 button.game-8e4f204791d1b591b6a6f93b572f9b2d {
