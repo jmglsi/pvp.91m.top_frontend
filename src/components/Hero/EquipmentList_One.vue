@@ -289,9 +289,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        this.tableData = ranking;
-
-        return;
+        return this.tableData = ranking;
       }
 
       this.$axios
@@ -392,16 +390,12 @@ export default {
     onCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
         this.equipmentInfo.type = 1;
-        this.getRanking(row.heroId, 6, this.equipmentInfo.type, 0, 0);
-
-        return;
+        return this.getRanking(row.heroId, 6, this.equipmentInfo.type, 0, 0);
       }
 
       if (column.property == "equipment.id") {
         this.equipmentInfo.type = 2;
-        this.getRanking(row.equipment.id, 6, this.equipmentInfo.type, 0, 0);
-
-        return;
+        return this.getRanking(row.equipment.id, 6, this.equipmentInfo.type, 0, 0);
       }
 
       this.lineData.heroId = row.heroId;

@@ -311,9 +311,7 @@ export default {
         newTeamId = data;
 
       if (oldTeamId == newTeamId) {
-        this.$message.error(this.$appMsg.error[1006]);
-
-        return;
+        return this.$message.error(this.$appMsg.error[1006]);
       }
 
       if (!oldTeamId) {

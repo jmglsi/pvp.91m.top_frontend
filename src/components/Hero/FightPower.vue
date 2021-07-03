@@ -276,9 +276,7 @@ export default {
       let fightPower = this.fightPower;
 
       if (fightPower.value == 0 || fightPower.img > 30000) {
-        this.$message.error(this.$appMsg.error[1009]);
-
-        return;
+        return this.$message.error(this.$appMsg.error[1009]);
       }
 
       let postData = {

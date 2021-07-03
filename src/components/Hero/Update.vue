@@ -338,9 +338,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        this.tableData = heroUpdate;
-
-        return;
+        return this.tableData = heroUpdate;
       }
 
       this.$axios

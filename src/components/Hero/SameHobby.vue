@@ -111,9 +111,7 @@ export default {
           appConfigInfo.updateInfo.timeout &&
         tipsType == 0
       ) {
-        this.tableData = heroSameHobby;
-
-        return;
+        return this.tableData = heroSameHobby;
       }
 
       this.$axios

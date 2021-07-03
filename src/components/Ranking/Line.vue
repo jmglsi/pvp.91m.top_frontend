@@ -111,9 +111,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        this.lineData = heroChartsLog;
-
-        return;
+        return this.lineData = heroChartsLog;
       }
 
       this.lineData = {

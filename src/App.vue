@@ -448,6 +448,10 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
   font-size: @app-font-size;
 }
 
+div.ant-popover-title {
+  text-align: center;
+}
+
 div.ant-message,
 div.ant-notification {
   z-index: 99999999 !important;

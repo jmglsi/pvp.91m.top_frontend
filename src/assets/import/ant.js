@@ -9,7 +9,8 @@ import {
     Message,
     Notification,
     Input,
-    Timeline
+    Timeline,
+    Popover
 } from 'ant-design-vue'
 
 Vue
@@ -21,6 +22,7 @@ Vue
     .use(Notification)
     .use(Input)
     .use(Timeline)
+    .use(Popover)
 
 Message.config({
     top: "50px",

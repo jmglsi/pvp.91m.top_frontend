@@ -591,10 +591,9 @@ export default {
           this.routeInfo.from.heroName = heroInfoData.name;
 
         this.hero.title = heroInfoData.name;
-        document.title =
-          heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name;
 
-        return;
+        return (document.title =
+          heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name);
       }
 
       this.$axios

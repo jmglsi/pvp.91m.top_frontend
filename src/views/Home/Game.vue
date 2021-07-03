@@ -75,9 +75,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        this.tableData = gameHome;
-
-        return;
+        return this.tableData = gameHome;
       }
 
       this.$axios.post(this.$appApi.game.getGameHome).then((res) => {

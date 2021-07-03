@@ -150,9 +150,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        this.appHomeInfo = appHome;
-
-        return;
+        return this.appHomeInfo = appHome;
       }
 
       this.$axios.post(this.$appApi.pvp.getAppHome).then((res) => {
