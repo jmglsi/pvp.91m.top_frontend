@@ -13,6 +13,32 @@ export default {
 <style lang="less">
 img.game-1ab74bf7276acc5985f078fee7e63109 {
   border-radius: @app-border-radius;
+  margin-top: -3px;
+}
+
+ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
+  margin-bottom: unset;
+}
+
+li.app-1951b6e7c82938dd7446a41e829b247b {
+  width: 75px;
+  margin-top: unset;
+}
+
+li.game-9ad2b9949abc36830804e02760ea3e63 {
+  margin-top: 10px;
+}
+
+span.game-07b120eca6da2e9c7115d4ccae824cca {
+  margin: 0 5px;
+}
+
+div.game-recommend {
+  text-align: center;
+}
+
+div.game-ea89eb98f6e31fc44977697c388b6c57 {
+  margin-bottom: 10px;
 }
 
 div.game-237b90fb6955b98328736810edefe6e7 {

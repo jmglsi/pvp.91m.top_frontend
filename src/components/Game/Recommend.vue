@@ -71,63 +71,9 @@
           </li>
         </ul>
       </li>
-      <li class="app-1951b6e7c82938dd7446a41e829b247b">
-        <div class="game-ea89eb98f6e31fc44977697c388b6c57">被克</div>
-        <ul>
-          <li class="game-9ad2b9949abc36830804e02760ea3e63">
-            <img
-              v-lazy="
-                '//game.gtimg.cn/images/yxzj/img201606/heroimg/111/111.jpg'
-              "
-              width="25"
-              height="25"
-              class="game-1ab74bf7276acc5985f078fee7e63109"
-            />
-          </li>
-          <li class="game-9ad2b9949abc36830804e02760ea3e63">
-            <img
-              v-lazy="
-                '//game.gtimg.cn/images/yxzj/img201606/heroimg/111/111.jpg'
-              "
-              width="25"
-              height="25"
-              class="game-1ab74bf7276acc5985f078fee7e63109"
-            />
-          </li>
-          <li class="game-9ad2b9949abc36830804e02760ea3e63">
-            <img
-              v-lazy="
-                '//game.gtimg.cn/images/yxzj/img201606/heroimg/111/111.jpg'
-              "
-              width="25"
-              height="25"
-              class="game-1ab74bf7276acc5985f078fee7e63109"
-            />
-          </li>
-        </ul>
-      </li>
     </ul>
   </div>
 </template>
-
-<style scoped>
-div.game-recommend {
-  text-align: center;
-}
-
-li.app-1951b6e7c82938dd7446a41e829b247b {
-  width: 50px;
-  margin-top: unset;
-}
-
-li.game-9ad2b9949abc36830804e02760ea3e63 {
-  margin-top: 10px;
-}
-
-div.game-ea89eb98f6e31fc44977697c388b6c57 {
-  margin-bottom: 10px;
-}
-</style>
 
 <script>
 export default {

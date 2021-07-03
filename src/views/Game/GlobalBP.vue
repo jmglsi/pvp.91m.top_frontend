@@ -508,6 +508,38 @@
     >
       <ul>
         <li>
+          <span>
+            <span
+              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+              :style="{ color: 'red' }"
+            >
+              已禁
+            </span>
+            <span>
+              <van-switch
+                v-model="showInfo.isBan"
+                active-color="red"
+                size="13px"
+              />
+            </span>
+          </span>
+          &nbsp; &nbsp;
+          <span>
+            <span
+              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+              :style="{ color: 'orange' }"
+            >
+              已用
+            </span>
+            <span>
+              <van-switch
+                v-model="showInfo.isUsed"
+                active-color="orange"
+                size="13px"
+              />
+            </span>
+          </span>
+          &nbsp; &nbsp;
           <a-popover
             :visible="
               recommendHeroId != 0 && showInfo.recommend && showInfo.popover
@@ -552,38 +584,6 @@
               </span>
             </span>
           </a-popover>
-          &nbsp; &nbsp;
-          <span>
-            <span
-              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-              :style="{ color: 'red' }"
-            >
-              已禁
-            </span>
-            <span>
-              <van-switch
-                v-model="showInfo.isBan"
-                active-color="red"
-                size="13px"
-              />
-            </span>
-          </span>
-          &nbsp; &nbsp;
-          <span>
-            <span
-              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-              :style="{ color: 'orange' }"
-            >
-              已用
-            </span>
-            <span>
-              <van-switch
-                v-model="showInfo.isUsed"
-                active-color="orange"
-                size="13px"
-              />
-            </span>
-          </span>
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
         </li>
         <li v-if="showInfo.apps && (bpMode == 'view' || bpMode == 'edit')">
