@@ -458,7 +458,7 @@ div.ant-notification {
 }
 
 div.van-search {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 div.van-tabs__nav {
@@ -485,7 +485,7 @@ div.app-6db4dcff371b9397d894ed932d085444 {
   margin-top: 10px;
 
   div.van-tabs__nav {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 }
 

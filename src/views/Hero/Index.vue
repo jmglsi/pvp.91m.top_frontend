@@ -138,7 +138,7 @@ div.hero-d7eb5a86f1d4b50ea22711e1e60718e9 {
 
 div.hero-c6e864acb6955eed0361921288d34149 {
   div.van-grid-item__content {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 }
 

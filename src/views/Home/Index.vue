@@ -55,6 +55,16 @@
         <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
           <Game />
         </van-tab>
+        <van-tab title="梯度" class="home-e7f8cbd87d347be881cba92dad128518">
+          <div style="margin-top: 25px">即将上线</div>
+        </van-tab>
+        <van-tab
+          to="/search?q=%E7%88%86%E6%96%99&refresh=1"
+          title="爆料 🔗"
+          class="home-e7f8cbd87d347be881cba92dad128518"
+        >
+          <div style="margin-top: 25px">数据来源互联网</div>
+        </van-tab>
       </van-tabs>
     </div>
 
@@ -171,5 +181,37 @@ img.home-47ee6ad584172f967b674131cb948a87 {
 div.home-72ab9e07378f988922e6c91884048db0 {
   font-size: @app-font-size + 2px;
   margin: 25px;
+}
+
+div.game-11919d5ca20d292c64673bc807d852e2.van-cell-group,
+div.game-ed4838a6d4554b1829c7f86a58e3f20f.van-cell {
+  background-color: transparent !important;
+}
+
+div.game-987e845860b29a0bb6ca902ba902b4f2 {
+  div.van-grid-item__content {
+    background-color: transparent !important;
+  }
+}
+
+div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
+  div.van-tabs__wrap {
+    width: 35% !important;
+    margin-top: -3px;
+  }
+
+  div.van-tab--active {
+    font-size: 25px;
+  }
+}
+
+div.home-3edeff15047c21ac6441301927306137 {
+  div.van-search {
+    width: 65%;
+    right: 0;
+    position: absolute;
+    margin-top: 3px;
+    z-index: 1;
+  }
 }
 </style>

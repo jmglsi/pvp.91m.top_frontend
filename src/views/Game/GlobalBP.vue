@@ -906,7 +906,7 @@ export default {
         setting: false,
         trend: false,
         popover: true,
-        recommend: true,
+        recommend: false,
         isBan: true,
         isUsed: true,
       },

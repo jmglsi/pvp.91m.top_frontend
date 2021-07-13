@@ -26,7 +26,7 @@
       />
     </div>
 
-    <AppHello v-if="$appIsMobile" height="100px" />
+    <AppHello height="100px" />
   </div>
 </template>
 
