@@ -1,11 +1,34 @@
 const path = require("path")
 const zlib = require("zlib")
 const CompressionWebpackPlugin = require("compression-webpack-plugin")
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
 module.exports = {
     productionSourceMap: false,
     configureWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
+            config.plugins.push(
+                new PrerenderSPAPlugin({
+                    staticDir: path.join(__dirname, 'dist'),
+                    routes: [
+                        '/',
+                        '/miniapp',
+                        '/skin/return',
+                        '/search',
+                        '/my',
+                        '/setting'
+                    ],
+                    renderer: new Renderer({
+                        inject: {
+                            foo: 'bar'
+                        },
+                        headless: true,
+                        renderAfterDocumentEvent: 'render-event'
+                    })
+                })
+            );
+
             config.optimization = {
                 splitChunks: {
                     chunks: 'all',

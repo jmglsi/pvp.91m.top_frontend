@@ -30,15 +30,18 @@
               </a-tooltip>
             </div>
           </template>
+
+          <div class="ranking-4789d9440d92b2647ea8a52c2f5b31b5">&nbsp;</div>
+
           <DianFengSai
-            v-if="tabsInfo.model == 0 && viewType == 0"
+            v-if="tabsInfo.model == 0 && viewInfo.model == 'a'"
             :isSmallMobile="isSmallMobile"
             :bid="bid || dfsAreaTypeInfo.model"
             :cid="cid || dfsPositionTypeInfo.model"
           />
 
           <RankingLine
-            v-else-if="tabsInfo.model == 0 && viewType == 1"
+            v-else-if="tabsInfo.model == 0 && viewInfo.model == 'c'"
             :bid="cid || dfsPositionTypeInfo.model"
           />
 
@@ -57,16 +60,32 @@
             "
             class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
           >
-            <van-button
-              round
-              icon="exchange"
-              size="small"
-              color="linear-gradient(to right, #fd6585, #0d25b9)"
-              @click="viewType == 0 ? (viewType = 1) : (viewType = 0)"
-            >
-              切换为 {{ viewType == 0 ? "图表" : "列表" }}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </van-button>
+            <a-popover placement="bottomRight" trigger="click">
+              <div class="ranking-1fc99c22c900d9d31cb0ad2434ed4464">
+                <van-button
+                  round
+                  icon="exchange"
+                  size="small"
+                  color="linear-gradient(to right, #fd6585, #0d25b9)"
+                >
+                  切换视图 &nbsp;&nbsp;&nbsp;&nbsp;
+                </van-button>
+              </div>
+              <div slot="content">
+                <div class="ranking-e1c6b759e0537c91d5c6dbb2d4738173">
+                  <a-radio-group
+                    :value="viewInfo.model"
+                    @change="onRadioChange"
+                    default-value="a"
+                    button-style="solid"
+                  >
+                    <a-radio-button value="a">排行</a-radio-button>
+                    <a-radio-button value="b">梯度</a-radio-button>
+                    <a-radio-button value="c">趋势</a-radio-button>
+                  </a-radio-group>
+                </div>
+              </div>
+            </a-popover>
           </div>
         </van-tab>
 
@@ -103,10 +122,7 @@
         </van-tab>
 
         <van-tab>
-          <template #title>
-            牌子 (测试中)
-            <i class="vxe-icon--funnel" />
-          </template>
+          <template #title>牌子 <i class="vxe-icon--funnel" /></template>
           <PaiZi
             v-if="tabsInfo.model == 4"
             :isSmallMobile="isSmallMobile"
@@ -175,7 +191,10 @@
       </van-action-sheet>
     </div>
 
-    <div v-if="viewType == 0" class="ranking-ebf09abeb7c3db44741d328324915725">
+    <div
+      v-if="viewInfo.model == 'a'"
+      class="ranking-ebf09abeb7c3db44741d328324915725"
+    >
       <van-divider
         :style="{
           padding: '0 15px',
@@ -221,12 +240,14 @@ export default {
   },
   data() {
     return {
-      heroName: "",
       bid: 0,
       cid: 0,
       did: 0,
-      viewType: 0,
+      heroName: "",
       isSmallMobile: 0,
+      viewInfo: {
+        model: "a",
+      },
       searchInfo: {
         defaultValue: "",
       },
@@ -403,6 +424,9 @@ export default {
 
       this.$appPush({ query: { type: tabsInfo.model } });
     },
+    onRadioChange: function (e) {
+      this.viewInfo.model = e.target.value;
+    },
     onDropdownMenuChange: function () {
       let tabsInfo = this.tabsInfo,
         bidInfo = this.bidInfo,
@@ -507,6 +531,20 @@ div.ranking-home {
   div.van-dropdown-menu__bar {
     box-shadow: unset;
   }
+}
+
+div.ranking-a9b4432c8e9b49bafa0a23e52d970016 {
+  div.van-tabs__nav {
+    z-index: 1;
+  }
+}
+
+div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  margin-top: -25px;
+  height: @app-height;
 }
 
 div.ranking-ebf09abeb7c3db44741d328324915725 {
@@ -615,7 +653,7 @@ div.ranking-5d308b6a0da77ffb33c63fc542f58746 {
 
 div.ranking-87714e7bd6c0d80c7bbdb69629b5a80d {
   position: fixed;
-  right: -20px;
+  right: -15px;
   z-index: 10;
 }
 </style>

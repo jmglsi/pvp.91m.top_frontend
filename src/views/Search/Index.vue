@@ -289,7 +289,7 @@
             </van-tab>
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
-              title="战力 (牌子)"
+              title="战力"
             />
             <van-tab :disabled="tableData.heroInfo.id == 999" title="赛事" />
             <van-tab
@@ -500,15 +500,15 @@ export default {
           hotKeywords: [
             {
               topNum: 0,
-              rows: [{ isTop: false, value: "test1" }],
+              rows: [],
             },
             {
               topNum: 0,
-              rows: [{ isTop: false, value: "test2" }],
+              rows: [],
             },
             {
               topNum: 0,
-              rows: [{ isTop: false, value: "test3" }],
+              rows: [],
             },
           ],
           placeholder: [],

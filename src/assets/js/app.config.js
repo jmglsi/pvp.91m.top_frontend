@@ -139,7 +139,9 @@ Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlTyp
                 // on cancel
             });
     } else {
-        this.$message.warning(message);
+        if (message) {
+            this.$message.warning(message);
+        }
 
         setTimeout(() => {
             this.$appPush(url);

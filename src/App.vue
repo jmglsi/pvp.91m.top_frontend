@@ -65,10 +65,10 @@ export default {
 
       this.tableData.result.model = to.path;
 
-      /(ranking|game(.*?)bp)/i.test(to.path) ? (hello = false) : (hello = true);
+      /ranking|game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
       this.showInfo.hello = hello;
 
-      /(login|miniapp|bilibili|hero|game)/i.test(to.path)
+      /miniapp|skin|bilibili|hero|game|login/i.test(to.path)
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
@@ -351,7 +351,7 @@ img.app-db21bca782a535e91eb87f56b8abdc45 {
 i.app-6de102c0bc4dc7f72ce287d6b0828052 {
   img.van-icon__image {
     border-radius: unset;
-    margin-top: -2px;
+    margin-top: -3px !important;
   }
 }
 

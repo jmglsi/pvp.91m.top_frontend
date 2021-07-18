@@ -60,8 +60,9 @@
               color="linear-gradient(to right, #4bb0ff, #6149f6)"
               @click="$appPush({ path: '/login' })"
               class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-              >注册/登录</van-button
             >
+              注册/登录/修改
+            </van-button>
           </template>
         </van-cell>
       </van-cell-group>
@@ -174,6 +175,7 @@
             icon="/img/app-icons/hero_black.png"
             title="喜欢列表"
             value="快速访问"
+            icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             name="1"
           >
             <div
@@ -232,22 +234,6 @@
       </van-cell-group>
     </div>
 
-    <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
-      <van-cell-group
-        :border="false"
-        title=" "
-        class="my-66e3a8a1303fb1fc8ce3249b23dbd268"
-      >
-        <van-cell
-          title="修改密码"
-          icon="/img/app-icons/password_edit.png"
-          is-link
-          @click="$appPush({ path: '/login' })"
-          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-        />
-      </van-cell-group>
-    </div>
-
     <div class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
@@ -272,24 +258,30 @@
         <van-cell
           icon="friends-o"
           title="感谢各位伙伴"
+          value="语雀"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
         />
         <van-cell
+          icon="good-job-o"
+          title="项目开源介绍"
+          value="NGA"
+          is-link
+          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.openSource[0] })"
+        />
+        <van-cell
           icon="comment-o"
           title="意见建议反馈"
+          value="吐个槽"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
         />
         <van-cell
-          icon="good-job-o"
-          title="前端开源地址"
-          is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.nga[0] })"
-        />
-        <van-cell
-          title="请我喝咖啡☕☕"
+          icon="/img/app-icons/coffee.png"
+          title="请我喝杯咖啡"
+          label="制作不易，支持一下~"
           value="爱发电"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
           is-link
           @click="$appOpenUrl('是否打开外部链接?', null, { path: url.afdian })"
         />
@@ -474,7 +466,7 @@ export default {
         globalBP: "//doc.91m.top/jmglsi/pvp",
         friends: "//doc.91m.top/jmglsi/pvp",
         support: "//support.qq.com/products/305514",
-        nga: ["//ngabbs.com/read.php?tid=26200132"],
+        openSource: ["//ngabbs.com/read.php?tid=26200132"],
         afdian: "//afdian.net/@jmglsi",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },

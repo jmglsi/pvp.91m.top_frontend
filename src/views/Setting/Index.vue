@@ -8,9 +8,9 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
-        z-index="99999999"
         left-text="返回"
         title="通用"
+        z-index="99999999"
       />
     </div>
 

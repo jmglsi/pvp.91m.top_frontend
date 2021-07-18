@@ -55,9 +55,6 @@
         <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
           <Game />
         </van-tab>
-        <van-tab title="梯度" class="home-e7f8cbd87d347be881cba92dad128518">
-          <div style="margin-top: 25px">即将上线</div>
-        </van-tab>
         <van-tab
           to="/search?q=%E7%88%86%E6%96%99&refresh=1"
           title="爆料 🔗"

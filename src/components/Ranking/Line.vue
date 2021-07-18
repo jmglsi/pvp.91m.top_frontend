@@ -1,13 +1,11 @@
 <template>
   <div class="ranking-line">
-    <div class="ranking-4789d9440d92b2647ea8a52c2f5b31b5">&nbsp;</div>
-
     <div class="ranking-63559bd374a437b89b36762811e4b809">
       <a-radio-group
         :value="viewInfo.model"
         :options="viewOptions"
-        :default-value="2"
         @change="onViewChange"
+        default-value="c"
       />
     </div>
 
@@ -62,8 +60,6 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.viewInfo.model = 2;
-
         this.getHeroChartsLog(5, newValue.bid, this.viewInfo.model, 0);
       },
     },
@@ -81,12 +77,12 @@ export default {
         settings: {},
       },
       viewInfo: {
-        model: 2,
+        model: "c",
       },
       viewOptions: [
-        { label: "禁用", value: 0 },
-        { label: "出场", value: 1 },
-        { label: "禁选", value: 2 },
+        { label: "禁用", value: "a" },
+        { label: "出场", value: "b" },
+        { label: "禁选", value: "c" },
       ],
     };
   },
@@ -111,7 +107,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.lineData = heroChartsLog;
+        return (this.lineData = heroChartsLog);
       }
 
       this.lineData = {
@@ -164,16 +160,8 @@ div.ranking-line {
   margin: 25px 0;
 }
 
-div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
-  background-color: white;
-  position: absolute;
-  width: 100%;
-  margin-top: -25px;
-  height: @app-height;
-}
-
 div.ranking-63559bd374a437b89b36762811e4b809 {
-  width: 225px;
+  width: 210px;
   position: absolute;
   right: 0;
 }

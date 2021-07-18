@@ -90,6 +90,7 @@
             icon="/img/app-icons/hero_black.png"
             title="喜欢列表"
             value="快速访问"
+            icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             name="1"
           >
             <div

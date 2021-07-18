@@ -38,16 +38,15 @@
         <vxe-table-column title="#" type="seq" width="75" />
 
         <vxe-table-column
-          title="名字"
-          field="gamePlayerName"
-          :width="listWidth > 0 ? listWidth + 25 : listWidth"
-        />
-
-        <vxe-table-column
           title="巅峰分"
           field="rankScore"
           :width="listWidth"
           sortable
+        />
+        <vxe-table-column
+          title="名字"
+          field="gamePlayerName"
+          :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
         <vxe-table-column
           title="常用英雄 (最近前 5 个)"

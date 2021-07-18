@@ -23,8 +23,13 @@ export { // warning
 }
 from '@ant-design/icons/lib/fill/ExclamationCircleFill'
 
-export {
+export { //search
     default as SearchOutline
 }
 from '@ant-design/icons/lib/outline/SearchOutline'
+
+export { //close
+    default as CloseOutline
+}
+from '@ant-design/icons/lib/outline/CloseOutline'
     // 导出需要的图标
