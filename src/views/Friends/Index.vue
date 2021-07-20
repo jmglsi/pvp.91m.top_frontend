@@ -56,7 +56,7 @@
         v-lazy="friendsInfo.img"
         width="100"
         height="100"
-        class="friends-85e06e092b46386f58023d2ad27a8bb0"
+        class="app-3b9655ab218c7f1a18f5dacd778a52f0"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ friendsInfo.description || "这个人很懒,什么都没有留下" }}
@@ -66,7 +66,6 @@
     <div class="friends-452abde170a4d98ca1ada465cac0eed5">
       <van-cell-group
         :border="false"
-        title
         class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f"
       >
         <van-cell
@@ -131,12 +130,13 @@
                 </li>
               </ul>
             </div>
-            <span
+            <div
               v-else
-              class="my-65d7dd3f74769ce2ba0009e9eb25c675"
               @click="$message.info($appMsg.info[1015])"
-              >未设置</span
+              class="app-5ddd8715c99cbf00677a622145b3c163"
             >
+              未设置
+            </div>
           </van-collapse-item>
         </van-collapse>
       </van-cell-group>
@@ -240,10 +240,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-img.friends-85e06e092b46386f58023d2ad27a8bb0 {
-  border-radius: @app-border-radius;
-}
-
 span.friends-d64cb5ed2250938cb89d25beef75f604 {
   margin: 0 3px;
 }

@@ -8,8 +8,8 @@
         :safe-area-inset-top="true"
         :style="
           scroll >= 50
-            ? { backgroundColor: 'white' }
-            : { backgroundColor: 'transparent' }
+            ? { backgroundColor: 'white !important' }
+            : { backgroundColor: 'transparent !important' }
         "
         @click-left="
           $appPush({

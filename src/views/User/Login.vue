@@ -22,7 +22,7 @@
           : {}
       "
     >
-      <van-cell-group title class="login-5e8eee748a3d14d6a380448d6d61a9cf">
+      <van-cell-group class="login-5e8eee748a3d14d6a380448d6d61a9cf">
         <van-field
           v-model="loginInfo.data.name"
           v-if="loginInfo.type == 0"

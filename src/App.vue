@@ -1,18 +1,22 @@
 <template>
   <div id="app">
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
-      <div
-        class="app-8de1f001663ee713d24888bb422e3881"
-        :style="
-          $appConfigInfo.appInfo.pwa == 1 && showInfo.statusBar
-            ? {
-                background:
-                  'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(236, 119, 171), rgb(120, 115, 245)) repeat scroll 0% 0%',
-                zIndex: -1,
-              }
-            : {}
-        "
-      ></div>
+      <div v-if="$appConfigInfo.appInfo.pwa == 1">
+        <div
+          v-if="showInfo.statusBar"
+          :style="{
+            background:
+              'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(236, 119, 171), rgb(120, 115, 245)) repeat scroll 0% 0%',
+            zIndex: -5,
+          }"
+          class="app-8de1f001663ee713d24888bb422e3881"
+        ></div>
+        <div
+          v-if="showInfo.whiteBar"
+          :style="{ backgroundColor: 'white !important' }"
+          class="app-4789d9440d92b2647ea8a52c2f5b31b5"
+        ></div>
+      </div>
 
       <div
         v-if="$route.meta.keepAlive"
@@ -61,6 +65,7 @@ export default {
     $route(to) {
       let hello = false,
         statusBar = false,
+        whiteBar = false,
         tabbar = false;
 
       this.tableData.result.model = to.path;
@@ -68,15 +73,18 @@ export default {
       /ranking|game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
       this.showInfo.hello = hello;
 
-      /miniapp|skin|bilibili|hero|game|login/i.test(to.path)
-        ? (tabbar = false)
-        : (tabbar = true);
-      this.showInfo.tabbar = tabbar;
-
       to.path == "/" || /search|ranking/i.test(to.path)
         ? (statusBar = true)
         : (statusBar = false);
       this.showInfo.statusBar = statusBar;
+
+      /ranking/i.test(to.path) ? (whiteBar = true) : (whiteBar = false);
+      this.showInfo.whiteBar = whiteBar;
+
+      /miniapp|skin|bilibili|hero|game|login/i.test(to.path)
+        ? (tabbar = false)
+        : (tabbar = true);
+      this.showInfo.tabbar = tabbar;
     },
   },
   metaInfo() {
@@ -147,6 +155,7 @@ export default {
       showInfo: {
         hello: true,
         statusBar: true,
+        whiteBar: false,
         tabbar: true,
       },
     };
@@ -218,7 +227,7 @@ export default {
           }
 
           if (appInfo.version != appConfigInfo.appInfo.version) {
-            this.$appConfigInfo.tipsInfo.rankingFilter = 0;
+            this.$appConfigInfo.tipsInfo.rankingTips = 0;
 
             localStorage.removeItem("appConfigInfo");
 
@@ -266,64 +275,16 @@ export default {
   width: 100%;
 }
 
-img {
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.update-tyf {
-  color: purple;
-}
-
-.update-zsf {
-  color: rgb(222, 177, 81);
-}
-
-.update-xyx {
-  color: rgb(35, 124, 123);
-}
-
-.update-pb {
-  color: black;
-}
-
-.update-cz {
-  color: red;
-}
-
-.update-fx {
-  color: orange;
-}
-
-.update-xpf {
-  color: green;
-}
-
-.update-fc {
-  color: blue;
-}
-
-.ranking-bda9643ac6601722a28f238714274da4 {
-  color: red;
-}
-
-.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
-  color: orange;
-}
-
-.ranking-48d6215903dff56238e52e8891380c8f {
-  color: blue;
-}
-
-.ranking-9f27410725ab8cc8854a2769c7a516b8 {
-  color: green;
-}
-
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
   margin: 0 5px;
   text-align: center;
   width: @app-width;
   z-index: @app-z-index;
+}
+
+img {
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
@@ -334,13 +295,13 @@ img.app-d31cb1c15b091f41248935d88a8d0a45 {
   width: 35px;
 }
 
+img.app-3b9655ab218c7f1a18f5dacd778a52f0 {
+  border-radius: @app-border-radius;
+}
+
 img.app-4ab161130e76571ab0c31aa23a6238c7 {
   border-radius: @app-border-radius;
   margin: 0 10px;
-}
-
-img.app-3b9655ab218c7f1a18f5dacd778a52f0 {
-  border-radius: @app-border-radius;
 }
 
 img.app-db21bca782a535e91eb87f56b8abdc45 {
@@ -470,6 +431,14 @@ div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
 
+div.app-5ddd8715c99cbf00677a622145b3c163 {
+  color: gray;
+  font-size: @app-font-size;
+  margin: 5px 0;
+  text-align: center;
+  width: 100%;
+}
+
 div.app-c1351782c9c93025d72864180d0cf28c {
   height: 70px;
   overflow: hidden;
@@ -523,6 +492,13 @@ div.app-8de1f001663ee713d24888bb422e3881 {
   margin-top: -60px;
   position: fixed;
   width: 100%;
+}
+
+div.app-4789d9440d92b2647ea8a52c2f5b31b5 {
+  position: absolute;
+  width: 100%;
+  margin-top: 25px;
+  height: 100px;
 }
 
 div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {

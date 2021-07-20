@@ -8,7 +8,6 @@
     >
       <van-cell-group
         :border="false"
-        title
         class="game-11919d5ca20d292c64673bc807d852e2"
       >
         <van-cell

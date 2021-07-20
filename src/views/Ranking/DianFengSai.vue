@@ -511,7 +511,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.tableData = ranking;
+        return (this.tableData = ranking);
       }
 
       this.$axios

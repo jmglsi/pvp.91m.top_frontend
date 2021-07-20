@@ -279,12 +279,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
-div.hero-9a7c47049573e03028c2e650b73f6252 {
-  text-align: @app-text-align;
-}
-div.hero-75c8e1c4a51a48edb54306fb640fdc4f {
-  text-align: center;
-}
-</style>

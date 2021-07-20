@@ -124,9 +124,9 @@ export default {
       } else {
         let newTags = "";
 
-        for (let i = 0; i < e.length; i++) {
-          newTags += "," + e[i].text;
-        }
+        e.map((x) => {
+          newTags += "," + x.text;
+        });
 
         this.heroList.new = newTags.slice(1);
       }

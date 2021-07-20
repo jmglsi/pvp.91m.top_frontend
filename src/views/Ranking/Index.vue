@@ -12,106 +12,131 @@
       >
         <van-tab>
           <template #title>
-            巅峰赛 (顶端局)
-            <i class="vxe-icon--funnel" />
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
-              <a-tooltip
-                :visible="showInfo.rankingFilterTips"
-                :overlayStyle="
-                  $appIsApple && $appConfigInfo.appInfo.pwa == 1
-                    ? { top: '78px !important' }
-                    : { top: '28px !important' }
-                "
-                placement="bottomLeft"
-              >
+              <span>巅峰赛 (顶端局)&nbsp;</span>
+
+              <a-tooltip :visible="showInfo.dfsTips" placement="bottomRight">
                 <template slot="title">
-                  <span>筛选移到这里了</span>
+                  <span>筛选移到这了</span>
                 </template>
+
+                <i class="vxe-icon--funnel" />
               </a-tooltip>
             </div>
           </template>
 
-          <div class="ranking-4789d9440d92b2647ea8a52c2f5b31b5">&nbsp;</div>
-
-          <DianFengSai
-            v-if="tabsInfo.model == 0 && viewInfo.model == 'a'"
-            :isSmallMobile="isSmallMobile"
-            :bid="bid || dfsAreaTypeInfo.model"
-            :cid="cid || dfsPositionTypeInfo.model"
-          />
-
-          <RankingLine
-            v-else-if="tabsInfo.model == 0 && viewInfo.model == 'c'"
-            :bid="cid || dfsPositionTypeInfo.model"
-          />
-
-          <div
-            v-if="
-              tabsInfo.model == 0 && (cid > 0 || dfsPositionTypeInfo.model > 0)
-            "
-            :style="
-              $appIsApple && $appConfigInfo.appInfo.pwa == 1
-                ? {
-                    top: '55px',
-                  }
-                : {
-                    top: '5px',
-                  }
-            "
-            class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
-          >
-            <a-popover placement="bottomRight" trigger="click">
-              <div class="ranking-1fc99c22c900d9d31cb0ad2434ed4464">
-                <van-button
-                  round
-                  icon="exchange"
-                  size="small"
-                  color="linear-gradient(to right, #fd6585, #0d25b9)"
+          <div v-if="tabsInfo.model == 0">
+            <div class="ranking-5f02576721f9492841a54d9bf8a47370">
+              <div v-if="viewInfo.model == 'a'">
+                <a-tooltip
+                  :visible="showInfo.skillTips"
+                  overlayClassName="ranking-8d583d7c052e343e6817b99812fa03b6"
+                  placement="left"
                 >
-                  切换视图 &nbsp;&nbsp;&nbsp;&nbsp;
-                </van-button>
+                  <template slot="title">
+                    <span>左侧查看出装，右侧搜索舆论</span>
+                  </template>
+
+                  <DianFengSai
+                    :isSmallMobile="isSmallMobile"
+                    :bid="bid || dfsAreaTypeInfo.model"
+                    :cid="cid || dfsPositionTypeInfo.model"
+                  />
+                </a-tooltip>
               </div>
-              <div slot="content">
-                <div class="ranking-e1c6b759e0537c91d5c6dbb2d4738173">
-                  <a-radio-group
-                    :value="viewInfo.model"
-                    @change="onRadioChange"
-                    default-value="a"
-                    button-style="solid"
+
+              <div v-else-if="viewInfo.model == 'b'">
+                <RankingGradient
+                  :bid="bid || dfsAreaTypeInfo.model"
+                  :cid="cid || dfsPositionTypeInfo.model"
+                />
+              </div>
+
+              <div v-else-if="viewInfo.model == 'c'">
+                <RankingLine :bid="cid || dfsPositionTypeInfo.model" />
+              </div>
+            </div>
+
+            <div
+              v-if="cid > 0 || dfsPositionTypeInfo.model > 0"
+              :style="
+                $appIsApple && $appConfigInfo.appInfo.pwa == 1
+                  ? {
+                      top: '55px',
+                    }
+                  : {
+                      top: '5px',
+                    }
+              "
+              class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
+            >
+              <a-popover placement="bottomRight" trigger="click">
+                <div class="ranking-1fc99c22c900d9d31cb0ad2434ed4464">
+                  <van-button
+                    round
+                    icon="exchange"
+                    size="small"
+                    color="linear-gradient(to right, #fd6585, #0d25b9)"
                   >
-                    <a-radio-button value="a">排行</a-radio-button>
-                    <a-radio-button value="b">梯度</a-radio-button>
-                    <a-radio-button value="c">趋势</a-radio-button>
-                  </a-radio-group>
+                    切换视图 &nbsp;&nbsp;&nbsp;&nbsp;
+                  </van-button>
                 </div>
-              </div>
-            </a-popover>
+                <template slot="content">
+                  <div class="ranking-e1c6b759e0537c91d5c6dbb2d4738173">
+                    <a-radio-group
+                      :value="viewInfo.model"
+                      @change="onRadioChange"
+                      default-value="a"
+                      button-style="solid"
+                    >
+                      <a-radio-button value="a">排行</a-radio-button>
+                      <a-radio-button value="b">梯度</a-radio-button>
+                      <a-radio-button value="c">趋势</a-radio-button>
+                    </a-radio-group>
+                  </div>
+                </template>
+              </a-popover>
+            </div>
           </div>
         </van-tab>
 
         <van-tab>
           <template #title>
-            关系和克制 (近期)
-            <i class="vxe-icon--search" />
+            关系和克制 (近期)&nbsp;<i class="vxe-icon--search" />
           </template>
-          <GuanXi
-            v-if="tabsInfo.model == 1"
-            :isSmallMobile="isSmallMobile"
-            :heroName="heroName"
-          />
+
+          <div>
+            <GuanXi
+              v-if="tabsInfo.model == 1"
+              :isSmallMobile="isSmallMobile"
+              :heroName="heroName"
+            />
+          </div>
         </van-tab>
 
         <van-tab>
           <template #title>
-            玩家 (非实时)
-            <i class="vxe-icon--funnel" />
+            <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
+              <span>玩家 (非实时)&nbsp;</span>
+
+              <a-tooltip :visible="showInfo.wanjiaTips" placement="bottomRight">
+                <template slot="title">
+                  <span>大佬们在玩什么</span>
+                </template>
+
+                <i class="vxe-icon--funnel" />
+              </a-tooltip>
+            </div>
           </template>
-          <WanJia
-            v-if="tabsInfo.model == 2"
-            :isSmallMobile="isSmallMobile"
-            :bid="bid || wjAreaTypeInfo.model"
-            :cid="cid || wjShieldTypeInfo.model"
-          />
+
+          <div>
+            <WanJia
+              v-if="tabsInfo.model == 2"
+              :isSmallMobile="isSmallMobile"
+              :bid="bid || wjAreaTypeInfo.model"
+              :cid="cid || wjShieldTypeInfo.model"
+            />
+          </div>
         </van-tab>
 
         <van-tab title="装备 (近期)">
@@ -122,16 +147,23 @@
         </van-tab>
 
         <van-tab>
-          <template #title>牌子 <i class="vxe-icon--funnel" /></template>
-          <PaiZi
-            v-if="tabsInfo.model == 4"
-            :isSmallMobile="isSmallMobile"
-            :bid="bid || pzAreaTypeInfo.model"
-            :cid="cid || pzProvinceTypeInfo.model"
-            :did="did || pzFightPowerTypeInfo.model"
-          />
+          <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
+
+          <div>
+            <PaiZi
+              v-if="tabsInfo.model == 4"
+              :isSmallMobile="isSmallMobile"
+              :bid="bid || pzAreaTypeInfo.model"
+              :cid="cid || pzProvinceTypeInfo.model"
+              :did="did || pzFightPowerTypeInfo.model"
+            />
+          </div>
         </van-tab>
       </van-tabs>
+    </div>
+
+    <div v-if="viewInfo.model != 'a'">
+      <AppHello height="100px" />
     </div>
 
     <van-popup
@@ -220,11 +252,13 @@ export default {
   name: "RankingHome",
   components: {
     DianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
+    RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
     RankingLine: () => import("@/components/Ranking/Line.vue"),
     GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
     WanJia: () => import("@/views/Ranking/WanJia.vue"),
     ZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
     PaiZi: () => import("@/views/Ranking/PaiZi.vue"),
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {
@@ -232,6 +266,10 @@ export default {
       this.bid = parseInt(to.query.bid) || 0;
       this.cid = parseInt(to.query.cid) || 0;
       this.did = parseInt(to.query.did) || 0;
+
+      if (this.bid == 0 && this.cid == 0 && this.did == 0) {
+        this.viewInfo.model = "a";
+      }
 
       if (parseInt(to.query.refresh) == 1) {
         this.tabsInfo.model = parseInt(to.query.type) || 0;
@@ -255,9 +293,11 @@ export default {
         model: 0,
       },
       showInfo: {
-        rankingFilterTips: true,
-        rankingFilterMenu: false,
+        dfsTips: true,
+        skillTips: true,
+        wanjiaTips: true,
         rankingSearch: false,
+        rankingFilterMenu: false,
       },
       dfsAreaTypeInfo: {
         model: 0,
@@ -332,7 +372,9 @@ export default {
     initPage: function () {
       let route = this.$route.query,
         appConfigInfo = this.$appConfigInfo,
-        rankingFilterTips = appConfigInfo.tipsInfo.rankingFilter || 0;
+        dfsTips = appConfigInfo.tipsInfo.dfsTips || 0,
+        skillTips = appConfigInfo.tipsInfo.skillTips || 0,
+        wanjiaTips = appConfigInfo.tipsInfo.wanjiaTips || 0;
 
       this.heroName = route.heroName || "";
       this.tabsInfo.model = parseInt(route.type) || 0;
@@ -340,15 +382,21 @@ export default {
       route.cid ? (this.cid = parseInt(route.cid)) : (this.cid = 0);
       route.did ? (this.did = parseInt(route.did)) : (this.did = 0);
 
-      if (rankingFilterTips == 0) {
-        appConfigInfo.tipsInfo.rankingFilter = 1;
+      if (dfsTips == 0 || skillTips == 0 || wanjiaTips == 0) {
+        appConfigInfo.tipsInfo.dfsTips = 1;
+        appConfigInfo.tipsInfo.skillTips = 1;
+        appConfigInfo.tipsInfo.wanjiaTips = 1;
         this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
         setTimeout(() => {
-          this.showInfo.rankingFilterTips = false;
-        }, 10000);
+          this.showInfo.dfsTips = false;
+          this.showInfo.skillTips = false;
+          this.showInfo.wanjiaTips = false;
+        }, 15000);
       } else {
-        this.showInfo.rankingFilterTips = false;
+        this.showInfo.dfsTips = false;
+        this.showInfo.skillTips = false;
+        this.showInfo.wanjiaTips = false;
       }
 
       if (appConfigInfo.appInfo.isSmallMobile == 0 && this.$appHeight < 575) {
@@ -477,6 +525,22 @@ export default {
 </script>
 
 <style lang="less">
+.ranking-bda9643ac6601722a28f238714274da4 {
+  color: red;
+}
+
+.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
+  color: orange;
+}
+
+.ranking-48d6215903dff56238e52e8891380c8f {
+  color: blue;
+}
+
+.ranking-9f27410725ab8cc8854a2769c7a516b8 {
+  color: green;
+}
+
 img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
   border-radius: @app-border-radius;
 }
@@ -533,18 +597,19 @@ div.ranking-home {
   }
 }
 
+div.ranking-8d583d7c052e343e6817b99812fa03b6 {
+  left: 60px !important;
+  top: 205px !important;
+}
+
+div.ranking-1ac6534055d3b55bd4340435430b314d.van-cell-group {
+  background-color: transparent !important;
+}
+
 div.ranking-a9b4432c8e9b49bafa0a23e52d970016 {
   div.van-tabs__nav {
     z-index: 1;
   }
-}
-
-div.ranking-4789d9440d92b2647ea8a52c2f5b31b5 {
-  background-color: white;
-  position: absolute;
-  width: 100%;
-  margin-top: -25px;
-  height: @app-height;
 }
 
 div.ranking-ebf09abeb7c3db44741d328324915725 {

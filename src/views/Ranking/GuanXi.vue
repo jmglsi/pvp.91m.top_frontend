@@ -37,7 +37,7 @@
               >
                 <img
                   v-lazy="row.hero_1.img"
-                  :width="50"
+                  width="50"
                   height="50"
                   class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
                 />
@@ -308,7 +308,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.tableData = ranking;
+        return (this.tableData = ranking);
       }
 
       this.$axios

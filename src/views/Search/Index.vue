@@ -233,7 +233,6 @@
       >
         <van-cell-group
           :border="false"
-          title
           class="search-5d555cae6745619e13c5488c119d2a14"
         >
           <van-cell

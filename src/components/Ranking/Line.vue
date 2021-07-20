@@ -23,8 +23,6 @@
         class="ranking-1ef625581088ffc24d94e052d9ebc61d"
       />
     </div>
-
-    <AppHello height="100px" />
   </div>
 </template>
 
@@ -42,7 +40,6 @@ export default {
   name: "HeroLine",
   components: {
     VeLine,
-    AppHello: () => import("@/components/App/Hello.vue"),
   },
   props: {
     bid: {

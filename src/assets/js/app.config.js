@@ -18,7 +18,7 @@ Vue.prototype.$appConfigInfo = {
         version: 0
     },
     tipsInfo: {
-        rankingFilter: 0,
+        rankingTips: 0,
         reducedFilter: 0,
     },
     updateInfo: {

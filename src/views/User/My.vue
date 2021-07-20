@@ -80,7 +80,7 @@
         v-lazy="loginInfo.img"
         width="100"
         height="100"
-        class="my-d5ca322453f2986b752e58b11af83d96"
+        class="app-3b9655ab218c7f1a18f5dacd778a52f0"
         @click="
           $appPush({
             path: '/friends',
@@ -96,7 +96,6 @@
     <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
-        title
         class="my-71c2fb64c38e4ee108607ca840607e48"
       >
         <van-cell
@@ -216,12 +215,13 @@
                 </li>
               </ul>
             </div>
-            <span
+            <div
               v-else
-              class="my-65d7dd3f74769ce2ba0009e9eb25c675"
               @click="$message.info($appMsg.info[1015])"
-              >未设置</span
+              class="app-5ddd8715c99cbf00677a622145b3c163"
             >
+              未设置
+            </div>
           </van-collapse-item>
         </van-collapse>
         <van-cell
@@ -267,7 +267,9 @@
           title="项目开源介绍"
           value="NGA"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.openSource[0] })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.openSource[0] })
+          "
         />
         <van-cell
           icon="comment-o"
@@ -345,7 +347,6 @@
         <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">
           <van-cell-group
             :border="false"
-            title
             class="my-3c5bcb72d710faf0c301750abeb5704f"
           >
             <van-field
@@ -655,10 +656,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-img.my-d5ca322453f2986b752e58b11af83d96 {
-  border-radius: @app-border-radius;
-}
-
 span.my-25930e3036f13852cb0b29694bbab611 {
   margin: 0 3px;
 }

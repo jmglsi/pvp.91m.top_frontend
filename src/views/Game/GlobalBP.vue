@@ -545,7 +545,22 @@
               recommendHeroId != 0 && showInfo.recommend && showInfo.popover
             "
           >
-            <div slot="title">
+            <span>
+              <span
+                class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+                :style="{ color: '#1989fa' }"
+              >
+                推荐
+              </span>
+              <span>
+                <van-switch
+                  v-model="showInfo.recommend"
+                  active-color="#1989fa"
+                  size="13px"
+                />
+              </span>
+            </span>
+            <template slot="title">
               <img
                 v-lazy="
                   '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -564,25 +579,10 @@
               <span class="game-45949fe72cfc70cc6a7bd3870cabc397">
                 仅供参考
               </span>
-            </div>
-            <div slot="content">
+            </template>
+            <template slot="content">
               <GameRecommend :heroId="recommendHeroId" />
-            </div>
-            <span>
-              <span
-                class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-                :style="{ color: '#1989fa' }"
-              >
-                推荐
-              </span>
-              <span>
-                <van-switch
-                  v-model="showInfo.recommend"
-                  active-color="#1989fa"
-                  size="13px"
-                />
-              </span>
-            </span>
+            </template>
           </a-popover>
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
         </li>

@@ -40,7 +40,7 @@
                     v-lazy="topInfo[1].skinImg"
                     width="50"
                     height="50"
-                    class="skin-52326308ff25a5e0ce86bdae53ff2c35"
+                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                   />
                 </div>
                 <div>
@@ -87,7 +87,7 @@
                     v-lazy="topInfo[0].skinImg"
                     width="75"
                     height="75"
-                    class="skin-52326308ff25a5e0ce86bdae53ff2c35"
+                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                   />
                   <img
                     v-lazy="
@@ -140,7 +140,7 @@
                     v-lazy="topInfo[2].skinImg"
                     width="50"
                     height="50"
-                    class="skin-52326308ff25a5e0ce86bdae53ff2c35"
+                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                   />
                 </div>
                 <div>
@@ -195,7 +195,7 @@
                 v-lazy="row.skinImg"
                 width="35"
                 height="35"
-                class="skin-52326308ff25a5e0ce86bdae53ff2c35"
+                class="app-3b9655ab218c7f1a18f5dacd778a52f0"
               />
               <van-tag
                 :color="row.tag.color"
@@ -403,10 +403,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-img.skin-52326308ff25a5e0ce86bdae53ff2c35 {
-  border-radius: @app-border-radius;
-}
-
 img.skin-c3aea51299c526f7b079c527ae02deb9 {
   position: absolute;
   transform: rotate(54deg);

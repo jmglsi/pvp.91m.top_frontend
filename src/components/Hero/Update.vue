@@ -245,10 +245,10 @@ export default {
         "/" +
         day.date.getDate();
 
-      for (let i = 0; i < tableData.length; i++) {
-        let result = tableData[i].calendar;
+      tableData.map((x) => {
+        let result = x.calendar;
 
-        if (!result.day) continue;
+        if (!result.day) return;
 
         if (oDay == result.day) {
           if (result.type == 0) {
@@ -287,7 +287,7 @@ export default {
             maxType = result.type;
           }
         }
-      }
+      });
 
       if (maxType > -3) {
         if (maxType == 0) {
@@ -338,7 +338,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.tableData = heroUpdate;
+        return (this.tableData = heroUpdate);
       }
 
       this.$axios

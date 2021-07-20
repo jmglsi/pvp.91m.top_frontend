@@ -15,7 +15,7 @@
               width="35"
               height="35"
               v-lazy="appInfo.search.img"
-              class="home-47ee6ad584172f967b674131cb948a87"
+              class="app-3b9655ab218c7f1a18f5dacd778a52f0"
               @click="
                 appInfo.search.to
                   ? $appOpenUrl(
@@ -171,8 +171,47 @@ export default {
 </script>
 
 <style lang="less">
-img.home-47ee6ad584172f967b674131cb948a87 {
-  border-radius: @app-border-radius;
+.update-tyf {
+  color: purple;
+}
+
+.update-zsf {
+  color: rgb(222, 177, 81);
+}
+
+.update-xyx {
+  color: rgb(35, 124, 123);
+}
+
+.update-pb {
+  color: black;
+}
+
+.update-cz {
+  color: red;
+}
+
+.update-fx {
+  color: orange;
+}
+
+.update-xpf {
+  color: green;
+}
+
+.update-fc {
+  color: blue;
+}
+
+img.home-3c873293a7dc1ea8c20579f6a7ae94a9 {
+  border-radius: unset;
+  height: 100%;
+  width: 100%;
+}
+
+div.home-f55b83381f479ed4c1203b80f891d83a {
+  font-size: @app-font-size + 2px;
+  margin-top: 5px;
 }
 
 div.home-72ab9e07378f988922e6c91884048db0 {

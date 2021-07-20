@@ -17,8 +17,8 @@
           "
         >
           <van-swipe
+            height="200"
             :autoplay="5000"
-            :height="200"
             class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >
             <van-swipe-item
@@ -33,7 +33,7 @@
             >
               <img
                 v-lazy="data.img"
-                class="tuijian-3c873293a7dc1ea8c20579f6a7ae94a9"
+                class="home-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag
                 mark
@@ -60,12 +60,12 @@
                     width="50"
                     height="50"
                     v-lazy="data.img"
-                    class="tuijian-6bea2af1a0662ae3049c2b1c5a60f302"
+                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                   />
                 </span>
                 <div
                   v-if="data.title"
-                  class="tuijian-f55b83381f479ed4c1203b80f891d83a"
+                  class="home-f55b83381f479ed4c1203b80f891d83a"
                 >
                   {{ data.title }}
                 </div>
@@ -150,7 +150,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.appHomeInfo = appHome;
+        return (this.appHomeInfo = appHome);
       }
 
       this.$axios.post(this.$appApi.pvp.getAppHome).then((res) => {
@@ -176,20 +176,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
-img.tuijian-6bea2af1a0662ae3049c2b1c5a60f302 {
-  border-radius: @app-border-radius;
-}
-
-img.tuijian-3c873293a7dc1ea8c20579f6a7ae94a9 {
-  border-radius: unset;
-  height: 100%;
-  width: 100%;
-}
-
-div.tuijian-f55b83381f479ed4c1203b80f891d83a {
-  font-size: @app-font-size + 2px;
-  margin-top: 5px;
-}
-</style>
