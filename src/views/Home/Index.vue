@@ -209,6 +209,14 @@ img.home-3c873293a7dc1ea8c20579f6a7ae94a9 {
   width: 100%;
 }
 
+div.app-game {
+  div.van-cell-group,
+  div.van-cell,
+  div.van-grid-item__content {
+    background-color: transparent !important;
+  }
+}
+
 div.home-f55b83381f479ed4c1203b80f891d83a {
   font-size: @app-font-size + 2px;
   margin-top: 5px;
@@ -217,17 +225,6 @@ div.home-f55b83381f479ed4c1203b80f891d83a {
 div.home-72ab9e07378f988922e6c91884048db0 {
   font-size: @app-font-size + 2px;
   margin: 25px;
-}
-
-div.game-11919d5ca20d292c64673bc807d852e2.van-cell-group,
-div.game-ed4838a6d4554b1829c7f86a58e3f20f.van-cell {
-  background-color: transparent !important;
-}
-
-div.game-987e845860b29a0bb6ca902ba902b4f2 {
-  div.van-grid-item__content {
-    background-color: transparent !important;
-  }
 }
 
 div.home-5db8dca30c2d7f0c2bc225ae852c5053 {

@@ -418,10 +418,6 @@ div.ant-notification {
   z-index: 99999999 !important;
 }
 
-div.van-search {
-  background-color: transparent !important;
-}
-
 div.van-tabs__nav {
   height: unset;
   overflow-x: unset;
@@ -429,6 +425,23 @@ div.van-tabs__nav {
 
 div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
+}
+
+div.app-home {
+  div.van-search,
+  div.van-tabs__nav,
+  div.van-cell-group,
+  div.van-cell {
+    background-color: transparent !important;
+  }
+}
+
+div.app-tuijian {
+  div.van-cell-group,
+  div.van-cell,
+  div.van-grid-item__content {
+    background-color: rgb(248, 249, 252) !important;
+  }
 }
 
 div.app-5ddd8715c99cbf00677a622145b3c163 {
@@ -444,18 +457,14 @@ div.app-c1351782c9c93025d72864180d0cf28c {
   overflow: hidden;
 }
 
-div.app-609a820218e58b4ea5a5f7656e61a0ad,
-div.app-18e05b8e51e3beb49ba55397d11cb8ce div.van-grid-item__content,
-div.app-06eab62dcb5a23b966a620807d78e66f.van-cell {
-  background-color: rgb(248, 249, 252);
+div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
+  height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 div.app-6db4dcff371b9397d894ed932d085444 {
   margin-top: 10px;
-
-  div.van-tabs__nav {
-    background-color: transparent !important;
-  }
 }
 
 div.app-0ca41257ee36e86e5d89591c82113263 {
@@ -499,12 +508,6 @@ div.app-4789d9440d92b2647ea8a52c2f5b31b5 {
   width: 100%;
   margin-top: 25px;
   height: 100px;
-}
-
-div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
-  height: 100%;
-  position: absolute;
-  width: 100%;
 }
 
 div.app-f3cc17bc0d768ca60b8bb496a10b1990 {

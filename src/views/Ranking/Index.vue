@@ -70,17 +70,11 @@
               "
               class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
             >
-              <a-popover placement="bottomRight" trigger="click">
-                <div class="ranking-1fc99c22c900d9d31cb0ad2434ed4464">
-                  <van-button
-                    round
-                    icon="exchange"
-                    size="small"
-                    color="linear-gradient(to right, #fd6585, #0d25b9)"
-                  >
-                    切换视图 &nbsp;&nbsp;&nbsp;&nbsp;
-                  </van-button>
-                </div>
+              <a-popover
+                placement="bottomRight"
+                trigger="click"
+                overlayClassName="ranking-ed3451c988256d717ce6e41d24da7e45"
+              >
                 <template slot="content">
                   <div class="ranking-e1c6b759e0537c91d5c6dbb2d4738173">
                     <a-radio-group
@@ -95,6 +89,17 @@
                     </a-radio-group>
                   </div>
                 </template>
+
+                <div class="ranking-1fc99c22c900d9d31cb0ad2434ed4464">
+                  <van-button
+                    round
+                    icon="exchange"
+                    size="small"
+                    color="linear-gradient(to right, #fd6585, #0d25b9)"
+                  >
+                    切换视图 &nbsp;&nbsp;&nbsp;&nbsp;
+                  </van-button>
+                </div>
               </a-popover>
             </div>
           </div>
@@ -597,13 +602,21 @@ div.ranking-home {
   }
 }
 
+div.ranking-gradient {
+  div.van-cell-group,
+  div.van-cell {
+    background-color: transparent !important;
+  }
+}
+
 div.ranking-8d583d7c052e343e6817b99812fa03b6 {
   left: 60px !important;
   top: 205px !important;
 }
 
-div.ranking-1ac6534055d3b55bd4340435430b314d.van-cell-group {
-  background-color: transparent !important;
+div.ranking-ed3451c988256d717ce6e41d24da7e45 {
+  left: unset !important;
+  right: 10px !important;
 }
 
 div.ranking-a9b4432c8e9b49bafa0a23e52d970016 {

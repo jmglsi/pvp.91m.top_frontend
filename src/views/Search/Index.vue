@@ -286,10 +286,7 @@
                 >
               </template>
             </van-tab>
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="战力"
-            />
+            <van-tab :disabled="tableData.heroInfo.id == 999" title="战力" />
             <van-tab :disabled="tableData.heroInfo.id == 999" title="赛事" />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
@@ -739,6 +736,14 @@ span.search-8fd6a51f93ef7b5379535e63a5e071cd {
   position: absolute;
 }
 
+div.search-home {
+  div.van-search,
+  div.van-cell-group,
+  div.van-cell {
+    background-color: transparent !important;
+  }
+}
+
 div.search-399841f840f75044108804ec30d37405 {
   color: #969799;
   font-size: @app-font-size;
@@ -746,7 +751,6 @@ div.search-399841f840f75044108804ec30d37405 {
   text-align: right;
   width: 100%;
   height: @app-height;
-  background: #fff;
   padding-right: 15px;
 }
 
@@ -769,7 +773,6 @@ div.search-db4665e1908869c6354106ce00ff95ba {
 
 div.search-cbf8ce69d638243d800b392c8d298b16 {
   margin-top: 40px;
-  background-color: white;
 }
 
 div.search-88cf8ac86e2afc51906e60c7025f522b {
