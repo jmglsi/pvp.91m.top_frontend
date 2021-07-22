@@ -1,5 +1,5 @@
-const path = require("path")
 const zlib = require("zlib")
+const Path = require("path")
 const CompressionWebpackPlugin = require("compression-webpack-plugin")
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
@@ -10,7 +10,7 @@ module.exports = {
         if (process.env.NODE_ENV === 'production') {
             config.plugins.push(
                 new PrerenderSPAPlugin({
-                    staticDir: path.join(__dirname, 'dist'),
+                    staticDir: Path.join(__dirname, 'dist'),
                     routes: [
                         '/',
                         '/miniapp',
@@ -79,6 +79,10 @@ module.exports = {
                 }
             }
         }
+
+        config.externals = {
+            qc: "QC"
+        }
     },
     chainWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
@@ -109,7 +113,7 @@ module.exports = {
             config.plugins.delete('prefetch')
 
             config.resolve.alias
-                .set('@ant-design/icons/lib/dist$', path.resolve("./src/assets/import/ant-icon.js"))
+                .set('@ant-design/icons/lib/dist$', Path.resolve("./src/assets/import/ant-icon.js"))
                 .end()
         }
     },
@@ -118,7 +122,7 @@ module.exports = {
             less: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    'hack': `true; @import "${path.join(__dirname, './src/assets/less/config.less')}";`,
+                    'hack': `true; @import "${Path.join(__dirname, './src/assets/less/config.less')}";`,
                 }
             }
         }

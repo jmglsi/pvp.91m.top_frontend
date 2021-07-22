@@ -1,5 +1,5 @@
 <template>
-  <div class="miniapp">
+  <div class="miniapp-home">
     <div class="miniapp-5acbc85c0ac59d5f69197b9fdb893b00">
       <van-nav-bar
         :border="false"
@@ -112,7 +112,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 div.miniapp-8d777f385d3dfec8815d20f7496026dc {
   text-align: @app-text-align;
 }

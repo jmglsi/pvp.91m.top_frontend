@@ -239,7 +239,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 span.friends-d64cb5ed2250938cb89d25beef75f604 {
   margin: 0 3px;
 }

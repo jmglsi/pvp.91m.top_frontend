@@ -1,6 +1,6 @@
 <template>
-  <div class="skin-line">
-    <div class="skin-8c35b9de834af969baf22173b9539eb9">
+  <div class="return-home">
+    <div class="return-8c35b9de834af969baf22173b9539eb9">
       <van-nav-bar
         left-arrow
         :border="false"
@@ -10,10 +10,10 @@
         @click-left="$appPush({ path: '/ranking' })"
         left-text="返回"
         z-index="99999999"
-        class="skin-0229cfdc78c2b9da8e238c9c89967c70"
+        class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #title>
-          <span class="skin-2de2ce7733cbb350c6aa2862912c853b"> 票选排行 </span>
+          <span class="return-2de2ce7733cbb350c6aa2862912c853b"> 票选排行 </span>
         </template>
         <template #right>
           <span
@@ -25,8 +25,8 @@
       </van-nav-bar>
     </div>
 
-    <div class="skin-0c81212fbe656b4245967fe1fba3413e">
-      <div v-if="type == 0" class="skin-4e31671abda91ffcc22a860a7bcd84ee">
+    <div class="return-0c81212fbe656b4245967fe1fba3413e">
+      <div v-if="type == 0" class="return-4e31671abda91ffcc22a860a7bcd84ee">
         <van-row @click="$message.warning($appMsg.warning[1005])">
           <a-popover
             arrow-point-at-center
@@ -34,7 +34,7 @@
             trigger="click"
           >
             <van-col span="8">
-              <div class="skin-194d92f12722c6d346dc1207ba7d2499">
+              <div class="return-194d92f12722c6d346dc1207ba7d2499">
                 <div>
                   <img
                     v-lazy="topInfo[1].skinImg"
@@ -51,13 +51,13 @@
                 <div>
                   <span
                     :style="{ color: topInfo[1].tag.color }"
-                    class="skin-279a4b0330c1a4ef39cde3a334a9c652"
+                    class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     2
                   </span>
                 </div>
-                <div class="skin-82175be63be4c53021549241368b4c6f">
-                  <span class="skin-2de2ce7733cbb350c6aa2862912c853b">
+                <div class="return-82175be63be4c53021549241368b4c6f">
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
                     {{ topInfo[1].allVoteNum || 0 }} 万
                   </span>
                 </div>
@@ -81,7 +81,7 @@
           </a-popover>
           <a-popover arrow-point-at-center placement="bottom" trigger="click">
             <van-col span="8">
-              <div class="skin-6fc36a6c243522e9579bb8500fcd8812">
+              <div class="return-6fc36a6c243522e9579bb8500fcd8812">
                 <div>
                   <img
                     v-lazy="topInfo[0].skinImg"
@@ -95,7 +95,7 @@
                     "
                     width="50"
                     height="50"
-                    class="skin-c3aea51299c526f7b079c527ae02deb9"
+                    class="return-c3aea51299c526f7b079c527ae02deb9"
                   />
                 </div>
                 <div>
@@ -106,13 +106,13 @@
                 <div>
                   <span
                     :style="{ color: topInfo[0].tag.color }"
-                    class="skin-279a4b0330c1a4ef39cde3a334a9c652"
+                    class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     1
                   </span>
                 </div>
-                <div class="skin-82175be63be4c53021549241368b4c6f">
-                  <span class="skin-2de2ce7733cbb350c6aa2862912c853b">
+                <div class="return-82175be63be4c53021549241368b4c6f">
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
                     {{ topInfo[0].allVoteNum || 0 }} 万
                   </span>
                 </div>
@@ -121,7 +121,7 @@
             <template slot="content">
               <span
                 @click="onActivityUrlclick"
-                class="skin-4fb4d4758e19b050e0de1ef488ae54a3"
+                class="return-4fb4d4758e19b050e0de1ef488ae54a3"
               >
                 {{ tableData.result.title || "好耶!" }}
                 <van-icon name="arrow" />
@@ -134,7 +134,7 @@
             trigger="click"
           >
             <van-col span="8">
-              <div class="skin-2e9cd6ca0ca7a6d34edb205e1087b7e1">
+              <div class="return-2e9cd6ca0ca7a6d34edb205e1087b7e1">
                 <div>
                   <img
                     v-lazy="topInfo[2].skinImg"
@@ -151,13 +151,13 @@
                 <div>
                   <span
                     :style="{ color: topInfo[2].tag.color }"
-                    class="skin-279a4b0330c1a4ef39cde3a334a9c652"
+                    class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     3
                   </span>
                 </div>
-                <div class="skin-82175be63be4c53021549241368b4c6f">
-                  <span class="skin-2de2ce7733cbb350c6aa2862912c853b">
+                <div class="return-82175be63be4c53021549241368b4c6f">
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
                     {{ topInfo[2].allVoteNum || 0 }} 万
                   </span>
                 </div>
@@ -182,7 +182,7 @@
         </van-row>
       </div>
 
-      <div v-if="type == 0" class="skin-32cf2eae6fcd7e91e52572c57b0dfed2">
+      <div v-if="type == 0" class="return-32cf2eae6fcd7e91e52572c57b0dfed2">
         <vxe-grid
           ref="refSkinReturn"
           :loading="tableData.loading"
@@ -204,7 +204,7 @@
                 class="app-e4d23e841d8e8804190027bce3180fa5"
                 >{{ row.skinName }}</van-tag
               >
-              <span class="skin-58206caebd18d792f59aa1ec064f65d1">
+              <span class="return-58206caebd18d792f59aa1ec064f65d1">
                 {{ rowIndex + 4 }}
               </span>
             </template>
@@ -244,7 +244,7 @@
 
       <div
         v-if="type == 1 && lineData.result.rows.length > 0"
-        class="skin-9eff02d43a97619df7707398ec7099cb"
+        class="return-9eff02d43a97619df7707398ec7099cb"
       >
         <ve-line
           :extend="lineData.extend"
@@ -256,7 +256,7 @@
           :after-config="afterConfig"
           width="99.2%"
           height="650px"
-          class="skin-f3581151f1ec81c0c0a0226b4aa6e2d5"
+          class="return-f3581151f1ec81c0c0a0226b4aa6e2d5"
         />
       </div>
     </div>
@@ -402,15 +402,15 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-img.skin-c3aea51299c526f7b079c527ae02deb9 {
+<style lang="less">
+img.return-c3aea51299c526f7b079c527ae02deb9 {
   position: absolute;
   transform: rotate(54deg);
   margin-left: -30px;
   margin-top: -20px;
 }
 
-span.skin-279a4b0330c1a4ef39cde3a334a9c652 {
+span.return-279a4b0330c1a4ef39cde3a334a9c652 {
   font-size: 50px;
 }
 
@@ -421,35 +421,35 @@ span.ranking-ad602d217564b616b293eac07fc53138 {
   right: 0;
 }
 
-span.skin-4fb4d4758e19b050e0de1ef488ae54a3 {
+span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
   color: #1989fa;
 }
 
-span.skin-58206caebd18d792f59aa1ec064f65d1 {
+span.return-58206caebd18d792f59aa1ec064f65d1 {
   position: absolute;
 }
 
-div.skin-8c35b9de834af969baf22173b9539eb9 {
+div.return-8c35b9de834af969baf22173b9539eb9 {
   div.van-nav-bar {
     background-color: transparent !important;
   }
 }
 
-div.skin-0c81212fbe656b4245967fe1fba3413e {
+div.return-0c81212fbe656b4245967fe1fba3413e {
   position: absolute;
   width: 100%;
 }
 
-div.skin-4e31671abda91ffcc22a860a7bcd84ee {
+div.return-4e31671abda91ffcc22a860a7bcd84ee {
   height: 385px;
   padding-top: 85px;
 }
 
-div.skin-194d92f12722c6d346dc1207ba7d2499 {
+div.return-194d92f12722c6d346dc1207ba7d2499 {
   padding-top: 75px;
 }
 
-div.skin-2e9cd6ca0ca7a6d34edb205e1087b7e1 {
+div.return-2e9cd6ca0ca7a6d34edb205e1087b7e1 {
   padding-top: 100px;
 }
 </style>

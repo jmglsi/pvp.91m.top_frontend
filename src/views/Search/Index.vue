@@ -699,7 +699,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 img.search-05a36d9069f1023c8432de89b15a83af {
   margin-top: -2px;
 }

@@ -212,7 +212,7 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 div.setting-b401c55622473cb5f8e0cf4e19901f39 {
   text-align: @app-text-align;
 }

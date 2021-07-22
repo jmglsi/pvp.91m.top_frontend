@@ -57,7 +57,7 @@ export default new Router({
             path: '/skin/return',
             name: 'skinReturn',
             component: () =>
-                import ('./views/Return/Skin.vue'),
+                import ('./views/Return/Index.vue'),
             meta: {
                 title: '趋势',
                 keepAlive: true
