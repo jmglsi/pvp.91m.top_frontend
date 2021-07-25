@@ -142,23 +142,31 @@
       </van-cell-group>
     </div>
 
-    <div class="friends-6a9bb439b8da049564b7efb8aa9060d1">
+    <div
+      class="
+        friends-6a9bb439b8da049564b7efb8aa9060d1
+        app-52b0e5c90604d59d1814f184d58e2033
+      "
+    >
       <van-button
         round
         icon="replay"
         type="primary"
         size="small"
         @click="getWebAccountInfo(1, 1)"
-        >刷新</van-button
-      >&nbsp;
+      >
+        刷新
+      </van-button>
+      &nbsp;
       <van-button
         round
         icon="description"
         type="info"
         size="small"
         @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
-        >复制 QQ</van-button
       >
+        复制 QQ
+      </van-button>
     </div>
   </div>
 </template>

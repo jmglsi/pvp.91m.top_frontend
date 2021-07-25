@@ -101,9 +101,9 @@
         class="app-0ca41257ee36e86e5d89591c82113263"
       >
         <template v-slot:cover>
-          <span class="hero-b5741c8457973b008c424c6f94ff3901"
-            >长按或右键可保存图片~</span
-          >
+          <span class="hero-b5741c8457973b008c424c6f94ff3901">
+            长按或右键保存图片
+          </span>
         </template>
       </van-image-preview>
     </div>

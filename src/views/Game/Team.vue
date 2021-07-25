@@ -62,13 +62,16 @@
                 class="game-3972b6d305454c0dd6bb3927cf9c8712"
               >
                 <template #button>
-                  <van-button
-                    round
-                    size="small"
-                    color="black"
-                    @click="onCreateEngageClick(tableDataRow.id)"
-                    >创建交战</van-button
-                  >
+                  <div class="game-73ece876adc866804e05a0eae53577c6">
+                    <van-button
+                      round
+                      size="small"
+                      color="black"
+                      @click="onCreateEngageClick(tableDataRow.id)"
+                    >
+                      创建交战
+                    </van-button>
+                  </div>
                 </template>
               </van-field>
               <van-field
@@ -85,9 +88,11 @@
                     :max-size="3 * 1024 * 1024"
                     @oversize="onOversize"
                   >
-                    <van-button round size="small" type="info"
-                      >上传图片</van-button
-                    >
+                    <div class="game-5f758f428b7ca18a42a55032f534bd2e">
+                      <van-button round size="small" type="info">
+                        上传图片
+                      </van-button>
+                    </div>
                   </van-uploader>
                 </template>
               </van-field>
@@ -109,16 +114,19 @@
               type="danger"
               class="app-a066f238070a70cb531c9bd722c65b36"
               @click="onDeleteTeamClick"
-              >删除信息</van-button
-            >&nbsp;
+            >
+              删除信息
+            </van-button>
+            &nbsp;
             <van-button
               round
               size="small"
               type="primary"
               class="app-a066f238070a70cb531c9bd722c65b36"
               @click="onSaveTeamInfoClick"
-              >保存信息</van-button
             >
+              保存信息
+            </van-button>
           </div>
         </div>
       </van-action-sheet>

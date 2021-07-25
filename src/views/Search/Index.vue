@@ -212,15 +212,16 @@
                   >{{ data }}</van-tag
                 >
               </div>
-              <div class="search-93aea4a321bd36aefe85b2b0526e52e8">
+              <div class="search-93aea4a321bd36aefe85b2b0526e52e8 app-52b0e5c90604d59d1814f184d58e2033">
                 <van-button
                   round
                   @click="onClearSearchData"
                   icon="clear"
                   size="small"
                   type="danger"
-                  >清除历史搜索</van-button
                 >
+                  清除历史搜索
+                </van-button>
               </div>
             </van-cell-group>
           </div>

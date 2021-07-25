@@ -1,5 +1,5 @@
 <template>
-  <div class="login-home">
+  <div class="my-home">
     <div class="my-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
         v-if="isLogin"
@@ -54,15 +54,17 @@
       >
         <van-cell>
           <template #title>
-            <van-button
-              round
-              size="small"
-              color="linear-gradient(to right, #4bb0ff, #6149f6)"
-              @click="$appPush({ path: '/login' })"
-              class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-            >
-              注册/登录/修改
-            </van-button>
+            <div class="my-b687f354f3b497e3ba1db4b7c3938b77">
+              <van-button
+                round
+                size="small"
+                color="linear-gradient(to right, #4bb0ff, #6149f6)"
+                @click="$appPush({ path: '/login' })"
+                class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
+              >
+                注册/登录/修改
+              </van-button>
+            </div>
           </template>
         </van-cell>
       </van-cell-group>
@@ -298,14 +300,17 @@
       >
         <van-cell>
           <template #title>
-            <van-button
-              round
-              size="small"
-              color="rgb(245,245,245)"
-              @click="onLogoutClick"
-              class="app-4236a440a662cc8253d7536e5aa17942"
-              >退出登录</van-button
-            >
+            <div class="my-11149d3aa483aacea271a78c0ea65d85">
+              <van-button
+                round
+                size="small"
+                color="rgb(245,245,245)"
+                @click="onLogoutClick"
+                class="app-4236a440a662cc8253d7536e5aa17942"
+              >
+                退出登录
+              </van-button>
+            </div>
           </template>
         </van-cell>
       </van-cell-group>
@@ -356,14 +361,17 @@
               label="大区"
             >
               <template #button>
-                <van-button
-                  round
-                  size="small"
-                  type="info"
-                  class="my-e06af146fff27b9e4b20bda71a291f9f"
-                  @click="onUpdateColumnsInfoClick(0)"
-                  >修改大区</van-button
-                >
+                <div class="my-1f4910bc86a6970eb3401b1dde5a1177">
+                  <van-button
+                    round
+                    size="small"
+                    type="info"
+                    class="my-e06af146fff27b9e4b20bda71a291f9f"
+                    @click="onUpdateColumnsInfoClick(0)"
+                  >
+                    修改大区
+                  </van-button>
+                </div>
               </template>
             </van-field>
             <van-field
@@ -373,14 +381,17 @@
               label="省份"
             >
               <template #button>
-                <van-button
-                  round
-                  size="small"
-                  type="info"
-                  class="my-e06af146fff27b9e4b20bda71a291f9f"
-                  @click="onUpdateColumnsInfoClick(1)"
-                  >修改省份</van-button
-                >
+                <div class="my-d00aad59acfadc27e8f50ccc61533a30">
+                  <van-button
+                    round
+                    size="small"
+                    type="info"
+                    class="my-e06af146fff27b9e4b20bda71a291f9f"
+                    @click="onUpdateColumnsInfoClick(1)"
+                  >
+                    修改省份
+                  </van-button>
+                </div>
               </template>
             </van-field>
             <van-field readonly label="段位">
@@ -388,14 +399,17 @@
                 <span class="my-35494217d6a01388d07eccf816b6ea39">
                   <img v-lazy="newInfo.rank.starIcon" width="50" height="50" />
                 </span>
-                <van-button
-                  round
-                  size="small"
-                  type="info"
-                  class="my-e06af146fff27b9e4b20bda71a291f9f"
-                  @click="onUpdateColumnsInfoClick(2)"
-                  >修改段位</van-button
-                >
+                <div class="my-6a138d8f7faefbcc60caf19afc89f0a2">
+                  <van-button
+                    round
+                    size="small"
+                    type="info"
+                    class="my-e06af146fff27b9e4b20bda71a291f9f"
+                    @click="onUpdateColumnsInfoClick(2)"
+                  >
+                    修改段位
+                  </van-button>
+                </div>
               </template>
             </van-field>
             <van-field
@@ -437,14 +451,17 @@
             />
           </van-cell-group>
 
-          <van-button
-            round
-            size="small"
-            type="primary"
-            class="app-a066f238070a70cb531c9bd722c65b36"
-            @click="updateWebAccountInfo"
-            >保存信息</van-button
-          >
+          <div class="my-47260541d2fb8caec524833d2a4eac4e">
+            <van-button
+              round
+              size="small"
+              type="primary"
+              class="app-a066f238070a70cb531c9bd722c65b36"
+              @click="updateWebAccountInfo"
+            >
+              保存信息
+            </van-button>
+          </div>
         </div>
       </van-action-sheet>
     </div>

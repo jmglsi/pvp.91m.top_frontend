@@ -90,7 +90,12 @@
                   </div>
                 </template>
 
-                <div class="ranking-1fc99c22c900d9d31cb0ad2434ed4464">
+                <div
+                  class="
+                    ranking-1fc99c22c900d9d31cb0ad2434ed4464
+                    app-52b0e5c90604d59d1814f184d58e2033
+                  "
+                >
                   <van-button
                     round
                     icon="exchange"
@@ -139,7 +144,6 @@
               v-if="tabsInfo.model == 2"
               :isSmallMobile="isSmallMobile"
               :bid="bid || wjAreaTypeInfo.model"
-              :cid="cid || wjShieldTypeInfo.model"
             />
           </div>
         </van-tab>
@@ -196,18 +200,20 @@
         <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
           <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">
             <van-dropdown-item
+              v-if="bidInfo.options.length > 0"
               v-model="bidInfo.model"
               :options="bidInfo.options"
               @change="onDropdownMenuChange"
             />
             <van-dropdown-item
+              v-if="cidInfo.options.length > 0"
               v-model="cidInfo.model"
               :options="cidInfo.options"
               @change="onDropdownMenuChange"
             />
             <van-dropdown-item
+              v-if="didInfo.options.length > 0 && tabsInfo.model == 4"
               v-model="didInfo.model"
-              v-if="tabsInfo.model == 4"
               :options="didInfo.options"
               @change="onDropdownMenuChange"
             />
@@ -337,13 +343,6 @@ export default {
           { text: "苹果WX", value: 4 },
         ],
       },
-      wjShieldTypeInfo: {
-        model: 0,
-        options: [
-          { text: "打开战绩", value: 0 },
-          { text: "隐藏战绩", value: 1 },
-        ],
-      },
       pzAreaTypeInfo: {
         model: 0,
         options: [],
@@ -444,7 +443,6 @@ export default {
 
       if (e == 2) {
         this.bidInfo = this.wjAreaTypeInfo;
-        this.cidInfo = this.wjShieldTypeInfo;
 
         this.showInfo.rankingFilterMenu = true;
       }
@@ -493,7 +491,6 @@ export default {
 
       if (tabsInfo.model == 2) {
         this.wjAreaTypeInfo.model = bidInfo.model;
-        this.wjShieldTypeInfo.model = cidInfo.model;
       }
 
       if (tabsInfo.model == 4) {
@@ -550,8 +547,16 @@ img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
   border-radius: @app-border-radius;
 }
 
+img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
+  border-radius: unset;
+  margin-left: -14px;
+  margin-top: -8px;
+  position: absolute;
+}
+
 span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
-  margin: 0 5px;
+  margin: 0 10px;
+  white-space: nowrap;
 }
 
 span.ranking-f58cc48f5b942c91e57eff48accc5151 {
@@ -564,6 +569,21 @@ span.ranking-4da12add5b0c1920dcde6c5627d30422 {
   left: 0;
   position: absolute;
   width: 100%;
+}
+
+span.ranking-7de1b8678bf87a631bd5f2c2b70a1214 {
+  position: absolute;
+  font-size: 10px;
+  margin-left: -34px;
+  margin-top: 30px;
+}
+
+span.ranking-5cb6f4cb579d8c69b973e0fec7239056 {
+  color: red;
+  font-size: @app-font-size;
+  margin-left: -10px;
+  margin-top: 9px;
+  position: absolute;
 }
 
 div.vxe-table--main-wrapper {
@@ -607,6 +627,36 @@ div.ranking-gradient {
   div.van-cell {
     background-color: transparent !important;
   }
+}
+
+div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
+  position: absolute;
+  margin: 0 auto;
+  margin-top: 0px;
+  height: 150px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+div.ranking-3ab42c8325a264730406e37e1f731f70 {
+  overflow: hidden;
+  height: 300px;
+  width: 100%;
+}
+
+div.ranking-420e569f7ae439ae256513412631f2f4 {
+  font-size: @app-font-size;
+  position: absolute;
+  left: 0;
+  margin: 0 auto;
+  margin-top: -5px;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+div.ranking-a6c2fcca8d40c28ed46b93c2c629f0ae {
+  font-size: 13px;
 }
 
 div.ranking-8d583d7c052e343e6817b99812fa03b6 {

@@ -35,23 +35,33 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="#" type="seq" width="75" />
-
         <vxe-table-column
           title="巅峰分"
           field="rankScore"
-          :width="listWidth"
+          :width="$appIsMobile ? 100 : 0"
           sortable
-        />
+        >
+          <template v-slot="{ row, rowIndex }">
+            <div>
+              <div class="app-52b0e5c90604d59d1814f184d58e2033">
+                {{ row.rankScore }}
+              </div>
+              <div
+                class="
+                  app-52b0e5c90604d59d1814f184d58e2033
+                  ranking-420e569f7ae439ae256513412631f2f4
+                "
+              >
+                {{ rowIndex + 1 }}&nbsp;|&nbsp;{{ row.gamePlayerName }}
+              </div>
+            </div>
+          </template>
+        </vxe-table-column>
         <vxe-table-column
-          title="名字"
-          field="gamePlayerName"
-          :width="listWidth > 0 ? listWidth + 25 : listWidth"
-        />
-        <vxe-table-column
-          title="常用英雄 (最近前 5 个)"
+          title="常用英雄 (数据来源互联网)"
           field="commonlyUsed"
-          width="350"
+          width="300"
+          align="left"
         >
           <template v-slot="{ row }">
             <div
@@ -62,29 +72,79 @@
               "
             >
               <span
-                v-for="(data, index) in row.commonlyUsed.slice(0, 5)"
+                v-for="(data, index) in row.heroList.slice(0, 5)"
                 :key="'ranking-124611e2f7ddd568c28b5cb512b89be0-' + index"
                 class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
               >
                 <img
-                  v-if="data"
+                  v-if="data.index <= 10"
+                  width="30"
+                  height="20"
+                  v-lazy="'//pic.iask.cn/fimg/681882549745.jpg'"
+                  class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
+                />
+                <span
+                  v-if="data.index <= 10"
+                  class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
+                >
+                  {{ data.index }}
+                </span>
+                <img
                   v-lazy="
                     '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                    data +
+                    data.heroId +
                     '/' +
-                    data +
+                    data.heroId +
                     '.jpg'
                   "
-                  width="50"
-                  height="50"
+                  width="35"
+                  height="35"
                   class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
                 />
-                <span v-else>暂无数据,点击查看对局回顾 ;(</span>
+                <span class="ranking-7de1b8678bf87a631bd5f2c2b70a1214">
+                  {{ data.fightPower }}
+                </span>
               </span>
+
+              <div
+                v-if="row.heroList.length == 0"
+                class="
+                  app-52b0e5c90604d59d1814f184d58e2033
+                  ranking-a6c2fcca8d40c28ed46b93c2c629f0ae
+                "
+              >
+                待更新,点击查看对局回顾 ;(
+              </div>
             </div>
           </template>
         </vxe-table-column>
       </vxe-grid>
+    </div>
+
+    <div
+      class="
+        ranking-abb5cb2b15eb9ccfe416f0ba3da3499e
+        app-52b0e5c90604d59d1814f184d58e2033
+      "
+    >
+      <van-button
+        round
+        icon="share"
+        size="small"
+        color="linear-gradient(to right, #fd6585, #0d25b9)"
+        @click="getImg"
+      >
+        分享图片
+      </van-button>
+    </div>
+
+    <div>
+      <van-dialog
+        v-model="showInfo.shareImg"
+        @confirm="showInfo.shareImg = false"
+      >
+        <div class="ranking-3ab42c8325a264730406e37e1f731f70"></div>
+      </van-dialog>
     </div>
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
@@ -101,6 +161,8 @@
 </template>
 
 <script>
+import html2canvas from "html2canvas";
+
 export default {
   name: "RankingWanJia",
   props: {
@@ -160,12 +222,13 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       showInfo: {
+        shareImg: false,
         playerMenu: false,
       },
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight(10);
+    //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
   },
   mounted() {
@@ -216,6 +279,28 @@ export default {
             this.$message.error(status.msg);
           }
         });
+    },
+    getImg: function () {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      this.showInfo.shareImg = true;
+      this.$message.warning(this.$appMsg.warning[500]);
+
+      html2canvas(
+        document.getElementsByClassName(
+          "ranking-7d87a4288bd07b77fe09098939795c8c"
+        )[0],
+        {
+          allowTaint: true,
+        }
+      ).then((canvas) => {
+        let shareImg = document.getElementsByClassName(
+          "ranking-3ab42c8325a264730406e37e1f731f70"
+        )[0];
+        shareImg.innerHTML = null;
+        shareImg.appendChild(canvas);
+
+        this.$message.success(this.$appMsg.success[1006]);
+      });
     },
     getPlayerInfo: function (row) {
       this.tableDataRow = row;

@@ -40,7 +40,12 @@
         </ul>
       </div>
 
-      <div class="hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c">
+      <div
+        class="
+          hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c
+          app-52b0e5c90604d59d1814f184d58e2033
+        "
+      >
         <van-button
           round
           icon="question-o"
@@ -50,8 +55,10 @@
           @click="
             $appPush({ path: '/search', query: { q: '国服认证', refresh: 1 } })
           "
-          >国服认证</van-button
-        >&nbsp;
+        >
+          国服认证
+        </van-button>
+        &nbsp;
         <van-button
           round
           icon="replay"
@@ -59,8 +66,9 @@
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="getHeroInfoByWebAccountList(heroId, 1)"
-          >刷新一下</van-button
         >
+          刷新一下
+        </van-button>
       </div>
     </div>
   </div>

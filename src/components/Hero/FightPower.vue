@@ -23,11 +23,13 @@
                 :max-size="3 * 1024 * 1024"
                 @oversize="onOversize"
               >
-                <van-button round size="small" type="info">
-                  上传&nbsp;
-                  {{ $appColumnsInfo.fightPowerType.text[fightPowerType] }}
-                  &nbsp;图片
-                </van-button>
+                <div class="hero-fightPower-4b2011a6e3693d22750506daa83636c2">
+                  <van-button round size="small" type="info">
+                    上传&nbsp;
+                    {{ $appColumnsInfo.fightPowerType.text[fightPowerType] }}
+                    &nbsp;图片
+                  </van-button>
+                </div>
               </van-uploader>
             </template>
           </van-field>
@@ -43,23 +45,28 @@
                   query: { q: '大佬们快来加群', refresh: 1 },
                 })
               "
-              >交流群</van-button
-            >&nbsp; &nbsp; &nbsp;
+            >
+              战力互助
+            </van-button>
+            &nbsp; &nbsp; &nbsp;
             <van-button
               round
               size="small"
               color="linear-gradient(to right, #6874E8, #9708CC)"
               @click="onExampleClick"
-              >示例图片</van-button
-            >&nbsp; &nbsp; &nbsp;
+            >
+              示例图片
+            </van-button>
+            &nbsp; &nbsp; &nbsp;
             <van-button
               round
               size="small"
               type="primary"
               :disabled="disabledInfo.addFightPower"
               @click="onAddFightPowerClick"
-              >提交分数</van-button
             >
+              提交分数
+            </van-button>
           </div>
 
           <div

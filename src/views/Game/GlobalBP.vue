@@ -439,15 +439,19 @@
             秒
           </div>
         </li>
-        <li v-if="bpMode == 'view'">
+        <li
+          v-if="bpMode == 'view'"
+          class="app-52b0e5c90604d59d1814f184d58e2033"
+        >
           <a-dropdown placement="bottomCenter" :trigger="['click']">
             <van-button
               round
               :icon="authorInfo.logo"
               size="small"
               class="game-8e4f204791d1b591b6a6f93b572f9b2d"
-              >{{ authorInfo.name }}</van-button
             >
+              {{ authorInfo.name }}
+            </van-button>
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in authorInfo.actions"
@@ -462,7 +466,7 @@
             </a-menu>
           </a-dropdown>
         </li>
-        <li>
+        <li class="app-52b0e5c90604d59d1814f184d58e2033">
           <van-button
             round
             :icon="
@@ -481,7 +485,7 @@
         <li :style="{ marginTop: '7px' }">
           <span class="game-9f200fbaabc11df2f193d590bc7b3f5b">查看</span>
         </li>
-        <li>
+        <li class="app-52b0e5c90604d59d1814f184d58e2033">
           <van-button
             round
             :icon="eye"

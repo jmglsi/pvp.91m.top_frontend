@@ -444,6 +444,10 @@ div.app-tuijian {
   }
 }
 
+div.app-52b0e5c90604d59d1814f184d58e2033 {
+  white-space: nowrap;
+}
+
 div.app-5ddd8715c99cbf00677a622145b3c163 {
   color: gray;
   font-size: @app-font-size;

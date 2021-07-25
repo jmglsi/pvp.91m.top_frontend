@@ -1,5 +1,5 @@
 <template>
-  <div class="login-in">
+  <div class="login-home">
     <div class="login-9ffe6c014e6f06f1c218fde0ca3fc4ef">
       <van-nav-bar
         left-arrow
@@ -72,8 +72,13 @@
             : $message.error($appMsg.error[1007])
         "
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-        >{{ loginInfo.text }}</van-button
       >
+        {{ loginInfo.text }}
+      </van-button>
+
+      <div>
+        <Oauth />
+      </div>
     </div>
 
     <div
@@ -129,6 +134,9 @@
 <script>
 export default {
   name: "LoginHome",
+  components: {
+    Oauth: () => import("@/views/User/Oauth.vue"),
+  },
   data() {
     return {
       loginInfo: {
