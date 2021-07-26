@@ -527,20 +527,9 @@ export default {
 </script>
 
 <style lang="less">
-.ranking-bda9643ac6601722a28f238714274da4 {
-  color: red;
-}
-
-.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
-  color: orange;
-}
-
-.ranking-48d6215903dff56238e52e8891380c8f {
-  color: blue;
-}
-
-.ranking-9f27410725ab8cc8854a2769c7a516b8 {
-  color: green;
+.vxe-cell,
+.vxe-cell--label {
+  font-family: monospace;
 }
 
 img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
@@ -554,14 +543,19 @@ img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
   position: absolute;
 }
 
+ul.ranking-f138efce9d200665110c7c47b8a57811 {
+    display: initial;
+}
+
+li.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
+  float: left;
+  width: 40px;
+  margin: 0 10px;
+}
+
 span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
   margin: 0 10px;
   white-space: nowrap;
-}
-
-span.ranking-f58cc48f5b942c91e57eff48accc5151 {
-  margin-left: -50px;
-  top: 62px;
 }
 
 span.ranking-4da12add5b0c1920dcde6c5627d30422 {
@@ -572,18 +566,23 @@ span.ranking-4da12add5b0c1920dcde6c5627d30422 {
 }
 
 span.ranking-7de1b8678bf87a631bd5f2c2b70a1214 {
+  color: white;
+  font-size: 12px;
   position: absolute;
-  font-size: 10px;
-  margin-left: -34px;
-  margin-top: 30px;
+  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
 }
 
 span.ranking-5cb6f4cb579d8c69b973e0fec7239056 {
   color: red;
   font-size: @app-font-size;
   margin-left: -10px;
-  margin-top: 9px;
+  margin-top: -15px;
   position: absolute;
+}
+
+span.ranking-f58cc48f5b942c91e57eff48accc5151 {
+  color: white;
+  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
 }
 
 div.vxe-table--main-wrapper {
@@ -613,7 +612,7 @@ td.ranking-bda9643ac6601722a28f238714274da4 div.vxe-cell,
 td.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.ranking-48d6215903dff56238e52e8891380c8f div.vxe-cell,
 td.ranking-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
-  font-size: @app-font-size + 10px;
+  font-size: @app-font-size + 8px;
 }
 
 div.ranking-home {
@@ -629,10 +628,19 @@ div.ranking-gradient {
   }
 }
 
+div.ranking-0e1a8b3f7f6162bf4b88d3d001b88374 {
+  color: white;
+  font-size: @app-font-size;
+  left: -28px;
+  width: 100%;
+  margin-top: -35px;
+  position: absolute;
+  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
+}
+
 div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
   position: absolute;
   margin: 0 auto;
-  margin-top: 0px;
   height: 150px;
   width: 100%;
   margin-top: 50px;
@@ -646,13 +654,13 @@ div.ranking-3ab42c8325a264730406e37e1f731f70 {
 
 div.ranking-420e569f7ae439ae256513412631f2f4 {
   font-size: @app-font-size;
-  position: absolute;
   left: 0;
   margin: 0 auto;
-  margin-top: -5px;
-  width: 100%;
-  text-overflow: ellipsis;
+  margin-top: -28px;
   overflow: hidden;
+  position: absolute;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 div.ranking-a6c2fcca8d40c28ed46b93c2c629f0ae {
@@ -744,7 +752,7 @@ div.ranking-713dd4d0b2e842c08da62ddeec872331 {
 div.ranking-78117a02d15f1dffe5263f47a220c56b {
   span.ranking-f58cc48f5b942c91e57eff48accc5151 {
     margin-left: -50px;
-    top: 62px;
+    top: 50px;
   }
 }
 
@@ -775,7 +783,8 @@ div.ranking-0b22b207c2b785ceff7a241980f23d14 {
 div.ranking-5d308b6a0da77ffb33c63fc542f58746 {
   span.ranking-f58cc48f5b942c91e57eff48accc5151 {
     margin-left: -43px;
-    top: 47px;
+    position: absolute;
+    top: 35px;
   }
 }
 

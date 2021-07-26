@@ -275,6 +275,22 @@ export default {
   width: 100%;
 }
 
+.ranking-bda9643ac6601722a28f238714274da4 {
+  color: red;
+}
+
+.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
+  color: orange;
+}
+
+.ranking-48d6215903dff56238e52e8891380c8f {
+  color: blue;
+}
+
+.ranking-9f27410725ab8cc8854a2769c7a516b8 {
+  color: green;
+}
+
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
   margin: 0 5px;
   text-align: center;
@@ -289,9 +305,9 @@ img {
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
   border-radius: unset;
-  margin-bottom: -40px;
+  bottom: -12px;
   margin-left: -45px;
-  position: relative;
+  position: absolute;
   width: 35px;
 }
 
@@ -384,9 +400,11 @@ span.app-e4d23e841d8e8804190027bce3180fa5 {
 
 span.app-0fc3cfbc27e91ea60a787de13dae3e3c {
   font-size: @app-font-size;
-  margin-top: -6px;
+  margin-top: -7px;
   position: absolute;
   width: @app-width;
+  color: white;
+  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
 }
 
 span.app-07cc694b9b3fc636710fa08b6922c42b {

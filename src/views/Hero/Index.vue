@@ -43,7 +43,6 @@ span.hero-9726255eec083aa56dc0449a21b33190 {
 }
 
 span.hero-0fc3cfbc27e91ea60a787de13dae3e3c {
-  color: white;
   margin-left: -40px;
   margin-top: 25px;
 }

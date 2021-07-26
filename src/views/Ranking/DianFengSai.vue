@@ -24,21 +24,22 @@
           sortable
         >
           <template v-slot="{ row }">
+            <van-tag
+              v-if="row.tag.text"
+              :color="row.tag.color"
+              mark
+              type="primary"
+              class="app-e4d23e841d8e8804190027bce3180fa5"
+              >{{ row.tag.text }}</van-tag
+            >
             <div
+              :style="{ position: 'relative' }"
               :class="
                 isSmallMobile == 1
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-0b22b207c2b785ceff7a241980f23d14'
                   : null
               "
             >
-              <van-tag
-                v-if="row.tag.text"
-                :color="row.tag.color"
-                mark
-                type="primary"
-                class="app-e4d23e841d8e8804190027bce3180fa5"
-                >{{ row.tag.text }}</van-tag
-              >
               <img
                 v-lazy="row.img"
                 width="50"

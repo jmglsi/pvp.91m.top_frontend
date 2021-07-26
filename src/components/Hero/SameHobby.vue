@@ -20,21 +20,23 @@
             class="app-1951b6e7c82938dd7446a41e829b247b"
             @click="$appPush({ path: data.to })"
           >
-            <img
-              v-if="data.fightPowerIcon"
-              v-lazy="data.fightPowerIcon"
-              width="35"
-              height="35"
-              class="hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767"
-            />
-            <img
-              width="75"
-              height="75"
-              v-lazy="data.img"
-              class="app-4ab161130e76571ab0c31aa23a6238c7"
-            />
-            <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">
-              {{ data.name }}
+            <div :style="{ position: 'relative' }">
+              <img
+                v-if="data.fightPowerIcon"
+                v-lazy="data.fightPowerIcon"
+                width="35"
+                height="35"
+                class="hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767"
+              />
+              <img
+                width="75"
+                height="75"
+                v-lazy="data.img"
+                class="app-4ab161130e76571ab0c31aa23a6238c7"
+              />
+              <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">
+                {{ data.name }}
+              </div>
             </div>
           </li>
         </ul>
@@ -145,9 +147,8 @@ div.hero-same-hobby {
 
 img.hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767 {
   border-radius: unset;
-  margin-right: -35px;
-  margin-top: -45px;
-  position: relative;
+  margin-top: -13px;
+  position: absolute;
   width: 45px;
 }
 

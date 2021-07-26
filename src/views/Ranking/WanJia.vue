@@ -9,28 +9,32 @@
         @cell-click="onCellClick"
       >
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
-          <template v-slot="{ row }">
+          <template v-slot="{ row, rowIndex }">
+            <van-tag
+              v-if="row.tag"
+              :color="row.tag.color"
+              mark
+              type="primary"
+              class="app-e4d23e841d8e8804190027bce3180fa5"
+              >{{ row.tag.text }}</van-tag
+            >
             <div
+              :style="{ position: 'relative' }"
               :class="
                 isSmallMobile == 1
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
                   : null
               "
             >
-              <van-tag
-                v-if="row.tag"
-                :color="row.tag.color"
-                mark
-                type="primary"
-                class="app-e4d23e841d8e8804190027bce3180fa5"
-                >{{ row.tag.text }}</van-tag
-              >
               <img
                 v-lazy="row.avatar"
                 width="50"
                 height="50"
                 class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
+              <div class="ranking-0e1a8b3f7f6162bf4b88d3d001b88374">
+                {{ rowIndex + 1 }}
+              </div>
             </div>
           </template>
         </vxe-table-column>
@@ -41,18 +45,13 @@
           :width="$appIsMobile ? 100 : 0"
           sortable
         >
-          <template v-slot="{ row, rowIndex }">
+          <template v-slot="{ row }">
             <div>
               <div class="app-52b0e5c90604d59d1814f184d58e2033">
                 {{ row.rankScore }}
               </div>
-              <div
-                class="
-                  app-52b0e5c90604d59d1814f184d58e2033
-                  ranking-420e569f7ae439ae256513412631f2f4
-                "
-              >
-                {{ rowIndex + 1 }}&nbsp;|&nbsp;{{ row.gamePlayerName }}
+              <div class="ranking-420e569f7ae439ae256513412631f2f4">
+                {{ row.gamePlayerName }}
               </div>
             </div>
           </template>
@@ -60,7 +59,7 @@
         <vxe-table-column
           title="常用英雄 (数据来源互联网)"
           field="commonlyUsed"
-          width="300"
+          width="325"
           align="left"
         >
           <template v-slot="{ row }">
@@ -71,40 +70,51 @@
                   : null
               "
             >
-              <span
-                v-for="(data, index) in row.heroList.slice(0, 5)"
-                :key="'ranking-124611e2f7ddd568c28b5cb512b89be0-' + index"
-                class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
-              >
-                <img
-                  v-if="data.index <= 10"
-                  width="30"
-                  height="20"
-                  v-lazy="'//pic.iask.cn/fimg/681882549745.jpg'"
-                  class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
-                />
-                <span
-                  v-if="data.index <= 10"
-                  class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
+              <ul class="ranking-f138efce9d200665110c7c47b8a57811">
+                <li
+                  v-for="(data, index) in row.heroList.slice(0, 5)"
+                  :key="'ranking-124611e2f7ddd568c28b5cb512b89be0-' + index"
+                  class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
                 >
-                  {{ data.index }}
-                </span>
-                <img
-                  v-lazy="
-                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                    data.heroId +
-                    '/' +
-                    data.heroId +
-                    '.jpg'
-                  "
-                  width="35"
-                  height="35"
-                  class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-                />
-                <span class="ranking-7de1b8678bf87a631bd5f2c2b70a1214">
-                  {{ data.fightPower }}
-                </span>
-              </span>
+                  <div :style="{ position: 'relative' }">
+                    <img
+                      v-if="data.index <= 10"
+                      width="30"
+                      height="20"
+                      v-lazy="'//pic.iask.cn/fimg/681882549745.jpg'"
+                      class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
+                    />
+                    <span
+                      v-if="data.index <= 10"
+                      class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
+                    >
+                      {{ data.index }}
+                    </span>
+                    <span
+                      :style="
+                        data.fightPower < 10000
+                          ? { marginLeft: '3px' }
+                          : { marginLeft: '-1px' }
+                      "
+                      class="ranking-7de1b8678bf87a631bd5f2c2b70a1214"
+                    >
+                      {{ data.fightPower }}
+                    </span>
+                    <img
+                      v-lazy="
+                        '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                        data.heroId +
+                        '/' +
+                        data.heroId +
+                        '.jpg'
+                      "
+                      width="35"
+                      height="35"
+                      class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                    />
+                  </div>
+                </li>
+              </ul>
 
               <div
                 v-if="row.heroList.length == 0"
@@ -291,6 +301,7 @@ export default {
         )[0],
         {
           allowTaint: true,
+          scale: 1,
         }
       ).then((canvas) => {
         let shareImg = document.getElementsByClassName(

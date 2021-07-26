@@ -106,27 +106,29 @@
                   v-for="(data, index) in friendsInfo.heroList"
                   :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
                   class="app-1951b6e7c82938dd7446a41e829b247b"
+                  @click="$appPush({ path: '/hero/' + data.id + '/info' })"
                 >
-                  <img
-                    v-lazy="
-                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                      data.id +
-                      '/' +
-                      data.id +
-                      '.jpg'
-                    "
-                    width="35"
-                    height="35"
-                    class="app-4ab161130e76571ab0c31aa23a6238c7"
-                    @click="$appPush({ path: '/hero/' + data.id + '/info' })"
-                  />
-                  <img
-                    v-if="data.fightPowerIcon"
-                    v-lazy="data.fightPowerIcon"
-                    width="25"
-                    height="25"
-                    class="app-d31cb1c15b091f41248935d88a8d0a45"
-                  />
+                  <div :style="{ position: 'relative' }">
+                    <img
+                      v-lazy="
+                        '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                        data.id +
+                        '/' +
+                        data.id +
+                        '.jpg'
+                      "
+                      width="35"
+                      height="35"
+                      class="app-4ab161130e76571ab0c31aa23a6238c7"
+                    />
+                    <img
+                      v-if="data.fightPowerIcon"
+                      v-lazy="data.fightPowerIcon"
+                      width="25"
+                      height="25"
+                      class="app-d31cb1c15b091f41248935d88a8d0a45"
+                    />
+                  </div>
                 </li>
               </ul>
             </div>
