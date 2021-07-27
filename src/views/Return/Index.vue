@@ -13,7 +13,9 @@
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #title>
-          <span class="return-2de2ce7733cbb350c6aa2862912c853b"> 票选排行 </span>
+          <span class="return-2de2ce7733cbb350c6aa2862912c853b">
+            票选排行
+          </span>
         </template>
         <template #right>
           <span
@@ -191,12 +193,6 @@
         >
           <vxe-table-column title="-" field="skinName" fixed="left" width="75">
             <template v-slot="{ row, rowIndex }">
-              <img
-                v-lazy="row.skinImg"
-                width="35"
-                height="35"
-                class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-              />
               <van-tag
                 :color="row.tag.color"
                 mark
@@ -204,9 +200,17 @@
                 class="app-e4d23e841d8e8804190027bce3180fa5"
                 >{{ row.skinName }}</van-tag
               >
-              <span class="return-58206caebd18d792f59aa1ec064f65d1">
-                {{ rowIndex + 4 }}
-              </span>
+              <div :style="{ position: 'relative' }">
+                <img
+                  v-lazy="row.skinImg"
+                  width="35"
+                  height="35"
+                  class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                />
+                <span class="return-58206caebd18d792f59aa1ec064f65d1">
+                  {{ rowIndex + 4 }}
+                </span>
+              </div>
             </template>
           </vxe-table-column>
           <vxe-table-column
@@ -426,7 +430,13 @@ span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
 }
 
 span.return-58206caebd18d792f59aa1ec064f65d1 {
+  color: white;
+  font-size: 10px;
+  left: -25px;
   position: absolute;
+  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
+  width: 100%;
+  text-align: center;
 }
 
 div.return-8c35b9de834af969baf22173b9539eb9 {

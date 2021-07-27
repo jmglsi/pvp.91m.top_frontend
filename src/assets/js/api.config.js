@@ -20,6 +20,7 @@ const pvp = {
     createTeam: pvpApi + "?type=createTeam",
     deleteGameBP: pvpApi + "?type=deleteGameBP",
     deleteTeam: pvpApi + "?type=deleteTeam",
+    getImg: pvpApi + "?type=getImg",
     getAppHome: pvpApi + "?type=getAppHome",
     getAppInfo: pvpApi + "?type=getAppInfo",
     getGameDashboard: pvpApi + "?type=getGameDashboard",

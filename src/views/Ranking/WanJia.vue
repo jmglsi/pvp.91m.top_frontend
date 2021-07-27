@@ -27,9 +27,16 @@
               "
             >
               <img
-                v-lazy="row.avatar"
+                v-lazy="
+                  row.avatar.match(/p\.qlogo\.cn/g)
+                    ? $appApi.pvp.getImg +
+                      '&url=' +
+                      encodeURIComponent(row.avatar)
+                    : row.avatar
+                "
                 width="50"
                 height="50"
+                crossorigin="anonymous"
                 class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div class="ranking-0e1a8b3f7f6162bf4b88d3d001b88374">
@@ -110,6 +117,7 @@
                       "
                       width="35"
                       height="35"
+                      crossorigin="anonymous"
                       class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
                     />
                   </div>
@@ -138,13 +146,24 @@
       "
     >
       <van-button
+        :disabled="!$appIsMobile"
         round
         icon="share"
         size="small"
-        color="linear-gradient(to right, #fd6585, #0d25b9)"
+        color="linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237))"
         @click="getImg"
       >
         分享图片
+      </van-button>
+      &nbsp;
+      <van-button
+        round
+        icon="aim"
+        size="small"
+        color="linear-gradient(to right, rgb(196, 113, 237), rgb(246, 79, 89))"
+        @click="onHeroListActionSheetSelect"
+      >
+        英雄分布
       </van-button>
     </div>
 
@@ -163,9 +182,52 @@
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
-        @select="onActionSheetSelect"
+        @select="onPlayerMenuActionSheetSelect"
         safe-area-inset-bottom
       />
+    </div>
+
+    <div class="ranking-9ba6e31a929c8c8d48edbc31d01824ad">
+      <van-action-sheet
+        v-model="showInfo.heroList"
+        @select="onHeroListActionSheetSelect"
+        title="大佬们在玩什么"
+      >
+        <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
+          <van-grid :border="false" :column-num="3">
+            <van-grid-item
+              v-for="(data, index) in allHeroList"
+              :key="'ranking-4ca0249904c6806e15f5147a59ae6d26-' + index"
+            >
+              <div
+                :style="{ height: '100%', width: '100%', position: 'relative' }"
+              >
+                <img
+                  width="45"
+                  height="45"
+                  v-lazy="
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    data[0] +
+                    '/' +
+                    data[0] +
+                    '.jpg'
+                  "
+                  class="ranking-a548cbd20a565cc98caf397c9bfd7cdb"
+                />
+                <div class="ranking-51c877f489423eb1c3901dd0e12c03d4">
+                  {{ data[1] }}
+                  <span class="ranking-004599265c459e7f8f865e2bd40c82fb">
+                    人
+                  </span>
+                  &nbsp; ({{
+                    ((data[1] / allHeroList.length) * 100).toFixed(2)
+                  }}%)
+                </div>
+              </div>
+            </van-grid-item>
+          </van-grid>
+        </div>
+      </van-action-sheet>
     </div>
   </div>
 </template>
@@ -213,6 +275,7 @@ export default {
   },
   data() {
     return {
+      allHeroList: [],
       copyData: "",
       uin: "",
       tableData: {
@@ -234,6 +297,7 @@ export default {
       showInfo: {
         shareImg: false,
         playerMenu: false,
+        heroList: false,
       },
     };
   },
@@ -249,14 +313,20 @@ export default {
       let appConfigInfo = this.$appConfigInfo,
         ranking = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
-        );
+        ),
+        playerList = [];
 
       if (
         ranking &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return (this.tableData = ranking);
+        this.tableData = ranking;
+        playerList = ranking.result.rows;
+
+        this.getHeroList(playerList);
+
+        return this.tableData;
       }
 
       this.$axios
@@ -278,17 +348,47 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
+            playerList = this.tableData.result.rows;
 
             this.$appSetLocalStorage(
               "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
               this.tableData
             );
 
+            this.getHeroList(playerList);
+
             this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }
         });
+    },
+    getHeroList: function (rows) {
+      let heroList = [],
+        newHeroList = {},
+        heroId = 0;
+
+      rows.map((x) => {
+        heroList = x.heroList;
+
+        heroList.map((y) => {
+          heroId = y.heroId;
+
+          if (heroId in newHeroList) {
+            newHeroList[heroId] = newHeroList[heroId] + 1;
+          } else {
+            newHeroList[heroId] = 1;
+          }
+        });
+      });
+
+      this.allHeroList = Object.entries(newHeroList).sort((a, b) => b[1] - a[1]);
+      //转数组、降序
+    },
+    getPlayerInfo: function (row) {
+      this.tableDataRow = row;
+
+      this.showInfo.playerMenu = true;
     },
     getImg: function () {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -300,8 +400,9 @@ export default {
           "ranking-7d87a4288bd07b77fe09098939795c8c"
         )[0],
         {
-          allowTaint: true,
-          scale: 1,
+          useCORS: true,
+          //allowTaint: true,
+          scale: 2,
         }
       ).then((canvas) => {
         let shareImg = document.getElementsByClassName(
@@ -310,13 +411,33 @@ export default {
         shareImg.innerHTML = null;
         shareImg.appendChild(canvas);
 
+        canvas.toBlob(
+          function (blob) {
+            const eleLink = document.createElement("a");
+            eleLink.download = "top100.png";
+            eleLink.style.display = "none";
+            eleLink.href = URL.createObjectURL(blob);
+            // 触发点击
+            document.body.appendChild(eleLink);
+            eleLink.click();
+            // 然后移除
+            document.body.removeChild(eleLink);
+          },
+          "image/png",
+          1
+        );
+
         this.$message.success(this.$appMsg.success[1006]);
       });
     },
-    getPlayerInfo: function (row) {
-      this.tableDataRow = row;
-
-      this.showInfo.playerMenu = true;
+    downloadImg: function (url) {
+      let s = document.createElement("a");
+      s.style.display = "none";
+      s.href = url;
+      s.download = "top100.png";
+      document.body.appendChild(s);
+      s.click();
+      document.body.removeChild(s);
     },
     onWanJiaCopy: function (row) {
       this.$axios
@@ -368,7 +489,7 @@ export default {
 
       this.getPlayerInfo(row);
     },
-    onActionSheetSelect: function (item) {
+    onPlayerMenuActionSheetSelect: function (item) {
       let playerInfo = this.tableDataRow;
 
       if (item.value == 0) {
@@ -397,6 +518,9 @@ export default {
           this.$message.info(this.$appMsg.info[1013]);
         }
       }
+    },
+    onHeroListActionSheetSelect: function () {
+      this.showInfo.heroList = true;
     },
   },
 };
