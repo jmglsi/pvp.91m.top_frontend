@@ -599,13 +599,7 @@ export default {
 
       this.copyData = longUrl;
 
-      setTimeout(
-        (copyData) => {
-          this.$appCopyData(copyData);
-        },
-        750,
-        this.copyData
-      );
+      this.$appCopyData(this.copyData);
     },
     onPickerConfirm: function (value, index) {
       let columnsInfo = this.$appColumnsInfo,

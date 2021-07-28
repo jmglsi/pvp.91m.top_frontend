@@ -237,13 +237,7 @@ export default {
     onFriendsCopy: function (name, uin) {
       this.copyData = "用户名:" + name + "\rQQ:" + uin;
 
-      setTimeout(
-        (copyData) => {
-          this.$appCopyData(copyData);
-        },
-        750,
-        this.copyData
-      );
+      this.$appCopyData(this.copyData);
     },
   },
 };

@@ -471,13 +471,7 @@ export default {
                   "\r-\r更多玩家信息 ↓\r" +
                   shortUrl;
 
-                setTimeout(
-                  (copyData) => {
-                    this.$appCopyData(copyData);
-                  },
-                  750,
-                  this.copyData
-                );
+                this.$appCopyData(this.copyData);
               });
           } else {
             this.$message.error(status.msg);

@@ -159,13 +159,7 @@ export default {
             let copyAv = this.copyAv;
 
             if (copyAv) {
-              setTimeout(
-                (copyData) => {
-                  this.$appCopyData(copyData);
-                },
-                750,
-                this.copyData
-              );
+              this.$appCopyData(this.copyData);
 
               this.copyAv = null;
             }
@@ -208,14 +202,6 @@ export default {
             row.bz +
             "\r-\r" +
             shortUrl;
-
-          setTimeout(
-            (copyData) => {
-              this.$appCopyData(copyData);
-            },
-            750,
-            this.copyData
-          );
         });
     },
     onClearInputData: function () {

@@ -269,13 +269,7 @@ export default {
 
           this.copyData = row.equipment.name + " 的其他信息 ↓\r" + shortUrl;
 
-          setTimeout(
-            (copyData) => {
-              this.$appCopyData(copyData);
-            },
-            750,
-            this.copyData
-          );
+          this.$appCopyData(this.copyData);
         });
     },
     onCellClick: function ({ row }) {

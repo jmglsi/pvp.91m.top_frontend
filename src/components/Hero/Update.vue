@@ -363,13 +363,7 @@ export default {
         date.getDate() +
         "日[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
 
-      setTimeout(
-        (copyData) => {
-          this.$appCopyData(copyData);
-        },
-        750,
-        this.copyData
-      );
+      this.$appCopyData(this.copyData);
     },
     onOpenHeroUpdateTextClick: function (heroId, data) {
       this.$axios

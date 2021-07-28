@@ -207,13 +207,7 @@ export default {
 
           this.copyData = this.replay.title + " 的对局回顾 ↓\r" + shortUrl;
 
-          setTimeout(
-            (copyData) => {
-              this.$appCopyData(copyData);
-            },
-            750,
-            this.copyData
-          );
+          this.$appCopyData(this.copyData);
         });
     },
     getHeroReplayByHeroId: function (page) {

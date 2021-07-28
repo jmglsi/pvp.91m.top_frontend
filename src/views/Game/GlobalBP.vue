@@ -1155,13 +1155,7 @@ export default {
             " 局比赛 ↓\r" +
             shortUrl;
 
-          setTimeout(
-            (copyData) => {
-              this.$appCopyData(copyData);
-            },
-            750,
-            this.copyData
-          );
+          this.$appCopyData(this.copyData);
         });
     },
     onCreateGameBPClick: function () {

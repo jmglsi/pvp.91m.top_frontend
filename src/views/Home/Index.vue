@@ -150,15 +150,9 @@ export default {
             // on confirm
             this.copyData = location.origin;
 
-            setTimeout(
-              (copyData) => {
-                this.$appCopyData(
-                  copyData,
-                  "链接已复制,请清除缓存重新添加到桌面~"
-                );
-              },
-              750,
-              this.copyData
+            this.$appCopyData(
+              this.copyData,
+              "链接已复制,请清除缓存重新添加到桌面~"
             );
           })
           .catch(() => {

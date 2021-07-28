@@ -400,13 +400,7 @@ export default {
             "\r-\r更多英雄关系 ↓\r" +
             shortUrl;
 
-          setTimeout(
-            (copyData) => {
-              this.$appCopyData(copyData);
-            },
-            750,
-            this.copyData
-          );
+          this.$appCopyData(this.copyData);
         });
     },
     filterMethod: function ({ option, row, column }) {
