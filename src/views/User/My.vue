@@ -398,10 +398,15 @@
             </van-field>
             <van-field readonly label="段位">
               <template #button>
-                <span class="my-35494217d6a01388d07eccf816b6ea39">
-                  <img v-lazy="newInfo.rank.starIcon" width="50" height="50" />
-                </span>
                 <div class="my-6a138d8f7faefbcc60caf19afc89f0a2">
+                  <span class="my-35494217d6a01388d07eccf816b6ea39">
+                    <img
+                      v-lazy="newInfo.rank.starIcon"
+                      width="50"
+                      height="50"
+                    />
+                  </span>
+
                   <van-button
                     round
                     size="small"
@@ -483,8 +488,8 @@ export default {
       copyData: "",
       isLogin: false,
       url: {
-        globalBP: "//doc.91m.top/jmglsi/pvp",
-        friends: "//doc.91m.top/jmglsi/pvp",
+        globalBP: "//s.91m.top/pvp.doc.globalBP",
+        friends: "//s.91m.top/pvp.doc.friends",
         support: "//support.qq.com/products/305514",
         openSource: ["//ngabbs.com/read.php?tid=26200132"],
         afdian: "//afdian.net/@jmglsi",

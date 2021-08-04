@@ -24,15 +24,12 @@
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
               :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
-              @click="
-                data.url
-                  ? $appOpenUrl('是否打开外部链接?', null, { path: data.url })
-                  : null
-              "
+              @click="onSwipeClick(data)"
               class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
             >
               <img
                 v-lazy="data.img"
+                crossorigin="anonymous"
                 class="home-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag
@@ -101,6 +98,8 @@
 </template>
 
 <script>
+import ColorThief from "colorthief";
+
 export default {
   name: "TuiJianHome",
   components: {
@@ -139,6 +138,10 @@ export default {
   },
   mounted() {
     this.getAppHome();
+
+    setTimeout(() => {
+      this.initColor();
+    }, 2000);
   },
   methods: {
     getAppHome: function () {
@@ -160,6 +163,35 @@ export default {
 
         this.$appSetLocalStorage("appHome", this.appHomeInfo);
       });
+    },
+    initColor: function () {
+      let img = document.getElementsByClassName(
+          "home-3c873293a7dc1ea8c20579f6a7ae94a9"
+        ),
+        colorthief = new ColorThief(),
+        nowColor = "0,0,0";
+
+      Array.from(img).map((x, i) => {
+        let nowRow = this.appHomeInfo.swipeInfo.result.rows[i];
+
+        if (nowRow.name) {
+          x.addEventListener("load", () => {
+            nowColor = colorthief.getPalette(x, 3)[2].toString();
+
+            this.appHomeInfo.swipeInfo.result.rows[i].tag.color =
+              "rgb(" + nowColor + ")";
+          });
+        }
+      });
+    },
+    onSwipeClick: function (data) {
+      if (data.to) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
+      }
+
+      if (data.url) {
+        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
+      }
     },
     onComponentShow: function () {
       setTimeout(() => {

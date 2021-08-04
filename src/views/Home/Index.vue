@@ -16,21 +16,7 @@
               height="35"
               v-lazy="appInfo.search.img"
               class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-              @click="
-                appInfo.search.to
-                  ? $appOpenUrl(
-                      '是否打开内部链接?',
-                      '网络交友需谨慎,涉及金钱莫轻信',
-                      { path: appInfo.search.to },
-                      1
-                    )
-                  : $appOpenUrl(
-                      '是否打开外部链接?',
-                      null,
-                      { path: appInfo.search.url },
-                      0
-                    )
-              "
+              @click="onRightClick(appInfo.search)"
             />
           </template>
         </van-search>
@@ -160,6 +146,20 @@ export default {
           });
       }
     },
+    onRightClick: function (data) {
+      if (data.to) {
+        this.$appOpenUrl(
+          "是否打开内部链接?",
+          "网络交友须谨慎，涉及金钱莫轻信",
+          { path: data.to },
+          1
+        );
+      }
+
+      if (data.url) {
+        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
+      }
+    },
   },
 };
 </script>
@@ -223,7 +223,7 @@ div.home-72ab9e07378f988922e6c91884048db0 {
 
 div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
   div.van-tabs__wrap {
-    width: 35% !important;
+    width: 43% !important;
     margin-top: -3px;
   }
 
@@ -234,10 +234,10 @@ div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
 
 div.home-3edeff15047c21ac6441301927306137 {
   div.van-search {
-    width: 65%;
+    width: 57%;
     right: 0;
     position: absolute;
-    margin-top: 3px;
+    margin-top: 2px;
     z-index: 1;
   }
 }

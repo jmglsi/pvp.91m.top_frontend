@@ -122,7 +122,7 @@
             </van-col>
             <template slot="content">
               <span
-                @click="onActivityUrlclick"
+                @click="onActivityClick(tableData.result)"
                 class="return-4fb4d4758e19b050e0de1ef488ae54a3"
               >
                 {{ tableData.result.title || "好耶!" }}
@@ -357,7 +357,10 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
-            this.topInfo = [result.rows[0], result.rows[1], result.rows[2]];
+
+            if (result.rows.length > 0) {
+              this.topInfo = [result.rows[0], result.rows[1], result.rows[2]];
+            }
 
             this.$message.success(this.$appMsg.success[1005]);
           } else {
@@ -391,15 +394,13 @@ export default {
         }
       });
     },
-    onActivityUrlclick: function () {
-      let tipsInfo = this.tableData.result;
-
-      if (tipsInfo.to) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: tipsInfo.to }, 1);
+    onActivityClick: function (data) {
+      if (data.to) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
       }
 
-      if (tipsInfo.url) {
-        this.$appOpenUrl("是否打开外部链接?", null, { path: tipsInfo.url }, 0);
+      if (data.url) {
+        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
       }
     },
   },

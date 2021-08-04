@@ -363,12 +363,12 @@ export default {
           }
         });
     },
-    getHeroList: function (rows) {
+    getHeroList: function (row) {
       let heroList = [],
         newHeroList = {},
         heroId = 0;
 
-      rows.map((x) => {
+      row.map((x) => {
         heroList = x.heroList;
 
         heroList.map((y) => {

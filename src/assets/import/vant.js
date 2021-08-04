@@ -20,6 +20,7 @@ import {
     Grid,
     GridItem,
     Icon,
+    Image,
     ImagePreview,
     Lazyload,
     Loading,
@@ -63,6 +64,7 @@ Vue
     .use(Grid)
     .use(GridItem)
     .use(Icon)
+    .use(Image)
     .use(ImagePreview)
     .use(Lazyload, { lazyComponent: true })
     .use(Loading)

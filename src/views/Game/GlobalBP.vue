@@ -479,11 +479,8 @@
           >
             以&nbsp;{{
               bpPerspective == 1 ? teamInfo.team_1.name : teamInfo.team_2.name
-            }}&nbsp;的视角
+            }}&nbsp;的视角查看
           </van-button>
-        </li>
-        <li :style="{ marginTop: '7px' }">
-          <span class="game-9f200fbaabc11df2f193d590bc7b3f5b">查看</span>
         </li>
         <li class="app-52b0e5c90604d59d1814f184d58e2033">
           <van-button
@@ -497,7 +494,7 @@
             {{
               bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
             }}
-            剩余英雄
+            &nbsp;的剩余英雄
           </van-button>
         </li>
       </ul>
@@ -1610,10 +1607,6 @@ img.game-dce7c4174ce9323904a934a486c41288 {
   position: absolute;
 }
 
-span.game-9f200fbaabc11df2f193d590bc7b3f5b {
-  font-size: @app-font-size + 2px;
-}
-
 span.game-99e127c3f9d57b5d03327ebe8b1e4982 {
   margin-left: 20px;
   margin-right: 10px;
@@ -1648,7 +1641,7 @@ button.game-8e4f204791d1b591b6a6f93b572f9b2d {
   img.van-icon__image {
     border-radius: @app-border-radius;
     height: 40px;
-    margin-left: -12px;
+    margin-left: -8px;
     margin-top: -2px;
     width: 40px;
   }

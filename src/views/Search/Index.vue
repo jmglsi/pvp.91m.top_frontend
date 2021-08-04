@@ -212,7 +212,12 @@
                   >{{ data }}</van-tag
                 >
               </div>
-              <div class="search-93aea4a321bd36aefe85b2b0526e52e8 app-52b0e5c90604d59d1814f184d58e2033">
+              <div
+                class="
+                  search-93aea4a321bd36aefe85b2b0526e52e8
+                  app-52b0e5c90604d59d1814f184d58e2033
+                "
+              >
                 <van-button
                   round
                   @click="onClearSearchData"
@@ -381,7 +386,7 @@
             :label="data.label"
             :value="data.value"
             :is-link="data.isLink"
-            @click="onCellClick(data.isLink, data.to, data.url)"
+            @click="data.isLink ? onCellClick(data) : null"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
           />
         </van-cell-group>
@@ -632,10 +637,13 @@ export default {
         this.showInfo.searchData = false;
       }
     },
-    onCellClick: function (isLink, to, url) {
-      if (isLink) {
-        if (to) this.$appPush({ path: to });
-        if (url) this.$appOpenUrl("是否打开外部链接?", null, { path: url });
+    onCellClick: function (data) {
+      if (data.to) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
+      }
+
+      if (data.url) {
+        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
       }
     },
     onDataTabsClick: function (e) {

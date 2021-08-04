@@ -445,7 +445,7 @@ export default {
       }
 
       ranking.result.rows.map((x) => {
-        let gradientIndex = 0;
+        let gradientIndex = 5;
 
         if (x.gradient == 0) {
           gradientIndex = 0;
