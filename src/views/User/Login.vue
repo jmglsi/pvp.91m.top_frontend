@@ -64,6 +64,7 @@
     <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
       <van-button
         round
+        :disabled="accessToken && loginInfo.type != 2 ? true : false"
         size="small"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
         @click="
@@ -76,8 +77,8 @@
         {{ loginInfo.text }}
       </van-button>
 
-      <div>
-        <Oauth />
+      <div class="login-411f660a2e7bb1558275b86749667ee9">
+        <Oauth :openId="openId" :accessToken="accessToken" />
       </div>
     </div>
 
@@ -135,10 +136,12 @@
 export default {
   name: "LoginHome",
   components: {
-    Oauth: () => import("@/views/User/Oauth.vue"),
+    Oauth: () => import("@/components/User/Oauth.vue"),
   },
   data() {
     return {
+      openId: this.$cookie.get("openId") || "",
+      accessToken: this.$cookie.get("accessToken") || "",
       loginInfo: {
         type: 1,
         text: "登录",

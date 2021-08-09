@@ -162,19 +162,6 @@ export default {
   },
   mounted() {
     this.getAppInfo();
-
-    setTimeout(() => {
-      let tempOpenId = this.$route.query.tempOpenId || "",
-        tempAccessToken = this.$route.query.tempAccessToken || "",
-        appInfo = this.$appConfigInfo.appInfo;
-
-      if (tempOpenId) {
-        this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
-        this.$cookie.set("tempAccessToken", tempAccessToken, { expires: "1H" });
-
-        if (appInfo.tempText) this.$message.info(appInfo.tempText);
-      }
-    }, 2500);
   },
   methods: {
     getAppInfo: function () {
@@ -189,7 +176,12 @@ export default {
         .then((res) => {
           let data = res.data.data,
             appInfo = data.appInfo,
-            tipsInfo = data.tipsInfo;
+            tipsInfo = data.tipsInfo,
+            q = this.$route.query,
+            tempOpenId = q.tempOpenId || "",
+            tempAccessToken = q.tempAccessToken || "",
+            oauthType = q.oauthType || "",
+            tempText = q.tempText || "";
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;
@@ -258,6 +250,31 @@ export default {
                 }
               },
             });
+          }
+
+          if (!oauthType) {
+            if (tempOpenId) {
+              this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
+              this.$cookie.set("tempAccessToken", tempAccessToken, {
+                expires: "1H",
+              });
+            }
+
+            if (appInfo.tempText) this.$message.info(appInfo.tempText);
+            //临时登录的 1小时
+          } else {
+            if (tempOpenId) {
+              this.$cookie.set("openId", tempOpenId, { expires: "7D" });
+              this.$cookie.set("accessToken", tempAccessToken, {
+                expires: "7D",
+              });
+            }
+
+            if (tempText)
+              this.$message.warning(
+                this.$appMsg.warning[tempText] || "未知错误"
+              );
+            //快速登录的 7天
           }
         });
     },

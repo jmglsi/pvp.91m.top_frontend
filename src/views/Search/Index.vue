@@ -741,7 +741,7 @@ span.search-34690b06683636425980897b6bcd33d4 {
 }
 
 span.search-8fd6a51f93ef7b5379535e63a5e071cd {
-  left: 20px;
+  left: 15px;
   position: absolute;
 }
 

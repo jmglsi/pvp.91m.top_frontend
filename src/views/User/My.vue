@@ -57,12 +57,13 @@
             <div class="my-b687f354f3b497e3ba1db4b7c3938b77">
               <van-button
                 round
+                :disabled="login.status"
                 size="small"
                 color="linear-gradient(to right, #4bb0ff, #6149f6)"
                 @click="$appPush({ path: '/login' })"
                 class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
               >
-                注册/登录/修改
+                {{ login.text }}
               </van-button>
             </div>
           </template>
@@ -245,8 +246,17 @@
         class="my-35382d1952f0fb4d86744b11faf01d07"
       >
         <van-cell
+          v-if="isLogin"
+          icon="exchange"
+          title="绑定"
+          value="第三方"
+          is-link
+          @click="$appPush({ path: '/login' })"
+        />
+        <van-cell
           icon="setting-o"
           title="通用"
+          value="设置"
           is-link
           @click="$appPush({ path: '/setting' })"
         />
@@ -486,6 +496,10 @@ export default {
   data() {
     return {
       copyData: "",
+      login: {
+        status: false,
+        text: "注册/登录/修改",
+      },
       isLogin: false,
       url: {
         globalBP: "//s.91m.top/pvp.doc.globalBP",
@@ -540,6 +554,26 @@ export default {
         model: ["1"],
       },
     };
+  },
+  created() {
+    let q = this.$route.query;
+
+    if (q.oauthType) {
+      this.login = {
+        status: true,
+        text: "登录中...",
+      };
+
+      setTimeout(() => {
+        this.$appPush({ path: "/my" });
+        location.reload();
+      }, 2500);
+    } else {
+      this.login = {
+        status: false,
+        text: "注册/登录/修改",
+      };
+    }
   },
   mounted() {
     this.mobileInfo.isSmallMobile =

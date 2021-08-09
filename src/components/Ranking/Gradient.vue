@@ -21,7 +21,7 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>非禁必须 <van-icon name="question-o" /></span>
+                <span>非禁必选 <van-icon name="question-o" /></span>
                 <template slot="content">
                   <span>
                     在极高的禁选率和胜率加持下，有着版本最顶尖的强度，熟练后可直接无脑选用。
