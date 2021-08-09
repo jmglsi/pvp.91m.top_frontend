@@ -666,7 +666,7 @@ export default {
     onHeroLikeClick: function () {
       this.$axios
         .post(
-          this.$appApi.pvp.addWebAccountHeroLike +
+          this.$appApi.pvp.addWebAccountLikeHero +
             "&heroId=" +
             this.hero.info.id
         )
