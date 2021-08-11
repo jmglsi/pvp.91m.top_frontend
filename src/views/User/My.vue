@@ -2,24 +2,22 @@
   <div class="my-home">
     <div class="my-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
-        v-if="isLogin"
         :border="false"
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        :left-text="!showInfo.editType ? '编辑' : '编辑中'"
-        @click-left="onUpdateInfoClick"
-        z-index="99999999"
       >
+        <template #left>
+          <div
+            v-if="isLogin"
+            @click="onUpdateInfoClick"
+            class="my-112e74e8fe4754534fce3393d07ddbdc"
+          >
+            <van-icon name="edit" size="18" />
+          </div>
+        </template>
         <template #title>
           <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
-            <span
-              class="
-                my-25930e3036f13852cb0b29694bbab611
-                my-b068931cc450442b63f5b3d276ea4297
-              "
-              >&lt;{{ $appColumnsInfo.areaType[loginInfo.areaType] }}&gt;</span
-            >
             <span
               class="
                 my-25930e3036f13852cb0b29694bbab611
@@ -41,6 +39,18 @@
                 >{{ loginInfo.certification.text }}</van-tag
               >
             </span>
+          </div>
+        </template>
+        <template #right>
+          <div
+            @click="
+              $appPush({
+                path: '/setting',
+              })
+            "
+            class="my-4e83469ea7b60361bbce2572e5c0bf66"
+          >
+            <van-icon name="setting-o" size="18" />
           </div>
         </template>
       </van-nav-bar>
@@ -212,8 +222,8 @@
                     <img
                       v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
-                      width="25"
-                      height="25"
+                      width="35"
+                      height="35"
                       class="app-d31cb1c15b091f41248935d88a8d0a45"
                     />
                   </div>
@@ -248,17 +258,10 @@
         <van-cell
           v-if="isLogin"
           icon="exchange"
-          title="绑定"
-          value="第三方"
+          title="绑定第三方"
+          value="快速登录"
           is-link
           @click="$appPush({ path: '/login' })"
-        />
-        <van-cell
-          icon="setting-o"
-          title="通用"
-          value="设置"
-          is-link
-          @click="$appPush({ path: '/setting' })"
         />
       </van-cell-group>
     </div>

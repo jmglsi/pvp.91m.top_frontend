@@ -11,14 +11,15 @@
     <div class="oauth-4a62ae82084ebecb1ea7d1b7f67ef7c4">
       <ul class="oauth-fae0b4b90bcae3951a2a115697b83089">
         <li
-          v-for="(data, index) in authInfo"
+          v-for="(data, index) in oauthInfo"
           :key="'oauth-50855523bbe392b3bd5aad8624faa32f-' + index"
           class="oauth-d7c4aa2641b836c39a069c80c569f682"
         >
           <img
             width="35"
             height="35"
-            v-lazy="data.img"
+            v-lazy="'/img/app-icons/' + data.type + '.ico'"
+            :style="accessToken && data.status == 0 ? { filter: 'grayscale(1)' } : {}"
             class="oauth-523290da497b3b91d14b1699ba5b4316"
             @click="onOauthClick(data)"
           />
@@ -40,35 +41,48 @@ export default {
       type: String,
       default: "",
     },
+    oauthList: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
   },
   computed: {
     listenChange() {
-      const { openId, accessToken } = this;
-      return { openId, accessToken };
+      const { openId, accessToken, oauthList } = this;
+      return { openId, accessToken, oauthList };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.accessToken == null) return;
+        console.log(newValue);
+
+        newValue.oauthList.map((x) => {
+          this.oauthInfo.map((y, i) => {
+            if (y.type == x.type)
+              this.oauthInfo[i].status = 1;
+          });
+        });
       },
     },
   },
   data() {
     return {
-      authInfo: [
+      oauthInfo: [
         {
           type: "qq",
-          img: "/img/app-icons/qq.ico",
+          status: 0,
         },
         {
           type: "github",
-          img: "/img/app-icons/github.ico",
+          status: 0,
         },
         {
           type: "coding",
-          img: "/img/app-icons/coding.ico",
+          status: 0,
         },
       ],
     };

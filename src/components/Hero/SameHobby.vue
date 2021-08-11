@@ -24,8 +24,8 @@
               <img
                 v-if="data.fightPowerIcon"
                 v-lazy="data.fightPowerIcon"
-                width="35"
-                height="35"
+                width="45"
+                height="45"
                 class="hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767"
               />
               <img
@@ -149,7 +149,6 @@ img.hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767 {
   border-radius: unset;
   margin-top: -13px;
   position: absolute;
-  width: 45px;
 }
 
 div.hero-same-hobby-1a67ccb40b81a7318620c55405993a5d {

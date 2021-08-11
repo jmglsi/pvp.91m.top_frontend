@@ -538,7 +538,7 @@ img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
 
 img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
   border-radius: unset;
-  margin-left: -14px;
+  margin-left: -10px;
   margin-top: -8px;
   position: absolute;
 }

@@ -9,7 +9,6 @@
         :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
         left-text="返回"
-        z-index="99999999"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
         <template #title>
@@ -124,8 +123,8 @@
                     <img
                       v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
-                      width="25"
-                      height="25"
+                      width="35"
+                      height="35"
                       class="app-d31cb1c15b091f41248935d88a8d0a45"
                     />
                   </div>

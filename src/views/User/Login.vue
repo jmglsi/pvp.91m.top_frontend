@@ -9,7 +9,6 @@
         :safe-area-inset-top="true"
         @click-left="onNavBarLeftClick"
         left-text="返回"
-        z-index="99999999"
         class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
       />
     </div>
@@ -77,8 +76,15 @@
         {{ loginInfo.text }}
       </van-button>
 
-      <div class="login-411f660a2e7bb1558275b86749667ee9">
-        <Oauth :openId="openId" :accessToken="accessToken" />
+      <div
+        v-if="loginInfo.type == 1"
+        class="login-411f660a2e7bb1558275b86749667ee9"
+      >
+        <Oauth
+          :openId="openId"
+          :accessToken="accessToken"
+          :oauthList="loginInfo.oauthList"
+        />
       </div>
     </div>
 
@@ -89,27 +95,8 @@
       <span class="app-e4c9479b11955648dad558fe717a4eb2">
         注:
         <br />1.信息是加密储存的
-        <br />2.用户名和QQ将用于扩列、BP界面、找回密码,请不要瞎写
+        <br />2.用户名和QQ将用于扩列、BP界面、找回密码，请不要瞎写
       </span>
-    </div>
-
-    <div class="login-ae64b9ce80d3b20870647479c735eeb0">
-      <div
-        @click="
-          $appPush({
-            path: '/search',
-            query: { q: '大佬们快来加群', refresh: 1 },
-          })
-        "
-        class="login-2707770f6b9a7f3321a020d1bcd5dd9d"
-      >
-        <img
-          src="//pub.idqqimg.com/wpa/images/group.png"
-          alt="游戏群"
-          title="游戏群"
-          class="login-414c54d9374ac490e9773a8c5f357427"
-        />
-      </div>
     </div>
 
     <div
@@ -145,6 +132,7 @@ export default {
       loginInfo: {
         type: 1,
         text: "登录",
+        oauthList: [],
         data: {
           name: null,
           email: null,
@@ -157,6 +145,9 @@ export default {
       },
     };
   },
+  created() {
+    if (this.accessToken) this.getWebAccountInfo(2);
+  },
   methods: {
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
@@ -164,6 +155,8 @@ export default {
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = "登录";
+
+        this.getWebAccountInfo(2);
       }
     },
     onRegisterClick: function () {
@@ -212,24 +205,31 @@ export default {
           }
         });
     },
+    getWebAccountInfo: function (aid = 0) {
+      this.$axios
+        .post(this.$appApi.pvp.getWebAccountInfo + "&aid=" + aid)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.loginInfo.oauthList = data.oauthList;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
   },
 };
 </script>
 
 <style scoped lang="less">
-img.login-414c54d9374ac490e9773a8c5f357427,
 i.my-c1d8fd0f00bccc16b2cf5d07bfc3c96f img.van-icon__image {
   border-radius: unset;
 }
 
 div.login-6920626369b1f05844f5e3d6f93b5f6e {
-  margin-top: 25px;
-}
-
-div.login-ae64b9ce80d3b20870647479c735eeb0 {
-  position: absolute;
-  bottom: 100px;
-  width: 100%;
+  margin-top: 35px;
 }
 
 div.login-f01ae8c7f2d058ec6be00db589a32bea {
@@ -245,5 +245,11 @@ div.login-60ae25445ac62d5ec51c776826888d9f {
 div.login-4ae1ffb5939d592986bed21d0913562d {
   color: red;
   right: 25px;
+}
+
+div.login-411f660a2e7bb1558275b86749667ee9 {
+  position: absolute;
+  bottom: 150px;
+  width: 100%;
 }
 </style>

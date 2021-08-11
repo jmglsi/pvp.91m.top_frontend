@@ -9,7 +9,6 @@
         :safe-area-inset-top="true"
         @click-left="$router.go(-1)"
         left-text="返回"
-        z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>

@@ -10,7 +10,6 @@
         @click-left="$router.go(-1)"
         left-text="返回"
         title="通用"
-        z-index="99999999"
       />
     </div>
 

@@ -10,7 +10,6 @@
         @click-left="$appPush({ path: '/my' })"
         left-text="返回"
         title="交战"
-        z-index="99999999"
         class="game-7140a921b48604a7db01e6b676e34174"
       />
     </div>

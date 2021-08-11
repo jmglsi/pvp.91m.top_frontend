@@ -322,10 +322,10 @@ img {
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
   border-radius: unset;
-  bottom: -12px;
+  bottom: -19px;
   margin-left: -45px;
   position: absolute;
-  width: 35px;
+  transform: scale(0.75);
 }
 
 img.app-3b9655ab218c7f1a18f5dacd778a52f0 {
