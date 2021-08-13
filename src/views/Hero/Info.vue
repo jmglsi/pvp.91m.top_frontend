@@ -15,8 +15,7 @@
           $appPush({
             path: '/search',
             query: {
-              q: hero.info.name,
-              refresh: 1,
+              q: hero.info.id,
             },
           })
         "
