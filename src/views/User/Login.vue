@@ -127,8 +127,8 @@ export default {
   },
   data() {
     return {
-      openId: this.$cookie.get("openId") || "",
-      accessToken: this.$cookie.get("accessToken") || "",
+      openId: this.$cookie.get("openId") || null,
+      accessToken: this.$cookie.get("accessToken") || null,
       loginInfo: {
         type: 1,
         text: "登录",

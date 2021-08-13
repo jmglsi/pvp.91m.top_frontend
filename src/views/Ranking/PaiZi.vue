@@ -113,11 +113,15 @@ export default {
       type: Number,
       default: 0,
     },
+    refresh: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid, did } = this;
-      return { isSmallMobile, bid, cid, did };
+      const { isSmallMobile, bid, cid, did, refresh } = this;
+      return { isSmallMobile, bid, cid, did, refresh };
     },
   },
   watch: {

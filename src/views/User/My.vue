@@ -59,7 +59,6 @@
     <div v-if="!isLogin" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
       <van-cell-group
         :border="false"
-        title=" "
         class="my-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell>
@@ -498,7 +497,7 @@ export default {
   },
   data() {
     return {
-      copyData: "",
+      copyData: null,
       login: {
         status: false,
         text: "注册/登录/修改",
@@ -508,14 +507,14 @@ export default {
         globalBP: "//s.91m.top/pvp.doc.globalBP",
         friends: "//s.91m.top/pvp.doc.friends",
         support: "//support.qq.com/products/305514",
-        openSource: ["//ngabbs.com/read.php?tid=26200132"],
+        openSource: ["//bbs.nga.cn/read.php?tid=26200132"],
         afdian: "//afdian.net/@jmglsi",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
       loginInfo: {
         certification: {
-          color: "",
-          text: "",
+          color: null,
+          text: null,
         },
         description: null,
         heroList: [],
@@ -530,8 +529,8 @@ export default {
       },
       newInfo: {
         certification: {
-          color: "",
-          text: "",
+          color: null,
+          text: null,
         },
         description: null,
         heroList: [],

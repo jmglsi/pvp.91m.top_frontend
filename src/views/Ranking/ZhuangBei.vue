@@ -130,11 +130,15 @@ export default {
       type: Number,
       default: 0,
     },
+    refresh: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { isSmallMobile } = this;
-      return { isSmallMobile };
+      const { isSmallMobile, refresh } = this;
+      return { isSmallMobile, refresh };
     },
   },
   data() {
@@ -179,8 +183,9 @@ export default {
   },
   methods: {
     initPage: function () {
-      let equipmentId = parseInt(this.$route.query.equipmentId) || 0,
-        equipmentName = this.$route.query.equipmentName || "加载中";
+      let q = this.$route.query,
+        equipmentId = parseInt(q.equipmentId) || 0,
+        equipmentName = q.equipmentName || "加载中";
 
       if (equipmentId) {
         this.tableDataRow.equipment.id = equipmentId;

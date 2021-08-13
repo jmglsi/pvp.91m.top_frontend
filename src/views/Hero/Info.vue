@@ -18,7 +18,7 @@
           })
         "
         @click-right="$message.info($appMsg.info[1004])"
-        left-text="搜一搜"
+        :left-text="scroll >= 50 ? '搜一搜' : null"
         z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
@@ -534,7 +534,7 @@ export default {
       tipsInfo: [0, 0, 0],
       routeInfo: {
         from: {
-          heroName: "",
+          heroName: null,
         },
       },
     };
@@ -548,7 +548,8 @@ export default {
   methods: {
     initPage: function () {
       let id = this.$route.params.id || 111,
-        show = this.$route.query.show || "";
+        q = this.$route.query,
+        show = q.show || null;
 
       this.getHeroInfo(id);
 
@@ -692,7 +693,7 @@ export default {
       this.showInfo.imageIndex = imageIndex;
     },
     onHeroTabsChange: function (e) {
-      let dTitle = null,
+      let dTitle,
         heroInfo = this.hero.info;
 
       if (e == 0) {

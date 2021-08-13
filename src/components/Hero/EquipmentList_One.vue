@@ -244,7 +244,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.equipmentId == null) return;
+        if (!newValue.equipmentId) return;
 
         this.getRanking(newValue.equipmentId, 6, newValue.equipmentType, 0, 0);
       },
@@ -289,7 +289,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.tableData = ranking;
+        return (this.tableData = ranking);
       }
 
       this.$axios
@@ -395,7 +395,13 @@ export default {
 
       if (column.property == "equipment.id") {
         this.equipmentInfo.type = 2;
-        return this.getRanking(row.equipment.id, 6, this.equipmentInfo.type, 0, 0);
+        return this.getRanking(
+          row.equipment.id,
+          6,
+          this.equipmentInfo.type,
+          0,
+          0
+        );
       }
 
       this.lineData.heroId = row.heroId;

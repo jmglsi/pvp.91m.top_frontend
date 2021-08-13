@@ -30,12 +30,8 @@ img.hero-ff2364a0be3d20e46cc69efb36afe9a5 {
   margin: 0 3px;
 }
 
-div.hero-632d142d7a508e86f6c35a044a17411e {
-  margin-right: 25px;
-
-  span.hero-d5d3db1765287eef77d7927cc956f50a {
-    margin: 0 5px;
-  }
+span.hero-d5d3db1765287eef77d7927cc956f50a {
+  margin: 0 5px;
 }
 
 span.hero-9726255eec083aa56dc0449a21b33190 {

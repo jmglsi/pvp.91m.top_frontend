@@ -52,7 +52,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.arrData == "") return;
+        if (!newValue.arrData) return;
 
         this.lineData.result = [];
 

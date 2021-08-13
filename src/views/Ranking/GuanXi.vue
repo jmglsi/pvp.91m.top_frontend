@@ -9,12 +9,9 @@
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
-        <vxe-table-column
-          :title="heroName == '' ? '英雄' : heroName"
-          fixed="left"
-        >
+        <vxe-table-column :title="heroName ? heroName : '英雄'" fixed="left">
           <vxe-table-column
-            :title="heroName == '' ? '1' : '和'"
+            :title="heroName ? '和' : '1'"
             :filters="[
               { label: '对抗路 (战士)', data: 1 },
               { label: '中路', data: 2 },
@@ -53,7 +50,7 @@
             </template>
           </vxe-table-column>
           <vxe-table-column
-            :title="heroName == '' ? '2' : '↓'"
+            :title="heroName ? '↓' : '2'"
             :filters="[
               { label: '对抗路 (战士)', data: 1 },
               { label: '中路', data: 2 },
@@ -243,20 +240,22 @@ export default {
       type: String,
       default: "",
     },
+    refresh: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { heroName, isSmallMobile } = this;
-      return { heroName, isSmallMobile };
+      const { isSmallMobile, heroName, refresh } = this;
+      return { isSmallMobile, heroName, refresh };
     },
   },
   watch: {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        let refresh = parseInt(this.$route.query.refresh) || 0;
-
-        if (refresh == 1) {
+        if (newValue.refresh == 1) {
           this.getRanking(1, 0, 0, 0, newValue.heroName);
         }
       },
@@ -264,7 +263,7 @@ export default {
   },
   data() {
     return {
-      copyData: "",
+      copyData: null,
       tableData: {
         color: {},
         loading: true,
@@ -390,7 +389,7 @@ export default {
             row.hero_1.name +
             " 和 " +
             row.hero_2.name +
-            "" +
+            null +
             "\r-\r队友胜率:" +
             row.teammateWinRate +
             "%\r对手胜率:" +

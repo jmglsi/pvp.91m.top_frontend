@@ -923,7 +923,7 @@ export default {
     }
   },
   mounted() {
-    let gameLabel = this.$route.params.id || "";
+    let gameLabel = this.$route.params.id || null;
 
     if (gameLabel) {
       this.gameLabel = gameLabel;
@@ -1214,7 +1214,7 @@ export default {
     onUpdateGameBPClick: function (nowIndex) {
       let gameInfo = this.gameInfo.result.rows[nowIndex];
 
-      if (gameInfo.win.camp == null) {
+      if (!gameInfo.win.camp) {
         this.$message.error(this.$appMsg.error[1002]);
 
         gameInfo.win.camp = 1;
@@ -1327,7 +1327,7 @@ export default {
         bpMode = this.bpMode;
 
       if (bpMode == "sort") {
-        let sortText = null,
+        let sortText,
           newTrend = -1;
 
         this.recommendHeroId = 0;
@@ -1439,7 +1439,7 @@ export default {
     onSwapPositionClick() {
       let tabsModel = this.tabsInfo.model,
         teamInfo = this.gameInfo.result.rows[tabsModel].team,
-        tempTeamInfo = null;
+        tempTeamInfo;
 
       tempTeamInfo = teamInfo.team_1;
 
@@ -1548,9 +1548,9 @@ export default {
       }
     },
     onWinCampClick: function (winCamp) {
-      let nowWinTeam = null,
-        nowWinCamp = null,
-        nowWinColor = null,
+      let nowWinTeam,
+        nowWinCamp,
+        nowWinColor,
         tabsModel = this.tabsInfo.model,
         teamInfo = this.gameInfo.result.rows[tabsModel].team;
 

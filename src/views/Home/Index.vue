@@ -108,9 +108,10 @@ export default {
   },
   methods: {
     initPage: function () {
-      let pwa = parseInt(this.$route.query.pwa) || 0,
-        type = parseInt(this.$route.query.type) || 0,
-        version = parseInt(this.$route.query.v) || 1609430400;
+      let q = this.$route.query,
+        pwa = parseInt(q.pwa) || 0,
+        type = parseInt(q.type) || 0,
+        version = parseInt(q.v) || 1609430400;
 
       this.tabsInfo.model = type;
 

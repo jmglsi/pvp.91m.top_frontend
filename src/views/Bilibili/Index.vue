@@ -101,7 +101,7 @@ export default {
     return {
       copyData: "",
       search: {
-        value: this.$route.query.q || "",
+        value: this.$route.query.q || null,
       },
       tableData: {
         searchPlaceholder: "请输入【视频id】,例如:bv12345",

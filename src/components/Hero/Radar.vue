@@ -55,7 +55,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == null) return;
+        if (!newValue.heroId) return;
 
         if (newValue.tabsModel == 1) {
           this.getHeroChartsLog(newValue.heroId, "", 3);
@@ -122,7 +122,7 @@ export default {
         this.chartSettings = {};
         this.chartData = [];
       } else {
-        let newTags = "";
+        let newTags;
 
         e.map((x) => {
           newTags += "," + x.text;

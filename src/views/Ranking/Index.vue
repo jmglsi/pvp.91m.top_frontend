@@ -41,6 +41,7 @@
                     :isSmallMobile="isSmallMobile"
                     :bid="bid || dfsAreaTypeInfo.model"
                     :cid="cid || dfsPositionTypeInfo.model"
+                    :refresh="refresh || 0"
                   />
                 </a-tooltip>
               </div>
@@ -120,6 +121,7 @@
               v-if="tabsInfo.model == 1"
               :isSmallMobile="isSmallMobile"
               :heroName="heroName"
+              :refresh="refresh || 0"
             />
           </div>
         </van-tab>
@@ -144,6 +146,7 @@
               v-if="tabsInfo.model == 2"
               :isSmallMobile="isSmallMobile"
               :bid="bid || wjAreaTypeInfo.model"
+              :refresh="refresh || 0"
             />
           </div>
         </van-tab>
@@ -152,6 +155,7 @@
           <ZhuangBei
             v-if="tabsInfo.model == 3"
             :isSmallMobile="isSmallMobile"
+            :refresh="refresh || 0"
           />
         </van-tab>
 
@@ -165,6 +169,7 @@
               :bid="bid || pzAreaTypeInfo.model"
               :cid="cid || pzProvinceTypeInfo.model"
               :did="did || pzFightPowerTypeInfo.model"
+              :refresh="refresh || 0"
             />
           </div>
         </van-tab>
@@ -273,17 +278,16 @@ export default {
   },
   watch: {
     $route: function (to) {
-      this.heroName = to.query.heroName || "";
-      this.bid = parseInt(to.query.bid) || 0;
-      this.cid = parseInt(to.query.cid) || 0;
-      this.did = parseInt(to.query.did) || 0;
+      let q = to.query;
+
+      this.heroName = q.heroName || "";
+      this.bid = parseInt(q.bid) || 0;
+      this.cid = parseInt(q.cid) || 0;
+      this.did = parseInt(q.did) || 0;
+      this.refresh = parseInt(q.refresh) || 0;
 
       if (this.bid == 0 && this.cid == 0 && this.did == 0) {
         this.viewInfo.model = "a";
-      }
-
-      if (parseInt(to.query.refresh) == 1) {
-        this.tabsInfo.model = parseInt(to.query.type) || 0;
       }
     },
   },
@@ -292,6 +296,7 @@ export default {
       bid: 0,
       cid: 0,
       did: 0,
+      refresh: 0,
       heroName: "",
       isSmallMobile: 0,
       viewInfo: {
@@ -374,17 +379,17 @@ export default {
   },
   methods: {
     initPage: function () {
-      let route = this.$route.query,
+      let q = this.$route.query,
         appConfigInfo = this.$appConfigInfo,
         dfsTips = appConfigInfo.tipsInfo.dfsTips || 0,
         skillTips = appConfigInfo.tipsInfo.skillTips || 0,
         wanjiaTips = appConfigInfo.tipsInfo.wanjiaTips || 0;
 
-      this.heroName = route.heroName || "";
-      this.tabsInfo.model = parseInt(route.type) || 0;
-      route.bid ? (this.bid = parseInt(route.bid)) : (this.bid = 0);
-      route.cid ? (this.cid = parseInt(route.cid)) : (this.cid = 0);
-      route.did ? (this.did = parseInt(route.did)) : (this.did = 0);
+      this.heroName = q.heroName || "";
+      this.tabsInfo.model = parseInt(q.type) || 0;
+      q.bid ? (this.bid = parseInt(q.bid)) : (this.bid = 0);
+      q.cid ? (this.cid = parseInt(q.cid)) : (this.cid = 0);
+      q.did ? (this.did = parseInt(q.did)) : (this.did = 0);
 
       if (dfsTips == 0 || skillTips == 0 || wanjiaTips == 0) {
         appConfigInfo.tipsInfo.dfsTips = 1;

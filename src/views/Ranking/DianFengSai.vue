@@ -396,20 +396,22 @@ export default {
       type: Number,
       default: 0,
     },
+    refresh: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid, did } = this;
-      return { isSmallMobile, bid, cid, did };
+      const { isSmallMobile, bid, cid, did, refresh } = this;
+      return { isSmallMobile, bid, cid, did, refresh };
     },
   },
   watch: {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        let refresh = parseInt(this.$route.query.refresh) || 0;
-
-        if (newValue.bid > -1 && newValue.cid > -1 && refresh == 1) {
+        if (newValue.refresh == 1) {
           this.getRanking(0, newValue.bid, newValue.cid, 0);
         }
       },

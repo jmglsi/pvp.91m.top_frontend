@@ -88,6 +88,13 @@
                         >&nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
+                          <img
+                            v-if="data.trend > 0"
+                            v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                            width="18"
+                            height="18"
+                            class="search-97c89d1a7343e149ab400d0bb141c7de"
+                          />
                         </span>
                       </span>
                     </van-grid-item>
@@ -461,14 +468,13 @@ export default {
   },
   watch: {
     $route: function (to) {
-      if (to.query.q) {
-        if (parseInt(to.query.refresh) == 1) {
-          this.getSearch(to.query.q);
+      let q = to.query;
+
+      if (q.q) {
+        if (parseInt(q.refresh) == 1) {
+          this.getSearch(q.q);
         }
       } else {
-        this.search.value = "";
-        this.showInfo.searchData = false;
-
         this.initSearchHistory();
       }
     },
@@ -492,8 +498,8 @@ export default {
   data() {
     return {
       search: {
-        data: localStorage.getItem("searchData") || "",
-        value: this.$route.query.q || "",
+        data: localStorage.getItem("searchData") || null,
+        value: this.$route.query.q || null,
         placeholder: "搜索",
       },
       tableData: {
@@ -581,7 +587,7 @@ export default {
               this.showInfo.searchData = true;
             }
           } else {
-            this.search.value = "";
+            this.search.value = null;
             this.showInfo.searchData = false;
 
             this.$message.error(status.msg);
@@ -711,6 +717,10 @@ export default {
 <style lang="less">
 img.search-05a36d9069f1023c8432de89b15a83af {
   margin-top: -2px;
+}
+
+img.search-97c89d1a7343e149ab400d0bb141c7de {
+  margin-bottom: 2px;
 }
 
 i.search-a0edf16f0e677f3e28dfd77595f437be {

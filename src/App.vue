@@ -178,10 +178,10 @@ export default {
             appInfo = data.appInfo,
             tipsInfo = data.tipsInfo,
             q = this.$route.query,
-            tempOpenId = q.tempOpenId || "",
-            tempAccessToken = q.tempAccessToken || "",
-            oauthType = q.oauthType || "",
-            tempText = q.tempText || "";
+            tempOpenId = q.tempOpenId || null,
+            tempAccessToken = q.tempAccessToken || null,
+            oauthType = q.oauthType || null,
+            tempText = q.tempText || null;
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;

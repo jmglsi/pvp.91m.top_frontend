@@ -172,7 +172,8 @@ export default {
   },
   watch: {
     $route: function (to) {
-      let cooperationInfo = to.query.cooperationInfo;
+      let q = to.query,
+        cooperationInfo = q.cooperationInfo;
 
       if (cooperationInfo) {
         this.initQrcode();
@@ -201,7 +202,8 @@ export default {
   },
   methods: {
     initQrcode: function () {
-      let cooperationInfo = this.$route.query.cooperationInfo;
+      let q = this.$route.query,
+        cooperationInfo = q.cooperationInfo;
 
       if (cooperationInfo) {
         this.showInfo.qrcode = true;

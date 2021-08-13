@@ -172,8 +172,8 @@ Vue.prototype.$appCopyData = function(data, successText = "复制成功", errorT
     setTimeout(() => {
         this.$dialog
             .confirm({
-                title: "您的分享是我更新的动力",
-                message: "是否复制?"
+                title: "是否复制?",
+                message: "您的分享是我更新的动力"
             })
             .then(() => {
                 this.$copyText(data).then(

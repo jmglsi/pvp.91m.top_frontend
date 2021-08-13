@@ -116,7 +116,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == null) return;
+        if (!newValue.heroId) return;
 
         this.getRanking(newValue.heroId, 6, 0, 0, 0);
       },
@@ -148,7 +148,7 @@ export default {
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.tableData = ranking;
+        return (this.tableData = ranking);
       }
 
       this.$axios

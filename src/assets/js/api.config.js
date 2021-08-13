@@ -1,4 +1,4 @@
-let apiHost = null;
+let apiHost;
 
 location.host.match(/127\.0\.0\.1|localhost/) ? apiHost = "//localhost/api.91m.top" : apiHost = "//api.91m.top";
 

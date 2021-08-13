@@ -254,20 +254,22 @@ export default {
       type: Number,
       default: 0,
     },
+    refresh: {
+      type: Number,
+      default: 0,
+    },
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid, did } = this;
-      return { isSmallMobile, bid, cid, did };
+      const { isSmallMobile, bid, cid, did, refresh } = this;
+      return { isSmallMobile, bid, cid, did, refresh };
     },
   },
   watch: {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        let refresh = parseInt(this.$route.query.refresh) || 0;
-
-        if (refresh == 1) {
+        if (newValue.refresh == 1) {
           this.getRanking(2, newValue.bid, newValue.cid, 0);
         }
       },
@@ -382,7 +384,9 @@ export default {
         });
       });
 
-      this.allHeroList = Object.entries(newHeroList).sort((a, b) => b[1] - a[1]);
+      this.allHeroList = Object.entries(newHeroList).sort(
+        (a, b) => b[1] - a[1]
+      );
       //转数组、降序
     },
     getPlayerInfo: function (row) {
