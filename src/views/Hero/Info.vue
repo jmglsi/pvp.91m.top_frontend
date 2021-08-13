@@ -14,7 +14,10 @@
         @click-left="
           $appPush({
             path: '/search',
-            query: { q: routeInfo.from.heroName, refresh: 1 },
+            query: {
+              q: hero.info.name,
+              refresh: 1,
+            },
           })
         "
         @click-right="$message.info($appMsg.info[1004])"
@@ -409,7 +412,7 @@
           @click="
             hero.info.wikiId
               ? $appOpenUrl('是否打开外部链接?', null, {
-                  path: 'https://bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
+                  path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
                 })
               : $message.info($appMsg.info[1006])
           "
@@ -442,9 +445,11 @@ export default {
   },
   watch: {
     $route: function (to) {
-      let id = to.params.id || 111;
+      let id = to.params.id;
 
-      this.getHeroInfo(id);
+      if (id) {
+        this.getHeroInfo(id);
+      }
     },
   },
   metaInfo() {
@@ -532,14 +537,9 @@ export default {
         model: 0,
       },
       tipsInfo: [0, 0, 0],
-      routeInfo: {
-        from: {
-          heroName: null,
-        },
-      },
     };
   },
-  beforeDestroy() {
+  destroy() {
     window.removeEventListener("scroll", this.listenerScrollTop);
   },
   mounted() {
@@ -547,9 +547,9 @@ export default {
   },
   methods: {
     initPage: function () {
-      let id = this.$route.params.id || 111,
+      let id = this.$route.params.id,
         q = this.$route.query,
-        show = q.show || null;
+        show = q.show || "";
 
       this.getHeroInfo(id);
 
@@ -569,7 +569,7 @@ export default {
       this.scroll =
         document.documentElement.scrollTop || document.body.scrollTop;
     },
-    getHeroInfo: function (id) {
+    getHeroInfo: function (id = 111) {
       let appConfigInfo = this.$appConfigInfo,
         heroData = this.$appGetLocalStorage("heroInfo-" + id);
 
@@ -587,9 +587,6 @@ export default {
         heroInfoData.id == 999
           ? (this.trendInfo.model = 2)
           : (this.trendInfo.model = 0);
-
-        if (!this.routeInfo.from.heroName)
-          this.routeInfo.from.heroName = heroInfoData.name;
 
         this.hero.title = heroInfoData.name;
 
@@ -612,9 +609,6 @@ export default {
           heroInfoData.id == 999
             ? (this.trendInfo.model = 2)
             : (this.trendInfo.model = 0);
-
-          if (!this.routeInfo.from.heroName)
-            this.routeInfo.from.heroName = heroInfoData.name;
 
           this.hero.title = heroInfoData.name;
           document.title =

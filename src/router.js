@@ -127,7 +127,7 @@ export default new Router({
                         import ('./views/Hero/Info.vue'),
                     meta: {
                         title: '英雄',
-                        keepAlive: false
+                        keepAlive: true
                     }
                 },
                 {

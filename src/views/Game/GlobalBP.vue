@@ -819,7 +819,7 @@ export default {
       },
       eye: "eye-o",
       url: {
-        question: "//doc.91m.top/jmglsi/pvp",
+        question: "//s.91m.top/pvp.doc",
       },
       isPortrait: true,
       recommendHeroId: 0,
@@ -923,7 +923,7 @@ export default {
     }
   },
   mounted() {
-    let gameLabel = this.$route.params.id || null;
+    let gameLabel = this.$route.params.id || "";
 
     if (gameLabel) {
       this.gameLabel = gameLabel;

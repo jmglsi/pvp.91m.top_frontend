@@ -5,6 +5,7 @@ location.host.match(/127\.0\.0\.1|localhost/) ? apiHost = "//localhost/api.91m.t
 const sApi = "//s.91m.top";
 const pvpApi = apiHost + "/hero/v1/app.php";
 const gameApi = apiHost + "/hero/v1/game.php";
+const loginApi = apiHost + "/hero/v1/login.php";
 const biliApi = apiHost + "/hero/v1/bilibili.php";
 
 const s = {
@@ -49,6 +50,10 @@ const game = {
     getGamePrediction: gameApi + "?type=getGamePrediction"
 }
 
+const login = {
+    getLogin: loginApi
+}
+
 const bili = {
     getOrderInfo: biliApi + "?type=getOrderInfo"
 }
@@ -57,5 +62,6 @@ export default {
     s,
     bili,
     game,
-    pvp
+    pvp,
+    login
 }

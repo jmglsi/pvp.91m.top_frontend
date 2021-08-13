@@ -55,7 +55,10 @@
           size="mini"
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="
-            $appPush({ path: '/search', query: { q: '国服认证', refresh: 1 } })
+            $appPush({
+              path: '/search',
+              query: { q: '国服认证', refresh: 1 },
+            })
           "
         >
           国服认证

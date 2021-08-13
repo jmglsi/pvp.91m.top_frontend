@@ -103,7 +103,10 @@
                 @click="
                   $appPush({
                     path: '/search',
-                    query: { q: data.name, refresh: 1 },
+                    query: {
+                      q: data.name,
+                      refresh: 1,
+                    },
                   })
                 "
               >
@@ -167,7 +170,10 @@
                 @click="
                   $appPush({
                     path: '/search',
-                    query: { q: data.name, refresh: 1 },
+                    query: {
+                      q: data.name,
+                      refresh: 1,
+                    },
                   })
                 "
               >
@@ -231,7 +237,10 @@
                 @click="
                   $appPush({
                     path: '/search',
-                    query: { q: data.name, refresh: 1 },
+                    query: {
+                      q: data.name,
+                      refresh: 1,
+                    },
                   })
                 "
               >
@@ -291,7 +300,10 @@
                 @click="
                   $appPush({
                     path: '/search',
-                    query: { q: data.name, refresh: 1 },
+                    query: {
+                      q: data.name,
+                      refresh: 1,
+                    },
                   })
                 "
               >
@@ -349,7 +361,10 @@
                 @click="
                   $appPush({
                     path: '/search',
-                    query: { q: data.name, refresh: 1 },
+                    query: {
+                      q: data.name,
+                      refresh: 1,
+                    },
                   })
                 "
               >

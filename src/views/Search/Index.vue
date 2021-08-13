@@ -498,8 +498,8 @@ export default {
   data() {
     return {
       search: {
-        data: localStorage.getItem("searchData") || null,
-        value: this.$route.query.q || null,
+        data: localStorage.getItem("searchData") || "",
+        value: this.$route.query.q || "",
         placeholder: "搜索",
       },
       tableData: {
@@ -660,7 +660,7 @@ export default {
       } else if (e == 2) {
         this.$appOpenUrl("是否打开外部链接?", "玩加电竞", {
           path:
-            "http://www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
+            "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
             "&tab_type=5&gm=kog&gametype=6&tag_id=0",
         });
@@ -673,7 +673,11 @@ export default {
       } else if (e == 5) {
         this.$appPush({
           path: "/ranking",
-          query: { type: 1, heroName: heroInfo.name, refresh: 1 },
+          query: {
+            type: 1,
+            heroName: heroInfo.name,
+            refresh: 1,
+          },
         });
       } else if (e == 6) {
         this.$appPush({

@@ -314,7 +314,7 @@ export default {
     onCreateEngageClick: function (data) {
       this.showInfo.teamMenu = false;
 
-      let oldTeamId = localStorage.getItem("tempTeamId") || null,
+      let oldTeamId = localStorage.getItem("tempTeamId") || "",
         newTeamId = data;
 
       if (oldTeamId == newTeamId) {

@@ -166,8 +166,8 @@ export default {
       replay: {
         id: this.$route.params.id || 111,
         title: this.$route.query.title || "加载中",
-        userId: this.$route.query.userId || null,
-        roleId: this.$route.query.roleId || null,
+        userId: this.$route.query.userId || "",
+        roleId: this.$route.query.roleId || "",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
       },
       collapseInfo: {

@@ -520,7 +520,11 @@ export default {
     },
     onRankingSearch: function (value) {
       this.$appPush({
-        query: { type: 1, heroName: value, refresh: 1 },
+        query: {
+          type: 1,
+          heroName: value,
+          refresh: 1,
+        },
       });
 
       this.searchInfo.defaultValue = value;

@@ -268,7 +268,7 @@ export default {
     },
     onExampleClick: function () {
       this.images = [
-        "https://img07.mifile.cn/v1/MI_542ED8B1722DC/b85c300b1a3e1a42fbe8ba0fb869f1ed.jpg",
+        "//img07.mifile.cn/v1/MI_542ED8B1722DC/b85c300b1a3e1a42fbe8ba0fb869f1ed.jpg",
       ];
 
       this.showInfo.imagePreview = true;

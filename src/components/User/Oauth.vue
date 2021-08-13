@@ -19,7 +19,9 @@
             width="35"
             height="35"
             v-lazy="'/img/app-icons/' + data.type + '.ico'"
-            :style="accessToken && data.status == 0 ? { filter: 'grayscale(1)' } : {}"
+            :style="
+              accessToken && data.status == 0 ? { filter: 'grayscale(1)' } : {}
+            "
             class="oauth-523290da497b3b91d14b1699ba5b4316"
             @click="onOauthClick(data)"
           />
@@ -62,8 +64,7 @@ export default {
 
         newValue.oauthList.map((x) => {
           this.oauthInfo.map((y, i) => {
-            if (y.type == x.type)
-              this.oauthInfo[i].status = 1;
+            if (y.type == x.type) this.oauthInfo[i].status = 1;
           });
         });
       },
@@ -90,7 +91,8 @@ export default {
   methods: {
     onOauthClick: function (oauth) {
       location.href =
-        "https://api.91m.top/hero/v1/login.php?oauthType=" +
+        this.$appApi.login.getLogin +
+        "?oauthType=" +
         oauth.type +
         "&host=" +
         location.host +

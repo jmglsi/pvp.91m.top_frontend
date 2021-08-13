@@ -178,10 +178,10 @@ export default {
             appInfo = data.appInfo,
             tipsInfo = data.tipsInfo,
             q = this.$route.query,
-            tempOpenId = q.tempOpenId || null,
-            tempAccessToken = q.tempAccessToken || null,
-            oauthType = q.oauthType || null,
-            tempText = q.tempText || null;
+            tempOpenId = q.tempOpenId || "",
+            tempAccessToken = q.tempAccessToken || "",
+            oauthType = q.oauthType || "",
+            tempText = q.tempText || "";
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;
@@ -192,7 +192,7 @@ export default {
             name: appInfo.name || "苏苏的荣耀助手",
             pwa: appConfigInfo.appInfo.pwa || 0,
             updateTime: appInfo.updateTime || 0,
-            tempText: appInfo.tempText || null,
+            tempText: appInfo.tempText || "",
             version: appInfo.version || 0,
             script: appInfo.script,
             link: appInfo.link,
@@ -658,6 +658,7 @@ div.app-0353ac5a7e2d6e9a6a0e652c63b2832a {
     width: 40px;
     height: 40px;
     margin-top: -21px;
+    background-color: white;
     border: 3px solid white;
     border-radius: @app-border-radius;
   }

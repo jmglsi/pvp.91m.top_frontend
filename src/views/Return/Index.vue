@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="type == 1 ? true : false"
         :safe-area-inset-top="true"
-        @click-left="$appPush({ path: '/ranking' })"
+        @click-left="$appPush({ path: '/' })"
         left-text="返回"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
@@ -92,7 +92,7 @@
                   />
                   <img
                     v-lazy="
-                      'https://ae03.alicdn.com/kf/H451a86f08ecd432b8d2d486290489d91E.png'
+                      '//ae03.alicdn.com/kf/H451a86f08ecd432b8d2d486290489d91E.png'
                     "
                     width="50"
                     height="50"
