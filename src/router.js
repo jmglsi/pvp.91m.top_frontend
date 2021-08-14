@@ -113,7 +113,7 @@ export default new Router({
                 import ('./views/User/My.vue'),
             meta: {
                 title: '我的',
-                keepAlive: false
+                keepAlive: true
             }
         }, {
             path: '/hero',
@@ -154,7 +154,7 @@ export default new Router({
                     import ('./views/Game/Team.vue'),
                 meta: {
                     title: '队伍',
-                    keepAlive: false
+                    keepAlive: true
                 }
             }, {
                 path: 'engage',
@@ -163,7 +163,7 @@ export default new Router({
                     import ('./views/Game/Engage.vue'),
                 meta: {
                     title: '交战',
-                    keepAlive: false
+                    keepAlive: true
                 }
             }, {
                 path: ':id/bp',

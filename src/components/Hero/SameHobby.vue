@@ -116,15 +116,15 @@ export default {
   methods: {
     getHeroInfoByWebAccountList: function (heroId, tipsType) {
       let appConfigInfo = this.$appConfigInfo,
-        heroSameHobby = this.$appGetLocalStorage("heroSameHobby-" + heroId);
+        ls = this.$appGetLocalStorage("heroSameHobby-" + heroId);
 
       if (
-        heroSameHobby &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
+        ls &&
+        (this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout &&
-        tipsType == 0
+          tipsType == 0)
       ) {
-        return (this.tableData = heroSameHobby);
+        return (this.tableData = ls);
       }
 
       this.$axios
@@ -134,7 +134,10 @@ export default {
         .then((res) => {
           this.tableData = res.data.data;
 
-          this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
+          this.$appSetLocalStorage(
+            "heroSameHobby-" + heroId,
+            this.tableData
+          );
 
           if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
         });

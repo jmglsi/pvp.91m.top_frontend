@@ -113,8 +113,8 @@ export default {
         },
       },
       cacheInfo: [
-        { title: "清空程序缓存", label: null },
-        { title: "清空排行缓存", label: null },
+        { title: "清空程序缓存" },
+        { title: "清空排行缓存" },
         { title: "清空全局BP模拟器缓存", label: "自定义排序将丢失，谨慎操作" },
       ],
     };
@@ -124,28 +124,28 @@ export default {
   },
   methods: {
     initPage: function () {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
-        isReducedMode = false,
-        isSmallMobile = false;
+      let isReducedMode = false,
+        isSmallMobile = false,
+        ls = this.$appGetLocalStorage("appConfigInfo");
 
-      this.appConfigInfo.appInfo = appConfigInfo.appInfo;
+      this.appConfigInfo.appInfo = ls.appInfo;
 
-      appConfigInfo.appInfo.isReducedMode == 1
+      ls.appInfo.isReducedMode == 1
         ? (isReducedMode = true)
         : (isReducedMode = false);
       this.appConfigInfo.appInfo.isReducedMode = isReducedMode;
 
-      appConfigInfo.appInfo.isSmallMobile == 1
+      ls.appInfo.isSmallMobile == 1
         ? (isSmallMobile = true)
         : (isSmallMobile = false);
       this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
     },
     onReducedModeChange: function (e) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
-        isReducedMode = false;
+      let isReducedMode = false,
+        ls = this.$appGetLocalStorage("appConfigInfo");
 
       if (!e) {
-        localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
+        this.$appDelectLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
 
         isReducedMode = false;
       } else {
@@ -159,44 +159,45 @@ export default {
       }
 
       this.appConfigInfo.appInfo.isReducedMode = isReducedMode;
-      appConfigInfo.appInfo.isReducedMode = Number(isReducedMode);
+      ls.appInfo.isReducedMode = Number(isReducedMode);
 
-      this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+      this.$appSetLocalStorage("appConfigInfo", ls);
 
       this.$message.success(this.$appMsg.success[1004]);
     },
     onSmallMobileChange: function (e) {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo"),
-        isSmallMobile = false;
+      let isSmallMobile = false,
+        ls = this.$appGetLocalStorage("appConfigInfo");
 
       e ? (isSmallMobile = true) : (isSmallMobile = false);
 
       this.appConfigInfo.appInfo.isSmallMobile = isSmallMobile;
-      appConfigInfo.appInfo.isSmallMobile = Number(isSmallMobile);
+      ls.appInfo.isSmallMobile = Number(isSmallMobile);
 
-      this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+      this.$appSetLocalStorage("appConfigInfo", ls);
 
       this.$message.success(this.$appMsg.success[1004]);
     },
     onDelectClick: function (e) {
       if (e == 0) {
-        localStorage.removeItem("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
+        this.$appDelectLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
 
-        localStorage.removeItem("appConfigInfo");
-        localStorage.removeItem("searchData");
-        localStorage.removeItem("appHome");
-        localStorage.removeItem("gameHome");
-        this.$appDelectCache("heroInfo");
-        this.$appDelectCache("heroUpdate");
-        this.$appDelectCache("heroSameHobby");
+        this.$appDelectLocalStorage("appConfigInfo");
+        this.$appDelectLocalStorage("search");
+        this.$appDelectLocalStorage("searchData");
+        this.$appDelectLocalStorage("appHome");
+        this.$appDelectLocalStorage("gameHome");
+        this.$appDelectLocalStorage("heroInfo");
+        this.$appDelectLocalStorage("heroUpdate");
+        this.$appDelectLocalStorage("heroSameHobby");
 
         this.isSmallMobile = false;
         this.isReducedMode = false;
       } else if (e == 1) {
-        this.$appDelectCache("ranking");
-        this.$appDelectCache("heroChartsLog");
+        this.$appDelectLocalStorage("ranking");
+        this.$appDelectLocalStorage("heroChartsLog");
       } else if (e == 2) {
-        localStorage.removeItem("gameBP");
+        this.$appDelectLocalStorage("gameBP");
       }
 
       this.$message.success(this.$appMsg.success[1000]);

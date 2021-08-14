@@ -127,23 +127,29 @@ export default {
   },
   data() {
     return {
-      openId: this.$cookie.get("openId") || "",
-      accessToken: this.$cookie.get("accessToken") || "",
+      openId: "",
+      accessToken: "",
       loginInfo: {
         type: 1,
         text: "登录",
         oauthList: [],
         data: {
-          name: null,
-          email: null,
-          password: null,
-          newPassword: null,
-          uin: null,
-          openId: null,
-          accessToken: null,
+          name: "",
+          email: "",
+          password: "",
+          newPassword: "",
+          uin: "",
+          openId: "",
+          accessToken: "",
         },
       },
     };
+  },
+  watch: {
+    $route: function () {
+      this.openId = this.$cookie.get("openId") || "";
+      this.accessToken = this.$cookie.get("accessToken") || "";
+    },
   },
   created() {
     if (this.accessToken) this.getWebAccountInfo(2);
@@ -177,7 +183,7 @@ export default {
             name: data.name,
             email: data.email,
             password: this.$md5(data.password),
-            newPassword: data.newPassword ? this.$md5(data.newPassword) : null,
+            newPassword: data.newPassword ? this.$md5(data.newPassword) : "",
             uin: data.uin,
           })
         )
@@ -191,13 +197,16 @@ export default {
               expires: "7D",
             });
 
-            this.$appDelectCache("ranking");
-            this.$appDelectCache("heroInfo");
-            this.$appDelectCache("charts");
+            this.$appDelectLocalStorage("ranking");
+            this.$appDelectLocalStorage("heroInfo");
+            this.$appDelectLocalStorage("charts");
 
-            setTimeout(() => {
-              this.$router.go(-1);
-            }, 500);
+            this.$appPush({
+              path: "/my",
+              query: {
+                refresh: 1,
+              },
+            });
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {

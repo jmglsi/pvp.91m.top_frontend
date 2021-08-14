@@ -146,14 +146,14 @@ export default {
   methods: {
     getAppHome: function () {
       let appConfigInfo = this.$appConfigInfo,
-        appHome = this.$appGetLocalStorage("appHome");
+        ls = this.$appGetLocalStorage("appHome");
 
       if (
-        appHome &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return (this.appHomeInfo = appHome);
+        return (this.appHomeInfo = ls);
       }
 
       this.$axios.post(this.$appApi.pvp.getAppHome).then((res) => {

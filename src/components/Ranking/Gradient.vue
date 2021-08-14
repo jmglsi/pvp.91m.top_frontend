@@ -447,11 +447,11 @@ export default {
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       if (bid == 0 && cid == 0) return;
 
-      let ranking = this.$appGetLocalStorage(
+      let ls = this.$appGetLocalStorage(
         "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
       );
 
-      if (!ranking) {
+      if (!ls) {
         this.$message.error(this.$appMsg.error[1010]);
 
         return;
@@ -459,7 +459,7 @@ export default {
         this.rankingData.result.rows = [[], [], [], [], [], []];
       }
 
-      ranking.result.rows.map((x) => {
+      ls.result.rows.map((x) => {
         let gradientIndex = 5;
 
         if (x.gradient == 0) {

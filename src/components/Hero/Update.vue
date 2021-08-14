@@ -327,18 +327,18 @@ export default {
     },
     getHeroUpdate: function (heroId) {
       let appConfigInfo = this.$appConfigInfo,
-        heroUpdate = this.$appGetLocalStorage("heroUpdate-" + heroId),
-        date = new Date();
+        date = new Date(),
+        ls = this.$appGetLocalStorage("heroUpdate-" + heroId);
 
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
       this.date.max = new Date(date.setMonth(date.getMonth() + 4));
 
       if (
-        heroUpdate &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return (this.tableData = heroUpdate);
+        return (this.tableData = ls);
       }
 
       this.$axios

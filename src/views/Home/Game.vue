@@ -67,14 +67,14 @@ export default {
   methods: {
     getGameHome: function () {
       let appConfigInfo = this.$appConfigInfo,
-        gameHome = this.$appGetLocalStorage("gameHome");
+        ls = this.$appGetLocalStorage("gameHome");
 
       if (
-        gameHome &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return this.tableData = gameHome;
+        return (this.tableData = ls);
       }
 
       this.$axios.post(this.$appApi.game.getGameHome).then((res) => {

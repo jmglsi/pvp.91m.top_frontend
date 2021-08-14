@@ -563,8 +563,6 @@ export default {
       this.getSearch(searchValue);
     },
     getSearch: function (value) {
-      if (value == "搜索") return;
-
       this.search.value = value;
 
       this.$axios
@@ -622,7 +620,7 @@ export default {
       localStorage.setItem("searchData", setValue);
     },
     onClearSearchData: function () {
-      localStorage.removeItem("searchData");
+      this.$appDelectLocalStorage("searchData");
 
       this.search.data = null;
       this.tableData.search.history = [];

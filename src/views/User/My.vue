@@ -557,6 +557,18 @@ export default {
       },
     };
   },
+  watch: {
+    $route: function (to) {
+      let q = to.query,
+        refresh = q.refresh;
+
+      if (refresh == 1) {
+        this.getWebAccountInfo();
+
+        this.$appPush({});
+      }
+    },
+  },
   created() {
     let q = this.$route.query;
 
@@ -567,7 +579,10 @@ export default {
       };
 
       setTimeout(() => {
-        this.$appPush({ path: "/my" });
+        this.$appPush({
+          refresh: 1,
+        });
+
         location.reload();
       }, 2500);
     } else {

@@ -312,19 +312,19 @@ export default {
   },
   methods: {
     getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {
-      let appConfigInfo = this.$appConfigInfo,
-        ranking = this.$appGetLocalStorage(
+      let playerList = [],
+        appConfigInfo = this.$appConfigInfo,
+        ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
-        ),
-        playerList = [];
+        );
 
       if (
-        ranking &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        this.tableData = ranking;
-        playerList = ranking.result.rows;
+        this.tableData = ls;
+        playerList = ls.result.rows;
 
         this.getHeroList(playerList);
 

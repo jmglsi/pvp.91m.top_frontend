@@ -95,16 +95,16 @@ export default {
       if (bid == 0) return;
 
       let appConfigInfo = this.$appConfigInfo,
-        heroChartsLog = this.$appGetLocalStorage(
+        ls = this.$appGetLocalStorage(
           "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (
-        heroChartsLog &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return (this.lineData = heroChartsLog);
+        return (this.lineData = ls);
       }
 
       this.lineData = {

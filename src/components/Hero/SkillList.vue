@@ -88,16 +88,16 @@ export default {
   methods: {
     getRanking: function (heroId = 111, aid = 5, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
-        ranking = this.$appGetLocalStorage(
+        ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroId
         );
 
       if (
-        ranking &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        return (this.tableData = ranking);
+        return (this.tableData = ls);
       }
 
       this.$axios

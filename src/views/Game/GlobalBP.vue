@@ -1051,10 +1051,10 @@ export default {
       }, 1000);
     },
     getRanking: function (gameTime = null, aid = 0, bid = 4, cid = 0) {
-      let ranking = this.$appGetLocalStorage("gameBP");
+      let ls = this.$appGetLocalStorage("gameBP");
 
-      if (ranking) {
-        return (this.tableData = ranking);
+      if (ls) {
+        return (this.tableData = ls);
       }
 
       this.$axios
@@ -1083,6 +1083,7 @@ export default {
             });
 
             this.initBPOrder(this.bpPerspective, 0);
+
             this.$appSetLocalStorage("gameBP", this.tableData);
 
             this.$message.success(this.$appMsg.success[1005]);
@@ -1428,7 +1429,7 @@ export default {
         })
         .then(() => {
           // on confirm
-          localStorage.removeItem("gameBP");
+          this.$appDelectLocalStorage("gameBP");
 
           this.getRanking();
         })
@@ -1725,7 +1726,7 @@ i.game-8d74837b1dc10576d7757cfd35b4661d {
 }
 
 div.game-87740aa9337e54dbad53ec95089dca77 {
-  background-color: white;
+  background-color: white !important;
 }
 
 div.game-beedfb16b1c81d2901c32b6dcc2939d0,

@@ -395,6 +395,7 @@ export default {
         appConfigInfo.tipsInfo.dfsTips = 1;
         appConfigInfo.tipsInfo.skillTips = 1;
         appConfigInfo.tipsInfo.wanjiaTips = 1;
+
         this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
 
         setTimeout(() => {
@@ -419,6 +420,7 @@ export default {
             this.isSmallMobile = 1;
 
             appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
+
             this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
           })
           .catch(() => {
@@ -426,6 +428,7 @@ export default {
             this.isSmallMobile = 0;
 
             appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
+
             this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
           });
       } else {

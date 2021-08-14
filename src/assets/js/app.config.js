@@ -106,13 +106,7 @@ Vue.prototype.$appGetLocalStorage = function(key) {
     return JSON.parse(localStorage.getItem(key));
 }
 
-let appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
-if (!appConfigInfo) {
-    Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);
-}
-Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
-
-Vue.prototype.$appDelectCache = function(key = "ranking") {
+Vue.prototype.$appDelectLocalStorage = function(key = "ranking") {
     for (let cache in localStorage) {
         if (cache.indexOf(key) > -1) {
             localStorage.removeItem(cache);
@@ -120,11 +114,17 @@ Vue.prototype.$appDelectCache = function(key = "ranking") {
     }
 }
 
+let ls = Vue.prototype.$appGetLocalStorage("appConfigInfo");
+if (!ls) {
+    Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);
+}
+Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
+
 Vue.prototype.$appPush = function(url = { path: '/' }) {
     this.$router.push(url);
 }
 
-Vue.prototype.$appOpenUrl = function(title, message, url = { path: '/' }, urlType = 0) {
+Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' }, urlType = 0) {
     if (urlType == 0) {
         this.$dialog
             .confirm({

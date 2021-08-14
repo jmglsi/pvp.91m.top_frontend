@@ -60,8 +60,6 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        console.log(newValue);
-
         newValue.oauthList.map((x) => {
           this.oauthInfo.map((y, i) => {
             if (y.type == x.type) this.oauthInfo[i].status = 1;

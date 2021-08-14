@@ -16,6 +16,7 @@
             path: '/search',
             query: {
               q: hero.info.id,
+              refresh: 1,
             },
           })
         "
@@ -396,11 +397,7 @@
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
-          :icon="
-            hero.info.likeStatus == 1
-              ? '/img/app-icons/like_1.png'
-              : '/img/app-icons/like_0.png'
-          "
+          :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
@@ -479,6 +476,7 @@ export default {
           clockwise: false,
           skin: [],
           skinIndex: 0,
+          likeStatus: 0,
           skill: {
             preview: [
               {
@@ -570,17 +568,17 @@ export default {
     },
     getHeroInfo: function (id = 111) {
       let appConfigInfo = this.$appConfigInfo,
-        heroData = this.$appGetLocalStorage("heroInfo-" + id);
+        ls = this.$appGetLocalStorage("heroInfo-" + id);
 
       if (
-        heroData &&
+        ls &&
         this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout
       ) {
-        let heroInfoData = heroData.heroInfo;
+        let heroInfoData = ls.heroInfo;
 
-        this.circle.info = heroData.circleInfo;
-        this.positionInfo = heroData.positionInfo;
+        this.circle.info = ls.circleInfo;
+        this.positionInfo = ls.positionInfo;
         this.hero.info = heroInfoData;
 
         heroInfoData.id == 999
@@ -666,14 +664,17 @@ export default {
         )
         .then((res) => {
           let heroData = this.hero,
-            status = res.data.status;
+            status = res.data.status,
+            ls = this.$appGetLocalStorage("heroInfo-" + heroData.info.id);
 
           if (status.code == 200) {
             heroData.info.likeStatus == 0
               ? (this.hero.info.likeStatus = 1)
               : (this.hero.info.likeStatus = 0);
 
-            localStorage.removeItem("heroInfo-" + heroData.info.id);
+            ls.heroInfo.likeStatus = this.hero.info.likeStatus;
+
+            this.$appSetLocalStorage("heroInfo-" + heroData.info.id, ls);
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {

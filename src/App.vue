@@ -27,10 +27,7 @@
         </keep-alive>
       </div>
 
-      <div
-        v-else-if="!$route.meta.keepAlive"
-        class="app-3d1b70e46d0b6cd9cfa43d743da14266"
-      >
+      <div v-else class="app-3d1b70e46d0b6cd9cfa43d743da14266">
         <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
       </div>
     </div>
@@ -165,7 +162,7 @@ export default {
   },
   methods: {
     getAppInfo: function () {
-      let appConfigInfo = this.$appGetLocalStorage("appConfigInfo");
+      let ls = this.$appGetLocalStorage("appConfigInfo");
 
       this.$axios
         .post(
@@ -187,10 +184,10 @@ export default {
           this.tableData.result.model = this.$route.path;
 
           this.$appConfigInfo.appInfo = {
-            isReducedMode: appConfigInfo.appInfo.isReducedMode || 0,
-            isSmallMobile: appConfigInfo.appInfo.isSmallMobile || 0,
+            isReducedMode: ls.appInfo.isReducedMode || 0,
+            isSmallMobile: ls.appInfo.isSmallMobile || 0,
+            pwa: ls.appInfo.pwa || 0,
             name: appInfo.name || "苏苏的荣耀助手",
-            pwa: appConfigInfo.appInfo.pwa || 0,
             updateTime: appInfo.updateTime || 0,
             tempText: appInfo.tempText || "",
             version: appInfo.version || 0,
@@ -204,24 +201,24 @@ export default {
             },
           };
 
-          if (appInfo.updateTime != appConfigInfo.appInfo.updateTime) {
-            localStorage.removeItem("appHome");
-            localStorage.removeItem("gameHome");
-            this.$appDelectCache("ranking");
-            this.$appDelectCache("heroInfo");
-            this.$appDelectCache("heroUpdate");
-            this.$appDelectCache("heroSameHobby");
-            this.$appDelectCache("heroChartsLog");
+          if (appInfo.updateTime != ls.appInfo.updateTime) {
+            this.$appDelectLocalStorage("appHome");
+            this.$appDelectLocalStorage("gameHome");
+            this.$appDelectLocalStorage("ranking");
+            this.$appDelectLocalStorage("heroInfo");
+            this.$appDelectLocalStorage("heroUpdate");
+            this.$appDelectLocalStorage("heroSameHobby");
+            this.$appDelectLocalStorage("heroChartsLog");
 
             if (appInfo.updateText) this.$message.info(appInfo.updateText);
 
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
 
-          if (appInfo.version != appConfigInfo.appInfo.version) {
+          if (appInfo.version != ls.appInfo.version) {
             this.$appConfigInfo.tipsInfo.rankingTips = 0;
 
-            localStorage.removeItem("appConfigInfo");
+            this.$appDelectLocalStorage("appConfigInfo");
 
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
@@ -561,7 +558,7 @@ div.app-f3cc17bc0d768ca60b8bb496a10b1990 {
     height: 32px;
 
     div.van-tabs__nav {
-      background-color: rgb(248, 249, 252);
+      background-color: rgb(248, 249, 252) !important;
     }
   }
 }
@@ -595,7 +592,7 @@ div.app-6bdc6915ee08058392eafe0ef6e353fd {
 
 div.app-b4a64ecd008af42ba95bc20350599699,
 div.app-9b9faf4e737f5907995f767e0b345dab {
-  background-color: rgb(248, 249, 252);
+  background-color: rgb(248, 249, 252) !important;
 }
 
 div.app-88bf7a95736562190270d51dc2cb3f42 {
@@ -658,7 +655,7 @@ div.app-0353ac5a7e2d6e9a6a0e652c63b2832a {
     width: 40px;
     height: 40px;
     margin-top: -21px;
-    background-color: white;
+    background-color: white !important;
     border: 3px solid white;
     border-radius: @app-border-radius;
   }

@@ -164,7 +164,7 @@ export default {
   },
   methods: {
     getGameDashboard: function () {
-      localStorage.removeItem("tempTeamId");
+      this.$appDelectLocalStorage("tempTeamId");
 
       this.$axios
         .post(this.$appApi.pvp.getGameDashboard + "&aid=0")
@@ -345,7 +345,7 @@ export default {
           if (status.code == 200) {
             let label = data.data.label;
 
-            localStorage.removeItem("tempTeamId");
+            this.$appDelectLocalStorage("tempTeamId");
             this.$appPush({ path: "/game/" + label + "/bp" });
 
             this.$message.success(this.$appMsg.success[1000]);
