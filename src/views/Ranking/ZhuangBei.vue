@@ -185,7 +185,7 @@ export default {
     initPage: function () {
       let q = this.$route.query,
         equipmentId = parseInt(q.equipmentId) || 0,
-        equipmentName = q.equipmentName || "加载中";
+        equipmentName = q.equipmentName || "加载中...";
 
       if (equipmentId) {
         this.tableDataRow.equipment.id = equipmentId;

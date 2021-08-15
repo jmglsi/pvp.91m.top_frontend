@@ -882,7 +882,7 @@ export default {
         used: [],
       },
       authorInfo: {
-        name: "加载中",
+        name: "加载中...",
         logo: "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
         actions: [],
       },

@@ -293,7 +293,7 @@
 
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroUpdate
-            v-if="hero.info.id"
+            v-if="hero.info.id && hero.info.id != 999"
             :heroId="hero.info.id"
             :updateId="hero.info.updateId"
           />
@@ -469,10 +469,10 @@ export default {
     return {
       scroll: 0,
       hero: {
-        title: "加载中",
+        title: "加载中...",
         info: {
           id: null,
-          name: "加载中",
+          name: "加载中...",
           clockwise: false,
           skin: [],
           skinIndex: 0,

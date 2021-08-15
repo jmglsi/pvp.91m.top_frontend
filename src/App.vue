@@ -125,8 +125,8 @@ export default {
           rows: [
             {
               icon: "//ae01.alicdn.com/kf/H8f2683de3a13409aa1318e7b3a3e3ca12.png",
-              to: null,
-              name: null,
+              to: "/",
+              name: "/",
               text: "加载中...",
             },
             {
