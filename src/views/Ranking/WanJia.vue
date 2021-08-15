@@ -287,7 +287,7 @@ export default {
         },
       },
       tableDataRow: {
-        gamePlayerName: "加载中",
+        gamePlayerName: "加载中...",
       },
       actions: [
         { name: "查看 QQ", value: 0 },

@@ -106,7 +106,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.getGameDashboard(0);
-    }, 1000);
+    }, 500);
   },
   methods: {
     getGameDashboard: function (page = 0) {

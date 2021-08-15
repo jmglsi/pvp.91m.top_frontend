@@ -87,7 +87,7 @@ export default {
       },
       tableDataRow: {
         id: 0,
-        name: "加载中",
+        name: "加载中...",
       },
       listWidth: 0,
       clientHeight: 0,

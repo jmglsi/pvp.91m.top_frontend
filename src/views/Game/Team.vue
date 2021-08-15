@@ -154,8 +154,8 @@ export default {
         },
       },
       tableDataRow: {
-        id: "",
-        name: "",
+        id: 0,
+        name: "加载中...",
       },
     };
   },

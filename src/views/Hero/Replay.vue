@@ -162,7 +162,7 @@ export default {
         pageSize: 25,
       },
       tableDataRow: {
-        gamePlayerName: "加载中",
+        gamePlayerName: "加载中...",
       },
       actions: [
         { name: "复制链接", value: 0 },
@@ -172,7 +172,7 @@ export default {
       ],
       replay: {
         id: this.$route.params.id || 111,
-        title: this.$route.query.title || "加载中",
+        title: this.$route.query.title || "加载中...",
         userId: this.$route.query.userId || "",
         roleId: this.$route.query.roleId || "",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,

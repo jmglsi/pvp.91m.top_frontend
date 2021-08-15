@@ -70,9 +70,9 @@
             </van-grid>
 
             <van-cell
-              :title="appHomeInfo.tipsInfo.title || '嗨~'"
-              :label="appHomeInfo.tipsInfo.label || '你好鸭♥'"
-              :value="appHomeInfo.tipsInfo.value"
+              :title="appHomeInfo.tipsInfo.title || '你好鸭 ~'"
+              :label="appHomeInfo.tipsInfo.label || '加载中...'"
+              :value="appHomeInfo.tipsInfo.value || '嗨 ❤️'"
               :to="appHomeInfo.tipsInfo.to"
               :url="appHomeInfo.tipsInfo.url"
               :is-link="appHomeInfo.tipsInfo.isLink"

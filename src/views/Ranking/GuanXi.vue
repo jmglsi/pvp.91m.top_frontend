@@ -273,10 +273,10 @@ export default {
       },
       tableDataRow: {
         hero_1: {
-          name: "加载中",
+          name: "加载中...",
         },
         hero_2: {
-          name: "加载中",
+          name: "加载中...",
         },
       },
       actions: [

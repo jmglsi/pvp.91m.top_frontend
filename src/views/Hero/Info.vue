@@ -415,7 +415,7 @@
           >稷下图书馆</van-tabbar-item
         >
         <van-tabbar-item
-          icon="//pic.iask.cn/fimg/461863542001.jpg"
+          icon="//ae04.alicdn.com/kf/H12ed60f16a404fc5a6422c0d31a5b8935.png"
           to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           >加群讨论</van-tabbar-item
@@ -496,16 +496,16 @@ export default {
       circle: {
         model: 0,
         info: {
-          text: "加载中",
-          tips: "加载中",
+          text: "加载中...",
+          tips: "加载中...",
           vote: [
             {
               img: "/img/app-icons/cry.png",
-              text: "加载中",
+              text: "加载中...",
             },
             {
               img: "/img/app-icons/smile.png",
-              text: "加载中",
+              text: "加载中...",
             },
           ],
         },
