@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="type == 1 ? true : false"
         :safe-area-inset-top="true"
-        @click-left="$appPush({ path: '/' })"
+        @click-left="$appPushBack()"
         left-text="返回"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >

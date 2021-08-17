@@ -1098,7 +1098,6 @@ export default {
       this.teamInfo.team_1.id == nowTeamInfo.id ? (ret = true) : (ret = false);
 
       //进入编辑模式的时候判断是不是蓝色方
-
       return ret;
     },
     getGameBP: function (gameLabel) {

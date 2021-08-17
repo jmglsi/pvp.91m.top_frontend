@@ -11,15 +11,7 @@
             ? { backgroundColor: 'white !important' }
             : { backgroundColor: 'transparent !important' }
         "
-        @click-left="
-          $appPush({
-            path: '/search',
-            query: {
-              q: hero.info.id,
-              refresh: 1,
-            },
-          })
-        "
+        @click-left="$appPushBack()"
         @click-right="$message.info($appMsg.info[1004])"
         :left-text="scroll >= 50 ? '搜一搜' : null"
         z-index="99999999"

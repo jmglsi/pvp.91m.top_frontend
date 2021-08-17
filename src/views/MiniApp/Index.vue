@@ -112,7 +112,7 @@
 
     <div
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
-      @click="$appPush({ path: '/' })"
+      @click="$appPushBack()"
     >
       <img
         v-lazy="
@@ -196,8 +196,10 @@ export default {
       },
     };
   },
-  mounted() {
+  created() {
     this.initQrcode();
+  },
+  mounted() {
     this.getMiniAppInfo();
   },
   methods: {

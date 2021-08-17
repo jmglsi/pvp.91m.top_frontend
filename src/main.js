@@ -15,6 +15,8 @@ import './assets/import/vxe-table'
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
+    Vue.prototype.$appLastUrl = from;
+
     document.title = to.meta.title + " | 苏苏的荣耀助手"
     document.body.scrollTop = document.documentElement.scrollTop = 0
 

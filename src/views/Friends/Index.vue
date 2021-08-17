@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$appPush({ path: '/' })"
+        @click-left="$appPushBack()"
         left-text="返回"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
@@ -227,8 +227,6 @@ export default {
                 query: { openId: data.openId },
               });
             }
-
-            //this.$message.success(this.$appMsg.success[1000]);
           } else {
             this.$message.error(status.msg);
           }

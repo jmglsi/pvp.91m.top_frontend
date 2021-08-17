@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="$appPushBack()"
         left-text="返回"
         title="通用"
       />
@@ -119,7 +119,7 @@ export default {
       ],
     };
   },
-  mounted() {
+  created() {
     this.initPage();
   },
   methods: {

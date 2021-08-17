@@ -575,13 +575,13 @@ export default {
       let color = this.tableData.result.color;
 
       if (column.property == "allBanRate") {
-        if (row.allBanRate >= color.ban && row.allWinRate >= color.win) {
+        if (row.allBanRate >= color.ban) {
           return "ranking-bda9643ac6601722a28f238714274da4";
         }
       }
 
       if (column.property == "allPickRate") {
-        if (row.allPickRate >= color.pick) {
+        if (row.allPickRate >= color.pick && row.allWinRate >= color.win) {
           return "ranking-48d6215903dff56238e52e8891380c8f";
         }
       }

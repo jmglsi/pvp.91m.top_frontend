@@ -7,8 +7,8 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$appPush({ path: '/my' })"
-        @click-right="onCreateTeamClick"
+        @click-left="$appPushBack()"
+        @click-right="onNavBarRightClick"
         left-text="返回"
         title="队伍"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
@@ -220,7 +220,7 @@ export default {
     onOversize: function () {
       this.$message.error(this.$appMsg.error[1005]);
     },
-    onCreateTeamClick: function () {
+    onNavBarRightClick: function () {
       this.tableData.type = 0;
       this.tableDataRow = {
         name: "",

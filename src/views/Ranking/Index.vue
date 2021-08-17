@@ -374,7 +374,7 @@ export default {
       },
     };
   },
-  mounted() {
+  created() {
     this.initPage();
   },
   methods: {

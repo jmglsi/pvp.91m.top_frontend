@@ -113,7 +113,7 @@ export default new Router({
                 import ('./views/User/My.vue'),
             meta: {
                 title: '我的',
-                keepAlive: true
+                keepAlive: false
             }
         }, {
             path: '/hero',

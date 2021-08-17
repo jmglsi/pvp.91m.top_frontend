@@ -18,17 +18,12 @@
         ></div>
       </div>
 
-      <div
-        v-if="$route.meta.keepAlive"
-        class="app-3d1b70e46d0b6cd9cfa43d743da14266"
-      >
-        <keep-alive>
+      <div class="app-3d1b70e46d0b6cd9cfa43d743da14266">
+        <keep-alive v-if="$route.meta.keepAlive">
           <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
         </keep-alive>
-      </div>
 
-      <div v-else class="app-3d1b70e46d0b6cd9cfa43d743da14266">
-        <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
+        <router-view v-else class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
       </div>
     </div>
 
@@ -70,7 +65,7 @@ export default {
       /ranking|game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
       this.showInfo.hello = hello;
 
-      to.path == "/" || /search|ranking/i.test(to.path)
+      /ranking|search/i.test(to.path) || to.path == "/"
         ? (statusBar = true)
         : (statusBar = false);
       this.showInfo.statusBar = statusBar;
@@ -78,7 +73,7 @@ export default {
       /ranking/i.test(to.path) ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /miniapp|skin|bilibili|hero|game|login/i.test(to.path)
+      /miniapp|bilibili|login|skin|hero(.*?)info|game(.*?)bp/i.test(to.path)
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;

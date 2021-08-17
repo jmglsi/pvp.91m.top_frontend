@@ -124,6 +124,21 @@ Vue.prototype.$appPush = function(url = { path: '/' }) {
     this.$router.push(url);
 }
 
+Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }) {
+    let nowUrl = Vue.prototype.$appLastUrl,
+        lastUrl = null;
+
+    if (nowUrl.path == "/") {
+        lastUrl = url;
+    } else {
+        /miniapp|friends|hero(.*?)info|game(.*?)bp/i.test(nowUrl.path) ? lastUrl = url : lastUrl = nowUrl;
+        lastUrl.query.refresh = 1;
+        //防止套娃
+    }
+
+    this.$router.push(lastUrl);
+}
+
 Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' }, urlType = 0) {
     if (urlType == 0) {
         this.$dialog
@@ -144,7 +159,7 @@ Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' },
         }
 
         setTimeout(() => {
-            this.$appPush(url);
+            this.$router.push(url)
         }, 2500)
     }
 }

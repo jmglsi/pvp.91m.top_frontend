@@ -7,14 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: '/search',
-            query: {
-              q: replay.id,
-            },
-          })
-        "
+        @click-left="$appPushBack()"
         left-text="返回"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >

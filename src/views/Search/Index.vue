@@ -24,11 +24,9 @@
                   ? { color: '#fff' }
                   : {}
               "
-              @click="
-                search.value ? (search.value = null) : $appPush({ path: '/' })
-              "
+              @click="$appPushBack()"
             >
-              取消
+              返回
             </div>
           </template>
         </van-search>
@@ -327,8 +325,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[2] >= 20 &&
-                  tableData.heroInfo.winRate[2] >= 50
+                  tableData.heroInfo.banRate[2] >= 30
                     ? 'ranking-bda9643ac6601722a28f238714274da4'
                     : null
                 "
@@ -347,7 +344,8 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[2] >= 30
+                  tableData.heroInfo.pickRate[2] >= 20 &&
+                  tableData.heroInfo.winRate[2] >= 50
                     ? 'ranking-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
@@ -366,7 +364,7 @@
             <van-grid-item @click="$message.info($appMsg.info[1021])">
               <div
                 :class="
-                  tableData.heroInfo.bpRate[2] >= 90
+                  tableData.heroInfo.bpRate[2] >= 70
                     ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
@@ -385,8 +383,8 @@
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[2] >= 20 ||
-                    tableData.heroInfo.pickRate[2] >= 30) &&
+                  (tableData.heroInfo.banRate[2] >= 30 ||
+                    tableData.heroInfo.pickRate[2] >= 20) &&
                   tableData.heroInfo.winRate[2] >= 50
                     ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
                     : null
@@ -426,8 +424,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[0] >= 20 &&
-                  tableData.heroInfo.winRate[0] >= 50
+                  tableData.heroInfo.banRate[0] >= 30
                     ? 'ranking-bda9643ac6601722a28f238714274da4'
                     : null
                 "
@@ -439,8 +436,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[1] >= 20 &&
-                  tableData.heroInfo.winRate[1] >= 50
+                  tableData.heroInfo.banRate[1] >= 30
                     ? 'ranking-bda9643ac6601722a28f238714274da4'
                     : null
                 "
@@ -452,8 +448,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[2] >= 20 &&
-                  tableData.heroInfo.winRate[2] >= 50
+                  tableData.heroInfo.banRate[2] >= 30
                     ? 'ranking-bda9643ac6601722a28f238714274da4'
                     : null
                 "
@@ -466,7 +461,8 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[0] >= 30
+                  tableData.heroInfo.pickRate[0] >= 20 &&
+                  tableData.heroInfo.winRate[0] >= 50
                     ? 'ranking-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
@@ -478,7 +474,8 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[1] >= 30
+                  tableData.heroInfo.pickRate[1] >= 20 &&
+                  tableData.heroInfo.winRate[1] >= 50
                     ? 'ranking-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
@@ -490,7 +487,8 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[2] >= 30
+                  tableData.heroInfo.pickRate[2] >= 20 &&
+                  tableData.heroInfo.winRate[2] >= 50
                     ? 'ranking-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
@@ -507,7 +505,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[0] >= 90
+                  tableData.heroInfo.bpRate[0] >= 70
                     ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
@@ -519,7 +517,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[1] >= 90
+                  tableData.heroInfo.bpRate[1] >= 70
                     ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
@@ -531,7 +529,7 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[2] >= 90
+                  tableData.heroInfo.bpRate[2] >= 70
                     ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
@@ -544,8 +542,8 @@
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[0] >= 20 ||
-                    tableData.heroInfo.pickRate[0] >= 30) &&
+                  (tableData.heroInfo.banRate[0] >= 30 ||
+                    tableData.heroInfo.pickRate[0] >= 20) &&
                   tableData.heroInfo.winRate[0] >= 50
                     ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
                     : null
@@ -558,8 +556,8 @@
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[1] >= 20 ||
-                    tableData.heroInfo.pickRate[1] >= 30) &&
+                  (tableData.heroInfo.banRate[1] >= 30 ||
+                    tableData.heroInfo.pickRate[1] >= 20) &&
                   tableData.heroInfo.winRate[1] >= 50
                     ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
                     : null
@@ -572,8 +570,8 @@
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[2] >= 20 ||
-                    tableData.heroInfo.pickRate[2] >= 30) &&
+                  (tableData.heroInfo.banRate[2] >= 30 ||
+                    tableData.heroInfo.pickRate[2] >= 20) &&
                   tableData.heroInfo.winRate[2] >= 50
                     ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
                     : null
@@ -884,15 +882,15 @@ export default {
       this.$message.success(this.$appMsg.success[1000]);
     },
     onClearInputData: function () {
-      if (this.search.value.length == 0) {
-        this.tableData.heroInfo.id = 0;
+      if (this.search.value.length > 0) return;
 
-        this.initSearchHistory();
+      this.tableData.heroInfo.id = 0;
 
-        this.$appPush({ path: "/search" });
+      this.initSearchHistory();
 
-        this.showInfo.searchData = false;
-      }
+      this.$appPush({ path: "/search" });
+
+      this.showInfo.searchData = false;
     },
     onCellClick: function (data) {
       if (data.to) {
