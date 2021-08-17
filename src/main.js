@@ -14,15 +14,6 @@ import './assets/import/vxe-table'
 
 Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
-    Vue.prototype.$appLastUrl = from;
-
-    document.title = to.meta.title + " | 苏苏的荣耀助手"
-    document.body.scrollTop = document.documentElement.scrollTop = 0
-
-    next()
-})
-
 import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 
@@ -41,6 +32,8 @@ Vue.prototype.$cookie = cookie
 import axios from 'axios'
 axios.interceptors.request.use(function(config) {
     let data = qs.parse(config.data)
+
+    config.url += "&host=" + location.host
 
     if (config.method == "post") {
         const openId = cookie.get("openId")
@@ -70,6 +63,15 @@ Vue.prototype.$appApi = appApi
 
 import appMsg from './assets/js/code.config'
 Vue.prototype.$appMsg = appMsg
+
+router.beforeEach((to, from, next) => {
+    Vue.prototype.$appLastUrl = from;
+
+    document.title = to.meta.title + " | " + Vue.prototype.$appConfigInfo.appInfo.name
+    document.body.scrollTop = document.documentElement.scrollTop = 0
+
+    next()
+})
 
 new Vue({
     router,

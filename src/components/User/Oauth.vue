@@ -92,12 +92,12 @@ export default {
         this.$appApi.login.getLogin +
         "?oauthType=" +
         oauth.type +
-        "&host=" +
-        location.host +
         "&openId=" +
         this.openId +
         "&accessToken=" +
-        this.accessToken;
+        this.accessToken +
+        "&host=" +
+        location.host;
     },
   },
 };

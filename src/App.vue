@@ -157,8 +157,6 @@ export default {
   },
   methods: {
     getAppInfo: function () {
-      let ls = this.$appGetLocalStorage("appConfigInfo");
-
       this.$axios
         .post(
           this.$appApi.pvp.getAppInfo +
@@ -173,7 +171,8 @@ export default {
             tempOpenId = q.tempOpenId || "",
             tempAccessToken = q.tempAccessToken || "",
             oauthType = q.oauthType || "",
-            tempText = q.tempText || "";
+            tempText = q.tempText || "",
+            ls = this.$appGetLocalStorage("appConfigInfo");
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;

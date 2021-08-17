@@ -583,7 +583,7 @@ export default {
           refresh: 1,
         });
 
-        location.reload();
+        this.$router.go(0);
       }, 2500);
     } else {
       this.login = {

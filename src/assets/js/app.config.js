@@ -6,7 +6,6 @@ Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(nav
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
-Vue.prototype.$appScrollTop = 0;
 
 Vue.prototype.$appConfigInfo = {
     appInfo: {
@@ -117,6 +116,10 @@ Vue.prototype.$appDelectLocalStorage = function(key = "ranking") {
 let ls = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 if (!ls) {
     Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);
+
+    setTimeout(() => {
+        location.reload();
+    }, 2000);
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
