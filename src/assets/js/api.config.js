@@ -2,15 +2,10 @@ let apiHost;
 
 location.host.match(/127\.0\.0\.1|localhost/) ? apiHost = "//localhost/api.91m.top" : apiHost = "//api.91m.top";
 
-const sApi = "//s.91m.top";
 const pvpApi = apiHost + "/hero/v1/app.php";
 const gameApi = apiHost + "/hero/v1/game.php";
 const loginApi = apiHost + "/hero/v1/login.php";
 const biliApi = apiHost + "/hero/v1/bilibili.php";
-
-const s = {
-    url: sApi + "/"
-}
 
 const pvp = {
     addHeroByCombination: pvpApi + "?type=addHeroByCombination",
@@ -33,6 +28,7 @@ const pvp = {
     getHeroUpdateText: pvpApi + "?type=getHeroUpdateText",
     getMiniAppInfo: pvpApi + "?type=getMiniAppInfo",
     getRanking: pvpApi + "?type=getRanking",
+    getShortUrl: pvpApi + "?type=getShortUrl",
     getSearch: pvpApi + "?type=getSearch",
     getSkinReturnLog: pvpApi + "?type=getSkinReturnLog",
     getSmobaHelperUserInfo: pvpApi + "?type=getSmobaHelperUserInfo",
@@ -59,7 +55,6 @@ const bili = {
 }
 
 export default {
-    s,
     bili,
     game,
     pvp,

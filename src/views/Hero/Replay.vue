@@ -198,7 +198,7 @@ export default {
         );
 
       this.$axios
-        .post(this.$appApi.s.url, {
+        .post(this.$appApi.pvp.getShortUrl, {
           url: longUrl,
         })
         .then((res) => {

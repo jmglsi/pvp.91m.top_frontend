@@ -266,7 +266,7 @@ export default {
         encodeURIComponent(row.equipment.name);
 
       this.$axios
-        .post(this.$appApi.s.url, {
+        .post(this.$appApi.pvp.getShortUrl, {
           url: longUrl,
         })
         .then((res) => {

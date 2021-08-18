@@ -378,7 +378,7 @@ export default {
           row.hero_2.id;
 
       this.$axios
-        .post(this.$appApi.s.url, {
+        .post(this.$appApi.pvp.getShortUrl, {
           url: longUrl,
         })
         .then((res) => {
@@ -389,7 +389,6 @@ export default {
             row.hero_1.name +
             " 和 " +
             row.hero_2.name +
-            null +
             "\r-\r队友胜率:" +
             row.teammateWinRate +
             "%\r对手胜率:" +
