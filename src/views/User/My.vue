@@ -117,7 +117,7 @@
           value="自豪的使用语雀"
           is-link
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.globalBP })
+            $appOpenUrl('是否打开外部链接?', null, { path: url.question })
           "
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
@@ -504,8 +504,8 @@ export default {
       },
       isLogin: false,
       url: {
-        globalBP: "//s.91m.top/pvp.doc.globalBP",
-        friends: "//s.91m.top/pvp.doc.friends",
+        question: "//www.yuque.com/jmglsi/pvp/yyxgbh",
+        friends: "//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH",
         support: "//support.qq.com/products/305514",
         openSource: ["//bbs.nga.cn/read.php?tid=26200132"],
         afdian: "//afdian.net/@jmglsi",

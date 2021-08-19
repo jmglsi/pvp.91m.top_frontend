@@ -975,7 +975,7 @@ export default {
       ret += "胜率: " + heroInfo.winRate.join(" / ") + "\n";
       ret +=
         ">>> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += ">>> 综合 https://s.91m.top/" + heroInfo.id;
+      ret += ">>> 综合 https://" + location.host + "/s/" + heroInfo.id;
 
       this.copyData = ret;
 
