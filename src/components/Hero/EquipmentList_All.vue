@@ -19,7 +19,7 @@
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-column title="最终结果,空的就是没出">
+      <vxe-table-column title="最终结果，空的就是没出">
         <vxe-table-column
           v-for="(data, index) in 6"
           :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"

@@ -101,7 +101,7 @@
         "
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
-        {{ loginInfo.description || "这个人很懒,什么都没有留下" }}
+        {{ loginInfo.description || "这个人很懒，什么都没有留下" }}
       </div>
     </div>
 

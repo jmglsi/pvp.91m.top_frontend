@@ -819,7 +819,7 @@ export default {
       },
       eye: "eye-o",
       url: {
-        question: "//www.yuque.com/jmglsi/pvp/yyxgbh",
+        question: "//www.yuque.com/jmglsi/pvp/gbpl91",
       },
       isPortrait: true,
       recommendHeroId: 0,

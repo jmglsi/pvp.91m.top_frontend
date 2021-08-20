@@ -276,7 +276,7 @@ export default {
       this.$message.info(
         "请上传查询英雄的 " +
           this.$appColumnsInfo.fightPowerType.text[this.fightPowerType] +
-          " 图片,此图片仅供参考"
+          " 图片，此图片仅供参考"
       );
     },
     onAddFightPowerClick: function () {

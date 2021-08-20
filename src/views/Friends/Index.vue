@@ -58,7 +58,7 @@
         class="app-3b9655ab218c7f1a18f5dacd778a52f0"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
-        {{ friendsInfo.description || "这个人很懒,什么都没有留下" }}
+        {{ friendsInfo.description || "这个人很懒，什么都没有留下" }}
       </div>
     </div>
 
