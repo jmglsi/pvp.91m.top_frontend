@@ -141,7 +141,7 @@ export default {
 
     setTimeout(() => {
       this.initColor();
-    }, 2000);
+    }, 2500);
   },
   methods: {
     getAppHome: function () {

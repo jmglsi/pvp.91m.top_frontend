@@ -456,11 +456,8 @@
               <a-menu-item
                 v-for="(data, index) in authorInfo.actions"
                 :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
-                @click="
-                  data.url
-                    ? $appOpenUrl('是否打开外部链接?', null, { path: data.url })
-                    : null
-                "
+                :disabled="data.title == '-' && (!data.to || !data.url)"
+                @click="onActionClick(data)"
                 >{{ data.title }}</a-menu-item
               >
             </a-menu>
@@ -587,7 +584,7 @@
           </a-popover>
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
         </li>
-        <li v-if="showInfo.apps && (bpMode == 'view' || bpMode == 'edit')">
+        <li>
           <a-dropdown placement="topCenter" :trigger="['click']">
             <van-button round icon="apps-o" size="small" color="black" />
             <a-menu
@@ -637,7 +634,7 @@
             />
           </div>
         </li>
-        <li v-if="gameInfo.game.type == 1">
+        <li>
           <van-button
             round
             icon="setting-o"
@@ -771,6 +768,7 @@ export default {
   data() {
     return {
       copyData: "",
+      gameLabel: this.$route.params.id || "",
       heroType: [
         "全部分路",
         "对抗路 (战士)",
@@ -807,6 +805,7 @@ export default {
           1, // 16 -17
         ],
       },
+      eye: "eye-o",
       bpMode: "view",
       bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
@@ -817,7 +816,6 @@ export default {
           rows: [],
         },
       },
-      eye: "eye-o",
       url: {
         question: "//www.yuque.com/jmglsi/pvp/gbpl91",
       },
@@ -826,7 +824,7 @@ export default {
       newGameInfo: {},
       gameInfo: {
         game: {
-          type: 0,
+          type: 1,
           time: null,
         },
         team: {
@@ -857,19 +855,19 @@ export default {
                 pick: [0, 0, 0, 0, 0],
               },
               win: {
-                camp: 1,
+                camp: null,
                 teamId: null,
               },
               team: {
                 team_1: {
-                  id: null,
+                  id: 1,
+                  name: "队伍_1",
                   logo: null,
-                  name: null,
                 },
                 team_2: {
-                  id: null,
+                  id: 2,
+                  name: "队伍_2",
                   logo: null,
-                  name: null,
                 },
               },
               stepsNow: 0,
@@ -882,9 +880,30 @@ export default {
         used: [],
       },
       authorInfo: {
-        name: "加载中...",
+        name: "本地",
         logo: "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
-        actions: [],
+        actions: [
+          {
+            title: "注册登录后",
+            to: "/my",
+            url: null,
+          },
+          {
+            title: "可同步数据",
+            to: "/my",
+            url: null,
+          },
+          {
+            title: "-",
+            to: null,
+            url: null,
+          },
+          {
+            title: "联系站长 💗",
+            to: "/friends?openId=dc96aebe41f1427bbb9e9fe4b0ab9517",
+            url: null,
+          },
+        ],
       },
       teamInfo: {
         team_1: {
@@ -902,7 +921,7 @@ export default {
         model: 0,
       },
       showInfo: {
-        apps: false,
+        apps: true,
         heroList: true,
         setting: false,
         trend: false,
@@ -923,12 +942,12 @@ export default {
     }
   },
   mounted() {
-    let gameLabel = this.$route.params.id || "";
+    let gameLabel = this.gameLabel;
 
     if (gameLabel) {
-      this.gameLabel = gameLabel;
-
       this.getGameBP(gameLabel);
+
+      this.getRanking(this.gameInfo.game.time);
     } else {
       return this.$appPush({ path: "/game" });
     }
@@ -1101,6 +1120,8 @@ export default {
       return ret;
     },
     getGameBP: function (gameLabel) {
+      if (this.gameLabel == "new") return;
+
       this.$axios
         .post(
           this.$appApi.game.getGameBP,
@@ -1120,12 +1141,6 @@ export default {
 
             this.getRanking(data.game.time);
             this.initBPOrder(this.bpPerspective, 0);
-
-            this.gameInfo.game.type == 1 &&
-            data.author.openId &&
-            data.author.openId == this.$cookie.get("openId")
-              ? (this.showInfo.apps = true)
-              : (this.showInfo.apps = false);
           } else {
             this.$message.error(status.msg);
           }
@@ -1154,6 +1169,15 @@ export default {
 
           this.$appCopyData(this.copyData);
         });
+    },
+    onActionClick: function (data) {
+      if (data.to) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
+      }
+
+      if (data.url) {
+        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
+      }
     },
     onCreateGameBPClick: function () {
       let teamInfo = this.teamInfo,
@@ -1189,6 +1213,12 @@ export default {
       };
       //创建 BP 的时候切换红蓝阵营
 
+      if (this.gameLabel == "new") {
+        this.gameInfo.result.rows.push(this.newGameInfo);
+
+        return;
+      }
+
       this.$axios
         .post(
           this.$appApi.pvp.updateGameBP,
@@ -1223,6 +1253,8 @@ export default {
         gameInfo.win.teamId = gameInfo.team.team_1.id;
       }
 
+      if (this.gameLabel == "new") return;
+
       this.$axios
         .post(
           this.$appApi.pvp.updateGameBP,
@@ -1246,6 +1278,29 @@ export default {
         });
     },
     onDeleteGameBPClick: function (nowIndex) {
+      let tabsModel = 0;
+
+      if (this.gameLabel == "new") {
+        if (nowIndex == 0) {
+          tabsModel = 0;
+
+          this.$message.error(this.$appMsg.error[1011]);
+
+          setTimeout(() => {
+            this.$router.go(0);
+          }, 2500);
+        } else {
+          this.gameInfo.result.rows.splice(nowIndex, 1);
+          tabsModel = nowIndex - 1;
+
+          this.$message.success(this.$appMsg.success[1000]);
+        }
+
+        this.tabsInfo.model = tabsModel;
+
+        return;
+      }
+
       this.$axios
         .post(
           this.$appApi.pvp.deleteGameBP,
@@ -1258,10 +1313,18 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.gameInfo.result.rows.splice(nowIndex, 1);
-            this.tabsInfo.model = nowIndex - 1;
+            if (nowIndex == 0) {
+              tabsModel = 0;
 
-            this.$message.success(this.$appMsg.success[1000]);
+              this.$appPush({ path: "/game/engage" });
+            } else {
+              this.gameInfo.result.rows.splice(nowIndex, 1);
+              tabsModel = nowIndex - 1;
+
+              this.$message.success(this.$appMsg.success[1000]);
+            }
+
+            this.tabsInfo.model = tabsModel;
           } else {
             this.$message.error(status.msg);
           }
@@ -1464,10 +1527,6 @@ export default {
           .then(() => {
             // on confirm
             this.onDeleteGameBPClick(tabsModel);
-
-            if (tabsModel == 0) {
-              this.$appPush({ path: "/game/engage" });
-            }
           })
           .catch(() => {
             // on cancel
