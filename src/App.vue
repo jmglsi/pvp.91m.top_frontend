@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import Aegis from "aegis-web-sdk";
+
 export default {
   name: "App",
   watch: {
@@ -268,6 +270,14 @@ export default {
             //快速登录的 7天
           }
         });
+
+      new Aegis({
+        id: "mr3jG4N5Gdv9B6Op8V",
+        uin: this.$cookie.get("openId") || "",
+        reportApiSpeed: true,
+        reportAssetSpeed: true,
+        spa: true,
+      });
     },
   },
 };

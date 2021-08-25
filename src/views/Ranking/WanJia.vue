@@ -88,7 +88,7 @@
                       v-if="data.index <= 10"
                       width="30"
                       height="20"
-                      v-lazy="'//pic.iask.cn/fimg/681882549745.jpg'"
+                      v-lazy="'//ae05.alicdn.com/kf/H864b4b4f279f47ef94cfcad4aaf88bf7V.png'"
                       class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
                     />
                     <span

@@ -93,7 +93,7 @@ export default {
       appInfo: {
         search: {
           placeholder: "搜索",
-          img: "//pic.iask.cn/fimg/724763542645.jpg",
+          img: "//ae04.alicdn.com/kf/Hec08150147584fc0b4dcc1176200ef94v.png",
           to: "/friends",
           url: null,
         },

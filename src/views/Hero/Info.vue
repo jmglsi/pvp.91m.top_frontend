@@ -120,7 +120,7 @@
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
               v-lazy="
-                '//img06.mifile.cn/v1/MI_542ED8B1722DC/65d2ff54aa494198a72119fe39627e3c.png'
+                '//ae04.alicdn.com/kf/H72b4cc1862e64d0a95689fd5c7eb50e7u.png'
               "
               width="25"
               height="25"
@@ -136,7 +136,7 @@
 
             <img
               v-lazy="
-                '//img06.mifile.cn/v1/MI_542ED8B1722DC/57f4613bdb1a0f3e40b154a87b1538a4.png'
+                '//ae02.alicdn.com/kf/Hb05bdd7fb7064f9183d0bc29e2373168v.png'
               "
               width="25"
               height="25"
@@ -339,7 +339,7 @@
           >
             <img
               v-lazy="
-                '//img06.mifile.cn/v1/MI_542ED8B1722DC/775ce210e6ab76e03cc5a0ff43e46141.png'
+                '//ae05.alicdn.com/kf/Hb46ca9fc479049fc8adad20b1079d6bdX.png'
               "
               width="50"
               height="50"
@@ -354,7 +354,7 @@
           >
             <img
               v-lazy="
-                '//img08.mifile.cn/v1/MI_542ED8B1722DC/2dfa18ec81ff43a63abf94798f431e8d.png'
+                '//ae03.alicdn.com/kf/H9cb5e21cd8e34a5d8d3fff0f4ee04964C.png'
               "
               width="50"
               height="50"
@@ -395,7 +395,7 @@
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
         <van-tabbar-item
-          icon="//img07.mifile.cn/v1/MI_542ED8B1722DC/09e4d71b4fc218baad6fcc97ce0b8a96.png"
+          icon="//ae05.alicdn.com/kf/H6152796593bb4938954de5b92ed276caH.png"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId

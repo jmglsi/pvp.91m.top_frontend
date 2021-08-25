@@ -127,7 +127,7 @@
           class="my-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
-            icon="//img06.mifile.cn/v1/MI_542ED8B1722DC/9c36dd7e015e0cbff074365092baee11.png"
+            icon="//ae03.alicdn.com/kf/Hd9966b1aa8c14384bad6db7b98bebab0k.png"
             to="/game/team"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
@@ -142,7 +142,7 @@
             </template>
           </van-grid-item>
           <van-grid-item
-            icon="//img08.mifile.cn/v1/MI_542ED8B1722DC/42b83c2748743e42808d847e9953f1cc.png"
+            icon="//ae02.alicdn.com/kf/H66b6f741d54f4ac3a7c083956b3c15eah.png"
             to="/game/engage"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-308ffde0dc5bd5718dcf0396fcc2a596"

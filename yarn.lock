@@ -1375,6 +1375,13 @@ address@^1.0.3:
   resolved "https://registry.npmjs.org/address/-/address-1.1.2.tgz"
   integrity sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA==
 
+aegis-web-sdk@^1.24.43:
+  version "1.24.43"
+  resolved "https://registry.yarnpkg.com/aegis-web-sdk/-/aegis-web-sdk-1.24.43.tgz#242091d477887442b51469bbfeefa58bc5327438"
+  integrity sha512-0hXf04GhdcyEl84dxFI5n7QH6ArESD3kGHbQ0/pqBQXRvaeHZR9g1Jv3ZBQMZs+/m0aH3mr+t4gad8rtom4+yQ==
+  dependencies:
+    web-vitals "^1.1.2"
+
 agent-base@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/agent-base/-/agent-base-4.3.0.tgz"
@@ -9344,6 +9351,11 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
+
+web-vitals@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-1.1.2.tgz#06535308168986096239aa84716e68b4c6ae6d1c"
+  integrity sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==
 
 webpack-bundle-analyzer@^3.3.0:
   version "3.9.0"

@@ -2,9 +2,7 @@
   <div v-if="isPortrait" @click="isPortrait = false" class="game-bp-portrait">
     <div slot-scope class="game-a76e75b5854094183e66c274e1d276e9">
       <img
-        v-lazy="
-          '//img06.mifile.cn/v1/MI_542ED8B1722DC/a04acc27d66ac47618f6c48652c2c25f.png'
-        "
+        v-lazy="'//ae03.alicdn.com/kf/H18227e8033284a6885ae800ce5f4af71O.png'"
         width="100"
         height="100"
       />
@@ -73,7 +71,7 @@
               />
               <img
                 v-lazy="
-                  '//img07.mifile.cn/v1/MI_542ED8B1722DC/2141e6eeea75f51e749297dafa6716b4.png'
+                  '//ae05.alicdn.com/kf/H177817b6310e4b99ac74142515052ca9k.png'
                 "
                 width="20"
                 height="20"
@@ -123,7 +121,7 @@
               />
               <img
                 v-lazy="
-                  '//img07.mifile.cn/v1/MI_542ED8B1722DC/2141e6eeea75f51e749297dafa6716b4.png'
+                  '//ae05.alicdn.com/kf/H177817b6310e4b99ac74142515052ca9k.png'
                 "
                 width="20"
                 height="20"
@@ -881,7 +879,7 @@ export default {
       },
       authorInfo: {
         name: "本地",
-        logo: "//img08.mifile.cn/v1/MI_542ED8B1722DC/caddd6f41678b4c2f56e3f4ef75944d0.png",
+        logo: "/img/game-icons/kpl.png",
         actions: [
           {
             title: "注册登录后",

@@ -115,9 +115,7 @@
       @click="$appPushBack()"
     >
       <img
-        v-lazy="
-          '//img06.mifile.cn/v1/MI_542ED8B1722DC/b97e76e5df98fbfd8b25ad527f9aadb5.png'
-        "
+        v-lazy="'//ae06.alicdn.com/kf/Hd256902b776e46afb155f83e216d2d75M.png'"
         width="25"
         height="25"
       />

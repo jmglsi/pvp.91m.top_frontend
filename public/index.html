@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
     <title>苏苏的荣耀助手</title>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <style lang="less">
-        body {
-            padding-top: env(safe-area-inset-top);
-        }
-    </style>
     <script type="text/javascript">
         var _hmt = _hmt || [];
         (function() {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?9c74475df89fd16ec1c0f9f864fea292";
+            hm.crossorigin = "anonymous"
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
@@ -28,18 +24,16 @@
             } else {
                 bp.src = 'http://push.zhanzhang.baidu.com/push.js';
             }
+            bp.crossorigin = "anonymous"
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(bp, s);
         })();
-
-        (function() {
-            window.onload = function() {
-                setTimeout(() => {
-                    window.scrollTo(0, 1)
-                }, 0);
-            }
-        })()
     </script>
+    <style lang="less">
+        body {
+            padding-top: env(safe-area-inset-top);
+        }
+    </style>
 </head>
 
 <body>
