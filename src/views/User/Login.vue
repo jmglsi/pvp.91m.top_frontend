@@ -120,6 +120,8 @@
 </template>
 
 <script>
+import md5 from 'js-md5'
+
 export default {
   name: "LoginHome",
   components: {
@@ -182,8 +184,8 @@ export default {
           this.$qs.stringify({
             name: data.name,
             email: data.email,
-            password: this.$md5(data.password),
-            newPassword: data.newPassword ? this.$md5(data.newPassword) : "",
+            password: md5(data.password),
+            newPassword: data.newPassword ? md5(data.newPassword) : "",
             uin: data.uin,
           })
         )

@@ -1,1 +1,1 @@
-import 'xe-utils'
+import 'xe-utils';

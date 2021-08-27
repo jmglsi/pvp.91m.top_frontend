@@ -1,6 +1,6 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-Vue.prototype.$appCountry = location.host.match(/127\.0\.0\.1|localhost|pvp\.91m\.top/)
+Vue.prototype.$appCountry = location.host.match(/127\.0\.0\.1|localhost|pvp\.91m\.top/);
 Vue.prototype.$appIsApple = /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
@@ -11,10 +11,19 @@ Vue.prototype.$appConfigInfo = {
     appInfo: {
         isReducedMode: 0,
         isSmallMobile: 0,
-        name: "苏苏的荣耀助手",
         pwa: 0,
+        name: "苏苏的荣耀助手",
         updateTime: 0,
-        version: 0
+        tempText: "",
+        version: 0,
+        script: [],
+        link: [],
+        search: {
+            placeholder: "",
+            img: null,
+            to: null,
+            url: null,
+        },
     },
     tipsInfo: {
         rankingTips: 0,
@@ -116,10 +125,6 @@ Vue.prototype.$appDelectLocalStorage = function(key = "ranking") {
 let ls = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 if (!ls) {
     Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);
-
-    setTimeout(() => {
-        location.reload();
-    }, 2000);
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
@@ -128,10 +133,11 @@ Vue.prototype.$appPush = function(url = { path: '/' }) {
 }
 
 Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }) {
-    let nowUrl = Vue.prototype.$appLastUrl,
+    let previousPage = this.$store.state.previousPage,
+        nowUrl = previousPage[previousPage.length - 1],
         lastUrl = null;
 
-    if (nowUrl.path == "/") {
+    if (previousPage.length < 2) {
         lastUrl = url;
     } else {
         /miniapp|friends|hero(.*?)info|game(.*?)bp/i.test(nowUrl.path) ? lastUrl = url : lastUrl = nowUrl;

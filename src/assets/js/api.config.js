@@ -1,11 +1,48 @@
-let apiHost;
+import Vue from 'vue';
 
-location.host.match(/127\.0\.0\.1|localhost/) ? apiHost = "//localhost/api.91m.top" : apiHost = "//api.91m.top";
+import qs from 'qs';
+Vue.prototype.$qs = qs;
 
-const pvpApi = apiHost + "/hero/v1/app.php";
-const gameApi = apiHost + "/hero/v1/game.php";
-const loginApi = apiHost + "/hero/v1/login.php";
-const biliApi = apiHost + "/hero/v1/bilibili.php";
+import cookie from 'vue-cookie';
+Vue.prototype.$cookie = cookie;
+
+import axios from 'axios';
+
+let nowHost = location.host,
+    nowUrl = null;
+
+nowHost.match(/127\.0\.0\.1|localhost/) ? axios.defaults.baseURL = "//localhost/api.91m.top" : axios.defaults.baseURL = "//api.91m.top";
+axios.interceptors.request.use(function(config) {
+    let data = qs.parse(config.data);
+
+    config.url += "&host=" + nowHost;
+
+    if (config.method == "post") {
+        const openId = cookie.get("openId");
+        const accessToken = cookie.get("accessToken");
+
+        const tempOpenId = cookie.get("tempOpenId");
+        const tempAccessToken = cookie.get("tempAccessToken");
+
+        config.data = qs.stringify({
+            openId: openId || tempOpenId,
+            accessToken: accessToken || tempAccessToken,
+            ...data
+        });
+    }
+
+    return config;
+}, function(error) {
+    return Promise.reject(error);
+})
+Vue.prototype.$axios = axios;
+
+nowUrl = axios.defaults.baseURL;
+
+const pvpApi = nowUrl + "/hero/v1/app.php";
+const gameApi = nowUrl + "/hero/v1/game.php";
+const loginApi = nowUrl + "/hero/v1/login.php";
+const biliApi = nowUrl + "/hero/v1/bilibili.php";
 
 const pvp = {
     addHeroByCombination: pvpApi + "?type=addHeroByCombination",

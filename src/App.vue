@@ -636,6 +636,7 @@ div.app-zb,
 div.app-skill,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
+div.app-inscription,
 div.app-pzOne {
   margin-top: 3px;
 }

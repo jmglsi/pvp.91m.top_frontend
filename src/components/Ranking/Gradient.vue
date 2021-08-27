@@ -402,7 +402,7 @@
       >
         @梦归奇迹
       </span>
-      指导 ;D
+      提供 ;D
     </div>
   </div>
 </template>
@@ -452,8 +452,6 @@ export default {
       );
 
       if (!ls) {
-        this.$message.error(this.$appMsg.error[1010]);
-
         return;
       } else {
         this.rankingData.result.rows = [[], [], [], [], [], []];
@@ -523,10 +521,5 @@ div.ranking-gradient {
 
 div.ranking-84b60dc869cf54a3d2112e59c70ce21f {
   text-align: left;
-}
-
-div.ranking-2862744e5d7cce9d070aa41172557d78 {
-  margin-top: 50px;
-  font-size: @app-font-size;
 }
 </style>

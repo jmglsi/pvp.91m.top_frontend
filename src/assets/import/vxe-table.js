@@ -1,8 +1,8 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-import 'vxe-table/lib/style.css'
-import XEUtils from 'xe-utils'
-import zhCNLocat from 'vxe-table/lib/locale/lang/zh-CN'
+import 'vxe-table/lib/style.css';
+import XEUtils from 'xe-utils';
+import zhCNLocat from 'vxe-table/lib/locale/lang/zh-CN';
 
 import {
     VXETable,
@@ -14,7 +14,7 @@ import {
     Icon,
     Toolbar,
     Table,
-} from 'vxe-table'
+} from 'vxe-table';
 
 Vue
     .use(Button)
@@ -49,4 +49,4 @@ VXETable.setup({
     i18n: (key, value) => XEUtils.get(zhCNLocat, key, value)
 });
 
-Vue.prototype.$XModal = VXETable.modal
+Vue.prototype.$XModal = VXETable.modal;

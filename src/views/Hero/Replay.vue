@@ -264,8 +264,6 @@ export default {
           this.$appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
             path: replayInfo.inscriptionUrl,
           });
-        } else {
-          this.$message.info(this.$appMsg.info[1010]);
         }
       }
     },

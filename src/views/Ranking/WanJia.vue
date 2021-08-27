@@ -88,7 +88,9 @@
                       v-if="data.index <= 10"
                       width="30"
                       height="20"
-                      v-lazy="'//ae05.alicdn.com/kf/H864b4b4f279f47ef94cfcad4aaf88bf7V.png'"
+                      v-lazy="
+                        '//ae05.alicdn.com/kf/H864b4b4f279f47ef94cfcad4aaf88bf7V.png'
+                      "
                       class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
                     />
                     <span
@@ -146,7 +148,6 @@
       "
     >
       <van-button
-        :disabled="!$appIsMobile"
         round
         icon="share"
         size="small"
@@ -165,6 +166,21 @@
       >
         英雄分布
       </van-button>
+
+      <div class="ranking-2862744e5d7cce9d070aa41172557d78">
+        国服由
+        <span
+          :style="{ color: '#1989fa' }"
+          @click="
+            $appPush({
+              path: '/friends?openId=f2abc2e39c22c3879df227abfc8d7d34',
+            })
+          "
+        >
+          @暴走的巅峰赛
+        </span>
+        提供 ;D
+      </div>
     </div>
 
     <div>
@@ -421,10 +437,10 @@ export default {
             eleLink.download = "top100.png";
             eleLink.style.display = "none";
             eleLink.href = URL.createObjectURL(blob);
-            // 触发点击
+            //触发点击
             document.body.appendChild(eleLink);
             eleLink.click();
-            // 然后移除
+            //然后移除
             document.body.removeChild(eleLink);
           },
           "image/png",

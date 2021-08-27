@@ -1659,7 +1659,7 @@ img.game-221cf04d9a9e32c6af24502f96e3ecfe {
 }
 
 img.game-dce7c4174ce9323904a934a486c41288 {
-  margin-left: -15px;
+  margin-left: -20px;
   margin-top: 20px;
   position: absolute;
 }

@@ -1,6 +1,6 @@
-import Vue from 'vue'
+import Vue from 'vue';
 
-import 'ant-design-vue/dist/antd.css'
+import 'ant-design-vue/dist/antd.css';
 import {
     Dropdown,
     Menu,
@@ -11,7 +11,7 @@ import {
     Input,
     Timeline,
     Popover
-} from 'ant-design-vue'
+} from 'ant-design-vue';
 
 Vue
     .use(Dropdown)
@@ -27,12 +27,12 @@ Vue
 Message.config({
     top: "50px",
     duration: 5
-})
+});
 
 Notification.config({
     top: "50px",
     duration: 5
-})
+});
 
-Vue.prototype.$message = Message
-Vue.prototype.$notification = Notification
+Vue.prototype.$message = Message;
+Vue.prototype.$notification = Notification;

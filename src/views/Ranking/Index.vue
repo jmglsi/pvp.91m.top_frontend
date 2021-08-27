@@ -34,7 +34,7 @@
                   placement="left"
                 >
                   <template slot="title">
-                    <span>左侧查看出装，右侧搜索舆论</span>
+                    <span>左侧查看备战，右侧搜索舆论</span>
                   </template>
 
                   <DianFengSai
@@ -644,6 +644,11 @@ div.ranking-gradient {
   }
 }
 
+div.ranking-2862744e5d7cce9d070aa41172557d78 {
+  margin-top: 50px;
+  font-size: @app-font-size;
+}
+
 div.ranking-51c877f489423eb1c3901dd0e12c03d4 {
   font-size: @app-font-size;
   position: absolute;
@@ -664,9 +669,9 @@ div.ranking-0e1a8b3f7f6162bf4b88d3d001b88374 {
 div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
   position: absolute;
   margin: 0 auto;
-  height: 150px;
+  height: 225px;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 25px;
 }
 
 div.ranking-3ab42c8325a264730406e37e1f731f70 {

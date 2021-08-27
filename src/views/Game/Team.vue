@@ -84,7 +84,7 @@
                   <van-uploader
                     :after-read="onAfterRead"
                     :before-read="onBeforeRead"
-                    :max-size="3 * 1024 * 1024"
+                    :max-size="1 * 1024 * 1024"
                     @oversize="onOversize"
                   >
                     <div class="game-5f758f428b7ca18a42a55032f534bd2e">
