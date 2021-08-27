@@ -308,13 +308,19 @@
           <van-tab title="技能">
             <HeroSkillList :heroId="hero.info.id" />
           </van-tab>
-          <van-tab title="装备 (推荐)">
+          <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL :heroId="hero.info.id" />
           </van-tab>
           <van-tab title="装备 (单件)">
             <HeroEquipmentListOne
               :equipmentId="hero.info.id"
               :equipmentType="1"
+            />
+          </van-tab>
+          <van-tab title="铭文 (推荐)">
+            <HeroInscriptionList
+              v-if="skillInfo.model == 3"
+              :heroId="hero.info.id"
             />
           </van-tab>
         </van-tabs>
@@ -426,6 +432,7 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroLine: () => import("@/components/Hero/Line.vue"),
     HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
@@ -447,7 +454,8 @@ export default {
           vmid: "keyWords",
           name: "keyWords",
           content:
-            this.hero.info.name + ",顶端局,趋势,预测,出装,组队,更新,胜率",
+            this.hero.info.name +
+            ",顶端局,趋势,预测,技能,出装,装备,备战,组队,更新,胜率",
         },
         {
           vmid: "description",
@@ -525,7 +533,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0],
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   destroy() {
@@ -639,6 +647,8 @@ export default {
         tipsText = this.$appMsg.info[1008];
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
+      } else if (e == 3) {
+        tipsText = this.$appMsg.info[1010];
       }
 
       if (this.tipsInfo[e] == 0) {

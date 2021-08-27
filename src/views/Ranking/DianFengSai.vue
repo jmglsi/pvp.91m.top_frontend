@@ -339,7 +339,7 @@
               :heroId="tableDataRow.id"
             />
           </van-tab>
-          <van-tab title="装备 (推荐)">
+          <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
               v-if="cellInfo.index == 0 && skillInfo.model == 1"
               :heroId="tableDataRow.id"
@@ -350,6 +350,12 @@
               v-if="cellInfo.index == 0 && skillInfo.model == 2"
               :equipmentId="tableDataRow.id"
               :equipmentType="1"
+            />
+          </van-tab>
+          <van-tab title="铭文 (推荐)">
+            <HeroInscriptionList
+              v-if="skillInfo.model == 3"
+              :heroId="tableDataRow.id"
             />
           </van-tab>
         </van-tabs>
@@ -378,6 +384,7 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
   },
   props: {
     isSmallMobile: {
@@ -436,6 +443,7 @@ export default {
         { name: "趋势", value: 0 },
         { name: "搜一搜", value: 1 },
         { name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -452,7 +460,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0],
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   created() {
@@ -630,6 +638,8 @@ export default {
         tipsText = this.$appMsg.info[1008];
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
+      } else if (e == 3) {
+        tipsText = this.$appMsg.info[1010];
       }
 
       if (this.tipsInfo[e] == 0) {
@@ -655,6 +665,12 @@ export default {
       if (item.value == 2) {
         this.$appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
           path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
+        });
+      }
+
+      if (item.value == 3) {
+        this.$appOpenUrl("是否打开外部链接?", "NGA @小熊de大熊", {
+          path: "//bbs.nga.cn/read.php?tid=12677614",
         });
       }
     },

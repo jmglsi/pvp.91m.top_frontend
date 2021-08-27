@@ -278,11 +278,11 @@
             :before-change="onDataTabsBeforeChange"
             @click="onDataTabsClick"
           >
-            <van-tab title="综合">
+            <van-tab>
               <template #title>
-                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff"
-                  >综合</span
-                >
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  综合
+                </span>
                 <img
                   v-if="tableData.heroInfo.trend > 0"
                   v-lazy="
@@ -297,19 +297,27 @@
                 >
               </template>
             </van-tab>
+            <van-tab :disabled="tableData.heroInfo.id == 999">
+              <template #title>
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  备战
+                </span>
+                <img width="15" height="15" v-lazy="'/img/app-icons/hot.png'" />
+              </template>
+            </van-tab>
+            <van-tab
+              :disabled="tableData.heroInfo.id == 999"
+              title="攻速阈值"
+            />
             <van-tab :disabled="tableData.heroInfo.id == 999" title="战力" />
             <van-tab :disabled="tableData.heroInfo.id == 999" title="赛事" />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
-              title="技能和出装"
+              title="关系和克制"
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
               title="更新调整"
-            />
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="关系和克制"
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
@@ -666,7 +674,7 @@
               :heroId="tableData.heroInfo.id"
             />
           </van-tab>
-          <van-tab title="装备 (推荐)">
+          <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
               v-if="skillInfo.model == 1"
               :heroId="tableData.heroInfo.id"
@@ -677,6 +685,12 @@
               v-if="skillInfo.model == 2"
               :equipmentId="tableData.heroInfo.id"
               :equipmentType="1"
+            />
+          </van-tab>
+          <van-tab title="铭文 (推荐)">
+            <HeroInscriptionList
+              v-if="skillInfo.model == 3"
+              :heroId="tableData.heroInfo.id"
             />
           </van-tab>
         </van-tabs>
@@ -710,6 +724,7 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
@@ -791,7 +806,7 @@ export default {
         skillMenu: false,
         fightPowerMenu: false,
       },
-      tipsInfo: [0, 0, 0],
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   mounted() {
@@ -905,19 +920,19 @@ export default {
       let heroInfo = this.tableData.heroInfo;
 
       if (e == 1) {
-        this.showInfo.fightPowerMenu = true;
+        this.showInfo.skillMenu = true;
       } else if (e == 2) {
+        this.$appOpenUrl("是否打开外部链接?", "NGA @小熊de大熊", {
+          path: "//bbs.nga.cn/read.php?tid=12677614",
+        });
+      } else if (e == 3) {
+        this.showInfo.fightPowerMenu = true;
+      } else if (e == 4) {
         this.$appOpenUrl("是否打开外部链接?", "玩加电竞", {
           path:
             "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
             heroInfo.id +
             "&tab_type=5&gm=kog&gametype=6&tag_id=0",
-        });
-      } else if (e == 3) {
-        this.showInfo.skillMenu = true;
-      } else if (e == 4) {
-        this.$appPush({
-          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate",
         });
       } else if (e == 5) {
         this.$appPush({
@@ -929,6 +944,10 @@ export default {
           },
         });
       } else if (e == 6) {
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate",
+        });
+      } else if (e == 7) {
         this.$appPush({
           path:
             "/hero/" +
@@ -955,6 +974,8 @@ export default {
         tipsText = this.$appMsg.info[1008];
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
+      } else if (e == 3) {
+        tipsText = this.$appMsg.info[1010];
       }
 
       if (this.tipsInfo[e] == 0) {
