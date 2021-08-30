@@ -298,7 +298,7 @@ export default {
       did: 0,
       refresh: 0,
       heroName: "",
-      isSmallMobile: 0,
+      isSmallMobile: false,
       viewInfo: {
         model: "a",
       },
@@ -380,10 +380,10 @@ export default {
   methods: {
     initPage: function () {
       let q = this.$route.query,
-        appConfigInfo = this.$appConfigInfo,
-        dfsTips = appConfigInfo.tipsInfo.dfsTips || 0,
-        skillTips = appConfigInfo.tipsInfo.skillTips || 0,
-        wanjiaTips = appConfigInfo.tipsInfo.wanjiaTips || 0;
+        ls = this.$appConfigInfo,
+        dfsTips = ls.tipsInfo.dfsTips || false,
+        skillTips = ls.tipsInfo.skillTips || false,
+        wanjiaTips = ls.tipsInfo.wanjiaTips || false;
 
       this.heroName = q.heroName || "";
       this.tabsInfo.model = parseInt(q.type) || 0;
@@ -391,12 +391,11 @@ export default {
       q.cid ? (this.cid = parseInt(q.cid)) : (this.cid = 0);
       q.did ? (this.did = parseInt(q.did)) : (this.did = 0);
 
-      if (dfsTips == 0 || skillTips == 0 || wanjiaTips == 0) {
-        appConfigInfo.tipsInfo.dfsTips = 1;
-        appConfigInfo.tipsInfo.skillTips = 1;
-        appConfigInfo.tipsInfo.wanjiaTips = 1;
-
-        this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+      if (!dfsTips || !skillTips || !wanjiaTips) {
+        ls.tipsInfo.dfsTips = true;
+        ls.tipsInfo.skillTips = true;
+        ls.tipsInfo.wanjiaTips = true;
+        this.$appSetLocalStorage("appConfigInfo", ls);
 
         setTimeout(() => {
           this.showInfo.dfsTips = false;
@@ -409,7 +408,9 @@ export default {
         this.showInfo.wanjiaTips = false;
       }
 
-      if (appConfigInfo.appInfo.isSmallMobile == 0 && this.$appHeight < 575) {
+      this.isSmallMobile = ls.appInfo.isSmallMobile;
+
+      if (!ls.appInfo.isSmallMobile && this.$appHeight < 575) {
         this.$dialog
           .confirm({
             title: "是否适配小屏?",
@@ -417,22 +418,18 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.isSmallMobile = 1;
+            this.isSmallMobile = true;
 
-            appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
-
-            this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+            ls.appInfo.isSmallMobile = this.isSmallMobile;
+            this.$appSetLocalStorage("appConfigInfo", ls);
           })
           .catch(() => {
             // on cancel
-            this.isSmallMobile = 0;
+            this.isSmallMobile = false;
 
-            appConfigInfo.appInfo.isSmallMobile = this.isSmallMobile;
-
-            this.$appSetLocalStorage("appConfigInfo", appConfigInfo);
+            ls.appInfo.isSmallMobile = this.isSmallMobile;
+            this.$appSetLocalStorage("appConfigInfo", ls);
           });
-      } else {
-        this.isSmallMobile = appConfigInfo.appInfo.isSmallMobile;
       }
     },
     onRankingTabsClick: function (e) {

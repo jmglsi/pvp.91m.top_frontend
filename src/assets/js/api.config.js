@@ -6,6 +6,15 @@ Vue.prototype.$qs = qs;
 import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
 
+import Aegis from "aegis-web-sdk";
+new Aegis({
+    id: "mr3jG4N5Gdv9B6Op8V",
+    uin: cookie.get("openId") || "",
+    reportApiSpeed: true,
+    reportAssetSpeed: true,
+    spa: true,
+});
+
 import axios from 'axios';
 
 let nowHost = location.host,

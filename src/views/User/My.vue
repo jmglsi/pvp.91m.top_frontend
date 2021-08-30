@@ -234,7 +234,21 @@
               @click="$message.info($appMsg.info[1015])"
               class="app-5ddd8715c99cbf00677a622145b3c163"
             >
-              未设置
+              <van-button
+                round
+                icon="question-o"
+                color="red"
+                size="mini"
+                class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
+                @click="
+                  $appPush({
+                    path: '/search',
+                    query: { q: '国服认证', refresh: 1 },
+                  })
+                "
+              >
+                国服认证
+              </van-button>
             </div>
           </van-collapse-item>
         </van-collapse>
@@ -257,8 +271,9 @@
         <van-cell
           v-if="isLogin"
           icon="exchange"
-          title="绑定第三方"
-          value="快速登录"
+          title="第三方授权"
+          label="绑定以后可以快速登录"
+          value="查看"
           is-link
           @click="$appPush({ path: '/login' })"
         />
@@ -297,7 +312,7 @@
         <van-cell
           icon="/img/app-icons/coffee.png"
           title="请我喝杯咖啡"
-          label="制作不易，支持一下~"
+          label="制作不易，支持一下～"
           value="爱发电"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
           is-link
@@ -594,7 +609,7 @@ export default {
   },
   mounted() {
     this.mobileInfo.isSmallMobile =
-      Boolean(parseInt(localStorage.getItem("isSmallMobile"))) || false;
+      localStorage.getItem("isSmallMobile") || false;
 
     this.getWebAccountInfo();
   },

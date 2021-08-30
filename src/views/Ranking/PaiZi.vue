@@ -19,9 +19,7 @@
           <template v-slot="{ row }">
             <div
               :class="
-                isSmallMobile == 1
-                  ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4'
-                  : null
+                isSmallMobile ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
             >
               <img
@@ -98,8 +96,8 @@ export default {
   },
   props: {
     isSmallMobile: {
-      type: Number,
-      default: 0,
+      type: Boolean,
+      default: false,
     },
     bid: {
       type: Number,

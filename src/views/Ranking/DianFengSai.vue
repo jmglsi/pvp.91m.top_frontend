@@ -35,7 +35,7 @@
             <div
               :style="{ position: 'relative' }"
               :class="
-                isSmallMobile == 1
+                isSmallMobile
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-0b22b207c2b785ceff7a241980f23d14'
                   : null
               "
@@ -388,8 +388,8 @@ export default {
   },
   props: {
     isSmallMobile: {
-      type: Number,
-      default: 0,
+      type: Boolean,
+      default: false,
     },
     bid: {
       type: Number,

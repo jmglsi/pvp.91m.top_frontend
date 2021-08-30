@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import md5 from 'js-md5'
+import md5 from "js-md5";
 
 export default {
   name: "LoginHome",
@@ -147,13 +147,10 @@ export default {
       },
     };
   },
-  watch: {
-    $route: function () {
-      this.openId = this.$cookie.get("openId") || "";
-      this.accessToken = this.$cookie.get("accessToken") || "";
-    },
-  },
-  created() {
+  mounted() {
+    this.openId = this.$cookie.get("openId") || "";
+    this.accessToken = this.$cookie.get("accessToken") || "";
+
     if (this.accessToken) this.getWebAccountInfo(2);
   },
   methods: {

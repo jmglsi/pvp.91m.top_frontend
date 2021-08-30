@@ -51,8 +51,6 @@
 </template>
 
 <script>
-import Aegis from "aegis-web-sdk";
-
 export default {
   name: "App",
   watch: {
@@ -174,24 +172,25 @@ export default {
             tempAccessToken = q.tempAccessToken || "",
             oauthType = q.oauthType || "",
             tempText = q.tempText || "",
-            ls = this.$appGetLocalStorage("appConfigInfo");
+            ls = this.$appConfigInfo;
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;
 
           this.$appConfigInfo.appInfo = {
-            isReducedMode: ls.appInfo.isReducedMode || 0,
-            isSmallMobile: ls.appInfo.isSmallMobile || 0,
-            pwa: ls.appInfo.pwa || 0,
-            name: appInfo.name || "苏苏的荣耀助手",
-            updateTime: appInfo.updateTime || 0,
-            tempText: appInfo.tempText || "",
-            version: appInfo.version || 0,
-            script: appInfo.script,
+            isReducedMode: ls.appInfo.isReducedMode || false,
+            isSmallMobile: ls.appInfo.isSmallMobile || false,
+            newsPush: ls.appInfo.newsPush || true,
             link: appInfo.link,
+            name: appInfo.name || "苏苏的荣耀助手",
+            pwa: ls.appInfo.pwa || 0,
+            script: appInfo.script,
+            tempText: appInfo.tempText || "",
+            updateTime: appInfo.updateTime || 0,
+            version: appInfo.version || 0,
             search: {
-              placeholder: appInfo.search.placeholder,
               img: appInfo.search.img,
+              placeholder: appInfo.search.placeholder,
               to: appInfo.search.to,
               url: appInfo.search.url,
             },
@@ -212,10 +211,7 @@ export default {
           }
 
           if (appInfo.version != ls.appInfo.version) {
-            this.$appConfigInfo.tipsInfo.rankingTips = 0;
-
             this.$appDelectLocalStorage("appConfigInfo");
-
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
 
@@ -270,14 +266,6 @@ export default {
             //快速登录的 7天
           }
         });
-
-      new Aegis({
-        id: "mr3jG4N5Gdv9B6Op8V",
-        uin: this.$cookie.get("openId") || "",
-        reportApiSpeed: true,
-        reportAssetSpeed: true,
-        spa: true,
-      });
     },
   },
 };

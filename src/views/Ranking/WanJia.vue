@@ -21,7 +21,7 @@
             <div
               :style="{ position: 'relative' }"
               :class="
-                isSmallMobile == 1
+                isSmallMobile
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
                   : null
               "
@@ -72,7 +72,7 @@
           <template v-slot="{ row }">
             <div
               :class="
-                isSmallMobile == 1
+                isSmallMobile
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
                   : null
               "
@@ -255,8 +255,8 @@ export default {
   name: "RankingWanJia",
   props: {
     isSmallMobile: {
-      type: Number,
-      default: 0,
+      type: Boolean,
+      default: false,
     },
     bid: {
       type: Number,

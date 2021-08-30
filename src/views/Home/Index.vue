@@ -111,18 +111,18 @@ export default {
       let q = this.$route.query,
         pwa = parseInt(q.pwa) || 0,
         type = parseInt(q.type) || 0,
-        version = parseInt(q.v) || 1609430400;
+        version = parseInt(q.v) || 1609430400,
+        ls = this.$appConfigInfo;
 
       this.tabsInfo.model = type;
 
-      if (this.$appConfigInfo.appInfo.version > 0) {
-        this.appInfo = this.$appConfigInfo.appInfo;
+      if (ls.appInfo.version > 0) {
+        this.appInfo = ls.appInfo;
       }
 
       if (pwa == 0) return;
-      this.$appConfigInfo.appInfo.pwa = pwa;
-
-      this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+      ls.appInfo.pwa = pwa;
+      this.$appSetLocalStorage("appConfigInfo", ls);
 
       let updateDay = ((this.$appTs - version) / 86400).toFixed(2);
 

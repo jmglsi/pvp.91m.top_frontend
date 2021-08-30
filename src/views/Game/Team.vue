@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$appPushBack()"
+        @click-left="$appPush({ path: '/my', query: { refresh: 0 } })"
         @click-right="onNavBarRightClick"
         left-text="返回"
         title="队伍"

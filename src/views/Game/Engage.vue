@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$appPushBack({ path: '/my', query: { refresh: 0 } })"
+        @click-left="$appPush({ path: '/my', query: { refresh: 0 } })"
         left-text="返回"
         title="交战"
         class="game-7140a921b48604a7db01e6b676e34174"

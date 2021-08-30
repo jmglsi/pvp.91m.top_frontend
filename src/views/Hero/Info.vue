@@ -398,8 +398,9 @@
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
-          >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
+          {{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}
+        </van-tabbar-item>
         <van-tabbar-item
           icon="//ae05.alicdn.com/kf/H6152796593bb4938954de5b92ed276caH.png"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
@@ -410,14 +411,16 @@
                 })
               : $message.info($appMsg.info[1006])
           "
-          >稷下图书馆</van-tabbar-item
         >
+          稷下图书馆
+        </van-tabbar-item>
         <van-tabbar-item
           icon="//ae04.alicdn.com/kf/H12ed60f16a404fc5a6422c0d31a5b8935.png"
-          to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4"
+          to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
-          >加群讨论</van-tabbar-item
         >
+          加群讨论
+        </van-tabbar-item>
       </van-tabbar>
     </div>
   </div>

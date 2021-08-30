@@ -28,7 +28,7 @@
               <div
                 :style="{ position: 'relative' }"
                 :class="
-                  isSmallMobile == 1
+                  isSmallMobile
                     ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
                     : null
                 "
@@ -67,7 +67,7 @@
               <div
                 :style="{ position: 'relative' }"
                 :class="
-                  isSmallMobile == 1
+                  isSmallMobile
                     ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
                     : null
                 "
@@ -233,8 +233,8 @@ export default {
   name: "RankingGuanXi",
   props: {
     isSmallMobile: {
-      type: Number,
-      default: 0,
+      type: Boolean,
+      default: false,
     },
     heroName: {
       type: String,

@@ -9,25 +9,27 @@ Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
 Vue.prototype.$appConfigInfo = {
     appInfo: {
-        isReducedMode: 0,
-        isSmallMobile: 0,
-        pwa: 0,
-        name: "苏苏的荣耀助手",
-        updateTime: 0,
-        tempText: "",
-        version: 0,
-        script: [],
+        isReducedMode: false,
+        isSmallMobile: false,
+        newsPush: true,
         link: [],
+        name: "苏苏的荣耀助手",
+        pwa: 0,
+        script: [],
+        tempText: "",
+        updateTime: 0,
+        version: 0,
         search: {
-            placeholder: "",
             img: null,
+            placeholder: "",
             to: null,
             url: null,
         },
     },
     tipsInfo: {
-        rankingTips: 0,
-        reducedFilter: 0,
+        dfsTips: false,
+        skillTips: false,
+        wanjiaTips: false
     },
     updateInfo: {
         timeout: 43200
@@ -134,18 +136,18 @@ Vue.prototype.$appPush = function(url = { path: '/' }) {
 
 Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }) {
     let previousPage = this.$store.state.previousPage,
-        nowUrl = previousPage[previousPage.length - 1],
-        lastUrl = null;
+        lastUrl = previousPage[previousPage.length - 1],
+        nowUrl = null;
 
     if (previousPage.length < 2) {
-        lastUrl = url;
+        nowUrl = url;
     } else {
-        /miniapp|friends|hero(.*?)info|game(.*?)bp/i.test(nowUrl.path) ? lastUrl = url : lastUrl = nowUrl;
-        lastUrl.query.refresh = 1;
+        /miniapp|friends|hero(.*?)info/i.test(lastUrl.path) ? nowUrl = url : nowUrl = lastUrl;
+        nowUrl.query.refresh = 1;
         //防止套娃
     }
 
-    this.$router.push(lastUrl);
+    this.$router.push(nowUrl);
 }
 
 Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' }, urlType = 0) {
