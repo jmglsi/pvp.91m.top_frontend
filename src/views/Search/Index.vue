@@ -79,11 +79,11 @@
                               : {}
                           "
                           class="search-f43418d85f50da28b3a9c1e780237105"
-                        >
-                          {{
+                          >{{
                             index + 1 - tableData.search.hotKeywords[0].topNum
-                          }} </span
-                        >&nbsp;
+                          }}</span
+                        >
+                        &nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                           <img
@@ -133,11 +133,11 @@
                               : {}
                           "
                           class="search-f43418d85f50da28b3a9c1e780237105"
-                        >
-                          {{
+                          >{{
                             index + 1 - tableData.search.hotKeywords[1].topNum
-                          }} </span
-                        >&nbsp;
+                          }}</span
+                        >
+                        &nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                         </span>
@@ -180,11 +180,11 @@
                               : {}
                           "
                           class="search-f43418d85f50da28b3a9c1e780237105"
-                        >
-                          {{
+                          >{{
                             index + 1 - tableData.search.hotKeywords[2].topNum
-                          }} </span
-                        >&nbsp;
+                          }}</span
+                        >
+                        &nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                         </span>
@@ -266,7 +266,9 @@
             :label="data.label"
             :value="data.value"
             is-link
-            @click="$appOpenUrl('是否打开外部链接?', NULL, { path: data.url })"
+            @click="
+              $appOpenUrl('是否打开外部链接?', NULL, { path: data.url }, 0)
+            "
             icon-prefix="search-a64976150427434c778228d76650f6fb"
             class="search-869ab9bf85478a49725209693c5760e5"
           />
@@ -334,7 +336,7 @@
               <div
                 :class="
                   tableData.heroInfo.banRate[2] >= 30
-                    ? 'ranking-bda9643ac6601722a28f238714274da4'
+                    ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -354,7 +356,7 @@
                 :class="
                   tableData.heroInfo.pickRate[2] >= 20 &&
                   tableData.heroInfo.winRate[2] >= 50
-                    ? 'ranking-48d6215903dff56238e52e8891380c8f'
+                    ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -373,7 +375,7 @@
               <div
                 :class="
                   tableData.heroInfo.bpRate[2] >= 70
-                    ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -394,7 +396,7 @@
                   (tableData.heroInfo.banRate[2] >= 30 ||
                     tableData.heroInfo.pickRate[2] >= 20) &&
                   tableData.heroInfo.winRate[2] >= 50
-                    ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
+                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -433,7 +435,7 @@
               <div
                 :class="
                   tableData.heroInfo.banRate[0] >= 30
-                    ? 'ranking-bda9643ac6601722a28f238714274da4'
+                    ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -445,7 +447,7 @@
               <div
                 :class="
                   tableData.heroInfo.banRate[1] >= 30
-                    ? 'ranking-bda9643ac6601722a28f238714274da4'
+                    ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -457,7 +459,7 @@
               <div
                 :class="
                   tableData.heroInfo.banRate[2] >= 30
-                    ? 'ranking-bda9643ac6601722a28f238714274da4'
+                    ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -471,7 +473,7 @@
                 :class="
                   tableData.heroInfo.pickRate[0] >= 20 &&
                   tableData.heroInfo.winRate[0] >= 50
-                    ? 'ranking-48d6215903dff56238e52e8891380c8f'
+                    ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -484,7 +486,7 @@
                 :class="
                   tableData.heroInfo.pickRate[1] >= 20 &&
                   tableData.heroInfo.winRate[1] >= 50
-                    ? 'ranking-48d6215903dff56238e52e8891380c8f'
+                    ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -497,7 +499,7 @@
                 :class="
                   tableData.heroInfo.pickRate[2] >= 20 &&
                   tableData.heroInfo.winRate[2] >= 50
-                    ? 'ranking-48d6215903dff56238e52e8891380c8f'
+                    ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -514,7 +516,7 @@
               <div
                 :class="
                   tableData.heroInfo.bpRate[0] >= 70
-                    ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -526,7 +528,7 @@
               <div
                 :class="
                   tableData.heroInfo.bpRate[1] >= 70
-                    ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -538,7 +540,7 @@
               <div
                 :class="
                   tableData.heroInfo.bpRate[2] >= 70
-                    ? 'ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -553,7 +555,7 @@
                   (tableData.heroInfo.banRate[0] >= 30 ||
                     tableData.heroInfo.pickRate[0] >= 20) &&
                   tableData.heroInfo.winRate[0] >= 50
-                    ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
+                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -567,7 +569,7 @@
                   (tableData.heroInfo.banRate[1] >= 30 ||
                     tableData.heroInfo.pickRate[1] >= 20) &&
                   tableData.heroInfo.winRate[1] >= 50
-                    ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
+                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -581,7 +583,7 @@
                   (tableData.heroInfo.banRate[2] >= 30 ||
                     tableData.heroInfo.pickRate[2] >= 20) &&
                   tableData.heroInfo.winRate[2] >= 50
-                    ? 'ranking-9f27410725ab8cc8854a2769c7a516b8'
+                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
@@ -922,18 +924,28 @@ export default {
       if (e == 1) {
         this.showInfo.skillMenu = true;
       } else if (e == 2) {
-        this.$appOpenUrl("是否打开外部链接?", "NGA @小熊de大熊", {
-          path: "//bbs.nga.cn/read.php?tid=12677614",
-        });
+        this.$appOpenUrl(
+          "是否打开外部链接?",
+          "NGA @小熊de大熊",
+          {
+            path: "//bbs.nga.cn/read.php?tid=12677614",
+          },
+          0
+        );
       } else if (e == 3) {
         this.showInfo.fightPowerMenu = true;
       } else if (e == 4) {
-        this.$appOpenUrl("是否打开外部链接?", "玩加电竞", {
-          path:
-            "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
-            heroInfo.id +
-            "&tab_type=5&gm=kog&gametype=6&tag_id=0",
-        });
+        this.$appOpenUrl(
+          "是否打开外部链接?",
+          "玩加电竞",
+          {
+            path:
+              "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
+              heroInfo.id +
+              "&tab_type=5&gm=kog&gametype=6&tag_id=0",
+          },
+          0
+        );
       } else if (e == 5) {
         this.$appPush({
           path: "/ranking",

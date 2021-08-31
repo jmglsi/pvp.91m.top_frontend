@@ -12,9 +12,9 @@
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
-          <span class="hero-d5d3db1765287eef77d7927cc956f50a">
-            {{ replay.title }}
-          </span>
+          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{
+            replay.title
+          }}</span>
         </template>
       </van-nav-bar>
     </div>
@@ -85,9 +85,14 @@
                     : null
                 "
                 @click="
-                  $appOpenUrl('是否查看装备更新记录?', 'NGA @破笼之鸟', {
-                    path: '//ngabbs.com/read.php?tid=19902976',
-                  })
+                  $appOpenUrl(
+                    '是否查看装备更新记录?',
+                    'NGA @破笼之鸟',
+                    {
+                      path: '//ngabbs.com/read.php?tid=19902976',
+                    },
+                    0
+                  )
                 "
                 class="hero-0a96464cb313aab9cc51e5aa61b0193f"
               />
@@ -103,7 +108,8 @@
               size="mini"
               class="hero-ce50a09343724eb82df11390e2c1de18"
               >{{ data.heroKda }}</van-tag
-            >&nbsp;
+            >
+            &nbsp;
             <van-tag
               round
               type="primary"
@@ -248,22 +254,37 @@ export default {
       }
 
       if (item.value == 1) {
-        this.$appOpenUrl("是否打开对局详情?", "需要安装王者营地", {
-          path: replayInfo.hippyUrl,
-        });
+        this.$appOpenUrl(
+          "是否打开对局详情?",
+          "需要安装王者营地",
+          {
+            path: replayInfo.hippyUrl,
+          },
+          0
+        );
       }
 
       if (item.value == 2) {
-        this.$appOpenUrl("是否打开对局回顾?", "需要安装王者营地", {
-          path: replayInfo.replayUrl,
-        });
+        this.$appOpenUrl(
+          "是否打开对局回顾?",
+          "需要安装王者营地",
+          {
+            path: replayInfo.replayUrl,
+          },
+          0
+        );
       }
 
       if (item.value == 3) {
         if (replayInfo.inscriptionUrl) {
-          this.$appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
-            path: replayInfo.inscriptionUrl,
-          });
+          this.$appOpenUrl(
+            "是否查看玩家铭文?",
+            "需要安装王者营地",
+            {
+              path: replayInfo.inscriptionUrl,
+            },
+            0
+          );
         }
       }
     },

@@ -1,7 +1,5 @@
 import Vue from 'vue';
 
-import '@vant/touch-emulator';
-
 import {
     ActionSheet,
     Button,
@@ -45,6 +43,7 @@ import {
     Picker,
     Sticky
 } from 'vant';
+import '@vant/touch-emulator';
 
 Vue
     .use(ActionSheet)

@@ -144,16 +144,21 @@
           class="miniapp-53eb3ce1747e8a37d3f912fab5a6f24e"
           @click="
             qrcodeInfo.url
-              ? $appOpenUrl('是否打开外部链接?', null, { path: qrcodeInfo.url })
+              ? $appOpenUrl(
+                  '是否打开外部链接?',
+                  null,
+                  { path: qrcodeInfo.url },
+                  0
+                )
               : $message.warning($appMsg.warning[1006])
           "
         />
 
         <div class="miniapp-aa79b87e9649590354fb9181f371e5bc">
           关注
-          <span class="miniapp-9ad284a8297802bd67af0356d21ae35f">
-            {{ qrcodeInfo.text }}
-          </span>
+          <span class="miniapp-9ad284a8297802bd67af0356d21ae35f">{{
+            qrcodeInfo.text
+          }}</span>
         </div>
       </van-dialog>
     </div>

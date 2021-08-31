@@ -7,20 +7,25 @@ import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
 
 import Aegis from "aegis-web-sdk";
-new Aegis({
-    id: "mr3jG4N5Gdv9B6Op8V",
-    uin: cookie.get("openId") || "",
-    reportApiSpeed: true,
-    reportAssetSpeed: true,
-    spa: true,
-});
 
 import axios from 'axios';
 
 let nowHost = location.host,
     nowUrl = null;
 
-nowHost.match(/127\.0\.0\.1|localhost/) ? axios.defaults.baseURL = "//localhost/api.91m.top" : axios.defaults.baseURL = "//api.91m.top";
+if (nowHost.match(/127\.0\.0\.1|localhost/)) {
+    axios.defaults.baseURL = "//localhost/api.91m.top";
+} else {
+    axios.defaults.baseURL = "//api.91m.top";
+
+    new Aegis({
+        id: "mr3jG4N5Gdv9B6Op8V",
+        uin: cookie.get("openId") || "",
+        reportApiSpeed: true,
+        reportAssetSpeed: true,
+        spa: true,
+    });
+}
 axios.interceptors.request.use(function(config) {
     let data = qs.parse(config.data);
 

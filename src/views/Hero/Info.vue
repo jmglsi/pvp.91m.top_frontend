@@ -95,7 +95,7 @@
         :startPosition="showInfo.imageIndex"
         class="app-0ca41257ee36e86e5d89591c82113263"
       >
-        <template v-slot:cover>
+        <template #cover>
           <span class="hero-b5741c8457973b008c424c6f94ff3901">
             长按或右键保存图片
           </span>
@@ -129,6 +129,7 @@
             <span
               class="
                 app-0fc3cfbc27e91ea60a787de13dae3e3c
+                app-5f19eaf71f40d74d66be84db52b3ad87
                 hero-0fc3cfbc27e91ea60a787de13dae3e3c
               "
               >{{ hero.info.equMoneyMin || 0 }}</span
@@ -145,6 +146,7 @@
             <span
               class="
                 app-0fc3cfbc27e91ea60a787de13dae3e3c
+                app-5f19eaf71f40d74d66be84db52b3ad87
                 hero-0fc3cfbc27e91ea60a787de13dae3e3c
               "
               >{{ hero.info.usedtime || 0 }}</span
@@ -190,6 +192,7 @@
               <span
                 class="
                   app-0fc3cfbc27e91ea60a787de13dae3e3c
+                  app-5f19eaf71f40d74d66be84db52b3ad87
                   hero-0fc3cfbc27e91ea60a787de13dae3e3c
                 "
                 >{{ hero.info.skill.preview[0].pickRate }}%</span
@@ -205,6 +208,7 @@
               <span
                 class="
                   app-0fc3cfbc27e91ea60a787de13dae3e3c
+                  app-5f19eaf71f40d74d66be84db52b3ad87
                   hero-0fc3cfbc27e91ea60a787de13dae3e3c
                 "
                 >{{ hero.info.skill.preview[1].pickRate }}%</span
@@ -350,9 +354,9 @@
               width="50"
               height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
-              {{ circle.info.vote[0].text }}
-            </span>
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+              circle.info.vote[0].text
+            }}</span>
           </van-grid-item>
           <van-grid-item
             class="hero-59c25466342abdb6746988b245f3a5a6"
@@ -365,9 +369,9 @@
               width="50"
               height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
-              {{ circle.info.vote[1].text }}
-            </span>
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
+              circle.info.vote[1].text
+            }}</span>
           </van-grid-item>
           <van-cell
             title="注意事项"
@@ -398,17 +402,21 @@
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
+          >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
-          {{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}
-        </van-tabbar-item>
         <van-tabbar-item
           icon="//ae05.alicdn.com/kf/H6152796593bb4938954de5b92ed276caH.png"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId
-              ? $appOpenUrl('是否打开外部链接?', null, {
-                  path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
-                })
+              ? $appOpenUrl(
+                  '是否打开外部链接?',
+                  null,
+                  {
+                    path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
+                  },
+                  0
+                )
               : $message.info($appMsg.info[1006])
           "
         >

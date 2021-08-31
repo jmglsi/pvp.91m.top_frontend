@@ -26,11 +26,11 @@
         title="设置"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
-        <van-cell title="精简模式" label="优化排行界面的加载速度">
+        <van-cell title="精简模式" label="优化排行界面的渲染速度">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
-                v-model="appConfigInfo.appInfo.isReducedMode"
+                v-model="$appConfigInfo.appInfo.isReducedMode"
                 @change="onReducedModeChange"
               />
             </span>
@@ -40,17 +40,27 @@
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
-                v-model="appConfigInfo.appInfo.isSmallMobile"
+                v-model="$appConfigInfo.appInfo.isSmallMobile"
                 @change="onSmallMobileChange"
               />
             </span>
           </template>
         </van-cell>
-        <van-cell title="[系统] 公告推送" label="群内将自动推送最新公告">
+        <van-cell title="打开链接" label="打开外部链接时会有提示">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
-                v-model="appConfigInfo.appInfo.newsPush"
+                v-model="$appConfigInfo.appInfo.openUrl"
+                @change="onOpenUrlChange"
+              />
+            </span>
+          </template>
+        </van-cell>
+        <van-cell title="公告推送" label="群内将自动推送最新公告">
+          <template #right-icon>
+            <span class="setting-a833c0959e80ada90f239fb707903be2">
+              <van-switch
+                v-model="$appConfigInfo.appInfo.newsPush"
                 :disabled="true"
               />
             </span>
@@ -84,8 +94,13 @@
           :value="$appCountry ? '国内' : '国外'"
           @click="
             $appCountry
-              ? $appOpenUrl('是否切至国外?', null, { path: '//pvp.r18.games' })
-              : $appOpenUrl('是否切至国内?', null, { path: '//pvp.91m.top' })
+              ? $appOpenUrl(
+                  '是否切至国外?',
+                  null,
+                  { path: '//pvp.r18.games' },
+                  0
+                )
+              : $appOpenUrl('是否切至国内?', null, { path: '//pvp.91m.top' }, 0)
           "
           is-link
         />
@@ -123,6 +138,7 @@ export default {
         appInfo: {
           isSmallMobile: false,
           isReducedMode: false,
+          openUrl: false,
           newsPush: true,
           updateTime: 0,
           version: 0,
@@ -152,22 +168,26 @@ export default {
         });
       }
 
-      this.appConfigInfo.appInfo.isReducedMode = e;
-
       ls.appInfo.isReducedMode = e;
       this.$appSetLocalStorage("appConfigInfo", ls);
 
-      this.$message.success(this.$appMsg.success[1004]);
+      this.$message.success(this.$appMsg.success[1000]);
     },
     onSmallMobileChange: function (e) {
       let ls = this.$appConfigInfo;
 
-      this.appConfigInfo.appInfo.isSmallMobile = e;
-
       ls.appInfo.isSmallMobile = e;
       this.$appSetLocalStorage("appConfigInfo", ls);
 
-      this.$message.success(this.$appMsg.success[1004]);
+      this.$message.success(this.$appMsg.success[1000]);
+    },
+    onOpenUrlChange: function (e) {
+      let ls = this.$appConfigInfo;
+
+      ls.appInfo.openUrl = e;
+      this.$appSetLocalStorage("appConfigInfo", ls);
+
+      this.$message.success(this.$appMsg.success[1000]);
     },
     onDelectClick: function (e) {
       if (e == 0) {

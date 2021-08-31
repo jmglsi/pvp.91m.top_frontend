@@ -5,7 +5,7 @@
     </div>
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
-      <vxe-grid
+      <vxe-table
         ref="refDianFengSai"
         id="refDianFengSai"
         :loading="tableData.loading"
@@ -16,14 +16,14 @@
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
-        <vxe-table-column
+        <vxe-column
           title="英雄"
           field="allScore"
           fixed="left"
           width="75"
           sortable
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <van-tag
               v-if="row.tag.text"
               :color="row.tag.color"
@@ -32,6 +32,7 @@
               class="app-e4d23e841d8e8804190027bce3180fa5"
               >{{ row.tag.text }}</van-tag
             >
+
             <div
               :style="{ position: 'relative' }"
               :class="
@@ -66,6 +67,7 @@
                 <span
                   class="
                     app-0fc3cfbc27e91ea60a787de13dae3e3c
+                    app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-043052eea2d064cab23119e56f4f640e
                   "
                   >{{ row.skill.preview[0].pickRate }}%</span
@@ -82,6 +84,7 @@
                 <span
                   class="
                     app-0fc3cfbc27e91ea60a787de13dae3e3c
+                    app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-dabb6e25dffefe5b4821b7062afbdaef
                   "
                   >{{ row.skill.preview[1].pickRate }}%</span
@@ -89,17 +92,17 @@
               </div>
             </div>
           </template>
-        </vxe-table-column>
+        </vxe-column>
 
-        <vxe-table-column title="#" type="seq" width="50" />
+        <vxe-column title="#" type="seq" width="50" />
 
-        <vxe-table-column
+        <vxe-column
           title="优先级"
           field="updateIndex"
           :width="listWidth"
           sortable
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
               row.updateType == 0 ? "-" : Math.abs(row.updateIndex)
             }}</span>
@@ -111,10 +114,10 @@
               class="app-db21bca782a535e91eb87f56b8abdc45"
             />
           </template>
-        </vxe-table-column>
+        </vxe-column>
 
-        <vxe-table-column title="出场越低,波动越大 (%)">
-          <vxe-table-column
+        <vxe-table-colgroup title="出场越低,波动越大 (%)">
+          <vxe-column
             title="禁用"
             field="allBanRate"
             :filters="[{ data: 0 }]"
@@ -122,7 +125,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -135,8 +138,8 @@
               />
               %
             </template>
-          </vxe-table-column>
-          <vxe-table-column
+          </vxe-column>
+          <vxe-column
             title="出场"
             field="allPickRate"
             :filters="[{ data: 0 }]"
@@ -144,7 +147,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -157,8 +160,8 @@
               />
               %
             </template>
-          </vxe-table-column>
-          <vxe-table-column
+          </vxe-column>
+          <vxe-column
             title="禁选"
             field="allBPRate"
             :filters="[{ data: 1, checked: true }]"
@@ -166,7 +169,7 @@
             width="100"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -179,8 +182,8 @@
               />
               %
             </template>
-          </vxe-table-column>
-          <vxe-table-column
+          </vxe-column>
+          <vxe-column
             title="胜率"
             field="allWinRate"
             :filters="[{ data: 0 }]"
@@ -188,7 +191,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -201,124 +204,124 @@
               />
               %
             </template>
-          </vxe-table-column>
-        </vxe-table-column>
+          </vxe-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column title="牌子 (%)">
-          <vxe-table-column
+        <vxe-table-colgroup title="牌子 (%)">
+          <vxe-column
             title="全部"
             field="allBrandRate"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="金牌"
             field="evaluateGoldRate"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="银牌"
             field="evaluateSilverRate"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column title="MVP (%)">
-          <vxe-table-column
+        <vxe-table-colgroup title="MVP (%)">
+          <vxe-column
             title="全部"
             field="allMvpRate"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="胜方"
             field="winMvpRate"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="败方"
             field="loseMvpRate"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column
+        <vxe-column
           title="承伤"
           field="totalBeHurtedCntPerMin"
           :width="listWidth"
           sortable
         />
 
-        <vxe-table-column title="伤害">
-          <vxe-table-column
+        <vxe-table-colgroup title="伤害">
+          <vxe-column
             title="全部"
             field="totalOutputPerMin"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="对人"
             field="totalHurtHeroCntPerMin"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column title="金币">
-          <vxe-table-column
+        <vxe-table-colgroup title="金币">
+          <vxe-column
             title="全部"
             field="equMoneyOverflow"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="分均"
             field="equMoneyMin"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column title="KDA">
-          <vxe-table-column
+        <vxe-table-colgroup title="KDA">
+          <vxe-column
             title="击杀"
             field="killCnt"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="死亡"
             field="deadCnt"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="助攻"
             field="assistCnt"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column title="其他">
-          <vxe-table-column
+        <vxe-table-colgroup title="其他">
+          <vxe-column
             title="参团"
             field="joinGamePercent"
             :width="listWidth"
             sortable
           />
-          <vxe-table-column
+          <vxe-column
             title="时长"
             field="usedtime"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
-      </vxe-grid>
+        </vxe-table-colgroup>
+      </vxe-table>
     </div>
 
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
@@ -584,19 +587,19 @@ export default {
 
       if (column.property == "allBanRate") {
         if (row.allBanRate >= color.ban) {
-          return "ranking-bda9643ac6601722a28f238714274da4";
+          return "app-bda9643ac6601722a28f238714274da4";
         }
       }
 
       if (column.property == "allPickRate") {
         if (row.allPickRate >= color.pick && row.allWinRate >= color.win) {
-          return "ranking-48d6215903dff56238e52e8891380c8f";
+          return "app-48d6215903dff56238e52e8891380c8f";
         }
       }
 
       if (column.property == "allBPRate") {
         if (row.allBPRate >= color.bp) {
-          return "ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
+          return "app-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
         }
       }
 
@@ -605,7 +608,7 @@ export default {
           (row.allBanRate >= color.ban || row.allPickRate >= color.pick) &&
           row.allWinRate >= color.win
         ) {
-          return "ranking-9f27410725ab8cc8854a2769c7a516b8";
+          return "app-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
     },
@@ -663,15 +666,25 @@ export default {
       }
 
       if (item.value == 2) {
-        this.$appOpenUrl("是否查看英雄更新记录?", "NGA @EndMP", {
-          path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
-        });
+        this.$appOpenUrl(
+          "是否查看英雄更新记录?",
+          "NGA @EndMP",
+          {
+            path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
+          },
+          0
+        );
       }
 
       if (item.value == 3) {
-        this.$appOpenUrl("是否打开外部链接?", "NGA @小熊de大熊", {
-          path: "//bbs.nga.cn/read.php?tid=12677614",
-        });
+        this.$appOpenUrl(
+          "是否打开外部链接?",
+          "NGA @小熊de大熊",
+          {
+            path: "//bbs.nga.cn/read.php?tid=12677614",
+          },
+          0
+        );
       }
     },
   },

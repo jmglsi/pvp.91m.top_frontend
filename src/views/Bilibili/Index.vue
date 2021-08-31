@@ -20,7 +20,7 @@
     </div>
 
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
-      <vxe-grid
+      <vxe-table
         ref="refBilibili"
         :isLoading="tableData.loading"
         :data="tableData.result.rows"
@@ -69,7 +69,7 @@
         />
 
         <vxe-table-column title="状态" field="is_running" width="75" />
-      </vxe-grid>
+      </vxe-table>
     </div>
 
     <div class="bilibili-71f262d796bed1ab30e8a2d5a8ddee6f">

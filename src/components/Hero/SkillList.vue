@@ -1,13 +1,13 @@
 <template>
   <div class="hero-skill app-skill">
-    <vxe-grid
+    <vxe-table
       ref="refHeroSkill"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       height="543"
     >
       <vxe-table-column title="技能" field="score" fixed="left" width="50">
-        <template v-slot="{ row }">
+        <template #default="{ row }">
           <img
             v-lazy="row.img"
             width="25"
@@ -19,30 +19,31 @@
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-column title="比率 (%)">
+      <vxe-table-colgroup title="比率 (%)">
         <vxe-table-column
           title="出场"
           field="pickRate"
           :width="listWidth"
           sortable
         />
+
         <vxe-table-column
           title="胜率"
           field="winRate"
           :width="listWidth"
           sortable
         />
-      </vxe-table-column>
+      </vxe-table-colgroup>
 
-      <vxe-table-column title="MVP (%)">
+      <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
           title="净胜"
           field="mvpRate"
           :width="listWidth"
           sortable
         />
-      </vxe-table-column>
-    </vxe-grid>
+      </vxe-table-colgroup>
+    </vxe-table>
   </div>
 </template>
 

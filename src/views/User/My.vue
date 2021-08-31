@@ -71,9 +71,8 @@
                 color="linear-gradient(to right, #4bb0ff, #6149f6)"
                 @click="$appPush({ path: '/login' })"
                 class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
+                >{{ login.text }}</van-button
               >
-                {{ login.text }}
-              </van-button>
             </div>
           </template>
         </van-cell>
@@ -117,7 +116,7 @@
           value="自豪的使用语雀"
           is-link
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.question })
+            $appOpenUrl('是否打开外部链接?', null, { path: url.question }, 0)
           "
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
@@ -134,9 +133,9 @@
           >
             <template #text>
               <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
-                  {{ loginInfo.statistics.team }}
-                </span>
+                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
+                  loginInfo.statistics.team
+                }}</span>
                 <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
               </div>
             </template>
@@ -149,9 +148,9 @@
           >
             <template #text>
               <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
-                  {{ loginInfo.statistics.label }}
-                </span>
+                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
+                  loginInfo.statistics.label
+                }}</span>
                 <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
               </div>
             </template>
@@ -175,9 +174,9 @@
             <span class="my-af99c9298d1eb69981a035d0a15afa20">
               <img v-lazy="loginInfo.rank.starIcon" width="50" height="50" />
               <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="my-7121ba1bc1276c3bb6df96b333a16760">
-                {{ loginInfo.rank.score }}
-              </span>
+              <span class="my-7121ba1bc1276c3bb6df96b333a16760">{{
+                loginInfo.rank.score
+              }}</span>
             </span>
           </template>
         </van-cell>
@@ -291,7 +290,9 @@
           title="感谢各位伙伴"
           value="语雀"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.friends })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.friends }, 0)
+          "
         />
         <van-cell
           icon="good-job-o"
@@ -299,7 +300,12 @@
           value="NGA"
           is-link
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.openSource[0] })
+            $appOpenUrl(
+              '是否打开外部链接?',
+              null,
+              { path: url.openSource[0] },
+              0
+            )
           "
         />
         <van-cell
@@ -307,7 +313,9 @@
           title="意见建议反馈"
           value="吐个槽"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.support })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.support }, 0)
+          "
         />
         <van-cell
           icon="/img/app-icons/coffee.png"
@@ -316,7 +324,9 @@
           value="爱发电"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
           is-link
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.afdian })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.afdian }, 0)
+          "
         />
       </van-cell-group>
     </div>
@@ -353,7 +363,9 @@
       >
         <van-cell
           title="沪ICP备16031287号-2"
-          @click="$appOpenUrl('是否打开外部链接?', null, { path: url.beian })"
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.beian }, 0)
+          "
           class="my-c0bdff9ec0fe8c0a83371c4573d7ecf4"
         />
       </van-cell-group>

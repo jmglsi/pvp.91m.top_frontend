@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-wj app-wj">
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
-      <vxe-grid
+      <vxe-table
         ref="refWanJia"
         :loading="tableData.loading"
         :data="tableData.result.rows"
@@ -9,7 +9,7 @@
         @cell-click="onCellClick"
       >
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
-          <template v-slot="{ row, rowIndex }">
+          <template #default="{ row, rowIndex }">
             <van-tag
               v-if="row.tag"
               :color="row.tag.color"
@@ -39,7 +39,12 @@
                 crossorigin="anonymous"
                 class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
-              <div class="ranking-0e1a8b3f7f6162bf4b88d3d001b88374">
+              <div
+                class="
+                  app-5f19eaf71f40d74d66be84db52b3ad87
+                  ranking-0e1a8b3f7f6162bf4b88d3d001b88374
+                "
+              >
                 {{ rowIndex + 1 }}
               </div>
             </div>
@@ -52,24 +57,30 @@
           :width="$appIsMobile ? 100 : 0"
           sortable
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <div>
               <div class="app-52b0e5c90604d59d1814f184d58e2033">
                 {{ row.rankScore }}
               </div>
-              <div class="ranking-420e569f7ae439ae256513412631f2f4">
+              <div
+                class="
+                  app-5f19eaf71f40d74d66be84db52b3ad87
+                  ranking-420e569f7ae439ae256513412631f2f4
+                "
+              >
                 {{ row.gamePlayerName }}
               </div>
             </div>
           </template>
         </vxe-table-column>
+
         <vxe-table-column
           title="常用英雄 (数据来源互联网)"
           field="commonlyUsed"
           width="325"
           align="left"
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <div
               :class="
                 isSmallMobile
@@ -96,19 +107,20 @@
                     <span
                       v-if="data.index <= 10"
                       class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
+                      >{{ data.index }}</span
                     >
-                      {{ data.index }}
-                    </span>
                     <span
                       :style="
                         data.fightPower < 10000
                           ? { marginLeft: '3px' }
                           : { marginLeft: '-1px' }
                       "
-                      class="ranking-7de1b8678bf87a631bd5f2c2b70a1214"
+                      class="
+                        app-5f19eaf71f40d74d66be84db52b3ad87
+                        ranking-7de1b8678bf87a631bd5f2c2b70a1214
+                      "
+                      >{{ data.fightPower }}</span
                     >
-                      {{ data.fightPower }}
-                    </span>
                     <img
                       v-lazy="
                         '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -138,7 +150,7 @@
             </div>
           </template>
         </vxe-table-column>
-      </vxe-grid>
+      </vxe-table>
     </div>
 
     <div
@@ -525,9 +537,14 @@ export default {
 
       if (item.value == 2) {
         if (playerInfo.inscriptionUrl) {
-          this.$appOpenUrl("是否查看玩家铭文?", "需要安装王者营地", {
-            path: playerInfo.inscriptionUrl,
-          });
+          this.$appOpenUrl(
+            "是否查看玩家铭文?",
+            "需要安装王者营地",
+            {
+              path: playerInfo.inscriptionUrl,
+            },
+            0
+          );
         } else {
           this.$message.info(this.$appMsg.info[1013]);
         }

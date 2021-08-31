@@ -1,6 +1,6 @@
 <template>
   <div class="hero-equipmentListOne app-equipmentListOne">
-    <vxe-grid
+    <vxe-table
       ref="refHeroEquipmentListOne"
       :loading="tableData.loading"
       :data="tableData.result.rows"
@@ -8,7 +8,7 @@
       height="543"
     >
       <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
-        <template v-slot="{ row }">
+        <template #default="{ row }">
           <img
             v-lazy="
               '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -30,7 +30,7 @@
         fixed="left"
         width="50"
       >
-        <template v-slot="{ row }">
+        <template #default="{ row }">
           <img
             v-lazy="
               '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
@@ -50,7 +50,7 @@
         :width="listWidth"
         sortable
       >
-        <template v-slot="{ row }">
+        <template #default="{ row }">
           <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
             row.equipment.updateType == 0
               ? "-"
@@ -68,7 +68,7 @@
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-column title="全部 (%)">
+      <vxe-table-colgroup title="全部 (%)">
         <vxe-table-column
           title="出场"
           field="allPickRate"
@@ -77,7 +77,7 @@
           :width="listWidth"
           sortable
         >
-          <template v-slot:filter="{ $panel, column }">
+          <template #filter="{ $panel, column }">
             ≥
             <input
               v-model="option.data"
@@ -91,6 +91,7 @@
             %
           </template>
         </vxe-table-column>
+
         <vxe-table-column
           title="胜率"
           field="allWinRate"
@@ -99,7 +100,7 @@
           :width="listWidth"
           sortable
         >
-          <template v-slot:filter="{ $panel, column }">
+          <template #filter="{ $panel, column }">
             ≥
             <input
               v-model="option.data"
@@ -113,9 +114,9 @@
             %
           </template>
         </vxe-table-column>
-      </vxe-table-column>
+      </vxe-table-colgroup>
 
-      <vxe-table-column
+      <vxe-table-colgroup
         v-for="(data, index) in 6"
         :key="'hero-equipment-5306afd97611c2ddc21400d0fcd9139c-' + index"
         :title="'格子_' + (index + 1).toString() + ' (%)'"
@@ -128,7 +129,7 @@
           :width="listWidth"
           sortable
         >
-          <template v-slot:filter="{ $panel, column }">
+          <template #filter="{ $panel, column }">
             ≥
             <input
               v-model="option.data"
@@ -142,6 +143,7 @@
             %
           </template>
         </vxe-table-column>
+
         <vxe-table-column
           title="胜率"
           :field="'winRate_' + index"
@@ -150,7 +152,7 @@
           :width="listWidth"
           sortable
         >
-          <template v-slot:filter="{ $panel, column }">
+          <template #filter="{ $panel, column }">
             ≥
             <input
               v-model="option.data"
@@ -164,8 +166,8 @@
             %
           </template>
         </vxe-table-column>
-      </vxe-table-column>
-    </vxe-grid>
+      </vxe-table-colgroup>
+    </vxe-table>
 
     <van-action-sheet
       v-model="showInfo.equipmentMenu"

@@ -72,9 +72,8 @@
             : $message.error($appMsg.error[1007])
         "
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
+        >{{ loginInfo.text }}</van-button
       >
-        {{ loginInfo.text }}
-      </van-button>
 
       <div
         v-if="loginInfo.type == 1"

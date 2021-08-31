@@ -11,6 +11,7 @@ Vue.prototype.$appConfigInfo = {
     appInfo: {
         isReducedMode: false,
         isSmallMobile: false,
+        openUrl: false,
         newsPush: true,
         link: [],
         name: "苏苏的荣耀助手",
@@ -152,18 +153,24 @@ Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }
 
 Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' }, urlType = 0) {
     if (urlType == 0) {
-        this.$dialog
-            .confirm({
-                title: title,
-                message: message
-            })
-            .then(() => {
-                // on confirm
-                window.open(url.path);
-            })
-            .catch(() => {
-                // on cancel
-            });
+        let ls = Vue.prototype.$appConfigInfo;
+
+        if (ls.appInfo.openUrl) {
+            this.$dialog
+                .confirm({
+                    title: title,
+                    message: message
+                })
+                .then(() => {
+                    // on confirm
+                    window.open(url.path);
+                })
+                .catch(() => {
+                    // on cancel
+                });
+        } else {
+            window.open(url.path);
+        }
     } else {
         if (message) {
             this.$message.warning(message);

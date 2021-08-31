@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-pz app-pz">
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
-      <vxe-grid
+      <vxe-table
         ref="refPaiZi"
         :loading="tableData.loading"
         :data="tableData.result.rows"
@@ -16,7 +16,7 @@
           width="75"
           sortable
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <div
               :class="
                 isSmallMobile ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
@@ -47,7 +47,7 @@
           :width="listWidth"
           sortable
         />
-      </vxe-grid>
+      </vxe-table>
     </div>
 
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">

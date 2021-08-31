@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-zb app-zb">
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
-      <vxe-grid
+      <vxe-table
         ref="refZhuangBei"
         :loading="tableData.loading"
         :data="tableData.result.rows"
@@ -23,7 +23,7 @@
           ]"
           :filter-method="filterMethod"
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <div
               :class="
                 isSmallMobile ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
@@ -58,30 +58,31 @@
           sortable
         />
 
-        <vxe-table-column title="英雄">
+        <vxe-table-colgroup title="英雄">
           <vxe-table-column
             title="数量"
             field="heroNum"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
-        <vxe-table-column title="出场越低,波动越大 (%)">
+        <vxe-table-colgroup title="出场越低,波动越大 (%)">
           <vxe-table-column
             title="出场"
             field="allPickRate"
             :width="listWidth"
             sortable
           />
+
           <vxe-table-column
             title="胜率"
             field="allWinRate"
             :width="listWidth"
             sortable
           />
-        </vxe-table-column>
-      </vxe-grid>
+        </vxe-table-colgroup>
+      </vxe-table>
     </div>
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
@@ -292,9 +293,14 @@ export default {
       }
 
       if (item.value == 2) {
-        this.$appOpenUrl("是否查看装备更新记录?", "NGA @破笼之鸟", {
-          path: "//ngabbs.com/read.php?tid=19902976",
-        });
+        this.$appOpenUrl(
+          "是否查看装备更新记录?",
+          "NGA @破笼之鸟",
+          {
+            path: "//ngabbs.com/read.php?tid=19902976",
+          },
+          0
+        );
       }
     },
   },

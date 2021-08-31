@@ -1,31 +1,28 @@
 import Vue from 'vue';
-
-import 'vxe-table/lib/style.css';
 import XEUtils from 'xe-utils';
-import zhCNLocat from 'vxe-table/lib/locale/lang/zh-CN';
 
 import {
     VXETable,
     Button,
+    Colgroup,
     Column,
     Filter,
-    Grid,
     Header,
     Icon,
     Toolbar,
     Table,
 } from 'vxe-table';
+import zhCN from 'vxe-table/lib/locale/lang/zh-CN';
 
 Vue
     .use(Button)
+    .use(Colgroup)
     .use(Column)
     .use(Filter)
-    .use(Grid)
     .use(Header)
     .use(Icon)
     .use(Toolbar)
     .use(Table)
-
 
 VXETable.setup({
     table: {
@@ -46,7 +43,7 @@ VXETable.setup({
             gt: -1
         }
     },
-    i18n: (key, value) => XEUtils.get(zhCNLocat, key, value)
+    i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhCN, key), args)
 });
 
 Vue.prototype.$XModal = VXETable.modal;

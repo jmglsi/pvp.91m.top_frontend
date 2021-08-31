@@ -1,6 +1,5 @@
 import Vue from 'vue';
 
-import 'ant-design-vue/dist/antd.css';
 import {
     Dropdown,
     Menu,
@@ -12,6 +11,7 @@ import {
     Timeline,
     Popover
 } from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
 
 Vue
     .use(Dropdown)

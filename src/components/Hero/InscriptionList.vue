@@ -1,6 +1,6 @@
 <template>
   <div class="hero-inscription app-inscription">
-    <vxe-grid
+    <vxe-table
       ref="refHeroInscription"
       :loading="tableData.loading"
       :data="tableData.result.rows"
@@ -22,27 +22,29 @@
         sortable
       />
 
-      <vxe-table-column title="配置">
+      <vxe-table-colgroup title="配置">
         <vxe-table-column
           title="蓝色"
           field="blue"
           :width="listWidth"
           sortable
         />
+
         <vxe-table-column
           title="绿色"
           field="green"
           :width="listWidth"
           sortable
         />
+
         <vxe-table-column
           title="红色"
           field="red"
           :width="listWidth"
           sortable
         />
-      </vxe-table-column>
-    </vxe-grid>
+      </vxe-table-colgroup>
+    </vxe-table>
   </div>
 </template>
 

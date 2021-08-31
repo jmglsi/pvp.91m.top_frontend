@@ -120,9 +120,9 @@ export default {
 
       if (
         ls &&
-        (this.$appTs - appConfigInfo.appInfo.updateTime <
+        this.$appTs - appConfigInfo.appInfo.updateTime <
           appConfigInfo.updateInfo.timeout &&
-          tipsType == 0)
+        tipsType == 0
       ) {
         return (this.tableData = ls);
       }
@@ -134,10 +134,7 @@ export default {
         .then((res) => {
           this.tableData = res.data.data;
 
-          this.$appSetLocalStorage(
-            "heroSameHobby-" + heroId,
-            this.tableData
-          );
+          this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
 
           if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
         });

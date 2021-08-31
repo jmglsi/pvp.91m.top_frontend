@@ -13,9 +13,9 @@
             :span="$appIsMobile ? 15 : 21"
             @click="showInfo.calendar = true"
           >
-            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">
-              {{ tableData.result.tips }}
-            </span>
+            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
+              tableData.result.tips
+            }}</span>
           </van-col>
           <van-col :span="$appIsMobile ? 9 : 3">
             <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
@@ -70,13 +70,11 @@
               >
               <span
                 @click="
-                  $appOpenUrl('是否打开外部链接?', null, { path: data.url })
+                  $appOpenUrl('是否打开外部链接?', null, { path: data.url }, 0)
                 "
                 class="update-f0af832cbd923851be8557213d95dddc"
+                >&nbsp;🔗&nbsp;{{ data.title }}</span
               >
-                &nbsp;🔗
-                {{ data.title }}
-              </span>
             </div>
 
             <div
@@ -118,9 +116,14 @@
         <div
           v-if="heroId > 0"
           @click="
-            $appOpenUrl('是否查看英雄更多更新记录?', 'NGA @EndMP', {
-              path: '//nga.178.com/read.php?pid=' + updateId,
-            })
+            $appOpenUrl(
+              '是否查看英雄更多更新记录?',
+              'NGA @EndMP',
+              {
+                path: '//nga.178.com/read.php?pid=' + updateId,
+              },
+              0
+            )
           "
           class="update-0b479089ade5d13a2c41830785ebac9d"
         >
@@ -154,9 +157,10 @@
         "
       >
         <template #title>
-          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">
-            {{ updateInfo.title }} </span
-          >&nbsp;
+          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba"
+            >{{ updateInfo.title }}
+          </span>
+          &nbsp;
           <span class="update-50d683cbc99c635a03f18ca2fcfbe70b">
             <van-switch
               v-model="showInfo.checked"

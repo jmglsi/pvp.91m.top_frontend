@@ -1,7 +1,7 @@
 <template>
   <div class="ranking-gx app-gx">
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
-      <vxe-grid
+      <vxe-table
         ref="refGuanXi"
         :loading="tableData.loading"
         :data="tableData.result.rows"
@@ -9,7 +9,7 @@
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
-        <vxe-table-column :title="heroName ? heroName : '英雄'" fixed="left">
+        <vxe-table-colgroup :title="heroName ? heroName : '英雄'" fixed="left">
           <vxe-table-column
             :title="heroName ? '和' : '1'"
             :filters="[
@@ -24,7 +24,7 @@
             field="hero_1"
             width="75"
           >
-            <template v-slot="{ row }">
+            <template #default="{ row }">
               <div
                 :style="{ position: 'relative' }"
                 :class="
@@ -42,6 +42,7 @@
                 <span
                   class="
                     app-0fc3cfbc27e91ea60a787de13dae3e3c
+                    app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-f58cc48f5b942c91e57eff48accc5151
                   "
                   >{{ row.hero_1.adaptationRate }}</span
@@ -49,6 +50,7 @@
               </div>
             </template>
           </vxe-table-column>
+
           <vxe-table-column
             :title="heroName ? '↓' : '2'"
             :filters="[
@@ -63,7 +65,7 @@
             field="hero_2"
             width="75"
           >
-            <template v-slot="{ row }">
+            <template #default="{ row }">
               <div
                 :style="{ position: 'relative' }"
                 :class="
@@ -81,6 +83,7 @@
                 <span
                   class="
                     app-0fc3cfbc27e91ea60a787de13dae3e3c
+                    app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-f58cc48f5b942c91e57eff48accc5151
                   "
                   >{{ row.hero_2.adaptationRate }}</span
@@ -88,11 +91,11 @@
               </div>
             </template>
           </vxe-table-column>
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-column title="队友 (%)">
+        <vxe-table-colgroup title="队友 (%)">
           <vxe-table-column
             title="出场"
             field="teammatePickRate"
@@ -101,7 +104,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -115,6 +118,7 @@
               %
             </template>
           </vxe-table-column>
+
           <vxe-table-column
             title="胜率"
             field="teammateWinRate"
@@ -123,7 +127,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -137,7 +141,7 @@
               %
             </template>
           </vxe-table-column>
-        </vxe-table-column>
+        </vxe-table-colgroup>
 
         <vxe-table-column
           title="适配"
@@ -147,7 +151,7 @@
           :width="listWidth"
           sortable
         >
-          <template v-slot:filter="{ $panel, column }">
+          <template #filter="{ $panel, column }">
             ≥
             <input
               v-model="option.data"
@@ -161,7 +165,7 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="对手 (%)">
+        <vxe-table-colgroup title="对手 (%)">
           <vxe-table-column
             title="出场"
             field="opponentPickRate"
@@ -170,7 +174,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -184,6 +188,7 @@
               %
             </template>
           </vxe-table-column>
+
           <vxe-table-column
             title="胜率"
             field="opponentWinRate"
@@ -192,7 +197,7 @@
             :width="listWidth"
             sortable
           >
-            <template v-slot:filter="{ $panel, column }">
+            <template #filter="{ $panel, column }">
               ≥
               <input
                 v-model="option.data"
@@ -206,8 +211,8 @@
               %
             </template>
           </vxe-table-column>
-        </vxe-table-column>
-      </vxe-grid>
+        </vxe-table-colgroup>
+      </vxe-table>
     </div>
 
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
@@ -441,7 +446,7 @@ export default {
           row.teammatePickRate >= color.pick ||
           row.opponentPickRate >= color.pick
         ) {
-          return "ranking-48d6215903dff56238e52e8891380c8f";
+          return "app-48d6215903dff56238e52e8891380c8f";
         }
       }
 
@@ -450,7 +455,7 @@ export default {
           row.teammatePickRate >= color.pick &&
           row.teammateWinRate >= color.win
         ) {
-          return "ranking-9f27410725ab8cc8854a2769c7a516b8";
+          return "app-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
 
@@ -459,7 +464,7 @@ export default {
           row.opponentPickRate >= color.pick &&
           row.opponentWinRate >= color.win
         ) {
-          return "ranking-9f27410725ab8cc8854a2769c7a516b8";
+          return "app-9f27410725ab8cc8854a2769c7a516b8";
         }
       }
     },

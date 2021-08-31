@@ -45,9 +45,9 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[1].tag.color" round type="primary">
-                    {{ topInfo[1].skinName }}
-                  </van-tag>
+                  <van-tag :color="topInfo[1].tag.color" round type="primary">{{
+                    topInfo[1].skinName
+                  }}</van-tag>
                 </div>
                 <div>
                   <span
@@ -58,9 +58,9 @@
                   </span>
                 </div>
                 <div class="return-82175be63be4c53021549241368b4c6f">
-                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
-                    {{ topInfo[1].allVoteNum || 0 }} 万
-                  </span>
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b"
+                    >{{ topInfo[1].allVoteNum || 0 }} 万</span
+                  >
                 </div>
               </div>
             </van-col>
@@ -100,9 +100,9 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[0].tag.color" round type="primary">
-                    {{ topInfo[0].skinName }}
-                  </van-tag>
+                  <van-tag :color="topInfo[0].tag.color" round type="primary">{{
+                    topInfo[0].skinName
+                  }}</van-tag>
                 </div>
                 <div>
                   <span
@@ -113,9 +113,9 @@
                   </span>
                 </div>
                 <div class="return-82175be63be4c53021549241368b4c6f">
-                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
-                    {{ topInfo[0].allVoteNum || 0 }} 万
-                  </span>
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b"
+                    >{{ topInfo[0].allVoteNum || 0 }} 万</span
+                  >
                 </div>
               </div>
             </van-col>
@@ -123,9 +123,8 @@
               <span
                 @click="onActivityClick(tableData.result)"
                 class="return-4fb4d4758e19b050e0de1ef488ae54a3"
-              >
-                {{ tableData.result.title || "好耶!" }}
-                <van-icon name="arrow" />
+                >{{ tableData.result.title || "好耶!"
+                }}<van-icon name="arrow" />
               </span>
             </template>
           </a-popover>
@@ -145,9 +144,9 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[2].tag.color" round type="primary">
-                    {{ topInfo[2].skinName }}
-                  </van-tag>
+                  <van-tag :color="topInfo[2].tag.color" round type="primary">{{
+                    topInfo[2].skinName
+                  }}</van-tag>
                 </div>
                 <div>
                   <span
@@ -158,9 +157,9 @@
                   </span>
                 </div>
                 <div class="return-82175be63be4c53021549241368b4c6f">
-                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
-                    {{ topInfo[2].allVoteNum || 0 }} 万
-                  </span>
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b"
+                    >{{ topInfo[2].allVoteNum || 0 }} 万</span
+                  >
                 </div>
               </div>
             </van-col>
@@ -184,14 +183,14 @@
       </div>
 
       <div v-if="type == 0" class="return-32cf2eae6fcd7e91e52572c57b0dfed2">
-        <vxe-grid
+        <vxe-table
           ref="refSkinReturn"
           :loading="tableData.loading"
           :data="tableData.result.rows.slice(3)"
           :height="clientHeight"
         >
           <vxe-table-column title="-" field="skinName" fixed="left" width="75">
-            <template v-slot="{ row, rowIndex }">
+            <template #default="{ row, rowIndex }">
               <van-tag
                 :color="row.tag.color"
                 mark
@@ -206,25 +205,31 @@
                   height="35"
                   class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                 />
-                <span class="return-58206caebd18d792f59aa1ec064f65d1">
-                  {{ rowIndex + 4 }}
-                </span>
+                <span
+                  class="
+                    app-5f19eaf71f40d74d66be84db52b3ad87
+                    return-58206caebd18d792f59aa1ec064f65d1
+                  "
+                  >{{ rowIndex + 4 }}</span
+                >
               </div>
             </template>
           </vxe-table-column>
+
           <vxe-table-column
             title="分均"
             field="addNum"
             :width="listWidth"
             sortable
           />
+
           <vxe-table-column
             title="当前 (万)"
             field="allVoteNum"
             :width="listWidth"
             sortable
           >
-            <template v-slot="{ row }">
+            <template #default="{ row }">
               <div>{{ row.allVoteNum }}</div>
               <span
                 v-if="row.needVote > 0"
@@ -236,13 +241,14 @@
               >
             </template>
           </vxe-table-column>
+
           <vxe-table-column
             title="还需 (时)"
             field="needTime"
             :width="listWidth"
             sortable
           />
-        </vxe-grid>
+        </vxe-table>
       </div>
 
       <div
@@ -430,11 +436,9 @@ span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
 }
 
 span.return-58206caebd18d792f59aa1ec064f65d1 {
-  color: white;
   font-size: 10px;
   left: -25px;
   position: absolute;
-  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
   width: 100%;
   text-align: center;
 }

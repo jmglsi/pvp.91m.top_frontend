@@ -180,11 +180,12 @@ export default {
           this.$appConfigInfo.appInfo = {
             isReducedMode: ls.appInfo.isReducedMode || false,
             isSmallMobile: ls.appInfo.isSmallMobile || false,
+            openUrl: ls.appInfo.openUrl || false,
             newsPush: ls.appInfo.newsPush || true,
-            link: appInfo.link,
+            link: appInfo.link || [],
             name: appInfo.name || "苏苏的荣耀助手",
             pwa: ls.appInfo.pwa || 0,
-            script: appInfo.script,
+            script: appInfo.script || [],
             tempText: appInfo.tempText || "",
             updateTime: appInfo.updateTime || 0,
             version: appInfo.version || 0,
@@ -281,20 +282,25 @@ export default {
   width: 100%;
 }
 
-.ranking-bda9643ac6601722a28f238714274da4 {
+.app-bda9643ac6601722a28f238714274da4 {
   color: red;
 }
 
-.ranking-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
+.app-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
   color: orange;
 }
 
-.ranking-48d6215903dff56238e52e8891380c8f {
+.app-48d6215903dff56238e52e8891380c8f {
   color: blue;
 }
 
-.ranking-9f27410725ab8cc8854a2769c7a516b8 {
+.app-9f27410725ab8cc8854a2769c7a516b8 {
   color: green;
+}
+
+.app-5f19eaf71f40d74d66be84db52b3ad87 {
+  color: white;
+  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
 }
 
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
@@ -409,8 +415,6 @@ span.app-0fc3cfbc27e91ea60a787de13dae3e3c {
   margin-top: -7px;
   position: absolute;
   width: @app-width;
-  color: white;
-  text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
 }
 
 span.app-07cc694b9b3fc636710fa08b6922c42b {
@@ -631,7 +635,7 @@ div.app-pzOne {
 
 div.app-130a360689f8d613da10c94d53527a1b {
   padding-top: 3px;
-  z-index: 5;
+  z-index: 10;
 }
 
 div.app-1de7efdd403ec02d55f5c1d9557a2fc4 {

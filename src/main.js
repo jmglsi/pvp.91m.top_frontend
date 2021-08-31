@@ -17,7 +17,8 @@ import 'vant/lib/index.less';
 
 import './assets/import/ant';
 import './assets/import/vant';
-import './assets/import/vxe-utils';
+
+import 'xe-utils';
 import './assets/import/vxe-table';
 //js
 

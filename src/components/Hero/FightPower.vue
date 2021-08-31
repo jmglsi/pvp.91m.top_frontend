@@ -24,11 +24,11 @@
                 @oversize="onOversize"
               >
                 <div class="hero-fightPower-4b2011a6e3693d22750506daa83636c2">
-                  <van-button round size="small" type="info">
-                    上传&nbsp;
-                    {{ $appColumnsInfo.fightPowerType.text[fightPowerType] }}
-                    &nbsp;图片
-                  </van-button>
+                  <van-button round size="small" type="info"
+                    >上传&nbsp;{{
+                      $appColumnsInfo.fightPowerType.text[fightPowerType]
+                    }}&nbsp;图片</van-button
+                  >
                 </div>
               </van-uploader>
             </template>
@@ -98,7 +98,7 @@
           <div
             class="hero-fightPower-8198feb840dbc4a19c84ebfab63d9515 app-pzOne"
           >
-            <vxe-grid
+            <vxe-table
               ref="refPaiZiOne"
               :loading="tableData.loading"
               :data="tableData.result.rows"
@@ -107,7 +107,7 @@
               <vxe-table-column title="#" type="seq" width="50" />
 
               <vxe-table-column type="expand" width="50">
-                <template v-slot:content="{ row, rowIndex }">
+                <template #content="{ row, rowIndex }">
                   <img
                     v-if="row.fightPowerImg"
                     v-lazy="row.fightPowerImg"
@@ -156,7 +156,7 @@
                 width="200"
                 sortable
               />
-            </vxe-grid>
+            </vxe-table>
           </div>
         </van-tab>
       </van-tabs>
@@ -310,7 +310,7 @@ export default {
           }
         });
     },
-    getRanking: function (heroId, aid = 7, bid = 0, cid = 0, did = 0) {
+    getRanking: function (heroId, aid = 10, bid = 0, cid = 0, did = 0) {
       if (heroId == 0 || did == 0) return;
 
       this.$axios
@@ -343,7 +343,7 @@ export default {
     },
     onTabsChange: function (e) {
       if (e == 1) {
-        this.getRanking(this.heroId, 7, 0, 0, this.fightPowerType);
+        this.getRanking(this.heroId, 10, 0, 0, this.fightPowerType);
       }
     },
     onImagePreviewClick: function (index) {

@@ -447,9 +447,8 @@
               :icon="authorInfo.logo"
               size="small"
               class="game-8e4f204791d1b591b6a6f93b572f9b2d"
+              >{{ authorInfo.name }}</van-button
             >
-              {{ authorInfo.name }}
-            </van-button>
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in authorInfo.actions"
@@ -485,12 +484,10 @@
             color="linear-gradient(to right, #6874E8, #9708CC)"
             class="game-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onSeeHeroClick"
-          >
-            {{
+            >{{
               bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
-            }}
-            &nbsp;的剩余英雄
-          </van-button>
+            }}&nbsp;的剩余英雄</van-button
+          >
         </li>
       </ul>
     </div>
@@ -658,7 +655,7 @@
             size="small"
             color="black"
             @click="
-              $appOpenUrl('是否查看常见问题?', null, { path: url.question })
+              $appOpenUrl('是否查看常见问题?', null, { path: url.question }, 0)
             "
           />
         </li>
@@ -678,9 +675,8 @@
             :type="bpMode == 'sort' ? 'primary' : 'info'"
             size="small"
             @click="onNewSortClick"
+            >{{ bpMode == "sort" ? "保存" : "修改" }}排序</van-button
           >
-            {{ bpMode == "sort" ? "保存" : "修改" }}排序
-          </van-button>
           &nbsp;
           <van-button
             v-if="bpMode == 'edit'"

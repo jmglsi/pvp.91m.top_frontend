@@ -77,9 +77,9 @@
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
               <img v-lazy="friendsInfo.rank.starIcon" width="50" height="50" />
               <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">
-                {{ friendsInfo.rank.score }}
-              </span>
+              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
+                friendsInfo.rank.score
+              }}</span>
             </span>
           </template>
         </van-cell>

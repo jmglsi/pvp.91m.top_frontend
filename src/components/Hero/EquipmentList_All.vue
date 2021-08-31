@@ -1,13 +1,13 @@
 <template>
   <div class="hero-equipmentListAll app-equipmentListAll">
-    <vxe-grid
+    <vxe-table
       ref="refHeroEquipmentListAll"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       height="543"
     >
       <vxe-table-column title="技能" field="score" fixed="left" width="50">
-        <template v-slot="{ row }">
+        <template #default="{ row }">
           <img
             v-lazy="row.img"
             width="25"
@@ -19,7 +19,7 @@
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-column title="最终结果，空的就是没出">
+      <vxe-table-colgroup title="最终结果，空的就是没出">
         <vxe-table-column
           v-for="(data, index) in 6"
           :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
@@ -28,7 +28,7 @@
           :width="$appIsMobile ? 60 : 0"
           sortable
         >
-          <template v-slot="{ row }">
+          <template #default="{ row }">
             <img
               v-if="row.list[index] > 0"
               v-lazy="
@@ -42,7 +42,7 @@
             />
           </template>
         </vxe-table-column>
-      </vxe-table-column>
+      </vxe-table-colgroup>
 
       <vxe-table-column
         title="价格"
@@ -50,12 +50,14 @@
         :width="listWidth"
         sortable
       />
+
       <vxe-table-column
         title="场次"
         field="pickTimes"
         :width="listWidth"
         sortable
       />
+
       <vxe-table-column
         title="胜率 (%)"
         field="winRate"
@@ -64,7 +66,7 @@
         width="125"
         sortable
       >
-        <template v-slot:filter="{ $panel, column }">
+        <template #filter="{ $panel, column }">
           ≥
           <input
             v-model="option.data"
@@ -78,6 +80,7 @@
           %
         </template>
       </vxe-table-column>
+
       <vxe-table-column
         title="时长"
         field="usedtime"
@@ -85,15 +88,15 @@
         sortable
       />
 
-      <vxe-table-column title="MVP (%)">
+      <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
           title="净胜"
           field="mvpRate"
           :width="listWidth"
           sortable
         />
-      </vxe-table-column>
-    </vxe-grid>
+      </vxe-table-colgroup>
+    </vxe-table>
   </div>
 </template>
 
