@@ -476,11 +476,16 @@ div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
 
+div.van-search,
+div.van-cell,
+div.van-cell-group,
+div.van-grid-item__content,
+div.van-collapse-item__content {
+  background-color: transparent !important;
+}
+
 div.app-home {
-  div.van-search,
-  div.van-tabs__nav,
-  div.van-cell-group,
-  div.van-cell {
+  div.van-tabs__nav {
     background-color: transparent !important;
   }
 }

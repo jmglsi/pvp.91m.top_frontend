@@ -63,7 +63,14 @@
       >
         <van-cell>
           <template #title>
-            <div class="my-b687f354f3b497e3ba1db4b7c3938b77">
+            <div
+              :style="
+                $appIsApple && $appConfigInfo.appInfo.pwa == 1
+                  ? { marginBottom: '25px' }
+                  : {}
+              "
+              class="my-b687f354f3b497e3ba1db4b7c3938b77"
+            >
               <van-button
                 round
                 :disabled="login.status"

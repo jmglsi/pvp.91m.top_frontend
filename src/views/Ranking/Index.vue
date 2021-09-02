@@ -629,13 +629,6 @@ div.ranking-home {
   }
 }
 
-div.ranking-gradient {
-  div.van-cell-group,
-  div.van-cell {
-    background-color: transparent !important;
-  }
-}
-
 div.ranking-2862744e5d7cce9d070aa41172557d78 {
   margin-top: 50px;
   font-size: @app-font-size;

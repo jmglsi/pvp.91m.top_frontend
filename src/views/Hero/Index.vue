@@ -126,12 +126,6 @@ div.hero-d7eb5a86f1d4b50ea22711e1e60718e9 {
   margin-top: -125px;
 }
 
-div.hero-c6e864acb6955eed0361921288d34149 {
-  div.van-grid-item__content {
-    background-color: transparent !important;
-  }
-}
-
 div.hero-b7b5e31b028440d2e0e0157baad49513 {
   margin: 25px 0;
 }

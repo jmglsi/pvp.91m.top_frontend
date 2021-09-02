@@ -1071,11 +1071,7 @@ div.search-8d84ed4977747dd8eab8dbdc9ed3508c {
 }
 
 div.search-home {
-  div.van-search,
-  div.van-tabs__nav,
-  div.van-grid-item__content,
-  div.van-cell-group,
-  div.van-cell {
+  div.van-tabs__nav{
     background-color: transparent !important;
   }
 }

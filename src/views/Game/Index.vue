@@ -37,10 +37,6 @@ div.game-recommend {
   }
 }
 
-div.van-grid-item__content {
-  background-color: transparent !important;
-}
-
 div.game-ea89eb98f6e31fc44977697c388b6c57 {
   margin-bottom: 10px;
 }

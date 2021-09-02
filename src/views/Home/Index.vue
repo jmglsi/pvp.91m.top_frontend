@@ -6,9 +6,9 @@
       >
         <van-search
           show-action
-          shape="round"
           :placeholder="appInfo.search.placeholder"
           @click="$appPush({ path: '/search' })"
+          shape="round"
         >
           <template #action>
             <img
@@ -202,14 +202,6 @@ img.home-3c873293a7dc1ea8c20579f6a7ae94a9 {
   border-radius: unset;
   height: 100%;
   width: 100%;
-}
-
-div.app-game {
-  div.van-cell-group,
-  div.van-cell,
-  div.van-grid-item__content {
-    background-color: transparent !important;
-  }
 }
 
 div.home-f55b83381f479ed4c1203b80f891d83a {

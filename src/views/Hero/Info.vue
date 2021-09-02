@@ -87,6 +87,9 @@
         >
           <img v-lazy="data" class="hero-44908c08b6c253a19ab6246e6eec857a" />
         </van-swipe-item>
+        <template #indicator>
+          <div class="custom-indicator"></div>
+        </template>
       </van-swipe>
 
       <van-image-preview

@@ -443,12 +443,6 @@ span.return-58206caebd18d792f59aa1ec064f65d1 {
   text-align: center;
 }
 
-div.return-8c35b9de834af969baf22173b9539eb9 {
-  div.van-nav-bar {
-    background-color: transparent !important;
-  }
-}
-
 div.return-0c81212fbe656b4245967fe1fba3413e {
   position: absolute;
   width: 100%;
