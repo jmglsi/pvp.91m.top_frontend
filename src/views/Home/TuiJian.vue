@@ -54,9 +54,9 @@
               >
                 <span v-if="data.img">
                   <img
+                    v-lazy="data.img"
                     width="50"
                     height="50"
-                    v-lazy="data.img"
                     class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                   />
                 </span>
@@ -146,13 +146,10 @@ export default {
   methods: {
     getAppHome: function () {
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage("appHome");
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.appHomeInfo = ls);
       }
 
@@ -160,6 +157,7 @@ export default {
         let data = res.data.data;
 
         this.appHomeInfo = data;
+        this.appHomeInfo.updateTime = ts;
 
         this.$appSetLocalStorage("appHome", this.appHomeInfo);
       });

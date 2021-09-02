@@ -12,9 +12,9 @@
         >
           <template #action>
             <img
+              v-lazy="appInfo.search.img"
               width="35"
               height="35"
-              v-lazy="appInfo.search.img"
               class="app-3b9655ab218c7f1a18f5dacd778a52f0"
               @click="onRightClick(appInfo.search)"
             />
@@ -116,7 +116,7 @@ export default {
 
       this.tabsInfo.model = type;
 
-      if (ls.appInfo.version > 0) {
+      if (ls.appInfo.update.version > 0) {
         this.appInfo = ls.appInfo;
       }
 

@@ -15,12 +15,12 @@
           class="oauth-d7c4aa2641b836c39a069c80c569f682"
         >
           <img
-            width="35"
-            height="35"
             v-lazy="'/img/app-icons/' + data.type + '.ico'"
             :style="
               accessToken && data.status == 0 ? { filter: 'grayscale(1)' } : {}
             "
+            width="35"
+            height="35"
             class="oauth-523290da497b3b91d14b1699ba5b4316"
             @click="onOauthClick(data)"
           />

@@ -131,7 +131,7 @@
       </van-action-sheet>
     </div>
 
-    <AppHello height="100px" />
+    <AppHello height="50px" />
   </div>
 </template>
 

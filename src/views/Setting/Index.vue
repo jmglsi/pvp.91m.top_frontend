@@ -26,12 +26,12 @@
         title="设置"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
-        <van-cell title="精简模式" label="优化排行界面的渲染速度">
+        <van-cell title="摇摆分路" label="单个英雄不同分路的情况">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
-                v-model="$appConfigInfo.appInfo.isReducedMode"
-                @change="onReducedModeChange"
+                v-model="$appConfigInfo.appInfo.isSwingMode"
+                @change="onSwingModeChange"
               />
             </span>
           </template>
@@ -40,8 +40,18 @@
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
-                v-model="$appConfigInfo.appInfo.isSmallMobile"
+                v-model="$appConfigInfo.appInfo.isSmallMode"
                 @change="onSmallMobileChange"
+              />
+            </span>
+          </template>
+        </van-cell>
+        <van-cell title="精简模式" label="优化排行界面的渲染速度">
+          <template #right-icon>
+            <span class="setting-a833c0959e80ada90f239fb707903be2">
+              <van-switch
+                v-model="$appConfigInfo.appInfo.isReductionMode"
+                @change="onReducedModeChange"
               />
             </span>
           </template>
@@ -107,12 +117,12 @@
         <van-cell
           title="更新时间"
           label="最后一次数据更新的时间"
-          :value="appConfigInfo.appInfo.updateTime"
+          :value="appConfigInfo.appInfo.update.time"
         />
         <van-cell
           title="系统版本"
           label="最后一次系统更新的时间"
-          :value="appConfigInfo.appInfo.version"
+          :value="appConfigInfo.appInfo.update.version"
         />
         <van-cell
           title="访问类型"
@@ -136,11 +146,15 @@ export default {
     return {
       appConfigInfo: {
         appInfo: {
-          isSmallMobile: false,
-          isReducedMode: false,
+          isSwingMode: false,
+          isSmallMode: false,
+          isReductionMode: false,
           openUrl: false,
           newsPush: true,
-          updateTime: 0,
+          update: {
+            version: 0,
+            time: 0,
+          },
           version: 0,
         },
       },
@@ -155,6 +169,22 @@ export default {
     this.appConfigInfo = this.$appConfigInfo;
   },
   methods: {
+    onSwingModeChange: function (e) {
+      let ls = this.$appConfigInfo;
+
+      ls.appInfo.isSwingMode = e;
+      this.$appSetLocalStorage("appConfigInfo", ls);
+
+      this.$message.success(this.$appMsg.success[1000]);
+    },
+    onSmallMobileChange: function (e) {
+      let ls = this.$appConfigInfo;
+
+      ls.appInfo.isSmallMode = e;
+      this.$appSetLocalStorage("appConfigInfo", ls);
+
+      this.$message.success(this.$appMsg.success[1000]);
+    },
     onReducedModeChange: function (e) {
       let ls = this.$appConfigInfo;
 
@@ -168,15 +198,7 @@ export default {
         });
       }
 
-      ls.appInfo.isReducedMode = e;
-      this.$appSetLocalStorage("appConfigInfo", ls);
-
-      this.$message.success(this.$appMsg.success[1000]);
-    },
-    onSmallMobileChange: function (e) {
-      let ls = this.$appConfigInfo;
-
-      ls.appInfo.isSmallMobile = e;
+      ls.appInfo.isReductionMode = e;
       this.$appSetLocalStorage("appConfigInfo", ls);
 
       this.$message.success(this.$appMsg.success[1000]);

@@ -29,9 +29,9 @@
                 class="hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767"
               />
               <img
+                v-lazy="data.img"
                 width="75"
                 height="75"
-                v-lazy="data.img"
                 class="app-4ab161130e76571ab0c31aa23a6238c7"
               />
               <div class="hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b">
@@ -116,12 +116,12 @@ export default {
   methods: {
     getHeroInfoByWebAccountList: function (heroId, tipsType) {
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage("heroSameHobby-" + heroId);
 
       if (
         ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout &&
+        ts - ls.updateTime < appConfigInfo.appInfo.update.timeout &&
         tipsType == 0
       ) {
         return (this.tableData = ls);
@@ -133,6 +133,7 @@ export default {
         )
         .then((res) => {
           this.tableData = res.data.data;
+          this.tableData.updateTime = ts;
 
           this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
 

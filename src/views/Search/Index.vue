@@ -304,15 +304,17 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   备战
                 </span>
-                <img width="15" height="15" v-lazy="'/img/app-icons/hot.png'" />
+                <img v-lazy="'/img/app-icons/hot.png'" width="15" height="15" />
               </template>
             </van-tab>
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
               title="攻速阈值"
             />
-            <van-tab :disabled="tableData.heroInfo.id == 999" title="战力" />
-            <van-tab :disabled="tableData.heroInfo.id == 999" title="赛事" />
+            <van-tab
+              :disabled="tableData.heroInfo.id == 999"
+              title="最低金标"
+            />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
               title="关系和克制"
@@ -328,7 +330,7 @@
           </van-tabs>
 
           <van-grid
-            v-show="showInfo.heroData == 0"
+            v-if="showInfo.heroData == 0"
             :border="false"
             :column-num="4"
           >
@@ -413,11 +415,7 @@
             </van-grid-item>
           </van-grid>
 
-          <van-grid
-            v-show="showInfo.heroData == 1"
-            :border="false"
-            :column-num="4"
-          >
+          <van-grid v-else :border="false" :column-num="4">
             <van-grid-item text="%"></van-grid-item>
             <van-grid-item
               text="全分段"
@@ -928,25 +926,13 @@ export default {
           "是否打开外部链接?",
           "NGA @小熊de大熊",
           {
-            path: "//bbs.nga.cn/read.php?tid=12677614",
+            path: "//ngabbs.com/read.php?tid=12677614",
           },
           0
         );
       } else if (e == 3) {
         this.showInfo.fightPowerMenu = true;
       } else if (e == 4) {
-        this.$appOpenUrl(
-          "是否打开外部链接?",
-          "玩加电竞",
-          {
-            path:
-              "//www.wanplus.com/static/app/community/share.html?header_type=5&id=" +
-              heroInfo.id +
-              "&tab_type=5&gm=kog&gametype=6&tag_id=0",
-          },
-          0
-        );
-      } else if (e == 5) {
         this.$appPush({
           path: "/ranking",
           query: {
@@ -955,11 +941,11 @@ export default {
             refresh: 1,
           },
         });
-      } else if (e == 6) {
+      } else if (e == 5) {
         this.$appPush({
           path: "/hero/" + heroInfo.id + "/info?show=heroUpdate",
         });
-      } else if (e == 7) {
+      } else if (e == 6) {
         this.$appPush({
           path:
             "/hero/" +
@@ -1000,15 +986,24 @@ export default {
       let heroInfo = this.tableData.heroInfo,
         ret = "";
 
-      ret = "[" + heroInfo.name + "]\n";
+      ret =
+        "[" +
+        heroInfo.name +
+        "] " +
+        heroInfo.scoreIcon +
+        " " +
+        heroInfo.score[2] +
+        " " +
+        heroInfo.trendIcon +
+        "\n";
       ret += "  %  全分段 | 1350 | 顶端局\n";
       ret += "禁用: " + heroInfo.banRate.join(" / ") + "\n";
       ret += "出场: " + heroInfo.pickRate.join(" / ") + "\n";
       ret += "禁选: " + heroInfo.bpRate.join(" / ") + "\n";
       ret += "胜率: " + heroInfo.winRate.join(" / ") + "\n";
       ret +=
-        ">>> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += ">>> 综合 https://" + location.host + "/s/" + heroInfo.id;
+        "> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
+      ret += "> 综合 https://" + location.host + "/s/" + heroInfo.id;
 
       this.copyData = ret;
 

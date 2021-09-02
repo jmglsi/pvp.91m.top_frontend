@@ -21,7 +21,7 @@
             <div
               :style="{ position: 'relative' }"
               :class="
-                isSmallMobile
+                isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
                   : null
               "
@@ -83,7 +83,7 @@
           <template #default="{ row }">
             <div
               :class="
-                isSmallMobile
+                isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
                   : null
               "
@@ -97,11 +97,11 @@
                   <div :style="{ position: 'relative' }">
                     <img
                       v-if="data.index <= 10"
-                      width="30"
-                      height="20"
                       v-lazy="
                         '//ae05.alicdn.com/kf/H864b4b4f279f47ef94cfcad4aaf88bf7V.png'
                       "
+                      width="30"
+                      height="20"
                       class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
                     />
                     <span
@@ -231,8 +231,6 @@
                 :style="{ height: '100%', width: '100%', position: 'relative' }"
               >
                 <img
-                  width="45"
-                  height="45"
                   v-lazy="
                     '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                     data[0] +
@@ -240,6 +238,8 @@
                     data[0] +
                     '.jpg'
                   "
+                  width="45"
+                  height="45"
                   class="ranking-a548cbd20a565cc98caf397c9bfd7cdb"
                 />
                 <div class="ranking-51c877f489423eb1c3901dd0e12c03d4">
@@ -266,7 +266,7 @@ import html2canvas from "html2canvas";
 export default {
   name: "RankingWanJia",
   props: {
-    isSmallMobile: {
+    isSmallMode: {
       type: Boolean,
       default: false,
     },
@@ -289,8 +289,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid, did, refresh } = this;
-      return { isSmallMobile, bid, cid, did, refresh };
+      const { isSmallMode, bid, cid, did, refresh } = this;
+      return { isSmallMode, bid, cid, did, refresh };
     },
   },
   watch: {
@@ -342,15 +342,12 @@ export default {
     getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {
       let playerList = [],
         appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         this.tableData = ls;
         playerList = ls.result.rows;
 
@@ -378,7 +375,9 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
-            playerList = this.tableData.result.rows;
+            this.tableData.updateTime = ts;
+
+            playerList = data.result.rows;
 
             this.$appSetLocalStorage(
               "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,

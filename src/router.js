@@ -21,7 +21,7 @@ export default new Router({
         }, {
             path: '/bp',
             name: 'bp',
-            redirect: '/my'
+            redirect: '/game/new/bp'
         }, {
             path: '/skin/encore',
             name: 'skinEncore',

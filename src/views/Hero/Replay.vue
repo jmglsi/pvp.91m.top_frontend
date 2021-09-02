@@ -144,12 +144,17 @@
         class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
       />
     </div>
+
+    <AppHello height="50px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "HeroReplay",
+  components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
   data() {
     return {
       copyData: "",

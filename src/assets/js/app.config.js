@@ -9,17 +9,23 @@ Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
 Vue.prototype.$appConfigInfo = {
     appInfo: {
-        isReducedMode: false,
-        isSmallMobile: false,
+        isSwingMode: false,
+        isSmallMode: false,
+        isReductionMode: false,
         openUrl: false,
         newsPush: true,
+        pwa: 0,
         link: [],
         name: "苏苏的荣耀助手",
-        pwa: 0,
         script: [],
         tempText: "",
-        updateTime: 0,
-        version: 0,
+        update: {
+            version: 0,
+            time: 0,
+            title: "加载中...",
+            text: "加载中...",
+            timeout: 43200
+        },
         search: {
             img: null,
             placeholder: "",
@@ -31,9 +37,6 @@ Vue.prototype.$appConfigInfo = {
         dfsTips: false,
         skillTips: false,
         wanjiaTips: false
-    },
-    updateInfo: {
-        timeout: 43200
     }
 };
 

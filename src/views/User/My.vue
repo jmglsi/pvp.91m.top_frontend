@@ -89,15 +89,15 @@
     >
       <img
         v-lazy="loginInfo.img"
-        width="100"
-        height="100"
-        class="app-3b9655ab218c7f1a18f5dacd778a52f0"
         @click="
           $appPush({
             path: '/friends',
             query: { openId: loginInfo.openId },
           })
         "
+        width="100"
+        height="100"
+        class="app-3b9655ab218c7f1a18f5dacd778a52f0"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ loginInfo.description || "这个人很懒，什么都没有留下" }}
@@ -534,7 +534,7 @@ export default {
         question: "//www.yuque.com/jmglsi/pvp/yyxgbh",
         friends: "//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH",
         support: "//support.qq.com/products/305514",
-        openSource: ["//bbs.nga.cn/read.php?tid=26200132"],
+        openSource: ["//ngabbs.com/read.php?tid=26200132"],
         afdian: "//afdian.net/@jmglsi",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
@@ -575,9 +575,6 @@ export default {
         editType: false,
         editMenu: false,
         pickerMenu: false,
-      },
-      mobileInfo: {
-        isSmallMobile: false,
       },
       collapseInfo: {
         model: ["1"],
@@ -620,9 +617,6 @@ export default {
     }
   },
   mounted() {
-    this.mobileInfo.isSmallMobile =
-      localStorage.getItem("isSmallMobile") || false;
-
     this.getWebAccountInfo();
   },
   methods: {

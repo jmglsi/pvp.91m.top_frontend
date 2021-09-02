@@ -55,25 +55,24 @@ export default {
   name: "App",
   watch: {
     $route(to) {
-      let hello = false,
+      let nowPath = to.path,
         statusBar = false,
         whiteBar = false,
         tabbar = false;
 
-      this.tableData.result.model = to.path;
+      this.tableData.result.model = nowPath;
 
-      /ranking|game(.*?)bp/i.test(to.path) ? (hello = false) : (hello = true);
-      this.showInfo.hello = hello;
-
-      /ranking|search/i.test(to.path) || to.path == "/"
+      /ranking|search/i.test(nowPath) || nowPath == "/"
         ? (statusBar = true)
         : (statusBar = false);
       this.showInfo.statusBar = statusBar;
 
-      /ranking/i.test(to.path) ? (whiteBar = true) : (whiteBar = false);
+      /ranking/i.test(nowPath) ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /miniapp|bilibili|login|skin|hero(.*?)info|game(.*?)bp/i.test(to.path)
+      /miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|game\/(.*?)/i.test(
+        nowPath
+      )
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
@@ -172,32 +171,13 @@ export default {
             tempAccessToken = q.tempAccessToken || "",
             oauthType = q.oauthType || "",
             tempText = q.tempText || "",
-            ls = this.$appConfigInfo;
+            isUpdate = false,
+            appConfigInfo = this.$appConfigInfo;
 
           this.tableData = data;
           this.tableData.result.model = this.$route.path;
 
-          this.$appConfigInfo.appInfo = {
-            isReducedMode: ls.appInfo.isReducedMode || false,
-            isSmallMobile: ls.appInfo.isSmallMobile || false,
-            openUrl: ls.appInfo.openUrl || false,
-            newsPush: ls.appInfo.newsPush || true,
-            link: appInfo.link || [],
-            name: appInfo.name || "苏苏的荣耀助手",
-            pwa: ls.appInfo.pwa || 0,
-            script: appInfo.script || [],
-            tempText: appInfo.tempText || "",
-            updateTime: appInfo.updateTime || 0,
-            version: appInfo.version || 0,
-            search: {
-              img: appInfo.search.img,
-              placeholder: appInfo.search.placeholder,
-              to: appInfo.search.to,
-              url: appInfo.search.url,
-            },
-          };
-
-          if (appInfo.updateTime != ls.appInfo.updateTime) {
+          if (appInfo.update.time != appConfigInfo.appInfo.update.time) {
             this.$appDelectLocalStorage("appHome");
             this.$appDelectLocalStorage("gameHome");
             this.$appDelectLocalStorage("ranking");
@@ -206,13 +186,54 @@ export default {
             this.$appDelectLocalStorage("heroSameHobby");
             this.$appDelectLocalStorage("heroChartsLog");
 
-            if (appInfo.updateText) this.$message.info(appInfo.updateText);
-
-            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+            isUpdate = true;
           }
 
-          if (appInfo.version != ls.appInfo.version) {
+          if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
+            if (appInfo.update.text) {
+              this.$dialog
+                .alert({
+                  title: appInfo.update.title,
+                  message: appInfo.update.text,
+                  theme: "round-button",
+                })
+                .then(() => {
+                  // on close
+                });
+            }
+
             this.$appDelectLocalStorage("appConfigInfo");
+
+            isUpdate = true;
+          }
+
+          this.$appConfigInfo.appInfo = {
+            isSwingMode: appConfigInfo.appInfo.isSwingMode || false,
+            isSmallMode: appConfigInfo.appInfo.isSmallMode || false,
+            isReductionMode: appConfigInfo.appInfo.isReductionMode || false,
+            openUrl: appConfigInfo.appInfo.openUrl || false,
+            newsPush: appConfigInfo.appInfo.newsPush || true,
+            pwa: appConfigInfo.appInfo.pwa || 0,
+            link: appInfo.link || [],
+            name: appInfo.name || "苏苏的荣耀助手",
+            script: appInfo.script || [],
+            tempText: appInfo.tempText || "",
+            update: {
+              version: appInfo.update.version || 0,
+              time: appInfo.update.time || 0,
+              title: appInfo.update.title || "加载中...",
+              text: appInfo.update.text || "加载中...",
+              timeout: appInfo.update.timeout || 43200,
+            },
+            search: {
+              img: appInfo.search.img || null,
+              placeholder: appInfo.search.placeholder || "",
+              to: appInfo.search.to || null,
+              url: appInfo.search.url || null,
+            },
+          };
+
+          if (isUpdate) {
             this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
           }
 

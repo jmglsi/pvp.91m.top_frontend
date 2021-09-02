@@ -19,7 +19,7 @@
           <template #default="{ row }">
             <div
               :class="
-                isSmallMobile ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
+                isSmallMode ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
             >
               <img
@@ -95,7 +95,7 @@ export default {
     };
   },
   props: {
-    isSmallMobile: {
+    isSmallMode: {
       type: Boolean,
       default: false,
     },
@@ -118,8 +118,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid, did, refresh } = this;
-      return { isSmallMobile, bid, cid, did, refresh };
+      const { isSmallMode, bid, cid, did, refresh } = this;
+      return { isSmallMode, bid, cid, did, refresh };
     },
   },
   watch: {

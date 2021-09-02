@@ -12,7 +12,6 @@
           title="装备"
           field="equipment.id"
           fixed="left"
-          width="75"
           :filters="[
             { label: '其他', data: 0 },
             { label: '鞋子', data: 1 },
@@ -22,11 +21,12 @@
             { label: '神装', data: 5 },
           ]"
           :filter-method="filterMethod"
+          width="75"
         >
           <template #default="{ row }">
             <div
               :class="
-                isSmallMobile ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
+                isSmallMode ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
             >
               <img
@@ -125,7 +125,7 @@ export default {
       import("@/components/Hero/EquipmentList_One.vue"),
   },
   props: {
-    isSmallMobile: {
+    isSmallMode: {
       type: Boolean,
       default: false,
     },
@@ -136,8 +136,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, refresh } = this;
-      return { isSmallMobile, refresh };
+      const { isSmallMode, refresh } = this;
+      return { isSmallMode, refresh };
     },
   },
   data() {
@@ -207,15 +207,12 @@ export default {
     },
     getRanking: function (aid = 3, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
 
@@ -238,6 +235,7 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
+            this.tableData.updateTime = ts;
 
             this.$appSetLocalStorage(
               "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,

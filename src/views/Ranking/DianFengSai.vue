@@ -36,7 +36,7 @@
             <div
               :style="{ position: 'relative' }"
               :class="
-                isSmallMobile
+                isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-0b22b207c2b785ceff7a241980f23d14'
                   : null
               "
@@ -390,7 +390,7 @@ export default {
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
   },
   props: {
-    isSmallMobile: {
+    isSmallMode: {
       type: Boolean,
       default: false,
     },
@@ -413,8 +413,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, bid, cid, did, refresh } = this;
-      return { isSmallMobile, bid, cid, did, refresh };
+      const { isSmallMode, bid, cid, did, refresh } = this;
+      return { isSmallMode, bid, cid, did, refresh };
     },
   },
   watch: {
@@ -422,7 +422,7 @@ export default {
       immediate: false,
       handler(newValue) {
         if (newValue.refresh == 1) {
-          this.getRanking(0, newValue.bid, newValue.cid, 0);
+          this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
         }
       },
     },
@@ -476,7 +476,7 @@ export default {
     //手动将表格和工具栏进行关联
   },
   mounted() {
-    this.getRanking(0, this.bid, this.cid, 0);
+    this.getRanking(0, this.bid, this.cid, this.did);
   },
   methods: {
     initTableWidth: function () {
@@ -516,15 +516,12 @@ export default {
     },
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
 
@@ -547,6 +544,7 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
+            this.tableData.updateTime = ts;
 
             //this.$refs.refDianFengSai.loadData(data.result.rows);
 
@@ -681,7 +679,7 @@ export default {
           "是否打开外部链接?",
           "NGA @小熊de大熊",
           {
-            path: "//bbs.nga.cn/read.php?tid=12677614",
+            path: "//ngabbs.com/read.php?tid=12677614",
           },
           0
         );

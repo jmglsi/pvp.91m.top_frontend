@@ -38,9 +38,9 @@
             >
               <van-col span="7">
                 <img
+                  v-lazy="data.team_1.logo"
                   width="50"
                   height="50"
-                  v-lazy="data.team_1.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
                 <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
@@ -56,9 +56,9 @@
               </van-col>
               <van-col span="7">
                 <img
+                  v-lazy="data.team_2.logo"
                   width="50"
                   height="50"
-                  v-lazy="data.team_2.logo"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
                 <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
@@ -80,7 +80,7 @@
       />
     </div>
 
-    <AppHello height="100px" />
+    <AppHello height="50px" />
   </div>
 </template>
 

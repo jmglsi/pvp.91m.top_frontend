@@ -95,15 +95,12 @@ export default {
       if (bid == 0) return;
 
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.lineData = ls);
       }
 
@@ -133,6 +130,7 @@ export default {
           if (status.code == 200) {
             this.lineData = data;
             this.lineData.loading = false;
+            this.lineData.updateTime = ts;
 
             this.$appSetLocalStorage(
               "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did,

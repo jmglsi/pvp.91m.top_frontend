@@ -11,7 +11,7 @@
       </div>
     </div>
   </div>
-  <div v-else-if="!isPortrait" class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
+  <div v-else class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
     <span
       class="app-f4842dcb685d490e2a43212b8072a6fe"
       @click="
@@ -264,21 +264,21 @@
                           >
                           <van-tag
                             round
-                            v-else-if="data.isUsed"
+                            v-if="data.isUsed"
                             color="orange"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
                             >已用</van-tag
                           >
                         </span>
                         <img
-                          width="40"
-                          height="40"
                           v-lazy="data.img"
                           :style="
                             tabsInfo.model < 6 && (data.isBan || data.isUsed)
                               ? { filter: 'grayscale(1)' }
                               : {}
                           "
+                          width="40"
+                          height="40"
                           class="game-ae47f38706d42938ff1dbd5960a08056"
                         />
                       </van-grid-item>
@@ -330,21 +330,21 @@
                           >
                           <van-tag
                             round
-                            v-else-if="data.isUsed"
+                            v-if="data.isUsed"
                             color="orange"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
                             >已用</van-tag
                           >
                         </span>
                         <img
-                          width="40"
-                          height="40"
                           v-lazy="data.img"
                           :style="
                             tabsInfo.model < 6 && (data.isBan || data.isUsed)
                               ? { filter: 'grayscale(1)' }
                               : {}
                           "
+                          width="40"
+                          height="40"
                           class="game-ae47f38706d42938ff1dbd5960a08056"
                         />
                       </van-grid-item>
@@ -865,7 +865,6 @@ export default {
                 },
               },
               stepsNow: 0,
-              stepsActive: 0,
               BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             },
           ],
@@ -941,7 +940,7 @@ export default {
     if (gameLabel) {
       this.getGameBP(gameLabel);
 
-      this.getRanking(this.gameInfo.game.time);
+      this.getRanking();
     } else {
       return this.$appPush({ path: "/game" });
     }
@@ -1063,7 +1062,7 @@ export default {
         }
       }, 1000);
     },
-    getRanking: function (gameTime = null, aid = 0, bid = 4, cid = 0) {
+    getRanking: function (gameTime = null, aid = 0, bid = 4, cid = 0, did = 1) {
       let ls = this.$appGetLocalStorage("gameBP");
 
       if (ls) {
@@ -1078,7 +1077,9 @@ export default {
             "&bid=" +
             bid +
             "&cid=" +
-            cid,
+            cid +
+            "&did=" +
+            did,
           this.$qs.stringify({
             gameTime: gameTime,
           })
@@ -1088,12 +1089,12 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableData.result = data.result;
-
             data.result.rows.map((x) => {
               x.isBan = false;
               x.isUsed = false;
             });
+
+            this.tableData.result = data.result;
 
             this.initBPOrder(this.bpPerspective, 0);
 
@@ -1114,31 +1115,33 @@ export default {
       return ret;
     },
     getGameBP: function (gameLabel) {
-      if (this.gameLabel == "new") return;
+      if (this.gameLabel == "new") {
+        this.$message.warning(this.$appMsg.warning[750]);
+        //本地
+      } else {
+        this.$axios
+          .post(
+            this.$appApi.game.getGameBP,
+            this.$qs.stringify({
+              gameLabel: gameLabel,
+            })
+          )
+          .then((res) => {
+            let status = res.data.status;
 
-      this.$axios
-        .post(
-          this.$appApi.game.getGameBP,
-          this.$qs.stringify({
-            gameLabel: gameLabel,
-          })
-        )
-        .then((res) => {
-          let status = res.data.status;
+            if (status.code == 200) {
+              let data = res.data.data;
 
-          if (status.code == 200) {
-            let data = res.data.data;
+              this.gameInfo = data;
+              this.teamInfo = data.team;
+              this.authorInfo = data.author;
 
-            this.gameInfo = data;
-            this.teamInfo = data.team;
-            this.authorInfo = data.author;
-
-            this.getRanking(data.game.time);
-            this.initBPOrder(this.bpPerspective, 0);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
+              this.initBPOrder(this.bpPerspective, 0);
+            } else {
+              this.$message.error(status.msg);
+            }
+          });
+      }
     },
     onGameShareCopy: function () {
       let tabsModel = this.tabsInfo.model,
@@ -1202,7 +1205,6 @@ export default {
           logo: null,
         },
         stepsNow: 0,
-        stepsActive: 0,
         BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       };
       //创建 BP 的时候切换红蓝阵营
@@ -1557,7 +1559,6 @@ export default {
             logo: null,
           },
           stepsNow: 0,
-          stepsActive: 0,
           BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         };
 
@@ -1681,7 +1682,7 @@ span.game-0db3e75efe3faa0cee4451fb55bc4c53 {
 span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
   margin-left: -15px;
   position: absolute;
-  top: -1px;
+  top: 1px;
   z-index: @app-z-index;
 }
 

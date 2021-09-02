@@ -78,7 +78,7 @@
             </div>
 
             <div
-              v-else-if="!data.url"
+              v-else
               v-html="data.title"
               class="update-5a5152e95445ede11c05f5fa898d8fd9"
             />
@@ -332,16 +332,13 @@ export default {
     getHeroUpdate: function (heroId) {
       let appConfigInfo = this.$appConfigInfo,
         date = new Date(),
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage("heroUpdate-" + heroId);
 
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
       this.date.max = new Date(date.setMonth(date.getMonth() + 4));
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
 
@@ -349,6 +346,7 @@ export default {
         .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
         .then((res) => {
           this.tableData = res.data.data;
+          this.tableData.updateTime = ts;
 
           this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
         });

@@ -9,8 +9,8 @@
         :data="lineData.result"
         :loading="lineData.loading"
         :after-config="afterConfig"
-        height="250px"
         width="99.2%"
+        height="250px"
         class="game-7a0c936f40819c94d6d605e89f223e45"
       />
     </div>

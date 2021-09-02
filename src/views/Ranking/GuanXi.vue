@@ -11,6 +11,7 @@
       >
         <vxe-table-colgroup :title="heroName ? heroName : '英雄'" fixed="left">
           <vxe-table-column
+            field="hero_1"
             :title="heroName ? '和' : '1'"
             :filters="[
               { label: '对抗路 (战士)', data: 1 },
@@ -21,14 +22,13 @@
               { label: '游走', data: 6 },
             ]"
             :filter-method="filterMethod"
-            field="hero_1"
             width="75"
           >
             <template #default="{ row }">
               <div
                 :style="{ position: 'relative' }"
                 :class="
-                  isSmallMobile
+                  isSmallMode
                     ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
                     : null
                 "
@@ -52,6 +52,7 @@
           </vxe-table-column>
 
           <vxe-table-column
+            field="hero_2"
             :title="heroName ? '↓' : '2'"
             :filters="[
               { label: '对抗路 (战士)', data: 1 },
@@ -62,14 +63,13 @@
               { label: '游走', data: 6 },
             ]"
             :filter-method="filterMethod"
-            field="hero_2"
             width="75"
           >
             <template #default="{ row }">
               <div
                 :style="{ position: 'relative' }"
                 :class="
-                  isSmallMobile
+                  isSmallMode
                     ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
                     : null
                 "
@@ -237,7 +237,7 @@
 export default {
   name: "RankingGuanXi",
   props: {
-    isSmallMobile: {
+    isSmallMode: {
       type: Boolean,
       default: false,
     },
@@ -252,8 +252,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { isSmallMobile, heroName, refresh } = this;
-      return { isSmallMobile, heroName, refresh };
+      const { isSmallMode, heroName, refresh } = this;
+      return { isSmallMode, heroName, refresh };
     },
   },
   watch: {
@@ -305,15 +305,12 @@ export default {
   methods: {
     getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroName
         );
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
 
@@ -338,6 +335,7 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
             this.tableData.loading = false;
+            this.tableData.updateTime = ts;
 
             this.$appSetLocalStorage(
               "ranking-" +

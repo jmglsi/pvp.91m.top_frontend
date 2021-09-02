@@ -331,6 +331,8 @@
       </van-action-sheet>
     </div>
 
+    <AppHello height="100px" />
+
     <div class="hero-16e1b9e46fe4483c6bc17aea9d20736a">
       <van-action-sheet
         v-model="showInfo.heroMenu"
@@ -382,6 +384,7 @@
               $dialog.alert({
                 title: '请客观评价该英雄',
                 message: circle.info.tips,
+                theme: 'round-button',
               })
             "
           />
@@ -413,7 +416,7 @@
                   '是否打开外部链接?',
                   null,
                   {
-                    path: '//bbs.nga.cn/read.php?tid=' + hero.info.wikiId,
+                    path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId,
                   },
                   0
                 )
@@ -448,6 +451,7 @@ export default {
     HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {
@@ -579,13 +583,10 @@ export default {
     },
     getHeroInfo: function (id = 111) {
       let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
         ls = this.$appGetLocalStorage("heroInfo-" + id);
 
-      if (
-        ls &&
-        this.$appTs - appConfigInfo.appInfo.updateTime <
-          appConfigInfo.updateInfo.timeout
-      ) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         let heroInfoData = ls.heroInfo;
 
         this.circle.info = ls.circleInfo;
@@ -611,6 +612,8 @@ export default {
           this.circle.info = heroData.circleInfo;
           this.positionInfo = heroData.positionInfo;
           this.hero.info = heroInfoData;
+
+          heroData.updateTime = ts;
 
           this.$appSetLocalStorage("heroInfo-" + id, heroData);
 

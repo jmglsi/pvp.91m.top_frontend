@@ -38,9 +38,10 @@
                   </template>
 
                   <DianFengSai
-                    :isSmallMobile="isSmallMobile"
+                    :isSmallMode="isSmallMode"
                     :bid="bid || dfsAreaTypeInfo.model"
                     :cid="cid || dfsPositionTypeInfo.model"
+                    :did="did || 0"
                     :refresh="refresh || 0"
                   />
                 </a-tooltip>
@@ -119,7 +120,7 @@
           <div>
             <GuanXi
               v-if="tabsInfo.model == 1"
-              :isSmallMobile="isSmallMobile"
+              :isSmallMode="isSmallMode"
               :heroName="heroName"
               :refresh="refresh || 0"
             />
@@ -144,7 +145,7 @@
           <div>
             <WanJia
               v-if="tabsInfo.model == 2"
-              :isSmallMobile="isSmallMobile"
+              :isSmallMode="isSmallMode"
               :bid="bid || wjAreaTypeInfo.model"
               :refresh="refresh || 0"
             />
@@ -154,7 +155,7 @@
         <van-tab title="装备 (近期)">
           <ZhuangBei
             v-if="tabsInfo.model == 3"
-            :isSmallMobile="isSmallMobile"
+            :isSmallMode="isSmallMode"
             :refresh="refresh || 0"
           />
         </van-tab>
@@ -165,7 +166,7 @@
           <div>
             <PaiZi
               v-if="tabsInfo.model == 4"
-              :isSmallMobile="isSmallMobile"
+              :isSmallMode="isSmallMode"
               :bid="bid || pzAreaTypeInfo.model"
               :cid="cid || pzProvinceTypeInfo.model"
               :did="did || pzFightPowerTypeInfo.model"
@@ -176,9 +177,7 @@
       </van-tabs>
     </div>
 
-    <div v-if="viewInfo.model != 'a'">
-      <AppHello height="100px" />
-    </div>
+    <AppHello v-if="viewInfo.model != 'a'" height="100px" />
 
     <van-popup
       v-model="showInfo.rankingSearch"
@@ -298,7 +297,7 @@ export default {
       did: 0,
       refresh: 0,
       heroName: "",
-      isSmallMobile: false,
+      isSmallMode: false,
       viewInfo: {
         model: "a",
       },
@@ -408,9 +407,9 @@ export default {
         this.showInfo.wanjiaTips = false;
       }
 
-      this.isSmallMobile = ls.appInfo.isSmallMobile;
+      this.isSmallMode = ls.appInfo.isSmallMode;
 
-      if (!ls.appInfo.isSmallMobile && this.$appHeight < 575) {
+      if (!ls.appInfo.isSmallMode && this.$appHeight < 575) {
         this.$dialog
           .confirm({
             title: "是否适配小屏?",
@@ -418,16 +417,16 @@ export default {
           })
           .then(() => {
             // on confirm
-            this.isSmallMobile = true;
+            this.isSmallMode = true;
 
-            ls.appInfo.isSmallMobile = this.isSmallMobile;
+            ls.appInfo.isSmallMode = this.isSmallMode;
             this.$appSetLocalStorage("appConfigInfo", ls);
           })
           .catch(() => {
             // on cancel
-            this.isSmallMobile = false;
+            this.isSmallMode = false;
 
-            ls.appInfo.isSmallMobile = this.isSmallMobile;
+            ls.appInfo.isSmallMode = this.isSmallMode;
             this.$appSetLocalStorage("appConfigInfo", ls);
           });
       }
@@ -492,6 +491,8 @@ export default {
       if (tabsInfo.model == 0) {
         this.dfsAreaTypeInfo.model = bidInfo.model;
         this.dfsPositionTypeInfo.model = cidInfo.model;
+
+        didInfo.model = Number(this.$appConfigInfo.appInfo.isSwingMode);
       }
 
       if (tabsInfo.model == 2) {

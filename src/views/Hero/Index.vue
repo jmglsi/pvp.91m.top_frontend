@@ -1,17 +1,12 @@
 <template>
   <div class="hero-home">
     <router-view />
-
-    <AppHello height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "HeroHome",
-  components: {
-    AppHello: () => import("@/components/App/Hello.vue"),
-  },
 };
 </script>
 

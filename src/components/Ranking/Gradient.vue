@@ -43,16 +43,16 @@
                 "
               >
                 <img
+                  v-lazy="data.img"
                   width="35"
                   height="35"
-                  v-lazy="data.img"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
-                  width="15"
-                  height="15"
                   v-if="data.trend > 0"
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  width="15"
+                  height="15"
                   class="
                     ranking-092fa818fdb7286350fa796ffd546c6b
                     app-db21bca782a535e91eb87f56b8abdc45
@@ -111,16 +111,16 @@
                 "
               >
                 <img
+                  v-lazy="data.img"
                   width="35"
                   height="35"
-                  v-lazy="data.img"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
-                  width="15"
-                  height="15"
                   v-if="data.trend > 0"
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  width="15"
+                  height="15"
                   class="
                     ranking-092fa818fdb7286350fa796ffd546c6b
                     app-db21bca782a535e91eb87f56b8abdc45
@@ -178,16 +178,16 @@
                 "
               >
                 <img
+                  v-lazy="data.img"
                   width="35"
                   height="35"
-                  v-lazy="data.img"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
-                  width="15"
-                  height="15"
                   v-if="data.trend > 0"
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  width="15"
+                  height="15"
                   class="
                     ranking-092fa818fdb7286350fa796ffd546c6b
                     app-db21bca782a535e91eb87f56b8abdc45
@@ -245,16 +245,16 @@
                 "
               >
                 <img
+                  v-lazy="data.img"
                   width="35"
                   height="35"
-                  v-lazy="data.img"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
-                  width="15"
-                  height="15"
                   v-if="data.trend > 0"
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  width="15"
+                  height="15"
                   class="
                     ranking-092fa818fdb7286350fa796ffd546c6b
                     app-db21bca782a535e91eb87f56b8abdc45
@@ -308,16 +308,16 @@
                 "
               >
                 <img
+                  v-lazy="data.img"
                   width="35"
                   height="35"
-                  v-lazy="data.img"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
-                  width="15"
-                  height="15"
                   v-if="data.trend > 0"
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  width="15"
+                  height="15"
                   class="
                     ranking-092fa818fdb7286350fa796ffd546c6b
                     app-db21bca782a535e91eb87f56b8abdc45
@@ -369,16 +369,16 @@
                 "
               >
                 <img
+                  v-lazy="data.img"
                   width="35"
                   height="35"
-                  v-lazy="data.img"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
-                  width="15"
-                  height="15"
                   v-if="data.trend > 0"
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  width="15"
+                  height="15"
                   class="
                     ranking-092fa818fdb7286350fa796ffd546c6b
                     app-db21bca782a535e91eb87f56b8abdc45

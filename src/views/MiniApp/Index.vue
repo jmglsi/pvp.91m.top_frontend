@@ -163,7 +163,7 @@
       </van-dialog>
     </div>
 
-    <AppHello height="100px" />
+    <AppHello height="75px" />
   </div>
 </template>
 
