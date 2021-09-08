@@ -6,19 +6,19 @@ Vue.prototype.$qs = qs;
 import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
 
-import Aegis from "aegis-web-sdk";
+import aegis from "aegis-web-sdk";
 
 import axios from 'axios';
 
 let nowHost = location.host,
-    nowUrl = null;
+    baseUrl = null;
 
-if (nowHost.match(/127\.0\.0\.1|localhost/)) {
-    axios.defaults.baseURL = "//localhost/api.91m.top";
+if (/127\.0\.0\.1|localhost/i.test(nowHost)) {
+    baseUrl = "//localhost/api.91m.top";
 } else {
-    axios.defaults.baseURL = "//api.91m.top";
+    baseUrl = "//api.91m.top";
 
-    new Aegis({
+    new aegis({
         id: "mr3jG4N5Gdv9B6Op8V",
         uin: cookie.get("openId") || "",
         reportApiSpeed: true,
@@ -26,6 +26,7 @@ if (nowHost.match(/127\.0\.0\.1|localhost/)) {
         spa: true,
     });
 }
+axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(function(config) {
     let data = qs.parse(config.data);
 
@@ -51,12 +52,10 @@ axios.interceptors.request.use(function(config) {
 })
 Vue.prototype.$axios = axios;
 
-nowUrl = axios.defaults.baseURL;
-
-const pvpApi = nowUrl + "/hero/v1/app.php";
-const gameApi = nowUrl + "/hero/v1/game.php";
-const loginApi = nowUrl + "/hero/v1/login.php";
-const biliApi = nowUrl + "/hero/v1/bilibili.php";
+const pvpApi = baseUrl + "/hero/v1/app.php";
+const gameApi = baseUrl + "/hero/v1/game.php";
+const loginApi = baseUrl + "/hero/v1/login.php";
+const biliApi = baseUrl + "/hero/v1/bilibili.php";
 
 const pvp = {
     addHeroByCombination: pvpApi + "?type=addHeroByCombination",

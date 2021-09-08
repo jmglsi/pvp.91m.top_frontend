@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-Vue.prototype.$appCountry = location.host.match(/127\.0\.0\.1|localhost|pvp\.91m\.top/);
+Vue.prototype.$appCountry = /127\.0\.0\.1|localhost|pvp\.91m\.top/i.test(location.host);
 Vue.prototype.$appIsApple = /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
@@ -12,13 +12,13 @@ Vue.prototype.$appConfigInfo = {
         isSwingMode: false,
         isSmallMode: false,
         isReductionMode: false,
-        openUrl: false,
+        openUrl: true,
         newsPush: true,
         pwa: 0,
         link: [],
         name: "苏苏的荣耀助手",
         script: [],
-        tempText: "",
+        tempText: null,
         update: {
             version: 0,
             time: 0,
@@ -28,16 +28,17 @@ Vue.prototype.$appConfigInfo = {
         },
         search: {
             img: null,
-            placeholder: "",
+            placeholder: null,
             to: null,
             url: null,
-        },
+        }
     },
     tipsInfo: {
         dfsTips: false,
         skillTips: false,
         wanjiaTips: false
-    }
+    },
+    positionInfo: []
 };
 
 Vue.prototype.$appColumnsInfo = {
@@ -165,11 +166,11 @@ Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' },
                     message: message
                 })
                 .then(() => {
-                    // on confirm
+                    //on confirm
                     window.open(url.path);
                 })
                 .catch(() => {
-                    // on cancel
+                    //on cancel
                 });
         } else {
             window.open(url.path);
@@ -222,7 +223,7 @@ Vue.prototype.$appCopyData = function(data, successText = "复制成功", errorT
                 );
             })
             .catch(() => {
-                // on cancel
+                //on cancel
             });
     }, 250);
 }

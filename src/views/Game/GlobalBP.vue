@@ -780,23 +780,23 @@ export default {
         blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
         red: [1, 3, 5, 6, 9, 10, 12, 14, 17],
         bpPerspective: [
-          1, // 0 - 1
-          1, // 1 - 2
-          1, // 2 - 3
-          2, // 3 - 4
-          1, // 4 - 5
-          2, // 5 - 6
-          1, // 6 - 7
-          2, // 7 - 8
-          1, // 8 - 9
-          1, // 9 - 10
-          1, // 10 - 11
-          1, // 11 - 12
-          1, // 12 - 13
-          2, // 13 - 14
-          1, // 14 - 15
-          2, // 15 - 16
-          1, // 16 -17
+          1, //0 - 1
+          1, //1 - 2
+          1, //2 - 3
+          2, //3 - 4
+          1, //4 - 5
+          2, //5 - 6
+          1, //6 - 7
+          2, //7 - 8
+          1, //8 - 9
+          1, //9 - 10
+          1, //10 - 11
+          1, //11 - 12
+          1, //12 - 13
+          2, //13 - 14
+          1, //14 - 15
+          2, //15 - 16
+          1, //16 -17
         ],
       },
       eye: "eye-o",
@@ -1404,13 +1404,13 @@ export default {
             title: "是否将【" + hero.name + "】标记为【" + sortText + "】?",
           })
           .then(() => {
-            // on confirm
+            //on confirm
             this.tableData.result.rows[nowIndex].trend = newTrend;
 
             this.$appSetLocalStorage("gameBP", this.tableData);
           })
           .catch(() => {
-            // on cancel
+            //on cancel
           });
 
         return;
@@ -1486,13 +1486,13 @@ export default {
           message: "保存在本地的排序将被清除\r有新英雄的时候可能需要 ;D",
         })
         .then(() => {
-          // on confirm
+          //on confirm
           this.$appDelectLocalStorage("gameBP");
 
           this.getRanking();
         })
         .catch(() => {
-          // on cancel
+          //on cancel
         });
     },
     onSwapPositionClick() {
@@ -1521,11 +1521,11 @@ export default {
             message: "此操作不可逆",
           })
           .then(() => {
-            // on confirm
+            //on confirm
             this.onDeleteGameBPClick(tabsModel);
           })
           .catch(() => {
-            // on cancel
+            //on cancel
           });
       }
 
@@ -1568,13 +1568,13 @@ export default {
             message: "此操作不可逆",
           })
           .then(() => {
-            // on confirm
+            //on confirm
             this.gameInfo.result.rows[tabsModel] = newGameInfo;
 
             this.$message.success(this.$appMsg.success[1000]);
           })
           .catch(() => {
-            // on cancel
+            //on cancel
           });
       }
 
@@ -1621,7 +1621,7 @@ export default {
           title: "是否将本局胜方标记为【" + nowWinTeam.name + "】?",
         })
         .then(() => {
-          // on confirm
+          //on confirm
           nowWinCamp = winCamp;
 
           this.gameInfo.result.rows[tabsModel].win = {
@@ -1635,7 +1635,7 @@ export default {
           this.$message.success(this.$appMsg.success[1000]);
         })
         .catch(() => {
-          // on cancel
+          //on cancel
         });
     },
   },

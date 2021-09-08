@@ -1,24 +1,24 @@
-export { // loading
+export { //loading
     default as LoadingOutline
 }
 from '@ant-design/icons/lib/outline/LoadingOutline';
 
-export { // error
+export { //error
     default as CloseCircleFill
 }
 from '@ant-design/icons/lib/fill/CloseCircleFill';
 
-export { // info
+export { //info
     default as InfoCircleFill
 }
 from '@ant-design/icons/lib/fill/InfoCircleFill';
 
-export { // success
+export { //success
     default as CheckCircleFill
 }
 from '@ant-design/icons/lib/fill/CheckCircleFill';
 
-export { // warning
+export { //warning
     default as ExclamationCircleFill
 }
 from '@ant-design/icons/lib/fill/ExclamationCircleFill';

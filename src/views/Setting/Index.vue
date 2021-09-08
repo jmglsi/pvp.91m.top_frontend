@@ -117,16 +117,16 @@
         <van-cell
           title="更新时间"
           label="最后一次数据更新的时间"
-          :value="appConfigInfo.appInfo.update.time"
+          :value="$appConfigInfo.appInfo.update.time"
         />
         <van-cell
           title="系统版本"
           label="最后一次系统更新的时间"
-          :value="appConfigInfo.appInfo.update.version"
+          :value="$appConfigInfo.appInfo.update.version"
         />
         <van-cell
           title="访问类型"
-          :value="appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
+          :value="$appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
           @click="$message.info($appMsg.info[1018])"
         />
       </van-cell-group>
@@ -149,13 +149,8 @@ export default {
           isSwingMode: false,
           isSmallMode: false,
           isReductionMode: false,
-          openUrl: false,
+          openUrl: true,
           newsPush: true,
-          update: {
-            version: 0,
-            time: 0,
-          },
-          version: 0,
         },
       },
       cacheInfo: [

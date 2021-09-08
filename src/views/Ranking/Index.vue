@@ -416,14 +416,14 @@ export default {
             message: "稍后可在【我的 - 通用 - 适配小屏】修改",
           })
           .then(() => {
-            // on confirm
+            //on confirm
             this.isSmallMode = true;
 
             ls.appInfo.isSmallMode = this.isSmallMode;
             this.$appSetLocalStorage("appConfigInfo", ls);
           })
           .catch(() => {
-            // on cancel
+            //on cancel
             this.isSmallMode = false;
 
             ls.appInfo.isSmallMode = this.isSmallMode;

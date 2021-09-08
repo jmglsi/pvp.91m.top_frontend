@@ -107,8 +107,8 @@ export default {
           content: "yes",
         },
       ],
-      script: this.tableData.appInfo.script || [],
-      link: this.tableData.appInfo.link || [],
+      script: this.$appConfigInfo.appInfo.script || [],
+      link: this.$appConfigInfo.appInfo.link || [],
     };
   },
   data() {
@@ -137,11 +137,6 @@ export default {
             },
           ],
         },
-        appInfo: {
-          script: [],
-          link: [],
-        },
-        tipsInfo: {},
       },
       showInfo: {
         hello: true,
@@ -166,12 +161,12 @@ export default {
           let data = res.data.data,
             appInfo = data.appInfo,
             tipsInfo = data.tipsInfo,
+            positionInfo = data.positionInfo,
             q = this.$route.query,
             tempOpenId = q.tempOpenId || "",
             tempAccessToken = q.tempAccessToken || "",
             oauthType = q.oauthType || "",
-            tempText = q.tempText || "",
-            isUpdate = false,
+            tempText = q.tempText || null,
             appConfigInfo = this.$appConfigInfo;
 
           this.tableData = data;
@@ -185,8 +180,6 @@ export default {
             this.$appDelectLocalStorage("heroUpdate");
             this.$appDelectLocalStorage("heroSameHobby");
             this.$appDelectLocalStorage("heroChartsLog");
-
-            isUpdate = true;
           }
 
           if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
@@ -198,20 +191,18 @@ export default {
                   theme: "round-button",
                 })
                 .then(() => {
-                  // on close
+                  //on close
                 });
             }
 
             this.$appDelectLocalStorage("appConfigInfo");
-
-            isUpdate = true;
           }
 
           this.$appConfigInfo.appInfo = {
             isSwingMode: appConfigInfo.appInfo.isSwingMode || false,
             isSmallMode: appConfigInfo.appInfo.isSmallMode || false,
             isReductionMode: appConfigInfo.appInfo.isReductionMode || false,
-            openUrl: appConfigInfo.appInfo.openUrl || false,
+            openUrl: appConfigInfo.appInfo.openUrl || true,
             newsPush: appConfigInfo.appInfo.newsPush || true,
             pwa: appConfigInfo.appInfo.pwa || 0,
             link: appInfo.link || [],
@@ -227,15 +218,14 @@ export default {
             },
             search: {
               img: appInfo.search.img || null,
-              placeholder: appInfo.search.placeholder || "",
+              placeholder: appInfo.search.placeholder || null,
               to: appInfo.search.to || null,
               url: appInfo.search.url || null,
             },
           };
+          this.$appConfigInfo.positionInfo = positionInfo || [];
 
-          if (isUpdate) {
-            this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
-          }
+          this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
 
           if (tipsInfo) {
             this.$notification.open({
@@ -298,9 +288,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
+  width: 100%;
   height: 100%;
   text-align: center;
-  width: 100%;
+  position: absolute;
 }
 
 .app-bda9643ac6601722a28f238714274da4 {
@@ -476,6 +467,7 @@ div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
 
+div.vxe-toolbar,
 div.van-search,
 div.van-cell,
 div.van-cell-group,

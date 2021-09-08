@@ -352,8 +352,7 @@ export default {
             );
 
             if (heroName) {
-              document.title =
-                heroName + " | " + this.$appConfigInfo.appInfo.name;
+              document.title = heroName + " | " + appConfigInfo.appInfo.name;
             }
 
             this.$message.success(this.$appMsg.success[1005]);

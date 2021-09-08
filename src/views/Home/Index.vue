@@ -6,17 +6,17 @@
       >
         <van-search
           show-action
-          :placeholder="appInfo.search.placeholder"
+          :placeholder="$appConfigInfo.appInfo.search.placeholder"
           @click="$appPush({ path: '/search' })"
           shape="round"
         >
           <template #action>
             <img
-              v-lazy="appInfo.search.img"
+              v-lazy="$appConfigInfo.appInfo.search.img"
               width="35"
               height="35"
               class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-              @click="onRightClick(appInfo.search)"
+              @click="onRightClick($appConfigInfo.appInfo.search)"
             />
           </template>
         </van-search>
@@ -90,14 +90,6 @@ export default {
   data() {
     return {
       copyData: "",
-      appInfo: {
-        search: {
-          placeholder: "搜索",
-          img: "//ae04.alicdn.com/kf/Hec08150147584fc0b4dcc1176200ef94v.png",
-          to: "/friends",
-          url: null,
-        },
-      },
       tabsInfo: {
         model: 0,
       },
@@ -116,11 +108,8 @@ export default {
 
       this.tabsInfo.model = type;
 
-      if (ls.appInfo.update.version > 0) {
-        this.appInfo = ls.appInfo;
-      }
-
       if (pwa == 0) return;
+
       ls.appInfo.pwa = pwa;
       this.$appSetLocalStorage("appConfigInfo", ls);
 
@@ -134,7 +123,7 @@ export default {
               "您已经很久没有更新过本站啦\r页面有可能发生了较大的变化\r建议清除缓存重新添加到桌面",
           })
           .then(() => {
-            // on confirm
+            //on confirm
             this.copyData = location.origin;
 
             this.$appCopyData(
@@ -143,7 +132,7 @@ export default {
             );
           })
           .catch(() => {
-            // on cancel
+            //on cancel
           });
       }
     },

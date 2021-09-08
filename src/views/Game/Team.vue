@@ -285,7 +285,7 @@ export default {
           message: "此操作不可逆",
         })
         .then(() => {
-          // on confirm
+          //on confirm
           this.$axios
             .post(
               this.$appApi.pvp.deleteTeam,
@@ -308,7 +308,7 @@ export default {
           this.showInfo.teamMenu = false;
         })
         .catch(() => {
-          // on cancel
+          //on cancel
         });
     },
     onCreateEngageClick: function (data) {

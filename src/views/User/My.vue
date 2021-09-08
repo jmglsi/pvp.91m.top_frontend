@@ -736,7 +736,7 @@ export default {
           title: "是否退出登录?",
         })
         .then(() => {
-          // on confirm
+          //on confirm
           this.isLogin = false;
 
           this.$cookie.delete("openId");
@@ -745,7 +745,7 @@ export default {
           this.$cookie.delete("tempAccessToken");
         })
         .catch(() => {
-          // on cancel
+          //on cancel
         });
     },
   },

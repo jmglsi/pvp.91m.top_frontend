@@ -28,7 +28,7 @@
             >
               <img
                 v-lazy="
-                  row.avatar.match(/p\.qlogo\.cn/g)
+                  /p\.qlogo\.cn/i.test(row.avatar)
                     ? $appApi.pvp.getImg +
                       '&url=' +
                       encodeURIComponent(row.avatar)
@@ -340,12 +340,12 @@ export default {
   },
   methods: {
     getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {
-      let playerList = [],
-        appConfigInfo = this.$appConfigInfo,
+      let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
-        );
+        ),
+        playerList = [];
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         this.tableData = ls;

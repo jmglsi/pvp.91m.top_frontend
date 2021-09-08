@@ -56,9 +56,9 @@
                 <van-tag
                   v-if="data"
                   round
-                  :color="positionInfo[data][1]"
+                  :color="$appConfigInfo.positionInfo[data][1] || 'black'"
                   class="hero-bc267281c62550407c9572aff2a45f69"
-                  >{{ positionInfo[data][0] }}</van-tag
+                  >{{ $appConfigInfo.positionInfo[data][0] || "未知" }}</van-tag
                 >
               </li>
             </ul>
@@ -593,7 +593,6 @@ export default {
         let heroInfoData = ls.heroInfo;
 
         this.circle.info = ls.circleInfo;
-        this.positionInfo = ls.positionInfo;
         this.hero.info = heroInfoData;
 
         heroInfoData.id == 999
@@ -602,8 +601,9 @@ export default {
 
         this.hero.title = heroInfoData.name;
 
-        return (document.title =
-          heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name);
+        document.title = heroInfoData.name + " | " + appConfigInfo.appInfo.name;
+
+        return;
       }
 
       this.$axios
@@ -613,7 +613,6 @@ export default {
             heroInfoData = heroData.heroInfo;
 
           this.circle.info = heroData.circleInfo;
-          this.positionInfo = heroData.positionInfo;
           this.hero.info = heroInfoData;
 
           heroData.updateTime = ts;
@@ -626,7 +625,7 @@ export default {
 
           this.hero.title = heroInfoData.name;
           document.title =
-            heroInfoData.name + " | " + this.$appConfigInfo.appInfo.name;
+            heroInfoData.name + " | " + appConfigInfo.appInfo.name;
         });
     },
     onComponentShow: function () {
@@ -706,8 +705,9 @@ export default {
       this.showInfo.imageIndex = imageIndex;
     },
     onHeroTabsChange: function (e) {
-      let dTitle,
-        heroInfo = this.hero.info;
+      let appConfigInfo = this.$appConfigInfo,
+        heroInfo = this.hero.info,
+        dTitle;
 
       if (e == 0) {
         dTitle = heroInfo.name;
@@ -720,7 +720,7 @@ export default {
         this.hero.title = null;
       }
 
-      document.title = dTitle + " | " + this.$appConfigInfo.appInfo.name;
+      document.title = dTitle + " | " + appConfigInfo.appInfo.name;
 
       e == 0
         ? (this.showInfo.parameter = true)
