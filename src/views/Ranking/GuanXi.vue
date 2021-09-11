@@ -45,8 +45,9 @@
                     app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-f58cc48f5b942c91e57eff48accc5151
                   "
-                  >{{ row.hero_1.adaptationRate }}</span
                 >
+                  {{ row.hero_1.adaptationRate }}
+                </span>
               </div>
             </template>
           </vxe-table-column>
@@ -86,8 +87,9 @@
                     app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-f58cc48f5b942c91e57eff48accc5151
                   "
-                  >{{ row.hero_2.adaptationRate }}</span
                 >
+                  {{ row.hero_2.adaptationRate }}
+                </span>
               </div>
             </template>
           </vxe-table-column>

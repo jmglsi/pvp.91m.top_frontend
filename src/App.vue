@@ -349,6 +349,11 @@ img.app-db21bca782a535e91eb87f56b8abdc45 {
   margin-left: 5px;
 }
 
+img.app-32595defa680e058a9db0aaae36d6f46 {
+  position: absolute;
+  margin-left: 33px !important;
+}
+
 i.app-6de102c0bc4dc7f72ce287d6b0828052 {
   img.van-icon__image {
     border-radius: unset;
@@ -447,6 +452,15 @@ span.app-dac41b9450b77c3eb0ab7d8428d004f5 {
 span.app-e4c9479b11955648dad558fe717a4eb2 {
   color: red;
   font-size: @app-font-size;
+}
+
+span.app-b0704b59dbf144bfeffb53bdb11d7128 {
+  position: absolute;
+  font-size: 10px;
+  left: 0;
+  margin-left: 15px;
+  margin-top: -8px;
+  width: 100%;
 }
 
 div.ant-popover-title {

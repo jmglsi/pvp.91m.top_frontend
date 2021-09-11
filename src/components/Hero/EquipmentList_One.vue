@@ -44,28 +44,6 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="优先级"
-        field="equipment.updateIndex"
-        :width="listWidth"
-        sortable
-      >
-        <template #default="{ row }">
-          <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
-            row.equipment.updateType == 0
-              ? "-"
-              : Math.abs(row.equipment.updateIndex)
-          }}</span>
-          <img
-            v-if="row.equipment.updateType != 0"
-            v-lazy="'/img/app-icons/hot_' + row.equipment.updateType + '.png'"
-            width="15"
-            height="15"
-            class="app-db21bca782a535e91eb87f56b8abdc45"
-          />
-        </template>
-      </vxe-table-column>
-
       <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-colgroup title="全部 (%)">
@@ -89,6 +67,40 @@
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
+          </template>
+
+          <template #default="{ row }">
+            <div :style="{ position: 'relative' }">
+              <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                {{ row.allPickRate }}
+              </div>
+              <span
+                v-if="row.equipment.updateType != 0"
+                :style="
+                  row.equipment.updateType == 2
+                    ? { color: 'red' }
+                    : { color: 'blue' }
+                "
+                class="app-b0704b59dbf144bfeffb53bdb11d7128"
+              >
+                {{
+                  (row.equipment.updateType == 2 ? "+" : "-") +
+                  Math.abs(row.equipment.updateValue)
+                }}
+              </span>
+              <img
+                v-if="row.equipment.updateType != 0"
+                v-lazy="
+                  '/img/app-icons/hot_' + row.equipment.updateType + '.png'
+                "
+                width="15"
+                height="15"
+                class="
+                  app-db21bca782a535e91eb87f56b8abdc45
+                  app-32595defa680e058a9db0aaae36d6f46
+                "
+              />
+            </div>
           </template>
         </vxe-table-column>
 
@@ -277,7 +289,7 @@ export default {
     };
   },
   created() {
-    this.listWidth = this.$appInitTableWidth(1450);
+    this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
     getRanking: function (id = 111, aid = 6, bid = 1, cid = 0, did = 0) {

@@ -25,7 +25,36 @@
           field="pickRate"
           :width="listWidth"
           sortable
-        />
+        >
+          <template #default="{ row }">
+            <div :style="{ position: 'relative' }">
+              <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                {{ row.pickRate }}
+              </div>
+              <span
+                v-if="row.updateType != 0"
+                :style="
+                  row.updateType == 2 ? { color: 'red' } : { color: 'blue' }
+                "
+                class="app-b0704b59dbf144bfeffb53bdb11d7128"
+              >
+                {{
+                  (row.updateType == 2 ? "+" : "-") + Math.abs(row.updateValue)
+                }}
+              </span>
+              <img
+                v-if="row.updateType != 0"
+                v-lazy="'/img/app-icons/hot_' + row.updateType + '.png'"
+                width="15"
+                height="15"
+                class="
+                  app-db21bca782a535e91eb87f56b8abdc45
+                  app-32595defa680e058a9db0aaae36d6f46
+                "
+              />
+            </div>
+          </template>
+        </vxe-table-column>
 
         <vxe-table-column
           title="胜率"

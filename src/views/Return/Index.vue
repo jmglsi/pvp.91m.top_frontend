@@ -210,8 +210,9 @@
                     app-5f19eaf71f40d74d66be84db52b3ad87
                     return-58206caebd18d792f59aa1ec064f65d1
                   "
-                  >{{ rowIndex + 4 }}</span
                 >
+                  {{ rowIndex + 4 }}
+                </span>
               </div>
             </template>
           </vxe-table-column>
@@ -230,15 +231,18 @@
             sortable
           >
             <template #default="{ row }">
-              <div>{{ row.allVoteNum }}</div>
-              <span
-                v-if="row.needVote > 0"
-                :style="
-                  row.needVote < 10 ? { color: 'red' } : { color: 'blue' }
-                "
-                class="ranking-ad602d217564b616b293eac07fc53138"
-                >还差 {{ row.needVote }}</span
-              >
+              <div :style="{ position: 'relative' }">
+                <div>{{ row.allVoteNum }}</div>
+                <span
+                  v-if="row.needVote > 0"
+                  :style="
+                    row.needVote < 10 ? { color: 'red' } : { color: 'blue' }
+                  "
+                  class="ranking-ad602d217564b616b293eac07fc53138"
+                >
+                  还差 {{ row.needVote }}
+                </span>
+              </div>
             </template>
           </vxe-table-column>
 
@@ -427,8 +431,10 @@ span.return-279a4b0330c1a4ef39cde3a334a9c652 {
 span.ranking-ad602d217564b616b293eac07fc53138 {
   font-size: @app-font-size;
   margin-top: -3px;
+  left: 0;
+  margin-left: 25px;
   position: absolute;
-  right: 0;
+  width: 100%;
 }
 
 span.return-4fb4d4758e19b050e0de1ef488ae54a3 {

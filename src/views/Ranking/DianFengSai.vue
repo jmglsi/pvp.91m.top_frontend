@@ -70,8 +70,9 @@
                     app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-043052eea2d064cab23119e56f4f640e
                   "
-                  >{{ row.skill.preview[0].pickRate }}%</span
                 >
+                  {{ row.skill.preview[0].pickRate }}%
+                </span>
                 <img
                   v-lazy="row.skill.preview[1].img"
                   width="15"
@@ -87,8 +88,9 @@
                     app-5f19eaf71f40d74d66be84db52b3ad87
                     ranking-dabb6e25dffefe5b4821b7062afbdaef
                   "
-                  >{{ row.skill.preview[1].pickRate }}%</span
                 >
+                  {{ row.skill.preview[1].pickRate }}%
+                </span>
               </div>
             </div>
           </template>

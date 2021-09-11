@@ -119,8 +119,9 @@
                         app-5f19eaf71f40d74d66be84db52b3ad87
                         ranking-7de1b8678bf87a631bd5f2c2b70a1214
                       "
-                      >{{ data.fightPower }}</span
                     >
+                      {{ data.fightPower }}
+                    </span>
                     <img
                       v-lazy="
                         '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
