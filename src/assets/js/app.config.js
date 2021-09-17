@@ -129,6 +129,14 @@ Vue.prototype.$appDelectLocalStorage = function(key = "ranking") {
     }
 }
 
+Vue.prototype.$appDelectAllLocalStorage = function() {
+    let cacheList = ["appHome", "gameHome", "heroChartsLog", "heroInfo", "heroSameHobby", "heroUpdate", "ranking", "search", "searchData"];
+
+    cacheList.map((x) => {
+        Vue.prototype.$appDelectLocalStorage(x);
+    })
+}
+
 let ls = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 if (!ls) {
     Vue.prototype.$appSetLocalStorage("appConfigInfo", Vue.prototype.$appConfigInfo);

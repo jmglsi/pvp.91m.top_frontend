@@ -98,26 +98,6 @@
 
         <vxe-column title="#" type="seq" width="50" />
 
-        <vxe-column
-          title="优先级"
-          field="updateIndex"
-          :width="listWidth"
-          sortable
-        >
-          <template #default="{ row }">
-            <span class="hero-b1bd56e896540535e327e5a177ede4a8">{{
-              row.updateType == 0 ? "-" : Math.abs(row.updateIndex)
-            }}</span>
-            <img
-              v-if="row.updateType != 0"
-              v-lazy="'/img/app-icons/hot_' + row.updateType + '.png'"
-              width="15"
-              height="15"
-              class="app-db21bca782a535e91eb87f56b8abdc45"
-            />
-          </template>
-        </vxe-column>
-
         <vxe-table-colgroup title="出场越低,波动越大 (%)">
           <vxe-column
             title="禁用"
@@ -161,6 +141,39 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
+            </template>
+            <template #default="{ row }">
+              <div :style="{ position: 'relative' }">
+                <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                  {{ row.allPickRate }}
+                </div>
+                <span
+                  v-if="row.change.updateType != 0"
+                  :style="
+                    row.change.updateType == 2
+                      ? { color: 'red' }
+                      : { color: 'blue' }
+                  "
+                  class="app-b0704b59dbf144bfeffb53bdb11d7128"
+                >
+                  {{
+                    (row.change.updateType == 2 ? "+" : "-") +
+                    Math.abs(row.change.updateValue)
+                  }}
+                </span>
+                <img
+                  v-if="row.change.updateType != 0"
+                  v-lazy="
+                    '/img/app-icons/hot_' + row.change.updateType + '.png'
+                  "
+                  width="15"
+                  height="15"
+                  class="
+                    app-db21bca782a535e91eb87f56b8abdc45
+                    app-32595defa680e058a9db0aaae36d6f46
+                  "
+                />
+              </div>
             </template>
           </vxe-column>
           <vxe-column

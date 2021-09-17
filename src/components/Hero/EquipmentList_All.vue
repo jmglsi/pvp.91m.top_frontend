@@ -9,7 +9,7 @@
       <vxe-table-column title="技能" field="score" fixed="left" width="50">
         <template #default="{ row }">
           <img
-            v-lazy="row.img"
+            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.id + '.png'"
             width="25"
             height="25"
             class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"

@@ -10,7 +10,7 @@
       >
         <vxe-table-column
           title="装备"
-          field="equipment.id"
+          field="id"
           fixed="left"
           :filters="[
             { label: '其他', data: 0 },
@@ -18,7 +18,8 @@
             { label: '打野刀', data: 2 },
             { label: '辅助装', data: 3 },
             { label: '保命装', data: 4 },
-            { label: '神装', data: 5 },
+            { label: '终极装', data: 5 },
+            { label: '专属装', data: 6 },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -32,7 +33,7 @@
               <img
                 v-lazy="
                   '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                  row.equipment.id +
+                  row.id +
                   '.png'
                 "
                 width="50"
@@ -47,13 +48,13 @@
 
         <vxe-table-column
           title="名字"
-          field="equipment.name"
+          field="name"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
         />
 
         <vxe-table-column
           title="价格"
-          field="equipment.money"
+          field="money"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
           sortable
         />
@@ -73,7 +74,41 @@
             field="allPickRate"
             :width="listWidth"
             sortable
-          />
+          >
+            <template #default="{ row }">
+              <div :style="{ position: 'relative' }">
+                <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                  {{ row.allPickRate }}
+                </div>
+                <span
+                  v-if="row.change.updateType != 0"
+                  :style="
+                    row.change.updateType == 2
+                      ? { color: 'red' }
+                      : { color: 'blue' }
+                  "
+                  class="app-b0704b59dbf144bfeffb53bdb11d7128"
+                >
+                  {{
+                    (row.change.updateType == 2 ? "+" : "-") +
+                    Math.abs(row.change.updateValue)
+                  }}
+                </span>
+                <img
+                  v-if="row.change.updateType != 0"
+                  v-lazy="
+                    '/img/app-icons/hot_' + row.change.updateType + '.png'
+                  "
+                  width="15"
+                  height="15"
+                  class="
+                    app-db21bca782a535e91eb87f56b8abdc45
+                    app-32595defa680e058a9db0aaae36d6f46
+                  "
+                />
+              </div>
+            </template>
+          </vxe-table-column>
 
           <vxe-table-column
             title="胜率"
@@ -88,12 +123,7 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.equipmentMenu"
-        :title="
-          tableDataRow.equipment.name +
-          ' (' +
-          tableDataRow.equipment.id +
-          ') 如何操作'
-        "
+        :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
@@ -104,12 +134,12 @@
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
         v-model="showInfo.skillMenu"
-        :title="tableDataRow.equipment.name + ' 的其他数据 (近期)'"
+        :title="tableDataRow.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
         <HeroEquipmentListOne
           v-if="showInfo.skillMenu"
-          :equipmentId="tableDataRow.equipment.id"
+          :equipmentId="tableDataRow.id"
           :equipmentType="2"
         />
       </van-action-sheet>
@@ -150,10 +180,8 @@ export default {
         },
       },
       tableDataRow: {
-        equipment: {
-          id: 0,
-          name: "加载中...",
-        },
+        id: 0,
+        name: "加载中...",
       },
       actions: [
         { name: "复制链接", value: 0 },
@@ -187,8 +215,8 @@ export default {
         equipmentName = q.equipmentName || "加载中...";
 
       if (equipmentId) {
-        this.tableDataRow.equipment.id = equipmentId;
-        this.tableDataRow.equipment.name = equipmentName;
+        this.tableDataRow.id = equipmentId;
+        this.tableDataRow.name = equipmentName;
 
         this.showInfo.skillMenu = true;
       }
@@ -249,8 +277,8 @@ export default {
         });
     },
     filterMethod: function ({ option, row, column }) {
-      if (column.property == "equipment.id") {
-        return row.equipment.type == option.data;
+      if (column.property == "id") {
+        return row.type == option.data;
       }
     },
     onZhuangBeiCopy: function (row) {
@@ -258,9 +286,9 @@ export default {
         location.origin +
         location.pathname +
         "?type=3&equipmentId=" +
-        row.equipment.id +
+        row.id +
         "&equipmentName=" +
-        encodeURIComponent(row.equipment.name);
+        encodeURIComponent(row.name);
 
       this.$axios
         .post(this.$appApi.pvp.getShortUrl, {
@@ -269,7 +297,7 @@ export default {
         .then((res) => {
           let shortUrl = res.data.data.url;
 
-          this.copyData = row.equipment.name + " 的其他信息 ↓\r" + shortUrl;
+          this.copyData = row.name + " 的其他信息 ↓\r" + shortUrl;
 
           this.$appCopyData(this.copyData);
         });

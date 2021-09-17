@@ -212,15 +212,9 @@ export default {
         this.$appDelectLocalStorage("ranking");
       } else if (e == 1) {
         this.$appDelectLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
-
         this.$appDelectLocalStorage("appConfigInfo");
-        this.$appDelectLocalStorage("appHome");
-        this.$appDelectLocalStorage("gameHome");
-        this.$appDelectLocalStorage("heroInfo");
-        this.$appDelectLocalStorage("heroSameHobby");
-        this.$appDelectLocalStorage("heroUpdate");
-        this.$appDelectLocalStorage("search");
-        this.$appDelectLocalStorage("searchData");
+
+        this.$appDelectAllLocalStorage();
       } else if (e == 2) {
         this.$appDelectLocalStorage("gameBP");
       }

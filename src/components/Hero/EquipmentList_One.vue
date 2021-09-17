@@ -24,17 +24,12 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        title="装备"
-        field="equipment.id"
-        fixed="left"
-        width="50"
-      >
+      <vxe-table-column title="装备" field="id" fixed="left" width="50">
         <template #default="{ row }">
           <img
             v-lazy="
               '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-              row.equipment.id +
+              row.id +
               '.png'
             "
             width="25"
@@ -68,31 +63,28 @@
             />
             %
           </template>
-
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                 {{ row.allPickRate }}
               </div>
               <span
-                v-if="row.equipment.updateType != 0"
+                v-if="row.change.updateType != 0"
                 :style="
-                  row.equipment.updateType == 2
+                  row.change.updateType == 2
                     ? { color: 'red' }
                     : { color: 'blue' }
                 "
                 class="app-b0704b59dbf144bfeffb53bdb11d7128"
               >
                 {{
-                  (row.equipment.updateType == 2 ? "+" : "-") +
-                  Math.abs(row.equipment.updateValue)
+                  (row.change.updateType == 2 ? "+" : "-") +
+                  Math.abs(row.change.updateValue)
                 }}
               </span>
               <img
-                v-if="row.equipment.updateType != 0"
-                v-lazy="
-                  '/img/app-icons/hot_' + row.equipment.updateType + '.png'
-                "
+                v-if="row.change.updateType != 0"
+                v-lazy="'/img/app-icons/hot_' + row.change.updateType + '.png'"
                 width="15"
                 height="15"
                 class="
@@ -260,7 +252,7 @@ export default {
       handler(newValue) {
         if (!newValue.equipmentId) return;
 
-        this.getRanking(newValue.equipmentId, 6, newValue.equipmentType, 0, 0);
+        this.getRanking(6, newValue.equipmentType, 0, 0, newValue.equipmentId);
       },
     },
   },
@@ -292,7 +284,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (id = 111, aid = 6, bid = 1, cid = 0, did = 0) {
+    getRanking: function (aid = 6, bid = 1, cid = 0, did = 0, id = 111) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -402,22 +394,16 @@ export default {
     onCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
         this.equipmentInfo.type = 1;
-        return this.getRanking(row.heroId, 6, this.equipmentInfo.type, 0, 0);
+        return this.getRanking(6, this.equipmentInfo.type, 0, 0, row.heroId);
       }
 
-      if (column.property == "equipment.id") {
+      if (column.property == "id") {
         this.equipmentInfo.type = 2;
-        return this.getRanking(
-          row.equipment.id,
-          6,
-          this.equipmentInfo.type,
-          0,
-          0
-        );
+        return this.getRanking(6, this.equipmentInfo.type, 0, 0, row.id);
       }
 
       this.lineData.heroId = row.heroId;
-      this.lineData.equipmentId = row.equipment.id;
+      this.lineData.equipmentId = row.id;
 
       this.lineDataRow = {
         columns: ["格子", "胜率", "占比"],

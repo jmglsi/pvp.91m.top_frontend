@@ -173,13 +173,7 @@ export default {
           this.tableData.result.model = this.$route.path;
 
           if (appInfo.update.time != appConfigInfo.appInfo.update.time) {
-            this.$appDelectLocalStorage("appHome");
-            this.$appDelectLocalStorage("gameHome");
-            this.$appDelectLocalStorage("ranking");
-            this.$appDelectLocalStorage("heroInfo");
-            this.$appDelectLocalStorage("heroUpdate");
-            this.$appDelectLocalStorage("heroSameHobby");
-            this.$appDelectLocalStorage("heroChartsLog");
+            this.$appDelectAllLocalStorage();
           }
 
           if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
@@ -199,11 +193,12 @@ export default {
           }
 
           this.$appConfigInfo.appInfo = {
-            isSwingMode: appConfigInfo.appInfo.isSwingMode || false,
-            isSmallMode: appConfigInfo.appInfo.isSmallMode || false,
-            isReductionMode: appConfigInfo.appInfo.isReductionMode || false,
-            openUrl: appConfigInfo.appInfo.openUrl || true,
-            newsPush: appConfigInfo.appInfo.newsPush || true,
+            isSwingMode: Boolean(appConfigInfo.appInfo.isSwingMode) || false,
+            isSmallMode: Boolean(appConfigInfo.appInfo.isSmallMode) || false,
+            isReductionMode:
+              Boolean(appConfigInfo.appInfo.isReductionMode) || false,
+            openUrl: Boolean(appConfigInfo.appInfo.openUrl) || true,
+            newsPush: Boolean(appConfigInfo.appInfo.newsPush) || true,
             pwa: appConfigInfo.appInfo.pwa || 0,
             link: appInfo.link || [],
             name: appInfo.name || "苏苏的荣耀助手",
@@ -376,7 +371,6 @@ i.app-72383b9892bd1e6a2bd310dfb1fb2344 img.van-icon__image {
 }
 
 ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
-  list-style: none;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -597,7 +591,7 @@ div.app-a139b05b7f8e496c00991733ef7cd589 {
 }
 
 div.app-f97c2ea77c6a08b3afd5a59851cbe0d8,
-div.app-609a820218e58b4ea5a5f7656e61a0ad {
+div.app-1c17c2e6813dda8cab7978f50d30203c {
   border-radius: 10px;
   overflow: hidden;
   transform: translateY(0);

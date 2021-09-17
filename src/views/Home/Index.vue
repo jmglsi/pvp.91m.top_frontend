@@ -193,6 +193,57 @@ img.home-3c873293a7dc1ea8c20579f6a7ae94a9 {
   width: 100%;
 }
 
+ul.home-0fb3346555b8f5460aaaf04001361da5 {
+  width: 250px;
+  height: 367px;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+li.home-423fda2e543a1804accff6229de61143 {
+  text-align: left;
+  margin: 7px 0;
+  margin-left: 20px;
+  width: 150px;
+}
+
+div.home-caa1dc26349a3e0c95b4a9e69a6e53b7 {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+}
+
+div.home-e289b0da5cdb7507d4d9cc22f588cbda {
+  width: 225px;
+  overflow: hidden;
+}
+
+div.home-56677dd04cbe46e7b175e734b4ec94ef {
+  background-color: #f7f8fa !important;
+  height: 381px;
+  overflow: hidden;
+  position: absolute;
+  width: 80px;
+}
+
+div.home-41d74f0099cd7f9b526d7c601ada0e26 {
+  left: 80px;
+  position: relative;
+  width: 100%;
+}
+
+div.home-07e33cfc65db63122f9d18ae77a89315 {
+  font-size: @app-font-size + 2px;
+  width: 75px;
+  position: fixed;
+  right: -13px;
+}
+
+div.home-d553001f432b5a09d9ae776abd8413c0 {
+  bottom: 0;
+  font-size: @app-font-size + 2px;
+}
+
 div.home-f55b83381f479ed4c1203b80f891d83a {
   font-size: @app-font-size + 2px;
   margin-top: 5px;

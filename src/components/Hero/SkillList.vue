@@ -9,7 +9,7 @@
       <vxe-table-column title="技能" field="score" fixed="left" width="50">
         <template #default="{ row }">
           <img
-            v-lazy="row.img"
+            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.id + '.png'"
             width="25"
             height="25"
             class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093"
@@ -32,19 +32,22 @@
                 {{ row.pickRate }}
               </div>
               <span
-                v-if="row.updateType != 0"
+                v-if="row.change.updateType != 0"
                 :style="
-                  row.updateType == 2 ? { color: 'red' } : { color: 'blue' }
+                  row.change.updateType == 2
+                    ? { color: 'red' }
+                    : { color: 'blue' }
                 "
                 class="app-b0704b59dbf144bfeffb53bdb11d7128"
               >
                 {{
-                  (row.updateType == 2 ? "+" : "-") + Math.abs(row.updateValue)
+                  (row.change.updateType == 2 ? "+" : "-") +
+                  Math.abs(row.change.updateValue)
                 }}
               </span>
               <img
-                v-if="row.updateType != 0"
-                v-lazy="'/img/app-icons/hot_' + row.updateType + '.png'"
+                v-if="row.change.updateType != 0"
+                v-lazy="'/img/app-icons/hot_' + row.change.updateType + '.png'"
                 width="15"
                 height="15"
                 class="

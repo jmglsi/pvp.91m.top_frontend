@@ -24,12 +24,16 @@ import {
     Loading,
     NavBar,
     Pagination,
+    Picker,
     Popup,
     PullRefresh,
     Row,
     Search,
     ShareSheet,
+    Sidebar,
+    SidebarItem,
     Skeleton,
+    Sticky,
     Swipe,
     SwipeItem,
     Switch,
@@ -40,8 +44,6 @@ import {
     Tabs,
     Tag,
     Uploader,
-    Picker,
-    Sticky
 } from 'vant';
 import '@vant/touch-emulator';
 
@@ -69,12 +71,16 @@ Vue
     .use(Loading)
     .use(NavBar)
     .use(Pagination)
+    .use(Picker)
     .use(Popup)
     .use(PullRefresh)
     .use(Row)
     .use(Search)
     .use(ShareSheet)
+    .use(Sidebar)
+    .use(SidebarItem)
     .use(Skeleton)
+    .use(Sticky)
     .use(Swipe)
     .use(SwipeItem)
     .use(Switch)
@@ -85,5 +91,3 @@ Vue
     .use(Tabs)
     .use(Tag)
     .use(Uploader)
-    .use(Picker)
-    .use(Sticky)

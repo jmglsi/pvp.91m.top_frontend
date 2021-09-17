@@ -1,20 +1,20 @@
 <template>
   <div class="app-tuijian tuijian-b77f3080e567fd154c25b053042dcba9">
     <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
-      <van-pull-refresh
-        v-model="isLoading"
-        :pulling-text="appHomeInfo.miniappInfo.pulling"
-        :loosing-text="appHomeInfo.miniappInfo.loosing"
-        :loading-text="appHomeInfo.miniappInfo.loading"
-        :success-text="appHomeInfo.miniappInfo.success"
-        @refresh="onDropdownRefreshClick"
-        class="tuijian-af03857fe372b964b53ef3a082c2b518"
+      <div
+        class="
+          app-a139b05b7f8e496c00991733ef7cd589
+          app-1e4b00d1b398e8a6551429b2a2f0e17c
+        "
       >
-        <div
-          class="
-            app-a139b05b7f8e496c00991733ef7cd589
-            app-1e4b00d1b398e8a6551429b2a2f0e17c
-          "
+        <van-pull-refresh
+          v-model="isLoading"
+          :pulling-text="appHomeInfo.miniappInfo.pulling"
+          :loosing-text="appHomeInfo.miniappInfo.loosing"
+          :loading-text="appHomeInfo.miniappInfo.loading"
+          :success-text="appHomeInfo.miniappInfo.success"
+          @refresh="onDropdownRefreshClick"
+          class="tuijian-af03857fe372b964b53ef3a082c2b518"
         >
           <van-swipe
             height="200"
@@ -40,59 +40,184 @@
               >
             </van-swipe-item>
           </van-swipe>
+        </van-pull-refresh>
 
-          <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
-            <van-grid
-              :border="false"
-              :column-num="3"
-              class="app-18e05b8e51e3beb49ba55397d11cb8ce"
-            >
-              <van-grid-item
-                v-for="(data, index) in appHomeInfo.indexInfo"
-                :key="'tuijian-ea25beed04733529ada26478f028b97e-' + index"
-                :to="data.to"
-              >
-                <span v-if="data.img">
-                  <img
-                    v-lazy="data.img"
-                    width="50"
-                    height="50"
-                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-                  />
-                </span>
-                <div
-                  v-if="data.title"
-                  class="home-f55b83381f479ed4c1203b80f891d83a"
-                >
-                  {{ data.title }}
-                </div>
-              </van-grid-item>
-            </van-grid>
-
-            <van-cell
-              :title="appHomeInfo.tipsInfo.title || '加载中...'"
-              :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
-              :value="appHomeInfo.tipsInfo.value || '⏳'"
-              :to="appHomeInfo.tipsInfo.to"
-              :url="appHomeInfo.tipsInfo.url"
-              :is-link="appHomeInfo.tipsInfo.isLink"
-              class="app-06eab62dcb5a23b966a620807d78e66f"
-            />
-          </div>
-        </div>
-
-        <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
-          <van-skeleton v-if="showInfo.skeleton" :row="30" />
-
-          <lazy-component
-            :preLoad="1"
-            @show="onComponentShow"
-            class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
+        <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
+          <van-swipe
+            @change="onSwipeChange"
+            class="app-1c17c2e6813dda8cab7978f50d30203c"
           >
-            <HeroUpdate :heroId="0" />
-          </lazy-component>
+            <van-swipe-item>
+              <van-grid
+                :border="false"
+                :column-num="3"
+                class="app-18e05b8e51e3beb49ba55397d11cb8ce"
+              >
+                <van-grid-item
+                  v-for="(data, index) in appHomeInfo.indexInfo"
+                  :key="'tuijian-ea25beed04733529ada26478f028b97e-' + index"
+                  :to="data.to"
+                >
+                  <span v-if="data.img">
+                    <img
+                      v-lazy="data.img"
+                      width="50"
+                      height="50"
+                      class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                    />
+                  </span>
+                  <div
+                    v-if="data.title"
+                    class="home-f55b83381f479ed4c1203b80f891d83a"
+                  >
+                    {{ data.title }}
+                  </div>
+                </van-grid-item>
+              </van-grid>
+
+              <van-cell
+                :title="appHomeInfo.tipsInfo.title || '加载中...'"
+                :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
+                :value="appHomeInfo.tipsInfo.value || '⏳'"
+                :to="appHomeInfo.tipsInfo.to"
+                :url="appHomeInfo.tipsInfo.url"
+                :is-link="appHomeInfo.tipsInfo.isLink"
+                class="app-06eab62dcb5a23b966a620807d78e66f"
+              />
+            </van-swipe-item>
+            <van-swipe-item>
+              <van-row>
+                <van-col span="5" class="home-56677dd04cbe46e7b175e734b4ec94ef">
+                  <van-sidebar
+                    @change="onHeroChange(changeInfo.bid)"
+                    v-model="changeInfo.bid"
+                  >
+                    <van-sidebar-item title="英雄" disabled />
+                    <van-sidebar-item title="技能" />
+                    <van-sidebar-item title="装备" />
+                  </van-sidebar>
+                </van-col>
+                <van-col span="19">
+                  <div class="home-41d74f0099cd7f9b526d7c601ada0e26">
+                    <div
+                      @click="
+                        changeInfo.cid == 0
+                          ? (changeInfo.cid = 1)
+                          : (changeInfo.cid = 0)
+                      "
+                      class="home-07e33cfc65db63122f9d18ae77a89315"
+                    >
+                      <span v-if="changeInfo.cid == 0">
+                        <img
+                          width="20"
+                          height="20"
+                          v-lazy="'/img/app-icons/hot_2.png'"
+                        />上升
+                      </span>
+                      <span v-else>
+                        <img
+                          width="20"
+                          height="20"
+                          v-lazy="'/img/app-icons/hot_1.png'"
+                        />下降
+                      </span>
+                    </div>
+                    <div class="home-e289b0da5cdb7507d4d9cc22f588cbda">
+                      <ul class="home-0fb3346555b8f5460aaaf04001361da5">
+                        <li
+                          v-for="(data, index) in tableData.result.rows"
+                          :key="
+                            'home-0e73165b8a0e247743acaaf2d13e2a47-' + index
+                          "
+                          @click="
+                            $appPush({
+                              path: '/search',
+                              query: { q: data.heroId, refresh: 1 },
+                            })
+                          "
+                          class="home-423fda2e543a1804accff6229de61143"
+                        >
+                          <img
+                            width="30"
+                            height="30"
+                            v-lazy="
+                              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                              data.heroId +
+                              '/' +
+                              data.heroId +
+                              '.jpg'
+                            "
+                            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                          />
+                          &nbsp;&nbsp;&nbsp;
+                          <img
+                            width="30"
+                            height="30"
+                            v-lazy="
+                              getChangeImg(changeInfo.bid, data.id)
+                            "
+                            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                          />
+                          &nbsp;&nbsp;&nbsp;
+                          <span class="home-18174044426adc86b297062d2e40e214">
+                            {{ data.pickRate }}
+                          </span>
+                          <span class="app-07cc694b9b3fc636710fa08b6922c42b"
+                            >%</span
+                          >
+                          <span
+                            :style="
+                              data.change.updateType == 2
+                                ? { color: 'red' }
+                                : { color: 'blue' }
+                            "
+                            class="
+                              app-07cc694b9b3fc636710fa08b6922c42b
+                              home-2095d846baffaf78edd96501f098e66a
+                            "
+                          >
+                            {{
+                              (data.change.updateType == 2 ? "+" : "-") +
+                              Math.abs(data.change.updateValue)
+                            }}
+                          </span>
+                        </li>
+                      </ul>
+                      <div
+                        v-if="tableData.result.rows.length == 0"
+                        class="home-caa1dc26349a3e0c95b4a9e69a6e53b7"
+                      >
+                        暂无数据，稍后再看看吧~
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="
+                      home-07e33cfc65db63122f9d18ae77a89315
+                      home-d553001f432b5a09d9ae776abd8413c0
+                    "
+                    @click="getRanking(11, changeInfo.bid, changeInfo.cid, 0)"
+                  >
+                    🔍 查询
+                  </div>
+                </van-col>
+              </van-row>
+            </van-swipe-item>
+          </van-swipe>
         </div>
-      </van-pull-refresh>
+      </div>
+
+      <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
+        <van-skeleton v-if="showInfo.skeleton" :row="30" />
+
+        <lazy-component
+          :preLoad="1"
+          @show="onComponentShow"
+          class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
+        >
+          <HeroUpdate :heroId="0" />
+        </lazy-component>
+      </div>
     </div>
   </div>
 </template>
@@ -108,6 +233,15 @@ export default {
   data() {
     return {
       isLoading: false,
+      tableData: {
+        color: {},
+        column: [],
+        columns: [],
+        loading: true,
+        result: {
+          rows: [],
+        },
+      },
       showInfo: {
         skeleton: true,
       },
@@ -133,6 +267,11 @@ export default {
           to: null,
           url: null,
         },
+      },
+      changeInfo: {
+        bid: 1,
+        cid: 0,
+        img: null,
       },
     };
   },
@@ -182,6 +321,13 @@ export default {
         }
       });
     },
+    onSwipeChange: function (e) {
+      let changeInfo = this.changeInfo;
+
+      if (e == 1) {
+        this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
+      }
+    },
     onSwipeClick: function (data) {
       if (data.to) {
         this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
@@ -190,6 +336,72 @@ export default {
       if (data.url) {
         this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
       }
+    },
+    getChangeImg: function (bid, id) {
+      let url;
+
+      if (bid == 1) {
+        url = "//image.ttwz.qq.com/images/skill/" + id + ".png";
+      } else if (bid == 2) {
+        url =
+          "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/" +
+          id +
+          ".png";
+      }
+
+      return url;
+    },
+    onHeroChange: function () {
+      let changeInfo = this.changeInfo;
+
+      this.tableData.result.rows = [];
+
+      this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
+    },
+    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
+      let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
+        ls = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
+        );
+
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+        return (this.tableData = ls);
+      }
+
+      this.$axios
+        .post(
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.loading = false;
+            this.tableData.updateTime = ts;
+
+            //this.$refs.refDianFengSai.loadData(data.result.rows);
+
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
+              this.tableData
+            );
+
+            this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     onComponentShow: function () {
       setTimeout(() => {
