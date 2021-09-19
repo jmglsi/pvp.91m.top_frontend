@@ -1,8 +1,3 @@
-export { //loading
-    default as LoadingOutline
-}
-from '@ant-design/icons/lib/outline/LoadingOutline';
-
 export { //error
     default as CloseCircleFill
 }
@@ -22,6 +17,11 @@ export { //warning
     default as ExclamationCircleFill
 }
 from '@ant-design/icons/lib/fill/ExclamationCircleFill';
+
+export { //loading
+    default as LoadingOutline
+}
+from '@ant-design/icons/lib/outline/LoadingOutline';
 
 export { //search
     default as SearchOutline

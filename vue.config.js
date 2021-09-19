@@ -33,16 +33,16 @@ module.exports = {
                 splitChunks: {
                     chunks: 'all',
                     cacheGroups: {
-                        vant: {
-                            name: 'vant',
-                            test: /[\\/]node_modules[\\/]_?vant(.*)/,
+                        antd: {
+                            name: 'antd',
+                            test: /[\\/]node_modules[\\/]_?ant(.*)/,
                             reuseExistingChunk: true,
                             enforce: true,
                             priority: 30
                         },
-                        ant: {
-                            name: 'ant',
-                            test: /[\\/]node_modules[\\/]_?ant(.*)/,
+                        vant: {
+                            name: 'vant',
+                            test: /[\\/]node_modules[\\/]_?vant(.*)/,
                             reuseExistingChunk: true,
                             enforce: true,
                             priority: 30
@@ -78,10 +78,10 @@ module.exports = {
                     }
                 }
             }
-        }
 
-        config.externals = {
-            qc: "QC"
+            config.externals = {
+                qc: "QC"
+            }
         }
     },
     chainWebpack: config => {
@@ -110,11 +110,11 @@ module.exports = {
                 }))
                 .end()
 
-            config.plugins.delete('prefetch')
-
             config.resolve.alias
-                .set('@ant-design/icons/lib/dist$', Path.resolve("./src/assets/import/ant-icon.js"))
+                .set('@ant-design/icons/lib$', Path.resolve(__dirname, "./src/assets/import/antd-icons.js"))
                 .end()
+
+            config.plugins.delete('prefetch')
         }
     },
     css: {
@@ -122,16 +122,16 @@ module.exports = {
             less: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    'hack': `true; @import "${Path.join(__dirname, './src/assets/less/config.less')}";`,
+                    hack: 'true; @import "/Users/jmglsi/Web/htdocs/pvp.91m.top/src/assets/less/config.less";'
                 }
             }
-        }
+        },
+        extract: false
     },
     pwa: {
         name: '苏苏的荣耀助手 - 全局BP模拟器',
         short_name: '荣耀助手',
         themeColor: '#000000',
-        msTileColor: '#000000',
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black-translucent'
     }

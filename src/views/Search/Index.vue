@@ -286,17 +286,19 @@
                   综合
                 </span>
                 <img
-                  v-if="tableData.heroInfo.trend > 0"
+                  v-if="tableData.heroInfo.change.trendType > 0"
                   v-lazy="
-                    '/img/app-icons/hot_' + tableData.heroInfo.trend + '.png'
+                    '/img/app-icons/hot_' +
+                    tableData.heroInfo.change.trendType +
+                    '.png'
                   "
-                  width="15"
-                  height="15"
+                  width="13"
+                  height="13"
                   class="search-05a36d9069f1023c8432de89b15a83af"
                 />
-                <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420"
-                  >-</span
-                >
+                <span v-else class="search-b0958af6a9b2591433e50ff9eb7f3420">
+                  -
+                </span>
               </template>
             </van-tab>
             <van-tab :disabled="tableData.heroInfo.id == 999">
@@ -304,7 +306,7 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   备战
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="15" height="15" />
+                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
               </template>
             </van-tab>
             <van-tab
@@ -371,7 +373,38 @@
                   %
                 </span>
               </div>
-              <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">出场</div>
+              <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
+                <div :style="{ position: 'relative' }">
+                  <span class="search-b37184da1d9153fb045173b0a4b03e39">
+                    出场
+                  </span>
+                  <span
+                    v-if="tableData.heroInfo.change.updateType != 0"
+                    :style="
+                      tableData.heroInfo.change.updateType == 2
+                        ? { color: 'red' }
+                        : { color: 'blue' }
+                    "
+                    class="search-cad25b2e05f6e21804b99605ab78a40b"
+                  >
+                    {{
+                      (tableData.heroInfo.change.updateType == 2 ? "+" : "-") +
+                      Math.abs(tableData.heroInfo.change.updateValue)
+                    }}
+                  </span>
+                  <img
+                    v-if="tableData.heroInfo.change.updateType != 0"
+                    v-lazy="
+                      '/img/app-icons/hot_' +
+                      tableData.heroInfo.change.updateType +
+                      '.png'
+                    "
+                    width="13"
+                    height="13"
+                    class="search-3cdd9882517a697dfcf15e4bcf9fde7e"
+                  />
+                </div>
+              </div>
             </van-grid-item>
             <van-grid-item @click="$message.info($appMsg.info[1021])">
               <div
@@ -1022,6 +1055,11 @@ img.search-97c89d1a7343e149ab400d0bb141c7de {
   margin-bottom: 2px;
 }
 
+img.search-3cdd9882517a697dfcf15e4bcf9fde7e {
+  margin-top: -1px;
+  margin-left: -3px;
+}
+
 i.search-a0edf16f0e677f3e28dfd77595f437be {
   img.van-icon__image {
     border-radius: @app-border-radius;
@@ -1071,7 +1109,7 @@ div.search-8d84ed4977747dd8eab8dbdc9ed3508c {
 }
 
 div.search-home {
-  div.van-tabs__nav{
+  div.van-tabs__nav {
     background-color: transparent !important;
   }
 }

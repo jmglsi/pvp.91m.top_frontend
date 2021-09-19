@@ -15,7 +15,7 @@ Vue.use(VueClipboard);
 import 'vant/lib/index.less';
 //less
 
-import './assets/import/ant';
+import './assets/import/antd';
 import './assets/import/vant';
 
 import 'xe-utils';

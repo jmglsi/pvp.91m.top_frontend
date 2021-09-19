@@ -2238,12 +2238,12 @@ aws4@^1.8.0:
   resolved "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axios@^0.21.1:
-  version "0.21.1"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.21.1.tgz"
-  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+axios@^0.21.4:
+  version "0.21.4"
+  resolved "https://registry.nlark.com/axios/download/axios-0.21.4.tgz?cache=0&sync_timestamp=1630942582656&other_urls=https%3A%2F%2Fregistry.nlark.com%2Faxios%2Fdownload%2Faxios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
+  integrity sha1-xnuQ3AVo5cHPKwuFjEO6KOLtpXU=
   dependencies:
-    follow-redirects "^1.10.0"
+    follow-redirects "^1.14.0"
 
 babel-eslint@^10.1.0:
   version "10.1.0"
@@ -3300,10 +3300,10 @@ core-js@^2.4.0:
   resolved "https://registry.npmjs.org/core-js/-/core-js-2.6.12.tgz"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
-core-js@^3.16.4:
-  version "3.16.4"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.16.4.tgz#0fb1029a554fc2688c0963d7c900e188188a78e0"
-  integrity sha512-Tq4GVE6XCjE+hcyW6hPy0ofN3hwtLudz5ZRdrlCnsnD/xkm/PWQRudzYHiKgZKUcefV6Q57fhDHjZHJP5dpfSg==
+core-js@^3.17.3:
+  version "3.17.3"
+  resolved "https://registry.nlark.com/core-js/download/core-js-3.17.3.tgz#8e8bd20e91df9951e903cabe91f9af4a0895bc1e"
+  integrity sha1-jovSDpHfmVHpA8q+kfmvSgiVvB4=
 
 core-js@^3.6.5:
   version "3.8.0"
@@ -4145,10 +4145,10 @@ eslint-loader@^2.2.1:
     object-hash "^1.1.4"
     rimraf "^2.6.1"
 
-eslint-plugin-vue@^7.17.0:
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.17.0.tgz#41e0bdb5effca5ee26f087f924be987eb41ef573"
-  integrity sha512-Rq5R2QetDCgC+kBFQw1+aJ5B93tQ4xqZvoCUxuIzwTonngNArsdP8ChM8PowIzsJvRtWl4ltGh/bZcN3xhFWSw==
+eslint-plugin-vue@^7.18.0:
+  version "7.18.0"
+  resolved "https://registry.nlark.com/eslint-plugin-vue/download/eslint-plugin-vue-7.18.0.tgz#02a452142330c7f27c242db21a1b9e25238540f6"
+  integrity sha1-AqRSFCMwx/J8JC2yGhueJSOFQPY=
   dependencies:
     eslint-utils "^2.1.0"
     natural-compare "^1.4.0"
@@ -4663,10 +4663,15 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0, follow-redirects@^1.10.0:
+follow-redirects@^1.0.0:
   version "1.13.0"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.13.0.tgz"
   integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
+
+follow-redirects@^1.14.0:
+  version "1.14.4"
+  resolved "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.4.tgz?cache=0&sync_timestamp=1631622129411&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.4.tgz#838fdf48a8bbdd79e52ee51fb1c94e3ed98b9379"
+  integrity sha1-g4/fSKi73XnlLuUfsclOPtmLk3k=
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -9473,10 +9478,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@^2.12.26:
-  version "2.12.26"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-2.12.26.tgz#bd5b233e0464a2f94ef29c349b4b982bd814eea2"
-  integrity sha512-1JsFLt088joJgYbnIeunAIt2mySrypvIcwlpFlrcqEDs2mlb+HyGqpNjUL1bI2RhH9z3Qk7fJxY/1zs5VuhlKQ==
+vant@^2.12.27:
+  version "2.12.27"
+  resolved "https://registry.nlark.com/vant/download/vant-2.12.27.tgz?cache=0&sync_timestamp=1631413887490&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvant%2Fdownload%2Fvant-2.12.27.tgz#2e250d05639acaa5a579394200417720ab57e7f6"
+  integrity sha1-LiUNBWOayqWleTlCAEF3IKtX5/Y=
   dependencies:
     "@babel/runtime" "7.x"
     "@vant/icons" "^1.5.3"
@@ -9508,10 +9513,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-clipboard2@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/vue-clipboard2/-/vue-clipboard2-0.3.1.tgz"
-  integrity sha512-H5S/agEDj0kXjUb5GP2c0hCzIXWRBygaWLN3NEFsaI9I3uWin778SFEMt8QRXiPG+7anyjqWiw2lqcxWUSfkYg==
+vue-clipboard2@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.nlark.com/vue-clipboard2/download/vue-clipboard2-0.3.3.tgz?cache=0&sync_timestamp=1631689100130&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-clipboard2%2Fdownload%2Fvue-clipboard2-0.3.3.tgz#331fec85f9d4f175eb0d4feaef4d77338562af36"
+  integrity sha1-Mx/shfnU8XXrDU/q7013M4VirzY=
   dependencies:
     clipboard "^2.0.0"
 
@@ -9540,10 +9545,10 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@^8.25.0:
-  version "8.25.0"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.25.0.tgz#1037d9295fa2845a230b771de473481edb2cfc4c"
-  integrity sha512-ynhcL+PmTxuuSE1T10htiSXzjBozxYIE3ffbM1RfgAkVbr/v1SP+9Mi/7/uv8ZVV1yGuKjFAYp9BXq+X7op6MQ==
+vue-i18n@^8.25.1:
+  version "8.25.1"
+  resolved "https://registry.nlark.com/vue-i18n/download/vue-i18n-8.25.1.tgz?cache=0&sync_timestamp=1631557012123&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fvue-i18n%2Fdownload%2Fvue-i18n-8.25.1.tgz#63e4111ff50269c8ae91e7f0f73373198a81a0fc"
+  integrity sha1-Y+QRH/UCaciukefw9zNzGYqBoPw=
 
 vue-lazyload@1.2.3:
   version "1.2.3"
@@ -10050,10 +10055,10 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.4.2.tgz"
   integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
 
-xe-utils@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-3.3.1.tgz#77af254b12d5ae2d4d3f32c3df7e3a5ccde1fad8"
-  integrity sha512-OdQgl9WPV9dK3/djneFPrGX8z1M4neX+VOkzra5oONjoNsCKQhwdiut99WlxceNMQ5vXDv4EQ/wKA2fux3Gdug==
+xe-utils@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.nlark.com/xe-utils/download/xe-utils-3.3.2.tgz#b05817b094a6b40d897cd8d5df62ed716ff845f5"
+  integrity sha1-sFgXsJSmtA2JfNjV32LtcW/4RfU=
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
