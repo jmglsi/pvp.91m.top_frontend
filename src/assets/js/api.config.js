@@ -10,10 +10,16 @@ import aegis from "aegis-web-sdk";
 
 import axios from 'axios';
 
-let nowHost = location.host,
-    baseUrl = null;
+let url = location,
+    nowQuery = Vue.prototype.$appQuery,
+    baseUrl,
+    baseRef = nowQuery.ref || null;
 
-if (/127\.0\.0\.1|localhost/i.test(nowHost)) {
+if (baseRef) {
+    cookie.set("ref", baseRef);
+}
+
+if (/127\.0\.0\.1|localhost/i.test(url.host)) {
     baseUrl = "//localhost/api.91m.top";
 } else {
     baseUrl = "//api.91m.top";
@@ -30,7 +36,7 @@ axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(function(config) {
     let data = qs.parse(config.data);
 
-    config.url += "&host=" + nowHost;
+    config.url += "&host=" + (cookie.get("ref") || url.host);
 
     if (config.method == "post") {
         const openId = cookie.get("openId");

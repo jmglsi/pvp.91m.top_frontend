@@ -1,9 +1,13 @@
 import Vue from 'vue';
+import XEUtils from 'xe-utils';
 
-Vue.prototype.$appCountry = /127\.0\.0\.1|localhost|pvp\.91m\.top/i.test(location.host);
+let url = location;
+
+Vue.prototype.$appCountry = /127\.0\.0\.1|localhost|pvp\.91m\.top/i.test(url.host);
 Vue.prototype.$appIsApple = /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
+Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
 

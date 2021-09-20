@@ -481,13 +481,14 @@ export default {
           if (status.code == 200) {
             this.uin = data.uin;
 
-            let longUrl =
-              location.origin +
-              location.pathname +
-              "?type=2&userId=" +
-              row.userId +
-              "&gamePlayerName=" +
-              encodeURIComponent(row.gamePlayerName);
+            let url = location,
+              longUrl =
+                url.origin +
+                url.pathname +
+                "?type=2&userId=" +
+                row.userId +
+                "&gamePlayerName=" +
+                encodeURIComponent(row.gamePlayerName);
 
             this.$axios
               .post(this.$appApi.pvp.getShortUrl, {

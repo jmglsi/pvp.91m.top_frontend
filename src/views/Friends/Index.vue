@@ -204,7 +204,7 @@ export default {
   },
   methods: {
     getWebAccountInfo: function (tipsType, aid = 1) {
-      let q = this.$route.query,
+      let q = this.$appQuery,
         openId = q.openId || "",
         postData = {};
 

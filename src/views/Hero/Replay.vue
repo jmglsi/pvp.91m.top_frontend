@@ -176,10 +176,10 @@ export default {
       ],
       replay: {
         id: this.$route.params.id || 111,
-        title: this.$route.query.title || "加载中...",
-        userId: this.$route.query.userId || "",
-        roleId: this.$route.query.roleId || "",
-        teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
+        title: this.$appQuery.title || "加载中...",
+        userId: this.$appQuery.userId || "",
+        roleId: this.$appQuery.roleId || "",
+        teammate: Boolean(parseInt(this.$appQuery.teammate)) || false,
       },
       collapseInfo: {
         model: ["1"],

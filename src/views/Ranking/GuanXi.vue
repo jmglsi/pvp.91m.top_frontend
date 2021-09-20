@@ -371,9 +371,10 @@ export default {
     onGuanXiCopy: function () {
       let row = this.tableDataRow,
         heroName = row.hero_1.name,
+        url = location,
         longUrl =
-          location.origin +
-          location.pathname +
+          url.origin +
+          url.pathname +
           "?type=1&heroName=" +
           encodeURIComponent(heroName) +
           "&heroId1=" +

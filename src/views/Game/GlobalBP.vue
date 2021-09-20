@@ -1147,7 +1147,8 @@ export default {
       let tabsModel = this.tabsInfo.model,
         teamInfo = this.teamInfo,
         vs = teamInfo.team_1.name + " Vs " + teamInfo.team_2.name,
-        longUrl = location.href;
+        url = location,
+        longUrl = url.href;
 
       this.$axios
         .post(this.$appApi.pvp.getShortUrl, {

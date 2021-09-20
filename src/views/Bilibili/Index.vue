@@ -101,7 +101,7 @@ export default {
     return {
       copyData: "",
       search: {
-        value: this.$route.query.q || "",
+        value: this.$appQuery.q || "",
       },
       tableData: {
         searchPlaceholder: "请输入【视频id】，例如:bv12345",
@@ -174,7 +174,8 @@ export default {
       this.showInfo.actionSheet = true;
     },
     onBilibiliCopy: function (row) {
-      let longUrl = location.origin + location.pathname + "?q=" + row.uid;
+      let url = location,
+        longUrl = url.origin + url.pathname + "?q=" + row.uid;
 
       this.$axios
         .post(this.$appApi.pvp.getShortUrl, {

@@ -151,18 +151,20 @@ export default {
   },
   methods: {
     getAppInfo: function () {
+      let url = location;
+
       this.$axios
         .post(
           this.$appApi.pvp.getAppInfo +
             "&url=" +
-            encodeURIComponent(location.pathname + location.search)
+            encodeURIComponent(url.pathname + url.search)
         )
         .then((res) => {
           let data = res.data.data,
             appInfo = data.appInfo,
             tipsInfo = data.tipsInfo,
             positionInfo = data.positionInfo,
-            q = this.$route.query,
+            q = this.$appQuery,
             tempOpenId = q.tempOpenId || "",
             tempAccessToken = q.tempAccessToken || "",
             oauthType = q.oauthType || "",

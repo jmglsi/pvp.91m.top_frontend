@@ -87,7 +87,9 @@ export default {
   },
   methods: {
     onOauthClick: function (oauth) {
-      location.href =
+      let url = location;
+
+      url.href =
         this.$appApi.login.getLogin +
         "?oauthType=" +
         oauth.type +
@@ -96,7 +98,7 @@ export default {
         "&accessToken=" +
         this.accessToken +
         "&host=" +
-        location.host;
+        url.host;
     },
   },
 };

@@ -601,7 +601,7 @@ export default {
     },
   },
   created() {
-    let q = this.$route.query;
+    let q = this.$appQuery;
 
     if (q.oauthType) {
       this.login = {
@@ -678,8 +678,8 @@ export default {
         });
     },
     onMyLinkCopy: function () {
-      let longUrl =
-        location.origin + "/friends?openId=" + this.loginInfo.openId;
+      let url = location,
+        longUrl = url.origin + "/friends?openId=" + this.loginInfo.openId;
 
       this.copyData = longUrl;
 

@@ -82,7 +82,7 @@ export default {
           vmid: "description",
           name: "description",
           content:
-            "在这,可以找到自己心仪的英雄。在这,可以看到每个英雄的巅峰时刻。在这,还可以模拟全局BP！",
+            "在这，可以找到自己心仪的英雄。在这，可以看到每个英雄的巅峰时刻。在这，还可以模拟全局BP！",
         },
       ],
     };
@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$route.query,
+      let q = this.$appQuery,
         pwa = parseInt(q.pwa) || 0,
         type = parseInt(q.type) || 0,
         version = parseInt(q.v) || 1609430400,
@@ -113,7 +113,8 @@ export default {
       ls.appInfo.pwa = pwa;
       this.$appSetLocalStorage("appConfigInfo", ls);
 
-      let updateDay = ((this.$appTs - version) / 86400).toFixed(2);
+      let updateDay = ((this.$appTs - version) / 86400).toFixed(2),
+        url = location;
 
       if (updateDay >= 90) {
         this.$dialog
@@ -124,7 +125,7 @@ export default {
           })
           .then(() => {
             //on confirm
-            this.copyData = location.origin;
+            this.copyData = url.origin;
 
             this.$appCopyData(
               this.copyData,

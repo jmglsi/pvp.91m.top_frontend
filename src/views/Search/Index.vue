@@ -796,7 +796,7 @@ export default {
       copyData: "",
       search: {
         data: localStorage.getItem("searchData") || "",
-        value: this.$route.query.q || "",
+        value: this.$appQuery.q || "",
         placeholder: "搜索",
       },
       tableData: {
@@ -1017,7 +1017,8 @@ export default {
     },
     onShareClick: function () {
       let heroInfo = this.tableData.heroInfo,
-        ret = "";
+        ret = "",
+        url = location;
 
       ret =
         "[" +
@@ -1036,7 +1037,7 @@ export default {
       ret += "胜率: " + heroInfo.winRate.join(" / ") + "\n";
       ret +=
         "> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += "> 综合 https://" + location.host + "/s/" + heroInfo.id;
+      ret += "> 综合 https://" + url.host + "/s/" + heroInfo.id;
 
       this.copyData = ret;
 

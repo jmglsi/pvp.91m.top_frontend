@@ -210,7 +210,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$route.query,
+      let q = this.$appQuery,
         equipmentId = parseInt(q.equipmentId) || 0,
         equipmentName = q.equipmentName || "加载中...";
 
@@ -282,13 +282,14 @@ export default {
       }
     },
     onZhuangBeiCopy: function (row) {
-      let longUrl =
-        location.origin +
-        location.pathname +
-        "?type=3&equipmentId=" +
-        row.id +
-        "&equipmentName=" +
-        encodeURIComponent(row.name);
+      let url = location,
+        longUrl =
+          url.origin +
+          url.pathname +
+          "?type=3&equipmentId=" +
+          row.id +
+          "&equipmentName=" +
+          encodeURIComponent(row.name);
 
       this.$axios
         .post(this.$appApi.pvp.getShortUrl, {
