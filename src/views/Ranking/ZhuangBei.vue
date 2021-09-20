@@ -210,7 +210,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         equipmentId = parseInt(q.equipmentId) || 0,
         equipmentName = q.equipmentName || "加载中...";
 

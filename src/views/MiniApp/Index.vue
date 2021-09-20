@@ -207,7 +207,7 @@ export default {
   },
   methods: {
     initQrcode: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         cooperationInfo = q.cooperationInfo;
 
       if (cooperationInfo) {
