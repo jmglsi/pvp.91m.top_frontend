@@ -796,7 +796,7 @@ export default {
       copyData: "",
       search: {
         data: localStorage.getItem("searchData") || "",
-        value: this.$appQuery.q || "",
+        value: this.$route.query.q || "",
         placeholder: "搜索",
       },
       tableData: {
