@@ -378,7 +378,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         ls = this.$appConfigInfo,
         dfsTips = ls.tipsInfo.dfsTips || false,
         skillTips = ls.tipsInfo.skillTips || false,
