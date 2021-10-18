@@ -12,7 +12,10 @@
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #title>
-          <span class="return-2de2ce7733cbb350c6aa2862912c853b">
+          <span
+            @click="$message.warning($appMsg.warning[1005])"
+            class="return-2de2ce7733cbb350c6aa2862912c853b"
+          >
             票选排行
           </span>
         </template>
@@ -28,7 +31,7 @@
 
     <div class="return-0c81212fbe656b4245967fe1fba3413e">
       <div v-if="type == 0" class="return-4e31671abda91ffcc22a860a7bcd84ee">
-        <van-row @click="$message.warning($appMsg.warning[1005])">
+        <van-row>
           <a-popover
             arrow-point-at-center
             placement="bottomLeft"
@@ -69,9 +72,7 @@
               <br />
               <span
                 :style="
-                  topInfo[1].needVote < 25
-                    ? { color: 'red' }
-                    : { color: 'blue' }
+                  topInfo[1].needTime > 0 ? { color: 'red' } : { color: 'blue' }
                 "
               >
                 还差:{{ topInfo[1].needVote }} 万
@@ -168,9 +169,7 @@
               <br />
               <span
                 :style="
-                  topInfo[1].needVote < 15
-                    ? { color: 'red' }
-                    : { color: 'blue' }
+                  topInfo[2].needTime > 0 ? { color: 'red' } : { color: 'blue' }
                 "
               >
                 还差:{{ topInfo[2].needVote }} 万
@@ -198,6 +197,7 @@
                 class="app-e4d23e841d8e8804190027bce3180fa5"
                 >{{ row.skinName }}</van-tag
               >
+
               <div :style="{ position: 'relative' }">
                 <img
                   v-lazy="row.skinImg"
@@ -205,14 +205,14 @@
                   height="35"
                   class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                 />
-                <span
+                <div
                   class="
                     app-5f19eaf71f40d74d66be84db52b3ad87
                     return-58206caebd18d792f59aa1ec064f65d1
                   "
                 >
                   {{ rowIndex + 4 }}
-                </span>
+                </div>
               </div>
             </template>
           </vxe-table-column>
@@ -220,7 +220,7 @@
           <vxe-table-column
             title="分均"
             field="addNum"
-            :width="listWidth"
+            width="75"
             sortable
           />
 
@@ -236,7 +236,7 @@
                 <span
                   v-if="row.needVote > 0"
                   :style="
-                    row.needVote < 10 ? { color: 'red' } : { color: 'blue' }
+                    row.needTime > 0 ? { color: 'red' } : { color: 'blue' }
                   "
                   class="ranking-ad602d217564b616b293eac07fc53138"
                 >
@@ -441,12 +441,13 @@ span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
   color: #1989fa;
 }
 
-span.return-58206caebd18d792f59aa1ec064f65d1 {
+div.return-58206caebd18d792f59aa1ec064f65d1 {
   font-size: 10px;
-  left: -25px;
+  left: -28px;
+  margin-top: -10px;
   position: absolute;
-  width: 100%;
   text-align: center;
+  width: 100%;
 }
 
 div.return-0c81212fbe656b4245967fe1fba3413e {

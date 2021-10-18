@@ -319,9 +319,9 @@ export default {
         gamePlayerName: "加载中...",
       },
       actions: [
-        { name: "查看 QQ", value: 0 },
-        { name: "对局回顾", value: 1 },
-        { name: "铭文", subname: "需要安装王者营地", value: 2 },
+        { name: "对局回顾", value: 0 },
+        { name: "查看主页", subname: "需要安装王者营地", value: 1 },
+        { name: "铭文搭配", subname: "需要安装王者营地", value: 2 },
       ],
       clientHeight: 0,
       listWidth: 0,
@@ -471,46 +471,6 @@ export default {
       s.click();
       document.body.removeChild(s);
     },
-    onWanJiaCopy: function (row) {
-      this.$axios
-        .post(this.$appApi.pvp.getSmobaHelperUserInfo + "&userId=" + row.userId)
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.uin = data.uin;
-
-            let url = location,
-              longUrl =
-                url.origin +
-                url.pathname +
-                "?type=2&userId=" +
-                row.userId +
-                "&gamePlayerName=" +
-                encodeURIComponent(row.gamePlayerName);
-
-            this.$axios
-              .post(this.$appApi.pvp.getShortUrl, {
-                url: longUrl,
-              })
-              .then((res) => {
-                let shortUrl = res.data.data.url;
-
-                this.copyData =
-                  row.gamePlayerName +
-                  "\rQQ:" +
-                  this.uin +
-                  "\r-\r更多玩家信息 ↓\r" +
-                  shortUrl;
-
-                this.$appCopyData(this.copyData);
-              });
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-    },
     onCellClick: function ({ row }) {
       if (row.userId == 0) return;
 
@@ -520,10 +480,6 @@ export default {
       let playerInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onWanJiaCopy(playerInfo);
-      }
-
-      if (item.value == 1) {
         this.$appPush({
           path:
             "/hero/999/replay?title=" +
@@ -534,6 +490,21 @@ export default {
             playerInfo.roleId +
             "&teammate=0",
         });
+      }
+
+      if (item.value == 1) {
+        if (playerInfo.inscriptionUrl) {
+          this.$appOpenUrl(
+            "是否查看玩家主页?",
+            "需要安装王者营地",
+            {
+              path: playerInfo.profileUrl,
+            },
+            0
+          );
+        } else {
+          this.$message.info(this.$appMsg.info[1013]);
+        }
       }
 
       if (item.value == 2) {
