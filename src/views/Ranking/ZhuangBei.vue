@@ -68,7 +68,7 @@
           />
         </vxe-table-colgroup>
 
-        <vxe-table-colgroup title="出场越低,波动越大 (%)">
+        <vxe-table-colgroup title="出场越低，波动越大 (%)">
           <vxe-table-column
             title="出场"
             field="allPickRate"

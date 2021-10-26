@@ -22,7 +22,7 @@
             :style="
               scroll >= 50 || tabsInfo.model > 0 ? null : { display: 'none' }
             "
-            @click="$message.info('英雄id:' + hero.info.id + '，近期热度 ;D')"
+            @click="$message.info('英雄id:' + hero.info.id + '，近期热度')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
             <span

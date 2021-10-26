@@ -98,7 +98,7 @@
 
         <vxe-column title="#" type="seq" width="50" />
 
-        <vxe-table-colgroup title="出场越低,波动越大 (%)">
+        <vxe-table-colgroup title="出场越低，波动越大 (%)">
           <vxe-column
             title="禁用"
             field="allBanRate"

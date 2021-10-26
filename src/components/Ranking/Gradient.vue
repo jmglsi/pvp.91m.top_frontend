@@ -402,7 +402,7 @@
       >
         @梦归奇迹
       </span>
-      提供 ;D
+      提供
     </div>
   </div>
 </template>

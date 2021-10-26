@@ -203,6 +203,8 @@ export default {
             row.bz +
             "\r-\r" +
             shortUrl;
+
+          this.$appCopyData(this.copyData);
         });
     },
     onClearInputData: function () {

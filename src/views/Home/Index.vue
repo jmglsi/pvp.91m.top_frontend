@@ -36,7 +36,7 @@
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
         <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
-          <TuiJian />
+          <Recommend />
         </van-tab>
         <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
           <Game />
@@ -52,9 +52,9 @@
     </div>
 
     <div class="home-72ab9e07378f988922e6c91884048db0">
-      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de"
-        >数据随意引用，注明出处即可 ;D</span
-      >
+      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">
+        数据随意引用，注明出处即可
+      </span>
     </div>
 
     <AppHello height="100px" />
@@ -65,7 +65,7 @@
 export default {
   name: "AppHome",
   components: {
-    TuiJian: () => import("@/views/Home/TuiJian.vue"),
+    Recommend: () => import("@/views/Home/Recommend.vue"),
     Game: () => import("@/views/Home/Game.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
   },
@@ -129,7 +129,7 @@ export default {
 
             this.$appCopyData(
               this.copyData,
-              "链接已复制,请清除缓存重新添加到桌面~"
+              "链接已复制，请清除缓存重新添加到桌面~"
             );
           })
           .catch(() => {

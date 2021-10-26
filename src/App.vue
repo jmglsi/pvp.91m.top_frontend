@@ -492,7 +492,7 @@ div.app-home {
   }
 }
 
-div.app-tuijian {
+div.app-recommend {
   div.van-cell-group,
   div.van-cell,
   div.van-grid-item__content {

@@ -7,7 +7,7 @@
         height="100"
       />
       <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
-        请将设备横过来 或 点击这里切换横屏 ;D
+        请将设备横过来 或 点击这里切换横屏
       </div>
     </div>
   </div>
@@ -1042,11 +1042,9 @@ export default {
       this.gameInfo.ban = Array.from(new Set(ban));
       this.gameInfo.used = Array.from(new Set(used));
 
-      this.tableData.result.rows.map((hero) => {
-        ban.indexOf(hero.id) > -1 ? (hero.isBan = true) : (hero.isBan = false);
-        used.indexOf(hero.id) > -1
-          ? (hero.isUsed = true)
-          : (hero.isUsed = false);
+      this.tableData.result.rows.map((x) => {
+        ban.indexOf(x.id) > -1 ? (x.isBan = true) : (x.isBan = false);
+        used.indexOf(x.id) > -1 ? (x.isUsed = true) : (x.isUsed = false);
       });
     },
     initCountdown: function () {
@@ -1268,7 +1266,7 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.$message.success("已保存第 " + (nowIndex + 1) + " 局 ;D");
+            this.$message.success("已保存第 " + (nowIndex + 1) + " 局");
           } else {
             this.$message.error(status.msg);
           }
@@ -1407,8 +1405,6 @@ export default {
           .then(() => {
             //on confirm
             this.tableData.result.rows[nowIndex].trend = newTrend;
-
-            this.$appSetLocalStorage("gameBP", this.tableData);
           })
           .catch(() => {
             //on cancel
@@ -1467,11 +1463,22 @@ export default {
       if (this.bpMode == "sort") {
         this.tableData.model = 0;
 
+        this.tableData.result.rows.map((x) => {
+          x.isBan = false;
+          x.isUsed = false;
+        });
+
+        this.$appSetLocalStorage("gameBP", this.tableData);
+
         this.bpMode = "view";
 
         this.showInfo.setting = false;
 
         this.$message.success(this.$appMsg.success[1000]);
+
+        setTimeout(() => {
+          this.$router.go(0);
+        }, 500);
       } else {
         this.bpMode = "sort";
 
@@ -1484,7 +1491,7 @@ export default {
       this.$dialog
         .confirm({
           title: "是否重置排序?此操作不可逆!",
-          message: "保存在本地的排序将被清除\r有新英雄的时候可能需要 ;D",
+          message: "保存在本地的排序将被清除\r有新英雄的时候可能需要",
         })
         .then(() => {
           //on confirm

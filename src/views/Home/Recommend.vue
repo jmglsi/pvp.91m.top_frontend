@@ -1,6 +1,6 @@
 <template>
-  <div class="app-tuijian tuijian-b77f3080e567fd154c25b053042dcba9">
-    <div class="tuijian-fde59ce861918e4314a5a460e7c9cc54">
+  <div class="app-recommend recommend-b77f3080e567fd154c25b053042dcba9">
+    <div class="recommend-fde59ce861918e4314a5a460e7c9cc54">
       <div
         class="
           app-a139b05b7f8e496c00991733ef7cd589
@@ -14,7 +14,7 @@
           :loading-text="appHomeInfo.miniappInfo.loading"
           :success-text="appHomeInfo.miniappInfo.success"
           @refresh="onDropdownRefreshClick"
-          class="tuijian-af03857fe372b964b53ef3a082c2b518"
+          class="recommend-af03857fe372b964b53ef3a082c2b518"
         >
           <van-swipe
             height="200"
@@ -23,9 +23,9 @@
           >
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
-              :key="'tuijian-0c74eea41745fb37742d335606774a60-' + index"
+              :key="'recommend-0c74eea41745fb37742d335606774a60-' + index"
               @click="onSwipeClick(data)"
-              class="tuijian-ac104b3f82b3b5d3643319a05734ce93"
+              class="recommend-ac104b3f82b3b5d3643319a05734ce93"
             >
               <img
                 v-lazy="data.img"
@@ -55,7 +55,7 @@
               >
                 <van-grid-item
                   v-for="(data, index) in appHomeInfo.indexInfo"
-                  :key="'tuijian-ea25beed04733529ada26478f028b97e-' + index"
+                  :key="'recommend-ea25beed04733529ada26478f028b97e-' + index"
                   :to="data.to"
                 >
                   <span v-if="data.img">
@@ -153,9 +153,7 @@
                           <img
                             width="30"
                             height="30"
-                            v-lazy="
-                              getChangeImg(changeInfo.bid, data.id)
-                            "
+                            v-lazy="getChangeImg(changeInfo.bid, data.id)"
                             class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                           />
                           &nbsp;&nbsp;&nbsp;
@@ -207,7 +205,7 @@
         </div>
       </div>
 
-      <div class="tuijian-3379002f77deb3f52601cf5ddcdcebca">
+      <div class="recommend-3379002f77deb3f52601cf5ddcdcebca">
         <van-skeleton v-if="showInfo.skeleton" :row="30" />
 
         <lazy-component
@@ -226,7 +224,7 @@
 import ColorThief from "colorthief";
 
 export default {
-  name: "TuiJianHome",
+  name: "RecommendHome",
   components: {
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },

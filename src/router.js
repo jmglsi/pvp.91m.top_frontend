@@ -23,10 +23,6 @@ export default new Router({
             name: 'bp',
             redirect: '/game/new/bp'
         }, {
-            path: '/skin/encore',
-            name: 'skinEncore',
-            redirect: '/skin/return'
-        }, {
             path: '/bilibili',
             name: 'bilibili',
             component: () =>
@@ -51,15 +47,6 @@ export default new Router({
                 import ('./views/MiniApp/Index.vue'),
             meta: {
                 title: '小程序',
-                keepAlive: true
-            }
-        }, {
-            path: '/skin/return',
-            name: 'skinReturn',
-            component: () =>
-                import ('./views/Return/Index.vue'),
-            meta: {
-                title: '趋势',
                 keepAlive: true
             }
         }, {
@@ -116,6 +103,32 @@ export default new Router({
                 keepAlive: false
             }
         }, {
+            path: '/skin',
+            name: 'skinReturn',
+            redirect: '/skin/return',
+            component: () =>
+                import ('./views/Return/Index.vue'),
+            children: [{
+                    path: 'encore',
+                    name: 'skinEncore',
+                    redirect: '/skin/return',
+                    meta: {
+                        title: '趋势',
+                        keepAlive: true
+                    }
+                },
+                {
+                    path: 'return',
+                    name: 'skinReturn',
+                    component: () =>
+                        import ('./views/Ranking/FanChang.vue'),
+                    meta: {
+                        title: '趋势',
+                        keepAlive: true
+                    }
+                }
+            ]
+        }, {
             path: '/hero',
             redirect: '/ranking',
             component: () =>
@@ -144,7 +157,7 @@ export default new Router({
         },
         {
             path: '/game',
-            redirect: '/my',
+            redirect: '/game/new/bp',
             component: () =>
                 import ('./views/Game/Index.vue'),
             children: [{
