@@ -14,7 +14,6 @@ module.exports = {
                     routes: [
                         '/',
                         '/miniapp',
-                        '/skin/return',
                         '/search',
                         '/my',
                         '/setting'
