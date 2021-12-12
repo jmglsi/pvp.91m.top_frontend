@@ -75,6 +75,7 @@ const pvp = {
     getImg: pvpApi + "?type=getImg",
     getAppHome: pvpApi + "?type=getAppHome",
     getAppInfo: pvpApi + "?type=getAppInfo",
+    getCivilwarMatchInfo: pvpApi + "?type=getCivilwarMatchInfo",
     getGameDashboard: pvpApi + "?type=getGameDashboard",
     getHeroChartsLog: pvpApi + "?type=getHeroChartsLog",
     getHeroInfo: pvpApi + "?type=getHeroInfo",
