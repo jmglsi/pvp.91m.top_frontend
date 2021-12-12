@@ -563,7 +563,7 @@ export default {
   methods: {
     initPage: function () {
       let id = this.$route.params.id,
-        q = this.$appQuery,
+        q = this.$route.query,
         show = q.show || "";
 
       this.getHeroInfo(id);

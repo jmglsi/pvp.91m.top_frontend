@@ -126,8 +126,8 @@
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
         v-model="showInfo.replayMenu"
-        :title="tableDataRow.gamePlayerName + ' 如何操作'"
-        :actions="actions"
+        :title="(tableDataRow.gamePlayerName || replay.title) + ' 如何操作'"
+        :actions="!replay.gameOpenId ? actions : []"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
         safe-area-inset-bottom
@@ -179,6 +179,7 @@ export default {
         title: this.$route.query.title || "加载中...",
         userId: this.$route.query.userId || "",
         roleId: this.$route.query.roleId || "",
+        gameOpenId: this.$route.query.gameOpenId || "",
         teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
       },
       collapseInfo: {
@@ -232,6 +233,8 @@ export default {
             replayInfo.userId +
             "&roleId=" +
             replayInfo.roleId +
+            "&gameOpenId=" +
+            replayInfo.gameOpenId +
             "&page=" +
             page
         )

@@ -333,8 +333,7 @@ export default {
     let tableWidth = this.$appInitTableWidth(350);
 
     tableWidth > 0 ? (this.listWidth = tableWidth + 10) : (this.listWidth = 0);
-  },
-  mounted() {
+
     this.type == 0 ? this.getRanking(-1, 0, 0, 0) : this.getSkinReturnLog();
   },
   methods: {

@@ -489,10 +489,10 @@ export default {
       this.$refs.refDianFengSai.connect(this.$refs.refXToolbar);
     });
     //手动将表格和工具栏进行关联
-  },
-  mounted() {
+
     this.getRanking(0, this.bid, this.cid, this.did);
   },
+  mounted() {},
   methods: {
     initTableWidth: function () {
       this.listWidth = this.$appInitTableWidth(1450);
@@ -683,7 +683,7 @@ export default {
           "是否查看英雄更新记录?",
           "NGA @EndMP",
           {
-            path: "//nga.178.com/read.php?pid=" + heroInfo.updateId,
+            path: "//ngabbs.com/read.php?pid=" + heroInfo.updateId,
           },
           0
         );

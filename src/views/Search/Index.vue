@@ -1024,20 +1024,20 @@ export default {
         "[" +
         heroInfo.name +
         "] " +
-        heroInfo.scoreIcon +
+        heroInfo.change.scoreIcon +
         " " +
         heroInfo.score[2] +
         " " +
-        heroInfo.trendIcon +
+        heroInfo.change.trendIcon +
         "\n";
       ret += "  %  全分段 | 1350 | 顶端局\n";
-      ret += "禁用: " + heroInfo.banRate.join(" / ") + "\n";
-      ret += "出场: " + heroInfo.pickRate.join(" / ") + "\n";
-      ret += "禁选: " + heroInfo.bpRate.join(" / ") + "\n";
-      ret += "胜率: " + heroInfo.winRate.join(" / ") + "\n";
+      ret += "禁用:" + heroInfo.banRate.join(" / ") + "\n";
+      ret += "出场:" + heroInfo.pickRate.join(" / ") + "\n";
+      ret += "禁选:" + heroInfo.bpRate.join(" / ") + "\n";
+      ret += "胜率:" + heroInfo.winRate.join(" / ") + "\n";
       ret +=
         "> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += "> 综合 https://" + url.host + "/s/" + heroInfo.id;
+      ret += "> " + url.origin + "/s/" + heroInfo.id;
 
       this.copyData = ret;
 

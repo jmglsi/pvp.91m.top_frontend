@@ -335,8 +335,7 @@ export default {
   created() {
     //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
-  },
-  mounted() {
+
     this.getRanking(2, this.bid, this.cid, 0);
   },
   methods: {

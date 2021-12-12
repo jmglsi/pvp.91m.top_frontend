@@ -174,6 +174,20 @@
             />
           </div>
         </van-tab>
+
+        <van-tab>
+          <template #title>内战&nbsp;<i class="vxe-icon--funnel" /></template>
+
+          <div>
+            <NeiZhan
+              v-if="tabsInfo.model == 5"
+              :isSmallMode="isSmallMode"
+              :bid="bid || nzOrderInfo.model"
+              :cid="cid || nzStatusInfo.model"
+              :refresh="refresh || 0"
+            />
+          </div>
+        </van-tab>
       </van-tabs>
     </div>
 
@@ -271,6 +285,7 @@ export default {
     RankingLine: () => import("@/components/Ranking/Line.vue"),
     GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
     WanJia: () => import("@/views/Ranking/WanJia.vue"),
+    NeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
     ZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
     PaiZi: () => import("@/views/Ranking/PaiZi.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
@@ -296,6 +311,7 @@ export default {
       cid: 0,
       did: 0,
       refresh: 0,
+      gc: "",
       heroName: "",
       isSmallMode: false,
       viewInfo: {
@@ -359,6 +375,21 @@ export default {
         model: 0,
         options: [],
       },
+      nzOrderInfo: {
+        model: 0,
+        options: [
+          { text: "降序", value: 0 },
+          { text: "升序", value: 1 },
+        ],
+      },
+      nzStatusInfo: {
+        model: 0,
+        options: [
+          { text: "全部", value: 0 },
+          { text: "队列中", value: 1 },
+          { text: "对局中", value: 2 },
+        ],
+      },
       bidInfo: {
         model: 0,
         options: [],
@@ -389,6 +420,7 @@ export default {
       q.bid ? (this.bid = parseInt(q.bid)) : (this.bid = 0);
       q.cid ? (this.cid = parseInt(q.cid)) : (this.cid = 0);
       q.did ? (this.did = parseInt(q.did)) : (this.did = 0);
+      q.gc ? (this.gc = q.gc) : (this.gc = "");
 
       if (!dfsTips || !skillTips || !wanjiaTips) {
         ls.tipsInfo.dfsTips = true;
@@ -451,6 +483,10 @@ export default {
         this.showInfo.rankingFilterMenu = true;
       }
 
+      if (e == 3) {
+        //
+      }
+
       if (e == 4) {
         let arrData_1 = [],
           arrData_2 = [],
@@ -477,6 +513,13 @@ export default {
         this.showInfo.rankingFilterMenu = true;
       }
 
+      if (e == 5) {
+        this.bidInfo = this.nzOrderInfo;
+        this.cidInfo = this.nzStatusInfo;
+
+        this.showInfo.rankingFilterMenu = true;
+      }
+
       this.$appPush({ query: { type: tabsInfo.model } });
     },
     onRadioChange: function (e) {
@@ -495,8 +538,16 @@ export default {
         didInfo.model = Number(this.$appConfigInfo.appInfo.isSwingMode);
       }
 
+      if (tabsInfo.model == 1) {
+        //
+      }
+
       if (tabsInfo.model == 2) {
         this.wjAreaTypeInfo.model = bidInfo.model;
+      }
+
+      if (tabsInfo.model == 3) {
+        //
       }
 
       if (tabsInfo.model == 4) {
@@ -505,12 +556,18 @@ export default {
         this.pzFightPowerTypeInfo.model = didInfo.model;
       }
 
+      if (tabsInfo.model == 5) {
+        this.nzOrderInfo.model = bidInfo.model;
+        this.nzStatusInfo.model = cidInfo.model;
+      }
+
       this.$appPush({
         query: {
           type: tabsInfo.model,
           bid: bidInfo.model,
           cid: cidInfo.model,
           did: didInfo.model,
+          gc: this.gc,
           refresh: 1,
         },
       });
@@ -655,6 +712,17 @@ div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
   height: 225px;
   width: 100%;
   margin-top: 25px;
+}
+
+div.ranking-8747b0956746ca03e56e59d7312efcb1 {
+  height: 150px;
+}
+
+div.ranking-561f33b3e8f36a8c9cdf1a5a3b099497 {
+  font-size: 10px;
+  margin-top: 3px;
+  position: absolute;
+  width: 100%;
 }
 
 div.ranking-3ab42c8325a264730406e37e1f731f70 {

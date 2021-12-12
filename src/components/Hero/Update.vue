@@ -120,7 +120,7 @@
               '是否查看英雄更多更新记录?',
               'NGA @EndMP',
               {
-                path: '//nga.178.com/read.php?pid=' + updateId,
+                path: '//ngabbs.com/read.php?pid=' + updateId,
               },
               0
             )

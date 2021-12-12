@@ -204,8 +204,7 @@ export default {
   created() {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
-  },
-  mounted() {
+
     this.initPage();
   },
   methods: {
@@ -286,7 +285,7 @@ export default {
         longUrl =
           url.origin +
           url.pathname +
-          "?type=3&equipmentId=" +
+          "?type=4&equipmentId=" +
           row.id +
           "&equipmentName=" +
           encodeURIComponent(row.name);

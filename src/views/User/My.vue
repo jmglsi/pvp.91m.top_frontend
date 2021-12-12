@@ -327,7 +327,7 @@
         <van-cell
           icon="/img/app-icons/coffee.png"
           title="请我喝杯咖啡"
-          label="制作不易，支持一下～"
+          label="制作不易，支持一下~"
           value="爱发电"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
           is-link
