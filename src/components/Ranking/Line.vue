@@ -18,7 +18,7 @@
         :data="lineData.result"
         :loading="lineData.loading"
         :after-config="afterConfig"
-        height="650px"
+        height="500px"
         width="99.2%"
         class="ranking-1ef625581088ffc24d94e052d9ebc61d"
       />
@@ -29,10 +29,11 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
-import "echarts/lib/component/title";
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/legendScroll";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
-import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/title";
 
 import "v-charts/lib/style.css";
 

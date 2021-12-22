@@ -339,15 +339,15 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[2] >= 30
+                  tableData.heroInfo.banRate[3] >= 30
                     ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.banRate[2] }}</span>
+                <span>{{ tableData.heroInfo.banRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.banRate[2] > 0"
+                  v-if="tableData.heroInfo.banRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -358,16 +358,16 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[2] >= 20 &&
-                  tableData.heroInfo.winRate[2] >= 50
+                  tableData.heroInfo.pickRate[3] >= 20 &&
+                  tableData.heroInfo.winRate[3] >= 50
                     ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.pickRate[2] }}</span>
+                <span>{{ tableData.heroInfo.pickRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.pickRate[2] > 0"
+                  v-if="tableData.heroInfo.pickRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -409,15 +409,15 @@
             <van-grid-item @click="$message.info($appMsg.info[1021])">
               <div
                 :class="
-                  tableData.heroInfo.bpRate[2] >= 70
+                  tableData.heroInfo.bpRate[3] >= 70
                     ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.bpRate[2] }}</span>
+                <span>{{ tableData.heroInfo.bpRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.bpRate[2] > 0"
+                  v-if="tableData.heroInfo.bpRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -428,17 +428,17 @@
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[2] >= 30 ||
-                    tableData.heroInfo.pickRate[2] >= 20) &&
-                  tableData.heroInfo.winRate[2] >= 50
+                  (tableData.heroInfo.banRate[3] >= 30 ||
+                    tableData.heroInfo.pickRate[3] >= 20) &&
+                  tableData.heroInfo.winRate[3] >= 50
                     ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.winRate[2] }}</span>
+                <span>{{ tableData.heroInfo.winRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.winRate[2] > 0"
+                  v-if="tableData.heroInfo.winRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -448,7 +448,7 @@
             </van-grid-item>
           </van-grid>
 
-          <van-grid v-else :border="false" :column-num="4">
+          <van-grid v-else :border="false" :column-num="5">
             <van-grid-item text="%"></van-grid-item>
             <van-grid-item
               text="全分段"
@@ -457,6 +457,11 @@
             </van-grid-item>
             <van-grid-item
               text="1350"
+              @click="$message.info($appMsg.info[1022])"
+            >
+            </van-grid-item>
+            <van-grid-item
+              text="高星局"
               @click="$message.info($appMsg.info[1022])"
             >
             </van-grid-item>
@@ -498,6 +503,18 @@
                 <span>{{ tableData.heroInfo.banRate[2] }}</span>
               </div>
             </van-grid-item>
+            <van-grid-item>
+              <div
+                :class="
+                  tableData.heroInfo.banRate[3] >= 30
+                    ? 'app-bda9643ac6601722a28f238714274da4'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.banRate[3] }}</span>
+              </div>
+            </van-grid-item>
             <van-grid-item text="出场"></van-grid-item>
             <van-grid-item>
               <div
@@ -536,6 +553,19 @@
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
                 <span>{{ tableData.heroInfo.pickRate[2] }}</span>
+              </div>
+            </van-grid-item>
+            <van-grid-item>
+              <div
+                :class="
+                  tableData.heroInfo.pickRate[3] >= 20 &&
+                  tableData.heroInfo.winRate[3] >= 50
+                    ? 'app-48d6215903dff56238e52e8891380c8f'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.pickRate[3] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item
@@ -579,6 +609,18 @@
                 <span>{{ tableData.heroInfo.bpRate[2] }}</span>
               </div>
             </van-grid-item>
+            <van-grid-item>
+              <div
+                :class="
+                  tableData.heroInfo.bpRate[3] >= 70
+                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.bpRate[3] }}</span>
+              </div>
+            </van-grid-item>
             <van-grid-item text="胜率"></van-grid-item>
             <van-grid-item>
               <div
@@ -620,6 +662,20 @@
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
                 <span>{{ tableData.heroInfo.winRate[2] }}</span>
+              </div>
+            </van-grid-item>
+            <van-grid-item>
+              <div
+                :class="
+                  (tableData.heroInfo.banRate[3] >= 30 ||
+                    tableData.heroInfo.pickRate[3] >= 20) &&
+                  tableData.heroInfo.winRate[3] >= 50
+                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
+                    : null
+                "
+                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              >
+                <span>{{ tableData.heroInfo.winRate[3] }}</span>
               </div>
             </van-grid-item>
           </van-grid>
@@ -1026,15 +1082,15 @@ export default {
         "] " +
         heroInfo.change.scoreIcon +
         " " +
-        heroInfo.score[2] +
+        heroInfo.score[3] +
         " " +
         heroInfo.change.trendIcon +
         "\n";
-      ret += "  %  全分段 | 1350 | 顶端局\n";
-      ret += "禁用:" + heroInfo.banRate.join(" / ") + "\n";
-      ret += "出场:" + heroInfo.pickRate.join(" / ") + "\n";
-      ret += "禁选:" + heroInfo.bpRate.join(" / ") + "\n";
-      ret += "胜率:" + heroInfo.winRate.join(" / ") + "\n";
+      ret += "  全分段 | 1350 | 高星局 | 顶端局\n";
+      ret += "B:" + heroInfo.banRate.join(" / ") + "\n";
+      ret += "P:" + heroInfo.pickRate.join(" / ") + "\n";
+      ret += "∑:" + heroInfo.bpRate.join(" / ") + "\n";
+      ret += "W:" + heroInfo.winRate.join(" / ") + "\n";
       ret +=
         "> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
       ret += "> " + url.origin + "/s/" + heroInfo.id;

@@ -31,10 +31,11 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
-import "echarts/lib/component/title";
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/legendScroll";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
-import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/title";
 
 import "v-charts/lib/style.css";
 
