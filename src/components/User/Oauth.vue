@@ -82,6 +82,10 @@ export default {
           type: "coding",
           status: 0,
         },
+        {
+          type: "yuque",
+          status: 0,
+        },
       ],
     };
   },

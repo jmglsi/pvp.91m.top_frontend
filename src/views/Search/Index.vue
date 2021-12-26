@@ -315,7 +315,7 @@
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
-              title="最低金标"
+              title="最低金牌"
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
@@ -824,6 +824,8 @@ export default {
 
       if (q.q) {
         if (parseInt(q.refresh) == 1) {
+          this.showInfo.fightPowerMenu = false;
+
           this.getSearch(q.q);
         }
       } else {

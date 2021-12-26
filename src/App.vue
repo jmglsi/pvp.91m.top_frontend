@@ -199,7 +199,7 @@ export default {
             isSmallMode: Boolean(appConfigInfo.appInfo.isSmallMode) || false,
             isReductionMode:
               Boolean(appConfigInfo.appInfo.isReductionMode) || false,
-            openUrl: Boolean(appConfigInfo.appInfo.openUrl) || true,
+            openUrl: Boolean(appConfigInfo.appInfo.openUrl) || false,
             newsPush: Boolean(appConfigInfo.appInfo.newsPush) || true,
             pwa: appConfigInfo.appInfo.pwa || 0,
             link: appInfo.link || [],

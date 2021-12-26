@@ -39,12 +39,7 @@
               round
               size="small"
               color="linear-gradient(to right, #43CBFF, #6874E8)"
-              @click="
-                $appPush({
-                  path: '/search',
-                  query: { q: '大佬们快来加群', refresh: 1 },
-                })
-              "
+              @click="onAddGroupClick"
             >
               战力互助
             </van-button>
@@ -267,6 +262,12 @@ export default {
     },
     onOversize: function () {
       this.$message.error(this.$appMsg.error[1005]);
+    },
+    onAddGroupClick: function () {
+      this.$appPush({
+        path: "/search",
+        query: { q: "大佬们快来加群", refresh: 1 },
+      });
     },
     onExampleClick: function () {
       this.images = [

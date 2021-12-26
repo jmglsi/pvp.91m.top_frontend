@@ -261,7 +261,7 @@
         <van-cell
           icon="manager"
           title="扩列链接"
-          value="点击复制"
+          value="复制"
           is-link
           @click="onMyLinkCopy"
         />
