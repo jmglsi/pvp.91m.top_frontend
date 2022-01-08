@@ -19,7 +19,7 @@
             { label: '辅助装', data: 3 },
             { label: '保命装', data: 4 },
             { label: '终极装', data: 5 },
-            { label: '专属装', data: 6 },
+            { label: '专精装', data: 6 },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -285,7 +285,7 @@ export default {
         longUrl =
           url.origin +
           url.pathname +
-          "?type=4&equipmentId=" +
+          "?type=3&equipmentId=" +
           row.id +
           "&equipmentName=" +
           encodeURIComponent(row.name);

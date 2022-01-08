@@ -45,6 +45,7 @@
         <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
           <van-swipe
             @change="onSwipeChange"
+            ref="refSkillMenu"
             class="app-1c17c2e6813dda8cab7978f50d30203c"
           >
             <van-swipe-item>
@@ -242,6 +243,7 @@ export default {
       },
       showInfo: {
         skeleton: true,
+        skillMenu: false,
       },
       appHomeInfo: {
         miniappInfo: {
@@ -274,6 +276,7 @@ export default {
     };
   },
   mounted() {
+    this.initPage();
     this.getAppHome();
 
     setTimeout(() => {
@@ -281,6 +284,18 @@ export default {
     }, 2500);
   },
   methods: {
+    initPage: function () {
+      let q = this.$appQuery,
+        show = q.show || "";
+
+      if (show == "heroSkill") {
+        this.$refs.refSkillMenu.swipeTo(1);
+
+        this.showInfo.skillMenu = true;
+      } else {
+        this.showInfo.skillMenu = false;
+      }
+    },
     getAppHome: function () {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
