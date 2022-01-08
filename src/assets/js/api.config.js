@@ -13,10 +13,10 @@ import axios from 'axios';
 let url = location,
     nowQuery = Vue.prototype.$appQuery,
     baseUrl,
-    baseRef = nowQuery.ref || null;
+    baseSource = nowQuery.source || null;
 
-if (baseRef) {
-    cookie.set("ref", baseRef);
+if (baseSource) {
+    cookie.set("source", baseSource);
 }
 
 if (/127\.0\.0\.1|localhost/i.test(url.host)) {
@@ -36,7 +36,7 @@ axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(function(config) {
     let data = qs.parse(config.data);
 
-    config.url += "&host=" + (cookie.get("ref") || url.host);
+    config.url += "&host=" + (cookie.get("source") || url.host);
 
     if (config.method == "post") {
         const openId = cookie.get("openId");
