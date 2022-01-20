@@ -146,7 +146,7 @@
                   ranking-a6c2fcca8d40c28ed46b93c2c629f0ae
                 "
               >
-                待更新,点击查看对局回顾
+                待更新，点击查看对局回顾
               </div>
             </div>
           </template>
@@ -181,7 +181,7 @@
       </van-button>
 
       <div class="ranking-2862744e5d7cce9d070aa41172557d78">
-        国服由
+        国服数据由
         <span
           :style="{ color: '#1989fa' }"
           @click="
@@ -298,7 +298,7 @@ export default {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        if (newValue.refresh == 1) {
+        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
           this.getRanking(2, newValue.bid, newValue.cid, 0);
         }
       },
@@ -310,7 +310,7 @@ export default {
       copyData: "",
       uin: "",
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -336,7 +336,9 @@ export default {
     //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
 
-    this.getRanking(2, this.bid, this.cid, 0);
+    if (this.$cookie.get("agree") == 1) {
+      this.getRanking(2, this.bid, this.cid, 0);
+    }
   },
   methods: {
     getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {
@@ -355,6 +357,8 @@ export default {
 
         return this.tableData;
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(

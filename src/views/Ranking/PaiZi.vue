@@ -126,7 +126,9 @@ export default {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
+        if (this.$cookie.get("agree") == 1) {
+          this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
+        }
       },
     },
   },
@@ -134,7 +136,9 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
 
-    this.getRanking(4, this.bid, this.cid, this.did);
+    if (this.$cookie.get("agree") == 1) {
+      this.getRanking(4, this.bid, this.cid, this.did);
+    }
   },
   methods: {
     getRanking: function (aid = 4, bid = 0, cid = 0, did = 0) {

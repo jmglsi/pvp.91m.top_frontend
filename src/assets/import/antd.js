@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import {
+    Checkbox,
     Dropdown,
     Menu,
     Radio,
@@ -13,6 +14,7 @@ import {
 } from 'ant-design-vue';
 
 Vue
+    .use(Checkbox)
     .use(Dropdown)
     .use(Menu)
     .use(Radio)

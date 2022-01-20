@@ -1,92 +1,66 @@
 <template>
-  <div class="hero-equipmentListAll app-equipmentListAll">
+  <div class="hero-position app-position">
     <vxe-table
-      ref="refHeroEquipmentListAll"
+      ref="refHeroPosition"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       height="543"
     >
-      <vxe-table-column title="技能" field="score" fixed="left" width="50">
+      <vxe-table-column title="分路" field="id" fixed="left" width="75">
         <template #default="{ row }">
-          <img
-            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.id + '.png'"
-            width="25"
-            height="25"
-            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
-          />
+          {{ positionInfo[row.id] }}
         </template>
       </vxe-table-column>
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-colgroup title="最终结果，空的就是没出">
+      <vxe-table-colgroup title="比率 (%)">
         <vxe-table-column
-          v-for="(data, index) in 6"
-          :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
-          :title="(index + 1).toString()"
-          :field="'list[' + index + ']'"
-          :width="$appIsMobile ? 60 : 0"
+          title="占比"
+          field="pickRate"
+          :width="listWidth"
           sortable
         >
           <template #default="{ row }">
-            <img
-              v-if="row.list[index] > 0"
-              v-lazy="
-                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                row.list[index] +
-                '.png'
-              "
-              width="25"
-              height="25"
-              class="hero-88473b8c633f40889fe2a0affd773691"
-            />
+            <div :style="{ position: 'relative' }">
+              <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                {{ row.pickRate }}
+              </div>
+              <span
+                v-if="row.change.updateType != 0"
+                :style="
+                  row.change.updateType == 2
+                    ? { color: 'red' }
+                    : { color: 'blue' }
+                "
+                class="app-b0704b59dbf144bfeffb53bdb11d7128"
+              >
+                {{
+                  (row.change.updateType == 2 ? "+" : "-") +
+                  Math.abs(row.change.updateValue)
+                }}
+              </span>
+              <img
+                v-if="row.change.updateType != 0"
+                v-lazy="'/img/app-icons/hot_' + row.change.updateType + '.png'"
+                width="15"
+                height="15"
+                class="
+                  app-db21bca782a535e91eb87f56b8abdc45
+                  app-32595defa680e058a9db0aaae36d6f46
+                "
+              />
+            </div>
           </template>
         </vxe-table-column>
+
+        <vxe-table-column
+          title="胜率"
+          field="winRate"
+          :width="listWidth"
+          sortable
+        />
       </vxe-table-colgroup>
-
-      <vxe-table-column
-        title="价格"
-        field="money"
-        :width="listWidth"
-        sortable
-      />
-
-      <vxe-table-column
-        title="场次"
-        field="pickTimes"
-        :width="listWidth"
-        sortable
-      />
-
-      <vxe-table-column
-        title="胜率 (%)"
-        field="winRate"
-        :filters="[{ data: 0 }]"
-        :filter-method="filterMethod"
-        width="125"
-        sortable
-      >
-        <template #filter="{ $panel, column }">
-          ≥
-          <input
-            v-model="option.data"
-            v-for="(option, index) in column.filters"
-            :key="'hero-equipment-3884d17acbdfbe7dd4921e00606d4e93-' + index"
-            type="type"
-            placeholder="0"
-            @input="$panel.changeOption($event, !!option.data, option)"
-            class="app-fa42596ed8c1eff3ed8b93bba913bde3"
-          />
-          %
-        </template>
-      </vxe-table-column>
-
-      <vxe-table-column
-        title="时长"
-        field="usedtime"
-        :width="listWidth"
-        sortable
-      />
 
       <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
@@ -102,7 +76,7 @@
 
 <script>
 export default {
-  name: "HeroEquipmentListAll",
+  name: "HeroPosition",
   props: {
     heroId: {
       type: Number,
@@ -122,7 +96,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (this.$cookie.get("agree") == 1) {
-          this.getRanking(newValue.heroId, 6, 0, 0, 0);
+          this.getRanking(newValue.heroId, 13, 0, 0, 0);
         }
       },
     },
@@ -136,13 +110,14 @@ export default {
           rows: [],
         },
       },
+      positionInfo: ["对抗路", "中路", "发育路", "打野", "游走"],
     };
   },
   created() {
-    this.listWidth = this.$appInitTableWidth(1450);
+    this.listWidth = this.$appInitTableWidth(350);
   },
   methods: {
-    getRanking: function (heroId = 111, aid = 6, bid = 0, cid = 0, did = 0) {
+    getRanking: function (heroId = 111, aid = 13, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -195,11 +170,6 @@ export default {
             this.$appOpenUrl("温馨提示", status.msg, { path: "/my" }, 1);
           }
         });
-    },
-    filterMethod: function ({ option, row, column }) {
-      if (column.property == "winRate") {
-        return row.winRate >= option.data;
-      }
     },
   },
 };

@@ -69,7 +69,7 @@
                           :style="{ color: 'orange' }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
-                          <van-icon name="back-top" />
+                          <van-icon :name="data.icon" />
                         </span>
                         <span
                           v-else
@@ -83,7 +83,6 @@
                             index + 1 - tableData.search.hotKeywords[0].topNum
                           }}</span
                         >
-                        &nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                           <img
@@ -123,7 +122,7 @@
                           :style="{ color: 'orange' }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
-                          <van-icon name="back-top" />
+                          <van-icon :name="data.icon" />
                         </span>
                         <span
                           v-else
@@ -137,7 +136,6 @@
                             index + 1 - tableData.search.hotKeywords[1].topNum
                           }}</span
                         >
-                        &nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                         </span>
@@ -170,7 +168,7 @@
                           :style="{ color: 'orange' }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
-                          <van-icon name="back-top" />
+                          <van-icon :name="data.icon" />
                         </span>
                         <span
                           v-else
@@ -184,7 +182,6 @@
                             index + 1 - tableData.search.hotKeywords[2].topNum
                           }}</span
                         >
-                        &nbsp;
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                         </span>
@@ -304,7 +301,7 @@
             <van-tab :disabled="tableData.heroInfo.id == 999">
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  备战
+                  备战推荐
                 </span>
                 <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
               </template>
@@ -319,7 +316,7 @@
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
-              title="关系和克制"
+              title="关系克制"
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
@@ -763,25 +760,33 @@
               :heroId="tableData.heroInfo.id"
             />
           </van-tab>
+          <van-tab title="分路">
+            <HeroPositionList
+              v-if="skillInfo.model == 1"
+              :heroId="tableData.heroInfo.id"
+            />
+          </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
-              v-if="skillInfo.model == 1"
+              v-if="skillInfo.model == 2"
               :heroId="tableData.heroInfo.id"
             />
           </van-tab>
           <van-tab title="装备 (单件)">
             <HeroEquipmentListOne
-              v-if="skillInfo.model == 2"
+              v-if="skillInfo.model == 3"
               :equipmentId="tableData.heroInfo.id"
               :equipmentType="1"
             />
           </van-tab>
-          <van-tab title="铭文 (推荐)">
-            <HeroInscriptionList
-              v-if="skillInfo.model == 3"
-              :heroId="tableData.heroInfo.id"
-            />
-          </van-tab>
+          <!--
+            <van-tab title="铭文 (推荐)">
+              <HeroInscriptionList
+                v-if="skillInfo.model == 4"
+                :heroId="tableData.heroInfo.id"
+              />
+            </van-tab>
+          -->
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -809,11 +814,12 @@ export default {
   name: "SearchHome",
   components: {
     HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
+    HeroPositionList: () => import("@/components/Hero/PositionList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
@@ -897,7 +903,7 @@ export default {
         skillMenu: false,
         fightPowerMenu: false,
       },
-      tipsInfo: [0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0],
     };
   },
   mounted() {
@@ -1060,10 +1066,12 @@ export default {
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1008];
+        tipsText = this.$appMsg.info[1023];
       } else if (e == 2) {
-        tipsText = this.$appMsg.info[1009];
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 3) {
+        tipsText = this.$appMsg.info[1009];
+      } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       }
 
@@ -1150,6 +1158,10 @@ span.search-ddfb601e1d7aa0d473f1a3ab353ef982 {
 
 span.search-5077dcc14128f743498aaafcbd0ecb5d {
   color: purple;
+}
+
+span.search-4eb6182d96f5f9cf7e7e0282ddca8e80 {
+  margin-left: 3px;
 }
 
 span.search-34690b06683636425980897b6bcd33d4 {

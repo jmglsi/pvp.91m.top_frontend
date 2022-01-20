@@ -179,7 +179,7 @@
           <vxe-column
             title="禁选"
             field="allBPRate"
-            :filters="[{ data: 1, checked: true }]"
+            :filters="[{ data: 2.5, checked: true }]"
             :filter-method="filterMethod"
             width="100"
             sortable
@@ -336,6 +336,20 @@
             sortable
           />
         </vxe-table-colgroup>
+
+        <template #empty>
+          <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
+            <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
+              使用即代表您同意
+              <a
+                href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH"
+                target="_blank"
+              >
+                《隐私和数据声明》
+              </a>
+            </a-checkbox>
+          </div>
+        </template>
       </vxe-table>
     </div>
 
@@ -357,25 +371,33 @@
               :heroId="tableDataRow.id"
             />
           </van-tab>
+          <van-tab title="分路">
+            <HeroPositionList
+              v-if="cellInfo.index == 0 && skillInfo.model == 1"
+              :heroId="tableDataRow.id"
+            />
+          </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
-              v-if="cellInfo.index == 0 && skillInfo.model == 1"
+              v-if="cellInfo.index == 0 && skillInfo.model == 2"
               :heroId="tableDataRow.id"
             />
           </van-tab>
           <van-tab title="装备 (单件)">
             <HeroEquipmentListOne
-              v-if="cellInfo.index == 0 && skillInfo.model == 2"
+              v-if="cellInfo.index == 0 && skillInfo.model == 3"
               :equipmentId="tableDataRow.id"
               :equipmentType="1"
             />
           </van-tab>
-          <van-tab title="铭文 (推荐)">
-            <HeroInscriptionList
-              v-if="skillInfo.model == 3"
-              :heroId="tableDataRow.id"
-            />
-          </van-tab>
+          <!--
+            <van-tab title="铭文 (推荐)">
+              <HeroInscriptionList
+                v-if="skillInfo.model == 4"
+                :heroId="tableDataRow.id"
+              />
+            </van-tab>
+          -->
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -398,11 +420,12 @@ export default {
   name: "RankingDianFengSai",
   components: {
     HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
+    HeroPositionList: () => import("@/components/Hero/PositionList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
   },
   props: {
     isSmallMode: {
@@ -436,7 +459,7 @@ export default {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        if (newValue.refresh == 1) {
+        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
           this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
         }
       },
@@ -448,7 +471,7 @@ export default {
         color: {},
         column: [],
         columns: [],
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -466,6 +489,7 @@ export default {
       listWidth: 0,
       clientHeight: 0,
       showInfo: {
+        checked: false,
         skillMenu: false,
         heroMenu: false,
       },
@@ -478,7 +502,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0],
     };
   },
   created() {
@@ -490,7 +514,11 @@ export default {
     });
     //手动将表格和工具栏进行关联
 
-    this.getRanking(0, this.bid, this.cid, this.did);
+    if (this.$cookie.get("agree") == 1) {
+      this.showInfo.checked = true;
+
+      this.getRanking(0, this.bid, this.cid, this.did);
+    }
   },
   mounted() {},
   methods: {
@@ -539,6 +567,8 @@ export default {
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(
@@ -651,10 +681,12 @@ export default {
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1008];
+        tipsText = this.$appMsg.info[1023];
       } else if (e == 2) {
-        tipsText = this.$appMsg.info[1009];
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 3) {
+        tipsText = this.$appMsg.info[1009];
+      } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       }
 
@@ -699,6 +731,25 @@ export default {
           0
         );
       }
+    },
+    onAgreeChange: function () {
+      let nowChecked = false,
+        nowChecked_int = 0;
+
+      if (this.showInfo.checked == true) {
+        nowChecked = false;
+        nowChecked_int = 0;
+      } else {
+        nowChecked = true;
+        nowChecked_int = 1;
+
+        this.getRanking(0, this.bid, this.cid, this.did);
+      }
+
+      this.showInfo.checked = nowChecked;
+      this.$cookie.set("agree", nowChecked_int, {
+        expires: "1Y",
+      });
     },
   },
 };

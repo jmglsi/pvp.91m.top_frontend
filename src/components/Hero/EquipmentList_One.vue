@@ -45,7 +45,7 @@
         <vxe-table-column
           title="出场"
           field="allPickRate"
-          :filters="[{ data: 0.25, checked: true }]"
+          :filters="[{ data: 1, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -252,7 +252,15 @@ export default {
       handler(newValue) {
         if (!newValue.equipmentId) return;
 
-        this.getRanking(6, newValue.equipmentType, 0, 0, newValue.equipmentId);
+        if (this.$cookie.get("agree") == 1) {
+          this.getRanking(
+            6,
+            newValue.equipmentType,
+            0,
+            0,
+            newValue.equipmentId
+          );
+        }
       },
     },
   },
@@ -263,7 +271,7 @@ export default {
     return {
       listWidth: 0,
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -294,6 +302,8 @@ export default {
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(

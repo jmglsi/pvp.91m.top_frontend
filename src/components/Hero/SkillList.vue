@@ -6,10 +6,14 @@
       :data="tableData.result.rows"
       height="543"
     >
-      <vxe-table-column title="技能" field="score" fixed="left" width="50">
+      <vxe-table-column title="技能" field="score" fixed="left" width="75">
         <template #default="{ row }">
           <img
-            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.id + '.png'"
+            v-lazy="
+              row.id == 0
+                ? '//ae03.alicdn.com/kf/H79634bb28539419db2dd990a6131404cF.png'
+                : '//image.ttwz.qq.com/images/skill/' + row.id + '.png'
+            "
             width="25"
             height="25"
             class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093"
@@ -21,7 +25,7 @@
 
       <vxe-table-colgroup title="比率 (%)">
         <vxe-table-column
-          title="出场"
+          title="占比"
           field="pickRate"
           :width="listWidth"
           sortable
@@ -75,6 +79,20 @@
           sortable
         />
       </vxe-table-colgroup>
+
+      <template #empty>
+        <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
+          <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
+            使用即代表您同意
+            <a
+              href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH"
+              target="_blank"
+            >
+              《隐私和数据声明》
+            </a>
+          </a-checkbox>
+        </div>
+      </template>
     </vxe-table>
   </div>
 </template>
@@ -100,7 +118,9 @@ export default {
       handler(newValue) {
         if (!newValue.heroId) return;
 
-        this.getRanking(newValue.heroId, 5, 0, 0, 0);
+        if (this.$cookie.get("agree") == 1) {
+          this.getRanking(newValue.heroId, 5, 0, 0, 0);
+        }
       },
     },
   },
@@ -108,10 +128,13 @@ export default {
     return {
       listWidth: 0,
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
+      },
+      showInfo: {
+        checked: false,
       },
     };
   },
@@ -129,6 +152,8 @@ export default {
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(
@@ -170,6 +195,25 @@ export default {
             this.$appOpenUrl("温馨提示", status.msg, { path: "/my" }, 1);
           }
         });
+    },
+    onAgreeChange: function () {
+      let nowChecked = false,
+        nowChecked_int = 0;
+
+      if (this.showInfo.checked == true) {
+        nowChecked = false;
+        nowChecked_int = 0;
+      } else {
+        nowChecked = true;
+        nowChecked_int = 1;
+
+        this.getRanking(this.heroId, 5, 0, 0, 0);
+      }
+
+      this.showInfo.checked = nowChecked;
+      this.$cookie.set("agree", nowChecked_int, {
+        expires: "1Y",
+      });
     },
   },
 };

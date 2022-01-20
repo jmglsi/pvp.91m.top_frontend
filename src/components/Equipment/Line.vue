@@ -59,7 +59,7 @@ export default {
       lineData: {
         extend: {
           title: {
-            subtext: "该装备在某个格子时的数据 (受总样本数量影响)",
+            subtext: "该装备在某个格子时的数据 (受总样本数影响)",
             left: "center",
           },
           yAxis: {

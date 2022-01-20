@@ -167,7 +167,7 @@ export default {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        if (newValue.refresh == 1) {
+        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
           this.getRanking(12, newValue.bid, newValue.cid, 0);
         }
       },
@@ -180,7 +180,7 @@ export default {
       gc: this.$appQuery.gc || "",
       gameLabel: this.$appQuery.gameLabel || "",
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -209,7 +209,9 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
 
-    this.getRanking(12, this.bid, this.cid, 0);
+    if (this.$cookie.get("agree") == 1) {
+      this.getRanking(12, this.bid, this.cid, 0);
+    }
 
     if (this.gameLabel) {
       this.getCivilwarMatchInfo(this.gameLabel);
@@ -222,6 +224,8 @@ export default {
       let postData = {
         msgSource: this.gc,
       };
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(

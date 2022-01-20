@@ -174,7 +174,7 @@ export default {
     return {
       copyData: "",
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -220,7 +220,9 @@ export default {
         this.showInfo.skillMenu = true;
       }
 
-      this.getRanking(3, 0, 0, 0);
+      if (this.$cookie.get("agree") == 1) {
+        this.getRanking(3, 0, 0, 0);
+      }
 
       this.$appPush({
         query: {
@@ -242,6 +244,8 @@ export default {
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(

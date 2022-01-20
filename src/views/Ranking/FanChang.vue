@@ -297,7 +297,7 @@ export default {
       copyData: "",
       type: parseInt(this.$route.query.type) || 0,
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -347,6 +347,8 @@ export default {
       return e;
     },
     getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {
+      this.tableData.loading = true;
+
       this.$axios
         .post(
           this.$appApi.pvp.getRanking +

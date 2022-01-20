@@ -101,7 +101,7 @@
           <vxe-table-column
             title="出场"
             field="teammatePickRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ data: 0.25, checked: true }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -171,7 +171,7 @@
           <vxe-table-column
             title="出场"
             field="opponentPickRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ data: 0.25, checked: true }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -262,7 +262,7 @@ export default {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        if (newValue.refresh == 1) {
+        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
           this.getRanking(1, 0, 0, 0, newValue.heroName);
         }
       },
@@ -273,7 +273,7 @@ export default {
       copyData: null,
       tableData: {
         color: {},
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -301,7 +301,9 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
 
-    this.getRanking(1, 0, 0, 0, this.heroName);
+    if (this.$cookie.get("agree") == 1) {
+      this.getRanking(1, 0, 0, 0, this.heroName);
+    }
   },
   methods: {
     getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {
@@ -314,6 +316,8 @@ export default {
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(
@@ -393,9 +397,11 @@ export default {
             row.hero_1.name +
             " 和 " +
             row.hero_2.name +
-            "\r-\r队友胜率:" +
+            "\r-\r队友 时 一起 的胜率:" +
             row.teammateWinRate +
-            "%\r对手胜率:" +
+            "%\r对手 时 " +
+            row.hero_1.name +
+            " 的胜率:" +
             row.opponentWinRate +
             "%\r适配:" +
             row.adaptation +

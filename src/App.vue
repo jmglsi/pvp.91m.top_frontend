@@ -151,130 +151,120 @@ export default {
   },
   methods: {
     getAppInfo: function () {
-      let url = location;
+      this.$axios.post(this.$appApi.pvp.getAppInfo).then((res) => {
+        let data = res.data.data,
+          appInfo = data.appInfo,
+          tipsInfo = data.tipsInfo,
+          positionInfo = data.positionInfo,
+          q = this.$appQuery,
+          tempOpenId = q.tempOpenId || "",
+          tempAccessToken = q.tempAccessToken || "",
+          oauthType = q.oauthType || "",
+          tempText = q.tempText || null,
+          appConfigInfo = this.$appConfigInfo;
 
-      this.$axios
-        .post(
-          this.$appApi.pvp.getAppInfo +
-            "&url=" +
-            encodeURIComponent(url.pathname + url.search)
-        )
-        .then((res) => {
-          let data = res.data.data,
-            appInfo = data.appInfo,
-            tipsInfo = data.tipsInfo,
-            positionInfo = data.positionInfo,
-            q = this.$appQuery,
-            tempOpenId = q.tempOpenId || "",
-            tempAccessToken = q.tempAccessToken || "",
-            oauthType = q.oauthType || "",
-            tempText = q.tempText || null,
-            appConfigInfo = this.$appConfigInfo;
+        this.tableData = data;
+        this.tableData.result.model = this.$route.path;
 
-          this.tableData = data;
-          this.tableData.result.model = this.$route.path;
+        if (appInfo.update.time != appConfigInfo.appInfo.update.time) {
+          this.$appDelectAllLocalStorage();
+        }
 
-          if (appInfo.update.time != appConfigInfo.appInfo.update.time) {
-            this.$appDelectAllLocalStorage();
+        if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
+          if (appInfo.update.text) {
+            this.$dialog
+              .alert({
+                title: appInfo.update.title,
+                message: appInfo.update.text,
+                theme: "round-button",
+              })
+              .then(() => {
+                //on close
+              });
           }
 
-          if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
-            if (appInfo.update.text) {
-              this.$dialog
-                .alert({
-                  title: appInfo.update.title,
-                  message: appInfo.update.text,
-                  theme: "round-button",
-                })
-                .then(() => {
-                  //on close
-                });
-            }
+          this.$appDelectLocalStorage("appConfigInfo");
+        }
 
-            this.$appDelectLocalStorage("appConfigInfo");
-          }
+        this.$appConfigInfo.appInfo = {
+          isSwingMode: Boolean(appConfigInfo.appInfo.isSwingMode) || false,
+          isSmallMode: Boolean(appConfigInfo.appInfo.isSmallMode) || false,
+          isReductionMode:
+            Boolean(appConfigInfo.appInfo.isReductionMode) || false,
+          openUrl: Boolean(appConfigInfo.appInfo.openUrl) || false,
+          newsPush: Boolean(appConfigInfo.appInfo.newsPush) || true,
+          pwa: appConfigInfo.appInfo.pwa || 0,
+          link: appInfo.link || [],
+          name: appInfo.name || "苏苏的荣耀助手",
+          script: appInfo.script || [],
+          tempText: appInfo.tempText || "",
+          update: {
+            version: appInfo.update.version || 0,
+            time: appInfo.update.time || 0,
+            title: appInfo.update.title || "加载中...",
+            text: appInfo.update.text || "加载中...",
+            timeout: appInfo.update.timeout || 43200,
+          },
+          search: {
+            img: appInfo.search.img || null,
+            placeholder: appInfo.search.placeholder || null,
+            to: appInfo.search.to || null,
+            url: appInfo.search.url || null,
+          },
+        };
+        this.$appConfigInfo.positionInfo = positionInfo || [];
 
-          this.$appConfigInfo.appInfo = {
-            isSwingMode: Boolean(appConfigInfo.appInfo.isSwingMode) || false,
-            isSmallMode: Boolean(appConfigInfo.appInfo.isSmallMode) || false,
-            isReductionMode:
-              Boolean(appConfigInfo.appInfo.isReductionMode) || false,
-            openUrl: Boolean(appConfigInfo.appInfo.openUrl) || false,
-            newsPush: Boolean(appConfigInfo.appInfo.newsPush) || true,
-            pwa: appConfigInfo.appInfo.pwa || 0,
-            link: appInfo.link || [],
-            name: appInfo.name || "苏苏的荣耀助手",
-            script: appInfo.script || [],
-            tempText: appInfo.tempText || "",
-            update: {
-              version: appInfo.update.version || 0,
-              time: appInfo.update.time || 0,
-              title: appInfo.update.title || "加载中...",
-              text: appInfo.update.text || "加载中...",
-              timeout: appInfo.update.timeout || 43200,
+        this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+
+        if (tipsInfo) {
+          this.$notification.open({
+            message: tipsInfo.title,
+            description: tipsInfo.description,
+            onClick: () => {
+              if (tipsInfo.to) {
+                this.$appOpenUrl(
+                  "是否打开内部链接?",
+                  null,
+                  { path: tipsInfo.to },
+                  1
+                );
+              }
+
+              if (tipsInfo.url) {
+                this.$appOpenUrl(
+                  "是否打开外部链接?",
+                  null,
+                  { path: tipsInfo.url },
+                  0
+                );
+              }
             },
-            search: {
-              img: appInfo.search.img || null,
-              placeholder: appInfo.search.placeholder || null,
-              to: appInfo.search.to || null,
-              url: appInfo.search.url || null,
-            },
-          };
-          this.$appConfigInfo.positionInfo = positionInfo || [];
+          });
+        }
 
-          this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
-
-          if (tipsInfo) {
-            this.$notification.open({
-              message: tipsInfo.title,
-              description: tipsInfo.description,
-              onClick: () => {
-                if (tipsInfo.to) {
-                  this.$appOpenUrl(
-                    "是否打开内部链接?",
-                    null,
-                    { path: tipsInfo.to },
-                    1
-                  );
-                }
-
-                if (tipsInfo.url) {
-                  this.$appOpenUrl(
-                    "是否打开外部链接?",
-                    null,
-                    { path: tipsInfo.url },
-                    0
-                  );
-                }
-              },
+        if (!oauthType) {
+          if (tempOpenId) {
+            this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
+            this.$cookie.set("tempAccessToken", tempAccessToken, {
+              expires: "1H",
             });
           }
 
-          if (!oauthType) {
-            if (tempOpenId) {
-              this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
-              this.$cookie.set("tempAccessToken", tempAccessToken, {
-                expires: "1H",
-              });
-            }
-
-            if (appInfo.tempText) this.$message.info(appInfo.tempText);
-            //临时登录的 1小时
-          } else {
-            if (tempOpenId) {
-              this.$cookie.set("openId", tempOpenId, { expires: "7D" });
-              this.$cookie.set("accessToken", tempAccessToken, {
-                expires: "7D",
-              });
-            }
-
-            if (tempText)
-              this.$message.warning(
-                this.$appMsg.warning[tempText] || "未知错误"
-              );
-            //快速登录的 7天
+          if (appInfo.tempText) this.$message.info(appInfo.tempText);
+          //临时登录的 1小时
+        } else {
+          if (tempOpenId) {
+            this.$cookie.set("openId", tempOpenId, { expires: "7D" });
+            this.$cookie.set("accessToken", tempAccessToken, {
+              expires: "7D",
+            });
           }
-        });
+
+          if (tempText)
+            this.$message.warning(this.$appMsg.warning[tempText] || "未知错误");
+          //快速登录的 7天
+        }
+      });
     },
   },
 };
@@ -473,6 +463,10 @@ div.van-tabs__nav {
   overflow-x: unset;
 }
 
+div.vxe-table--empty-content {
+  width: unset !important;
+}
+
 div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
 }
@@ -510,6 +504,12 @@ div.app-5ddd8715c99cbf00677a622145b3c163 {
   margin: 5px 0;
   text-align: center;
   width: 100%;
+}
+
+div.app-b0b345803bbcaebeb0bd65253594cfc9 {
+  text-align: left;
+  margin-left: 17px;
+  margin-top: 35px;
 }
 
 div.app-c1351782c9c93025d72864180d0cf28c {
@@ -654,6 +654,7 @@ div.app-wj,
 div.app-pz,
 div.app-zb,
 div.app-skill,
+div.app-position,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
 div.app-inscription,

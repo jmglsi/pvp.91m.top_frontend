@@ -13,10 +13,15 @@ import axios from 'axios';
 let url = location,
     nowQuery = Vue.prototype.$appQuery,
     baseUrl,
-    baseSource = nowQuery.source || null;
+    baseHost = nowQuery.host || null,
+    baseRef = nowQuery.ref || null;
 
-if (baseSource) {
-    cookie.set("source", baseSource);
+if (baseHost) {
+    cookie.set("host", baseHost);
+}
+
+if (baseRef) {
+    cookie.set("ref", baseRef);
 }
 
 if (/127\.0\.0\.1|localhost/i.test(url.host)) {
@@ -34,28 +39,29 @@ if (/127\.0\.0\.1|localhost/i.test(url.host)) {
 }
 axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(function(config) {
-    let data = qs.parse(config.data);
+        let data = qs.parse(config.data);
 
-    config.url += "&host=" + (cookie.get("source") || url.host);
+        config.url += "&host=" + (cookie.get("host") || url.host) + "&url=" + encodeURIComponent(url.pathname + url.search) + "&ref=" + (cookie.get("ref") || "");
 
-    if (config.method == "post") {
-        const openId = cookie.get("openId");
-        const accessToken = cookie.get("accessToken");
+        if (config.method == "post") {
+            const openId = cookie.get("openId");
+            const accessToken = cookie.get("accessToken");
 
-        const tempOpenId = cookie.get("tempOpenId");
-        const tempAccessToken = cookie.get("tempAccessToken");
+            const tempOpenId = cookie.get("tempOpenId");
+            const tempAccessToken = cookie.get("tempAccessToken");
 
-        config.data = qs.stringify({
-            openId: openId || tempOpenId,
-            accessToken: accessToken || tempAccessToken,
-            ...data
-        });
-    }
+            config.data = qs.stringify({
+                openId: openId || tempOpenId,
+                accessToken: accessToken || tempAccessToken,
+                ...data
+            });
+        }
 
-    return config;
-}, function(error) {
-    return Promise.reject(error);
-})
+        return config;
+    },
+    function(error) {
+        return Promise.reject(error);
+    })
 Vue.prototype.$axios = axios;
 
 const pvpApi = baseUrl + "/hero/v1/app.php";

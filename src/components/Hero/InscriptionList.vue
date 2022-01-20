@@ -69,7 +69,9 @@ export default {
       handler(newValue) {
         if (!newValue.heroId) return;
 
-        this.getRanking(newValue.heroId, 7, 0, 0, 0);
+        if (this.$cookie.get("agree") == 1) {
+          this.getRanking(newValue.heroId, 7, 0, 0, 0);
+        }
       },
     },
   },
@@ -77,7 +79,7 @@ export default {
     return {
       listWidth: 0,
       tableData: {
-        loading: true,
+        loading: false,
         result: {
           rows: [],
         },
@@ -98,6 +100,8 @@ export default {
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
         return (this.tableData = ls);
       }
+
+      this.tableData.loading = true;
 
       this.$axios
         .post(

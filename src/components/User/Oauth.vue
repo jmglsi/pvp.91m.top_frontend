@@ -93,6 +93,8 @@ export default {
     onOauthClick: function (oauth) {
       let url = location;
 
+      this.$appDelectAllLocalStorage();
+
       url.href =
         this.$appApi.login.getLogin +
         "?oauthType=" +

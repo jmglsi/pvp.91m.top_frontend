@@ -315,6 +315,9 @@
           <van-tab title="技能">
             <HeroSkillList :heroId="hero.info.id" />
           </van-tab>
+          <van-tab title="分路">
+            <HeroPositionList :heroId="hero.info.id" />
+          </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL :heroId="hero.info.id" />
           </van-tab>
@@ -324,12 +327,11 @@
               :equipmentType="1"
             />
           </van-tab>
-          <van-tab title="铭文 (推荐)">
-            <HeroInscriptionList
-              v-if="skillInfo.model == 3"
-              :heroId="hero.info.id"
-            />
-          </van-tab>
+          <!--
+            <van-tab title="铭文 (推荐)">
+              <HeroInscriptionList :heroId="hero.info.id" />
+            </van-tab>
+          -->
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -445,11 +447,12 @@ export default {
   name: "HeroInfo",
   components: {
     HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
+    HeroPositionList: () => import("@/components/Hero/PositionList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroLine: () => import("@/components/Hero/Line.vue"),
     HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
@@ -551,7 +554,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0],
     };
   },
   destroy() {
@@ -660,10 +663,12 @@ export default {
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1008];
+        tipsText = this.$appMsg.info[1023];
       } else if (e == 2) {
-        tipsText = this.$appMsg.info[1009];
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 3) {
+        tipsText = this.$appMsg.info[1009];
+      } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       }
 

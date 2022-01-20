@@ -60,10 +60,23 @@
       </van-cell-group>
     </div>
 
+    <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
+      <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
+        使用即代表您同意
+        <a href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
+          《隐私和数据声明》
+        </a>
+      </a-checkbox>
+    </div>
+
     <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
       <van-button
         round
-        :disabled="accessToken && loginInfo.type != 2 ? true : false"
+        :disabled="
+          (accessToken && loginInfo.type != 2) || !showInfo.checked
+            ? true
+            : false
+        "
         size="small"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
         @click="
@@ -76,7 +89,7 @@
       >
 
       <div
-        v-if="loginInfo.type == 1"
+        v-if="showInfo.checked && loginInfo.type == 1"
         class="login-411f660a2e7bb1558275b86749667ee9"
       >
         <Oauth
@@ -144,11 +157,18 @@ export default {
           accessToken: "",
         },
       },
+      showInfo: {
+        checked: false,
+      },
     };
   },
   mounted() {
     this.openId = this.$cookie.get("openId") || "";
     this.accessToken = this.$cookie.get("accessToken") || "";
+
+    if (this.$cookie.get("agree") == 1) {
+      this.showInfo.checked = true;
+    }
 
     if (this.accessToken) this.getWebAccountInfo(2);
   },
@@ -195,9 +215,7 @@ export default {
               expires: "7D",
             });
 
-            this.$appDelectLocalStorage("ranking");
-            this.$appDelectLocalStorage("heroInfo");
-            this.$appDelectLocalStorage("charts");
+            this.$appDelectAllLocalStorage();
 
             this.$appPush({
               path: "/my",
@@ -226,6 +244,23 @@ export default {
           }
         });
     },
+    onAgreeChange: function () {
+      let nowChecked = false,
+        nowChecked_int = 0;
+
+      if (this.showInfo.checked == true) {
+        nowChecked = false;
+        nowChecked_int = 0;
+      } else {
+        nowChecked = true;
+        nowChecked_int = 1;
+      }
+
+      this.showInfo.checked = nowChecked;
+      this.$cookie.set("agree", nowChecked_int, {
+        expires: "1Y",
+      });
+    },
   },
 };
 </script>
@@ -236,7 +271,7 @@ i.my-c1d8fd0f00bccc16b2cf5d07bfc3c96f img.van-icon__image {
 }
 
 div.login-6920626369b1f05844f5e3d6f93b5f6e {
-  margin-top: 35px;
+  margin-top: 32px;
 }
 
 div.login-f01ae8c7f2d058ec6be00db589a32bea {
