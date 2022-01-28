@@ -9,7 +9,7 @@
         :cell-class-name="cellClassName"
         @cell-click="onCellClick"
       >
-        <vxe-table-colgroup :title="heroName ? heroName : '英雄'" fixed="left">
+        <vxe-table-colgroup :title="heroName ? heroName : '推荐'" fixed="left">
           <vxe-table-column
             field="hero_1"
             :title="heroName ? '和' : '1'"

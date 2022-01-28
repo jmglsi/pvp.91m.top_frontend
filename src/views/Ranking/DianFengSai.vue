@@ -340,7 +340,7 @@
         <template #empty>
           <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
             <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-              使用即代表您同意
+              我已经阅读并同意
               <a
                 href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH"
                 target="_blank"
@@ -365,27 +365,21 @@
           :ellipsis="false"
           @change="onSkillTabsChange"
         >
-          <van-tab title="技能">
-            <HeroSkillList
+          <van-tab title="打法">
+            <HeroGenreList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"
-              :heroId="tableDataRow.id"
-            />
-          </van-tab>
-          <van-tab title="分路">
-            <HeroPositionList
-              v-if="cellInfo.index == 0 && skillInfo.model == 1"
               :heroId="tableDataRow.id"
             />
           </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
-              v-if="cellInfo.index == 0 && skillInfo.model == 2"
+              v-if="cellInfo.index == 0 && skillInfo.model == 1"
               :heroId="tableDataRow.id"
             />
           </van-tab>
           <van-tab title="装备 (单件)">
             <HeroEquipmentListOne
-              v-if="cellInfo.index == 0 && skillInfo.model == 3"
+              v-if="cellInfo.index == 0 && skillInfo.model == 2"
               :equipmentId="tableDataRow.id"
               :equipmentType="1"
             />
@@ -419,8 +413,7 @@
 export default {
   name: "RankingDianFengSai",
   components: {
-    HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
-    HeroPositionList: () => import("@/components/Hero/PositionList.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -502,7 +495,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   created() {
@@ -681,12 +674,10 @@ export default {
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1023];
-      } else if (e == 2) {
         tipsText = this.$appMsg.info[1008];
-      } else if (e == 3) {
+      } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
-      } else if (e == 4) {
+      } else if (e == 3) {
         tipsText = this.$appMsg.info[1010];
       }
 

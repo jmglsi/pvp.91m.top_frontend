@@ -318,7 +318,7 @@
         <van-cell
           icon="comment-o"
           title="意见建议反馈"
-          value="吐个槽"
+          value="兔小巢"
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.support }, 0)
@@ -350,7 +350,7 @@
               <van-button
                 round
                 size="small"
-                color="rgb(245,245,245)"
+                color="rgb(250, 250, 250)"
                 @click="onLogoutClick"
                 class="app-4236a440a662cc8253d7536e5aa17942"
               >

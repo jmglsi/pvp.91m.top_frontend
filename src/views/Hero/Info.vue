@@ -312,11 +312,8 @@
           :ellipsis="false"
           @change="onSkillTabsChange"
         >
-          <van-tab title="技能">
-            <HeroSkillList :heroId="hero.info.id" />
-          </van-tab>
-          <van-tab title="分路">
-            <HeroPositionList :heroId="hero.info.id" />
+          <van-tab title="打法">
+            <HeroGenreList :heroId="hero.info.id" />
           </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL :heroId="hero.info.id" />
@@ -446,8 +443,7 @@
 export default {
   name: "HeroInfo",
   components: {
-    HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
-    HeroPositionList: () => import("@/components/Hero/PositionList.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -476,12 +472,12 @@ export default {
           name: "keyWords",
           content:
             this.hero.info.name +
-            ",顶端局,趋势,预测,技能,出装,装备,备战,组队,更新,胜率",
+            ",趋势,预测,技能,出装,装备,备战,组队,更新,胜率,顶端局,巅峰赛,顶端巅峰赛",
         },
         {
           vmid: "description",
           name: "description",
-          content: this.hero.info.name + " 王者荣耀 巅峰赛 (顶端局) 的趋势",
+          content: "王者荣耀 " + this.hero.info.name + " 顶端巅峰赛的趋势",
         },
       ],
     };
@@ -554,7 +550,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   destroy() {
@@ -663,12 +659,10 @@ export default {
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1023];
-      } else if (e == 2) {
         tipsText = this.$appMsg.info[1008];
-      } else if (e == 3) {
+      } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
-      } else if (e == 4) {
+      } else if (e == 3) {
         tipsText = this.$appMsg.info[1010];
       }
 

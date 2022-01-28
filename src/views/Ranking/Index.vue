@@ -13,7 +13,7 @@
         <van-tab>
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
-              <span>巅峰赛 (顶端局)&nbsp;</span>
+              <span>顶端巅峰赛&nbsp;</span>
 
               <a-tooltip :visible="showInfo.dfsTips" placement="bottomRight">
                 <template slot="title">
@@ -337,8 +337,8 @@ export default {
           { text: "QQ (昨日)", value: 1 },
           { text: "WX (昨日)", value: 2 },
           { text: "上分推荐 (昨日)", value: 3 },
-          { text: "全部 (上周)", value: 4 },
-          { text: "全部 (上月)", value: 5 },
+          { text: "全部 (最近 7 天)", value: 4 },
+          { text: "全部 (最近 30 天)", value: 5 },
         ],
       },
       dfsPositionTypeInfo: {

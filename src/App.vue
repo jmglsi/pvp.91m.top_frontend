@@ -490,7 +490,7 @@ div.app-recommend {
   div.van-cell-group,
   div.van-cell,
   div.van-grid-item__content {
-    background-color: rgb(248, 249, 252) !important;
+    background-color: rgb(250, 250, 250) !important;
   }
 }
 
@@ -582,7 +582,7 @@ div.app-f3cc17bc0d768ca60b8bb496a10b1990 {
     height: 32px;
 
     div.van-tabs__nav {
-      background-color: rgb(248, 249, 252) !important;
+      background-color: rgb(250, 250, 250) !important;
     }
   }
 }
@@ -616,7 +616,7 @@ div.app-6bdc6915ee08058392eafe0ef6e353fd {
 
 div.app-b4a64ecd008af42ba95bc20350599699,
 div.app-9b9faf4e737f5907995f767e0b345dab {
-  background-color: rgb(248, 249, 252) !important;
+  background-color: rgb(250, 250, 250) !important;
 }
 
 div.app-88bf7a95736562190270d51dc2cb3f42 {
@@ -653,7 +653,7 @@ div.app-gx,
 div.app-wj,
 div.app-pz,
 div.app-zb,
-div.app-skill,
+div.app-genre,
 div.app-position,
 div.app-equipmentListAll,
 div.app-equipmentListOne,

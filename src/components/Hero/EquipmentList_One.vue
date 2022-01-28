@@ -24,12 +24,17 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="装备" field="id" fixed="left" width="50">
+      <vxe-table-column
+        title="装备"
+        field="equipmentId"
+        fixed="left"
+        width="50"
+      >
         <template #default="{ row }">
           <img
             v-lazy="
               '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-              row.id +
+              row.equipmentId +
               '.png'
             "
             width="25"
@@ -407,13 +412,19 @@ export default {
         return this.getRanking(6, this.equipmentInfo.type, 0, 0, row.heroId);
       }
 
-      if (column.property == "id") {
+      if (column.property == "equipmentId") {
         this.equipmentInfo.type = 2;
-        return this.getRanking(6, this.equipmentInfo.type, 0, 0, row.id);
+        return this.getRanking(
+          6,
+          this.equipmentInfo.type,
+          0,
+          0,
+          row.equipmentId
+        );
       }
 
       this.lineData.heroId = row.heroId;
-      this.lineData.equipmentId = row.id;
+      this.lineData.equipmentId = row.equipmentId;
 
       this.lineDataRow = {
         columns: ["格子", "胜率", "占比"],

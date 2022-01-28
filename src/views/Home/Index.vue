@@ -213,7 +213,7 @@ div.home-e289b0da5cdb7507d4d9cc22f588cbda {
 }
 
 div.home-56677dd04cbe46e7b175e734b4ec94ef {
-  background-color: #f7f8fa !important;
+  background-color: rgb(250, 250, 250) !important;
   height: 381px;
   overflow: hidden;
   position: absolute;

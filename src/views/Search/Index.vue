@@ -462,7 +462,10 @@
               @click="$message.info($appMsg.info[1022])"
             >
             </van-grid-item>
-            <van-grid-item text="顶端局"></van-grid-item>
+            <van-grid-item
+              text="顶端局"
+              @click="$message.info($appMsg.info[1023])"
+            ></van-grid-item>
             <van-grid-item text="禁用"></van-grid-item>
             <van-grid-item>
               <div
@@ -689,7 +692,7 @@
               class="search-c27c140f08b0252f3027cf077cee2358"
             >
               &nbsp;
-              <van-icon name="todo-list-o" /> 基于 顶端局 统计
+              <van-icon name="todo-list-o" /> 基于 顶端巅峰赛 统计
             </span>
             <span
               @click="
@@ -703,7 +706,6 @@
               <van-icon name="exchange" /> 切换视图
             </span>
             <span
-              v-if="showInfo.heroData == 1"
               @click="onShareClick"
               class="search-5077dcc14128f743498aaafcbd0ecb5d"
             >
@@ -754,27 +756,21 @@
           :ellipsis="false"
           @change="onSkillTabsChange"
         >
-          <van-tab title="技能">
-            <HeroSkillList
+          <van-tab title="打法">
+            <HeroGenreList
               v-if="skillInfo.model == 0"
-              :heroId="tableData.heroInfo.id"
-            />
-          </van-tab>
-          <van-tab title="分路">
-            <HeroPositionList
-              v-if="skillInfo.model == 1"
               :heroId="tableData.heroInfo.id"
             />
           </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
-              v-if="skillInfo.model == 2"
+              v-if="skillInfo.model == 1"
               :heroId="tableData.heroInfo.id"
             />
           </van-tab>
           <van-tab title="装备 (单件)">
             <HeroEquipmentListOne
-              v-if="skillInfo.model == 3"
+              v-if="skillInfo.model == 2"
               :equipmentId="tableData.heroInfo.id"
               :equipmentType="1"
             />
@@ -813,8 +809,7 @@
 export default {
   name: "SearchHome",
   components: {
-    HeroSkillList: () => import("@/components/Hero/SkillList.vue"),
-    HeroPositionList: () => import("@/components/Hero/PositionList.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -903,7 +898,7 @@ export default {
         skillMenu: false,
         fightPowerMenu: false,
       },
-      tipsInfo: [0, 0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   mounted() {
@@ -1066,12 +1061,10 @@ export default {
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1023];
-      } else if (e == 2) {
         tipsText = this.$appMsg.info[1008];
-      } else if (e == 3) {
+      } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
-      } else if (e == 4) {
+      } else if (e == 3) {
         tipsText = this.$appMsg.info[1010];
       }
 

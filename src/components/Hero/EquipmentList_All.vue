@@ -6,10 +6,16 @@
       :data="tableData.result.rows"
       height="543"
     >
-      <vxe-table-column title="技能" field="score" fixed="left" width="50">
+      <vxe-table-column
+        title="技能"
+        field="skillId"
+        fixed="left"
+        width="75"
+        sortable
+      >
         <template #default="{ row }">
           <img
-            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.id + '.png'"
+            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'"
             width="25"
             height="25"
             class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"

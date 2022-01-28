@@ -1,25 +1,44 @@
 <template>
-  <div class="hero-skill app-skill">
+  <div class="hero-genre app-genre">
     <vxe-table
-      ref="refHeroSkill"
+      ref="refHeroGenre"
       :loading="tableData.loading"
       :data="tableData.result.rows"
       height="543"
     >
-      <vxe-table-column title="技能" field="score" fixed="left" width="75">
-        <template #default="{ row }">
-          <img
-            v-lazy="
-              row.id == 0
-                ? '//ae03.alicdn.com/kf/H79634bb28539419db2dd990a6131404cF.png'
-                : '//image.ttwz.qq.com/images/skill/' + row.id + '.png'
-            "
-            width="25"
-            height="25"
-            class="hero-skill-4dba5f40eab9da71ab3d5db2d3883093"
-          />
-        </template>
-      </vxe-table-column>
+      <vxe-table-colgroup title="流派">
+        <vxe-table-column
+          title="技能"
+          field="skillId"
+          fixed="left"
+          width="75"
+          sortable
+        >
+          <template #default="{ row }">
+            <img
+              v-lazy="
+                row.skillId == 0
+                  ? '//ae03.alicdn.com/kf/H79634bb28539419db2dd990a6131404cF.png'
+                  : '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
+              "
+              width="25"
+              height="25"
+              class="hero-genre-4dba5f40eab9da71ab3d5db2d3883093"
+            />
+          </template>
+        </vxe-table-column>
+        <vxe-table-column
+          title="分路"
+          field="positionId"
+          fixed="left"
+          width="75"
+          sortable
+        >
+          <template #default="{ row }">
+            {{ positionInfo[row.positionId] }}
+          </template>
+        </vxe-table-column>
+      </vxe-table-colgroup>
 
       <vxe-table-column title="#" type="seq" width="50" />
 
@@ -83,7 +102,7 @@
       <template #empty>
         <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
           <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-            使用即代表您同意
+            我已经阅读并同意
             <a
               href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH"
               target="_blank"
@@ -99,7 +118,7 @@
 
 <script>
 export default {
-  name: "HeroSkill",
+  name: "HeroGenre",
   props: {
     heroId: {
       type: Number,
@@ -119,7 +138,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (this.$cookie.get("agree") == 1) {
-          this.getRanking(newValue.heroId, 5, 0, 0, 0);
+          this.getRanking(newValue.heroId, 14, 0, 0, 0);
         }
       },
     },
@@ -133,16 +152,17 @@ export default {
           rows: [],
         },
       },
+      positionInfo: ["对抗路", "中路", "发育路", "打野", "游走"],
       showInfo: {
         checked: false,
       },
     };
   },
   created() {
-    this.listWidth = this.$appInitTableWidth(350);
+    this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (heroId = 111, aid = 5, bid = 0, cid = 0, did = 0) {
+    getRanking: function (heroId = 111, aid = 14, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
