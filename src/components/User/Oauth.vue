@@ -44,7 +44,7 @@ export default {
     },
     oauthList: {
       type: Array,
-      default: function () {
+      default: () => {
         return [];
       },
     },

@@ -152,21 +152,21 @@
       <van-button
         round
         icon="replay"
-        type="primary"
-        size="small"
+        color="#000000"
+        size="mini"
         @click="getWebAccountInfo(1, 1)"
       >
-        刷新
+        刷新一下
       </van-button>
       &nbsp;
       <van-button
         round
-        icon="description"
+        icon="chat-o"
         type="info"
-        size="small"
+        size="mini"
         @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
       >
-        复制 QQ
+        CPDD
       </van-button>
     </div>
   </div>

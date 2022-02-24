@@ -454,7 +454,7 @@
                 v-for="(data, index) in authorInfo.actions"
                 :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
                 :disabled="data.title == '-' && (!data.to || !data.url)"
-                @click="onActionClick(data)"
+                @click="onUrlClick(data)"
                 >{{ data.title }}</a-menu-item
               >
             </a-menu>
@@ -724,7 +724,7 @@
         v-model="tabsInfo.model"
         v-if="tabsInfo.model > -1"
         :ellipsis="false"
-        @change="onGameTabsChange"
+        @click="onGameTabsClick"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab
@@ -1166,14 +1166,13 @@ export default {
           this.$appCopyData(this.copyData);
         });
     },
-    onActionClick: function (data) {
-      if (data.to) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
-      }
-
-      if (data.url) {
-        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
-      }
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
     onCreateGameBPClick: function () {
       let teamInfo = this.teamInfo,
@@ -1353,7 +1352,7 @@ export default {
       if (bpMode == 1)
         this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
     },
-    onGameTabsChange: function (e) {
+    onGameTabsClick: function (e) {
       this.initBPOrder(this.bpPerspective, e);
 
       this.newGameInfo = {};

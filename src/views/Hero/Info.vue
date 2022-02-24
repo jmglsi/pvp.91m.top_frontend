@@ -228,7 +228,7 @@
         v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
-        @change="onHeroTabsChange"
+        @click="onHeroTabsClick"
         duration="0.5"
         line-width="25px"
         class="hero-d42f4851e770aa0f758b01388874f67b"
@@ -286,7 +286,7 @@
         @show="onComponentShow"
         class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
       >
-        <div class="hero-b7b5e31b028440d2e0e0157baad49513">
+        <div id="heroSameHobby" class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroSameHobby :heroId="hero.info.id" />
         </div>
 
@@ -310,15 +310,15 @@
           v-model="skillInfo.model"
           v-if="skillInfo.model > -1"
           :ellipsis="false"
-          @change="onSkillTabsChange"
+          @click="onSkillTabsClick"
         >
-          <van-tab title="打法">
+          <van-tab title="打法 (推荐)">
             <HeroGenreList :heroId="hero.info.id" />
           </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL :heroId="hero.info.id" />
           </van-tab>
-          <van-tab title="装备 (单件)">
+          <van-tab title="出装 (单件)">
             <HeroEquipmentListOne
               :equipmentId="hero.info.id"
               :equipmentType="1"
@@ -417,9 +417,7 @@
               ? $appOpenUrl(
                   '是否打开外部链接?',
                   null,
-                  {
-                    path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId,
-                  },
+                  { path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId },
                   0
                 )
               : $message.info($appMsg.info[1006])
@@ -461,6 +459,7 @@ export default {
 
       if (id) {
         this.getHeroInfo(id);
+        this.initShow();
       }
     },
   },
@@ -560,24 +559,30 @@ export default {
     this.initPage();
   },
   methods: {
-    initPage: function () {
-      let id = this.$route.params.id,
-        q = this.$route.query,
-        show = q.show || "";
-
-      this.getHeroInfo(id);
+    initShow: function () {
+      let r = this.$route,
+        //hash = r.hash || "",
+        show = r.query.show || "";
 
       if (show == "heroUpdate") {
         this.$message.info(this.$appMsg.info[1016]);
       }
 
-      if (show == "heroSkill") {
-        this.showInfo.skillMenu = true;
-      } else {
-        this.showInfo.skillMenu = false;
-      }
+      setTimeout(() => {
+        if (show == "heroSkill") {
+          this.showInfo.skillMenu = true;
+        } else {
+          this.showInfo.skillMenu = false;
+        }
+      }, 1000);
 
       window.addEventListener("scroll", this.listenerScrollTop);
+    },
+    initPage: function () {
+      let id = this.$route.params.id;
+
+      this.getHeroInfo(id);
+      this.initShow();
     },
     listenerScrollTop: function () {
       this.scroll =
@@ -653,7 +658,7 @@ export default {
 
       this.showInfo.heroMenu = false;
     },
-    onSkillTabsChange: function (e) {
+    onSkillTabsClick: function (e) {
       let tipsText;
 
       if (e == 0) {
@@ -663,10 +668,10 @@ export default {
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
       } else if (e == 3) {
-        tipsText = this.$appMsg.info[1010];
+        //tipsText = this.$appMsg.info[1010];
       }
 
-      if (this.tipsInfo[e] == 0) {
+      if (tipsText && this.tipsInfo[e] == 0) {
         this.tipsInfo[e] = 1;
 
         this.$message.info(tipsText);
@@ -703,7 +708,7 @@ export default {
       this.showInfo.imagePreview = true;
       this.showInfo.imageIndex = imageIndex;
     },
-    onHeroTabsChange: function (e) {
+    onHeroTabsClick: function (e) {
       let appConfigInfo = this.$appConfigInfo,
         heroInfo = this.hero.info,
         dTitle;

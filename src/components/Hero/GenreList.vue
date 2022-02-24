@@ -2,53 +2,69 @@
   <div class="hero-genre app-genre">
     <vxe-table
       ref="refHeroGenre"
-      :loading="tableData.loading"
       :data="tableData.result.rows"
+      :loading="tableData.loading"
       height="543"
     >
-      <vxe-table-colgroup title="流派">
-        <vxe-table-column
-          title="技能"
-          field="skillId"
-          fixed="left"
-          width="75"
-          sortable
-        >
+      <vxe-table-colgroup
+        title="流派"
+        fixed="left"
+        :title-help="{ content: $appMsg.tips[1003] }"
+      >
+        <vxe-table-column title="技能" field="skillId" width="75" sortable>
           <template #default="{ row }">
-            <img
-              v-lazy="
-                row.skillId == 0
-                  ? '//ae03.alicdn.com/kf/H79634bb28539419db2dd990a6131404cF.png'
-                  : '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
-              "
-              width="25"
-              height="25"
-              class="hero-genre-4dba5f40eab9da71ab3d5db2d3883093"
-            />
+            <div :style="{ position: 'relative' }">
+              <img
+                v-lazy="
+                  row.skillId == 0
+                    ? '//ae03.alicdn.com/kf/H79634bb28539419db2dd990a6131404cF.png'
+                    : '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
+                "
+                width="25"
+                height="25"
+                class="hero-genre-4dba5f40eab9da71ab3d5db2d3883093"
+              />
+            </div>
           </template>
         </vxe-table-column>
-        <vxe-table-column
-          title="分路"
-          field="positionId"
-          fixed="left"
-          width="75"
-          sortable
-        >
+        <vxe-table-column title="分路" field="positionId" width="75" sortable>
           <template #default="{ row }">
-            {{ positionInfo[row.positionId] }}
+            <div :style="{ position: 'relative' }">
+              {{ positionInfo[row.positionId] }}
+            </div>
           </template>
         </vxe-table-column>
       </vxe-table-colgroup>
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-colgroup title="比率 (%)">
+      <vxe-table-colgroup
+        title="比率 (%)"
+        :title-help="{
+          content: $appMsg.tips[1004] + '\n' + $appMsg.tips[1011],
+        }"
+      >
         <vxe-table-column
           title="占比"
           field="pickRate"
+          :filters="[{ data: 2.5, checked: true }]"
+          :filter-method="filterMethod"
           :width="listWidth"
           sortable
         >
+          <template #filter="{ $panel, column }">
+            ≥
+            <input
+              v-model="option.data"
+              v-for="(option, index) in column.filters"
+              :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
+              type="type"
+              placeholder="0"
+              @input="$panel.changeOption($event, !!option.data, option)"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+            />
+            %
+          </template>
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
@@ -85,14 +101,30 @@
         <vxe-table-column
           title="胜率"
           field="winRate"
+          :filters="[{ data: 40, checked: true }]"
+          :filter-method="filterMethod"
           :width="listWidth"
           sortable
-        />
+        >
+          <template #filter="{ $panel, column }">
+            ≥
+            <input
+              v-model="option.data"
+              v-for="(option, index) in column.filters"
+              :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
+              type="type"
+              placeholder="0"
+              @input="$panel.changeOption($event, !!option.data, option)"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+            />
+            %
+          </template>
+        </vxe-table-column>
       </vxe-table-colgroup>
 
       <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
-          title="净胜"
+          title="胜方"
           field="mvpRate"
           :width="listWidth"
           sortable
@@ -216,6 +248,15 @@ export default {
           }
         });
     },
+    filterMethod: function ({ option, row, column }) {
+      if (column.property == "pickRate") {
+        return row.pickRate >= option.data;
+      }
+
+      if (column.property == "winRate") {
+        return row.winRate >= option.data;
+      }
+    },
     onAgreeChange: function () {
       let nowChecked = false,
         nowChecked_int = 0;
@@ -227,7 +268,7 @@ export default {
         nowChecked = true;
         nowChecked_int = 1;
 
-        this.getRanking(this.heroId, 5, 0, 0, 0);
+        this.getRanking(this.heroId, 14, 0, 0, 0);
       }
 
       this.showInfo.checked = nowChecked;

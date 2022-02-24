@@ -124,18 +124,6 @@
                         >
                           <van-icon :name="data.icon" />
                         </span>
-                        <span
-                          v-else
-                          :style="
-                            index < 3 + tableData.search.hotKeywords[1].topNum
-                              ? { color: 'red' }
-                              : {}
-                          "
-                          class="search-f43418d85f50da28b3a9c1e780237105"
-                          >{{
-                            index + 1 - tableData.search.hotKeywords[1].topNum
-                          }}</span
-                        >
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                         </span>
@@ -170,18 +158,6 @@
                         >
                           <van-icon :name="data.icon" />
                         </span>
-                        <span
-                          v-else
-                          :style="
-                            index < 3 + tableData.search.hotKeywords[2].topNum
-                              ? { color: 'red' }
-                              : {}
-                          "
-                          class="search-f43418d85f50da28b3a9c1e780237105"
-                          >{{
-                            index + 1 - tableData.search.hotKeywords[2].topNum
-                          }}</span
-                        >
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                         </span>
@@ -224,7 +200,7 @@
                   round
                   @click="onClearSearchData"
                   icon="clear"
-                  size="small"
+                  size="mini"
                   type="danger"
                 >
                   清除历史搜索
@@ -262,10 +238,8 @@
             :title="data.title"
             :label="data.label"
             :value="data.value"
-            is-link
-            @click="
-              $appOpenUrl('是否打开外部链接?', NULL, { path: data.url }, 0)
-            "
+            :is-link="data.isLink"
+            @click="data.isLink ? onUrlClick(data) : null"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
             class="search-869ab9bf85478a49725209693c5760e5"
           />
@@ -317,10 +291,6 @@
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
               title="关系克制"
-            />
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="更新调整"
             />
             <van-tab
               :disabled="tableData.heroInfo.id == 999"
@@ -737,7 +707,7 @@
             :label="data.label"
             :value="data.value"
             :is-link="data.isLink"
-            @click="data.isLink ? onCellClick(data) : null"
+            @click="data.isLink ? onUrlClick(data) : null"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
           />
         </van-cell-group>
@@ -754,9 +724,9 @@
           v-model="skillInfo.model"
           v-if="skillInfo.model > -1"
           :ellipsis="false"
-          @change="onSkillTabsChange"
+          @click="onSkillTabsClick"
         >
-          <van-tab title="打法">
+          <van-tab title="打法 (推荐)">
             <HeroGenreList
               v-if="skillInfo.model == 0"
               :heroId="tableData.heroInfo.id"
@@ -768,13 +738,14 @@
               :heroId="tableData.heroInfo.id"
             />
           </van-tab>
-          <van-tab title="装备 (单件)">
+          <van-tab title="出装 (单件)">
             <HeroEquipmentListOne
               v-if="skillInfo.model == 2"
               :equipmentId="tableData.heroInfo.id"
               :equipmentType="1"
             />
           </van-tab>
+          <van-tab title="更新调整" />
           <!--
             <van-tab title="铭文 (推荐)">
               <HeroInscriptionList
@@ -859,6 +830,9 @@ export default {
         placeholder: "搜索",
       },
       tableData: {
+        result: {
+          rows: [],
+        },
         search: {
           history: [],
           hotKeywords: [
@@ -876,9 +850,6 @@ export default {
             },
           ],
           placeholder: [],
-        },
-        result: {
-          rows: [],
         },
         heroInfo: {
           id: null,
@@ -906,6 +877,9 @@ export default {
   },
   methods: {
     initPage: function () {
+      let q = this.$route.query,
+        show = q.show || "";
+
       setInterval(() => {
         let text = this.tableData.search.placeholder;
 
@@ -916,6 +890,14 @@ export default {
       if (searchValue) {
         this.showInfo.searchData = true;
         this.showInfo.searchHistory = false;
+
+        setTimeout(() => {
+          if (show == "heroSkill") {
+            this.showInfo.skillMenu = true;
+          } else {
+            this.showInfo.skillMenu = false;
+          }
+        }, 1000);
       }
 
       this.getSearch(searchValue);
@@ -999,14 +981,13 @@ export default {
 
       this.showInfo.searchData = false;
     },
-    onCellClick: function (data) {
-      if (data.to) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
-      }
-
-      if (data.url) {
-        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
-      }
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
     onDataTabsClick: function (e) {
       let heroInfo = this.tableData.heroInfo;
@@ -1035,10 +1016,6 @@ export default {
         });
       } else if (e == 5) {
         this.$appPush({
-          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate",
-        });
-      } else if (e == 6) {
-        this.$appPush({
           path:
             "/hero/" +
             heroInfo.id +
@@ -1055,8 +1032,9 @@ export default {
 
       return change;
     },
-    onSkillTabsChange: function (e) {
-      let tipsText;
+    onSkillTabsClick: function (e) {
+      let heroInfo = this.tableData.heroInfo,
+        tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
@@ -1065,10 +1043,14 @@ export default {
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
       } else if (e == 3) {
-        tipsText = this.$appMsg.info[1010];
+        //tipsText = this.$appMsg.info[1010];
+
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
+        });
       }
 
-      if (this.tipsInfo[e] == 0) {
+      if (tipsText && this.tipsInfo[e] == 0) {
         this.tipsInfo[e] = 1;
 
         this.$message.info(tipsText);
@@ -1096,7 +1078,8 @@ export default {
       ret += "W:" + heroInfo.winRate.join(" / ") + "\n";
       ret +=
         "> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += "> " + url.origin + "/s/" + heroInfo.id;
+      ret += "> 成就 " + heroInfo.label + "\n";
+      ret += "> 综合 " + url.origin + "/s/" + heroInfo.id;
 
       this.copyData = ret;
 
@@ -1170,12 +1153,6 @@ span.search-8fd6a51f93ef7b5379535e63a5e071cd {
 span.search-d427af48bbd4a36972ce659cd329dd38,
 div.search-8d84ed4977747dd8eab8dbdc9ed3508c {
   font-size: @app-font-size;
-}
-
-div.search-home {
-  div.van-tabs__nav {
-    background-color: transparent !important;
-  }
 }
 
 div.search-399841f840f75044108804ec30d37405 {

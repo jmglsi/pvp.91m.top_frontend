@@ -114,7 +114,7 @@
 
         <van-tab>
           <template #title>
-            关系和克制 (近期)&nbsp;<i class="vxe-icon--search" />
+            关系克制 (近期)&nbsp;<i class="vxe-icon--search" />
           </template>
 
           <div>
@@ -263,14 +263,15 @@
           marginTop: '-3px',
           borderColor: 'rgb(243,189,103)',
         }"
-        @click="$message.info(this.$appMsg.info[1012])"
+        @click="$message.info($appMsg.info[1012])"
       >
         <van-tag
           round
           type="danger"
           class="ranking-4d09fbef1438e2b23375b87ba3e02942"
-          >游客部分功能将受限,登录后解锁</van-tag
         >
+          游客部分功能受限，登录后将自动解锁
+        </van-tag>
       </van-divider>
     </div>
   </div>
@@ -776,7 +777,7 @@ div.ranking-ebf09abeb7c3db44741d328324915725 {
 
 div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
   left: -3px;
-  margin-top: 12px;
+  margin-top: 9px;
   position: absolute;
   z-index: 10;
 

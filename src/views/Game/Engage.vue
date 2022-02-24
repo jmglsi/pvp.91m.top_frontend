@@ -93,10 +93,10 @@ export default {
   data() {
     return {
       tableData: {
-        type: 0,
         result: {
           rows: [],
         },
+        type: 0,
       },
       paginationInfo: {
         model: 1,

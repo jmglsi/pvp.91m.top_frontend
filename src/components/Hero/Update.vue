@@ -18,8 +18,13 @@
             }}</span>
           </van-col>
           <van-col :span="$appIsMobile ? 9 : 3">
-            <div class="app-f3b57b63e4f5f4e157fd45bdb8611005">
-              <van-dropdown-menu direction="up">
+            <div
+              class="
+                app-f3b57b63e4f5f4e157fd45bdb8611005
+                app-8f06e89ca90bebf60c91699c473f4022
+              "
+            >
+              <van-dropdown-menu>
                 <van-dropdown-item
                   v-model="updateInfo.model"
                   :options="updateInfo.options"
@@ -33,10 +38,7 @@
       <div class="update-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
-            v-for="(data, index) in tableData.result.rows.slice(
-              0,
-              heroId == 0 ? 10 : 25
-            )"
+            v-for="(data, index) in tableData.result.rows"
             v-show="
               (updateInfo.model == 0 && data.calendar.type <= 0) ||
               (updateInfo.model == 1 && data.calendar.type > 0) ||
@@ -70,7 +72,14 @@
               >
               <span
                 @click="
-                  $appOpenUrl('是否打开外部链接?', null, { path: data.url }, 0)
+                  data.url
+                    ? $appOpenUrl(
+                        '是否打开外部链接?',
+                        null,
+                        { path: data.url },
+                        0
+                      )
+                    : null
                 "
                 class="update-f0af832cbd923851be8557213d95dddc"
                 >&nbsp;🔗&nbsp;{{ data.title }}</span
@@ -201,7 +210,11 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.getHeroUpdate(newValue.heroId);
+        //if (!newValue.heroId) return;
+
+        if (this.$cookie.get("agree") == 1) {
+          this.getHeroUpdate(newValue.heroId);
+        }
       },
     },
   },
@@ -215,9 +228,9 @@ export default {
       tableData: {
         result: {
           rows: [],
+          tips: "",
+          title: "",
         },
-        tips: "",
-        title: "",
       },
       tableDataRow: {},
       updateInfo: {
@@ -240,7 +253,7 @@ export default {
   methods: {
     onFormatter: function (day) {
       let tableData = this.tableData.result.rows,
-        maxType = -5;
+        mapType = -5;
 
       let oDay =
         day.date.getFullYear() +
@@ -252,79 +265,84 @@ export default {
       tableData.map((x) => {
         let result = x.calendar;
 
-        if (!result.day) return;
+        if (result.type == -1) {
+          //
+        } else {
+          if (oDay == result.day) {
+            if (result.type == 0) {
+              day.bottomInfo = result.text;
+            }
 
-        if (oDay == result.day) {
-          if (result.type == 0) {
-            day.bottomInfo = result.text;
-          }
+            if (result.type == 1) {
+              day.topInfo = result.text;
+            }
 
-          if (result.type == 1) {
-            day.topInfo = result.text;
-          }
+            if (result.type == 1.1) {
+              day.text = result.text;
+            }
 
-          if (result.type == 1.1) {
-            day.text = result.text;
-          }
+            if (result.type == 1.2) {
+              day.text = result.text;
+            }
 
-          if (result.type == 1.2) {
-            day.text = result.text;
-          }
+            if (result.type == 1.3) {
+              day.text = result.text;
+            }
 
-          if (result.type == 1.3) {
-            day.text = result.text;
-          }
+            if (result.type == 2) {
+              day.text = result.text;
+            }
 
-          if (result.type == 2) {
-            day.text = result.text;
-          }
+            if (result.type == 3) {
+              day.text = result.text;
+            }
 
-          if (result.type == 3) {
-            day.text = result.text;
-          }
+            if (result.type == 4) {
+              day.text = result.text;
+            }
 
-          if (result.type == 4) {
-            day.text = result.text;
-          }
-
-          if (result.type > maxType) {
-            maxType = result.type;
+            /**
+             *
+             * 取优先级最高的
+             *
+             */
+            if (result.type > mapType) {
+              mapType = result.type;
+            }
           }
         }
       });
 
-      if (maxType > -3) {
-        if (maxType == 0) {
-          day.className = "update-tyf";
-        }
+      if (mapType == 0) {
+        day.className = "app-fdc229c08af23dac1a0e8caac88a239d";
+      }
 
-        if (maxType == 1) {
-          day.className = "update-zsf";
-        }
+      if (mapType == 1) {
+        day.className = "app-d7a506baa20bdbe9daaa1366348175a9";
+      }
 
-        if (maxType == 1.1) {
-          day.className = "update-xyx";
-        }
+      if (mapType == 1.1) {
+        day.className = "app-53f544c1e6fce0feac70340d481ad2ed";
+      }
 
-        if (maxType == 1.2) {
-          day.className = "update-pb";
-        }
+      if (mapType == 1.2) {
+        day.className = "app-8a900759792c14b84891392b9f0e360d";
+      }
 
-        if (maxType == 1.3) {
-          day.className = "update-cz";
-        }
+      if (mapType == 1.3) {
+        day.className = "app-bda9643ac6601722a28f238714274da4";
+      }
 
-        if (maxType == 2) {
-          day.className = "update-fx";
-        }
+      if (mapType == 2) {
+        day.className = "app-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
+      }
 
-        if (maxType == 3) {
-          day.className = "update-xpf";
-        }
+      if (mapType == 3) {
+        day.className = "app-9f27410725ab8cc8854a2769c7a516b8";
+      }
 
-        if (maxType == 4) {
-          day.className = "update-fc";
-        }
+      if (mapType == 4) {
+        day.className = "app-48d6215903dff56238e52e8891380c8f";
       }
 
       return day;

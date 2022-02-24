@@ -192,9 +192,7 @@ Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' },
             this.$message.warning(message);
         }
 
-        setTimeout(() => {
-            this.$router.push(url)
-        }, 2500)
+        this.$router.push(url);
     }
 }
 

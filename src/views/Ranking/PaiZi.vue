@@ -3,9 +3,9 @@
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
       <vxe-table
         ref="refPaiZi"
-        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
+        :loading="tableData.loading"
         empty-text="点击上方筛选"
         @cell-click="onCellClick"
       >
@@ -18,6 +18,7 @@
         >
           <template #default="{ row }">
             <div
+              :style="{ position: 'relative' }"
               :class="
                 isSmallMode ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
@@ -75,13 +76,13 @@ export default {
   data() {
     return {
       tableData: {
-        color: {},
-        column: [],
-        columns: [],
         loading: false,
         result: {
           rows: [],
         },
+        color: {},
+        column: [],
+        columns: [],
       },
       tableDataRow: {
         id: 0,
@@ -124,9 +125,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: false,
+      immediate: true,
       handler(newValue) {
-        if (this.$cookie.get("agree") == 1) {
+        let agree = this.$cookie.get("agree");
+
+        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
         }
       },
@@ -136,9 +139,11 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
 
-    if (this.$cookie.get("agree") == 1) {
-      this.getRanking(4, this.bid, this.cid, this.did);
-    }
+    /*
+      if (this.$cookie.get("agree") == 1) {
+        this.getRanking(4, this.bid, this.cid, this.did);
+      }
+    */
   },
   methods: {
     getRanking: function (aid = 4, bid = 0, cid = 0, did = 0) {

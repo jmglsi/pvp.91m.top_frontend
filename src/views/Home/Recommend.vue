@@ -24,7 +24,7 @@
             <van-swipe-item
               v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
               :key="'recommend-0c74eea41745fb37742d335606774a60-' + index"
-              @click="onSwipeClick(data)"
+              @click="onUrlClick(data)"
               class="recommend-ac104b3f82b3b5d3643319a05734ce93"
             >
               <img
@@ -80,9 +80,12 @@
                 :title="appHomeInfo.tipsInfo.title || '加载中...'"
                 :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
                 :value="appHomeInfo.tipsInfo.value || '⏳'"
-                :to="appHomeInfo.tipsInfo.to"
-                :url="appHomeInfo.tipsInfo.url"
                 :is-link="appHomeInfo.tipsInfo.isLink"
+                @click="
+                  appHomeInfo.tipsInfo.isLink
+                    ? onUrlClick(appHomeInfo.tipsInfo)
+                    : null
+                "
                 class="app-06eab62dcb5a23b966a620807d78e66f"
               />
             </van-swipe-item>
@@ -90,10 +93,10 @@
               <van-row>
                 <van-col span="5" class="home-56677dd04cbe46e7b175e734b4ec94ef">
                   <van-sidebar
-                    @change="onHeroChange(changeInfo.bid)"
+                    @change="onHeroChange()"
                     v-model="changeInfo.bid"
                   >
-                    <van-sidebar-item title="英雄" disabled />
+                    <van-sidebar-item title="英雄" />
                     <van-sidebar-item title="技能" />
                     <van-sidebar-item title="装备" />
                   </van-sidebar>
@@ -233,13 +236,13 @@ export default {
     return {
       isLoading: false,
       tableData: {
-        color: {},
-        column: [],
-        columns: [],
         loading: true,
         result: {
           rows: [],
         },
+        color: {},
+        column: [],
+        columns: [],
       },
       showInfo: {
         skeleton: true,
@@ -341,14 +344,13 @@ export default {
         this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
       }
     },
-    onSwipeClick: function (data) {
-      if (data.to) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
-      }
-
-      if (data.url) {
-        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
-      }
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
     getChangeImg: function (bid, id) {
       let url;
@@ -369,7 +371,16 @@ export default {
 
       this.tableData.result.rows = [];
 
-      this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
+      if (changeInfo.bid == 0) {
+        this.changeInfo.bid = 1;
+
+        this.$appPush({
+          path: "/ranking",
+          query: { type: 0, bid: 3, cid: 0, did: 0, refresh: 1 },
+        });
+      } else {
+        this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
+      }
     },
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,

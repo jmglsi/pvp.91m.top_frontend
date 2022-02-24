@@ -147,11 +147,11 @@ export default {
         teamMenu: false,
       },
       tableData: {
-        type: 0,
-        index: 0,
         result: {
           rows: [],
         },
+        type: 0,
+        index: 0,
       },
       tableDataRow: {
         id: 0,

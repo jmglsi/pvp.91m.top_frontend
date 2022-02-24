@@ -3,9 +3,9 @@
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-table
         ref="refWanJia"
-        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
+        :loading="tableData.loading"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
@@ -18,6 +18,7 @@
               class="app-e4d23e841d8e8804190027bce3180fa5"
               >{{ row.tag.text }}</van-tag
             >
+
             <div
               :style="{ position: 'relative' }"
               :class="
@@ -58,7 +59,7 @@
           sortable
         >
           <template #default="{ row }">
-            <div>
+            <div :style="{ position: 'relative' }">
               <div class="app-52b0e5c90604d59d1814f184d58e2033">
                 {{ row.rankScore }}
               </div>
@@ -75,10 +76,11 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="常用英雄 (数据来源互联网)"
+          title="常用英雄"
           field="commonlyUsed"
           width="325"
           align="left"
+          :title-help="{ content: $appMsg.tips[1007] }"
         >
           <template #default="{ row }">
             <div
@@ -163,7 +165,7 @@
       <van-button
         round
         icon="share"
-        size="small"
+        size="mini"
         color="linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237))"
         @click="getImg"
       >
@@ -173,7 +175,7 @@
       <van-button
         round
         icon="aim"
-        size="small"
+        size="mini"
         color="linear-gradient(to right, rgb(196, 113, 237), rgb(246, 79, 89))"
         @click="onHeroListActionSheetSelect"
       >
@@ -296,9 +298,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: false,
+      immediate: true,
       handler(newValue) {
-        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
+        let agree = this.$cookie.get("agree");
+
+        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(2, newValue.bid, newValue.cid, 0);
         }
       },
@@ -336,9 +340,11 @@ export default {
     //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
 
-    if (this.$cookie.get("agree") == 1) {
-      this.getRanking(2, this.bid, this.cid, 0);
-    }
+    /*
+      if (this.$cookie.get("agree") == 1) {
+        this.getRanking(2, this.bid, this.cid, 0);
+      }
+    */
   },
   methods: {
     getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {

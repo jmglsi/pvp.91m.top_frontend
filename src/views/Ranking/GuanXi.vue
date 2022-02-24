@@ -3,13 +3,17 @@
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-table
         ref="refGuanXi"
-        :loading="tableData.loading"
+        :cell-class-name="cellClassName"
         :data="tableData.result.rows"
         :height="clientHeight"
-        :cell-class-name="cellClassName"
+        :loading="tableData.loading"
         @cell-click="onCellClick"
       >
-        <vxe-table-colgroup :title="heroName ? heroName : '推荐'" fixed="left">
+        <vxe-table-colgroup
+          fixed="left"
+          :title="heroName ? heroName : '推荐'"
+          :title-help="{ content: $appMsg.tips[1009] }"
+        >
           <vxe-table-column
             field="hero_1"
             :title="heroName ? '和' : '1'"
@@ -97,7 +101,10 @@
 
         <vxe-table-column title="#" type="seq" width="50" />
 
-        <vxe-table-colgroup title="队友 (%)">
+        <vxe-table-colgroup
+          title="队友 (%)"
+          :title-help="{ content: $appMsg.tips[1005] }"
+        >
           <vxe-table-column
             title="出场"
             field="teammatePickRate"
@@ -167,7 +174,15 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-colgroup title="对手 (%)">
+        <vxe-table-colgroup
+          title="对手 (%)"
+          :title-help="{
+            content:
+              '两个英雄不同队伍时，【' +
+              (heroName ? heroName : '1') +
+              '】的数据',
+          }"
+        >
           <vxe-table-column
             title="出场"
             field="opponentPickRate"
@@ -260,9 +275,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: false,
+      immediate: true,
       handler(newValue) {
-        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
+        let agree = this.$cookie.get("agree");
+
+        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(1, 0, 0, 0, newValue.heroName);
         }
       },
@@ -272,11 +289,11 @@ export default {
     return {
       copyData: null,
       tableData: {
-        color: {},
         loading: false,
         result: {
           rows: [],
         },
+        color: {},
       },
       tableDataRow: {
         hero_1: {
@@ -301,9 +318,11 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
 
-    if (this.$cookie.get("agree") == 1) {
-      this.getRanking(1, 0, 0, 0, this.heroName);
-    }
+    /*
+      if (this.$cookie.get("agree") == 1) {
+        this.getRanking(1, 0, 0, 0, this.heroName);
+      }
+    */
   },
   methods: {
     getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {

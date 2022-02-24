@@ -8,11 +8,11 @@
       <vxe-table
         ref="refDianFengSai"
         id="refDianFengSai"
-        :loading="tableData.loading"
-        :data="tableData.result.rows"
         :cell-class-name="cellClassName"
         :custom-config="{ storage: true }"
+        :data="tableData.result.rows"
         :height="clientHeight"
+        :loading="tableData.loading"
         @cell-click="onCellClick"
         @custom="toolbarCustomEvent"
       >
@@ -98,7 +98,10 @@
 
         <vxe-column title="#" type="seq" width="50" />
 
-        <vxe-table-colgroup title="出场越低，波动越大 (%)">
+        <vxe-table-colgroup
+          title="出场越低，波动越大 (%)"
+          :title-help="{ content: $appMsg.tips[1010] }"
+        >
           <vxe-column
             title="禁用"
             field="allBanRate"
@@ -363,9 +366,9 @@
           v-model="skillInfo.model"
           v-if="skillInfo.model > -1"
           :ellipsis="false"
-          @change="onSkillTabsChange"
+          @click="onSkillTabsClick"
         >
-          <van-tab title="打法">
+          <van-tab title="打法 (推荐)">
             <HeroGenreList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"
               :heroId="tableDataRow.id"
@@ -377,17 +380,18 @@
               :heroId="tableDataRow.id"
             />
           </van-tab>
-          <van-tab title="装备 (单件)">
+          <van-tab title="出装 (单件)">
             <HeroEquipmentListOne
               v-if="cellInfo.index == 0 && skillInfo.model == 2"
               :equipmentId="tableDataRow.id"
               :equipmentType="1"
             />
           </van-tab>
+          <van-tab title="更新调整" v-if="cellInfo.index == 0" />
           <!--
             <van-tab title="铭文 (推荐)">
               <HeroInscriptionList
-                v-if="skillInfo.model == 4"
+                v-if="cellInfo.index == 0 && skillInfo.model == 4"
                 :heroId="tableDataRow.id"
               />
             </van-tab>
@@ -450,9 +454,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: false,
+      immediate: true,
       handler(newValue) {
-        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
+        let agree = this.$cookie.get("agree");
+
+        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
         }
       },
@@ -461,23 +467,22 @@ export default {
   data() {
     return {
       tableData: {
-        color: {},
-        column: [],
-        columns: [],
         loading: false,
         result: {
           rows: [],
         },
+        color: {},
+        column: [],
+        columns: [],
       },
       tableDataRow: {
         id: 0,
         name: "加载中...",
       },
       actions: [
-        { name: "趋势", value: 0 },
-        { name: "搜一搜", value: 1 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
+        { name: "搜一搜", value: 0 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 1 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 2 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -507,13 +512,12 @@ export default {
     });
     //手动将表格和工具栏进行关联
 
-    if (this.$cookie.get("agree") == 1) {
-      this.showInfo.checked = true;
-
-      this.getRanking(0, this.bid, this.cid, this.did);
-    }
+    /*
+      if (this.$cookie.get("agree") == 1) {
+        this.getRanking(0, this.bid, this.cid, this.did);
+      }
+    */
   },
-  mounted() {},
   methods: {
     initTableWidth: function () {
       this.listWidth = this.$appInitTableWidth(1450);
@@ -534,18 +538,13 @@ export default {
     },
     toolbarCustomEvent: function (params) {
       switch (params.type) {
-        case "confirm": {
+        case "confirm":
           //确认
           break;
-        }
-        case "reset": {
-          //重置
+
+        case "reset":
+          //还原
           break;
-        }
-        case "close": {
-          //关闭
-          break;
-        }
       }
 
       this.initTableWidth();
@@ -668,8 +667,9 @@ export default {
         this.showInfo.heroMenu = true;
       }
     },
-    onSkillTabsChange: function (e) {
-      let tipsText;
+    onSkillTabsClick: function (e) {
+      let heroInfo = this.tableDataRow,
+        tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1007];
@@ -678,10 +678,14 @@ export default {
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
       } else if (e == 3) {
-        tipsText = this.$appMsg.info[1010];
+        //tipsText = this.$appMsg.info[1010];
+
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
+        });
       }
 
-      if (this.tipsInfo[e] == 0) {
+      if (tipsText && this.tipsInfo[e] == 0) {
         this.tipsInfo[e] = 1;
 
         this.$message.info(tipsText);
@@ -691,17 +695,13 @@ export default {
       let heroInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.$appPush({ path: "/hero/" + heroInfo.id + "/info" });
-      }
-
-      if (item.value == 1) {
         this.$appPush({
           path: "/search?q=" + heroInfo.name,
           query: { refresh: 1 },
         });
       }
 
-      if (item.value == 2) {
+      if (item.value == 1) {
         this.$appOpenUrl(
           "是否查看英雄更新记录?",
           "NGA @EndMP",
@@ -712,7 +712,7 @@ export default {
         );
       }
 
-      if (item.value == 3) {
+      if (item.value == 2) {
         this.$appOpenUrl(
           "是否打开外部链接?",
           "NGA @小熊de大熊",

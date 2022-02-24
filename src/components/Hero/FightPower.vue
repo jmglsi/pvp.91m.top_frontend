@@ -5,7 +5,7 @@
         v-model="tabsInfo.model"
         :border="false"
         :ellipsis="false"
-        @change="onTabsChange"
+        @click="onFightPowerTabsClick"
       >
         <van-tab title="我为人人，人人为我">
           <van-field
@@ -97,25 +97,27 @@
           >
             <vxe-table
               ref="refPaiZiOne"
-              :loading="tableData.loading"
               :data="tableData.result.rows"
+              :loading="tableData.loading"
               height="543"
             >
               <vxe-table-column title="#" type="seq" width="50" />
 
               <vxe-table-column type="expand" width="50">
                 <template #content="{ row, rowIndex }">
-                  <img
-                    v-if="row.fightPowerImg"
-                    v-lazy="row.fightPowerImg"
-                    @click="onImagePreviewClick(rowIndex)"
-                    class="hero-fightPower-559b72e1d0f69118d849a535f9000646"
-                  />
-                  <span
-                    v-else
-                    class="hero-fightPower-768607b02a407038d55cbdc241ef8df2"
-                    >没有图片</span
-                  >
+                  <div :style="{ position: 'relative' }">
+                    <img
+                      v-if="row.fightPowerImg"
+                      v-lazy="row.fightPowerImg"
+                      @click="onImagePreviewClick(rowIndex)"
+                      class="hero-fightPower-559b72e1d0f69118d849a535f9000646"
+                    />
+                    <span
+                      v-else
+                      class="hero-fightPower-768607b02a407038d55cbdc241ef8df2"
+                      >没有图片</span
+                    >
+                  </div>
                 </template>
               </vxe-table-column>
 
@@ -344,7 +346,7 @@ export default {
           }
         });
     },
-    onTabsChange: function (e) {
+    onFightPowerTabsClick: function (e) {
       if (e == 1) {
         this.getRanking(this.heroId, 10, 0, 0, this.fightPowerType);
       }

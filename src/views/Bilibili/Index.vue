@@ -22,9 +22,9 @@
     <div class="bilibili-7bf050eec9dadca430cb5b7c7fac4a0d">
       <vxe-table
         ref="refBilibili"
-        :isLoading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
+        :isLoading="tableData.loading"
         @cell-click="onCellClick"
       >
         <vxe-table-column title="id" field="uid" fixed="left" width="150" />
@@ -104,11 +104,11 @@ export default {
         value: this.$route.query.q || "",
       },
       tableData: {
-        searchPlaceholder: "请输入【视频id】，例如:bv12345",
         loading: true,
         result: {
           rows: [],
         },
+        searchPlaceholder: "请输入【视频id】，例如:bv12345",
         total: 200,
         pageSize: 50,
       },

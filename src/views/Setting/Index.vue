@@ -215,6 +215,8 @@ export default {
         this.$appDelectLocalStorage("appConfigInfo");
 
         this.$appDelectAllLocalStorage();
+
+        this.$cookie.delete("agree");
       } else if (e == 2) {
         this.$appDelectLocalStorage("gameBP");
       }

@@ -16,11 +16,9 @@ export default new Router({
     mode: 'history',
     routes: [{
             path: '*',
-            name: '404',
             redirect: '/ranking'
         }, {
             path: '/bp',
-            name: 'bp',
             redirect: '/game/new/bp'
         }, {
             path: '/bilibili',
@@ -104,13 +102,11 @@ export default new Router({
             }
         }, {
             path: '/skin',
-            name: 'skinReturn',
             redirect: '/skin/return',
             component: () =>
                 import ('./views/Return/Index.vue'),
             children: [{
                     path: 'encore',
-                    name: 'skinEncore',
                     redirect: '/skin/return',
                     meta: {
                         title: '趋势',

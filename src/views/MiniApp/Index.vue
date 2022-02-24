@@ -144,12 +144,7 @@
           class="miniapp-53eb3ce1747e8a37d3f912fab5a6f24e"
           @click="
             qrcodeInfo.url
-              ? $appOpenUrl(
-                  '是否打开外部链接?',
-                  null,
-                  { path: qrcodeInfo.url },
-                  0
-                )
+              ? onUrlClick(qrcodeInfo)
               : $message.warning($appMsg.warning[1006])
           "
         />
@@ -234,6 +229,14 @@ export default {
     getQrCode: function (data) {
       this.qrcodeInfo = data;
       this.showInfo.qrcode = true;
+    },
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
   },
 };

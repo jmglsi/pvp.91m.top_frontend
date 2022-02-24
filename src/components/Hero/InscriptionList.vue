@@ -2,8 +2,8 @@
   <div class="hero-inscription app-inscription">
     <vxe-table
       ref="refHeroInscription"
-      :loading="tableData.loading"
       :data="tableData.result.rows"
+      :loading="tableData.loading"
       height="543"
     >
       <vxe-table-column

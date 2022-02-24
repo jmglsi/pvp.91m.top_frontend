@@ -33,7 +33,7 @@ export default {
   props: {
     heroEquipment: {
       type: Object,
-      default: () => {},
+      default: () => ({}),
     },
   },
   computed: {

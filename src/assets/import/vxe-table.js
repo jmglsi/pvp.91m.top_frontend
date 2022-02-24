@@ -10,6 +10,7 @@ import {
     Header,
     Icon,
     Toolbar,
+    Tooltip,
     Table,
 } from 'vxe-table';
 import zhCN from 'vxe-table/lib/locale/lang/zh-CN';
@@ -22,17 +23,19 @@ Vue
     .use(Header)
     .use(Icon)
     .use(Toolbar)
+    .use(Tooltip)
     .use(Table)
 
 VXETable.setup({
     table: {
         align: "center",
-        border: "inner",
-        resizable: true,
         autoResize: true,
-        showOverflow: false,
+        border: "inner",
         highlightCurrentRow: true,
         highlightHoverRow: true,
+        resizable: true,
+        showOverflow: null,
+        stripe: true,
         sortConfig: {
             trigger: 'cell',
         },

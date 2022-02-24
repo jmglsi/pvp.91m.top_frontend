@@ -2,55 +2,71 @@
   <div class="hero-equipmentListOne app-equipmentListOne">
     <vxe-table
       ref="refHeroEquipmentListOne"
-      :loading="tableData.loading"
       :data="tableData.result.rows"
+      :loading="tableData.loading"
       @cell-click="onCellClick"
       height="543"
     >
-      <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
-        <template #default="{ row }">
-          <img
-            v-lazy="
-              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-              row.heroId +
-              '/' +
-              row.heroId +
-              '.jpg'
-            "
-            width="25"
-            height="25"
-            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-          />
-        </template>
-      </vxe-table-column>
-
-      <vxe-table-column
-        title="装备"
-        field="equipmentId"
+      <vxe-table-colgroup
+        title="备战"
         fixed="left"
-        width="50"
+        :title-help="{ content: $appMsg.tips[1001] }"
       >
-        <template #default="{ row }">
-          <img
-            v-lazy="
-              '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-              row.equipmentId +
-              '.png'
-            "
-            width="25"
-            height="25"
-            class="hero-785aadb8cf1105bafaef41fd3e44a292"
-          />
-        </template>
-      </vxe-table-column>
+        <vxe-table-column title="英雄" field="heroId" width="50">
+          <template #default="{ row }">
+            <div :style="{ position: 'relative' }">
+              <img
+                v-lazy="
+                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                  row.heroId +
+                  '/' +
+                  row.heroId +
+                  '.jpg'
+                "
+                width="25"
+                height="25"
+                class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+              />
+            </div>
+          </template>
+        </vxe-table-column>
+
+        <vxe-table-column title="装备" field="equipmentId" width="50">
+          <template #default="{ row }">
+            <div :style="{ position: 'relative' }">
+              <img
+                v-lazy="
+                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  row.equipmentId +
+                  '.png'
+                "
+                width="25"
+                height="25"
+                class="hero-785aadb8cf1105bafaef41fd3e44a292"
+              />
+            </div>
+          </template>
+        </vxe-table-column>
+      </vxe-table-colgroup>
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-colgroup title="全部 (%)">
+      <vxe-table-column
+        title="顺位"
+        field="maxIndex"
+        :title-help="{ content: $appMsg.tips[1012] }"
+        :width="listWidth"
+        sortable
+      />
+
+      <vxe-table-colgroup
+        title="全部 (%)"
+        :title-help="{ content: $appMsg.tips[1002] }"
+      >
         <vxe-table-column
           title="出场"
           field="allPickRate"
-          :filters="[{ data: 1, checked: true }]"
+          :filters="[{ data: 2.5, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -220,12 +236,11 @@
         <span class="app-e4c9479b11955648dad558fe717a4eb2">
           1.格子出场不高但是胜率接近 100%
           可能是因为样本较少、针对出、还没出完就结束的
-          <br />2.全部出场 > 100% 是因为买了多件,例如:双无尽蒙犽
+          <br />2.全部出场 > 100% 是因为买了多件，例如：双无尽蒙犽
           <br />3.核心装在前面可能是因为先买的小件后面合的
           <br />4.保命装在前面可能是因为最后卖了前几件换的
-          <br />5.大小件胜率不一样说明合成也需要时间呀
-          <br />6.少数傻逼最后会卖装备甚至买其他职业的
-          <br />7.格子上的装备不等于必出顺序,请结合 占比、胜率、 体感 来看
+          <br />5.少数傻逼最后会卖掉，甚至买其他职业的装备
+          <br />6.请结合 顺位、占比、胜率、自身体感 来看
         </span>
       </div>
     </van-action-sheet>
@@ -294,7 +309,7 @@ export default {
     };
   },
   created() {
-    this.listWidth = this.$appInitTableWidth(750);
+    this.listWidth = this.$appInitTableWidth(1450);
   },
   methods: {
     getRanking: function (aid = 6, bid = 1, cid = 0, did = 0, id = 111) {

@@ -16,7 +16,7 @@
               width="35"
               height="35"
               class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-              @click="onRightClick($appConfigInfo.appInfo.search)"
+              @click="onUrlClick($appConfigInfo.appInfo.search)"
             />
           </template>
         </van-search>
@@ -30,7 +30,7 @@
         :border="false"
         :ellipsis="false"
         :swipeable="true"
-        @change="$appPush({ query: { type: tabsInfo.model } })"
+        @click="$appPush({ query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
@@ -130,57 +130,19 @@ export default {
           });
       }
     },
-    onRightClick: function (data) {
-      if (data.to) {
-        this.$appOpenUrl(
-          "是否打开内部链接?",
-          "网络交友须谨慎，涉及金钱莫轻信",
-          { path: data.to },
-          1
-        );
-      }
-
-      if (data.url) {
-        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
-      }
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        data.to ? "网络交友须谨慎，涉及金钱莫轻信" : null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
   },
 };
 </script>
 
 <style lang="less">
-.update-tyf {
-  color: purple;
-}
-
-.update-zsf {
-  color: rgb(222, 177, 81);
-}
-
-.update-xyx {
-  color: rgb(35, 124, 123);
-}
-
-.update-pb {
-  color: black;
-}
-
-.update-cz {
-  color: red;
-}
-
-.update-fx {
-  color: orange;
-}
-
-.update-xpf {
-  color: green;
-}
-
-.update-fc {
-  color: blue;
-}
-
 img.home-3c873293a7dc1ea8c20579f6a7ae94a9 {
   border-radius: unset;
   height: 100%;

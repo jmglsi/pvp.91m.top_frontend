@@ -3,9 +3,9 @@
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
       <vxe-table
         ref="refZhuangBei"
-        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
+        :loading="tableData.loading"
         @cell-click="onCellClick"
       >
         <vxe-table-column
@@ -26,6 +26,7 @@
         >
           <template #default="{ row }">
             <div
+              :style="{ position: 'relative' }"
               :class="
                 isSmallMode ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
@@ -59,10 +60,19 @@
           sortable
         />
 
-        <vxe-table-colgroup title="英雄">
+        <vxe-table-colgroup
+          title="英雄"
+          :title-help="{ content: $appMsg.tips[1008] }"
+        >
           <vxe-table-column
             title="数量"
             field="heroNum"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-table-column
+            title="顺位"
+            field="maxIndex"
             :width="listWidth"
             sortable
           />

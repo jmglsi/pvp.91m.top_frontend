@@ -2,8 +2,8 @@
   <div class="hero-equipmentListAll app-equipmentListAll">
     <vxe-table
       ref="refHeroEquipmentListAll"
-      :loading="tableData.loading"
       :data="tableData.result.rows"
+      :loading="tableData.loading"
       height="543"
     >
       <vxe-table-column
@@ -14,18 +14,25 @@
         sortable
       >
         <template #default="{ row }">
-          <img
-            v-lazy="'//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'"
-            width="25"
-            height="25"
-            class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
-          />
+          <div :style="{ position: 'relative' }">
+            <img
+              v-lazy="
+                '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
+              "
+              width="25"
+              height="25"
+              class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
+            />
+          </div>
         </template>
       </vxe-table-column>
 
       <vxe-table-column title="#" type="seq" width="50" />
 
-      <vxe-table-colgroup title="最终结果，空的就是没出">
+      <vxe-table-colgroup
+        title="最终结果，空的就是没出"
+        :title-help="{ content: $appMsg.tips[1000] }"
+      >
         <vxe-table-column
           v-for="(data, index) in 6"
           :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
@@ -35,17 +42,19 @@
           sortable
         >
           <template #default="{ row }">
-            <img
-              v-if="row.list[index] > 0"
-              v-lazy="
-                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                row.list[index] +
-                '.png'
-              "
-              width="25"
-              height="25"
-              class="hero-88473b8c633f40889fe2a0affd773691"
-            />
+            <div :style="{ position: 'relative' }">
+              <img
+                v-if="row.list[index] > 0"
+                v-lazy="
+                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  row.list[index] +
+                  '.png'
+                "
+                width="25"
+                height="25"
+                class="hero-88473b8c633f40889fe2a0affd773691"
+              />
+            </div>
           </template>
         </vxe-table-column>
       </vxe-table-colgroup>
@@ -96,7 +105,7 @@
 
       <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
-          title="净胜"
+          title="胜方"
           field="mvpRate"
           :width="listWidth"
           sortable

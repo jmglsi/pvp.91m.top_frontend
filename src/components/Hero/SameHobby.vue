@@ -50,6 +50,17 @@
       >
         <van-button
           round
+          icon="replay"
+          color="#000000"
+          size="mini"
+          class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
+          @click="getHeroInfoByWebAccountList(heroId, 1)"
+        >
+          刷新一下
+        </van-button>
+        &nbsp;
+        <van-button
+          round
           icon="question-o"
           color="red"
           size="mini"
@@ -62,17 +73,6 @@
           "
         >
           国服认证
-        </van-button>
-        &nbsp;
-        <van-button
-          round
-          icon="replay"
-          color="#000000"
-          size="mini"
-          class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
-          @click="getHeroInfoByWebAccountList(heroId, 1)"
-        >
-          刷新一下
         </van-button>
       </div>
     </div>

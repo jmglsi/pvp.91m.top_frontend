@@ -3,12 +3,18 @@
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-table
         ref="refNeiZhan"
-        :loading="tableData.loading"
         :data="tableData.result.rows"
         :height="clientHeight"
+        :loading="tableData.loading"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
+        <vxe-table-column
+          title="玩家"
+          field="userId"
+          fixed="left"
+          width="75"
+          :title-help="{ content: $appMsg.tips[1006] }"
+        >
           <template #default="{ row, rowIndex }">
             <van-tag
               v-if="row.tag"
@@ -16,8 +22,10 @@
               mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.tag.text }}</van-tag
             >
+              {{ row.tag.text }}
+            </van-tag>
+
             <div
               :style="{ position: 'relative' }"
               :class="
@@ -51,13 +59,13 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="内战分 (bo1)"
+          title="内战分"
           field="rankScore_bo1"
           :width="listWidth"
           sortable
         >
           <template #default="{ row }">
-            <div>
+            <div :style="{ position: 'relative' }">
               <div class="app-52b0e5c90604d59d1814f184d58e2033">
                 {{ row.rankScore_bo1 }}
               </div>
@@ -75,7 +83,7 @@
 
         <vxe-column title="状态" field="status" :width="listWidth" sortable>
           <template #default="{ row }">
-            <div>
+            <div :style="{ position: 'relative' }">
               <div v-if="row.status == 0">空闲</div>
               <div v-else-if="row.status == 1" style="color: blue">队列中</div>
               <div v-else-if="row.status == 2" style="color: red">对局中</div>
@@ -165,9 +173,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: false,
+      immediate: true,
       handler(newValue) {
-        if (this.$cookie.get("agree") == 1 && newValue.refresh == 1) {
+        let agree = this.$cookie.get("agree");
+
+        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(12, newValue.bid, newValue.cid, 0);
         }
       },
@@ -209,9 +219,11 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
 
-    if (this.$cookie.get("agree") == 1) {
-      this.getRanking(12, this.bid, this.cid, 0);
-    }
+    /*
+      if (this.$cookie.get("agree") == 1) {
+        this.getRanking(12, this.bid, this.cid, 0);
+      }
+    */
 
     if (this.gameLabel) {
       this.getCivilwarMatchInfo(this.gameLabel);

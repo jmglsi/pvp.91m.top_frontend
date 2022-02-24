@@ -221,23 +221,7 @@ export default {
             message: tipsInfo.title,
             description: tipsInfo.description,
             onClick: () => {
-              if (tipsInfo.to) {
-                this.$appOpenUrl(
-                  "是否打开内部链接?",
-                  null,
-                  { path: tipsInfo.to },
-                  1
-                );
-              }
-
-              if (tipsInfo.url) {
-                this.$appOpenUrl(
-                  "是否打开外部链接?",
-                  null,
-                  { path: tipsInfo.url },
-                  0
-                );
-              }
+              this.onUrlClick(tipsInfo);
             },
           });
         }
@@ -266,6 +250,14 @@ export default {
         }
       });
     },
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
+    },
   },
 };
 </script>
@@ -289,12 +281,28 @@ export default {
   color: orange;
 }
 
+.app-9f27410725ab8cc8854a2769c7a516b8 {
+  color: green;
+}
+
 .app-48d6215903dff56238e52e8891380c8f {
   color: blue;
 }
 
-.app-9f27410725ab8cc8854a2769c7a516b8 {
-  color: green;
+.app-fdc229c08af23dac1a0e8caac88a239d {
+  color: purple;
+}
+
+.app-d7a506baa20bdbe9daaa1366348175a9 {
+  color: rgb(222, 177, 81);
+}
+
+.app-53f544c1e6fce0feac70340d481ad2ed {
+  color: rgb(35, 124, 123);
+}
+
+.app-8a900759792c14b84891392b9f0e360d {
+  color: black;
 }
 
 .app-5f19eaf71f40d74d66be84db52b3ad87 {
@@ -454,7 +462,8 @@ div.ant-popover-title {
 }
 
 div.ant-message,
-div.ant-notification {
+div.ant-notification,
+div.vxe-table--tooltip-wrapper {
   z-index: 99999999 !important;
 }
 
@@ -469,15 +478,6 @@ div.vxe-table--empty-content {
 
 div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
   padding: 6px 0;
-}
-
-div.vxe-toolbar,
-div.van-search,
-div.van-cell,
-div.van-cell-group,
-div.van-grid-item__content,
-div.van-collapse-item__content {
-  background-color: transparent !important;
 }
 
 div.app-home {
@@ -629,14 +629,26 @@ div.van-tabbar-item__text {
 }
 
 div.app-f3b57b63e4f5f4e157fd45bdb8611005 {
-  div.van-dropdown-item {
-    margin-bottom: 10px;
-  }
-
   div.van-dropdown-menu__bar {
     border-radius: 50px;
     width: 125px;
   }
+}
+
+div.app-8f06e89ca90bebf60c91699c473f4022 {
+  div.van-dropdown-item {
+    margin: 0 10px;
+
+    div.van-cell {
+      background-color: #fafafa !important;
+    }
+  }
+}
+
+div.app-71c40c24a80f0a5cda72f93d3af1d904 {
+  height: 533px;
+  margin-top: 10px;
+  overflow: auto;
 }
 
 div.app-61046f2f5eefe3dc179e52af32241062 {
