@@ -416,15 +416,15 @@ export default {
             row.hero_1.name +
             " 和 " +
             row.hero_2.name +
-            "\r-\r队友 时 一起 的胜率:" +
+            "\n-\n队友 时 一起 的胜率:" +
             row.teammateWinRate +
-            "%\r对手 时 " +
+            "%\n对手 时 " +
             row.hero_1.name +
             " 的胜率:" +
             row.opponentWinRate +
-            "%\r适配:" +
+            "%\n适配:" +
             row.adaptation +
-            "\r-\r更多英雄关系 ↓\r" +
+            "\n-\n" +
             shortUrl;
 
           this.$appCopyData(this.copyData);

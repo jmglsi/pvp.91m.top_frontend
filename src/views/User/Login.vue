@@ -63,7 +63,7 @@
     <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
       <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
         我已经阅读并同意
-        <a href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
+        <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
           《隐私和数据声明》
         </a>
       </a-checkbox>

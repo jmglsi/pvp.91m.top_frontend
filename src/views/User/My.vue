@@ -190,7 +190,7 @@
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
             icon="/img/app-icons/hero_black.png"
-            title="喜欢列表"
+            title="关注列表"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             name="1"
@@ -557,7 +557,7 @@ export default {
         friendsType: 1,
         rank: {
           starType: 1,
-          starIcon: "//camp.qq.com/battle/profile/roleJob/1.png",
+          starIcon: "//camp.qq.com/battle/profile/roleJobV2/1.png",
           score: 1200,
         },
       },
@@ -573,7 +573,7 @@ export default {
         friendsType: 1,
         rank: {
           starType: 1,
-          starIcon: "//camp.qq.com/battle/profile/roleJob/1.png",
+          starIcon: "//camp.qq.com/battle/profile/roleJobV2/1.png",
           score: 1200,
         },
       },
@@ -698,7 +698,7 @@ export default {
 
         this.newInfo.rank.starType = index;
         this.newInfo.rank.starIcon =
-          "//camp.qq.com/battle/profile/roleJob/" + starIndex + ".png";
+          "//camp.qq.com/battle/profile/roleJobV2/" + starIndex + ".png";
       }
 
       this.showInfo.pickerMenu = false;
@@ -779,7 +779,7 @@ div.my-7dc22b2c6a992f0232345df41303f5ea {
   text-align: @app-text-align;
 
   span.my-4646fa4296a7f5dea261e60e00ecd24b {
-    font-size: @app-font-size + 10px;
+    font-size: 20px;
   }
 }
 

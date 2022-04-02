@@ -373,7 +373,7 @@ export default {
       let date = new Date(row.calendar.day);
 
       this.copyData =
-        "[quote]\r[size=110%][b][url=" +
+        "[quote]\n[size=110%][b][url=" +
         row.url +
         "][color=blue]" +
         date.getFullYear() +
@@ -381,7 +381,7 @@ export default {
         (date.getMonth() + 1) +
         "月" +
         date.getDate() +
-        "日[/color][/url][/b][/size]\r======\rNGA英雄调整模板\r[/quote]";
+        "日[/color][/url][/b][/size]\n======\nNGA英雄调整模板\n[/quote]";
 
       this.$appCopyData(this.copyData);
     },

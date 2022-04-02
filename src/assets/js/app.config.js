@@ -18,6 +18,7 @@ Vue.prototype.$appConfigInfo = {
         isReductionMode: false,
         openUrl: true,
         newsPush: true,
+        wow: true,
         pwa: 0,
         link: [],
         name: "苏苏的荣耀助手",
@@ -91,10 +92,12 @@ Vue.prototype.$appColumnsInfo = {
         "浙江省",
     ],
     starType: {
-        value: [1, 0, 16, 22, 20, 18, 17, 4, 1],
+        value: [1, 102, 0, 101, 16, 22, 20, 19, 17, 4, 1],
         text: [
             "请选择段位",
+            "传奇王者",
             "荣耀王者",
+            "无双王者",
             "最强王者",
             "至尊星耀",
             "永恒钻石",
@@ -165,6 +168,31 @@ Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }
     }
 
     this.$router.push(nowUrl);
+}
+
+Vue.prototype.$appFloatToTime = function(float) {
+    let arr = float.toFixed(2).split("."),
+        arr_1 = "0",
+        num_1 = "0",
+        arr_2 = "0",
+        num_2 = "0";
+
+    arr_1 = arr[0];
+    arr_2 = arr[1];
+
+    if (parseInt(arr_1) < 10) {
+        num_1 = "0" + arr_1;
+    } else {
+        num_1 = arr_1;
+    }
+
+    num_2 = ((arr_2 / 100) * 60).toFixed(0);
+
+    if (parseInt(num_2) < 10) {
+        num_2 = "0" + num_2;
+    }
+
+    return num_1 + ":" + num_2;
 }
 
 Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' }, urlType = 0) {

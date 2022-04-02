@@ -66,16 +66,6 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="公告推送" label="群内将自动推送最新公告">
-          <template #right-icon>
-            <span class="setting-a833c0959e80ada90f239fb707903be2">
-              <van-switch
-                v-model="$appConfigInfo.appInfo.newsPush"
-                :disabled="true"
-              />
-            </span>
-          </template>
-        </van-cell>
       </van-cell-group>
 
       <van-cell-group
@@ -91,6 +81,33 @@
           is-link
           @click="onDelectClick(index)"
         />
+      </van-cell-group>
+
+      <van-cell-group
+        :border="false"
+        title="群内"
+        class="setting-ea4d5993952f38933e7cced73b900ad7"
+      >
+        <van-cell title="王者公告" label="推送最新的公告信息">
+          <template #right-icon>
+            <span class="setting-a833c0959e80ada90f239fb707903be2">
+              <van-switch
+                v-model="$appConfigInfo.appInfo.newsPush"
+                :disabled="true"
+              />
+            </span>
+          </template>
+        </van-cell>
+        <van-cell title="环比变化" label="推送变化较大的英雄">
+          <template #right-icon>
+            <span class="setting-a833c0959e80ada90f239fb707903be2">
+              <van-switch
+                v-model="$appConfigInfo.appInfo.wow"
+                :disabled="true"
+              />
+            </span>
+          </template>
+        </van-cell>
       </van-cell-group>
 
       <van-cell-group
@@ -151,6 +168,7 @@ export default {
           isReductionMode: false,
           openUrl: true,
           newsPush: true,
+          wow: true,
         },
       },
       cacheInfo: [

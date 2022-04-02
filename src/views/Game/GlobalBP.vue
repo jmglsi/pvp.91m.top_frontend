@@ -1160,7 +1160,7 @@ export default {
             vs +
             "】的第 " +
             (tabsModel + 1) +
-            " 局比赛 ↓\r" +
+            " 局比赛 ↓\n-\n" +
             shortUrl;
 
           this.$appCopyData(this.copyData);
@@ -1490,7 +1490,7 @@ export default {
       this.$dialog
         .confirm({
           title: "是否重置排序?此操作不可逆!",
-          message: "保存在本地的排序将被清除\r有新英雄的时候可能需要",
+          message: "保存在本地的排序将被清除\n有新英雄的时候可能需要",
         })
         .then(() => {
           //on confirm
@@ -1694,7 +1694,7 @@ span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
 }
 
 span.game-45949fe72cfc70cc6a7bd3870cabc397 {
-  font-size: 10px;
+  font-size: @app-font-size;
   color: red;
 }
 

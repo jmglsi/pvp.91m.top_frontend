@@ -21,7 +21,9 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>非禁必选 <van-icon name="question-o" /></span>
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  非禁必选 <van-icon name="question-o" />
+                </span>
                 <template slot="content">
                   <span>
                     在极高的禁选率和胜率加持下，有着版本最顶尖的强度，熟练后可直接无脑选用
@@ -85,7 +87,9 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>T0 之下 <van-icon name="question-o" /></span>
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  T0 之下 <van-icon name="question-o" />
+                </span>
                 <template slot="content">
                   <span>
                     介于 T0 和 T1
@@ -153,7 +157,9 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>强势英雄 <van-icon name="question-o" /></span>
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  强势英雄 <van-icon name="question-o" />
+                </span>
                 <template slot="content">
                   <span>
                     是队伍的中坚力量，具有左右胜利的实力，一般需要依阵容搭配使用
@@ -220,7 +226,9 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>体系英雄 <van-icon name="question-o" /></span>
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  体系英雄 <van-icon name="question-o" />
+                </span>
                 <template slot="content">
                   <span>
                     能在自己的领域内表现卓越，在某些战局中起到主导团队的作用
@@ -283,7 +291,9 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>奇兵英雄 <van-icon name="question-o" /></span>
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  奇兵英雄 <van-icon name="question-o" />
+                </span>
                 <template slot="content">
                   <span>
                     有明显的克制关系，优缺点明显，能够在特定的阵容中表现突出
@@ -346,7 +356,9 @@
               "
             >
               <a-popover placement="bottomRight" trigger="click">
-                <span>弱势英雄 <van-icon name="question-o" /></span>
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  弱势英雄 <van-icon name="question-o" />
+                </span>
                 <template slot="content">
                   <span>不是绝活哥，不建议上手</span>
                 </template>

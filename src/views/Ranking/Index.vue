@@ -14,12 +14,10 @@
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
               <span>顶端巅峰赛&nbsp;</span>
-
               <a-tooltip :visible="showInfo.dfsTips" placement="bottomRight">
                 <template slot="title">
                   <span>筛选移到这了</span>
                 </template>
-
                 <i class="vxe-icon--funnel" />
               </a-tooltip>
             </div>
@@ -91,7 +89,6 @@
                     </a-radio-group>
                   </div>
                 </template>
-
                 <div
                   class="
                     ranking-1fc99c22c900d9d31cb0ad2434ed4464
@@ -136,7 +133,6 @@
                 <template slot="title">
                   <span>大佬们在玩什么</span>
                 </template>
-
                 <i class="vxe-icon--funnel" />
               </a-tooltip>
             </div>
@@ -638,7 +634,7 @@ span.ranking-4da12add5b0c1920dcde6c5627d30422 {
 }
 
 span.ranking-7de1b8678bf87a631bd5f2c2b70a1214 {
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
   margin-top: 25px;
   position: absolute;
 }
@@ -665,7 +661,7 @@ td.vxe-body--column {
   padding: 12px 0;
 
   div.vxe-cell {
-    font-size: @app-font-size + 5px;
+    font-size: 15px;
   }
 }
 
@@ -716,11 +712,11 @@ div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
 }
 
 div.ranking-8747b0956746ca03e56e59d7312efcb1 {
-  height: 150px;
+  height: 587px;
 }
 
 div.ranking-561f33b3e8f36a8c9cdf1a5a3b099497 {
-  font-size: 10px;
+  font-size: @app-font-size;
   margin-top: 3px;
   position: absolute;
   width: 100%;
@@ -750,7 +746,7 @@ div.ranking-420e569f7ae439ae256513412631f2f4 {
 }
 
 div.ranking-a6c2fcca8d40c28ed46b93c2c629f0ae {
-  font-size: 13px;
+  font-size: @app-font-size + 3px;
 }
 
 div.ranking-8d583d7c052e343e6817b99812fa03b6 {

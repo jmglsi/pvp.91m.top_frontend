@@ -1,6 +1,8 @@
 import Vue from 'vue';
 
 import {
+    Avatar,
+    Card,
     Checkbox,
     Dropdown,
     Menu,
@@ -9,11 +11,14 @@ import {
     Message,
     Notification,
     Input,
+    Icon,
     Timeline,
     Popover
 } from 'ant-design-vue';
 
 Vue
+    .use(Avatar)
+    .use(Card)
     .use(Checkbox)
     .use(Dropdown)
     .use(Menu)
@@ -22,6 +27,7 @@ Vue
     .use(Message)
     .use(Notification)
     .use(Input)
+    .use(Icon)
     .use(Timeline)
     .use(Popover)
 

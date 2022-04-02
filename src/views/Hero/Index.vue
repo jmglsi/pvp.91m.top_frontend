@@ -25,6 +25,12 @@ img.hero-ff2364a0be3d20e46cc69efb36afe9a5 {
   margin: 0 3px;
 }
 
+i.hero-equipment-8b812bcd24d7f0b29c950eebfa4876f6 {
+  img.van-icon__image {
+    border-radius: 100%;
+  }
+}
+
 span.hero-d5d3db1765287eef77d7927cc956f50a {
   margin: 0 5px;
 }

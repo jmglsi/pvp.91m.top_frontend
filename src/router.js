@@ -138,6 +138,15 @@ export default new Router({
                         title: '英雄',
                         keepAlive: true
                     }
+                }, {
+                    path: ':id/equipment',
+                    name: 'heroEquipment',
+                    component: () =>
+                        import ('./views/Hero/Equipment.vue'),
+                    meta: {
+                        title: '备战',
+                        keepAlive: true
+                    }
                 },
                 {
                     path: ':id/replay',

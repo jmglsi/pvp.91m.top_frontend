@@ -216,7 +216,7 @@ export default {
         .then((res) => {
           let shortUrl = res.data.data.url;
 
-          this.copyData = this.replay.title + " 的对局回顾 ↓\r" + shortUrl;
+          this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
 
           this.$appCopyData(this.copyData);
         });

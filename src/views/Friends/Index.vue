@@ -86,7 +86,7 @@
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
             icon="/img/app-icons/hero_black.png"
-            title="喜欢列表"
+            title="关注列表"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             name="1"
@@ -190,7 +190,7 @@ export default {
         areaType: 1,
         rank: {
           starType: 7,
-          starIcon: "//camp.qq.com/battle/profile/roleJob/1.png",
+          starIcon: "//camp.qq.com/battle/profile/roleJobV2/1.png",
           score: 1200,
         },
       },
@@ -233,7 +233,7 @@ export default {
         });
     },
     onFriendsCopy: function (name, uin) {
-      this.copyData = "用户名:" + name + "\rQQ:" + uin;
+      this.copyData = "用户名:" + name + "\nQQ:" + uin + "\n-\n" + location;
 
       this.$appCopyData(this.copyData);
     },

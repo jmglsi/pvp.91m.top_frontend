@@ -473,7 +473,7 @@ span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
 }
 
 div.return-58206caebd18d792f59aa1ec064f65d1 {
-  font-size: 10px;
+  font-size: @app-font-size;
   left: -28px;
   margin-top: -10px;
   position: absolute;

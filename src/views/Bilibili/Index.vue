@@ -187,21 +187,21 @@ export default {
           this.copyData =
             "id:" +
             row.uid +
-            "\r类型:" +
+            "\n类型:" +
             row.type +
-            "\r开始:" +
+            "\n开始:" +
             row.start_num +
-            "\r目标:" +
+            "\n目标:" +
             row.num +
-            "\r剩余:" +
+            "\n剩余:" +
             row.task_num +
-            "\r更新时间:" +
+            "\n更新时间:" +
             row.update_time +
-            "\r状态:" +
+            "\n状态:" +
             row.is_running +
-            "\r备注:" +
+            "\n备注:" +
             row.bz +
-            "\r-\r" +
+            "\n-\n" +
             shortUrl;
 
           this.$appCopyData(this.copyData);

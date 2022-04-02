@@ -344,10 +344,7 @@
           <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
             <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
               我已经阅读并同意
-              <a
-                href="https://www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH"
-                target="_blank"
-              >
+              <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
                 《隐私和数据声明》
               </a>
             </a-checkbox>
@@ -481,8 +478,9 @@ export default {
       },
       actions: [
         { name: "搜一搜", value: 0 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 1 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 2 },
+        //{ name: "备战中心", subname: "速来整活", value: 1 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -702,6 +700,10 @@ export default {
       }
 
       if (item.value == 1) {
+        this.$appPush({ path: "/hero/" + heroInfo.id + "/equipment" });
+      }
+
+      if (item.value == 2) {
         this.$appOpenUrl(
           "是否查看英雄更新记录?",
           "NGA @EndMP",
@@ -712,7 +714,7 @@ export default {
         );
       }
 
-      if (item.value == 2) {
+      if (item.value == 3) {
         this.$appOpenUrl(
           "是否打开外部链接?",
           "NGA @小熊de大熊",

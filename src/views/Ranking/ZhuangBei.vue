@@ -311,7 +311,7 @@ export default {
         .then((res) => {
           let shortUrl = res.data.data.url;
 
-          this.copyData = row.name + " 的其他信息 ↓\r" + shortUrl;
+          this.copyData = row.name + " 的其他信息 ↓\n-\n" + shortUrl;
 
           this.$appCopyData(this.copyData);
         });

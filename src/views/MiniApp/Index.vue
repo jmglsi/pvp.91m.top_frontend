@@ -52,6 +52,30 @@
       <div class="miniapp-7c8fdd065963838acab323de542586ee">
         <van-cell-group
           :border="false"
+          title="小程序"
+          class="miniapp-b377992f355a56a90c6120fb8559de59"
+        >
+          <van-grid
+            :border="false"
+            :column-num="3"
+            class="miniapp-a713c75193d032a9ea6df8a0665471eb"
+          >
+            <van-grid-item
+              v-for="(data, index) in miniapp.result.c"
+              :key="'miniapp-92eb5ffee6ae2fec3ad71c777531578f-' + index"
+              :icon="data.icon"
+              :text="data.text"
+              :to="data.to"
+              :url="data.url"
+              icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
+            />
+          </van-grid>
+        </van-cell-group>
+      </div>
+
+      <div class="miniapp-7c8fdd065963838acab323de542586ee">
+        <van-cell-group
+          :border="false"
           title="他们都在用"
           class="miniapp-e92a4998df8669fd2f0d92b7f3d41ac5"
         >
@@ -81,30 +105,6 @@
                 </div>
               </div>
             </van-grid-item>
-          </van-grid>
-        </van-cell-group>
-      </div>
-
-      <div class="miniapp-7c8fdd065963838acab323de542586ee">
-        <van-cell-group
-          :border="false"
-          title="小程序"
-          class="miniapp-b377992f355a56a90c6120fb8559de59"
-        >
-          <van-grid
-            :border="false"
-            :column-num="3"
-            class="miniapp-a713c75193d032a9ea6df8a0665471eb"
-          >
-            <van-grid-item
-              v-for="(data, index) in miniapp.result.c"
-              :key="'miniapp-92eb5ffee6ae2fec3ad71c777531578f-' + index"
-              :icon="data.icon"
-              :text="data.text"
-              :to="data.to"
-              :url="data.url"
-              icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
-            />
           </van-grid>
         </van-cell-group>
       </div>
@@ -169,13 +169,10 @@ export default {
     AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
-    $route: function (to) {
-      let q = to.query,
-        cooperationInfo = q.cooperationInfo;
-
-      if (cooperationInfo) {
+    $route: function () {
+      setTimeout(() => {
         this.initQrcode();
-      }
+      }, 1000);
     },
   },
   data() {
@@ -194,33 +191,26 @@ export default {
       },
     };
   },
-  created() {
-    this.initQrcode();
-  },
   mounted() {
     this.getMiniAppInfo();
   },
   methods: {
     initQrcode: function () {
       let q = this.$route.query,
-        cooperationInfo = q.cooperationInfo;
+        index = Number(q.index || -1);
 
-      if (cooperationInfo) {
+      if (index > -1) {
+        this.qrcodeInfo = this.miniapp.result.b[index];
         this.showInfo.qrcode = true;
-        this.qrcodeInfo = JSON.parse(cooperationInfo);
-
-        this.$appPush({ path: "/miniapp" });
       }
     },
     getMiniAppInfo: function () {
       this.$axios.post(this.$appApi.pvp.getMiniAppInfo).then((res) => {
         let data = res.data.data;
+        this.cooperation = data.result.b;
         this.miniapp = data;
 
-        this.cooperation = this.shuffle(data.result.b).slice(0, 9);
-        setInterval(() => {
-          this.cooperation = this.shuffle(data.result.b).slice(0, 9);
-        }, 25000);
+        this.initQrcode();
       });
     },
     shuffle: function (arr) {
@@ -272,7 +262,7 @@ span.miniapp-9ad284a8297802bd67af0356d21ae35f {
 
 div.miniapp-bb351527dd7ab2526a28e42d9e17ddf3 {
   margin-top: 5px;
-  font-size: 12px;
+  font-size: @app-font-size + 2px;
 }
 
 div.miniapp-7c8fdd065963838acab323de542586ee {

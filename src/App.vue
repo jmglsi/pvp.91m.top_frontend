@@ -70,7 +70,7 @@ export default {
       /ranking/i.test(nowPath) ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|game\/(.*?)/i.test(
+      /miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/equipment|hero\/(.*?)\/replay|game\/(.*?)/i.test(
         nowPath
       )
         ? (tabbar = false)
@@ -193,6 +193,7 @@ export default {
             Boolean(appConfigInfo.appInfo.isReductionMode) || false,
           openUrl: Boolean(appConfigInfo.appInfo.openUrl) || false,
           newsPush: Boolean(appConfigInfo.appInfo.newsPush) || true,
+          wow: Boolean(appConfigInfo.appInfo.wow) || true,
           pwa: appConfigInfo.appInfo.pwa || 0,
           link: appInfo.link || [],
           name: appInfo.name || "苏苏的荣耀助手",
@@ -450,7 +451,7 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
 
 span.app-b0704b59dbf144bfeffb53bdb11d7128 {
   position: absolute;
-  font-size: 10px;
+  font-size: @app-font-size;
   left: 0;
   margin-left: 15px;
   margin-top: -8px;

@@ -24,11 +24,11 @@
                 @oversize="onOversize"
               >
                 <div class="hero-fightPower-4b2011a6e3693d22750506daa83636c2">
-                  <van-button round size="small" type="info"
-                    >上传&nbsp;{{
+                  <van-button round size="small" type="info">
+                    上传&nbsp;{{
                       $appColumnsInfo.fightPowerType.text[fightPowerType]
-                    }}&nbsp;图片</van-button
-                  >
+                    }}&nbsp;图片
+                  </van-button>
                 </div>
               </van-uploader>
             </template>
