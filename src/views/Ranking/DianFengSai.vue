@@ -397,6 +397,13 @@
       </van-action-sheet>
     </div>
 
+    <div
+      v-show="showInfo.heroSameHobby"
+      class="ranking-d742492b2526d57a222af9b54040b3b4"
+    >
+      <HeroSameHobby :heroId="tableDataRow.id" />
+    </div>
+
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroMenu"
@@ -404,6 +411,8 @@
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
+        @open="onActionOpen"
+        @close="onActionClose"
         safe-area-inset-bottom
       />
     </div>
@@ -420,6 +429,7 @@ export default {
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
     //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
   },
   props: {
     isSmallMode: {
@@ -477,8 +487,8 @@ export default {
         name: "加载中...",
       },
       actions: [
-        { name: "搜一搜", value: 0 },
-        //{ name: "备战中心", subname: "速来整活", value: 1 },
+        { name: "趋势", subname: "左下角喜欢一下", value: 0 },
+        { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
         { name: "更新记录", subname: "NGA @EndMP", value: 2 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
@@ -488,6 +498,7 @@ export default {
         checked: false,
         skillMenu: false,
         heroMenu: false,
+        heroSameHobby: false,
       },
       cellInfo: {
         index: 0,
@@ -689,19 +700,33 @@ export default {
         this.$message.info(tipsText);
       }
     },
+    onActionOpen: function () {
+      this.showInfo.heroSameHobby = true;
+    },
+    onActionClose: function () {
+      this.showInfo.heroSameHobby = false;
+    },
     onActionSheetSelect: function (item) {
       let heroInfo = this.tableDataRow;
 
       if (item.value == 0) {
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/info",
+        });
+      }
+
+      if (item.value == 1) {
         this.$appPush({
           path: "/search?q=" + heroInfo.name,
           query: { refresh: 1 },
         });
       }
 
-      if (item.value == 1) {
-        this.$appPush({ path: "/hero/" + heroInfo.id + "/equipment" });
-      }
+      /*
+        if (item.value == 1) {
+          this.$appPush({ path: "/hero/" + heroInfo.id + "/equipment" });
+        }
+      */
 
       if (item.value == 2) {
         this.$appOpenUrl(

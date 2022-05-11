@@ -19,10 +19,6 @@ module.exports = {
                         '/setting'
                     ],
                     renderer: new Renderer({
-                        inject: {
-                            foo: 'bar'
-                        },
-                        headless: true,
                         renderAfterDocumentEvent: 'render-event'
                     })
                 })
@@ -121,7 +117,7 @@ module.exports = {
             less: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    hack: 'true; @import "/Users/jmglsi/Web/htdocs/pvp.91m.top/src/assets/less/config.less";'
+                    hack: 'true; @import "' + Path.resolve(__dirname, "./src/assets/less/config.less") + '";'
                 }
             }
         },

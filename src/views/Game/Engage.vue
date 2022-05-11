@@ -8,10 +8,13 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="$appPush({ path: '/my', query: { refresh: 0 } })"
+        @click-right="onNavBarRightClick"
         left-text="返回"
         title="交战"
         class="game-7140a921b48604a7db01e6b676e34174"
-      />
+      >
+        <van-icon name="down" slot="right" />
+      </van-nav-bar>
     </div>
 
     <div
@@ -124,6 +127,18 @@ export default {
             this.$appPush({ path: "/login" });
           }
         });
+    },
+    onNavBarRightClick: function () {
+      this.$axios.post(this.$appApi.game.getGameBPFile).then((res) => {
+        let data = res.data.data,
+          status = res.data.status;
+
+        if (status.code == 200) {
+          this.$appOpenUrl("是否下载对局记录?", null, { path: data.csv }, 0);
+        } else {
+          this.$message.error(status.msg);
+        }
+      });
     },
     onPaginationChange: function (e) {
       this.getGameDashboard(e - 1);

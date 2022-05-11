@@ -30,7 +30,7 @@ if (/127\.0\.0\.1|localhost/i.test(url.host)) {
     baseUrl = "//api.91m.top";
 
     new aegis({
-        id: "mr3jG4N5Gdv9B6Op8V",
+        id: "5GVrzSe8lWdPQ86vmw",
         uin: cookie.get("openId") || "",
         reportApiSpeed: true,
         reportAssetSpeed: true,
@@ -41,7 +41,7 @@ axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(function(config) {
         let data = qs.parse(config.data);
 
-        config.url += "&host=" + (cookie.get("host") || url.host) + "&url=" + encodeURIComponent(url.pathname + url.search) + "&ref=" + (cookie.get("ref") || "");
+        config.url += "&host=" + (cookie.get("host") || url.host) + "&url=" + encodeURIComponent(url.pathname + url.search) + "&ref=" + encodeURIComponent(cookie.get("ref") || "");
 
         if (config.method == "post") {
             const openId = cookie.get("openId");
@@ -105,6 +105,7 @@ const pvp = {
 
 const game = {
     getGameBP: gameApi + "?type=getGameBP",
+    getGameBPFile: gameApi + "?type=getGameBPFile",
     getGameHome: gameApi + "?type=getGameHome",
     getGamePrediction: gameApi + "?type=getGamePrediction"
 }

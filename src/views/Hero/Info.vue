@@ -123,7 +123,7 @@
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
               v-lazy="
-                '//ae04.alicdn.com/kf/H72b4cc1862e64d0a95689fd5c7eb50e7u.png'
+                '//pic.rmb.bdstatic.com/bjh/5cd048b354ce84e2078a0a4d0eb733f5.png'
               "
               width="25"
               height="25"
@@ -140,7 +140,7 @@
 
             <img
               v-lazy="
-                '//ae02.alicdn.com/kf/Hb05bdd7fb7064f9183d0bc29e2373168v.png'
+                '//pic.rmb.bdstatic.com/bjh/de5232e288319d1d8b10cc57fb29858a.png'
               "
               width="25"
               height="25"
@@ -353,7 +353,7 @@
           >
             <img
               v-lazy="
-                '//ae05.alicdn.com/kf/Hb46ca9fc479049fc8adad20b1079d6bdX.png'
+                '//pic.rmb.bdstatic.com/bjh/9c0ca8b80af1f8b6e5bca075e91aee2c.png'
               "
               width="50"
               height="50"
@@ -368,7 +368,7 @@
           >
             <img
               v-lazy="
-                '//ae03.alicdn.com/kf/H9cb5e21cd8e34a5d8d3fff0f4ee04964C.png'
+                '//pic.rmb.bdstatic.com/bjh/8508598e59de00afaa3b1db2c0b46ce7.png'
               "
               width="50"
               height="50"
@@ -410,7 +410,7 @@
           >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
         <van-tabbar-item
-          icon="//ae05.alicdn.com/kf/H6152796593bb4938954de5b92ed276caH.png"
+          icon="//pic.rmb.bdstatic.com/bjh/f945a32ff317bcc82c10e09ecc8f11a8.png"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="
             hero.info.wikiId
@@ -426,7 +426,7 @@
           稷下图书馆
         </van-tabbar-item>
         <van-tabbar-item
-          icon="//ae04.alicdn.com/kf/H12ed60f16a404fc5a6422c0d31a5b8935.png"
+          icon="//pic.rmb.bdstatic.com/bjh/be831fde1fd4d15d0f77e62a93fcbc05.png"
           to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >

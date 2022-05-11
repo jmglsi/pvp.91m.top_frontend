@@ -133,7 +133,7 @@
           class="my-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
-            icon="//ae03.alicdn.com/kf/Hd9966b1aa8c14384bad6db7b98bebab0k.png"
+            icon="//pic.rmb.bdstatic.com/bjh/e5a868b08d2273f0d90940a56026929b.png"
             to="/game/team"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
@@ -148,7 +148,7 @@
             </template>
           </van-grid-item>
           <van-grid-item
-            icon="//ae02.alicdn.com/kf/H66b6f741d54f4ac3a7c083956b3c15eah.png"
+            icon="//pic.rmb.bdstatic.com/bjh/1d29d623b11fc0fcc40131b2765b4213.png"
             to="/game/engage"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-308ffde0dc5bd5718dcf0396fcc2a596"
@@ -158,7 +158,7 @@
                 <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
                   loginInfo.statistics.label
                 }}</span>
-                <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">局</span>
+                <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">场</span>
               </div>
             </template>
           </van-grid-item>

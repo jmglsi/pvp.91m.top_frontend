@@ -334,7 +334,7 @@ export default {
           { text: "QQ (昨日)", value: 1 },
           { text: "WX (昨日)", value: 2 },
           { text: "上分推荐 (昨日)", value: 3 },
-          { text: "全部 (最近 7 天)", value: 4 },
+          { text: "全部 (最近 5 天)", value: 4 },
           { text: "全部 (最近 30 天)", value: 5 },
         ],
       },
@@ -681,6 +681,14 @@ div.ranking-home {
   div.van-dropdown-menu__bar {
     box-shadow: unset;
   }
+}
+
+div.ranking-d742492b2526d57a222af9b54040b3b4 {
+  left: 0;
+  position: absolute;
+  top: 25px;
+  width: 100%;
+  z-index: 1111111;
 }
 
 div.ranking-2862744e5d7cce9d070aa41172557d78 {

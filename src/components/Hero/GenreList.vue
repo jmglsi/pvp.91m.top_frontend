@@ -17,7 +17,7 @@
               <img
                 v-lazy="
                   row.skillId == 0
-                    ? '//ae03.alicdn.com/kf/H79634bb28539419db2dd990a6131404cF.png'
+                    ? '//pic.rmb.bdstatic.com/bjh/4765993d83516be82f000a60d2524f7f.png'
                     : '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
                 "
                 width="25"

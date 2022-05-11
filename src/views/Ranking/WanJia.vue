@@ -100,7 +100,7 @@
                     <img
                       v-if="data.index <= 10"
                       v-lazy="
-                        '//ae05.alicdn.com/kf/H864b4b4f279f47ef94cfcad4aaf88bf7V.png'
+                        '//pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
                       "
                       width="30"
                       height="20"

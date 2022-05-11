@@ -2,7 +2,9 @@
   <div v-if="isPortrait" @click="isPortrait = false" class="game-bp-portrait">
     <div slot-scope class="game-a76e75b5854094183e66c274e1d276e9">
       <img
-        v-lazy="'//ae03.alicdn.com/kf/H18227e8033284a6885ae800ce5f4af71O.png'"
+        v-lazy="
+          '//pic.rmb.bdstatic.com/bjh/9fdf2ee01a51ab2f10f5a757d20edeab.png'
+        "
         width="100"
         height="100"
       />
@@ -71,7 +73,7 @@
               />
               <img
                 v-lazy="
-                  '//ae05.alicdn.com/kf/H177817b6310e4b99ac74142515052ca9k.png'
+                  '//pic.rmb.bdstatic.com/bjh/77ef5bb6c9534d4a1f67e69dfdbb8598.png'
                 "
                 width="20"
                 height="20"
@@ -121,7 +123,7 @@
               />
               <img
                 v-lazy="
-                  '//ae05.alicdn.com/kf/H177817b6310e4b99ac74142515052ca9k.png'
+                  '//pic.rmb.bdstatic.com/bjh/77ef5bb6c9534d4a1f67e69dfdbb8598.png'
                 "
                 width="20"
                 height="20"

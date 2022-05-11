@@ -64,8 +64,8 @@
                         height="15"
                         v-lazy="
                           showInfo.isBig
-                            ? '//inews.gtimg.com/newsapp_ls/0/14644306174/0.jiketuchuang.png'
-                            : '//inews.gtimg.com/newsapp_ls/0/14644314622/0.jiketuchuang.png'
+                            ? '//pic.rmb.bdstatic.com/bjh/e7f2225412920b26a606ea4422b716b8.jpeg'
+                            : '//pic.rmb.bdstatic.com/bjh/1eda7acbe1911284b79f2720b55c6ea9.jpeg'
                         "
                         class="hero-equipment-046bda3addab352133049c67c32859c2"
                       />
@@ -75,7 +75,7 @@
                       width="15"
                       height="15"
                       v-lazy="
-                        '//ae05.alicdn.com/kf/H35bcd01e3b474f2d8c351f0f0c020143P.png'
+                        '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                       "
                       class="hero-equipment-046bda3addab352133049c67c32859c2"
                     />
@@ -89,7 +89,7 @@
                       width="15"
                       height="15"
                       v-lazy="
-                        '//ae05.alicdn.com/kf/Hd6171472d5f5477497204e33bdb827b6H.png'
+                        '//pic.rmb.bdstatic.com/bjh/d110862ec23fb8ba4ec5ac9d393f1e12.png'
                       "
                       class="hero-equipment-046bda3addab352133049c67c32859c2"
                     />
@@ -176,7 +176,7 @@
                     width="17"
                     height="17"
                     v-lazy="
-                      '//ae01.alicdn.com/kf/H4ea87869a0c944c3b3cee48c25d1a6d1T.png'
+                      '//pic.rmb.bdstatic.com/bjh/ca9f38c9f423fc9b63998761bc77080f.png'
                     "
                     class="hero-equipment-464e0def3c0912855013b4af9a3c312e"
                   />
@@ -318,7 +318,7 @@
                             width="12"
                             height="12"
                             v-lazy="
-                              '//ae01.alicdn.com/kf/Hdd7c8c9584934388abbfb48f94631fe5C.png'
+                              '//pic.rmb.bdstatic.com/bjh/c4ac3ff83221540a2244d920bf475f5f.png'
                             "
                           />
                           <template slot="title">
@@ -351,7 +351,7 @@
                                   width="15"
                                   height="15"
                                   v-lazy="
-                                    '//ae05.alicdn.com/kf/H35bcd01e3b474f2d8c351f0f0c020143P.png'
+                                    '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                                   "
                                   class="
                                     hero-equipment-99cb324cd7e789db254f951a8babc0a8
@@ -403,7 +403,7 @@
                           width="12"
                           height="12"
                           v-lazy="
-                            '//ae05.alicdn.com/kf/H35bcd01e3b474f2d8c351f0f0c020143P.png'
+                            '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                           "
                         />
                         <span

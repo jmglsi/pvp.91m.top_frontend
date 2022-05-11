@@ -97,7 +97,7 @@
                   />
                   <img
                     v-lazy="
-                      '//ae03.alicdn.com/kf/H451a86f08ecd432b8d2d486290489d91E.png'
+                      '//pic.rmb.bdstatic.com/bjh/3d0f3f7e4bfe26e10ec191a92d20f34b.png'
                     "
                     width="50"
                     height="50"
