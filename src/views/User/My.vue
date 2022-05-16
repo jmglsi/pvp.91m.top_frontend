@@ -23,8 +23,9 @@
                 my-25930e3036f13852cb0b29694bbab611
                 my-b068931cc450442b63f5b3d276ea4297
               "
-              >{{ loginInfo.name }}</span
             >
+              {{ loginInfo.name }}
+            </span>
             <span
               class="
                 my-25930e3036f13852cb0b29694bbab611
@@ -36,8 +37,9 @@
                 :color="loginInfo.certification.color"
                 class="my-7eaa86d23ffacfb49464ee78252aa43a"
                 @click="$message.info($appMsg.info[1003])"
-                >{{ loginInfo.certification.text }}</van-tag
               >
+                {{ loginInfo.certification.text }}
+              </van-tag>
             </span>
           </div>
         </template>
@@ -78,8 +80,9 @@
                 color="linear-gradient(to right, #4bb0ff, #6149f6)"
                 @click="$appPush({ path: '/login' })"
                 class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-                >{{ login.text }}</van-button
               >
+                {{ login.text }}
+              </van-button>
             </div>
           </template>
         </van-cell>
@@ -105,6 +108,14 @@
         width="100"
         height="100"
         class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+      />
+      <img
+        v-lazy="
+          '//pic.rmb.bdstatic.com/bjh/23e445df5f5a1473f352741e9921b94a.png'
+        "
+        width="25"
+        height="25"
+        class="my-ef65f15f01e7d076cc4ef40d753e4d65"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ loginInfo.description || "这个人很懒，什么都没有留下" }}
@@ -140,9 +151,9 @@
           >
             <template #text>
               <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
-                  loginInfo.statistics.team
-                }}</span>
+                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
+                  {{ loginInfo.statistics.team }}
+                </span>
                 <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
               </div>
             </template>
@@ -155,9 +166,9 @@
           >
             <template #text>
               <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">{{
-                  loginInfo.statistics.label
-                }}</span>
+                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
+                  {{ loginInfo.statistics.label }}
+                </span>
                 <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">场</span>
               </div>
             </template>
@@ -181,9 +192,9 @@
             <span class="my-af99c9298d1eb69981a035d0a15afa20">
               <img v-lazy="loginInfo.rank.starIcon" width="50" height="50" />
               <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="my-7121ba1bc1276c3bb6df96b333a16760">{{
-                loginInfo.rank.score
-              }}</span>
+              <span class="my-7121ba1bc1276c3bb6df96b333a16760">
+                {{ loginInfo.rank.score }}
+              </span>
             </span>
           </template>
         </van-cell>
@@ -293,15 +304,6 @@
         class="my-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell
-          icon="friends-o"
-          title="感谢各位伙伴"
-          value="语雀"
-          is-link
-          @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.friends }, 0)
-          "
-        />
-        <van-cell
           icon="good-job-o"
           title="项目开源介绍"
           value="NGA"
@@ -316,8 +318,24 @@
           "
         />
         <van-cell
+          icon="description"
+          title="项目开放接口"
+          label="需要样本，请联系我"
+          value="Coding"
+          is-link
+          @click="
+            $appOpenUrl(
+              '是否打开外部链接?',
+              null,
+              { path: url.openSource[1] },
+              0
+            )
+          "
+        />
+        <van-cell
           icon="comment-o"
           title="意见建议反馈"
+          label="什么都行，欢迎吐槽"
           value="兔小巢"
           is-link
           @click="
@@ -327,12 +345,21 @@
         <van-cell
           icon="/img/app-icons/coffee.png"
           title="请我喝杯咖啡"
-          label="制作不易，支持一下~"
+          label="制作不易，支持一下"
           value="爱发电"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.afdian }, 0)
+          "
+        />
+        <van-cell
+          icon="friends-o"
+          title="感谢各位伙伴"
+          value="自豪的使用语雀"
+          is-link
+          @click="
+            $appOpenUrl('是否打开外部链接?', null, { path: url.friends }, 0)
           "
         />
       </van-cell-group>
@@ -541,7 +568,10 @@ export default {
         question: "//www.yuque.com/jmglsi/pvp/yyxgbh",
         friends: "//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH",
         support: "//support.qq.com/products/305514",
-        openSource: ["//ngabbs.com/read.php?tid=26200132"],
+        openSource: [
+          "//ngabbs.com/read.php?tid=26200132",
+          "//e9c29a200307a5bb-jmglsi.doc.coding.io/",
+        ],
         afdian: "//afdian.net/@jmglsi",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
@@ -739,6 +769,7 @@ export default {
           //on confirm
           this.isLogin = false;
 
+          this.$cookie.delete("agree");
           this.$cookie.delete("openId");
           this.$cookie.delete("accessToken");
           this.$cookie.delete("tempOpenId");
@@ -753,6 +784,15 @@ export default {
 </script>
 
 <style scoped lang="less">
+img.my-ef65f15f01e7d076cc4ef40d753e4d65 {
+  background-color: white;
+  border-radius: 100%;
+  margin-left: -26px;
+  margin-top: 71px;
+  padding: 1px;
+  position: absolute;
+}
+
 span.my-25930e3036f13852cb0b29694bbab611 {
   margin: 0 3px;
 }

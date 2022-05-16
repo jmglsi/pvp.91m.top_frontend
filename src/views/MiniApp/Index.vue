@@ -115,7 +115,9 @@
       @click="$appPushBack()"
     >
       <img
-        v-lazy="'//pic.rmb.bdstatic.com/bjh/1ab44f38796521f73775569555c2e604.png'"
+        v-lazy="
+          '//pic.rmb.bdstatic.com/bjh/1ab44f38796521f73775569555c2e604.png'
+        "
         width="25"
         height="25"
       />
@@ -151,9 +153,9 @@
 
         <div class="miniapp-aa79b87e9649590354fb9181f371e5bc">
           关注
-          <span class="miniapp-9ad284a8297802bd67af0356d21ae35f">{{
-            qrcodeInfo.text
-          }}</span>
+          <span class="miniapp-9ad284a8297802bd67af0356d21ae35f">
+            {{ qrcodeInfo.text }}
+          </span>
         </div>
       </van-dialog>
     </div>

@@ -16,8 +16,9 @@
               mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.tag.text }}</van-tag
             >
+              {{ row.tag.text }}
+            </van-tag>
 
             <div
               :style="{ position: 'relative' }"
@@ -76,7 +77,7 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="常用英雄"
+          title="常用 | 点击可同步备战 (出装、铭文)"
           field="commonlyUsed"
           width="325"
           align="left"
@@ -96,48 +97,81 @@
                   :key="'ranking-124611e2f7ddd568c28b5cb512b89be0-' + index"
                   class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
                 >
-                  <div :style="{ position: 'relative' }">
-                    <img
-                      v-if="data.index <= 10"
-                      v-lazy="
-                        '//pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
-                      "
-                      width="30"
-                      height="20"
-                      class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
-                    />
-                    <span
-                      v-if="data.index <= 10"
-                      class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
-                      >{{ data.index }}</span
-                    >
-                    <span
-                      :style="
-                        data.fightPower < 10000
-                          ? { marginLeft: '3px' }
-                          : { marginLeft: '-1px' }
-                      "
-                      class="
-                        app-5f19eaf71f40d74d66be84db52b3ad87
-                        ranking-7de1b8678bf87a631bd5f2c2b70a1214
-                      "
-                    >
-                      {{ data.fightPower }}
-                    </span>
-                    <img
-                      v-lazy="
-                        '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                        data.heroId +
-                        '/' +
-                        data.heroId +
-                        '.jpg'
-                      "
-                      width="35"
-                      height="35"
-                      crossorigin="anonymous"
-                      class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
-                    />
-                  </div>
+                  <a-dropdown :trigger="['click']">
+                    <div :style="{ position: 'relative' }">
+                      <img
+                        v-if="data.index <= 10"
+                        v-lazy="
+                          '//pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
+                        "
+                        width="30"
+                        height="20"
+                        class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
+                      />
+                      <span
+                        v-if="data.index <= 10"
+                        class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
+                      >
+                        {{ data.index }}
+                      </span>
+                      <span
+                        :style="
+                          data.fightPower < 10000
+                            ? { marginLeft: '3px' }
+                            : { marginLeft: '-1px' }
+                        "
+                        class="
+                          app-5f19eaf71f40d74d66be84db52b3ad87
+                          ranking-7de1b8678bf87a631bd5f2c2b70a1214
+                        "
+                      >
+                        {{ data.fightPower }}
+                      </span>
+                      <img
+                        v-lazy="
+                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                          data.heroId +
+                          '/' +
+                          data.heroId +
+                          '.jpg'
+                        "
+                        width="35"
+                        height="35"
+                        crossorigin="anonymous"
+                        class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                      />
+                    </div>
+
+                    <template #overlay>
+                      <a-menu>
+                        <a-menu-item
+                          v-for="index in 3"
+                          :key="
+                            'ranking-31d3689c01b543a417ec7571237a436d-' + index
+                          "
+                          @click="getHeroInscription(row, data.heroId, index)"
+                        >
+                          第 {{ index }} 套备战
+                        </a-menu-item>
+                        <a-menu-divider />
+                        <a-menu-item
+                          key="ranking-31d3689c01b543a417ec7571237a436d-4"
+                          @click="
+                            $appPush({
+                              path: '/search',
+                              query: {
+                                q: data.heroId,
+                                show: 'heroSkill',
+                                refresh: 1,
+                              },
+                            })
+                          "
+                        >
+                          国服战力排行
+                        </a-menu-item>
+                      </a-menu>
+                    </template>
+                  </a-dropdown>
                 </li>
               </ul>
 
@@ -325,7 +359,6 @@ export default {
       actions: [
         { name: "对局回顾", value: 0 },
         { name: "查看主页", subname: "需要安装王者营地", value: 1 },
-        { name: "铭文搭配", subname: "需要安装王者营地", value: 2 },
       ],
       clientHeight: 0,
       listWidth: 0,
@@ -426,11 +459,6 @@ export default {
       );
       //转数组、降序
     },
-    getPlayerInfo: function (row) {
-      this.tableDataRow = row;
-
-      this.showInfo.playerMenu = true;
-    },
     getImg: function () {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       this.showInfo.shareImg = true;
@@ -471,6 +499,24 @@ export default {
         this.$message.success(this.$appMsg.success[1006]);
       });
     },
+    getHeroInscription: function (row, heroId, index) {
+      this.$appOpenUrl(
+        "是否查看英雄备战 (出装、铭文)?",
+        null,
+        {
+          path:
+            "https://camp.qq.com/h5/webdist/prepare-war-share/index.html?isNavigationBarHidden=1&showLoading=false&gameRoleId=" +
+            row.roleId +
+            "&shareUserId=" +
+            row.userId +
+            "&heroId=" +
+            heroId +
+            "&indexNum=" +
+            index,
+        },
+        0
+      );
+    },
     downloadImg: function (url) {
       let s = document.createElement("a");
       s.style.display = "none";
@@ -480,10 +526,16 @@ export default {
       s.click();
       document.body.removeChild(s);
     },
-    onCellClick: function ({ row }) {
+    onCellClick: function ({ row, column }) {
       if (row.userId == 0) return;
 
-      this.getPlayerInfo(row);
+      this.tableDataRow = row;
+
+      if (column.property == "commonlyUsed") {
+        this.showInfo.playerMenu = false;
+      } else {
+        this.showInfo.playerMenu = true;
+      }
     },
     onPlayerMenuActionSheetSelect: function (item) {
       let playerInfo = this.tableDataRow;
@@ -502,33 +554,14 @@ export default {
       }
 
       if (item.value == 1) {
-        if (playerInfo.inscriptionUrl) {
-          this.$appOpenUrl(
-            "是否查看玩家主页?",
-            "需要安装王者营地",
-            {
-              path: playerInfo.profileUrl,
-            },
-            0
-          );
-        } else {
-          this.$message.info(this.$appMsg.info[1013]);
-        }
-      }
-
-      if (item.value == 2) {
-        if (playerInfo.inscriptionUrl) {
-          this.$appOpenUrl(
-            "是否查看玩家铭文?",
-            "需要安装王者营地",
-            {
-              path: playerInfo.inscriptionUrl,
-            },
-            0
-          );
-        } else {
-          this.$message.info(this.$appMsg.info[1013]);
-        }
+        this.$appOpenUrl(
+          "是否查看玩家主页?",
+          "需要安装王者营地",
+          {
+            path: playerInfo.profileUrl,
+          },
+          0
+        );
       }
     },
     onHeroListActionSheetSelect: function () {

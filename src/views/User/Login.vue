@@ -85,8 +85,9 @@
             : $message.error($appMsg.error[1007])
         "
         class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
-        >{{ loginInfo.text }}</van-button
       >
+        {{ loginInfo.text }}
+      </van-button>
 
       <div
         v-if="showInfo.checked && loginInfo.type == 1"
@@ -210,9 +211,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$cookie.set("openId", data.openId, { expires: "7D" });
+            this.$cookie.set("openId", data.openId, { expires: "1h" });
             this.$cookie.set("accessToken", data.accessToken, {
-              expires: "7D",
+              expires: "1h",
             });
 
             this.$appDelectAllLocalStorage();

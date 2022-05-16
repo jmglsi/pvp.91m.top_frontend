@@ -43,8 +43,9 @@
           :name="data.name"
           :class="data.isBig ? 'app-0353ac5a7e2d6e9a6a0e652c63b2832a' : null"
           icon-prefix="app-e0c3b278eeb2cab05f548d7af0f2c949"
-          >{{ data.text }}</van-tabbar-item
         >
+          {{ data.text }}
+        </van-tabbar-item>
       </van-tabbar>
     </div>
   </div>
@@ -118,19 +119,19 @@ export default {
           model: "/",
           rows: [
             {
-              icon: "//ae01.alicdn.com/kf/H8f2683de3a13409aa1318e7b3a3e3ca12.png",
+              icon: null,
               to: "/",
               name: "/",
               text: "加载中...",
             },
             {
-              icon: "//ae04.alicdn.com/kf/H12ed60f16a404fc5a6422c0d31a5b8935.png",
+              icon: null,
               to: null,
               name: null,
               text: "加载中...",
             },
             {
-              icon: "//ae02.alicdn.com/kf/H50706569b2914a769c1d3a95cfd641c6T.png",
+              icon: null,
               to: null,
               name: null,
               text: "加载中...",
@@ -229,9 +230,9 @@ export default {
 
         if (!oauthType) {
           if (tempOpenId) {
-            this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
+            this.$cookie.set("tempOpenId", tempOpenId, { expires: "1h" });
             this.$cookie.set("tempAccessToken", tempAccessToken, {
-              expires: "1H",
+              expires: "1h",
             });
           }
 
@@ -239,9 +240,9 @@ export default {
           //临时登录的 1小时
         } else {
           if (tempOpenId) {
-            this.$cookie.set("openId", tempOpenId, { expires: "7D" });
+            this.$cookie.set("openId", tempOpenId, { expires: "1h" });
             this.$cookie.set("accessToken", tempAccessToken, {
-              expires: "7D",
+              expires: "1h",
             });
           }
 
@@ -458,7 +459,8 @@ span.app-b0704b59dbf144bfeffb53bdb11d7128 {
   width: 100%;
 }
 
-div.ant-popover-title {
+div.ant-popover-title,
+ul.ant-dropdown-menu {
   text-align: center;
 }
 

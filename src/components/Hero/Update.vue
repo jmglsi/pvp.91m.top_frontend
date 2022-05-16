@@ -13,9 +13,9 @@
             :span="$appIsMobile ? 15 : 21"
             @click="showInfo.calendar = true"
           >
-            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">{{
-              tableData.result.tips
-            }}</span>
+            <span class="update-6b0325a49e13e1c8adc31a953f4bca63">
+              {{ tableData.result.tips }}
+            </span>
           </van-col>
           <van-col :span="$appIsMobile ? 9 : 3">
             <div
@@ -55,8 +55,9 @@
               "
               round
               class="update-5a0c2e4611419b82b55675d035764007"
-              >{{ data.calendar.day }}</van-tag
             >
+              {{ data.calendar.day }}
+            </van-tag>
 
             <div
               v-if="data.url"
@@ -68,8 +69,9 @@
                 :key="'update-12c9bc92e856bdab7bc932b5d368f97e-' + index"
                 color="black"
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
-                >{{ data }}</van-tag
               >
+                {{ data }}
+              </van-tag>
               <span
                 @click="
                   data.url
@@ -82,8 +84,9 @@
                     : null
                 "
                 class="update-f0af832cbd923851be8557213d95dddc"
-                >&nbsp;🔗&nbsp;{{ data.title }}</span
               >
+                &nbsp;🔗&nbsp;{{ data.title }}
+              </span>
             </div>
 
             <div
@@ -166,8 +169,8 @@
         "
       >
         <template #title>
-          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba"
-            >{{ updateInfo.title }}
+          <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">
+            {{ updateInfo.title }}
           </span>
           &nbsp;
           <span class="update-50d683cbc99c635a03f18ca2fcfbe70b">

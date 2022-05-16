@@ -12,9 +12,9 @@
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
-          <span class="hero-d5d3db1765287eef77d7927cc956f50a">{{
-            replay.title
-          }}</span>
+          <span class="hero-d5d3db1765287eef77d7927cc956f50a">
+            {{ replay.title }}
+          </span>
         </template>
       </van-nav-bar>
     </div>
@@ -44,18 +44,20 @@
                 hero-01cac4e332fec6d6ecd331a00412712d
                 hero-e4d23e841d8e8804190027bce3180fa5
               "
-              >{{ data.status == "success" ? "胜利" : "失败" }}</van-tag
             >
+              {{ data.status == "success" ? "胜利" : "失败" }}
+            </van-tag>
             <van-tag
               v-if="!replay.teammate"
               round
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
-              >{{ data.equipment.allMoney }}</van-tag
             >
-            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">{{
-              data.gamePlayerName
-            }}</span>
+              {{ data.equipment.allMoney }}
+            </van-tag>
+            <span class="hero-12d045cdd2c0b9b6bf64ab787d773ae6">
+              {{ data.gamePlayerName }}
+            </span>
           </div>
 
           <div
@@ -105,19 +107,60 @@
               round
               disabled
               color="black"
-              size="mini"
+              size="medium"
               class="hero-ce50a09343724eb82df11390e2c1de18"
-              >{{ data.heroKda }}</van-tag
             >
+              {{ data.heroKda }}
+            </van-tag>
+            &nbsp;
+            <a-dropdown v-if="!replay.teammate" :trigger="['click']">
+              <van-tag
+                round
+                color="red"
+                size="medium"
+                class="hero-ce50a09343724eb82df11390e2c1de18"
+              >
+                备战
+              </van-tag>
+
+              <template #overlay>
+                <a-menu>
+                  <a-menu-item
+                    v-for="index in 3"
+                    :key="'ranking-31d3689c01b543a417ec7571237a436d-' + index"
+                    @click="getHeroInscription(data, data.heroId, index)"
+                  >
+                    第 {{ index }} 套备战
+                  </a-menu-item>
+                  <a-menu-divider />
+                  <a-menu-item
+                    key="ranking-31d3689c01b543a417ec7571237a436d-4"
+                    @click="
+                      $appPush({
+                        path: '/search',
+                        query: {
+                          q: data.heroId,
+                          show: 'heroSkill',
+                          refresh: 1,
+                        },
+                      })
+                    "
+                  >
+                    国服战力排行
+                  </a-menu-item>
+                </a-menu>
+              </template>
+            </a-dropdown>
             &nbsp;
             <van-tag
               round
               type="primary"
-              size="mini"
+              size="medium"
               class="hero-ce50a09343724eb82df11390e2c1de18"
               @click="getGameInfo(data)"
-              >对局</van-tag
             >
+              对局
+            </van-tag>
           </div>
         </van-collapse-item>
       </van-collapse>
@@ -170,9 +213,9 @@ export default {
       },
       actions: [
         { name: "复制链接", value: 0 },
-        { name: "详情", subname: "需要安装王者营地", value: 1 },
-        { name: "回顾", subname: "需要安装王者营地", value: 2 },
-        { name: "铭文", subname: "需要安装王者营地", value: 3 },
+        { name: "回顾", value: 1 },
+        { name: "详情", subname: "需要安装王者营地", value: 2 },
+        //{ name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
       replay: {
         id: this.$route.params.id || 111,
@@ -197,6 +240,24 @@ export default {
     this.getHeroReplayByHeroId(0);
   },
   methods: {
+    getHeroInscription: function (row, heroId, index) {
+      this.$appOpenUrl(
+        "是否查看英雄备战 (出装、铭文)?",
+        null,
+        {
+          path:
+            "https://camp.qq.com/h5/webdist/prepare-war-share/index.html?isNavigationBarHidden=1&showLoading=false&gameRoleId=" +
+            row.roleId +
+            "&shareUserId=" +
+            row.userId +
+            "&heroId=" +
+            heroId +
+            "&indexNum=" +
+            index,
+        },
+        0
+      );
+    },
     getGameInfo: function (row) {
       this.tableDataRow = row;
 
@@ -263,10 +324,10 @@ export default {
 
       if (item.value == 1) {
         this.$appOpenUrl(
-          "是否打开对局详情?",
-          "需要安装王者营地",
+          "是否打开对局回顾?",
+          null,
           {
-            path: replayInfo.hippyUrl,
+            path: replayInfo.replayUrl,
           },
           0
         );
@@ -274,10 +335,10 @@ export default {
 
       if (item.value == 2) {
         this.$appOpenUrl(
-          "是否打开对局回顾?",
+          "是否打开对局详情?",
           "需要安装王者营地",
           {
-            path: replayInfo.replayUrl,
+            path: replayInfo.hippyUrl,
           },
           0
         );

@@ -32,8 +32,9 @@
                   : { color: 'white' }
               "
               class="hero-d5d3db1765287eef77d7927cc956f50a"
-              >{{ hero.title }}</span
             >
+              {{ hero.title }}
+            </span>
             <img
               v-if="showInfo.parameter && hero.info.trend > 0"
               v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
@@ -58,8 +59,9 @@
                   round
                   :color="$appConfigInfo.positionInfo[data][1] || 'black'"
                   class="hero-bc267281c62550407c9572aff2a45f69"
-                  >{{ $appConfigInfo.positionInfo[data][0] || "未知" }}</van-tag
                 >
+                  {{ $appConfigInfo.positionInfo[data][0] || "未知" }}
+                </van-tag>
               </li>
             </ul>
           </div>
@@ -135,8 +137,9 @@
                 app-5f19eaf71f40d74d66be84db52b3ad87
                 hero-0fc3cfbc27e91ea60a787de13dae3e3c
               "
-              >{{ hero.info.equMoneyMin || 0 }}</span
             >
+              {{ hero.info.equMoneyMin || 0 }}
+            </span>
 
             <img
               v-lazy="
@@ -152,8 +155,9 @@
                 app-5f19eaf71f40d74d66be84db52b3ad87
                 hero-0fc3cfbc27e91ea60a787de13dae3e3c
               "
-              >{{ hero.info.usedtime || 0 }}</span
             >
+              {{ hero.info.usedtime || 0 }}
+            </span>
           </div>
 
           <span class="hero-9726255eec083aa56dc0449a21b33190">
@@ -161,8 +165,9 @@
               round
               color="black"
               class="hero-1d61d12b768d71c075477fd92281464d"
-              >{{ hero.info.equMoneyOverflow || 0 }}</van-tag
             >
+              {{ hero.info.equMoneyOverflow || 0 }}
+            </van-tag>
           </span>
         </van-grid-item>
         <van-grid-item
@@ -198,8 +203,9 @@
                   app-5f19eaf71f40d74d66be84db52b3ad87
                   hero-0fc3cfbc27e91ea60a787de13dae3e3c
                 "
-                >{{ hero.info.skill.preview[0].pickRate }}%</span
               >
+                {{ hero.info.skill.preview[0].pickRate }}%
+              </span>
             </span>
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
@@ -214,8 +220,9 @@
                   app-5f19eaf71f40d74d66be84db52b3ad87
                   hero-0fc3cfbc27e91ea60a787de13dae3e3c
                 "
-                >{{ hero.info.skill.preview[1].pickRate }}%</span
               >
+                {{ hero.info.skill.preview[1].pickRate }}%
+              </span>
             </span>
           </div>
         </van-grid-item>
@@ -324,11 +331,16 @@
               :equipmentType="1"
             />
           </van-tab>
-          <!--
-            <van-tab title="铭文 (推荐)">
-              <HeroInscriptionList :heroId="hero.info.id" />
-            </van-tab>
-          -->
+          <van-tab>
+            <template #title>
+              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                国服 (备战)
+              </span>
+              <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+            </template>
+
+            <HeroInscriptionList :heroId="hero.info.id" />
+          </van-tab>
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -358,9 +370,9 @@
               width="50"
               height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
-              circle.info.vote[0].text
-            }}</span>
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
+              {{ circle.info.vote[0].text }}
+            </span>
           </van-grid-item>
           <van-grid-item
             class="hero-59c25466342abdb6746988b245f3a5a6"
@@ -373,9 +385,9 @@
               width="50"
               height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">{{
-              circle.info.vote[1].text
-            }}</span>
+            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
+              {{ circle.info.vote[1].text }}
+            </span>
           </van-grid-item>
           <van-cell
             title="注意事项"
@@ -407,8 +419,9 @@
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
-          >{{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}</van-tabbar-item
         >
+          {{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}
+        </van-tabbar-item>
         <van-tabbar-item
           icon="//pic.rmb.bdstatic.com/bjh/f945a32ff317bcc82c10e09ecc8f11a8.png"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
@@ -427,7 +440,7 @@
         </van-tabbar-item>
         <van-tabbar-item
           icon="//pic.rmb.bdstatic.com/bjh/be831fde1fd4d15d0f77e62a93fcbc05.png"
-          to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
+          to="/search/?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >
           加群讨论
@@ -446,7 +459,7 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroLine: () => import("@/components/Hero/Line.vue"),
     HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
@@ -668,6 +681,8 @@ export default {
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
       } else if (e == 3) {
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 4) {
         //tipsText = this.$appMsg.info[1010];
       }
 

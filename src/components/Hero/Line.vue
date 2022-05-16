@@ -82,14 +82,15 @@ export default {
     return {
       trendIndex: 0,
       lineData: {
-        extend: {},
         loading: true,
+        extend: {},
+        tooltip: {},
         markLine: {},
         markPoint: {},
+        settings: {},
         result: {
           rows: [],
         },
-        settings: {},
       },
       lineInfo: {
         checked: false,

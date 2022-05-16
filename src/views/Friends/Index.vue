@@ -24,8 +24,9 @@
               friends-d64cb5ed2250938cb89d25beef75f604
               friends-2a0906894c02a2995ccddcda771afab7
             "
-            >{{ friendsInfo.name }}</span
           >
+            {{ friendsInfo.name }}
+          </span>
           <span
             class="
               friends-d64cb5ed2250938cb89d25beef75f604
@@ -37,8 +38,9 @@
               :color="friendsInfo.certification.color"
               class="friends-e14d426045f0bd910a6606a7a11122eb"
               @click="$message.info($appMsg.info[1003])"
-              >{{ friendsInfo.certification.text }}</van-tag
             >
+              {{ friendsInfo.certification.text }}
+            </van-tag>
           </span>
         </template>
       </van-nav-bar>
@@ -77,9 +79,9 @@
             <span class="friends-012c09cef7751ec30c771ff22eafb10a">
               <img v-lazy="friendsInfo.rank.starIcon" width="50" height="50" />
               <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">{{
-                friendsInfo.rank.score
-              }}</span>
+              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">
+                {{ friendsInfo.rank.score }}
+              </span>
             </span>
           </template>
         </van-cell>

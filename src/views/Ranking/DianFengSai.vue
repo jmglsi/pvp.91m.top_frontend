@@ -30,8 +30,9 @@
               mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
-              >{{ row.tag.text }}</van-tag
             >
+              {{ row.tag.text }}
+            </van-tag>
 
             <div
               :style="{ position: 'relative' }"
@@ -384,15 +385,20 @@
               :equipmentType="1"
             />
           </van-tab>
-          <van-tab title="更新调整" v-if="cellInfo.index == 0" />
-          <!--
-            <van-tab title="铭文 (推荐)">
-              <HeroInscriptionList
-                v-if="cellInfo.index == 0 && skillInfo.model == 4"
-                :heroId="tableDataRow.id"
-              />
-            </van-tab>
-          -->
+          <van-tab>
+            <template #title>
+              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                国服 (备战)
+              </span>
+              <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+            </template>
+
+            <HeroInscriptionList
+              v-if="cellInfo.index == 0 && skillInfo.model == 3"
+              :heroId="tableDataRow.id"
+            />
+          </van-tab>
+          <van-tab title="更新调整" />
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -428,7 +434,7 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
   },
   props: {
@@ -687,8 +693,8 @@ export default {
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
       } else if (e == 3) {
-        //tipsText = this.$appMsg.info[1010];
-
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 4) {
         this.$appPush({
           path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
         });
@@ -717,8 +723,8 @@ export default {
 
       if (item.value == 1) {
         this.$appPush({
-          path: "/search?q=" + heroInfo.name,
-          query: { refresh: 1 },
+          path: "/search",
+          query: { q: heroInfo.name, refresh: 1 },
         });
       }
 

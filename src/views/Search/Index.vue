@@ -34,12 +34,33 @@
     </div>
 
     <div
+      v-if="tableData.cardInfo.isNew"
+      class="search-062a862a53dafe999914c45b9e5dd103"
+    >
+      <img
+        v-lazy="tableData.cardInfo.new.img"
+        :style="
+          $appIsApple && $appConfigInfo.appInfo.pwa == 1
+            ? { marginTop: '-50px' }
+            : {}
+        "
+        class="search-20a7da8370c02da6e860aaebf3a54c57"
+      />
+    </div>
+
+    <div
       :style="
-        $appIsApple && $appConfigInfo.appInfo.pwa == 1
-          ? { marginTop: '10px' }
+        tableData.cardInfo.isNew
+          ? $appIsApple && $appConfigInfo.appInfo.pwa == 1
+            ? { marginTop: '475px' }
+            : {}
           : {}
       "
-      class="search-881fe153c6b26bc75a8f0ab057501629"
+      :class="
+        tableData.cardInfo.isNew
+          ? 'search-9fa34518e0f029520c0e38e0cc4d7013'
+          : 'search-881fe153c6b26bc75a8f0ab057501629'
+      "
     >
       <div v-if="!search.value" class="search-843c48c53bd40c7f476497c030fb0e92">
         <div class="search-4b9ca1bc335daf2e137b6c468a2c39b4">
@@ -79,10 +100,11 @@
                               : {}
                           "
                           class="search-f43418d85f50da28b3a9c1e780237105"
-                          >{{
-                            index + 1 - tableData.search.hotKeywords[0].topNum
-                          }}</span
                         >
+                          {{
+                            index + 1 - tableData.search.hotKeywords[0].topNum
+                          }}
+                        </span>
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
                           <img
@@ -187,8 +209,9 @@
                   text-color="#ad0000"
                   @click="getSearch(data)"
                   class="search-34690b06683636425980897b6bcd33d4"
-                  >{{ data }}</van-tag
                 >
+                  {{ data }}
+                </van-tag>
               </div>
               <div
                 class="
@@ -212,7 +235,7 @@
       </div>
 
       <div
-        v-if="showInfo.searchData && tableData.heroInfo.id"
+        v-if="showInfo.searchData && tableData.cardInfo.id"
         class="search-f63b407c95e4f2db4c44e27b3a8d136b"
       >
         <van-cell-group
@@ -220,19 +243,21 @@
           class="search-5d555cae6745619e13c5488c119d2a14"
         >
           <van-cell
-            :icon="tableData.heroInfo.img"
+            :icon="tableData.cardInfo.id != 999 ? tableData.cardInfo.img : null"
             :title="
-              tableData.heroInfo.name + ' (' + tableData.heroInfo.id + ')'
+              tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ')'
             "
-            :label="tableData.heroInfo.label"
-            :to="'/hero/' + tableData.heroInfo.id + '/info'"
-            is-link
-            value="趋势"
+            :label="tableData.cardInfo.label"
+            :value="tableData.cardInfo.value"
+            :is-link="tableData.cardInfo.isLink"
+            @click="
+              tableData.cardInfo.isLink ? onUrlClick(tableData.cardInfo) : null
+            "
             icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
             class="search-a64976150427434c778228d76650f6fb"
           />
           <van-cell
-            v-for="(data, index) in tableData.heroInfo.more"
+            v-for="(data, index) in tableData.cardInfo.more"
             :key="'search-2c05f043426380f092ad26111c3a490d-' + index"
             :icon="data.icon"
             :title="data.title"
@@ -257,10 +282,10 @@
                   综合
                 </span>
                 <img
-                  v-if="tableData.heroInfo.change.trendType > 0"
+                  v-if="tableData.cardInfo.change.trendType > 0"
                   v-lazy="
                     '/img/app-icons/hot_' +
-                    tableData.heroInfo.change.trendType +
+                    tableData.cardInfo.change.trendType +
                     '.png'
                   "
                   width="13"
@@ -272,7 +297,7 @@
                 </span>
               </template>
             </van-tab>
-            <van-tab :disabled="tableData.heroInfo.id == 999">
+            <van-tab :disabled="tableData.cardInfo.isNew">
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   备战推荐
@@ -280,22 +305,10 @@
                 <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
               </template>
             </van-tab>
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="攻速阈值"
-            />
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="最低金牌"
-            />
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="关系克制"
-            />
-            <van-tab
-              :disabled="tableData.heroInfo.id == 999"
-              title="对局回顾"
-            />
+            <van-tab :disabled="tableData.cardInfo.isNew" title="攻速阈值" />
+            <van-tab :disabled="tableData.cardInfo.isNew" title="最低金牌" />
+            <van-tab :disabled="tableData.cardInfo.isNew" title="关系克制" />
+            <van-tab :disabled="tableData.cardInfo.isNew" title="对局回顾" />
           </van-tabs>
 
           <van-grid
@@ -306,15 +319,15 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[3] >= 30
+                  tableData.cardInfo.banRate[3] >= 30
                     ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.banRate[3] }}</span>
+                <span>{{ tableData.cardInfo.banRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.banRate[3] > 0"
+                  v-if="tableData.cardInfo.banRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -325,16 +338,16 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[3] >= 20 &&
-                  tableData.heroInfo.winRate[3] >= 50
+                  tableData.cardInfo.pickRate[3] >= 20 &&
+                  tableData.cardInfo.winRate[3] >= 50
                     ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.pickRate[3] }}</span>
+                <span>{{ tableData.cardInfo.pickRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.pickRate[3] > 0"
+                  v-if="tableData.cardInfo.pickRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -346,24 +359,24 @@
                     出场
                   </span>
                   <span
-                    v-if="tableData.heroInfo.change.updateType != 0"
+                    v-if="tableData.cardInfo.change.updateType != 0"
                     :style="
-                      tableData.heroInfo.change.updateType == 2
+                      tableData.cardInfo.change.updateType == 2
                         ? { color: 'red' }
                         : { color: 'blue' }
                     "
                     class="search-cad25b2e05f6e21804b99605ab78a40b"
                   >
                     {{
-                      (tableData.heroInfo.change.updateType == 2 ? "+" : "-") +
-                      Math.abs(tableData.heroInfo.change.updateValue)
+                      (tableData.cardInfo.change.updateType == 2 ? "+" : "-") +
+                      Math.abs(tableData.cardInfo.change.updateValue)
                     }}
                   </span>
                   <img
-                    v-if="tableData.heroInfo.change.updateType != 0"
+                    v-if="tableData.cardInfo.change.updateType != 0"
                     v-lazy="
                       '/img/app-icons/hot_' +
-                      tableData.heroInfo.change.updateType +
+                      tableData.cardInfo.change.updateType +
                       '.png'
                     "
                     width="13"
@@ -376,15 +389,15 @@
             <van-grid-item @click="$message.info($appMsg.info[1021])">
               <div
                 :class="
-                  tableData.heroInfo.bpRate[3] >= 70
+                  tableData.cardInfo.bpRate[3] >= 70
                     ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.bpRate[3] }}</span>
+                <span>{{ tableData.cardInfo.bpRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.bpRate[3] > 0"
+                  v-if="tableData.cardInfo.bpRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -395,17 +408,17 @@
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[3] >= 30 ||
-                    tableData.heroInfo.pickRate[3] >= 20) &&
-                  tableData.heroInfo.winRate[3] >= 50
+                  (tableData.cardInfo.banRate[3] >= 30 ||
+                    tableData.cardInfo.pickRate[3] >= 20) &&
+                  tableData.cardInfo.winRate[3] >= 50
                     ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.winRate[3] }}</span>
+                <span>{{ tableData.cardInfo.winRate[3] }}</span>
                 <span
-                  v-if="tableData.heroInfo.winRate[3] > 0"
+                  v-if="tableData.cardInfo.winRate[3] > 0"
                   class="search-d427af48bbd4a36972ce659cd329dd38"
                 >
                   %
@@ -440,102 +453,102 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[0] >= 30
+                  tableData.cardInfo.banRate[0] >= 30
                     ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.banRate[0] }}</span>
+                <span>{{ tableData.cardInfo.banRate[0] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[1] >= 30
+                  tableData.cardInfo.banRate[1] >= 30
                     ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.banRate[1] }}</span>
+                <span>{{ tableData.cardInfo.banRate[1] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[2] >= 30
+                  tableData.cardInfo.banRate[2] >= 30
                     ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.banRate[2] }}</span>
+                <span>{{ tableData.cardInfo.banRate[2] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.banRate[3] >= 30
+                  tableData.cardInfo.banRate[3] >= 30
                     ? 'app-bda9643ac6601722a28f238714274da4'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.banRate[3] }}</span>
+                <span>{{ tableData.cardInfo.banRate[3] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item text="出场"></van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[0] >= 20 &&
-                  tableData.heroInfo.winRate[0] >= 50
+                  tableData.cardInfo.pickRate[0] >= 20 &&
+                  tableData.cardInfo.winRate[0] >= 50
                     ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.pickRate[0] }}</span>
+                <span>{{ tableData.cardInfo.pickRate[0] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[1] >= 20 &&
-                  tableData.heroInfo.winRate[1] >= 50
+                  tableData.cardInfo.pickRate[1] >= 20 &&
+                  tableData.cardInfo.winRate[1] >= 50
                     ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.pickRate[1] }}</span>
+                <span>{{ tableData.cardInfo.pickRate[1] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[2] >= 20 &&
-                  tableData.heroInfo.winRate[2] >= 50
+                  tableData.cardInfo.pickRate[2] >= 20 &&
+                  tableData.cardInfo.winRate[2] >= 50
                     ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.pickRate[2] }}</span>
+                <span>{{ tableData.cardInfo.pickRate[2] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.pickRate[3] >= 20 &&
-                  tableData.heroInfo.winRate[3] >= 50
+                  tableData.cardInfo.pickRate[3] >= 20 &&
+                  tableData.cardInfo.winRate[3] >= 50
                     ? 'app-48d6215903dff56238e52e8891380c8f'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.pickRate[3] }}</span>
+                <span>{{ tableData.cardInfo.pickRate[3] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item
@@ -546,106 +559,106 @@
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[0] >= 70
+                  tableData.cardInfo.bpRate[0] >= 70
                     ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.bpRate[0] }}</span>
+                <span>{{ tableData.cardInfo.bpRate[0] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[1] >= 70
+                  tableData.cardInfo.bpRate[1] >= 70
                     ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.bpRate[1] }}</span>
+                <span>{{ tableData.cardInfo.bpRate[1] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[2] >= 70
+                  tableData.cardInfo.bpRate[2] >= 70
                     ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.bpRate[2] }}</span>
+                <span>{{ tableData.cardInfo.bpRate[2] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  tableData.heroInfo.bpRate[3] >= 70
+                  tableData.cardInfo.bpRate[3] >= 70
                     ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.bpRate[3] }}</span>
+                <span>{{ tableData.cardInfo.bpRate[3] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item text="胜率"></van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[0] >= 30 ||
-                    tableData.heroInfo.pickRate[0] >= 20) &&
-                  tableData.heroInfo.winRate[0] >= 50
+                  (tableData.cardInfo.banRate[0] >= 30 ||
+                    tableData.cardInfo.pickRate[0] >= 20) &&
+                  tableData.cardInfo.winRate[0] >= 50
                     ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.winRate[0] }}</span>
+                <span>{{ tableData.cardInfo.winRate[0] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[1] >= 30 ||
-                    tableData.heroInfo.pickRate[1] >= 20) &&
-                  tableData.heroInfo.winRate[1] >= 50
+                  (tableData.cardInfo.banRate[1] >= 30 ||
+                    tableData.cardInfo.pickRate[1] >= 20) &&
+                  tableData.cardInfo.winRate[1] >= 50
                     ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.winRate[1] }}</span>
+                <span>{{ tableData.cardInfo.winRate[1] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[2] >= 30 ||
-                    tableData.heroInfo.pickRate[2] >= 20) &&
-                  tableData.heroInfo.winRate[2] >= 50
+                  (tableData.cardInfo.banRate[2] >= 30 ||
+                    tableData.cardInfo.pickRate[2] >= 20) &&
+                  tableData.cardInfo.winRate[2] >= 50
                     ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.winRate[2] }}</span>
+                <span>{{ tableData.cardInfo.winRate[2] }}</span>
               </div>
             </van-grid-item>
             <van-grid-item>
               <div
                 :class="
-                  (tableData.heroInfo.banRate[3] >= 30 ||
-                    tableData.heroInfo.pickRate[3] >= 20) &&
-                  tableData.heroInfo.winRate[3] >= 50
+                  (tableData.cardInfo.banRate[3] >= 30 ||
+                    tableData.cardInfo.pickRate[3] >= 20) &&
+                  tableData.cardInfo.winRate[3] >= 50
                     ? 'app-9f27410725ab8cc8854a2769c7a516b8'
                     : null
                 "
                 class="search-0c27228425c2ec1dd01a785b6e9a0437"
               >
-                <span>{{ tableData.heroInfo.winRate[3] }}</span>
+                <span>{{ tableData.cardInfo.winRate[3] }}</span>
               </div>
             </van-grid-item>
           </van-grid>
@@ -686,7 +699,7 @@
         </van-cell-group>
 
         <div class="search-cbf8ce69d638243d800b392c8d298b16">
-          <HeroSameHobby :heroId="tableData.heroInfo.id" />
+          <HeroSameHobby :heroId="tableData.cardInfo.id" />
         </div>
       </div>
 
@@ -696,7 +709,7 @@
       >
         <van-cell-group
           :border="false"
-          :title="tableData.heroInfo.id ? ' ' : ''"
+          :title="tableData.cardInfo.id ? ' ' : ''"
           class="search-7eb8c85291f87604bb87a151d0dc5d88"
         >
           <van-cell
@@ -717,7 +730,7 @@
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
         v-model="showInfo.skillMenu"
-        :title="tableData.heroInfo.name + ' 的其他数据 (近期)'"
+        :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
         <van-tabs
@@ -729,31 +742,36 @@
           <van-tab title="打法 (推荐)">
             <HeroGenreList
               v-if="skillInfo.model == 0"
-              :heroId="tableData.heroInfo.id"
+              :heroId="tableData.cardInfo.id"
             />
           </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL
               v-if="skillInfo.model == 1"
-              :heroId="tableData.heroInfo.id"
+              :heroId="tableData.cardInfo.id"
             />
           </van-tab>
           <van-tab title="出装 (单件)">
             <HeroEquipmentListOne
               v-if="skillInfo.model == 2"
-              :equipmentId="tableData.heroInfo.id"
+              :equipmentId="tableData.cardInfo.id"
               :equipmentType="1"
             />
           </van-tab>
+          <van-tab>
+            <template #title>
+              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                国服 (备战)
+              </span>
+              <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+            </template>
+
+            <HeroInscriptionList
+              v-if="skillInfo.model == 3"
+              :heroId="tableData.cardInfo.id"
+            />
+          </van-tab>
           <van-tab title="更新调整" />
-          <!--
-            <van-tab title="铭文 (推荐)">
-              <HeroInscriptionList
-                v-if="skillInfo.model == 4"
-                :heroId="tableData.heroInfo.id"
-              />
-            </van-tab>
-          -->
         </van-tabs>
       </van-action-sheet>
     </div>
@@ -761,12 +779,12 @@
     <div class="search-914f478e623fb19a2937274e72d82551">
       <van-action-sheet
         v-model="showInfo.fightPowerMenu"
-        :title="tableData.heroInfo.name + ' 如何操作'"
+        :title="tableData.cardInfo.name + ' 如何操作'"
         safe-area-inset-bottom
       >
         <HeroFightPower
           v-if="showInfo.fightPowerMenu"
-          :heroId="tableData.heroInfo.id"
+          :heroId="tableData.cardInfo.id"
           :fightPowerType="2"
         />
       </van-action-sheet>
@@ -785,20 +803,21 @@ export default {
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    //HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {
-      let q = to.query;
+      let q = to.query,
+        show = q.show || "";
 
       if (q.q) {
         if (parseInt(q.refresh) == 1) {
           this.showInfo.fightPowerMenu = false;
 
-          this.getSearch(q.q);
+          this.getSearch(q.q, show);
         }
       } else {
         this.initSearchHistory();
@@ -851,7 +870,7 @@ export default {
           ],
           placeholder: [],
         },
-        heroInfo: {
+        cardInfo: {
           id: null,
           name: null,
         },
@@ -890,19 +909,11 @@ export default {
       if (searchValue) {
         this.showInfo.searchData = true;
         this.showInfo.searchHistory = false;
-
-        setTimeout(() => {
-          if (show == "heroSkill") {
-            this.showInfo.skillMenu = true;
-          } else {
-            this.showInfo.skillMenu = false;
-          }
-        }, 1000);
       }
 
-      this.getSearch(searchValue);
+      this.getSearch(searchValue, show);
     },
-    getSearch: function (value) {
+    getSearch: function (value, show) {
       this.search.value = value;
 
       this.$axios
@@ -932,6 +943,14 @@ export default {
           }
 
           this.initSearchHistory();
+
+          setTimeout(() => {
+            if (show == "heroSkill") {
+              this.showInfo.skillMenu = true;
+            } else {
+              this.showInfo.skillMenu = false;
+            }
+          }, 1000);
         });
     },
     initSearchHistory: function () {
@@ -973,7 +992,8 @@ export default {
     onClearInputData: function () {
       if (this.search.value.length > 0) return;
 
-      this.tableData.heroInfo.id = 0;
+      this.tableData.cardInfo.id = 0;
+      this.tableData.cardInfo.isNew = false;
 
       this.initSearchHistory();
 
@@ -990,7 +1010,7 @@ export default {
       );
     },
     onDataTabsClick: function (e) {
-      let heroInfo = this.tableData.heroInfo;
+      let cardInfo = this.tableData.cardInfo;
 
       if (e == 1) {
         this.showInfo.skillMenu = true;
@@ -1010,7 +1030,7 @@ export default {
           path: "/ranking",
           query: {
             type: 1,
-            heroName: heroInfo.name,
+            heroName: cardInfo.name,
             refresh: 1,
           },
         });
@@ -1018,9 +1038,9 @@ export default {
         this.$appPush({
           path:
             "/hero/" +
-            heroInfo.id +
+            cardInfo.id +
             "/replay?title=" +
-            heroInfo.name +
+            cardInfo.name +
             "&teammate=0",
         });
       }
@@ -1033,7 +1053,7 @@ export default {
       return change;
     },
     onSkillTabsClick: function (e) {
-      let heroInfo = this.tableData.heroInfo,
+      let cardInfo = this.tableData.cardInfo,
         tipsText;
 
       if (e == 0) {
@@ -1043,10 +1063,10 @@ export default {
       } else if (e == 2) {
         tipsText = this.$appMsg.info[1009];
       } else if (e == 3) {
-        //tipsText = this.$appMsg.info[1010];
-
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 4) {
         this.$appPush({
-          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
+          path: "/hero/" + cardInfo.id + "/info?show=heroUpdate#heroSameHobby",
         });
       }
 
@@ -1057,29 +1077,29 @@ export default {
       }
     },
     onShareClick: function () {
-      let heroInfo = this.tableData.heroInfo,
+      let cardInfo = this.tableData.cardInfo,
         ret = "",
         url = location;
 
       ret =
         "[" +
-        heroInfo.name +
+        cardInfo.name +
         "] " +
-        heroInfo.change.scoreIcon +
+        cardInfo.change.scoreIcon +
         " " +
-        heroInfo.score[3] +
+        cardInfo.score[3] +
         " " +
-        heroInfo.change.trendIcon +
+        cardInfo.change.trendIcon +
         "\n";
       ret += "  全分段 | 1350 | 高星局 | 顶端局\n";
-      ret += "B:" + heroInfo.banRate.join(" / ") + "\n";
-      ret += "P:" + heroInfo.pickRate.join(" / ") + "\n";
-      ret += "∑:" + heroInfo.bpRate.join(" / ") + "\n";
-      ret += "W:" + heroInfo.winRate.join(" / ") + "\n";
+      ret += "B:" + cardInfo.banRate.join(" / ") + "\n";
+      ret += "P:" + cardInfo.pickRate.join(" / ") + "\n";
+      ret += "∑:" + cardInfo.bpRate.join(" / ") + "\n";
+      ret += "W:" + cardInfo.winRate.join(" / ") + "\n";
       ret +=
-        "> 最后调整 " + (heroInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += "> 成就 " + heroInfo.label + "\n";
-      ret += "> 综合 " + url.origin + "/s/" + heroInfo.id;
+        "> 最后调整 " + (cardInfo.adjustmentTime || "近一年暂无调整") + "\n";
+      ret += "> 成就 " + cardInfo.label + "\n";
+      ret += "> 综合 " + url.origin + "/s/" + cardInfo.id;
 
       this.copyData = ret;
 
@@ -1101,6 +1121,11 @@ img.search-97c89d1a7343e149ab400d0bb141c7de {
 img.search-3cdd9882517a697dfcf15e4bcf9fde7e {
   margin-top: -1px;
   margin-left: -3px;
+}
+
+img.search-20a7da8370c02da6e860aaebf3a54c57 {
+  border-radius: unset;
+  width: 100%;
 }
 
 i.search-a0edf16f0e677f3e28dfd77595f437be {
@@ -1155,16 +1180,6 @@ div.search-8d84ed4977747dd8eab8dbdc9ed3508c {
   font-size: @app-font-size;
 }
 
-div.search-399841f840f75044108804ec30d37405 {
-  color: #969799;
-  font-size: @app-font-size;
-  position: absolute;
-  text-align: right;
-  width: 100%;
-  height: @app-height;
-  padding-right: 15px;
-}
-
 span.search-b0958af6a9b2591433e50ff9eb7f3420 {
   margin-left: 6px;
   margin-right: 4px;
@@ -1180,6 +1195,28 @@ div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: @app-text-align;
+}
+
+div.search-399841f840f75044108804ec30d37405 {
+  color: #969799;
+  font-size: @app-font-size;
+  position: absolute;
+  text-align: right;
+  width: 100%;
+  height: @app-height;
+  padding-right: 15px;
+}
+
+div.search-9fa34518e0f029520c0e38e0cc4d7013 {
+  background-color: white;
+  border-radius: 10px;
+}
+
+div.search-062a862a53dafe999914c45b9e5dd103 {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
 }
 
 div.search-cbf8ce69d638243d800b392c8d298b16 {

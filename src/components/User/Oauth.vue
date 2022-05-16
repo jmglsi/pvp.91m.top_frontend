@@ -3,8 +3,9 @@
     <div class="oauth-ceb83cb85dff6aa94a65ed6cac1f563f">
       <van-divider
         :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
-        >{{ accessToken ? "第三方授权" : "第三方登录" }}</van-divider
       >
+        {{ accessToken ? "第三方授权" : "第三方登录" }}
+      </van-divider>
     </div>
 
     <div class="oauth-4a62ae82084ebecb1ea7d1b7f67ef7c4">

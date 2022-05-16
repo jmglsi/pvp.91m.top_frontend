@@ -30,9 +30,9 @@
                   icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
                 />
                 <van-grid-item>
-                  <span class="app-07cc694b9b3fc636710fa08b6922c42b">{{
-                    data.game.time
-                  }}</span>
+                  <span class="app-07cc694b9b3fc636710fa08b6922c42b">
+                    {{ data.game.time }}
+                  </span>
                   <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
                 </van-grid-item>
                 <van-grid-item

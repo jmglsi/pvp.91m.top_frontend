@@ -52,9 +52,9 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[1].tag.color" round type="primary">{{
-                    topInfo[1].skinName
-                  }}</van-tag>
+                  <van-tag :color="topInfo[1].tag.color" round type="primary">
+                    {{ topInfo[1].skinName }}
+                  </van-tag>
                 </div>
                 <div>
                   <span
@@ -65,9 +65,9 @@
                   </span>
                 </div>
                 <div class="return-82175be63be4c53021549241368b4c6f">
-                  <span class="return-2de2ce7733cbb350c6aa2862912c853b"
-                    >{{ topInfo[1].allVoteNum || 0 }} 万</span
-                  >
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
+                    {{ topInfo[1].allVoteNum || 0 }} 万
+                  </span>
                 </div>
               </div>
             </van-col>
@@ -105,9 +105,9 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[0].tag.color" round type="primary">{{
-                    topInfo[0].skinName
-                  }}</van-tag>
+                  <van-tag :color="topInfo[0].tag.color" round type="primary">
+                    {{ topInfo[0].skinName }}
+                  </van-tag>
                 </div>
                 <div>
                   <span
@@ -118,9 +118,9 @@
                   </span>
                 </div>
                 <div class="return-82175be63be4c53021549241368b4c6f">
-                  <span class="return-2de2ce7733cbb350c6aa2862912c853b"
-                    >{{ topInfo[0].allVoteNum || 0 }} 万</span
-                  >
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
+                    {{ topInfo[0].allVoteNum || 0 }} 万
+                  </span>
                 </div>
               </div>
             </van-col>
@@ -128,8 +128,9 @@
               <span
                 @click="onUrlClick(tableData.result)"
                 class="return-4fb4d4758e19b050e0de1ef488ae54a3"
-                >{{ tableData.result.title || "好耶!"
-                }}<van-icon name="arrow" />
+              >
+                {{ tableData.result.title || "好耶!" }}
+                <van-icon name="arrow" />
               </span>
             </template>
           </a-popover>
@@ -149,9 +150,9 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[2].tag.color" round type="primary">{{
-                    topInfo[2].skinName
-                  }}</van-tag>
+                  <van-tag :color="topInfo[2].tag.color" round type="primary">
+                    {{ topInfo[2].skinName }}
+                  </van-tag>
                 </div>
                 <div>
                   <span
@@ -162,9 +163,9 @@
                   </span>
                 </div>
                 <div class="return-82175be63be4c53021549241368b4c6f">
-                  <span class="return-2de2ce7733cbb350c6aa2862912c853b"
-                    >{{ topInfo[2].allVoteNum || 0 }} 万</span
-                  >
+                  <span class="return-2de2ce7733cbb350c6aa2862912c853b">
+                    {{ topInfo[2].allVoteNum || 0 }} 万
+                  </span>
                 </div>
               </div>
             </van-col>
@@ -199,8 +200,9 @@
                 mark
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
-                >{{ row.skinName }}</van-tag
               >
+                {{ row.skinName }}
+              </van-tag>
 
               <div :style="{ position: 'relative' }">
                 <img
@@ -231,7 +233,9 @@
           >
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
-                <div>{{ row.allVoteNum }}</div>
+                <div>
+                  {{ row.allVoteNum }}
+                </div>
                 <span
                   v-if="row.needVote > 0"
                   :style="

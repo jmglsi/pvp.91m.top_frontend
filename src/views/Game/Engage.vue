@@ -51,9 +51,9 @@
                 </div>
               </van-col>
               <van-col span="10">
-                <span class="app-07cc694b9b3fc636710fa08b6922c42b">{{
-                  data.engage.time
-                }}</span>
+                <span class="app-07cc694b9b3fc636710fa08b6922c42b">
+                  {{ data.engage.time }}
+                </span>
                 <br />
                 <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
               </van-col>

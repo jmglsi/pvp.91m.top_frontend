@@ -23,14 +23,16 @@
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
         :style="{ color: 'blue' }"
-        >{{ gameInfo.result.rows[tabsInfo.model].team.team_1.name }}</span
       >
+        {{ gameInfo.result.rows[tabsInfo.model].team.team_1.name }}
+      </span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
         :style="{ color: 'red' }"
-        >{{ gameInfo.result.rows[tabsInfo.model].team.team_2.name }}</span
       >
+        {{ gameInfo.result.rows[tabsInfo.model].team.team_2.name }}
+      </span>
     </span>
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
@@ -434,8 +436,9 @@
             <span
               class="game-0db3e75efe3faa0cee4451fb55bc4c53"
               :style="bpCountdown < 10 ? { color: 'red' } : { color: 'blue' }"
-              >{{ bpCountdown }}</span
             >
+              {{ bpCountdown }}
+            </span>
             秒
           </div>
         </li>
@@ -449,16 +452,18 @@
               :icon="authorInfo.logo"
               size="small"
               class="game-8e4f204791d1b591b6a6f93b572f9b2d"
-              >{{ authorInfo.name }}</van-button
             >
+              {{ authorInfo.name }}
+            </van-button>
             <a-menu slot="overlay">
               <a-menu-item
                 v-for="(data, index) in authorInfo.actions"
                 :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
                 :disabled="data.title == '-' && (!data.to || !data.url)"
                 @click="onUrlClick(data)"
-                >{{ data.title }}</a-menu-item
               >
+                {{ data.title }}
+              </a-menu-item>
             </a-menu>
           </a-dropdown>
         </li>
@@ -486,10 +491,11 @@
             color="linear-gradient(to right, #6874E8, #9708CC)"
             class="game-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onSeeHeroClick"
-            >{{
-              bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
-            }}&nbsp;的剩余英雄</van-button
           >
+            {{
+              bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
+            }}&nbsp;的剩余英雄
+          </van-button>
         </li>
       </ul>
     </div>
@@ -613,9 +619,9 @@
                 @click="onToolsMenuClick(2)"
                 >重置本局</a-menu-item
               >
-              <a-menu-item @click="onToolsMenuClick(3)"
-                >{{ bpMode == "view" ? "编辑" : "保存" }}本局</a-menu-item
-              >
+              <a-menu-item @click="onToolsMenuClick(3)">
+                {{ bpMode == "view" ? "编辑" : "保存" }}本局
+              </a-menu-item>
             </a-menu>
           </a-dropdown>
         </li>
@@ -677,8 +683,9 @@
             :type="bpMode == 'sort' ? 'primary' : 'info'"
             size="small"
             @click="onNewSortClick"
-            >{{ bpMode == "sort" ? "保存" : "修改" }}排序</van-button
           >
+            {{ bpMode == "sort" ? "保存" : "修改" }}排序
+          </van-button>
           &nbsp;
           <van-button
             v-if="bpMode == 'edit'"
@@ -742,8 +749,9 @@
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
               :style="{ color: gameInfo.result.rows[index].win.color }"
-              >{{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}</span
             >
+              {{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}
+            </span>
           </template>
         </van-tab>
       </van-tabs>
