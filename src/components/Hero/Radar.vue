@@ -103,10 +103,11 @@ export default {
           this.$appApi.pvp.getHeroChartsLog +
             "&heroId=" +
             heroId +
-            "&heroName=" +
-            heroName +
             "&aid=" +
-            aid
+            aid,
+          {
+            arrData: heroName,
+          }
         )
         .then((res) => {
           let data = res.data.data,
@@ -125,7 +126,7 @@ export default {
         this.chartSettings = {};
         this.chartData = [];
       } else {
-        let newTags;
+        let newTags = "";
 
         e.map((x) => {
           newTags += "," + x.text;

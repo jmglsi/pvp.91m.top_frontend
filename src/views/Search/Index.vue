@@ -51,9 +51,9 @@
     <div
       :style="
         tableData.cardInfo.isNew
-          ? $appIsApple && $appConfigInfo.appInfo.pwa == 1
-            ? { marginTop: '475px' }
-            : {}
+          ? { marginTop: '490px' }
+          : $appIsApple && $appConfigInfo.appInfo.pwa == 1
+          ? { marginTop: '10px' }
           : {}
       "
       :class="
