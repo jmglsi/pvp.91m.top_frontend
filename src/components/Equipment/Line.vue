@@ -8,6 +8,7 @@
         :mark-point="lineData.markPoint"
         :data="lineData.result"
         :loading="lineData.loading"
+        :after-config="afterConfig"
         :height="$appIsMobile ? '375px' : '475px'"
         width="100%"
         class="equipment-be4fa98d69734bbd05d093fc0010f826"
@@ -66,15 +67,21 @@ export default {
             splitLine: {
               show: false,
             },
+            min: 0,
+            max: 1,
           },
           series: {
             markLine: {
+              symbol: "none",
               data: [
                 {
                   yAxis: 0.5,
-                  name: "平均胜率",
+                  name: "及格",
                   itemStyle: {
-                    color: "gray",
+                    color: "#63d1b0",
+                  },
+                  label: {
+                    formatter: " ",
                   },
                 },
               ],
@@ -99,6 +106,18 @@ export default {
         },
       },
     };
+  },
+  methods: {
+    afterConfig: function (e) {
+      if (!e.series) {
+        return e;
+      }
+
+      Array.from(e.series).map((x) => {
+        x.symbol = "none";
+      });
+      return e;
+    },
   },
 };
 </script>

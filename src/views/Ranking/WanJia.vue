@@ -29,13 +29,7 @@
               "
             >
               <img
-                v-lazy="
-                  /p\.qlogo\.cn/i.test(row.avatar)
-                    ? $appApi.pvp.getImg +
-                      '&url=' +
-                      encodeURIComponent(row.avatar)
-                    : row.avatar
-                "
+                v-lazy="row.avatar"
                 width="50"
                 height="50"
                 crossorigin="anonymous"
@@ -102,10 +96,12 @@
                       <img
                         v-if="data.index <= 10"
                         v-lazy="
-                          '//pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
+                          $appApi.app.proxyImg +
+                          'https://pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
                         "
                         width="30"
                         height="20"
+                        crossorigin="anonymous"
                         class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
                       />
                       <span
@@ -277,6 +273,7 @@
                   "
                   width="45"
                   height="45"
+                  crossorigin="anonymous"
                   class="ranking-a548cbd20a565cc98caf397c9bfd7cdb"
                 />
                 <div class="ranking-51c877f489423eb1c3901dd0e12c03d4">

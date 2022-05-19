@@ -14,17 +14,6 @@
         class="hero-be4fa98d69734bbd05d093fc0010f826"
       />
     </div>
-
-    <div
-      v-if="showInfo.autoPlayTrend && aid == 0"
-      class="hero-f6d50810d5b150ebd421cc944d2597a5"
-    >
-      <van-switch
-        v-model="lineInfo.checked"
-        @change="onSwitchChange"
-        size="15px"
-      />
-    </div>
   </div>
 </template>
 
@@ -92,17 +81,15 @@ export default {
           rows: [],
         },
       },
-      lineInfo: {
-        checked: false,
-      },
-      showInfo: {
-        autoPlayTrend: false,
-      },
     };
   },
   methods: {
     afterConfig: function (e) {
-      e.series.map((x) => {
+      if (!e.series) {
+        return e;
+      }
+
+      Array.from(e.series).map((x) => {
         x.symbol = "none";
       });
       //去除折线图上的小圆点
@@ -136,8 +123,6 @@ export default {
           if (status.code == 200) {
             this.lineData = data;
             this.lineData.loading = false;
-
-            this.showInfo.autoPlayTrend = true;
           } else {
             this.$appOpenUrl(
               "温馨提示",
@@ -154,37 +139,6 @@ export default {
           }
         });
     },
-    onSwitchChange: function (e) {
-      let dataZoom = this.lineData.extend.dataZoom[0],
-        interval = dataZoom.end - dataZoom.start;
-
-      this.trendIndex = 0;
-      clearInterval(this.autoPlayTrendInterval);
-      if (e) {
-        this.autoPlayTrendClick(interval);
-      }
-    },
-    autoPlayTrendClick: function (interval) {
-      this.autoPlayTrendInterval = setInterval(() => {
-        this.trendIndex++;
-        this.lineData.extend.dataZoom[0].start = this.trendIndex;
-        this.lineData.extend.dataZoom[0].end = this.trendIndex + interval;
-
-        if (this.trendIndex >= 100 - interval) {
-          this.lineInfo.checked = false;
-
-          clearInterval(this.autoPlayTrendInterval);
-        }
-      }, 150);
-    },
   },
 };
 </script>
-
-<style scoped lang="less">
-div.hero-f6d50810d5b150ebd421cc944d2597a5 {
-  left: 7px;
-  margin-top: -30px;
-  position: absolute;
-}
-</style>

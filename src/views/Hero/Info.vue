@@ -263,8 +263,13 @@
           :disabled="tabsInfo.model == 0 ? true : false"
         />
         <div class="hero-e06398232dc80e41209489705546802c">
+          <HeroHistogram
+            v-if="tabsInfo.model == 0 && trendInfo.model == 0"
+            :heroId="hero.info.id"
+            :aid="trendInfo.model"
+          />
           <HeroLine
-            v-if="tabsInfo.model == 0"
+            v-else-if="tabsInfo.model == 0 && trendInfo.model > 0"
             :heroId="hero.info.id"
             :aid="trendInfo.model"
           />
@@ -461,6 +466,7 @@ export default {
       import("@/components/Hero/EquipmentList_One.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroLine: () => import("@/components/Hero/Line.vue"),
+    HeroHistogram: () => import("@/components/Hero/Histogram.vue"),
     HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),

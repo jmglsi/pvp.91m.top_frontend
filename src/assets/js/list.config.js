@@ -1143,8 +1143,6 @@ equipment.map((x) => {
 
 allTag = tagArr_1.split("|").concat(tagArr_2.split("|"));
 
-console.log(equipment);
-
 export {
     allTag,
     equipment

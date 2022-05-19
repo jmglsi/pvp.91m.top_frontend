@@ -112,6 +112,7 @@ div.hero-d42f4851e770aa0f758b01388874f67b {
   margin: 0 0 20px 0;
 
   div.van-tabs__wrap {
+    border-radius: 10px;
     height: 70px;
   }
 

@@ -86,10 +86,13 @@ export default {
   },
   methods: {
     afterConfig: function (e) {
-      e.series.map((x) => {
+      if (!e.series) {
+        return e;
+      }
+
+      Array.from(e.series).map((x) => {
         x.symbol = "none";
       });
-      //去除折线图上的小圆点
       return e;
     },
     getHeroChartsLog: function (aid, bid, cid, did) {

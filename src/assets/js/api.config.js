@@ -69,6 +69,25 @@ const gameApi = baseUrl + "/hero/v1/game.php";
 const loginApi = baseUrl + "/hero/v1/login.php";
 const biliApi = baseUrl + "/hero/v1/bilibili.php";
 
+const app = {
+    proxyImg: baseUrl + "/proxy/img?url="
+}
+
+const bili = {
+    getOrderInfo: biliApi + "?type=getOrderInfo"
+}
+
+const game = {
+    getGameBP: gameApi + "?type=getGameBP",
+    getGameBPFile: gameApi + "?type=getGameBPFile",
+    getGameHome: gameApi + "?type=getGameHome",
+    getGamePrediction: gameApi + "?type=getGamePrediction"
+}
+
+const login = {
+    getLogin: loginApi
+}
+
 const pvp = {
     addHeroByCombination: pvpApi + "?type=addHeroByCombination",
     addHeroFightPowerByWebAccount: pvpApi + "?type=addHeroFightPowerByWebAccount",
@@ -103,24 +122,10 @@ const pvp = {
     uploadImg: pvpApi + "?type=uploadImg"
 }
 
-const game = {
-    getGameBP: gameApi + "?type=getGameBP",
-    getGameBPFile: gameApi + "?type=getGameBPFile",
-    getGameHome: gameApi + "?type=getGameHome",
-    getGamePrediction: gameApi + "?type=getGamePrediction"
-}
-
-const login = {
-    getLogin: loginApi
-}
-
-const bili = {
-    getOrderInfo: biliApi + "?type=getOrderInfo"
-}
-
 export default {
+    app,
     bili,
     game,
-    pvp,
-    login
+    login,
+    pvp
 }

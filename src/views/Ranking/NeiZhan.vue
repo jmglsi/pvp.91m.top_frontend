@@ -35,13 +35,7 @@
               "
             >
               <img
-                v-lazy="
-                  /p\.qlogo\.cn/i.test(row.avatar)
-                    ? $appApi.pvp.getImg +
-                      '&url=' +
-                      encodeURIComponent(row.avatar)
-                    : row.avatar
-                "
+                v-lazy="row.avatar"
                 width="50"
                 height="50"
                 class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
@@ -287,8 +281,6 @@ export default {
 
           if (status.code == 200) {
             this.matchInfo = data;
-
-            console.log(this.matchInfo);
 
             this.$message.success(this.$appMsg.success[1005]);
           } else {

@@ -344,10 +344,13 @@ export default {
   },
   methods: {
     afterConfig: function (e) {
-      e.series.map((x) => {
+      if (!e.series) {
+        return e;
+      }
+
+      Array.from(e.series).map((x) => {
         x.symbol = "none";
       });
-      //去除折线图上的小圆点
       return e;
     },
     getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {
