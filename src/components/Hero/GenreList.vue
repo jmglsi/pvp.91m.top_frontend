@@ -4,14 +4,51 @@
       ref="refHeroGenre"
       :data="tableData.result.rows"
       :loading="tableData.loading"
+      @cell-click="onCellClick"
       height="543"
     >
+      <vxe-table-column title="英雄" fixed="left" field="heroId" width="50">
+        <template #default="{ row }">
+          <div :style="{ position: 'relative' }">
+            <img
+              v-lazy="
+                '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                row.heroId +
+                '/' +
+                row.heroId +
+                '.jpg'
+              "
+              width="25"
+              height="25"
+              class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+            />
+          </div>
+        </template>
+      </vxe-table-column>
+
       <vxe-table-colgroup
         title="流派"
         fixed="left"
         :title-help="{ content: $appMsg.tips[1003] }"
       >
-        <vxe-table-column title="技能" field="skillId" width="75" sortable>
+        <vxe-table-column
+          title="技能"
+          field="skillId"
+          :filters="[
+            { label: '闪现', data: 80115 },
+            { label: '惩戒', data: 80104 },
+            { label: '干扰', data: 80105 },
+            { label: '净化', data: 80107 },
+            { label: '弱化', data: 80121 },
+            { label: '治疗', data: 80102 },
+            { label: '眩晕', data: 80103 },
+            { label: '斩杀', data: 80108 },
+            { label: '狂暴', data: 80110 },
+            { label: '疾跑', data: 80109 },
+          ]"
+          :filter-method="filterMethod"
+          width="75"
+        >
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               <img
@@ -27,7 +64,19 @@
             </div>
           </template>
         </vxe-table-column>
-        <vxe-table-column title="分路" field="positionId" width="75" sortable>
+        <vxe-table-column
+          title="分路"
+          field="positionId"
+          :filters="[
+            { label: '对抗路', data: 0 },
+            { label: '中路', data: 1 },
+            { label: '发育路', data: 2 },
+            { label: '打野', data: 3 },
+            { label: '辅助', data: 4 },
+          ]"
+          :filter-method="filterMethod"
+          width="75"
+        >
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               {{ positionInfo[row.positionId] }}
@@ -47,7 +96,7 @@
         <vxe-table-column
           title="占比"
           field="pickRate"
-          :filters="[{ data: 2.5, checked: true }]"
+          :filters="[{ data: 1, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -149,25 +198,25 @@
 export default {
   name: "HeroGenre",
   props: {
-    heroId: {
+    genreId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { genreId } = this;
+      return { genreId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.genreId) return;
 
         if (this.$cookie.get("agree") == 1) {
-          this.getRanking(newValue.heroId, 14, 0, 0, 0);
+          this.getRanking(newValue.genreId, 14, 0, 0, 0);
         }
       },
     },
@@ -182,6 +231,9 @@ export default {
         },
       },
       positionInfo: ["对抗路", "中路", "发育路", "打野", "游走"],
+      genreInfo: {
+        type: 0,
+      },
       showInfo: {
         checked: false,
       },
@@ -191,11 +243,11 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (heroId = 111, aid = 14, bid = 0, cid = 0, did = 0) {
+    getRanking: function (genreId = 111, aid = 14, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroId
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + genreId
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
@@ -215,8 +267,8 @@ export default {
             cid +
             "&did=" +
             did +
-            "&heroId=" +
-            heroId
+            "&id=" +
+            genreId
         )
         .then((res) => {
           let data = res.data.data,
@@ -237,7 +289,7 @@ export default {
                 "-" +
                 did +
                 "-" +
-                heroId,
+                genreId,
               this.tableData
             );
           } else {
@@ -246,12 +298,36 @@ export default {
         });
     },
     filterMethod: function ({ option, row, column }) {
+      if (column.property == "skillId") {
+        return row.skillId == option.data;
+      }
+
+      if (column.property == "positionId") {
+        return row.positionId == option.data;
+      }
+
       if (column.property == "pickRate") {
         return row.pickRate >= option.data;
       }
 
       if (column.property == "winRate") {
         return row.winRate >= option.data;
+      }
+    },
+    onCellClick: function ({ row, column }) {
+      if (column.property == "heroId") {
+        this.genreInfo.type = 0;
+        return this.getRanking(row.heroId, 14, this.genreInfo.type, 0, 0);
+      }
+
+      if (column.property == "skillId") {
+        this.genreInfo.type = 1;
+        return this.getRanking(row.skillId, 14, this.genreInfo.type, 0, 0);
+      }
+
+      if (column.property == "positionId") {
+        this.genreInfo.type = 2;
+        return this.getRanking(row.positionId, 14, this.genreInfo.type, 0, 0);
       }
     },
     onAgreeChange: function () {
@@ -265,7 +341,7 @@ export default {
         nowChecked = true;
         nowChecked_int = 1;
 
-        this.getRanking(this.heroId, 14, 0, 0, 0);
+        this.getRanking(this.id, 14, 0, 0, 0);
       }
 
       this.showInfo.checked = nowChecked;

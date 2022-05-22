@@ -29,11 +29,13 @@
             >
               <img
                 v-lazy="data.img"
+                crossorigin="anonymous"
                 class="home-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag
                 mark
                 :color="data.tag.color"
+                size="medium"
                 class="app-a5a5c883f68e45baa83f140e218759f1"
               >
                 {{ data.tag.text }}
@@ -217,7 +219,7 @@
           @show="onComponentShow"
           class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
         >
-          <HeroUpdate :heroId="0" />
+          <HeroUpdate :aid="0" :heroId="0" />
         </lazy-component>
       </div>
     </div>
@@ -284,7 +286,7 @@ export default {
 
     setTimeout(() => {
       this.initColor();
-    }, 2500);
+    }, 500);
   },
   methods: {
     initPage: function () {
@@ -329,7 +331,7 @@ export default {
 
         if (nowRow.name) {
           x.addEventListener("load", () => {
-            nowColor = colorthief.getPalette(x, 3)[2].toString();
+            nowColor = colorthief.getPalette(x, 3)[0].toString();
 
             this.appHomeInfo.swipeInfo.result.rows[i].tag.color =
               "rgb(" + nowColor + ")";

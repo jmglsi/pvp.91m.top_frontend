@@ -742,7 +742,7 @@
           <van-tab title="打法 (推荐)">
             <HeroGenreList
               v-if="skillInfo.model == 0"
-              :heroId="tableData.cardInfo.id"
+              :genreId="tableData.cardInfo.id"
             />
           </van-tab>
           <van-tab title="出装 (推荐)">

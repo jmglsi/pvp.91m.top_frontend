@@ -200,10 +200,13 @@ Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' },
         let ls = Vue.prototype.$appConfigInfo;
 
         if (ls.appInfo.openUrl) {
+            let nowMessage;
+            message ? nowMessage = message : nowMessage = "我的 - 设置 (右上角) 中可关闭确认框";
+
             this.$dialog
                 .confirm({
                     title: title,
-                    message: message
+                    message: nowMessage
                 })
                 .then(() => {
                     //on confirm

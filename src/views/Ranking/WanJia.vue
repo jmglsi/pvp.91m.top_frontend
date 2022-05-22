@@ -8,7 +8,18 @@
         :loading="tableData.loading"
         @cell-click="onCellClick"
       >
-        <vxe-table-column title="玩家" field="userId" fixed="left" width="75">
+        <vxe-table-column
+          title="玩家"
+          field="userId"
+          fixed="left"
+          :filters="[
+            { label: '普通', data: 0 },
+            { label: '职业', data: 1 },
+            { label: '主播', data: 2 },
+          ]"
+          :filter-method="filterMethod"
+          width="75"
+        >
           <template #default="{ row, rowIndex }">
             <van-tag
               v-if="row.tag"
@@ -197,7 +208,7 @@
         icon="share"
         size="mini"
         color="linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237))"
-        @click="getImg"
+        @click="getPlayerList"
       >
         分享图片
       </van-button>
@@ -432,6 +443,11 @@ export default {
           }
         });
     },
+    filterMethod: function ({ option, row, column }) {
+      if (column.property == "userId") {
+        return row.tag.type == option.data;
+      }
+    },
     getHeroList: function (row) {
       let heroList = [],
         newHeroList = {},
@@ -456,7 +472,7 @@ export default {
       );
       //转数组、降序
     },
-    getImg: function () {
+    getPlayerList: function () {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       this.showInfo.shareImg = true;
       this.$message.warning(this.$appMsg.warning[500]);

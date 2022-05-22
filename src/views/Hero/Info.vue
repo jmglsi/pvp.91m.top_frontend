@@ -305,6 +305,7 @@
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroUpdate
             v-if="hero.info.id && hero.info.id != 999"
+            :aid="1"
             :heroId="hero.info.id"
             :updateId="hero.info.updateId"
           />
@@ -325,7 +326,7 @@
           @click="onSkillTabsClick"
         >
           <van-tab title="打法 (推荐)">
-            <HeroGenreList :heroId="hero.info.id" />
+            <HeroGenreList :genreId="hero.info.id" />
           </van-tab>
           <van-tab title="出装 (推荐)">
             <HeroEquipmentListALL :heroId="hero.info.id" />
@@ -421,6 +422,7 @@
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
+          v-if="hero.info.id != 999"
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"

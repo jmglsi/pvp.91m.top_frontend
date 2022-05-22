@@ -410,7 +410,7 @@ span.van-tab__text {
 
 span.app-a5a5c883f68e45baa83f140e218759f1 {
   position: absolute;
-  bottom: 25px;
+  bottom: 30px;
   z-index: @app-z-index;
   left: 0;
 }

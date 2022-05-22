@@ -369,7 +369,7 @@
           <van-tab title="打法 (推荐)">
             <HeroGenreList
               v-if="cellInfo.index == 0 && skillInfo.model == 0"
-              :heroId="tableDataRow.id"
+              :genreId="tableDataRow.id"
             />
           </van-tab>
           <van-tab title="出装 (推荐)">

@@ -98,7 +98,7 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="环比变化" label="推送变化较大的英雄">
+        <van-cell title="环比变化" label="推送变化明显的英雄">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch

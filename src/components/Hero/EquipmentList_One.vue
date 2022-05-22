@@ -66,7 +66,7 @@
         <vxe-table-column
           title="出场"
           field="allPickRate"
-          :filters="[{ data: 2.5, checked: true }]"
+          :filters="[{ data: 1, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable

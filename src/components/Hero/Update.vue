@@ -97,24 +97,48 @@
 
             <div class="update-c936f93d328137bba0ab32510a2e4fd0">
               <span
-                v-for="(itemHeroId, index) in data.items"
+                v-for="(item, index) in data.hero"
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
                 @click="
-                  itemHeroId != heroId
-                    ? $appPush({ path: '/hero/' + itemHeroId + '/info' })
+                  item != heroId
+                    ? $appPush({ path: '/hero/' + item + '/info' })
                     : null
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"
               >
                 <img
                   v-lazy="
-                    itemHeroId > 900
+                    item > 900
                       ? '/img/app-icons/hero_white.png'
                       : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                        itemHeroId +
+                        item +
                         '/' +
-                        itemHeroId +
+                        item +
                         '.jpg'
+                  "
+                  width="40"
+                  height="40"
+                  class="update-5d39f3848925994b52ec52fba934577c"
+                />
+              </span>
+            </div>
+
+            <div
+              v-if="data.equipment.length > 0"
+              class="update-33717161c2d8c0d081510c322ab5876a"
+            >
+              <van-divider />
+              <span
+                v-for="(item, index) in data.equipment"
+                :key="'update-df0ed5943fd740242219ad3e45245f6e-' + index"
+                @click="onEquipmentClick(data, index)"
+                class="update-cf1228c4eb54ec10bf815f0ed3816a49"
+              >
+                <img
+                  v-lazy="
+                    '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                    item +
+                    '.png'
                   "
                   width="40"
                   height="40"
@@ -126,7 +150,7 @@
         </a-timeline>
 
         <div
-          v-if="heroId > 0"
+          v-if="heroId > 0 && updateId > 0"
           @click="
             $appOpenUrl(
               '是否查看英雄更多更新记录?',
@@ -143,8 +167,9 @@
             round
             color="orange"
             class="update-77ed43eb3bc38c0cb1a38367cfedd9d6"
-            >更多更新记录</van-tag
           >
+            更多更新记录
+          </van-tag>
         </div>
       </div>
     </div>
@@ -159,6 +184,16 @@
         :max-date="date.max"
         safe-area-inset-bottom
       />
+    </div>
+
+    <div class="hero-ec93fee7573d5d8daa4444009358e91b">
+      <van-action-sheet
+        v-model="showInfo.skillMenu"
+        title="其他数据 (近期)"
+        safe-area-inset-bottom
+      >
+        <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
+      </van-action-sheet>
     </div>
 
     <div class="update-25ad144033367c9bb904b06d66436d71">
@@ -194,6 +229,10 @@
 export default {
   name: "HeroUpdate",
   props: {
+    aid: {
+      type: Number,
+      default: 0,
+    },
     heroId: {
       type: Number,
       default: 0,
@@ -203,10 +242,14 @@ export default {
       default: 0,
     },
   },
+  components: {
+    HeroEquipmentListOne: () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
+  },
   computed: {
     listenChange() {
-      const { heroId, updateId } = this;
-      return { heroId, updateId };
+      const { aid, heroId, updateId } = this;
+      return { aid, heroId, updateId };
     },
   },
   watch: {
@@ -216,7 +259,7 @@ export default {
         //if (!newValue.heroId) return;
 
         if (this.$cookie.get("agree") == 1) {
-          this.getHeroUpdate(newValue.heroId);
+          this.getHeroUpdate(newValue.heroId, newValue.aid);
         }
       },
     },
@@ -224,6 +267,7 @@ export default {
   data() {
     return {
       copyData: "",
+      equipmentId: 0,
       date: {
         min: new Date(),
         max: new Date(),
@@ -250,6 +294,7 @@ export default {
         calendar: false,
         dialog: false,
         checked: false,
+        skillMenu: false,
       },
     };
   },
@@ -350,7 +395,7 @@ export default {
 
       return day;
     },
-    getHeroUpdate: function (heroId) {
+    getHeroUpdate: function (heroId, aid = 0) {
       let appConfigInfo = this.$appConfigInfo,
         date = new Date(),
         ts = this.$appTs,
@@ -364,13 +409,19 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId)
+        .post(
+          this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
+        )
         .then((res) => {
           this.tableData = res.data.data;
           this.tableData.updateTime = ts;
 
           this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
         });
+    },
+    onEquipmentClick: function (e, a) {
+      this.equipmentId = parseInt(e.equipment[a]) || 0;
+      this.showInfo.skillMenu = true;
     },
     onHeroUpdateTextCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);
