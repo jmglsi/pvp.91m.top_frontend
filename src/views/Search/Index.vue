@@ -359,7 +359,7 @@
                     出场
                   </span>
                   <span
-                    v-if="tableData.cardInfo.change.updateType != 0"
+                    v-if="tableData.cardInfo.change.updateValue != 0"
                     :style="
                       tableData.cardInfo.change.updateType == 2
                         ? { color: 'red' }

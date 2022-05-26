@@ -5,12 +5,15 @@
       :data="tableData.result.rows"
       :loading="tableData.loading"
       @cell-click="onCellClick"
-      height="543"
+      height="443"
     >
       <vxe-table-column
         title="玩家"
         field="gamePlayerName"
         fixed="left"
+        :title-help="{
+          content: $appMsg.tips[1014],
+        }"
         width="125"
       />
 

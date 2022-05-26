@@ -5,7 +5,7 @@
       :data="tableData.result.rows"
       :loading="tableData.loading"
       @cell-click="onCellClick"
-      height="543"
+      height="443"
     >
       <vxe-table-colgroup
         title="备战"
@@ -90,7 +90,7 @@
                 {{ row.allPickRate }}
               </div>
               <span
-                v-if="row.change.updateType != 0"
+                v-if="row.change.updateValue != 0"
                 :style="
                   row.change.updateType == 2
                     ? { color: 'red' }

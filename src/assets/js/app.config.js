@@ -32,8 +32,8 @@ Vue.prototype.$appConfigInfo = {
             timeout: 43200
         },
         search: {
-            img: null,
-            placeholder: null,
+            img: "//pic.rmb.bdstatic.com/bjh/a1ff89d5d173772aad6f144d7c7329d7.png",
+            placeholder: "加载中...",
             to: null,
             url: null,
         }

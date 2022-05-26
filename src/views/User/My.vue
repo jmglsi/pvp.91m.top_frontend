@@ -774,6 +774,8 @@ export default {
           this.$cookie.delete("accessToken");
           this.$cookie.delete("tempOpenId");
           this.$cookie.delete("tempAccessToken");
+
+          this.$appDelectAllLocalStorage();
         })
         .catch(() => {
           //on cancel

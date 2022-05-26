@@ -18,7 +18,7 @@
         ></div>
       </div>
 
-      <div class="app-3d1b70e46d0b6cd9cfa43d743da14266">
+      <div v-if="showInfo.app" class="app-3d1b70e46d0b6cd9cfa43d743da14266">
         <keep-alive v-if="$route.meta.keepAlive">
           <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
         </keep-alive>
@@ -140,6 +140,7 @@ export default {
         },
       },
       showInfo: {
+        app: false,
         hello: true,
         statusBar: true,
         whiteBar: false,
@@ -236,8 +237,11 @@ export default {
             });
           }
 
-          if (appInfo.tempText) this.$message.info(appInfo.tempText);
-          //临时登录的 1小时
+          if (appInfo.tempText) {
+            this.$message.info(appInfo.tempText);
+
+            this.$appDelectAllLocalStorage();
+          }
         } else {
           if (tempOpenId) {
             this.$cookie.set("openId", tempOpenId, { expires: "1h" });
@@ -250,6 +254,13 @@ export default {
             this.$message.warning(this.$appMsg.warning[tempText] || "未知错误");
           //快速登录的 7天
         }
+
+        /**
+         *
+         * 加载完后再显示模块
+         *
+         */
+        this.showInfo.app = true;
       });
     },
     onUrlClick: function (data) {
@@ -425,7 +436,7 @@ span.app-e4d23e841d8e8804190027bce3180fa5 {
 
 span.app-0fc3cfbc27e91ea60a787de13dae3e3c {
   font-size: @app-font-size;
-  margin-top: -7px;
+  margin-top: -6px;
   position: absolute;
   width: @app-width;
 }

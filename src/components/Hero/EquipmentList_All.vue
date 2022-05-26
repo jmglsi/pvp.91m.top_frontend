@@ -4,7 +4,7 @@
       ref="refHeroEquipmentListAll"
       :data="tableData.result.rows"
       :loading="tableData.loading"
-      height="543"
+      height="443"
     >
       <vxe-table-column
         title="技能"

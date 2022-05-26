@@ -1,15 +1,35 @@
 <template>
-  <div v-if="isPortrait" @click="isPortrait = false" class="game-bp-portrait">
+  <div v-if="isPortrait" class="game-bp-portrait">
     <div slot-scope class="game-a76e75b5854094183e66c274e1d276e9">
       <img
         v-lazy="
           '//pic.rmb.bdstatic.com/bjh/9fdf2ee01a51ab2f10f5a757d20edeab.png'
         "
+        @click="isPortrait = false"
         width="100"
         height="100"
+        class="game-7185d8bd2cbce5ad7c638a99095aee6c"
       />
-      <div class="game-b3d70a861f68652bf97d7a26bf421d4f">
-        请将设备横过来 或 点击这里切换横屏
+      <div
+        @click="isPortrait = false"
+        class="game-b3d70a861f68652bf97d7a26bf421d4f"
+      >
+        请将设备横过来 或 <span style="color: red">点击这里</span> 切换横屏
+      </div>
+      <div
+        @click="
+          $appOpenUrl(
+            '是否查看常见问题?',
+            null,
+            {
+              path: '//www.yuque.com/jmglsi/pvp/gbpl91',
+            },
+            0
+          )
+        "
+        class="game-b3d70a861f68652bf97d7a26bf421d4f"
+      >
+        第一次使用务必看一下 ➡️➡️➡️
       </div>
     </div>
   </div>
@@ -1678,6 +1698,10 @@ img.game-dce7c4174ce9323904a934a486c41288 {
   position: absolute;
 }
 
+img.game-7185d8bd2cbce5ad7c638a99095aee6c {
+  margin-bottom: 25px;
+}
+
 span.game-99e127c3f9d57b5d03327ebe8b1e4982 {
   margin-left: 20px;
   margin-right: 10px;
@@ -1750,7 +1774,6 @@ div.game-251504ba219ea8c3175f47b73bdde6e6 {
 }
 
 div.game-b3d70a861f68652bf97d7a26bf421d4f {
-  color: red;
   font-size: @app-font-size + 2px;
   margin-top: 15px;
 }

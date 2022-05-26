@@ -5,7 +5,7 @@
       :data="tableData.result.rows"
       :loading="tableData.loading"
       @cell-click="onCellClick"
-      height="543"
+      height="443"
     >
       <vxe-table-column title="英雄" fixed="left" field="heroId" width="50">
         <template #default="{ row }">
@@ -120,7 +120,7 @@
                 {{ row.pickRate }}
               </div>
               <span
-                v-if="row.change.updateType != 0"
+                v-if="row.change.updateValue != 0"
                 :style="
                   row.change.updateType == 2
                     ? { color: 'red' }
@@ -150,8 +150,6 @@
         <vxe-table-column
           title="胜率"
           field="winRate"
-          :filters="[{ data: 40, checked: true }]"
-          :filter-method="filterMethod"
           :width="listWidth"
           sortable
         >
@@ -308,10 +306,6 @@ export default {
 
       if (column.property == "pickRate") {
         return row.pickRate >= option.data;
-      }
-
-      if (column.property == "winRate") {
-        return row.winRate >= option.data;
       }
     },
     onCellClick: function ({ row, column }) {

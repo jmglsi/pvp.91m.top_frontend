@@ -152,7 +152,7 @@
                   {{ row.allPickRate }}
                 </div>
                 <span
-                  v-if="row.change.updateType != 0"
+                  v-if="row.change.updateValue != 0"
                   :style="
                     row.change.updateType == 2
                       ? { color: 'red' }

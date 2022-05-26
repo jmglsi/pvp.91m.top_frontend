@@ -229,12 +229,12 @@ export default {
         this.$appDelectLocalStorage("heroChartsLog");
         this.$appDelectLocalStorage("ranking");
       } else if (e == 1) {
+        this.$cookie.delete("agree");
+
         this.$appDelectLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
         this.$appDelectLocalStorage("appConfigInfo");
 
         this.$appDelectAllLocalStorage();
-
-        this.$cookie.delete("agree");
       } else if (e == 2) {
         this.$appDelectLocalStorage("gameBP");
       }
