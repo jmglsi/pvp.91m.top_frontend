@@ -107,7 +107,7 @@
                       <img
                         v-if="data.index <= 10"
                         v-lazy="
-                          $appApi.app.proxyImg +
+                          $appApi.app.proxy +
                           'https://pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
                         "
                         width="30"

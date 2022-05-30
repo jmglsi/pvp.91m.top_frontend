@@ -252,7 +252,6 @@ export default {
 
           if (tempText)
             this.$message.warning(this.$appMsg.warning[tempText] || "未知错误");
-          //快速登录的 7天
         }
 
         /**
@@ -262,6 +261,15 @@ export default {
          */
         this.showInfo.app = true;
       });
+
+      /**
+       * 
+       * 以防上方没加载完
+       * 
+       */
+      setTimeout(() => {
+        this.showInfo.app = true;
+      }, 500);
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(

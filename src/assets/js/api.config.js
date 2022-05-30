@@ -70,7 +70,7 @@ const loginApi = baseUrl + "/hero/v1/login.php";
 const biliApi = baseUrl + "/hero/v1/bilibili.php";
 
 const app = {
-    proxyImg: baseUrl + "/proxy/img?url="
+    proxy: baseUrl + "/p?url="
 }
 
 const bili = {
