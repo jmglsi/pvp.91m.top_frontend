@@ -297,7 +297,7 @@
                 </span>
               </template>
             </van-tab>
-            <van-tab :disabled="tableData.cardInfo.isNew">
+            <van-tab :disabled="tableData.cardInfo.id == 999">
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   备战推荐
@@ -305,10 +305,22 @@
                 <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
               </template>
             </van-tab>
-            <van-tab :disabled="tableData.cardInfo.isNew" title="攻速阈值" />
-            <van-tab :disabled="tableData.cardInfo.isNew" title="最低金牌" />
-            <van-tab :disabled="tableData.cardInfo.isNew" title="关系克制" />
-            <van-tab :disabled="tableData.cardInfo.isNew" title="对局回顾" />
+            <van-tab
+              :disabled="tableData.cardInfo.id == 999"
+              title="攻速阈值"
+            />
+            <van-tab
+              :disabled="tableData.cardInfo.id == 999"
+              title="最低金牌"
+            />
+            <van-tab
+              :disabled="tableData.cardInfo.id == 999"
+              title="关系克制"
+            />
+            <van-tab
+              :disabled="tableData.cardInfo.id == 999"
+              title="对局回顾"
+            />
           </van-tabs>
 
           <van-grid
