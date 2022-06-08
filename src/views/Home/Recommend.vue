@@ -324,7 +324,7 @@ export default {
           "home-3c873293a7dc1ea8c20579f6a7ae94a9"
         ),
         colorthief = new ColorThief(),
-        nowColor = "0,0,0";
+        nowColor = "0, 0, 0";
 
       Array.from(img).map((x, i) => {
         let nowRow = this.appHomeInfo.swipeInfo.result.rows[i];

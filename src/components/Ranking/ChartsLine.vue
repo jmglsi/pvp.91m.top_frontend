@@ -4,6 +4,7 @@
       <ve-line
         :init-options="{ renderer: 'svg' }"
         :extend="lineData.extend"
+        :mark-line="lineData.markLine"
         :data="charts"
         :after-config="afterConfig"
         height="175px"
@@ -17,6 +18,8 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
+import "echarts/lib/component/markLine";
+
 import "v-charts/lib/style.css";
 import "zrender/lib/svg/svg";
 
@@ -26,9 +29,9 @@ export default {
     VeLine,
   },
   props: {
-    color: {
-      type: String,
-      default: "",
+    trend: {
+      type: Number,
+      default: 0,
     },
     charts: {
       type: Object,
@@ -37,15 +40,21 @@ export default {
   },
   computed: {
     listenChange() {
-      const { color, charts } = this;
-      return { color, charts };
+      const { trend, charts } = this;
+      return { trend, charts };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.lineData.extend.color = newValue.color;
+        let nowColor = this.colorInfo[newValue.trend];
+
+        this.lineData.extend.color = nowColor;
+        this.lineData.extend.series.areaStyle.color.colorStops[0].color =
+          nowColor;
+        this.lineData.extend.series.areaStyle.color.colorStops[1].color =
+          nowColor;
         this.lineData.result = newValue.charts;
       },
     },
@@ -54,9 +63,39 @@ export default {
     return {
       lineData: {
         extend: {
-          color: [this.color],
+          color: ["orange"],
+          series: {
+            smooth: true,
+            areaStyle: {
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 0.75,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "white",
+                  },
+                  {
+                    offset: 0.25,
+                    color: "white",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(255, 255, 255, 0)",
+                  },
+                ],
+                global: false,
+              },
+            },
+          },
           xAxis: {
             show: false,
+            splitLine: {
+              show: false,
+            },
           },
           yAxis: {
             show: false,
@@ -75,10 +114,27 @@ export default {
             },
           },
         },
+        markLine: {
+          symbol: "none",
+          data: [
+            {
+              name: "超热门",
+              value: "超热门",
+              yAxis: 120,
+              itemStyle: {
+                color: "red",
+              },
+              label: {
+                formatter: " ",
+              },
+            },
+          ],
+        },
         result: {
           rows: [],
         },
       },
+      colorInfo: ["orange", "#4694d6", "red"],
     };
   },
   methods: {
@@ -95,3 +151,16 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="less">
+div.ranking-f879e7f0824fcc83d172401c3cb31b8a {
+  height: 50px;
+  overflow: hidden;
+  width: auto;
+}
+
+div.ranking-c934456eea80a3c5db05ed142c757e07 {
+  margin-top: -53px;
+  margin-left: -45px;
+}
+</style>

@@ -106,19 +106,19 @@
                   :preLoad="1"
                   class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
                 >
-                  <ChartsLine
-                    :color="colorInfo[row.trend]"
-                    :charts="{
-                      columns: lineData.result.columns,
-                      rows: lineData.result.rows[row.id],
-                    }"
-                  />
                   <img
                     v-if="row.trend > 0"
                     v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
                     width="15"
                     height="15"
                     class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
+                  />
+                  <ChartsLine
+                    :trend="row.trend"
+                    :charts="{
+                      columns: lineData.result.columns,
+                      rows: lineData.result.rows[row.id],
+                    }"
                   />
                 </lazy-component>
               </div>
@@ -533,7 +533,6 @@ export default {
       ],
       listWidth: 0,
       clientHeight: 0,
-      colorInfo: ["orange", "#4694d6", "red"],
       showInfo: {
         checked: false,
         skillMenu: false,
