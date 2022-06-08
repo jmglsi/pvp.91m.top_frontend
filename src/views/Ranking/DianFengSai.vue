@@ -48,13 +48,6 @@
                 height="50"
                 class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
-              <img
-                v-if="row.trend > 0"
-                v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
-                width="15"
-                height="15"
-                class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
-              />
               <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                 <img
                   v-lazy="row.skill.preview[0].img"
@@ -103,6 +96,34 @@
           title="出场越低，波动越大 (%)"
           :title-help="{ content: $appMsg.tips[1010] }"
         >
+          <vxe-column title="趋势" field="trend" width="100" sortable>
+            <template #default="{ row }">
+              <div :style="{ position: 'relative' }">
+                <span v-if="row.id == 999">-</span>
+
+                <lazy-component
+                  v-else
+                  :preLoad="1"
+                  class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
+                >
+                  <ChartsLine
+                    :color="colorInfo[row.trend]"
+                    :charts="{
+                      columns: lineData.result.columns,
+                      rows: lineData.result.rows[row.id],
+                    }"
+                  />
+                  <img
+                    v-if="row.trend > 0"
+                    v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
+                    width="15"
+                    height="15"
+                    class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
+                  />
+                </lazy-component>
+              </div>
+            </template>
+          </vxe-column>
           <vxe-column
             title="禁用"
             field="allBanRate"
@@ -200,6 +221,10 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
+            </template>
+            <template #default="{ row }">
+              <span v-if="row.id == 999">0</span>
+              <span v-else>{{ row.allBPRate }}</span>
             </template>
           </vxe-column>
           <vxe-column
@@ -429,6 +454,7 @@
 export default {
   name: "RankingDianFengSai",
   components: {
+    ChartsLine: () => import("@/components/Ranking/ChartsLine.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
@@ -473,6 +499,7 @@ export default {
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
+          this.getHeroChartsLog(6);
         }
       },
     },
@@ -492,6 +519,12 @@ export default {
         id: 0,
         name: "加载中...",
       },
+      lineData: {
+        result: {
+          columns: [],
+          rows: [],
+        },
+      },
       actions: [
         { name: "趋势", subname: "左下角喜欢一下", value: 0 },
         { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
@@ -500,6 +533,7 @@ export default {
       ],
       listWidth: 0,
       clientHeight: 0,
+      colorInfo: ["orange", "#4694d6", "red"],
       showInfo: {
         checked: false,
         skillMenu: false,
@@ -614,6 +648,46 @@ export default {
       if (bid == 3 && cid == 0) {
         this.$message.info(this.$appMsg.info[1011]);
       }
+    },
+    getHeroChartsLog: function (aid = 6, bid = 0, cid = 0, did = 0) {
+      let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
+        ls = this.$appGetLocalStorage(
+          "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did
+        );
+
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+        return (this.lineData = ls);
+      }
+
+      this.$axios
+        .post(
+          this.$appApi.pvp.getHeroChartsLog +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          this.lineData.status = status;
+
+          if (status.code == 200) {
+            this.lineData = data;
+            this.lineData.updateTime = ts;
+
+            this.$appSetLocalStorage(
+              "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did,
+              this.lineData
+            );
+          }
+        });
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "allBanRate") {
@@ -768,6 +842,7 @@ export default {
         nowChecked_int = 1;
 
         this.getRanking(0, this.bid, this.cid, this.did);
+        this.getHeroChartsLog(6);
       }
 
       this.showInfo.checked = nowChecked;

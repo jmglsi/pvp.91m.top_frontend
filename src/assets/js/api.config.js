@@ -12,9 +12,12 @@ import axios from 'axios';
 
 let url = location,
     nowQuery = Vue.prototype.$appQuery,
+    appUrl,
     baseUrl,
     baseHost = nowQuery.host || null,
     baseRef = nowQuery.ref || null;
+
+appUrl = "//91m.top";
 
 if (baseHost) {
     cookie.set("host", baseHost);
@@ -70,7 +73,7 @@ const loginApi = baseUrl + "/hero/v1/login.php";
 const biliApi = baseUrl + "/hero/v1/bilibili.php";
 
 const app = {
-    proxy: baseUrl + "/p?url="
+    proxy: appUrl + "/p?url="
 }
 
 const bili = {

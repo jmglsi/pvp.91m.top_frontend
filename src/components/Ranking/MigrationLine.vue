@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-line">
+  <div class="ranking-migration">
     <div class="ranking-63559bd374a437b89b36762811e4b809">
       <a-radio-group
         :value="viewInfo.model"
@@ -38,7 +38,7 @@ import "echarts/lib/component/title";
 import "v-charts/lib/style.css";
 
 export default {
-  name: "HeroLine",
+  name: "HeroMigration",
   components: {
     VeLine,
   },
@@ -155,7 +155,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-div.ranking-line {
+div.ranking-migration {
   margin: 25px 0;
 }
 

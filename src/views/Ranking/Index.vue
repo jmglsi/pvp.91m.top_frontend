@@ -53,7 +53,7 @@
               </div>
 
               <div v-else-if="viewInfo.model == 'c'">
-                <RankingLine :bid="cid || dfsPositionTypeInfo.model" />
+                <RankingMigrationLine :bid="cid || dfsPositionTypeInfo.model" />
               </div>
             </div>
 
@@ -156,7 +156,7 @@
           />
         </van-tab>
 
-        <van-tab>
+        <van-tab disabled>
           <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
 
           <div>
@@ -279,7 +279,8 @@ export default {
   components: {
     DianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
     RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
-    RankingLine: () => import("@/components/Ranking/Line.vue"),
+    RankingMigrationLine: () =>
+      import("@/components/Ranking/MigrationLine.vue"),
     GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
     WanJia: () => import("@/views/Ranking/WanJia.vue"),
     NeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
@@ -683,6 +684,17 @@ div.ranking-home {
   }
 }
 
+div.ranking-f879e7f0824fcc83d172401c3cb31b8a {
+  height: 50px;
+  overflow: hidden;
+  width: auto;
+}
+
+div.ranking-c934456eea80a3c5db05ed142c757e07 {
+  margin-top: -50px;
+  margin-left: -45px;
+}
+
 div.ranking-d742492b2526d57a222af9b54040b3b4 {
   left: 0;
   position: absolute;
@@ -807,8 +819,8 @@ div.ranking-31c631534a3cec9ed2c5283f653a06aa {
 
 div.ranking-e10ca73b79369d2183f81ca10fb587af {
   img.ranking-3d5f1ffeadf58eb64ef57aef7e53a31e {
-    margin-left: -2px;
-    margin-top: -12px;
+    margin-left: 25px;
+    margin-top: -60px;
     position: absolute;
     z-index: @app-z-index;
   }

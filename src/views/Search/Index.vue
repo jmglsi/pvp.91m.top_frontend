@@ -309,10 +309,7 @@
               :disabled="tableData.cardInfo.id == 999"
               title="攻速阈值"
             />
-            <van-tab
-              :disabled="tableData.cardInfo.id == 999"
-              title="最低金牌"
-            />
+            <van-tab disabled title="最低金牌" />
             <van-tab
               :disabled="tableData.cardInfo.id == 999"
               title="关系克制"

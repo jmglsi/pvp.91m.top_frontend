@@ -320,7 +320,6 @@
         <van-cell
           icon="description"
           title="项目开放接口"
-          label="需要样本，请联系我"
           value="Coding"
           is-link
           @click="
@@ -561,7 +560,7 @@ export default {
       copyData: null,
       login: {
         status: false,
-        text: "注册/登录/修改",
+        text: "注册 / 登录 / 修改",
       },
       isLogin: false,
       url: {
@@ -649,7 +648,7 @@ export default {
     } else {
       this.login = {
         status: false,
-        text: "注册/登录/修改",
+        text: "注册 / 登录 / 修改",
       };
     }
   },

@@ -19,6 +19,10 @@ module.exports = {
                         '/setting'
                     ],
                     renderer: new Renderer({
+                        inject: {
+                            foo: 'bar'
+                        },
+                        headless: true,
                         renderAfterDocumentEvent: 'render-event'
                     })
                 })

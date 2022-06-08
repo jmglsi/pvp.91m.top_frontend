@@ -263,9 +263,9 @@ export default {
       });
 
       /**
-       * 
+       *
        * 以防上方没加载完
-       * 
+       *
        */
       setTimeout(() => {
         this.showInfo.app = true;
@@ -373,7 +373,7 @@ img.app-32595defa680e058a9db0aaae36d6f46 {
 i.app-6de102c0bc4dc7f72ce287d6b0828052 {
   img.van-icon__image {
     border-radius: unset;
-    margin-top: -3px !important;
+    margin-top: 3px !important;
   }
 }
 
@@ -474,7 +474,7 @@ span.app-b0704b59dbf144bfeffb53bdb11d7128 {
   font-size: @app-font-size;
   left: 0;
   margin-left: 15px;
-  margin-top: -8px;
+  margin-top: -7px;
   width: 100%;
 }
 

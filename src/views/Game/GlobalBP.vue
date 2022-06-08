@@ -1090,11 +1090,25 @@ export default {
         }
       }, 1000);
     },
-    getRanking: function (gameTime = null, aid = 0, bid = 4, cid = 0, did = 1) {
+    getRanking: function (aid = 0, bid = 4, cid = 0, did = 1) {
       let ls = this.$appGetLocalStorage("gameBP");
 
       if (ls) {
         return (this.tableData = ls);
+      }
+
+      let nowTime = null,
+        gameTime = this.gameInfo.game.time;
+
+      if (gameTime) {
+        nowTime = gameTime;
+      } else {
+        let date = new Date(),
+          nowYear = date.getFullYear(),
+          nowMonth = date.getMonth() + 1,
+          nowDate = date.getDate();
+
+        nowTime = nowYear + "-" + nowMonth + "-" + nowDate;
       }
 
       this.$axios
@@ -1109,7 +1123,7 @@ export default {
             "&did=" +
             did,
           this.$qs.stringify({
-            gameTime: gameTime,
+            gameTime: nowTime,
           })
         )
         .then((res) => {

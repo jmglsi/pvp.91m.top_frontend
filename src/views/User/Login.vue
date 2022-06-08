@@ -27,20 +27,20 @@
           v-if="loginInfo.type == 0"
           left-icon="/img/app-icons/user.png"
           placeholder="请输入用户名 (仅支持中英文数字)"
-          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.email"
           left-icon="/img/app-icons/email.png"
           placeholder="请输入邮箱"
-          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.password"
           type="password"
           left-icon="/img/app-icons/password_lock.png"
           placeholder="请输入密码"
-          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.newPassword"
@@ -48,14 +48,14 @@
           type="password"
           left-icon="/img/app-icons/password_lock.png"
           placeholder="请输入新密码"
-          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.uin"
           v-if="loginInfo.type == 0"
           left-icon="/img/app-icons/qq.png"
-          placeholder="请输入QQ"
-          icon-prefix="login-e71832eb64a3978b00a7d37f407b158e app-6de102c0bc4dc7f72ce287d6b0828052"
+          placeholder="联系 QQ"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
       </van-cell-group>
     </div>
@@ -108,7 +108,7 @@
       <span class="app-e4c9479b11955648dad558fe717a4eb2">
         注:
         <br />1.信息是加密储存的
-        <br />2.用户名和QQ将用于扩列、BP界面、找回密码，请不要瞎写
+        <br />2.用户名 和 QQ 将用于扩列、BP界面、找回密码，请不要瞎写
       </span>
     </div>
 
