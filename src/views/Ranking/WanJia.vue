@@ -13,9 +13,9 @@
           field="userId"
           fixed="left"
           :filters="[
-            { label: '普通', data: 0 },
-            { label: '职业', data: 1 },
-            { label: '主播', data: 2 },
+            { data: 0, label: '普通' },
+            { data: 1, label: '职业' },
+            { data: 2, label: '主播' },
           ]"
           :filter-method="filterMethod"
           width="75"

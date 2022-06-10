@@ -13,13 +13,13 @@
           field="id"
           fixed="left"
           :filters="[
-            { label: '其他', data: 0 },
-            { label: '鞋子', data: 1 },
-            { label: '打野刀', data: 2 },
-            { label: '辅助装', data: 3 },
-            { label: '保命装', data: 4 },
-            { label: '终极装', data: 5 },
-            { label: '专精装', data: 6 },
+            { data: 0, label: '其他' },
+            { data: 1, label: '鞋子' },
+            { data: 2, label: '打野刀' },
+            { data: 3, label: '辅助装' },
+            { data: 4, label: '保命装' },
+            { data: 5, label: '终极装' },
+            { data: 6, label: '专精装' },
           ]"
           :filter-method="filterMethod"
           width="75"

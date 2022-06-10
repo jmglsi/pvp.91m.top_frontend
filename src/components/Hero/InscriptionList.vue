@@ -23,10 +23,10 @@
         title="大区"
         field="selareaId"
         :filters="[
-          { label: '安卓QQ', data: 1 },
-          { label: '苹果QQ', data: 2 },
-          { label: '安卓WX', data: 3 },
-          { label: '苹果WX', data: 4 },
+          { data: 1, label: '安卓QQ' },
+          { data: 2, label: '苹果QQ' },
+          { data: 3, label: '安卓WX' },
+          { data: 4, label: '苹果WX' },
         ]"
         :filter-method="filterMethod"
         :width="listWidth"

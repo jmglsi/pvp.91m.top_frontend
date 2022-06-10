@@ -18,12 +18,12 @@
             field="hero_1"
             :title="heroName ? '和' : '1'"
             :filters="[
-              { label: '对抗路 (战士)', data: 1 },
-              { label: '中路', data: 2 },
-              { label: '对抗路 (坦克)', data: 3 },
-              { label: '打野', data: 4 },
-              { label: '发育路', data: 5 },
-              { label: '游走', data: 6 },
+              { data: 1, label: '对抗路' },
+              { data: 2, label: '中路' },
+              //{ data: 3, label: '对抗路 (坦克)' },
+              { data: 4, label: '打野' },
+              { data: 5, label: '发育路' },
+              { data: 6, label: '游走' },
             ]"
             :filter-method="filterMethod"
             width="75"
@@ -60,12 +60,12 @@
             field="hero_2"
             :title="heroName ? '↓' : '2'"
             :filters="[
-              { label: '对抗路 (战士)', data: 1 },
-              { label: '中路', data: 2 },
-              { label: '对抗路 (坦克)', data: 3 },
-              { label: '打野', data: 4 },
-              { label: '发育路', data: 5 },
-              { label: '游走', data: 6 },
+              { data: 1, label: '对抗路' },
+              { data: 2, label: '中路' },
+              //{ data: 3, label: '对抗路 (坦克)' },
+              { data: 4, label: '打野' },
+              { data: 5, label: '发育路' },
+              { data: 6, label: '游走' },
             ]"
             :filter-method="filterMethod"
             width="75"

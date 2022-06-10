@@ -42,7 +42,6 @@ VXETable.setup({
             isHover: true
         },
         sortConfig: {
-            multiple: true,
             trigger: "cell"
         },
         scrollX: {

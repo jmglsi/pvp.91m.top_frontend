@@ -35,16 +35,16 @@
           title="技能"
           field="skillId"
           :filters="[
-            { label: '闪现', data: 80115 },
-            { label: '惩戒', data: 80104 },
-            { label: '干扰', data: 80105 },
-            { label: '净化', data: 80107 },
-            { label: '弱化', data: 80121 },
-            { label: '治疗', data: 80102 },
-            { label: '眩晕', data: 80103 },
-            { label: '斩杀', data: 80108 },
-            { label: '狂暴', data: 80110 },
-            { label: '疾跑', data: 80109 },
+            { data: 80115, label: '闪现' },
+            { data: 80104, label: '惩戒' },
+            { data: 80105, label: '干扰' },
+            { data: 80107, label: '净化' },
+            { data: 80121, label: '弱化' },
+            { data: 80102, label: '治疗' },
+            { data: 80103, label: '眩晕' },
+            { data: 80108, label: '斩杀' },
+            { data: 80110, label: '狂暴' },
+            { data: 80109, label: '疾跑' },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -68,11 +68,11 @@
           title="分路"
           field="positionId"
           :filters="[
-            { label: '对抗路', data: 0 },
-            { label: '中路', data: 1 },
-            { label: '发育路', data: 2 },
-            { label: '打野', data: 3 },
-            { label: '辅助', data: 4 },
+            { data: 0, label: '对抗路' },
+            { data: 1, label: '中路' },
+            { data: 2, label: '发育路' },
+            { data: 3, label: '打野' },
+            { data: 4, label: '辅助' },
           ]"
           :filter-method="filterMethod"
           width="75"
