@@ -245,7 +245,9 @@
           <van-cell
             :icon="tableData.cardInfo.id != 999 ? tableData.cardInfo.img : null"
             :title="
-              tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ')'
+              tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+                ? tableData.cardInfo.name
+                : tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ')'
             "
             :label="tableData.cardInfo.label"
             :value="tableData.cardInfo.value"
@@ -297,7 +299,11 @@
                 </span>
               </template>
             </van-tab>
-            <van-tab :disabled="tableData.cardInfo.id == 999">
+            <van-tab
+              :disabled="
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+              "
+            >
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   备战推荐
@@ -306,16 +312,22 @@
               </template>
             </van-tab>
             <van-tab
-              :disabled="tableData.cardInfo.id == 999"
+              :disabled="
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+              "
               title="攻速阈值"
             />
             <van-tab disabled title="最低金牌" />
             <van-tab
-              :disabled="tableData.cardInfo.id == 999"
+              :disabled="
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+              "
               title="关系克制"
             />
             <van-tab
-              :disabled="tableData.cardInfo.id == 999"
+              :disabled="
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+              "
               title="对局回顾"
             />
           </van-tabs>

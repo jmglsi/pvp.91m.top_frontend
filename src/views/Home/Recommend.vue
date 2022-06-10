@@ -17,8 +17,8 @@
           class="recommend-af03857fe372b964b53ef3a082c2b518"
         >
           <van-swipe
-            height="200"
             :autoplay="5000"
+            height="200"
             class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >
             <van-swipe-item
@@ -47,6 +47,7 @@
         <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
           <van-swipe
             @change="onSwipeChange"
+            :autoplay="25000"
             ref="refSkillMenu"
             class="app-1c17c2e6813dda8cab7978f50d30203c"
           >
@@ -138,7 +139,11 @@
                           @click="
                             $appPush({
                               path: '/search',
-                              query: { q: data.heroId, refresh: 1 },
+                              query: {
+                                q: data.heroId,
+                                show: 'heroSkill',
+                                refresh: 1,
+                              },
                             })
                           "
                           class="home-423fda2e543a1804accff6229de61143"
