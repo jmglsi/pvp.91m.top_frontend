@@ -31,13 +31,19 @@ VXETable.setup({
         align: "center",
         autoResize: true,
         border: "inner",
-        highlightCurrentRow: true,
-        highlightHoverRow: true,
-        resizable: true,
+        keepSource: true,
         showOverflow: null,
         stripe: true,
+        columnConfig: {
+            resizable: true
+        },
+        rowConfig: {
+            isCurrent: true,
+            isHover: true
+        },
         sortConfig: {
-            trigger: 'cell',
+            multiple: true,
+            trigger: "cell"
         },
         scrollX: {
             gt: -1

@@ -254,22 +254,17 @@ export default {
             this.$message.warning(this.$appMsg.warning[tempText] || "未知错误");
         }
 
-        /**
-         *
-         * 加载完后再显示模块
-         *
-         */
         this.showInfo.app = true;
       });
 
       /**
        *
-       * 以防上方没加载完
+       * 以防上方没加载完，加载完后再显示
        *
        */
       setTimeout(() => {
         this.showInfo.app = true;
-      }, 500);
+      }, 250);
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(

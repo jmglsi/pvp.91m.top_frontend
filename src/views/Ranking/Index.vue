@@ -14,6 +14,7 @@
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
               <span>顶端巅峰赛&nbsp;</span>
+
               <a-tooltip :visible="showInfo.dfsTips" placement="bottomRight">
                 <template slot="title">
                   <span>筛选移到这了</span>
@@ -114,7 +115,7 @@
             关系克制 (近期)&nbsp;<i class="vxe-icon--search" />
           </template>
 
-          <div>
+          <div class="ranking-f0bce2ae24464a70a3e9e78a1c36eea0">
             <GuanXi
               v-if="tabsInfo.model == 1"
               :isSmallMode="isSmallMode"
@@ -138,7 +139,7 @@
             </div>
           </template>
 
-          <div>
+          <div class="ranking-c48b544672dab7bc931d3c19985856d6">
             <WanJia
               v-if="tabsInfo.model == 2"
               :isSmallMode="isSmallMode"
@@ -159,7 +160,7 @@
         <van-tab disabled>
           <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
 
-          <div>
+          <div class="ranking-02481dbde39222ea29fbc1d2f80b2885">
             <PaiZi
               v-if="tabsInfo.model == 4"
               :isSmallMode="isSmallMode"
@@ -174,7 +175,7 @@
         <van-tab>
           <template #title>内战&nbsp;<i class="vxe-icon--funnel" /></template>
 
-          <div>
+          <div class="ranking-967b680d849350ecbc7c66ff16027608">
             <NeiZhan
               v-if="tabsInfo.model == 5"
               :isSmallMode="isSmallMode"

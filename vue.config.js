@@ -97,13 +97,13 @@ module.exports = {
                 .use(new CompressionWebpackPlugin({
                     filename: '[path].br[query]',
                     algorithm: 'brotliCompress',
-                    test: /\.(html|js|css)$/i,
+                    test: /\.(html|js|css)(\?.*)?$/i,
                     compressionOptions: {
                         params: {
                             [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
                         },
                     },
-                    threshold: 5120,
+                    threshold: 8192,
                     minRatio: 0.8,
                     deleteOriginalAssets: false
                 }))

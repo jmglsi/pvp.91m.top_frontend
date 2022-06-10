@@ -243,7 +243,11 @@
                     出装选择 <van-icon name="question-o" />
 
                     <template slot="content">
-                      <div>不同的出装有不同的打法</div>
+                      <div
+                        class="hero-equipment-d86e26348c6bcf5542c3a8fae2e2d1b0"
+                      >
+                        不同的出装有不同的打法
+                      </div>
                       <van-divider
                         :style="{
                           color: 'orange',

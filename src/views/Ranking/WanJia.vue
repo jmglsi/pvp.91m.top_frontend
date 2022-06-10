@@ -239,7 +239,7 @@
       </div>
     </div>
 
-    <div>
+    <div class="ranking-707bf3cdee24b2a21ec613ec27c66a11">
       <van-dialog
         v-model="showInfo.shareImg"
         @confirm="showInfo.shareImg = false"
