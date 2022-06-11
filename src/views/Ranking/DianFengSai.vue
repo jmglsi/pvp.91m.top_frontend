@@ -94,7 +94,7 @@
 
         <vxe-table-colgroup
           title="出场越低，波动越大 (%)"
-          :title-help="{ content: $appMsg.tips[1010] }"
+          :title-prefix="{ content: $appMsg.tips[1010] }"
         >
           <vxe-column title="趋势" field="trend" width="100" sortable>
             <template #default="{ row }">
@@ -103,7 +103,6 @@
 
                 <lazy-component
                   v-else
-                  :preLoad="1"
                   class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
                 >
                   <img
@@ -176,8 +175,8 @@
                   v-if="row.change.updateValue != 0"
                   :style="
                     row.change.updateType == 2
-                      ? { color: 'red' }
-                      : { color: 'blue' }
+                      ? { color: 'red !important' }
+                      : { color: 'blue !important' }
                   "
                   class="app-b0704b59dbf144bfeffb53bdb11d7128"
                 >

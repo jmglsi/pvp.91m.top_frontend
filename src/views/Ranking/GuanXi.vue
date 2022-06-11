@@ -12,7 +12,7 @@
         <vxe-table-colgroup
           fixed="left"
           :title="heroName ? heroName : '推荐'"
-          :title-help="{ content: $appMsg.tips[1009] }"
+          :title-prefix="{ content: $appMsg.tips[1009] }"
         >
           <vxe-table-column
             field="hero_1"
@@ -103,7 +103,7 @@
 
         <vxe-table-colgroup
           title="队友 (%)"
-          :title-help="{ content: $appMsg.tips[1005] }"
+          :title-prefix="{ content: $appMsg.tips[1005] }"
         >
           <vxe-table-column
             title="出场"
@@ -176,7 +176,7 @@
 
         <vxe-table-colgroup
           title="对手 (%)"
-          :title-help="{
+          :title-prefix="{
             content:
               '两个英雄不同队伍时，【' +
               (heroName ? heroName : '1') +

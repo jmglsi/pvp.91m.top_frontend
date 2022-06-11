@@ -25,10 +25,22 @@
                 class="game-987e845860b29a0bb6ca902ba902b4f2"
               >
                 <van-grid-item
-                  :text="data.team_1.name"
-                  :icon="data.team_1.logo"
                   icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
-                />
+                >
+                  <template #icon>
+                    <img
+                      v-lazy="data.team_1.logo"
+                      width="50"
+                      height="50"
+                      class="game-1ab74bf7276acc5985f078fee7e63109"
+                    />
+                  </template>
+                  <template #text>
+                    <div class="app-82f6ee2b57fb59b0b7b3803164d6b9d8">
+                      {{ data.team_1.name }}
+                    </div>
+                  </template>
+                </van-grid-item>
                 <van-grid-item>
                   <span class="app-07cc694b9b3fc636710fa08b6922c42b">
                     {{ data.game.time }}
@@ -36,10 +48,22 @@
                   <span class="app-f4842dcb685d490e2a43212b8072a6fe">Vs</span>
                 </van-grid-item>
                 <van-grid-item
-                  :text="data.team_2.name"
-                  :icon="data.team_2.logo"
                   icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
-                />
+                >
+                  <template #icon>
+                    <img
+                      v-lazy="data.team_2.logo"
+                      width="50"
+                      height="50"
+                      class="game-1ab74bf7276acc5985f078fee7e63109"
+                    />
+                  </template>
+                  <template #text>
+                    <div class="app-82f6ee2b57fb59b0b7b3803164d6b9d8">
+                      {{ data.team_2.name }}
+                    </div>
+                  </template>
+                </van-grid-item>
               </van-grid>
             </div>
           </template>

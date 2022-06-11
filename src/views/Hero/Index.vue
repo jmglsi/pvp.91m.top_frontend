@@ -139,7 +139,7 @@ div.hero-b7b5e31b028440d2e0e0157baad49513 {
 
 div.hero-83444807ba7a7da23e12b17567d2d595 {
   div.van-circle__text {
-    color: white;
+    color: white !important;
   }
 }
 

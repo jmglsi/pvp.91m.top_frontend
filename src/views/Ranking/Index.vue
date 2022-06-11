@@ -256,9 +256,9 @@
       <van-divider
         :style="{
           padding: '0 15px',
-          color: 'rgb(243, 189, 103)',
+          color: 'rgb(243, 189, 103) !important',
           marginTop: '-3px',
-          borderColor: 'rgb(243, 189, 103)',
+          borderColor: 'rgb(243, 189, 103) !important',
         }"
         @click="$message.info($appMsg.info[1012])"
       >
@@ -642,7 +642,7 @@ span.ranking-7de1b8678bf87a631bd5f2c2b70a1214 {
 }
 
 span.ranking-5cb6f4cb579d8c69b973e0fec7239056 {
-  color: red;
+  color: red !important;
   font-size: @app-font-size;
   margin-left: -10px;
   margin-top: 10px;

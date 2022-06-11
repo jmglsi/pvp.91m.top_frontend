@@ -13,7 +13,7 @@
           field="userId"
           fixed="left"
           width="75"
-          :title-help="{ content: $appMsg.tips[1006] }"
+          :title-prefix="{ content: $appMsg.tips[1006] }"
         >
           <template #default="{ row, rowIndex }">
             <van-tag
@@ -79,8 +79,18 @@
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               <div v-if="row.status == 0">空闲</div>
-              <div v-else-if="row.status == 1" style="color: blue">队列中</div>
-              <div v-else-if="row.status == 2" style="color: red">对局中</div>
+              <div
+                v-else-if="row.status == 1"
+                :style="{ color: 'blue !important' }"
+              >
+                队列中
+              </div>
+              <div
+                v-else-if="row.status == 2"
+                :style="{ color: 'red !important' }"
+              >
+                对局中
+              </div>
             </div>
           </template>
         </vxe-column>
@@ -120,7 +130,11 @@
                   class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                 />
                 <div
-                  :style="index < 5 ? { color: 'blue' } : { color: 'red' }"
+                  :style="
+                    index < 5
+                      ? { color: 'blue !important' }
+                      : { color: 'red !important' }
+                  "
                   class="ranking-561f33b3e8f36a8c9cdf1a5a3b099497"
                 >
                   {{ data.gamePlayerName }}

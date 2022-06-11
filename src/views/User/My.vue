@@ -786,7 +786,7 @@ export default {
 
 <style scoped lang="less">
 img.my-ef65f15f01e7d076cc4ef40d753e4d65 {
-  background-color: white;
+  background-color: white !important;
   border-radius: 100%;
   margin-left: -26px;
   margin-top: 71px;

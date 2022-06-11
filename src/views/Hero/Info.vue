@@ -28,8 +28,8 @@
             <span
               :style="
                 scroll >= 50 || tabsInfo.model > 0
-                  ? { color: 'black' }
-                  : { color: 'white' }
+                  ? { color: 'black !important' }
+                  : { color: 'white !important' }
               "
               class="hero-d5d3db1765287eef77d7927cc956f50a"
             >
@@ -294,7 +294,6 @@
       <van-skeleton v-if="showInfo.skeleton" :row="30" />
 
       <lazy-component
-        :preLoad="1"
         @show="onComponentShow"
         class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
       >
@@ -361,9 +360,9 @@
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
         <van-grid
-          class="hero-ed90360246f7e2ed71281819e0ca3623"
           :border="false"
           :column-num="2"
+          class="hero-ed90360246f7e2ed71281819e0ca3623"
         >
           <van-grid-item
             class="hero-59c25466342abdb6746988b245f3a5a6"

@@ -281,12 +281,12 @@ div.login-f01ae8c7f2d058ec6be00db589a32bea {
 }
 
 div.login-60ae25445ac62d5ec51c776826888d9f {
-  color: #1989fa;
+  color: #1989fa  !important;
   left: 25px;
 }
 
 div.login-4ae1ffb5939d592986bed21d0913562d {
-  color: red;
+  color: red  !important;
   right: 25px;
 }
 

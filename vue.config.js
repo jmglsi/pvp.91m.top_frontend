@@ -1,6 +1,6 @@
-const zlib = require("zlib")
-const Path = require("path")
-const CompressionWebpackPlugin = require("compression-webpack-plugin")
+const zlib = require('zlib')
+const Path = require('path')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
@@ -79,7 +79,7 @@ module.exports = {
             }
 
             config.externals = {
-                qc: "QC"
+                qc: 'QC'
             }
         }
     },
@@ -97,23 +97,21 @@ module.exports = {
                 .use(new CompressionWebpackPlugin({
                     filename: '[path].br[query]',
                     algorithm: 'brotliCompress',
-                    test: /\.(html|js|css)(\?.*)?$/i,
+                    test: /\.(js|css|html|svg)$/,
                     compressionOptions: {
                         params: {
                             [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
                         },
                     },
-                    threshold: 8192,
+                    threshold: 5120,
                     minRatio: 0.8,
                     deleteOriginalAssets: false
                 }))
-                .end()
-
-            config.resolve.alias
-                .set('@ant-design/icons/lib$', Path.resolve(__dirname, "./src/assets/import/antd-icons.js"))
-                .end()
 
             config.plugins.delete('prefetch')
+
+            config.resolve.alias
+                .set('@ant-design/icons/lib/dist$', Path.resolve(__dirname, './src/assets/import/antd-icons.js'));
         }
     },
     css: {
@@ -121,7 +119,7 @@ module.exports = {
             less: {
                 javascriptEnabled: true,
                 modifyVars: {
-                    hack: 'true; @import "' + Path.resolve(__dirname, "./src/assets/less/config.less") + '";'
+                    hack: 'true; @import "' + Path.resolve(__dirname, './src/assets/less/config.less') + '";'
                 }
             }
         },

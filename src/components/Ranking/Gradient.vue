@@ -9,7 +9,7 @@
         >
           <template #title>
             T<span
-              :style="{ color: 'red', fontSize: '30px' }"
+              :style="{ color: 'red !important', fontSize: '30px' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
               >0</span
             >
@@ -75,7 +75,7 @@
         >
           <template #title>
             T<span
-              :style="{ color: '#fa8072' }"
+              :style="{ color: '#fa8072 !important' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
               >0.5</span
             >
@@ -145,7 +145,7 @@
         >
           <template #title>
             T<span
-              :style="{ color: 'orange' }"
+              :style="{ color: 'orange !important' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
               >1</span
             >
@@ -214,7 +214,7 @@
         >
           <template #title>
             T<span
-              :style="{ color: '#3d9140' }"
+              :style="{ color: '#3d9140 !important' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
               >2</span
             >
@@ -407,7 +407,7 @@
     <div class="ranking-2862744e5d7cce9d070aa41172557d78">
       英雄梯度由
       <span
-        :style="{ color: '#1989fa' }"
+        :style="{ color: '#1989fa !important' }"
         @click="
           $appPush({ path: '/friends?openId=8701875c7834f26c7794876584c59cd3' })
         "

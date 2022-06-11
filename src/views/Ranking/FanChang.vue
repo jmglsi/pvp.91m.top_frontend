@@ -58,7 +58,7 @@
                 </div>
                 <div>
                   <span
-                    :style="{ color: topInfo[1].tag.color }"
+                    :style="{ color: topInfo[1].tag.color + '  !important' }"
                     class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     2
@@ -76,7 +76,9 @@
               <br />
               <span
                 :style="
-                  topInfo[1].needTime > 0 ? { color: 'red' } : { color: 'blue' }
+                  topInfo[1].needTime > 0
+                    ? { color: 'red !important' }
+                    : { color: 'blue !important' }
                 "
               >
                 还差:{{ topInfo[1].needVote }} 万
@@ -111,7 +113,7 @@
                 </div>
                 <div>
                   <span
-                    :style="{ color: topInfo[0].tag.color }"
+                    :style="{ color: topInfo[0].tag.color + ' !important' }"
                     class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     1
@@ -156,7 +158,7 @@
                 </div>
                 <div>
                   <span
-                    :style="{ color: topInfo[2].tag.color }"
+                    :style="{ color: topInfo[2].tag.color + ' !important' }"
                     class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     3
@@ -174,7 +176,9 @@
               <br />
               <span
                 :style="
-                  topInfo[2].needTime > 0 ? { color: 'red' } : { color: 'blue' }
+                  topInfo[2].needTime > 0
+                    ? { color: 'red !important' }
+                    : { color: 'blue !important' }
                 "
               >
                 还差:{{ topInfo[2].needVote }} 万
@@ -239,7 +243,9 @@
                 <span
                   v-if="row.needVote > 0"
                   :style="
-                    row.needTime > 0 ? { color: 'red' } : { color: 'blue' }
+                    row.needTime > 0
+                      ? { color: 'red !important' }
+                      : { color: 'blue !important' }
                   "
                   class="ranking-ad602d217564b616b293eac07fc53138"
                 >
@@ -476,7 +482,7 @@ span.ranking-ad602d217564b616b293eac07fc53138 {
 }
 
 span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
-  color: #1989fa;
+  color: #1989fa !important;
 }
 
 div.return-58206caebd18d792f59aa1ec064f65d1 {

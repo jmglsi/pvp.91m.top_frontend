@@ -290,39 +290,39 @@ export default {
 }
 
 .app-bda9643ac6601722a28f238714274da4 {
-  color: red;
+  color: red !important;
 }
 
 .app-ee3e4aec9bcaaaf72cd0c59e8a0f477d {
-  color: orange;
+  color: orange !important;
 }
 
 .app-9f27410725ab8cc8854a2769c7a516b8 {
-  color: green;
+  color: green !important;
 }
 
 .app-48d6215903dff56238e52e8891380c8f {
-  color: blue;
+  color: blue !important;
 }
 
 .app-fdc229c08af23dac1a0e8caac88a239d {
-  color: purple;
+  color: purple !important;
 }
 
 .app-d7a506baa20bdbe9daaa1366348175a9 {
-  color: rgb(222, 177, 81);
+  color: rgb(222, 177, 81) !important;
 }
 
 .app-53f544c1e6fce0feac70340d481ad2ed {
-  color: rgb(35, 124, 123);
+  color: rgb(35, 124, 123) !important;
 }
 
 .app-8a900759792c14b84891392b9f0e360d {
-  color: black;
+  color: black !important;
 }
 
 .app-5f19eaf71f40d74d66be84db52b3ad87 {
-  color: white;
+  color: white !important;
   text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
 }
 
@@ -414,7 +414,7 @@ button.app-4236a440a662cc8253d7536e5aa17942 {
   width: 150px;
 
   span.van-button__text {
-    color: red;
+    color: red !important;
   }
 }
 
@@ -449,18 +449,18 @@ span.app-07cc694b9b3fc636710fa08b6922c42b {
 }
 
 span.app-f4842dcb685d490e2a43212b8072a6fe {
-  color: #969799;
+  color: #969799 !important;
   font-size: @app-font-size;
 }
 
 span.app-dac41b9450b77c3eb0ab7d8428d004f5 {
-  color: #969799;
+  color: #969799 !important;
   font-size: @app-font-size;
   margin: 0 15px;
 }
 
 span.app-e4c9479b11955648dad558fe717a4eb2 {
-  color: red;
+  color: red !important;
   font-size: @app-font-size;
 }
 
@@ -515,8 +515,13 @@ div.app-52b0e5c90604d59d1814f184d58e2033 {
   white-space: nowrap;
 }
 
+div.app-82f6ee2b57fb59b0b7b3803164d6b9d8 {
+  font-size: @app-font-size + 2px;
+  margin-top: 5px;
+}
+
 div.app-5ddd8715c99cbf00677a622145b3c163 {
-  color: gray;
+  color: gray !important;
   font-size: @app-font-size;
   margin: 5px 0;
   text-align: center;
@@ -556,7 +561,7 @@ div.app-0ca41257ee36e86e5d89591c82113263 {
 
   div.van-image-preview__cover {
     bottom: 35px;
-    color: white;
+    color: white !important;
     top: unset;
     width: 100%;
   }

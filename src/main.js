@@ -32,7 +32,7 @@ import store from './assets/js/store.config';
 router.beforeEach((to, from, next) => {
     store.state.previousPage.push(from);
 
-    document.title = to.meta.title + " | " + Vue.prototype.$appConfigInfo.appInfo.name;
+    document.title = to.meta.title + ' | ' + Vue.prototype.$appConfigInfo.appInfo.name;
     document.body.scrollTop = document.documentElement.scrollTop = 0;
 
     next();

@@ -11,7 +11,7 @@
         title="玩家"
         field="gamePlayerName"
         fixed="left"
-        :title-help="{
+        :title-prefix="{
           content: $appMsg.tips[1014],
         }"
         width="125"
@@ -36,7 +36,7 @@
       <vxe-table-column
         title="战力"
         field="heroFightPower"
-        :title-help="{
+        :title-prefix="{
           content: '非实时\n' + $appMsg.tips[1013],
         }"
         :width="listWidth"

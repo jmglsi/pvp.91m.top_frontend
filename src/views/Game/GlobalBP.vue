@@ -14,7 +14,8 @@
         @click="isPortrait = false"
         class="game-b3d70a861f68652bf97d7a26bf421d4f"
       >
-        请将设备横过来 或 <span style="color: red">点击这里</span> 切换横屏
+        请将设备横过来 或
+        <span :style="{ color: 'red !important' }">点击这里</span> 切换横屏
       </div>
       <div
         @click="
@@ -42,14 +43,14 @@
     >
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
-        :style="{ color: 'blue' }"
+        :style="{ color: 'blue !important' }"
       >
         {{ gameInfo.result.rows[tabsInfo.model].team.team_1.name }}
       </span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
-        :style="{ color: 'red' }"
+        :style="{ color: 'red !important' }"
       >
         {{ gameInfo.result.rows[tabsInfo.model].team.team_2.name }}
       </span>
@@ -239,6 +240,7 @@
             >
               <van-tab
                 v-for="(data, index) in heroType"
+                :disabled="index == 3"
                 :key="'game-687df0d960fe6dade3153dc0ba925e79-' + index"
                 :title="data"
               />
@@ -455,7 +457,11 @@
             倒计时:
             <span
               class="game-0db3e75efe3faa0cee4451fb55bc4c53"
-              :style="bpCountdown < 10 ? { color: 'red' } : { color: 'blue' }"
+              :style="
+                bpCountdown < 10
+                  ? { color: 'red !important' }
+                  : { color: 'blue !important' }
+              "
             >
               {{ bpCountdown }}
             </span>
@@ -532,7 +538,7 @@
           <span>
             <span
               class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-              :style="{ color: 'red' }"
+              :style="{ color: 'red !important' }"
             >
               已禁
             </span>
@@ -548,7 +554,7 @@
           <span>
             <span
               class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-              :style="{ color: 'orange' }"
+              :style="{ color: 'orange !important' }"
             >
               已用
             </span>
@@ -569,7 +575,7 @@
             <span>
               <span
                 class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-                :style="{ color: '#1989fa' }"
+                :style="{ color: '#1989fa !important' }"
               >
                 推荐
               </span>
@@ -717,7 +723,9 @@
             交换位置
           </van-button>
         </div>
-        <van-divider :style="{ color: 'red', borderColor: 'red' }">
+        <van-divider
+          :style="{ color: 'red !important', borderColor: 'red !important' }"
+        >
           以下功能慎用
         </van-divider>
         <div class="game-b517e39eb99fd590ac1df412b5c84007">
@@ -762,13 +770,18 @@
           :disabled="tabsInfo.model != index && bpMode != 'view' ? true : false"
         >
           <template #title>
-            <van-icon
-              :name="gameInfo.result.rows[index].win.logo"
-              class-prefix="game-8d74837b1dc10576d7757cfd35b4661d"
-            />&nbsp;
+            <img
+              v-if="gameInfo.result.rows[index].win.logo"
+              v-lazy="gameInfo.result.rows[index].win.logo"
+              width="14"
+              height="14"
+              class="game-8d74837b1dc10576d7757cfd35b4661d"
+            />
             <span
               class="game-f88456e481c26446fec30dd5685e46f4"
-              :style="{ color: gameInfo.result.rows[index].win.color }"
+              :style="{
+                color: gameInfo.result.rows[index].win.color + ' !important',
+              }"
             >
               {{ index == 6 ? "巅峰对决" : "第 " + (index + 1) + " 局" }}
             </span>
@@ -795,7 +808,7 @@ export default {
       gameLabel: this.$route.params.id || "",
       heroType: [
         "全部分路",
-        "对抗路 (战士)",
+        "对抗路",
         "中路",
         "对抗路 (坦克)",
         "打野",
@@ -1138,9 +1151,14 @@ export default {
 
             this.tableData.result = data.result;
 
-            this.initBPOrder(this.bpPerspective, 0);
-
             this.$appSetLocalStorage("gameBP", this.tableData);
+
+            /**
+             *
+             * 得在之后初始化，否则 isBan、isUsed 可能会被覆盖
+             *
+             */
+            this.initBPOrder(this.bpPerspective, 0);
 
             this.$message.success(this.$appMsg.success[1005]);
           } else {
@@ -1716,6 +1734,11 @@ img.game-7185d8bd2cbce5ad7c638a99095aee6c {
   margin-bottom: 25px;
 }
 
+img.game-8d74837b1dc10576d7757cfd35b4661d {
+  margin-top: -5px;
+  margin-right: 3px;
+}
+
 span.game-99e127c3f9d57b5d03327ebe8b1e4982 {
   margin-left: 20px;
   margin-right: 10px;
@@ -1823,12 +1846,6 @@ img.game-99b844b6785d8d7378bbc2b1401af365 {
   100% {
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.6),
       inset 0 0 10px rgba(255, 0, 0, 0.4);
-  }
-}
-
-i.game-8d74837b1dc10576d7757cfd35b4661d {
-  img.van-icon__image {
-    margin-top: -3px;
   }
 }
 

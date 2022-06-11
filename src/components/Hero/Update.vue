@@ -482,7 +482,7 @@ span.update-50d683cbc99c635a03f18ca2fcfbe70b {
 }
 
 span.update-f0af832cbd923851be8557213d95dddc {
-  color: rgb(63, 169, 255);
+  color: rgb(63, 169, 255) !important;
 }
 
 div.update-3490d5ece19a8f958d2be068e27f636a {

@@ -1,35 +1,22 @@
-export { //error
-    default as CloseCircleFill
-}
-from '@ant-design/icons/lib/fill/CloseCircleFill';
+export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill';
+//error
 
-export { //info
-    default as InfoCircleFill
-}
-from '@ant-design/icons/lib/fill/InfoCircleFill';
+export { default as InfoCircleFill } from '@ant-design/icons/lib/fill/InfoCircleFill';
+//info
 
-export { //success
-    default as CheckCircleFill
-}
-from '@ant-design/icons/lib/fill/CheckCircleFill';
+export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCircleFill';
+//success
 
-export { //warning
-    default as ExclamationCircleFill
-}
-from '@ant-design/icons/lib/fill/ExclamationCircleFill';
+export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/ExclamationCircleFill';
+//warning
 
-export { //loading
-    default as LoadingOutline
-}
-from '@ant-design/icons/lib/outline/LoadingOutline';
+export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline';
+//loading
 
-export { //search
-    default as SearchOutline
-}
-from '@ant-design/icons/lib/outline/SearchOutline';
+export { default as SearchOutline } from '@ant-design/icons/lib/outline/SearchOutline';
+//search
 
-export { //close
-    default as CloseOutline
-}
-from '@ant-design/icons/lib/outline/CloseOutline';
+export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline';
+//close
+
 //导出需要的图标

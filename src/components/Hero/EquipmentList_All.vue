@@ -31,7 +31,7 @@
 
       <vxe-table-colgroup
         title="最终结果，空的就是没出"
-        :title-help="{ content: $appMsg.tips[1000] }"
+        :title-prefix="{ content: $appMsg.tips[1000] }"
       >
         <vxe-table-column
           v-for="(data, index) in 6"

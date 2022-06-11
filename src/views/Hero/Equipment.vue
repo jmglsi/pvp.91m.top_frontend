@@ -152,8 +152,8 @@
             <van-sidebar-item title="描述" />
             <van-divider
               :style="{
-                color: 'orange',
-                borderColor: 'orange',
+                color: 'orange !important',
+                borderColor: 'orange !important',
                 padding: '0 16px',
               }"
             />
@@ -250,8 +250,8 @@
                       </div>
                       <van-divider
                         :style="{
-                          color: 'orange',
-                          borderColor: 'orange',
+                          color: 'orange !important',
+                          borderColor: 'orange !important',
                           padding: '0 8px',
                         }"
                       />
@@ -822,7 +822,7 @@ a.hero-equipment-61b5514f16614481c1eb3b3219cfd112 {
 }
 
 img.hero-equipment-464e0def3c0912855013b4af9a3c312e {
-  background-color: white;
+  background-color: white !important;
   position: absolute;
   bottom: -3px;
   margin-left: -13px;
@@ -842,11 +842,11 @@ img.hero-equipment-046bda3addab352133049c67c32859c2 {
 }
 
 span.hero-equipment-d1ce62e9288a1640df00006f274c0910 {
-  color: red;
+  color: red !important;
 }
 
 span.hero-equipment-32e99218b3e9a25c3ca08b8ff83c7620 {
-  color: gray;
+  color: gray !important;
   font-size: @app-font-size;
 }
 
@@ -855,7 +855,7 @@ span.hero-equipment-8a0ef47dc7fb94fd86ca714928f64401 {
 }
 
 span.hero-equipment-8723cf2d0377e86f7f75c09ae7a76a55 {
-  color: gray;
+  color: gray !important;
   position: absolute;
   right: 10px;
 }
@@ -869,7 +869,7 @@ div.van-sidebar {
 }
 
 div.van-sidebar {
-  background-color: #f7f8fa;
+  background-color: #f7f8fa !important;
   position: fixed;
 }
 

@@ -46,7 +46,7 @@
                   height="50"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
+                <div class="app-82f6ee2b57fb59b0b7b3803164d6b9d8">
                   {{ data.team_1.name }}
                 </div>
               </van-col>
@@ -64,7 +64,7 @@
                   height="50"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-                <div class="game-82f6ee2b57fb59b0b7b3803164d6b9d8">
+                <div class="app-82f6ee2b57fb59b0b7b3803164d6b9d8">
                   {{ data.team_2.name }}
                 </div>
               </van-col>

@@ -36,11 +36,23 @@
         <van-grid-item
           v-for="(data, index) in tableData.result.rows"
           :key="'app-a15836c76bf09c02a9181d1dee61315b-' + index"
-          :text="data.name"
-          :icon="data.logo"
           icon-prefix="app-b10034712510883e9d2c45b4ec90772d"
           @click="onUpdateTeamClick(data, index)"
-        />
+        >
+          <template #icon>
+            <img
+              v-lazy="data.logo"
+              width="50"
+              height="50"
+              class="game-1ab74bf7276acc5985f078fee7e63109"
+            />
+          </template>
+          <template #text>
+            <div class="app-82f6ee2b57fb59b0b7b3803164d6b9d8">
+              {{ data.name }}
+            </div>
+          </template>
+        </van-grid-item>
       </van-grid>
     </div>
 

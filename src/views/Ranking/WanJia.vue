@@ -86,7 +86,7 @@
           field="commonlyUsed"
           width="325"
           align="left"
-          :title-help="{ content: $appMsg.tips[1007] }"
+          :title-prefix="{ content: $appMsg.tips[1007] }"
         >
           <template #default="{ row }">
             <div
@@ -226,7 +226,7 @@
       <div class="ranking-2862744e5d7cce9d070aa41172557d78">
         国服数据由
         <span
-          :style="{ color: '#1989fa' }"
+          :style="{ color: '#1989fa !important' }"
           @click="
             $appPush({
               path: '/friends?openId=f2abc2e39c22c3879df227abfc8d7d34',

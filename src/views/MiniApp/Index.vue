@@ -259,7 +259,7 @@ img.miniapp-2259b1e5ad5ffd24b6fd4dcd1a89f19e {
 }
 
 span.miniapp-9ad284a8297802bd67af0356d21ae35f {
-  color: #1989fa;
+  color: #1989fa !important;
 }
 
 div.miniapp-bb351527dd7ab2526a28e42d9e17ddf3 {

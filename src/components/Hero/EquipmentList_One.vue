@@ -10,7 +10,7 @@
       <vxe-table-colgroup
         title="备战"
         fixed="left"
-        :title-help="{ content: $appMsg.tips[1001] }"
+        :title-prefix="{ content: $appMsg.tips[1001] }"
       >
         <vxe-table-column title="英雄" field="heroId" width="50">
           <template #default="{ row }">
@@ -54,14 +54,14 @@
       <vxe-table-column
         title="顺位"
         field="maxIndex"
-        :title-help="{ content: $appMsg.tips[1012] }"
+        :title-prefix="{ content: $appMsg.tips[1012] }"
         :width="listWidth"
         sortable
       />
 
       <vxe-table-colgroup
         title="全部 (%)"
-        :title-help="{ content: $appMsg.tips[1002] }"
+        :title-prefix="{ content: $appMsg.tips[1002] }"
       >
         <vxe-table-column
           title="出场"
@@ -93,8 +93,8 @@
                 v-if="row.change.updateValue != 0"
                 :style="
                   row.change.updateType == 2
-                    ? { color: 'red' }
-                    : { color: 'blue' }
+                    ? { color: 'red !important' }
+                    : { color: 'blue !important' }
                 "
                 class="app-b0704b59dbf144bfeffb53bdb11d7128"
               >

@@ -21,7 +21,7 @@
             <div
               :style="
                 $appIsApple && $appConfigInfo.appInfo.pwa == 1
-                  ? { color: '#fff' }
+                  ? { color: '#fff !important' }
                   : {}
               "
               @click="$appPushBack()"
@@ -87,7 +87,7 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange' }"
+                          :style="{ color: 'orange !important' }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -96,7 +96,7 @@
                           v-else
                           :style="
                             index < 3 + tableData.search.hotKeywords[0].topNum
-                              ? { color: 'red' }
+                              ? { color: 'red !important' }
                               : {}
                           "
                           class="search-f43418d85f50da28b3a9c1e780237105"
@@ -141,7 +141,7 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange' }"
+                          :style="{ color: 'orange !important' }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -175,7 +175,7 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange' }"
+                          :style="{ color: 'orange !important' }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -383,8 +383,8 @@
                     v-if="tableData.cardInfo.change.updateValue != 0"
                     :style="
                       tableData.cardInfo.change.updateType == 2
-                        ? { color: 'red' }
-                        : { color: 'blue' }
+                        ? { color: 'red !important' }
+                        : { color: 'blue !important' }
                     "
                     class="search-cad25b2e05f6e21804b99605ab78a40b"
                   >
@@ -1167,19 +1167,19 @@ span.search-d427af48bbd4a36972ce659cd329dd38 {
 }
 
 span.search-adba909214f9aea0d6208b9bbc56dee0 {
-  color: red;
+  color: red !important;
 }
 
 span.search-c27c140f08b0252f3027cf077cee2358 {
-  color: orange;
+  color: orange !important;
 }
 
 span.search-ddfb601e1d7aa0d473f1a3ab353ef982 {
-  color: blue;
+  color: blue !important;
 }
 
 span.search-5077dcc14128f743498aaafcbd0ecb5d {
-  color: purple;
+  color: purple !important;
 }
 
 span.search-4eb6182d96f5f9cf7e7e0282ddca8e80 {
@@ -1219,7 +1219,7 @@ div.search-db4665e1908869c6354106ce00ff95ba {
 }
 
 div.search-399841f840f75044108804ec30d37405 {
-  color: #969799;
+  color: #969799 !important;
   font-size: @app-font-size;
   position: absolute;
   text-align: right;
@@ -1229,7 +1229,7 @@ div.search-399841f840f75044108804ec30d37405 {
 }
 
 div.search-9fa34518e0f029520c0e38e0cc4d7013 {
-  background-color: white;
+  background-color: white !important;
   border-radius: 10px;
 }
 

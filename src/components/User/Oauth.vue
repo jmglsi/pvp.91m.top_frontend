@@ -2,7 +2,11 @@
   <div class="oauth-home">
     <div class="oauth-ceb83cb85dff6aa94a65ed6cac1f563f">
       <van-divider
-        :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+        :style="{
+          color: '#1989fa !important',
+          borderColor: '#1989fa !important',
+          padding: '0 16px',
+        }"
       >
         {{ accessToken ? "第三方授权" : "第三方登录" }}
       </van-divider>

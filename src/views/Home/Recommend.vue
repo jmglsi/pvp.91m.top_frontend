@@ -177,8 +177,8 @@
                           <span
                             :style="
                               data.change.updateType == 2
-                                ? { color: 'red' }
-                                : { color: 'blue' }
+                                ? { color: 'red !important' }
+                                : { color: 'blue !important' }
                             "
                             class="
                               app-07cc694b9b3fc636710fa08b6922c42b
@@ -220,7 +220,6 @@
         <van-skeleton v-if="showInfo.skeleton" :row="30" />
 
         <lazy-component
-          :preLoad="1"
           @show="onComponentShow"
           class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
         >

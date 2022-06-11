@@ -45,11 +45,6 @@ div.game-237b90fb6955b98328736810edefe6e7 {
   width: 100%;
 }
 
-div.game-82f6ee2b57fb59b0b7b3803164d6b9d8 {
-  font-size: @app-font-size + 2px;
-  margin-top: 5px;
-}
-
 div.game-4863c43e8743ebf1be3f48c5c4519627 {
   div.van-tabs__line {
     bottom: 13px;

@@ -62,7 +62,7 @@
 
         <vxe-table-colgroup
           title="英雄"
-          :title-help="{ content: $appMsg.tips[1008] }"
+          :title-prefix="{ content: $appMsg.tips[1008] }"
         >
           <vxe-table-column
             title="数量"
@@ -94,8 +94,8 @@
                   v-if="row.change.updateValue != 0"
                   :style="
                     row.change.updateType == 2
-                      ? { color: 'red' }
-                      : { color: 'blue' }
+                      ? { color: 'red !important' }
+                      : { color: 'blue !important' }
                   "
                   class="app-b0704b59dbf144bfeffb53bdb11d7128"
                 >
