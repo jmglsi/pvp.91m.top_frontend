@@ -10,7 +10,7 @@
         title="技能"
         field="skillId"
         fixed="left"
-        width="75"
+        width="50"
         sortable
       >
         <template #default="{ row }">
