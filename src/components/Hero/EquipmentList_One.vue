@@ -66,7 +66,7 @@
         <vxe-table-column
           title="出场"
           field="allPickRate"
-          :filters="[{ data: 1, checked: true }]"
+          :filters="[{ value: 1, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -74,12 +74,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
@@ -120,7 +120,7 @@
         <vxe-table-column
           title="胜率"
           field="allWinRate"
-          :filters="[{ data: 0 }]"
+          :filters="[{ value: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -128,12 +128,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-equipment-92089e17c1e005ddc0336c65dfa6b63b-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
@@ -149,7 +149,7 @@
         <vxe-table-column
           title="占比"
           :field="'pickRate_' + index"
-          :filters="[{ data: 0 }]"
+          :filters="[{ value: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -157,12 +157,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-equipment-ec3049b6fc592a98856d838ecfbfc3de-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
@@ -172,7 +172,7 @@
         <vxe-table-column
           title="胜率"
           :field="'winRate_' + index"
-          :filters="[{ data: 0 }]"
+          :filters="[{ value: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -180,12 +180,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-equipment-92089e17c1e005ddc0336c65dfa6b63b-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
@@ -366,59 +366,59 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "allPickRate") {
-        return row.allPickRate >= option.data;
+        return row.allPickRate >= option.value;
       }
 
       if (column.property == "allWinRate") {
-        return row.allWinRate >= option.data;
+        return row.allWinRate >= option.value;
       }
 
       if (column.property == "pickRate_0") {
-        return row.pickRate_0 >= option.data;
+        return row.pickRate_0 >= option.value;
       }
 
       if (column.property == "winRate_0") {
-        return row.winRate_0 >= option.data;
+        return row.winRate_0 >= option.value;
       }
 
       if (column.property == "pickRate_1") {
-        return row.pickRate_1 >= option.data;
+        return row.pickRate_1 >= option.value;
       }
 
       if (column.property == "winRate_1") {
-        return row.winRate_1 >= option.data;
+        return row.winRate_1 >= option.value;
       }
 
       if (column.property == "pickRate_2") {
-        return row.pickRate_2 >= option.data;
+        return row.pickRate_2 >= option.value;
       }
 
       if (column.property == "winRate_2") {
-        return row.winRate_2 >= option.data;
+        return row.winRate_2 >= option.value;
       }
 
       if (column.property == "pickRate_3") {
-        return row.pickRate_3 >= option.data;
+        return row.pickRate_3 >= option.value;
       }
 
       if (column.property == "winRate_3") {
-        return row.winRate_3 >= option.data;
+        return row.winRate_3 >= option.value;
       }
 
       if (column.property == "pickRate_4") {
-        return row.pickRate_4 >= option.data;
+        return row.pickRate_4 >= option.value;
       }
 
       if (column.property == "winRate_4") {
-        return row.winRate_4 >= option.data;
+        return row.winRate_4 >= option.value;
       }
 
       if (column.property == "pickRate_5") {
-        return row.pickRate_5 >= option.data;
+        return row.pickRate_5 >= option.value;
       }
 
       if (column.property == "winRate_5") {
-        return row.winRate_5 >= option.data;
+        return row.winRate_5 >= option.value;
       }
     },
     onCellClick: function ({ row, column }) {

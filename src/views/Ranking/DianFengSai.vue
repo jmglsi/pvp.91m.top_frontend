@@ -134,7 +134,7 @@
           <vxe-column
             title="禁用"
             field="allBanRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ value: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -142,12 +142,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -156,7 +156,7 @@
           <vxe-column
             title="出场"
             field="allPickRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ value: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -164,12 +164,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-f55d5cafb56611ebf0534588e49d4121-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -211,7 +211,7 @@
           <vxe-column
             title="禁选"
             field="allBPRate"
-            :filters="[{ data: 2.5, checked: true }]"
+            :filters="[{ value: 2.5, checked: true }]"
             :filter-method="filterMethod"
             width="100"
             sortable
@@ -219,12 +219,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -237,7 +237,7 @@
           <vxe-column
             title="胜率"
             field="allWinRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ value: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -245,12 +245,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-6b557157ba74177968c0e2cb78fa87b7-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -596,8 +596,8 @@ export default {
         ? (this.listWidth = 0)
         : (this.listWidth = 90);
     },
-    toolbarCustomEvent: function (params) {
-      switch (params.type) {
+    toolbarCustomEvent: function ({ type }) {
+      switch (type) {
         case "confirm":
           //确认
           break;
@@ -702,19 +702,19 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "allBanRate") {
-        return row.allBanRate >= option.data;
+        return row.allBanRate >= option.value;
       }
 
       if (column.property == "allBPRate") {
-        return row.allBPRate >= option.data;
+        return row.allBPRate >= option.value;
       }
 
       if (column.property == "allPickRate") {
-        return row.allPickRate >= option.data;
+        return row.allPickRate >= option.value;
       }
 
       if (column.property == "allWinRate") {
-        return row.allWinRate >= option.data;
+        return row.allWinRate >= option.value;
       }
     },
     cellClassName: function ({ row, column }) {

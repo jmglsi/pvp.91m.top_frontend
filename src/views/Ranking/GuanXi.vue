@@ -18,12 +18,12 @@
             field="hero_1"
             :title="heroName ? '和' : '1'"
             :filters="[
-              { data: 1, label: '对抗路' },
-              { data: 2, label: '中路' },
-              //{ data: 3, label: '对抗路 (坦克)' },
-              { data: 4, label: '打野' },
-              { data: 5, label: '发育路' },
-              { data: 6, label: '游走' },
+              { value: 1, label: '对抗路' },
+              { value: 2, label: '中路' },
+              //{ value: 3, label: '对抗路 (坦克)' },
+              { value: 4, label: '打野' },
+              { value: 5, label: '发育路' },
+              { value: 6, label: '游走' },
             ]"
             :filter-method="filterMethod"
             width="75"
@@ -60,12 +60,12 @@
             field="hero_2"
             :title="heroName ? '↓' : '2'"
             :filters="[
-              { data: 1, label: '对抗路' },
-              { data: 2, label: '中路' },
-              //{ data: 3, label: '对抗路 (坦克)' },
-              { data: 4, label: '打野' },
-              { data: 5, label: '发育路' },
-              { data: 6, label: '游走' },
+              { value: 1, label: '对抗路' },
+              { value: 2, label: '中路' },
+              //{ value: 3, label: '对抗路 (坦克)' },
+              { value: 4, label: '打野' },
+              { value: 5, label: '发育路' },
+              { value: 6, label: '游走' },
             ]"
             :filter-method="filterMethod"
             width="75"
@@ -108,7 +108,7 @@
           <vxe-table-column
             title="出场"
             field="teammatePickRate"
-            :filters="[{ data: 0.25, checked: true }]"
+            :filters="[{ value: 0.25, checked: true }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -116,12 +116,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-9fa4d8f5c751c67e15e1b44b680fe5a0-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -131,7 +131,7 @@
           <vxe-table-column
             title="胜率"
             field="teammateWinRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ value: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -139,12 +139,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-39443bf307387782e1d78103a8853493-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -155,7 +155,7 @@
         <vxe-table-column
           title="适配"
           field="adaptation"
-          :filters="[{ data: 0 }]"
+          :filters="[{ value: 0 }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -163,12 +163,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-37fbc8af6b6e2b2129d0a5462d2fe2dd-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
           </template>
@@ -186,7 +186,7 @@
           <vxe-table-column
             title="出场"
             field="opponentPickRate"
-            :filters="[{ data: 0.25, checked: true }]"
+            :filters="[{ value: 0.25, checked: true }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -194,12 +194,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-7b5fe4548b7ec10f94494337d3698b67-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -209,7 +209,7 @@
           <vxe-table-column
             title="胜率"
             field="opponentWinRate"
-            :filters="[{ data: 0 }]"
+            :filters="[{ value: 0 }]"
             :filter-method="filterMethod"
             :width="listWidth"
             sortable
@@ -217,12 +217,12 @@
             <template #filter="{ $panel, column }">
               ≥
               <input
-                v-model="option.data"
+                v-model="option.value"
                 v-for="(option, index) in column.filters"
                 :key="'hero-9e27252bc4e939c2253951d3f6692fb2-' + index"
                 type="type"
                 placeholder="0"
-                @input="$panel.changeOption($event, !!option.data, option)"
+                @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
@@ -432,31 +432,31 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "hero_1") {
-        return row.hero_1.type === option.data;
+        return row.hero_1.type === option.value;
       }
 
       if (column.property == "hero_2") {
-        return row.hero_2.type === option.data;
+        return row.hero_2.type === option.value;
       }
 
       if (column.property == "teammatePickRate") {
-        return row.teammatePickRate >= option.data;
+        return row.teammatePickRate >= option.value;
       }
 
       if (column.property == "teammateWinRate") {
-        return row.teammateWinRate >= option.data;
+        return row.teammateWinRate >= option.value;
       }
 
       if (column.property == "adaptation") {
-        return row.adaptation >= option.data;
+        return row.adaptation >= option.value;
       }
 
       if (column.property == "opponentPickRate") {
-        return row.opponentPickRate >= option.data;
+        return row.opponentPickRate >= option.value;
       }
 
       if (column.property == "opponentWinRate") {
-        return row.opponentWinRate >= option.data;
+        return row.opponentWinRate >= option.value;
       }
     },
     cellClassName: function ({ row, column }) {

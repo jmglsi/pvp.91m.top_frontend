@@ -13,9 +13,9 @@
           field="userId"
           fixed="left"
           :filters="[
-            { data: 0, label: '普通' },
-            { data: 1, label: '职业' },
-            { data: 2, label: '主播' },
+            { value: 0, label: '普通' },
+            { value: 1, label: '职业' },
+            { value: 2, label: '主播' },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -445,7 +445,7 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "userId") {
-        return row.tag.type == option.data;
+        return row.tag.type == option.value;
       }
     },
     getHeroList: function (row) {

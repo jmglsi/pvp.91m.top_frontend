@@ -125,10 +125,10 @@
                 title="大区"
                 field="areaText"
                 :filters="[
-                  { data: '安卓QQ', label: '安卓QQ' },
-                  { data: '苹果QQ', label: '苹果QQ' },
-                  { data: '安卓WX', label: '安卓WX' },
-                  { data: '苹果WX', label: '苹果WX' },
+                  { value: '安卓QQ', label: '安卓QQ' },
+                  { value: '苹果QQ', label: '苹果QQ' },
+                  { value: '安卓WX', label: '安卓WX' },
+                  { value: '苹果WX', label: '苹果WX' },
                 ]"
                 :filter-method="filterMethod"
                 width="125"
@@ -358,7 +358,7 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "areaText") {
-        return row.areaText == option.data;
+        return row.areaText == option.value;
       }
     },
   },

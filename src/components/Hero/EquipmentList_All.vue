@@ -76,7 +76,7 @@
       <vxe-table-column
         title="胜率 (%)"
         field="winRate"
-        :filters="[{ data: 0 }]"
+        :filters="[{ value: 0 }]"
         :filter-method="filterMethod"
         width="125"
         sortable
@@ -84,12 +84,12 @@
         <template #filter="{ $panel, column }">
           ≥
           <input
-            v-model="option.data"
+            v-model="option.value"
             v-for="(option, index) in column.filters"
             :key="'hero-equipment-3884d17acbdfbe7dd4921e00606d4e93-' + index"
             type="type"
             placeholder="0"
-            @input="$panel.changeOption($event, !!option.data, option)"
+            @input="$panel.changeOption($event, !!option.value, option)"
             class="app-fa42596ed8c1eff3ed8b93bba913bde3"
           />
           %
@@ -213,7 +213,7 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "winRate") {
-        return row.winRate >= option.data;
+        return row.winRate >= option.value;
       }
     },
   },

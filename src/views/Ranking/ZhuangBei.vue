@@ -13,13 +13,13 @@
           field="id"
           fixed="left"
           :filters="[
-            { data: 0, label: '其他' },
-            { data: 1, label: '鞋子' },
-            { data: 2, label: '打野刀' },
-            { data: 3, label: '辅助装' },
-            { data: 4, label: '保命装' },
-            { data: 5, label: '终极装' },
-            { data: 6, label: '专精装' },
+            { value: 0, label: '其他' },
+            { value: 1, label: '鞋子' },
+            { value: 2, label: '打野刀' },
+            { value: 3, label: '辅助装' },
+            { value: 4, label: '保命装' },
+            { value: 5, label: '终极装' },
+            { value: 6, label: '专精装' },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -291,7 +291,7 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "id") {
-        return row.type == option.data;
+        return row.type == option.value;
       }
     },
     onZhuangBeiCopy: function (row) {

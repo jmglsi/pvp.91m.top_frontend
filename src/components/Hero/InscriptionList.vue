@@ -23,10 +23,10 @@
         title="大区"
         field="selareaId"
         :filters="[
-          { data: 1, label: '安卓QQ' },
-          { data: 2, label: '苹果QQ' },
-          { data: 3, label: '安卓WX' },
-          { data: 4, label: '苹果WX' },
+          { value: 1, label: '安卓QQ' },
+          { value: 2, label: '苹果QQ' },
+          { value: 3, label: '安卓WX' },
+          { value: 4, label: '苹果WX' },
         ]"
         :filter-method="filterMethod"
         :width="listWidth"
@@ -167,7 +167,7 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "selareaId") {
-        return row.selareaId == option.label;
+        return row.selareaId == option.value;
       }
     },
     onCellClick: function ({ row }) {

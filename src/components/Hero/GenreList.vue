@@ -28,23 +28,22 @@
 
       <vxe-table-colgroup
         title="流派"
-        fixed="left"
         :title-prefix="{ content: $appMsg.tips[1003] }"
       >
         <vxe-table-column
-          title="技能"
+          title="技能"  
           field="skillId"
           :filters="[
-            { data: 80115, label: '闪现' },
-            { data: 80104, label: '惩戒' },
-            { data: 80105, label: '干扰' },
-            { data: 80107, label: '净化' },
-            { data: 80121, label: '弱化' },
-            { data: 80102, label: '治疗' },
-            { data: 80103, label: '眩晕' },
-            { data: 80108, label: '斩杀' },
-            { data: 80110, label: '狂暴' },
-            { data: 80109, label: '疾跑' },
+            { value: 80115, label: '闪现' },
+            { value: 80104, label: '惩戒' },
+            { value: 80105, label: '干扰' },
+            { value: 80107, label: '净化' },
+            { value: 80121, label: '弱化' },
+            { value: 80102, label: '治疗' },
+            { value: 80103, label: '眩晕' },
+            { value: 80108, label: '斩杀' },
+            { value: 80110, label: '狂暴' },
+            { value: 80109, label: '疾跑' },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -68,11 +67,11 @@
           title="分路"
           field="positionId"
           :filters="[
-            { data: 0, label: '对抗路' },
-            { data: 1, label: '中路' },
-            { data: 2, label: '发育路' },
-            { data: 3, label: '打野' },
-            { data: 4, label: '辅助' },
+            { value: 0, label: '对抗路' },
+            { value: 1, label: '中路' },
+            { value: 2, label: '发育路' },
+            { value: 3, label: '打野' },
+            { value: 4, label: '辅助' },
           ]"
           :filter-method="filterMethod"
           width="75"
@@ -96,7 +95,7 @@
         <vxe-table-column
           title="占比"
           field="pickRate"
-          :filters="[{ data: 1, checked: true }]"
+          :filters="[{ value: 1, checked: true }]"
           :filter-method="filterMethod"
           :width="listWidth"
           sortable
@@ -104,12 +103,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
@@ -156,12 +155,12 @@
           <template #filter="{ $panel, column }">
             ≥
             <input
-              v-model="option.data"
+              v-model="option.value"
               v-for="(option, index) in column.filters"
               :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
               type="type"
               placeholder="0"
-              @input="$panel.changeOption($event, !!option.data, option)"
+              @input="$panel.changeOption($event, !!option.value, option)"
               class="app-fa42596ed8c1eff3ed8b93bba913bde3"
             />
             %
@@ -297,15 +296,15 @@ export default {
     },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "skillId") {
-        return row.skillId == option.data;
+        return row.skillId == option.value;
       }
 
       if (column.property == "positionId") {
-        return row.positionId == option.data;
+        return row.positionId == option.value;
       }
 
       if (column.property == "pickRate") {
-        return row.pickRate >= option.data;
+        return row.pickRate >= option.value;
       }
     },
     onCellClick: function ({ row, column }) {
