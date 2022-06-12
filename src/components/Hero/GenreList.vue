@@ -71,7 +71,7 @@
             { value: 1, label: '中路' },
             { value: 2, label: '发育路' },
             { value: 3, label: '打野' },
-            { value: 4, label: '辅助' },
+            { value: 4, label: '游走' },
           ]"
           :filter-method="filterMethod"
           width="75"
