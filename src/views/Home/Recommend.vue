@@ -46,9 +46,8 @@
 
         <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
           <van-swipe
-            @change="onSwipeChange"
-            :autoplay="25000"
             ref="refSkillMenu"
+            @change="onSwipeChange"
             class="app-1c17c2e6813dda8cab7978f50d30203c"
           >
             <van-swipe-item>
@@ -436,7 +435,7 @@ export default {
     onComponentShow: function () {
       setTimeout(() => {
         this.showInfo.skeleton = false;
-      }, 1000);
+      }, 250);
     },
     onDropdownRefreshClick: function () {
       setTimeout(() => {

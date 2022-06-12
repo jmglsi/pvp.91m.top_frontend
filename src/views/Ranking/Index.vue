@@ -202,7 +202,7 @@
         :defaultValue="searchInfo.defaultValue"
         @search="onRankingSearch"
         enter-button
-        placeholder="试试搜索英雄的外号~"
+        placeholder="试一试搜索阿离"
       />
     </van-popup>
 

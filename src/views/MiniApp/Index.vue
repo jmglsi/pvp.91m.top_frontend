@@ -174,7 +174,7 @@ export default {
     $route: function () {
       setTimeout(() => {
         this.initQrcode();
-      }, 1000);
+      }, 500);
     },
   },
   data() {

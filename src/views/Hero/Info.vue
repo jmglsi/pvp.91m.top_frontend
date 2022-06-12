@@ -594,7 +594,7 @@ export default {
         } else {
           this.showInfo.skillMenu = false;
         }
-      }, 1000);
+      }, 500);
 
       window.addEventListener("scroll", this.listenerScrollTop);
     },
@@ -655,7 +655,7 @@ export default {
     onComponentShow: function () {
       setTimeout(() => {
         this.showInfo.skeleton = false;
-      }, 1000);
+      }, 250);
     },
     onHeroVoteClick: function (voteType) {
       this.$axios

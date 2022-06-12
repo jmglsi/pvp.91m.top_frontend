@@ -30,20 +30,20 @@ Vue.prototype.$appMsg = appMsg;
 
 import store from './assets/js/store.config';
 router.beforeEach((to, from, next) => {
-    store.state.previousPage.push(from);
+  store.state.previousPage.push(from);
 
-    document.title = to.meta.title + ' | ' + Vue.prototype.$appConfigInfo.appInfo.name;
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  document.title = to.meta.title + ' | ' + Vue.prototype.$appConfigInfo.appInfo.name;
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
 
-    next();
+  next();
 })
 
 new Vue({
-    router,
-    store,
-    render: h => h(App),
-    mounted() {
-        document.dispatchEvent(new Event('render-event'));
-        //预渲染
-    }
+  router,
+  store,
+  render: h => h(App),
+  mounted() {
+    document.dispatchEvent(new Event('render-event'));
+    //预渲染
+  }
 }).$mount('#app')

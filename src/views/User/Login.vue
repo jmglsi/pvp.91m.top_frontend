@@ -106,9 +106,9 @@
       class="app-61046f2f5eefe3dc179e52af32241062"
     >
       <span class="app-e4c9479b11955648dad558fe717a4eb2">
-        注:
-        <br />1.信息是加密储存的
-        <br />2.用户名 和 QQ 将用于扩列、BP界面、找回密码，请不要瞎写
+        <p>注:</p>
+        <p>1.信息是加密储存的</p>
+        <p>2.用户名 和 QQ 将用于扩列、BP界面、找回密码，请不要瞎写</p>
       </span>
     </div>
 
@@ -281,12 +281,12 @@ div.login-f01ae8c7f2d058ec6be00db589a32bea {
 }
 
 div.login-60ae25445ac62d5ec51c776826888d9f {
-  color: #1989fa  !important;
+  color: #1989fa !important;
   left: 25px;
 }
 
 div.login-4ae1ffb5939d592986bed21d0913562d {
-  color: red  !important;
+  color: red !important;
   right: 25px;
 }
 

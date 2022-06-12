@@ -1,3 +1,11 @@
+/**
+ * 
+ * 图标按需导入
+ * 
+ * @author 西瓜弟弟
+ * @link https://juejin.cn/post/6844904068230414343
+ */
+
 export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill';
 //error
 
@@ -18,5 +26,3 @@ export { default as SearchOutline } from '@ant-design/icons/lib/outline/SearchOu
 
 export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline';
 //close
-
-//导出需要的图标

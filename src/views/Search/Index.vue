@@ -971,7 +971,7 @@ export default {
             } else {
               this.showInfo.skillMenu = false;
             }
-          }, 1000);
+          }, 500);
         });
     },
     initSearchHistory: function () {

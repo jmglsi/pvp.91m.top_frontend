@@ -94,9 +94,17 @@
 
         <vxe-table-colgroup
           title="出场越低，波动越大 (%)"
-          :title-prefix="{ content: $appMsg.tips[1010] }"
+          :title-prefix="{
+            content: $appMsg.tips[1010] + '\n' + $appMsg.tips[1015],
+          }"
         >
-          <vxe-column title="趋势" field="trend" width="100" sortable>
+          <vxe-column
+            title="趋势"
+            field="trend"
+            width="100"
+            :title-prefix="{ content: $appMsg.tips[1016] }"
+            sortable
+          >
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
                 <span v-if="row.id == 999">-</span>
@@ -314,7 +322,12 @@
           />
         </vxe-table-colgroup>
 
-        <vxe-table-colgroup title="金币">
+        <vxe-table-colgroup
+          title="金币"
+          :title-prefix="{
+            content: $appMsg.tips[1017],
+          }"
+        >
           <vxe-column
             title="全部"
             field="equMoneyOverflow"
@@ -497,8 +510,8 @@ export default {
         let agree = this.$cookie.get("agree");
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
-          this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
           this.getHeroChartsLog(6);
+          this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
         }
       },
     },
@@ -839,8 +852,8 @@ export default {
         nowChecked = true;
         nowChecked_int = 1;
 
-        this.getRanking(0, this.bid, this.cid, this.did);
         this.getHeroChartsLog(6);
+        this.getRanking(0, this.bid, this.cid, this.did);
       }
 
       this.showInfo.checked = nowChecked;

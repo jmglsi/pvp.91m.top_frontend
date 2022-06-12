@@ -386,13 +386,13 @@ i.app-72383b9892bd1e6a2bd310dfb1fb2344 img.van-icon__image {
   transform: scale(1.25);
 }
 
+ul.app-9e60d3ee1e1574cae90960f940c0a821 {
+  height: 90px;
+}
+
 ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
   overflow-x: auto;
   white-space: nowrap;
-}
-
-ul.app-9e60d3ee1e1574cae90960f940c0a821 {
-  height: 90px;
 }
 
 li.app-1951b6e7c82938dd7446a41e829b247b {
