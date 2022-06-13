@@ -57,11 +57,13 @@
         :title="tableDataRow.name + ' 如何操作'"
         safe-area-inset-bottom
       >
-        <HeroFightPower
-          v-if="showInfo.fightPowerMenu"
-          :heroId="tableDataRow.id"
-          :fightPowerType="did"
-        />
+        <template #default>
+          <HeroFightPower
+            v-if="showInfo.fightPowerMenu"
+            :heroId="tableDataRow.id"
+            :fightPowerType="did"
+          />
+        </template>
       </van-action-sheet>
     </div>
   </div>

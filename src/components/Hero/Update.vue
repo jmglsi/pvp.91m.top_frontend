@@ -192,7 +192,9 @@
         title="其他数据 (近期)"
         safe-area-inset-bottom
       >
-        <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
+        <template #default>
+          <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
+        </template>
       </van-action-sheet>
     </div>
 

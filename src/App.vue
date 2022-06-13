@@ -674,8 +674,12 @@ div.app-71c40c24a80f0a5cda72f93d3af1d904 {
 }
 
 div.app-61046f2f5eefe3dc179e52af32241062 {
-  margin: 25px 15px;
+  margin: 0 15px 25px 15px;
   text-align: @app-text-align;
+}
+
+div.app-2acf2be2c6fdd22f4a6282a72817bdb1 {
+  margin-top: 25px;
 }
 
 div.app-044a82dc9b34eebf2c54fe2c3c904368 {

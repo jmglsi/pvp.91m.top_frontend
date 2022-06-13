@@ -74,6 +74,9 @@
               v-if="index == 0 || index == 2 || index == 11 || index == 13"
               class="game-4978748050a936d2f77fe718f1d81524"
             >
+              <span class="game-ee5411f228b6a2c6a510f907f315d5b4">
+                {{ index + 1 }}
+              </span>
               <img
                 v-lazy="
                   heroId
@@ -124,6 +127,9 @@
               v-if="index == 1 || index == 3 || index == 10 || index == 12"
               class="game-6e9c0050fe873888fbf53ec6f7b21816"
             >
+              <span class="game-ee5411f228b6a2c6a510f907f315d5b4">
+                {{ index + 1 }}
+              </span>
               <img
                 v-lazy="
                   heroId
@@ -205,6 +211,12 @@
                     :height="$appIsMobile ? 40 : 55"
                     class="game-eee32796c3fdfc147115c9f6e875c090"
                   />
+                  <span
+                    :style="{ textAlign: 'left' }"
+                    class="game-7ac4fc59b483c826ad0441884322b71a"
+                  >
+                    {{ index + 1 }}
+                  </span>
                 </span>
               </li>
             </ul>
@@ -406,6 +418,12 @@
                   "
                   class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
+                  <span
+                    :style="{ marginLeft: '-10px', textAlign: 'right' }"
+                    class="game-7ac4fc59b483c826ad0441884322b71a"
+                  >
+                    {{ index + 1 }}
+                  </span>
                   <img
                     v-lazy="
                       heroId
@@ -566,51 +584,53 @@
               />
             </span>
           </span>
-          &nbsp; &nbsp;
-          <a-popover
-            :visible="
-              recommendHeroId != 0 && showInfo.recommend && showInfo.popover
-            "
-          >
-            <span>
-              <span
-                class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-                :style="{ color: '#1989fa !important' }"
-              >
-                推荐
-              </span>
+          <!--
+            &nbsp; &nbsp;
+            <a-popover
+              :visible="
+                recommendHeroId != 0 && showInfo.recommend && showInfo.popover
+              "
+            >
               <span>
-                <van-switch
-                  v-model="showInfo.recommend"
-                  active-color="#1989fa"
-                  size="13px"
+                <span
+                  class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+                  :style="{ color: '#1989fa !important' }"
+                >
+                  推荐
+                </span>
+                <span>
+                  <van-switch
+                    v-model="showInfo.recommend"
+                    active-color="#1989fa"
+                    size="13px"
+                  />
+                </span>
+              </span>
+              <template slot="title">
+                <img
+                  v-lazy="
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    recommendHeroId +
+                    '/' +
+                    recommendHeroId +
+                    '.jpg'
+                  "
+                  width="25"
+                  height="25"
+                  class="game-1ab74bf7276acc5985f078fee7e63109"
                 />
-              </span>
-            </span>
-            <template slot="title">
-              <img
-                v-lazy="
-                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                  recommendHeroId +
-                  '/' +
-                  recommendHeroId +
-                  '.jpg'
-                "
-                width="25"
-                height="25"
-                class="game-1ab74bf7276acc5985f078fee7e63109"
-              />
-              <span class="game-07b120eca6da2e9c7115d4ccae824cca">
-                智能推荐
-              </span>
-              <span class="game-45949fe72cfc70cc6a7bd3870cabc397">
-                仅供参考
-              </span>
-            </template>
-            <template slot="content">
-              <GameRecommend :heroId="recommendHeroId" />
-            </template>
-          </a-popover>
+                <span class="game-07b120eca6da2e9c7115d4ccae824cca">
+                  智能推荐
+                </span>
+                <span class="game-45949fe72cfc70cc6a7bd3870cabc397">
+                  仅供参考
+                </span>
+              </template>
+              <template slot="content">
+                <GameRecommend :heroId="recommendHeroId" />
+              </template>
+            </a-popover>
+          -->
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
         </li>
         <li>
@@ -800,7 +820,7 @@ export default {
   components: {
     draggable,
     GameLine: () => import("@/components/Game/Line.vue"),
-    GameRecommend: () => import("@/components/Game/Recommend.vue"),
+    //GameRecommend: () => import("@/components/Game/Recommend.vue"),
   },
   data() {
     return {
@@ -1767,6 +1787,23 @@ span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
 span.game-45949fe72cfc70cc6a7bd3870cabc397 {
   font-size: @app-font-size;
   color: red;
+}
+
+span.game-ee5411f228b6a2c6a510f907f315d5b4 {
+  font-size: 10px;
+  margin-left: 14px;
+  position: absolute;
+  top: -13px;
+  width: 10px;
+  text-align: center;
+}
+
+span.game-7ac4fc59b483c826ad0441884322b71a {
+  color: gray;
+  font-size: @app-font-size;
+  margin-top: 3px;
+  position: absolute;
+  width: 10px;
 }
 
 button.game-8e4f204791d1b591b6a6f93b572f9b2d {

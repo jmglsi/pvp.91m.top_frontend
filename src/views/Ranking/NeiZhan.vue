@@ -114,35 +114,41 @@
         :title="matchInfo.matchStatus + ' - ' + matchInfo.matchWinCamp"
         safe-area-inset-bottom
       >
-        <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
-          <van-grid :border="false" :column-num="5">
-            <van-grid-item
-              v-for="(data, index) in matchInfo.matchDetail"
-              :key="'ranking-4ca0249904c6806e15f5147a59ae6d26-' + index"
-            >
-              <div
-                :style="{ height: '100%', width: '100%', position: 'relative' }"
+        <template #default>
+          <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
+            <van-grid :border="false" :column-num="5">
+              <van-grid-item
+                v-for="(data, index) in matchInfo.matchDetail"
+                :key="'ranking-4ca0249904c6806e15f5147a59ae6d26-' + index"
               >
-                <img
-                  v-lazy="data.avatar"
-                  width="35"
-                  height="35"
-                  class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-                />
                 <div
-                  :style="
-                    index < 5
-                      ? { color: 'blue !important' }
-                      : { color: 'red !important' }
-                  "
-                  class="ranking-561f33b3e8f36a8c9cdf1a5a3b099497"
+                  :style="{
+                    height: '100%',
+                    width: '100%',
+                    position: 'relative',
+                  }"
                 >
-                  {{ data.gamePlayerName }}
+                  <img
+                    v-lazy="data.avatar"
+                    width="35"
+                    height="35"
+                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                  />
+                  <div
+                    :style="
+                      index < 5
+                        ? { color: 'blue !important' }
+                        : { color: 'red !important' }
+                    "
+                    class="ranking-561f33b3e8f36a8c9cdf1a5a3b099497"
+                  >
+                    {{ data.gamePlayerName }}
+                  </div>
                 </div>
-              </div>
-            </van-grid-item>
-          </van-grid>
-        </div>
+              </van-grid-item>
+            </van-grid>
+          </div>
+        </template>
       </van-action-sheet>
     </div>
   </div>

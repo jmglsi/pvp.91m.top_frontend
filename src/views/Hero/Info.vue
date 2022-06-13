@@ -318,35 +318,37 @@
         :title="hero.info.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
-        <van-tabs
-          v-model="skillInfo.model"
-          v-if="skillInfo.model > -1"
-          :ellipsis="false"
-          @click="onSkillTabsClick"
-        >
-          <van-tab title="打法 (推荐)">
-            <HeroGenreList :genreId="hero.info.id" />
-          </van-tab>
-          <van-tab title="出装 (推荐)">
-            <HeroEquipmentListALL :heroId="hero.info.id" />
-          </van-tab>
-          <van-tab title="出装 (单件)">
-            <HeroEquipmentListOne
-              :equipmentId="hero.info.id"
-              :equipmentType="1"
-            />
-          </van-tab>
-          <van-tab>
-            <template #title>
-              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                国服 (备战)
-              </span>
-              <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
-            </template>
+        <template #default>
+          <van-tabs
+            v-model="skillInfo.model"
+            v-if="skillInfo.model > -1"
+            :ellipsis="false"
+            @click="onSkillTabsClick"
+          >
+            <van-tab title="打法 (推荐)">
+              <HeroGenreList :genreId="hero.info.id" />
+            </van-tab>
+            <van-tab title="出装 (推荐)">
+              <HeroEquipmentListALL :heroId="hero.info.id" />
+            </van-tab>
+            <van-tab title="出装 (单件)">
+              <HeroEquipmentListOne
+                :equipmentId="hero.info.id"
+                :equipmentType="1"
+              />
+            </van-tab>
+            <van-tab>
+              <template #title>
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  国服 (备战)
+                </span>
+                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+              </template>
 
-            <HeroInscriptionList :heroId="hero.info.id" />
-          </van-tab>
-        </van-tabs>
+              <HeroInscriptionList :heroId="hero.info.id" />
+            </van-tab>
+          </van-tabs>
+        </template>
       </van-action-sheet>
     </div>
 
@@ -359,55 +361,57 @@
         safe-area-inset-bottom
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
-        <van-grid
-          :border="false"
-          :column-num="2"
-          class="hero-ed90360246f7e2ed71281819e0ca3623"
-        >
-          <van-grid-item
-            class="hero-59c25466342abdb6746988b245f3a5a6"
-            @click="onHeroVoteClick(0)"
+        <template #default>
+          <van-grid
+            :border="false"
+            :column-num="2"
+            class="hero-ed90360246f7e2ed71281819e0ca3623"
           >
-            <img
-              v-lazy="
-                '//pic.rmb.bdstatic.com/bjh/9c0ca8b80af1f8b6e5bca075e91aee2c.png'
+            <van-grid-item
+              class="hero-59c25466342abdb6746988b245f3a5a6"
+              @click="onHeroVoteClick(0)"
+            >
+              <img
+                v-lazy="
+                  '//pic.rmb.bdstatic.com/bjh/9c0ca8b80af1f8b6e5bca075e91aee2c.png'
+                "
+                width="50"
+                height="50"
+              />
+              <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
+                {{ circle.info.vote[0].text }}
+              </span>
+            </van-grid-item>
+            <van-grid-item
+              class="hero-59c25466342abdb6746988b245f3a5a6"
+              @click="onHeroVoteClick(1)"
+            >
+              <img
+                v-lazy="
+                  '//pic.rmb.bdstatic.com/bjh/8508598e59de00afaa3b1db2c0b46ce7.png'
+                "
+                width="50"
+                height="50"
+              />
+              <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
+                {{ circle.info.vote[1].text }}
+              </span>
+            </van-grid-item>
+            <van-cell
+              title="注意事项"
+              icon="question-o"
+              is-link
+              class="hero-fc861e4a5806e7411f7860142244c917"
+              @click="
+                $dialog.alert({
+                  title: '请客观评价该英雄',
+                  message: circle.info.tips,
+                  theme: 'round-button',
+                })
               "
-              width="50"
-              height="50"
             />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
-              {{ circle.info.vote[0].text }}
-            </span>
-          </van-grid-item>
-          <van-grid-item
-            class="hero-59c25466342abdb6746988b245f3a5a6"
-            @click="onHeroVoteClick(1)"
-          >
-            <img
-              v-lazy="
-                '//pic.rmb.bdstatic.com/bjh/8508598e59de00afaa3b1db2c0b46ce7.png'
-              "
-              width="50"
-              height="50"
-            />
-            <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
-              {{ circle.info.vote[1].text }}
-            </span>
-          </van-grid-item>
-          <van-cell
-            title="注意事项"
-            icon="question-o"
-            is-link
-            class="hero-fc861e4a5806e7411f7860142244c917"
-            @click="
-              $dialog.alert({
-                title: '请客观评价该英雄',
-                message: circle.info.tips,
-                theme: 'round-button',
-              })
-            "
-          />
-        </van-grid>
+          </van-grid>
+        </template>
       </van-action-sheet>
     </div>
 

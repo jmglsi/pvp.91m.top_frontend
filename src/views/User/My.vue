@@ -423,125 +423,127 @@
         safe-area-inset-bottom
         title="我的信息"
       >
-        <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">
-          <van-cell-group
-            :border="false"
-            class="my-3c5bcb72d710faf0c301750abeb5704f"
-          >
-            <van-field
-              v-model="$appColumnsInfo.areaType[newInfo.areaType]"
-              readonly
-              input-align="right"
-              label="大区"
+        <template #default>
+          <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">
+            <van-cell-group
+              :border="false"
+              class="my-3c5bcb72d710faf0c301750abeb5704f"
             >
-              <template #button>
-                <div class="my-1f4910bc86a6970eb3401b1dde5a1177">
-                  <van-button
-                    round
-                    size="small"
-                    type="info"
-                    class="my-e06af146fff27b9e4b20bda71a291f9f"
-                    @click="onUpdateColumnsInfoClick(0)"
-                  >
-                    修改大区
-                  </van-button>
-                </div>
-              </template>
-            </van-field>
-            <van-field
-              v-model="$appColumnsInfo.provinceType[newInfo.provinceType]"
-              readonly
-              input-align="right"
-              label="省份"
+              <van-field
+                v-model="$appColumnsInfo.areaType[newInfo.areaType]"
+                readonly
+                input-align="right"
+                label="大区"
+              >
+                <template #button>
+                  <div class="my-1f4910bc86a6970eb3401b1dde5a1177">
+                    <van-button
+                      round
+                      size="small"
+                      type="info"
+                      class="my-e06af146fff27b9e4b20bda71a291f9f"
+                      @click="onUpdateColumnsInfoClick(0)"
+                    >
+                      修改大区
+                    </van-button>
+                  </div>
+                </template>
+              </van-field>
+              <van-field
+                v-model="$appColumnsInfo.provinceType[newInfo.provinceType]"
+                readonly
+                input-align="right"
+                label="省份"
+              >
+                <template #button>
+                  <div class="my-d00aad59acfadc27e8f50ccc61533a30">
+                    <van-button
+                      round
+                      size="small"
+                      type="info"
+                      class="my-e06af146fff27b9e4b20bda71a291f9f"
+                      @click="onUpdateColumnsInfoClick(1)"
+                    >
+                      修改省份
+                    </van-button>
+                  </div>
+                </template>
+              </van-field>
+              <van-field readonly label="段位">
+                <template #button>
+                  <div class="my-6a138d8f7faefbcc60caf19afc89f0a2">
+                    <span class="my-35494217d6a01388d07eccf816b6ea39">
+                      <img
+                        v-lazy="newInfo.rank.starIcon"
+                        width="50"
+                        height="50"
+                      />
+                    </span>
+
+                    <van-button
+                      round
+                      size="small"
+                      type="info"
+                      class="my-e06af146fff27b9e4b20bda71a291f9f"
+                      @click="onUpdateColumnsInfoClick(2)"
+                    >
+                      修改段位
+                    </van-button>
+                  </div>
+                </template>
+              </van-field>
+              <van-field
+                v-model="newInfo.rank.score"
+                type="number"
+                input-align="right"
+                label="巅峰分"
+              />
+            </van-cell-group>
+
+            <van-cell-group
+              :border="false"
+              title=" "
+              class="my-3c5bcb72d710faf0c301750abeb5704f"
             >
-              <template #button>
-                <div class="my-d00aad59acfadc27e8f50ccc61533a30">
-                  <van-button
-                    round
-                    size="small"
-                    type="info"
-                    class="my-e06af146fff27b9e4b20bda71a291f9f"
-                    @click="onUpdateColumnsInfoClick(1)"
-                  >
-                    修改省份
-                  </van-button>
-                </div>
-              </template>
-            </van-field>
-            <van-field readonly label="段位">
-              <template #button>
-                <div class="my-6a138d8f7faefbcc60caf19afc89f0a2">
+              <van-field
+                readonly
+                label="扩列"
+                @click="$message.warning($appMsg.warning[1002])"
+              >
+                <template #button>
                   <span class="my-35494217d6a01388d07eccf816b6ea39">
-                    <img
-                      v-lazy="newInfo.rank.starIcon"
-                      width="50"
-                      height="50"
-                    />
+                    <van-switch v-model="showInfo.friendsType" />
                   </span>
+                </template>
+              </van-field>
 
-                  <van-button
-                    round
-                    size="small"
-                    type="info"
-                    class="my-e06af146fff27b9e4b20bda71a291f9f"
-                    @click="onUpdateColumnsInfoClick(2)"
-                  >
-                    修改段位
-                  </van-button>
-                </div>
-              </template>
-            </van-field>
-            <van-field
-              v-model="newInfo.rank.score"
-              type="number"
-              input-align="right"
-              label="巅峰分"
-            />
-          </van-cell-group>
+              <van-field
+                v-model="newInfo.description"
+                autosize
+                label="签名"
+                rows="2"
+                maxlength="255"
+                type="textarea"
+                input-align="right"
+                placeholder="请输入签名"
+                @click="$message.warning($appMsg.warning[1003])"
+                show-word-limit
+              />
+            </van-cell-group>
 
-          <van-cell-group
-            :border="false"
-            title=" "
-            class="my-3c5bcb72d710faf0c301750abeb5704f"
-          >
-            <van-field
-              readonly
-              label="扩列"
-              @click="$message.warning($appMsg.warning[1002])"
-            >
-              <template #button>
-                <span class="my-35494217d6a01388d07eccf816b6ea39">
-                  <van-switch v-model="showInfo.friendsType" />
-                </span>
-              </template>
-            </van-field>
-
-            <van-field
-              v-model="newInfo.description"
-              autosize
-              label="签名"
-              rows="2"
-              maxlength="255"
-              type="textarea"
-              input-align="right"
-              placeholder="请输入签名"
-              @click="$message.warning($appMsg.warning[1003])"
-              show-word-limit
-            />
-          </van-cell-group>
-
-          <div class="my-47260541d2fb8caec524833d2a4eac4e">
-            <van-button
-              round
-              size="small"
-              type="primary"
-              class="app-a066f238070a70cb531c9bd722c65b36"
-              @click="updateWebAccountInfo"
-            >
-              保存信息
-            </van-button>
+            <div class="my-47260541d2fb8caec524833d2a4eac4e">
+              <van-button
+                round
+                size="small"
+                type="primary"
+                class="app-a066f238070a70cb531c9bd722c65b36"
+                @click="updateWebAccountInfo"
+              >
+                保存信息
+              </van-button>
+            </div>
           </div>
-        </div>
+        </template>
       </van-action-sheet>
     </div>
 

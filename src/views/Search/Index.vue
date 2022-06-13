@@ -754,46 +754,48 @@
         :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
-        <van-tabs
-          v-model="skillInfo.model"
-          v-if="skillInfo.model > -1"
-          :ellipsis="false"
-          @click="onSkillTabsClick"
-        >
-          <van-tab title="打法 (推荐)">
-            <HeroGenreList
-              v-if="skillInfo.model == 0"
-              :genreId="tableData.cardInfo.id"
-            />
-          </van-tab>
-          <van-tab title="出装 (推荐)">
-            <HeroEquipmentListALL
-              v-if="skillInfo.model == 1"
-              :heroId="tableData.cardInfo.id"
-            />
-          </van-tab>
-          <van-tab title="出装 (单件)">
-            <HeroEquipmentListOne
-              v-if="skillInfo.model == 2"
-              :equipmentId="tableData.cardInfo.id"
-              :equipmentType="1"
-            />
-          </van-tab>
-          <van-tab>
-            <template #title>
-              <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                国服 (备战)
-              </span>
-              <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
-            </template>
+        <template #default>
+          <van-tabs
+            v-model="skillInfo.model"
+            v-if="skillInfo.model > -1"
+            :ellipsis="false"
+            @click="onSkillTabsClick"
+          >
+            <van-tab title="打法 (推荐)">
+              <HeroGenreList
+                v-if="skillInfo.model == 0"
+                :genreId="tableData.cardInfo.id"
+              />
+            </van-tab>
+            <van-tab title="出装 (推荐)">
+              <HeroEquipmentListALL
+                v-if="skillInfo.model == 1"
+                :heroId="tableData.cardInfo.id"
+              />
+            </van-tab>
+            <van-tab title="出装 (单件)">
+              <HeroEquipmentListOne
+                v-if="skillInfo.model == 2"
+                :equipmentId="tableData.cardInfo.id"
+                :equipmentType="1"
+              />
+            </van-tab>
+            <van-tab>
+              <template #title>
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  国服 (备战)
+                </span>
+                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+              </template>
 
-            <HeroInscriptionList
-              v-if="skillInfo.model == 3"
-              :heroId="tableData.cardInfo.id"
-            />
-          </van-tab>
-          <van-tab title="更新调整" />
-        </van-tabs>
+              <HeroInscriptionList
+                v-if="skillInfo.model == 3"
+                :heroId="tableData.cardInfo.id"
+              />
+            </van-tab>
+            <van-tab title="更新调整" />
+          </van-tabs>
+        </template>
       </van-action-sheet>
     </div>
 
@@ -803,11 +805,13 @@
         :title="tableData.cardInfo.name + ' 如何操作'"
         safe-area-inset-bottom
       >
-        <HeroFightPower
-          v-if="showInfo.fightPowerMenu"
-          :heroId="tableData.cardInfo.id"
-          :fightPowerType="2"
-        />
+        <template #default>
+          <HeroFightPower
+            v-if="showInfo.fightPowerMenu"
+            :heroId="tableData.cardInfo.id"
+            :fightPowerType="2"
+          />
+        </template>
       </van-action-sheet>
     </div>
 

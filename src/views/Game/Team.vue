@@ -62,7 +62,7 @@
         :title="tableDataRow.id ? tableDataRow.name + ' 如何操作' : '新建队伍'"
         safe-area-inset-bottom
       >
-        <div class="content">
+        <template #default>
           <div class="game-350be0bb4350ca865ab9210d074875f1">
             <van-cell-group class="game-2ce081560b9cb8cdcd7472e639624e3e">
               <van-field
@@ -139,7 +139,7 @@
               保存信息
             </van-button>
           </div>
-        </div>
+        </template>
       </van-action-sheet>
     </div>
 

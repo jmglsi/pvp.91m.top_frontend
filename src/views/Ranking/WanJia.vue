@@ -265,41 +265,47 @@
         @select="onHeroListActionSheetSelect"
         title="大佬们在玩什么"
       >
-        <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
-          <van-grid :border="false" :column-num="3">
-            <van-grid-item
-              v-for="(data, index) in allHeroList"
-              :key="'ranking-4ca0249904c6806e15f5147a59ae6d26-' + index"
-            >
-              <div
-                :style="{ height: '100%', width: '100%', position: 'relative' }"
+        <template #default>
+          <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
+            <van-grid :border="false" :column-num="3">
+              <van-grid-item
+                v-for="(data, index) in allHeroList"
+                :key="'ranking-4ca0249904c6806e15f5147a59ae6d26-' + index"
               >
-                <img
-                  v-lazy="
-                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                    data[0] +
-                    '/' +
-                    data[0] +
-                    '.jpg'
-                  "
-                  width="45"
-                  height="45"
-                  crossorigin="anonymous"
-                  class="ranking-a548cbd20a565cc98caf397c9bfd7cdb"
-                />
-                <div class="ranking-51c877f489423eb1c3901dd0e12c03d4">
-                  {{ data[1] }}
-                  <span class="ranking-004599265c459e7f8f865e2bd40c82fb">
-                    人
-                  </span>
-                  &nbsp; ({{
-                    ((data[1] / allHeroList.length) * 100).toFixed(2)
-                  }}%)
+                <div
+                  :style="{
+                    height: '100%',
+                    width: '100%',
+                    position: 'relative',
+                  }"
+                >
+                  <img
+                    v-lazy="
+                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                      data[0] +
+                      '/' +
+                      data[0] +
+                      '.jpg'
+                    "
+                    width="45"
+                    height="45"
+                    crossorigin="anonymous"
+                    class="ranking-a548cbd20a565cc98caf397c9bfd7cdb"
+                  />
+                  <div class="ranking-51c877f489423eb1c3901dd0e12c03d4">
+                    {{ data[1] }}
+                    <span class="ranking-004599265c459e7f8f865e2bd40c82fb">
+                      人
+                    </span>
+                    &nbsp; ({{
+                      ((data[1] / allHeroList.length) * 100).toFixed(2)
+                    }}%)
+                  </div>
                 </div>
-              </div>
-            </van-grid-item>
-          </van-grid>
-        </div>
+              </van-grid-item>
+            </van-grid>
+          </div>
+        </template>
       </van-action-sheet>
     </div>
   </div>

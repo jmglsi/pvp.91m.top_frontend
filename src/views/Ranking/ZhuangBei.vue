@@ -147,11 +147,13 @@
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
         safe-area-inset-bottom
       >
-        <HeroEquipmentListOne
-          v-if="showInfo.skillMenu"
-          :equipmentId="tableDataRow.id"
-          :equipmentType="2"
-        />
+        <template #default>
+          <HeroEquipmentListOne
+            v-if="showInfo.skillMenu"
+            :equipmentId="tableDataRow.id"
+            :equipmentType="2"
+          />
+        </template>
       </van-action-sheet>
     </div>
   </div>

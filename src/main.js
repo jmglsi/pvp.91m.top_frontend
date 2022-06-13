@@ -43,7 +43,7 @@ new Vue({
   store,
   render: h => h(App),
   mounted() {
-    document.dispatchEvent(new Event('render-event'));
+    //document.dispatchEvent(new Event('render-event'));
     //预渲染
   }
 }).$mount('#app')

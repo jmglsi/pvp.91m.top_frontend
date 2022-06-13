@@ -212,40 +212,42 @@
         title="请选择"
         safe-area-inset-bottom
       >
-        <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
-          <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">
-            <van-dropdown-item
-              v-if="bidInfo.options.length > 0"
-              v-model="bidInfo.model"
-              :options="bidInfo.options"
-              @change="onDropdownMenuChange"
-            />
-            <van-dropdown-item
-              v-if="cidInfo.options.length > 0"
-              v-model="cidInfo.model"
-              :options="cidInfo.options"
-              @change="onDropdownMenuChange"
-            />
-            <van-dropdown-item
-              v-if="didInfo.options.length > 0 && tabsInfo.model == 4"
-              v-model="didInfo.model"
-              :options="didInfo.options"
-              @change="onDropdownMenuChange"
-            />
-          </van-dropdown-menu>
-        </div>
-        <div class="ranking-5728d19b81c17607842cb7befeef3152">
-          <span
-            class="ranking-4da12add5b0c1920dcde6c5627d30422"
-            @click="
-              $appPush({
-                path: '/search',
-                query: { q: '大佬们快来加群', refresh: 1 },
-              })
-            "
-            >您的分享是我更新的动力 ( •̀ ω •́ )y</span
-          >
-        </div>
+        <template #default>
+          <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
+            <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">
+              <van-dropdown-item
+                v-if="bidInfo.options.length > 0"
+                v-model="bidInfo.model"
+                :options="bidInfo.options"
+                @change="onDropdownMenuChange"
+              />
+              <van-dropdown-item
+                v-if="cidInfo.options.length > 0"
+                v-model="cidInfo.model"
+                :options="cidInfo.options"
+                @change="onDropdownMenuChange"
+              />
+              <van-dropdown-item
+                v-if="didInfo.options.length > 0 && tabsInfo.model == 4"
+                v-model="didInfo.model"
+                :options="didInfo.options"
+                @change="onDropdownMenuChange"
+              />
+            </van-dropdown-menu>
+          </div>
+          <div class="ranking-5728d19b81c17607842cb7befeef3152">
+            <span
+              class="ranking-4da12add5b0c1920dcde6c5627d30422"
+              @click="
+                $appPush({
+                  path: '/search',
+                  query: { q: '大佬们快来加群', refresh: 1 },
+                })
+              "
+              >您的分享是我更新的动力 ( •̀ ω •́ )y</span
+            >
+          </div>
+        </template>
       </van-action-sheet>
     </div>
 

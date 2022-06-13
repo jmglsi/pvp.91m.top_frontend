@@ -31,7 +31,7 @@
         :title-prefix="{ content: $appMsg.tips[1003] }"
       >
         <vxe-table-column
-          title="技能"  
+          title="技能"
           field="skillId"
           :filters="[
             { value: 80115, label: '闪现' },

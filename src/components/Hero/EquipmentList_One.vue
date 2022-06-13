@@ -196,53 +196,61 @@
 
     <van-action-sheet
       v-model="showInfo.equipmentMenu"
-      :round="false"
+      title=" "
+      :style="{ maxHeight: '450px' }"
       safe-area-inset-bottom
     >
-      <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
-        <img
-          v-lazy="
-            '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-            lineData.heroId +
-            '/' +
-            lineData.heroId +
-            '.jpg'
-          "
-          width="25"
-          height="25"
-          class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-        />&nbsp;和&nbsp;
-        <img
-          v-lazy="
-            '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-            lineData.equipmentId +
-            '.png'
-          "
-          width="25"
-          height="25"
-        />&nbsp;的契合度
-      </div>
+      <template #default>
+        <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
+          <img
+            v-lazy="
+              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+              lineData.heroId +
+              '/' +
+              lineData.heroId +
+              '.jpg'
+            "
+            width="25"
+            height="25"
+            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+          />
+          &nbsp;和&nbsp;
+          <img
+            v-lazy="
+              '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+              lineData.equipmentId +
+              '.png'
+            "
+            width="25"
+            height="25"
+          />
+          &nbsp;的契合度
+        </div>
 
-      <div class="hero-2acf2be2c6fdd22f4a6282a72817bdb1">
-        <EquipmentLine :heroEquipment="lineDataRow" />
-      </div>
+        <div class="app-2acf2be2c6fdd22f4a6282a72817bdb1">
+          <EquipmentLine :heroEquipment="lineDataRow" />
+        </div>
 
-      <div
-        class="
-          app-61046f2f5eefe3dc179e52af32241062
-          hero-386260160edfd75a6b62facc140fd3a4
-        "
-      >
-        <span class="app-e4c9479b11955648dad558fe717a4eb2">
-          1.格子出场不高但是胜率接近 100%
-          可能是因为样本较少、针对出、还没出完就结束的
-          <br />2.全部出场 > 100% 是因为买了多件，例如：双无尽蒙犽
-          <br />3.核心装在前面可能是因为先买的小件后面合的
-          <br />4.保命装在前面可能是因为最后卖了前几件换的
-          <br />5.少数傻逼最后会卖掉，甚至买其他职业的装备 <br />6.请结合
-          顺位、占比、胜率、自身体感 来看
-        </span>
-      </div>
+        <div
+          :style="{ marginTop: '-10px !important' }"
+          class="
+            app-61046f2f5eefe3dc179e52af32241062
+            hero-386260160edfd75a6b62facc140fd3a4
+          "
+        >
+          <span class="app-e4c9479b11955648dad558fe717a4eb2">
+            <p>
+              1.格子出场不高但是胜率接近 100%
+              可能是因为样本较少、针对出、还没出完就结束的
+            </p>
+            <p>2.全部出场 > 100% 是因为买了多件，例如：双无尽蒙犽</p>
+            <p>3.核心装在前面可能是因为先买的小件后面合的</p>
+            <p>4.保命装在前面可能是因为最后卖了前几件换的</p>
+            <p>5.少数傻逼最后会卖掉，甚至买其他职业的装备</p>
+            <p>6.请结合 顺位、占比、胜率、自身体感 来看</p>
+          </span>
+        </div>
+      </template>
     </van-action-sheet>
   </div>
 </template>
