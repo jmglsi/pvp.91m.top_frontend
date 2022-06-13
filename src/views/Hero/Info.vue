@@ -565,9 +565,9 @@ export default {
       trendInfo: {
         model: 0,
         options: [
-          { text: "巅峰赛趋势", value: 0 },
-          { text: "英雄强势期", value: 1 },
-          { text: "舆论趋势图", value: 2 },
+          { value: 0, text: "巅峰赛趋势" },
+          { value: 1, text: "英雄强势期" },
+          { value: 2, text: "舆论趋势图" },
         ],
       },
       skillInfo: {

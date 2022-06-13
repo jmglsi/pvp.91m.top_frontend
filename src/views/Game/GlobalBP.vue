@@ -419,7 +419,7 @@
                   class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
                   <span
-                    :style="{ marginLeft: '-10px', textAlign: 'right' }"
+                    :style="{ marginLeft: '-15px', textAlign: 'right' }"
                     class="game-7ac4fc59b483c826ad0441884322b71a"
                   >
                     {{ index + 1 }}
@@ -1791,10 +1791,10 @@ span.game-45949fe72cfc70cc6a7bd3870cabc397 {
 
 span.game-ee5411f228b6a2c6a510f907f315d5b4 {
   font-size: 10px;
-  margin-left: 14px;
+  margin-left: 12px;
   position: absolute;
   top: -13px;
-  width: 10px;
+  width: 15px;
   text-align: center;
 }
 
@@ -1803,7 +1803,7 @@ span.game-7ac4fc59b483c826ad0441884322b71a {
   font-size: @app-font-size;
   margin-top: 3px;
   position: absolute;
-  width: 10px;
+  width: 15px;
 }
 
 button.game-8e4f204791d1b591b6a6f93b572f9b2d {

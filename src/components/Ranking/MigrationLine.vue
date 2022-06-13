@@ -3,7 +3,7 @@
     <div class="ranking-63559bd374a437b89b36762811e4b809">
       <a-radio-group
         :value="viewInfo.model"
-        :options="viewOptions"
+        :options="viewInfo.options"
         @change="onViewChange"
         default-value="c"
       />
@@ -76,12 +76,12 @@ export default {
       },
       viewInfo: {
         model: "c",
+        options: [
+          { value: "a", label: "禁用" },
+          { value: "b", label: "出场" },
+          { value: "c", label: "禁选" },
+        ],
       },
-      viewOptions: [
-        { label: "禁用", value: "a" },
-        { label: "出场", value: "b" },
-        { label: "禁选", value: "c" },
-      ],
     };
   },
   methods: {

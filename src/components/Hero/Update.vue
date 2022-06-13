@@ -285,9 +285,9 @@ export default {
       updateInfo: {
         model: 0,
         options: [
-          { text: "体验服", value: 0 },
-          { text: "正式服", value: 1 },
-          { text: "全部", value: 2 },
+          { value: 0, text: "体验服" },
+          { value: 1, text: "正式服" },
+          { value: 2, text: "全部" },
         ],
         title: "",
         text: "",
