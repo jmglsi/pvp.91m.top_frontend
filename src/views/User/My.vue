@@ -566,7 +566,7 @@ export default {
       },
       isLogin: false,
       url: {
-        question: "//www.yuque.com/jmglsi/pvp/yyxgbh",
+        question: "//www.yuque.com/jmglsi/pvp/gbpl91",
         friends: "//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH",
         support: "//support.qq.com/products/305514",
         openSource: [

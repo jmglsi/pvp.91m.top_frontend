@@ -21,6 +21,9 @@ export default new Router({
     path: '/bp',
     redirect: '/game/new/bp'
   }, {
+    path: '/skin/encore',
+    redirect: '/skin/return'
+  }, {
     path: '/bilibili',
     name: 'bilibili',
     component: () =>
@@ -100,6 +103,19 @@ export default new Router({
       title: '我的',
       keepAlive: false
     }
+  }, {
+    path: '/skin',
+    redirect: '/skin/return',
+    component: () =>
+      import('./views/Return/Index.vue'),
+    children: [{
+      path: 'return',
+      name: 'skinReturn',
+      meta: {
+        title: '趋势',
+        keepAlive: true
+      }
+    }]
   }, {
     path: '/hero',
     redirect: '/ranking',

@@ -35,12 +35,7 @@
     </div>
   </div>
   <div v-else class="app-9fc0eb5a934dba03cc266a49b8ec51fb">
-    <span
-      class="app-f4842dcb685d490e2a43212b8072a6fe"
-      @click="
-        showInfo.isUsed ? (showInfo.isUsed = false) : (showInfo.isUsed = true)
-      "
-    >
+    <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
         :style="{ color: 'blue !important' }"
@@ -520,7 +515,7 @@
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
             class="game-8e4f204791d1b591b6a6f93b572f9b2d"
-            @click="onGamePerspectiveClick(1)"
+            @click="onGamePerspectiveClick()"
           >
             以&nbsp;{{
               bpPerspective == 1 ? teamInfo.team_1.name : teamInfo.team_2.name
@@ -538,7 +533,8 @@
           >
             {{
               bpPerspective == 1 ? teamInfo.team_2.name : teamInfo.team_1.name
-            }}&nbsp;的剩余英雄
+            }}
+            &nbsp;的剩余英雄
           </van-button>
         </li>
       </ul>
@@ -568,22 +564,24 @@
               />
             </span>
           </span>
-          &nbsp; &nbsp;
-          <span>
-            <span
-              class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-              :style="{ color: 'orange !important' }"
-            >
-              已用
-            </span>
+          <!--
+            &nbsp;&nbsp;
             <span>
-              <van-switch
-                v-model="showInfo.isUsed"
-                active-color="orange"
-                size="13px"
-              />
+              <span
+                class="game-59b9fd83bc5ce802ee9ace7db0e22522"
+                :style="{ color: 'orange !important' }"
+              >
+                已用
+              </span>
+              <span>
+                <van-switch
+                  v-model="showInfo.isUsed"
+                  active-color="orange"
+                  size="13px"
+                />
+              </span>
             </span>
-          </span>
+          -->
           <!--
             &nbsp; &nbsp;
             <a-popover
@@ -692,27 +690,20 @@
             @click="showInfo.setting = true"
           />
         </li>
-        <li v-if="bpMode == 'view'">
-          <van-button
-            round
-            icon="share-o"
-            size="small"
-            color="black"
-            @click="onGameShareCopy"
-          />
-        </li>
-        <li>
-          <van-button
-            round
-            :border="false"
-            icon="question-o"
-            size="small"
-            color="black"
-            @click="
-              $appOpenUrl('是否查看常见问题?', null, { path: url.question }, 0)
-            "
-          />
-        </li>
+        <!--
+          <li>
+            <van-button
+              round
+              :border="false"
+              icon="question-o"
+              size="small"
+              color="black"
+              @click="
+                $appOpenUrl('是否查看常见问题?', null, { path: url.question }, 0)
+              "
+            />
+          </li>
+        -->
       </ul>
     </div>
     <!-- 右下角 -->
@@ -862,7 +853,7 @@ export default {
           1, //16 -17
         ],
       },
-      eye: "eye-o",
+      eye: "closed-eye",
       bpMode: "view",
       bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
@@ -955,9 +946,14 @@ export default {
             url: null,
           },
           {
-            title: "联系站长 💗",
+            title: "联系站长",
             to: "/friends?openId=dc96aebe41f1427bbb9e9fe4b0ab9517",
             url: null,
+          },
+          {
+            title: "常见问题",
+            to: null,
+            url: "//www.yuque.com/jmglsi/pvp/gbpl91",
           },
         ],
       },
@@ -1223,31 +1219,6 @@ export default {
           });
       }
     },
-    onGameShareCopy: function () {
-      let tabsModel = this.tabsInfo.model,
-        teamInfo = this.teamInfo,
-        vs = teamInfo.team_1.name + " Vs " + teamInfo.team_2.name,
-        url = location,
-        longUrl = url.href;
-
-      this.$axios
-        .post(this.$appApi.pvp.getShortUrl, {
-          url: longUrl,
-        })
-        .then((res) => {
-          let shortUrl = res.data.data.url;
-
-          this.copyData =
-            "正在复盘【" +
-            vs +
-            "】的第 " +
-            (tabsModel + 1) +
-            " 局比赛 ↓\n-\n" +
-            shortUrl;
-
-          this.$appCopyData(this.copyData);
-        });
-    },
     onUrlClick: function (data) {
       this.$appOpenUrl(
         "是否打开" + (data.url ? "外部" : "内部") + "链接?",
@@ -1412,14 +1383,16 @@ export default {
       return ret;
     },
     onSeeHeroClick: function () {
-      if (this.eye == "eye-o") {
-        this.eye = "closed-eye";
-
-        this.showInfo.heroList = false;
-      } else {
+      if (this.eye == "closed-eye") {
         this.eye = "eye-o";
 
-        this.showInfo.heroList = true;
+        //this.showInfo.heroList = false;
+        this.showInfo.isUsed = false;
+      } else {
+        this.eye = "closed-eye";
+
+        //this.showInfo.heroList = true;
+        this.showInfo.isUsed = true;
       }
     },
     onGamePerspectiveClick: function (bpMode = 0) {
