@@ -230,7 +230,7 @@
               %
             </template>
             <template #default="{ row }">
-              <span v-if="row.id == 999">0</span>
+              <span v-if="!row.updateId">0</span>
               <span v-else>{{ row.allBPRate }}</span>
             </template>
           </vxe-column>
