@@ -274,7 +274,7 @@ export default {
             this.tableData = data;
             this.tableData.loading = false;
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }
@@ -302,7 +302,7 @@ export default {
           if (status.code == 200) {
             this.matchInfo = data;
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }

@@ -443,7 +443,7 @@ export default {
 
             this.getHeroList(playerList);
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }

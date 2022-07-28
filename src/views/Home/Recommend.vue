@@ -47,6 +47,7 @@
         <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
           <van-swipe
             ref="refSkillMenu"
+            :autoplay="10000"
             @change="onSwipeChange"
             class="app-1c17c2e6813dda8cab7978f50d30203c"
           >
@@ -426,7 +427,7 @@ export default {
               this.tableData
             );
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }

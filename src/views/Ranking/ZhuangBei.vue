@@ -285,7 +285,7 @@ export default {
               this.tableData
             );
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }

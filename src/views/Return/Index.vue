@@ -334,10 +334,13 @@ export default {
   },
   methods: {
     afterConfig: function (e) {
-      e.series.map((x) => {
+      if (!e.series) {
+        return e;
+      }
+
+      Array.from(e.series).map((x) => {
         x.symbol = "none";
       });
-      //去除折线图上的小圆点
       return e;
     },
     getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {
@@ -366,7 +369,7 @@ export default {
               this.topInfo = [result.rows[0], result.rows[1], result.rows[2]];
             }
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }
@@ -392,7 +395,7 @@ export default {
             },
           };
 
-          this.$message.success(this.$appMsg.success[1005]);
+          //this.$message.success(this.$appMsg.success[1005]);
         } else {
           this.$message.error(status.msg);
         }

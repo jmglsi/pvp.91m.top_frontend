@@ -1176,7 +1176,7 @@ export default {
              */
             this.initBPOrder(this.bpPerspective, 0);
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }

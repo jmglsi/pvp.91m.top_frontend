@@ -387,7 +387,7 @@ export default {
               this.topInfo = [result.rows[0], result.rows[1], result.rows[2]];
             }
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }
@@ -413,7 +413,7 @@ export default {
             },
           };
 
-          this.$message.success(this.$appMsg.success[1005]);
+          //this.$message.success(this.$appMsg.success[1005]);
         } else {
           this.$message.error(status.msg);
         }

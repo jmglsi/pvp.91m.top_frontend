@@ -79,7 +79,7 @@
                 >
                   <van-grid :border="false" :column-num="1">
                     <van-grid-item
-                      v-for="(data, index) in tableData.search.hotKeywords[0]
+                      v-for="(data, index) in tableData.search.recommend[0]
                         .rows"
                       :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
                       @click="getSearch(data.value)"
@@ -95,15 +95,65 @@
                         <span
                           v-else
                           :style="
-                            index < 3 + tableData.search.hotKeywords[0].topNum
+                            index < 3 + tableData.search.recommend[0].topNum
                               ? { color: 'red !important' }
                               : {}
                           "
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
-                          {{
-                            index + 1 - tableData.search.hotKeywords[0].topNum
-                          }}
+                          {{ index + 1 - tableData.search.recommend[0].topNum }}
+                        </span>
+                        <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
+                          {{ data.value }}
+                          <img
+                            v-if="data.trend > 0"
+                            v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                            width="18"
+                            height="18"
+                            class="search-97c89d1a7343e149ab400d0bb141c7de"
+                          />
+                        </span>
+                      </span>
+                    </van-grid-item>
+                  </van-grid>
+                </van-cell-group>
+              </li>
+              <li
+                class="
+                  app-1951b6e7c82938dd7446a41e829b247b
+                  search-9eca81635365b5dcc7960ad26bb0b714
+                "
+              >
+                <van-cell-group
+                  :border="false"
+                  title="热门讨论 🔥"
+                  class="search-dea6590081d28a153cc325fdaeb10c43"
+                >
+                  <van-grid :border="false" :column-num="1">
+                    <van-grid-item
+                      v-for="(data, index) in tableData.search.recommend[1]
+                        .rows"
+                      :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
+                      @click="getSearch(data.value)"
+                    >
+                      <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
+                        <span
+                          v-if="data.isTop"
+                          :style="{ color: 'orange !important' }"
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          <van-icon :name="data.icon" />
+                        </span>
+                        <span
+                          v-else
+                          :style="
+                            index < 3 + tableData.search.recommend[1].topNum
+                              ? { color: 'red !important' }
+                              : {}
+                          "
+                          class="search-f43418d85f50da28b3a9c1e780237105"
+                        >
+                          {{ index + 1 - tableData.search.recommend[1].topNum }}
                         </span>
                         <span class="search-4eb6182d96f5f9cf7e7e0282ddca8e80">
                           {{ data.value }}
@@ -133,7 +183,7 @@
                 >
                   <van-grid :border="false" :column-num="1">
                     <van-grid-item
-                      v-for="(data, index) in tableData.search.hotKeywords[1]
+                      v-for="(data, index) in tableData.search.recommend[2]
                         .rows"
                       :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
                       @click="getSearch(data.value)"
@@ -167,7 +217,7 @@
                 >
                   <van-grid :border="false" :column-num="1">
                     <van-grid-item
-                      v-for="(data, index) in tableData.search.hotKeywords[2]
+                      v-for="(data, index) in tableData.search.recommend[3]
                         .rows"
                       :key="'search-fb90ed45d99ca42494069dff99f2d9d0-' + index"
                       @click="getSearch(data.value)"
@@ -879,7 +929,11 @@ export default {
         },
         search: {
           history: [],
-          hotKeywords: [
+          recommend: [
+            {
+              topNum: 0,
+              rows: [],
+            },
             {
               topNum: 0,
               rows: [],

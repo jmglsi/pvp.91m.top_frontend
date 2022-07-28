@@ -18,11 +18,6 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
-import "echarts/lib/component/markLine";
-
-import "v-charts/lib/style.css";
-import "zrender/lib/svg/svg";
-
 export default {
   name: "HeroCharts",
   components: {
@@ -50,7 +45,7 @@ export default {
       handler(newValue) {
         let nowColor = this.colorInfo[newValue.trend];
 
-        this.lineData.extend.color = nowColor;
+        this.lineData.extend.color[0] = nowColor;
         this.lineData.extend.series.areaStyle.color.colorStops[0].color =
           nowColor;
         this.lineData.extend.series.areaStyle.color.colorStops[1].color =
@@ -65,6 +60,7 @@ export default {
         extend: {
           color: ["orange"],
           series: {
+            type: "line",
             smooth: true,
             areaStyle: {
               color: {

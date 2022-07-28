@@ -108,26 +108,24 @@
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
                 <span v-if="row.id == 999">-</span>
-
-                <lazy-component
-                  v-else
-                  class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
-                >
-                  <img
-                    v-if="row.trend > 0"
-                    v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
-                    width="15"
-                    height="15"
-                    class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
-                  />
-                  <ChartsLine
-                    :trend="row.trend"
-                    :charts="{
-                      columns: lineData.result.columns,
-                      rows: lineData.result.rows[row.id],
-                    }"
-                  />
-                </lazy-component>
+                <span v-else>
+                  <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                    <img
+                      v-if="row.trend > 0"
+                      v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
+                      width="15"
+                      height="15"
+                      class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
+                    />
+                    <ChartsLine
+                      :trend="row.trend"
+                      :charts="{
+                        columns: lineData.result.columns,
+                        rows: lineData.result.rows[row.id],
+                      }"
+                    />
+                  </lazy-component>
+                </span>
               </div>
             </template>
           </vxe-column>
@@ -465,6 +463,15 @@
 </template>
 
 <script>
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/legendScroll";
+import "echarts/lib/component/markLine";
+import "echarts/lib/component/markPoint";
+import "echarts/lib/component/title";
+
+import "v-charts/lib/style.css";
+import "zrender/lib/svg/svg";
+
 export default {
   name: "RankingDianFengSai",
   components: {
@@ -512,7 +519,6 @@ export default {
         let agree = this.$cookie.get("agree");
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
-          this.getHeroChartsLog(6);
           this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
         }
       },
@@ -570,6 +576,8 @@ export default {
     this.initTableWidth();
 
     this.$nextTick(() => {
+      this.getHeroChartsLog(6);
+
       this.$refs.refDianFengSai.connect(this.$refs.refXToolbar);
     });
     //手动将表格和工具栏进行关联
@@ -652,7 +660,7 @@ export default {
               this.tableData
             );
 
-            this.$message.success(this.$appMsg.success[1005]);
+            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }
