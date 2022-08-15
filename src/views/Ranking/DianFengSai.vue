@@ -95,7 +95,12 @@
         <vxe-table-colgroup
           title="出场越低，波动越大 (%)"
           :title-prefix="{
-            content: $appMsg.tips[1010] + '\n' + $appMsg.tips[1015],
+            content:
+              $appMsg.tips[1015] +
+              '\n' +
+              $appMsg.tips[1010] +
+              '\n-\n' +
+              $appMsg.tips[1018],
           }"
         >
           <vxe-column
@@ -174,9 +179,9 @@
             </template>
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
-                <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                   {{ row.allPickRate }}
-                </div>
+                </span>
                 <span
                   v-if="row.change.updateValue != 0"
                   :style="
@@ -198,10 +203,7 @@
                   "
                   width="15"
                   height="15"
-                  class="
-                    app-db21bca782a535e91eb87f56b8abdc45
-                    app-32595defa680e058a9db0aaae36d6f46
-                  "
+                  class="app-db21bca782a535e91eb87f56b8abdc45"
                 />
               </div>
             </template>
@@ -230,6 +232,13 @@
             <template #default="{ row }">
               <span v-if="!row.updateId">0</span>
               <span v-else>{{ row.allBPRate }}</span>
+
+              <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                <HeroProgress
+                  :listWidth="heroProficiencyWidth"
+                  :progressData="progressData.result.rows[row.id]"
+                />
+              </lazy-component>
             </template>
           </vxe-column>
           <vxe-column
@@ -320,25 +329,27 @@
           />
         </vxe-table-colgroup>
 
-        <vxe-table-colgroup
-          title="金币"
-          :title-prefix="{
-            content: $appMsg.tips[1017],
-          }"
-        >
-          <vxe-column
-            title="全部"
-            field="equMoneyOverflow"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-column
-            title="分均"
-            field="equMoneyMin"
-            :width="listWidth"
-            sortable
-          />
-        </vxe-table-colgroup>
+        <!--
+          <vxe-table-colgroup
+            title="金币"
+            :title-prefix="{
+              content: $appMsg.tips[1017],
+            }"
+          >
+            <vxe-column
+              title="全部"
+              field="equMoneyOverflow"
+              :width="listWidth"
+              sortable
+            />
+            <vxe-column
+              title="分均"
+              field="equMoneyMin"
+              :width="listWidth"
+              sortable
+            />
+          </vxe-table-colgroup>
+        -->
 
         <vxe-table-colgroup title="KDA">
           <vxe-column
@@ -377,7 +388,7 @@
         </vxe-table-colgroup>
 
         <template #empty>
-          <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
+          <div v-if="!agree" class="app-b0b345803bbcaebeb0bd65253594cfc9">
             <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
               我已经阅读并同意
               <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
@@ -463,19 +474,11 @@
 </template>
 
 <script>
-import "echarts/lib/component/dataZoom";
-import "echarts/lib/component/legendScroll";
-import "echarts/lib/component/markLine";
-import "echarts/lib/component/markPoint";
-import "echarts/lib/component/title";
-
-import "v-charts/lib/style.css";
-import "zrender/lib/svg/svg";
-
 export default {
   name: "RankingDianFengSai",
   components: {
     ChartsLine: () => import("@/components/Ranking/ChartsLine.vue"),
+    HeroProgress: () => import("@/components/Ranking/HeroProgress.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
@@ -516,16 +519,18 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        let agree = this.$cookie.get("agree");
+        this.agree = this.$cookie.get("agree");
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (this.agree == 1 || (this.agree == 1 && newValue.refresh == 1)) {
           this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
+          this.getRanking(15);
         }
       },
     },
   },
   data() {
     return {
+      agree: 0,
       tableData: {
         loading: false,
         result: {
@@ -545,6 +550,11 @@ export default {
           rows: [],
         },
       },
+      progressData: {
+        result: {
+          rows: [],
+        },
+      },
       actions: [
         { name: "趋势", subname: "左下角喜欢一下", value: 0 },
         { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
@@ -553,6 +563,7 @@ export default {
       ],
       listWidth: 0,
       clientHeight: 0,
+      heroProficiencyWidth: 0,
       showInfo: {
         checked: false,
         skillMenu: false,
@@ -585,12 +596,14 @@ export default {
     /*
       if (this.$cookie.get("agree") == 1) {
         this.getRanking(0, this.bid, this.cid, this.did);
+        this.getRanking(15);
       }
     */
   },
   methods: {
     initTableWidth: function () {
       this.listWidth = this.$appInitTableWidth(1450);
+      this.heroProficiencyWidth = (this.listWidth || 80) - 20;
 
       if (localStorage.VXE_TABLE_CUSTOM_COLUMN_VISIBLE == undefined) return;
 
@@ -627,7 +640,13 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
-        return (this.tableData = ls);
+        if (aid == 15) {
+          this.progressData = ls;
+        } else {
+          this.tableData = ls;
+        }
+
+        return;
       }
 
       this.tableData.loading = true;
@@ -646,18 +665,29 @@ export default {
         )
         .then((res) => {
           let data = res.data.data,
-            status = res.data.status;
+            status = res.data.status,
+            newData = null;
 
           if (status.code == 200) {
-            this.tableData = data;
-            this.tableData.loading = false;
-            this.tableData.updateTime = ts;
+            if (aid == 15) {
+              this.progressData = data;
+              this.progressData.loading = false;
+              this.progressData.updateTime = ts;
 
-            //this.$refs.refDianFengSai.loadData(data.result.rows);
+              newData = this.progressData;
+            } else {
+              this.tableData = data;
+              this.tableData.loading = false;
+              this.tableData.updateTime = ts;
+
+              //this.$refs.refDianFengSai.loadData(data.result.rows);
+
+              newData = this.tableData;
+            }
 
             this.$appSetLocalStorage(
               "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
-              this.tableData
+              newData
             );
 
             //this.$message.success(this.$appMsg.success[1005]);
@@ -864,6 +894,7 @@ export default {
 
         this.getHeroChartsLog(6);
         this.getRanking(0, this.bid, this.cid, this.did);
+        this.getRanking(15);
       }
 
       this.showInfo.checked = nowChecked;

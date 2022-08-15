@@ -317,18 +317,31 @@
             )
           "
         />
+        <!--
+          <van-cell
+            icon="description"
+            title="项目开放接口"
+            value="Coding"
+            is-link
+            @click="
+              $appOpenUrl(
+                '是否打开外部链接?',
+                null,
+                { path: url.openSource[1] },
+                0
+              )
+            "
+          />
+        -->
         <van-cell
-          icon="description"
-          title="项目开放接口"
-          value="Coding"
+          icon="/img/app-icons/coffee.png"
+          title="请我喝杯咖啡"
+          label="制作不易，支持一下"
+          value="爱发电"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
           is-link
           @click="
-            $appOpenUrl(
-              '是否打开外部链接?',
-              null,
-              { path: url.openSource[1] },
-              0
-            )
+            $appOpenUrl('是否打开外部链接?', null, { path: url.afdian }, 0)
           "
         />
         <van-cell
@@ -339,17 +352,6 @@
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.support }, 0)
-          "
-        />
-        <van-cell
-          icon="/img/app-icons/coffee.png"
-          title="请我喝杯咖啡"
-          label="制作不易，支持一下"
-          value="爱发电"
-          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-          is-link
-          @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.afdian }, 0)
           "
         />
         <van-cell

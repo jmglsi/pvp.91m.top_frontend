@@ -1295,7 +1295,7 @@ div.search-062a862a53dafe999914c45b9e5dd103 {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: -1;
+  z-index: -1 !important;
 }
 
 div.search-cbf8ce69d638243d800b392c8d298b16 {

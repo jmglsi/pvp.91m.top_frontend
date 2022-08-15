@@ -111,10 +111,7 @@
                   "
                   width="15"
                   height="15"
-                  class="
-                    app-db21bca782a535e91eb87f56b8abdc45
-                    app-32595defa680e058a9db0aaae36d6f46
-                  "
+                  class="app-db21bca782a535e91eb87f56b8abdc45"
                 />
               </div>
             </template>

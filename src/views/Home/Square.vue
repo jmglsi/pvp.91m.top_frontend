@@ -120,7 +120,7 @@ div.square-083a770f697e829b819171c6ec1a34e7 {
   margin-left: 25px;
   margin-top: 25px;
   position: absolute;
-  z-index: 1;
+  z-index: @app-z-index;
 }
 
 div.square-9e0ab13d2ba69005149eef0b04e58dfa {

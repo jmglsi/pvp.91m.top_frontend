@@ -118,10 +118,9 @@
         :column-num="3"
         class="hero-d7eb5a86f1d4b50ea22711e1e60718e9"
       >
-        <van-grid-item
-          class="hero-c6e864acb6955eed0361921288d34149"
+        <van-grid-item class="hero-c6e864acb6955eed0361921288d34149">
+        <!--
           @click="$message.info($appMsg.info[1005])"
-        >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
               v-lazy="
@@ -169,6 +168,7 @@
               {{ hero.info.equMoneyOverflow || 0 }}
             </van-tag>
           </span>
+        -->
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
@@ -432,22 +432,24 @@
         >
           {{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}
         </van-tabbar-item>
-        <van-tabbar-item
-          icon="//pic.rmb.bdstatic.com/bjh/f945a32ff317bcc82c10e09ecc8f11a8.png"
-          icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
-          @click="
-            hero.info.wikiId
-              ? $appOpenUrl(
-                  '是否打开外部链接?',
-                  null,
-                  { path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId },
-                  0
-                )
-              : $message.info($appMsg.info[1006])
-          "
-        >
-          稷下图书馆
-        </van-tabbar-item>
+        <!--
+          <van-tabbar-item
+            icon="//pic.rmb.bdstatic.com/bjh/f945a32ff317bcc82c10e09ecc8f11a8.png"
+            icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
+            @click="
+              hero.info.wikiId
+                ? $appOpenUrl(
+                    '是否打开外部链接?',
+                    null,
+                    { path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId },
+                    0
+                  )
+                : $message.info($appMsg.info[1006])
+            "
+          >
+            稷下图书馆
+          </van-tabbar-item>
+        -->
         <van-tabbar-item
           icon="//pic.rmb.bdstatic.com/bjh/be831fde1fd4d15d0f77e62a93fcbc05.png"
           to="/search/?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
@@ -637,23 +639,30 @@ export default {
       this.$axios
         .post(this.$appApi.pvp.getHeroInfo + "&id=" + id)
         .then((res) => {
-          let heroData = res.data.data,
-            heroInfoData = heroData.heroInfo;
+          let status = res.data.status;
 
-          this.circle.info = heroData.circleInfo;
-          this.hero.info = heroInfoData;
+          if (status.code == 200) {
+            let heroData = res.data.data,
+              heroInfoData = heroData.heroInfo;
+            this.circle.info = heroData.circleInfo;
+            this.hero.info = heroInfoData;
 
-          heroData.updateTime = ts;
+            heroData.updateTime = ts;
 
-          this.$appSetLocalStorage("heroInfo-" + id, heroData);
+            this.$appSetLocalStorage("heroInfo-" + id, heroData);
 
-          heroInfoData.id == 999
-            ? (this.trendInfo.model = 2)
-            : (this.trendInfo.model = 0);
+            heroInfoData.id == 999
+              ? (this.trendInfo.model = 2)
+              : (this.trendInfo.model = 0);
 
-          this.hero.title = heroInfoData.name;
-          document.title =
-            heroInfoData.name + " | " + appConfigInfo.appInfo.name;
+            this.hero.title = heroInfoData.name;
+            document.title =
+              heroInfoData.name + " | " + appConfigInfo.appInfo.name;
+
+            //this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     onComponentShow: function () {

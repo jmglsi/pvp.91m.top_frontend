@@ -1,6 +1,18 @@
 <template>
   <div class="ranking-gradient">
-    <div class="ranking-84b60dc869cf54a3d2112e59c70ce21f">
+    <div v-if="!showInfo.checked" :style="{ marginTop: '50px' }">
+      <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
+        我已经阅读并同意
+        <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
+          《隐私和数据声明》
+        </a>
+      </a-checkbox>
+    </div>
+
+    <div
+      v-if="showInfo.checked"
+      class="ranking-84b60dc869cf54a3d2112e59c70ce21f"
+    >
       <!-- T 0 -->
       <div class="ranking-5d6884d8590d15bb78e1f71eacd590fd">
         <van-cell-group
@@ -33,21 +45,21 @@
             </span>
           </template>
           <div class="ranking-f155536738c348c9a6e402eb19afa2af">
-            <ul v-if="rankingData.result.rows[0].length > 0">
+            <ul v-if="tableData.result.rows[0].length > 0">
               <li
-                v-for="(data, index) in rankingData.result.rows[0]"
+                v-for="(data, index) in showInfo.tableData.result[0].rows"
                 :key="'ranking-9caaa62de8e92fdabd24dbed8b94e965-' + index"
-                @click="
-                  $appPush({
-                    path: '/search',
-                    query: { q: data.name, refresh: 1 },
-                  })
-                "
+                @click="onHeroClick(data)"
               >
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <HeroCircle
+                    :progressData="progressData.result.rows[data.id]"
+                  />
+                </lazy-component>
                 <img
                   v-lazy="data.img"
-                  width="35"
-                  height="35"
+                  width="50"
+                  height="50"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
@@ -55,11 +67,65 @@
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
-                  class="
-                    ranking-092fa818fdb7286350fa796ffd546c6b
-                    app-db21bca782a535e91eb87f56b8abdc45
-                  "
+                  class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
+                <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                  <img
+                    v-lazy="data.skill.preview[0].img"
+                    :style="{ left: '-10px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'left',
+                      left: '-11px',
+                      marginTop: '-5px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-043052eea2d064cab23119e56f4f640e
+                    "
+                  >
+                    {{ data.skill.preview[0].pickRate }}
+                  </span>
+                  <img
+                    v-lazy="data.skill.preview[1].img"
+                    :style="{ left: '45px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'right',
+                      left: '11px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-dabb6e25dffefe5b4821b7062afbdaef
+                    "
+                  >
+                    {{ data.skill.preview[1].pickRate }}
+                  </span>
+                </div>
+              </li>
+              <li
+                v-if="tableData.result.rows[0].length > 7"
+                @click="onMoreClick(0)"
+              >
+                <span class="ranking-a45fb50775b608a28b2c7948f5c9fbbe">
+                  {{ showInfo.tableData.result[0].text }}
+                </span>
               </li>
             </ul>
             <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
@@ -88,7 +154,7 @@
             >
               <a-popover placement="bottomRight" trigger="click">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  T0 之下 <van-icon name="question-o" />
+                  一人之下 <van-icon name="question-o" />
                 </span>
                 <template slot="content">
                   <span>
@@ -100,24 +166,21 @@
             </span>
           </template>
           <div class="ranking-f155536738c348c9a6e402eb19afa2af">
-            <ul v-if="rankingData.result.rows[1].length > 0">
+            <ul v-if="tableData.result.rows[1].length > 0">
               <li
-                v-for="(data, index) in rankingData.result.rows[1]"
+                v-for="(data, index) in showInfo.tableData.result[1].rows"
                 :key="'ranking-6c7fc172ca71bccc83ee1c5491d3ba7e-' + index"
-                @click="
-                  $appPush({
-                    path: '/search',
-                    query: {
-                      q: data.name,
-                      refresh: 1,
-                    },
-                  })
-                "
+                @click="onHeroClick(data)"
               >
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <HeroCircle
+                    :progressData="progressData.result.rows[data.id]"
+                  />
+                </lazy-component>
                 <img
                   v-lazy="data.img"
-                  width="35"
-                  height="35"
+                  width="50"
+                  height="50"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
@@ -125,11 +188,65 @@
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
-                  class="
-                    ranking-092fa818fdb7286350fa796ffd546c6b
-                    app-db21bca782a535e91eb87f56b8abdc45
-                  "
+                  class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
+                <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                  <img
+                    v-lazy="data.skill.preview[0].img"
+                    :style="{ left: '-10px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'left',
+                      left: '-11px',
+                      marginTop: '-5px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-043052eea2d064cab23119e56f4f640e
+                    "
+                  >
+                    {{ data.skill.preview[0].pickRate }}
+                  </span>
+                  <img
+                    v-lazy="data.skill.preview[1].img"
+                    :style="{ left: '45px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'right',
+                      left: '11px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-dabb6e25dffefe5b4821b7062afbdaef
+                    "
+                  >
+                    {{ data.skill.preview[1].pickRate }}
+                  </span>
+                </div>
+              </li>
+              <li
+                v-if="tableData.result.rows[1].length > 7"
+                @click="onMoreClick(1)"
+              >
+                <span class="ranking-a45fb50775b608a28b2c7948f5c9fbbe">
+                  {{ showInfo.tableData.result[1].text }}
+                </span>
               </li>
             </ul>
             <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
@@ -169,24 +286,21 @@
             </span>
           </template>
           <div class="ranking-f155536738c348c9a6e402eb19afa2af">
-            <ul v-if="rankingData.result.rows[2].length > 0">
+            <ul v-if="tableData.result.rows[2].length > 0">
               <li
-                v-for="(data, index) in rankingData.result.rows[2]"
+                v-for="(data, index) in showInfo.tableData.result[2].rows"
                 :key="'ranking-5f877badb957977895f414293d3b13ca-' + index"
-                @click="
-                  $appPush({
-                    path: '/search',
-                    query: {
-                      q: data.name,
-                      refresh: 1,
-                    },
-                  })
-                "
+                @click="onHeroClick(data)"
               >
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <HeroCircle
+                    :progressData="progressData.result.rows[data.id]"
+                  />
+                </lazy-component>
                 <img
                   v-lazy="data.img"
-                  width="35"
-                  height="35"
+                  width="50"
+                  height="50"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
@@ -194,11 +308,65 @@
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
-                  class="
-                    ranking-092fa818fdb7286350fa796ffd546c6b
-                    app-db21bca782a535e91eb87f56b8abdc45
-                  "
+                  class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
+                <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                  <img
+                    v-lazy="data.skill.preview[0].img"
+                    :style="{ left: '-10px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'left',
+                      left: '-11px',
+                      marginTop: '-5px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-043052eea2d064cab23119e56f4f640e
+                    "
+                  >
+                    {{ data.skill.preview[0].pickRate }}
+                  </span>
+                  <img
+                    v-lazy="data.skill.preview[1].img"
+                    :style="{ left: '45px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'right',
+                      left: '11px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-dabb6e25dffefe5b4821b7062afbdaef
+                    "
+                  >
+                    {{ data.skill.preview[1].pickRate }}
+                  </span>
+                </div>
+              </li>
+              <li
+                v-if="tableData.result.rows[2].length > 7"
+                @click="onMoreClick(2)"
+              >
+                <span class="ranking-a45fb50775b608a28b2c7948f5c9fbbe">
+                  {{ showInfo.tableData.result[2].text }}
+                </span>
               </li>
             </ul>
             <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
@@ -238,24 +406,21 @@
             </span>
           </template>
           <div class="ranking-f155536738c348c9a6e402eb19afa2af">
-            <ul v-if="rankingData.result.rows[3].length > 0">
+            <ul v-if="tableData.result.rows[3].length > 0">
               <li
-                v-for="(data, index) in rankingData.result.rows[3]"
+                v-for="(data, index) in showInfo.tableData.result[3].rows"
                 :key="'ranking-d9221b65c901ace0d707524657300107-' + index"
-                @click="
-                  $appPush({
-                    path: '/search',
-                    query: {
-                      q: data.name,
-                      refresh: 1,
-                    },
-                  })
-                "
+                @click="onHeroClick(data)"
               >
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <HeroCircle
+                    :progressData="progressData.result.rows[data.id]"
+                  />
+                </lazy-component>
                 <img
                   v-lazy="data.img"
-                  width="35"
-                  height="35"
+                  width="50"
+                  height="50"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
@@ -263,11 +428,65 @@
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
-                  class="
-                    ranking-092fa818fdb7286350fa796ffd546c6b
-                    app-db21bca782a535e91eb87f56b8abdc45
-                  "
+                  class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
+                <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                  <img
+                    v-lazy="data.skill.preview[0].img"
+                    :style="{ left: '-10px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'left',
+                      left: '-11px',
+                      marginTop: '-5px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-043052eea2d064cab23119e56f4f640e
+                    "
+                  >
+                    {{ data.skill.preview[0].pickRate }}
+                  </span>
+                  <img
+                    v-lazy="data.skill.preview[1].img"
+                    :style="{ left: '45px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'right',
+                      left: '11px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-dabb6e25dffefe5b4821b7062afbdaef
+                    "
+                  >
+                    {{ data.skill.preview[1].pickRate }}
+                  </span>
+                </div>
+              </li>
+              <li
+                v-if="tableData.result.rows[3].length > 7"
+                @click="onMoreClick(3)"
+              >
+                <span class="ranking-a45fb50775b608a28b2c7948f5c9fbbe">
+                  {{ showInfo.tableData.result[3].text }}
+                </span>
               </li>
             </ul>
             <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
@@ -303,24 +522,21 @@
             </span>
           </template>
           <div class="ranking-f155536738c348c9a6e402eb19afa2af">
-            <ul v-if="rankingData.result.rows[4].length > 0">
+            <ul v-if="tableData.result.rows[4].length > 0">
               <li
-                v-for="(data, index) in rankingData.result.rows[4]"
+                v-for="(data, index) in showInfo.tableData.result[4].rows"
                 :key="'ranking-1147cba48a3152b125e90f67a6838668-' + index"
-                @click="
-                  $appPush({
-                    path: '/search',
-                    query: {
-                      q: data.name,
-                      refresh: 1,
-                    },
-                  })
-                "
+                @click="onHeroClick(data)"
               >
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <HeroCircle
+                    :progressData="progressData.result.rows[data.id]"
+                  />
+                </lazy-component>
                 <img
                   v-lazy="data.img"
-                  width="35"
-                  height="35"
+                  width="50"
+                  height="50"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
@@ -328,11 +544,65 @@
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
-                  class="
-                    ranking-092fa818fdb7286350fa796ffd546c6b
-                    app-db21bca782a535e91eb87f56b8abdc45
-                  "
+                  class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
+                <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                  <img
+                    v-lazy="data.skill.preview[0].img"
+                    :style="{ left: '-10px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'left',
+                      left: '-11px',
+                      marginTop: '-5px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-043052eea2d064cab23119e56f4f640e
+                    "
+                  >
+                    {{ data.skill.preview[0].pickRate }}
+                  </span>
+                  <img
+                    v-lazy="data.skill.preview[1].img"
+                    :style="{ left: '45px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'right',
+                      left: '11px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-dabb6e25dffefe5b4821b7062afbdaef
+                    "
+                  >
+                    {{ data.skill.preview[1].pickRate }}
+                  </span>
+                </div>
+              </li>
+              <li
+                v-if="tableData.result.rows[4].length > 7"
+                @click="onMoreClick(4)"
+              >
+                <span class="ranking-a45fb50775b608a28b2c7948f5c9fbbe">
+                  {{ showInfo.tableData.result[4].text }}
+                </span>
               </li>
             </ul>
             <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
@@ -366,24 +636,21 @@
             </span>
           </template>
           <div class="ranking-f155536738c348c9a6e402eb19afa2af">
-            <ul v-if="rankingData.result.rows[5].length > 0">
+            <ul v-if="tableData.result.rows[5].length > 0">
               <li
-                v-for="(data, index) in rankingData.result.rows[5]"
+                v-for="(data, index) in showInfo.tableData.result[5].rows"
                 :key="'ranking-27799f7b525c8aa54e66ac9d76a0f65e-' + index"
-                @click="
-                  $appPush({
-                    path: '/search',
-                    query: {
-                      q: data.name,
-                      refresh: 1,
-                    },
-                  })
-                "
+                @click="onHeroClick(data)"
               >
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <HeroCircle
+                    :progressData="progressData.result.rows[data.id]"
+                  />
+                </lazy-component>
                 <img
                   v-lazy="data.img"
-                  width="35"
-                  height="35"
+                  width="50"
+                  height="50"
                   class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
                 />
                 <img
@@ -391,11 +658,65 @@
                   v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
-                  class="
-                    ranking-092fa818fdb7286350fa796ffd546c6b
-                    app-db21bca782a535e91eb87f56b8abdc45
-                  "
+                  class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
+                <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
+                  <img
+                    v-lazy="data.skill.preview[0].img"
+                    :style="{ left: '-10px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'left',
+                      left: '-11px',
+                      marginTop: '-5px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-043052eea2d064cab23119e56f4f640e
+                    "
+                  >
+                    {{ data.skill.preview[0].pickRate }}
+                  </span>
+                  <img
+                    v-lazy="data.skill.preview[1].img"
+                    :style="{ left: '45px' }"
+                    width="15"
+                    height="15"
+                    class="
+                      ranking-95a25d46f98b0ec553d892cc45037d57
+                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
+                    "
+                  />
+                  <span
+                    :style="{
+                      textAlign: 'right',
+                      left: '11px',
+                    }"
+                    class="
+                      app-0fc3cfbc27e91ea60a787de13dae3e3c
+                      app-5f19eaf71f40d74d66be84db52b3ad87
+                      ranking-dabb6e25dffefe5b4821b7062afbdaef
+                    "
+                  >
+                    {{ data.skill.preview[1].pickRate }}
+                  </span>
+                </div>
+              </li>
+              <li
+                v-if="tableData.result.rows[5].length > 7"
+                @click="onMoreClick(5)"
+              >
+                <span class="ranking-a45fb50775b608a28b2c7948f5c9fbbe">
+                  {{ showInfo.tableData.result[5].text }}
+                </span>
               </li>
             </ul>
             <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
@@ -405,7 +726,7 @@
     </div>
 
     <div class="ranking-2862744e5d7cce9d070aa41172557d78">
-      英雄梯度由
+      英雄梯度模型由
       <span
         :style="{ color: '#1989fa !important' }"
         @click="
@@ -415,6 +736,102 @@
         @梦归奇迹
       </span>
       提供
+      <br />
+      梯度排行最后更新：
+      <span :style="{ color: 'red !important' }">
+        {{ tableData.result.updateTime || "等待更新" }}
+      </span>
+      <br />
+      <br />
+      每个人的梯度不一样，仅供参考
+      <br />
+      <br />
+      <span
+        :style="{ color: 'orange !important' }"
+        @click="
+          tableData.result.url
+            ? $appOpenUrl(
+                '是否打开外部链接?',
+                null,
+                { path: tableData.result.url },
+                0
+              )
+            : null
+        "
+      >
+        {{ tableData.result.title || null }}
+      </span>
+    </div>
+
+    <div class="ranking-ffab85bb31b6936dee15c689b1581675">
+      <van-action-sheet
+        v-model="showInfo.skillMenu"
+        :title="tableDataRow.name + ' 的其他数据 (近期)'"
+        safe-area-inset-bottom
+      >
+        <template #default>
+          <van-tabs
+            v-model="skillInfo.model"
+            v-if="skillInfo.model > -1"
+            :ellipsis="false"
+            @click="onSkillTabsClick"
+          >
+            <van-tab title="打法 (推荐)">
+              <HeroGenreList
+                v-if="cellInfo.index == 0 && skillInfo.model == 0"
+                :genreId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab title="出装 (推荐)">
+              <HeroEquipmentListALL
+                v-if="cellInfo.index == 0 && skillInfo.model == 1"
+                :heroId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab title="出装 (单件)">
+              <HeroEquipmentListOne
+                v-if="cellInfo.index == 0 && skillInfo.model == 2"
+                :equipmentId="tableDataRow.id"
+                :equipmentType="1"
+              />
+            </van-tab>
+            <van-tab>
+              <template #title>
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  国服 (备战)
+                </span>
+                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+              </template>
+
+              <HeroInscriptionList
+                v-if="cellInfo.index == 0 && skillInfo.model == 3"
+                :heroId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab title="更新调整" />
+          </van-tabs>
+        </template>
+      </van-action-sheet>
+    </div>
+
+    <div
+      v-show="showInfo.heroSameHobby"
+      class="ranking-d742492b2526d57a222af9b54040b3b4"
+    >
+      <HeroSameHobby :heroId="tableDataRow.id" />
+    </div>
+
+    <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
+      <van-action-sheet
+        v-model="showInfo.heroMenu"
+        :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
+        :actions="actions"
+        :close-on-click-action="true"
+        @select="onActionSheetSelect"
+        @open="onActionOpen"
+        @close="onActionClose"
+        safe-area-inset-bottom
+      />
     </div>
   </div>
 </template>
@@ -422,6 +839,16 @@
 <script>
 export default {
   name: "HeroGradient",
+  components: {
+    HeroCircle: () => import("@/components/Ranking/HeroCircle.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
+    HeroEquipmentListALL: () =>
+      import("@/components/Hero/EquipmentList_All.vue"),
+    HeroEquipmentListOne: () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+  },
   props: {
     bid: {
       type: Number,
@@ -442,23 +869,167 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.getRanking(0, newValue.bid, newValue.cid, 0);
+        this.agree = this.$cookie.get("agree");
+
+        if (this.agree == 1) {
+          this.getRanking(16, newValue.bid, newValue.cid, 0);
+          this.getRanking(15);
+
+          setTimeout(() => {
+            this.getRankingByT(16, newValue.bid, newValue.cid, 0);
+          }, 500);
+
+          this.showInfo.checked = true;
+        }
       },
     },
   },
   data() {
     return {
-      rankingData: {
+      agree: 0,
+      tableData: {
+        loading: false,
         result: {
           rows: [[], [], [], [], [], []],
         },
       },
+      tableDataRow: {
+        id: 0,
+        name: "加载中...",
+      },
+      progressData: {
+        result: {
+          rows: [],
+        },
+      },
+      actions: [
+        { name: "备战", subname: "学习大神思路", value: 0 },
+        { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
+        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
+      ],
+      showInfo: {
+        tableData: {
+          result: [
+            {
+              length: 7,
+              text: "展开",
+              rows: [],
+            },
+            {
+              length: 7,
+              text: "展开",
+              rows: [],
+            },
+            {
+              length: 7,
+              text: "展开",
+              rows: [],
+            },
+            {
+              length: 7,
+              text: "展开",
+              rows: [],
+            },
+            {
+              length: 7,
+              text: "展开",
+              rows: [],
+            },
+            {
+              length: 7,
+              text: "展开",
+              rows: [],
+            },
+          ],
+        },
+        skillMenu: false,
+        heroSameHobby: false,
+        heroMenu: false,
+        checked: false,
+      },
+      cellInfo: {
+        index: 0,
+      },
+      tabsInfo: {
+        model: 0,
+      },
+      skillInfo: {
+        model: 0,
+      },
+      tipsInfo: [0, 0, 0, 0],
     };
   },
   methods: {
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
-      if (bid == 0 && cid == 0) return;
+      let appConfigInfo = this.$appConfigInfo,
+        ts = this.$appTs,
+        ls = this.$appGetLocalStorage(
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
+        );
 
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+        if (aid == 15) {
+          this.progressData = ls;
+        } else {
+          this.tableData = ls;
+        }
+
+        return;
+      }
+
+      this.tableData.loading = true;
+
+      this.$axios
+        .post(
+          this.$appApi.pvp.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status,
+            newData = null;
+
+          if (status.code == 200) {
+            if (aid == 15) {
+              this.progressData = data;
+              this.progressData.loading = false;
+              this.progressData.updateTime = ts;
+
+              newData = this.progressData;
+            } else {
+              this.tableData = data;
+              this.tableData.loading = false;
+              this.tableData.updateTime = ts;
+
+              //this.$refs.refDianFengSai.loadData(data.result.rows);
+
+              newData = this.tableData;
+            }
+
+            this.$appSetLocalStorage(
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
+              newData
+            );
+
+            //this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+
+      if (bid == 3 && cid == 0) {
+        this.$message.info(this.$appMsg.info[1011]);
+      }
+    },
+    getRankingByT: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let ls = this.$appGetLocalStorage(
         "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
       );
@@ -466,11 +1037,11 @@ export default {
       if (!ls) {
         return;
       } else {
-        this.rankingData.result.rows = [[], [], [], [], [], []];
+        this.tableData.result.rows = [[], [], [], [], [], []];
       }
 
       ls.result.rows.map((x) => {
-        let gradientIndex = 5;
+        let gradientIndex = null;
 
         if (x.gradient == 0) {
           gradientIndex = 0;
@@ -486,7 +1057,141 @@ export default {
           gradientIndex = 5;
         }
 
-        this.rankingData.result.rows[gradientIndex].push(x);
+        if (x.gradient < 0 || x.gradient > 5) {
+          //
+        } else {
+          this.tableData.result.rows[gradientIndex].push(x);
+        }
+      });
+
+      this.showInfo.tableData.result[0].rows =
+        this.tableData.result.rows[0].slice(0, 7);
+      this.showInfo.tableData.result[1].rows =
+        this.tableData.result.rows[1].slice(0, 7);
+      this.showInfo.tableData.result[2].rows =
+        this.tableData.result.rows[2].slice(0, 7);
+      this.showInfo.tableData.result[3].rows =
+        this.tableData.result.rows[3].slice(0, 7);
+      this.showInfo.tableData.result[4].rows =
+        this.tableData.result.rows[4].slice(0, 7);
+      this.showInfo.tableData.result[5].rows =
+        this.tableData.result.rows[5].slice(0, 7);
+    },
+    onHeroClick: function (data) {
+      this.tableDataRow = data;
+
+      this.showInfo.heroMenu = true;
+    },
+    onMoreClick: function (t) {
+      let tableDataRows = this.tableData.result.rows[t];
+
+      if (this.showInfo.tableData.result[t].length == 7) {
+        this.showInfo.tableData.result[t].rows = tableDataRows;
+        this.showInfo.tableData.result[t].length = tableDataRows.length;
+        this.showInfo.tableData.result[t].text = "收起";
+      } else {
+        this.showInfo.tableData.result[t].rows = tableDataRows.slice(0, 7);
+        this.showInfo.tableData.result[t].length = 7;
+        this.showInfo.tableData.result[t].text = "展开";
+      }
+    },
+    onSkillTabsClick: function (e) {
+      let heroInfo = this.tableDataRow,
+        tipsText;
+
+      if (e == 0) {
+        tipsText = this.$appMsg.info[1007];
+      } else if (e == 1) {
+        tipsText = this.$appMsg.info[1008];
+      } else if (e == 2) {
+        tipsText = this.$appMsg.info[1009];
+      } else if (e == 3) {
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 4) {
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
+        });
+      }
+
+      if (tipsText && this.tipsInfo[e] == 0) {
+        this.tipsInfo[e] = 1;
+
+        this.$message.info(tipsText);
+      }
+    },
+    onActionOpen: function () {
+      this.showInfo.heroSameHobby = true;
+    },
+    onActionClose: function () {
+      this.showInfo.heroSameHobby = false;
+    },
+    onActionSheetSelect: function (item) {
+      let heroInfo = this.tableDataRow;
+
+      if (item.value == 0) {
+        //this.$appPush({
+        //path: "/hero/" + heroInfo.id + "/info",
+        //});
+        this.showInfo.skillMenu = true;
+      }
+
+      if (item.value == 1) {
+        this.$appPush({
+          path: "/search",
+          query: { q: heroInfo.name, refresh: 1 },
+        });
+      }
+
+      /*
+        if (item.value == 1) {
+          this.$appPush({ path: "/hero/" + heroInfo.id + "/equipment" });
+        }
+      */
+
+      if (item.value == 2) {
+        this.$appOpenUrl(
+          "是否查看英雄更新记录?",
+          "NGA @EndMP",
+          {
+            path: "//ngabbs.com/read.php?pid=" + heroInfo.updateId,
+          },
+          0
+        );
+      }
+
+      if (item.value == 3) {
+        this.$appOpenUrl(
+          "是否打开外部链接?",
+          "NGA @小熊de大熊",
+          {
+            path: "//ngabbs.com/read.php?tid=12677614",
+          },
+          0
+        );
+      }
+    },
+    onAgreeChange: function () {
+      let nowChecked = false,
+        nowChecked_int = 0;
+
+      if (this.showInfo.checked == true) {
+        nowChecked = false;
+        nowChecked_int = 0;
+      } else {
+        nowChecked = true;
+        nowChecked_int = 1;
+
+        this.getRanking(16, this.bid, this.cid, 0);
+        this.getRanking(15);
+
+        setTimeout(() => {
+          this.getRankingByT(16, this.bid, this.cid, 0);
+        }, 500);
+      }
+
+      this.showInfo.checked = nowChecked;
+      this.$cookie.set("agree", nowChecked_int, {
+        expires: "1Y",
       });
     },
   },
@@ -496,11 +1201,6 @@ export default {
 <style scoped lang="less">
 img.ranking-712ef34fdf31f8510e087c7a42d9cd48 {
   border-radius: 100%;
-}
-
-img.ranking-092fa818fdb7286350fa796ffd546c6b {
-  position: absolute;
-  margin-left: -1px;
 }
 
 span.ranking-0eef127325d38ed4804c26bd7c88bab3 {
@@ -516,6 +1216,12 @@ span.ranking-b4ba22aa4e7d0527ad550251603c5355 {
   float: right;
 }
 
+span.ranking-a45fb50775b608a28b2c7948f5c9fbbe {
+  margin-left: 12px;
+  margin-top: 17px;
+  position: absolute;
+}
+
 div.ranking-f155536738c348c9a6e402eb19afa2af {
   margin: 5px 10px 0 10px;
   overflow: hidden;
@@ -523,7 +1229,7 @@ div.ranking-f155536738c348c9a6e402eb19afa2af {
   li {
     float: left;
     text-align: center;
-    margin: 5px 15px 15px 10px;
+    margin: 5px 30px 15px 10px;
   }
 }
 

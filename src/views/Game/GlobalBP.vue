@@ -93,6 +93,9 @@
                 class="game-5de9dd2a5714dd606db0e0fa1611c227"
               />
               <img
+                v-if="
+                  gameInfo.result.rows[tabsInfo.model].BPOrder[index] > 0
+                "
                 v-lazy="
                   '//pic.rmb.bdstatic.com/bjh/77ef5bb6c9534d4a1f67e69dfdbb8598.png'
                 "
@@ -146,6 +149,9 @@
                 class="game-221cf04d9a9e32c6af24502f96e3ecfe"
               />
               <img
+                v-if="
+                  gameInfo.result.rows[tabsInfo.model].BPOrder[index] > 0
+                "
                 v-lazy="
                   '//pic.rmb.bdstatic.com/bjh/77ef5bb6c9534d4a1f67e69dfdbb8598.png'
                 "
@@ -1790,7 +1796,7 @@ button.game-8e4f204791d1b591b6a6f93b572f9b2d {
 }
 
 div.van-tabs__wrap {
-  z-index: 2;
+  z-index: 2 !important;
 }
 
 div.game-bp-portrait {

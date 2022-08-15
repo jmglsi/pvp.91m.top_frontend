@@ -356,13 +356,10 @@ img.app-4ab161130e76571ab0c31aa23a6238c7 {
 }
 
 img.app-db21bca782a535e91eb87f56b8abdc45 {
-  margin-top: -3px;
+  margin-left: -3px !important;
   margin-left: 5px;
-}
-
-img.app-32595defa680e058a9db0aaae36d6f46 {
+  margin-top: 23px;
   position: absolute;
-  margin-left: 33px !important;
 }
 
 i.app-6de102c0bc4dc7f72ce287d6b0828052 {
@@ -465,11 +462,10 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
 }
 
 span.app-b0704b59dbf144bfeffb53bdb11d7128 {
-  position: absolute;
   font-size: @app-font-size;
   left: 0;
-  margin-left: 15px;
-  margin-top: -7px;
+  margin-top: 19px;
+  position: absolute;
   width: 100%;
 }
 
@@ -702,7 +698,7 @@ div.app-pzOne {
 
 div.app-130a360689f8d613da10c94d53527a1b {
   padding-top: 3px;
-  z-index: 10;
+  z-index: 10 !important;
 }
 
 div.app-1de7efdd403ec02d55f5c1d9557a2fc4 {

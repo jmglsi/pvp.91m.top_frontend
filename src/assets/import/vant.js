@@ -23,6 +23,7 @@ import {
     Lazyload,
     Loading,
     NavBar,
+    Progress,
     Pagination,
     Picker,
     Popup,
@@ -74,6 +75,7 @@ Vue
     .use(Loading)
     .use(NavBar)
     .use(Pagination)
+    .use(Progress)
     .use(Picker)
     .use(Popup)
     .use(PullRefresh)

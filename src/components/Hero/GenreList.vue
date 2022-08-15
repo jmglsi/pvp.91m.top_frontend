@@ -115,9 +115,9 @@
           </template>
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
-              <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+              <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                 {{ row.pickRate }}
-              </div>
+              </span>
               <span
                 v-if="row.change.updateValue != 0"
                 :style="
@@ -137,10 +137,7 @@
                 v-lazy="'/img/app-icons/hot_' + row.change.updateType + '.png'"
                 width="15"
                 height="15"
-                class="
-                  app-db21bca782a535e91eb87f56b8abdc45
-                  app-32595defa680e058a9db0aaae36d6f46
-                "
+                class="app-db21bca782a535e91eb87f56b8abdc45"
               />
             </div>
           </template>
@@ -178,7 +175,7 @@
       </vxe-table-colgroup>
 
       <template #empty>
-        <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
+        <div v-if="!agree" class="app-b0b345803bbcaebeb0bd65253594cfc9">
           <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
             我已经阅读并同意
             <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
@@ -212,7 +209,9 @@ export default {
       handler(newValue) {
         if (!newValue.genreId) return;
 
-        if (this.$cookie.get("agree") == 1) {
+        this.agree = this.$cookie.get("agree");
+
+        if (this.agree == 1) {
           this.getRanking(newValue.genreId, 14, 0, 0, 0);
         }
       },
@@ -220,6 +219,7 @@ export default {
   },
   data() {
     return {
+      agree: 0,
       listWidth: 0,
       tableData: {
         loading: false,
@@ -334,7 +334,7 @@ export default {
         nowChecked = true;
         nowChecked_int = 1;
 
-        this.getRanking(this.id, 14, 0, 0, 0);
+        this.getRanking(this.genreId, 14, 0, 0, 0);
       }
 
       this.showInfo.checked = nowChecked;

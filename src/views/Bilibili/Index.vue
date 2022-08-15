@@ -255,7 +255,7 @@ export default {
 div.bilibili-a47ba339330136bcab5b4c91d5d10882 {
   left: 30px;
   position: absolute;
-  z-index: 2;
+  z-index: 2 !important;
 }
 
 div.bilibili-71f262d796bed1ab30e8a2d5a8ddee6f {

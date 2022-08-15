@@ -142,6 +142,7 @@ export default {
   },
   data() {
     return {
+      agree: 0,
       openId: "",
       accessToken: "",
       loginInfo: {
@@ -164,10 +165,11 @@ export default {
     };
   },
   mounted() {
+    this.agree = this.$cookie.get("agree");
     this.openId = this.$cookie.get("openId") || "";
     this.accessToken = this.$cookie.get("accessToken") || "";
 
-    if (this.$cookie.get("agree") == 1) {
+    if (this.agree == 1) {
       this.showInfo.checked = true;
     }
 

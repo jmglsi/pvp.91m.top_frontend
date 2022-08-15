@@ -227,7 +227,7 @@ div.home-3edeff15047c21ac6441301927306137 {
     right: 0;
     position: absolute;
     margin-top: 2px;
-    z-index: 1;
+    z-index: @app-z-index;
   }
 }
 </style>

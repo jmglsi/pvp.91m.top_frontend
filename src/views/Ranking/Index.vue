@@ -13,9 +13,13 @@
         <van-tab>
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
-              <span>顶端巅峰赛&nbsp;</span>
+              <span>梯度排行&nbsp;</span>
 
-              <a-tooltip :visible="showInfo.dfsTips" placement="bottomRight">
+              <a-tooltip
+                :visible="showInfo.dfsTips"
+                overlayClassName="ranking-2d6772ddd3e52a2c53cd8c794ec5ded3"
+                placement="bottomRight"
+              >
                 <template slot="title">
                   <span>筛选移到这了</span>
                 </template>
@@ -27,6 +31,13 @@
           <div v-if="tabsInfo.model == 0">
             <div class="ranking-5f02576721f9492841a54d9bf8a47370">
               <div v-if="viewInfo.model == 'a'">
+                <RankingGradient
+                  :bid="bid || dfsAreaTypeInfo.model"
+                  :cid="cid || dfsPositionTypeInfo.model"
+                />
+              </div>
+
+              <div v-else-if="viewInfo.model == 'b'">
                 <a-tooltip
                   :visible="showInfo.skillTips"
                   overlayClassName="ranking-8d583d7c052e343e6817b99812fa03b6"
@@ -46,20 +57,12 @@
                 </a-tooltip>
               </div>
 
-              <div v-else-if="viewInfo.model == 'b'">
-                <RankingGradient
-                  :bid="bid || dfsAreaTypeInfo.model"
-                  :cid="cid || dfsPositionTypeInfo.model"
-                />
-              </div>
-
               <div v-else-if="viewInfo.model == 'c'">
                 <RankingMigrationLine :bid="cid || dfsPositionTypeInfo.model" />
               </div>
             </div>
 
             <div
-              v-if="cid > 0 || dfsPositionTypeInfo.model > 0"
               :style="
                 $appIsApple && $appConfigInfo.appInfo.pwa == 1
                   ? {
@@ -84,9 +87,11 @@
                       default-value="a"
                       button-style="solid"
                     >
-                      <a-radio-button value="a">排行</a-radio-button>
-                      <a-radio-button value="b">梯度</a-radio-button>
-                      <a-radio-button value="c">趋势</a-radio-button>
+                      <a-radio-button value="a">梯度</a-radio-button>
+                      <a-radio-button value="b">排行</a-radio-button>
+                      <a-radio-button :disabled="cid == 0" value="c">
+                        趋势
+                      </a-radio-button>
                     </a-radio-group>
                   </div>
                 </template>
@@ -125,7 +130,7 @@
           </div>
         </van-tab>
 
-        <van-tab>
+        <van-tab disabled>
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
               <span>玩家 (非实时)&nbsp;</span>
@@ -188,7 +193,7 @@
       </van-tabs>
     </div>
 
-    <AppHello v-if="viewInfo.model != 'a'" height="100px" />
+    <AppHello v-if="viewInfo.model != 'b'" height="100px" />
 
     <van-popup
       v-model="showInfo.rankingSearch"
@@ -252,7 +257,7 @@
     </div>
 
     <div
-      v-if="viewInfo.model == 'a'"
+      v-if="viewInfo.model == 'b'"
       class="ranking-ebf09abeb7c3db44741d328324915725"
     >
       <van-divider
@@ -277,6 +282,15 @@
 </template>
 
 <script>
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/legendScroll";
+import "echarts/lib/component/markLine";
+import "echarts/lib/component/markPoint";
+import "echarts/lib/component/title";
+
+import "v-charts/lib/style.css";
+import "zrender/lib/svg/svg";
+
 export default {
   name: "RankingHome",
   components: {
@@ -301,7 +315,12 @@ export default {
       this.did = parseInt(q.did) || 0;
       this.refresh = parseInt(q.refresh) || 0;
 
-      if (this.bid == 0 && this.cid == 0 && this.did == 0) {
+      if (
+        this.bid == 0 &&
+        this.cid == 0 &&
+        this.did == 0 &&
+        this.viewInfo.model == "c"
+      ) {
         this.viewInfo.model = "a";
       }
     },
@@ -465,7 +484,7 @@ export default {
       }
     },
     onRankingTabsClick: function (e) {
-      let tabsInfo = this.tabsInfo;
+      //let tabsInfo = this.tabsInfo;
 
       if (e == 0) {
         this.bidInfo = this.dfsAreaTypeInfo;
@@ -521,7 +540,7 @@ export default {
         this.showInfo.rankingFilterMenu = true;
       }
 
-      this.$appPush({ query: { type: tabsInfo.model } });
+      //this.$appPush({ query: { type: tabsInfo.model } });
     },
     onRadioChange: function (e) {
       this.viewInfo.model = e.target.value;
@@ -611,6 +630,12 @@ img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
   position: absolute;
 }
 
+img.ranking-e49cd5784f7893174dadee338fd0e61b {
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -5px;
+}
+
 img.ranking-a548cbd20a565cc98caf397c9bfd7cdb {
   border-radius: 100%;
 }
@@ -692,7 +717,7 @@ div.ranking-d742492b2526d57a222af9b54040b3b4 {
   position: absolute;
   top: 25px;
   width: 100%;
-  z-index: 1111111;
+  z-index: 99999999 !important;
 }
 
 div.ranking-2862744e5d7cce9d070aa41172557d78 {
@@ -773,7 +798,7 @@ div.ranking-ed3451c988256d717ce6e41d24da7e45 {
 
 div.ranking-a9b4432c8e9b49bafa0a23e52d970016 {
   div.van-tabs__nav {
-    z-index: 1;
+    z-index: @app-z-index;
   }
 }
 
@@ -787,7 +812,7 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
   left: -3px;
   margin-top: 9px;
   position: absolute;
-  z-index: 10;
+  z-index: 10 !important;
 
   i.vxe-button--icon.vxe-icon--menu {
     bottom: 1px;
@@ -811,7 +836,7 @@ div.ranking-31c631534a3cec9ed2c5283f653a06aa {
 
 div.ranking-e10ca73b79369d2183f81ca10fb587af {
   img.ranking-3d5f1ffeadf58eb64ef57aef7e53a31e {
-    margin-left: 25px;
+    margin-left: 30px;
     margin-top: -12px;
     position: absolute;
     z-index: @app-z-index;
@@ -885,6 +910,6 @@ div.ranking-5d308b6a0da77ffb33c63fc542f58746 {
 div.ranking-87714e7bd6c0d80c7bbdb69629b5a80d {
   position: fixed;
   right: -15px;
-  z-index: 10;
+  z-index: 10 !important;
 }
 </style>
