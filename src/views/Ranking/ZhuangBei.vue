@@ -87,9 +87,9 @@
           >
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
-                <div class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                   {{ row.allPickRate }}
-                </div>
+                </span>
                 <span
                   v-if="row.change.updateValue != 0"
                   :style="

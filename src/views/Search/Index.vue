@@ -351,6 +351,28 @@
             </van-tab>
             <van-tab
               :disabled="
+                tableData.cardInfo.id == 0 ||
+                tableData.cardInfo.id == 999 ||
+                tableData.cardInfo.feature.killTime[0] == 0
+              "
+              title="打野"
+            >
+              <template #title>
+                <span class="search-3039391a38ca2410626ad542dd2ff17c">
+                  打野
+                </span>
+                <img
+                  width="13"
+                  height="13"
+                  v-lazy="
+                    'https://pic.rmb.bdstatic.com/bjh/89405199f9217a16028c0bfc42dc6ed2.png'
+                  "
+                  class="search-05a36d9069f1023c8432de89b15a83af"
+                />
+              </template>
+            </van-tab>
+            <van-tab
+              :disabled="
                 tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
               "
             >
@@ -798,6 +820,132 @@
       </div>
     </div>
 
+    <div class="search-811a956fbce550272da652c9d7a42d21">
+      <van-dialog
+        v-model="showInfo.heroFeature"
+        v-if="showInfo.heroFeature"
+        title=" "
+      >
+        <div class="search-18e1105363d453a80ba2002db3a80308">
+          <span>buff 双开:{{ tableData.cardInfo.feature.redBlue }}</span>
+        </div>
+        <div class="search-8c36adba08eefa688be68bc3cf4d5fd6">
+          <img width="250" height="250" v-lazy="'/img/app-icons/map.png'" />
+        </div>
+        <div class="search-a4339819b3dc402989af88a6fdfe4b76">
+          <van-tag
+            round
+            :style="{
+              position: 'absolute',
+              marginLeft: '-85px',
+              marginTop: '-140px',
+            }"
+            color="white"
+            :text-color="
+              tableData.cardInfo.feature.blue.blue.pickRate >
+              tableData.cardInfo.feature.blue.red.pickRate
+                ? 'red'
+                : 'gray'
+            "
+          >
+            {{ tableData.cardInfo.feature.blue.blue.pickRate }}%
+          </van-tag>
+          <van-tag
+            round
+            :style="{
+              position: 'absolute',
+              marginLeft: '-15px',
+              marginTop: '-55px',
+            }"
+            color="white"
+            :text-color="
+              tableData.cardInfo.feature.blue.red.pickRate >
+              tableData.cardInfo.feature.blue.blue.pickRate
+                ? 'red'
+                : 'gray'
+            "
+          >
+            {{ tableData.cardInfo.feature.blue.red.pickRate }}%
+          </van-tag>
+          <van-tag
+            round
+            :style="{
+              position: 'absolute',
+              marginLeft: '35px',
+              marginTop: '-125px',
+            }"
+            color="white"
+            :text-color="
+              tableData.cardInfo.feature.red.blue.pickRate >
+              tableData.cardInfo.feature.red.red.pickRate
+                ? 'red'
+                : 'gray'
+            "
+          >
+            {{ tableData.cardInfo.feature.red.blue.pickRate }}%
+          </van-tag>
+          <van-tag
+            round
+            :style="{
+              position: 'absolute',
+              marginLeft: '-30px',
+              marginTop: '-210px',
+            }"
+            color="white"
+            :text-color="
+              tableData.cardInfo.feature.red.red.pickRate >
+              tableData.cardInfo.feature.red.blue.pickRate
+                ? 'red'
+                : 'gray'
+            "
+          >
+            {{ tableData.cardInfo.feature.red.red.pickRate }}%
+          </van-tag>
+        </div>
+        <div class="search-18e1105363d453a80ba2002db3a80308">
+          <span>最快:{{ tableData.cardInfo.feature.killTime[0] }}</span>
+          (秒) |
+          <span
+            :style="{
+              color: tableData.cardInfo.feature.killTime[1] < 40 ? 'red' : null,
+            }"
+          >
+            中位:{{ tableData.cardInfo.feature.killTime[1] }}
+          </span>
+          (秒) |
+          <span
+            :style="{
+              color: tableData.cardInfo.feature.killTime[2] < 40 ? 'red' : null,
+            }"
+          >
+            平均:{{ tableData.cardInfo.feature.killTime[2] }}
+          </span>
+          (秒)
+        </div>
+        <div class="search-18e1105363d453a80ba2002db3a80308">
+          <span>1.大数据下的 buff 选择 (不考虑被干扰)</span>
+          <br />
+          <span>2.根据阵容选择哪个开，不要盲目跟从</span>
+          <br />
+          <span>3.知道对面开局信息后可以尝试抢一抢</span>
+          <br />
+          <br />
+          打野模型由
+          <span
+            :style="{ color: '#1989fa !important' }"
+            @click="
+              $appPush({
+                path: '/friends?openId=2a7ce02e6feeb419167f74737f1257ec',
+              })
+            "
+          >
+            @好个飞飞
+          </span>
+          提供
+        </div>
+      </van-dialog>
+    </div>
+
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
         v-model="showInfo.skillMenu"
@@ -952,6 +1100,26 @@ export default {
         cardInfo: {
           id: null,
           name: null,
+          feature: {
+            blue: {
+              blue: {
+                pickRate: 0,
+              },
+              red: {
+                pickRate: 0,
+              },
+            },
+            red: {
+              blue: {
+                pickRate: 0,
+              },
+              red: {
+                pickRate: 0,
+              },
+            },
+            redBlue: null,
+            killTime: [0, 0, 0],
+          },
         },
       },
       dataInfo: {
@@ -962,6 +1130,7 @@ export default {
       },
       showInfo: {
         heroData: 0,
+        heroFeature: false,
         searchData: false,
         searchHistory: false,
         skillMenu: false,
@@ -1092,8 +1261,10 @@ export default {
       let cardInfo = this.tableData.cardInfo;
 
       if (e == 1) {
-        this.showInfo.skillMenu = true;
+        this.showInfo.heroFeature = true;
       } else if (e == 2) {
+        this.showInfo.skillMenu = true;
+      } else if (e == 3) {
         this.$appOpenUrl(
           "是否打开外部链接?",
           "NGA @小熊de大熊",
@@ -1102,9 +1273,9 @@ export default {
           },
           0
         );
-      } else if (e == 3) {
-        this.showInfo.fightPowerMenu = true;
       } else if (e == 4) {
+        this.showInfo.fightPowerMenu = true;
+      } else if (e == 5) {
         this.$appPush({
           path: "/ranking",
           query: {
@@ -1113,7 +1284,7 @@ export default {
             refresh: 1,
           },
         });
-      } else if (e == 5) {
+      } else if (e == 6) {
         this.$appPush({
           path:
             "/hero/" +
@@ -1127,7 +1298,7 @@ export default {
     onDataTabsBeforeChange: function (e) {
       let change = false;
 
-      e == 0 || e == 2 ? (change = true) : (change = false);
+      e == 0 ? (change = true) : (change = false);
 
       return change;
     },
@@ -1274,6 +1445,11 @@ div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: @app-text-align;
+}
+
+div.search-18e1105363d453a80ba2002db3a80308 {
+  margin: 10px 0;
+  font-size: 10px;
 }
 
 div.search-399841f840f75044108804ec30d37405 {

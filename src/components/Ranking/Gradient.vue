@@ -1229,7 +1229,7 @@ div.ranking-f155536738c348c9a6e402eb19afa2af {
   li {
     float: left;
     text-align: center;
-    margin: 5px 30px 15px 10px;
+    margin: 5px 25px 15px 10px;
   }
 }
 
