@@ -146,18 +146,7 @@ export default {
 
             this.showInfo.autoPlayTrend = true;
           } else {
-            this.$appOpenUrl(
-              "温馨提示",
-              status.msg,
-              {
-                path: "/search",
-                query: {
-                  q: "大佬们快来加群",
-                  refresh: 1,
-                },
-              },
-              1
-            );
+            this.$message.error(status.msg);
           }
         });
     },

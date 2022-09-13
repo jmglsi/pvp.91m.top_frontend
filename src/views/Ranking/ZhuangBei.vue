@@ -90,7 +90,7 @@
                 <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                   {{ row.allPickRate }}
                 </span>
-                <span
+                <div
                   v-if="row.change.updateValue != 0"
                   :style="
                     row.change.updateType == 2
@@ -99,20 +99,23 @@
                   "
                   class="app-b0704b59dbf144bfeffb53bdb11d7128"
                 >
-                  {{
-                    (row.change.updateType == 2 ? "+" : "-") +
-                    Math.abs(row.change.updateValue)
-                  }}
-                </span>
-                <img
-                  v-if="row.change.updateType != 0"
-                  v-lazy="
-                    '/img/app-icons/hot_' + row.change.updateType + '.png'
-                  "
-                  width="15"
-                  height="15"
-                  class="app-db21bca782a535e91eb87f56b8abdc45"
-                />
+                  <span class="app-b1275ae967fdbd25d1692fa5e2f547e0">
+                    {{
+                      (row.change.updateType == 2 ? "+" : "-") +
+                      Math.abs(row.change.updateValue)
+                    }}
+                  </span>
+
+                  <img
+                    v-if="row.change.updateType != 0"
+                    v-lazy="
+                      '/img/app-icons/hot_' + row.change.updateType + '.png'
+                    "
+                    width="15"
+                    height="15"
+                    class="app-db21bca782a535e91eb87f56b8abdc45"
+                  />
+                </div>
               </div>
             </template>
           </vxe-table-column>
@@ -232,16 +235,6 @@ export default {
       if (this.$cookie.get("agree") == 1) {
         this.getRanking(3, 0, 0, 0);
       }
-
-      this.$appPush({
-        query: {
-          type: 3,
-          bid: 0,
-          cid: 0,
-          did: 0,
-          refresh: 1,
-        },
-      });
     },
     getRanking: function (aid = 3, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,

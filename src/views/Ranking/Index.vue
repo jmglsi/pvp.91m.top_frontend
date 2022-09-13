@@ -130,7 +130,7 @@
           </div>
         </van-tab>
 
-        <van-tab disabled>
+        <van-tab>
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
               <span>玩家 (非实时)&nbsp;</span>

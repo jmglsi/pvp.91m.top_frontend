@@ -52,28 +52,59 @@
 </template>
 
 <script>
+import watermark from "watermark-dom";
+
 export default {
   name: "App",
   watch: {
-    $route(to) {
+    $route: function (to) {
       let nowPath = to.path,
         statusBar = false,
         whiteBar = false,
-        tabbar = false;
+        tabbar = false,
+        name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
+        accessToken = this.$cookie.get("accessToken") || null,
+        colorArr = ["orange", "red"],
+        randAngle = Math.floor(Math.random() * 360),
+        randColor = colorArr[Math.floor(Math.random() * colorArr.length)],
+        watermarkConfig = {
+          watermark_alpha: 1,
+          watermark_height: 25,
+          watermark_width: 100,
+          watermark_x: -50,
+          watermark_y: -25,
+          watermark_x_space: 25,
+          watermark_y_space: 150,
+          watermark_fontsize: "12px",
+          watermark_txt: "@" + name,
+          watermark_angle: randAngle,
+          watermark_color: randColor,
+        },
+        needWatermark = /ranking|search/i.test(nowPath);
+
+      if (accessToken) {
+        if (needWatermark == true) {
+          watermark.load(watermarkConfig);
+        }
+
+        if (needWatermark == false && document.getElementById("wm_div_id")) {
+          watermark.remove();
+        }
+      }
 
       this.tableData.result.model = nowPath;
 
-      /ranking|search/i.test(nowPath) || nowPath == "/"
+      /ranking|search/i.test(nowPath) == true || nowPath == "/"
         ? (statusBar = true)
         : (statusBar = false);
       this.showInfo.statusBar = statusBar;
 
-      /ranking/i.test(nowPath) ? (whiteBar = true) : (whiteBar = false);
+      /ranking/i.test(nowPath) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
       /miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/equipment|hero\/(.*?)\/replay|game\/(.*?)/i.test(
         nowPath
-      )
+      ) == true
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
@@ -355,13 +386,6 @@ img.app-4ab161130e76571ab0c31aa23a6238c7 {
   margin: 0 10px;
 }
 
-img.app-db21bca782a535e91eb87f56b8abdc45 {
-  margin-left: -3px !important;
-  margin-left: 5px;
-  margin-top: 23px;
-  position: absolute;
-}
-
 i.app-6de102c0bc4dc7f72ce287d6b0828052 {
   img.van-icon__image {
     border-radius: unset;
@@ -461,14 +485,6 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
   font-size: @app-font-size;
 }
 
-span.app-b0704b59dbf144bfeffb53bdb11d7128 {
-  font-size: @app-font-size;
-  left: 0;
-  margin-top: 19px;
-  position: absolute;
-  width: 100%;
-}
-
 div.ant-popover-title,
 ul.ant-dropdown-menu {
   text-align: center;
@@ -505,6 +521,14 @@ div.app-recommend {
   div.van-grid-item__content {
     background-color: rgb(250, 250, 250) !important;
   }
+}
+
+div.app-b0704b59dbf144bfeffb53bdb11d7128 {
+  font-size: @app-font-size;
+  left: 0;
+  margin-top: -3px;
+  position: absolute;
+  width: 100%;
 }
 
 div.app-52b0e5c90604d59d1814f184d58e2033 {

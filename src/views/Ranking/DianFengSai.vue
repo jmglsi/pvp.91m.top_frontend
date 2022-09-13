@@ -182,7 +182,7 @@
                 <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                   {{ row.allPickRate }}
                 </span>
-                <span
+                <div
                   v-if="row.change.updateValue != 0"
                   :style="
                     row.change.updateType == 2
@@ -191,20 +191,23 @@
                   "
                   class="app-b0704b59dbf144bfeffb53bdb11d7128"
                 >
-                  {{
-                    (row.change.updateType == 2 ? "+" : "-") +
-                    Math.abs(row.change.updateValue)
-                  }}
-                </span>
-                <img
-                  v-if="row.change.updateType != 0"
-                  v-lazy="
-                    '/img/app-icons/hot_' + row.change.updateType + '.png'
-                  "
-                  width="15"
-                  height="15"
-                  class="app-db21bca782a535e91eb87f56b8abdc45"
-                />
+                  <span class="app-b1275ae967fdbd25d1692fa5e2f547e0">
+                    {{
+                      (row.change.updateType == 2 ? "+" : "-") +
+                      Math.abs(row.change.updateValue)
+                    }}
+                  </span>
+
+                  <img
+                    v-if="row.change.updateType != 0"
+                    v-lazy="
+                      '/img/app-icons/hot_' + row.change.updateType + '.png'
+                    "
+                    width="15"
+                    height="15"
+                    class="app-db21bca782a535e91eb87f56b8abdc45"
+                  />
+                </div>
               </div>
             </template>
           </vxe-column>
@@ -265,6 +268,96 @@
           </vxe-column>
         </vxe-table-colgroup>
 
+        <vxe-table-colgroup title="输出">
+          <vxe-column
+            title="全部"
+            field="totalOutputPerMin"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-column
+            title="对人"
+            field="totalHurtHeroCntPerMin"
+            :width="listWidth"
+            sortable
+          />
+        </vxe-table-colgroup>
+
+        <vxe-table-colgroup title="承伤">
+          <!--
+            <vxe-column
+              title="全部"
+              field="totalBeHurtedCntPerMin"
+              :width="listWidth"
+              sortable
+            />
+          -->
+          <vxe-column
+            title="分均"
+            field="totalBeHurtedCntPerMin"
+            :width="listWidth"
+            sortable
+          />
+        </vxe-table-colgroup>
+
+        <!--
+          <vxe-table-colgroup
+            title="经济"
+            :title-prefix="{
+              content: $appMsg.tips[1017],
+            }"
+          >
+            <vxe-column
+              title="全部"
+              field="equMoneyOverflow"
+              :width="listWidth"
+              sortable
+            />
+            <vxe-column
+              title="分均"
+              field="equMoneyMin"
+              :width="listWidth"
+              sortable
+            />
+          </vxe-table-colgroup>
+        -->
+
+        <vxe-table-colgroup title="团队">
+          <vxe-column
+            title="参团"
+            field="joinGamePercent"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-column
+            title="时长"
+            field="usedtime"
+            :width="listWidth"
+            sortable
+          />
+        </vxe-table-colgroup>
+
+        <vxe-table-colgroup title="KDA">
+          <vxe-column
+            title="击杀"
+            field="killCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-column
+            title="死亡"
+            field="deadCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-column
+            title="助攻"
+            field="assistCnt"
+            :width="listWidth"
+            sortable
+          />
+        </vxe-table-colgroup>
+
         <vxe-table-colgroup title="牌子 (%)">
           <vxe-column
             title="全部"
@@ -302,86 +395,6 @@
           <vxe-column
             title="败方"
             field="loseMvpRate"
-            :width="listWidth"
-            sortable
-          />
-        </vxe-table-colgroup>
-
-        <vxe-column
-          title="承伤"
-          field="totalBeHurtedCntPerMin"
-          :width="listWidth"
-          sortable
-        />
-
-        <vxe-table-colgroup title="伤害">
-          <vxe-column
-            title="全部"
-            field="totalOutputPerMin"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-column
-            title="对人"
-            field="totalHurtHeroCntPerMin"
-            :width="listWidth"
-            sortable
-          />
-        </vxe-table-colgroup>
-
-        <!--
-          <vxe-table-colgroup
-            title="金币"
-            :title-prefix="{
-              content: $appMsg.tips[1017],
-            }"
-          >
-            <vxe-column
-              title="全部"
-              field="equMoneyOverflow"
-              :width="listWidth"
-              sortable
-            />
-            <vxe-column
-              title="分均"
-              field="equMoneyMin"
-              :width="listWidth"
-              sortable
-            />
-          </vxe-table-colgroup>
-        -->
-
-        <vxe-table-colgroup title="KDA">
-          <vxe-column
-            title="击杀"
-            field="killCnt"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-column
-            title="死亡"
-            field="deadCnt"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-column
-            title="助攻"
-            field="assistCnt"
-            :width="listWidth"
-            sortable
-          />
-        </vxe-table-colgroup>
-
-        <vxe-table-colgroup title="其他">
-          <vxe-column
-            title="参团"
-            field="joinGamePercent"
-            :width="listWidth"
-            sortable
-          />
-          <vxe-column
-            title="时长"
-            field="usedtime"
             :width="listWidth"
             sortable
           />
@@ -556,7 +569,7 @@ export default {
         },
       },
       actions: [
-        { name: "趋势", subname: "左下角喜欢一下", value: 0 },
+        { name: "趋势", subname: "左下角关注一下", value: 0 },
         { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
         { name: "更新记录", subname: "NGA @EndMP", value: 2 },
         { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },

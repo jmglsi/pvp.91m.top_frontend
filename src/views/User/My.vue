@@ -671,6 +671,8 @@ export default {
             this.loginInfo = data;
             this.newInfo = data;
 
+            this.$cookie.set("name", data.name, { expires: "1h" });
+
             data.friendsType == 1
               ? (this.showInfo.friendsType = true)
               : (this.showInfo.friendsType = false);

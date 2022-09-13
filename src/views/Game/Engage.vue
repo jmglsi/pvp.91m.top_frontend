@@ -122,9 +122,7 @@ export default {
           if (status.code == 200) {
             this.tableData.result = data.result;
           } else {
-            this.$message.error(status.msg);
-
-            this.$appPush({ path: "/login" });
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },

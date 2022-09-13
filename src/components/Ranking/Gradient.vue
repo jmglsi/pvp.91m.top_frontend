@@ -92,7 +92,7 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}
+                    {{ data.skill.preview[0].pickRate }}%
                   </span>
                   <img
                     v-lazy="data.skill.preview[1].img"
@@ -115,7 +115,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}
+                    {{ data.skill.preview[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -213,7 +213,7 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}
+                    {{ data.skill.preview[0].pickRate }}%
                   </span>
                   <img
                     v-lazy="data.skill.preview[1].img"
@@ -236,7 +236,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}
+                    {{ data.skill.preview[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -333,7 +333,7 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}
+                    {{ data.skill.preview[0].pickRate }}%
                   </span>
                   <img
                     v-lazy="data.skill.preview[1].img"
@@ -356,7 +356,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}
+                    {{ data.skill.preview[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -453,7 +453,7 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}
+                    {{ data.skill.preview[0].pickRate }}%
                   </span>
                   <img
                     v-lazy="data.skill.preview[1].img"
@@ -476,7 +476,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}
+                    {{ data.skill.preview[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -569,7 +569,7 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}
+                    {{ data.skill.preview[0].pickRate }}%
                   </span>
                   <img
                     v-lazy="data.skill.preview[1].img"
@@ -592,7 +592,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}
+                    {{ data.skill.preview[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -683,7 +683,7 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}
+                    {{ data.skill.preview[0].pickRate }}%
                   </span>
                   <img
                     v-lazy="data.skill.preview[1].img"
@@ -706,7 +706,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}
+                    {{ data.skill.preview[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -1234,6 +1234,7 @@ div.ranking-f155536738c348c9a6e402eb19afa2af {
 }
 
 div.ranking-gradient {
+  background-color: white;
   margin: 25px 0;
 }
 

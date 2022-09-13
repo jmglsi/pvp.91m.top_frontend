@@ -294,11 +294,7 @@
         >
           <van-cell
             :icon="tableData.cardInfo.id != 999 ? tableData.cardInfo.img : null"
-            :title="
-              tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
-                ? tableData.cardInfo.name
-                : tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ')'
-            "
+            :title="tableData.cardInfo.title"
             :label="tableData.cardInfo.label"
             :value="tableData.cardInfo.value"
             :is-link="tableData.cardInfo.isLink"
@@ -844,7 +840,7 @@
             :text-color="
               tableData.cardInfo.feature.blue.blue.pickRate >
               tableData.cardInfo.feature.blue.red.pickRate
-                ? 'red'
+                ? 'blue'
                 : 'gray'
             "
           >
@@ -878,7 +874,7 @@
             :text-color="
               tableData.cardInfo.feature.red.blue.pickRate >
               tableData.cardInfo.feature.red.red.pickRate
-                ? 'red'
+                ? 'blue'
                 : 'gray'
             "
           >
@@ -1100,6 +1096,7 @@ export default {
         cardInfo: {
           id: null,
           name: null,
+          title: null,
           feature: {
             blue: {
               blue: {

@@ -117,7 +117,7 @@ export default {
             this.radarData = data;
             this.radarData.loading = false;
           } else {
-            this.$appOpenUrl("温馨提示", status.msg, { path: "/my" }, 1);
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },

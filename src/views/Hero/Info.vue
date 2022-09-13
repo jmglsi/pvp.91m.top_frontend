@@ -119,7 +119,7 @@
         class="hero-d7eb5a86f1d4b50ea22711e1e60718e9"
       >
         <van-grid-item class="hero-c6e864acb6955eed0361921288d34149">
-        <!--
+          <!--
           @click="$message.info($appMsg.info[1005])"
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
@@ -430,7 +430,7 @@
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
         >
-          {{ hero.info.likeStatus == 1 ? "已喜欢" : "喜欢" }}
+          {{ hero.info.likeStatus == 1 ? "已关注" : "关注" }}
         </van-tabbar-item>
         <!--
           <van-tabbar-item
