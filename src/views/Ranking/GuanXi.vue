@@ -15,7 +15,7 @@
           :title-prefix="{ content: $appMsg.tips[1009] }"
         >
           <vxe-table-column
-            field="hero_1"
+            field="hero[0]"
             :title="heroName ? '和' : '1'"
             :filters="[
               { value: 1, label: '对抗路' },
@@ -38,7 +38,7 @@
                 "
               >
                 <img
-                  v-lazy="row.hero_1.img"
+                  v-lazy="row.hero[0].img"
                   width="50"
                   height="50"
                   class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
@@ -50,14 +50,14 @@
                     ranking-f58cc48f5b942c91e57eff48accc5151
                   "
                 >
-                  {{ row.hero_1.adaptationRate }}
+                  {{ row.hero[0].adaptationRate }}
                 </span>
               </div>
             </template>
           </vxe-table-column>
 
           <vxe-table-column
-            field="hero_2"
+            field="hero[1]"
             :title="heroName ? '↓' : '2'"
             :filters="[
               { value: 1, label: '对抗路' },
@@ -80,7 +80,7 @@
                 "
               >
                 <img
-                  v-lazy="row.hero_2.img"
+                  v-lazy="row.hero[1].img"
                   width="50"
                   height="50"
                   class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
@@ -92,7 +92,7 @@
                     ranking-f58cc48f5b942c91e57eff48accc5151
                   "
                 >
-                  {{ row.hero_2.adaptationRate }}
+                  {{ row.hero[1].adaptationRate }}
                 </span>
               </div>
             </template>
@@ -236,9 +236,9 @@
       <van-action-sheet
         v-model="showInfo.heroMenu"
         :title="
-          tableDataRow.hero_1.name +
+          tableDataRow.hero[0].name +
           ' 和 ' +
-          tableDataRow.hero_2.name +
+          tableDataRow.hero[1].name +
           ' 如何操作'
         "
         :actions="actions"
@@ -296,12 +296,14 @@ export default {
         color: {},
       },
       tableDataRow: {
-        hero_1: {
-          name: "加载中...",
-        },
-        hero_2: {
-          name: "加载中...",
-        },
+        hero: [
+          {
+            name: "加载中...",
+          },
+          {
+            name: "加载中...",
+          },
+        ],
       },
       actions: [
         { name: "复制链接", value: 0 },
@@ -392,17 +394,17 @@ export default {
     },
     onGuanXiCopy: function () {
       let row = this.tableDataRow,
-        heroName = row.hero_1.name,
+        heroName = row.hero[0].name,
         url = location,
         longUrl =
           url.origin +
           url.pathname +
           "?type=1&heroName=" +
           encodeURIComponent(heroName) +
-          "&heroId1=" +
-          row.hero_1.id +
-          "&heroId2=" +
-          row.hero_2.id;
+          "&heroId_1=" +
+          row.hero[0].id +
+          "&heroId_2=" +
+          row.hero[1].id;
 
       this.$axios
         .post(this.$appApi.pvp.getShortUrl, {
@@ -413,13 +415,13 @@ export default {
 
           this.copyData =
             "英雄:" +
-            row.hero_1.name +
+            row.hero[0].name +
             " 和 " +
-            row.hero_2.name +
+            row.hero[1].name +
             "\n-\n队友 时 一起 的胜率:" +
             row.teammateWinRate +
             "%\n对手 时 " +
-            row.hero_1.name +
+            row.hero[0].name +
             " 的胜率:" +
             row.opponentWinRate +
             "%\n适配:" +
@@ -431,12 +433,12 @@ export default {
         });
     },
     filterMethod: function ({ option, row, column }) {
-      if (column.property == "hero_1") {
-        return row.hero_1.type === option.value;
+      if (column.property == "hero[0]") {
+        return row.hero[0].type === option.value;
       }
 
-      if (column.property == "hero_2") {
-        return row.hero_2.type === option.value;
+      if (column.property == "hero[1]") {
+        return row.hero[1].type === option.value;
       }
 
       if (column.property == "teammatePickRate") {
@@ -506,12 +508,12 @@ export default {
         this.$appPush({
           path:
             "/hero/" +
-            heroInfo.hero_1.id +
+            heroInfo.hero[0].id +
             "," +
-            heroInfo.hero_2.id +
+            heroInfo.hero[1].id +
             "/replay",
           query: {
-            title: heroInfo.hero_1.name + " 和 " + heroInfo.hero_2.name,
+            title: heroInfo.hero[0].name + " 和 " + heroInfo.hero[1].name,
             teammate: "1",
           },
         });

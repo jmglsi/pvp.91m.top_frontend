@@ -1,8 +1,8 @@
 const zlib = require('zlib')
 const Path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
-    //const PrerenderSPAPlugin = require('prerender-spa-plugin')
-    //const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
+//const PrerenderSPAPlugin = require('prerender-spa-plugin')
+//const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
 module.exports = {
     productionSourceMap: false,

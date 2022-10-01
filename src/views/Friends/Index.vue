@@ -125,7 +125,7 @@
                     <img
                       v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
-                      width="35"
+                      width="50"
                       height="35"
                       class="app-d31cb1c15b091f41248935d88a8d0a45"
                     />

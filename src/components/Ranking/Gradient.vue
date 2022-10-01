@@ -776,21 +776,28 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
+            <van-tab title="补位 (测试)">
+              <HeroComplementList
+                v-if="cellInfo.index == 0 && skillInfo.model == 0"
+                :complementId="tableDataRow.id"
+                :complementType="2"
+              />
+            </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList
-                v-if="cellInfo.index == 0 && skillInfo.model == 0"
+                v-if="cellInfo.index == 0 && skillInfo.model == 1"
                 :genreId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装 (推荐)">
               <HeroEquipmentListALL
-                v-if="cellInfo.index == 0 && skillInfo.model == 1"
+                v-if="cellInfo.index == 0 && skillInfo.model == 2"
                 :heroId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装 (单件)">
               <HeroEquipmentListOne
-                v-if="cellInfo.index == 0 && skillInfo.model == 2"
+                v-if="cellInfo.index == 0 && skillInfo.model == 3"
                 :equipmentId="tableDataRow.id"
                 :equipmentType="1"
               />
@@ -804,7 +811,7 @@
               </template>
 
               <HeroInscriptionList
-                v-if="cellInfo.index == 0 && skillInfo.model == 3"
+                v-if="cellInfo.index == 0 && skillInfo.model == 4"
                 :heroId="tableDataRow.id"
               />
             </van-tab>
@@ -842,6 +849,7 @@ export default {
   components: {
     HeroCircle: () => import("@/components/Ranking/HeroCircle.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
+    HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -957,7 +965,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0],
     };
   },
   methods: {
@@ -1100,14 +1108,16 @@ export default {
         tipsText;
 
       if (e == 0) {
-        tipsText = this.$appMsg.info[1007];
+        tipsText = this.$appMsg.info[1014];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1008];
+        tipsText = this.$appMsg.info[1007];
       } else if (e == 2) {
-        tipsText = this.$appMsg.info[1009];
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 3) {
-        tipsText = this.$appMsg.info[1010];
+        tipsText = this.$appMsg.info[1009];
       } else if (e == 4) {
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 5) {
         this.$appPush({
           path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
         });

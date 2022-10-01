@@ -325,6 +325,12 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
+            <van-tab title="补位 (测试)">
+              <HeroComplementList
+                :complementId="hero.info.id"
+                :complementType="2"
+              />
+            </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList :genreId="hero.info.id" />
             </van-tab>
@@ -467,6 +473,7 @@ export default {
   name: "HeroInfo",
   components: {
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
+    HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -575,7 +582,7 @@ export default {
       skillInfo: {
         model: 0,
       },
-      tipsInfo: [0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0],
     };
   },
   destroy() {
@@ -695,14 +702,16 @@ export default {
       let tipsText;
 
       if (e == 0) {
-        tipsText = this.$appMsg.info[1007];
+        tipsText = this.$appMsg.info[1014];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1008];
+        tipsText = this.$appMsg.info[1007];
       } else if (e == 2) {
-        tipsText = this.$appMsg.info[1009];
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 3) {
-        tipsText = this.$appMsg.info[1010];
+        tipsText = this.$appMsg.info[1009];
       } else if (e == 4) {
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 5) {
         //tipsText = this.$appMsg.info[1010];
       }
 

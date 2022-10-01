@@ -955,21 +955,28 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
+            <van-tab title="补位 (测试)">
+              <HeroComplementList
+                v-if="skillInfo.model == 0"
+                :complementId="tableData.cardInfo.id"
+                :complementType="2"
+              />
+            </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList
-                v-if="skillInfo.model == 0"
+                v-if="skillInfo.model == 1"
                 :genreId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab title="出装 (推荐)">
               <HeroEquipmentListALL
-                v-if="skillInfo.model == 1"
+                v-if="skillInfo.model == 2"
                 :heroId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab title="出装 (单件)">
               <HeroEquipmentListOne
-                v-if="skillInfo.model == 2"
+                v-if="skillInfo.model == 3"
                 :equipmentId="tableData.cardInfo.id"
                 :equipmentType="1"
               />
@@ -983,7 +990,7 @@
               </template>
 
               <HeroInscriptionList
-                v-if="skillInfo.model == 3"
+                v-if="skillInfo.model == 4"
                 :heroId="tableData.cardInfo.id"
               />
             </van-tab>
@@ -1018,6 +1025,7 @@ export default {
   name: "SearchHome",
   components: {
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
+    HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -1304,14 +1312,16 @@ export default {
         tipsText;
 
       if (e == 0) {
-        tipsText = this.$appMsg.info[1007];
+        tipsText = this.$appMsg.info[1014];
       } else if (e == 1) {
-        tipsText = this.$appMsg.info[1008];
+        tipsText = this.$appMsg.info[1007];
       } else if (e == 2) {
-        tipsText = this.$appMsg.info[1009];
+        tipsText = this.$appMsg.info[1008];
       } else if (e == 3) {
-        tipsText = this.$appMsg.info[1010];
+        tipsText = this.$appMsg.info[1009];
       } else if (e == 4) {
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 5) {
         this.$appPush({
           path: "/hero/" + cardInfo.id + "/info?show=heroUpdate#heroSameHobby",
         });

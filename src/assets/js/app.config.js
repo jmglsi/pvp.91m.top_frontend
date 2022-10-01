@@ -120,15 +120,15 @@ Vue.prototype.$appColumnsInfo = {
     type: 0,
 }
 
-Vue.prototype.$appSetLocalStorage = function(key, value = {}) {
+Vue.prototype.$appSetLocalStorage = function (key, value = {}) {
     localStorage.setItem(key, JSON.stringify(value));
 }
 
-Vue.prototype.$appGetLocalStorage = function(key) {
+Vue.prototype.$appGetLocalStorage = function (key) {
     return JSON.parse(localStorage.getItem(key));
 }
 
-Vue.prototype.$appDelectLocalStorage = function(key = "ranking") {
+Vue.prototype.$appDelectLocalStorage = function (key = "ranking") {
     for (let cache in localStorage) {
         if (cache.indexOf(key) > -1) {
             localStorage.removeItem(cache);
@@ -136,7 +136,7 @@ Vue.prototype.$appDelectLocalStorage = function(key = "ranking") {
     }
 }
 
-Vue.prototype.$appDelectAllLocalStorage = function() {
+Vue.prototype.$appDelectAllLocalStorage = function () {
     let cacheList = ["appHome", "appHeroList", "gameHome", "heroChartsLog", "heroInfo", "heroSameHobby", "heroUpdate", "ranking", "search", "searchData"];
 
     cacheList.map((x) => {
@@ -150,11 +150,11 @@ if (!ls) {
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
-Vue.prototype.$appPush = function(url = { path: '/' }) {
+Vue.prototype.$appPush = function (url = { path: '/' }) {
     this.$router.push(url);
 }
 
-Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }) {
+Vue.prototype.$appPushBack = function (url = { path: '/', query: { refresh: 0 } }) {
     let previousPage = this.$store.state.previousPage,
         lastUrl = previousPage[previousPage.length - 1],
         nowUrl = null;
@@ -170,7 +170,7 @@ Vue.prototype.$appPushBack = function(url = { path: '/', query: { refresh: 0 } }
     this.$router.push(nowUrl);
 }
 
-Vue.prototype.$appFloatToTime = function(float) {
+Vue.prototype.$appFloatToTime = function (float) {
     let arr = float.toFixed(2).split("."),
         arr_1 = "0",
         num_1 = "0",
@@ -195,7 +195,7 @@ Vue.prototype.$appFloatToTime = function(float) {
     return num_1 + ":" + num_2;
 }
 
-Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' }, urlType = 0) {
+Vue.prototype.$appOpenUrl = function (title, message = null, url = { path: '/' }, urlType = 0) {
     if (urlType == 0) {
         let ls = Vue.prototype.$appConfigInfo;
 
@@ -227,7 +227,7 @@ Vue.prototype.$appOpenUrl = function(title, message = null, url = { path: '/' },
     }
 }
 
-Vue.prototype.$appInitTableHeight = function(newHeight = 0) {
+Vue.prototype.$appInitTableHeight = function (newHeight = 0) {
     let ret = 0,
         width = this.$appWidth,
         height = this.$appHeight;
@@ -237,7 +237,7 @@ Vue.prototype.$appInitTableHeight = function(newHeight = 0) {
     return ret + newHeight;
 }
 
-Vue.prototype.$appInitTableWidth = function(tableWidth) {
+Vue.prototype.$appInitTableWidth = function (tableWidth) {
     let ret = 0,
         width = this.$appWidth;
 
@@ -246,7 +246,7 @@ Vue.prototype.$appInitTableWidth = function(tableWidth) {
     return ret;
 }
 
-Vue.prototype.$appCopyData = function(data, successText = "复制成功", errorText = "复制失败") {
+Vue.prototype.$appCopyData = function (data, successText = "复制成功", errorText = "复制失败") {
     setTimeout(() => {
         this.$dialog
             .confirm({

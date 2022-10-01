@@ -42,28 +42,28 @@ if (/127\.0\.0\.1|localhost/i.test(url.host) == true) {
 }
 
 axios.defaults.baseURL = baseUrl;
-axios.interceptors.request.use(function(config) {
-        let data = qs.parse(config.data);
+axios.interceptors.request.use(function (config) {
+    let data = qs.parse(config.data);
 
-        config.url += "&host=" + (cookie.get("host") || url.host) + "&url=" + encodeURIComponent(url.pathname + url.search) + "&ref=" + encodeURIComponent(cookie.get("ref") || "");
+    config.url += "&host=" + (cookie.get("host") || url.host) + "&url=" + encodeURIComponent(url.pathname + url.search) + "&ref=" + encodeURIComponent(cookie.get("ref") || "");
 
-        if (config.method == "post") {
-            const openId = cookie.get("openId");
-            const accessToken = cookie.get("accessToken");
+    if (config.method == "post") {
+        const openId = cookie.get("openId");
+        const accessToken = cookie.get("accessToken");
 
-            const tempOpenId = cookie.get("tempOpenId");
-            const tempAccessToken = cookie.get("tempAccessToken");
+        const tempOpenId = cookie.get("tempOpenId");
+        const tempAccessToken = cookie.get("tempAccessToken");
 
-            config.data = qs.stringify({
-                openId: openId || tempOpenId,
-                accessToken: accessToken || tempAccessToken,
-                ...data
-            });
-        }
+        config.data = qs.stringify({
+            openId: openId || tempOpenId,
+            accessToken: accessToken || tempAccessToken,
+            ...data
+        });
+    }
 
-        return config;
-    },
-    function(error) {
+    return config;
+},
+    function (error) {
         return Promise.reject(error);
     })
 Vue.prototype.$axios = axios;

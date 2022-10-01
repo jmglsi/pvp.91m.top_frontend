@@ -64,11 +64,11 @@ export default {
         tabbar = false,
         name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
         accessToken = this.$cookie.get("accessToken") || null,
-        colorArr = ["orange", "red"],
         randAngle = Math.floor(Math.random() * 360),
-        randColor = colorArr[Math.floor(Math.random() * colorArr.length)],
+        //colorArr = ["orange", "red"],
+        //randColor = colorArr[Math.floor(Math.random() * colorArr.length)],
         watermarkConfig = {
-          watermark_alpha: 1,
+          watermark_alpha: 0.3,
           watermark_height: 25,
           watermark_width: 100,
           watermark_x: -50,
@@ -78,7 +78,7 @@ export default {
           watermark_fontsize: "12px",
           watermark_txt: "@" + name,
           watermark_angle: randAngle,
-          watermark_color: randColor,
+          watermark_color: "#bebebe",
         },
         needWatermark = /ranking|search/i.test(nowPath);
 
@@ -372,7 +372,7 @@ img {
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
   border-radius: unset;
   bottom: -19px;
-  margin-left: -45px;
+  margin-left: -52px;
   position: absolute;
   transform: scale(0.75);
 }

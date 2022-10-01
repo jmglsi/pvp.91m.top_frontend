@@ -73,7 +73,9 @@
       <van-button
         round
         :disabled="
-          (accessToken && loginInfo.type != 2) || !showInfo.checked
+          (accessToken && loginInfo.type != 2) ||
+          !showInfo.checked ||
+          !showInfo.loginButton
             ? true
             : false
         "
@@ -161,6 +163,7 @@ export default {
       },
       showInfo: {
         checked: false,
+        loginButton: true,
       },
     };
   },
@@ -197,6 +200,8 @@ export default {
     onLoginClick: function (loginType) {
       let data = this.loginInfo.data;
 
+      this.showInfo.loginButton = false;
+
       this.$axios
         .post(
           this.$appApi.pvp.loginWebAccount + "&aid=" + loginType,
@@ -231,6 +236,10 @@ export default {
           } else {
             this.$message.error(status.msg);
           }
+
+          setTimeout(() => {
+            this.showInfo.loginButton = true;
+          }, 1000);
         });
     },
     getWebAccountInfo: function (aid = 0) {
