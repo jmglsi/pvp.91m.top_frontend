@@ -11,10 +11,10 @@
         title="玩家"
         field="gamePlayerName"
         fixed="left"
+        width="125"
         :title-prefix="{
           content: $appMsg.tips[1014],
         }"
-        width="125"
       />
 
       <vxe-table-column title="#" type="seq" width="50" />
@@ -36,10 +36,10 @@
       <vxe-table-column
         title="战力"
         field="heroFightPower"
+        :width="listWidth"
         :title-prefix="{
           content: '非实时\n' + $appMsg.tips[1013],
         }"
-        :width="listWidth"
         sortable
       />
     </vxe-table>

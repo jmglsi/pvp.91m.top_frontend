@@ -32,11 +32,7 @@
     <div class="return-0c81212fbe656b4245967fe1fba3413e">
       <div v-if="type == 0" class="return-4e31671abda91ffcc22a860a7bcd84ee">
         <van-row>
-          <a-popover
-            arrow-point-at-center
-            placement="bottomLeft"
-            trigger="click"
-          >
+          <a-popover arrowPointAtCenter placement="bottomLeft" trigger="click">
             <van-col span="8">
               <div class="return-194d92f12722c6d346dc1207ba7d2499">
                 <div>
@@ -81,7 +77,7 @@
               <span>还需:{{ topInfo[1].needTime }} 小时</span>
             </template>
           </a-popover>
-          <a-popover arrow-point-at-center placement="bottom" trigger="click">
+          <a-popover arrowPointAtCenter placement="bottom" trigger="click">
             <van-col span="8">
               <div class="return-6fc36a6c243522e9579bb8500fcd8812">
                 <div>
@@ -129,11 +125,7 @@
               </span>
             </template>
           </a-popover>
-          <a-popover
-            arrow-point-at-center
-            placement="bottomLeft"
-            trigger="click"
-          >
+          <a-popover arrowPointAtCenter placement="bottomLeft" trigger="click">
             <van-col span="8">
               <div class="return-2e9cd6ca0ca7a6d34edb205e1087b7e1">
                 <div>
@@ -188,7 +180,7 @@
           :data="tableData.result.rows.slice(3)"
           :height="clientHeight"
         >
-          <vxe-table-column title="-" field="skinName" fixed="left" width="75">
+          <vxe-table-column title="#" field="skinName" fixed="left" width="75">
             <template #default="{ row, rowIndex }">
               <van-tag
                 :color="row.tag.color"
@@ -217,12 +209,18 @@
             </template>
           </vxe-table-column>
 
-          <vxe-table-column title="分均" field="addNum" width="75" sortable />
+          <vxe-table-column
+            title="分均 (≈)"
+            field="addNum"
+            width="125"
+            sortable
+          />
 
           <vxe-table-column
             title="当前 (万)"
             field="allVoteNum"
-            :width="listWidth"
+            width="125"
+            :title-prefix="{ content: $appMsg.tips[1020] }"
             sortable
           >
             <template #default="{ row }">
@@ -244,7 +242,8 @@
           <vxe-table-column
             title="还需 (时)"
             field="needTime"
-            :width="listWidth"
+            width="125"
+            :title-prefix="{ content: $appMsg.tips[1021] }"
             sortable
           />
         </vxe-table>

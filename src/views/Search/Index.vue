@@ -959,7 +959,7 @@
               <HeroComplementList
                 v-if="skillInfo.model == 0"
                 :complementId="tableData.cardInfo.id"
-                :complementType="2"
+                :complementType="1"
               />
             </van-tab>
             <van-tab title="打法 (推荐)">

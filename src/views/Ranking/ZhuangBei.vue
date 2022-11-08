@@ -207,10 +207,6 @@ export default {
         skillMenu: false,
         equipmentMenu: false,
       },
-      skillInfo: {
-        model: 0,
-      },
-      tipsInfo: [0, 0, 0],
     };
   },
   created() {

@@ -8,12 +8,12 @@
       height="446"
     >
       <vxe-table-colgroup
-        title="是谁拉低了数据?"
+        title="谁拉低了数据?"
         fixed="left"
         :title-prefix="{ content: $appMsg.tips[1019] }"
       >
         <vxe-table-column
-          title="英雄_1"
+          title="1"
           field="hero[0]"
           :filters="[
             { value: 1, label: '对抗路' },
@@ -45,7 +45,7 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="英雄_2"
+          title="2"
           field="hero[1]"
           :filters="[
             { value: 1, label: '对抗路' },

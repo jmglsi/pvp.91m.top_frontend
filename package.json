@@ -3,11 +3,11 @@
     "version": "0.1.1",
     "private": true,
     "scripts": {
-        "ui": "vue ui",
         "web:start": "sh ~/Web/start.sh",
         "web:stop": "sh ~/Web/stop.sh",
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
+        "ui": "vue ui",
         "lint": "vue-cli-service lint",
         "test": "npm run build --report"
     },

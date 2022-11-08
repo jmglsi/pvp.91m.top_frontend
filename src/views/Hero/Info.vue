@@ -328,7 +328,7 @@
             <van-tab title="补位 (测试)">
               <HeroComplementList
                 :complementId="hero.info.id"
-                :complementType="2"
+                :complementType="1"
               />
             </van-tab>
             <van-tab title="打法 (推荐)">
@@ -580,7 +580,7 @@ export default {
         ],
       },
       skillInfo: {
-        model: 0,
+        model: 1,
       },
       tipsInfo: [0, 0, 0, 0, 0],
     };

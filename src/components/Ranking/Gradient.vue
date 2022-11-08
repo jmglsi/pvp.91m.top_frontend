@@ -780,7 +780,7 @@
               <HeroComplementList
                 v-if="cellInfo.index == 0 && skillInfo.model == 0"
                 :complementId="tableDataRow.id"
-                :complementType="2"
+                :complementType="1"
               />
             </van-tab>
             <van-tab title="打法 (推荐)">
@@ -963,7 +963,7 @@ export default {
         model: 0,
       },
       skillInfo: {
-        model: 0,
+        model: 1,
       },
       tipsInfo: [0, 0, 0, 0, 0],
     };

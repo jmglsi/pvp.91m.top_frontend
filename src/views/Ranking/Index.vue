@@ -554,8 +554,6 @@ export default {
       if (tabsInfo.model == 0) {
         this.dfsAreaTypeInfo.model = bidInfo.model;
         this.dfsPositionTypeInfo.model = cidInfo.model;
-
-        didInfo.model = Number(this.$appConfigInfo.appInfo.isSwingMode);
       }
 
       if (tabsInfo.model == 1) {
@@ -710,6 +708,11 @@ div.ranking-home {
   div.van-dropdown-menu__bar {
     box-shadow: unset;
   }
+}
+
+div.ranking-progress {
+  margin-top: 3px;
+  position: absolute;
 }
 
 div.ranking-d742492b2526d57a222af9b54040b3b4 {

@@ -54,8 +54,8 @@
       <vxe-table-column
         title="顺位"
         field="maxIndex"
-        :title-prefix="{ content: $appMsg.tips[1012] }"
         :width="listWidth"
+        :title-prefix="{ content: $appMsg.tips[1012] }"
         sortable
       />
 

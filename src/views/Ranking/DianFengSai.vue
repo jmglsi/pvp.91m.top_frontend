@@ -179,35 +179,51 @@
             </template>
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
-                <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
-                  {{ row.allPickRate }}
-                </span>
-                <div
-                  v-if="row.change.updateValue != 0"
-                  :style="
-                    row.change.updateType == 2
-                      ? { color: 'red !important' }
-                      : { color: 'blue !important' }
-                  "
-                  class="app-b0704b59dbf144bfeffb53bdb11d7128"
-                >
-                  <span class="app-b1275ae967fdbd25d1692fa5e2f547e0">
-                    {{
-                      (row.change.updateType == 2 ? "+" : "-") +
-                      Math.abs(row.change.updateValue)
-                    }}
-                  </span>
+                <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
+                  <a-popover placement="right" trigger="click">
+                    <template #content>
+                      <div
+                        v-html="heroProficiency"
+                        class="ranking-7e8b2826e5b06781c19f0ee58f12f230"
+                      ></div>
+                    </template>
+                    <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                      {{ row.allPickRate }}
+                    </span>
+                    <div
+                      v-if="row.change.updateValue != 0"
+                      :style="
+                        row.change.updateType == 2
+                          ? { color: 'red !important' }
+                          : { color: 'blue !important' }
+                      "
+                      class="app-b0704b59dbf144bfeffb53bdb11d7128"
+                    >
+                      <span class="app-b1275ae967fdbd25d1692fa5e2f547e0">
+                        {{
+                          (row.change.updateType == 2 ? "+" : "-") +
+                          Math.abs(row.change.updateValue)
+                        }}
+                      </span>
 
-                  <img
-                    v-if="row.change.updateType != 0"
-                    v-lazy="
-                      '/img/app-icons/hot_' + row.change.updateType + '.png'
-                    "
-                    width="15"
-                    height="15"
-                    class="app-db21bca782a535e91eb87f56b8abdc45"
-                  />
-                </div>
+                      <img
+                        v-if="row.change.updateType != 0"
+                        v-lazy="
+                          '/img/app-icons/hot_' + row.change.updateType + '.png'
+                        "
+                        width="15"
+                        height="15"
+                        class="app-db21bca782a535e91eb87f56b8abdc45"
+                      />
+                    </div>
+
+                    <HeroProgress
+                      v-if="bid < 4"
+                      :listWidth="heroProficiencyWidth - 10"
+                      :progressData="progressData.result.rows[row.id]"
+                    />
+                  </a-popover>
+                </lazy-component>
               </div>
             </template>
           </vxe-column>
@@ -235,13 +251,6 @@
             <template #default="{ row }">
               <span v-if="!row.updateId">0</span>
               <span v-else>{{ row.allBPRate }}</span>
-
-              <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                <HeroProgress
-                  :listWidth="heroProficiencyWidth"
-                  :progressData="progressData.result.rows[row.id]"
-                />
-              </lazy-component>
             </template>
           </vxe-column>
           <vxe-column
@@ -430,7 +439,7 @@
               <HeroComplementList
                 v-if="cellInfo.index == 0 && skillInfo.model == 0"
                 :complementId="tableDataRow.id"
-                :complementType="2"
+                :complementType="1"
               />
             </van-tab>
             <van-tab title="打法 (推荐)">
@@ -472,7 +481,7 @@
     </div>
 
     <div
-      v-show="showInfo.heroSameHobby"
+      v-show="cellInfo.index > -1 && showInfo.heroSameHobby"
       class="ranking-d742492b2526d57a222af9b54040b3b4"
     >
       <HeroSameHobby :heroId="tableDataRow.id" />
@@ -552,6 +561,7 @@ export default {
   data() {
     return {
       agree: 0,
+      heroProficiency: "加载中...",
       tableData: {
         loading: false,
         result: {
@@ -598,7 +608,7 @@ export default {
         model: 0,
       },
       skillInfo: {
-        model: 0,
+        model: 1,
       },
       tipsInfo: [0, 0, 0, 0, 0],
     };
@@ -652,6 +662,24 @@ export default {
       }
 
       this.initTableWidth();
+    },
+    getHeroProficiency: function (id = 111) {
+      this.heroProficiency = "加载中...";
+
+      this.$axios
+        .post(this.$appApi.pvp.getHeroProficiency + "&heroId=" + id)
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            let heroProficiency = res.data.data;
+            this.heroProficiency = heroProficiency;
+
+            //this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
@@ -809,9 +837,19 @@ export default {
       }
     },
     onCellClick: function ({ row, column }) {
-      this.tableDataRow = row;
+      if (column.property != "allPickRate") {
+        this.tableDataRow = row;
+      }
 
-      if (column.property == "allScore") {
+      if (column.property == "allPickRate") {
+        this.cellInfo.index = -1;
+
+        this.getHeroProficiency(row.id);
+
+        this.showInfo.skillMenu = false;
+        this.showInfo.heroMenu = false;
+        this.showInfo.heroSameHobby = false;
+      } else if (column.property == "allScore") {
         this.cellInfo.index = 0;
 
         if (row.id == 999) {

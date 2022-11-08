@@ -19,8 +19,8 @@
         <template #right>
           <a-popover
             :style="{ marginRight: '-10px', marginTop: '10px' }"
-            trigger="click"
             placement="bottomRight"
+            trigger="click"
           >
             <van-icon name="ellipsis" size="18" />
 
@@ -191,8 +191,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="不同的召唤师技能有不同的打法"
                   >
                     技能选择 <van-icon name="question-o" />
@@ -216,8 +216,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="不同的分路有不同的打法"
                   >
                     分路选择 <van-icon name="question-o" />
@@ -239,7 +239,7 @@
             <div v-show="sidebarInfo.model == 2">
               <van-cell-group :border="false">
                 <template #title>
-                  <a-popover trigger="click" placement="top">
+                  <a-popover placement="top" trigger="click">
                     出装选择 <van-icon name="question-o" />
 
                     <template slot="content">
@@ -434,8 +434,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="对线不同的人可能需要不同的铭文"
                   >
                     铭文选择 <van-icon name="question-o" />
@@ -447,8 +447,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="如果是别人的，请填写下原文地址哦~"
                   >
                     出处 <van-icon name="question-o" />
@@ -468,8 +468,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="每个标签按英文逗号【,】分割"
                   >
                     标签 <van-icon name="question-o" />
@@ -489,8 +489,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="介绍一下这个打法"
                   >
                     展开讲讲
@@ -517,8 +517,8 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    trigger="click"
                     placement="bottomLeft"
+                    trigger="click"
                     content="其他人的备战分享"
                   >
                     备战推荐 <van-icon name="question-o" />

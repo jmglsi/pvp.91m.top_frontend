@@ -306,6 +306,7 @@
         <van-cell
           icon="good-job-o"
           title="项目开源介绍"
+          label="仅供学习，禁止商用"
           value="NGA"
           is-link
           @click="
