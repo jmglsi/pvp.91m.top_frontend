@@ -122,7 +122,7 @@
                       height="15"
                       class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
                     />
-                    <ChartsLine
+                    <ChartsRankingLine
                       :trend="row.trend"
                       :charts="{
                         columns: lineData.result.columns,
@@ -217,7 +217,7 @@
                       />
                     </div>
 
-                    <HeroProgress
+                    <ChartsHeroProgress
                       v-if="bid < 4"
                       :listWidth="heroProficiencyWidth - 10"
                       :progressData="progressData.result.rows[row.id]"
@@ -506,8 +506,8 @@
 export default {
   name: "RankingDianFengSai",
   components: {
-    ChartsLine: () => import("@/components/Ranking/ChartsLine.vue"),
-    HeroProgress: () => import("@/components/Ranking/HeroProgress.vue"),
+    ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
+    ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>

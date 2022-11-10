@@ -99,7 +99,7 @@ export default new Router({
         path: '/my',
         name: 'my',
         component: () =>
-            import('./views/User/My.vue'),
+            import('./views/User/Index.vue'),
         meta: {
             title: '我的',
             keepAlive: false
@@ -109,7 +109,7 @@ export default new Router({
         name: 'skin',
         redirect: '/skin/return',
         component: () =>
-            import('./views/Return/Index.vue'),
+            import('./views/Ranking/FanChang.vue'),
         children: [{
             path: 'return',
             name: 'skinReturn',

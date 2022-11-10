@@ -19,7 +19,7 @@
 import VeLine from "v-charts/lib/line.common";
 
 export default {
-  name: "HeroCharts",
+  name: "ChartsRankingLine",
   components: {
     VeLine,
   },

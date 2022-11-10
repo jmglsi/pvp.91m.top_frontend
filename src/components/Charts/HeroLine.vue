@@ -29,7 +29,7 @@ import "echarts/lib/component/title";
 import "v-charts/lib/style.css";
 
 export default {
-  name: "HeroLine",
+  name: "ChartsHeroLine",
   components: {
     VeLine,
   },

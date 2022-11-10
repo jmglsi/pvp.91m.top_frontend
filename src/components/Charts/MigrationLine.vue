@@ -30,7 +30,7 @@
 import VeLine from "v-charts/lib/line.common";
 
 export default {
-  name: "HeroMigration",
+  name: "ChartsMigrationLine",
   components: {
     VeLine,
   },

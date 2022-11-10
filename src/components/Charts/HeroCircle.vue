@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "HeroCircle",
+  name: "ChartsHeroCircle",
   props: {
     progressData: {
       type: Array,

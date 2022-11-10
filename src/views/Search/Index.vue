@@ -1024,6 +1024,7 @@
 export default {
   name: "SearchHome",
   components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>
@@ -1033,7 +1034,6 @@ export default {
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
-    AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {

@@ -195,7 +195,7 @@
 
 <script>
 export default {
-  name: "HeroGenre",
+  name: "HeroGenreList",
   props: {
     genreId: {
       type: Number,

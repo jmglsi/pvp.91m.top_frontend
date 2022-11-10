@@ -117,7 +117,7 @@
 
 <script>
 export default {
-  name: "HeroEquipmentListAll",
+  name: "HeroEquipmentList_All",
   props: {
     heroId: {
       type: Number,

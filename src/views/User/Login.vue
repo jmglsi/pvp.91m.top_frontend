@@ -95,7 +95,7 @@
         v-if="showInfo.checked && loginInfo.type == 1"
         class="login-411f660a2e7bb1558275b86749667ee9"
       >
-        <Oauth
+        <UserOauth
           :openId="openId"
           :accessToken="accessToken"
           :oauthList="loginInfo.oauthList"
@@ -138,9 +138,9 @@
 import md5 from "js-md5";
 
 export default {
-  name: "LoginHome",
+  name: "UserLogin",
   components: {
-    Oauth: () => import("@/components/User/Oauth.vue"),
+    UserOauth: () => import("@/components/User/Oauth.vue"),
   },
   data() {
     return {

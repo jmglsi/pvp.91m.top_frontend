@@ -36,10 +36,10 @@
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
         <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
-          <Recommend />
+          <HomeRecommend />
         </van-tab>
         <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
-          <Game />
+          <HomeGame />
         </van-tab>
       </van-tabs>
     </div>
@@ -58,9 +58,9 @@
 export default {
   name: "AppHome",
   components: {
-    Recommend: () => import("@/views/Home/Recommend.vue"),
-    Game: () => import("@/views/Home/Game.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
+    HomeRecommend: () => import("@/views/Home/Recommend.vue"),
+    HomeGame: () => import("@/views/Home/Game.vue"),
   },
   metaInfo() {
     return {

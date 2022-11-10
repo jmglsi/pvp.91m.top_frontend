@@ -47,7 +47,7 @@
                     <span>左侧查看备战，右侧搜索舆论</span>
                   </template>
 
-                  <DianFengSai
+                  <RankingDianFengSai
                     :isSmallMode="isSmallMode"
                     :bid="bid || dfsAreaTypeInfo.model"
                     :cid="cid || dfsPositionTypeInfo.model"
@@ -58,7 +58,7 @@
               </div>
 
               <div v-else-if="viewInfo.model == 'c'">
-                <RankingMigrationLine :bid="cid || dfsPositionTypeInfo.model" />
+                <ChartsMigrationLine :bid="cid || dfsPositionTypeInfo.model" />
               </div>
             </div>
 
@@ -121,7 +121,7 @@
           </template>
 
           <div class="ranking-f0bce2ae24464a70a3e9e78a1c36eea0">
-            <GuanXi
+            <RankingGuanXi
               v-if="tabsInfo.model == 1"
               :isSmallMode="isSmallMode"
               :heroName="heroName"
@@ -145,7 +145,7 @@
           </template>
 
           <div class="ranking-c48b544672dab7bc931d3c19985856d6">
-            <WanJia
+            <RankingWanJia
               v-if="tabsInfo.model == 2"
               :isSmallMode="isSmallMode"
               :bid="bid || wjAreaTypeInfo.model"
@@ -155,7 +155,7 @@
         </van-tab>
 
         <van-tab title="装备 (近期)">
-          <ZhuangBei
+          <RankingZhuangBei
             v-if="tabsInfo.model == 3"
             :isSmallMode="isSmallMode"
             :refresh="refresh || 0"
@@ -166,7 +166,7 @@
           <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
 
           <div class="ranking-02481dbde39222ea29fbc1d2f80b2885">
-            <PaiZi
+            <RankingPaiZi
               v-if="tabsInfo.model == 4"
               :isSmallMode="isSmallMode"
               :bid="bid || pzAreaTypeInfo.model"
@@ -181,7 +181,7 @@
           <template #title>内战&nbsp;<i class="vxe-icon--funnel" /></template>
 
           <div class="ranking-967b680d849350ecbc7c66ff16027608">
-            <NeiZhan
+            <RankingNeiZhan
               v-if="tabsInfo.model == 5"
               :isSmallMode="isSmallMode"
               :bid="bid || nzOrderInfo.model"
@@ -294,16 +294,15 @@ import "zrender/lib/svg/svg";
 export default {
   name: "RankingHome",
   components: {
-    DianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
-    RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
-    RankingMigrationLine: () =>
-      import("@/components/Ranking/MigrationLine.vue"),
-    GuanXi: () => import("@/views/Ranking/GuanXi.vue"),
-    WanJia: () => import("@/views/Ranking/WanJia.vue"),
-    NeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
-    ZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
-    PaiZi: () => import("@/views/Ranking/PaiZi.vue"),
     AppHello: () => import("@/components/App/Hello.vue"),
+    ChartsMigrationLine: () => import("@/components/Charts/MigrationLine.vue"),
+    RankingDianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
+    RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
+    RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
+    RankingWanJia: () => import("@/views/Ranking/WanJia.vue"),
+    RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
+    RankingZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
+    RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
   },
   watch: {
     $route: function (to) {

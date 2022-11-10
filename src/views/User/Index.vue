@@ -556,7 +556,7 @@
 
 <script>
 export default {
-  name: "MyHome",
+  name: "UserHome",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },

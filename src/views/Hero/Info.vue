@@ -268,7 +268,7 @@
             :heroId="hero.info.id"
             :aid="trendInfo.model"
           />
-          <HeroLine
+          <ChartsHeroLine
             v-else-if="tabsInfo.model == 0 && trendInfo.model > 0"
             :heroId="hero.info.id"
             :aid="trendInfo.model"
@@ -278,7 +278,7 @@
           :style="$appIsMobile ? { marginTop: '0' } : { marginTop: '25px' }"
           class="hero-ea950cb092f4e99e2ccf981cf503e5e3"
         >
-          <HeroRadar
+          <ChartsHeroRadar
             v-if="tabsInfo.model > 0"
             :tabsModel="tabsInfo.model"
             :heroId="hero.info.id"
@@ -472,6 +472,9 @@
 export default {
   name: "HeroInfo",
   components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+    ChartsHeroRadar: () => import("@/components/Charts/HeroRadar.vue"),
+    ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>
@@ -479,12 +482,9 @@ export default {
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
-    HeroLine: () => import("@/components/Hero/Line.vue"),
     HeroHistogram: () => import("@/components/Hero/Histogram.vue"),
-    HeroRadar: () => import("@/components/Hero/Radar.vue"),
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {

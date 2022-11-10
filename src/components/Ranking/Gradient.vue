@@ -52,7 +52,7 @@
                 @click="onHeroClick(data)"
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <HeroCircle
+                  <ChartsHeroCircle
                     :progressData="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
@@ -173,7 +173,7 @@
                 @click="onHeroClick(data)"
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <HeroCircle
+                  <ChartsHeroCircle
                     :progressData="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
@@ -293,7 +293,7 @@
                 @click="onHeroClick(data)"
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <HeroCircle
+                  <ChartsHeroCircle
                     :progressData="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
@@ -413,7 +413,7 @@
                 @click="onHeroClick(data)"
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <HeroCircle
+                  <ChartsHeroCircle
                     :progressData="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
@@ -529,7 +529,7 @@
                 @click="onHeroClick(data)"
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <HeroCircle
+                  <ChartsHeroCircle
                     :progressData="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
@@ -643,7 +643,7 @@
                 @click="onHeroClick(data)"
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <HeroCircle
+                  <ChartsHeroCircle
                     :progressData="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
@@ -845,9 +845,9 @@
 
 <script>
 export default {
-  name: "HeroGradient",
+  name: "RankingGradient",
   components: {
-    HeroCircle: () => import("@/components/Ranking/HeroCircle.vue"),
+    ChartsHeroCircle: () => import("@/components/Charts/HeroCircle.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>

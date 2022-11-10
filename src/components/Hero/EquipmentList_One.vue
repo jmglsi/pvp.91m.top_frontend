@@ -230,7 +230,7 @@
         </div>
 
         <div class="app-2acf2be2c6fdd22f4a6282a72817bdb1">
-          <EquipmentLine :heroEquipment="lineDataRow" />
+          <ChartsEquipmentLine :heroEquipment="lineDataRow" />
         </div>
 
         <div
@@ -259,7 +259,7 @@
 
 <script>
 export default {
-  name: "HeroEquipmentListOne",
+  name: "HeroEquipmentList_One",
   props: {
     equipmentId: {
       type: Number,
@@ -295,7 +295,7 @@ export default {
     },
   },
   components: {
-    EquipmentLine: () => import("@/components/Equipment/Line.vue"),
+    ChartsEquipmentLine: () => import("@/components/Charts/EquipmentLine.vue"),
   },
   data() {
     return {

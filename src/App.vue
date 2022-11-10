@@ -55,7 +55,7 @@
 import watermark from "watermark-dom";
 
 export default {
-  name: "App",
+  name: "AppHome",
   watch: {
     $route: function (to) {
       let nowPath = to.path,

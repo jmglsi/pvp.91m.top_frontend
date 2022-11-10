@@ -759,7 +759,7 @@
       v-if="showInfo.trend"
       class="app-69df17da0044a6e876b2afd3217d2564"
     >
-      <GameLine
+      <ChartsGameLine
         :arrData="
           gameInfo.result.rows[tabsInfo.model].blue.pick +
           '|' +
@@ -812,7 +812,7 @@ export default {
   name: "GameGlobalBP",
   components: {
     draggable,
-    GameLine: () => import("@/components/Game/Line.vue"),
+    ChartsGameLine: () => import("@/components/Charts/GameLine.vue"),
     //GameRecommend: () => import("@/components/Game/Recommend.vue"),
   },
   data() {

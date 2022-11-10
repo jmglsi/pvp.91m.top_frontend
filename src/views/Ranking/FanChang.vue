@@ -280,7 +280,7 @@ import "echarts/lib/component/dataZoom";
 import "v-charts/lib/style.css";
 
 export default {
-  name: "HeroSkinReturn",
+  name: "RankingFanChang",
   components: {
     VeLine,
     AppHello: () => import("@/components/App/Hello.vue"),

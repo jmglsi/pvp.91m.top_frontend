@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: "HeroProgress",
+  name: "ChartsHeroProgress",
   props: {
     listWidth: {
       type: Number,

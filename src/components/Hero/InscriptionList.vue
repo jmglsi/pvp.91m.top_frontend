@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: "HeroInscription",
+  name: "HeroInscriptionList",
   props: {
     heroId: {
       type: Number,
