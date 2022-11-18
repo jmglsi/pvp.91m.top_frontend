@@ -51,7 +51,6 @@
         :actions="actions"
         :close-on-click-action="true"
         @select="onInscriptionMenuActionSheetSelect"
-        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -78,7 +77,7 @@ export default {
       handler(newValue) {
         if (!newValue.heroId) return;
 
-        if (this.$cookie.get("agree") == 1) {
+        if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getRanking(newValue.heroId, 10, 0, 0, 0);
         }
       },

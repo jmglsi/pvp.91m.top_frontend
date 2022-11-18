@@ -104,7 +104,6 @@
         :actions="actions"
         :close-on-click-action="true"
         @select="onPlayerMenuActionSheetSelect"
-        safe-area-inset-bottom
       />
     </div>
 
@@ -112,7 +111,6 @@
       <van-action-sheet
         v-model="showInfo.civilwarMenu"
         :title="matchInfo.matchStatus + ' - ' + matchInfo.matchWinCamp"
-        safe-area-inset-bottom
       >
         <template #default>
           <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
@@ -189,7 +187,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        let agree = this.$cookie.get("agree");
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(12, newValue.bid, newValue.cid, 0);
@@ -234,7 +232,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
 
     /*
-      if (this.$cookie.get("agree") == 1) {
+      if (this.$appConfigInfo.appInfo.isReadme == 1) {
         this.getRanking(12, this.bid, this.cid, 0);
       }
     */

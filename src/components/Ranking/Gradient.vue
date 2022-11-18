@@ -1,16 +1,7 @@
 <template>
   <div class="ranking-gradient">
-    <div v-if="!showInfo.checked" :style="{ marginTop: '50px' }">
-      <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-        我已经阅读并同意
-        <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
-          《隐私和数据声明》
-        </a>
-      </a-checkbox>
-    </div>
-
     <div
-      v-if="showInfo.checked"
+      v-if="$appConfigInfo.appInfo.isReadme == 1"
       class="ranking-84b60dc869cf54a3d2112e59c70ce21f"
     >
       <!-- T 0 -->
@@ -71,7 +62,7 @@
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill.preview[0].img"
+                    v-lazy="data.skill[0].img"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
@@ -92,10 +83,10 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}%
+                    {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill.preview[1].img"
+                    v-lazy="data.skill[1].img"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
@@ -115,7 +106,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}%
+                    {{ data.skill[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -192,7 +183,7 @@
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill.preview[0].img"
+                    v-lazy="data.skill[0].img"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
@@ -213,10 +204,10 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}%
+                    {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill.preview[1].img"
+                    v-lazy="data.skill[1].img"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
@@ -236,7 +227,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}%
+                    {{ data.skill[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -312,7 +303,7 @@
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill.preview[0].img"
+                    v-lazy="data.skill[0].img"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
@@ -333,10 +324,10 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}%
+                    {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill.preview[1].img"
+                    v-lazy="data.skill[1].img"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
@@ -356,7 +347,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}%
+                    {{ data.skill[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -432,7 +423,7 @@
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill.preview[0].img"
+                    v-lazy="data.skill[0].img"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
@@ -453,10 +444,10 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}%
+                    {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill.preview[1].img"
+                    v-lazy="data.skill[1].img"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
@@ -476,7 +467,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}%
+                    {{ data.skill[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -548,7 +539,7 @@
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill.preview[0].img"
+                    v-lazy="data.skill[0].img"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
@@ -569,10 +560,10 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}%
+                    {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill.preview[1].img"
+                    v-lazy="data.skill[1].img"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
@@ -592,7 +583,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}%
+                    {{ data.skill[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -662,7 +653,7 @@
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill.preview[0].img"
+                    v-lazy="data.skill[0].img"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
@@ -683,10 +674,10 @@
                       ranking-043052eea2d064cab23119e56f4f640e
                     "
                   >
-                    {{ data.skill.preview[0].pickRate }}%
+                    {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill.preview[1].img"
+                    v-lazy="data.skill[1].img"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
@@ -706,7 +697,7 @@
                       ranking-dabb6e25dffefe5b4821b7062afbdaef
                     "
                   >
-                    {{ data.skill.preview[1].pickRate }}%
+                    {{ data.skill[1].pickRate }}%
                   </span>
                 </div>
               </li>
@@ -767,7 +758,6 @@
       <van-action-sheet
         v-model="showInfo.skillMenu"
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
-        safe-area-inset-bottom
       >
         <template #default>
           <van-tabs
@@ -837,7 +827,6 @@
         @select="onActionSheetSelect"
         @open="onActionOpen"
         @close="onActionClose"
-        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -877,24 +866,19 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.agree = this.$cookie.get("agree");
-
-        if (this.agree == 1) {
+        if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getRanking(16, newValue.bid, newValue.cid, 0);
           this.getRanking(15);
 
           setTimeout(() => {
             this.getRankingByT(16, newValue.bid, newValue.cid, 0);
           }, 500);
-
-          this.showInfo.checked = true;
         }
       },
     },
   },
   data() {
     return {
-      agree: 0,
       tableData: {
         loading: false,
         result: {
@@ -954,7 +938,6 @@ export default {
         skillMenu: false,
         heroSameHobby: false,
         heroMenu: false,
-        checked: false,
       },
       cellInfo: {
         index: 0,
@@ -1179,30 +1162,6 @@ export default {
           0
         );
       }
-    },
-    onAgreeChange: function () {
-      let nowChecked = false,
-        nowChecked_int = 0;
-
-      if (this.showInfo.checked == true) {
-        nowChecked = false;
-        nowChecked_int = 0;
-      } else {
-        nowChecked = true;
-        nowChecked_int = 1;
-
-        this.getRanking(16, this.bid, this.cid, 0);
-        this.getRanking(15);
-
-        setTimeout(() => {
-          this.getRankingByT(16, this.bid, this.cid, 0);
-        }, 500);
-      }
-
-      this.showInfo.checked = nowChecked;
-      this.$cookie.set("agree", nowChecked_int, {
-        expires: "1Y",
-      });
     },
   },
 };

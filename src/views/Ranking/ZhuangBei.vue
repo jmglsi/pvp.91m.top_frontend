@@ -137,7 +137,6 @@
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
-        safe-area-inset-bottom
       />
     </div>
 
@@ -145,7 +144,6 @@
       <van-action-sheet
         v-model="showInfo.skillMenu"
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
-        safe-area-inset-bottom
       >
         <template #default>
           <HeroEquipmentListOne
@@ -228,7 +226,7 @@ export default {
         this.showInfo.skillMenu = true;
       }
 
-      if (this.$cookie.get("agree") == 1) {
+      if (this.$appConfigInfo.appInfo.isReadme == 1) {
         this.getRanking(3, 0, 0, 0);
       }
     },

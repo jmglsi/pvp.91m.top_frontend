@@ -422,9 +422,8 @@
     <div class="my-0b8eeb7297d7691797414caa1ec92c8e">
       <van-action-sheet
         v-model="showInfo.editMenu"
-        @close="showInfo.editType = false"
-        safe-area-inset-bottom
         title="我的信息"
+        @close="showInfo.editType = false"
       >
         <template #default>
           <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">

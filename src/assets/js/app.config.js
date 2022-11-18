@@ -13,6 +13,7 @@ Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
 Vue.prototype.$appConfigInfo = {
     appInfo: {
+        isReadme: false,
         isSwingMode: false,
         isSmallMode: false,
         isReductionMode: false,

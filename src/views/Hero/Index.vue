@@ -84,7 +84,7 @@ div.ti-input {
 
 div.hero-a2d3b30fd0cc9eb4affc0de9b7049895 {
   div.van-nav-bar__right {
-    width: 50% !important;
+    width: 40% !important;
   }
 
   div.hero-68adaff1d028a37f27fb33c483329cba {

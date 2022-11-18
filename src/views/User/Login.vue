@@ -60,21 +60,12 @@
       </van-cell-group>
     </div>
 
-    <div class="app-b0b345803bbcaebeb0bd65253594cfc9">
-      <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-        我已经阅读并同意
-        <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
-          《隐私和数据声明》
-        </a>
-      </a-checkbox>
-    </div>
-
     <div class="login-6920626369b1f05844f5e3d6f93b5f6e">
       <van-button
         round
         :disabled="
           (accessToken && loginInfo.type != 2) ||
-          !showInfo.checked ||
+          !$appConfigInfo.appInfo.isReadme ||
           !showInfo.loginButton
             ? true
             : false
@@ -92,7 +83,7 @@
       </van-button>
 
       <div
-        v-if="showInfo.checked && loginInfo.type == 1"
+        v-if="$appConfigInfo.appInfo.isReadme == 1 && loginInfo.type == 1"
         class="login-411f660a2e7bb1558275b86749667ee9"
       >
         <UserOauth
@@ -144,7 +135,6 @@ export default {
   },
   data() {
     return {
-      agree: 0,
       openId: "",
       accessToken: "",
       loginInfo: {
@@ -162,19 +152,13 @@ export default {
         },
       },
       showInfo: {
-        checked: false,
         loginButton: true,
       },
     };
   },
   mounted() {
-    this.agree = this.$cookie.get("agree");
     this.openId = this.$cookie.get("openId") || "";
     this.accessToken = this.$cookie.get("accessToken") || "";
-
-    if (this.agree == 1) {
-      this.showInfo.checked = true;
-    }
 
     if (this.accessToken) this.getWebAccountInfo(2);
   },
@@ -255,23 +239,6 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    },
-    onAgreeChange: function () {
-      let nowChecked = false,
-        nowChecked_int = 0;
-
-      if (this.showInfo.checked == true) {
-        nowChecked = false;
-        nowChecked_int = 0;
-      } else {
-        nowChecked = true;
-        nowChecked_int = 1;
-      }
-
-      this.showInfo.checked = nowChecked;
-      this.$cookie.set("agree", nowChecked_int, {
-        expires: "1Y",
-      });
     },
   },
 };

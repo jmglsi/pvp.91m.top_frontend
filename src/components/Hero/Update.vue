@@ -182,7 +182,6 @@
         :formatter="onFormatter"
         :min-date="date.min"
         :max-date="date.max"
-        safe-area-inset-bottom
       />
     </div>
 
@@ -190,7 +189,6 @@
       <van-action-sheet
         v-model="showInfo.skillMenu"
         title="其他数据 (近期)"
-        safe-area-inset-bottom
       >
         <template #default>
           <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
@@ -260,7 +258,7 @@ export default {
       handler(newValue) {
         //if (!newValue.heroId) return;
 
-        if (this.$cookie.get("agree") == 1) {
+        if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getHeroUpdate(newValue.heroId, newValue.aid);
         }
       },

@@ -152,7 +152,7 @@ export default {
       handler(newValue) {
         if (!newValue.complementId) return;
 
-        if (this.$cookie.get("agree") == 1) {
+        if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getRanking(
             newValue.complementId,
             17,

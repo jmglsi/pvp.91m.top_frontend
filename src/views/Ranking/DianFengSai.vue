@@ -50,7 +50,7 @@
               />
               <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                 <img
-                  v-lazy="row.skill.preview[0].img"
+                  v-lazy="row.skill[0].img"
                   width="15"
                   height="15"
                   class="
@@ -65,10 +65,10 @@
                     ranking-043052eea2d064cab23119e56f4f640e
                   "
                 >
-                  {{ row.skill.preview[0].pickRate }}%
+                  {{ row.skill[0].pickRate }}%
                 </span>
                 <img
-                  v-lazy="row.skill.preview[1].img"
+                  v-lazy="row.skill[1].img"
                   width="15"
                   height="15"
                   class="
@@ -83,7 +83,7 @@
                     ranking-dabb6e25dffefe5b4821b7062afbdaef
                   "
                 >
-                  {{ row.skill.preview[1].pickRate }}%
+                  {{ row.skill[1].pickRate }}%
                 </span>
               </div>
             </div>
@@ -218,7 +218,7 @@
                     </div>
 
                     <ChartsHeroProgress
-                      v-if="bid < 4"
+                      v-if="row.id != 999 && bid < 4"
                       :listWidth="heroProficiencyWidth - 10"
                       :progressData="progressData.result.rows[row.id]"
                     />
@@ -280,56 +280,52 @@
         <vxe-table-colgroup title="输出">
           <vxe-column
             title="全部"
-            field="totalOutputPerMin"
+            field="totalHurtCnt"
             :width="listWidth"
             sortable
           />
           <vxe-column
             title="对人"
-            field="totalHurtHeroCntPerMin"
+            field="totalHeroHurtCnt"
             :width="listWidth"
             sortable
           />
         </vxe-table-colgroup>
 
         <vxe-table-colgroup title="承伤">
-          <!--
-            <vxe-column
-              title="全部"
-              field="totalBeHurtedCntPerMin"
-              :width="listWidth"
-              sortable
-            />
-          -->
           <vxe-column
-            title="分均"
-            field="totalBeHurtedCntPerMin"
+            title="全部"
+            field="totalBehurtCnt"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-column
+            title="每死"
+            field="behurtPerDeath"
             :width="listWidth"
             sortable
           />
         </vxe-table-colgroup>
 
-        <!--
-          <vxe-table-colgroup
-            title="经济"
-            :title-prefix="{
-              content: $appMsg.tips[1017],
-            }"
-          >
-            <vxe-column
-              title="全部"
-              field="equMoneyOverflow"
-              :width="listWidth"
-              sortable
-            />
-            <vxe-column
-              title="分均"
-              field="equMoneyMin"
-              :width="listWidth"
-              sortable
-            />
-          </vxe-table-colgroup>
-        -->
+        <vxe-table-colgroup
+          title="经济"
+          :title-prefix="{
+            content: $appMsg.tips[1017],
+          }"
+        >
+          <vxe-column
+            title="全部"
+            field="equipmentMoney"
+            :width="listWidth"
+            sortable
+          />
+          <vxe-column
+            title="分均"
+            field="equipmentMoneyMin"
+            :width="listWidth"
+            sortable
+          />
+        </vxe-table-colgroup>
 
         <vxe-table-colgroup title="团队">
           <vxe-column
@@ -408,17 +404,6 @@
             sortable
           />
         </vxe-table-colgroup>
-
-        <template #empty>
-          <div v-if="!agree" class="app-b0b345803bbcaebeb0bd65253594cfc9">
-            <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-              我已经阅读并同意
-              <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
-                《隐私和数据声明》
-              </a>
-            </a-checkbox>
-          </div>
-        </template>
       </vxe-table>
     </div>
 
@@ -426,7 +411,6 @@
       <van-action-sheet
         v-model="showInfo.skillMenu"
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
-        safe-area-inset-bottom
       >
         <template #default>
           <van-tabs
@@ -496,7 +480,6 @@
         @select="onActionSheetSelect"
         @open="onActionOpen"
         @close="onActionClose"
-        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -549,9 +532,9 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.agree = this.$cookie.get("agree");
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (this.agree == 1 || (this.agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
           this.getRanking(15);
         }
@@ -560,7 +543,6 @@ export default {
   },
   data() {
     return {
-      agree: 0,
       heroProficiency: "加载中...",
       tableData: {
         loading: false,
@@ -596,7 +578,6 @@ export default {
       clientHeight: 0,
       heroProficiencyWidth: 0,
       showInfo: {
-        checked: false,
         skillMenu: false,
         heroMenu: false,
         heroSameHobby: false,
@@ -625,7 +606,7 @@ export default {
     //手动将表格和工具栏进行关联
 
     /*
-      if (this.$cookie.get("agree") == 1) {
+      if (this.$appConfigInfo.appInfo.isReadme == 1) {
         this.getRanking(0, this.bid, this.cid, this.did);
         this.getRanking(15);
       }
@@ -941,27 +922,6 @@ export default {
           0
         );
       }
-    },
-    onAgreeChange: function () {
-      let nowChecked = false,
-        nowChecked_int = 0;
-
-      if (this.showInfo.checked == true) {
-        nowChecked = false;
-        nowChecked_int = 0;
-      } else {
-        nowChecked = true;
-        nowChecked_int = 1;
-
-        this.getHeroChartsLog(6);
-        this.getRanking(0, this.bid, this.cid, this.did);
-        this.getRanking(15);
-      }
-
-      this.showInfo.checked = nowChecked;
-      this.$cookie.set("agree", nowChecked_int, {
-        expires: "1Y",
-      });
     },
   },
 };

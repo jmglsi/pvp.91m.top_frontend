@@ -212,11 +212,7 @@
     </van-popup>
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
-      <van-action-sheet
-        v-model="showInfo.rankingFilterMenu"
-        title="请选择"
-        safe-area-inset-bottom
-      >
+      <van-action-sheet v-model="showInfo.rankingFilterMenu" title="请选择">
         <template #default>
           <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
             <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">

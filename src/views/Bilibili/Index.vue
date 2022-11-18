@@ -88,7 +88,6 @@
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
-        safe-area-inset-bottom
       />
     </div>
   </div>

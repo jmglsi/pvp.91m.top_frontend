@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <AppReadme />
+
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <div v-if="$appConfigInfo.appInfo.pwa == 1">
         <div
@@ -32,7 +34,6 @@
         v-model="tableData.result.model"
         v-if="showInfo.tabbar"
         fixed
-        safe-area-inset-bottom
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
@@ -56,6 +57,9 @@ import watermark from "watermark-dom";
 
 export default {
   name: "AppHome",
+  components: {
+    AppReadme: () => import("@/components/App/Readme.vue"),
+  },
   watch: {
     $route: function (to) {
       let nowPath = to.path,
@@ -220,6 +224,7 @@ export default {
         }
 
         this.$appConfigInfo.appInfo = {
+          isReadme: Boolean(appConfigInfo.appInfo.isReadme) || false,
           isSwingMode: Boolean(appConfigInfo.appInfo.isSwingMode) || false,
           isSmallMode: Boolean(appConfigInfo.appInfo.isSmallMode) || false,
           isReductionMode:
@@ -523,6 +528,16 @@ div.app-recommend {
   }
 }
 
+div.app-fe64546261ce7a19b6784737edd0fdf1 {
+  height: 423px;
+
+  div.app-41b238cc893836e28b50cd5a59843803 {
+    margin-top: 175px;
+    position: absolute;
+    width: 100%;
+  }
+}
+
 div.app-b0704b59dbf144bfeffb53bdb11d7128 {
   font-size: @app-font-size;
   left: 0;
@@ -546,12 +561,6 @@ div.app-5ddd8715c99cbf00677a622145b3c163 {
   margin: 5px 0;
   text-align: center;
   width: 100%;
-}
-
-div.app-b0b345803bbcaebeb0bd65253594cfc9 {
-  text-align: left;
-  margin-left: 17px;
-  margin-top: 35px;
 }
 
 div.app-c1351782c9c93025d72864180d0cf28c {

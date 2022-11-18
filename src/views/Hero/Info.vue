@@ -22,26 +22,30 @@
             :style="
               scroll >= 50 || tabsInfo.model > 0 ? null : { display: 'none' }
             "
-            @click="$message.info('英雄id:' + hero.info.id + '，近期热度')"
             class="hero-632d142d7a508e86f6c35a044a17411e"
           >
-            <span
-              :style="
-                scroll >= 50 || tabsInfo.model > 0
-                  ? { color: 'black !important' }
-                  : { color: 'white !important' }
-              "
-              class="hero-d5d3db1765287eef77d7927cc956f50a"
-            >
-              {{ hero.title }}
-            </span>
-            <img
-              v-if="showInfo.parameter && hero.info.trend > 0"
-              v-lazy="'/img/app-icons/hot_' + hero.info.trend + '.png'"
-              width="15"
-              height="15"
-              class="hero-f90943c8968fa651d7e1b617ff046fe2"
-            />
+            <!-- @click="$message.info('英雄id:' + hero.info.id + '，近期热度')" -->
+            <ChooseHero @select="getHeroId">
+              <span
+                :style="
+                  scroll >= 50 || tabsInfo.model > 0
+                    ? { color: 'black !important' }
+                    : { color: 'white !important' }
+                "
+                class="hero-d5d3db1765287eef77d7927cc956f50a"
+              >
+                {{ hero.title }}
+              </span>
+              <img
+                v-if="showInfo.parameter && hero.info.change.trendType > 0"
+                v-lazy="
+                  '/img/app-icons/hot_' + hero.info.change.trendType + '.png'
+                "
+                width="15"
+                height="15"
+                class="hero-f90943c8968fa651d7e1b617ff046fe2"
+              />
+            </ChooseHero>
           </div>
         </template>
         <template #right>
@@ -118,9 +122,10 @@
         :column-num="3"
         class="hero-d7eb5a86f1d4b50ea22711e1e60718e9"
       >
-        <van-grid-item class="hero-c6e864acb6955eed0361921288d34149">
-          <!--
+        <van-grid-item
+          class="hero-c6e864acb6955eed0361921288d34149"
           @click="$message.info($appMsg.info[1005])"
+        >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
               v-lazy="
@@ -137,7 +142,7 @@
                 hero-0fc3cfbc27e91ea60a787de13dae3e3c
               "
             >
-              {{ hero.info.equMoneyMin || 0 }}
+              {{ hero.info.equipmentMoney || 0 }}
             </span>
 
             <img
@@ -165,10 +170,9 @@
               color="black"
               class="hero-1d61d12b768d71c075477fd92281464d"
             >
-              {{ hero.info.equMoneyOverflow || 0 }}
+              {{ hero.info.equipmentMoneyMin || 0 }}
             </van-tag>
           </span>
-        -->
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
@@ -192,7 +196,7 @@
           <div class="hero-f3412345b511c61986bba9a39793157f">
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
-                v-lazy="hero.info.skill.preview[0].img"
+                v-lazy="hero.info.skill[0].img"
                 width="25"
                 height="25"
                 class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -204,12 +208,12 @@
                   hero-0fc3cfbc27e91ea60a787de13dae3e3c
                 "
               >
-                {{ hero.info.skill.preview[0].pickRate }}%
+                {{ hero.info.skill[0].pickRate }}%
               </span>
             </span>
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
-                v-lazy="hero.info.skill.preview[1].img"
+                v-lazy="hero.info.skill[1].img"
                 width="25"
                 height="25"
                 class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -221,7 +225,7 @@
                   hero-0fc3cfbc27e91ea60a787de13dae3e3c
                 "
               >
-                {{ hero.info.skill.preview[1].pickRate }}%
+                {{ hero.info.skill[1].pickRate }}%
               </span>
             </span>
           </div>
@@ -316,7 +320,6 @@
       <van-action-sheet
         v-model="showInfo.skillMenu"
         :title="hero.info.name + ' 的其他数据 (近期)'"
-        safe-area-inset-bottom
       >
         <template #default>
           <van-tabs
@@ -364,7 +367,6 @@
       <van-action-sheet
         v-model="showInfo.heroMenu"
         :title="hero.info.name + ' 的 ' + circle.info.text"
-        safe-area-inset-bottom
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
         <template #default>
@@ -425,11 +427,7 @@
       v-if="tabsInfo.model == 0"
       class="hero-79acd83e2dbb9d5b6de778dd5077db2c"
     >
-      <van-tabbar
-        fixed
-        safe-area-inset-bottom
-        class="app-130a360689f8d613da10c94d53527a1b"
-      >
+      <van-tabbar fixed class="app-130a360689f8d613da10c94d53527a1b">
         <van-tabbar-item
           v-if="hero.info.id != 999"
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
@@ -475,6 +473,7 @@ export default {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChartsHeroRadar: () => import("@/components/Charts/HeroRadar.vue"),
     ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
+    ChooseHero: () => import("@/components/Choose/Hero.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
     HeroEquipmentListALL: () =>
@@ -523,23 +522,26 @@ export default {
           id: null,
           name: "加载中...",
           clockwise: false,
+          equipmentMoney: 0,
+          equipmentMoneyMin: 0,
           skin: [],
           skinIndex: 0,
           likeStatus: 0,
-          skill: {
-            preview: [
-              {
-                id: 0,
-                img: "//image.ttwz.qq.com/images/skill/80102.png",
-                pickRate: 0,
-              },
-              {
-                id: 0,
-                img: "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1701.png",
-                pickTimes: 0,
-              },
-            ],
+          change: {
+            trendType: 0,
           },
+          skill: [
+            {
+              id: 0,
+              img: "//image.ttwz.qq.com/images/skill/80102.png",
+              pickRate: 0,
+            },
+            {
+              id: 0,
+              img: "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1701.png",
+              pickTimes: 0,
+            },
+          ],
         },
       },
       circle: {
@@ -672,6 +674,11 @@ export default {
           }
         });
     },
+    getHeroId: function (e) {
+      this.$appPush({
+        path: "/hero/" + e + "/info",
+      });
+    },
     onComponentShow: function () {
       setTimeout(() => {
         this.showInfo.skeleton = false;
@@ -759,6 +766,7 @@ export default {
 
       if (e == 0) {
         dTitle = heroInfo.name;
+
         this.hero.title = dTitle;
       } else if (e == 1) {
         dTitle = "同分路对比";

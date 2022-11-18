@@ -946,7 +946,6 @@
       <van-action-sheet
         v-model="showInfo.skillMenu"
         :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
-        safe-area-inset-bottom
       >
         <template #default>
           <van-tabs
@@ -1004,7 +1003,6 @@
       <van-action-sheet
         v-model="showInfo.fightPowerMenu"
         :title="tableData.cardInfo.name + ' 如何操作'"
-        safe-area-inset-bottom
       >
         <template #default>
           <HeroFightPower

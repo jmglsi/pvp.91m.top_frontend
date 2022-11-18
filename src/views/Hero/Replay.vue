@@ -173,7 +173,6 @@
         :actions="!replay.gameOpenId ? actions : []"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
-        safe-area-inset-bottom
         class="hero-4bc6fcee674cad1c5910499a6ad199b8"
       />
     </div>

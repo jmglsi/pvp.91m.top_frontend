@@ -60,7 +60,6 @@
       <van-action-sheet
         v-model="showInfo.teamMenu"
         :title="tableDataRow.id ? tableDataRow.name + ' 如何操作' : '新建队伍'"
-        safe-area-inset-bottom
       >
         <template #default>
           <div class="game-350be0bb4350ca865ab9210d074875f1">

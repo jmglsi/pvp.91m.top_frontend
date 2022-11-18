@@ -200,7 +200,6 @@
       v-model="showInfo.equipmentMenu"
       title=" "
       :style="{ maxHeight: '450px' }"
-      safe-area-inset-bottom
     >
       <template #default>
         <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
@@ -282,7 +281,7 @@ export default {
       handler(newValue) {
         if (!newValue.equipmentId) return;
 
-        if (this.$cookie.get("agree") == 1) {
+        if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getRanking(
             6,
             newValue.equipmentType,

@@ -55,7 +55,6 @@
       <van-action-sheet
         v-model="showInfo.fightPowerMenu"
         :title="tableDataRow.name + ' 如何操作'"
-        safe-area-inset-bottom
       >
         <template #default>
           <HeroFightPower
@@ -129,7 +128,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        let agree = this.$cookie.get("agree");
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
@@ -142,7 +141,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
 
     /*
-      if (this.$cookie.get("agree") == 1) {
+      if (this.$appConfigInfo.appInfo.isReadme == 1) {
         this.getRanking(4, this.bid, this.cid, this.did);
       }
     */

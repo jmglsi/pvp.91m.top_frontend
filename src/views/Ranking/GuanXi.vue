@@ -244,7 +244,6 @@
         :actions="actions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
-        safe-area-inset-bottom
       />
     </div>
   </div>
@@ -277,7 +276,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        let agree = this.$cookie.get("agree");
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
           this.getRanking(1, 0, 0, 0, newValue.heroName);
@@ -321,7 +320,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
 
     /*
-      if (this.$cookie.get("agree") == 1) {
+      if (this.$appConfigInfo.appInfo.isReadme == 1) {
         this.getRanking(1, 0, 0, 0, this.heroName);
       }
     */

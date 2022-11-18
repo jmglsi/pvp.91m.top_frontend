@@ -178,17 +178,6 @@
           sortable
         />
       </vxe-table-colgroup>
-
-      <template #empty>
-        <div v-if="!agree" class="app-b0b345803bbcaebeb0bd65253594cfc9">
-          <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-            我已经阅读并同意
-            <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
-              《隐私和数据声明》
-            </a>
-          </a-checkbox>
-        </div>
-      </template>
     </vxe-table>
   </div>
 </template>
@@ -214,9 +203,7 @@ export default {
       handler(newValue) {
         if (!newValue.genreId) return;
 
-        this.agree = this.$cookie.get("agree");
-
-        if (this.agree == 1) {
+        if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getRanking(newValue.genreId, 14, 0, 0, 0);
         }
       },
@@ -224,7 +211,6 @@ export default {
   },
   data() {
     return {
-      agree: 0,
       listWidth: 0,
       tableData: {
         loading: false,
@@ -327,25 +313,6 @@ export default {
         this.genreInfo.type = 2;
         return this.getRanking(row.positionId, 14, this.genreInfo.type, 0, 0);
       }
-    },
-    onAgreeChange: function () {
-      let nowChecked = false,
-        nowChecked_int = 0;
-
-      if (this.showInfo.checked == true) {
-        nowChecked = false;
-        nowChecked_int = 0;
-      } else {
-        nowChecked = true;
-        nowChecked_int = 1;
-
-        this.getRanking(this.genreId, 14, 0, 0, 0);
-      }
-
-      this.showInfo.checked = nowChecked;
-      this.$cookie.set("agree", nowChecked_int, {
-        expires: "1Y",
-      });
     },
   },
 };
