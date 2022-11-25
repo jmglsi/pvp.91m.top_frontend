@@ -302,7 +302,7 @@
               tableData.cardInfo.isLink ? onUrlClick(tableData.cardInfo) : null
             "
             icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
-            class="search-a64976150427434c778228d76650f6fb"
+            class="search-7b0acd4657210b07548f308396bb87a1"
           />
           <van-cell
             v-for="(data, index) in tableData.cardInfo.more"
@@ -323,6 +323,7 @@
             :ellipsis="false"
             :before-change="onDataTabsBeforeChange"
             @click="onDataTabsClick"
+            class="search-172457bddedfc8312574a6e2695e1a6d"
           >
             <van-tab>
               <template #title>
@@ -344,27 +345,411 @@
                   -
                 </span>
               </template>
+
+              <van-grid
+                v-if="showInfo.heroData == 0"
+                :border="false"
+                :column-num="4"
+              >
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.banRate[3] >= 30
+                        ? 'app-bda9643ac6601722a28f238714274da4'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.banRate[3] }}</span>
+                    <span
+                      v-if="tableData.cardInfo.banRate[3] > 0"
+                      class="search-d427af48bbd4a36972ce659cd329dd38"
+                    >
+                      %
+                    </span>
+                  </div>
+                  <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
+                    禁用
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.pickRate[3] >= 20 &&
+                      tableData.cardInfo.winRate[3] >= 50
+                        ? 'app-48d6215903dff56238e52e8891380c8f'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.pickRate[3] }}</span>
+                    <span
+                      v-if="tableData.cardInfo.pickRate[3] > 0"
+                      class="search-d427af48bbd4a36972ce659cd329dd38"
+                    >
+                      %
+                    </span>
+                  </div>
+                  <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
+                    <div :style="{ position: 'relative' }">
+                      <span class="search-b37184da1d9153fb045173b0a4b03e39">
+                        出场
+                      </span>
+                      <span
+                        v-if="tableData.cardInfo.change.updateValue != 0"
+                        :style="
+                          tableData.cardInfo.change.updateType == 2
+                            ? { color: 'red !important' }
+                            : { color: 'blue !important' }
+                        "
+                        class="search-cad25b2e05f6e21804b99605ab78a40b"
+                      >
+                        {{
+                          (tableData.cardInfo.change.updateType == 2
+                            ? "+"
+                            : "-") +
+                          Math.abs(tableData.cardInfo.change.updateValue)
+                        }}
+                      </span>
+                      <img
+                        v-if="tableData.cardInfo.change.updateType != 0"
+                        v-lazy="
+                          '/img/app-icons/hot_' +
+                          tableData.cardInfo.change.updateType +
+                          '.png'
+                        "
+                        width="13"
+                        height="13"
+                        class="search-3cdd9882517a697dfcf15e4bcf9fde7e"
+                      />
+                    </div>
+                  </div>
+                </van-grid-item>
+                <van-grid-item @click="$message.info($appMsg.info[1021])">
+                  <div
+                    :class="
+                      tableData.cardInfo.bpRate[3] >= 70
+                        ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.bpRate[3] }}</span>
+                    <span
+                      v-if="tableData.cardInfo.bpRate[3] > 0"
+                      class="search-d427af48bbd4a36972ce659cd329dd38"
+                    >
+                      %
+                    </span>
+                  </div>
+                  <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
+                    禁选
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      (tableData.cardInfo.banRate[3] >= 30 ||
+                        tableData.cardInfo.pickRate[3] >= 20) &&
+                      tableData.cardInfo.winRate[3] >= 50
+                        ? 'app-9f27410725ab8cc8854a2769c7a516b8'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.winRate[3] }}</span>
+                    <span
+                      v-if="tableData.cardInfo.winRate[3] > 0"
+                      class="search-d427af48bbd4a36972ce659cd329dd38"
+                    >
+                      %
+                    </span>
+                  </div>
+                  <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
+                    胜率
+                  </div>
+                </van-grid-item>
+              </van-grid>
+
+              <van-grid v-else :border="false" :column-num="5">
+                <van-grid-item text="%"></van-grid-item>
+                <van-grid-item
+                  text="全分段"
+                  @click="$message.info($appMsg.info[1022])"
+                >
+                </van-grid-item>
+                <van-grid-item
+                  text="1350"
+                  @click="$message.info($appMsg.info[1022])"
+                >
+                </van-grid-item>
+                <van-grid-item
+                  text="高星局"
+                  @click="$message.info($appMsg.info[1022])"
+                >
+                </van-grid-item>
+                <van-grid-item
+                  text="顶端局"
+                  @click="$message.info($appMsg.info[1023])"
+                ></van-grid-item>
+                <van-grid-item text="禁用"></van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.banRate[0] >= 30
+                        ? 'app-bda9643ac6601722a28f238714274da4'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.banRate[0] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.banRate[1] >= 30
+                        ? 'app-bda9643ac6601722a28f238714274da4'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.banRate[1] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.banRate[2] >= 30
+                        ? 'app-bda9643ac6601722a28f238714274da4'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.banRate[2] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.banRate[3] >= 30
+                        ? 'app-bda9643ac6601722a28f238714274da4'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.banRate[3] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item text="出场"></van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.pickRate[0] >= 20 &&
+                      tableData.cardInfo.winRate[0] >= 50
+                        ? 'app-48d6215903dff56238e52e8891380c8f'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.pickRate[0] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.pickRate[1] >= 20 &&
+                      tableData.cardInfo.winRate[1] >= 50
+                        ? 'app-48d6215903dff56238e52e8891380c8f'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.pickRate[1] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.pickRate[2] >= 20 &&
+                      tableData.cardInfo.winRate[2] >= 50
+                        ? 'app-48d6215903dff56238e52e8891380c8f'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.pickRate[2] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.pickRate[3] >= 20 &&
+                      tableData.cardInfo.winRate[3] >= 50
+                        ? 'app-48d6215903dff56238e52e8891380c8f'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.pickRate[3] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item
+                  text="禁选"
+                  @click="$message.info($appMsg.info[1021])"
+                >
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.bpRate[0] >= 70
+                        ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.bpRate[0] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.bpRate[1] >= 70
+                        ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.bpRate[1] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.bpRate[2] >= 70
+                        ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.bpRate[2] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      tableData.cardInfo.bpRate[3] >= 70
+                        ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.bpRate[3] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item text="胜率"></van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      (tableData.cardInfo.banRate[0] >= 30 ||
+                        tableData.cardInfo.pickRate[0] >= 20) &&
+                      tableData.cardInfo.winRate[0] >= 50
+                        ? 'app-9f27410725ab8cc8854a2769c7a516b8'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.winRate[0] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      (tableData.cardInfo.banRate[1] >= 30 ||
+                        tableData.cardInfo.pickRate[1] >= 20) &&
+                      tableData.cardInfo.winRate[1] >= 50
+                        ? 'app-9f27410725ab8cc8854a2769c7a516b8'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.winRate[1] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      (tableData.cardInfo.banRate[2] >= 30 ||
+                        tableData.cardInfo.pickRate[2] >= 20) &&
+                      tableData.cardInfo.winRate[2] >= 50
+                        ? 'app-9f27410725ab8cc8854a2769c7a516b8'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.winRate[2] }}</span>
+                  </div>
+                </van-grid-item>
+                <van-grid-item>
+                  <div
+                    :class="
+                      (tableData.cardInfo.banRate[3] >= 30 ||
+                        tableData.cardInfo.pickRate[3] >= 20) &&
+                      tableData.cardInfo.winRate[3] >= 50
+                        ? 'app-9f27410725ab8cc8854a2769c7a516b8'
+                        : null
+                    "
+                    class="search-0c27228425c2ec1dd01a785b6e9a0437"
+                  >
+                    <span>{{ tableData.cardInfo.winRate[3] }}</span>
+                  </div>
+                </van-grid-item>
+              </van-grid>
+
+              <div class="search-399841f840f75044108804ec30d37405">
+                <span
+                  v-if="showInfo.heroData == 0"
+                  class="search-adba909214f9aea0d6208b9bbc56dee0"
+                >
+                  <van-icon name="underway-o" /> 11:30 更新
+                </span>
+                <span
+                  v-if="showInfo.heroData == 0"
+                  class="search-c27c140f08b0252f3027cf077cee2358"
+                >
+                  &nbsp;
+                  <van-icon name="todo-list-o" /> 基于 顶端巅峰赛 统计
+                </span>
+                <span
+                  @click="
+                    showInfo.heroData == 0
+                      ? (showInfo.heroData = 1)
+                      : (showInfo.heroData = 0)
+                  "
+                  class="search-ddfb601e1d7aa0d473f1a3ab353ef982"
+                >
+                  &nbsp;
+                  <van-icon name="exchange" /> 切换视图
+                </span>
+                <span
+                  @click="onShareClick"
+                  class="search-5077dcc14128f743498aaafcbd0ecb5d"
+                >
+                  &nbsp;
+                  <van-icon name="share-o" /> 分享
+                </span>
+              </div>
             </van-tab>
             <van-tab
               :disabled="
-                tableData.cardInfo.id == 0 ||
-                tableData.cardInfo.id == 999 ||
-                tableData.cardInfo.feature.killTime[0] == 0
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
               "
-              title="打野"
             >
               <template #title>
-                <span class="search-3039391a38ca2410626ad542dd2ff17c">
-                  打野
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  备战
                 </span>
-                <img
-                  width="13"
-                  height="13"
-                  v-lazy="
-                    'https://pic.rmb.bdstatic.com/bjh/89405199f9217a16028c0bfc42dc6ed2.png'
-                  "
-                  class="search-05a36d9069f1023c8432de89b15a83af"
-                />
+                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
               </template>
             </van-tab>
             <van-tab
@@ -374,417 +759,122 @@
             >
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  备战推荐
+                  其他
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+                <img
+                  v-lazy="'/img/app-icons/star.png'"
+                  width="17"
+                  height="17"
+                />
               </template>
-            </van-tab>
-            <van-tab
-              :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
-              "
-              title="攻速阈值"
-            />
-            <van-tab disabled title="最低金牌" />
-            <van-tab
-              :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
-              "
-              title="关系克制"
-            />
-            <van-tab
-              :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
-              "
-              title="对局回顾"
-            />
-          </van-tabs>
 
-          <van-grid
-            v-if="showInfo.heroData == 0"
-            :border="false"
-            :column-num="4"
-          >
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.banRate[3] >= 30
-                    ? 'app-bda9643ac6601722a28f238714274da4'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
+              <van-cell-group
+                :border="false"
+                @click="$message.info($appMsg.info[1026])"
+                title="评分维度"
               >
-                <span>{{ tableData.cardInfo.banRate[3] }}</span>
-                <span
-                  v-if="tableData.cardInfo.banRate[3] > 0"
-                  class="search-d427af48bbd4a36972ce659cd329dd38"
-                >
-                  %
-                </span>
-              </div>
-              <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">禁用</div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.pickRate[3] >= 20 &&
-                  tableData.cardInfo.winRate[3] >= 50
-                    ? 'app-48d6215903dff56238e52e8891380c8f'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.pickRate[3] }}</span>
-                <span
-                  v-if="tableData.cardInfo.pickRate[3] > 0"
-                  class="search-d427af48bbd4a36972ce659cd329dd38"
-                >
-                  %
-                </span>
-              </div>
-              <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
-                <div :style="{ position: 'relative' }">
-                  <span class="search-b37184da1d9153fb045173b0a4b03e39">
-                    出场
-                  </span>
-                  <span
-                    v-if="tableData.cardInfo.change.updateValue != 0"
-                    :style="
-                      tableData.cardInfo.change.updateType == 2
-                        ? { color: 'red !important' }
-                        : { color: 'blue !important' }
-                    "
-                    class="search-cad25b2e05f6e21804b99605ab78a40b"
+                <van-grid :border="false" :column-num="3">
+                  <van-grid-item
+                    v-for="(data, index) in tableData.cardInfo.behavior"
+                    :key="'search-b3f9864c505c0a9096540e0ef4b18e17-' + index"
+                    class="search-a09f3d18d97597a65b022847ad930687"
                   >
-                    {{
-                      (tableData.cardInfo.change.updateType == 2 ? "+" : "-") +
-                      Math.abs(tableData.cardInfo.change.updateValue)
-                    }}
-                  </span>
-                  <img
-                    v-if="tableData.cardInfo.change.updateType != 0"
-                    v-lazy="
-                      '/img/app-icons/hot_' +
-                      tableData.cardInfo.change.updateType +
-                      '.png'
-                    "
-                    width="13"
-                    height="13"
-                    class="search-3cdd9882517a697dfcf15e4bcf9fde7e"
+                    <template #icon>
+                      <img width="50" height="50" v-lazy="data.img" />
+                    </template>
+
+                    <template #text>
+                      <span class="search-3682992b479e96709916587ba97f026b">
+                        {{
+                          data.id.indexOf("8-") > -1
+                            ? data.title +
+                              " / " +
+                              tableData.cardInfo.equipmentMoneyMin
+                            : data.title
+                        }}
+                      </span>
+                    </template>
+                  </van-grid-item>
+                </van-grid>
+              </van-cell-group>
+
+              <van-cell-group
+                :border="false"
+                @click="$message.info($appMsg.info[1027])"
+                title="高光时刻"
+              >
+                <van-grid :border="false" :column-num="3">
+                  <van-grid-item
+                    v-for="(data, index) in tableData.cardInfo.highLight"
+                    :key="'search-b72889efaadc4b88fe8eefe617f4bc99-' + index"
+                    :text="data.title"
+                    class="search-166e01dd604a0a8bbce5a14bdb61b128"
                   />
-                </div>
-              </div>
-            </van-grid-item>
-            <van-grid-item @click="$message.info($appMsg.info[1021])">
-              <div
-                :class="
-                  tableData.cardInfo.bpRate[3] >= 70
-                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.bpRate[3] }}</span>
-                <span
-                  v-if="tableData.cardInfo.bpRate[3] > 0"
-                  class="search-d427af48bbd4a36972ce659cd329dd38"
-                >
-                  %
-                </span>
-              </div>
-              <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">禁选</div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  (tableData.cardInfo.banRate[3] >= 30 ||
-                    tableData.cardInfo.pickRate[3] >= 20) &&
-                  tableData.cardInfo.winRate[3] >= 50
-                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.winRate[3] }}</span>
-                <span
-                  v-if="tableData.cardInfo.winRate[3] > 0"
-                  class="search-d427af48bbd4a36972ce659cd329dd38"
-                >
-                  %
-                </span>
-              </div>
-              <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">胜率</div>
-            </van-grid-item>
-          </van-grid>
+                </van-grid>
+              </van-cell-group>
 
-          <van-grid v-else :border="false" :column-num="5">
-            <van-grid-item text="%"></van-grid-item>
-            <van-grid-item
-              text="全分段"
-              @click="$message.info($appMsg.info[1022])"
-            >
-            </van-grid-item>
-            <van-grid-item
-              text="1350"
-              @click="$message.info($appMsg.info[1022])"
-            >
-            </van-grid-item>
-            <van-grid-item
-              text="高星局"
-              @click="$message.info($appMsg.info[1022])"
-            >
-            </van-grid-item>
-            <van-grid-item
-              text="顶端局"
-              @click="$message.info($appMsg.info[1023])"
-            ></van-grid-item>
-            <van-grid-item text="禁用"></van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.banRate[0] >= 30
-                    ? 'app-bda9643ac6601722a28f238714274da4'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.banRate[0] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.banRate[1] >= 30
-                    ? 'app-bda9643ac6601722a28f238714274da4'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.banRate[1] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.banRate[2] >= 30
-                    ? 'app-bda9643ac6601722a28f238714274da4'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.banRate[2] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.banRate[3] >= 30
-                    ? 'app-bda9643ac6601722a28f238714274da4'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.banRate[3] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item text="出场"></van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.pickRate[0] >= 20 &&
-                  tableData.cardInfo.winRate[0] >= 50
-                    ? 'app-48d6215903dff56238e52e8891380c8f'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.pickRate[0] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.pickRate[1] >= 20 &&
-                  tableData.cardInfo.winRate[1] >= 50
-                    ? 'app-48d6215903dff56238e52e8891380c8f'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.pickRate[1] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.pickRate[2] >= 20 &&
-                  tableData.cardInfo.winRate[2] >= 50
-                    ? 'app-48d6215903dff56238e52e8891380c8f'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.pickRate[2] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.pickRate[3] >= 20 &&
-                  tableData.cardInfo.winRate[3] >= 50
-                    ? 'app-48d6215903dff56238e52e8891380c8f'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.pickRate[3] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item
-              text="禁选"
-              @click="$message.info($appMsg.info[1021])"
-            >
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.bpRate[0] >= 70
-                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.bpRate[0] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.bpRate[1] >= 70
-                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.bpRate[1] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.bpRate[2] >= 70
-                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.bpRate[2] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  tableData.cardInfo.bpRate[3] >= 70
-                    ? 'app-ee3e4aec9bcaaaf72cd0c59e8a0f477d'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.bpRate[3] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item text="胜率"></van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  (tableData.cardInfo.banRate[0] >= 30 ||
-                    tableData.cardInfo.pickRate[0] >= 20) &&
-                  tableData.cardInfo.winRate[0] >= 50
-                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.winRate[0] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  (tableData.cardInfo.banRate[1] >= 30 ||
-                    tableData.cardInfo.pickRate[1] >= 20) &&
-                  tableData.cardInfo.winRate[1] >= 50
-                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.winRate[1] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  (tableData.cardInfo.banRate[2] >= 30 ||
-                    tableData.cardInfo.pickRate[2] >= 20) &&
-                  tableData.cardInfo.winRate[2] >= 50
-                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.winRate[2] }}</span>
-              </div>
-            </van-grid-item>
-            <van-grid-item>
-              <div
-                :class="
-                  (tableData.cardInfo.banRate[3] >= 30 ||
-                    tableData.cardInfo.pickRate[3] >= 20) &&
-                  tableData.cardInfo.winRate[3] >= 50
-                    ? 'app-9f27410725ab8cc8854a2769c7a516b8'
-                    : null
-                "
-                class="search-0c27228425c2ec1dd01a785b6e9a0437"
-              >
-                <span>{{ tableData.cardInfo.winRate[3] }}</span>
-              </div>
-            </van-grid-item>
-          </van-grid>
-
-          <div class="search-399841f840f75044108804ec30d37405">
-            <span
-              v-if="showInfo.heroData == 0"
-              class="search-adba909214f9aea0d6208b9bbc56dee0"
-            >
-              <van-icon name="underway-o" /> 11:30 更新
-            </span>
-            <span
-              v-if="showInfo.heroData == 0"
-              class="search-c27c140f08b0252f3027cf077cee2358"
-            >
-              &nbsp;
-              <van-icon name="todo-list-o" /> 基于 顶端巅峰赛 统计
-            </span>
-            <span
-              @click="
-                showInfo.heroData == 0
-                  ? (showInfo.heroData = 1)
-                  : (showInfo.heroData = 0)
-              "
-              class="search-ddfb601e1d7aa0d473f1a3ab353ef982"
-            >
-              &nbsp;
-              <van-icon name="exchange" /> 切换视图
-            </span>
-            <span
-              @click="onShareClick"
-              class="search-5077dcc14128f743498aaafcbd0ecb5d"
-            >
-              &nbsp;
-              <van-icon name="share-o" /> 分享
-            </span>
-          </div>
+              <van-cell-group :border="false" title="更多">
+                <van-grid :border="false" :column-num="3">
+                  <van-grid-item
+                    @click="
+                      tableData.cardInfo.type.indexOf(4) > -1
+                        ? (showInfo.heroFeature = true)
+                        : $message.info($appMsg.info[1025])
+                    "
+                    icon="//pic.rmb.bdstatic.com/bjh/89405199f9217a16028c0bfc42dc6ed2.png"
+                    text="打野"
+                  />
+                  <van-grid-item
+                    @click="$message.info($appMsg.info[1024])"
+                    icon="//img06.mifile.cn/v1/MI_542ED8B1722DC/95ffe175d31f3b63453980ece4151981.png"
+                    text="最低金牌"
+                  />
+                  <van-grid-item
+                    @click="
+                      $appOpenUrl(
+                        '是否打开外部链接?',
+                        'NGA @小熊de大熊',
+                        {
+                          path: '//ngabbs.com/read.php?tid=12677614',
+                        },
+                        0
+                      )
+                    "
+                    icon="//img08.mifile.cn/v1/MI_542ED8B1722DC/ec41a4707d78940f02d3a76681cbda49.png"
+                    text="攻速阈值"
+                  />
+                  <van-grid-item
+                    @click="
+                      $appPush({
+                        path: '/ranking',
+                        query: {
+                          type: 1,
+                          heroName: tableData.cardInfo.name,
+                          refresh: 1,
+                        },
+                      })
+                    "
+                    icon="exchange"
+                    text="关系克制"
+                  />
+                  <van-grid-item
+                    @click="
+                      $appPush({
+                        path:
+                          '/hero/' +
+                          tableData.cardInfo.id +
+                          '/replay?title=' +
+                          tableData.cardInfo.name +
+                          '&teammate=0',
+                      })
+                    "
+                    icon="tv-o"
+                    text="对局回顾"
+                  />
+                </van-grid>
+              </van-cell-group>
+            </van-tab>
+          </van-tabs>
         </van-cell-group>
 
         <div class="search-cbf8ce69d638243d800b392c8d298b16">
@@ -811,6 +901,7 @@
             :is-link="data.isLink"
             @click="data.isLink ? onUrlClick(data) : null"
             icon-prefix="search-a64976150427434c778228d76650f6fb"
+            class="search-f5336aaff8f1004df0465d37962321b0"
           />
         </van-cell-group>
       </div>
@@ -954,11 +1045,10 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
-            <van-tab title="补位 (测试)">
-              <HeroComplementList
+            <van-tab title="顺位 (推荐)">
+              <HeroBp
                 v-if="skillInfo.model == 0"
-                :complementId="tableData.cardInfo.id"
-                :complementType="1"
+                :heroId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab title="打法 (推荐)">
@@ -1024,7 +1114,7 @@ export default {
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
-    HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
+    HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
@@ -1103,6 +1193,9 @@ export default {
           id: null,
           name: null,
           title: null,
+          type: [],
+          behavior: [],
+          highLight: [],
           feature: {
             blue: {
               blue: {
@@ -1261,47 +1354,50 @@ export default {
       );
     },
     onDataTabsClick: function (e) {
-      let cardInfo = this.tableData.cardInfo;
+      //let cardInfo = this.tableData.cardInfo;
 
       if (e == 1) {
-        this.showInfo.heroFeature = true;
-      } else if (e == 2) {
         this.showInfo.skillMenu = true;
-      } else if (e == 3) {
-        this.$appOpenUrl(
-          "是否打开外部链接?",
-          "NGA @小熊de大熊",
-          {
-            path: "//ngabbs.com/read.php?tid=12677614",
-          },
-          0
-        );
-      } else if (e == 4) {
-        this.showInfo.fightPowerMenu = true;
-      } else if (e == 5) {
-        this.$appPush({
-          path: "/ranking",
-          query: {
-            type: 1,
-            heroName: cardInfo.name,
-            refresh: 1,
-          },
-        });
-      } else if (e == 6) {
-        this.$appPush({
-          path:
-            "/hero/" +
-            cardInfo.id +
-            "/replay?title=" +
-            cardInfo.name +
-            "&teammate=0",
-        });
       }
+      /*
+        else if (e == 2) {
+          this.showInfo.heroFeature = true;
+        } else if (e == 3) {
+          this.$appOpenUrl(
+            "是否打开外部链接?",
+            "NGA @小熊de大熊",
+            {
+              path: "//ngabbs.com/read.php?tid=12677614",
+            },
+            0
+          );
+        } else if (e == 4) {
+          this.showInfo.fightPowerMenu = true;
+        } else if (e == 5) {
+          this.$appPush({
+            path: "/ranking",
+            query: {
+              type: 1,
+              heroName: cardInfo.name,
+              refresh: 1,
+            },
+          });
+        } else if (e == 6) {
+          this.$appPush({
+            path:
+              "/hero/" +
+              cardInfo.id +
+              "/replay?title=" +
+              cardInfo.name +
+              "&teammate=0",
+          });
+        }
+      */
     },
     onDataTabsBeforeChange: function (e) {
       let change = false;
 
-      e == 0 ? (change = true) : (change = false);
+      e == 0 || e == 2 ? (change = true) : (change = false);
 
       return change;
     },
@@ -1446,10 +1542,29 @@ span.search-f43418d85f50da28b3a9c1e780237105 {
   width: 15px;
 }
 
+span.search-3682992b479e96709916587ba97f026b {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+span.search-7c61bf0e17805d4183c7eeb293ebdb42 {
+  width: 250px;
+  position: absolute;
+}
+
 div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: @app-text-align;
+}
+
+div.search-7b0acd4657210b07548f308396bb87a1 {
+  div.van-cell__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px !important;
+  }
 }
 
 div.search-18e1105363d453a80ba2002db3a80308 {

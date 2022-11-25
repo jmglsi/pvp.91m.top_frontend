@@ -328,11 +328,8 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
-            <van-tab title="补位 (测试)">
-              <HeroComplementList
-                :complementId="hero.info.id"
-                :complementType="1"
-              />
+            <van-tab title="顺位 (推荐)">
+              <HeroBp :heroId="hero.info.id" />
             </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList :genreId="hero.info.id" />
@@ -475,7 +472,7 @@ export default {
     ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
-    HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
+    HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

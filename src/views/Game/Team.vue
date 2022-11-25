@@ -63,7 +63,10 @@
       >
         <template #default>
           <div class="game-350be0bb4350ca865ab9210d074875f1">
-            <van-cell-group class="game-2ce081560b9cb8cdcd7472e639624e3e">
+            <van-cell-group
+              :border="false"
+              class="game-2ce081560b9cb8cdcd7472e639624e3e"
+            >
               <van-field
                 v-model="tableDataRow.id"
                 v-if="tableDataRow.id"

@@ -277,7 +277,18 @@
           </vxe-column>
         </vxe-table-colgroup>
 
-        <vxe-table-colgroup title="输出">
+        <vxe-table-colgroup
+          :title-prefix="{
+            content: $appMsg.tips[1022],
+          }"
+          title="输出"
+        >
+          <vxe-column
+            title="转化"
+            field="hurtTransRate"
+            :width="listWidth"
+            sortable
+          />
           <vxe-column
             title="全部"
             field="totalHurtCnt"
@@ -419,11 +430,10 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
-            <van-tab title="补位 (测试)">
-              <HeroComplementList
+            <van-tab title="顺位 (推荐)">
+              <HeroBp
                 v-if="cellInfo.index == 0 && skillInfo.model == 0"
-                :complementId="tableDataRow.id"
-                :complementType="1"
+                :heroId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="打法 (推荐)">
@@ -492,7 +502,7 @@ export default {
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
-    HeroComplementList: () => import("@/components/Hero/ComplementList.vue"),
+    HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
