@@ -8,7 +8,11 @@
           padding: '0 16px',
         }"
       >
-        {{ accessToken ? "第三方授权" : "第三方登录" }}
+        {{
+          accessToken
+            ? $t("oauth.third-party-authorization")
+            : $t("oauth.sign-in-with")
+        }}
       </van-divider>
     </div>
 

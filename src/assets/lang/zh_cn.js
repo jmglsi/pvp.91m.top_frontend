@@ -7,8 +7,6 @@ export default {
   'equipment': '装备',
   'hero': '英雄',
   'more': '更多',
-  'my-login-out': '退出登录',
-  'my-login': '注册 / 登录 / 修改',
   'none': '暂无数据',
   'other': '其他',
   'prepare-for-war': '备战',
@@ -36,6 +34,19 @@ export default {
     'title': '意见建议反馈',
     'label': '什么都行，欢迎吐槽',
     'value': '兔小巢',
+  },
+  'my': {
+    'change': '修改密码',
+    'login-i': '注册 / 登录 / 修改',
+    'login-out': '退出登录',
+    'login': '登录',
+    'register': '注册',
+  },
+  'oauth': {
+    'sign-in-with': '第三方登录',
+    'third-party-authorization': '第三方授权',
+    'label': '绑定以后可以快速登录',
+    'value': '查看'
   },
   'open-source': {
     'title': '项目开源介绍',

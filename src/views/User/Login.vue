@@ -114,7 +114,7 @@
         login-60ae25445ac62d5ec51c776826888d9f
       "
     >
-      <span @click="onRegisterClick">注册</span>
+      <span @click="onRegisterClick">{{ $t("my.register") }}</span>
     </div>
 
     <div
@@ -123,7 +123,7 @@
         login-4ae1ffb5939d592986bed21d0913562d
       "
     >
-      <span @click="onUpdateClick">修改密码</span>
+      <span @click="onUpdateClick">{{ $t("my.change") }}</span>
     </div>
   </div>
 </template>
@@ -142,7 +142,7 @@ export default {
       accessToken: "",
       loginInfo: {
         type: 1,
-        text: "登录",
+        text: this.$t("my.login"),
         oauthList: [],
         data: {
           name: "",
@@ -171,18 +171,18 @@ export default {
         this.$appPush({ path: "/my" });
       } else {
         this.loginInfo.type = 1;
-        this.loginInfo.text = "登录";
+        this.loginInfo.text = this.$t("my.login");
 
         this.getWebAccountInfo(2);
       }
     },
     onRegisterClick: function () {
       this.loginInfo.type = 0;
-      this.loginInfo.text = "注册";
+      this.loginInfo.text = this.$t("my.register");
     },
     onUpdateClick: function () {
       this.loginInfo.type = 2;
-      this.loginInfo.text = "修改密码";
+      this.loginInfo.text = this.$t("my.change");
     },
     onLoginClick: function (loginType) {
       let data = this.loginInfo.data;

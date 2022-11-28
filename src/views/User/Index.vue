@@ -293,9 +293,9 @@
         <van-cell
           v-if="isLogin"
           icon="exchange"
-          title="第三方授权"
-          label="绑定以后可以快速登录"
-          value="查看"
+          :title="$t('oauth.third-party-authorization')"
+          :label="$t('oauth.label')"
+          :value="$t('oauth.value')"
           is-link
           @click="$appPush({ path: '/login' })"
         />
@@ -388,7 +388,7 @@
                 @click="onLogoutClick"
                 class="app-4236a440a662cc8253d7536e5aa17942"
               >
-                {{ $t("my-login-out") }}
+                {{ $t("my.login-out") }}
               </van-button>
             </div>
           </template>
@@ -416,6 +416,7 @@
       <van-popup v-model="showInfo.languageMenu" round position="bottom">
         <van-picker
           show-toolbar
+          :default-index="$cookie.get('lang-index') || 0"
           :confirm-button-text="$t('confirm')"
           :cancel-button-text="$t('cancel')"
           :columns="
@@ -586,7 +587,7 @@ export default {
       copyData: null,
       login: {
         status: false,
-        text: this.$t("my-login"),
+        text: this.$t("my.login-i"),
       },
       isLogin: false,
       url: {
@@ -675,7 +676,7 @@ export default {
     } else {
       this.login = {
         status: false,
-        text: this.$t("my-login"),
+        text: this.$t("my.login-i"),
       };
     }
   },
@@ -790,11 +791,16 @@ export default {
       this.$cookie.set("lang", lang, {
         expires: "1Y",
       });
+      this.$cookie.set("lang-index", i, {
+        expires: "1Y",
+      });
       this.$i18n.locale = lang;
 
       this.$message.success(e + " ok");
 
-      location.reload();
+      //location.reload();
+
+      this.login.text = this.$t("my.login-i");
 
       this.showInfo.languageMenu = false;
     },

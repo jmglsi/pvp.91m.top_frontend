@@ -7,8 +7,6 @@ export default {
   'equipment': 'equip',
   'hero': 'hero',
   'more': 'more',
-  'my-login-out': 'login out',
-  'my-login': 'register / login / modify',
   'none': 'none',
   'other': 'other',
   'prepare-for-war': 'prepare for war',
@@ -36,6 +34,19 @@ export default {
     'title': 'Suggestions Feedback',
     'label': 'Anything is fine, welcome to complain',
     'value': 'TXC',
+  },
+  'my': {
+    'change': 'change password',
+    'login-i': 'register / login / change',
+    'login-out': 'login out',
+    'login': 'login',
+    'register': 'register',
+  },
+  'oauth': {
+    'sign-in-with': 'sign in with',
+    'third-party-authorization': 'third party authorization',
+    'label': 'you can log in quickly after binding',
+    'value': 'see'
   },
   'open-source': {
     'title': 'introduction to open source',
