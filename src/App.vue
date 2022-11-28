@@ -533,6 +533,10 @@ div.app-recommend {
   }
 }
 
+div.app-bp {
+  height: 443px;
+}
+
 div.app-fe64546261ce7a19b6784737edd0fdf1 {
   height: 423px;
 
@@ -725,6 +729,7 @@ div.app-gx,
 div.app-wj,
 div.app-pz,
 div.app-zb,
+div.app-bp,
 div.app-genre,
 div.app-position,
 div.app-equipmentListAll,
@@ -732,6 +737,17 @@ div.app-equipmentListOne,
 div.app-inscription,
 div.app-pzOne {
   margin-top: 3px;
+}
+
+div.app-genre,
+div.app-position,
+div.app-equipmentListAll,
+div.app-equipmentListOne,
+div.app-inscription,
+div.app-pzOne {
+  height: 443px !important;
+  max-height: 443px !important;
+  overflow: hidden;
 }
 
 div.app-130a360689f8d613da10c94d53527a1b {

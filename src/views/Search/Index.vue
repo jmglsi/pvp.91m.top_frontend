@@ -1225,9 +1225,6 @@ export default {
       dataInfo: {
         model: 0,
       },
-      skillInfo: {
-        model: 0,
-      },
       showInfo: {
         heroData: 0,
         heroFeature: false,
@@ -1236,7 +1233,10 @@ export default {
         skillMenu: false,
         fightPowerMenu: false,
       },
-      tipsInfo: [0, 0, 0, 0],
+      skillInfo: {
+        model: 1,
+      },
+      tipsInfo: [0, 0, 0, 0, 0],
     };
   },
   mounted() {

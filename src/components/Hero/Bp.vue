@@ -1,5 +1,5 @@
 <template>
-  <div class="bp-ce736395c918ab733925e1d3298e7aca">
+  <div class="bp-ce736395c918ab733925e1d3298e7aca app-bp">
     <van-row>
       <van-col span="12">
         <div class="bp-427034659a1ba05f529b72e639b4481f">
@@ -494,12 +494,8 @@ div.bp-84d1241e18d9a700e019ca9654463a63 {
 }
 
 div.bp-427034659a1ba05f529b72e639b4481f {
-  margin-top: 25px;
-  margin-bottom: 10px;
-}
-
-div.bp-ce736395c918ab733925e1d3298e7aca {
-  margin-bottom: 25px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 div.bp-00b97ff5a43507241bb2776b701516bb {

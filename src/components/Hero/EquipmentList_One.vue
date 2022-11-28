@@ -7,47 +7,47 @@
       @cell-click="onCellClick"
       height="443"
     >
-      <vxe-table-colgroup
-        :title="$t('prepare-for-war')"
-        fixed="left"
-        :title-prefix="{ content: $appMsg.tips[1001] }"
-      >
-        <vxe-table-column title="英雄" field="heroId" width="50">
-          <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
-              <img
-                v-lazy="
-                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                  row.heroId +
-                  '/' +
-                  row.heroId +
-                  '.jpg'
-                "
-                width="25"
-                height="25"
-                class="app-3b9655ab218c7f1a18f5dacd778a52f0"
-              />
-            </div>
-          </template>
-        </vxe-table-column>
+      <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
+        <template #default="{ row }">
+          <div :style="{ position: 'relative' }">
+            <img
+              v-lazy="
+                '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                row.heroId +
+                '/' +
+                row.heroId +
+                '.jpg'
+              "
+              width="25"
+              height="25"
+              class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+            />
+          </div>
+        </template>
+      </vxe-table-column>
 
-        <vxe-table-column title="装备" field="equipmentId" width="50">
-          <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
-              <img
-                v-lazy="
-                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                  row.equipmentId +
-                  '.png'
-                "
-                width="25"
-                height="25"
-                class="hero-785aadb8cf1105bafaef41fd3e44a292"
-              />
-            </div>
-          </template>
-        </vxe-table-column>
-      </vxe-table-colgroup>
+      <vxe-table-column
+        :title-prefix="{ content: $appMsg.tips[1001] }"
+        title="装备"
+        field="equipmentId"
+        fixed="left"
+        width="50"
+      >
+        <template #default="{ row }">
+          <div :style="{ position: 'relative' }">
+            <img
+              v-lazy="
+                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                row.equipmentId +
+                '.png'
+              "
+              width="25"
+              height="25"
+              class="hero-785aadb8cf1105bafaef41fd3e44a292"
+            />
+          </div>
+        </template>
+      </vxe-table-column>
 
       <vxe-table-column title="#" type="seq" width="50" />
 
