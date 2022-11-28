@@ -26,7 +26,7 @@
               "
               @click="$appPushBack()"
             >
-              返回
+              {{ $t("nav-bar.left-text") }}
             </div>
           </template>
         </van-search>
@@ -74,7 +74,7 @@
               >
                 <van-cell-group
                   :border="false"
-                  title="热门搜索 🔍"
+                  :title="$t('search.hot-keywords') + '🔍'"
                   class="search-dea6590081d28a153cc325fdaeb10c43"
                 >
                   <van-grid :border="false" :column-num="1">
@@ -126,7 +126,7 @@
               >
                 <van-cell-group
                   :border="false"
-                  title="热门讨论 🔥"
+                  :title="$t('search.hot-talk') + '🔥'"
                   class="search-dea6590081d28a153cc325fdaeb10c43"
                 >
                   <van-grid :border="false" :column-num="1">
@@ -178,7 +178,7 @@
               >
                 <van-cell-group
                   :border="false"
-                  title="暂未调整 🆕"
+                  :title="$t('search.no-adjusted-temporarily') + '🆕'"
                   class="search-dea6590081d28a153cc325fdaeb10c43"
                 >
                   <van-grid :border="false" :column-num="1">
@@ -212,7 +212,7 @@
               >
                 <van-cell-group
                   :border="false"
-                  title="衣柜空空 👔"
+                  :title="$t('search.no-skin-temporarily') + '👔'"
                   class="search-dea6590081d28a153cc325fdaeb10c43"
                 >
                   <van-grid :border="false" :column-num="1">
@@ -247,7 +247,7 @@
           >
             <van-cell-group
               :border="false"
-              title="历史搜索"
+              :title="$t('search.history')"
               class="search-827ba321df0f99b511a783406dd7e82f"
             >
               <div class="search-88cf8ac86e2afc51906e60c7025f522b">
@@ -276,7 +276,7 @@
                   size="mini"
                   type="danger"
                 >
-                  清除历史搜索
+                  {{ $t("search.clean-history") }}
                 </van-button>
               </div>
             </van-cell-group>
@@ -328,7 +328,7 @@
             <van-tab>
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  综合
+                  {{ $t("comprehensive") }}
                 </span>
                 <img
                   v-if="tableData.cardInfo.change.trendType > 0"
@@ -369,7 +369,7 @@
                     </span>
                   </div>
                   <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
-                    禁用
+                    {{ $t("bp.ban") }}
                   </div>
                 </van-grid-item>
                 <van-grid-item>
@@ -393,7 +393,7 @@
                   <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
                     <div :style="{ position: 'relative' }">
                       <span class="search-b37184da1d9153fb045173b0a4b03e39">
-                        出场
+                        {{ $t("bp.pick") }}
                       </span>
                       <span
                         v-if="tableData.cardInfo.change.updateValue != 0"
@@ -443,7 +443,7 @@
                     </span>
                   </div>
                   <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
-                    禁选
+                    {{ $t("bp.bp") }}
                   </div>
                 </van-grid-item>
                 <van-grid-item>
@@ -466,7 +466,7 @@
                     </span>
                   </div>
                   <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
-                    胜率
+                    {{ $t("bp.win") }}
                   </div>
                 </van-grid-item>
               </van-grid>
@@ -474,7 +474,7 @@
               <van-grid v-else :border="false" :column-num="5">
                 <van-grid-item text="%"></van-grid-item>
                 <van-grid-item
-                  text="全分段"
+                  :text="$t('bp.all')"
                   @click="$message.info($appMsg.info[1022])"
                 >
                 </van-grid-item>
@@ -484,15 +484,15 @@
                 >
                 </van-grid-item>
                 <van-grid-item
-                  text="高星局"
+                  :text="$t('bp.rank')"
                   @click="$message.info($appMsg.info[1022])"
                 >
                 </van-grid-item>
                 <van-grid-item
-                  text="顶端局"
+                  :text="$t('bp.top-rank')"
                   @click="$message.info($appMsg.info[1023])"
                 ></van-grid-item>
-                <van-grid-item text="禁用"></van-grid-item>
+                <van-grid-item :text="$t('bp.ban')"></van-grid-item>
                 <van-grid-item>
                   <div
                     :class="
@@ -541,7 +541,7 @@
                     <span>{{ tableData.cardInfo.banRate[3] }}</span>
                   </div>
                 </van-grid-item>
-                <van-grid-item text="出场"></van-grid-item>
+                <van-grid-item :text="$t('bp.pick')"></van-grid-item>
                 <van-grid-item>
                   <div
                     :class="
@@ -595,7 +595,7 @@
                   </div>
                 </van-grid-item>
                 <van-grid-item
-                  text="禁选"
+                  :text="$t('bp.bp')"
                   @click="$message.info($appMsg.info[1021])"
                 >
                 </van-grid-item>
@@ -647,7 +647,7 @@
                     <span>{{ tableData.cardInfo.bpRate[3] }}</span>
                   </div>
                 </van-grid-item>
-                <van-grid-item text="胜率"></van-grid-item>
+                <van-grid-item :text="$t('bp.win')"></van-grid-item>
                 <van-grid-item>
                   <div
                     :class="
@@ -711,14 +711,14 @@
                   v-if="showInfo.heroData == 0"
                   class="search-adba909214f9aea0d6208b9bbc56dee0"
                 >
-                  <van-icon name="underway-o" /> 11:30 更新
+                  <van-icon name="underway-o" /> 11:30
                 </span>
                 <span
                   v-if="showInfo.heroData == 0"
                   class="search-c27c140f08b0252f3027cf077cee2358"
                 >
                   &nbsp;
-                  <van-icon name="todo-list-o" /> 基于 顶端巅峰赛 统计
+                  <van-icon name="todo-list-o" /> {{ $t("based") }}
                 </span>
                 <span
                   @click="
@@ -729,14 +729,16 @@
                   class="search-ddfb601e1d7aa0d473f1a3ab353ef982"
                 >
                   &nbsp;
-                  <van-icon name="exchange" /> 切换视图
+                  <van-icon name="exchange" />
+                  {{ $t("switch-views") }}
                 </span>
                 <span
                   @click="onShareClick"
                   class="search-5077dcc14128f743498aaafcbd0ecb5d"
                 >
                   &nbsp;
-                  <van-icon name="share-o" /> 分享
+                  <van-icon name="share-o" />
+                  {{ $t("share") }}
                 </span>
               </div>
             </van-tab>
@@ -747,7 +749,7 @@
             >
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  备战
+                  {{ $t("prepare-for-war") }}
                 </span>
                 <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
               </template>
@@ -759,7 +761,7 @@
             >
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  其他
+                  {{ $t("other") }}
                 </span>
                 <img
                   v-lazy="'/img/app-icons/star.png'"
@@ -821,12 +823,12 @@
                         ? (showInfo.heroFeature = true)
                         : $message.info($appMsg.info[1025])
                     "
-                    icon="//pic.rmb.bdstatic.com/bjh/89405199f9217a16028c0bfc42dc6ed2.png"
-                    text="打野"
+                    icon="/img/app-icons/jungle.png"
+                    text="打野数据"
                   />
                   <van-grid-item
                     @click="$message.info($appMsg.info[1024])"
-                    icon="//img06.mifile.cn/v1/MI_542ED8B1722DC/95ffe175d31f3b63453980ece4151981.png"
+                    icon="/img/app-icons/medal.png"
                     text="最低金牌"
                   />
                   <van-grid-item
@@ -840,7 +842,7 @@
                         0
                       )
                     "
-                    icon="//img08.mifile.cn/v1/MI_542ED8B1722DC/ec41a4707d78940f02d3a76681cbda49.png"
+                    icon="/img/app-icons/attack_speed.png"
                     text="攻速阈值"
                   />
                   <van-grid-item
@@ -1092,7 +1094,9 @@
     <div class="search-914f478e623fb19a2937274e72d82551">
       <van-action-sheet
         v-model="showInfo.fightPowerMenu"
-        :title="tableData.cardInfo.name + ' 如何操作'"
+        :title="
+          tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ') 如何操作'
+        "
       >
         <template #default>
           <HeroFightPower
@@ -1161,7 +1165,7 @@ export default {
       search: {
         data: localStorage.getItem("searchData") || "",
         value: this.$route.query.q || "",
-        placeholder: "搜索",
+        placeholder: this.$t("search.placeholder"),
       },
       tableData: {
         result: {

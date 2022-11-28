@@ -8,7 +8,7 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="$appPushBack()"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         title="通用"
       />
     </div>

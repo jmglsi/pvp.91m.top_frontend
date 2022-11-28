@@ -64,7 +64,7 @@
                   :color="$appConfigInfo.positionInfo[data][1] || 'black'"
                   class="hero-bc267281c62550407c9572aff2a45f69"
                 >
-                  {{ $appConfigInfo.positionInfo[data][0] || "未知" }}
+                  {{ $appConfigInfo.positionInfo[data][0] || $t("unknown") }}
                 </van-tag>
               </li>
             </ul>
@@ -128,9 +128,7 @@
         >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
-              v-lazy="
-                '//pic.rmb.bdstatic.com/bjh/5cd048b354ce84e2078a0a4d0eb733f5.png'
-              "
+              v-lazy="'/img/app-icons/gold.png'"
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -146,9 +144,7 @@
             </span>
 
             <img
-              v-lazy="
-                '//pic.rmb.bdstatic.com/bjh/de5232e288319d1d8b10cc57fb29858a.png'
-              "
+              v-lazy="'/img/app-icons/time.png'"
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -376,13 +372,7 @@
               class="hero-59c25466342abdb6746988b245f3a5a6"
               @click="onHeroVoteClick(0)"
             >
-              <img
-                v-lazy="
-                  '//pic.rmb.bdstatic.com/bjh/9c0ca8b80af1f8b6e5bca075e91aee2c.png'
-                "
-                width="50"
-                height="50"
-              />
+              <img v-lazy="circle.info.vote[0].img" width="50" height="50" />
               <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
                 {{ circle.info.vote[0].text }}
               </span>
@@ -391,13 +381,7 @@
               class="hero-59c25466342abdb6746988b245f3a5a6"
               @click="onHeroVoteClick(1)"
             >
-              <img
-                v-lazy="
-                  '//pic.rmb.bdstatic.com/bjh/8508598e59de00afaa3b1db2c0b46ce7.png'
-                "
-                width="50"
-                height="50"
-              />
+              <img v-lazy="circle.info.vote[1].img" width="50" height="50" />
               <span class="hero-ebd73ade48cb3e102d1dbbfbc0377c5f">
                 {{ circle.info.vote[1].text }}
               </span>
@@ -435,7 +419,7 @@
         </van-tabbar-item>
         <!--
           <van-tabbar-item
-            icon="//pic.rmb.bdstatic.com/bjh/f945a32ff317bcc82c10e09ecc8f11a8.png"
+            icon="/img/app-icons/research.png"
             icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
             @click="
               hero.info.wikiId
@@ -452,7 +436,7 @@
           </van-tabbar-item>
         -->
         <van-tabbar-item
-          icon="//pic.rmb.bdstatic.com/bjh/be831fde1fd4d15d0f77e62a93fcbc05.png"
+          icon="/img/app-icons/group.png"
           to="/search/?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >
@@ -514,10 +498,10 @@ export default {
     return {
       scroll: 0,
       hero: {
-        title: "加载中...",
+        title: this.$t("loading"),
         info: {
           id: null,
-          name: "加载中...",
+          name: this.$t("loading"),
           clockwise: false,
           equipmentMoney: 0,
           equipmentMoneyMin: 0,
@@ -544,16 +528,16 @@ export default {
       circle: {
         model: 0,
         info: {
-          text: "加载中...",
-          tips: "加载中...",
+          text: this.$t("loading"),
+          tips: this.$t("loading"),
           vote: [
             {
               img: "/img/app-icons/cry.png",
-              text: "加载中...",
+              text: this.$t("loading"),
             },
             {
               img: "/img/app-icons/smile.png",
-              text: "加载中...",
+              text: this.$t("loading"),
             },
           ],
         },

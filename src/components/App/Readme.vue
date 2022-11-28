@@ -4,14 +4,18 @@
       v-model="showInfo.actionSheet"
       :closeable="false"
       :close-on-click-overlay="false"
-      title="请同意后再操作"
+      :title="$t('please-agree-before-operation')"
     >
       <div class="app-fe64546261ce7a19b6784737edd0fdf1">
         <div class="app-41b238cc893836e28b50cd5a59843803">
           <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
-            我已经阅读并同意
+            <span class="app-af2b80cae7eca06c6b87833898217fea">
+              {{ $t("i-have-read-and-agreed") }}
+            </span>
+            <br />
+            <br />
             <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
-              《隐私和数据声明》
+              《{{ $t("privacy-and-data-statement") }}》
             </a>
           </a-checkbox>
         </div>

@@ -114,13 +114,7 @@
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
       @click="$appPushBack()"
     >
-      <img
-        v-lazy="
-          '//pic.rmb.bdstatic.com/bjh/1ab44f38796521f73775569555c2e604.png'
-        "
-        width="25"
-        height="25"
-      />
+      <img v-lazy="'/img/app-icons/stow.png'" width="25" height="25" />
     </div>
 
     <div class="miniapp-5bce5b8f873dd260895c472435bfcdf4">

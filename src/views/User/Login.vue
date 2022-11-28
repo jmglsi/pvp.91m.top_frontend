@@ -8,7 +8,7 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="onNavBarLeftClick"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
       />
     </div>

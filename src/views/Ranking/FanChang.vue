@@ -8,7 +8,7 @@
         :placeholder="type == 1 ? true : false"
         :safe-area-inset-top="true"
         @click-left="$appPushBack()"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #title>
@@ -88,9 +88,7 @@
                     class="app-3b9655ab218c7f1a18f5dacd778a52f0"
                   />
                   <img
-                    v-lazy="
-                      '//ae03.alicdn.com/kf/H451a86f08ecd432b8d2d486290489d91E.png'
-                    "
+                    v-lazy="'/img/app-icons/crown.png'"
                     width="50"
                     height="50"
                     class="return-c3aea51299c526f7b079c527ae02deb9"

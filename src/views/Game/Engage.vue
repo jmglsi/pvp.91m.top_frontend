@@ -9,7 +9,7 @@
         :safe-area-inset-top="true"
         @click-left="$appPush({ path: '/my', query: { refresh: 0 } })"
         @click-right="onNavBarRightClick"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         title="交战"
         class="game-7140a921b48604a7db01e6b676e34174"
       >

@@ -53,7 +53,7 @@
               <img
                 v-lazy="
                   row.skillId == 0
-                    ? '//pic.rmb.bdstatic.com/bjh/4765993d83516be82f000a60d2524f7f.png'
+                    ? '/img/app-icons/question.png'
                     : '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
                 "
                 width="25"

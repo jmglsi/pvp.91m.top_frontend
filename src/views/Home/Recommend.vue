@@ -80,7 +80,7 @@
               </van-grid>
 
               <van-cell
-                :title="appHomeInfo.tipsInfo.title || '加载中...'"
+                :title="appHomeInfo.tipsInfo.title || $t('loading')"
                 :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
                 :value="appHomeInfo.tipsInfo.value || '⏳'"
                 :is-link="appHomeInfo.tipsInfo.isLink"
@@ -99,9 +99,9 @@
                     @change="onHeroChange()"
                     v-model="changeInfo.bid"
                   >
-                    <van-sidebar-item title="英雄" />
-                    <van-sidebar-item title="技能" />
-                    <van-sidebar-item title="装备" />
+                    <van-sidebar-item :title="$t('hero')" />
+                    <van-sidebar-item :title="$t('skill')" />
+                    <van-sidebar-item :title="$t('equipment')" />
                   </van-sidebar>
                 </van-col>
                 <van-col span="19">
@@ -119,14 +119,16 @@
                           width="20"
                           height="20"
                           v-lazy="'/img/app-icons/hot_2.png'"
-                        />上升
+                        />
+                        {{ $t("up") }}
                       </span>
                       <span v-else>
                         <img
                           width="20"
                           height="20"
                           v-lazy="'/img/app-icons/hot_1.png'"
-                        />下降
+                        />
+                        {{ $t("down") }}
                       </span>
                     </div>
                     <div class="home-e289b0da5cdb7507d4d9cc22f588cbda">
@@ -196,7 +198,7 @@
                         v-if="tableData.result.rows.length == 0"
                         class="home-caa1dc26349a3e0c95b4a9e69a6e53b7"
                       >
-                        暂无数据，稍后再看看吧~
+                        {{ $t("none") }}
                       </div>
                     </div>
                   </div>
@@ -207,7 +209,7 @@
                     "
                     @click="getRanking(11, changeInfo.bid, changeInfo.cid, 0)"
                   >
-                    🔍 查询
+                    🔍 {{ $t("search.text") }}
                   </div>
                 </van-col>
               </van-row>
@@ -259,7 +261,7 @@ export default {
           to: "/miniapp",
           pulling: "喵呜...",
           loosing: "奇迹什么时候女装呢...",
-          loading: "加载中...",
+          loading: this.$t("loading"),
           success: null,
         },
         swipeInfo: {

@@ -8,7 +8,7 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="$appPushBack()"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>
@@ -120,7 +120,7 @@
                 size="medium"
                 class="hero-ce50a09343724eb82df11390e2c1de18"
               >
-                备战
+                {{ $t("prepare-for-war") }}
               </van-tag>
 
               <template #overlay>
@@ -208,7 +208,7 @@ export default {
         pageSize: 25,
       },
       tableDataRow: {
-        gamePlayerName: "加载中...",
+        gamePlayerName: this.$t("loading"),
       },
       actions: [
         { name: "复制链接", value: 0 },
@@ -218,7 +218,7 @@ export default {
       ],
       replay: {
         id: this.$route.params.id || 111,
-        title: this.$route.query.title || "加载中...",
+        title: this.$route.query.title || this.$t("loading"),
         userId: this.$route.query.userId || "",
         roleId: this.$route.query.roleId || "",
         gameOpenId: this.$route.query.gameOpenId || "",

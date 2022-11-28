@@ -297,10 +297,10 @@ export default {
       tableDataRow: {
         hero: [
           {
-            name: "加载中...",
+            name: this.$t("loading"),
           },
           {
-            name: "加载中...",
+            name: this.$t("loading"),
           },
         ],
       },

@@ -9,7 +9,7 @@
         :safe-area-inset-top="true"
         @click-left="$appPush({ path: '/my', query: { refresh: 0 } })"
         @click-right="onNavBarRightClick"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         title="队伍"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
       >
@@ -169,7 +169,7 @@ export default {
       },
       tableDataRow: {
         id: 0,
-        name: "加载中...",
+        name: this.$t("loading"),
       },
     };
   },

@@ -35,10 +35,16 @@
         line-width="25px"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
-        <van-tab title="推荐" class="home-e7f8cbd87d347be881cba92dad128518">
+        <van-tab
+          :title="$t('recommend')"
+          class="home-e7f8cbd87d347be881cba92dad128518"
+        >
           <HomeRecommend />
         </van-tab>
-        <van-tab title="赛事" class="home-e7f8cbd87d347be881cba92dad128518">
+        <van-tab
+          :title="$t('competition')"
+          class="home-e7f8cbd87d347be881cba92dad128518"
+        >
           <HomeGame />
         </van-tab>
       </van-tabs>

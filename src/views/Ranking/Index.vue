@@ -107,7 +107,7 @@
                     size="small"
                     color="linear-gradient(to right, #fd6585, #0d25b9)"
                   >
-                    切换视图 &nbsp;&nbsp;&nbsp;&nbsp;
+                    {{ $t("switch-views") }} &nbsp;&nbsp;&nbsp;&nbsp;
                   </van-button>
                 </div>
               </a-popover>

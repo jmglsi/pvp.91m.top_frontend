@@ -45,6 +45,13 @@
         </template>
         <template #right>
           <div
+            @click="showInfo.languageMenu = true"
+            class="my-35b118640aa1bb334cacc58d3215f130"
+          >
+            <van-icon name="/img/app-icons/translate.png" size="18" />
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div
             @click="
               $appPush({
                 path: '/setting',
@@ -110,9 +117,7 @@
         class="app-3b9655ab218c7f1a18f5dacd778a52f0"
       />
       <img
-        v-lazy="
-          '//pic.rmb.bdstatic.com/bjh/23e445df5f5a1473f352741e9921b94a.png'
-        "
+        v-lazy="'/img/app-icons/my_home_page.png'"
         width="25"
         height="25"
         class="my-ef65f15f01e7d076cc4ef40d753e4d65"
@@ -144,7 +149,7 @@
           class="my-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
-            icon="//pic.rmb.bdstatic.com/bjh/e5a868b08d2273f0d90940a56026929b.png"
+            icon="/img/game-icons/team.png"
             to="/game/team"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
@@ -159,7 +164,7 @@
             </template>
           </van-grid-item>
           <van-grid-item
-            icon="//pic.rmb.bdstatic.com/bjh/1d29d623b11fc0fcc40131b2765b4213.png"
+            icon="/img/game-icons/engage.png"
             to="/game/engage"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-308ffde0dc5bd5718dcf0396fcc2a596"
@@ -264,7 +269,7 @@
                   })
                 "
               >
-                国服认证
+                {{ $t("authenticate") }}
               </van-button>
             </div>
           </van-collapse-item>
@@ -305,9 +310,9 @@
       >
         <van-cell
           icon="good-job-o"
-          title="项目开源介绍"
-          label="仅供学习，禁止商用"
-          value="NGA"
+          :title="$t('open-source.title')"
+          :label="$t('open-source.label')"
+          :value="$t('open-source.value')"
           is-link
           @click="
             $appOpenUrl(
@@ -347,9 +352,9 @@
         -->
         <van-cell
           icon="comment-o"
-          title="意见建议反馈"
-          label="什么都行，欢迎吐槽"
-          value="兔小巢"
+          :title="$t('feedback.title')"
+          :label="$t('feedback.label')"
+          :value="$t('feedback.value')"
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.support }, 0)
@@ -357,8 +362,8 @@
         />
         <van-cell
           icon="friends-o"
-          title="感谢各位伙伴"
-          value="自豪的使用语雀"
+          :title="$t('thank.title')"
+          :value="$t('thank.value')"
           is-link
           @click="
             $appOpenUrl('是否打开外部链接?', null, { path: url.friends }, 0)
@@ -383,7 +388,7 @@
                 @click="onLogoutClick"
                 class="app-4236a440a662cc8253d7536e5aa17942"
               >
-                退出登录
+                {{ $t("my-login-out") }}
               </van-button>
             </div>
           </template>
@@ -405,6 +410,23 @@
           class="my-c0bdff9ec0fe8c0a83371c4573d7ecf4"
         />
       </van-cell-group>
+    </div>
+
+    <div class="my-af6006055b54757559df70268b785c6d">
+      <van-popup v-model="showInfo.languageMenu" round position="bottom">
+        <van-picker
+          show-toolbar
+          :confirm-button-text="$t('confirm')"
+          :cancel-button-text="$t('cancel')"
+          :columns="
+            $appLanguageInfo.map((x) => {
+              return x.title;
+            })
+          "
+          @confirm="onLanguageConfirm"
+          @cancel="showInfo.languageMenu = false"
+        />
+      </van-popup>
     </div>
 
     <div class="my-56fe8eb767404084edadf3ca37055338">
@@ -564,7 +586,7 @@ export default {
       copyData: null,
       login: {
         status: false,
-        text: "注册 / 登录 / 修改",
+        text: this.$t("my-login"),
       },
       isLogin: false,
       url: {
@@ -615,6 +637,7 @@ export default {
         editType: false,
         editMenu: false,
         pickerMenu: false,
+        languageMenu: false,
       },
       collapseInfo: {
         model: ["1"],
@@ -639,7 +662,7 @@ export default {
     if (q.oauthType) {
       this.login = {
         status: true,
-        text: "登录中...",
+        text: this.$t("loading"),
       };
 
       setTimeout(() => {
@@ -652,7 +675,7 @@ export default {
     } else {
       this.login = {
         status: false,
-        text: "注册 / 登录 / 修改",
+        text: this.$t("my-login"),
       };
     }
   },
@@ -760,6 +783,20 @@ export default {
       this.$appColumnsInfo.type = e;
 
       this.showInfo.pickerMenu = true;
+    },
+    onLanguageConfirm: function (e, i) {
+      let lang = this.$appLanguageInfo[i].lang || "zh-CN";
+
+      this.$cookie.set("lang", lang, {
+        expires: "1Y",
+      });
+      this.$i18n.locale = lang;
+
+      this.$message.success(e + " ok");
+
+      location.reload();
+
+      this.showInfo.languageMenu = false;
     },
     onUpdateInfoClick: function () {
       this.showInfo.editType = true;

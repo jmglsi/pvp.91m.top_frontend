@@ -191,7 +191,7 @@ export default {
       },
       tableDataRow: {
         id: 0,
-        name: "加载中...",
+        name: this.$t("loading"),
       },
       actions: [
         { name: "复制链接", value: 0 },
@@ -217,7 +217,7 @@ export default {
     initPage: function () {
       let q = this.$route.query,
         equipmentId = parseInt(q.equipmentId) || 0,
-        equipmentName = q.equipmentName || "加载中...";
+        equipmentName = q.equipmentName || this.$t("loading");
 
       if (equipmentId) {
         this.tableDataRow.id = equipmentId;

@@ -8,7 +8,7 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="$appPushBack()"
-        left-text="返回"
+        :left-text="$t('nav-bar.left-text')"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
         <template #title>
@@ -158,7 +158,7 @@
         size="mini"
         @click="getWebAccountInfo(1, 1)"
       >
-        刷新一下
+        {{ $t("refresh") }}
       </van-button>
       &nbsp;
       <van-button

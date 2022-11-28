@@ -553,7 +553,7 @@ export default {
   },
   data() {
     return {
-      heroProficiency: "加载中...",
+      heroProficiency: this.$t("loading"),
       tableData: {
         loading: false,
         result: {
@@ -565,7 +565,7 @@ export default {
       },
       tableDataRow: {
         id: 0,
-        name: "加载中...",
+        name: this.$t("loading"),
       },
       lineData: {
         result: {
@@ -655,7 +655,7 @@ export default {
       this.initTableWidth();
     },
     getHeroProficiency: function (id = 111) {
-      this.heroProficiency = "加载中...";
+      this.heroProficiency = this.$t("loading");
 
       this.$axios
         .post(this.$appApi.pvp.getHeroProficiency + "&heroId=" + id)

@@ -93,7 +93,7 @@ export default {
         },
       },
       tableDataRow: {
-        gamePlayerName: "加载中...",
+        gamePlayerName: this.$t("loading"),
       },
       actions: [
         { name: "第 1 套备战", value: 0 },

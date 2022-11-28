@@ -157,19 +157,19 @@ export default {
               icon: null,
               to: "/",
               name: "/",
-              text: "加载中...",
+              text: this.$t("loading"),
             },
             {
               icon: null,
               to: null,
               name: null,
-              text: "加载中...",
+              text: this.$t("loading"),
             },
             {
               icon: null,
               to: null,
               name: null,
-              text: "加载中...",
+              text: this.$t("loading"),
             },
           ],
         },
@@ -182,6 +182,9 @@ export default {
         tabbar: true,
       },
     };
+  },
+  created() {
+    this.$i18n.locale = this.$cookie.get("lang") || "zh-CN";
   },
   mounted() {
     this.getAppInfo();
@@ -240,8 +243,8 @@ export default {
           update: {
             version: appInfo.update.version || 0,
             time: appInfo.update.time || 0,
-            title: appInfo.update.title || "加载中...",
-            text: appInfo.update.text || "加载中...",
+            title: appInfo.update.title || this.$t("loading"),
+            text: appInfo.update.text || this.$t("loading"),
             timeout: appInfo.update.timeout || 43200,
           },
           search: {
@@ -287,7 +290,9 @@ export default {
           }
 
           if (tempText)
-            this.$message.warning(this.$appMsg.warning[tempText] || "未知错误");
+            this.$message.warning(
+              this.$appMsg.warning[tempText] || this.$t("unknown")
+            );
         }
 
         this.showInfo.app = true;

@@ -119,7 +119,9 @@
                 </span>
               </li>
             </ul>
-            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
+            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">
+              {{ $t("none") }}
+            </div>
           </div>
         </van-cell-group>
       </div>
@@ -240,7 +242,9 @@
                 </span>
               </li>
             </ul>
-            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
+            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">
+              {{ $t("none") }}
+            </div>
           </div>
         </van-cell-group>
       </div>
@@ -360,7 +364,9 @@
                 </span>
               </li>
             </ul>
-            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
+            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">
+              {{ $t("none") }}
+            </div>
           </div>
         </van-cell-group>
       </div>
@@ -480,7 +486,9 @@
                 </span>
               </li>
             </ul>
-            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
+            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">
+              {{ $t("none") }}
+            </div>
           </div>
         </van-cell-group>
       </div>
@@ -596,7 +604,9 @@
                 </span>
               </li>
             </ul>
-            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
+            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">
+              {{ $t("none") }}
+            </div>
           </div>
         </van-cell-group>
       </div>
@@ -710,7 +720,9 @@
                 </span>
               </li>
             </ul>
-            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">暂无</div>
+            <div v-else class="app-5ddd8715c99cbf00677a622145b3c163">
+              {{ $t("none") }}
+            </div>
           </div>
         </van-cell-group>
       </div>
@@ -886,7 +898,7 @@ export default {
       },
       tableDataRow: {
         id: 0,
-        name: "加载中...",
+        name: this.$t("loading"),
       },
       progressData: {
         result: {

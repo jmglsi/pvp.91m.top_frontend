@@ -56,7 +56,7 @@
           class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="getHeroInfoByWebAccountList(heroId, 1)"
         >
-          刷新一下
+          {{ $t("refresh") }}
         </van-button>
         &nbsp;
         <van-button
@@ -72,7 +72,7 @@
             })
           "
         >
-          国服认证
+          {{ $t("authenticate") }}
         </van-button>
       </div>
     </div>

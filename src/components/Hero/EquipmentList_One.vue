@@ -8,7 +8,7 @@
       height="443"
     >
       <vxe-table-colgroup
-        title="备战"
+        :title="$t('prepare-for-war')"
         fixed="left"
         :title-prefix="{ content: $appMsg.tips[1001] }"
       >
