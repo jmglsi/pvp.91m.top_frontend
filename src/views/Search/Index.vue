@@ -730,7 +730,7 @@
                 >
                   &nbsp;
                   <van-icon name="exchange" />
-                  {{ $t("switch-views") }}
+                  {{ $t("switch-view") }}
                 </span>
                 <span
                   @click="onShareClick"
@@ -834,7 +834,7 @@
                   <van-grid-item
                     @click="
                       $appOpenUrl(
-                        '是否打开外部链接?',
+                        $t('open-url.title'),
                         'NGA @小熊de大熊',
                         {
                           path: '//ngabbs.com/read.php?tid=12677614',
@@ -1368,7 +1368,7 @@ export default {
           this.showInfo.heroFeature = true;
         } else if (e == 3) {
           this.$appOpenUrl(
-            "是否打开外部链接?",
+            this.$t('open-url.title'),
             "NGA @小熊de大熊",
             {
               path: "//ngabbs.com/read.php?tid=12677614",
@@ -1567,7 +1567,7 @@ div.search-7b0acd4657210b07548f308396bb87a1 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 250px !important;
+    width: 200px !important;
   }
 }
 

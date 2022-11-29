@@ -320,7 +320,7 @@ export default {
 
       if (item.value == 2) {
         this.$appOpenUrl(
-          "是否查看装备更新记录?",
+          this.$t("open-url.title"),
           "NGA @破笼之鸟",
           {
             path: "//ngabbs.com/read.php?tid=19902976",

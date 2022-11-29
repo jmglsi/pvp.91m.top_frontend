@@ -4,7 +4,7 @@
       <slot></slot>
     </div>
 
-    <van-action-sheet v-model="showInfo.actionSheet" title="请选择英雄">
+    <van-action-sheet v-model="showInfo.actionSheet" title="如何操作">
       <div @click="getHeroId" class="choose-164050dcb4e46bbf16cd81a95f499980">
         已选 125
       </div>

@@ -328,7 +328,7 @@ export default {
       if (item.value == 1) {
         if (playerInfo.inscriptionUrl) {
           this.$appOpenUrl(
-            "是否查看玩家主页?",
+            this.$t("open-url.title"),
             "需要安装王者营地",
             {
               path: playerInfo.profileUrl,
@@ -343,7 +343,7 @@ export default {
       if (item.value == 2) {
         if (playerInfo.inscriptionUrl) {
           this.$appOpenUrl(
-            "是否查看玩家铭文?",
+            this.$t("open-url.title"),
             "需要安装王者营地",
             {
               path: playerInfo.inscriptionUrl,

@@ -15,7 +15,7 @@ export default {
   'select-language': '请选择语言',
   'share': '分享',
   'skill': '技能',
-  'switch-views': '切换视图',
+  'switch-view': '切换视图',
   'unknown': '未知',
   'up': '上升',
   'please-agree-before-operation': '请同意后再操作',
@@ -52,6 +52,9 @@ export default {
     'title': '项目开源介绍',
     'label': '仅供学习，禁止商用',
     'value': 'NGA'
+  },
+  'open-url': {
+    'title': '是否打开外部链接?'
   },
   'search': {
     'history': '历史搜索',

@@ -913,7 +913,7 @@ export default {
 
       if (item.value == 2) {
         this.$appOpenUrl(
-          "是否查看英雄更新记录?",
+          this.$t("open-url.title"),
           "NGA @EndMP",
           {
             path: "//ngabbs.com/read.php?pid=" + heroInfo.updateId,
@@ -924,7 +924,7 @@ export default {
 
       if (item.value == 3) {
         this.$appOpenUrl(
-          "是否打开外部链接?",
+          this.$t("open-url.title"),
           "NGA @小熊de大熊",
           {
             path: "//ngabbs.com/read.php?tid=12677614",

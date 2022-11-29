@@ -15,7 +15,7 @@ export default {
   'select-language': 'please select language',
   'share': 'share',
   'skill': 'skill',
-  'switch-views': 'switch views',
+  'switch-view': 'switch view',
   'unknown': 'unknown',
   'up': 'up',
   'please-agree-before-operation': 'please agree before operation',
@@ -52,6 +52,9 @@ export default {
     'title': 'introduction to open source',
     'label': 'For learning only, no commercial use',
     'value': 'NGA'
+  },
+  'open-url': {
+    'title': 'open external link?'
   },
   'search': {
     'history': 'search history',

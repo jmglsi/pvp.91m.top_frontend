@@ -76,7 +76,7 @@
                 @click="
                   data.url
                     ? $appOpenUrl(
-                        '是否打开外部链接?',
+                        $t('open-url.title'),
                         null,
                         { path: data.url },
                         0
@@ -153,7 +153,7 @@
           v-if="heroId > 0 && updateId > 0"
           @click="
             $appOpenUrl(
-              '是否查看英雄更多更新记录?',
+              $t('open-url.title'),
               'NGA @EndMP',
               {
                 path: '//ngabbs.com/read.php?pid=' + updateId,
@@ -186,10 +186,7 @@
     </div>
 
     <div class="hero-ec93fee7573d5d8daa4444009358e91b">
-      <van-action-sheet
-        v-model="showInfo.skillMenu"
-        title="其他数据 (近期)"
-      >
+      <van-action-sheet v-model="showInfo.skillMenu" title="其他数据 (近期)">
         <template #default>
           <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
         </template>

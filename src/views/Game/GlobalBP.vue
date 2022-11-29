@@ -18,8 +18,8 @@
       <div
         @click="
           $appOpenUrl(
-            '是否查看常见问题?',
-            null,
+            $t('open-url.title'),
+            '查看常见问题',
             {
               path: '//www.yuque.com/jmglsi/pvp/gbpl91',
             },
@@ -695,7 +695,7 @@
               size="small"
               color="black"
               @click="
-                $appOpenUrl('是否查看常见问题?', null, { path: url.question }, 0)
+                $appOpenUrl($t('open-url.title'), '查看常见问题', { path: url.question }, 0)
               "
             />
           </li>

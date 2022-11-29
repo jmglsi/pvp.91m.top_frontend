@@ -139,7 +139,7 @@
           value="自豪的使用语雀"
           is-link
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.question }, 0)
+            $appOpenUrl($t('open-url.title'), null, { path: url.question }, 0)
           "
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
@@ -316,7 +316,7 @@
           is-link
           @click="
             $appOpenUrl(
-              '是否打开外部链接?',
+              $t('open-url.title'),
               null,
               { path: url.openSource[0] },
               0
@@ -331,7 +331,7 @@
             is-link
             @click="
               $appOpenUrl(
-                '是否打开外部链接?',
+                $t('open-url.title'),
                 null,
                 { path: url.openSource[1] },
                 0
@@ -346,7 +346,7 @@
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             is-link
             @click="
-              $appOpenUrl('是否打开外部链接?', null, { path: url.afdian }, 0)
+              $appOpenUrl($t('open-url.title'), null, { path: url.afdian }, 0)
             "
           />
         -->
@@ -357,7 +357,7 @@
           :value="$t('feedback.value')"
           is-link
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.support }, 0)
+            $appOpenUrl($t('open-url.title'), null, { path: url.support }, 0)
           "
         />
         <van-cell
@@ -366,7 +366,7 @@
           :value="$t('thank.value')"
           is-link
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.friends }, 0)
+            $appOpenUrl($t('open-url.title'), null, { path: url.friends }, 0)
           "
         />
       </van-cell-group>
@@ -405,7 +405,7 @@
         <van-cell
           title="沪ICP备16031287号-2"
           @click="
-            $appOpenUrl('是否打开外部链接?', null, { path: url.beian }, 0)
+            $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
           "
           class="my-c0bdff9ec0fe8c0a83371c4573d7ecf4"
         />

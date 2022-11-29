@@ -179,7 +179,7 @@ export default {
 
       if (item.value == 3) {
         this.$appOpenUrl(
-          "是否查看玩家主页?",
+          this.$t("open-url.title"),
           "需要安装王者营地",
           {
             path: "smobagamehelper://profile?userid=" + playerInfo.userId,
@@ -188,8 +188,8 @@ export default {
         );
       } else {
         this.$appOpenUrl(
-          "是否查看英雄备战 (出装、铭文)?",
-          null,
+          this.$t("open-url.title"),
+          "查看英雄备战 (出装、铭文)",
           {
             path:
               "https://camp.qq.com/h5/webdist/prepare-war-share/index.html?isNavigationBarHidden=1&showLoading=false&gameRoleId=" +

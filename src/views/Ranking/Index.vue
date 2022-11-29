@@ -107,7 +107,7 @@
                     size="small"
                     color="linear-gradient(to right, #fd6585, #0d25b9)"
                   >
-                    {{ $t("switch-views") }} &nbsp;&nbsp;&nbsp;&nbsp;
+                    {{ $t("switch-view") }} &nbsp;&nbsp;&nbsp;&nbsp;
                   </van-button>
                 </div>
               </a-popover>
@@ -212,7 +212,7 @@
     </van-popup>
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
-      <van-action-sheet v-model="showInfo.rankingFilterMenu" title="请选择">
+      <van-action-sheet v-model="showInfo.rankingFilterMenu" title="如何操作">
         <template #default>
           <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
             <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">

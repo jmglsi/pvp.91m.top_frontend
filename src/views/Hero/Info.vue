@@ -424,7 +424,7 @@
             @click="
               hero.info.wikiId
                 ? $appOpenUrl(
-                    '是否打开外部链接?',
+                    $t('open-url.title'),
                     null,
                     { path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId },
                     0

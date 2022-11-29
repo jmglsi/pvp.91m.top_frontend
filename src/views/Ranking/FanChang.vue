@@ -116,7 +116,7 @@
             </van-col>
             <template slot="content">
               <span
-                @click="onActivityClick(tableData.result)"
+                @click="onUrlClick(tableData.result)"
                 class="return-4fb4d4758e19b050e0de1ef488ae54a3"
                 >{{ tableData.result.title || "好耶!"
                 }}<van-icon name="arrow" />
@@ -398,14 +398,13 @@ export default {
         }
       });
     },
-    onActivityClick: function (data) {
-      if (data.to) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: data.to }, 1);
-      }
-
-      if (data.url) {
-        this.$appOpenUrl("是否打开外部链接?", null, { path: data.url }, 0);
-      }
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
   },
 };

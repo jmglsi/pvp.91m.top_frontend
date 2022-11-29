@@ -88,7 +88,7 @@
                 "
                 @click="
                   $appOpenUrl(
-                    '是否查看装备更新记录?',
+                    $t('open-url.title'),
                     'NGA @破笼之鸟',
                     {
                       path: '//ngabbs.com/read.php?tid=19902976',
@@ -241,8 +241,8 @@ export default {
   methods: {
     getHeroInscription: function (row, heroId, index) {
       this.$appOpenUrl(
-        "是否查看英雄备战 (出装、铭文)?",
-        null,
+        this.$t("open-url.title"),
+        "查看英雄备战 (出装、铭文)",
         {
           path:
             "https://camp.qq.com/h5/webdist/prepare-war-share/index.html?isNavigationBarHidden=1&showLoading=false&gameRoleId=" +
@@ -332,7 +332,7 @@ export default {
 
       if (item.value == 2) {
         this.$appOpenUrl(
-          "是否打开对局详情?",
+          this.$t("open-url.title"),
           "需要安装王者营地",
           {
             path: replayInfo.hippyUrl,
@@ -344,7 +344,7 @@ export default {
       if (item.value == 3) {
         if (replayInfo.inscriptionUrl) {
           this.$appOpenUrl(
-            "是否查看玩家铭文?",
+            this.$t("open-url.title"),
             "需要安装王者营地",
             {
               path: replayInfo.inscriptionUrl,
