@@ -27,7 +27,7 @@ export default {
     'bp': '禁选',
     'pick': '出场',
     'rank': '高星局',
-    'top-rank': '高星局',
+    'top-rank': '顶端局',
     'win': '胜率',
   },
   'feedback': {
