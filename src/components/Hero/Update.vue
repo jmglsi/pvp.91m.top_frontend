@@ -108,13 +108,13 @@
               >
                 <img
                   v-lazy="
-                    item > 900
-                      ? '/img/app-icons/hero_white.png'
-                      : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    item < 900
+                      ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                         item +
                         '/' +
                         item +
                         '.jpg'
+                      : '/img/app-icons/hero_white.png'
                   "
                   width="40"
                   height="40"

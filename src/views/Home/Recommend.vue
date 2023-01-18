@@ -287,15 +287,15 @@ export default {
     };
   },
   mounted() {
-    this.initPage();
     this.getAppHome();
+    this.initShow();
 
     setTimeout(() => {
       this.initColor();
     }, 500);
   },
   methods: {
-    initPage: function () {
+    initShow: function () {
       let q = this.$appQuery,
         show = q.show || "";
 

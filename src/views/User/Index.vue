@@ -109,7 +109,9 @@
         @click="
           $appPush({
             path: '/friends',
-            query: { openId: loginInfo.openId },
+            query: {
+              openId: loginInfo.openId,
+            },
           })
         "
         width="100"
@@ -265,7 +267,10 @@
                 @click="
                   $appPush({
                     path: '/search',
-                    query: { q: '国服认证', refresh: 1 },
+                    query: {
+                      q: '国服认证',
+                      refresh: 1,
+                    },
                   })
                 "
               >

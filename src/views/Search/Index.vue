@@ -17,6 +17,22 @@
           "
           shape="round"
         >
+          <template #left>
+            <div class="search-e979efff8a859d0adcb2d63d51cd9de4">
+              <ChooseHero @select="getHeroId">
+                <img
+                  v-lazy="
+                    tableData.cardInfo.id < 900
+                      ? tableData.cardInfo.img
+                      : '/img/app-icons/hero_white.png'
+                  "
+                  width="30"
+                  height="30"
+                  class="search-8ceeee39d23f78afb2216e6a0928f6cd"
+                />
+              </ChooseHero>
+            </div>
+          </template>
           <template #action>
             <div
               :style="
@@ -292,8 +308,11 @@
           :border="false"
           class="search-5d555cae6745619e13c5488c119d2a14"
         >
+          <!--
+            :icon="tableData.cardInfo.id < 900 ? tableData.cardInfo.img : null"
+            icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
+          -->
           <van-cell
-            :icon="tableData.cardInfo.id != 999 ? tableData.cardInfo.img : null"
             :title="tableData.cardInfo.title"
             :label="tableData.cardInfo.label"
             :value="tableData.cardInfo.value"
@@ -301,7 +320,6 @@
             @click="
               tableData.cardInfo.isLink ? onUrlClick(tableData.cardInfo) : null
             "
-            icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
             class="search-7b0acd4657210b07548f308396bb87a1"
           />
           <van-cell
@@ -744,7 +762,7 @@
             </van-tab>
             <van-tab
               :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id > 900
               "
             >
               <template #title>
@@ -756,7 +774,7 @@
             </van-tab>
             <van-tab
               :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id == 999
+                tableData.cardInfo.id == 0 || tableData.cardInfo.id > 900
               "
             >
               <template #title>
@@ -1117,6 +1135,7 @@ export default {
   name: "SearchHome",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
+    ChooseHero: () => import("@/components/Choose/Hero.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
@@ -1240,18 +1259,12 @@ export default {
     };
   },
   mounted() {
-    this.initPage();
+    this.initShow();
   },
   methods: {
-    initPage: function () {
+    initShow: function () {
       let q = this.$route.query,
         show = q.show || "";
-
-      setInterval(() => {
-        let text = this.tableData.search.placeholder;
-
-        this.search.placeholder = text[Math.floor(Math.random() * text.length)];
-      }, 5000);
 
       let searchValue = this.search.value;
       if (searchValue) {
@@ -1261,7 +1274,19 @@ export default {
 
       this.getSearch(searchValue, show);
     },
-    getSearch: function (value, show) {
+    getHeroId: function (e) {
+      let searchData = e.name;
+
+      this.search.value = searchData;
+
+      if (searchData) {
+        this.showInfo.searchData = true;
+        this.showInfo.searchHistory = false;
+      }
+
+      this.getSearch(searchData);
+    },
+    getSearch: function (value, show = null) {
       this.search.value = value;
 
       this.$axios
@@ -1291,6 +1316,13 @@ export default {
           }
 
           this.initSearchHistory();
+
+          setInterval(() => {
+            let text = this.tableData.search.placeholder;
+
+            this.search.placeholder =
+              text[Math.floor(Math.random() * text.length)];
+          }, 5000);
 
           setTimeout(() => {
             if (show == "heroSkill") {
@@ -1483,6 +1515,10 @@ img.search-20a7da8370c02da6e860aaebf3a54c57 {
   width: 100%;
 }
 
+img.search-8ceeee39d23f78afb2216e6a0928f6cd {
+  border-radius: @app-border-radius;
+}
+
 i.search-a0edf16f0e677f3e28dfd77595f437be {
   img.van-icon__image {
     border-radius: @app-border-radius;
@@ -1569,6 +1605,10 @@ div.search-7b0acd4657210b07548f308396bb87a1 {
     white-space: nowrap;
     width: 200px !important;
   }
+}
+
+div.search-e979efff8a859d0adcb2d63d51cd9de4 {
+  margin-right: 10px;
 }
 
 div.search-18e1105363d453a80ba2002db3a80308 {

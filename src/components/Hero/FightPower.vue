@@ -277,7 +277,10 @@ export default {
     onAddGroupClick: function () {
       this.$appPush({
         path: "/search",
-        query: { q: "大佬们快来加群", refresh: 1 },
+        query: {
+          q: "大佬们快来加群",
+          refresh: 1,
+        },
       });
     },
     onExampleClick: function () {

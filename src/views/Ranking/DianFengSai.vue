@@ -112,8 +112,7 @@
           >
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
-                <span v-if="row.id == 999">-</span>
-                <span v-else>
+                <span v-if="row.id < 900">
                   <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                     <img
                       v-if="row.trend > 0"
@@ -131,6 +130,7 @@
                     />
                   </lazy-component>
                 </span>
+                <span v-else>-</span>
               </div>
             </template>
           </vxe-column>
@@ -218,7 +218,7 @@
                     </div>
 
                     <ChartsHeroProgress
-                      v-if="row.id != 999 && bid < 4"
+                      v-if="row.id < 900 && bid < 4"
                       :listWidth="heroProficiencyWidth - 10"
                       :progressData="progressData.result.rows[row.id]"
                     />
@@ -843,12 +843,12 @@ export default {
       } else if (column.property == "allScore") {
         this.cellInfo.index = 0;
 
-        if (row.id == 999) {
-          this.showInfo.skillMenu = false;
-          this.showInfo.heroMenu = true;
-        } else {
+        if (row.id < 900) {
           this.showInfo.skillMenu = true;
           this.showInfo.heroMenu = false;
+        } else {
+          this.showInfo.skillMenu = false;
+          this.showInfo.heroMenu = true;
         }
       } else {
         this.cellInfo.index = 1;
@@ -901,7 +901,10 @@ export default {
       if (item.value == 1) {
         this.$appPush({
           path: "/search",
-          query: { q: heroInfo.name, refresh: 1 },
+          query: {
+            q: heroInfo.name,
+            refresh: 1,
+          },
         });
       }
 

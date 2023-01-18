@@ -8,6 +8,7 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         @click-left="$appPushBack()"
+        :left-text="$t('nav-bar.left-text')"
         z-index="99999999"
         title="未命名的方案"
       >
@@ -22,7 +23,7 @@
             placement="bottomRight"
             trigger="click"
           >
-            <van-icon name="ellipsis" size="18" />
+            <van-icon v-show="false" name="ellipsis" size="18" />
 
             <template slot="content">
               <div class="hero-equipment-7d5a4bb93ee168ac07930ac48716e41f">
@@ -145,11 +146,11 @@
       <van-row>
         <van-col :span="$appIsMobile ? 6 : 2">
           <van-sidebar v-model="sidebarInfo.model">
-            <van-sidebar-item title="技能" />
-            <van-sidebar-item title="分路" />
-            <van-sidebar-item title="出装" />
-            <van-sidebar-item title="铭文" />
-            <van-sidebar-item title="描述" />
+            <van-sidebar-item v-show="false" title="技能" />
+            <van-sidebar-item v-show="false" title="分路" />
+            <van-sidebar-item v-show="false" title="出装" />
+            <van-sidebar-item v-show="false" title="铭文" />
+            <van-sidebar-item title="发布" />
             <van-divider
               :style="{
                 color: 'orange !important',
@@ -158,28 +159,32 @@
               }"
             />
             <van-sidebar-item title="推荐" />
-            <van-sidebar-item @click="$appPushBack()">
+            <van-sidebar-item>
               <template #title>
                 <div class="hero-equipment-39ac5a75c3d64a3b45733fbc8ad4275b">
-                  <img
-                    width="50"
-                    height="50"
-                    v-lazy="
-                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                      chooseInfo.heroId +
-                      '/' +
-                      chooseInfo.heroId +
-                      '.jpg'
-                    "
-                  />
-                  <img
-                    width="17"
-                    height="17"
-                    v-lazy="
-                      '//pic.rmb.bdstatic.com/bjh/ca9f38c9f423fc9b63998761bc77080f.png'
-                    "
-                    class="hero-equipment-464e0def3c0912855013b4af9a3c312e"
-                  />
+                  <ChooseHero @select="getHeroId">
+                    <img
+                      width="50"
+                      height="50"
+                      v-lazy="
+                        chooseInfo.heroId == 0
+                          ? '/img/app-icons/hero_white.png'
+                          : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                            chooseInfo.heroId +
+                            '/' +
+                            chooseInfo.heroId +
+                            '.jpg'
+                      "
+                    />
+                    <img
+                      width="17"
+                      height="17"
+                      v-lazy="
+                        '//pic.rmb.bdstatic.com/bjh/ca9f38c9f423fc9b63998761bc77080f.png'
+                      "
+                      class="hero-equipment-464e0def3c0912855013b4af9a3c312e"
+                    />
+                  </ChooseHero>
                 </div>
               </template>
             </van-sidebar-item>
@@ -338,7 +343,6 @@
                               >
                                 {{ data.item_name }}
                               </span>
-                              <!-- ({{ data.item_id }}) -->
                               <span
                                 class="
                                   hero-equipment-8723cf2d0377e86f7f75c09ae7a76a55
@@ -449,6 +453,27 @@
                   <a-popover
                     placement="bottomLeft"
                     trigger="click"
+                    content="备战 - 分享 直接复制即可"
+                  >
+                    口令 <van-icon name="question-o" />
+                  </a-popover>
+                </template>
+                <van-field
+                  v-model="chooseInfo.originalUrl"
+                  rows="3"
+                  autosize
+                  type="textarea"
+                  maxlength="255"
+                  placeholder="请复制口令"
+                  show-word-limit
+                />
+              </van-cell-group>
+
+              <van-cell-group :border="false">
+                <template #title>
+                  <a-popover
+                    placement="bottomLeft"
+                    trigger="click"
                     content="如果是别人的，请填写下原文地址哦~"
                   >
                     出处 <van-icon name="question-o" />
@@ -477,7 +502,7 @@
                 </template>
                 <van-field
                   v-model="chooseInfo.tags"
-                  rows="1"
+                  rows="2"
                   autosize
                   type="textarea"
                   maxlength="255"
@@ -493,7 +518,7 @@
                     trigger="click"
                     content="介绍一下这个打法"
                   >
-                    展开讲讲
+                    描述
                     <span
                       class="hero-equipment-d1ce62e9288a1640df00006f274c0910"
                     >
@@ -546,6 +571,7 @@ export default {
   components: {
     draggable,
     AppHello: () => import("@/components/App/Hello.vue"),
+    ChooseHero: () => import("@/components/Choose/Hero.vue"),
   },
   watch: {
     $route: function (to) {
@@ -811,6 +837,11 @@ export default {
       }
 
       this.placement = nowPlacement;
+    },
+    getHeroId: function (e) {
+      this.chooseInfo.heroId = e;
+
+      this.$appPush({ path: "/hero/" + e + "/equipment" });
     },
   },
 };

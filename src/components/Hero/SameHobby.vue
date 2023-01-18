@@ -68,7 +68,10 @@
           @click="
             $appPush({
               path: '/search',
-              query: { q: '国服认证', refresh: 1 },
+              query: {
+                q: '国服认证',
+                refresh: 1,
+              },
             })
           "
         >

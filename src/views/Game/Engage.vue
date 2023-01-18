@@ -7,7 +7,14 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$appPush({ path: '/my', query: { refresh: 0 } })"
+        @click-left="
+          $appPush({
+            path: '/my',
+            query: {
+              refresh: 0,
+            },
+          })
+        "
         @click-right="onNavBarRightClick"
         :left-text="$t('nav-bar.left-text')"
         title="交战"

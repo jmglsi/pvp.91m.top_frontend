@@ -242,7 +242,10 @@
               @click="
                 $appPush({
                   path: '/search',
-                  query: { q: '大佬们快来加群', refresh: 1 },
+                  query: {
+                    q: '大佬们快来加群',
+                    refresh: 1,
+                  },
                 })
               "
               >您的分享是我更新的动力 ( •̀ ω •́ )y</span

@@ -1142,7 +1142,10 @@ export default {
       if (item.value == 1) {
         this.$appPush({
           path: "/search",
-          query: { q: heroInfo.name, refresh: 1 },
+          query: {
+            q: heroInfo.name,
+            refresh: 1,
+          },
         });
       }
 

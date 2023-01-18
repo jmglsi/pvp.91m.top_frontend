@@ -303,7 +303,7 @@
 
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroUpdate
-            v-if="hero.info.id && hero.info.id != 999"
+            v-if="hero.info.id && hero.info.id < 900"
             :aid="1"
             :heroId="hero.info.id"
             :updateId="hero.info.updateId"
@@ -410,7 +410,7 @@
     >
       <van-tabbar fixed class="app-130a360689f8d613da10c94d53527a1b">
         <van-tabbar-item
-          v-if="hero.info.id != 999"
+          v-if="hero.info.id < 999"
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
@@ -615,9 +615,9 @@ export default {
         this.circle.info = ls.circleInfo;
         this.hero.info = heroInfoData;
 
-        heroInfoData.id == 999
-          ? (this.trendInfo.model = 2)
-          : (this.trendInfo.model = 0);
+        heroInfoData.id < 900
+          ? (this.trendInfo.model = 0)
+          : (this.trendInfo.model = 2);
 
         this.hero.title = heroInfoData.name;
 
@@ -641,9 +641,9 @@ export default {
 
             this.$appSetLocalStorage("heroInfo-" + id, heroData);
 
-            heroInfoData.id == 999
-              ? (this.trendInfo.model = 2)
-              : (this.trendInfo.model = 0);
+            heroInfoData.id < 900
+              ? (this.trendInfo.model = 0)
+              : (this.trendInfo.model = 2);
 
             this.hero.title = heroInfoData.name;
             document.title =
@@ -657,7 +657,7 @@ export default {
     },
     getHeroId: function (e) {
       this.$appPush({
-        path: "/hero/" + e + "/info",
+        path: "/hero/" + e.id + "/info",
       });
     },
     onComponentShow: function () {
