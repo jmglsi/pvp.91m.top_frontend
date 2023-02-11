@@ -9,9 +9,9 @@ import {
   Filter,
   Header,
   Icon,
+  Table,
   Toolbar,
   Tooltip,
-  Table,
 } from 'vxe-table';
 import zhCN from 'vxe-table/lib/locale/lang/zh-CN';
 
@@ -22,9 +22,9 @@ Vue
   .use(Filter)
   .use(Header)
   .use(Icon)
+  .use(Table)
   .use(Toolbar)
   .use(Tooltip)
-  .use(Table)
 
 VXETable.setup({
   table: {

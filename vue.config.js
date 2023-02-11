@@ -1,5 +1,5 @@
-const zlib = require('zlib')
 const Path = require('path')
+const Zlib = require('zlib')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 //const PrerenderSPAPlugin = require('prerender-spa-plugin')
 //const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
@@ -32,11 +32,25 @@ module.exports = {
 
       config.optimization = {
         splitChunks: {
-          chunks: 'all',
+          chunks: 'all', //async 异步，initial 同步，all 同步或者异步
+          minSize: 30000,
+          maxSize: 0,
+          minChunks: 1,
+          maxAsyncRequests: 5,
+          maxInitialRequests: 5,
+          automaticNameDelimiter: '~',
+          name: true,
           cacheGroups: {
-            antd: {
-              name: 'antd',
+            ant: {
+              name: 'ant',
               test: /[\\/]node_modules[\\/]_?ant(.*)/,
+              reuseExistingChunk: true,
+              enforce: true,
+              priority: 30
+            },
+            charts: {
+              name: 'charts',
+              test: /[\\/]node_modules[\\/](_?echarts|v\\-charts)(.*)/,
               reuseExistingChunk: true,
               enforce: true,
               priority: 30
@@ -55,13 +69,6 @@ module.exports = {
               enforce: true,
               priority: 30
             },
-            echarts: {
-              name: 'echarts',
-              test: /[\\/]node_modules[\\/]_?echarts(.*)/,
-              reuseExistingChunk: true,
-              enforce: true,
-              priority: 30
-            },
             vendor: {
               name: 'vendor',
               test: /[\\/]node_modules[\\/]/,
@@ -69,12 +76,24 @@ module.exports = {
               enforce: true,
               priority: 20
             },
-            common: {
-              name: 'common',
+            'common-async': {
+              name: 'common-async',
               chunks: 'async',
               reuseExistingChunk: true,
               enforce: true,
-              priority: 10
+              priority: -10
+            },
+            'common-initial': {
+              name: 'common-initial',
+              chunks: 'initial',
+              reuseExistingChunk: true,
+              enforce: true,
+              priority: -10
+            },
+            default: {
+              minChunks: 2,
+              reuseExistingChunk: true,
+              priority: -20
             }
           }
         }
@@ -90,8 +109,7 @@ module.exports = {
       if (process.env.npm_config_report) {
         config
           .plugin('webpack-bundle-analyzer')
-          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
-          .end()
+          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin).end()
       }
 
       config
@@ -102,7 +120,7 @@ module.exports = {
           test: /\.(js|css|html|svg)$/,
           compressionOptions: {
             params: {
-              [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+              [Zlib.constants.BROTLI_PARAM_QUALITY]: 11,
             },
           },
           threshold: 5120,

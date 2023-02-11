@@ -298,10 +298,10 @@ export default {
     RankingDianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
     RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
     RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
-    RankingWanJia: () => import("@/views/Ranking/WanJia.vue"),
     RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
-    RankingZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
     RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
+    RankingWanJia: () => import("@/views/Ranking/WanJia.vue"),
+    RankingZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
   },
   watch: {
     $route: function (to) {
@@ -627,9 +627,9 @@ img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
 }
 
 img.ranking-e49cd5784f7893174dadee338fd0e61b {
-  position: absolute;
-  margin-top: -10px;
   margin-left: -5px;
+  margin-top: -10px;
+  position: absolute;
 }
 
 img.ranking-a548cbd20a565cc98caf397c9bfd7cdb {
@@ -642,8 +642,8 @@ ul.ranking-f138efce9d200665110c7c47b8a57811 {
 
 li.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
   float: left;
-  width: 40px;
   margin: 0 10px;
+  width: 40px;
 }
 
 span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
@@ -652,8 +652,8 @@ span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
 }
 
 span.ranking-4da12add5b0c1920dcde6c5627d30422 {
-  margin: 50px 0;
   left: 0;
+  margin: 50px 0;
   position: absolute;
   width: 100%;
 }
@@ -722,31 +722,31 @@ div.ranking-d742492b2526d57a222af9b54040b3b4 {
 }
 
 div.ranking-2862744e5d7cce9d070aa41172557d78 {
-  margin-top: 50px;
   font-size: @app-font-size;
+  margin-top: 50px;
 }
 
 div.ranking-51c877f489423eb1c3901dd0e12c03d4 {
+  bottom: -19px;
   font-size: @app-font-size;
   position: absolute;
-  bottom: -19px;
   width: 100%;
 }
 
 div.ranking-0e1a8b3f7f6162bf4b88d3d001b88374 {
   font-size: @app-font-size;
   left: -28px;
-  width: 100%;
   margin-top: -10px;
   position: absolute;
+  width: 100%;
 }
 
 div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
-  position: absolute;
-  margin: 0 auto;
   height: 225px;
-  width: 100%;
   margin-top: 25px;
+  margin: 0 auto;
+  position: absolute;
+  width: 100%;
 }
 
 div.ranking-8747b0956746ca03e56e59d7312efcb1 {
@@ -761,22 +761,22 @@ div.ranking-561f33b3e8f36a8c9cdf1a5a3b099497 {
 }
 
 div.ranking-3ab42c8325a264730406e37e1f731f70 {
-  overflow: hidden;
   height: 300px;
+  overflow: hidden;
   width: 100%;
 
   canvas {
-    width: 100% !important;
     height: 100% !important;
     object-fit: cover;
+    width: 100% !important;
   }
 }
 
 div.ranking-420e569f7ae439ae256513412631f2f4 {
   font-size: @app-font-size;
   left: 0;
-  margin: 0 auto;
   margin-top: -3px;
+  margin: 0 auto;
   overflow: hidden;
   position: absolute;
   text-overflow: ellipsis;
@@ -821,8 +821,8 @@ div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
 }
 
 div.ranking-5728d19b81c17607842cb7befeef3152 {
-  padding-top: 25px;
   height: 375px;
+  padding-top: 25px;
 }
 
 div.ranking-31c631534a3cec9ed2c5283f653a06aa {

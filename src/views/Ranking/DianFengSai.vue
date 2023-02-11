@@ -112,7 +112,7 @@
           >
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
-                <span v-if="row.id < 900">
+                <span v-if="row.id && row.id < 900">
                   <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                     <img
                       v-if="row.trend > 0"
@@ -218,7 +218,7 @@
                     </div>
 
                     <ChartsHeroProgress
-                      v-if="row.id < 900 && bid < 4"
+                      v-if="row.id && row.id < 900 && bid < 4"
                       :listWidth="heroProficiencyWidth - 10"
                       :progressData="progressData.result.rows[row.id]"
                     />
@@ -468,7 +468,16 @@
                 :heroId="tableDataRow.id"
               />
             </van-tab>
-            <van-tab title="更新调整" />
+            <van-tab title="更新调整">
+              <div class="app-0cecd2d48b0c852a513d34eec25042b7">
+                <HeroUpdate
+                  v-if="cellInfo.index == 0 && skillInfo.model == 5"
+                  :aid="1"
+                  :heroId="tableDataRow.id"
+                  :updateId="tableDataRow.updateId"
+                />
+              </div>
+            </van-tab>
           </van-tabs>
         </template>
       </van-action-sheet>
@@ -501,14 +510,15 @@ export default {
   components: {
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
-    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+    HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   props: {
     isSmallMode: {
@@ -564,7 +574,7 @@ export default {
         columns: [],
       },
       tableDataRow: {
-        id: 0,
+        id: null,
         name: this.$t("loading"),
       },
       lineData: {
@@ -601,7 +611,7 @@ export default {
       skillInfo: {
         model: 1,
       },
-      tipsInfo: [0, 0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0, 0],
     };
   },
   created() {
@@ -843,7 +853,7 @@ export default {
       } else if (column.property == "allScore") {
         this.cellInfo.index = 0;
 
-        if (row.id < 900) {
+        if (row.id && row.id < 900) {
           this.showInfo.skillMenu = true;
           this.showInfo.heroMenu = false;
         } else {
@@ -858,8 +868,7 @@ export default {
       }
     },
     onSkillTabsClick: function (e) {
-      let heroInfo = this.tableDataRow,
-        tipsText;
+      let tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1014];
@@ -872,9 +881,7 @@ export default {
       } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       } else if (e == 5) {
-        this.$appPush({
-          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
-        });
+        tipsText = this.$appMsg.info[1028];
       }
 
       if (tipsText && this.tipsInfo[e] == 0) {

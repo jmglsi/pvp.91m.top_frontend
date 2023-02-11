@@ -306,7 +306,7 @@ export default {
         },
       },
       lineData: {
-        equipmentId: 0,
+        equipmentId: null,
       },
       lineDataRow: {},
       equipmentInfo: {

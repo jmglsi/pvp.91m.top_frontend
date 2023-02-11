@@ -65,8 +65,8 @@ export default {
   name: "AppHome",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    HomeRecommend: () => import("@/views/Home/Recommend.vue"),
     HomeGame: () => import("@/views/Home/Game.vue"),
+    HomeRecommend: () => import("@/views/Home/Recommend.vue"),
   },
   metaInfo() {
     return {
@@ -156,16 +156,16 @@ img.home-3c873293a7dc1ea8c20579f6a7ae94a9 {
 }
 
 ul.home-0fb3346555b8f5460aaaf04001361da5 {
-  width: 250px;
   height: 367px;
   overflow-y: auto;
   white-space: nowrap;
+  width: 250px;
 }
 
 li.home-423fda2e543a1804accff6229de61143 {
-  text-align: left;
-  margin: 7px 0;
   margin-left: 20px;
+  margin: 7px 0;
+  text-align: left;
   width: 150px;
 }
 
@@ -176,8 +176,8 @@ div.home-caa1dc26349a3e0c95b4a9e69a6e53b7 {
 }
 
 div.home-e289b0da5cdb7507d4d9cc22f588cbda {
-  width: 225px;
   overflow: hidden;
+  width: 225px;
 }
 
 div.home-56677dd04cbe46e7b175e734b4ec94ef {
@@ -196,9 +196,9 @@ div.home-41d74f0099cd7f9b526d7c601ada0e26 {
 
 div.home-07e33cfc65db63122f9d18ae77a89315 {
   font-size: @app-font-size + 2px;
-  width: 75px;
   position: fixed;
   right: -13px;
+  width: 75px;
 }
 
 div.home-d553001f432b5a09d9ae776abd8413c0 {
@@ -218,8 +218,8 @@ div.home-72ab9e07378f988922e6c91884048db0 {
 
 div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
   div.van-tabs__wrap {
-    width: 43% !important;
     margin-top: -3px;
+    width: 43% !important;
   }
 
   div.van-tab--active {
@@ -229,10 +229,10 @@ div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
 
 div.home-3edeff15047c21ac6441301927306137 {
   div.van-search {
-    width: 57%;
-    right: 0;
-    position: absolute;
     margin-top: 2px;
+    position: absolute;
+    right: 0;
+    width: 57%;
     z-index: @app-z-index;
   }
 }

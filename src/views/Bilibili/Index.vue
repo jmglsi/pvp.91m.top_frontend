@@ -112,7 +112,7 @@ export default {
         pageSize: 50,
       },
       tableDataRow: {
-        uid: 0,
+        uid: null,
       },
       paginationModel: 1,
       actions: [

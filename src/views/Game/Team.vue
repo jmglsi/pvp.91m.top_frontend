@@ -175,7 +175,7 @@ export default {
         index: 0,
       },
       tableDataRow: {
-        id: 0,
+        id: null,
         name: this.$t("loading"),
       },
     };

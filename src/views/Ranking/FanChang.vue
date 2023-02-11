@@ -412,10 +412,10 @@ export default {
 
 <style lang="less">
 img.return-c3aea51299c526f7b079c527ae02deb9 {
-  position: absolute;
-  transform: rotate(54deg);
   margin-left: -30px;
   margin-top: -20px;
+  position: absolute;
+  transform: rotate(54deg);
 }
 
 span.return-279a4b0330c1a4ef39cde3a334a9c652 {
@@ -424,9 +424,9 @@ span.return-279a4b0330c1a4ef39cde3a334a9c652 {
 
 span.ranking-ad602d217564b616b293eac07fc53138 {
   font-size: @app-font-size;
-  margin-top: -3px;
   left: 0;
   margin-left: 25px;
+  margin-top: -3px;
   position: absolute;
   width: 100%;
 }

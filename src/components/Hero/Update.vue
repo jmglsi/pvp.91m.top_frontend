@@ -1,5 +1,5 @@
 <template>
-  <div class="hero-update">
+  <div class="app-update">
     <div
       class="
         app-0464ec62d5cba8a9ec29d0c4c89fc7c6
@@ -253,7 +253,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        //if (!newValue.heroId) return;
+        if (!newValue.heroId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getHeroUpdate(newValue.heroId, newValue.aid);
@@ -264,7 +264,7 @@ export default {
   data() {
     return {
       copyData: "",
-      equipmentId: 0,
+      equipmentId: null,
       date: {
         min: new Date(),
         max: new Date(),
@@ -491,8 +491,8 @@ div.update-7d4e6768382f99a87a56cad0ac71b15b {
 }
 
 div.update-5a5152e95445ede11c05f5fa898d8fd9 {
-  margin-top: 10px;
   margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 div.update-0b479089ade5d13a2c41830785ebac9d {

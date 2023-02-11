@@ -119,6 +119,49 @@ export default new Router({
       }
     }]
   }, {
+    path: '/admin',
+    name: 'admin',
+    redirect: '/admin/web-data',
+    component: () =>
+      import('./views/Admin/Index.vue'),
+    children: [{
+      path: 'web-data',
+      name: 'webData',
+      component: () =>
+        import('./views/Admin/Web/Data.vue'),
+      meta: {
+        title: '网站数据',
+        keepAlive: true
+      }
+    }, {
+      path: 'web-setting',
+      name: 'webSetting',
+      component: () =>
+        import('./views/Admin/Web/Setting.vue'),
+      meta: {
+        title: '网站设置',
+        keepAlive: true
+      }
+    }, {
+      path: 'robot-data',
+      name: 'robotData',
+      component: () =>
+        import('./views/Admin/Robot/Data.vue'),
+      meta: {
+        title: '机器人数据',
+        keepAlive: true
+      }
+    }, {
+      path: 'robot-setting',
+      name: 'robotSetting',
+      component: () =>
+        import('./views/Admin/Robot/Setting.vue'),
+      meta: {
+        title: '机器人设置',
+        keepAlive: true
+      }
+    }]
+  }, {
     path: '/hero',
     name: 'hero',
     redirect: '/ranking',
@@ -133,8 +176,7 @@ export default new Router({
         title: '英雄',
         keepAlive: true
       }
-    },
-    {
+    }, {
       path: ':id/replay',
       name: 'heroReplay',
       component: () =>
@@ -154,8 +196,7 @@ export default new Router({
       }
     },
     ]
-  },
-  {
+  }, {
     path: '/game',
     name: 'game',
     redirect: '/game/new/bp',
@@ -189,6 +230,5 @@ export default new Router({
         keepAlive: false
       }
     }]
-  }
-  ]
+  }]
 })

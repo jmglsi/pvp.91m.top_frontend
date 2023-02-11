@@ -779,26 +779,23 @@
             @click="onSkillTabsClick"
           >
             <van-tab title="顺位 (推荐)">
-              <HeroBp
-                v-if="cellInfo.index == 0 && skillInfo.model == 0"
-                :heroId="tableDataRow.id"
-              />
+              <HeroBp v-if="skillInfo.model == 0" :heroId="tableDataRow.id" />
             </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList
-                v-if="cellInfo.index == 0 && skillInfo.model == 1"
+                v-if="skillInfo.model == 1"
                 :genreId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装 (推荐)">
               <HeroEquipmentListALL
-                v-if="cellInfo.index == 0 && skillInfo.model == 2"
+                v-if="skillInfo.model == 2"
                 :heroId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装 (单件)">
               <HeroEquipmentListOne
-                v-if="cellInfo.index == 0 && skillInfo.model == 3"
+                v-if="skillInfo.model == 3"
                 :equipmentId="tableDataRow.id"
                 :equipmentType="1"
               />
@@ -812,11 +809,20 @@
               </template>
 
               <HeroInscriptionList
-                v-if="cellInfo.index == 0 && skillInfo.model == 4"
+                v-if="skillInfo.model == 4"
                 :heroId="tableDataRow.id"
               />
             </van-tab>
-            <van-tab title="更新调整" />
+            <van-tab title="更新调整">
+              <div class="app-0cecd2d48b0c852a513d34eec25042b7">
+                <HeroUpdate
+                  v-if="skillInfo.model == 5"
+                  :aid="1"
+                  :heroId="tableDataRow.id"
+                  :updateId="tableDataRow.updateId"
+                />
+              </div>
+            </van-tab>
           </van-tabs>
         </template>
       </van-action-sheet>
@@ -848,14 +854,15 @@ export default {
   name: "RankingGradient",
   components: {
     ChartsHeroCircle: () => import("@/components/Charts/HeroCircle.vue"),
-    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+    HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   props: {
     bid: {
@@ -897,7 +904,7 @@ export default {
         },
       },
       tableDataRow: {
-        id: 0,
+        id: null,
         name: this.$t("loading"),
       },
       progressData: {
@@ -950,16 +957,13 @@ export default {
         heroSameHobby: false,
         heroMenu: false,
       },
-      cellInfo: {
-        index: 0,
-      },
       tabsInfo: {
         model: 0,
       },
       skillInfo: {
         model: 1,
       },
-      tipsInfo: [0, 0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0, 0],
     };
   },
   methods: {
@@ -1098,8 +1102,7 @@ export default {
       }
     },
     onSkillTabsClick: function (e) {
-      let heroInfo = this.tableDataRow,
-        tipsText;
+      let tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1014];
@@ -1112,9 +1115,7 @@ export default {
       } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       } else if (e == 5) {
-        this.$appPush({
-          path: "/hero/" + heroInfo.id + "/info?show=heroUpdate#heroSameHobby",
-        });
+        tipsText = this.$appMsg.info[1028];
       }
 
       if (tipsText && this.tipsInfo[e] == 0) {
@@ -1211,8 +1212,8 @@ div.ranking-f155536738c348c9a6e402eb19afa2af {
 
   li {
     float: left;
-    text-align: center;
     margin: 5px 25px 15px 10px;
+    text-align: center;
   }
 }
 

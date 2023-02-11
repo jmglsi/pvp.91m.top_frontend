@@ -257,8 +257,8 @@ span.miniapp-9ad284a8297802bd67af0356d21ae35f {
 }
 
 div.miniapp-bb351527dd7ab2526a28e42d9e17ddf3 {
-  margin-top: 5px;
   font-size: @app-font-size + 2px;
+  margin-top: 5px;
 }
 
 div.miniapp-7c8fdd065963838acab323de542586ee {
@@ -272,8 +272,8 @@ div.miniapp-c5a8ea51876ffac858c47176d08a0fff {
 }
 
 div.miniapp-aa79b87e9649590354fb9181f371e5bc {
-  margin-top: -15px;
   margin-bottom: 25px;
+  margin-top: -15px;
 }
 
 div.miniapp-021a7599a708a3781fabe39f7631edfc {

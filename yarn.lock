@@ -3064,7 +3064,7 @@ compressible@~2.0.16:
 
 compression-webpack-plugin@^5.0.2:
   version "5.0.2"
-  resolved "https://registry.npmjs.org/compression-webpack-plugin/-/compression-webpack-plugin-5.0.2.tgz"
+  resolved "https://registry.npmmirror.com/compression-webpack-plugin/-/compression-webpack-plugin-5.0.2.tgz#df84e682cfa1fb2a230e71cf83d50c323d5369c2"
   integrity sha512-F2G4cQfsMZ6CiPlG22Q5EDUCqnfyZqTjyJP5cMgNYUbBg/dUzV3hto8yTFFIogDCTWooVbePHQE0qL6FrJUSsA==
   dependencies:
     cacache "^15.0.5"

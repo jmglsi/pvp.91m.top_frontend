@@ -25,11 +25,11 @@ div.game-recommend {
 
   ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
     margin-bottom: unset;
-  }
 
-  li.app-1951b6e7c82938dd7446a41e829b247b {
-    width: 75px;
-    margin-top: unset;
+    li.app-1951b6e7c82938dd7446a41e829b247b {
+      margin-top: unset;
+      width: 75px;
+    }
   }
 
   li.game-9ad2b9949abc36830804e02760ea3e63 {
@@ -53,10 +53,10 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 {
 
 div.game-99938282f04071859941e18f16efcf42 {
   border-radius: 10px;
-  margin: 0 auto;
   margin-top: 50px;
-  overflow: hidden;
+  margin: 0 auto;
   overflow-y: auto;
+  overflow: hidden;
 
   span.van-tab__text {
     font-size: @app-font-size + 2px;

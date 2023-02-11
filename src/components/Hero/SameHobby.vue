@@ -154,8 +154,8 @@ div.hero-same-hobby {
 
 img.hero-same-hobby-b388f78be6e273d6af7956cd2ae3c767 {
   border-radius: unset;
-  margin-top: -13px;
   margin-left: -5px;
+  margin-top: -13px;
   position: absolute;
 }
 
@@ -164,8 +164,8 @@ div.hero-same-hobby-1a67ccb40b81a7318620c55405993a5d {
   overflow: hidden;
 
   ul.hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7 {
-    width: 100%;
     height: 135px;
+    width: 100%;
 
     div.hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b {
       font-size: @app-font-size + 2px;

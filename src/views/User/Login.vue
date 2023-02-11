@@ -248,8 +248,10 @@ export default {
 </script>
 
 <style scoped lang="less">
-i.my-c1d8fd0f00bccc16b2cf5d07bfc3c96f img.van-icon__image {
-  border-radius: unset;
+i.my-c1d8fd0f00bccc16b2cf5d07bfc3c96f {
+  img.van-icon__image {
+    border-radius: unset;
+  }
 }
 
 div.login-6920626369b1f05844f5e3d6f93b5f6e {
@@ -272,8 +274,8 @@ div.login-4ae1ffb5939d592986bed21d0913562d {
 }
 
 div.login-411f660a2e7bb1558275b86749667ee9 {
-  position: absolute;
   bottom: 150px;
+  position: absolute;
   width: 100%;
 }
 </style>

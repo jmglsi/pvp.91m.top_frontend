@@ -4,32 +4,38 @@ import {
   Avatar,
   Card,
   Checkbox,
+  Col,
   Dropdown,
+  Icon,
+  Input,
   Menu,
-  Radio,
-  Tooltip,
   Message,
   Notification,
-  Input,
-  Icon,
+  Popover,
+  Radio,
+  Row,
+  Statistic,
   Timeline,
-  Popover
+  Tooltip,
 } from 'ant-design-vue';
 
 Vue
   .use(Avatar)
   .use(Card)
   .use(Checkbox)
+  .use(Col)
   .use(Dropdown)
+  .use(Icon)
+  .use(Input)
   .use(Menu)
-  .use(Radio)
-  .use(Tooltip)
   .use(Message)
   .use(Notification)
-  .use(Input)
-  .use(Icon)
-  .use(Timeline)
   .use(Popover)
+  .use(Radio)
+  .use(Row)
+  .use(Statistic)
+  .use(Timeline)
+  .use(Tooltip)
 
 Message.config({
   top: "50px",

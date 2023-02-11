@@ -410,7 +410,7 @@
     >
       <van-tabbar fixed class="app-130a360689f8d613da10c94d53527a1b">
         <van-tabbar-item
-          v-if="hero.info.id < 999"
+          v-if="hero.info.id && hero.info.id < 999"
           :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
@@ -455,16 +455,16 @@ export default {
     ChartsHeroRadar: () => import("@/components/Charts/HeroRadar.vue"),
     ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
-    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
-    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroHistogram: () => import("@/components/Hero/Histogram.vue"),
-    HeroUpdate: () => import("@/components/Hero/Update.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
+    HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   watch: {
     $route: function (to) {
@@ -513,12 +513,12 @@ export default {
           },
           skill: [
             {
-              id: 0,
+              id: null,
               img: "//image.ttwz.qq.com/images/skill/80102.png",
               pickRate: 0,
             },
             {
-              id: 0,
+              id: null,
               img: "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1701.png",
               pickTimes: 0,
             },
@@ -615,7 +615,7 @@ export default {
         this.circle.info = ls.circleInfo;
         this.hero.info = heroInfoData;
 
-        heroInfoData.id < 900
+        heroInfoData.id && heroInfoData.id < 900
           ? (this.trendInfo.model = 0)
           : (this.trendInfo.model = 2);
 
@@ -641,7 +641,7 @@ export default {
 
             this.$appSetLocalStorage("heroInfo-" + id, heroData);
 
-            heroInfoData.id < 900
+            heroInfoData.id && heroInfoData.id < 900
               ? (this.trendInfo.model = 0)
               : (this.trendInfo.model = 2);
 
@@ -700,7 +700,7 @@ export default {
       } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       } else if (e == 5) {
-        //tipsText = this.$appMsg.info[1010];
+        //tipsText = this.$appMsg.info[1028];
       }
 
       if (tipsText && this.tipsInfo[e] == 0) {

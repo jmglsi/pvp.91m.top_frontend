@@ -5,11 +5,11 @@
     "scripts": {
         "web:start": "sh ~/Web/start.sh",
         "web:stop": "sh ~/Web/stop.sh",
-        "serve": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "ui": "vue ui",
+        "web:serve": "vue-cli-service serve",
+        "web:build": "vue-cli-service build",
+        "analyz": "vue-cli-service build --mode prod --report",
         "lint": "vue-cli-service lint",
-        "test": "npm run build --report"
+        "ui": "vue ui"
     },
     "dependencies": {
         "@johmun/vue-tags-input": "^2.1.0",

@@ -156,7 +156,7 @@ div.ranking-f879e7f0824fcc83d172401c3cb31b8a {
 }
 
 div.ranking-c934456eea80a3c5db05ed142c757e07 {
-  margin-top: -53px;
   margin-left: -45px;
+  margin-top: -53px;
 }
 </style>

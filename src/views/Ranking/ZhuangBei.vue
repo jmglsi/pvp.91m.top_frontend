@@ -190,7 +190,7 @@ export default {
         },
       },
       tableDataRow: {
-        id: 0,
+        id: null,
         name: this.$t("loading"),
       },
       actions: [

@@ -70,10 +70,6 @@ span.hero-5a7c3c141fd96e8559a5994bd1c63057 {
   margin: 0 2px;
 }
 
-div.van-circle__text {
-  font-size: @app-font-size;
-}
-
 div.van-collapse {
   margin-top: 3px;
 }

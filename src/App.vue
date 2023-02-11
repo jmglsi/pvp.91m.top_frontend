@@ -106,7 +106,7 @@ export default {
       /ranking/i.test(nowPath) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/equipment|hero\/(.*?)\/replay|game\/(.*?)/i.test(
+      /admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/equipment|hero\/(.*?)\/replay|game\/(.*?)/i.test(
         nowPath
       ) == true
         ? (tabbar = false)
@@ -324,10 +324,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
-  width: 100%;
   height: 100%;
-  text-align: center;
   position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 .app-bda9643ac6601722a28f238714274da4 {
@@ -365,6 +365,10 @@ export default {
 .app-5f19eaf71f40d74d66be84db52b3ad87 {
   color: white !important;
   text-shadow: 1px 1px 3px #000, 1px 1px 3px #000;
+}
+
+.app-b28e48b33c0948bab67b77d696b3b9fd {
+  margin-left: 5px;
 }
 
 input.app-fa42596ed8c1eff3ed8b93bba913bde3 {
@@ -424,11 +428,11 @@ ul.app-9e60d3ee1e1574cae90960f940c0a821 {
 ul.app-d865b50ce307751bdeb9a6ab16e7baf9 {
   overflow-x: auto;
   white-space: nowrap;
-}
 
-li.app-1951b6e7c82938dd7446a41e829b247b {
-  display: inline-block;
-  margin-top: 10px;
+  li.app-1951b6e7c82938dd7446a41e829b247b {
+    display: inline-block;
+    margin-top: 10px;
+  }
 }
 
 button.app-a066f238070a70cb531c9bd722c65b36 {
@@ -454,10 +458,10 @@ span.van-tab__text {
 }
 
 span.app-a5a5c883f68e45baa83f140e218759f1 {
-  position: absolute;
   bottom: 30px;
-  z-index: @app-z-index;
   left: 0;
+  position: absolute;
+  z-index: @app-z-index;
 }
 
 span.app-e4d23e841d8e8804190027bce3180fa5 {
@@ -515,8 +519,10 @@ div.vxe-table--empty-content {
   width: unset !important;
 }
 
-div.vxe-table th.vxe-header--column:not(.col--ellipsis) {
-  padding: 6px 0;
+div.vxe-table {
+  th.vxe-header--column:not(.col--ellipsis) {
+    padding: 6px 0;
+  }
 }
 
 div.app-home {
@@ -535,6 +541,26 @@ div.app-recommend {
 
 div.app-bp {
   height: 443px;
+}
+
+div.app-0cecd2d48b0c852a513d34eec25042b7 {
+  height: 446px;
+  overflow: auto;
+}
+
+div.app-4717d11da95ed90ccdb4d4a0648bad39 {
+  margin-top: 50px;
+}
+
+div.app-76da017caccd1fb264af2218f6064b0d {
+  height: 100%;
+  padding-bottom: 25px;
+  padding-left: 280px;
+  padding-right: 25px;
+  padding-top: 25px;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 div.app-fe64546261ce7a19b6784737edd0fdf1 {
@@ -611,9 +637,9 @@ div.app-face1cbe136c70e1fc08cff038596944 {
 
 div.app-69df17da0044a6e876b2afd3217d2564 {
   border-radius: 5px;
+  max-width: 500px;
   padding: 10px;
   width: 75%;
-  max-width: 500px;
 }
 
 div.app-8de1f001663ee713d24888bb422e3881 {
@@ -624,10 +650,10 @@ div.app-8de1f001663ee713d24888bb422e3881 {
 }
 
 div.app-4789d9440d92b2647ea8a52c2f5b31b5 {
+  height: 100px;
+  margin-top: 25px;
   position: absolute;
   width: 100%;
-  margin-top: 25px;
-  height: 100px;
 }
 
 div.app-f3cc17bc0d768ca60b8bb496a10b1990 {
@@ -744,7 +770,8 @@ div.app-position,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
 div.app-inscription,
-div.app-pzOne {
+div.app-pzOne,
+div.app-update {
   height: 443px !important;
   max-height: 443px !important;
   overflow: hidden;
@@ -766,12 +793,12 @@ div.app-0353ac5a7e2d6e9a6a0e652c63b2832a {
   z-index: @app-z-index;
 
   img.van-icon__image {
-    width: 40px;
+    background-color: white !important;
+    border-radius: @app-border-radius;
+    border: 3px solid white;
     height: 40px;
     margin-top: -21px;
-    background-color: white !important;
-    border: 3px solid white;
-    border-radius: @app-border-radius;
+    width: 40px;
   }
 }
 </style>

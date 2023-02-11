@@ -152,8 +152,8 @@ div.ranking-migration {
 }
 
 div.ranking-63559bd374a437b89b36762811e4b809 {
-  width: 210px;
   position: absolute;
   right: 0;
+  width: 210px;
 }
 </style>

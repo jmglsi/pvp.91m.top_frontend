@@ -167,13 +167,13 @@
                       width="50"
                       height="50"
                       v-lazy="
-                        chooseInfo.heroId == 0
-                          ? '/img/app-icons/hero_white.png'
-                          : '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                        chooseInfo.heroId && chooseInfo.heroId < 900
+                          ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                             chooseInfo.heroId +
                             '/' +
                             chooseInfo.heroId +
                             '.jpg'
+                          : '/img/app-icons/hero_white.png'
                       "
                     />
                     <img
@@ -591,8 +591,8 @@ export default {
       plainOptions,
       chooseList: [],
       chooseInfo: {
-        heroId: 0,
-        skillId: 0,
+        heroId: null,
+        skillId: null,
         positionId: 1,
         avg: 750,
         price: 0,
@@ -854,9 +854,9 @@ a.hero-equipment-61b5514f16614481c1eb3b3219cfd112 {
 
 img.hero-equipment-464e0def3c0912855013b4af9a3c312e {
   background-color: white !important;
-  position: absolute;
   bottom: -3px;
   margin-left: -13px;
+  position: absolute;
 }
 
 img.hero-equipment-78bb2ecaecea15a67ff2ca0fa9ef3f7a {
@@ -913,8 +913,8 @@ div.hero-equipment-9d68288c30614ee39e8260cdb81dc630 {
 }
 
 div.hero-equipment-7d5a4bb93ee168ac07930ac48716e41f {
-  width: 237px;
   height: 400px;
+  width: 237px;
 }
 
 div.hero-equipment-7d5a4bb93ee168ac07930ac48716e41f {
@@ -933,8 +933,8 @@ div.hero-equipment-2b17aa16463c3aeca8da93a07962df5a {
 }
 
 div.hero-equipment-9305946983d796f54630b29f8241fdf9 {
-  text-align: left;
   font-size: @app-font-size + 2px;
+  text-align: left;
 }
 
 div.hero-equipment-e9326e4d97ca90bdc8f972e25e6967ff {

@@ -86,7 +86,7 @@ export default {
         columns: [],
       },
       tableDataRow: {
-        id: 0,
+        id: null,
         name: this.$t("loading"),
       },
       listWidth: 0,

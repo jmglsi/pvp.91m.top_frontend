@@ -499,21 +499,21 @@ div.bp-427034659a1ba05f529b72e639b4481f {
 }
 
 div.bp-00b97ff5a43507241bb2776b701516bb {
-  width: 50px;
-  height: 50px;
-  text-align: center;
   background-color: blue;
   border-radius: 10px;
+  height: 50px;
   margin: 10px;
+  text-align: center;
+  width: 50px;
 }
 
 div.bp-85a6487e98ea46cd1391fd415d370de0 {
-  width: 50px;
-  height: 50px;
-  text-align: center;
   background-color: red;
   border-radius: 10px;
+  height: 50px;
   margin: 10px;
+  text-align: center;
+  width: 50px;
 }
 
 div.bp-0492ba0dd77bbcafdac5b4aeded96ed1 {

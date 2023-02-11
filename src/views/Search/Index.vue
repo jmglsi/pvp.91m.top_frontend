@@ -22,7 +22,7 @@
               <ChooseHero @select="getHeroId">
                 <img
                   v-lazy="
-                    tableData.cardInfo.id < 900
+                    tableData.cardInfo.id && tableData.cardInfo.id < 900
                       ? tableData.cardInfo.img
                       : '/img/app-icons/hero_white.png'
                   "
@@ -309,7 +309,7 @@
           class="search-5d555cae6745619e13c5488c119d2a14"
         >
           <!--
-            :icon="tableData.cardInfo.id < 900 ? tableData.cardInfo.img : null"
+            :icon="tableData.cardInfo.id && tableData.cardInfo.id < 900 ? tableData.cardInfo.img : null"
             icon-prefix="search-a0edf16f0e677f3e28dfd77595f437be"
           -->
           <van-cell
@@ -1103,7 +1103,16 @@
                 :heroId="tableData.cardInfo.id"
               />
             </van-tab>
-            <van-tab title="更新调整" />
+            <van-tab title="更新调整">
+              <div class="app-0cecd2d48b0c852a513d34eec25042b7">
+                <HeroUpdate
+                  v-if="skillInfo.model == 5"
+                  :aid="1"
+                  :heroId="tableData.cardInfo.id"
+                  :updateId="tableData.cardInfo.updateId"
+                />
+              </div>
+            </van-tab>
           </van-tabs>
         </template>
       </van-action-sheet>
@@ -1136,15 +1145,16 @@ export default {
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
-    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
+    HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
+    HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   watch: {
     $route: function (to) {
@@ -1255,7 +1265,7 @@ export default {
       skillInfo: {
         model: 1,
       },
-      tipsInfo: [0, 0, 0, 0, 0],
+      tipsInfo: [0, 0, 0, 0, 0, 0],
     };
   },
   mounted() {
@@ -1438,8 +1448,7 @@ export default {
       return change;
     },
     onSkillTabsClick: function (e) {
-      let cardInfo = this.tableData.cardInfo,
-        tipsText;
+      let tipsText;
 
       if (e == 0) {
         tipsText = this.$appMsg.info[1014];
@@ -1452,9 +1461,7 @@ export default {
       } else if (e == 4) {
         tipsText = this.$appMsg.info[1010];
       } else if (e == 5) {
-        this.$appPush({
-          path: "/hero/" + cardInfo.id + "/info?show=heroUpdate#heroSameHobby",
-        });
+        tipsText = this.$appMsg.info[1028];
       }
 
       if (tipsText && this.tipsInfo[e] == 0) {
@@ -1506,8 +1513,8 @@ img.search-97c89d1a7343e149ab400d0bb141c7de {
 }
 
 img.search-3cdd9882517a697dfcf15e4bcf9fde7e {
-  margin-top: -1px;
   margin-left: -3px;
+  margin-top: -1px;
 }
 
 img.search-20a7da8370c02da6e860aaebf3a54c57 {
@@ -1588,8 +1595,8 @@ span.search-3682992b479e96709916587ba97f026b {
 }
 
 span.search-7c61bf0e17805d4183c7eeb293ebdb42 {
-  width: 250px;
   position: absolute;
+  width: 250px;
 }
 
 div.search-843c48c53bd40c7f476497c030fb0e92,
@@ -1612,18 +1619,18 @@ div.search-e979efff8a859d0adcb2d63d51cd9de4 {
 }
 
 div.search-18e1105363d453a80ba2002db3a80308 {
-  margin: 10px 0;
   font-size: 10px;
+  margin: 10px 0;
 }
 
 div.search-399841f840f75044108804ec30d37405 {
   color: #969799 !important;
   font-size: @app-font-size;
+  height: @app-height;
+  padding-right: 15px;
   position: absolute;
   text-align: right;
   width: 100%;
-  height: @app-height;
-  padding-right: 15px;
 }
 
 div.search-9fa34518e0f029520c0e38e0cc4d7013 {
@@ -1647,8 +1654,8 @@ div.search-88cf8ac86e2afc51906e60c7025f522b {
 }
 
 div.search-93aea4a321bd36aefe85b2b0526e52e8 {
-  text-align: center;
   margin-top: 25px;
+  text-align: center;
 }
 
 div.search-0c27228425c2ec1dd01a785b6e9a0437 {

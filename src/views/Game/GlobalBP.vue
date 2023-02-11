@@ -582,7 +582,7 @@
             &nbsp; &nbsp;
             <a-popover
               :visible="
-                recommendHeroId != 0 && showInfo.recommend && showInfo.popover
+                recommendHeroId && showInfo.recommend && showInfo.popover
               "
             >
               <span>
@@ -864,7 +864,7 @@ export default {
         question: "//www.yuque.com/jmglsi/pvp/gbpl91",
       },
       isPortrait: true,
-      recommendHeroId: 0,
+      recommendHeroId: null,
       newGameInfo: {},
       gameInfo: {
         game: {
@@ -1718,8 +1718,8 @@ img.game-7185d8bd2cbce5ad7c638a99095aee6c {
 }
 
 img.game-8d74837b1dc10576d7757cfd35b4661d {
-  margin-top: -5px;
   margin-right: 3px;
+  margin-top: -5px;
 }
 
 span.game-99e127c3f9d57b5d03327ebe8b1e4982 {
@@ -1748,17 +1748,17 @@ span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
 }
 
 span.game-45949fe72cfc70cc6a7bd3870cabc397 {
-  font-size: @app-font-size;
   color: red;
+  font-size: @app-font-size;
 }
 
 span.game-ee5411f228b6a2c6a510f907f315d5b4 {
   font-size: 10px;
   margin-left: 12px;
   position: absolute;
+  text-align: center;
   top: -13px;
   width: 15px;
-  text-align: center;
 }
 
 span.game-7ac4fc59b483c826ad0441884322b71a {
