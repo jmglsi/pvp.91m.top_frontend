@@ -1737,7 +1737,7 @@ span.game-80653328482d7cba8da3f0fa033b0c12 {
 }
 
 span.game-0db3e75efe3faa0cee4451fb55bc4c53 {
-  font-size: @app-font-size + 10px;
+  font-size: 20px;
 }
 
 span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
@@ -1753,7 +1753,7 @@ span.game-45949fe72cfc70cc6a7bd3870cabc397 {
 }
 
 span.game-ee5411f228b6a2c6a510f907f315d5b4 {
-  font-size: 10px;
+  font-size: @app-font-size;
   margin-left: 12px;
   position: absolute;
   text-align: center;
@@ -1811,7 +1811,7 @@ div.game-251504ba219ea8c3175f47b73bdde6e6 {
 }
 
 div.game-b3d70a861f68652bf97d7a26bf421d4f {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin-top: 15px;
 }
 
@@ -1924,6 +1924,6 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 {
 
 div.game-5b51012ae7490ea129b5d75ad9b1016c,
 div.game-2d121e51de7a817bff612f1e16fadb8e {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
 }
 </style>

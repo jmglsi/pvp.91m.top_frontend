@@ -9,7 +9,7 @@
           :style="{
             background:
               'rgba(0, 0, 0, 0) linear-gradient(to right, rgb(236, 119, 171), rgb(120, 115, 245)) repeat scroll 0% 0%',
-            zIndex: -5,
+            zIndex: '-5 !important',
           }"
           class="app-8de1f001663ee713d24888bb422e3881"
         ></div>
@@ -549,6 +549,7 @@ div.app-0cecd2d48b0c852a513d34eec25042b7 {
 }
 
 div.app-4717d11da95ed90ccdb4d4a0648bad39 {
+  margin-bottom: 65px;
   margin-top: 50px;
 }
 
@@ -586,7 +587,7 @@ div.app-52b0e5c90604d59d1814f184d58e2033 {
 }
 
 div.app-82f6ee2b57fb59b0b7b3803164d6b9d8 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin-top: 5px;
 }
 

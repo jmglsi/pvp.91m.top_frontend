@@ -249,7 +249,7 @@ span.friends-d64cb5ed2250938cb89d25beef75f604 {
 }
 
 span.friends-2a0906894c02a2995ccddcda771afab7 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
 }
 
 span.friends-012c09cef7751ec30c771ff22eafb10a {

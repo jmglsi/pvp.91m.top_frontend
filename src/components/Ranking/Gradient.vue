@@ -1184,7 +1184,7 @@ export default {
 
 <style scoped lang="less">
 img.ranking-712ef34fdf31f8510e087c7a42d9cd48 {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 span.ranking-0eef127325d38ed4804c26bd7c88bab3 {
@@ -1223,6 +1223,6 @@ div.ranking-gradient {
 }
 
 div.ranking-84b60dc869cf54a3d2112e59c70ce21f {
-  text-align: left;
+  text-align: @app-text-align;
 }
 </style>

@@ -53,13 +53,13 @@ div.game-4863c43e8743ebf1be3f48c5c4519627 {
 
 div.game-99938282f04071859941e18f16efcf42 {
   border-radius: 10px;
-  margin-top: 50px;
   margin: 0 auto;
-  overflow-y: auto;
+  margin-top: 50px;
   overflow: hidden;
+  overflow-y: auto;
 
   span.van-tab__text {
-    font-size: @app-font-size + 2px;
+    font-size: 12px;
   }
 
   div.van-tabs__wrap {

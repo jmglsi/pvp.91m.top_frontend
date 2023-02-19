@@ -1590,7 +1590,7 @@ span.search-f43418d85f50da28b3a9c1e780237105 {
 }
 
 span.search-3682992b479e96709916587ba97f026b {
-  font-size: 10px;
+  font-size: @app-font-size;
   margin-top: 5px;
 }
 
@@ -1619,7 +1619,7 @@ div.search-e979efff8a859d0adcb2d63d51cd9de4 {
 }
 
 div.search-18e1105363d453a80ba2002db3a80308 {
-  font-size: 10px;
+  font-size: @app-font-size;
   margin: 10px 0;
 }
 
@@ -1659,6 +1659,6 @@ div.search-93aea4a321bd36aefe85b2b0526e52e8 {
 }
 
 div.search-0c27228425c2ec1dd01a785b6e9a0437 {
-  font-size: @app-font-size + 8px;
+  font-size: 18px;
 }
 </style>

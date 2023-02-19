@@ -210,14 +210,14 @@
           <vxe-table-column
             title="分均 (≈)"
             field="addNum"
-            width="125"
+            width="100"
             sortable
           />
 
           <vxe-table-column
             title="当前 (万)"
             field="allVoteNum"
-            width="125"
+            :width="listWidth"
             :title-prefix="{ content: $appMsg.tips[1020] }"
             sortable
           >
@@ -240,7 +240,7 @@
           <vxe-table-column
             title="还需 (时)"
             field="needTime"
-            width="125"
+            :width="listWidth"
             :title-prefix="{ content: $appMsg.tips[1021] }"
             sortable
           />
@@ -410,7 +410,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 img.return-c3aea51299c526f7b079c527ae02deb9 {
   margin-left: -30px;
   margin-top: -20px;
@@ -436,7 +436,7 @@ span.return-4fb4d4758e19b050e0de1ef488ae54a3 {
 }
 
 div.return-58206caebd18d792f59aa1ec064f65d1 {
-  font-size: 10px;
+  font-size: @app-font-size;
   left: -28px;
   margin-top: -10px;
   position: absolute;

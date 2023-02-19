@@ -5,7 +5,7 @@
         v-model="currentRate[0]"
         :rate="progressData[0] * 0.25"
         :clockwise="false"
-        :style="{ zIndex: 2 }"
+        :style="{ zIndex: '2 !important' }"
         size="60px"
         color="green"
       />
@@ -15,7 +15,7 @@
         v-model="currentRate[1]"
         :rate="(progressData[0] + progressData[1]) * 0.25"
         :clockwise="false"
-        :style="{ zIndex: 1 }"
+        :style="{ zIndex: '1 !important' }"
         size="60px"
         color="orange"
       />
@@ -25,7 +25,7 @@
         v-model="currentRate[2]"
         :rate="25"
         :clockwise="false"
-        :style="{ zIndex: 0 }"
+        :style="{ zIndex: '0 !important' }"
         size="60px"
         color="red"
       />

@@ -27,7 +27,7 @@ img.hero-ff2364a0be3d20e46cc69efb36afe9a5 {
 
 i.hero-equipment-8b812bcd24d7f0b29c950eebfa4876f6 {
   img.van-icon__image {
-    border-radius: 100%;
+    border-radius: @app-border-radius;
   }
 }
 

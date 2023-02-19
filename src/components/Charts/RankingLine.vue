@@ -150,7 +150,7 @@ export default {
 
 <style scoped lang="less">
 div.ranking-f879e7f0824fcc83d172401c3cb31b8a {
-  height: 50px;
+  height: @app-height;
   overflow: hidden;
   width: auto;
 }

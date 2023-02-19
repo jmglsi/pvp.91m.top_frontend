@@ -163,9 +163,9 @@ ul.home-0fb3346555b8f5460aaaf04001361da5 {
 }
 
 li.home-423fda2e543a1804accff6229de61143 {
-  margin-left: 20px;
   margin: 7px 0;
-  text-align: left;
+  margin-left: 20px;
+  text-align: @app-text-align;
   width: 150px;
 }
 
@@ -195,7 +195,7 @@ div.home-41d74f0099cd7f9b526d7c601ada0e26 {
 }
 
 div.home-07e33cfc65db63122f9d18ae77a89315 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   position: fixed;
   right: -13px;
   width: 75px;
@@ -203,16 +203,16 @@ div.home-07e33cfc65db63122f9d18ae77a89315 {
 
 div.home-d553001f432b5a09d9ae776abd8413c0 {
   bottom: 0;
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
 }
 
 div.home-f55b83381f479ed4c1203b80f891d83a {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin-top: 5px;
 }
 
 div.home-72ab9e07378f988922e6c91884048db0 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin: 25px;
 }
 

@@ -860,7 +860,7 @@ img.hero-equipment-464e0def3c0912855013b4af9a3c312e {
 }
 
 img.hero-equipment-78bb2ecaecea15a67ff2ca0fa9ef3f7a {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 img.hero-equipment-99cb324cd7e789db254f951a8babc0a8 {
@@ -933,8 +933,8 @@ div.hero-equipment-2b17aa16463c3aeca8da93a07962df5a {
 }
 
 div.hero-equipment-9305946983d796f54630b29f8241fdf9 {
-  font-size: @app-font-size + 2px;
-  text-align: left;
+  font-size: 12px;
+  text-align: @app-text-align;
 }
 
 div.hero-equipment-e9326e4d97ca90bdc8f972e25e6967ff {
@@ -942,7 +942,7 @@ div.hero-equipment-e9326e4d97ca90bdc8f972e25e6967ff {
 }
 
 div.hero-equipment-3b09ddd4e6e3d406a35c2319e712aff7 {
-  text-align: left;
+  text-align: @app-text-align;
 }
 
 div.hero-equipment-0e65087ef714d330232ef74987513fbb {

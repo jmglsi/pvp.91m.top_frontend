@@ -841,7 +841,7 @@ export default {
 <style scoped lang="less">
 img.my-ef65f15f01e7d076cc4ef40d753e4d65 {
   background-color: white !important;
-  border-radius: 100%;
+  border-radius: @app-border-radius;
   margin-left: -26px;
   margin-top: 71px;
   padding: 1px;
@@ -853,7 +853,7 @@ span.my-25930e3036f13852cb0b29694bbab611 {
 }
 
 span.my-b068931cc450442b63f5b3d276ea4297 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
 }
 
 span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {

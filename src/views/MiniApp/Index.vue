@@ -257,7 +257,7 @@ span.miniapp-9ad284a8297802bd67af0356d21ae35f {
 }
 
 div.miniapp-bb351527dd7ab2526a28e42d9e17ddf3 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin-top: 5px;
 }
 

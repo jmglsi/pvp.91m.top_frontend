@@ -633,7 +633,7 @@ img.ranking-e49cd5784f7893174dadee338fd0e61b {
 }
 
 img.ranking-a548cbd20a565cc98caf397c9bfd7cdb {
-  border-radius: 100%;
+  border-radius: @app-border-radius;
 }
 
 ul.ranking-f138efce9d200665110c7c47b8a57811 {
@@ -659,7 +659,7 @@ span.ranking-4da12add5b0c1920dcde6c5627d30422 {
 }
 
 span.ranking-7de1b8678bf87a631bd5f2c2b70a1214 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin-top: 25px;
   position: absolute;
 }
@@ -699,7 +699,7 @@ td.app-bda9643ac6601722a28f238714274da4 div.vxe-cell,
 td.app-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.app-48d6215903dff56238e52e8891380c8f div.vxe-cell,
 td.app-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
-  font-size: @app-font-size + 8px;
+  font-size: 18px;
 }
 
 div.ranking-home {
@@ -784,7 +784,7 @@ div.ranking-420e569f7ae439ae256513412631f2f4 {
 }
 
 div.ranking-a6c2fcca8d40c28ed46b93c2c629f0ae {
-  font-size: @app-font-size + 3px;
+  font-size: 13px;
 }
 
 div.ranking-8d583d7c052e343e6817b99812fa03b6 {

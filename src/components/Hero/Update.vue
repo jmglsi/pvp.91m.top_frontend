@@ -501,7 +501,7 @@ div.update-0b479089ade5d13a2c41830785ebac9d {
 }
 
 div.update-288ac40c37c02b743c0c2cc51c650dd3 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   padding: 20px;
   text-align: @app-text-align;
 }

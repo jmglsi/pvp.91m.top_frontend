@@ -155,9 +155,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 span.choose-ce813c1b85eaac5a5da5d10967cf2c6e {
-  font-size: 10px;
+  font-size: @app-font-size;
   margin-top: 3px;
 }
 

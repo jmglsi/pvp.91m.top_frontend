@@ -112,7 +112,7 @@ export default {
 <style scoped lang="less">
 div.square-cad86054cf97209ea888c47407f2b1b8 {
   margin: 0 auto;
-  text-align: left;
+  text-align: @app-text-align;
   width: 95%;
 }
 

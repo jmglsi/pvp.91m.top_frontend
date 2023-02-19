@@ -168,7 +168,7 @@ div.hero-same-hobby-1a67ccb40b81a7318620c55405993a5d {
     width: 100%;
 
     div.hero-same-hobby-913efcd4d0c3a78c5794f0967fdeda4b {
-      font-size: @app-font-size + 2px;
+      font-size: 12px;
       margin-top: 5px;
     }
   }

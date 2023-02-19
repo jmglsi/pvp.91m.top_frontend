@@ -387,7 +387,7 @@ div.hero-fightPower-cb2772c8daa27828fc2ed77540c1bba1 {
 }
 
 div.hero-fightPower-1fcc988ce1403e447b81fe06cbaf7e66 {
-  font-size: @app-font-size + 2px;
+  font-size: 12px;
   margin: 125px 25px;
 }
 </style>

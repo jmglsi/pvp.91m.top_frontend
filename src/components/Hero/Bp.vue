@@ -471,7 +471,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 ul.bp-666568243a3618d60572c92f2cf0ff3d {
   float: left;
 }
@@ -486,7 +486,7 @@ ul.bp-d5f3c2f290902549bb3b62cbfbf7a1bb {
 }
 
 span.bp-4f9cc6d1b08849bf0c18bc06df163a6a {
-  font-size: 10px;
+  font-size: @app-font-size;
 }
 
 div.bp-84d1241e18d9a700e019ca9654463a63 {
@@ -501,30 +501,30 @@ div.bp-427034659a1ba05f529b72e639b4481f {
 div.bp-00b97ff5a43507241bb2776b701516bb {
   background-color: blue;
   border-radius: 10px;
-  height: 50px;
+  height: @app-height;
   margin: 10px;
   text-align: center;
-  width: 50px;
+  width: @app-width;
 }
 
 div.bp-85a6487e98ea46cd1391fd415d370de0 {
   background-color: red;
   border-radius: 10px;
-  height: 50px;
+  height: @app-height;
   margin: 10px;
   text-align: center;
-  width: 50px;
+  width: @app-width;
 }
 
 div.bp-0492ba0dd77bbcafdac5b4aeded96ed1 {
   left: 75px;
   position: absolute;
-  text-align: left;
+  text-align: @app-text-align;
 }
 
 div.bp-6c02537f8c5493e03caec9b1ea2cb5e7 {
   position: absolute;
   right: 75px;
-  text-align: left;
+  text-align: @app-text-align;
 }
 </style>
