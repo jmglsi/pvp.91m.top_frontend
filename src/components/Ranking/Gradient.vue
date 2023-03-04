@@ -18,12 +18,9 @@
             >
             &nbsp;
             <span
-              class="
-                ranking-3605ac8c437e0c5eb801c76edfd6fb43
-                ranking-b4ba22aa4e7d0527ad550251603c5355
-              "
+              class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
-              <a-popover placement="bottomRight" trigger="click">
+              <a-popover trigger="click" placement="bottomRight">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
                   非禁必选 <van-icon name="question-o" />
                 </span>
@@ -48,28 +45,31 @@
                   />
                 </lazy-component>
                 <img
-                  v-lazy="data.img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + data.id + '.jpg',
+                    error: data.img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
+                  class="app-border-radius"
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill[0].img"
+                    v-lazy="{
+                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      error: data.skill[0].img,
+                    }"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                   />
                   <span
                     :style="{
@@ -77,34 +77,26 @@
                       left: '-11px',
                       marginTop: '-5px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-043052eea2d064cab23119e56f4f640e
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                   >
                     {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill[1].img"
+                    v-lazy="{
+                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      error: data.skill[1].img,
+                    }"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                   />
                   <span
                     :style="{
                       textAlign: 'right',
                       left: '11px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-dabb6e25dffefe5b4821b7062afbdaef
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                   >
                     {{ data.skill[1].pickRate }}%
                   </span>
@@ -140,12 +132,9 @@
             >
             &nbsp;
             <span
-              class="
-                ranking-3605ac8c437e0c5eb801c76edfd6fb43
-                ranking-b4ba22aa4e7d0527ad550251603c5355
-              "
+              class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
-              <a-popover placement="bottomRight" trigger="click">
+              <a-popover trigger="click" placement="bottomRight">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
                   一人之下 <van-icon name="question-o" />
                 </span>
@@ -171,28 +160,31 @@
                   />
                 </lazy-component>
                 <img
-                  v-lazy="data.img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + data.id + '.jpg',
+                    error: data.img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
+                  class="app-border-radius"
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill[0].img"
+                    v-lazy="{
+                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      error: data.skill[0].img,
+                    }"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                   />
                   <span
                     :style="{
@@ -200,34 +192,26 @@
                       left: '-11px',
                       marginTop: '-5px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-043052eea2d064cab23119e56f4f640e
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                   >
                     {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill[1].img"
+                    v-lazy="{
+                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      error: data.skill[1].img,
+                    }"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                   />
                   <span
                     :style="{
                       textAlign: 'right',
                       left: '11px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-dabb6e25dffefe5b4821b7062afbdaef
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                   >
                     {{ data.skill[1].pickRate }}%
                   </span>
@@ -263,12 +247,9 @@
             >
             &nbsp;
             <span
-              class="
-                ranking-3605ac8c437e0c5eb801c76edfd6fb43
-                ranking-b4ba22aa4e7d0527ad550251603c5355
-              "
+              class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
-              <a-popover placement="bottomRight" trigger="click">
+              <a-popover trigger="click" placement="bottomRight">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
                   强势英雄 <van-icon name="question-o" />
                 </span>
@@ -293,28 +274,31 @@
                   />
                 </lazy-component>
                 <img
-                  v-lazy="data.img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + data.id + '.jpg',
+                    error: data.img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
+                  class="app-border-radius"
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill[0].img"
+                    v-lazy="{
+                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      error: data.skill[0].img,
+                    }"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                   />
                   <span
                     :style="{
@@ -322,34 +306,26 @@
                       left: '-11px',
                       marginTop: '-5px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-043052eea2d064cab23119e56f4f640e
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                   >
                     {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill[1].img"
+                    v-lazy="{
+                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      error: data.skill[1].img,
+                    }"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                   />
                   <span
                     :style="{
                       textAlign: 'right',
                       left: '11px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-dabb6e25dffefe5b4821b7062afbdaef
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                   >
                     {{ data.skill[1].pickRate }}%
                   </span>
@@ -385,12 +361,9 @@
             >
             &nbsp;
             <span
-              class="
-                ranking-3605ac8c437e0c5eb801c76edfd6fb43
-                ranking-b4ba22aa4e7d0527ad550251603c5355
-              "
+              class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
-              <a-popover placement="bottomRight" trigger="click">
+              <a-popover trigger="click" placement="bottomRight">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
                   体系英雄 <van-icon name="question-o" />
                 </span>
@@ -415,28 +388,31 @@
                   />
                 </lazy-component>
                 <img
-                  v-lazy="data.img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + data.id + '.jpg',
+                    error: data.img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
+                  class="app-border-radius"
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill[0].img"
+                    v-lazy="{
+                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      error: data.skill[0].img,
+                    }"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                   />
                   <span
                     :style="{
@@ -444,34 +420,26 @@
                       left: '-11px',
                       marginTop: '-5px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-043052eea2d064cab23119e56f4f640e
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                   >
                     {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill[1].img"
+                    v-lazy="{
+                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      error: data.skill[1].img,
+                    }"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                   />
                   <span
                     :style="{
                       textAlign: 'right',
                       left: '11px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-dabb6e25dffefe5b4821b7062afbdaef
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                   >
                     {{ data.skill[1].pickRate }}%
                   </span>
@@ -503,12 +471,9 @@
             T<span class="ranking-0eef127325d38ed4804c26bd7c88bab3">3</span>
             &nbsp;
             <span
-              class="
-                ranking-3605ac8c437e0c5eb801c76edfd6fb43
-                ranking-b4ba22aa4e7d0527ad550251603c5355
-              "
+              class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
-              <a-popover placement="bottomRight" trigger="click">
+              <a-popover trigger="click" placement="bottomRight">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
                   奇兵英雄 <van-icon name="question-o" />
                 </span>
@@ -533,28 +498,31 @@
                   />
                 </lazy-component>
                 <img
-                  v-lazy="data.img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + data.id + '.jpg',
+                    error: data.img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
+                  class="app-border-radius"
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill[0].img"
+                    v-lazy="{
+                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      error: data.skill[0].img,
+                    }"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                   />
                   <span
                     :style="{
@@ -562,34 +530,26 @@
                       left: '-11px',
                       marginTop: '-5px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-043052eea2d064cab23119e56f4f640e
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                   >
                     {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill[1].img"
+                    v-lazy="{
+                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      error: data.skill[1].img,
+                    }"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                   />
                   <span
                     :style="{
                       textAlign: 'right',
                       left: '11px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-dabb6e25dffefe5b4821b7062afbdaef
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                   >
                     {{ data.skill[1].pickRate }}%
                   </span>
@@ -621,12 +581,9 @@
             T<span class="ranking-0eef127325d38ed4804c26bd7c88bab3">4</span>
             &nbsp;
             <span
-              class="
-                ranking-3605ac8c437e0c5eb801c76edfd6fb43
-                ranking-b4ba22aa4e7d0527ad550251603c5355
-              "
+              class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
-              <a-popover placement="bottomRight" trigger="click">
+              <a-popover trigger="click" placement="bottomRight">
                 <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
                   弱势英雄 <van-icon name="question-o" />
                 </span>
@@ -649,28 +606,31 @@
                   />
                 </lazy-component>
                 <img
-                  v-lazy="data.img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + data.id + '.jpg',
+                    error: data.img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-712ef34fdf31f8510e087c7a42d9cd48"
+                  class="app-border-radius"
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
                 />
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
-                    v-lazy="data.skill[0].img"
+                    v-lazy="{
+                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      error: data.skill[0].img,
+                    }"
                     :style="{ left: '-10px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                   />
                   <span
                     :style="{
@@ -678,34 +638,26 @@
                       left: '-11px',
                       marginTop: '-5px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-043052eea2d064cab23119e56f4f640e
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                   >
                     {{ data.skill[0].pickRate }}%
                   </span>
                   <img
-                    v-lazy="data.skill[1].img"
+                    v-lazy="{
+                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      error: data.skill[1].img,
+                    }"
                     :style="{ left: '45px' }"
                     width="15"
                     height="15"
-                    class="
-                      ranking-95a25d46f98b0ec553d892cc45037d57
-                      ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                    "
+                    class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                   />
                   <span
                     :style="{
                       textAlign: 'right',
                       left: '11px',
                     }"
-                    class="
-                      app-0fc3cfbc27e91ea60a787de13dae3e3c
-                      app-5f19eaf71f40d74d66be84db52b3ad87
-                      ranking-dabb6e25dffefe5b4821b7062afbdaef
-                    "
+                    class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                   >
                     {{ data.skill[1].pickRate }}%
                   </span>
@@ -805,7 +757,7 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
               </template>
 
               <HeroInscriptionList
@@ -1183,10 +1135,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-img.ranking-712ef34fdf31f8510e087c7a42d9cd48 {
-  border-radius: @app-border-radius;
-}
-
 span.ranking-0eef127325d38ed4804c26bd7c88bab3 {
   font-size: 20px;
   margin-left: 5px;

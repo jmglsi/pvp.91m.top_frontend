@@ -2,10 +2,7 @@
   <div class="app-recommend recommend-b77f3080e567fd154c25b053042dcba9">
     <div class="recommend-fde59ce861918e4314a5a460e7c9cc54">
       <div
-        class="
-          app-a139b05b7f8e496c00991733ef7cd589
-          app-1e4b00d1b398e8a6551429b2a2f0e17c
-        "
+        class="app-a139b05b7f8e496c00991733ef7cd589 app-1e4b00d1b398e8a6551429b2a2f0e17c"
       >
         <van-pull-refresh
           v-model="isLoading"
@@ -67,7 +64,7 @@
                       v-lazy="data.img"
                       width="50"
                       height="50"
-                      class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                      class="app-border-radius"
                     />
                   </span>
                   <div
@@ -118,7 +115,7 @@
                         <img
                           width="20"
                           height="20"
-                          v-lazy="'/img/app-icons/hot_2.png'"
+                          v-lazy="'/img/icons-app/hot_2.png'"
                         />
                         {{ $t("up") }}
                       </span>
@@ -126,7 +123,7 @@
                         <img
                           width="20"
                           height="20"
-                          v-lazy="'/img/app-icons/hot_1.png'"
+                          v-lazy="'/img/icons-app/hot_1.png'"
                         />
                         {{ $t("down") }}
                       </span>
@@ -153,21 +150,23 @@
                           <img
                             width="30"
                             height="30"
-                            v-lazy="
-                              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                              data.heroId +
-                              '/' +
-                              data.heroId +
-                              '.jpg'
-                            "
-                            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                            v-lazy="{
+                              src: '/img/icons-hero/' + data.heroId + '.jpg',
+                              error:
+                                '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                                data.heroId +
+                                '/' +
+                                data.heroId +
+                                '.jpg',
+                            }"
+                            class="app-border-radius"
                           />
                           &nbsp;&nbsp;&nbsp;
                           <img
                             width="30"
                             height="30"
                             v-lazy="getChangeImg(changeInfo.bid, data.id)"
-                            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                            class="app-border-radius"
                           />
                           &nbsp;&nbsp;&nbsp;
                           <span class="home-18174044426adc86b297062d2e40e214">
@@ -182,10 +181,7 @@
                                 ? { color: 'red !important' }
                                 : { color: 'blue !important' }
                             "
-                            class="
-                              app-07cc694b9b3fc636710fa08b6922c42b
-                              home-2095d846baffaf78edd96501f098e66a
-                            "
+                            class="app-07cc694b9b3fc636710fa08b6922c42b home-2095d846baffaf78edd96501f098e66a"
                           >
                             {{
                               (data.change.updateType == 2 ? "+" : "-") +
@@ -203,10 +199,7 @@
                     </div>
                   </div>
                   <div
-                    class="
-                      home-07e33cfc65db63122f9d18ae77a89315
-                      home-d553001f432b5a09d9ae776abd8413c0
-                    "
+                    class="home-07e33cfc65db63122f9d18ae77a89315 home-d553001f432b5a09d9ae776abd8413c0"
                     @click="getRanking(11, changeInfo.bid, changeInfo.cid, 0)"
                   >
                     🔍 {{ $t("search.text") }}

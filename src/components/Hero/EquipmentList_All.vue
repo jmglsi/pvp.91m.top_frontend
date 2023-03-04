@@ -16,12 +16,14 @@
         <template #default="{ row }">
           <div :style="{ position: 'relative' }">
             <img
-              v-lazy="
-                '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
-              "
+              v-lazy="{
+                src: '/img/icons-skill/' + row.skillId + '.jpg',
+                error:
+                  '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png',
+              }"
               width="25"
               height="25"
-              class="hero-dd89b1b4d8b06f747929cc86ec6bb94f"
+              class="app-border-radius"
             />
           </div>
         </template>
@@ -45,14 +47,16 @@
             <div :style="{ position: 'relative' }">
               <img
                 v-if="row.list[index] > 0"
-                v-lazy="
-                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                  row.list[index] +
-                  '.png'
-                "
+                v-lazy="{
+                  src: '/img/icons-equipment/' + row.list[index] + '.jpg',
+                  error:
+                    '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                    row.list[index] +
+                    '.png',
+                }"
                 width="25"
                 height="25"
-                class="hero-88473b8c633f40889fe2a0affd773691"
+                class="app-border-radius"
               />
             </div>
           </template>

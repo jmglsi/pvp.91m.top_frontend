@@ -39,7 +39,10 @@
               @click="getHeroId(data)"
             >
               <img
-                v-lazy="data.img"
+                v-lazy="{
+                  src: '/img/icons-hero/' + data.id + '.jpg',
+                  error: data.img,
+                }"
                 width="50"
                 height="50"
                 class="choose-c1721b4099fda993a5897b0c5a3326bc"

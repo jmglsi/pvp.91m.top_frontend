@@ -11,16 +11,18 @@
         <template #default="{ row }">
           <div :style="{ position: 'relative' }">
             <img
-              v-lazy="
-                '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                row.heroId +
-                '/' +
-                row.heroId +
-                '.jpg'
-              "
+              v-lazy="{
+                src: '/img/icons-hero/' + row.heroId + '.jpg',
+                error:
+                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                  row.heroId +
+                  '/' +
+                  row.heroId +
+                  '.jpg',
+              }"
               width="25"
               height="25"
-              class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+              class="app-border-radius"
             />
           </div>
         </template>
@@ -53,12 +55,18 @@
               <img
                 v-lazy="
                   row.skillId == 0
-                    ? '/img/app-icons/question.png'
-                    : '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png'
+                    ? '/img/icons-app/question.png'
+                    : {
+                        src: '/img/icons-skill/' + row.skillId + '.jpg',
+                        error:
+                          '//image.ttwz.qq.com/images/skill/' +
+                          row.skillId +
+                          '.png',
+                      }
                 "
                 width="25"
                 height="25"
-                class="hero-genre-4dba5f40eab9da71ab3d5db2d3883093"
+                class="app-border-radius"
               />
             </div>
           </template>
@@ -137,7 +145,7 @@
                 <img
                   v-if="row.change.updateType != 0"
                   v-lazy="
-                    '/img/app-icons/hot_' + row.change.updateType + '.png'
+                    '/img/icons-app/hot_' + row.change.updateType + '.png'
                   "
                   width="15"
                   height="15"

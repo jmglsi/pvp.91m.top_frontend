@@ -24,7 +24,7 @@
           class="oauth-d7c4aa2641b836c39a069c80c569f682"
         >
           <img
-            v-lazy="'/img/app-icons/' + data.type + '.ico'"
+            v-lazy="'/img/icons-app/' + data.type + '.ico'"
             :style="
               accessToken && data.status == 0 ? { filter: 'grayscale(1)' } : {}
             "

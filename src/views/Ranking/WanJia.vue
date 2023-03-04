@@ -44,13 +44,10 @@
                 width="50"
                 height="50"
                 crossorigin="anonymous"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div
-                class="
-                  app-5f19eaf71f40d74d66be84db52b3ad87
-                  ranking-0e1a8b3f7f6162bf4b88d3d001b88374
-                "
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-0e1a8b3f7f6162bf4b88d3d001b88374"
               >
                 {{ rowIndex + 1 }}
               </div>
@@ -70,10 +67,7 @@
                 {{ row.rankScore }}
               </div>
               <div
-                class="
-                  app-5f19eaf71f40d74d66be84db52b3ad87
-                  ranking-420e569f7ae439ae256513412631f2f4
-                "
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-420e569f7ae439ae256513412631f2f4"
               >
                 {{ row.gamePlayerName }}
               </div>
@@ -127,28 +121,26 @@
                             ? { marginLeft: '3px' }
                             : { marginLeft: '-1px' }
                         "
-                        class="
-                          app-5f19eaf71f40d74d66be84db52b3ad87
-                          ranking-7de1b8678bf87a631bd5f2c2b70a1214
-                        "
+                        class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-7de1b8678bf87a631bd5f2c2b70a1214"
                       >
                         {{ data.fightPower }}
                       </span>
                       <img
-                        v-lazy="
-                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                          data.heroId +
-                          '/' +
-                          data.heroId +
-                          '.jpg'
-                        "
+                        v-lazy="{
+                          src: '/img/icons-hero/' + data.heroId + '.jpg',
+                          error:
+                            '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                            data.heroId +
+                            '/' +
+                            data.heroId +
+                            '.jpg',
+                        }"
                         width="35"
                         height="35"
                         crossorigin="anonymous"
-                        class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                        class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
                       />
                     </div>
-
                     <template #overlay>
                       <a-menu>
                         <a-menu-item
@@ -184,10 +176,7 @@
 
               <div
                 v-if="row.heroList.length == 0"
-                class="
-                  app-52b0e5c90604d59d1814f184d58e2033
-                  ranking-a6c2fcca8d40c28ed46b93c2c629f0ae
-                "
+                class="app-52b0e5c90604d59d1814f184d58e2033 ranking-a6c2fcca8d40c28ed46b93c2c629f0ae"
               >
                 待更新，点击查看对局回顾
               </div>
@@ -198,10 +187,7 @@
     </div>
 
     <div
-      class="
-        ranking-abb5cb2b15eb9ccfe416f0ba3da3499e
-        app-52b0e5c90604d59d1814f184d58e2033
-      "
+      class="ranking-abb5cb2b15eb9ccfe416f0ba3da3499e app-52b0e5c90604d59d1814f184d58e2033"
     >
       <van-button
         round
@@ -279,17 +265,19 @@
                   }"
                 >
                   <img
-                    v-lazy="
-                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                      data[0] +
-                      '/' +
-                      data[0] +
-                      '.jpg'
-                    "
+                    v-lazy="{
+                      src: '/img/icons-hero/' + data[0] + '.jpg',
+                      error:
+                        '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                        data[0] +
+                        '/' +
+                        data[0] +
+                        '.jpg',
+                    }"
                     width="45"
                     height="45"
                     crossorigin="anonymous"
-                    class="ranking-a548cbd20a565cc98caf397c9bfd7cdb"
+                    class="app-border-radius"
                   />
                   <div class="ranking-51c877f489423eb1c3901dd0e12c03d4">
                     {{ data[1] }}

@@ -15,7 +15,7 @@
               v-lazy="$appConfigInfo.appInfo.search.img"
               width="35"
               height="35"
-              class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+              class="app-border-radius"
               @click="onUrlClick($appConfigInfo.appInfo.search)"
             />
           </template>

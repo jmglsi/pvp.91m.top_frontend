@@ -24,10 +24,13 @@
               "
             >
               <img
-                v-lazy="row.img"
+                v-lazy="{
+                  src: '/img/icons-hero/' + row.id + '.jpg',
+                  error: row.img,
+                }"
                 width="50"
                 height="50"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
             </div>
           </template>

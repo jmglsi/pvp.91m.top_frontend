@@ -32,14 +32,16 @@
               "
             >
               <img
-                v-lazy="
-                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                  row.id +
-                  '.png'
-                "
+                v-lazy="{
+                  src: '/img/icons-equipment/' + row.id + '.jpg',
+                  error:
+                    '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                    row.id +
+                    '.png',
+                }"
                 width="50"
                 height="50"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
             </div>
           </template>
@@ -109,7 +111,7 @@
                   <img
                     v-if="row.change.updateType != 0"
                     v-lazy="
-                      '/img/app-icons/hot_' + row.change.updateType + '.png'
+                      '/img/icons-app/hot_' + row.change.updateType + '.png'
                     "
                     width="15"
                     height="15"

@@ -11,16 +11,18 @@
         <template #default="{ row }">
           <div :style="{ position: 'relative' }">
             <img
-              v-lazy="
-                '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                row.heroId +
-                '/' +
-                row.heroId +
-                '.jpg'
-              "
+              v-lazy="{
+                src: '/img/icons-hero/' + row.heroId + '.jpg',
+                error:
+                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                  row.heroId +
+                  '/' +
+                  row.heroId +
+                  '.jpg',
+              }"
               width="25"
               height="25"
-              class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+              class="app-border-radius"
             />
           </div>
         </template>
@@ -36,14 +38,16 @@
         <template #default="{ row }">
           <div :style="{ position: 'relative' }">
             <img
-              v-lazy="
-                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                row.equipmentId +
-                '.png'
-              "
+              v-lazy="{
+                src: '/img/icons-equipment/' + row.equipmentId + '.jpg',
+                error:
+                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  row.equipmentId +
+                  '.png',
+              }"
               width="25"
               height="25"
-              class="hero-785aadb8cf1105bafaef41fd3e44a292"
+              class="app-border-radius"
             />
           </div>
         </template>
@@ -108,7 +112,7 @@
                 <img
                   v-if="row.change.updateType != 0"
                   v-lazy="
-                    '/img/app-icons/hot_' + row.change.updateType + '.png'
+                    '/img/icons-app/hot_' + row.change.updateType + '.png'
                   "
                   width="15"
                   height="15"
@@ -204,26 +208,31 @@
       <template #default>
         <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
           <img
-            v-lazy="
-              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-              lineData.heroId +
-              '/' +
-              lineData.heroId +
-              '.jpg'
-            "
+            v-lazy="{
+              src: '/img/icons-hero/' + lineData.heroId + '.jpg',
+              error:
+                '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                lineData.heroId +
+                '/' +
+                lineData.heroId +
+                '.jpg',
+            }"
             width="25"
             height="25"
-            class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+            class="app-border-radius"
           />
           &nbsp;和&nbsp;
           <img
-            v-lazy="
-              '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-              lineData.equipmentId +
-              '.png'
-            "
+            v-lazy="{
+              src: '/img/icons-equipment/' + lineData.equipmentId + '.jpg',
+              error:
+                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                lineData.equipmentId +
+                '.png',
+            }"
             width="25"
             height="25"
+            class="app-border-radius"
           />
           &nbsp;的契合度
         </div>
@@ -234,10 +243,7 @@
 
         <div
           :style="{ marginTop: '-10px !important' }"
-          class="
-            app-61046f2f5eefe3dc179e52af32241062
-            hero-386260160edfd75a6b62facc140fd3a4
-          "
+          class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4"
         >
           <span class="app-e4c9479b11955648dad558fe717a4eb2">
             <p>

@@ -1,11 +1,7 @@
 <template>
   <div class="app-update">
     <div
-      class="
-        app-0464ec62d5cba8a9ec29d0c4c89fc7c6
-        app-b4a64ecd008af42ba95bc20350599699
-        update-e1fade65183eeca567683609ebb7005f
-      "
+      class="app-0464ec62d5cba8a9ec29d0c4c89fc7c6 app-b4a64ecd008af42ba95bc20350599699 update-e1fade65183eeca567683609ebb7005f"
     >
       <div class="update-3490d5ece19a8f958d2be068e27f636a">
         <van-row>
@@ -19,10 +15,7 @@
           </van-col>
           <van-col :span="$appIsMobile ? 9 : 3">
             <div
-              class="
-                app-f3b57b63e4f5f4e157fd45bdb8611005
-                app-8f06e89ca90bebf60c91699c473f4022
-              "
+              class="app-f3b57b63e4f5f4e157fd45bdb8611005 app-8f06e89ca90bebf60c91699c473f4022"
             >
               <van-dropdown-menu>
                 <van-dropdown-item
@@ -109,16 +102,20 @@
                 <img
                   v-lazy="
                     item < 900
-                      ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                        item +
-                        '/' +
-                        item +
-                        '.jpg'
-                      : '/img/app-icons/hero_white.png'
+                      ? {
+                          src: '/img/icons-hero/' + item + '.jpg',
+                          error:
+                            '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                            item +
+                            '/' +
+                            item +
+                            '.jpg',
+                        }
+                      : '/img/icons-app/hero_white.png'
                   "
                   width="40"
                   height="40"
-                  class="update-5d39f3848925994b52ec52fba934577c"
+                  class="app-border-radius update-5d39f3848925994b52ec52fba934577c"
                 />
               </span>
             </div>
@@ -135,14 +132,16 @@
                 class="update-cf1228c4eb54ec10bf815f0ed3816a49"
               >
                 <img
-                  v-lazy="
-                    '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
-                    item +
-                    '.png'
-                  "
+                  v-lazy="{
+                    src: '/img/icons-equipment/' + item + '.jpg',
+                    error:
+                      '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                      item +
+                      '.png',
+                  }"
                   width="40"
                   height="40"
-                  class="update-5d39f3848925994b52ec52fba934577c"
+                  class="app-border-radius update-5d39f3848925994b52ec52fba934577c"
                 />
               </span>
             </div>
@@ -294,6 +293,11 @@ export default {
         skillMenu: false,
       },
     };
+  },
+  mounted() {
+    if (this.$appConfigInfo.appInfo.isReadme == 1) {
+      this.getHeroUpdate(this.heroId, this.aid);
+    }
   },
   methods: {
     onFormatter: function (day) {
@@ -460,7 +464,6 @@ export default {
 
 <style scoped lang="less">
 img.update-5d39f3848925994b52ec52fba934577c {
-  border-radius: @app-border-radius;
   margin-bottom: 5px;
   margin-right: 5px;
 }

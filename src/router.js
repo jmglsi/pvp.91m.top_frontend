@@ -160,6 +160,24 @@ export default new Router({
         title: '机器人设置',
         keepAlive: true
       }
+    }, {
+      path: 'mp-data',
+      name: 'mpData',
+      component: () =>
+        import('./views/Admin/Mp/Data.vue'),
+      meta: {
+        title: '公众号数据',
+        keepAlive: true
+      }
+    }, {
+      path: 'system-assignment',
+      name: 'systemAssignment',
+      component: () =>
+        import('./views/Admin/System/Assignment.vue'),
+      meta: {
+        title: '系统任务',
+        keepAlive: true
+      }
     }]
   }, {
     path: '/hero',
@@ -183,6 +201,15 @@ export default new Router({
         import('./views/Hero/Replay.vue'),
       meta: {
         title: '回顾',
+        keepAlive: false
+      }
+    }, {
+      path: ':id/view',
+      name: 'heroView',
+      component: () =>
+        import('./views/Hero/View.vue'),
+      meta: {
+        title: '预览',
         keepAlive: false
       }
     }, {

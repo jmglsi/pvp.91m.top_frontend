@@ -38,7 +38,7 @@
                 v-lazy="row.avatar"
                 width="50"
                 height="50"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div
                 class="
@@ -130,7 +130,7 @@
                     v-lazy="data.avatar"
                     width="35"
                     height="35"
-                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                    class="app-border-radius"
                   />
                   <div
                     :style="

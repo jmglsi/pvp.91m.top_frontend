@@ -7,8 +7,8 @@
         :mark-line="lineData.markLine"
         :data="charts"
         :after-config="afterConfig"
-        height="175px"
-        width="125px"
+        width="85px"
+        height="50px"
         class="ranking-c934456eea80a3c5db05ed142c757e07"
       />
     </div>
@@ -32,6 +32,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    animation: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     listenChange() {
@@ -51,6 +55,8 @@ export default {
         this.lineData.extend.series.areaStyle.color.colorStops[1].color =
           nowColor;
         this.lineData.result = newValue.charts;
+
+        this.lineData.extend.animation = this.animation;
       },
     },
   },
@@ -58,6 +64,7 @@ export default {
     return {
       lineData: {
         extend: {
+          animation: true,
           color: ["orange"],
           series: {
             type: "line",
@@ -105,6 +112,9 @@ export default {
             show: false,
           },
           grid: {
+            left: -40,
+            bottom: 40,
+            width: 118,
             tooltip: {
               show: false,
             },
@@ -116,7 +126,7 @@ export default {
             {
               name: "超热门",
               value: "超热门",
-              yAxis: 120,
+              yAxis: 110,
               itemStyle: {
                 color: "red",
               },
@@ -153,10 +163,5 @@ div.ranking-f879e7f0824fcc83d172401c3cb31b8a {
   height: @app-height;
   overflow: hidden;
   width: auto;
-}
-
-div.ranking-c934456eea80a3c5db05ed142c757e07 {
-  margin-left: -45px;
-  margin-top: -53px;
 }
 </style>

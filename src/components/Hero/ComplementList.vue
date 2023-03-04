@@ -29,16 +29,18 @@
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               <img
-                v-lazy="
-                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                  row.hero[0].id +
-                  '/' +
-                  row.hero[0].id +
-                  '.jpg'
-                "
+                v-lazy="{
+                  src: '/img/icons-hero/' + row.hero[0].id + '.jpg',
+                  error:
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    row.hero[0].id +
+                    '/' +
+                    row.hero[0].id +
+                    '.jpg',
+                }"
                 width="25"
                 height="25"
-                class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                class="app-border-radius"
               />
             </div>
           </template>
@@ -61,16 +63,18 @@
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
               <img
-                v-lazy="
-                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                  row.hero[1].id +
-                  '/' +
-                  row.hero[1].id +
-                  '.jpg'
-                "
+                v-lazy="{
+                  src: '/img/icons-hero/' + row.hero[1].id + '.jpg',
+                  error:
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    row.hero[1].id +
+                    '/' +
+                    row.hero[1].id +
+                    '.jpg',
+                }"
                 width="25"
                 height="25"
-                class="hero-785aadb8cf1105bafaef41fd3e44a292"
+                class="app-border-radius"
               />
             </div>
           </template>

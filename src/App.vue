@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppReadme />
+    <AppReadme v-if="agree" />
 
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <div v-if="$appConfigInfo.appInfo.pwa == 1">
@@ -106,12 +106,14 @@ export default {
       /ranking/i.test(nowPath) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/equipment|hero\/(.*?)\/replay|game\/(.*?)/i.test(
+      /admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
         nowPath
       ) == true
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
+
+      /view/i.test(nowPath) ? (this.agree = false) : (this.agree = true);
     },
   },
   metaInfo() {
@@ -149,6 +151,7 @@ export default {
   },
   data() {
     return {
+      agree: true,
       tableData: {
         result: {
           model: "/",
@@ -211,7 +214,7 @@ export default {
         }
 
         if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
-          if (appInfo.update.text) {
+          if (appInfo.update.text && this.agree) {
             this.$dialog
               .alert({
                 title: appInfo.update.title,
@@ -383,6 +386,10 @@ img {
   object-fit: cover;
 }
 
+img.app-border-radius {
+  border-radius: @app-border-radius;
+}
+
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
   border-radius: unset;
   bottom: -19px;
@@ -391,12 +398,7 @@ img.app-d31cb1c15b091f41248935d88a8d0a45 {
   transform: scale(0.75);
 }
 
-img.app-3b9655ab218c7f1a18f5dacd778a52f0 {
-  border-radius: @app-border-radius;
-}
-
 img.app-4ab161130e76571ab0c31aa23a6238c7 {
-  border-radius: @app-border-radius;
   margin: 0 10px;
 }
 
@@ -554,7 +556,8 @@ div.app-4717d11da95ed90ccdb4d4a0648bad39 {
 }
 
 div.app-76da017caccd1fb264af2218f6064b0d {
-  height: 100%;
+  height: 740px;
+  overflow: auto;
   padding-bottom: 25px;
   padding-left: 280px;
   padding-right: 25px;
@@ -771,8 +774,7 @@ div.app-position,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
 div.app-inscription,
-div.app-pzOne,
-div.app-update {
+div.app-pzOne {
   height: 443px !important;
   max-height: 443px !important;
   overflow: hidden;

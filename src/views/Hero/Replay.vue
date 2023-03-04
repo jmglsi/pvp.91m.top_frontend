@@ -122,7 +122,6 @@
               >
                 {{ $t("prepare-for-war") }}
               </van-tag>
-
               <template #overlay>
                 <a-menu>
                   <a-menu-item

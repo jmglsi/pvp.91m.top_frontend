@@ -33,7 +33,7 @@ Vue.prototype.$appConfigInfo = {
       timeout: 43200
     },
     search: {
-      img: "/img/app-icons/customer_service.png",
+      img: "/img/icons-app/customer_service.png",
       placeholder: "loading...",
       to: null,
       url: null,

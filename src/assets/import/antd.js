@@ -15,6 +15,7 @@ import {
   Radio,
   Row,
   Statistic,
+  Table,
   Timeline,
   Tooltip,
 } from 'ant-design-vue';
@@ -34,6 +35,7 @@ Vue
   .use(Radio)
   .use(Row)
   .use(Statistic)
+  .use(Table)
   .use(Timeline)
   .use(Tooltip)
 

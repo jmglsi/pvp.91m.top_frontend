@@ -13,25 +13,16 @@
       >
         <template #title>
           <span
-            class="
-              friends-d64cb5ed2250938cb89d25beef75f604
-              friends-2a0906894c02a2995ccddcda771afab7
-            "
+            class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
             >&lt;{{ $appColumnsInfo.areaType[friendsInfo.areaType] }}&gt;</span
           >
           <span
-            class="
-              friends-d64cb5ed2250938cb89d25beef75f604
-              friends-2a0906894c02a2995ccddcda771afab7
-            "
+            class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
           >
             {{ friendsInfo.name }}
           </span>
           <span
-            class="
-              friends-d64cb5ed2250938cb89d25beef75f604
-              friends-0a862f895f636cb1313fefe4eb09810f
-            "
+            class="friends-d64cb5ed2250938cb89d25beef75f604 friends-0a862f895f636cb1313fefe4eb09810f"
           >
             <van-tag
               round
@@ -57,7 +48,7 @@
         v-lazy="friendsInfo.img"
         width="100"
         height="100"
-        class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+        class="app-border-radius"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ friendsInfo.description || "这个人很懒，什么都没有留下" }}
@@ -72,7 +63,7 @@
         <van-cell
           v-if="friendsInfo"
           title="王者荣耀"
-          icon="/img/game-icons/king.png"
+          icon="/img/icons-game/king.png"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
@@ -87,7 +78,7 @@
         </van-cell>
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
-            icon="/img/app-icons/hero_black.png"
+            icon="/img/icons-app/hero_black.png"
             title="关注列表"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
@@ -98,10 +89,7 @@
               class="app-c1351782c9c93025d72864180d0cf28c"
             >
               <ul
-                class="
-                  app-d865b50ce307751bdeb9a6ab16e7baf9
-                  app-9e60d3ee1e1574cae90960f940c0a821
-                "
+                class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
               >
                 <li
                   v-for="(data, index) in friendsInfo.heroList"
@@ -111,16 +99,18 @@
                 >
                   <div :style="{ position: 'relative' }">
                     <img
-                      v-lazy="
-                        '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                        data.id +
-                        '/' +
-                        data.id +
-                        '.jpg'
-                      "
+                      v-lazy="{
+                        src: '/img/icons-hero/' + data.id + '.jpg',
+                        error:
+                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                          data.id +
+                          '/' +
+                          data.id +
+                          '.jpg',
+                      }"
                       width="35"
                       height="35"
-                      class="app-4ab161130e76571ab0c31aa23a6238c7"
+                      class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
                       v-if="data.fightPowerIcon"
@@ -146,10 +136,7 @@
     </div>
 
     <div
-      class="
-        friends-6a9bb439b8da049564b7efb8aa9060d1
-        app-52b0e5c90604d59d1814f184d58e2033
-      "
+      class="friends-6a9bb439b8da049564b7efb8aa9060d1 app-52b0e5c90604d59d1814f184d58e2033"
     >
       <van-button
         round

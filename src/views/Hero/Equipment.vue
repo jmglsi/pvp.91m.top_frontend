@@ -20,8 +20,8 @@
         <template #right>
           <a-popover
             :style="{ marginRight: '-10px', marginTop: '10px' }"
-            placement="bottomRight"
             trigger="click"
+            placement="bottomRight"
           >
             <van-icon v-show="false" name="ellipsis" size="18" />
 
@@ -39,9 +39,7 @@
                             (chooseInfo.skillId || 80104) +
                             '.jpg'
                           "
-                          class="
-                            hero-equipment-78bb2ecaecea15a67ff2ca0fa9ef3f7a
-                          "
+                          class="app-border-radius"
                         />
                       </template>
                     </van-grid-item>
@@ -173,7 +171,7 @@
                             '/' +
                             chooseInfo.heroId +
                             '.jpg'
-                          : '/img/app-icons/hero_white.png'
+                          : '/img/icons-app/hero_white.png'
                       "
                     />
                     <img
@@ -196,9 +194,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
-                    placement="bottomLeft"
-                    trigger="click"
                     content="不同的召唤师技能有不同的打法"
+                    trigger="click"
+                    placement="bottomLeft"
                   >
                     技能选择 <van-icon name="question-o" />
                   </a-popover>
@@ -221,9 +219,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="不同的分路有不同的打法"
                     placement="bottomLeft"
                     trigger="click"
-                    content="不同的分路有不同的打法"
                   >
                     分路选择 <van-icon name="question-o" />
                   </a-popover>
@@ -244,7 +242,7 @@
             <div v-show="sidebarInfo.model == 2">
               <van-cell-group :border="false">
                 <template #title>
-                  <a-popover placement="top" trigger="click">
+                  <a-popover trigger="click" placement="top">
                     出装选择 <van-icon name="question-o" />
 
                     <template slot="content">
@@ -307,7 +305,7 @@
                           '.png'
                         "
                         @click="onItemChoose(data)"
-                        class="hero-equipment-78bb2ecaecea15a67ff2ca0fa9ef3f7a"
+                        class="app-border-radius"
                       />
                     </template>
                     <template #text>
@@ -316,9 +314,7 @@
                         @click="onItemClick"
                       >
                         <span
-                          class="
-                            hero-equipment-bfdb7aa2ebfcd02113b228f44f73d2a7
-                          "
+                          class="hero-equipment-bfdb7aa2ebfcd02113b228f44f73d2a7"
                         >
                           {{ data.item_name }}
                         </span>
@@ -332,26 +328,18 @@
                           />
                           <template slot="title">
                             <div
-                              class="
-                                hero-equipment-3b09ddd4e6e3d406a35c2319e712aff7
-                              "
+                              class="hero-equipment-3b09ddd4e6e3d406a35c2319e712aff7"
                             >
                               <span
-                                class="
-                                  hero-equipment-853bf9d3be5a89003b5f5b481a7f1a56
-                                "
+                                class="hero-equipment-853bf9d3be5a89003b5f5b481a7f1a56"
                               >
                                 {{ data.item_name }}
                               </span>
                               <span
-                                class="
-                                  hero-equipment-8723cf2d0377e86f7f75c09ae7a76a55
-                                "
+                                class="hero-equipment-8723cf2d0377e86f7f75c09ae7a76a55"
                               >
                                 <span
-                                  class="
-                                    hero-equipment-261370eb2630e93715dfb2d0845949fb
-                                  "
+                                  class="hero-equipment-261370eb2630e93715dfb2d0845949fb"
                                 >
                                   损失
                                 </span>
@@ -361,9 +349,7 @@
                                   v-lazy="
                                     '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                                   "
-                                  class="
-                                    hero-equipment-99cb324cd7e789db254f951a8babc0a8
-                                  "
+                                  class="hero-equipment-99cb324cd7e789db254f951a8babc0a8"
                                 />
                                 <del>{{ data.loss_price }}</del>
                               </span>
@@ -371,14 +357,10 @@
                           </template>
                           <template slot="content">
                             <div
-                              class="
-                                hero-equipment-f5f7f495ed00512c9ee88c432bd988e8
-                              "
+                              class="hero-equipment-f5f7f495ed00512c9ee88c432bd988e8"
                             >
                               <div
-                                class="
-                                  hero-equipment-0e65087ef714d330232ef74987513fbb
-                                "
+                                class="hero-equipment-0e65087ef714d330232ef74987513fbb"
                               >
                                 <van-tag
                                   v-for="(item, index) in data.tags"
@@ -389,9 +371,7 @@
                                   v-show="item.hidden == false"
                                   :color="item.color"
                                   plain
-                                  class="
-                                    hero-equipment-8a0ef47dc7fb94fd86ca714928f64401
-                                  "
+                                  class="hero-equipment-8a0ef47dc7fb94fd86ca714928f64401"
                                 >
                                   {{ item.name }}
                                 </van-tag>
@@ -415,16 +395,12 @@
                           "
                         />
                         <span
-                          class="
-                            hero-equipment-a6fd35511053bd90735e98ca6f02a4c9
-                          "
+                          class="hero-equipment-a6fd35511053bd90735e98ca6f02a4c9"
                         >
                           {{ data.total_price }}
                         </span>
                         <span
-                          class="
-                            hero-equipment-32e99218b3e9a25c3ca08b8ff83c7620
-                          "
+                          class="hero-equipment-32e99218b3e9a25c3ca08b8ff83c7620"
                         >
                           <del>{{ data.price }}</del>
                         </span>
@@ -438,9 +414,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="对线不同的人可能需要不同的铭文"
                     placement="bottomLeft"
                     trigger="click"
-                    content="对线不同的人可能需要不同的铭文"
                   >
                     铭文选择 <van-icon name="question-o" />
                   </a-popover>
@@ -451,9 +427,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="备战 - 分享 直接复制即可"
                     placement="bottomLeft"
                     trigger="click"
-                    content="备战 - 分享 直接复制即可"
                   >
                     口令 <van-icon name="question-o" />
                   </a-popover>
@@ -472,9 +448,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="如果是别人的，请填写下原文地址哦~"
                     placement="bottomLeft"
                     trigger="click"
-                    content="如果是别人的，请填写下原文地址哦~"
                   >
                     出处 <van-icon name="question-o" />
                   </a-popover>
@@ -493,9 +469,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="每个标签按英文逗号【,】分割"
                     placement="bottomLeft"
                     trigger="click"
-                    content="每个标签按英文逗号【,】分割"
                   >
                     标签 <van-icon name="question-o" />
                   </a-popover>
@@ -514,9 +490,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="介绍一下这个打法"
                     placement="bottomLeft"
                     trigger="click"
-                    content="介绍一下这个打法"
                   >
                     描述
                     <span
@@ -542,9 +518,9 @@
               <van-cell-group :border="false">
                 <template #title>
                   <a-popover
+                    content="其他人的备战分享"
                     placement="bottomLeft"
                     trigger="click"
-                    content="其他人的备战分享"
                   >
                     备战推荐 <van-icon name="question-o" />
                   </a-popover>
@@ -857,10 +833,6 @@ img.hero-equipment-464e0def3c0912855013b4af9a3c312e {
   bottom: -3px;
   margin-left: -13px;
   position: absolute;
-}
-
-img.hero-equipment-78bb2ecaecea15a67ff2ca0fa9ef3f7a {
-  border-radius: @app-border-radius;
 }
 
 img.hero-equipment-99cb324cd7e789db254f951a8babc0a8 {

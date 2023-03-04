@@ -38,17 +38,16 @@
                 "
               >
                 <img
-                  v-lazy="row.hero[0].img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + row.hero[0].id + '.jpg',
+                    error: row.hero[0].img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                  class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
                 />
                 <span
-                  class="
-                    app-0fc3cfbc27e91ea60a787de13dae3e3c
-                    app-5f19eaf71f40d74d66be84db52b3ad87
-                    ranking-f58cc48f5b942c91e57eff48accc5151
-                  "
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-f58cc48f5b942c91e57eff48accc5151"
                 >
                   {{ row.hero[0].adaptationRate }}
                 </span>
@@ -80,17 +79,16 @@
                 "
               >
                 <img
-                  v-lazy="row.hero[1].img"
+                  v-lazy="{
+                    src: '/img/icons-hero/' + row.hero[1].id + '.jpg',
+                    error: row.hero[1].img,
+                  }"
                   width="50"
                   height="50"
-                  class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                  class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
                 />
                 <span
-                  class="
-                    app-0fc3cfbc27e91ea60a787de13dae3e3c
-                    app-5f19eaf71f40d74d66be84db52b3ad87
-                    ranking-f58cc48f5b942c91e57eff48accc5151
-                  "
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-f58cc48f5b942c91e57eff48accc5151"
                 >
                   {{ row.hero[1].adaptationRate }}
                 </span>

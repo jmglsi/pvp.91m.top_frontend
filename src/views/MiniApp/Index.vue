@@ -98,7 +98,7 @@
                   v-lazy="data.icon"
                   width="50"
                   height="50"
-                  class="miniapp-e326b5c8d2279d775a16ba9496aae07f"
+                  class="app-border-radius"
                 />
                 <div class="miniapp-bb351527dd7ab2526a28e42d9e17ddf3">
                   {{ data.text }}
@@ -114,7 +114,7 @@
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
       @click="$appPushBack()"
     >
-      <img v-lazy="'/img/app-icons/stow.png'" width="25" height="25" />
+      <img v-lazy="'/img/icons-app/stow.png'" width="25" height="25" />
     </div>
 
     <div class="miniapp-5bce5b8f873dd260895c472435bfcdf4">
@@ -233,10 +233,6 @@ i.miniapp-dfc72e0d49207e3dd9a8244d6abf7021 {
   img.van-icon__image {
     border-radius: unset;
   }
-}
-
-img.miniapp-e326b5c8d2279d775a16ba9496aae07f {
-  border-radius: @app-border-radius;
 }
 
 img.miniapp-53eb3ce1747e8a37d3f912fab5a6f24e,

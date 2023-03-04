@@ -19,18 +19,12 @@
         <template #title>
           <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
             <span
-              class="
-                my-25930e3036f13852cb0b29694bbab611
-                my-b068931cc450442b63f5b3d276ea4297
-              "
+              class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
             >
               {{ loginInfo.name }}
             </span>
             <span
-              class="
-                my-25930e3036f13852cb0b29694bbab611
-                my-293a35164a20c927b0fd61942fbc1cf2
-              "
+              class="my-25930e3036f13852cb0b29694bbab611 my-293a35164a20c927b0fd61942fbc1cf2"
             >
               <van-tag
                 round
@@ -48,7 +42,7 @@
             @click="showInfo.languageMenu = true"
             class="my-35b118640aa1bb334cacc58d3215f130"
           >
-            <van-icon name="/img/app-icons/translate.png" size="18" />
+            <van-icon name="/img/icons-app/translate.png" size="18" />
           </div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div
@@ -116,13 +110,13 @@
         "
         width="100"
         height="100"
-        class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+        class="app-border-radius"
       />
       <img
-        v-lazy="'/img/app-icons/my_home_page.png'"
+        v-lazy="'/img/icons-app/my_home_page.png'"
         width="25"
         height="25"
-        class="my-ef65f15f01e7d076cc4ef40d753e4d65"
+        class="app-border-radius my-ef65f15f01e7d076cc4ef40d753e4d65"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ loginInfo.description || "这个人很懒，什么都没有留下" }}
@@ -135,7 +129,7 @@
         class="my-71c2fb64c38e4ee108607ca840607e48"
       >
         <van-cell
-          icon="/img/app-icons/game.png"
+          icon="/img/icons-app/game.png"
           title="全局BP模拟器"
           label="第一次使用务必看一下"
           value="自豪的使用语雀"
@@ -151,7 +145,7 @@
           class="my-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
-            icon="/img/game-icons/team.png"
+            icon="/img/icons-game/team.png"
             to="/game/team"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
@@ -166,7 +160,7 @@
             </template>
           </van-grid-item>
           <van-grid-item
-            icon="/img/game-icons/engage.png"
+            icon="/img/icons-game/engage.png"
             to="/game/engage"
             icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="my-308ffde0dc5bd5718dcf0396fcc2a596"
@@ -192,7 +186,7 @@
       >
         <van-cell
           title="王者荣耀"
-          icon="/img/game-icons/king.png"
+          icon="/img/icons-game/king.png"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
@@ -207,7 +201,7 @@
         </van-cell>
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
-            icon="/img/app-icons/hero_black.png"
+            icon="/img/icons-app/hero_black.png"
             title="关注列表"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
@@ -218,10 +212,7 @@
               class="app-c1351782c9c93025d72864180d0cf28c"
             >
               <ul
-                class="
-                  app-d865b50ce307751bdeb9a6ab16e7baf9
-                  app-9e60d3ee1e1574cae90960f940c0a821
-                "
+                class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
               >
                 <li
                   v-for="(data, index) in loginInfo.heroList"
@@ -231,16 +222,18 @@
                 >
                   <div :style="{ position: 'relative' }">
                     <img
-                      v-lazy="
-                        '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                        data.id +
-                        '/' +
-                        data.id +
-                        '.jpg'
-                      "
+                      v-lazy="{
+                        src: '/img/icons-hero/' + data.id + '.jpg',
+                        error:
+                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                          data.id +
+                          '/' +
+                          data.id +
+                          '.jpg',
+                      }"
                       width="35"
                       height="35"
-                      class="app-4ab161130e76571ab0c31aa23a6238c7"
+                      class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
                       v-if="data.fightPowerIcon"
@@ -344,7 +337,7 @@
             "
           />
           <van-cell
-            icon="/img/app-icons/coffee.png"
+            icon="/img/icons-app/coffee.png"
             title="请我喝杯咖啡"
             label="制作不易，支持一下"
             value="爱发电"
@@ -841,7 +834,6 @@ export default {
 <style scoped lang="less">
 img.my-ef65f15f01e7d076cc4ef40d753e4d65 {
   background-color: white !important;
-  border-radius: @app-border-radius;
   margin-left: -26px;
   margin-top: 71px;
   padding: 1px;

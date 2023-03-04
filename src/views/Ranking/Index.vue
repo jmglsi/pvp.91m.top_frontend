@@ -615,10 +615,6 @@ export default {
   font-family: monospace;
 }
 
-img.ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3 {
-  border-radius: @app-border-radius;
-}
-
 img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
   border-radius: unset;
   margin-left: -10px;
@@ -630,10 +626,6 @@ img.ranking-e49cd5784f7893174dadee338fd0e61b {
   margin-left: -5px;
   margin-top: -10px;
   position: absolute;
-}
-
-img.ranking-a548cbd20a565cc98caf397c9bfd7cdb {
-  border-radius: @app-border-radius;
 }
 
 ul.ranking-f138efce9d200665110c7c47b8a57811 {

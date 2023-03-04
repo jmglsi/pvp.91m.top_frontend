@@ -32,7 +32,7 @@
     <div class="return-0c81212fbe656b4245967fe1fba3413e">
       <div v-if="type == 0" class="return-4e31671abda91ffcc22a860a7bcd84ee">
         <van-row>
-          <a-popover arrowPointAtCenter placement="bottomLeft" trigger="click">
+          <a-popover arrowPointAtCenter trigger="click" placement="bottomLeft">
             <van-col span="8">
               <div class="return-194d92f12722c6d346dc1207ba7d2499">
                 <div>
@@ -40,7 +40,7 @@
                     v-lazy="topInfo[1].skinImg"
                     width="50"
                     height="50"
-                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                    class="app-border-radius"
                   />
                 </div>
                 <div>
@@ -77,7 +77,7 @@
               <span>还需:{{ topInfo[1].needTime }} 小时</span>
             </template>
           </a-popover>
-          <a-popover arrowPointAtCenter placement="bottom" trigger="click">
+          <a-popover arrowPointAtCenter trigger="click" placement="bottom">
             <van-col span="8">
               <div class="return-6fc36a6c243522e9579bb8500fcd8812">
                 <div>
@@ -85,10 +85,10 @@
                     v-lazy="topInfo[0].skinImg"
                     width="75"
                     height="75"
-                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                    class="app-border-radius"
                   />
                   <img
-                    v-lazy="'/img/app-icons/crown.png'"
+                    v-lazy="'/img/icons-app/crown.png'"
                     width="50"
                     height="50"
                     class="return-c3aea51299c526f7b079c527ae02deb9"
@@ -123,7 +123,7 @@
               </span>
             </template>
           </a-popover>
-          <a-popover arrowPointAtCenter placement="bottomLeft" trigger="click">
+          <a-popover arrowPointAtCenter trigger="click" placement="bottomLeft">
             <van-col span="8">
               <div class="return-2e9cd6ca0ca7a6d34edb205e1087b7e1">
                 <div>
@@ -131,7 +131,7 @@
                     v-lazy="topInfo[2].skinImg"
                     width="50"
                     height="50"
-                    class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                    class="app-border-radius"
                   />
                 </div>
                 <div>
@@ -193,7 +193,7 @@
                   v-lazy="row.skinImg"
                   width="35"
                   height="35"
-                  class="app-3b9655ab218c7f1a18f5dacd778a52f0"
+                  class="app-border-radius"
                 />
                 <div
                   class="
@@ -306,15 +306,15 @@ export default {
       clientHeight: 0,
       topInfo: [
         {
-          skinImg: "/img/app-icons/hero_white.png",
+          skinImg: "/img/icons-app/hero_white.png",
           tag: {},
         },
         {
-          skinImg: "/img/app-icons/hero_white.png",
+          skinImg: "/img/icons-app/hero_white.png",
           tag: {},
         },
         {
-          skinImg: "/img/app-icons/hero_white.png",
+          skinImg: "/img/icons-app/hero_white.png",
           tag: {},
         },
       ],

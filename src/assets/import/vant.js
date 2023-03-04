@@ -70,7 +70,7 @@ Vue
   .use(ImagePreview)
   .use(Lazyload, {
     lazyComponent: true,
-    loading: '/img/app-icons/loading.png'
+    loading: '/img/icons-app/loading.png'
   })
   .use(Loading)
   .use(NavBar)

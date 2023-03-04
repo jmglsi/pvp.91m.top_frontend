@@ -39,7 +39,7 @@
               <img
                 v-if="showInfo.parameter && hero.info.change.trendType > 0"
                 v-lazy="
-                  '/img/app-icons/hot_' + hero.info.change.trendType + '.png'
+                  '/img/icons-app/hot_' + hero.info.change.trendType + '.png'
                 "
                 width="15"
                 height="15"
@@ -128,33 +128,25 @@
         >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
-              v-lazy="'/img/app-icons/gold.png'"
+              v-lazy="'/img/icons-app/gold.png'"
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
             />
             <span
-              class="
-                app-0fc3cfbc27e91ea60a787de13dae3e3c
-                app-5f19eaf71f40d74d66be84db52b3ad87
-                hero-0fc3cfbc27e91ea60a787de13dae3e3c
-              "
+              class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 hero-0fc3cfbc27e91ea60a787de13dae3e3c"
             >
               {{ hero.info.equipmentMoney || 0 }}
             </span>
 
             <img
-              v-lazy="'/img/app-icons/time.png'"
+              v-lazy="'/img/icons-app/time.png'"
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
             />
             <span
-              class="
-                app-0fc3cfbc27e91ea60a787de13dae3e3c
-                app-5f19eaf71f40d74d66be84db52b3ad87
-                hero-0fc3cfbc27e91ea60a787de13dae3e3c
-              "
+              class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 hero-0fc3cfbc27e91ea60a787de13dae3e3c"
             >
               {{ hero.info.usedtime || 0 }}
             </span>
@@ -192,34 +184,32 @@
           <div class="hero-f3412345b511c61986bba9a39793157f">
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
-                v-lazy="hero.info.skill[0].img"
+                v-lazy="{
+                  src: '/img/icons-skill/' + hero.info.skill[0].id + '.jpg',
+                  error: hero.info.skill[0].img,
+                }"
                 width="25"
                 height="25"
-                class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
+                class="app-border-radius hero-ff2364a0be3d20e46cc69efb36afe9a5"
               />
               <span
-                class="
-                  app-0fc3cfbc27e91ea60a787de13dae3e3c
-                  app-5f19eaf71f40d74d66be84db52b3ad87
-                  hero-0fc3cfbc27e91ea60a787de13dae3e3c
-                "
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 hero-0fc3cfbc27e91ea60a787de13dae3e3c"
               >
                 {{ hero.info.skill[0].pickRate }}%
               </span>
             </span>
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
-                v-lazy="hero.info.skill[1].img"
+                v-lazy="{
+                  src: '/img/icons-equipment/' + hero.info.skill[1].id + '.jpg',
+                  error: hero.info.skill[1].img,
+                }"
                 width="25"
                 height="25"
-                class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
+                class="app-border-radius hero-ff2364a0be3d20e46cc69efb36afe9a5"
               />
               <span
-                class="
-                  app-0fc3cfbc27e91ea60a787de13dae3e3c
-                  app-5f19eaf71f40d74d66be84db52b3ad87
-                  hero-0fc3cfbc27e91ea60a787de13dae3e3c
-                "
+                class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 hero-0fc3cfbc27e91ea60a787de13dae3e3c"
               >
                 {{ hero.info.skill[1].pickRate }}%
               </span>
@@ -344,7 +334,7 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
               </template>
 
               <HeroInscriptionList :heroId="hero.info.id" />
@@ -411,7 +401,7 @@
       <van-tabbar fixed class="app-130a360689f8d613da10c94d53527a1b">
         <van-tabbar-item
           v-if="hero.info.id && hero.info.id < 999"
-          :icon="'/img/app-icons/like_' + hero.info.likeStatus + '.png'"
+          :icon="'/img/icons-app/like_' + hero.info.likeStatus + '.png'"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           @click="onHeroLikeClick"
         >
@@ -419,7 +409,7 @@
         </van-tabbar-item>
         <!--
           <van-tabbar-item
-            icon="/img/app-icons/research.png"
+            icon="/img/icons-app/research.png"
             icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
             @click="
               hero.info.wikiId
@@ -436,7 +426,7 @@
           </van-tabbar-item>
         -->
         <van-tabbar-item
-          icon="/img/app-icons/group.png"
+          icon="/img/icons-app/group.png"
           to="/search/?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >
@@ -532,11 +522,11 @@ export default {
           tips: this.$t("loading"),
           vote: [
             {
-              img: "/img/app-icons/cry.png",
+              img: "/img/icons-app/cry.png",
               text: this.$t("loading"),
             },
             {
-              img: "/img/app-icons/smile.png",
+              img: "/img/icons-app/smile.png",
               text: this.$t("loading"),
             },
           ],

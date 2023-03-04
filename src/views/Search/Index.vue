@@ -23,12 +23,16 @@
                 <img
                   v-lazy="
                     tableData.cardInfo.id && tableData.cardInfo.id < 900
-                      ? tableData.cardInfo.img
-                      : '/img/app-icons/hero_white.png'
+                      ? {
+                          src:
+                            '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
+                          error: tableData.cardInfo.img,
+                        }
+                      : '/img/icons-app/hero_white.png'
                   "
                   width="30"
                   height="30"
-                  class="search-8ceeee39d23f78afb2216e6a0928f6cd"
+                  class="app-border-radius"
                 />
               </ChooseHero>
             </div>
@@ -83,10 +87,7 @@
           <div class="search-3c00205f941124762c6c5e000e7e2bde">
             <ul class="app-d865b50ce307751bdeb9a6ab16e7baf9">
               <li
-                class="
-                  app-1951b6e7c82938dd7446a41e829b247b
-                  search-9eca81635365b5dcc7960ad26bb0b714
-                "
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
               >
                 <van-cell-group
                   :border="false"
@@ -123,7 +124,7 @@
                           {{ data.value }}
                           <img
                             v-if="data.trend > 0"
-                            v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                            v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                             width="18"
                             height="18"
                             class="search-97c89d1a7343e149ab400d0bb141c7de"
@@ -135,10 +136,7 @@
                 </van-cell-group>
               </li>
               <li
-                class="
-                  app-1951b6e7c82938dd7446a41e829b247b
-                  search-9eca81635365b5dcc7960ad26bb0b714
-                "
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
               >
                 <van-cell-group
                   :border="false"
@@ -175,7 +173,7 @@
                           {{ data.value }}
                           <img
                             v-if="data.trend > 0"
-                            v-lazy="'/img/app-icons/hot_' + data.trend + '.png'"
+                            v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
                             width="18"
                             height="18"
                             class="search-97c89d1a7343e149ab400d0bb141c7de"
@@ -187,10 +185,7 @@
                 </van-cell-group>
               </li>
               <li
-                class="
-                  app-1951b6e7c82938dd7446a41e829b247b
-                  search-9eca81635365b5dcc7960ad26bb0b714
-                "
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
               >
                 <van-cell-group
                   :border="false"
@@ -221,10 +216,7 @@
                 </van-cell-group>
               </li>
               <li
-                class="
-                  app-1951b6e7c82938dd7446a41e829b247b
-                  search-9eca81635365b5dcc7960ad26bb0b714
-                "
+                class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
               >
                 <van-cell-group
                   :border="false"
@@ -280,10 +272,7 @@
                 </van-tag>
               </div>
               <div
-                class="
-                  search-93aea4a321bd36aefe85b2b0526e52e8
-                  app-52b0e5c90604d59d1814f184d58e2033
-                "
+                class="search-93aea4a321bd36aefe85b2b0526e52e8 app-52b0e5c90604d59d1814f184d58e2033"
               >
                 <van-button
                   round
@@ -351,7 +340,7 @@
                 <img
                   v-if="tableData.cardInfo.change.trendType > 0"
                   v-lazy="
-                    '/img/app-icons/hot_' +
+                    '/img/icons-app/hot_' +
                     tableData.cardInfo.change.trendType +
                     '.png'
                   "
@@ -432,7 +421,7 @@
                       <img
                         v-if="tableData.cardInfo.change.updateType != 0"
                         v-lazy="
-                          '/img/app-icons/hot_' +
+                          '/img/icons-app/hot_' +
                           tableData.cardInfo.change.updateType +
                           '.png'
                         "
@@ -769,7 +758,7 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   {{ $t("prepare-for-war") }}
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
               </template>
             </van-tab>
             <van-tab
@@ -782,7 +771,7 @@
                   {{ $t("other") }}
                 </span>
                 <img
-                  v-lazy="'/img/app-icons/star.png'"
+                  v-lazy="'/img/icons-app/star.png'"
                   width="17"
                   height="17"
                 />
@@ -841,12 +830,12 @@
                         ? (showInfo.heroFeature = true)
                         : $message.info($appMsg.info[1025])
                     "
-                    icon="/img/app-icons/jungle.png"
+                    icon="/img/icons-app/jungle.png"
                     text="打野数据"
                   />
                   <van-grid-item
                     @click="$message.info($appMsg.info[1024])"
-                    icon="/img/app-icons/medal.png"
+                    icon="/img/icons-app/medal.png"
                     text="最低金牌"
                   />
                   <van-grid-item
@@ -860,7 +849,7 @@
                         0
                       )
                     "
-                    icon="/img/app-icons/attack_speed.png"
+                    icon="/img/icons-app/attack_speed.png"
                     text="攻速阈值"
                   />
                   <van-grid-item
@@ -937,7 +926,7 @@
           <span>buff 双开:{{ tableData.cardInfo.feature.redBlue }}</span>
         </div>
         <div class="search-8c36adba08eefa688be68bc3cf4d5fd6">
-          <img width="250" height="250" v-lazy="'/img/app-icons/map.png'" />
+          <img width="250" height="250" v-lazy="'/img/icons-app/map.png'" />
         </div>
         <div class="search-a4339819b3dc402989af88a6fdfe4b76">
           <van-tag
@@ -1095,7 +1084,7 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
               </template>
 
               <HeroInscriptionList
@@ -1520,10 +1509,6 @@ img.search-3cdd9882517a697dfcf15e4bcf9fde7e {
 img.search-20a7da8370c02da6e860aaebf3a54c57 {
   border-radius: unset;
   width: 100%;
-}
-
-img.search-8ceeee39d23f78afb2216e6a0928f6cd {
-  border-radius: @app-border-radius;
 }
 
 i.search-a0edf16f0e677f3e28dfd77595f437be {

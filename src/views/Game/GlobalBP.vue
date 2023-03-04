@@ -2,7 +2,7 @@
   <div v-if="isPortrait" class="game-bp-portrait">
     <div slot-scope class="game-a76e75b5854094183e66c274e1d276e9">
       <img
-        v-lazy="'/img/game-icons/horizontal.png'"
+        v-lazy="'/img/icons-game/horizontal.png'"
         @click="isPortrait = false"
         width="100"
         height="100"
@@ -21,7 +21,7 @@
             $t('open-url.title'),
             '查看常见问题',
             {
-              path: '//www.yuque.com/jmglsi/pvp/gbpl91',
+              path: url.question,
             },
             0
           )
@@ -51,10 +51,7 @@
 
     <div class="game-716fcd585a785195878b2683fca82e6f">
       <div
-        class="
-          game-8c9cb4a232c7e88403dddc3a0e589162
-          game-bf2c7b7ad9bcf75cd72e0b4ce30500e3
-        "
+        class="game-8c9cb4a232c7e88403dddc3a0e589162 game-bf2c7b7ad9bcf75cd72e0b4ce30500e3"
       >
         <ul>
           <li
@@ -73,12 +70,16 @@
               <img
                 v-lazy="
                   heroId
-                    ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                      heroId +
-                      '/' +
-                      heroId +
-                      '.jpg'
-                    : '/img/app-icons/hero_white.png'
+                    ? {
+                        src: '/img/icons-hero/' + heroId + '.jpg',
+                        error:
+                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                          heroId +
+                          '/' +
+                          heroId +
+                          '.jpg',
+                      }
+                    : '/img/icons-app/hero_white.png'
                 "
                 :class="
                   bpMode == 'edit' &&
@@ -92,7 +93,7 @@
               />
               <img
                 v-if="gameInfo.result.rows[tabsInfo.model].BPOrder[index] > 0"
-                v-lazy="'/img/game-icons/locked.png'"
+                v-lazy="'/img/icons-game/locked.png'"
                 width="20"
                 height="20"
                 class="game-dce7c4174ce9323904a934a486c41288"
@@ -103,10 +104,7 @@
       </div>
 
       <div
-        class="
-          game-c6a2f8b3941d7f91bc4e51839e5371e0
-          game-ba9bced6af8121cf6413000a4274ac2b
-        "
+        class="game-c6a2f8b3941d7f91bc4e51839e5371e0 game-ba9bced6af8121cf6413000a4274ac2b"
       >
         <ul>
           <li
@@ -125,12 +123,16 @@
               <img
                 v-lazy="
                   heroId
-                    ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                      heroId +
-                      '/' +
-                      heroId +
-                      '.jpg'
-                    : '/img/app-icons/hero_white.png'
+                    ? {
+                        src: '/img/icons-hero/' + heroId + '.jpg',
+                        error:
+                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                          heroId +
+                          '/' +
+                          heroId +
+                          '.jpg',
+                      }
+                    : '/img/icons-app/hero_white.png'
                 "
                 :class="
                   bpMode == 'edit' &&
@@ -144,7 +146,7 @@
               />
               <img
                 v-if="gameInfo.result.rows[tabsInfo.model].BPOrder[index] > 0"
-                v-lazy="'/img/game-icons/locked.png'"
+                v-lazy="'/img/icons-game/locked.png'"
                 width="20"
                 height="20"
                 class="game-dce7c4174ce9323904a934a486c41288"
@@ -185,12 +187,16 @@
                   <img
                     v-lazy="
                       heroId
-                        ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                          heroId +
-                          '/' +
-                          heroId +
-                          '.jpg'
-                        : '/img/app-icons/hero_white.png'
+                        ? {
+                            src: '/img/icons-hero/' + heroId + '.jpg',
+                            error:
+                              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                              heroId +
+                              '/' +
+                              heroId +
+                              '.jpg',
+                          }
+                        : '/img/icons-app/hero_white.png'
                     "
                     :class="
                       bpMode == 'edit' &&
@@ -300,7 +306,10 @@
                           >
                         </span>
                         <img
-                          v-lazy="data.img"
+                          v-lazy="{
+                            src: '/img/icons-hero/' + data.id + '.jpg',
+                            error: data.img,
+                          }"
                           :style="
                             tabsInfo.model < 6 && (data.isBan || data.isUsed)
                               ? { filter: 'grayscale(1)' }
@@ -366,7 +375,10 @@
                           >
                         </span>
                         <img
-                          v-lazy="data.img"
+                          v-lazy="{
+                            src: '/img/icons-hero/' + data.id + '.jpg',
+                            error: data.img,
+                          }"
                           :style="
                             tabsInfo.model < 6 && (data.isBan || data.isUsed)
                               ? { filter: 'grayscale(1)' }
@@ -418,12 +430,16 @@
                   <img
                     v-lazy="
                       heroId
-                        ? '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                          heroId +
-                          '/' +
-                          heroId +
-                          '.jpg'
-                        : '/img/app-icons/hero_white.png'
+                        ? {
+                            src: '/img/icons-hero/' + heroId + '.jpg',
+                            error:
+                              '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                              heroId +
+                              '/' +
+                              heroId +
+                              '.jpg',
+                          }
+                        : '/img/icons-app/hero_white.png'
                     "
                     :class="
                       bpMode == 'edit' &&
@@ -455,10 +471,7 @@
 
     <div
       v-if="tabsInfo.model < 6"
-      class="
-        game-beedfb16b1c81d2901c32b6dcc2939d0
-        game-e4e6288c92630a6c237c15442fdb0917
-      "
+      class="game-beedfb16b1c81d2901c32b6dcc2939d0 game-e4e6288c92630a6c237c15442fdb0917"
     >
       <ul>
         <li v-if="bpMode == 'edit'">
@@ -481,7 +494,7 @@
           v-if="bpMode == 'view'"
           class="app-52b0e5c90604d59d1814f184d58e2033"
         >
-          <a-dropdown placement="bottomCenter" :trigger="['click']">
+          <a-dropdown :trigger="['click']" placement="bottomCenter">
             <van-button
               round
               :icon="authorInfo.logo"
@@ -490,16 +503,18 @@
             >
               {{ authorInfo.name }}
             </van-button>
-            <a-menu slot="overlay">
-              <a-menu-item
-                v-for="(data, index) in authorInfo.actions"
-                :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
-                :disabled="data.title == '-' && (!data.to || !data.url)"
-                @click="onUrlClick(data)"
-              >
-                {{ data.title }}
-              </a-menu-item>
-            </a-menu>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item
+                  v-for="(data, index) in authorInfo.actions"
+                  :key="'game-c0698b41400686c1c43b9ff3061c6802-' + index"
+                  :disabled="data.title == '-' && (!data.to || !data.url)"
+                  @click="onUrlClick(data)"
+                >
+                  {{ data.title }}
+                </a-menu-item>
+              </a-menu>
+            </template>
           </a-dropdown>
         </li>
         <li class="app-52b0e5c90604d59d1814f184d58e2033">
@@ -538,10 +553,7 @@
     <!-- 右上角 -->
 
     <div
-      class="
-        game-173f312c43fe32a4f01c84d1cf0520b1
-        game-e4e6288c92630a6c237c15442fdb0917
-      "
+      class="game-173f312c43fe32a4f01c84d1cf0520b1 game-e4e6288c92630a6c237c15442fdb0917"
     >
       <ul>
         <li>
@@ -602,13 +614,15 @@
               </span>
               <template slot="title">
                 <img
-                  v-lazy="
-                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                    recommendHeroId +
-                    '/' +
-                    recommendHeroId +
-                    '.jpg'
-                  "
+                  v-lazy="{
+                    src: '/img/icons-hero/' + recommendHeroId + '.jpg',
+                    error:
+                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                      recommendHeroId +
+                      '/' +
+                      recommendHeroId +
+                      '.jpg',
+                  }"
                   width="25"
                   height="25"
                   class="game-1ab74bf7276acc5985f078fee7e63109"
@@ -628,41 +642,40 @@
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
         </li>
         <li>
-          <a-dropdown placement="topCenter" :trigger="['click']">
+          <a-dropdown :trigger="['click']" placement="topCenter">
             <van-button round icon="apps-o" size="small" color="black" />
-            <a-menu
-              slot="overlay"
-              class="game-c22cea301eff6baea51a9da08c0a680a"
-            >
-              <a-menu-item
-                v-if="
-                  bpMode == 'view' &&
-                  gameInfo.result.rows.length - 1 == tabsInfo.model
-                "
-                @click="onToolsMenuClick(0)"
-                >删除本局</a-menu-item
-              >
-              <a-menu-item
-                v-if="
-                  bpMode == 'view' &&
-                  gameInfo.result.rows.length - 1 == tabsInfo.model &&
-                  gameInfo.result.rows.length < 7
-                "
-                @click="onToolsMenuClick(1)"
-                >再来一局</a-menu-item
-              >
-              <a-menu-item
-                v-if="
-                  bpMode == 'edit' &&
-                  gameInfo.result.rows.length - 1 == tabsInfo.model
-                "
-                @click="onToolsMenuClick(2)"
-                >重置本局</a-menu-item
-              >
-              <a-menu-item @click="onToolsMenuClick(3)">
-                {{ bpMode == "view" ? "编辑" : "保存" }}本局
-              </a-menu-item>
-            </a-menu>
+            <template #overlay>
+              <a-menu class="game-c22cea301eff6baea51a9da08c0a680a">
+                <a-menu-item
+                  v-if="
+                    bpMode == 'view' &&
+                    gameInfo.result.rows.length - 1 == tabsInfo.model
+                  "
+                  @click="onToolsMenuClick(0)"
+                  >删除本局</a-menu-item
+                >
+                <a-menu-item
+                  v-if="
+                    bpMode == 'view' &&
+                    gameInfo.result.rows.length - 1 == tabsInfo.model &&
+                    gameInfo.result.rows.length < 7
+                  "
+                  @click="onToolsMenuClick(1)"
+                  >再来一局</a-menu-item
+                >
+                <a-menu-item
+                  v-if="
+                    bpMode == 'edit' &&
+                    gameInfo.result.rows.length - 1 == tabsInfo.model
+                  "
+                  @click="onToolsMenuClick(2)"
+                  >重置本局</a-menu-item
+                >
+                <a-menu-item @click="onToolsMenuClick(3)">
+                  {{ bpMode == "view" ? "编辑" : "保存" }}本局
+                </a-menu-item>
+              </a-menu>
+            </template>
           </a-dropdown>
         </li>
         <li v-if="bpMode == 'view'">
@@ -924,7 +937,7 @@ export default {
       },
       authorInfo: {
         name: "本地",
-        logo: "/img/game-icons/kpl.png",
+        logo: "/img/icons-game/kpl.png",
         actions: [
           {
             title: "注册登录后",

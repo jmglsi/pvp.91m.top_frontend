@@ -43,45 +43,40 @@
               "
             >
               <img
-                v-lazy="row.img"
+                v-lazy="{
+                  src: '/img/icons-hero/' + row.id + '.jpg',
+                  error: row.img,
+                }"
                 width="50"
                 height="50"
-                class="ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                 <img
-                  v-lazy="row.skill[0].img"
+                  v-lazy="{
+                    src: '/img/icons-skill/' + row.skill[0].id + '.jpg',
+                    error: row.skill[0].img,
+                  }"
                   width="15"
                   height="15"
-                  class="
-                    ranking-95a25d46f98b0ec553d892cc45037d57
-                    ranking-35af5e6c0fc290aa4f2e38d4c8296a03
-                  "
+                  class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                 />
                 <span
-                  class="
-                    app-0fc3cfbc27e91ea60a787de13dae3e3c
-                    app-5f19eaf71f40d74d66be84db52b3ad87
-                    ranking-043052eea2d064cab23119e56f4f640e
-                  "
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                 >
                   {{ row.skill[0].pickRate }}%
                 </span>
                 <img
-                  v-lazy="row.skill[1].img"
+                  v-lazy="{
+                    src: '/img/icons-equipment/' + row.skill[1].id + '.jpg',
+                    error: row.skill[1].img,
+                  }"
                   width="15"
                   height="15"
-                  class="
-                    ranking-95a25d46f98b0ec553d892cc45037d57
-                    ranking-fbfe7b256ce6b4df1d03d8022163c6d2
-                  "
+                  class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                 />
                 <span
-                  class="
-                    app-0fc3cfbc27e91ea60a787de13dae3e3c
-                    app-5f19eaf71f40d74d66be84db52b3ad87
-                    ranking-dabb6e25dffefe5b4821b7062afbdaef
-                  "
+                  class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                 >
                   {{ row.skill[1].pickRate }}%
                 </span>
@@ -116,7 +111,7 @@
                   <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                     <img
                       v-if="row.trend > 0"
-                      v-lazy="'/img/app-icons/hot_' + row.trend + '.png'"
+                      v-lazy="'/img/icons-app/hot_' + row.trend + '.png'"
                       width="15"
                       height="15"
                       class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
@@ -180,7 +175,7 @@
             <template #default="{ row }">
               <div :style="{ position: 'relative' }">
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
-                  <a-popover placement="right" trigger="click">
+                  <a-popover trigger="click" placement="right">
                     <template #content>
                       <div
                         v-html="heroProficiency"
@@ -209,7 +204,7 @@
                       <img
                         v-if="row.change.updateType != 0"
                         v-lazy="
-                          '/img/app-icons/hot_' + row.change.updateType + '.png'
+                          '/img/icons-app/hot_' + row.change.updateType + '.png'
                         "
                         width="15"
                         height="15"
@@ -460,7 +455,7 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/app-icons/hot.png'" width="13" height="13" />
+                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
               </template>
 
               <HeroInscriptionList
