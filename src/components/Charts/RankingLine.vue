@@ -7,8 +7,8 @@
         :mark-line="lineData.markLine"
         :data="charts"
         :after-config="afterConfig"
-        width="85px"
-        height="50px"
+        :width="exStyle.width"
+        :height="exStyle.height"
         class="ranking-c934456eea80a3c5db05ed142c757e07"
       />
     </div>
@@ -31,6 +31,14 @@ export default {
     charts: {
       type: Object,
       default: () => ({}),
+    },
+    exStyle: {
+      type: Object,
+      default: () => ({
+        width: "85px",
+        height: "50px",
+        grid: { left: -40, bottom: 40, width: 118 },
+      }),
     },
     animation: {
       type: Boolean,
@@ -112,9 +120,10 @@ export default {
             show: false,
           },
           grid: {
-            left: -40,
-            bottom: 40,
-            width: 118,
+            left: this.exStyle.grid.left,
+            bottom: this.exStyle.grid.bottom,
+            width: this.exStyle.grid.width,
+            height: this.exStyle.grid.height,
             tooltip: {
               show: false,
             },
@@ -161,7 +170,6 @@ export default {
 <style scoped lang="less">
 div.ranking-f879e7f0824fcc83d172401c3cb31b8a {
   height: @app-height;
-  overflow: hidden;
   width: auto;
 }
 </style>

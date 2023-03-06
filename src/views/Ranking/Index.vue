@@ -365,10 +365,9 @@ export default {
           { value: 0, text: "全部分路 ω' )و" },
           { value: 1, text: "对抗路" },
           { value: 2, text: "中路" },
-          //{ value: 3, text: "对抗路 (坦克)" },
+          { value: 3, text: "发育路" },
           { value: 4, text: "打野" },
-          { value: 5, text: "发育路" },
-          { value: 6, text: "游走" },
+          { value: 5, text: "游走" },
         ],
       },
       wjAreaTypeInfo: {

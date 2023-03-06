@@ -249,7 +249,6 @@
             >
               <van-tab
                 v-for="(data, index) in heroType"
-                :disabled="index == 3"
                 :key="'game-687df0d960fe6dade3153dc0ba925e79-' + index"
                 :title="data"
               />
@@ -826,15 +825,7 @@ export default {
     return {
       copyData: "",
       gameLabel: this.$route.params.id || "",
-      heroType: [
-        "全部分路",
-        "对抗路",
-        "中路",
-        "对抗路 (坦克)",
-        "打野",
-        "发育路",
-        "游走",
-      ],
+      heroType: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
       bpCountdown: 45,
       bpOpponent: {},
       bpSelf: {},

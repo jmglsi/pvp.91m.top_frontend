@@ -86,7 +86,7 @@
         >
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
-              {{ positionInfo[row.positionId] }}
+              {{ $appConfigInfo.positionInfo[row.positionId + 1][0] }}
             </div>
           </template>
         </vxe-table-column>
@@ -226,7 +226,6 @@ export default {
           rows: [],
         },
       },
-      positionInfo: ["对抗路", "中路", "发育路", "打野", "游走"],
       genreInfo: {
         type: 0,
       },

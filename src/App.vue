@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <AppReadme v-if="agree" />
+  <div id="app" :style="{ zoom: zoom }">
+    <AppReadme v-if="!noUpdateTips" />
 
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <div v-if="$appConfigInfo.appInfo.pwa == 1">
@@ -113,7 +113,9 @@ export default {
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
 
-      /view/i.test(nowPath) ? (this.agree = false) : (this.agree = true);
+      /hero\/(.*?)\/view/i.test(nowPath)
+        ? (this.noUpdateTips = true)
+        : (this.noUpdateTips = false);
     },
   },
   metaInfo() {
@@ -151,7 +153,8 @@ export default {
   },
   data() {
     return {
-      agree: true,
+      zoom: 1,
+      noUpdateTips: true,
       tableData: {
         result: {
           model: "/",
@@ -206,6 +209,7 @@ export default {
           tempText = q.tempText || null,
           appConfigInfo = this.$appConfigInfo;
 
+        this.zoom = q.zoom || 1;
         this.tableData = data;
         this.tableData.result.model = this.$route.path;
 
@@ -214,7 +218,7 @@ export default {
         }
 
         if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
-          if (appInfo.update.text && this.agree) {
+          if (appInfo.update.text && !this.noUpdateTips) {
             this.$dialog
               .alert({
                 title: appInfo.update.title,

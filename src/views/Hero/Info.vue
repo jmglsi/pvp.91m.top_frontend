@@ -585,9 +585,9 @@ export default {
       window.addEventListener("scroll", this.listenerScrollTop);
     },
     initPage: function () {
-      let id = this.$route.params.id;
+      let p = this.$route.params;
 
-      this.getHeroInfo(id);
+      this.getHeroInfo(p.id);
       this.initShow();
     },
     listenerScrollTop: function () {

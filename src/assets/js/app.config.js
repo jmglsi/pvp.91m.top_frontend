@@ -44,7 +44,7 @@ Vue.prototype.$appConfigInfo = {
     skillTips: false,
     wanjiaTips: false
   },
-  positionInfo: []
+  positionInfo: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"]
 };
 
 Vue.prototype.$appLanguageInfo = [

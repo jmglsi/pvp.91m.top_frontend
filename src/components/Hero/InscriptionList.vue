@@ -96,10 +96,10 @@ export default {
         gamePlayerName: this.$t("loading"),
       },
       actions: [
-        { name: "第 1 套备战", value: 0 },
-        { name: "第 2 套备战", value: 1 },
-        { name: "第 3 套备战", value: 2 },
-        { name: "查看主页", subname: "需要安装王者营地", value: 3 },
+        { value: 0, name: "第 1 套备战" },
+        { value: 1, name: "第 2 套备战" },
+        { value: 2, name: "第 3 套备战" },
+        { value: 3, name: "查看主页", subname: "需要安装王者营地" },
       ],
       showInfo: {
         inscriptionMenu: false,

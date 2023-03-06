@@ -19,7 +19,6 @@
       >
         <van-tab
           v-for="(data, index) in heroType"
-          :disabled="index == 3"
           :key="'choose-a726de89f2f7a2df77b98d2aeb366fff-' + index"
           :title="data"
         />
@@ -68,30 +67,19 @@ export default {
   },
   data() {
     return {
-      heroType: [
-        "全部分路",
-        "对抗路",
-        "中路",
-        "对抗路 (坦克)",
-        "打野",
-        "发育路",
-        "游走",
-      ],
+      heroType: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
       tableData: {
         model: 0,
         result: {
           rows: [],
         },
       },
-      tabsInfo: {
-        model: 0,
-      },
       showInfo: {
         actionSheet: false,
       },
     };
   },
-  created() {
+  mounted() {
     this.getRanking();
   },
   methods: {

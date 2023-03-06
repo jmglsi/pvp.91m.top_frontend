@@ -690,9 +690,10 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$route.query;
+      let q = this.$route.query,
+        p = this.$route.params;
 
-      this.chooseInfo.heroId = this.$route.params.id;
+      this.chooseInfo.heroId = p.id;
       this.sidebarInfo.model = 6;
       this.listInfo.equipment = equipment;
       this.chooseInfo.avg = q.avg || 750;
