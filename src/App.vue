@@ -574,6 +574,10 @@ div.app-76da017caccd1fb264af2218f6064b0d {
 div.app-fe64546261ce7a19b6784737edd0fdf1 {
   height: 423px;
 
+  label.ant-checkbox-wrapper {
+    width: 250px;
+  }
+
   div.app-41b238cc893836e28b50cd5a59843803 {
     margin-top: 175px;
     position: absolute;

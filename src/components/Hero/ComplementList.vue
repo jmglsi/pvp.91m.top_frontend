@@ -18,10 +18,9 @@
           :filters="[
             { value: 1, label: '对抗路' },
             { value: 2, label: '中路' },
-            //{ value: 3, label: '对抗路 (坦克)' },
+            { value: 3, label: '发育路' },
             { value: 4, label: '打野' },
-            { value: 5, label: '发育路' },
-            { value: 6, label: '游走' },
+            { value: 5, label: '游走' },
           ]"
           :filter-method="filterMethod"
           width="90"
@@ -52,10 +51,9 @@
           :filters="[
             { value: 1, label: '对抗路' },
             { value: 2, label: '中路' },
-            //{ value: 3, label: '对抗路 (坦克)' },
+            { value: 3, label: '发育路' },
             { value: 4, label: '打野' },
-            { value: 5, label: '发育路' },
-            { value: 6, label: '游走' },
+            { value: 5, label: '游走' },
           ]"
           :filter-method="filterMethod"
           width="90"

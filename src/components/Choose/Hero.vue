@@ -18,9 +18,9 @@
         :swipe-threshold="$appIsMobile ? 4 : 7"
       >
         <van-tab
-          v-for="(data, index) in heroType"
+          v-for="(data, index) in $appConfigInfo.positionInfo"
           :key="'choose-a726de89f2f7a2df77b98d2aeb366fff-' + index"
-          :title="data"
+          :title="data[0]"
         />
 
         <div class="choose-be7fdb49198e3c5175fd7a20e1c2ae93">
@@ -67,7 +67,6 @@ export default {
   },
   data() {
     return {
-      heroType: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
       tableData: {
         model: 0,
         result: {

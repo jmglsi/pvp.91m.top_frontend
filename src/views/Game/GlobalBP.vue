@@ -248,9 +248,9 @@
               class="app-f3cc17bc0d768ca60b8bb496a10b1990"
             >
               <van-tab
-                v-for="(data, index) in heroType"
+                v-for="(data, index) in $appConfigInfo.positionInfo"
                 :key="'game-687df0d960fe6dade3153dc0ba925e79-' + index"
-                :title="data"
+                :title="data[0]"
               />
 
               <div class="game-87740aa9337e54dbad53ec95089dca77">
@@ -825,7 +825,6 @@ export default {
     return {
       copyData: "",
       gameLabel: this.$route.params.id || "",
-      heroType: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
       bpCountdown: 45,
       bpOpponent: {},
       bpSelf: {},

@@ -1,2 +1,5 @@
+# robots.txt generated at http://tool.chinaz.com/robots/
 User-agent: *
 Disallow:
+Disallow: /admin/
+Sitemap: https://pvp.91m.top/sitemap.xml
