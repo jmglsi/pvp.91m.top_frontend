@@ -49,12 +49,20 @@ Vue.prototype.$appConfigInfo = {
 
 Vue.prototype.$appLanguageInfo = [
   {
-    title: '中文',
+    title: '中文 (简体)',
     lang: 'zh-CN'
+  },
+  {
+    title: '中文 (繁体)',
+    lang: 'zh-HK'
   },
   {
     title: 'English',
     lang: 'en-US'
+  },
+  {
+    title: '日本語',
+    lang: 'ja-JP'
   },
 ]
 

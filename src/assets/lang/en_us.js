@@ -1,76 +1,76 @@
 export default {
-  'authenticate': 'authenticate',
-  'based': 'TOPRANK statistics',
-  'competition': "competition",
-  'comprehensive': 'comprehensive',
-  'down': 'down',
-  'equipment': 'equip',
-  'hero': 'hero',
-  'more': 'more',
-  'none': 'none',
-  'other': 'other',
-  'prepare-for-war': 'prepare for war',
-  'recommend': "recommend",
-  'refresh': 'refresh',
-  'select-language': 'please select language',
-  'share': 'share',
-  'skill': 'skill',
-  'switch-view': 'switch view',
-  'unknown': 'unknown',
-  'up': 'up',
-  'please-agree-before-operation': 'please agree before operation',
-  'i-have-read-and-agreed': 'i have read and agreed',
-  'privacy-and-data-statement': 'privacy and data statement',
-  'bp': {
-    'all': 'ALL',
-    'ban': 'BAN',
-    'bp': 'BP',
-    'pick': 'PICK',
-    'rank': 'RANK',
-    'top-rank': 'TOPRANK',
-    'win': 'WIN',
+  "authenticate": "Strongest Authentication",
+  "based": "Based on Peak Competition Statistics",
+  "competition": "Competition",
+  "comprehensive": "Comprehensive",
+  "down": "Decreasing",
+  "equipment": "Equipment",
+  "hero": "Hero",
+  "more": "More",
+  "none": "No Data",
+  "other": "Other",
+  "prepare-for-war": "Prepare for Battle",
+  "recommend": "Recommended",
+  "refresh": "Refresh",
+  "select-language": "Select Language",
+  "share": "Share",
+  "skill": "Skills",
+  "switch-view": "Switch View",
+  "unknown": "Unknown",
+  "up": "Increasing",
+  "please-agree-before-operation": "Please Agree Before Proceeding",
+  "i-have-read-and-agreed": "I have read and agreed to",
+  "privacy-and-data-statement": "Privacy and Data Statement",
+  "bp": {
+    "all": "All Sections",
+    "ban": "Ban",
+    "bp": "Banned Pick",
+    "pick": "Picked",
+    "rank": "High Star Match",
+    "top-rank": "Top Match",
+    "win": "Win Rate"
   },
-  'feedback': {
-    'title': 'Suggestions Feedback',
-    'label': 'Anything is fine, welcome to complain',
-    'value': 'TXC',
+  "feedback": {
+    "title": "Feedback and Suggestions",
+    "label": "Anything goes, feel free to express yourself",
+    "value": "Tu Xiaochao"
   },
-  'my': {
-    'change': 'change password',
-    'login-i': 'register / login / change',
-    'login-out': 'login out',
-    'login': 'login',
-    'register': 'register',
+  "my": {
+    "change": "Change Password",
+    "login-i": "Register / Login / Change",
+    "login-out": "Log Out",
+    "login": "Log In",
+    "register": "Register"
   },
-  'oauth': {
-    'sign-in-with': 'sign in with',
-    'third-party-authorization': 'third party authorization',
-    'label': 'you can log in quickly after binding',
-    'value': 'see'
+  "oauth": {
+    "sign-in-with": "Sign In with Third-Party Account",
+    "third-party-authorization": "Third-Party Authorization",
+    "label": "After binding, you can log in quickly",
+    "value": "View"
   },
-  'open-source': {
-    'title': 'introduction to open source',
-    'label': 'For learning only, no commercial use',
-    'value': 'NGA'
+  "open-source": {
+    "title": "Introduction to Project Open Source",
+    "label": "For learning only, commercial use is prohibited",
+    "value": "NGA"
   },
-  'open-url': {
-    'title': 'open external link?'
+  "open-url": {
+    "title": "Do you want to open the external link?"
   },
-  'search': {
-    'history': 'search history',
-    'clean-history': 'clean history',
-    'hot-keywords': 'hot keywords',
-    'hot-talk': 'hot talk',
-    'no-adjusted-temporarily': 'no adjusted temp',
-    'no-skin-temporarily': 'no skin temp',
-    'text': 'search',
-    'placeholder': 'search'
+  "search": {
+    "history": "Search History",
+    "clean-history": "Clear Search History",
+    "hot-keywords": "Hot Keywords",
+    "hot-talk": "Hot Discussions",
+    "no-adjusted-temporarily": "Not Adjusted for the Time Being",
+    "no-skin-temporarily": "Wardrobe is Empty",
+    "text": "Search",
+    "placeholder": "Search"
   },
-  'thank': {
-    'title': 'Thank you all partners',
-    'value': 'YUQUE'
+  "thank": {
+    "title": "Thank you, partners",
+    "value": "Proudly Using Yuque"
   },
-  'nav-bar': {
-    'left-text': 'back'
-  },
+  "nav-bar": {
+    "left-text": "Return"
+  }
 }

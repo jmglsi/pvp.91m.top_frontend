@@ -9,8 +9,7 @@ Vue.use(VueMeta);
 import VueClipboard from 'vue-clipboard2';
 Vue.use(VueClipboard);
 
-import { i18n, vantLocale } from './assets/import/i18n';
-vantLocale(i18n.locale);
+import { i18n } from './assets/import/i18n';
 
 import './assets/import/antd';
 import './assets/import/vant';

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { i18n, messages } from './i18n';
 
 import {
   ActionSheet,
@@ -22,6 +23,7 @@ import {
   ImagePreview,
   Lazyload,
   Loading,
+  Locale,
   NavBar,
   Pagination,
   Picker,
@@ -96,3 +98,5 @@ Vue
   .use(Tabs)
   .use(Tag)
   .use(Uploader)
+
+Locale.use(i18n.locale, messages[i18n.locale]);

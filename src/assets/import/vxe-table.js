@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import XEUtils from 'xe-utils';
+import { i18n } from './i18n';
 
 import {
   VXETable,
@@ -13,7 +13,6 @@ import {
   Toolbar,
   Tooltip,
 } from 'vxe-table';
-import zhCN from 'vxe-table/lib/locale/lang/zh-CN';
 
 Vue
   .use(Button)
@@ -51,7 +50,7 @@ VXETable.setup({
       gt: -1
     }
   },
-  i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhCN, key), args)
+  i18n: (key, args) => i18n.t(key, args)
 });
 
 Vue.prototype.$XModal = VXETable.modal;
