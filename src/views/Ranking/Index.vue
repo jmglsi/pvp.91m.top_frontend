@@ -281,14 +281,14 @@
 </template>
 
 <script>
-import "echarts/lib/component/dataZoom";
-import "echarts/lib/component/legendScroll";
-import "echarts/lib/component/markLine";
-import "echarts/lib/component/markPoint";
-import "echarts/lib/component/title";
+import 'echarts/lib/component/dataZoom';
+import 'echarts/lib/component/legendScroll';
+import 'echarts/lib/component/markLine';
+import 'echarts/lib/component/markPoint';
+import 'echarts/lib/component/title';
 
-import "v-charts/lib/style.css";
-import "zrender/lib/svg/svg";
+import 'v-charts/lib/style.css';
+import 'zrender/lib/svg/svg';
 
 export default {
   name: "RankingHome",
@@ -734,8 +734,8 @@ div.ranking-0e1a8b3f7f6162bf4b88d3d001b88374 {
 
 div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
   height: 225px;
-  margin-top: 25px;
   margin: 0 auto;
+  margin-top: 25px;
   position: absolute;
   width: 100%;
 }
@@ -766,8 +766,8 @@ div.ranking-3ab42c8325a264730406e37e1f731f70 {
 div.ranking-420e569f7ae439ae256513412631f2f4 {
   font-size: @app-font-size;
   left: 0;
-  margin-top: -3px;
   margin: 0 auto;
+  margin-top: -3px;
   overflow: hidden;
   position: absolute;
   text-overflow: ellipsis;

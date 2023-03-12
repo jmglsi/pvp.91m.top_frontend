@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import watermark from "watermark-dom";
+import watermark from 'watermark-dom';
 
 export default {
   name: "AppHome",
@@ -197,7 +197,7 @@ export default {
   },
   methods: {
     getAppInfo: function () {
-      this.$axios.post(this.$appApi.pvp.getAppInfo).then((res) => {
+      this.$axios.post(this.$appApi.app.getAppInfo).then((res) => {
         let data = res.data.data,
           appInfo = data.appInfo,
           tipsInfo = data.tipsInfo,

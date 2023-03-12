@@ -663,7 +663,7 @@ export default {
       this.heroProficiency = this.$t("loading");
 
       this.$axios
-        .post(this.$appApi.pvp.getHeroProficiency + "&heroId=" + id)
+        .post(this.$appApi.app.getHeroProficiency + "&heroId=" + id)
         .then((res) => {
           let status = res.data.status;
 
@@ -698,7 +698,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -758,7 +758,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroChartsLog +
+          this.$appApi.app.getHeroChartsLog +
             "&aid=" +
             aid +
             "&bid=" +

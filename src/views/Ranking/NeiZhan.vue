@@ -253,7 +253,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -290,7 +290,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getCivilwarMatchInfo,
+          this.$appApi.app.getCivilwarMatchInfo,
           this.$qs.stringify(postData)
         )
         .then((res) => {

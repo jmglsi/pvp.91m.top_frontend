@@ -617,7 +617,7 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.pvp.getHeroInfo + "&id=" + id)
+        .post(this.$appApi.app.getHeroInfo + "&id=" + id)
         .then((res) => {
           let status = res.data.status;
 
@@ -658,7 +658,7 @@ export default {
     onHeroVoteClick: function (voteType) {
       this.$axios
         .post(
-          this.$appApi.pvp.addHeroVote +
+          this.$appApi.app.addHeroVote +
             "&heroId=" +
             this.hero.info.id +
             "&voteType=" +
@@ -702,7 +702,7 @@ export default {
     onHeroLikeClick: function () {
       this.$axios
         .post(
-          this.$appApi.pvp.addWebAccountLikeHero +
+          this.$appApi.app.addWebAccountLikeHero +
             "&heroId=" +
             this.hero.info.id
         )

@@ -188,7 +188,7 @@ export default {
       this.$appDelectLocalStorage("tempTeamId");
 
       this.$axios
-        .post(this.$appApi.pvp.getGameDashboard + "&aid=0")
+        .post(this.$appApi.app.getGameDashboard + "&aid=0")
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -207,7 +207,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.uploadImg,
+          this.$appApi.app.uploadImg,
           this.$qs.stringify({
             filePath: data,
           })
@@ -269,7 +269,7 @@ export default {
 
       if (tableData.type == 0) {
         this.$axios
-          .post(this.$appApi.pvp.createTeam, this.$qs.stringify(postData))
+          .post(this.$appApi.app.createTeam, this.$qs.stringify(postData))
           .then((res) => {
             let status = res.data.status;
 
@@ -283,7 +283,7 @@ export default {
           });
       } else {
         this.$axios
-          .post(this.$appApi.pvp.updateTeamInfo, this.$qs.stringify(postData))
+          .post(this.$appApi.app.updateTeamInfo, this.$qs.stringify(postData))
           .then((res) => {
             let status = res.data.status;
 
@@ -309,7 +309,7 @@ export default {
           //on confirm
           this.$axios
             .post(
-              this.$appApi.pvp.deleteTeam,
+              this.$appApi.app.deleteTeam,
               this.$qs.stringify({
                 teamId: row.id,
               })
@@ -353,7 +353,7 @@ export default {
     onSaveEngageClick: function (teamId_1, teamId_2) {
       this.$axios
         .post(
-          this.$appApi.pvp.createEngage,
+          this.$appApi.app.createEngage,
           this.$qs.stringify({
             teamId_1: teamId_1,
             teamId_2: teamId_2,

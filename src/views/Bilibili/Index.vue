@@ -177,7 +177,7 @@ export default {
         longUrl = url.origin + url.pathname + "?q=" + row.uid;
 
       this.$axios
-        .post(this.$appApi.pvp.getShortUrl, {
+        .post(this.$appApi.app.getShortUrl, {
           url: longUrl,
         })
         .then((res) => {

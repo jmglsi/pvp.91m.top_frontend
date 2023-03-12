@@ -132,7 +132,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroInfoByWebAccountList + "&heroId=" + heroId
+          this.$appApi.app.getHeroInfoByWebAccountList + "&heroId=" + heroId
         )
         .then((res) => {
           this.tableData = res.data.data;

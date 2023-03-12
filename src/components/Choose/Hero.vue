@@ -110,7 +110,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +

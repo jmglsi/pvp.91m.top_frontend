@@ -121,7 +121,7 @@ export default {
   methods: {
     getGameDashboard: function (page = 0) {
       this.$axios
-        .post(this.$appApi.pvp.getGameDashboard + "&aid=1&page=" + page)
+        .post(this.$appApi.app.getGameDashboard + "&aid=1&page=" + page)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;

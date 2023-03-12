@@ -362,7 +362,7 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.pvp.getHeroBpIndex + "&heroId=" + heroId)
+        .post(this.$appApi.app.getHeroBpIndex + "&heroId=" + heroId)
         .then((res) => {
           let data = res.data.data;
 

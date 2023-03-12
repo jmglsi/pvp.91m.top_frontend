@@ -269,7 +269,7 @@ export default {
         );
 
       this.$axios
-        .post(this.$appApi.pvp.getShortUrl, {
+        .post(this.$appApi.app.getShortUrl, {
           url: longUrl,
         })
         .then((res) => {
@@ -285,7 +285,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroReplayByHeroId +
+          this.$appApi.app.getHeroReplayByHeroId +
             "&id=" +
             replayInfo.id +
             "&userId=" +

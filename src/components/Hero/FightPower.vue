@@ -239,7 +239,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.uploadImg,
+          this.$appApi.app.uploadImg,
           this.$qs.stringify({
             filePath: data,
           })
@@ -311,7 +311,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.addHeroFightPowerByWebAccount +
+          this.$appApi.app.addHeroFightPowerByWebAccount +
             "&heroId=" +
             this.heroId,
           this.$qs.stringify(postData)
@@ -332,7 +332,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&heroId=" +
             heroId +
             "&aid=" +

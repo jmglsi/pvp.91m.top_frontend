@@ -271,11 +271,11 @@
 </template>
 
 <script>
-import VeLine from "v-charts/lib/line.common";
+import VeLine from 'v-charts/lib/line.common';
 
-import "echarts/lib/component/title";
-import "echarts/lib/component/dataZoom";
-import "v-charts/lib/style.css";
+import 'echarts/lib/component/title';
+import 'echarts/lib/component/dataZoom';
+import 'v-charts/lib/style.css';
 
 export default {
   name: "RankingFanChang",
@@ -343,7 +343,7 @@ export default {
     getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -373,7 +373,7 @@ export default {
         });
     },
     getSkinReturnLog: function () {
-      this.$axios.post(this.$appApi.pvp.getSkinReturnLog).then((res) => {
+      this.$axios.post(this.$appApi.app.getSkinReturnLog).then((res) => {
         let data = res.data.data,
           status = res.data.status;
 

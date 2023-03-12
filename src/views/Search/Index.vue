@@ -1290,7 +1290,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getSearch,
+          this.$appApi.app.getSearch,
           this.$qs.stringify({
             q: value,
           })

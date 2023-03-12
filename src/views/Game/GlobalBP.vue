@@ -812,7 +812,7 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
+import draggable from 'vuedraggable';
 
 export default {
   name: "GameGlobalBP",
@@ -1135,7 +1135,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -1261,7 +1261,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.updateGameBP,
+          this.$appApi.app.updateGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: gameIndex,
@@ -1297,7 +1297,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.updateGameBP,
+          this.$appApi.app.updateGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: nowIndex,
@@ -1343,7 +1343,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.deleteGameBP,
+          this.$appApi.app.deleteGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: nowIndex,

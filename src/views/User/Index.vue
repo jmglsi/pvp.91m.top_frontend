@@ -684,7 +684,7 @@ export default {
   methods: {
     getWebAccountInfo: function (aid = 0) {
       this.$axios
-        .post(this.$appApi.pvp.getWebAccountInfo + "&aid=" + aid)
+        .post(this.$appApi.app.getWebAccountInfo + "&aid=" + aid)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -717,7 +717,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.updateWebAccountInfo,
+          this.$appApi.app.updateWebAccountInfo,
           this.$qs.stringify(postData)
         )
         .then((res) => {

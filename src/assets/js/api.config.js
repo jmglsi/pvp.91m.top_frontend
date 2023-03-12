@@ -6,7 +6,7 @@ Vue.prototype.$qs = qs;
 import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
 
-import aegis from "aegis-web-sdk";
+import aegis from 'aegis-web-sdk';
 
 import axios from 'axios';
 
@@ -17,8 +17,6 @@ let url = location,
   baseHost = nowQuery.host || null,
   baseRef = nowQuery.ref || null;
 
-appUrl = "//91m.top";
-
 if (baseHost) {
   cookie.set("host", baseHost);
 }
@@ -26,6 +24,8 @@ if (baseHost) {
 if (baseRef) {
   cookie.set("ref", baseRef);
 }
+
+appUrl = "//91m.top";
 
 if (/127\.0\.0\.1|localhost/i.test(url.host) == true) {
   baseUrl = "//localhost/api.91m.top";
@@ -68,14 +68,10 @@ axios.interceptors.request.use(function (config) {
   })
 Vue.prototype.$axios = axios;
 
-const pvpApi = baseUrl + "/hero/v1/app.php";
+const appApi = baseUrl + "/hero/v1/app.php";
 const gameApi = baseUrl + "/hero/v1/game.php";
 const loginApi = baseUrl + "/hero/v1/login.php";
 const biliApi = baseUrl + "/hero/v1/bilibili.php";
-
-const app = {
-  proxy: appUrl + "/p?url="
-}
 
 const bili = {
   getOrderInfo: biliApi + "?type=getOrderInfo"
@@ -92,45 +88,45 @@ const login = {
   getLogin: loginApi
 }
 
-const pvp = {
-  addHeroByCombination: pvpApi + "?type=addHeroByCombination",
-  addHeroFightPowerByWebAccount: pvpApi + "?type=addHeroFightPowerByWebAccount",
-  addHeroVote: pvpApi + "?type=addHeroVote",
-  addWebAccountLikeHero: pvpApi + "?type=addWebAccountLikeHero",
-  createEngage: pvpApi + "?type=createEngage",
-  createTeam: pvpApi + "?type=createTeam",
-  deleteGameBP: pvpApi + "?type=deleteGameBP",
-  deleteTeam: pvpApi + "?type=deleteTeam",
-  getAppHome: pvpApi + "?type=getAppHome",
-  getAppInfo: pvpApi + "?type=getAppInfo",
-  getCivilwarMatchInfo: pvpApi + "?type=getCivilwarMatchInfo",
-  getGameDashboard: pvpApi + "?type=getGameDashboard",
-  getHeroBpIndex: pvpApi + "?type=getHeroBpIndex",
-  getHeroChartsLog: pvpApi + "?type=getHeroChartsLog",
-  getHeroInfo: pvpApi + "?type=getHeroInfo",
-  getHeroInfoByWebAccountList: pvpApi + "?type=getHeroInfoByWebAccountList",
-  getHeroProficiency: pvpApi + "?type=getHeroProficiency",
-  getHeroReplayByHeroId: pvpApi + "?type=getHeroReplayByHeroId",
-  getHeroUpdate: pvpApi + "?type=getHeroUpdate",
-  getHeroUpdateText: pvpApi + "?type=getHeroUpdateText",
-  getMiniAppInfo: pvpApi + "?type=getMiniAppInfo",
-  getRanking: pvpApi + "?type=getRanking",
-  getSearch: pvpApi + "?type=getSearch",
-  getShortUrl: pvpApi + "?type=getShortUrl",
-  getSkinReturnLog: pvpApi + "?type=getSkinReturnLog",
-  getSmobaHelperUserInfo: pvpApi + "?type=getSmobaHelperUserInfo",
-  getWebAccountInfo: pvpApi + "?type=getWebAccountInfo",
-  loginWebAccount: pvpApi + "?type=loginWebAccount",
-  updateGameBP: pvpApi + "?type=updateGameBP",
-  updateTeamInfo: pvpApi + "?type=updateTeamInfo",
-  updateWebAccountInfo: pvpApi + "?type=updateWebAccountInfo",
-  uploadImg: pvpApi + "?type=uploadImg"
+const app = {
+  proxy: appUrl + "/p?url=",
+  addHeroByCombination: appApi + "?type=addHeroByCombination",
+  addHeroFightPowerByWebAccount: appApi + "?type=addHeroFightPowerByWebAccount",
+  addHeroVote: appApi + "?type=addHeroVote",
+  addWebAccountLikeHero: appApi + "?type=addWebAccountLikeHero",
+  createEngage: appApi + "?type=createEngage",
+  createTeam: appApi + "?type=createTeam",
+  deleteGameBP: appApi + "?type=deleteGameBP",
+  deleteTeam: appApi + "?type=deleteTeam",
+  getAppHome: appApi + "?type=getAppHome",
+  getAppInfo: appApi + "?type=getAppInfo",
+  getCivilwarMatchInfo: appApi + "?type=getCivilwarMatchInfo",
+  getGameDashboard: appApi + "?type=getGameDashboard",
+  getHeroBpIndex: appApi + "?type=getHeroBpIndex",
+  getHeroChartsLog: appApi + "?type=getHeroChartsLog",
+  getHeroInfo: appApi + "?type=getHeroInfo",
+  getHeroInfoByWebAccountList: appApi + "?type=getHeroInfoByWebAccountList",
+  getHeroProficiency: appApi + "?type=getHeroProficiency",
+  getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
+  getHeroUpdate: appApi + "?type=getHeroUpdate",
+  getHeroUpdateText: appApi + "?type=getHeroUpdateText",
+  getMiniAppInfo: appApi + "?type=getMiniAppInfo",
+  getRanking: appApi + "?type=getRanking",
+  getSearch: appApi + "?type=getSearch",
+  getShortUrl: appApi + "?type=getShortUrl",
+  getSkinReturnLog: appApi + "?type=getSkinReturnLog",
+  getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
+  getWebAccountInfo: appApi + "?type=getWebAccountInfo",
+  loginWebAccount: appApi + "?type=loginWebAccount",
+  updateGameBP: appApi + "?type=updateGameBP",
+  updateTeamInfo: appApi + "?type=updateTeamInfo",
+  updateWebAccountInfo: appApi + "?type=updateWebAccountInfo",
+  uploadImg: appApi + "?type=uploadImg"
 }
 
 export default {
   app,
   bili,
   game,
-  login,
-  pvp
+  login
 }

@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VueI18n from "vue-i18n";
+import VueI18n from 'vue-i18n';
 
 //vant
 import zhCN_vant from 'vant/lib/locale/lang/zh-CN';

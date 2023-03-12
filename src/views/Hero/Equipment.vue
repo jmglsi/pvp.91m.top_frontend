@@ -537,8 +537,8 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
-import { allTag, equipment } from "../../assets/js/list.config";
+import draggable from 'vuedraggable';
+import { allTag, equipment } from '../../assets/js/list.config';
 const plainOptions = allTag;
 const defaultCheckedList = allTag;
 

@@ -201,7 +201,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getWebAccountInfo + "&aid=" + aid,
+          this.$appApi.app.getWebAccountInfo + "&aid=" + aid,
           this.$qs.stringify(postData)
         )
         .then((res) => {

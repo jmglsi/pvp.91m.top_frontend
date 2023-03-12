@@ -226,7 +226,7 @@
 </template>
 
 <script>
-import ColorThief from "colorthief";
+import ColorThief from 'colorthief';
 
 export default {
   name: "RecommendHome",
@@ -309,7 +309,7 @@ export default {
         return (this.appHomeInfo = ls);
       }
 
-      this.$axios.post(this.$appApi.pvp.getAppHome).then((res) => {
+      this.$axios.post(this.$appApi.app.getAppHome).then((res) => {
         let data = res.data.data;
 
         this.appHomeInfo = data;
@@ -396,7 +396,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +

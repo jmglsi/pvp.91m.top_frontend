@@ -87,9 +87,9 @@
 </template>
 
 <script>
-import "echarts/lib/component/markLine";
+import 'echarts/lib/component/markLine';
 
-import "zrender/lib/svg/svg";
+import 'zrender/lib/svg/svg';
 
 export default {
   name: "HeroView",
@@ -203,7 +203,7 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.pvp.getHeroInfo + "&id=" + id)
+        .post(this.$appApi.app.getHeroInfo + "&id=" + id)
         .then((res) => {
           let status = res.data.status;
 
@@ -240,7 +240,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -307,7 +307,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -358,7 +358,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroChartsLog +
+          this.$appApi.app.getHeroChartsLog +
             "&aid=" +
             aid +
             "&bid=" +

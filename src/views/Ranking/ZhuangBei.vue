@@ -247,7 +247,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getRanking +
+          this.$appApi.app.getRanking +
             "&aid=" +
             aid +
             "&bid=" +
@@ -293,7 +293,7 @@ export default {
           encodeURIComponent(row.name);
 
       this.$axios
-        .post(this.$appApi.pvp.getShortUrl, {
+        .post(this.$appApi.app.getShortUrl, {
           url: longUrl,
         })
         .then((res) => {

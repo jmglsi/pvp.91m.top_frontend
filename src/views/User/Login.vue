@@ -129,7 +129,7 @@
 </template>
 
 <script>
-import md5 from "js-md5";
+import md5 from 'js-md5';
 
 export default {
   name: "UserLogin",
@@ -191,7 +191,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.loginWebAccount + "&aid=" + loginType,
+          this.$appApi.app.loginWebAccount + "&aid=" + loginType,
           this.$qs.stringify({
             name: data.name,
             email: data.email,
@@ -231,7 +231,7 @@ export default {
     },
     getWebAccountInfo: function (aid = 0) {
       this.$axios
-        .post(this.$appApi.pvp.getWebAccountInfo + "&aid=" + aid)
+        .post(this.$appApi.app.getWebAccountInfo + "&aid=" + aid)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;

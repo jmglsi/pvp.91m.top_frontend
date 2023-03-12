@@ -411,7 +411,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
+          this.$appApi.app.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
         )
         .then((res) => {
           this.tableData = res.data.data;
@@ -443,7 +443,7 @@ export default {
     onOpenHeroUpdateTextClick: function (heroId, data) {
       this.$axios
         .post(
-          this.$appApi.pvp.getHeroUpdateText +
+          this.$appApi.app.getHeroUpdateText +
             "&heroId=" +
             heroId +
             "&articleId=" +
