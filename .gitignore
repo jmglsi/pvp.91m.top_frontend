@@ -21,6 +21,7 @@ yarn-error.log*
 *.sw?
 dist.*
 
+sync.sh
 /public/img/icons-hero/*
 /public/img/icons-skill/*
 /public/img/icons-equipment/*
