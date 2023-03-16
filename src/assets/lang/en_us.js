@@ -8,7 +8,6 @@ export default {
   "hero": "Hero",
   "more": "More",
   "none": "No Data",
-  "other": "Other",
   "prepare-for-war": "Prepare for Battle",
   "recommend": "Recommended",
   "refresh": "Refresh",
@@ -72,5 +71,68 @@ export default {
   },
   "nav-bar": {
     "left-text": "Return"
+  },
+  "setting": {
+    "title": "Settings",
+    "position": {
+      "title": "Swinging Split Lane",
+      "label": "Different split lanes for individual heroes"
+    },
+    "small": {
+      "title": "Adapt to Small Screens",
+      "label": "Some pages will automatically shrink images"
+    },
+    "mode": {
+      "title": "Simplified Mode",
+      "label": "Optimizes rendering speed of ranking interface"
+    },
+    "link": {
+      "title": "Open Links",
+      "label": "Prompts when opening external links"
+    }
+  },
+  "cache": {
+    "title": "Cache",
+    "ranking": {
+      "title": "Clear Ranking Cache"
+    },
+    "system": {
+      "title": "Clear System Cache",
+      "label": "[Proceed with caution] Settings above will be lost"
+    },
+    "global-bp": {
+      "title": "Clear Global BP Simulator Cache",
+      "label": "[Proceed with caution] Custom sorting will be lost"
+    }
+  },
+  "group": {
+    "title": "Group",
+    "gg": {
+      "title": "King's Announcement",
+      "label": "Push the latest announcement information"
+    },
+    "change": {
+      "title": "MoM Change",
+      "label": "Push heroes with significant changes"
+    }
+  },
+  "other": {
+    "title": "Other",
+    "area": {
+      "title": "Current Region",
+      "label": "Visitors can try to switch regions",
+      "type": ["China", "Overseas"]
+    },
+    "update": {
+      "title": "Update Time",
+      "label": "Time of the last data update"
+    },
+    "version": {
+      "title": "System Version",
+      "label": "Time of the last system update"
+    },
+    "pwa": {
+      "title": "Access Type"
+    }
   }
 }

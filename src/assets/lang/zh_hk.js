@@ -8,7 +8,6 @@ export default {
   "hero": "英雄",
   "more": "更多",
   "none": "暫無數據",
-  "other": "其他",
   "prepare-for-war": "備戰",
   "recommend": "推薦",
   "refresh": "刷新一下",
@@ -72,5 +71,68 @@ export default {
   },
   "nav-bar": {
     "left-text": "返回"
+  },
+  "setting": {
+    "title": "設置",
+    "position": {
+      "title": "搖擺分路",
+      "label": "單個英雄不同分路的情況"
+    },
+    "small": {
+      "title": "適配小屏",
+      "label": "部分頁面將自動縮小圖片"
+    },
+    "mode": {
+      "title": "精簡模式",
+      "label": "優化排行界面的渲染速度"
+    },
+    "link": {
+      "title": "打開鏈接",
+      "label": "打開外部鏈接時會有提示"
+    }
+  },
+  "cache": {
+    "title": "緩存",
+    "ranking": {
+      "title": "清空排行緩存"
+    },
+    "system": {
+      "title": "清空系統緩存",
+      "label": "[謹慎操作] 上方的設置將丟失"
+    },
+    "global-bp": {
+      "title": "清空全局BP模擬器緩存",
+      "label": "[謹慎操作] 自定義排序將丟失"
+    }
+  },
+  "group": {
+    "title": "群組內",
+    "gg": {
+      "title": "王者公告",
+      "label": "推送最新的公告訊息"
+    },
+    "change": {
+      "title": "環比變化",
+      "label": "推送變化明顯的英雄"
+    }
+  },
+  "other": {
+    "title": "其他",
+    "area": {
+      "title": "目前地區",
+      "label": "訪問卡的可以嘗試切換下",
+      "type": ["國內", "國外"]
+    },
+    "update": {
+      "title": "更新時間",
+      "label": "最後一次數據更新的時間"
+    },
+    "version": {
+      "title": "系統版本",
+      "label": "最後一次系統更新的時間"
+    },
+    "pwa": {
+      "title": "訪問類型"
+    }
   }
 }

@@ -12,7 +12,6 @@ import axios from 'axios';
 
 let url = location,
   nowQuery = Vue.prototype.$appQuery,
-  appUrl,
   baseUrl,
   baseHost = nowQuery.host || null,
   baseRef = nowQuery.ref || null;
@@ -25,13 +24,7 @@ if (baseRef) {
   cookie.set("ref", baseRef);
 }
 
-appUrl = "//91m.top";
-
-if (/127\.0\.0\.1|localhost/i.test(url.host) == true) {
-  baseUrl = "//localhost/api.91m.top";
-} else {
-  baseUrl = "//api.91m.top";
-
+if (process.env.NODE_ENV === "production") {
   new aegis({
     id: "5GVrzSe8lWdPQ86vmw",
     uin: cookie.get("openId") || null,
@@ -40,6 +33,8 @@ if (/127\.0\.0\.1|localhost/i.test(url.host) == true) {
     spa: true,
   });
 }
+
+baseUrl = process.env.VUE_APP_BASE_URL;
 
 axios.defaults.baseURL = baseUrl;
 axios.interceptors.request.use(function (config) {
@@ -89,7 +84,7 @@ const login = {
 }
 
 const app = {
-  proxy: appUrl + "/p?url=",
+  proxy: "//91m.top/p?url=",
   addHeroByCombination: appApi + "?type=addHeroByCombination",
   addHeroFightPowerByWebAccount: appApi + "?type=addHeroFightPowerByWebAccount",
   addHeroVote: appApi + "?type=addHeroVote",

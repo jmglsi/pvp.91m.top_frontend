@@ -8,7 +8,6 @@ export default {
   "hero": "ヒーロー",
   "more": "もっと",
   "none": "データなし",
-  "other": "他の",
   "prepare-for-war": "戦闘の準備をする",
   "recommend": "おすすめ",
   "refresh": "更新する",
@@ -72,5 +71,68 @@ export default {
   },
   "nav-bar": {
     "left-text": "戻る"
+  },
+  "setting": {
+    "title": "設定",
+    "position": {
+      "title": "揺れる分岐",
+      "label": "英雄ごとに異なるレーンの状況"
+    },
+    "small": {
+      "title": "小さい画面に対応",
+      "label": "一部のページは自動的に画像を縮小します"
+    },
+    "mode": {
+      "title": "シンプルモード",
+      "label": "ランキング画面の描画速度を最適化します"
+    },
+    "link": {
+      "title": "リンクを開く",
+      "label": "外部リンクを開くときに警告が表示されます"
+    }
+  },
+  "cache": {
+    "title": "キャッシュ",
+    "ranking": {
+      "title": "ランキングキャッシュをクリア"
+    },
+    "system": {
+      "title": "システムキャッシュをクリア",
+      "label": "[注意] 上記の設定が失われます"
+    },
+    "global-bp": {
+      "title": "グローバルBPシミュレーターキャッシュをクリア",
+      "label": "[注意] カスタムソートが失われます"
+    }
+  },
+  "group": {
+    "title": "グループ",
+    "gg": {
+      "title": "公式お知らせ",
+      "label": "最新のお知らせを配信します"
+    },
+    "change": {
+      "title": "増減率変化",
+      "label": "急激に変化しているヒーローを配信します"
+    }
+  },
+  "other": {
+    "title": "その他",
+    "area": {
+      "title": "地域",
+      "label": "カードの訪問を切り替えてみてください",
+      "type": ["China", "国外"]
+    },
+    "update": {
+      "title": "更新時間",
+      "label": "最後にデータが更新された時間"
+    },
+    "version": {
+      "title": "システムバージョン",
+      "label": "最後にシステムが更新された時間"
+    },
+    "pwa": {
+      "title": "アクセスタイプ"
+    }
   }
 }

@@ -3,12 +3,12 @@
     "version": "0.1.1",
     "private": true,
     "scripts": {
-        "web:serve": "vue-cli-service serve",
-        "web:build": "vue-cli-service build",
-        "web:sync": "sh sync.sh",
+        "web:serve": "vue-cli-service serve --mode development",
+        "web:build": "vue-cli-service build --mode production",
         "web:start": "sh ~/Web/start.sh",
         "web:stop": "sh ~/Web/stop.sh",
-        "analyz": "vue-cli-service build --mode prod --report",
+        "web:analyz": "vue-cli-service build --mode production --report",
+        "web:sync": "sh sync.sh",
         "lint": "vue-cli-service lint",
         "ui": "vue ui"
     },

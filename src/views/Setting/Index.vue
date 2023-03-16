@@ -23,10 +23,13 @@
     >
       <van-cell-group
         :border="false"
-        title="设置"
+        :title="$t('setting.title')"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
-        <van-cell title="摇摆分路" label="单个英雄不同分路的情况">
+        <van-cell
+          :title="$t('setting.position.title')"
+          :label="$t('setting.position.label')"
+        >
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -36,7 +39,10 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="适配小屏" label="部分页面将自动缩小图片">
+        <van-cell
+          :title="$t('setting.small.title')"
+          :label="$t('setting.small.label')"
+        >
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -46,7 +52,10 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="精简模式" label="优化排行界面的渲染速度">
+        <van-cell
+          :title="$t('setting.mode.title')"
+          :label="$t('setting.mode.label')"
+        >
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -56,7 +65,10 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="打开链接" label="打开外部链接时会有提示">
+        <van-cell
+          :title="$t('setting.link.title')"
+          :label="$t('setting.link.label')"
+        >
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -70,7 +82,7 @@
 
       <van-cell-group
         :border="false"
-        title="缓存"
+        :title="$t('cache.title')"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
         <van-cell
@@ -85,10 +97,10 @@
 
       <van-cell-group
         :border="false"
-        title="群内"
+        :title="$t('group.title')"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
-        <van-cell title="王者公告" label="推送最新的公告信息">
+        <van-cell :title="$t('group.gg.title')" :label="$t('group.gg.label')">
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -98,7 +110,10 @@
             </span>
           </template>
         </van-cell>
-        <van-cell title="环比变化" label="推送变化明显的英雄">
+        <van-cell
+          :title="$t('group.change.title')"
+          :label="$t('group.change.label')"
+        >
           <template #right-icon>
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
@@ -112,13 +127,13 @@
 
       <van-cell-group
         :border="false"
-        title="其他"
+        :title="$t('other.title')"
         class="setting-ea4d5993952f38933e7cced73b900ad7"
       >
         <van-cell
-          title="当前地区"
-          label="访问卡的可以尝试切换下"
-          :value="$appCountry ? '国内' : '国外'"
+          :title="$t('other.area.title')"
+          :label="$t('other.area.label')"
+          :value="$appCountry ? $t('other.area.type[0]') : $t('other.area.type[1]')"
           @click="
             $appCountry
               ? $appOpenUrl(
@@ -132,18 +147,18 @@
           is-link
         />
         <van-cell
-          title="更新时间"
-          label="最后一次数据更新的时间"
+          :title="$t('other.update.title')"
+          :label="$t('other.update.label')"
           :value="$appConfigInfo.appInfo.update.time"
         />
         <van-cell
-          title="系统版本"
-          label="最后一次系统更新的时间"
+          :title="$t('other.version.title')"
+          :label="$t('other.version.label')"
           :value="$appConfigInfo.appInfo.update.version"
         />
         <van-cell
-          title="访问类型"
-          :value="$appConfigInfo.appInfo.pwa == 1 ? 'PWA' : '普通'"
+          :title="$t('other.pwa.title')"
+          :value="$appConfigInfo.appInfo.pwa"
           @click="$message.info($appMsg.info[1018])"
         />
       </van-cell-group>

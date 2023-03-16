@@ -768,7 +768,7 @@
             >
               <template #title>
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  {{ $t("other") }}
+                  {{ $t("other.title") }}
                 </span>
                 <img
                   v-lazy="'/img/icons-app/star.png'"

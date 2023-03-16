@@ -7,12 +7,12 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn web:serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+yarn web:build
 ```
 
 ### Lints and fixes files
