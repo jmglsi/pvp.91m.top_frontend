@@ -24,7 +24,7 @@ if (baseRef) {
   cookie.set("ref", baseRef);
 }
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   new aegis({
     id: "5GVrzSe8lWdPQ86vmw",
     uin: cookie.get("openId") || null,
