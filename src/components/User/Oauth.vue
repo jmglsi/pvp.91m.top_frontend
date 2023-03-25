@@ -26,7 +26,7 @@
           <img
             v-lazy="'/img/icons-app/' + data.type + '.ico'"
             :style="
-              accessToken && data.status == 0 ? { filter: 'grayscale(1)' } : {}
+              accessToken && data.status == 1 ? { filter: 'grayscale(1)' } : {}
             "
             width="35"
             height="35"
@@ -95,6 +95,10 @@ export default {
           type: "yuque",
           status: 0,
         },
+        {
+          type: "afdian",
+          status: 0,
+        },
       ],
     };
   },
@@ -102,18 +106,22 @@ export default {
     onOauthClick: function (oauth) {
       let url = location;
 
-      this.$appDelectAllLocalStorage();
+      if (oauth.status == 0) {
+        this.$appDelectAllLocalStorage();
 
-      url.href =
-        this.$appApi.login.getLogin +
-        "?oauthType=" +
-        oauth.type +
-        "&openId=" +
-        this.openId +
-        "&accessToken=" +
-        this.accessToken +
-        "&host=" +
-        url.host;
+        url.href =
+          this.$appApi.login.getLogin +
+          "?oauthType=" +
+          oauth.type +
+          "&openId=" +
+          this.openId +
+          "&accessToken=" +
+          this.accessToken +
+          "&host=" +
+          url.host;
+      } else {
+        this.$message.warning(this.$appMsg.warning[1010]);
+      }
     },
   },
 };

@@ -275,6 +275,7 @@
         <van-cell
           icon="manager"
           title="扩列链接"
+          label="复制到公众号可以续时"
           value="复制"
           is-link
           @click="onMyLinkCopy"
