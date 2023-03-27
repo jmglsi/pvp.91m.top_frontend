@@ -39,12 +39,13 @@ Vue.prototype.$appConfigInfo = {
       url: null,
     }
   },
+  oauthInfo: ["qq", "yuque", "afdian", "coding", "github"],
+  positionInfo: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
   tipsInfo: {
     dfsTips: false,
     skillTips: false,
     wanjiaTips: false
   },
-  positionInfo: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"]
 };
 
 Vue.prototype.$appLanguageInfo = [

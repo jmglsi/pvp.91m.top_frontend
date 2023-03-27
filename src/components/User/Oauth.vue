@@ -19,7 +19,7 @@
     <div class="oauth-4a62ae82084ebecb1ea7d1b7f67ef7c4">
       <ul class="oauth-fae0b4b90bcae3951a2a115697b83089">
         <li
-          v-for="(data, index) in oauthInfo"
+          v-for="(data, index) in allOauthInfo"
           :key="'oauth-50855523bbe392b3bd5aad8624faa32f-' + index"
           class="oauth-d7c4aa2641b836c39a069c80c569f682"
         >
@@ -51,7 +51,7 @@ export default {
       type: String,
       default: "",
     },
-    oauthList: {
+    oauthInfo: {
       type: Array,
       default: () => {
         return [];
@@ -60,17 +60,27 @@ export default {
   },
   computed: {
     listenChange() {
-      const { openId, accessToken, oauthList } = this;
-      return { openId, accessToken, oauthList };
+      const { openId, accessToken, oauthInfo } = this;
+      return { openId, accessToken, oauthInfo };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        newValue.oauthList.map((x) => {
-          this.oauthInfo.map((y, i) => {
-            if (y.type == x.type) this.oauthInfo[i].status = 1;
+        let o = this.$appConfigInfo.oauthInfo;
+
+        this.allOauthInfo = [];
+        o.map((a) => {
+          this.allOauthInfo.push({
+            type: a,
+            status: 0,
+          });
+        });
+
+        o.map((x, i) => {
+          newValue.oauthInfo.map((y) => {
+            if (x == y) this.allOauthInfo[i].status = 1;
           });
         });
       },
@@ -78,28 +88,7 @@ export default {
   },
   data() {
     return {
-      oauthInfo: [
-        {
-          type: "qq",
-          status: 0,
-        },
-        {
-          type: "yuque",
-          status: 0,
-        },
-        {
-          type: "afdian",
-          status: 0,
-        },
-        {
-          type: "coding",
-          status: 0,
-        },
-        {
-          type: "github",
-          status: 0,
-        },
-      ],
+      allOauthInfo: [],
     };
   },
   methods: {
