@@ -92,7 +92,7 @@
         <UserOauth
           :openId="openId"
           :accessToken="accessToken"
-          :oauthList="loginInfo.oauthList"
+          :oauthInfo="loginInfo.oauthInfo"
         />
       </div>
     </div>
@@ -143,7 +143,7 @@ export default {
       loginInfo: {
         type: 1,
         text: this.$t("my.login"),
-        oauthList: [],
+        oauthInfo: [],
         data: {
           name: "",
           email: "",
@@ -237,7 +237,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.loginInfo.oauthList = data.oauthList;
+            this.loginInfo.oauthInfo = data.oauthInfo;
           } else {
             this.$message.error(status.msg);
           }
