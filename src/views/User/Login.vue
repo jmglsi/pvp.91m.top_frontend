@@ -205,9 +205,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$cookie.set("openId", data.openId, { expires: "1h" });
+            this.$cookie.set("openId", data.openId, { expires: "1M" });
             this.$cookie.set("accessToken", data.accessToken, {
-              expires: "1h",
+              expires: "1M",
             });
 
             this.$appDelectAllLocalStorage();
