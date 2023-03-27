@@ -290,9 +290,9 @@ export default {
           }
         } else {
           if (tempOpenId) {
-            this.$cookie.set("openId", tempOpenId, { expires: "1h" });
+            this.$cookie.set("openId", tempOpenId, { expires: "1M" });
             this.$cookie.set("accessToken", tempAccessToken, {
-              expires: "1h",
+              expires: "1M",
             });
           }
 
