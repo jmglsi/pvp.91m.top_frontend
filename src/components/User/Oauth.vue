@@ -84,7 +84,11 @@ export default {
           status: 0,
         },
         {
-          type: "github",
+          type: "yuque",
+          status: 0,
+        },
+        {
+          type: "afdian",
           status: 0,
         },
         {
@@ -92,11 +96,7 @@ export default {
           status: 0,
         },
         {
-          type: "yuque",
-          status: 0,
-        },
-        {
-          type: "afdian",
+          type: "github",
           status: 0,
         },
       ],
