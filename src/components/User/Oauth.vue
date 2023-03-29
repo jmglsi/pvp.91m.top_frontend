@@ -24,7 +24,12 @@
           class="oauth-d7c4aa2641b836c39a069c80c569f682"
         >
           <img
-            v-lazy="'/img/icons-app/' + data.type + '.ico'"
+            v-lazy="
+              $appApi.app.apiHost +
+              '/hero/v1/app/public/img/icons-app/' +
+              data.type +
+              '.ico'
+            "
             :style="
               accessToken && data.status == 1 ? { filter: 'grayscale(1)' } : {}
             "
