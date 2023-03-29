@@ -84,7 +84,8 @@ const login = {
 }
 
 const app = {
-  proxy: "//91m.top/p?url=",
+  apiHost: "//api.91m.top",
+  appProxy: "//91m.top/p?url=",
   addHeroByCombination: appApi + "?type=addHeroByCombination",
   addHeroFightPowerByWebAccount: appApi + "?type=addHeroFightPowerByWebAccount",
   addHeroVote: appApi + "?type=addHeroVote",
