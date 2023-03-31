@@ -135,15 +135,12 @@
                     :heroId="tableData.cardInfo.id"
                   />
                 </van-tab>
-                <van-tab title="更新调整">
-                  <div class="app-0cecd2d48b0c852a513d34eec25042b7">
-                    <HeroUpdate
-                      v-if="skillInfo.model == 5"
-                      :aid="1"
-                      :heroId="tableData.cardInfo.id"
-                      :updateId="tableData.cardInfo.updateId"
-                    />
-                  </div>
+                <van-tab
+                  title="更新调整"
+                  :to="
+                    '/hero/' + tableData.cardInfo.id + '/info?show=heroUpdate'
+                  "
+                >
                 </van-tab>
               </van-tabs>
             </template>
@@ -165,7 +162,7 @@ export default {
       import("@/components/Hero/EquipmentList_One.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
-    HeroUpdate: () => import("@/components/Hero/Update.vue"),
+    //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   data() {
     return {
