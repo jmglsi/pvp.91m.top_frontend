@@ -463,15 +463,20 @@
                 :heroId="tableDataRow.id"
               />
             </van-tab>
-            <van-tab title="更新调整">
-              <div class="app-0cecd2d48b0c852a513d34eec25042b7">
-                <HeroUpdate
-                  v-if="cellInfo.index == 0 && skillInfo.model == 5"
-                  :aid="1"
-                  :heroId="tableDataRow.id"
-                  :updateId="tableDataRow.updateId"
-                />
-              </div>
+            <van-tab
+              title="更新调整"
+              :to="'/hero/' + tableDataRow.id + '/info?show=heroUpdate'"
+            >
+              <!--
+                <div class="app-0cecd2d48b0c852a513d34eec25042b7">
+                  <HeroUpdate
+                    v-if="cellInfo.index == 0 && skillInfo.model == 5"
+                    :aid="1"
+                    :heroId="tableDataRow.id"
+                    :updateId="tableDataRow.updateId"
+                  />
+                </div>
+              -->
             </van-tab>
           </van-tabs>
         </template>
@@ -513,7 +518,7 @@ export default {
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    HeroUpdate: () => import("@/components/Hero/Update.vue"),
+    //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   props: {
     isSmallMode: {

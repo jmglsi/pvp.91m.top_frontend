@@ -42,6 +42,7 @@
           <HomeRecommend />
         </van-tab>
         <van-tab
+          disabled
           :title="$t('competition')"
           class="home-e7f8cbd87d347be881cba92dad128518"
         >
