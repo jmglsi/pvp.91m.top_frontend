@@ -87,9 +87,9 @@
 </template>
 
 <script>
-import 'echarts/lib/component/markLine';
+import "echarts/lib/component/markLine";
 
-import 'zrender/lib/svg/svg';
+import "zrender/lib/svg/svg";
 
 export default {
   name: "HeroView",

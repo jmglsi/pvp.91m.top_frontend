@@ -14,8 +14,9 @@
         <template #title>
           <span
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
-            >&lt;{{ $appColumnsInfo.areaType[friendsInfo.areaType] }}&gt;</span
           >
+            &lt;{{ $appColumnsInfo.areaType[friendsInfo.areaType] }}&gt;
+          </span>
           <span
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
           >

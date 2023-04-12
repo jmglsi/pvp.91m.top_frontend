@@ -40,10 +40,7 @@
             <van-tag
               round
               :type="data.status"
-              class="
-                hero-01cac4e332fec6d6ecd331a00412712d
-                hero-e4d23e841d8e8804190027bce3180fa5
-              "
+              class="hero-01cac4e332fec6d6ecd331a00412712d hero-e4d23e841d8e8804190027bce3180fa5"
             >
               {{ data.status == "success" ? "胜利" : "失败" }}
             </van-tag>

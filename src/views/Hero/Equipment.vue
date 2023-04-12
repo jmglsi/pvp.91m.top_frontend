@@ -537,8 +537,8 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import { allTag, equipment } from '../../assets/js/list.config';
+import draggable from "vuedraggable";
+import { allTag, equipment } from "../../assets/js/list.config";
 const plainOptions = allTag;
 const defaultCheckedList = allTag;
 
@@ -727,7 +727,8 @@ export default {
     onTabsShow: function (e) {
       let tabsModel = this.tabsInfo.model,
         nowType = 0,
-        nowArr = new Array();
+        nowArr = new Array(),
+        o = e.tags || [];
 
       if (tabsModel == 6) {
         nowType = e.item_type - 1;
@@ -737,7 +738,7 @@ export default {
         nowType = e.item_type;
       }
 
-      e.tags.map((x) => {
+      o.map((x) => {
         nowArr.push(x.name);
       });
 

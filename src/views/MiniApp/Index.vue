@@ -12,10 +12,7 @@
     </div>
 
     <div
-      class="
-        miniapp-8d777f385d3dfec8815d20f7496026dc
-        app-4eb2044800e2b7b9e5c44d370af22b27
-      "
+      class="miniapp-8d777f385d3dfec8815d20f7496026dc app-4eb2044800e2b7b9e5c44d370af22b27"
       :style="
         $appIsApple && $appConfigInfo.appInfo.pwa == 1
           ? { marginTop: '-50px' }
@@ -23,10 +20,7 @@
       "
     >
       <div
-        class="
-          miniapp-7c8fdd065963838acab323de542586ee
-          miniapp-c5a8ea51876ffac858c47176d08a0fff
-        "
+        class="miniapp-7c8fdd065963838acab323de542586ee miniapp-c5a8ea51876ffac858c47176d08a0fff"
       >
         <van-cell-group
           :border="false"

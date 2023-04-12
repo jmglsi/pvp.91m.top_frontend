@@ -1,18 +1,11 @@
 <template>
   <div class="hero-same-hobby">
     <div
-      class="
-        app-a931c759bf506211221c0cc099e8d1c2
-        app-6bdc6915ee08058392eafe0ef6e353fd
-        app-9b9faf4e737f5907995f767e0b345dab
-      "
+      class="app-a931c759bf506211221c0cc099e8d1c2 app-6bdc6915ee08058392eafe0ef6e353fd app-9b9faf4e737f5907995f767e0b345dab"
     >
       <div class="hero-same-hobby-1a67ccb40b81a7318620c55405993a5d">
         <ul
-          class="
-            app-d865b50ce307751bdeb9a6ab16e7baf9
-            hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7
-          "
+          class="app-d865b50ce307751bdeb9a6ab16e7baf9 hero-same-hobby-e35a6eccbb664dddb48bb07bb1e2d7b7"
         >
           <li
             v-for="(data, index) in tableData.result.rows"
@@ -43,10 +36,7 @@
       </div>
 
       <div
-        class="
-          hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c
-          app-52b0e5c90604d59d1814f184d58e2033
-        "
+        class="hero-same-hobby-a6c4ccf6f4e422e8df37fc7a1b93e07c app-52b0e5c90604d59d1814f184d58e2033"
       >
         <van-button
           round

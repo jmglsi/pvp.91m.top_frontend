@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import VeLine from 'v-charts/lib/line.common';
+import VeLine from "v-charts/lib/line.common";
 
-import 'echarts/lib/component/dataZoom';
-import 'echarts/lib/component/markLine';
-import 'echarts/lib/component/markPoint';
-import 'echarts/lib/component/title';
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/markLine";
+import "echarts/lib/component/markPoint";
+import "echarts/lib/component/title";
 
-import 'v-charts/lib/style.css';
+import "v-charts/lib/style.css";
 
 export default {
   name: "ChartsGameLine",
@@ -80,7 +80,7 @@ export default {
         return e;
       }
 
-      Array.from(e.series).map((x) => {
+      Array.from(e.series, (x) => {
         x.symbol = "none";
       });
       return e;
