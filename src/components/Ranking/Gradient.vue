@@ -993,7 +993,9 @@ export default {
         this.tableData.result.rows = [[], [], [], [], [], []];
       }
 
-      ls.result.rows.map((x) => {
+      let o = ls.result.rows || [];
+
+      o.map((x) => {
         let gradientIndex = null;
 
         if (x.gradient == 0) {

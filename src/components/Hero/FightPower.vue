@@ -65,10 +65,7 @@
           </div>
 
           <div
-            class="
-              app-61046f2f5eefe3dc179e52af32241062
-              hero-fightPower-1fcc988ce1403e447b81fe06cbaf7e66
-            "
+            class="app-61046f2f5eefe3dc179e52af32241062 hero-fightPower-1fcc988ce1403e447b81fe06cbaf7e66"
           >
             <p>
               1.默认保存在【我的 - 左上角编辑】填的信息下，<span

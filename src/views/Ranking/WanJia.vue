@@ -299,7 +299,7 @@
 </template>
 
 <script>
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 
 export default {
   name: "RankingWanJia",
@@ -441,15 +441,15 @@ export default {
         return row.tag.type == option.value;
       }
     },
-    getHeroList: function (row) {
-      let heroList = [],
-        newHeroList = {},
-        heroId = 0;
+    getHeroList: function (e) {
+      let newHeroList = {},
+        heroId = 0,
+        o = [];
 
-      row.map((x) => {
-        heroList = x.heroList;
+      e.map((x) => {
+        o = x.heroList;
 
-        heroList.map((y) => {
+        o.map((y) => {
           heroId = y.heroId;
 
           if (heroId in newHeroList) {

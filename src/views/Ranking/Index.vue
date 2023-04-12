@@ -96,10 +96,7 @@
                   </div>
                 </template>
                 <div
-                  class="
-                    ranking-1fc99c22c900d9d31cb0ad2434ed4464
-                    app-52b0e5c90604d59d1814f184d58e2033
-                  "
+                  class="ranking-1fc99c22c900d9d31cb0ad2434ed4464 app-52b0e5c90604d59d1814f184d58e2033"
                 >
                   <van-button
                     round
@@ -198,10 +195,7 @@
     <van-popup
       v-model="showInfo.rankingSearch"
       v-if="showInfo.rankingSearch"
-      class="
-        app-69df17da0044a6e876b2afd3217d2564
-        ranking-31c631534a3cec9ed2c5283f653a06aa
-      "
+      class="app-69df17da0044a6e876b2afd3217d2564 ranking-31c631534a3cec9ed2c5283f653a06aa"
     >
       <a-input-search
         :defaultValue="searchInfo.defaultValue"
@@ -281,14 +275,14 @@
 </template>
 
 <script>
-import 'echarts/lib/component/dataZoom';
-import 'echarts/lib/component/legendScroll';
-import 'echarts/lib/component/markLine';
-import 'echarts/lib/component/markPoint';
-import 'echarts/lib/component/title';
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/legendScroll";
+import "echarts/lib/component/markLine";
+import "echarts/lib/component/markPoint";
+import "echarts/lib/component/title";
 
-import 'v-charts/lib/style.css';
-import 'zrender/lib/svg/svg';
+import "v-charts/lib/style.css";
+import "zrender/lib/svg/svg";
 
 export default {
   name: "RankingHome",
@@ -507,18 +501,22 @@ export default {
       if (e == 4) {
         let arrData_1 = [],
           arrData_2 = [],
-          arrData_3 = [];
-        this.$appColumnsInfo.areaType.map((x, i) => {
+          arrData_3 = [],
+          o = this.$appColumnsInfo.areaType || [],
+          p = this.$appColumnsInfo.provinceType || [],
+          q = this.$appColumnsInfo.fightPowerType.text || [];
+
+        o.map((x, i) => {
           arrData_1.push({ text: x, value: i });
         });
         this.pzAreaTypeInfo.options = arrData_1;
 
-        this.$appColumnsInfo.provinceType.map((x, i) => {
+        p.map((x, i) => {
           arrData_2.push({ text: x, value: i });
         });
         this.pzProvinceTypeInfo.options = arrData_2;
 
-        this.$appColumnsInfo.fightPowerType.text.map((x, i) => {
+        q.map((x, i) => {
           arrData_3.push({ text: x, value: i });
         });
         this.pzFightPowerTypeInfo.options = arrData_3;

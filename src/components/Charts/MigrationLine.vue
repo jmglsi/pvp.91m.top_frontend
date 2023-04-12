@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import VeLine from 'v-charts/lib/line.common';
+import VeLine from "v-charts/lib/line.common";
 
 export default {
   name: "ChartsMigrationLine",
@@ -82,7 +82,7 @@ export default {
         return e;
       }
 
-      Array.from(e.series).map((x) => {
+      Array.from(e.series, (x) => {
         x.symbol = "none";
       });
       return e;

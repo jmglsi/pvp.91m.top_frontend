@@ -1092,6 +1092,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@lokesh.dhakar/quantize@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.npmmirror.com/@lokesh.dhakar/quantize/-/quantize-1.3.0.tgz#04476889953aca94614fbc79e9a43adc7979179a"
+  integrity sha512-4KBSyaMj65d8A+2vnzLxtHFu4OmBU4IKO0yLxZ171Itdf9jGV4w+WbG7VsKts2jUdRkFSzsZqpZOz6hTB3qGAw==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npmjs.org/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz"
@@ -1349,10 +1354,10 @@
   dependencies:
     "@popperjs/core" "^2.9.2"
 
-"@vant/touch-emulator@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.npmjs.org/@vant/touch-emulator/-/touch-emulator-1.3.2.tgz"
-  integrity sha512-Om6e8kCAnmk/q8byngKreff7Hyn6XxwOGr8yedP3y3LEVoE+iyj8/+Mn+AYvGEQ00GK0MlgAfyaV4emXAYj1Hw==
+"@vant/touch-emulator@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.npmmirror.com/@vant/touch-emulator/-/touch-emulator-1.4.0.tgz#02420ca5f312a7eb6c36c349cbb8e80e6f29ff2f"
+  integrity sha512-Zt+zISV0+wpOew2S1siOJ3G22y+hapHAKmXM+FhpvWzsRc4qahaYXatCAITuuXt0EcDp7WvEeTO4F7p9AtX/pw==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0", "@vue/babel-helper-vue-jsx-merge-props@^1.2.1":
   version "1.2.1"
@@ -1839,10 +1844,10 @@ address@^1.1.2:
   resolved "https://registry.npmjs.org/address/-/address-1.2.0.tgz"
   integrity sha512-tNEZYz5G/zYunxFm7sfhAxkXEuLj3K6BKwv6ZURlsF6yiUQ65z0Q2wZW9L5cPUl9ocofGvXOdFYbFHp0+6MOig==
 
-aegis-web-sdk@^1.35.26:
-  version "1.35.26"
-  resolved "https://registry.npmjs.org/aegis-web-sdk/-/aegis-web-sdk-1.35.26.tgz"
-  integrity sha512-80CAt6BVg72yb4z2Ee/M74KWo5aOm3W8y6+OAdYNKuxCTpKfvmPg6M0F1e8RHKQnAuhfaniNgiZwGBVnTtHuiw==
+aegis-web-sdk@^1.37.1:
+  version "1.37.1"
+  resolved "https://registry.npmmirror.com/aegis-web-sdk/-/aegis-web-sdk-1.37.1.tgz#3bb4ff3b87782b4a1b0bfc45a2b1462fb2275183"
+  integrity sha512-p2zpmZjWgusOZLz0/Tv/VclZ22k/I59TQCFKr77idrfCX4Xo39NrV5Q5R6XRf6m8z1CiRNGbOh2uni+L13267A==
   dependencies:
     web-vitals "^1.1.2"
 
@@ -2993,13 +2998,13 @@ color@^3.0.0:
     color-convert "^1.9.3"
     color-string "^1.6.0"
 
-colorthief@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.npmjs.org/colorthief/-/colorthief-2.3.2.tgz"
-  integrity sha512-1r4nPW553JviRcFRvN3fS2V9nUSQGjRIws8UfEeFLIxk8j1tvtaX+AAYTkH3A4B5Muiys8SA1WJxf+00xVTXyg==
+colorthief@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.npmmirror.com/colorthief/-/colorthief-2.4.0.tgz#74e6edd142695655bd5f52c7f8116b125ea2b2bd"
+  integrity sha512-0U48RGNRo5fVO+yusBwgp+d3augWSorXabnqXUu9SabEhCpCgZJEUjUTTI41OOBBYuMMxawa3177POT6qLfLeQ==
   dependencies:
+    "@lokesh.dhakar/quantize" "^1.3.0"
     get-pixels "^3.3.2"
-    quantize "github:lokesh/quantize"
 
 combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   version "1.0.8"
@@ -7741,10 +7746,6 @@ qs@~6.5.2:
   resolved "https://registry.npmjs.org/qs/-/qs-6.5.3.tgz"
   integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
-"quantize@github:lokesh/quantize":
-  version "1.2.0"
-  resolved "https://codeload.github.com/lokesh/quantize/tar.gz/f572abd2646b5944852535c8a26fdb958a5d7c4b"
-
 query-string@^4.1.0:
   version "4.3.4"
   resolved "https://registry.npmjs.org/query-string/-/query-string-4.3.4.tgz"
@@ -9305,9 +9306,9 @@ uuid@^8.3.2:
   resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
-v-charts@^1.18.0:
+v-charts@^1.19.0:
   version "1.19.0"
-  resolved "https://mirrors.cloud.tencent.com/npm/v-charts/-/v-charts-1.19.0.tgz"
+  resolved "https://registry.npmmirror.com/v-charts/-/v-charts-1.19.0.tgz#07b701800b159bd514264ffc8bf12b0405142da3"
   integrity sha512-vm2HBUmxAsXK0ivwce9LytcpqrItDA5JSPLYVxZXtiuoyhcn80XX1/3dPJd/1GqG1OYv3jfBo1s9ra4q8GowqA==
   dependencies:
     echarts-amap "1.0.0-rc.6"
@@ -9914,10 +9915,10 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.8.tgz"
   integrity sha512-ri1Id1WinAX5Jqn9HejiGb8crfRio0Qgu8+MtL36rlTA6RLsMdWt1Az/19A2Qij6uSHUMphEFaTKa4WG+UNHNw==
 
-xe-utils@^3.5.4:
-  version "3.5.4"
-  resolved "https://registry.npmjs.org/xe-utils/-/xe-utils-3.5.4.tgz"
-  integrity sha512-oH7VOgvHv34pn198dhKPVKnuEHV22Q06YpCTVnAS3JuutylmZj/rtJGvn0BxxWQ37w2LgCknoebLA4uIGXwFtw==
+xe-utils@^3.5.7:
+  version "3.5.7"
+  resolved "https://registry.npmmirror.com/xe-utils/-/xe-utils-3.5.7.tgz#2c885852dfadd5c8beeffdc1f884f8ceb962c669"
+  integrity sha512-3H+fDBKBR2wLJgyA7k9C/w1Xljx6Maml5ukV0WDY06HjYyGs2FEz6XhcwRCLIDXX4pBP3Gu0nX9DbCeuuRA2Ew==
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"

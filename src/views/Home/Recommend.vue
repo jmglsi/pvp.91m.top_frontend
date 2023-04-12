@@ -226,7 +226,7 @@
 </template>
 
 <script>
-import ColorThief from 'colorthief';
+import ColorThief from "colorthief";
 
 export default {
   name: "RecommendHome",
@@ -319,13 +319,14 @@ export default {
       });
     },
     initColor: function () {
-      let img = document.getElementsByClassName(
-          "home-3c873293a7dc1ea8c20579f6a7ae94a9"
-        ),
-        colorthief = new ColorThief(),
-        nowColor = "0, 0, 0";
+      let colorthief = new ColorThief(),
+        nowColor = "0, 0, 0",
+        o =
+          document.getElementsByClassName(
+            "home-3c873293a7dc1ea8c20579f6a7ae94a9"
+          ) || [];
 
-      Array.from(img).map((x, i) => {
+      Array.from(o, (x, i) => {
         let nowRow = this.appHomeInfo.swipeInfo.result.rows[i];
 
         if (nowRow.name) {

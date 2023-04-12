@@ -1,10 +1,7 @@
 <template>
   <div class="app-game">
     <div
-      class="
-        game-c8d46d341bea4fd5bff866a65ff8aea9
-        app-4eb2044800e2b7b9e5c44d370af22b27
-      "
+      class="game-c8d46d341bea4fd5bff866a65ff8aea9 app-4eb2044800e2b7b9e5c44d370af22b27"
     >
       <van-cell-group
         :border="false"

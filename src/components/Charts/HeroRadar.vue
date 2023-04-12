@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import VeRadar from 'v-charts/lib/radar.common';
+import VeRadar from "v-charts/lib/radar.common";
 
-import 'echarts/lib/component/legendScroll';
-import 'echarts/lib/component/title';
+import "echarts/lib/component/legendScroll";
+import "echarts/lib/component/title";
 
 export default {
   name: "HeroRadar",

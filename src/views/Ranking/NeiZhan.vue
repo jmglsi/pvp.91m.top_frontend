@@ -41,10 +41,7 @@
                 class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div
-                class="
-                  app-5f19eaf71f40d74d66be84db52b3ad87
-                  ranking-0e1a8b3f7f6162bf4b88d3d001b88374
-                "
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-0e1a8b3f7f6162bf4b88d3d001b88374"
               >
                 {{ rowIndex + 1 }}
               </div>
@@ -64,10 +61,7 @@
                 {{ row.rankScore_bo1 }}
               </div>
               <div
-                class="
-                  app-5f19eaf71f40d74d66be84db52b3ad87
-                  ranking-420e569f7ae439ae256513412631f2f4
-                "
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-420e569f7ae439ae256513412631f2f4"
               >
                 {{ row.gamePlayerName }}
               </div>
