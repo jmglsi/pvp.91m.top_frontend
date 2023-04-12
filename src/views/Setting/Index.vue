@@ -133,7 +133,9 @@
         <van-cell
           :title="$t('other.area.title')"
           :label="$t('other.area.label')"
-          :value="$appCountry ? $t('other.area.type[0]') : $t('other.area.type[1]')"
+          :value="
+            $appCountry ? $t('other.area.type[0]') : $t('other.area.type[1]')
+          "
           @click="
             $appCountry
               ? $appOpenUrl(

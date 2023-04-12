@@ -1,10 +1,7 @@
 <template>
   <div class="app-square">
     <div
-      class="
-        square-cad86054cf97209ea888c47407f2b1b8
-        app-4eb2044800e2b7b9e5c44d370af22b27
-      "
+      class="square-cad86054cf97209ea888c47407f2b1b8 app-4eb2044800e2b7b9e5c44d370af22b27"
     >
       <div class="square-b5ef386ed8989d7603a5cb470d663b67">
         <div class="square-083a770f697e829b819171c6ec1a34e7">

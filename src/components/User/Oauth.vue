@@ -73,7 +73,8 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        let o = this.$appConfigInfo.oauthInfo;
+        let o = this.$appConfigInfo.oauthInfo,
+          p = newValue.oauthInfo || [];
 
         this.allOauthInfo = [];
         o.map((a) => {
@@ -84,7 +85,7 @@ export default {
         });
 
         o.map((x, i) => {
-          newValue.oauthInfo.map((y) => {
+          p.map((y) => {
             if (x == y) this.allOauthInfo[i].status = 1;
           });
         });

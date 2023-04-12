@@ -15,10 +15,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[0].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-00b97ff5a43507241bb2776b701516bb
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
             >
               1
             </div>
@@ -42,10 +39,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[1].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-00b97ff5a43507241bb2776b701516bb
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
             >
               4
             </div>
@@ -53,10 +47,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[1].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-00b97ff5a43507241bb2776b701516bb
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
             >
               5
             </div>
@@ -80,10 +71,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[2].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-00b97ff5a43507241bb2776b701516bb
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
             >
               8
             </div>
@@ -91,10 +79,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[2].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-00b97ff5a43507241bb2776b701516bb
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
             >
               9
             </div>
@@ -132,10 +117,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[0].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-85a6487e98ea46cd1391fd415d370de0
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
             >
               2
             </div>
@@ -143,10 +125,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[0].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-85a6487e98ea46cd1391fd415d370de0
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
             >
               3
             </div>
@@ -170,10 +149,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[1].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-85a6487e98ea46cd1391fd415d370de0
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
             >
               6
             </div>
@@ -181,10 +157,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[1].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-85a6487e98ea46cd1391fd415d370de0
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
             >
               7
             </div>
@@ -208,10 +181,7 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[2].pickRate / 100) * 2 }"
-              class="
-                bp-84d1241e18d9a700e019ca9654463a63
-                bp-85a6487e98ea46cd1391fd415d370de0
-              "
+              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
             >
               10
             </div>

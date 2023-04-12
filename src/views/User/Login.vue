@@ -109,19 +109,13 @@
     </div>
 
     <div
-      class="
-        login-f01ae8c7f2d058ec6be00db589a32bea
-        login-60ae25445ac62d5ec51c776826888d9f
-      "
+      class="login-f01ae8c7f2d058ec6be00db589a32bea login-60ae25445ac62d5ec51c776826888d9f"
     >
       <span @click="onRegisterClick">{{ $t("my.register") }}</span>
     </div>
 
     <div
-      class="
-        login-f01ae8c7f2d058ec6be00db589a32bea
-        login-4ae1ffb5939d592986bed21d0913562d
-      "
+      class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d"
     >
       <span @click="onUpdateClick">{{ $t("my.change") }}</span>
     </div>
@@ -129,7 +123,7 @@
 </template>
 
 <script>
-import md5 from 'js-md5';
+import md5 from "js-md5";
 
 export default {
   name: "UserLogin",

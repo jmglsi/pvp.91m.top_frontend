@@ -196,10 +196,7 @@
                   class="app-border-radius"
                 />
                 <div
-                  class="
-                    app-5f19eaf71f40d74d66be84db52b3ad87
-                    return-58206caebd18d792f59aa1ec064f65d1
-                  "
+                  class="app-5f19eaf71f40d74d66be84db52b3ad87 return-58206caebd18d792f59aa1ec064f65d1"
                 >
                   {{ rowIndex + 4 }}
                 </div>
@@ -271,11 +268,11 @@
 </template>
 
 <script>
-import VeLine from 'v-charts/lib/line.common';
+import VeLine from "v-charts/lib/line.common";
 
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/dataZoom';
-import 'v-charts/lib/style.css';
+import "echarts/lib/component/title";
+import "echarts/lib/component/dataZoom";
+import "v-charts/lib/style.css";
 
 export default {
   name: "RankingFanChang",
@@ -335,7 +332,7 @@ export default {
         return e;
       }
 
-      Array.from(e.series).map((x) => {
+      Array.from(e.series, (x) => {
         x.symbol = "none";
       });
       return e;

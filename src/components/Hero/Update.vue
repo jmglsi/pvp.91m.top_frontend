@@ -301,7 +301,7 @@ export default {
   },
   methods: {
     onFormatter: function (day) {
-      let tableData = this.tableData.result.rows,
+      let o = this.tableData.result.rows,
         mapType = -5;
 
       let oDay =
@@ -311,7 +311,7 @@ export default {
         "/" +
         day.date.getDate();
 
-      tableData.map((x) => {
+      o.map((x) => {
         let result = x.calendar;
 
         if (result.type == -1) {

@@ -812,7 +812,7 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable';
+import draggable from "vuedraggable";
 
 export default {
   name: "GameGlobalBP",
@@ -1100,7 +1100,9 @@ export default {
       this.gameInfo.ban = Array.from(new Set(ban));
       this.gameInfo.used = Array.from(new Set(used));
 
-      this.tableData.result.rows.map((x) => {
+      let o = this.tableData.result.rows || [];
+
+      o.map((x) => {
         ban.indexOf(x.id) > -1 ? (x.isBan = true) : (x.isBan = false);
         used.indexOf(x.id) > -1 ? (x.isUsed = true) : (x.isUsed = false);
       });
@@ -1153,7 +1155,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            data.result.rows.map((x) => {
+            let o = data.result.rows || [];
+
+            o.map((x) => {
               x.isBan = false;
               x.isUsed = false;
             });
@@ -1508,9 +1512,11 @@ export default {
     },
     onNewSortClick: function () {
       if (this.bpMode == "sort") {
+        let o = this.tableData.result.rows || [];
+
         this.tableData.model = 0;
 
-        this.tableData.result.rows.map((x) => {
+        o.map((x) => {
           x.isBan = false;
           x.isUsed = false;
         });

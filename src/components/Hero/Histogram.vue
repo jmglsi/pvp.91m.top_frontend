@@ -30,17 +30,17 @@
 </template>
 
 <script>
-import VeHistogram from 'v-charts/lib/histogram.common';
+import VeHistogram from "v-charts/lib/histogram.common";
 
-import 'echarts/lib/chart/line';
-import 'echarts/lib/component/dataZoom';
-import 'echarts/lib/component/legendScroll';
-import 'echarts/lib/component/markLine';
-import 'echarts/lib/component/markPoint';
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/toolbox';
+import "echarts/lib/chart/line";
+import "echarts/lib/component/dataZoom";
+import "echarts/lib/component/legendScroll";
+import "echarts/lib/component/markLine";
+import "echarts/lib/component/markPoint";
+import "echarts/lib/component/title";
+import "echarts/lib/component/toolbox";
 
-import 'v-charts/lib/style.css';
+import "v-charts/lib/style.css";
 
 export default {
   name: "HeroHistogram",
@@ -110,7 +110,7 @@ export default {
         return e;
       }
 
-      Array.from(e.series).map((x) => {
+      Array.from(e.series, (x) => {
         x.symbol = "none";
       });
       return e;
