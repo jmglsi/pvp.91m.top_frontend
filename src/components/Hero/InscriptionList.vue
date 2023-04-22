@@ -78,7 +78,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(newValue.heroId, 10, 0, 0, 0);
+          this.getRankingByZhanli(newValue.heroId, 10, 0, 0, 0);
         }
       },
     },
@@ -92,15 +92,16 @@ export default {
           rows: [],
         },
       },
+      tableData_suit: {
+        loading: false,
+        result: {
+          rows: [],
+        },
+      },
       tableDataRow: {
         gamePlayerName: this.$t("loading"),
       },
-      actions: [
-        { value: 0, name: "第 1 套备战" },
-        { value: 1, name: "第 2 套备战" },
-        { value: 2, name: "第 3 套备战" },
-        { value: 3, name: "查看主页", subname: "需要安装王者营地" },
-      ],
+      actions: [],
       showInfo: {
         inscriptionMenu: false,
       },
@@ -110,7 +111,13 @@ export default {
     this.listWidth = this.$appInitTableWidth(350);
   },
   methods: {
-    getRanking: function (heroId = 111, aid = 10, bid = 0, cid = 0, did = 0) {
+    getRankingByZhanli: function (
+      heroId = 111,
+      aid = 10,
+      bid = 0,
+      cid = 0,
+      did = 0
+    ) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -164,6 +171,62 @@ export default {
           }
         });
     },
+    getRankingBySuit: function (
+      roleId = 0,
+      heroId = 111,
+      aid = 10,
+      bid = 1,
+      cid = 0,
+      did = 0
+    ) {
+      if (roleId == 0) return;
+
+      this.$message.info(this.$appMsg.info[1029]);
+
+      this.actions = [];
+
+      this.$axios
+        .post(
+          this.$appApi.app.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did +
+            "&roleId=" +
+            roleId +
+            "&heroId=" +
+            heroId
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData_suit = data;
+
+            data.result.rows.map((x, i) => {
+              this.actions.push({
+                value: i,
+                name: x.name,
+                subname: "第 " + (i + 1) + " 套备战",
+                url: x.url,
+              });
+            });
+
+            this.actions.push({
+              value: 3,
+              name: "查看主页",
+              subname: "需要安装王者营地",
+            });
+          } else {
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+          }
+        });
+    },
     filterMethod: function ({ option, row, column }) {
       if (column.property == "selareaId") {
         return row.selareaId == option.value;
@@ -171,6 +234,8 @@ export default {
     },
     onCellClick: function ({ row }) {
       this.tableDataRow = row;
+
+      this.getRankingBySuit(row.roleId, this.heroId);
 
       this.showInfo.inscriptionMenu = true;
     },
@@ -190,17 +255,7 @@ export default {
         this.$appOpenUrl(
           this.$t("open-url.title"),
           "查看英雄备战 (出装、铭文)",
-          {
-            path:
-              "https://camp.qq.com/h5/webdist/prepare-war-share/index.html?isNavigationBarHidden=1&showLoading=false&gameRoleId=" +
-              playerInfo.roleId +
-              "&shareUserId=" +
-              playerInfo.userId +
-              "&heroId=" +
-              this.heroId +
-              "&indexNum=" +
-              item.value,
-          },
+          { path: item.url },
           0
         );
       }
