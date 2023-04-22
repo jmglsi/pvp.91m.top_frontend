@@ -94,6 +94,7 @@
                 <li
                   v-for="(data, index) in row.heroList.slice(0, 5)"
                   :key="'ranking-124611e2f7ddd568c28b5cb512b89be0-' + index"
+                  @click="getRankingBySuit(tableDataRow.roleId, data.heroId)"
                   class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
                 >
                   <a-dropdown :trigger="['click']">
@@ -144,13 +145,20 @@
                     <template #overlay>
                       <a-menu>
                         <a-menu-item
-                          v-for="index in 3"
+                          v-for="(data, index) in actions"
                           :key="
                             'ranking-31d3689c01b543a417ec7571237a436d-' + index
                           "
-                          @click="getHeroInscription(row, data.heroId, index)"
+                          @click="
+                            $appOpenUrl(
+                              $t('open-url.title'),
+                              '查看英雄备战 (出装、铭文)',
+                              { path: data.url },
+                              0
+                            )
+                          "
                         >
-                          第 {{ index }} 套备战
+                          {{ data.name }}
                         </a-menu-item>
                         <a-menu-divider />
                         <a-menu-item
@@ -358,8 +366,8 @@ export default {
         gamePlayerName: this.$t("loading"),
       },
       actions: [
-        { name: "对局回顾", value: 0 },
-        { name: "查看主页", subname: "需要安装王者营地", value: 1 },
+        //{ name: "对局回顾", value: 0 },
+        //{ name: "查看主页", subname: "需要安装王者营地", value: 1 },
       ],
       clientHeight: 0,
       listWidth: 0,
@@ -505,23 +513,55 @@ export default {
         this.$message.success(this.$appMsg.success[1006]);
       });
     },
-    getHeroInscription: function (row, heroId, index) {
-      this.$appOpenUrl(
-        this.$t("open-url.title"),
-        "查看英雄备战 (出装、铭文)",
-        {
-          path:
-            "https://camp.qq.com/h5/webdist/prepare-war-share/index.html?isNavigationBarHidden=1&showLoading=false&gameRoleId=" +
-            row.roleId +
-            "&shareUserId=" +
-            row.userId +
+    getRankingBySuit: function (
+      roleId = 0,
+      heroId = 111,
+      aid = 10,
+      bid = 1,
+      cid = 0,
+      did = 0
+    ) {
+      if (roleId == 0) return;
+
+      this.$message.info(this.$appMsg.info[1029]);
+
+      this.actions = [];
+
+      this.$axios
+        .post(
+          this.$appApi.app.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did +
+            "&roleId=" +
+            roleId +
             "&heroId=" +
-            heroId +
-            "&indexNum=" +
-            index,
-        },
-        0
-      );
+            heroId
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData_suit = data;
+
+            data.result.rows.map((x, i) => {
+              this.actions.push({
+                value: i,
+                name: x.name,
+                subname: "第 " + (i + 1) + " 套备战",
+                url: x.url,
+              });
+            });
+          } else {
+            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+          }
+        });
     },
     downloadImg: function (url) {
       let s = document.createElement("a");
