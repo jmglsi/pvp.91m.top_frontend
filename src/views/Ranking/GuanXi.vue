@@ -406,25 +406,32 @@ export default {
           url: longUrl,
         })
         .then((res) => {
-          let shortUrl = res.data.data.url;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.copyData =
-            "英雄:" +
-            row.hero[0].name +
-            " 和 " +
-            row.hero[1].name +
-            "\n-\n队友 时 一起 的胜率:" +
-            row.teammateWinRate +
-            "%\n对手 时 " +
-            row.hero[0].name +
-            " 的胜率:" +
-            row.opponentWinRate +
-            "%\n适配:" +
-            row.adaptation +
-            "\n-\n" +
-            shortUrl;
+          if (status.code == 200) {
+            let shortUrl = data.url;
 
-          this.$appCopyData(this.copyData);
+            this.copyData =
+              "英雄:" +
+              row.hero[0].name +
+              " 和 " +
+              row.hero[1].name +
+              "\n-\n队友 时 一起 的胜率:" +
+              row.teammateWinRate +
+              "%\n对手 时 " +
+              row.hero[0].name +
+              " 的胜率:" +
+              row.opponentWinRate +
+              "%\n适配:" +
+              row.adaptation +
+              "\n-\n" +
+              shortUrl;
+
+            this.$appCopyData(this.copyData);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     filterMethod: function ({ option, row, column }) {

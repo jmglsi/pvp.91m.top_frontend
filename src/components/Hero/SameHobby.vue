@@ -125,12 +125,20 @@ export default {
           this.$appApi.app.getHeroInfoByWebAccountList + "&heroId=" + heroId
         )
         .then((res) => {
-          this.tableData = res.data.data;
-          this.tableData.updateTime = ts;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.updateTime = ts;
 
-          if (tipsType == 1) this.$message.success(this.$appMsg.success[1000]);
+            this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
+
+            if (tipsType == 1)
+              this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
   },

@@ -334,107 +334,113 @@ export default {
       this.$axios
         .post(this.$appApi.app.getHeroBpIndex + "&heroId=" + heroId)
         .then((res) => {
-          let data = res.data.data;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.heroBpInfo = data;
-          this.heroBpInfo.updateTime = ts;
+          if (status.code == 200) {
+            this.heroBpInfo = data;
+            this.heroBpInfo.updateTime = ts;
 
-          if (data.blue.allPickTimes == 0) return;
+            if (data.blue.allPickTimes == 0) return;
 
-          this.newBpInfo.blue[0].pickRate =
-            Math.floor(
-              (data.blue.pickIndex[0].pickTimes / data.blue.allPickTimes) *
-                10000
-            ) / 100;
-          this.newBpInfo.blue[0].winRate =
-            Math.floor(
-              (data.blue.pickIndex[0].winTimes /
-                data.blue.pickIndex[0].pickTimes) *
-                10000
-            ) / 100;
-          //蓝 1
+            this.newBpInfo.blue[0].pickRate =
+              Math.floor(
+                (data.blue.pickIndex[0].pickTimes / data.blue.allPickTimes) *
+                  10000
+              ) / 100;
+            this.newBpInfo.blue[0].winRate =
+              Math.floor(
+                (data.blue.pickIndex[0].winTimes /
+                  data.blue.pickIndex[0].pickTimes) *
+                  10000
+              ) / 100;
+            //蓝 1
 
-          this.newBpInfo.blue[1].pickRate =
-            Math.floor(
-              ((data.blue.pickIndex[1].pickTimes +
-                data.blue.pickIndex[2].pickTimes) /
-                data.blue.allPickTimes) *
-                10000
-            ) / 100;
-          this.newBpInfo.blue[1].winRate =
-            Math.floor(
-              ((data.blue.pickIndex[1].winTimes +
-                data.blue.pickIndex[2].winTimes) /
-                (data.blue.pickIndex[1].pickTimes +
-                  data.blue.pickIndex[2].pickTimes)) *
-                10000
-            ) / 100;
-          //蓝 2-3
+            this.newBpInfo.blue[1].pickRate =
+              Math.floor(
+                ((data.blue.pickIndex[1].pickTimes +
+                  data.blue.pickIndex[2].pickTimes) /
+                  data.blue.allPickTimes) *
+                  10000
+              ) / 100;
+            this.newBpInfo.blue[1].winRate =
+              Math.floor(
+                ((data.blue.pickIndex[1].winTimes +
+                  data.blue.pickIndex[2].winTimes) /
+                  (data.blue.pickIndex[1].pickTimes +
+                    data.blue.pickIndex[2].pickTimes)) *
+                  10000
+              ) / 100;
+            //蓝 2-3
 
-          this.newBpInfo.blue[2].pickRate =
-            Math.floor(
-              ((data.blue.pickIndex[3].pickTimes +
-                data.blue.pickIndex[4].pickTimes) /
-                data.blue.allPickTimes) *
-                10000
-            ) / 100;
-          this.newBpInfo.blue[2].winRate =
-            Math.floor(
-              ((data.blue.pickIndex[3].winTimes +
-                data.blue.pickIndex[4].winTimes) /
-                (data.blue.pickIndex[3].pickTimes +
-                  data.blue.pickIndex[4].pickTimes)) *
-                10000
-            ) / 100;
-          //蓝 4-5
+            this.newBpInfo.blue[2].pickRate =
+              Math.floor(
+                ((data.blue.pickIndex[3].pickTimes +
+                  data.blue.pickIndex[4].pickTimes) /
+                  data.blue.allPickTimes) *
+                  10000
+              ) / 100;
+            this.newBpInfo.blue[2].winRate =
+              Math.floor(
+                ((data.blue.pickIndex[3].winTimes +
+                  data.blue.pickIndex[4].winTimes) /
+                  (data.blue.pickIndex[3].pickTimes +
+                    data.blue.pickIndex[4].pickTimes)) *
+                  10000
+              ) / 100;
+            //蓝 4-5
 
-          this.newBpInfo.red[0].pickRate =
-            Math.floor(
-              ((data.red.pickIndex[0].pickTimes +
-                data.red.pickIndex[1].pickTimes) /
-                data.red.allPickTimes) *
-                10000
-            ) / 100;
-          this.newBpInfo.red[0].winRate =
-            Math.floor(
-              ((data.red.pickIndex[0].winTimes +
-                data.red.pickIndex[1].winTimes) /
-                (data.red.pickIndex[0].pickTimes +
-                  data.red.pickIndex[1].pickTimes)) *
-                10000
-            ) / 100;
-          //红 1-2
+            this.newBpInfo.red[0].pickRate =
+              Math.floor(
+                ((data.red.pickIndex[0].pickTimes +
+                  data.red.pickIndex[1].pickTimes) /
+                  data.red.allPickTimes) *
+                  10000
+              ) / 100;
+            this.newBpInfo.red[0].winRate =
+              Math.floor(
+                ((data.red.pickIndex[0].winTimes +
+                  data.red.pickIndex[1].winTimes) /
+                  (data.red.pickIndex[0].pickTimes +
+                    data.red.pickIndex[1].pickTimes)) *
+                  10000
+              ) / 100;
+            //红 1-2
 
-          this.newBpInfo.red[1].pickRate =
-            Math.floor(
-              ((data.red.pickIndex[2].pickTimes +
-                data.red.pickIndex[3].pickTimes) /
-                data.red.allPickTimes) *
-                10000
-            ) / 100;
-          this.newBpInfo.red[1].winRate =
-            Math.floor(
-              ((data.red.pickIndex[2].winTimes +
-                data.red.pickIndex[3].winTimes) /
-                (data.red.pickIndex[2].pickTimes +
-                  data.red.pickIndex[3].pickTimes)) *
-                10000
-            ) / 100;
-          //红 3-4
+            this.newBpInfo.red[1].pickRate =
+              Math.floor(
+                ((data.red.pickIndex[2].pickTimes +
+                  data.red.pickIndex[3].pickTimes) /
+                  data.red.allPickTimes) *
+                  10000
+              ) / 100;
+            this.newBpInfo.red[1].winRate =
+              Math.floor(
+                ((data.red.pickIndex[2].winTimes +
+                  data.red.pickIndex[3].winTimes) /
+                  (data.red.pickIndex[2].pickTimes +
+                    data.red.pickIndex[3].pickTimes)) *
+                  10000
+              ) / 100;
+            //红 3-4
 
-          this.newBpInfo.red[2].pickRate =
-            Math.floor(
-              (data.red.pickIndex[4].pickTimes / data.red.allPickTimes) * 10000
-            ) / 100;
-          this.newBpInfo.red[2].winRate =
-            Math.floor(
-              (data.red.pickIndex[4].winTimes /
-                data.red.pickIndex[4].pickTimes) *
-                10000
-            ) / 100;
-          //红 5
+            this.newBpInfo.red[2].pickRate =
+              Math.floor(
+                (data.red.pickIndex[4].pickTimes / data.red.allPickTimes) *
+                  10000
+              ) / 100;
+            this.newBpInfo.red[2].winRate =
+              Math.floor(
+                (data.red.pickIndex[4].winTimes /
+                  data.red.pickIndex[4].pickTimes) *
+                  10000
+              ) / 100;
+            //红 5
 
-          this.$appSetLocalStorage("heroBpIndex-" + heroId, this.newBpInfo);
+            this.$appSetLocalStorage("heroBpIndex-" + heroId, this.newBpInfo);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
   },

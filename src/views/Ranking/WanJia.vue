@@ -145,7 +145,7 @@
                     <template #overlay>
                       <a-menu>
                         <a-menu-item
-                          v-for="(data, index) in actions"
+                          v-for="(data, index) in actions_suit"
                           :key="
                             'ranking-31d3689c01b543a417ec7571237a436d-' + index
                           "
@@ -366,9 +366,10 @@ export default {
         gamePlayerName: this.$t("loading"),
       },
       actions: [
-        //{ name: "对局回顾", value: 0 },
-        //{ name: "查看主页", subname: "需要安装王者营地", value: 1 },
+        { name: "对局回顾", value: 0 },
+        { name: "查看主页", subname: "需要安装王者营地", value: 1 },
       ],
+      actions_suit: [],
       clientHeight: 0,
       listWidth: 0,
       showInfo: {
@@ -525,7 +526,7 @@ export default {
 
       this.$message.info(this.$appMsg.info[1029]);
 
-      this.actions = [];
+      this.actions_suit = [];
 
       this.$axios
         .post(
@@ -551,7 +552,7 @@ export default {
             this.tableData_suit = data;
 
             data.result.rows.map((x, i) => {
-              this.actions.push({
+              this.actions_suit.push({
                 value: i,
                 name: x.name,
                 subname: "第 " + (i + 1) + " 套备战",

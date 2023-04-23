@@ -310,12 +310,17 @@ export default {
       }
 
       this.$axios.post(this.$appApi.app.getAppHome).then((res) => {
-        let data = res.data.data;
+        let data = res.data.data,
+          status = res.data.status;
 
-        this.appHomeInfo = data;
-        this.appHomeInfo.updateTime = ts;
+        if (status.code == 200) {
+          this.appHomeInfo = data;
+          this.appHomeInfo.updateTime = ts;
 
-        this.$appSetLocalStorage("appHome", this.appHomeInfo);
+          this.$appSetLocalStorage("appHome", this.appHomeInfo);
+        } else {
+          this.$message.error(status.msg);
+        }
       });
     },
     initColor: function () {
