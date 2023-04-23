@@ -297,11 +297,18 @@ export default {
           url: longUrl,
         })
         .then((res) => {
-          let shortUrl = res.data.data.url;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.copyData = row.name + " 的其他信息 ↓\n-\n" + shortUrl;
+          if (status.code == 200) {
+            let shortUrl = data.url;
 
-          this.$appCopyData(this.copyData);
+            this.copyData = row.name + " 的其他信息 ↓\n-\n" + shortUrl;
+
+            this.$appCopyData(this.copyData);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     onCellClick: function ({ row }) {

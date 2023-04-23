@@ -96,10 +96,17 @@ export default {
       }
 
       this.$axios.post(this.$appApi.game.getGameHome).then((res) => {
-        this.tableData = res.data.data;
-        this.tableData.updateTime = ts;
+        let data = res.data.data,
+          status = res.data.status;
 
-        this.$appSetLocalStorage("gameHome", this.tableData);
+        if (status.code == 200) {
+          this.tableData = data;
+          this.tableData.updateTime = ts;
+
+          this.$appSetLocalStorage("gameHome", this.tableData);
+        } else {
+          this.$message.error(status.msg);
+        }
       });
     },
   },
