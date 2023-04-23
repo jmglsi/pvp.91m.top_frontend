@@ -461,10 +461,10 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableDataRow = data;
+            this.tableDataRow = row;
 
-            this.updateInfo.title = data.calendar.day + " 的更新内容";
-            this.updateInfo.text = res.data.data;
+            this.updateInfo.text = data;
+            this.updateInfo.title = row.calendar.day + " 的更新内容";
 
             this.showInfo.dialog = true;
           } else {
