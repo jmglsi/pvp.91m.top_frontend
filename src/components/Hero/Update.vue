@@ -414,10 +414,17 @@ export default {
           this.$appApi.app.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
         )
         .then((res) => {
-          this.tableData = res.data.data;
-          this.tableData.updateTime = ts;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.updateTime = ts;
+
+            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     onEquipmentClick: function (e, a) {
@@ -440,22 +447,29 @@ export default {
 
       this.$appCopyData(this.copyData);
     },
-    onOpenHeroUpdateTextClick: function (heroId, data) {
+    onOpenHeroUpdateTextClick: function (heroId, row) {
       this.$axios
         .post(
           this.$appApi.app.getHeroUpdateText +
             "&heroId=" +
             heroId +
             "&articleId=" +
-            data.articleId
+            row.articleId
         )
         .then((res) => {
-          this.tableDataRow = data;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.updateInfo.title = data.calendar.day + " 的更新内容";
-          this.updateInfo.text = res.data.data;
+          if (status.code == 200) {
+            this.tableDataRow = data;
 
-          this.showInfo.dialog = true;
+            this.updateInfo.title = data.calendar.day + " 的更新内容";
+            this.updateInfo.text = res.data.data;
+
+            this.showInfo.dialog = true;
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
   },

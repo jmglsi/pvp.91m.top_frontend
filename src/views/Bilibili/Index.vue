@@ -181,29 +181,36 @@ export default {
           url: longUrl,
         })
         .then((res) => {
-          let shortUrl = res.data.data.url;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.copyData =
-            "id:" +
-            row.uid +
-            "\n类型:" +
-            row.type +
-            "\n开始:" +
-            row.start_num +
-            "\n目标:" +
-            row.num +
-            "\n剩余:" +
-            row.task_num +
-            "\n更新时间:" +
-            row.update_time +
-            "\n状态:" +
-            row.is_running +
-            "\n备注:" +
-            row.bz +
-            "\n-\n" +
-            shortUrl;
+          if (status.code == 200) {
+            let shortUrl = data.url;
 
-          this.$appCopyData(this.copyData);
+            this.copyData =
+              "id:" +
+              row.uid +
+              "\n类型:" +
+              row.type +
+              "\n开始:" +
+              row.start_num +
+              "\n目标:" +
+              row.num +
+              "\n剩余:" +
+              row.task_num +
+              "\n更新时间:" +
+              row.update_time +
+              "\n状态:" +
+              row.is_running +
+              "\n备注:" +
+              row.bz +
+              "\n-\n" +
+              shortUrl;
+
+            this.$appCopyData(this.copyData);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     onClearInputData: function () {

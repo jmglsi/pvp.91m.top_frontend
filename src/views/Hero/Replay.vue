@@ -123,7 +123,7 @@
               <template #overlay>
                 <a-menu>
                   <a-menu-item
-                    v-for="(data, index) in actions"
+                    v-for="(data, index) in actions_suit"
                     :key="'ranking-31d3689c01b543a417ec7571237a436d-' + index"
                     @click="
                       $appOpenUrl(
@@ -215,11 +215,12 @@ export default {
         gamePlayerName: this.$t("loading"),
       },
       actions: [
-        //{ name: "复制链接", value: 0 },
-        //{ name: "回顾", value: 1 },
-        //{ name: "详情", subname: "需要安装王者营地", value: 2 },
+        { name: "复制链接", value: 0 },
+        { name: "回顾", value: 1 },
+        { name: "详情", subname: "需要安装王者营地", value: 2 },
         //{ name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
+      actions_suit: [],
       replay: {
         id: this.$route.params.id || 111,
         title: this.$route.query.title || this.$t("loading"),
@@ -255,7 +256,7 @@ export default {
 
       this.$message.info(this.$appMsg.info[1029]);
 
-      this.actions = [];
+      this.actions_suit = [];
 
       this.$axios
         .post(
@@ -281,7 +282,7 @@ export default {
             this.tableData_suit = data;
 
             data.result.rows.map((x, i) => {
-              this.actions.push({
+              this.actions_suit.push({
                 value: i,
                 name: x.name,
                 subname: "第 " + (i + 1) + " 套备战",
@@ -299,22 +300,23 @@ export default {
       this.showInfo.replayMenu = true;
     },
     onReplayCopy: function (row) {
-      let replayUrl = row.replayUrl,
-        replayUrlIndex = replayUrl.indexOf("="),
-        longUrl = decodeURIComponent(
-          replayUrl.slice(replayUrlIndex + 1, replayUrl.length)
-        );
-
       this.$axios
         .post(this.$appApi.app.getShortUrl, {
-          url: longUrl,
+          url: row.replayUrl,
         })
         .then((res) => {
-          let shortUrl = res.data.data.url;
+          let data = res.data.data,
+            status = res.data.status;
 
-          this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
+          if (status.code == 200) {
+            let shortUrl = data.url;
 
-          this.$appCopyData(this.copyData);
+            this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
+
+            this.$appCopyData(this.copyData);
+          } else {
+            this.$message.error(status.msg);
+          }
         });
     },
     getHeroReplayByHeroId: function (page) {
