@@ -92,6 +92,7 @@
         <UserOauth
           :openId="openId"
           :accessToken="accessToken"
+          :redirect="redirect"
           :oauthInfo="loginInfo.oauthInfo"
         />
       </div>
@@ -134,6 +135,7 @@ export default {
     return {
       openId: "",
       accessToken: "",
+      redirect: "",
       loginInfo: {
         type: 1,
         text: this.$t("my.login"),
@@ -154,8 +156,11 @@ export default {
     };
   },
   mounted() {
+    let q = this.$route.query;
+
     this.openId = this.$cookie.get("openId") || "";
     this.accessToken = this.$cookie.get("accessToken") || "";
+    this.redirect = q.redirect || "";
 
     if (this.accessToken) this.getWebAccountInfo(2);
   },

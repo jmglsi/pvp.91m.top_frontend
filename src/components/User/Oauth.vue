@@ -56,6 +56,10 @@ export default {
       type: String,
       default: "",
     },
+    redirect: {
+      type: String,
+      default: "",
+    },
     oauthInfo: {
       type: Array,
       default: () => {
@@ -65,8 +69,8 @@ export default {
   },
   computed: {
     listenChange() {
-      const { openId, accessToken, oauthInfo } = this;
-      return { openId, accessToken, oauthInfo };
+      const { openId, accessToken, redirect, oauthInfo } = this;
+      return { openId, accessToken, redirect, oauthInfo };
     },
   },
   watch: {
@@ -99,8 +103,7 @@ export default {
   },
   methods: {
     onOauthClick: function (oauth) {
-      let q = this.$route.query,
-        url = location;
+      let url = location;
 
       if (oauth.status == 0) {
         this.$appDelectAllLocalStorage();
@@ -113,10 +116,10 @@ export default {
           this.openId +
           "&accessToken=" +
           this.accessToken +
-          "&host=" +
-          url.host +
           "&redirect=" +
-          encodeURIComponent(q.redirect);
+          encodeURIComponent(this.redirect) +
+          "&host=" +
+          encodeURIComponent(url.host);
       } else {
         this.$message.warning(this.$appMsg.warning[1010]);
       }
