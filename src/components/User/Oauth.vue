@@ -99,7 +99,8 @@ export default {
   },
   methods: {
     onOauthClick: function (oauth) {
-      let url = location;
+      let q = this.$route.query,
+        url = location;
 
       if (oauth.status == 0) {
         this.$appDelectAllLocalStorage();
@@ -113,7 +114,9 @@ export default {
           "&accessToken=" +
           this.accessToken +
           "&host=" +
-          url.host;
+          url.host +
+          "&redirect=" +
+          encodeURIComponent(q.redirect);
       } else {
         this.$message.warning(this.$appMsg.warning[1010]);
       }

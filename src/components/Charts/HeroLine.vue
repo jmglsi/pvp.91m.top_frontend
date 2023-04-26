@@ -128,18 +128,7 @@ export default {
             this.lineData = data;
             this.lineData.loading = false;
           } else {
-            this.$appOpenUrl(
-              "温馨提示",
-              status.msg,
-              {
-                path: "/search",
-                query: {
-                  q: "大佬们快来加群",
-                  refresh: 1,
-                },
-              },
-              1
-            );
+            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },
