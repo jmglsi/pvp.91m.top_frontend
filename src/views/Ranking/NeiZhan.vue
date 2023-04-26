@@ -193,8 +193,8 @@ export default {
     return {
       copyData: "",
       uin: "",
-      gc: this.$appQuery.gc || "",
-      gameLabel: this.$appQuery.gameLabel || "",
+      gc: this.$route.query.gc || "",
+      gameLabel: this.$route.query.gameLabel || "",
       tableData: {
         loading: false,
         result: {

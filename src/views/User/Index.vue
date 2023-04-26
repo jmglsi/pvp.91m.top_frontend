@@ -657,7 +657,7 @@ export default {
     },
   },
   created() {
-    let q = this.$appQuery;
+    let q = this.$route.query;
 
     if (q.oauthType) {
       this.login = {
