@@ -207,21 +207,12 @@ export default {
 
             this.$appDelectAllLocalStorage();
 
-            if (q.redirect) {
-              this.$appPush({
-                path: q.redirect,
-                query: {
-                  refresh: 1,
-                },
-              });
-            } else {
-              this.$appPush({
-                path: "/my",
-                query: {
-                  refresh: 1,
-                },
-              });
-            }
+            this.$appPush({
+              path: q.redirect || "/my",
+              query: {
+                refresh: 1,
+              },
+            });
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {
