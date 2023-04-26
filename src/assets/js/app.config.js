@@ -8,6 +8,7 @@ Vue.prototype.$appIsApple = /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
 Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
+//appQuery 只适合首次
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
 

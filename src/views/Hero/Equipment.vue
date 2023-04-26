@@ -690,7 +690,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$route.query,
+      let q = this.$appQuery,
         p = this.$route.params;
 
       this.chooseInfo.heroId = p.id;

@@ -223,11 +223,11 @@ export default {
       actions_suit: [],
       replay: {
         id: this.$route.params.id || 111,
-        title: this.$route.query.title || this.$t("loading"),
-        userId: this.$route.query.userId || "",
-        roleId: this.$route.query.roleId || "",
-        gameOpenId: this.$route.query.gameOpenId || "",
-        teammate: Boolean(parseInt(this.$route.query.teammate)) || false,
+        title: this.$appQuery.title || this.$t("loading"),
+        userId: this.$appQuery.userId || "",
+        roleId: this.$appQuery.roleId || "",
+        gameOpenId: this.$appQuery.gameOpenId || "",
+        teammate: Boolean(parseInt(this.$appQuery.teammate)) || false,
       },
       collapseInfo: {
         model: ["1"],
@@ -290,7 +290,7 @@ export default {
               });
             });
           } else {
-            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },
@@ -343,7 +343,7 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
           } else {
-            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },

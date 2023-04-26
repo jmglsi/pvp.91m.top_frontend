@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import router from '../../router';
 
 import qs from 'qs';
 Vue.prototype.$qs = qs;
@@ -37,6 +38,11 @@ if (process.env.NODE_ENV === 'production') {
 baseUrl = process.env.VUE_APP_BASE_URL;
 
 axios.defaults.baseURL = baseUrl;
+/**
+ * 
+ * 请求拦截器
+ * 
+ */
 axios.interceptors.request.use(function (config) {
   let data = qs.parse(config.data);
 
@@ -61,6 +67,29 @@ axios.interceptors.request.use(function (config) {
   function (error) {
     return Promise.reject(error);
   })
+
+/**
+ * 
+ * 返回拦截器
+ * 
+ */
+axios.interceptors.response.use(
+  response => {
+    if (response.data.status.code == 2004) {
+      router.replace({
+        path: '/login',
+        query: { redirect: router.currentRoute.fullPath }
+      })
+    }
+    return response;
+  },
+  error => {
+    if (error.response) {
+      //
+    }
+    return Promise.reject(error.response.data)
+  });
+
 Vue.prototype.$axios = axios;
 
 const appApi = baseUrl + "/hero/v1/app.php";

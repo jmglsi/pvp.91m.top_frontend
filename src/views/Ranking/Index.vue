@@ -420,7 +420,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$route.query,
+      let q = this.$appQuery,
         ls = this.$appConfigInfo,
         dfsTips = ls.tipsInfo.dfsTips || false,
         skillTips = ls.tipsInfo.skillTips || false,

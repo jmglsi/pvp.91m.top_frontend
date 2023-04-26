@@ -179,7 +179,8 @@ export default {
       this.loginInfo.text = this.$t("my.change");
     },
     onLoginClick: function (loginType) {
-      let data = this.loginInfo.data;
+      let q = this.$route.query,
+        data = this.loginInfo.data;
 
       this.showInfo.loginButton = false;
 
@@ -206,12 +207,21 @@ export default {
 
             this.$appDelectAllLocalStorage();
 
-            this.$appPush({
-              path: "/my",
-              query: {
-                refresh: 1,
-              },
-            });
+            if (q.redirect) {
+              this.$appPush({
+                path: q.redirect,
+                query: {
+                  refresh: 1,
+                },
+              });
+            } else {
+              this.$appPush({
+                path: "/my",
+                query: {
+                  refresh: 1,
+                },
+              });
+            }
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {
