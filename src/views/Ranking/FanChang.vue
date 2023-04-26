@@ -282,7 +282,7 @@ export default {
   },
   data() {
     return {
-      type: parseInt(this.$route.query.type) || 0,
+      type: parseInt(this.$appQuery.type) || 0,
       tableData: {
         loading: true,
         result: {

@@ -179,7 +179,8 @@ export default {
       this.loginInfo.text = this.$t("my.change");
     },
     onLoginClick: function (loginType) {
-      let data = this.loginInfo.data;
+      let q = this.$route.query,
+        data = this.loginInfo.data;
 
       this.showInfo.loginButton = false;
 
@@ -207,7 +208,7 @@ export default {
             this.$appDelectAllLocalStorage();
 
             this.$appPush({
-              path: "/my",
+              path: q.redirect || "/my",
               query: {
                 refresh: 1,
               },

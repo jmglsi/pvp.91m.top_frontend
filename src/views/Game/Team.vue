@@ -193,7 +193,7 @@ export default {
           if (status.code == 200) {
             this.tableData.result = data.result;
           } else {
-            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
     },
@@ -368,7 +368,7 @@ export default {
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {
-            this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
           }
         });
 
