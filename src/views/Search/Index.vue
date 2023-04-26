@@ -1177,7 +1177,7 @@ export default {
       copyData: "",
       search: {
         data: localStorage.getItem("searchData") || "",
-        value: this.$appQuery.q || "",
+        value: this.$route.query.q || "",
         placeholder: this.$t("search.placeholder"),
       },
       tableData: {
@@ -1257,7 +1257,7 @@ export default {
   },
   methods: {
     initShow: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         show = q.show || "";
 
       let searchValue = this.search.value;
