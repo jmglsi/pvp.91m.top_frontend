@@ -61,7 +61,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (newValue.tabsModel == 1) {
-          this.getHeroChartsLog(newValue.heroId, "", 3);
+          this.getHeroChartsLog(4, newValue.heroId, "");
         } else {
           this.tag.array = [];
         }
@@ -90,7 +90,7 @@ export default {
     };
   },
   methods: {
-    getHeroChartsLog: function (heroId, heroName, aid = 3) {
+    getHeroChartsLog: function (aid, heroId, heroName = "") {
       this.radarData = {
         loading: true,
         result: {
@@ -117,7 +117,7 @@ export default {
             this.radarData = data;
             this.radarData.loading = false;
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
@@ -140,7 +140,7 @@ export default {
         newHeroList = this.heroList.new;
 
       if (oldHeroList != newHeroList) {
-        this.getHeroChartsLog("", newHeroList, 4);
+        this.getHeroChartsLog(5, "", newHeroList);
         this.heroList.old = newHeroList;
       }
     },

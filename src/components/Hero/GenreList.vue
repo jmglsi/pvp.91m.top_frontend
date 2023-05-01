@@ -288,7 +288,7 @@ export default {
               this.tableData
             );
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },

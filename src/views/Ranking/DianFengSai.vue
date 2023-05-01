@@ -619,7 +619,7 @@ export default {
     this.initTableWidth();
 
     this.$nextTick(() => {
-      this.getHeroChartsLog(6);
+      this.getHeroChartsLog(7);
 
       this.$refs.refDianFengSai.connect(this.$refs.refXToolbar);
     });

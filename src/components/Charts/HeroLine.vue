@@ -60,8 +60,8 @@ export default {
         if (!newValue.heroId) return;
 
         this.getHeroChartsLog(
-          newValue.heroId,
           newValue.aid,
+          newValue.heroId,
           Number(newValue.detailed)
         );
       },
@@ -99,7 +99,7 @@ export default {
       });
       return e;
     },
-    getHeroChartsLog: function (heroId, aid, detailed) {
+    getHeroChartsLog: function (aid, heroId, detailed) {
       this.lineData = {
         loading: true,
         result: {
@@ -128,7 +128,7 @@ export default {
             this.lineData = data;
             this.lineData.loading = false;
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
