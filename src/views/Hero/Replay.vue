@@ -290,7 +290,7 @@ export default {
               });
             });
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
@@ -343,7 +343,7 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },

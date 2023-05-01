@@ -191,9 +191,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableData.result = data.result;
+            this.tableData = data;
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
@@ -357,18 +357,18 @@ export default {
           })
         )
         .then((res) => {
-          let data = res.data,
-            status = data.status;
+          let data = res.data.data,
+            status = res.data.status;
 
           if (status.code == 200) {
-            let label = data.data.label;
+            let label = data.label;
 
             this.$appDelectLocalStorage("tempTeamId");
             this.$appPush({ path: "/game/" + label + "/bp" });
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
 

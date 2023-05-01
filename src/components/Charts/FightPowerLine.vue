@@ -72,7 +72,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.getHeroChartsLog(7, newValue.bid, this.viewInfo.model, 0);
+        this.getHeroChartsLog(8, newValue.bid, this.viewInfo.model, 0);
       },
     },
   },
@@ -163,7 +163,7 @@ export default {
     onViewChange(e) {
       this.viewInfo.model = e.target.value;
 
-      this.getHeroChartsLog(7, this.bid, this.viewInfo.model, 0);
+      this.getHeroChartsLog(8, this.bid, this.viewInfo.model, 0);
     },
   },
 };

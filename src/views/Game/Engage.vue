@@ -127,9 +127,9 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableData.result = data.result;
+            this.tableData = data;
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
