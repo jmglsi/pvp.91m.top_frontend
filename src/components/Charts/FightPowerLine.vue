@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-migration">
+  <div class="ranking-fightPower">
     <div class="ranking-63559bd374a437b89b36762811e4b809">
       <a-radio-group
         :value="viewInfo.model"
@@ -23,6 +23,28 @@
         class="ranking-1ef625581088ffc24d94e052d9ebc61d"
       />
     </div>
+
+    <div class="ranking-f18a548cd035129a5e113b9c3b7a91c0">
+      该灵感由
+      <span
+        :style="{ color: '#1989fa !important' }"
+        @click="
+          $appPush({ path: '/friends?openId=da84e3d908d9455bf6482fb6a348fa02' })
+        "
+      >
+        @果果分水果
+      </span>
+      &nbsp;和&nbsp;
+      <span
+        :style="{ color: '#1989fa !important' }"
+        @click="
+          $appPush({ path: '/friends?openId=96c4d62b425d18c433bba83519d28d5a' })
+        "
+      >
+        @楚璃
+      </span>
+      提供
+    </div>
   </div>
 </template>
 
@@ -30,7 +52,7 @@
 import VeLine from "v-charts/lib/line.common";
 
 export default {
-  name: "ChartsMigrationLine",
+  name: "ChartsFightPowerLine",
   components: {
     VeLine,
   },
@@ -50,7 +72,7 @@ export default {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        this.getHeroChartsLog(5, newValue.bid, this.viewInfo.model, 0);
+        this.getHeroChartsLog(7, newValue.bid, this.viewInfo.model, 0);
       },
     },
   },
@@ -69,9 +91,10 @@ export default {
       viewInfo: {
         model: "c",
         options: [
-          { value: "a", label: "禁用" },
-          { value: "b", label: "出场" },
-          { value: "c", label: "禁选" },
+          { value: "a", label: "国1" },
+          { value: "b", label: "国10" },
+          { value: "c", label: "国50" },
+          { value: "d", label: "国100" },
         ],
       },
     };
@@ -140,22 +163,27 @@ export default {
     onViewChange(e) {
       this.viewInfo.model = e.target.value;
 
-      this.getHeroChartsLog(5, this.bid, this.viewInfo.model, 0);
+      this.getHeroChartsLog(7, this.bid, this.viewInfo.model, 0);
     },
   },
 };
 </script>
 
 <style scoped lang="less">
-div.ranking-migration {
+div.ranking-fightPower {
   margin: 25px 0;
 }
 
 div.ranking-63559bd374a437b89b36762811e4b809 {
-  margin-top: -5px;
+  margin-top: -25px;
   position: absolute;
   right: 0;
-  width: 210px;
+  width: 175px;
   z-index: 1;
+  text-align: left;
+}
+
+div.ranking-f18a548cd035129a5e113b9c3b7a91c0 {
+  margin-top: 50px;
 }
 </style>

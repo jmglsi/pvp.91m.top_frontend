@@ -681,7 +681,7 @@
     </div>
 
     <div class="ranking-2862744e5d7cce9d070aa41172557d78">
-      英雄梯度模型由
+      英雄梯度由
       <span
         :style="{ color: '#1989fa !important' }"
         @click="
@@ -692,13 +692,13 @@
       </span>
       提供
       <br />
-      梯度排行最后更新：
+      最后更新时间：
       <span :style="{ color: 'red !important' }">
         {{ tableData.result.updateTime || "等待更新" }}
       </span>
       <br />
       <br />
-      每个人的梯度不一样，仅供参考
+      每个人的梯度都不一样，仅供参考
       <br />
       <br />
       <span
