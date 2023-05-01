@@ -24,7 +24,7 @@
       />
     </div>
 
-    <div class="ranking-f18a548cd035129a5e113b9c3b7a91c0">
+    <div class="ranking-2862744e5d7cce9d070aa41172557d78">
       该灵感由
       <span
         :style="{ color: '#1989fa !important' }"
@@ -181,9 +181,5 @@ div.ranking-63559bd374a437b89b36762811e4b809 {
   width: 175px;
   z-index: 1;
   text-align: left;
-}
-
-div.ranking-f18a548cd035129a5e113b9c3b7a91c0 {
-  margin-top: 50px;
 }
 </style>
