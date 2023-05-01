@@ -1026,7 +1026,7 @@
           <span>3.知道对面开局信息后可以尝试抢一抢</span>
           <br />
           <br />
-          打野模型由
+          该灵感由
           <span
             :style="{ color: '#1989fa !important' }"
             @click="

@@ -60,6 +60,10 @@
               <div v-else-if="viewInfo.model == 'c'">
                 <ChartsMigrationLine :bid="cid || dfsPositionTypeInfo.model" />
               </div>
+
+              <div v-else-if="viewInfo.model == 'd'">
+                <ChartsFightPowerLine :bid="cid || dfsPositionTypeInfo.model" />
+              </div>
             </div>
 
             <div
@@ -90,7 +94,10 @@
                       <a-radio-button value="a">梯度</a-radio-button>
                       <a-radio-button value="b">排行</a-radio-button>
                       <a-radio-button :disabled="cid == 0" value="c">
-                        趋势
+                        迁徙
+                      </a-radio-button>
+                      <a-radio-button :disabled="cid == 0" value="d">
+                        战力
                       </a-radio-button>
                     </a-radio-group>
                   </div>
@@ -242,8 +249,9 @@
                   },
                 })
               "
-              >您的分享是我更新的动力 ( •̀ ω •́ )y</span
             >
+              您的分享是我更新的动力 ( •̀ ω •́ )y
+            </span>
           </div>
         </template>
       </van-action-sheet>
@@ -289,6 +297,8 @@ export default {
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChartsMigrationLine: () => import("@/components/Charts/MigrationLine.vue"),
+    ChartsFightPowerLine: () =>
+      import("@/components/Charts/FightPowerLine.vue"),
     RankingDianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
     RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
     RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
@@ -610,6 +620,10 @@ export default {
 .vxe-cell,
 .vxe-cell--label {
   font-family: monospace;
+}
+
+label.ant-radio-wrapper {
+  margin-top: 10px;
 }
 
 img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
