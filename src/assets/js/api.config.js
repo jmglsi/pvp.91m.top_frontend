@@ -76,11 +76,21 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(
   response => {
     if (response.data.status.code == 2004) {
-      router.replace({
-        path: '/login',
-        query: { redirect: router.currentRoute.fullPath }
-      })
+      let currentRoute = router.currentRoute;
+
+      cookie.delete("openId");
+      cookie.delete("accessToken");
+      cookie.delete("tempOpenId");
+      cookie.delete("tempAccessToken");
+
+      if (currentRoute.name != "login") {
+        router.replace({
+          path: "/login",
+          query: { redirect: currentRoute.fullPath }
+        })
+      }
     }
+
     return response;
   },
   error => {
