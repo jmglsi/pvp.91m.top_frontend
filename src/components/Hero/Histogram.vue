@@ -74,8 +74,8 @@ export default {
         if (!newValue.heroId) return;
 
         this.getHeroChartsLog(
-          newValue.heroId,
           newValue.aid,
+          newValue.heroId,
           Number(newValue.detailed)
         );
       },
@@ -115,7 +115,7 @@ export default {
       });
       return e;
     },
-    getHeroChartsLog: function (heroId, aid, detailed) {
+    getHeroChartsLog: function (aid, heroId, detailed) {
       this.lineData = {
         loading: true,
         result: {

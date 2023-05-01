@@ -167,7 +167,7 @@ export default {
               this.tableData
             );
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
@@ -223,7 +223,7 @@ export default {
               subname: "需要安装王者营地",
             });
           } else {
-            //this.$appOpenUrl("温馨提示", status.msg, { path: "/login" }, 1);
+            this.$message.error(status.msg);
           }
         });
     },
