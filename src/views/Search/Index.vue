@@ -1515,6 +1515,12 @@ i.search-a0edf16f0e677f3e28dfd77595f437be {
   }
 }
 
+i.search-a64976150427434c778228d76650f6fb {
+  img.van-icon__image {
+    margin-top: 3px;
+  }
+}
+
 li.search-9eca81635365b5dcc7960ad26bb0b714 {
   width: 150px;
 }

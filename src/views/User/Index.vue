@@ -473,6 +473,7 @@
                   </div>
                 </template>
               </van-field>
+              <!--
               <van-field
                 v-model="$appColumnsInfo.provinceType[newInfo.provinceType]"
                 readonly
@@ -493,6 +494,7 @@
                   </div>
                 </template>
               </van-field>
+              -->
               <van-field readonly label="段位">
                 <template #button>
                   <div class="my-6a138d8f7faefbcc60caf19afc89f0a2">
@@ -796,8 +798,6 @@ export default {
       this.$i18n.locale = lang;
 
       this.$message.success(e + " ok");
-
-      //location.reload();
 
       this.login.text = this.$t("my.login-i");
 
