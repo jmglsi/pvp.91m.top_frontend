@@ -209,6 +209,7 @@ export default {
             this.$cookie.set("accessToken", data.accessToken, {
               expires: "1M",
             });
+            this.$cookie.set("name", data.name, { expires: "1M" });
 
             this.$appDelectAllLocalStorage();
 
