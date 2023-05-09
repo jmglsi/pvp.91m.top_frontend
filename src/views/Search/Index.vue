@@ -18,36 +18,35 @@
           shape="round"
         >
           <template #left>
-            <div class="search-e979efff8a859d0adcb2d63d51cd9de4">
-              <ChooseHero @select="getHeroId">
-                <img
-                  v-lazy="
-                    tableData.cardInfo.id && tableData.cardInfo.id < 900
-                      ? {
-                          src:
-                            '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
-                          error: tableData.cardInfo.img,
-                        }
-                      : '/img/icons-app/hero_white.png'
-                  "
-                  width="30"
-                  height="30"
-                  class="app-border-radius"
-                />
-              </ChooseHero>
-            </div>
-          </template>
-          <template #action>
             <div
               :style="
                 $appIsApple && $appConfigInfo.appInfo.pwa == 1
                   ? { color: '#fff !important' }
                   : {}
               "
-              @click="$appPushBack()"
+              @click="$appPush({ path: '/', query: { refresh: 1 } })"
+              class="search-e979efff8a859d0adcb2d63d51cd9de4"
             >
               {{ $t("nav-bar.left-text") }}
             </div>
+          </template>
+          <template #action>
+            <ChooseHero @select="getHeroId">
+              <img
+                v-lazy="
+                  tableData.cardInfo.id && tableData.cardInfo.id < 900
+                    ? {
+                        src:
+                          '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
+                        error: tableData.cardInfo.img,
+                      }
+                    : '/img/icons-app/hero_white.png'
+                "
+                width="30"
+                height="30"
+                class="app-border-radius"
+              />
+            </ChooseHero>
           </template>
         </van-search>
       </van-sticky>
@@ -1031,7 +1030,8 @@
             :style="{ color: '#1989fa !important' }"
             @click="
               $appPush({
-                path: '/friends?openId=2a7ce02e6feeb419167f74737f1257ec',
+                path: '/friends',
+                query: { openId: '2a7ce02e6feeb419167f74737f1257ec' },
               })
             "
           >
@@ -1370,8 +1370,6 @@ export default {
       this.tableData.cardInfo.isNew = false;
 
       this.initSearchHistory();
-
-      this.$appPush({ path: "/search" });
 
       this.showInfo.searchData = false;
     },

@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="type == 1 ? true : false"
         :safe-area-inset-top="true"
-        @click-left="$appPushBack()"
+        @click-left="$router.go(-1)"
         :left-text="$t('nav-bar.left-text')"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >

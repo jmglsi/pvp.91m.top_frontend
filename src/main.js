@@ -26,10 +26,7 @@ Vue.prototype.$appApi = appApi;
 import appMsg from './assets/js/code.config';
 Vue.prototype.$appMsg = appMsg;
 
-import store from './assets/js/store.config';
 router.beforeEach((to, from, next) => {
-  store.state.previousPage.push(from);
-
   document.title = to.meta.title + ' | ' + Vue.prototype.$appConfigInfo.appInfo.name;
   document.body.scrollTop = document.documentElement.scrollTop = 0;
 
@@ -42,7 +39,6 @@ Vue.config.productionTip = false;
 new Vue({
   i18n,
   router,
-  store,
   render: (h) => h(App),
   /*
     mounted() {

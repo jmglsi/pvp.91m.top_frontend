@@ -106,7 +106,7 @@
 
     <div
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
-      @click="$appPushBack()"
+      @click="$router.go(-1)"
     >
       <img v-lazy="'/img/icons-app/stow.png'" width="25" height="25" />
     </div>

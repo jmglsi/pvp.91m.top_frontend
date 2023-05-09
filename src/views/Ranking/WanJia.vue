@@ -223,7 +223,8 @@
           :style="{ color: '#1989fa !important' }"
           @click="
             $appPush({
-              path: '/friends?openId=f2abc2e39c22c3879df227abfc8d7d34',
+              path: '/friends',
+              query: { openId: 'f2abc2e39c22c3879df227abfc8d7d34' },
             })
           "
         >
