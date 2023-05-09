@@ -7,7 +7,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$appPushBack()"
+        @click-left="$router.go(-1)"
         :left-text="$t('nav-bar.left-text')"
         z-index="99999999"
         title="未命名的方案"

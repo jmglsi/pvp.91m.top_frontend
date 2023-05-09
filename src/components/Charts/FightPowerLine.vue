@@ -29,7 +29,10 @@
       <span
         :style="{ color: '#1989fa !important' }"
         @click="
-          $appPush({ path: '/friends?openId=da84e3d908d9455bf6482fb6a348fa02' })
+          $appPush({
+            path: '/friends',
+            query: { openId: 'da84e3d908d9455bf6482fb6a348fa02' },
+          })
         "
       >
         @果果分水果
@@ -38,7 +41,10 @@
       <span
         :style="{ color: '#1989fa !important' }"
         @click="
-          $appPush({ path: '/friends?openId=96c4d62b425d18c433bba83519d28d5a' })
+          $appPush({
+            path: '/friends',
+            query: { openId: '96c4d62b425d18c433bba83519d28d5a' },
+          })
         "
       >
         @楚璃

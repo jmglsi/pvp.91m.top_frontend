@@ -11,7 +11,7 @@
             ? { backgroundColor: 'white !important' }
             : { backgroundColor: 'transparent !important' }
         "
-        @click-left="$appPushBack()"
+        @click-left="$router.go(-1)"
         @click-right="$message.info($appMsg.info[1004])"
         :left-text="scroll >= 50 ? '搜一搜' : null"
         z-index="99999999"
@@ -427,7 +427,7 @@
         -->
         <van-tabbar-item
           icon="/img/icons-app/group.png"
-          to="/search/?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
+          to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >
           加群讨论

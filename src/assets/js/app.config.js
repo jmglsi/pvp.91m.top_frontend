@@ -172,24 +172,14 @@ if (!ls) {
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
-Vue.prototype.$appPush = function (url = { path: '/' }) {
-  this.$router.push(url);
-}
+Vue.prototype.$appPush = function (data = { path: '/' }) {
+  let replace = data.replace || false;
 
-Vue.prototype.$appPushBack = function (url = { path: '/', query: { refresh: 0 } }) {
-  let previousPage = this.$store.state.previousPage,
-    lastUrl = previousPage[previousPage.length - 1],
-    nowUrl = null;
-
-  if (previousPage.length < 2) {
-    nowUrl = url;
+  if (replace && !replace) {
+    this.$router.push(data);
   } else {
-    /miniapp|friends|hero(.*?)info/i.test(lastUrl.path) == true ? nowUrl = url : nowUrl = lastUrl;
-    nowUrl.query.refresh = 1;
-    //防止套娃
+    this.$router.replace(data);
   }
-
-  this.$router.push(nowUrl);
 }
 
 Vue.prototype.$appFloatToTime = function (float) {
@@ -217,7 +207,7 @@ Vue.prototype.$appFloatToTime = function (float) {
   return num_1 + ":" + num_2;
 }
 
-Vue.prototype.$appOpenUrl = function (title, message = null, url = { path: '/' }, urlType = 0) {
+Vue.prototype.$appOpenUrl = function (title, message = null, data = { path: '/' }, urlType = 0) {
   if (urlType == 0) {
     let ls = Vue.prototype.$appConfigInfo;
 
@@ -232,20 +222,20 @@ Vue.prototype.$appOpenUrl = function (title, message = null, url = { path: '/' }
         })
         .then(() => {
           //on confirm
-          window.open(url.path);
+          window.open(data.path);
         })
         .catch(() => {
           //on cancel
         });
     } else {
-      window.open(url.path);
+      window.open(data.path);
     }
   } else {
     if (message) {
       this.$message.warning(message);
     }
 
-    this.$router.push(url);
+    this.$router.push(data);
   }
 }
 

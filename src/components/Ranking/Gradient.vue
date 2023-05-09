@@ -685,7 +685,10 @@
       <span
         :style="{ color: '#1989fa !important' }"
         @click="
-          $appPush({ path: '/friends?openId=8701875c7834f26c7794876584c59cd3' })
+          $appPush({
+            path: '/friends',
+            query: { openId: '8701875c7834f26c7794876584c59cd3' },
+          })
         "
       >
         @梦归奇迹
