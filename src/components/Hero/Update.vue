@@ -94,7 +94,10 @@
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
                 @click="
                   item != heroId
-                    ? $appPush({ path: '/hero/' + item + '/info' })
+                    ? $appPush({
+                        path: '/hero/' + item + '/info',
+                        replace: true,
+                      })
                     : null
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"

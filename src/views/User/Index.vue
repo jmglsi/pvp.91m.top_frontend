@@ -653,8 +653,6 @@ export default {
 
       if (refresh == 1) {
         this.getWebAccountInfo();
-
-        this.$appPush({});
       }
     },
   },
