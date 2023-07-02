@@ -337,7 +337,7 @@ export default {
       heroName: "",
       isSmallMode: false,
       viewInfo: {
-        model: "a",
+        model: this.$route.query.eid || "a",
       },
       searchInfo: {
         defaultValue: "",
