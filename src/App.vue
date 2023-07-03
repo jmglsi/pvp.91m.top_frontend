@@ -106,7 +106,7 @@ export default {
       /ranking/i.test(nowPath) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
+      /admin|weekly|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
         nowPath
       ) == true
         ? (tabbar = false)

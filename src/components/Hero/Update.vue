@@ -44,7 +44,7 @@
               v-if="data.calendar.day"
               :color="data.calendar.color"
               @click="
-                heroId > 0 ? onOpenHeroUpdateTextClick(heroId, data) : null
+                heroId > 0 ? onOpenHeroUpdateDetailClick(heroId, data) : null
               "
               round
               class="update-5a0c2e4611419b82b55675d035764007"
@@ -199,7 +199,7 @@
       <van-dialog
         v-model="showInfo.dialog"
         @close="
-          showInfo.checked ? onHeroUpdateTextCopy(heroId, tableDataRow) : null
+          showInfo.checked ? onHeroUpdateDetailCopy(heroId, tableDataRow) : null
         "
       >
         <template #title>
@@ -434,7 +434,7 @@ export default {
       this.equipmentId = parseInt(e.equipment[a]) || 0;
       this.showInfo.skillMenu = true;
     },
-    onHeroUpdateTextCopy: function (heroId, row) {
+    onHeroUpdateDetailCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);
 
       this.copyData =
@@ -450,10 +450,10 @@ export default {
 
       this.$appCopyData(this.copyData);
     },
-    onOpenHeroUpdateTextClick: function (heroId, row) {
+    onOpenHeroUpdateDetailClick: function (heroId, row) {
       this.$axios
         .post(
-          this.$appApi.app.getHeroUpdateText +
+          this.$appApi.app.getHeroUpdateDetail +
             "&heroId=" +
             heroId +
             "&articleId=" +
@@ -466,7 +466,7 @@ export default {
           if (status.code == 200) {
             this.tableDataRow = row;
 
-            this.updateInfo.text = data;
+            this.updateInfo.text = data[0].updateText;
             this.updateInfo.title = row.calendar.day + " 的更新内容";
 
             this.showInfo.dialog = true;

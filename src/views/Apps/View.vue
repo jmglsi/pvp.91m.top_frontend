@@ -1,20 +1,20 @@
 <template>
-  <div class="hero-view">
-    <div class="hero-ed54df2282a902e04da118c6dd9d8843">
+  <div class="apps-hero-view">
+    <div class="apps-ed54df2282a902e04da118c6dd9d8843">
       <van-button
         round
         size="small"
         :icon="'/img/icons-hero/' + hero.info.id + '.jpg'"
-        class="hero-7fd0a5f5913603ec56c9095e237cd4bc"
+        class="apps-7fd0a5f5913603ec56c9095e237cd4bc"
       >
         <img
           v-if="hero.info.change.trendType > 0"
           v-lazy="'/img/icons-app/hot_' + hero.info.change.trendType + '.png'"
           width="15"
           height="15"
-          class="hero-26a263bb8e3b535b7a46349053f49e96"
+          class="apps-26a263bb8e3b535b7a46349053f49e96"
         />
-        <span class="hero-a100b6fadea02956261621e88186b9a2">
+        <span class="apps-a100b6fadea02956261621e88186b9a2">
           {{ hero.info.name }}
         </span>
 
@@ -22,14 +22,14 @@
           v-if="hero.info.id && hero.info.id < 900"
           :listWidth="60"
           :progressData="progressData.result.rows[hero.info.id]"
-          class="hero-c63abbfb166e7e598518fe6a7a58c86b"
+          class="apps-c63abbfb166e7e598518fe6a7a58c86b"
         />
       </van-button>
-      <span class="hero-d3eb91ba1fa50a7d88bd6a93569c69b1">
+      <span class="apps-d3eb91ba1fa50a7d88bd6a93569c69b1">
         热度趋势 来源:苏苏的荣耀助手
       </span>
       <span
-        class="hero-d3eb91ba1fa50a7d88bd6a93569c69b1 hero-c63abbfb166e7e598518fe6a7a58c86b"
+        class="apps-d3eb91ba1fa50a7d88bd6a93569c69b1 apps-c63abbfb166e7e598518fe6a7a58c86b"
       >
         最后更新 {{ viewInfo.nowTime }}
       </span>
@@ -47,21 +47,21 @@
         grid: { left: -43, bottom: -15, width: 302, height: 105 },
       }"
       :animation="false"
-      class="hero-ea7120740464ce78c305436d1f150b4d"
+      class="apps-ea7120740464ce78c305436d1f150b4d"
     />
 
-    <div class="hero-bed58a7a97fd68cfc9d2cf0dc5d9f9d5">
+    <div class="apps-bed58a7a97fd68cfc9d2cf0dc5d9f9d5">
       <ul>
         <li
           v-for="(data, index) in tableData.result.rows"
-          :key="'hero-32bc3a9909dc2659759bef0eecc68def-' + index"
+          :key="'apps-32bc3a9909dc2659759bef0eecc68def-' + index"
         >
           <van-button
             v-if="index < 2 && data.pickRate > 5"
             round
             size="mini"
             :icon="'/img/icons-skill/' + data.skillId + '.jpg'"
-            class="hero-7fd0a5f5913603ec56c9095e237cd4bc"
+            class="apps-7fd0a5f5913603ec56c9095e237cd4bc"
           >
             {{
               $appConfigInfo.positionInfo[data.positionId + 1][0] +
@@ -76,7 +76,7 @@
             round
             size="mini"
             :icon="hero.info.skill[1].img"
-            class="hero-7fd0a5f5913603ec56c9095e237cd4bc"
+            class="apps-7fd0a5f5913603ec56c9095e237cd4bc"
           >
             {{ parseInt(hero.info.skill[1].pickRate) + "%" }}
           </van-button>
@@ -390,7 +390,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-button.hero-7fd0a5f5913603ec56c9095e237cd4bc {
+button.apps-7fd0a5f5913603ec56c9095e237cd4bc {
   margin-right: 5px;
 
   img.van-icon__image {
@@ -401,40 +401,36 @@ button.hero-7fd0a5f5913603ec56c9095e237cd4bc {
     width: 20px;
   }
 
-  img.hero-26a263bb8e3b535b7a46349053f49e96 {
+  img.apps-26a263bb8e3b535b7a46349053f49e96 {
     left: 26px;
     top: -2px;
     position: absolute;
   }
 
   span.van-button__text,
-  span.hero-a100b6fadea02956261621e88186b9a2 {
+  span.apps-a100b6fadea02956261621e88186b9a2 {
     margin-top: 2px;
   }
 }
 
-span.hero-d3eb91ba1fa50a7d88bd6a93569c69b1 {
+span.apps-d3eb91ba1fa50a7d88bd6a93569c69b1 {
   position: absolute;
   width: 300px;
   text-align: @app-text-align;
 }
 
-span.hero-c63abbfb166e7e598518fe6a7a58c86b {
+span.apps-c63abbfb166e7e598518fe6a7a58c86b {
   margin-top: 15px;
 }
 
-div.hero-test {
-  text-align: @app-text-align;
-}
-
-div.hero-ea7120740464ce78c305436d1f150b4d {
+div.apps-ea7120740464ce78c305436d1f150b4d {
   margin: 10px;
   margin-left: 5px;
   margin-top: 12px;
   width: 250px;
 }
 
-div.hero-bed58a7a97fd68cfc9d2cf0dc5d9f9d5 {
+div.apps-bed58a7a97fd68cfc9d2cf0dc5d9f9d5 {
   position: absolute;
   left: 5px;
   top: 122px;
@@ -445,7 +441,7 @@ div.hero-bed58a7a97fd68cfc9d2cf0dc5d9f9d5 {
   }
 }
 
-div.hero-ed54df2282a902e04da118c6dd9d8843 {
+div.apps-ed54df2282a902e04da118c6dd9d8843 {
   left: 5px;
   position: absolute;
   top: 2px;
@@ -459,7 +455,7 @@ div.hero-ed54df2282a902e04da118c6dd9d8843 {
     width: 28px;
   }
 
-  span.hero-a100b6fadea02956261621e88186b9a2 {
+  span.apps-a100b6fadea02956261621e88186b9a2 {
     margin-top: -5px;
   }
 
@@ -468,7 +464,7 @@ div.hero-ed54df2282a902e04da118c6dd9d8843 {
   }
 }
 
-div.hero-c63abbfb166e7e598518fe6a7a58c86b {
+div.apps-c63abbfb166e7e598518fe6a7a58c86b {
   margin-top: -14px;
   margin-left: -9px;
   position: absolute;

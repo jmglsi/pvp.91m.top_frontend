@@ -107,7 +107,7 @@ export default new Router({
   }, {
     path: '/skin',
     name: 'skin',
-    redirect: '/skin/return',
+    redirect: '/ranking',
     component: () =>
       import('./views/Ranking/FanChang.vue'),
     children: [{
@@ -121,7 +121,7 @@ export default new Router({
   }, {
     path: '/admin',
     name: 'admin',
-    redirect: '/admin/web-data',
+    redirect: '/ranking',
     component: () =>
       import('./views/Admin/Index.vue'),
     children: [{
@@ -204,15 +204,6 @@ export default new Router({
         keepAlive: false
       }
     }, {
-      path: ':id/view',
-      name: 'heroView',
-      component: () =>
-        import('./views/Hero/View.vue'),
-      meta: {
-        title: '预览',
-        keepAlive: false
-      }
-    }, {
       path: ':id/equipment',
       name: 'heroEquipment',
       component: () =>
@@ -224,9 +215,34 @@ export default new Router({
     },
     ]
   }, {
+    path: '/apps',
+    name: 'apps',
+    redirect: '/ranking',
+    component: () =>
+      import('./views/Apps/Index.vue'),
+    children: [{
+      path: 'hero/:id/view',
+      name: 'heroView',
+      component: () =>
+        import('./views/Apps/View.vue'),
+      meta: {
+        title: '预览',
+        keepAlive: false
+      }
+    }, {
+      path: 'weekly',
+      name: 'weekly',
+      component: () =>
+        import('./views/Apps/Weekly.vue'),
+      meta: {
+        title: '周报',
+        keepAlive: false
+      }
+    }]
+  }, {
     path: '/game',
     name: 'game',
-    redirect: '/game/new/bp',
+    redirect: '/ranking',
     component: () =>
       import('./views/Game/Index.vue'),
     children: [{
