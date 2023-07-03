@@ -215,16 +215,16 @@ export default new Router({
     },
     ]
   }, {
-    path: '/apps',
-    name: 'apps',
+    path: '/tools',
+    name: 'tools',
     redirect: '/ranking',
     component: () =>
-      import('./views/Apps/Index.vue'),
+      import('./views/Tools/Index.vue'),
     children: [{
       path: 'hero/:id/view',
       name: 'heroView',
       component: () =>
-        import('./views/Apps/View.vue'),
+        import('./views/Tools/View.vue'),
       meta: {
         title: '预览',
         keepAlive: false
@@ -233,7 +233,7 @@ export default new Router({
       path: 'weekly',
       name: 'weekly',
       component: () =>
-        import('./views/Apps/Weekly.vue'),
+        import('./views/Tools/Weekly.vue'),
       meta: {
         title: '周报',
         keepAlive: false

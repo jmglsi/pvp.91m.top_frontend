@@ -1,5 +1,5 @@
 <template>
-  <div class="apps-home">
+  <div class="tools-home">
     <router-view />
   </div>
 </template>
