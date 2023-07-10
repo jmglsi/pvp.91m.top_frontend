@@ -191,7 +191,7 @@
 
     <div class="tools-0718fd9d729c89c24317bec50cd5f968">
       <van-divider content-position="right">
-        数据来源 苏苏的荣耀助手，最后更新 2023-07-10
+        数据来源 苏苏的荣耀助手
       </van-divider>
     </div>
   </div>
