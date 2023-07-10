@@ -92,7 +92,7 @@ import "echarts/lib/component/markLine";
 import "zrender/lib/svg/svg";
 
 export default {
-  name: "HeroView",
+  name: "ToolsView",
   components: {
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
@@ -267,8 +267,6 @@ export default {
               this.tableData.loading = false;
               this.tableData.updateTime = ts;
 
-              //this.$refs.refDianFengSai.loadData(data.result.rows);
-
               newData = this.tableData;
             }
 
@@ -276,8 +274,6 @@ export default {
               "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
               newData
             );
-
-            //this.$message.success(this.$appMsg.success[1005]);
           } else {
             this.$message.error(status.msg);
           }

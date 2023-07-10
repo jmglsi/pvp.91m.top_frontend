@@ -90,7 +90,7 @@
 
             <div class="update-c936f93d328137bba0ab32510a2e4fd0">
               <span
-                v-for="(item, index) in data.hero"
+                v-for="(item, index) in data.heroList"
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
                 @click="
                   item != heroId
@@ -124,12 +124,12 @@
             </div>
 
             <div
-              v-if="data.equipment.length > 0"
+              v-if="data.equipmentList.length > 0"
               class="update-33717161c2d8c0d081510c322ab5876a"
             >
               <van-divider />
               <span
-                v-for="(item, index) in data.equipment"
+                v-for="(item, index) in data.equipmentList"
                 :key="'update-df0ed5943fd740242219ad3e45245f6e-' + index"
                 @click="onEquipmentClick(data, index)"
                 class="update-cf1228c4eb54ec10bf815f0ed3816a49"
@@ -466,7 +466,7 @@ export default {
           if (status.code == 200) {
             this.tableDataRow = row;
 
-            this.updateInfo.text = data[0].updateText;
+            this.updateInfo.text = data.heroList[0].updateText;
             this.updateInfo.title = row.calendar.day + " 的更新内容";
 
             this.showInfo.dialog = true;
