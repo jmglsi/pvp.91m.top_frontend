@@ -113,7 +113,7 @@ export default {
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
 
-      /hero\/(.*?)\/view/i.test(nowPath)
+      /weekly|hero\/(.*?)\/view/i.test(nowPath)
         ? (this.noUpdateTips = true)
         : (this.noUpdateTips = false);
     },
