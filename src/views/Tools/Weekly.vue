@@ -1,6 +1,6 @@
 <template>
   <div class="tools-weekly">
-    <div v-if="articleId" class="tools-99fbdd20d1de3e2b40c66e8041b4c785">
+    <div v-if="articleId > 0" class="tools-99fbdd20d1de3e2b40c66e8041b4c785">
       <van-divider
         content-position="right"
         :style="{
@@ -37,6 +37,17 @@
                   height="35"
                   class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                 />
+
+                <div
+                  v-if="data.updateType == 3 || data.updateType == 4"
+                  class="tools-5688b4942ace92e2a2445773bcc4c483"
+                >
+                  <van-icon
+                    :color="data.updateType == 3 ? 'green' : 'blue'"
+                    size="17"
+                    name="goods-collect"
+                  />
+                </div>
               </div>
             </van-grid-item>
           </van-grid>
@@ -112,10 +123,11 @@
                 <img
                   v-lazy="{
                     src: '/img/icons-skill/' + data.id + '.jpg',
-                    error: '//image.ttwz.qq.com/images/skill/' + id + '.png',
+                    error:
+                      '//image.ttwz.qq.com/images/skill/' + data.id + '.png',
                   }"
-                  width="15"
-                  height="15"
+                  width="17"
+                  height="17"
                   class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7 tools-72aa4435371df16ebd5958bf17d2ce17"
                 />
 
@@ -167,8 +179,8 @@
                       data.id +
                       '.png',
                   }"
-                  width="15"
-                  height="15"
+                  width="17"
+                  height="17"
                   class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7 tools-72aa4435371df16ebd5958bf17d2ce17"
                 />
 
@@ -202,7 +214,7 @@ export default {
   name: "ToolsWeekly",
   data() {
     return {
-      articleId: this.$route.query.articleId || "",
+      articleId: parseInt(this.$route.query.articleId) || 0,
       update: {
         heroList: [],
         equipmentList: [],
@@ -219,7 +231,7 @@ export default {
     this.getRanking(11, 1, 0, 0);
     this.getRanking(11, 2, 0, 0);
 
-    if (articleId) {
+    if (articleId > 0) {
       this.getHeroUpdateDetail(articleId);
     }
   },
@@ -293,7 +305,7 @@ export default {
 img.tools-72aa4435371df16ebd5958bf17d2ce17 {
   background-color: #fff !important;
   left: 27px;
-  margin-top: 21px;
+  margin-top: 20px;
   padding: 1px;
   position: absolute;
 }
@@ -314,6 +326,18 @@ div.tools-0718fd9d729c89c24317bec50cd5f968 {
   margin-top: -75px;
   position: absolute;
   width: 375px;
+}
+
+div.tools-5688b4942ace92e2a2445773bcc4c483 {
+  background-color: #fff !important;
+  border-radius: 100%;
+  height: 20px;
+  margin-left: 35px;
+  margin-top: -16px;
+  padding: 1px;
+  position: absolute;
+  text-align: center;
+  width: 20px;
 }
 
 div.tools-3c561cfe952966d66469f189d0f1ded6 {
