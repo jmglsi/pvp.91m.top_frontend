@@ -484,7 +484,7 @@
     </div>
 
     <div
-      v-show="cellInfo.index > -1 && showInfo.heroSameHobby"
+      v-if="cellInfo.index > -1 && showInfo.heroSameHobby"
       class="ranking-d742492b2526d57a222af9b54040b3b4"
     >
       <HeroSameHobby :heroId="tableDataRow.id" />

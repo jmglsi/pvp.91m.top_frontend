@@ -1,6 +1,9 @@
 <template>
   <div class="tools-weekly">
-    <div v-if="articleId > 0" class="tools-99fbdd20d1de3e2b40c66e8041b4c785">
+    <div
+      v-if="articleId > 0 && update.heroList.length > 0"
+      class="tools-99fbdd20d1de3e2b40c66e8041b4c785"
+    >
       <van-divider
         content-position="right"
         :style="{
@@ -15,7 +18,9 @@
         <div class="tools-715a26d0452334a25d81cd422f67f5f0">
           <span class="tools-b25280b37a417ded3d58f929839c2019">
             #英雄
-            <span v-if="update.heroList.length > 10">🪧 更新涉及英雄较多</span>
+            <span v-if="update.heroList.length > 10">
+              🪧 更新涉及英雄较多
+            </span>
           </span>
           <van-grid :border="false" :column-num="10">
             <van-grid-item
@@ -225,7 +230,7 @@ export default {
       },
     };
   },
-  mounted() {
+  created() {
     let articleId = this.articleId;
 
     this.getRanking(11, 1, 0, 0);

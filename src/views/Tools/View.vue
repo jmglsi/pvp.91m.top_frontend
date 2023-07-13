@@ -151,10 +151,10 @@ export default {
     };
   },
   created() {
-    this.getHeroChartsLog(7);
-  },
-  mounted() {
     this.initPage();
+
+    this.getRanking(15);
+    this.getHeroChartsLog(7);
   },
   methods: {
     initPage: function () {
@@ -187,7 +187,6 @@ export default {
         nowS;
 
       this.getHeroInfo(p.id);
-      this.getRanking(15);
       this.getRankingByGenreList(p.id, 14);
     },
     getHeroInfo: function (id = 111) {
