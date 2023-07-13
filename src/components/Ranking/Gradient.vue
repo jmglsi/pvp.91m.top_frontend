@@ -779,7 +779,7 @@
     </div>
 
     <div
-      v-show="showInfo.heroSameHobby"
+      v-if="showInfo.heroSameHobby"
       class="ranking-d742492b2526d57a222af9b54040b3b4"
     >
       <HeroSameHobby :heroId="tableDataRow.id" />
