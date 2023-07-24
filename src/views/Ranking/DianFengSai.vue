@@ -563,6 +563,7 @@ export default {
   },
   data() {
     return {
+      time: this.$route.query.t || "",
       heroProficiency: this.$t("loading"),
       tableData: {
         loading: false,
@@ -686,7 +687,7 @@ export default {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + this.time
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
@@ -711,7 +712,10 @@ export default {
             "&cid=" +
             cid +
             "&did=" +
-            did
+            did,
+          this.$qs.stringify({
+            t: this.time,
+          })
         )
         .then((res) => {
           let data = res.data.data,
@@ -736,7 +740,16 @@ export default {
             }
 
             this.$appSetLocalStorage(
-              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
+              "ranking-" +
+                aid +
+                "-" +
+                bid +
+                "-" +
+                cid +
+                "-" +
+                did +
+                "-" +
+                this.time,
               newData
             );
 
