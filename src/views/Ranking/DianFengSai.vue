@@ -753,7 +753,13 @@ export default {
               newData
             );
 
-            //this.$message.success(this.$appMsg.success[1005]);
+            if (aid == 0) {
+              //this.$message.success(this.$appMsg.success[1005]);
+
+              if (this.time) {
+                this.$message.info(this.$appMsg.info[1030]);
+              }
+            }
           } else {
             this.$message.error(status.msg);
           }
