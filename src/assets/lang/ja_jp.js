@@ -36,7 +36,8 @@ export default {
   },
   "my": {
     "change": "パスワードを変更する",
-    "login-i": "登録/ログイン/変更する",
+    "forget": "パスワードを忘れる",
+    "login-i": "登録 / ログイン",
     "login-out": "ログアウトする",
     "login": "ログインする",
     "register": "登録する"

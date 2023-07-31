@@ -39,7 +39,29 @@
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
+          v-model="loginInfo.data.code"
+          v-if="loginInfo.type == 3"
+          left-icon="/img/icons-app/captcha.png"
+          placeholder="请输入验证码"
+          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
+        >
+          <template #button>
+            <div class="login-0864d16c299765901bd0de98e61b5039">
+              <van-button
+                round
+                :disabled="loginInfo.code.disable"
+                size="small"
+                type="primary"
+                @click="onSendCode"
+              >
+                {{ loginInfo.code.text }}
+              </van-button>
+            </div>
+          </template>
+        </van-field>
+        <van-field
           v-model="loginInfo.data.password"
+          v-if="loginInfo.type < 2"
           type="password"
           left-icon="/img/icons-app/password_lock.png"
           placeholder="请输入密码"
@@ -47,7 +69,7 @@
         />
         <van-field
           v-model="loginInfo.data.newPassword"
-          v-if="loginInfo.type == 2"
+          v-if="loginInfo.type == 3"
           type="password"
           left-icon="/img/icons-app/password_lock.png"
           placeholder="请输入新密码"
@@ -67,7 +89,8 @@
       <van-button
         round
         :disabled="
-          (accessToken && loginInfo.type != 2) ||
+          (loginInfo.type == 3 && loginInfo.data.code.length != 6) ||
+          (accessToken && loginInfo.type < 2) ||
           !$appConfigInfo.appInfo.isReadme ||
           !showInfo.loginButton
             ? true
@@ -76,7 +99,7 @@
         size="small"
         color="linear-gradient(to right, #4bb0ff, #6149f6)"
         @click="
-          loginInfo.data.email && loginInfo.data.password
+          loginInfo.data.email
             ? onLoginClick(loginInfo.type)
             : $message.error($appMsg.error[1007])
         "
@@ -118,7 +141,7 @@
     <div
       class="login-f01ae8c7f2d058ec6be00db589a32bea login-4ae1ffb5939d592986bed21d0913562d"
     >
-      <span @click="onUpdateClick">{{ $t("my.change") }}</span>
+      <span @click="onUpdateClick">{{ $t("my.forget") }}</span>
     </div>
   </div>
 </template>
@@ -136,13 +159,20 @@ export default {
       openId: "",
       accessToken: "",
       redirect: "",
+      sendCode: "",
       loginInfo: {
         type: 1,
         text: this.$t("my.login"),
         oauthInfo: [],
+        code: {
+          disable: false,
+          text: "发送验证码",
+          timeout: 5,
+        },
         data: {
           name: "",
           email: "",
+          code: "",
           password: "",
           newPassword: "",
           uin: "",
@@ -179,8 +209,55 @@ export default {
       this.loginInfo.type = 0;
       this.loginInfo.text = this.$t("my.register");
     },
+    onSendCode: function () {
+      let timeout = this.loginInfo.code.timeout,
+        data = this.loginInfo.data;
+
+      if (this.sendCode) {
+        clearInterval(this.sendCode);
+      }
+
+      this.$axios
+        .post(
+          this.$appApi.app.loginWebAccount + "&aid=2",
+          this.$qs.stringify({
+            email: data.email,
+            code: data.code,
+            newPassword: data.newPassword ? md5(data.newPassword) : "",
+          })
+        )
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.$message.success(this.$appMsg.success[1004]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+
+      this.loginInfo.code.disable = false;
+      this.sendCode = setInterval(() => {
+        timeout--;
+
+        this.loginInfo.code.text = timeout;
+
+        if (timeout == 0) {
+          clearInterval(this.sendCode);
+
+          this.loginInfo.code.disable = false;
+          this.loginInfo.code.text = "发送验证码";
+
+          return;
+        }
+      }, 1000);
+
+      //this.loginInfo.type = 2;
+      this.loginInfo.code.disable = true;
+      this.loginInfo.code.text = "正在发送..";
+    },
     onUpdateClick: function () {
-      this.loginInfo.type = 2;
+      this.loginInfo.type = 3;
       this.loginInfo.text = this.$t("my.change");
     },
     onLoginClick: function (loginType) {
@@ -195,7 +272,8 @@ export default {
           this.$qs.stringify({
             name: data.name,
             email: data.email,
-            password: md5(data.password),
+            code: data.code,
+            password: data.password ? md5(data.password) : "",
             newPassword: data.newPassword ? md5(data.newPassword) : "",
             uin: data.uin,
           })
@@ -278,5 +356,12 @@ div.login-411f660a2e7bb1558275b86749667ee9 {
   bottom: 150px;
   position: absolute;
   width: 100%;
+}
+
+div.login-0864d16c299765901bd0de98e61b5039 {
+  position: absolute;
+  height: 25px;
+  right: 0;
+  margin-top: -17px;
 }
 </style>
