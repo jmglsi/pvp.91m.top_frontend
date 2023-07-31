@@ -36,7 +36,8 @@ export default {
   },
   "my": {
     "change": "Change Password",
-    "login-i": "Register / Login / Change",
+    "forget": "Forgot Password",
+    "login-i": "Register / Login",
     "login-out": "Log Out",
     "login": "Log In",
     "register": "Register"

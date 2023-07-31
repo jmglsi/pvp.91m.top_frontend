@@ -36,7 +36,8 @@ export default {
   },
   "my": {
     "change": "修改密碼",
-    "login-i": "註冊 / 登錄 / 修改",
+    "forget": "忘記密碼",
+    "login-i": "註冊 / 登錄",
     "login-out": "退出登錄",
     "login": "登錄",
     "register": "註冊"
