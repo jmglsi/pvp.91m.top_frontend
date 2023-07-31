@@ -167,7 +167,7 @@ export default {
         code: {
           disable: false,
           text: "发送验证码",
-          timeout: 5,
+          timeout: 60,
         },
         data: {
           name: "",
