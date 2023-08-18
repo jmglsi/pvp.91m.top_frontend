@@ -83,10 +83,21 @@
         </li>
       </ul>
     </div>
+
+    <div class="tools-01d8b754716fc5f519c1a4b654867193">
+      <div class="tools-58e4ea8e49b560235a7058518676b7e4">
+        <vue-qr ref="qrCode" :text="hero.qrcode.url" :size="200" />
+      </div>
+      <span class="tools-e144855db3887408c0e2202a42027279">
+        {{ hero.qrcode.name }}
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+import VueQr from "vue-qr";
+
 import "echarts/lib/component/markLine";
 
 import "zrender/lib/svg/svg";
@@ -94,6 +105,7 @@ import "zrender/lib/svg/svg";
 export default {
   name: "ToolsView",
   components: {
+    VueQr,
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
   },
@@ -125,6 +137,10 @@ export default {
               pickTimes: 0,
             },
           ],
+        },
+        qrcode: {
+          name: "",
+          url: "",
         },
       },
       tableData: {
@@ -187,6 +203,7 @@ export default {
         nowS;
 
       this.getHeroInfo(p.id);
+      this.getHeroInfoByRandSuit(p.id);
       this.getRankingByGenreList(p.id, 14);
     },
     getHeroInfo: function (id = 111) {
@@ -214,6 +231,23 @@ export default {
             heroData.updateTime = ts;
 
             this.$appSetLocalStorage("heroInfo-" + id, heroData);
+
+            //this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    getHeroInfoByRandSuit: function (id = 111) {
+      this.$axios
+        .post(this.$appApi.app.getHeroInfoByRandSuit + "&heroId=" + id)
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            let suitData = res.data.data;
+            console.log(suitData);
+            this.hero.qrcode = suitData;
 
             //this.$message.success(this.$appMsg.success[1005]);
           } else {
@@ -418,6 +452,13 @@ span.tools-c63abbfb166e7e598518fe6a7a58c86b {
   margin-top: 15px;
 }
 
+span.tools-e144855db3887408c0e2202a42027279 {
+  font-size: 10px;
+  left: 125px;
+  margin-top: 105px;
+  position: absolute;
+}
+
 div.tools-ea7120740464ce78c305436d1f150b4d {
   margin: 10px;
   margin-left: 5px;
@@ -463,5 +504,16 @@ div.tools-c63abbfb166e7e598518fe6a7a58c86b {
   margin-top: -14px;
   margin-left: -9px;
   position: absolute;
+}
+
+div.tools-01d8b754716fc5f519c1a4b654867193 {
+  z-index: -1;
+}
+
+div.tools-58e4ea8e49b560235a7058518676b7e4 {
+  left: -65px;
+  margin-top: 13px;
+  position: absolute;
+  transform: scale(0.25);
 }
 </style>>
