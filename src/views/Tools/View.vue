@@ -86,7 +86,7 @@
 
     <div class="tools-01d8b754716fc5f519c1a4b654867193">
       <div class="tools-58e4ea8e49b560235a7058518676b7e4">
-        <vue-qr ref="qrCode" :text="hero.qrcode.url" :size="200" />
+        <vue-qr ref="refQrCode" :text="hero.qrcode.url" :size="200" />
       </div>
       <span class="tools-e144855db3887408c0e2202a42027279">
         {{ hero.qrcode.name }}
@@ -454,10 +454,11 @@ span.tools-c63abbfb166e7e598518fe6a7a58c86b {
 
 span.tools-e144855db3887408c0e2202a42027279 {
   font-size: 10px;
-  left: 70px;
-  width: 225px;
+  left: 65px;
   margin-top: 105px;
   position: absolute;
+  text-align: center;
+  width: 200px;
 }
 
 div.tools-ea7120740464ce78c305436d1f150b4d {
