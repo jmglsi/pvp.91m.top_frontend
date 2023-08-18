@@ -140,6 +140,7 @@ const app = {
   getHeroBpIndex: appApi + "?type=getHeroBpIndex",
   getHeroChartsLog: appApi + "?type=getHeroChartsLog",
   getHeroInfo: appApi + "?type=getHeroInfo",
+  getHeroInfoByRandSuit: appApi + "?type=getHeroInfoByRandSuit",
   getHeroInfoByWebAccountList: appApi + "?type=getHeroInfoByWebAccountList",
   getHeroProficiency: appApi + "?type=getHeroProficiency",
   getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
