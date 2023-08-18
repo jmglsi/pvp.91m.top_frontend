@@ -488,8 +488,21 @@ export default {
       //let tabsInfo = this.tabsInfo;
 
       if (e == 0) {
+        /**
+         *
+         * 初始化菜单
+         *
+         */
         this.bidInfo = this.dfsAreaTypeInfo;
+        /**
+         *
+         * 同步选项
+         *
+         */
+        this.dfsAreaTypeInfo.model = this.bid;
+
         this.cidInfo = this.dfsPositionTypeInfo;
+        this.dfsPositionTypeInfo.model = this.cid;
 
         this.showInfo.rankingFilterMenu = true;
       }
@@ -500,6 +513,7 @@ export default {
 
       if (e == 2) {
         this.bidInfo = this.wjAreaTypeInfo;
+        this.wjAreaTypeInfo.model = this.bid;
 
         this.showInfo.rankingFilterMenu = true;
       }
@@ -532,15 +546,23 @@ export default {
         this.pzFightPowerTypeInfo.options = arrData_3;
 
         this.bidInfo = this.pzAreaTypeInfo;
+        this.pzAreaTypeInfo.model = this.bid;
+
         this.cidInfo = this.pzProvinceTypeInfo;
+        this.pzProvinceTypeInfo.model = this.cid;
+
         this.didInfo = this.pzFightPowerTypeInfo;
+        this.pzFightPowerTypeInfo.model = this.did;
 
         this.showInfo.rankingFilterMenu = true;
       }
 
       if (e == 5) {
         this.bidInfo = this.nzOrderInfo;
+        this.nzOrderInfo.model = this.bid;
+
         this.cidInfo = this.nzStatusInfo;
+        this.nzStatusInfo.model = this.cid;
 
         this.showInfo.rankingFilterMenu = true;
       }
@@ -557,8 +579,7 @@ export default {
         didInfo = this.didInfo;
 
       if (tabsInfo.model == 0) {
-        this.dfsAreaTypeInfo.model = bidInfo.model;
-        this.dfsPositionTypeInfo.model = cidInfo.model;
+        //
       }
 
       if (tabsInfo.model == 1) {
@@ -566,7 +587,7 @@ export default {
       }
 
       if (tabsInfo.model == 2) {
-        this.wjAreaTypeInfo.model = bidInfo.model;
+        //
       }
 
       if (tabsInfo.model == 3) {
@@ -574,14 +595,11 @@ export default {
       }
 
       if (tabsInfo.model == 4) {
-        this.pzAreaTypeInfo.model = bidInfo.model;
-        this.pzProvinceTypeInfo.model = cidInfo.model;
-        this.pzFightPowerTypeInfo.model = didInfo.model;
+        //
       }
 
       if (tabsInfo.model == 5) {
-        this.nzOrderInfo.model = bidInfo.model;
-        this.nzStatusInfo.model = cidInfo.model;
+        //
       }
 
       this.$appPush({
@@ -590,6 +608,7 @@ export default {
           bid: bidInfo.model,
           cid: cidInfo.model,
           did: didInfo.model,
+          eid: this.viewInfo.model,
           gc: this.gc,
           refresh: 1,
         },
