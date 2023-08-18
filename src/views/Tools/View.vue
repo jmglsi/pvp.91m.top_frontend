@@ -454,7 +454,8 @@ span.tools-c63abbfb166e7e598518fe6a7a58c86b {
 
 span.tools-e144855db3887408c0e2202a42027279 {
   font-size: 10px;
-  left: 125px;
+  left: 70px;
+  width: 225px;
   margin-top: 105px;
   position: absolute;
 }
