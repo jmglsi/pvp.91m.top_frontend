@@ -576,7 +576,8 @@ export default {
       let tabsInfo = this.tabsInfo,
         bidInfo = this.bidInfo,
         cidInfo = this.cidInfo,
-        didInfo = this.didInfo;
+        didInfo = this.didInfo,
+        eidInfo = this.viewInfo;
 
       if (tabsInfo.model == 0) {
         //
@@ -608,7 +609,7 @@ export default {
           bid: bidInfo.model,
           cid: cidInfo.model,
           did: didInfo.model,
-          eid: this.viewInfo.model,
+          eid: eidInfo.model,
           gc: this.gc,
           refresh: 1,
         },
