@@ -86,7 +86,7 @@
 
     <div class="tools-01d8b754716fc5f519c1a4b654867193">
       <div class="tools-58e4ea8e49b560235a7058518676b7e4">
-        <vue-qr ref="qrCode" :text="hero.qrcode.url" :size="200" />
+        <vue-qr ref="refQrCode" :text="hero.qrcode.url" :size="200" />
       </div>
       <span class="tools-e144855db3887408c0e2202a42027279">
         {{ hero.qrcode.name }}
