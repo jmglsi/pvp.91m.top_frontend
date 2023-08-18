@@ -454,10 +454,11 @@ span.tools-c63abbfb166e7e598518fe6a7a58c86b {
 
 span.tools-e144855db3887408c0e2202a42027279 {
   font-size: 10px;
-  left: 70px;
-  width: 225px;
+  left: 65px;
   margin-top: 105px;
   position: absolute;
+  text-align: center;
+  width: 200px;
 }
 
 div.tools-ea7120740464ce78c305436d1f150b4d {
