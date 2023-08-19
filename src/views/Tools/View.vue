@@ -443,9 +443,10 @@ button.tools-7fd0a5f5913603ec56c9095e237cd4bc {
 }
 
 span.tools-d3eb91ba1fa50a7d88bd6a93569c69b1 {
+  margin-left: 5px;
   position: absolute;
-  width: 300px;
   text-align: @app-text-align;
+  width: 300px;
 }
 
 span.tools-c63abbfb166e7e598518fe6a7a58c86b {
