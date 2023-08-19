@@ -693,6 +693,18 @@
       >
         @梦归奇迹
       </span>
+      和
+      <span
+        :style="{ color: '#1989fa !important' }"
+        @click="
+          $appPush({
+            path: '/friends',
+            query: { openId: '122faeffce051c73a476a40919ea71fb' },
+          })
+        "
+      >
+        @安致远
+      </span>
       提供
       <br />
       最后更新时间：
