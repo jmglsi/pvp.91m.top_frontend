@@ -230,7 +230,7 @@
                 @change="onDropdownMenuChange"
               />
               <van-dropdown-item
-                v-if="didInfo.options.length > 0 && tabsInfo.model == 4"
+                v-if="didInfo.options.length > 0"
                 v-model="didInfo.model"
                 :options="didInfo.options"
                 @change="onDropdownMenuChange"
@@ -315,14 +315,10 @@ export default {
       this.bid = parseInt(q.bid) || 0;
       this.cid = parseInt(q.cid) || 0;
       this.did = parseInt(q.did) || 0;
+      this.viewInfo.model = q.eid || "a";
       this.refresh = parseInt(q.refresh) || 0;
 
-      if (
-        this.bid == 0 &&
-        this.cid == 0 &&
-        this.did == 0 &&
-        this.viewInfo.model == "c"
-      ) {
+      if (this.bid == 0 && this.cid == 0 && this.did == 0) {
         this.viewInfo.model = "a";
       }
     },
@@ -494,14 +490,17 @@ export default {
          *
          */
         this.bidInfo = this.dfsAreaTypeInfo;
+        this.cidInfo = this.dfsPositionTypeInfo;
+        this.didInfo = {
+          model: 0,
+          options: [],
+        };
         /**
          *
          * 同步选项
          *
          */
         this.dfsAreaTypeInfo.model = this.bid;
-
-        this.cidInfo = this.dfsPositionTypeInfo;
         this.dfsPositionTypeInfo.model = this.cid;
 
         this.showInfo.rankingFilterMenu = true;
@@ -513,6 +512,15 @@ export default {
 
       if (e == 2) {
         this.bidInfo = this.wjAreaTypeInfo;
+        this.cidInfo = {
+          model: 0,
+          options: [],
+        };
+        this.didInfo = {
+          model: 0,
+          options: [],
+        };
+
         this.wjAreaTypeInfo.model = this.bid;
 
         this.showInfo.rankingFilterMenu = true;
@@ -546,12 +554,11 @@ export default {
         this.pzFightPowerTypeInfo.options = arrData_3;
 
         this.bidInfo = this.pzAreaTypeInfo;
-        this.pzAreaTypeInfo.model = this.bid;
-
         this.cidInfo = this.pzProvinceTypeInfo;
-        this.pzProvinceTypeInfo.model = this.cid;
-
         this.didInfo = this.pzFightPowerTypeInfo;
+
+        this.pzAreaTypeInfo.model = this.bid;
+        this.pzProvinceTypeInfo.model = this.cid;
         this.pzFightPowerTypeInfo.model = this.did;
 
         this.showInfo.rankingFilterMenu = true;
@@ -559,9 +566,13 @@ export default {
 
       if (e == 5) {
         this.bidInfo = this.nzOrderInfo;
-        this.nzOrderInfo.model = this.bid;
-
         this.cidInfo = this.nzStatusInfo;
+        this.didInfo = {
+          model: 0,
+          options: [],
+        };
+
+        this.nzOrderInfo.model = this.bid;
         this.nzStatusInfo.model = this.cid;
 
         this.showInfo.rankingFilterMenu = true;
