@@ -317,10 +317,6 @@ export default {
       this.did = parseInt(q.did) || 0;
       this.viewInfo.model = q.eid || "a";
       this.refresh = parseInt(q.refresh) || 0;
-
-      if (this.bid == 0 && this.cid == 0 && this.did == 0) {
-        this.viewInfo.model = "a";
-      }
     },
   },
   data() {
@@ -328,8 +324,8 @@ export default {
       bid: 0,
       cid: 0,
       did: 0,
-      refresh: 0,
       gc: "",
+      refresh: 0,
       heroName: "",
       isSmallMode: false,
       viewInfo: {
@@ -581,14 +577,29 @@ export default {
       //this.$appPush({ query: { type: tabsInfo.model } });
     },
     onRadioChange: function (e) {
+      let tabsInfo = this.tabsInfo,
+        bidInfo = this.bidInfo,
+        cidInfo = this.cidInfo,
+        didInfo = this.didInfo;
+
       this.viewInfo.model = e.target.value;
+
+      this.$appPush({
+        query: {
+          type: tabsInfo.model,
+          bid: bidInfo.model,
+          cid: cidInfo.model,
+          did: didInfo.model,
+          eid: this.viewInfo.model,
+          refresh: 1,
+        },
+      });
     },
     onDropdownMenuChange: function () {
       let tabsInfo = this.tabsInfo,
         bidInfo = this.bidInfo,
         cidInfo = this.cidInfo,
-        didInfo = this.didInfo,
-        eidInfo = this.viewInfo;
+        didInfo = this.didInfo;
 
       if (tabsInfo.model == 0) {
         //
@@ -620,7 +631,7 @@ export default {
           bid: bidInfo.model,
           cid: cidInfo.model,
           did: didInfo.model,
-          eid: eidInfo.model,
+          eid: this.viewInfo.model,
           gc: this.gc,
           refresh: 1,
         },

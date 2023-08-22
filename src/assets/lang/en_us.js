@@ -34,6 +34,9 @@ export default {
     "label": "Anything goes, feel free to express yourself",
     "value": "Tu Xiaochao"
   },
+  "home": {
+    "bottom": "Data is cited arbitrarily, as long as the source is indicated"
+  },
   "my": {
     "change": "Change Password",
     "forget": "Forgot Password",

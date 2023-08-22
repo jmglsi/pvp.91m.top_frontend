@@ -34,6 +34,9 @@ export default {
     "label": "什么都行，欢迎吐槽",
     "value": "兔小巢"
   },
+  "home": {
+    "bottom": "数据随意引用，注明出处即可"
+  },
   "my": {
     "change": "修改密码",
     "forget": "忘记密码",
