@@ -53,7 +53,7 @@
 
     <div class="home-72ab9e07378f988922e6c91884048db0">
       <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">
-        数据随意引用，注明出处即可
+        {{ $t("home.bottom") }}
       </span>
     </div>
 
