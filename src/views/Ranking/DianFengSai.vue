@@ -410,6 +410,7 @@
             sortable
           />
         </vxe-table-colgroup>
+        <template #empty><div v-html="msg || '暂无数据'"></div></template>
       </vxe-table>
     </div>
 
@@ -563,6 +564,7 @@ export default {
   },
   data() {
     return {
+      msg: "",
       time: this.$route.query.t || "",
       heroProficiency: this.$t("loading"),
       tableData: {
@@ -760,6 +762,9 @@ export default {
                 this.$message.info(this.$appMsg.info[1030]);
               }
             }
+          } else if (status.code == 2006) {
+            this.tableData.loading = false;
+            this.msg = status.msg;
           } else {
             this.$message.error(status.msg);
           }
