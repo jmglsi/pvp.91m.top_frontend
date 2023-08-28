@@ -166,7 +166,8 @@
           />
         </van-tab>
 
-        <van-tab disabled>
+        <!--
+        <van-tab>
           <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
 
           <div class="ranking-02481dbde39222ea29fbc1d2f80b2885">
@@ -180,7 +181,9 @@
             />
           </div>
         </van-tab>
+        -->
 
+        <!--
         <van-tab>
           <template #title>内战&nbsp;<i class="vxe-icon--funnel" /></template>
 
@@ -194,6 +197,7 @@
             />
           </div>
         </van-tab>
+        -->
       </van-tabs>
     </div>
 
@@ -302,8 +306,8 @@ export default {
     RankingDianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
     RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
     RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
-    RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
-    RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
+    //RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
+    //RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
     RankingWanJia: () => import("@/views/Ranking/WanJia.vue"),
     RankingZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
   },
@@ -477,8 +481,6 @@ export default {
       }
     },
     onRankingTabsClick: function (e) {
-      //let tabsInfo = this.tabsInfo;
-
       if (e == 0) {
         /**
          *
@@ -573,23 +575,18 @@ export default {
 
         this.showInfo.rankingFilterMenu = true;
       }
-
-      //this.$appPush({ query: { type: tabsInfo.model } });
     },
     onRadioChange: function (e) {
-      let tabsInfo = this.tabsInfo,
-        bidInfo = this.bidInfo,
-        cidInfo = this.cidInfo,
-        didInfo = this.didInfo;
+      let tabsInfo = this.tabsInfo;
 
       this.viewInfo.model = e.target.value;
 
       this.$appPush({
         query: {
           type: tabsInfo.model,
-          bid: bidInfo.model,
-          cid: cidInfo.model,
-          did: didInfo.model,
+          bid: this.bid,
+          cid: this.cid,
+          did: this.did,
           eid: this.viewInfo.model,
           refresh: 1,
         },
@@ -632,7 +629,7 @@ export default {
           cid: cidInfo.model,
           did: didInfo.model,
           eid: this.viewInfo.model,
-          gc: this.gc,
+          //gc: this.gc,
           refresh: 1,
         },
       });

@@ -41,13 +41,14 @@
         >
           <HomeRecommend />
         </van-tab>
+        <!--
         <van-tab
-          disabled
           :title="$t('competition')"
           class="home-e7f8cbd87d347be881cba92dad128518"
         >
           <HomeGame />
         </van-tab>
+        -->
       </van-tabs>
     </div>
 
@@ -66,7 +67,7 @@ export default {
   name: "AppHome",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    HomeGame: () => import("@/views/Home/Game.vue"),
+    //HomeGame: () => import("@/views/Home/Game.vue"),
     HomeRecommend: () => import("@/views/Home/Recommend.vue"),
   },
   metaInfo() {
