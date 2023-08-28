@@ -832,11 +832,14 @@
                     icon="/img/icons-app/jungle.png"
                     text="打野数据"
                   />
+                  <!--
                   <van-grid-item
                     @click="$message.info($appMsg.info[1024])"
                     icon="/img/icons-app/medal.png"
                     text="最低金牌"
                   />
+                  -->
+                  <!--
                   <van-grid-item
                     @click="
                       $appOpenUrl(
@@ -851,6 +854,7 @@
                     icon="/img/icons-app/attack_speed.png"
                     text="攻速阈值"
                   />
+                  -->
                   <van-grid-item
                     @click="
                       $appPush({
