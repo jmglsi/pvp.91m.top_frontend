@@ -725,14 +725,14 @@ export default {
       });
     },
     onTabsShow: function (e) {
-      let tabsModel = this.tabsInfo.model,
+      let tabsInfo = this.tabsInfo,
         nowType = 0,
         nowArr = new Array(),
         o = e.tags || [];
 
-      if (tabsModel == 6) {
+      if (tabsInfo.model == 6) {
         nowType = e.item_type - 1;
-      } else if (tabsModel == 7) {
+      } else if (tabsInfo.model == 7) {
         nowType = -1;
       } else {
         nowType = e.item_type;
@@ -744,7 +744,7 @@ export default {
 
       let subSet = this.subSet(this.checkedList, nowArr);
 
-      return (tabsModel == 0 ? true : tabsModel == nowType) && subSet;
+      return (tabsInfo.model == 0 ? true : tabsInfo.model == nowType) && subSet;
     },
     onItemShow: function (e) {
       let isBig = this.showInfo.isBig,
