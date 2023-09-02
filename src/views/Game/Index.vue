@@ -1,12 +1,12 @@
 <template>
-  <div class="game-home">
+  <div class="game-index">
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "GameHome",
+  name: "gameIndex",
 };
 </script>
 

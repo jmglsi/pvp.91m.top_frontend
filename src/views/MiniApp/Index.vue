@@ -1,5 +1,5 @@
 <template>
-  <div class="miniapp-home">
+  <div class="miniapp-index">
     <div class="miniapp-5acbc85c0ac59d5f69197b9fdb893b00">
       <van-nav-bar
         :border="false"

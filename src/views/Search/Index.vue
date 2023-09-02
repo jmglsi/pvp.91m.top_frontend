@@ -1,5 +1,5 @@
 <template>
-  <div class="search-home">
+  <div class="search-index">
     <div class="search-9420e49425fc3d6dcfe7b9f8d62b1b6b">
       <van-sticky
         :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
