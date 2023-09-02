@@ -121,7 +121,7 @@ export default {
   methods: {
     getGameDashboard: function (page = 0) {
       this.$axios
-        .post(this.$appApi.app.getGameDashboard + "&aid=1&page=" + page)
+        .post(this.$appApi.game.getGameDashboard + "&aid=1&page=" + page)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
@@ -133,17 +133,19 @@ export default {
           }
         });
     },
-    onNavBarRightClick: function () {
-      this.$axios.post(this.$appApi.game.getGameBPFile).then((res) => {
-        let data = res.data.data,
-          status = res.data.status;
+    onNavBarRightClick: function (aid = 0) {
+      this.$axios
+        .post(this.$appApi.game.getGameBPFile + "&aid" + aid)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
 
-        if (status.code == 200) {
-          this.$appOpenUrl("是否下载对局记录?", null, { path: data.csv }, 0);
-        } else {
-          this.$message.error(status.msg);
-        }
-      });
+          if (status.code == 200) {
+            this.$appOpenUrl("是否下载对局记录?", null, { path: data.csv }, 0);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     onPaginationChange: function (e) {
       this.getGameDashboard(e - 1);

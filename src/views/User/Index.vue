@@ -1,6 +1,6 @@
 <template>
-  <div class="my-home">
-    <div class="my-8e35828097179076a177cfd25e3713db">
+  <div class="login-index">
+    <div class="login-8e35828097179076a177cfd25e3713db">
       <van-nav-bar
         :border="false"
         :fixed="true"
@@ -11,25 +11,25 @@
           <div
             v-if="isLogin"
             @click="onUpdateInfoClick"
-            class="my-112e74e8fe4754534fce3393d07ddbdc"
+            class="login-112e74e8fe4754534fce3393d07ddbdc"
           >
             <van-icon name="edit" size="18" />
           </div>
         </template>
         <template #title>
-          <div v-if="isLogin" class="my-f9c7cabc13f359223ebc3ccf9cc104b8">
+          <div v-if="isLogin" class="login-f9c7cabc13f359223ebc3ccf9cc104b8">
             <span
-              class="my-25930e3036f13852cb0b29694bbab611 my-b068931cc450442b63f5b3d276ea4297"
+              class="login-25930e3036f13852cb0b29694bbab611 login-b068931cc450442b63f5b3d276ea4297"
             >
               {{ loginInfo.name }}
             </span>
             <span
-              class="my-25930e3036f13852cb0b29694bbab611 my-293a35164a20c927b0fd61942fbc1cf2"
+              class="login-25930e3036f13852cb0b29694bbab611 login-293a35164a20c927b0fd61942fbc1cf2"
             >
               <van-tag
                 round
                 :color="loginInfo.certification.color"
-                class="my-7eaa86d23ffacfb49464ee78252aa43a"
+                class="login-7eaa86d23ffacfb49464ee78252aa43a"
                 @click="$message.info($appMsg.info[1003])"
               >
                 {{ loginInfo.certification.text }}
@@ -40,7 +40,7 @@
         <template #right>
           <div
             @click="showInfo.languageMenu = true"
-            class="my-35b118640aa1bb334cacc58d3215f130"
+            class="login-35b118640aa1bb334cacc58d3215f130"
           >
             <van-icon name="/img/icons-app/translate.png" size="18" />
           </div>
@@ -51,7 +51,7 @@
                 path: '/setting',
               })
             "
-            class="my-4e83469ea7b60361bbce2572e5c0bf66"
+            class="login-4e83469ea7b60361bbce2572e5c0bf66"
           >
             <van-icon name="setting-o" size="18" />
           </div>
@@ -59,10 +59,10 @@
       </van-nav-bar>
     </div>
 
-    <div v-if="!isLogin" class="my-3d1d6b29e66d9b4f061e24a2551e2b67">
+    <div v-if="!isLogin" class="login-3d1d6b29e66d9b4f061e24a2551e2b67">
       <van-cell-group
         :border="false"
-        class="my-058928a73f2a944d621b028eb9addd36"
+        class="login-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell>
           <template #title>
@@ -72,7 +72,7 @@
                   ? { marginBottom: '25px' }
                   : {}
               "
-              class="my-b687f354f3b497e3ba1db4b7c3938b77"
+              class="login-b687f354f3b497e3ba1db4b7c3938b77"
             >
               <van-button
                 round
@@ -116,17 +116,17 @@
         v-lazy="'/img/icons-app/my_home_page.png'"
         width="25"
         height="25"
-        class="app-border-radius my-ef65f15f01e7d076cc4ef40d753e4d65"
+        class="app-border-radius login-ef65f15f01e7d076cc4ef40d753e4d65"
       />
       <div class="app-88bf7a95736562190270d51dc2cb3f42">
         {{ loginInfo.description || "这个人很懒，什么都没有留下" }}
       </div>
     </div>
 
-    <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
+    <div v-if="isLogin" class="login-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
-        class="my-71c2fb64c38e4ee108607ca840607e48"
+        class="login-71c2fb64c38e4ee108607ca840607e48"
       >
         <van-cell
           icon="/img/icons-app/game.png"
@@ -142,35 +142,35 @@
         <van-grid
           :border="false"
           :column-num="2"
-          class="my-c3d90961c9bf155d11cbef9c57725aea"
+          class="login-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
             icon="/img/icons-game/team.png"
             to="/game/team"
-            icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
-            class="my-7409cbd9b549064c9b5ea3ab21ee3ac6"
+            icon-prefix="login-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
+            class="login-7409cbd9b549064c9b5ea3ab21ee3ac6"
           >
             <template #text>
-              <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
+              <div class="login-6e8737d4ac83f11c858de8bde0a6c52a">
+                <span class="login-4646fa4296a7f5dea261e60e00ecd24b">
                   {{ loginInfo.statistics.team }}
                 </span>
-                <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
+                <span class="login-7a33dbf09bb2e3ed21ecb1adf0cb37b4">支</span>
               </div>
             </template>
           </van-grid-item>
           <van-grid-item
             icon="/img/icons-game/engage.png"
             to="/game/engage"
-            icon-prefix="my-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
-            class="my-308ffde0dc5bd5718dcf0396fcc2a596"
+            icon-prefix="login-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
+            class="login-308ffde0dc5bd5718dcf0396fcc2a596"
           >
             <template #text>
-              <div class="my-6e8737d4ac83f11c858de8bde0a6c52a">
-                <span class="my-4646fa4296a7f5dea261e60e00ecd24b">
+              <div class="login-6e8737d4ac83f11c858de8bde0a6c52a">
+                <span class="login-4646fa4296a7f5dea261e60e00ecd24b">
                   {{ loginInfo.statistics.label }}
                 </span>
-                <span class="my-7a33dbf09bb2e3ed21ecb1adf0cb37b4">场</span>
+                <span class="login-7a33dbf09bb2e3ed21ecb1adf0cb37b4">场</span>
               </div>
             </template>
           </van-grid-item>
@@ -178,11 +178,11 @@
       </van-cell-group>
     </div>
 
-    <div v-if="isLogin" class="my-7dc22b2c6a992f0232345df41303f5ea">
+    <div v-if="isLogin" class="login-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
         title=" "
-        class="my-abf7b3191e2a24c6fc3c008124bcf0d4"
+        class="login-abf7b3191e2a24c6fc3c008124bcf0d4"
       >
         <van-cell
           title="王者荣耀"
@@ -190,10 +190,10 @@
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
-            <span class="my-af99c9298d1eb69981a035d0a15afa20">
+            <span class="login-af99c9298d1eb69981a035d0a15afa20">
               <img v-lazy="loginInfo.rank.starIcon" width="50" height="50" />
               <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="my-7121ba1bc1276c3bb6df96b333a16760">
+              <span class="login-7121ba1bc1276c3bb6df96b333a16760">
                 {{ loginInfo.rank.score }}
               </span>
             </span>
@@ -283,11 +283,11 @@
       </van-cell-group>
     </div>
 
-    <div class="my-7dc22b2c6a992f0232345df41303f5ea">
+    <div class="login-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
         title=" "
-        class="my-35382d1952f0fb4d86744b11faf01d07"
+        class="login-35382d1952f0fb4d86744b11faf01d07"
       >
         <van-cell
           v-if="isLogin"
@@ -301,11 +301,11 @@
       </van-cell-group>
     </div>
 
-    <div class="my-7dc22b2c6a992f0232345df41303f5ea">
+    <div class="login-7dc22b2c6a992f0232345df41303f5ea">
       <van-cell-group
         :border="false"
         title=" "
-        class="my-058928a73f2a944d621b028eb9addd36"
+        class="login-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell
           icon="good-job-o"
@@ -371,15 +371,15 @@
       </van-cell-group>
     </div>
 
-    <div v-if="isLogin" class="my-4cf71de630f99f4bf37ea1218fdab416">
+    <div v-if="isLogin" class="login-4cf71de630f99f4bf37ea1218fdab416">
       <van-cell-group
         :border="false"
         title=" "
-        class="my-058928a73f2a944d621b028eb9addd36"
+        class="login-058928a73f2a944d621b028eb9addd36"
       >
         <van-cell>
           <template #title>
-            <div class="my-11149d3aa483aacea271a78c0ea65d85">
+            <div class="login-11149d3aa483aacea271a78c0ea65d85">
               <van-button
                 round
                 size="small"
@@ -395,23 +395,23 @@
       </van-cell-group>
     </div>
 
-    <div class="my-111fb4d92036323891a140cd49383f86">
+    <div class="login-111fb4d92036323891a140cd49383f86">
       <van-cell-group
         :border="false"
         title=" "
-        class="my-b990d992f06c8db21d6b58c25f843529"
+        class="login-b990d992f06c8db21d6b58c25f843529"
       >
         <van-cell
           title="沪ICP备16031287号-2"
           @click="
             $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
           "
-          class="my-c0bdff9ec0fe8c0a83371c4573d7ecf4"
+          class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4"
         />
       </van-cell-group>
     </div>
 
-    <div class="my-af6006055b54757559df70268b785c6d">
+    <div class="login-af6006055b54757559df70268b785c6d">
       <van-popup v-model="showInfo.languageMenu" round position="bottom">
         <van-picker
           show-toolbar
@@ -429,29 +429,29 @@
       </van-popup>
     </div>
 
-    <div class="my-56fe8eb767404084edadf3ca37055338">
+    <div class="login-56fe8eb767404084edadf3ca37055338">
       <van-popup v-model="showInfo.pickerMenu" round position="bottom">
         <van-picker
           show-toolbar
-          :columns="$appColumnsInfo.now"
           :default-index="$appColumnsInfo.index"
+          :columns="$appColumnsInfo.now"
           @confirm="onPickerConfirm"
           @cancel="onPickerCancel"
         />
       </van-popup>
     </div>
 
-    <div class="my-0b8eeb7297d7691797414caa1ec92c8e">
+    <div class="login-0b8eeb7297d7691797414caa1ec92c8e">
       <van-action-sheet
         v-model="showInfo.editMenu"
         title="我的信息"
         @close="showInfo.editType = false"
       >
         <template #default>
-          <div class="my-e28b0ad4c2c20a8df957d67806ea9b85">
+          <div class="login-e28b0ad4c2c20a8df957d67806ea9b85">
             <van-cell-group
               :border="false"
-              class="my-3c5bcb72d710faf0c301750abeb5704f"
+              class="login-3c5bcb72d710faf0c301750abeb5704f"
             >
               <van-field
                 v-model="$appColumnsInfo.areaType[newInfo.areaType]"
@@ -460,12 +460,12 @@
                 label="大区"
               >
                 <template #button>
-                  <div class="my-1f4910bc86a6970eb3401b1dde5a1177">
+                  <div class="login-1f4910bc86a6970eb3401b1dde5a1177">
                     <van-button
                       round
                       size="small"
                       type="info"
-                      class="my-e06af146fff27b9e4b20bda71a291f9f"
+                      class="login-e06af146fff27b9e4b20bda71a291f9f"
                       @click="onUpdateColumnsInfoClick(0)"
                     >
                       修改大区
@@ -481,12 +481,12 @@
                 label="省份"
               >
                 <template #button>
-                  <div class="my-d00aad59acfadc27e8f50ccc61533a30">
+                  <div class="login-d00aad59acfadc27e8f50ccc61533a30">
                     <van-button
                       round
                       size="small"
                       type="info"
-                      class="my-e06af146fff27b9e4b20bda71a291f9f"
+                      class="login-e06af146fff27b9e4b20bda71a291f9f"
                       @click="onUpdateColumnsInfoClick(1)"
                     >
                       修改省份
@@ -497,8 +497,8 @@
               -->
               <van-field readonly label="段位">
                 <template #button>
-                  <div class="my-6a138d8f7faefbcc60caf19afc89f0a2">
-                    <span class="my-35494217d6a01388d07eccf816b6ea39">
+                  <div class="login-6a138d8f7faefbcc60caf19afc89f0a2">
+                    <span class="login-35494217d6a01388d07eccf816b6ea39">
                       <img
                         v-lazy="newInfo.rank.starIcon"
                         width="50"
@@ -510,7 +510,7 @@
                       round
                       size="small"
                       type="info"
-                      class="my-e06af146fff27b9e4b20bda71a291f9f"
+                      class="login-e06af146fff27b9e4b20bda71a291f9f"
                       @click="onUpdateColumnsInfoClick(2)"
                     >
                       修改段位
@@ -529,7 +529,7 @@
             <van-cell-group
               :border="false"
               title=" "
-              class="my-3c5bcb72d710faf0c301750abeb5704f"
+              class="login-3c5bcb72d710faf0c301750abeb5704f"
             >
               <van-field
                 readonly
@@ -537,7 +537,7 @@
                 @click="$message.warning($appMsg.warning[1002])"
               >
                 <template #button>
-                  <span class="my-35494217d6a01388d07eccf816b6ea39">
+                  <span class="login-35494217d6a01388d07eccf816b6ea39">
                     <van-switch v-model="showInfo.friendsType" />
                   </span>
                 </template>
@@ -557,7 +557,7 @@
               />
             </van-cell-group>
 
-            <div class="my-47260541d2fb8caec524833d2a4eac4e">
+            <div class="login-47260541d2fb8caec524833d2a4eac4e">
               <van-button
                 round
                 size="small"
@@ -831,7 +831,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-img.my-ef65f15f01e7d076cc4ef40d753e4d65 {
+img.login-ef65f15f01e7d076cc4ef40d753e4d65 {
   background-color: white !important;
   margin-left: -26px;
   margin-top: 71px;
@@ -839,37 +839,37 @@ img.my-ef65f15f01e7d076cc4ef40d753e4d65 {
   position: absolute;
 }
 
-span.my-25930e3036f13852cb0b29694bbab611 {
+span.login-25930e3036f13852cb0b29694bbab611 {
   margin: 0 3px;
 }
 
-span.my-b068931cc450442b63f5b3d276ea4297 {
+span.login-b068931cc450442b63f5b3d276ea4297 {
   font-size: 12px;
 }
 
-span.my-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
+span.login-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
   margin-left: 5px;
 }
 
-span.my-af99c9298d1eb69981a035d0a15afa20 {
+span.login-af99c9298d1eb69981a035d0a15afa20 {
   position: absolute;
   right: 30px;
   top: -5px;
 }
 
-span.my-35494217d6a01388d07eccf816b6ea39 {
+span.login-35494217d6a01388d07eccf816b6ea39 {
   margin-right: 10px;
 }
 
-div.my-7dc22b2c6a992f0232345df41303f5ea {
+div.login-7dc22b2c6a992f0232345df41303f5ea {
   text-align: @app-text-align;
 
-  span.my-4646fa4296a7f5dea261e60e00ecd24b {
+  span.login-4646fa4296a7f5dea261e60e00ecd24b {
     font-size: 20px;
   }
 }
 
-div.my-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
+div.login-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
   font-size: @app-font-size;
 }
 </style>

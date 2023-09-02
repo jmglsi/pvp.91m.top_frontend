@@ -1,5 +1,5 @@
 <template>
-  <div class="ranking-home">
+  <div class="ranking-index">
     <div class="ranking-a9b4432c8e9b49bafa0a23e52d970016">
       <van-tabs
         v-model="tabsInfo.model"
@@ -744,7 +744,7 @@ td.app-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
   font-size: 18px;
 }
 
-div.ranking-home {
+div.ranking-index {
   div.van-dropdown-menu__bar {
     box-shadow: unset;
   }

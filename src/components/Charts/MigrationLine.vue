@@ -156,6 +156,6 @@ div.ranking-63559bd374a437b89b36762811e4b809 {
   position: absolute;
   right: 0;
   width: 210px;
-  z-index: 1;
+  z-index: @app-z-index;
 }
 </style>

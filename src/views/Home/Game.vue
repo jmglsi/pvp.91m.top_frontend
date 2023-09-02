@@ -86,7 +86,7 @@ export default {
     this.getGameHome();
   },
   methods: {
-    getGameHome: function () {
+    getGameHome: function (aid = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage("gameHome");
@@ -95,19 +95,21 @@ export default {
         return (this.tableData = ls);
       }
 
-      this.$axios.post(this.$appApi.game.getGameHome).then((res) => {
-        let data = res.data.data,
-          status = res.data.status;
+      this.$axios
+        .post(this.$appApi.game.getGameHome + "&aid=" + aid)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
 
-        if (status.code == 200) {
-          this.tableData = data;
-          this.tableData.updateTime = ts;
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.updateTime = ts;
 
-          this.$appSetLocalStorage("gameHome", this.tableData);
-        } else {
-          this.$message.error(status.msg);
-        }
-      });
+            this.$appSetLocalStorage("gameHome", this.tableData);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
   },
 };

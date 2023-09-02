@@ -17,6 +17,7 @@ export default {
   "switch-view": "切換視圖",
   "unknown": "未知",
   "up": "上升",
+  "copy": "複製",
   "please-agree-before-operation": "請同意後再操作",
   "i-have-read-and-agreed": "我已經閱讀並同意",
   "privacy-and-data-statement": "隱私和數據聲明",

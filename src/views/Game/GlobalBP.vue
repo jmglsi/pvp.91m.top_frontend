@@ -1187,14 +1187,14 @@ export default {
       //进入编辑模式的时候判断是不是蓝色方
       return ret;
     },
-    getGameBP: function (gameLabel) {
+    getGameBP: function (gameLabel, aid = 0) {
       if (this.gameLabel == "new") {
         this.$message.warning(this.$appMsg.warning[750]);
         //本地
       } else {
         this.$axios
           .post(
-            this.$appApi.game.getGameBP,
+            this.$appApi.game.getGameBP + "&aid=" + aid,
             this.$qs.stringify({
               gameLabel: gameLabel,
             })
@@ -1301,7 +1301,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.app.updateGameBP,
+          this.$appApi.game.updateGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: nowIndex,
@@ -1347,7 +1347,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.app.deleteGameBP,
+          this.$appApi.game.deleteGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: nowIndex,

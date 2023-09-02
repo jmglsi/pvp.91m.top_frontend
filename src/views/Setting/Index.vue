@@ -1,5 +1,5 @@
 <template>
-  <div class="setting-home">
+  <div class="setting-index">
     <div class="setting-1adddd9de210a4c10b2e24417e2eb4e5">
       <van-nav-bar
         left-arrow

@@ -1,5 +1,5 @@
 <template>
-  <div class="bilibili-home">
+  <div class="bilibili-index">
     <div class="bilibili-727f1cf32d65577632c02b9225ecbb67">
       <van-search
         v-model="search.value"
