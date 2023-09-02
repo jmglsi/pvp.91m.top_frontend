@@ -17,6 +17,7 @@ export default {
   "switch-view": "Switch View",
   "unknown": "Unknown",
   "up": "Increasing",
+  "copy": "Copy",
   "please-agree-before-operation": "Please Agree Before Proceeding",
   "i-have-read-and-agreed": "I have read and agreed to",
   "privacy-and-data-statement": "Privacy and Data Statement",

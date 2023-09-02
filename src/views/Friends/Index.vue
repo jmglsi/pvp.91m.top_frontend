@@ -1,5 +1,5 @@
 <template>
-  <div class="friends-home">
+  <div class="friends-index">
     <div class="friends-4b0f87c869518b7632257a1d66b8f9b8">
       <van-nav-bar
         left-arrow
@@ -156,7 +156,7 @@
         size="mini"
         @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
       >
-        CPDD
+        {{ $t("copy") }}
       </van-button>
     </div>
   </div>

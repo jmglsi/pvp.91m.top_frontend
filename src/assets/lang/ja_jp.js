@@ -17,6 +17,7 @@ export default {
   "switch-view": "ビューを切り替える",
   "unknown": "未知の",
   "up": "アップ",
+  "copy": "コピー",
   "please-agree-before-operation": "操作する前に同意してください",
   "i-have-read-and-agreed": "読んで同意した",
   "privacy-and-data-statement": "プライバシーとデータの声明",

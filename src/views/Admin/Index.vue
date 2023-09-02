@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-home">
+  <div class="admin-index">
     <a-menu
       :style="{
         height: '100%',
@@ -81,7 +81,7 @@
 
 <script>
 export default {
-  name: "AdminHome",
+  name: "adminIndex",
   data() {
     return {
       defaultSelectedKey: "web-data",
@@ -120,7 +120,7 @@ img.admin-11692cbdb16fd998d9dc739c3d53afaa {
   z-index: @app-z-index;
 }
 
-div.admin-home {
+div.admin-index {
   text-align: @app-text-align;
 }
 </style>

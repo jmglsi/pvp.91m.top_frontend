@@ -112,10 +112,17 @@ const bili = {
 }
 
 const game = {
+  createEngage: gameApi + "?type=createEngage",
+  createTeam: gameApi + "?type=createTeam",
+  deleteGameBP: gameApi + "?type=deleteGameBP",
+  deleteTeam: gameApi + "?type=deleteTeam",
+  getGameHome: gameApi + "?type=getGameHome",
   getGameBP: gameApi + "?type=getGameBP",
   getGameBPFile: gameApi + "?type=getGameBPFile",
-  getGameHome: gameApi + "?type=getGameHome",
-  getGamePrediction: gameApi + "?type=getGamePrediction"
+  getGameDashboard: gameApi + "?type=getGameDashboard",
+  getGamePrediction: gameApi + "?type=getGamePrediction",
+  updateGameBP: gameApi + "?type=updateGameBP",
+  updateTeamInfo: gameApi + "?type=updateTeamInfo",
 }
 
 const login = {
@@ -129,14 +136,9 @@ const app = {
   addHeroFightPowerByWebAccount: appApi + "?type=addHeroFightPowerByWebAccount",
   addHeroVote: appApi + "?type=addHeroVote",
   addWebAccountLikeHero: appApi + "?type=addWebAccountLikeHero",
-  createEngage: appApi + "?type=createEngage",
-  createTeam: appApi + "?type=createTeam",
-  deleteGameBP: appApi + "?type=deleteGameBP",
-  deleteTeam: appApi + "?type=deleteTeam",
   getAppHome: appApi + "?type=getAppHome",
   getAppInfo: appApi + "?type=getAppInfo",
   getCivilwarMatchInfo: appApi + "?type=getCivilwarMatchInfo",
-  getGameDashboard: appApi + "?type=getGameDashboard",
   getHeroBpIndex: appApi + "?type=getHeroBpIndex",
   getHeroChartsLog: appApi + "?type=getHeroChartsLog",
   getHeroInfo: appApi + "?type=getHeroInfo",
@@ -154,8 +156,6 @@ const app = {
   getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
   getWebAccountInfo: appApi + "?type=getWebAccountInfo",
   loginWebAccount: appApi + "?type=loginWebAccount",
-  updateGameBP: appApi + "?type=updateGameBP",
-  updateTeamInfo: appApi + "?type=updateTeamInfo",
   updateWebAccountInfo: appApi + "?type=updateWebAccountInfo",
   uploadImg: appApi + "?type=uploadImg"
 }

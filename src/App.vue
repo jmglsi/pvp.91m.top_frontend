@@ -106,14 +106,14 @@ export default {
       /ranking/i.test(nowPath) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /admin|weekly|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
+      /tools|admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
         nowPath
       ) == true
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
 
-      /weekly|hero\/(.*?)\/view/i.test(nowPath)
+      /tools/i.test(nowPath)
         ? (this.noUpdateTips = true)
         : (this.noUpdateTips = false);
     },
@@ -533,7 +533,7 @@ div.vxe-table {
   }
 }
 
-div.app-home {
+div.app-index {
   div.van-tabs__nav {
     background-color: transparent !important;
   }
