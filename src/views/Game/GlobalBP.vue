@@ -1265,7 +1265,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.app.updateGameBP,
+          this.$appApi.game.updateGameBP,
           this.$qs.stringify({
             gameLabel: this.gameLabel,
             gameIndex: gameIndex,
