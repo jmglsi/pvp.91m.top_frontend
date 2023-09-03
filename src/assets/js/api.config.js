@@ -113,14 +113,18 @@ const bili = {
 
 const game = {
   createEngage: gameApi + "?type=createEngage",
+  createRole: gameApi + "?type=createRole",
   createTeam: gameApi + "?type=createTeam",
   deleteGameBP: gameApi + "?type=deleteGameBP",
   deleteTeam: gameApi + "?type=deleteTeam",
-  getGameHome: gameApi + "?type=getGameHome",
   getGameBP: gameApi + "?type=getGameBP",
   getGameBPFile: gameApi + "?type=getGameBPFile",
   getGameDashboard: gameApi + "?type=getGameDashboard",
+  getGameHome: gameApi + "?type=getGameHome",
   getGamePrediction: gameApi + "?type=getGamePrediction",
+  joinTeam: gameApi + "?type=joinTeam",
+  setStatus: gameApi + "?type=setStatus",
+  setUsed: gameApi + "?type=setUsed",
   updateGameBP: gameApi + "?type=updateGameBP",
   updateTeamInfo: gameApi + "?type=updateTeamInfo",
 }

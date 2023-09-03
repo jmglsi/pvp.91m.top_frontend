@@ -525,7 +525,7 @@
             size="small"
             color="linear-gradient(to right, #43CBFF, #6874E8)"
             class="game-8e4f204791d1b591b6a6f93b572f9b2d"
-            @click="onGamePerspectiveClick()"
+            @click="onGamePerspectiveClick"
           >
             以&nbsp;{{
               bpPerspective == 1 ? teamInfo.team_1.name : teamInfo.team_2.name
@@ -651,8 +651,9 @@
                     gameInfo.result.rows.length - 1 == tabsInfo.model
                   "
                   @click="onToolsMenuClick(0)"
-                  >删除本局</a-menu-item
                 >
+                  删除本局
+                </a-menu-item>
                 <a-menu-item
                   v-if="
                     bpMode == 'view' &&
@@ -660,16 +661,18 @@
                     gameInfo.result.rows.length < 7
                   "
                   @click="onToolsMenuClick(1)"
-                  >再来一局</a-menu-item
                 >
+                  再来一局
+                </a-menu-item>
                 <a-menu-item
                   v-if="
                     bpMode == 'edit' &&
                     gameInfo.result.rows.length - 1 == tabsInfo.model
                   "
                   @click="onToolsMenuClick(2)"
-                  >重置本局</a-menu-item
                 >
+                  重置本局
+                </a-menu-item>
                 <a-menu-item @click="onToolsMenuClick(3)">
                   {{ bpMode == "view" ? "编辑" : "保存" }}本局
                 </a-menu-item>
@@ -780,7 +783,7 @@
         v-model="tabsInfo.model"
         v-if="tabsInfo.model > -1"
         :ellipsis="false"
-        @click="onGameTabsClick"
+        @click="onTabsClick"
         class="game-4863c43e8743ebf1be3f48c5c4519627"
       >
         <van-tab
@@ -1179,14 +1182,6 @@ export default {
           }
         });
     },
-    isBlueCamp: function (nowTeamInfo) {
-      let ret = false;
-
-      this.teamInfo.team_1.id == nowTeamInfo.id ? (ret = true) : (ret = false);
-
-      //进入编辑模式的时候判断是不是蓝色方
-      return ret;
-    },
     getGameBP: function (gameLabel, aid = 0) {
       if (this.gameLabel == "new") {
         this.$message.warning(this.$appMsg.warning[750]);
@@ -1215,6 +1210,19 @@ export default {
             }
           });
       }
+    },
+    isBlueCamp: function (nowTeamInfo) {
+      let ret = false;
+
+      this.teamInfo.team_1.id == nowTeamInfo.id ? (ret = true) : (ret = false);
+
+      //进入编辑模式的时候判断是不是蓝色方
+      return ret;
+    },
+    onTabsClick: function (e) {
+      this.initBPOrder(this.bpPerspective, e);
+
+      this.newGameInfo = {};
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(
@@ -1403,11 +1411,6 @@ export default {
 
       if (bpMode == 1)
         this.$message.success("初始化 " + this.bpSelf.name + " 的视角");
-    },
-    onGameTabsClick: function (e) {
-      this.initBPOrder(this.bpPerspective, e);
-
-      this.newGameInfo = {};
     },
     onGameBanPickClick: function (nowIndex) {
       if (this.bpMode == "view") return;

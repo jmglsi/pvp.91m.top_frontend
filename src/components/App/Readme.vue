@@ -8,7 +8,10 @@
     >
       <div class="app-fe64546261ce7a19b6784737edd0fdf1">
         <div class="app-41b238cc893836e28b50cd5a59843803">
-          <a-checkbox :checked="showInfo.checked" @change="onAgreeChange">
+          <a-checkbox
+            :checked="showInfo.checkbox"
+            @change="onCheckboxAgreeChange"
+          >
             <span class="app-af2b80cae7eca06c6b87833898217fea">
               {{ $t("i-have-read-and-agreed") }}
             </span>
@@ -32,7 +35,7 @@ export default {
       agree: false,
       showInfo: {
         actionSheet: true,
-        checked: false,
+        checkbox: false,
       },
     };
   },
@@ -44,12 +47,12 @@ export default {
     this.$appConfigInfo.appInfo.isReadme = agree;
   },
   methods: {
-    onAgreeChange: function () {
+    onCheckboxAgreeChange: function () {
       let nowActionSheet = true,
         nowChecked = false,
         nowChecked_int = 0;
 
-      if (this.showInfo.checked == true) {
+      if (this.showInfo.checkbox == true) {
         nowActionSheet = true;
         nowChecked = false;
         nowChecked_int = 0;
@@ -60,7 +63,7 @@ export default {
       }
 
       this.showInfo.actionSheet = nowActionSheet;
-      this.showInfo.checked = nowChecked;
+      this.showInfo.checkbox = nowChecked;
       this.$cookie.set("agree", nowChecked_int, {
         expires: "1Y",
       });

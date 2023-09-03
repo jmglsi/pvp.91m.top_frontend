@@ -62,7 +62,7 @@
 
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
-        v-model="showInfo.teamMenu"
+        v-model="showInfo.actionSheet"
         :title="tableDataRow.id ? tableDataRow.name + ' 如何操作' : '新建队伍'"
       >
         <template #default>
@@ -161,9 +161,6 @@ export default {
   },
   data() {
     return {
-      showInfo: {
-        teamMenu: false,
-      },
       tableData: {
         result: {
           rows: [],
@@ -175,28 +172,15 @@ export default {
         id: null,
         name: this.$t("loading"),
       },
+      showInfo: {
+        actionSheet: false,
+      },
     };
   },
   mounted() {
     this.getGameDashboard();
   },
   methods: {
-    getGameDashboard: function () {
-      this.$appDelectLocalStorage("tempTeamId");
-
-      this.$axios
-        .post(this.$appApi.game.getGameDashboard + "&aid=0")
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.tableData = data;
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-    },
     onAfterRead: function (file) {
       let data = file.content;
 
@@ -238,6 +222,22 @@ export default {
     onOversize: function () {
       this.$message.error(this.$appMsg.error[1005]);
     },
+    getGameDashboard: function () {
+      this.$appDelectLocalStorage("tempTeamId");
+
+      this.$axios
+        .post(this.$appApi.game.getGameDashboard + "&aid=0")
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData = data;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
     onNavBarRightClick: function () {
       this.tableData.type = 0;
       this.tableDataRow = {
@@ -245,14 +245,14 @@ export default {
         logo: "",
       };
 
-      this.showInfo.teamMenu = true;
+      this.showInfo.actionSheet = true;
     },
     onUpdateTeamClick: function (data, index) {
       this.tableData.type = 1;
       this.tableDataRow = data;
       this.tableDataRow.index = index;
 
-      this.showInfo.teamMenu = true;
+      this.showInfo.actionSheet = true;
     },
     onSaveTeamInfoClick: function () {
       let tableData = this.tableData,
@@ -268,10 +268,11 @@ export default {
         this.$axios
           .post(this.$appApi.game.createTeam, this.$qs.stringify(postData))
           .then((res) => {
-            let status = res.data.status;
+            let data = res.data.data,
+              status = res.data.status;
 
             if (status.code == 200) {
-              this.getGameDashboard();
+              this.tableData.result.rows.push(data);
 
               this.$message.success(this.$appMsg.success[1000]);
             } else {
@@ -292,7 +293,7 @@ export default {
           });
       }
 
-      this.showInfo.teamMenu = false;
+      this.showInfo.actionSheet = false;
     },
     onDeleteTeamClick: function () {
       let row = this.tableDataRow;
@@ -323,14 +324,14 @@ export default {
               }
             });
 
-          this.showInfo.teamMenu = false;
+          this.showInfo.actionSheet = false;
         })
         .catch(() => {
           //on cancel
         });
     },
     onCreateEngageClick: function (data) {
-      this.showInfo.teamMenu = false;
+      this.showInfo.actionSheet = false;
 
       let oldTeamId = localStorage.getItem("tempTeamId") || "",
         newTeamId = data;
@@ -372,7 +373,7 @@ export default {
           }
         });
 
-      this.showInfo.teamMenu = false;
+      this.showInfo.actionSheet = false;
     },
   },
 };

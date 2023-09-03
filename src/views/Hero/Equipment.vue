@@ -109,7 +109,7 @@
                           'hero-equipment-b1c2779b9bc8205364266507480d4ee9-' +
                           index
                         "
-                        v-show="onItemShow(data)"
+                        v-show="onDraggableShow(data)"
                         @click="onItemDelete(data, index)"
                         class="hero-equipment-2b17aa16463c3aeca8da93a07962df5a"
                       >
@@ -264,7 +264,7 @@
                         <a-checkbox
                           :indeterminate="indeterminate"
                           :checked="checkAll"
-                          @change="onCheckAllChange"
+                          @change="onCheckboxAllChange"
                         >
                           全选 （{{ plainOptions.length }})
                         </a-checkbox>
@@ -272,7 +272,7 @@
                       <a-checkbox-group
                         v-model="checkedList"
                         :options="plainOptions"
-                        @change="onCheckChange"
+                        @change="onCheckboxChange"
                       />
                     </template>
                   </a-popover>
@@ -292,7 +292,7 @@
                     :key="
                       'hero-equipment-b22320a558966d2b8acc4d2ba5c16f34-' + index
                     "
-                    v-show="onTabsShow(data)"
+                    v-show="onItemShow(data)"
                     icon-prefix="hero-equipment-8b812bcd24d7f0b29c950eebfa4876f6"
                   >
                     <template #icon>
@@ -713,40 +713,23 @@ export default {
 
       return ret;
     },
-    onCheckChange(e) {
+    getHeroId: function (e) {
+      this.chooseInfo.heroId = e;
+
+      this.$appPush({ path: "/hero/" + e + "/equipment" });
+    },
+    onCheckboxChange(e) {
       this.indeterminate = !!e.length && e.length < plainOptions.length;
       this.checkAll = e.length === plainOptions.length;
     },
-    onCheckAllChange(e) {
+    onCheckboxAllChange(e) {
       Object.assign(this, {
         checkedList: e.target.checked ? plainOptions : [],
         indeterminate: false,
         checkAll: e.target.checked,
       });
     },
-    onTabsShow: function (e) {
-      let tabsInfo = this.tabsInfo,
-        nowType = 0,
-        nowArr = new Array(),
-        o = e.tags || [];
-
-      if (tabsInfo.model == 6) {
-        nowType = e.item_type - 1;
-      } else if (tabsInfo.model == 7) {
-        nowType = -1;
-      } else {
-        nowType = e.item_type;
-      }
-
-      o.map((x) => {
-        nowArr.push(x.name);
-      });
-
-      let subSet = this.subSet(this.checkedList, nowArr);
-
-      return (tabsInfo.model == 0 ? true : tabsInfo.model == nowType) && subSet;
-    },
-    onItemShow: function (e) {
+    onDraggableShow: function (e) {
       let isBig = this.showInfo.isBig,
         nowBig = false;
 
@@ -769,6 +752,28 @@ export default {
       this.chooseInfo.positionId = e.id;
 
       this.$message.success("已选择 " + e.name);
+    },
+    onItemShow: function (e) {
+      let tabsInfo = this.tabsInfo,
+        nowType = 0,
+        nowArr = new Array(),
+        o = e.tags || [];
+
+      if (tabsInfo.model == 6) {
+        nowType = e.item_type - 1;
+      } else if (tabsInfo.model == 7) {
+        nowType = -1;
+      } else {
+        nowType = e.item_type;
+      }
+
+      o.map((x) => {
+        nowArr.push(x.name);
+      });
+
+      let subSet = this.subSet(this.checkedList, nowArr);
+
+      return (tabsInfo.model == 0 ? true : tabsInfo.model == nowType) && subSet;
     },
     onItemChoose: function (e) {
       let avg = this.chooseInfo.avg,
@@ -815,11 +820,6 @@ export default {
       }
 
       this.placement = nowPlacement;
-    },
-    getHeroId: function (e) {
-      this.chooseInfo.heroId = e;
-
-      this.$appPush({ path: "/hero/" + e + "/equipment" });
     },
   },
 };

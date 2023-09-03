@@ -423,27 +423,27 @@
               return x.title;
             })
           "
-          @confirm="onLanguageConfirm"
+          @confirm="onLanguagePickerConfirm"
           @cancel="showInfo.languageMenu = false"
         />
       </van-popup>
     </div>
 
     <div class="login-56fe8eb767404084edadf3ca37055338">
-      <van-popup v-model="showInfo.pickerMenu" round position="bottom">
+      <van-popup v-model="showInfo.popup" round position="bottom">
         <van-picker
           show-toolbar
           :default-index="$appColumnsInfo.index"
           :columns="$appColumnsInfo.now"
-          @confirm="onPickerConfirm"
-          @cancel="onPickerCancel"
+          @confirm="onDataPickerConfirm"
+          @cancel="onDataPickerCancel"
         />
       </van-popup>
     </div>
 
     <div class="login-0b8eeb7297d7691797414caa1ec92c8e">
       <van-action-sheet
-        v-model="showInfo.editMenu"
+        v-model="showInfo.actionSheet"
         title="我的信息"
         @close="showInfo.editType = false"
       >
@@ -635,10 +635,10 @@ export default {
         },
       },
       showInfo: {
+        actionSheet: false,
+        popup: false,
         friendsType: true,
         editType: false,
-        editMenu: false,
-        pickerMenu: false,
         languageMenu: false,
       },
       collapseInfo: {
@@ -727,7 +727,7 @@ export default {
           if (status.code == 200) {
             this.loginInfo = this.newInfo;
 
-            this.showInfo.editMenu = false;
+            this.showInfo.actionSheet = false;
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {
@@ -735,15 +735,7 @@ export default {
           }
         });
     },
-    onMyLinkCopy: function () {
-      let url = location,
-        longUrl = url.origin + "/friends?openId=" + this.loginInfo.openId;
-
-      this.copyData = longUrl;
-
-      this.$appCopyData(this.copyData);
-    },
-    onPickerConfirm: function (value, index) {
+    onDataPickerConfirm: function (value, index) {
       let columnsInfo = this.$appColumnsInfo,
         starIndex = 0;
 
@@ -759,10 +751,27 @@ export default {
           "//camp.qq.com/battle/profile/roleJobV2/" + starIndex + ".png";
       }
 
-      this.showInfo.pickerMenu = false;
+      this.showInfo.popup = false;
     },
-    onPickerCancel: function () {
-      this.showInfo.pickerMenu = false;
+    onDataPickerCancel: function () {
+      this.showInfo.popup = false;
+    },
+    onLanguagePickerConfirm: function (e, i) {
+      let lang = this.$appLanguageInfo[i].lang || "zh-CN";
+
+      this.$cookie.set("lang", lang, {
+        expires: "1Y",
+      });
+      this.$cookie.set("lang-index", i, {
+        expires: "1Y",
+      });
+      this.$i18n.locale = lang;
+
+      this.$message.success(e + " ok");
+
+      this.login.text = this.$t("my.login-i");
+
+      this.showInfo.languageMenu = false;
     },
     onUpdateColumnsInfoClick: function (e) {
       let columns = [],
@@ -782,28 +791,11 @@ export default {
       this.$appColumnsInfo.now = columns;
       this.$appColumnsInfo.type = e;
 
-      this.showInfo.pickerMenu = true;
-    },
-    onLanguageConfirm: function (e, i) {
-      let lang = this.$appLanguageInfo[i].lang || "zh-CN";
-
-      this.$cookie.set("lang", lang, {
-        expires: "1Y",
-      });
-      this.$cookie.set("lang-index", i, {
-        expires: "1Y",
-      });
-      this.$i18n.locale = lang;
-
-      this.$message.success(e + " ok");
-
-      this.login.text = this.$t("my.login-i");
-
-      this.showInfo.languageMenu = false;
+      this.showInfo.popup = true;
     },
     onUpdateInfoClick: function () {
       this.showInfo.editType = true;
-      this.showInfo.editMenu = true;
+      this.showInfo.actionSheet = true;
     },
     onLogoutClick: function () {
       this.$dialog
@@ -825,6 +817,14 @@ export default {
         .catch(() => {
           //on cancel
         });
+    },
+    onMyLinkCopy: function () {
+      let url = location,
+        longUrl = url.origin + "/friends?openId=" + this.loginInfo.openId;
+
+      this.copyData = longUrl;
+
+      this.$appCopyData(this.copyData);
     },
   },
 };

@@ -172,7 +172,7 @@
 
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
-        v-model="showInfo.replayMenu"
+        v-model="showInfo.actionSheet"
         :title="(tableDataRow.gamePlayerName || replay.title) + ' 如何操作'"
         :actions="!replay.gameOpenId ? actions : []"
         :close-on-click-action="true"
@@ -236,7 +236,7 @@ export default {
         model: 1,
       },
       showInfo: {
-        replayMenu: false,
+        actionSheet: false,
       },
     };
   },
@@ -297,27 +297,7 @@ export default {
     getGameInfo: function (row) {
       this.tableDataRow = row;
 
-      this.showInfo.replayMenu = true;
-    },
-    onReplayCopy: function (row) {
-      this.$axios
-        .post(this.$appApi.app.getShortUrl, {
-          url: row.replayUrl,
-        })
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            let shortUrl = data.url;
-
-            this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
-
-            this.$appCopyData(this.copyData);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
+      this.showInfo.actionSheet = true;
     },
     getHeroReplayByHeroId: function (page) {
       let replayInfo = this.replay;
@@ -391,6 +371,26 @@ export default {
           );
         }
       }
+    },
+    onReplayCopy: function (row) {
+      this.$axios
+        .post(this.$appApi.app.getShortUrl, {
+          url: row.replayUrl,
+        })
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            let shortUrl = data.url;
+
+            this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
+
+            this.$appCopyData(this.copyData);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
   },
 };

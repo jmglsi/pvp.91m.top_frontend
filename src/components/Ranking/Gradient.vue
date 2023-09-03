@@ -735,7 +735,7 @@
 
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
-        v-model="showInfo.skillMenu"
+        v-model="showInfo.skillActionSheet"
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
       >
         <template #default>
@@ -743,7 +743,7 @@
             v-model="skillInfo.model"
             v-if="skillInfo.model > -1"
             :ellipsis="false"
-            @click="onSkillTabsClick"
+            @click="onTabsClick"
           >
             <van-tab title="顺位 (推荐)">
               <HeroBp v-if="skillInfo.model == 0" :heroId="tableDataRow.id" />
@@ -799,7 +799,7 @@
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
-        v-model="showInfo.heroMenu"
+        v-model="showInfo.heroActionSheet"
         :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
@@ -915,9 +915,9 @@ export default {
             },
           ],
         },
-        skillMenu: false,
+        skillActionSheet: false,
+        heroActionSheet: false,
         heroSameHobby: false,
-        heroMenu: false,
       },
       tabsInfo: {
         model: 0,
@@ -1043,25 +1043,7 @@ export default {
       this.showInfo.tableData.result[5].rows =
         this.tableData.result.rows[5].slice(0, 7);
     },
-    onHeroClick: function (data) {
-      this.tableDataRow = data;
-
-      this.showInfo.heroMenu = true;
-    },
-    onMoreClick: function (t) {
-      let tableDataRows = this.tableData.result.rows[t];
-
-      if (this.showInfo.tableData.result[t].length == 7) {
-        this.showInfo.tableData.result[t].rows = tableDataRows;
-        this.showInfo.tableData.result[t].length = tableDataRows.length;
-        this.showInfo.tableData.result[t].text = "收起";
-      } else {
-        this.showInfo.tableData.result[t].rows = tableDataRows.slice(0, 7);
-        this.showInfo.tableData.result[t].length = 7;
-        this.showInfo.tableData.result[t].text = "展开";
-      }
-    },
-    onSkillTabsClick: function (e) {
+    onTabsClick: function (e) {
       let tipsText;
 
       if (e == 0) {
@@ -1097,7 +1079,7 @@ export default {
         //this.$appPush({
         //path: "/hero/" + heroInfo.id + "/info",
         //});
-        this.showInfo.skillMenu = true;
+        this.showInfo.skillActionSheet = true;
       }
 
       if (item.value == 1) {
@@ -1136,6 +1118,24 @@ export default {
           },
           0
         );
+      }
+    },
+    onHeroClick: function (data) {
+      this.tableDataRow = data;
+
+      this.showInfo.heroActionSheet = true;
+    },
+    onMoreClick: function (t) {
+      let tableDataRows = this.tableData.result.rows[t];
+
+      if (this.showInfo.tableData.result[t].length == 7) {
+        this.showInfo.tableData.result[t].rows = tableDataRows;
+        this.showInfo.tableData.result[t].length = tableDataRows.length;
+        this.showInfo.tableData.result[t].text = "收起";
+      } else {
+        this.showInfo.tableData.result[t].rows = tableDataRows.slice(0, 7);
+        this.showInfo.tableData.result[t].length = 7;
+        this.showInfo.tableData.result[t].text = "展开";
       }
     },
   },

@@ -20,7 +20,10 @@ export default new Router({
       redirect: '/ranking'
     }, {
       path: '/bp',
-      redirect: '/tools/game/new/bp'
+      redirect: '/game/new/bp'
+    }, {
+      path: '/n/home',
+      redirect: '/tools/n/home'
     }, {
       path: '/skin/encore',
       redirect: '/skin/return'
@@ -94,7 +97,7 @@ export default new Router({
         import('./views/Friends/Index.vue'),
       meta: {
         title: '扩列',
-        keepAlive: false
+        keepAlive: true
       }
     }, {
       path: '/my',
@@ -145,7 +148,7 @@ export default new Router({
             import('./views/Hero/Replay.vue'),
           meta: {
             title: '回顾',
-            keepAlive: false
+            keepAlive: true
           }
         }, {
           path: ':id/equipment',
@@ -166,16 +169,6 @@ export default new Router({
         import('./views/Tools/Index.vue'),
       children: [
         {
-          path: 'n/home',
-          name: 'nHome',
-          component: () =>
-            import('./views/Tools/NHome.vue'),
-          meta: {
-            title: '逆水寒',
-            keepAlive: true
-          }
-        },
-        {
           path: 'hero/:id/view',
           name: 'heroView',
           component: () =>
@@ -193,7 +186,16 @@ export default new Router({
             title: '周报',
             keepAlive: false
           }
-        }
+        }, {
+          path: 'n/home',
+          name: 'nHome',
+          component: () =>
+            import('./views/Tools/NHome.vue'),
+          meta: {
+            title: '逆水寒',
+            keepAlive: false
+          }
+        },
       ]
     }, {
       path: '/game',
@@ -209,7 +211,7 @@ export default new Router({
             import('./views/Game/Team.vue'),
           meta: {
             title: '队伍',
-            keepAlive: true
+            keepAlive: false
           }
         }, {
           path: 'engage',
@@ -218,7 +220,7 @@ export default new Router({
             import('./views/Game/Engage.vue'),
           meta: {
             title: '交战',
-            keepAlive: true
+            keepAlive: false
           }
         }, {
           path: ':id/bp',

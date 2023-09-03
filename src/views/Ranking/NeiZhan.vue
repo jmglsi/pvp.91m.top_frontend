@@ -6,7 +6,7 @@
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
-        @cell-click="onCellClick"
+        @cell-click="onTableCellClick"
       >
         <vxe-table-column
           title="玩家"
@@ -93,17 +93,17 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.playerMenu"
+        v-model="showInfo.playerActionSheet"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
-        @select="onPlayerMenuActionSheetSelect"
+        @select="onActionSheetSelect"
       />
     </div>
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.civilwarMenu"
+        v-model="showInfo.civilwarActionSheet"
         :title="matchInfo.matchStatus + ' - ' + matchInfo.matchWinCamp"
       >
         <template #default>
@@ -216,8 +216,8 @@ export default {
         matchDetail: [],
       },
       showInfo: {
-        playerMenu: false,
-        civilwarMenu: false,
+        playerActionSheet: false,
+        civilwarActionSheet: false,
       },
     };
   },
@@ -234,7 +234,7 @@ export default {
     if (this.gameLabel) {
       this.getCivilwarMatchInfo(this.gameLabel);
 
-      this.showInfo.civilwarMenu = true;
+      this.showInfo.civilwarActionSheet = true;
     }
   },
   methods: {
@@ -272,11 +272,6 @@ export default {
           }
         });
     },
-    getPlayerInfo: function (row) {
-      this.tableDataRow = row;
-
-      this.showInfo.playerMenu = true;
-    },
     getCivilwarMatchInfo: function (gameLabel) {
       let postData = {
         gameLabel: gameLabel,
@@ -300,12 +295,12 @@ export default {
           }
         });
     },
-    onCellClick: function ({ row }) {
+    onTableCellClick: function ({ row }) {
       if (row.userId == 0) return;
 
       this.getPlayerInfo(row);
     },
-    onPlayerMenuActionSheetSelect: function (item) {
+    onActionSheetSelect: function (item) {
       let playerInfo = this.tableDataRow;
 
       if (item.value == 0) {
@@ -348,6 +343,11 @@ export default {
           this.$message.info(this.$appMsg.info[1013]);
         }
       }
+    },
+    getPlayerInfo: function (row) {
+      this.tableDataRow = row;
+
+      this.showInfo.playerActionSheet = true;
     },
   },
 };

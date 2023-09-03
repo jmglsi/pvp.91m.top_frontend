@@ -4,7 +4,7 @@
       ref="refHeroComplement"
       :data="tableData.result.rows"
       :loading="tableData.loading"
-      @cell-click="onCellClick"
+      @cell-click="onTableCellClick"
       height="446"
     >
       <vxe-table-colgroup
@@ -22,7 +22,7 @@
             { value: 4, label: '打野' },
             { value: 5, label: '游走' },
           ]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           width="90"
         >
           <template #default="{ row }">
@@ -55,7 +55,7 @@
             { value: 4, label: '打野' },
             { value: 5, label: '游走' },
           ]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           width="90"
         >
           <template #default="{ row }">
@@ -85,7 +85,7 @@
         title="场次"
         field="pickTimes"
         :filters="[{ value: 100, checked: true }]"
-        :filter-method="filterMethod"
+        :filter-method="onTableColumnFilterMethod"
         :width="listWidth"
         sortable
       >
@@ -107,7 +107,7 @@
         title="胜率 (%)"
         field="winRate"
         :filters="[{ value: 0 }]"
-        :filter-method="filterMethod"
+        :filter-method="onTableColumnFilterMethod"
         width="125"
         sortable
       >
@@ -238,7 +238,7 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "hero[0]") {
         return row.hero[0].type == option.value;
       }
@@ -255,7 +255,7 @@ export default {
         return row.winRate >= option.value;
       }
     },
-    onCellClick: function ({ row, column }) {
+    onTableCellClick: function ({ row, column }) {
       if (column.property == "hero[0]") {
         this.complementInfo.type = 1;
         return this.getRanking(

@@ -352,8 +352,8 @@ export default {
         )
         .then((res) => {
           let data = res.data.data,
-            result = data.result,
-            status = res.data.status;
+            status = res.data.status,
+            result = data.result;
 
           if (status.code == 200) {
             this.tableData = data;

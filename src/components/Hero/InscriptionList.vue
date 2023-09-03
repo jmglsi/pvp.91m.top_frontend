@@ -4,7 +4,7 @@
       ref="refHeroInscription"
       :data="tableData.result.rows"
       :loading="tableData.loading"
-      @cell-click="onCellClick"
+      @cell-click="onTableCellClick"
       height="443"
     >
       <vxe-table-column
@@ -28,7 +28,7 @@
           { value: '安卓WX', label: '安卓WX' },
           { value: '苹果WX', label: '苹果WX' },
         ]"
-        :filter-method="filterMethod"
+        :filter-method="onTableColumnFilterMethod"
         :width="listWidth"
         sortable
       />
@@ -46,11 +46,11 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.inscriptionMenu"
+        v-model="showInfo.actionSheet"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
         :actions="actions"
         :close-on-click-action="true"
-        @select="onInscriptionMenuActionSheetSelect"
+        @select="onActionSheetSelect"
       />
     </div>
   </div>
@@ -92,18 +92,18 @@ export default {
           rows: [],
         },
       },
-      tableData_suit: {
+      tableDataRow: {
+        gamePlayerName: this.$t("loading"),
+      },
+      suitData: {
         loading: false,
         result: {
           rows: [],
         },
       },
-      tableDataRow: {
-        gamePlayerName: this.$t("loading"),
-      },
       actions: [],
       showInfo: {
-        inscriptionMenu: false,
+        actionSheet: false,
       },
     };
   },
@@ -206,7 +206,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableData_suit = data;
+            this.suitData = data;
 
             data.result.rows.map((x, i) => {
               this.actions.push({
@@ -227,19 +227,19 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "selareaId") {
         return row.selareaId == option.value;
       }
     },
-    onCellClick: function ({ row }) {
+    onTableCellClick: function ({ row }) {
       this.tableDataRow = row;
 
       this.getRankingBySuit(row.roleId, this.heroId);
 
-      this.showInfo.inscriptionMenu = true;
+      this.showInfo.actionSheet = true;
     },
-    onInscriptionMenuActionSheetSelect: function (item) {
+    onActionSheetSelect: function (item) {
       let playerInfo = this.tableDataRow;
 
       if (item.value == 3) {

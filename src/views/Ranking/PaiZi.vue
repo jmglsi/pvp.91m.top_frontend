@@ -7,7 +7,7 @@
         :height="clientHeight"
         :loading="tableData.loading"
         empty-text="点击上方筛选"
-        @cell-click="onCellClick"
+        @cell-click="onTableCellClick"
       >
         <vxe-table-column
           title="英雄"
@@ -56,12 +56,12 @@
 
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
-        v-model="showInfo.fightPowerMenu"
+        v-model="showInfo.actionSheet"
         :title="tableDataRow.name + ' 如何操作'"
       >
         <template #default>
           <HeroFightPower
-            v-if="showInfo.fightPowerMenu"
+            v-if="showInfo.actionSheet"
             :heroId="tableDataRow.id"
             :fightPowerType="did"
           />
@@ -95,7 +95,7 @@ export default {
       listWidth: 0,
       clientHeight: 0,
       showInfo: {
-        fightPowerMenu: false,
+        actionSheet: false,
       },
     };
   },
@@ -181,10 +181,10 @@ export default {
           }
         });
     },
-    onCellClick: function ({ row }) {
+    onTableCellClick: function ({ row }) {
       this.tableDataRow = row;
 
-      this.showInfo.fightPowerMenu = true;
+      this.showInfo.actionSheet = true;
     },
   },
 };

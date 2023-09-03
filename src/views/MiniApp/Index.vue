@@ -194,6 +194,9 @@ export default {
         this.showInfo.qrcode = true;
       }
     },
+    shuffle: function (arr) {
+      return arr.sort(() => Math.random() - 0.5);
+    },
     getMiniAppInfo: function () {
       this.$axios.post(this.$appApi.app.getMiniAppInfo).then((res) => {
         let data = res.data.data,
@@ -208,9 +211,6 @@ export default {
           this.$message.error(status.msg);
         }
       });
-    },
-    shuffle: function (arr) {
-      return arr.sort(() => Math.random() - 0.5);
     },
     getQrCode: function (data) {
       this.qrcodeInfo = data;

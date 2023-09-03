@@ -83,7 +83,7 @@
 
         <div class="admin-c9d65acf110c123e832b5cc410a20904">
           <van-action-sheet
-            v-model="showInfo.skillMenu"
+            v-model="showInfo.actionSheet"
             :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
           >
             <template #default>
@@ -91,7 +91,7 @@
                 v-model="skillInfo.model"
                 v-if="skillInfo.model > -1"
                 :ellipsis="false"
-                @click="onSkillTabsClick"
+                @click="onTabsClick"
               >
                 <van-tab title="顺位 (推荐)">
                   <HeroBp
@@ -208,12 +208,11 @@ export default {
         },
       },
       showInfo: {
-        heroData: 0,
+        actionSheet: false,
         heroFeature: false,
         searchData: false,
         searchHistory: false,
-        skillMenu: false,
-        fightPowerMenu: false,
+        heroData: 0,
       },
       skillInfo: {
         model: 1,
@@ -222,26 +221,10 @@ export default {
     };
   },
   methods: {
-    onHeroClick: function (e) {
-      this.tableData.cardInfo.id = e.heroId;
-      this.tableData.cardInfo.name = e.heroName;
-
-      if (["hot-keywords", "hot-talk"].indexOf(this.selectedKeys) > -1) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: e.to }, 0);
-      } else if (
-        ["trend-hero", "trend-skill", "trend-equipment"].indexOf(
-          this.selectedKeys
-        ) > -1
-      ) {
-        this.$appOpenUrl("是否打开内部链接?", null, { path: e.to }, 0);
-      } else {
-        this.showInfo.skillMenu = true;
-      }
-    },
     onMenuSelect: function (e) {
       this.selectedKeys = e.key;
     },
-    onSkillTabsClick: function (e) {
+    onTabsClick: function (e) {
       let tipsText;
 
       if (e == 0) {
@@ -262,6 +245,22 @@ export default {
         this.tipsInfo[e] = 1;
 
         this.$message.info(tipsText);
+      }
+    },
+    onHeroClick: function (e) {
+      this.tableData.cardInfo.id = e.heroId;
+      this.tableData.cardInfo.name = e.heroName;
+
+      if (["hot-keywords", "hot-talk"].indexOf(this.selectedKeys) > -1) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: e.to }, 0);
+      } else if (
+        ["trend-hero", "trend-skill", "trend-equipment"].indexOf(
+          this.selectedKeys
+        ) > -1
+      ) {
+        this.$appOpenUrl("是否打开内部链接?", null, { path: e.to }, 0);
+      } else {
+        this.showInfo.actionSheet = true;
       }
     },
   },

@@ -181,11 +181,11 @@ export default {
         },
       },
       showInfo: {
+        tabbar: true,
         app: false,
         hello: true,
         statusBar: true,
         whiteBar: false,
-        tabbar: true,
       },
     };
   },

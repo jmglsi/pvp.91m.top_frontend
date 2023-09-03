@@ -3,11 +3,11 @@
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-table
         ref="refGuanXi"
-        :cell-class-name="cellClassName"
+        :cell-class-name="onTableCellClassName"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
-        @cell-click="onCellClick"
+        @cell-click="onTableCellClick"
       >
         <vxe-table-colgroup
           fixed="left"
@@ -24,7 +24,7 @@
               { value: 4, label: '打野' },
               { value: 5, label: '游走' },
             ]"
-            :filter-method="filterMethod"
+            :filter-method="onTableColumnFilterMethod"
             width="75"
           >
             <template #default="{ row }">
@@ -64,7 +64,7 @@
               { value: 4, label: '打野' },
               { value: 5, label: '游走' },
             ]"
-            :filter-method="filterMethod"
+            :filter-method="onTableColumnFilterMethod"
             width="75"
           >
             <template #default="{ row }">
@@ -105,7 +105,7 @@
             title="出场"
             field="teammatePickRate"
             :filters="[{ value: 0.25, checked: true }]"
-            :filter-method="filterMethod"
+            :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -128,7 +128,7 @@
             title="胜率"
             field="teammateWinRate"
             :filters="[{ value: 0 }]"
-            :filter-method="filterMethod"
+            :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -152,7 +152,7 @@
           title="适配"
           field="adaptation"
           :filters="[{ value: 0 }]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
           sortable
         >
@@ -183,7 +183,7 @@
             title="出场"
             field="opponentPickRate"
             :filters="[{ value: 0.25, checked: true }]"
-            :filter-method="filterMethod"
+            :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -206,7 +206,7 @@
             title="胜率"
             field="opponentWinRate"
             :filters="[{ value: 0 }]"
-            :filter-method="filterMethod"
+            :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -230,7 +230,7 @@
 
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
-        v-model="showInfo.heroMenu"
+        v-model="showInfo.heroActionSheet"
         :title="
           tableDataRow.hero[0].name +
           ' 和 ' +
@@ -307,7 +307,7 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       showInfo: {
-        heroMenu: false,
+        heroActionSheet: false,
       },
     };
   },
@@ -385,7 +385,94 @@ export default {
     getHeroInfo: function (row) {
       this.tableDataRow = row;
 
-      this.showInfo.heroMenu = true;
+      this.showInfo.heroActionSheet = true;
+    },
+    onTableColumnFilterMethod: function ({ option, row, column }) {
+      if (column.property == "hero[0]") {
+        return row.hero[0].type === option.value;
+      }
+
+      if (column.property == "hero[1]") {
+        return row.hero[1].type === option.value;
+      }
+
+      if (column.property == "teammatePickRate") {
+        return row.teammatePickRate >= option.value;
+      }
+
+      if (column.property == "teammateWinRate") {
+        return row.teammateWinRate >= option.value;
+      }
+
+      if (column.property == "adaptation") {
+        return row.adaptation >= option.value;
+      }
+
+      if (column.property == "opponentPickRate") {
+        return row.opponentPickRate >= option.value;
+      }
+
+      if (column.property == "opponentWinRate") {
+        return row.opponentWinRate >= option.value;
+      }
+    },
+    onTableCellClassName: function ({ row, column }) {
+      let color = this.tableData.result.color;
+
+      if (
+        column.property == "teammatePickRate" ||
+        column.property == "opponentPickRate"
+      ) {
+        if (
+          row.teammatePickRate >= color.pick ||
+          row.opponentPickRate >= color.pick
+        ) {
+          return "app-48d6215903dff56238e52e8891380c8f";
+        }
+      }
+
+      if (column.property == "teammateWinRate") {
+        if (
+          row.teammatePickRate >= color.pick &&
+          row.teammateWinRate >= color.win
+        ) {
+          return "app-9f27410725ab8cc8854a2769c7a516b8";
+        }
+      }
+
+      if (column.property == "opponentWinRate") {
+        if (
+          row.opponentPickRate >= color.pick &&
+          row.opponentWinRate >= color.win
+        ) {
+          return "app-9f27410725ab8cc8854a2769c7a516b8";
+        }
+      }
+    },
+    onTableCellClick: function ({ row }) {
+      this.getHeroInfo(row);
+    },
+    onActionSheetSelect: function (item) {
+      let heroInfo = this.tableDataRow;
+
+      if (item.value == 0) {
+        this.onGuanXiCopy();
+      }
+
+      if (item.value == 1) {
+        this.$appPush({
+          path:
+            "/hero/" +
+            heroInfo.hero[0].id +
+            "," +
+            heroInfo.hero[1].id +
+            "/replay",
+          query: {
+            title: heroInfo.hero[0].name + " 和 " + heroInfo.hero[1].name,
+            teammate: "1",
+          },
+        });
+      }
     },
     onGuanXiCopy: function () {
       let row = this.tableDataRow,
@@ -433,93 +520,6 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    },
-    filterMethod: function ({ option, row, column }) {
-      if (column.property == "hero[0]") {
-        return row.hero[0].type === option.value;
-      }
-
-      if (column.property == "hero[1]") {
-        return row.hero[1].type === option.value;
-      }
-
-      if (column.property == "teammatePickRate") {
-        return row.teammatePickRate >= option.value;
-      }
-
-      if (column.property == "teammateWinRate") {
-        return row.teammateWinRate >= option.value;
-      }
-
-      if (column.property == "adaptation") {
-        return row.adaptation >= option.value;
-      }
-
-      if (column.property == "opponentPickRate") {
-        return row.opponentPickRate >= option.value;
-      }
-
-      if (column.property == "opponentWinRate") {
-        return row.opponentWinRate >= option.value;
-      }
-    },
-    cellClassName: function ({ row, column }) {
-      let color = this.tableData.result.color;
-
-      if (
-        column.property == "teammatePickRate" ||
-        column.property == "opponentPickRate"
-      ) {
-        if (
-          row.teammatePickRate >= color.pick ||
-          row.opponentPickRate >= color.pick
-        ) {
-          return "app-48d6215903dff56238e52e8891380c8f";
-        }
-      }
-
-      if (column.property == "teammateWinRate") {
-        if (
-          row.teammatePickRate >= color.pick &&
-          row.teammateWinRate >= color.win
-        ) {
-          return "app-9f27410725ab8cc8854a2769c7a516b8";
-        }
-      }
-
-      if (column.property == "opponentWinRate") {
-        if (
-          row.opponentPickRate >= color.pick &&
-          row.opponentWinRate >= color.win
-        ) {
-          return "app-9f27410725ab8cc8854a2769c7a516b8";
-        }
-      }
-    },
-    onCellClick: function ({ row }) {
-      this.getHeroInfo(row);
-    },
-    onActionSheetSelect: function (item) {
-      let heroInfo = this.tableDataRow;
-
-      if (item.value == 0) {
-        this.onGuanXiCopy();
-      }
-
-      if (item.value == 1) {
-        this.$appPush({
-          path:
-            "/hero/" +
-            heroInfo.hero[0].id +
-            "," +
-            heroInfo.hero[1].id +
-            "/replay",
-          query: {
-            title: heroInfo.hero[0].name + " 和 " + heroInfo.hero[1].name,
-            teammate: "1",
-          },
-        });
-      }
     },
   },
 };

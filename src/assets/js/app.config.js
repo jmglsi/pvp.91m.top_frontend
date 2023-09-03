@@ -42,6 +42,50 @@ Vue.prototype.$appConfigInfo = {
   },
   oauthInfo: ["qq", "yuque", "afdian", "coding", "github"],
   positionInfo: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
+  professionInfo: [
+    {
+      color: [],
+      name: "全部",
+      icon: "",
+      num: [0, 0],
+    },
+    {
+      color: ["190, 125, 75", "234, 152, 92"],
+      name: "铁衣",
+      icon: "//n.netease.com/data/attachment/common/5e/common_118_icon.jpg",
+      num: [0, 0],
+    },
+    {
+      color: ["64, 90, 146", "88, 119, 184"],
+      name: "神相",
+      icon: "//n.netease.com/data/attachment/common/eb/common_117_icon.jpg",
+      num: [0, 0],
+    },
+    {
+      color: ["92, 156, 182", "126, 202, 234"],
+      name: "碎梦",
+      icon: "//n.netease.com/data/attachment/common/c4/common_116_icon.jpg",
+      num: [0, 0],
+    },
+    {
+      color: ["122, 66, 137", "204, 113, 218"],
+      name: "九灵",
+      icon: "//n.netease.com/data/attachment/common/2b/common_115_icon.jpg",
+      num: [0, 0],
+    },
+    {
+      color: ["213, 103, 124", "245, 139, 161"],
+      name: "素问",
+      icon: "//n.netease.com/data/attachment/common/5f/common_114_icon.jpg",
+      num: [0, 0],
+    },
+    {
+      color: ["125, 54, 49", "127, 68, 66"],
+      name: "血河",
+      icon: "//n.netease.com/data/attachment/common/73/common_113_icon.jpg",
+      num: [0, 0],
+    }
+  ],
   tipsInfo: {
     dfsTips: false,
     skillTips: false,

@@ -5,7 +5,7 @@
         v-model="tabsInfo.model"
         :border="false"
         :ellipsis="false"
-        @click="onFightPowerTabsClick"
+        @click="onTabsClick"
       >
         <van-tab title="我为人人，人人为我">
           <van-field
@@ -121,8 +121,9 @@
                     <span
                       v-else
                       class="hero-fightPower-768607b02a407038d55cbdc241ef8df2"
-                      >没有图片</span
                     >
+                      没有图片
+                    </span>
                   </div>
                 </template>
               </vxe-table-column>
@@ -136,7 +137,7 @@
                   { value: '安卓WX', label: '安卓WX' },
                   { value: '苹果WX', label: '苹果WX' },
                 ]"
-                :filter-method="filterMethod"
+                :filter-method="onTableColumnFilterMethod"
                 width="125"
                 sortable
               />
@@ -221,7 +222,6 @@ export default {
       },
       showInfo: {
         imagePreview: false,
-        imageIndex: 0,
       },
     };
   },
@@ -355,20 +355,20 @@ export default {
           }
         });
     },
-    onFightPowerTabsClick: function (e) {
+    onTabsClick: function (e) {
       if (e == 1) {
         this.getRanking(this.heroId, 10, 0, 0, this.fightPowerType);
+      }
+    },
+    onTableColumnFilterMethod: function ({ option, row, column }) {
+      if (column.property == "areaText") {
+        return row.areaText == option.value;
       }
     },
     onImagePreviewClick: function (index) {
       this.images = [this.tableData.result.rows[index].fightPowerImg];
 
       this.showInfo.imagePreview = true;
-    },
-    filterMethod: function ({ option, row, column }) {
-      if (column.property == "areaText") {
-        return row.areaText == option.value;
-      }
     },
   },
 };
