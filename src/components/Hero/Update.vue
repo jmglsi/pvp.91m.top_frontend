@@ -199,7 +199,7 @@
       <van-dialog
         v-model="showInfo.dialog"
         @close="
-          showInfo.checked ? onHeroUpdateDetailCopy(heroId, tableDataRow) : null
+          showInfo.checked ? onCopy(heroId, tableDataRow) : null
         "
       >
         <template #title>
@@ -434,7 +434,7 @@ export default {
       this.equipmentId = parseInt(e.equipment[a]) || 0;
       this.showInfo.actionSheet = true;
     },
-    onHeroUpdateDetailCopy: function (heroId, row) {
+    onCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);
 
       this.copyData =

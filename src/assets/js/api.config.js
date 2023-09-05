@@ -122,10 +122,12 @@ const game = {
   getGameDashboard: gameApi + "?type=getGameDashboard",
   getGameHome: gameApi + "?type=getGameHome",
   getGamePrediction: gameApi + "?type=getGamePrediction",
+  getTeamInfo: gameApi + "?type=getTeamInfo",
   joinTeam: gameApi + "?type=joinTeam",
   setStatus: gameApi + "?type=setStatus",
   setUsed: gameApi + "?type=setUsed",
   updateGameBP: gameApi + "?type=updateGameBP",
+  updateGameBPIndex: gameApi + "?type=updateGameBPIndex",
   updateTeamInfo: gameApi + "?type=updateTeamInfo",
 }
 

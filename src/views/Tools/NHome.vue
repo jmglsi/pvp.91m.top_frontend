@@ -76,7 +76,7 @@
           <div @click="onTitleClick" class="n-6e52395638ccfaf655bf8c600d8c8044">
             <div class="n-995b1773c816966a6a2fef460a9751f2">
               <span class="n-6938e80e77fe7d0953d2ccbcaeb26df7">
-                {{ authorInfo.teamName }}
+                {{ authorInfo.name }}
               </span>
               <img
                 v-if="gameLabel"
@@ -102,9 +102,6 @@
                   <span style="color: red">使用说明</span>
                 </a-menu-item>
                 <a-menu-divider />
-                <a-menu-item @click="onModalShowClick(1)" key="n-top-right-1">
-                  <span>新建角色</span>
-                </a-menu-item>
                 <a-menu-item
                   :disabled="
                     gameLabel || homeData.result.rows.myTeam.length > 0
@@ -112,18 +109,17 @@
                       : false
                   "
                   @click="onModalShowClick(3)"
-                  key="n-top-right-2"
+                  key="n-top-right-1"
                 >
                   <span>新建帮会</span>
                 </a-menu-item>
+                <a-menu-item @click="onModalShowClick(1)" key="n-top-right-2">
+                  <span>新建角色</span>
+                </a-menu-item>
                 <a-menu-divider />
-                <a-menu-item
-                  :disabled="gameLabel ? true : false"
-                  key="n-top-right-3"
-                >
-                  <span :style="gameLabel ? {} : { color: 'blue' }">
-                    数据录入
-                  </span>
+                <a-menu-item disabled key="n-top-right-3">
+                  <!-- :style="gameLabel ? {} : { color: 'blue' }" -->
+                  <span> 数据录入 </span>
                 </a-menu-item>
               </a-menu>
             </template>
@@ -146,6 +142,26 @@
         @refresh="onPullRefresh"
       >
         <div v-if="!gameLabel" class="n-b4e157ffbfb4ee490b792d5eabfbdac1">
+          <div class="n-90ada85d44c24e38318c47b44be27bc8">
+            <van-cell-group :border="false" title="我的帮会">
+              <div v-if="homeData.result.rows.myTeam.length > 0">
+                <van-cell
+                  v-for="(data, index) in homeData.result.rows.myTeam"
+                  :key="'app-26ad5d9a2b2a9161a4268f8ae740350c-' + index"
+                  :icon="data.icon"
+                  :title="data.title"
+                  :label="data.label"
+                  :value="data.value"
+                  is-link
+                  @click="onTeamListClick(data)"
+                />
+              </div>
+              <div v-else class="n-ad264e30744d4b76ffa84e851e64906e">
+                暂无帮会
+              </div>
+            </van-cell-group>
+          </div>
+
           <div class="n-c135773fcc3610088460b5e8cf829d5c">
             <van-cell-group :border="false" title="我的角色">
               <div v-if="homeData.result.rows.myRole.length > 0">
@@ -175,36 +191,17 @@
             </van-cell-group>
           </div>
 
-          <div class="n-90ada85d44c24e38318c47b44be27bc8">
-            <van-cell-group :border="false" title="我的帮会">
-              <div v-if="homeData.result.rows.myTeam.length > 0">
-                <van-cell
-                  v-for="(data, index) in homeData.result.rows.myTeam"
-                  :key="'app-26ad5d9a2b2a9161a4268f8ae740350c-' + index"
-                  :icon="data.icon"
-                  :title="data.title"
-                  :label="data.label"
-                  :value="data.value"
-                  is-link
-                />
-              </div>
-              <div v-else class="n-ad264e30744d4b76ffa84e851e64906e">
-                暂无帮会
-              </div>
-            </van-cell-group>
-          </div>
-
           <div class="n-fa5a798d6c69dcc44259373f8ffbe37d">
             <van-cell-group :border="false" title="我的分组">
-              <div v-if="homeData.result.rows.gameBP.length > 0">
+              <div v-if="homeData.result.rows.myEngage.length > 0">
                 <van-cell
-                  v-for="(data, index) in homeData.result.rows.gameBP"
+                  v-for="(data, index) in homeData.result.rows.myEngage"
                   :key="'app-26ad5d9a2b2a9161a4268f8ae740350c-' + index"
                   :icon="data.icon"
                   :title="data.title"
                   :value="data.value"
-                  :is-link="data.isLink"
-                  @click="data.isLink ? onUrlClick(data) : null"
+                  is-link
+                  @click="onEngageListClick(data)"
                 >
                   <template #label>
                     <div class="n-6cf5e5a50b79366afe6c4b68f0ba7f7c">
@@ -444,7 +441,9 @@
         <template #title>
           <span v-if="showInfo.createRole">新建角色</span>
           <span v-if="showInfo.createEngage">新建分组</span>
+          <span v-if="showInfo.createTeam">新建帮会</span>
         </template>
+
         <div
           v-if="showInfo.createRole"
           class="n-e5a345c45b6de5d26268c141ca23e71e"
@@ -480,8 +479,14 @@
             <van-cell-group :border="false">
               <van-field
                 v-model="editInfo.nName"
-                label="游戏 Id"
-                placeholder="请输入游戏 Id"
+                label="角色 Id"
+                placeholder="请输入角色 Id"
+                class="n-fce42c651ad31b43c91ec081b2da592d"
+              />
+              <van-field
+                v-model="editInfo.description"
+                label="角色描述"
+                placeholder="有什么需要备注的吗"
                 class="n-fce42c651ad31b43c91ec081b2da592d"
               />
             </van-cell-group>
@@ -492,15 +497,31 @@
           v-if="showInfo.createEngage"
           class="n-e5a345c45b6de5d26268c141ca23e71e"
         >
-          <van-field
-            v-model="editInfo.description"
-            autosize
-            show-word-limit
-            rows="5"
-            type="textarea"
-            maxlength="100"
-            placeholder="描述内容"
-          />
+          <van-cell-group :border="false">
+            <van-field
+              v-model="editInfo.description"
+              autosize
+              show-word-limit
+              rows="5"
+              type="textarea"
+              maxlength="100"
+              placeholder="描述内容"
+            />
+          </van-cell-group>
+        </div>
+
+        <div
+          v-if="showInfo.createTeam"
+          class="n-6dcb5225432681c2dce9ffcfcca81e25"
+        >
+          <van-cell-group :border="false">
+            <van-field
+              v-model="editInfo.teamName"
+              label="帮会名字"
+              placeholder="请输入帮会名字"
+              class="n-fce42c651ad31b43c91ec081b2da592d"
+            />
+          </van-cell-group>
         </div>
       </a-modal>
     </div>
@@ -524,11 +545,33 @@
 
     <div class="n-aa5985c67335242694f8fcbe71daeeb8">
       <van-action-sheet
-        v-model="showInfo.usedActionSheet"
-        :actions="usedMenuActions"
+        v-model="showInfo.roleActionSheet"
+        :actions="roleActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
-        @select="onUsedMenuSheetSelect"
+        @select="onRoleActionSheetSelect"
+        title="如何操作"
+      />
+    </div>
+
+    <div class="n-0c0417c7568139ec675c0b1da98576c5">
+      <van-action-sheet
+        v-model="showInfo.teamActionSheet"
+        :actions="teamActionSheetActions"
+        :closeable="false"
+        :close-on-click-action="true"
+        @select="onTeamActionSheetSelect"
+        title="如何操作"
+      />
+    </div>
+
+    <div class="n-ff45be8b8aa87178e4d29998c8e811b6">
+      <van-action-sheet
+        v-model="showInfo.engageActionSheet"
+        :actions="engageActionSheetActions"
+        :closeable="false"
+        :close-on-click-action="true"
+        @select="onEngageActionSheetSelect"
         title="如何操作"
       />
     </div>
@@ -536,7 +579,7 @@
     <div class="n-3dd36d00d2b6ccf750790ad378e60cb3">
       <van-action-sheet
         v-model="showInfo.editActionSheet"
-        :actions="editMenuActions"
+        :actions="editActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
         :title="
@@ -584,33 +627,26 @@ export default {
       let gameLabel = to.query.gameLabel;
 
       if (gameLabel) {
-        this.getGameBP(gameLabel);
+        this.gameLabel = gameLabel;
 
-        setTimeout(() => {
-          this.gameLabel = gameLabel;
-        }, 500);
+        this.getGameBP(gameLabel);
       }
     },
   },
   data() {
     return {
+      nowModal: 0,
+      nowNId: "",
       nMode: "view",
+      nowTeamId: "",
+      nowTeamName: "",
+      nowGameLabel: "",
       nowIconColor: "#1989fa",
       nowIconName: "add-o",
-      nowModal: 0,
-      nId: "",
+      nowDataChange: false,
       openId: this.$cookie.get("openId") || "",
       joinTeamId: this.$route.query.joinTeamId || "",
       gameLabel: this.$route.query.gameLabel || "",
-      homeData: {
-        result: {
-          rows: {
-            myTeam: [],
-            myRole: [],
-            gameBP: [],
-          },
-        },
-      },
       tableData: {
         author: {},
         myInfo: {
@@ -817,15 +853,47 @@ export default {
           },
         ],
       },
+      homeData: {
+        result: {
+          rows: {
+            myRole: [],
+            myTeam: [],
+            myEngage: [],
+          },
+        },
+      },
+      newData: {
+        rows_1: [],
+        rows_2: [],
+      },
       columns: [],
-      usedMenuActions: [
+      roleActionSheetActions: [
         {
           name: "切换角色",
           subname: "切换成这个角色，下次报名将使用这个",
           value: 0,
         },
       ],
-      editMenuActions: [
+      teamActionSheetActions: [
+        {
+          name: "复制信息",
+          subname: "复制帮会的链接，以便于别人加入",
+          value: 0,
+        },
+      ],
+      engageActionSheetActions: [
+        {
+          name: "直接打开",
+          subname: "进入队伍分组的编辑界面，要报名",
+          value: 0,
+        },
+        {
+          name: "复制信息",
+          subname: "复制分组的链接，以便于别人报名",
+          value: 1,
+        },
+      ],
+      editActionSheetActions: [
         {
           name: "取消占位",
           subname: "将会清空这个位置，但是不会取消报名",
@@ -834,23 +902,26 @@ export default {
       ],
       authorInfo: {
         openId: "",
-        teamName: "加载中...",
+        name: "加载中...",
         description: "这个人很懒，什么都没留下。",
       },
       editInfo: {
         nType: 0,
         nName: "",
+        teamName: "",
         description: "",
       },
       showInfo: {
         popup: false,
         picker: false,
-        usedActionSheet: false,
+        roleActionSheet: false,
+        teamActionSheet: false,
+        engageActionSheet: false,
         editActionSheet: false,
         pullRefresh: false,
-        createTeam: false,
         createRole: false,
         createEngage: false,
+        createTeam: false,
         nModal: false,
       },
       statusInfo: [
@@ -876,7 +947,7 @@ export default {
     } else {
       this.getGameHome(1);
 
-      this.authorInfo.teamName = "首页";
+      this.authorInfo.name = "首页";
       this.authorInfo.description = "请先点击【⚙️】查阅【使用说明】";
 
       if (joinTeamId) {
@@ -927,190 +998,13 @@ export default {
     initColumns: function () {
       let tableData = this.tableData.result.rows,
         professionInfo = this.professionInfo.rows,
-        initCamp_1 = [
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-        ],
-        initCamp_2 = [
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-          {
-            nType: -1,
-          },
-        ];
+        initCamp_1 = [],
+        initCamp_2 = [];
+
+      for (let x = 0; x < 30; x++) {
+        initCamp_1.push({ nType: -1 });
+        initCamp_2.push({ nType: -1 });
+      }
 
       /**
        *
@@ -1177,6 +1071,24 @@ export default {
         yIndex: 0,
       });
     },
+    getGameHome: function (aid = 0) {
+      this.$axios
+        .post(this.$appApi.game.getGameHome + "&aid=" + aid)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.homeData = data;
+
+            this.onIconLoadingChange();
+
+            //this.$message.success(this.$appMsg.success[1005]);
+          } else {
+            //this.$message.error(status.msg);
+          }
+        });
+    },
     getGameBP: function (gameLabel, aid = 1) {
       this.$axios
         .post(
@@ -1204,21 +1116,59 @@ export default {
           }
         });
     },
-    getGameHome: function (aid = 0) {
+    updateGameBP: function (aid = 1) {
       this.$axios
-        .post(this.$appApi.game.getGameHome + "&aid=" + aid)
+        .post(
+          this.$appApi.game.updateGameBP + "&aid=" + aid,
+          this.$qs.stringify({
+            gameLabel: this.gameLabel,
+            arrData: JSON.stringify(this.newData),
+          })
+        )
         .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
+          let status = res.data.status;
 
           if (status.code == 200) {
-            this.homeData = data;
-
             this.onIconLoadingChange();
 
-            //this.$message.success(this.$appMsg.success[1005]);
+            this.nowDataChange = false;
+
+            setTimeout(() => {
+              this.getGameBP(this.gameLabel);
+            }, 250);
+
+            //this.$message.success(this.$appMsg.success[1000]);
           } else {
-            //this.$message.error(status.msg);
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    updateGameBPIndex: function (gameLabel, nId, nCamp, nIndex, aid = 1) {
+      this.$axios
+        .post(
+          this.$appApi.game.updateGameBPIndex + "&aid=" + aid,
+          this.$qs.stringify({
+            gameLabel: gameLabel,
+            nId: nId,
+            nCamp: nCamp,
+            nIndex: nIndex,
+          })
+        )
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.onIconLoadingChange();
+
+            this.nowDataChange = false;
+
+            setTimeout(() => {
+              this.getGameBP(this.gameLabel);
+            }, 250);
+
+            //this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
           }
         });
     },
@@ -1226,7 +1176,9 @@ export default {
       let gameLabel = this.gameLabel;
 
       if (gameLabel) {
-        this.getGameBP(this.gameLabel);
+        if (this.nowDataChange == true) {
+          this.updateGameBP(1);
+        }
       } else {
         this.getGameHome(1);
       }
@@ -1244,7 +1196,12 @@ export default {
         } else if (editInfo.nType == 0) {
           this.$message.error(this.$appMsg.error[2001]);
         } else {
-          this.onCreateRoleClick(editInfo.nName, editInfo.nType, 1);
+          this.onCreateRoleClick(
+            editInfo.nName,
+            editInfo.nType,
+            editInfo.description,
+            1
+          );
 
           this.editInfo.nType = 0;
           this.editInfo.nName = "";
@@ -1253,24 +1210,63 @@ export default {
         this.onCreateEngageClick(editInfo.description, 1);
 
         this.editInfo.description = "";
+      } else if (this.showInfo.createTeam) {
+        if (!editInfo.teamName) {
+          this.$message.error(this.$appMsg.error[2002]);
+        } else {
+          this.onCreateTeamClick(editInfo.teamName, 1);
+          this.editInfo.teamName = "";
+        }
       }
 
       this.showInfo.nModal = false;
     },
+    onCampChange() {
+      let newData = {
+        rows_1: [],
+        rows_2: [],
+      };
+
+      this.campData.rows_1.map((x, i) => {
+        x.nIndex = i;
+
+        if (x.nType != -1) {
+          newData.rows_1.push(x);
+        }
+      });
+
+      this.campData.rows_2.map((x, i) => {
+        x.nIndex = i;
+
+        if (x.nType != -1) {
+          newData.rows_2.push(x);
+        }
+      });
+
+      this.newData = newData;
+      this.nowDataChange = true;
+    },
     onDraggableChange: function () {
       this.initCamp();
+      this.onCampChange();
     },
     onPickerConfirm: function (value, index) {
-      let nCamp = this.tableDataRow.nCamp,
-        nIndex = this.tableDataRow.nIndex;
+      let tableDataRow = this.tableDataRow,
+        nCamp = tableDataRow.nCamp,
+        nIndex = tableDataRow.nIndex,
+        nowRow = {};
 
       if (!this.columns[index[0]].children[index[1]].disabled) {
         if (nCamp == 1) {
           this.campData.rows_1[nIndex] =
             this.columns[index[0]].children[index[1]];
+
+          nowRow = this.campData.rows_1[nIndex];
         } else if (nCamp == 2) {
           this.campData.rows_2[nIndex] =
             this.columns[index[0]].children[index[1]];
+
+          nowRow = this.campData.rows_2[nIndex];
         }
 
         this.columns[index[0]].children[index[1]].disabled = true;
@@ -1279,6 +1275,13 @@ export default {
       }
 
       this.initCamp();
+      this.onCampChange();
+      this.updateGameBPIndex(
+        this.gameLabel,
+        nowRow.nId,
+        nowRow.nCamp,
+        nowRow.nIndex
+      );
 
       /**
        *
@@ -1294,9 +1297,41 @@ export default {
 
       this.showInfo.picker = false;
     },
-    onUsedMenuSheetSelect: function (value, index) {
+    onRoleActionSheetSelect: function (value, index) {
       if (index == 0) {
-        this.onSetUsedClick(this.nId, 1);
+        this.onSetUsedClick(this.nowNId, 1);
+      }
+    },
+    onTeamActionSheetSelect: function (value, index) {
+      let copyData = "";
+
+      if (index == 0) {
+        copyData =
+          "帮会:" +
+          this.nowTeamName +
+          "\n链接:" +
+          location.origin +
+          location.pathname +
+          "?joinTeamId=" +
+          this.nowTeamId;
+
+        this.$appCopyData(copyData);
+      }
+    },
+    onEngageActionSheetSelect: function (value, index) {
+      let copyData = "";
+
+      if (index == 0) {
+        this.$appPush({ path: "/tools/n/home?gameLabel=" + this.nowGameLabel });
+      } else if (index == 1) {
+        copyData =
+          "链接:" +
+          location.origin +
+          location.pathname +
+          "?gameLabel=" +
+          this.nowGameLabel;
+
+        this.$appCopyData(copyData);
       }
     },
     onEditMenuSheetSelect: function (value, index) {
@@ -1330,6 +1365,8 @@ export default {
           }
         }
 
+        this.updateGameBPIndex(this.gameLabel, tableDataRow.nId, 0, 0);
+
         if (tableDataRow.nCamp > 0) {
           if (tableDataRow.status == 1) {
             this.tableData.result.rows[yIndex].disabled = false;
@@ -1353,7 +1390,7 @@ export default {
         }
 
         this.nowIconName = "add-o";
-      }, 1000);
+      }, 500);
     },
     onIconColor: function (e = 0) {
       let status = 0,
@@ -1383,18 +1420,50 @@ export default {
     onJoinTeam: function (teamId, aid = 1) {
       this.$axios
         .post(
-          this.$appApi.game.joinTeam + "&aid=" + aid,
+          this.$appApi.game.getTeamInfo + "&aid=" + aid,
           this.$qs.stringify({
             teamId: teamId,
           })
         )
         .then((res) => {
-          let status = res.data.status;
+          let data = res.data.data,
+            status = res.data.status;
 
           if (status.code == 200) {
-            this.getGameHome(1);
+            let teamName = data.teamName;
 
-            this.$message.success(this.$appMsg.success[1000]);
+            this.$dialog
+              .confirm({
+                title: "是否加入该帮会?",
+                message: teamName,
+              })
+              .then(() => {
+                //on confirm
+                this.$axios
+                  .post(
+                    this.$appApi.game.joinTeam + "&aid=" + aid,
+                    this.$qs.stringify({
+                      teamId: teamId,
+                    })
+                  )
+                  .then((res) => {
+                    let status = res.data.status;
+
+                    if (status.code == 200) {
+                      this.getGameHome(1);
+
+                      this.$message.success(this.$appMsg.success[1000]);
+                    } else {
+                      //this.$message.error(status.msg);
+                    }
+                  });
+
+                this.showInfo.actionSheet = false;
+              })
+              .catch(() => {
+                //on cancel
+              });
+            //this.$message.success(this.$appMsg.success[1000]);
           } else {
             //this.$message.error(status.msg);
           }
@@ -1402,13 +1471,14 @@ export default {
 
       this.$appPush({ path: "/tools/n/home" });
     },
-    onCreateRoleClick: function (nName, nType, aid = 1) {
+    onCreateRoleClick: function (nName, nType, description, aid = 1) {
       this.$axios
         .post(
           this.$appApi.game.createRole + "&aid=" + aid,
           this.$qs.stringify({
             nName: nName,
             nType: nType,
+            description: description,
           })
         )
         .then((res) => {
@@ -1427,17 +1497,6 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    },
-    onModalShowClick: function (e) {
-      this.showInfo.nModal = true;
-
-      if (e == 1) {
-        this.showInfo.createRole = true;
-        this.showInfo.createEngage = false;
-      } else if (e == 2) {
-        this.showInfo.createRole = false;
-        this.showInfo.createEngage = true;
-      }
     },
     onCreateEngageClick: function (description, aid = 1) {
       this.$axios
@@ -1459,6 +1518,44 @@ export default {
             this.$message.error(status.msg);
           }
         });
+    },
+    onCreateTeamClick: function (teamName, aid = 1) {
+      this.$axios
+        .post(
+          this.$appApi.game.createTeam + "&aid=" + aid,
+          this.$qs.stringify({
+            teamName: teamName,
+          })
+        )
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.getGameHome(1);
+            this.onIconLoadingChange();
+
+            //this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onModalShowClick: function (e) {
+      this.showInfo.nModal = true;
+
+      if (e == 1) {
+        this.showInfo.createRole = true;
+        this.showInfo.createEngage = false;
+        this.showInfo.createTeam = false;
+      } else if (e == 2) {
+        this.showInfo.createRole = false;
+        this.showInfo.createEngage = true;
+        this.showInfo.createTeam = false;
+      } else if (e == 3) {
+        this.showInfo.createRole = false;
+        this.showInfo.createEngage = false;
+        this.showInfo.createTeam = true;
+      }
     },
     onSetUsedClick: function (nId, aid = 1) {
       this.$axios
@@ -1502,20 +1599,12 @@ export default {
     },
     onHomeClick: function () {
       this.gameLabel = "";
-      this.authorInfo.teamName = "首页";
+      this.authorInfo.name = "首页";
       this.authorInfo.description = "请先点击【⚙️】查阅【使用说明】";
 
       this.getGameHome(1);
 
       this.$appPush({ path: "/tools/n/home" });
-    },
-    onUrlClick: function (data) {
-      this.$appOpenUrl(
-        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
-        null,
-        { path: data.url ? data.url : data.to },
-        data.url ? 0 : 1
-      );
     },
     onTitleClick: function () {
       if (this.showInfo.popup == false) {
@@ -1564,9 +1653,20 @@ export default {
       this.tableDataRow.nIndex = index;
     },
     onRoleListClick: function (e) {
-      this.showInfo.usedActionSheet = true;
+      this.showInfo.roleActionSheet = true;
 
-      this.nId = e.nId;
+      this.nowNId = e.nId;
+    },
+    onTeamListClick: function (e) {
+      this.showInfo.teamActionSheet = true;
+
+      this.nowTeamId = e.teamId;
+      this.nowTeamName = e.teamName;
+    },
+    onEngageListClick: function (e) {
+      this.showInfo.engageActionSheet = true;
+
+      this.nowGameLabel = e.gameLabel;
     },
   },
 };
@@ -1612,7 +1712,7 @@ span.n-f2a32c26eb3e74db9dc116b7c46b976e {
 div.n-b4e157ffbfb4ee490b792d5eabfbdac1 {
   margin-top: 25px;
   text-align: left;
-  height: 750px;
+  height: 1150px;
 }
 
 div.n-fcc35edc628651ab30ef10d9f772acf0 {
@@ -1631,7 +1731,7 @@ div.n-6cf5e5a50b79366afe6c4b68f0ba7f7c {
   max-width: 90%;
 }
 
-div.n-90ada85d44c24e38318c47b44be27bc8,
+div.n-c135773fcc3610088460b5e8cf829d5c,
 div.n-fa5a798d6c69dcc44259373f8ffbe37d {
   margin-top: 50px;
 }

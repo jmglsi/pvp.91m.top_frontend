@@ -97,7 +97,7 @@ export default new Router({
         import('./views/Friends/Index.vue'),
       meta: {
         title: '扩列',
-        keepAlive: true
+        keepAlive: false
       }
     }, {
       path: '/my',
@@ -192,7 +192,7 @@ export default new Router({
           component: () =>
             import('./views/Tools/NHome.vue'),
           meta: {
-            title: '逆水寒',
+            title: '逆水寒-队伍编辑器',
             keepAlive: false
           }
         },

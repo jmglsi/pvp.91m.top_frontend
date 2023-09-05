@@ -495,7 +495,7 @@
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
         :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
         @open="onActionSheetOpen"
@@ -591,7 +591,7 @@ export default {
           rows: [],
         },
       },
-      actions: [
+      actionSheetActions: [
         { name: "趋势", subname: "左下角关注一下", value: 0 },
         { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
         { name: "更新记录", subname: "NGA @EndMP", value: 2 },
@@ -749,7 +749,7 @@ export default {
                 this.$message.info(this.$appMsg.info[1030]);
               }
             }
-          } else if (status.code == 2006) {
+          } else if ([2006, 2015].indexOf(status.code) > -1) {
             this.tableData.loading = false;
             this.msg = status.msg;
           } else {

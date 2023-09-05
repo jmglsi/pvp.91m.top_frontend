@@ -85,7 +85,7 @@
       <van-action-sheet
         v-model="showInfo.actionSheet"
         :title="tableDataRow.uid + ' 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -115,7 +115,7 @@ export default {
         uid: null,
       },
       paginationModel: 1,
-      actions: [
+      actionSheetActions: [
         { name: "复制订单", value: 0 },
         { name: "查看相关", value: 1 },
       ],
@@ -204,7 +204,7 @@ export default {
       let orderInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onBilibiliCopy(orderInfo);
+        this.onCopy(orderInfo);
       }
 
       if (item.value == 1) {
@@ -212,7 +212,7 @@ export default {
         this.getOrderInfo(orderInfo.uid, 1);
       }
     },
-    onBilibiliCopy: function (row) {
+    onCopy: function (row) {
       let url = location,
         longUrl = url.origin + url.pathname + "?q=" + row.uid;
 

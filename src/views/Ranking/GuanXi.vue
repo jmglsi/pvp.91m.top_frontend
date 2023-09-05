@@ -237,7 +237,7 @@
           tableDataRow.hero[1].name +
           ' 如何操作'
         "
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -300,7 +300,7 @@ export default {
           },
         ],
       },
-      actions: [
+      actionSheetActions: [
         { name: "复制链接", value: 0 },
         { name: "对局回顾", value: 1 },
       ],
@@ -456,7 +456,7 @@ export default {
       let heroInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onGuanXiCopy();
+        this.onCopy();
       }
 
       if (item.value == 1) {
@@ -474,7 +474,7 @@ export default {
         });
       }
     },
-    onGuanXiCopy: function () {
+    onCopy: function () {
       let row = this.tableDataRow,
         heroName = row.hero[0].name,
         url = location,

@@ -136,7 +136,7 @@
       <van-action-sheet
         v-model="showInfo.equipmentActionSheet"
         :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -195,7 +195,7 @@ export default {
         id: null,
         name: this.$t("loading"),
       },
-      actions: [
+      actionSheetActions: [
         { name: "复制链接", value: 0 },
         { name: "装备详情", value: 1 },
         { name: "更新记录", subname: "NGA @破笼之鸟", value: 2 },
@@ -291,7 +291,7 @@ export default {
       let equipmentInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onZhuangBeiCopy(equipmentInfo);
+        this.onCopy(equipmentInfo);
       }
 
       if (item.value == 1) {
@@ -309,7 +309,7 @@ export default {
         );
       }
     },
-    onZhuangBeiCopy: function (row) {
+    onCopy: function (row) {
       let url = location,
         longUrl =
           url.origin +

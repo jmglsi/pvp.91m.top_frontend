@@ -95,7 +95,7 @@
       <van-action-sheet
         v-model="showInfo.playerActionSheet"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -204,7 +204,7 @@ export default {
       tableDataRow: {
         gamePlayerName: this.$t("loading"),
       },
-      actions: [{ name: "对局回顾", value: 0 }],
+      actionSheetActions: [{ name: "对局回顾", value: 0 }],
       clientHeight: 0,
       listWidth: 0,
       matchInfo: {

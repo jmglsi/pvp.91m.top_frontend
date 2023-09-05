@@ -278,7 +278,7 @@
           label="复制到公众号可以续时"
           value="复制"
           is-link
-          @click="onMyLinkCopy"
+          @click="onCopy"
         />
       </van-cell-group>
     </div>
@@ -818,7 +818,7 @@ export default {
           //on cancel
         });
     },
-    onMyLinkCopy: function () {
+    onCopy: function () {
       let url = location,
         longUrl = url.origin + "/friends?openId=" + this.loginInfo.openId;
 

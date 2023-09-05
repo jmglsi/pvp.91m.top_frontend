@@ -154,7 +154,7 @@
         icon="chat-o"
         type="info"
         size="mini"
-        @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
+        @click="onCopy(friendsInfo.name, friendsInfo.uin)"
       >
         {{ $t("copy") }}
       </van-button>
@@ -222,7 +222,7 @@ export default {
           }
         });
     },
-    onFriendsCopy: function (name, uin) {
+    onCopy: function (name, uin) {
       this.copyData = "用户名:" + name + "\nQQ:" + uin + "\n-\n" + location;
 
       this.$appCopyData(this.copyData);

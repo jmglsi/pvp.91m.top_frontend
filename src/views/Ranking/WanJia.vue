@@ -145,7 +145,7 @@
                     <template #overlay>
                       <a-menu>
                         <a-menu-item
-                          v-for="(data, index) in actions_suit"
+                          v-for="(data, index) in suitActionSheetActions"
                           :key="
                             'ranking-31d3689c01b543a417ec7571237a436d-' + index
                           "
@@ -247,7 +247,7 @@
       <van-action-sheet
         v-model="showInfo.playerActionSheet"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
-        :actions="actions"
+        :actions="playerActionSheetActions"
         :close-on-click-action="true"
         @select="onPlayerMenuActionSheetSelect"
       />
@@ -366,11 +366,11 @@ export default {
       tableDataRow: {
         gamePlayerName: this.$t("loading"),
       },
-      actions: [
+      playeractionSheetActions: [
         { name: "对局回顾", value: 0 },
         { name: "查看主页", subname: "需要安装王者营地", value: 1 },
       ],
-      actions_suit: [],
+      suitActionSheetActions: [],
       clientHeight: 0,
       listWidth: 0,
       showInfo: {
@@ -458,7 +458,7 @@ export default {
 
       this.$message.info(this.$appMsg.info[1029]);
 
-      this.actions_suit = [];
+      this.suitActionSheetActions = [];
 
       this.$axios
         .post(
@@ -484,7 +484,7 @@ export default {
             this.tableData_suit = data;
 
             data.result.rows.map((x, i) => {
-              this.actions_suit.push({
+              this.suitActionSheetActions.push({
                 value: i,
                 name: x.name,
                 subname: "第 " + (i + 1) + " 套备战",

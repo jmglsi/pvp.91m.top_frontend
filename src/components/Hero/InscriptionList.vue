@@ -48,7 +48,7 @@
       <van-action-sheet
         v-model="showInfo.actionSheet"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -101,7 +101,7 @@ export default {
           rows: [],
         },
       },
-      actions: [],
+      actionSheetActions: [],
       showInfo: {
         actionSheet: false,
       },
@@ -183,7 +183,7 @@ export default {
 
       this.$message.info(this.$appMsg.info[1029]);
 
-      this.actions = [];
+      this.actionSheetActions = [];
 
       this.$axios
         .post(
@@ -209,7 +209,7 @@ export default {
             this.suitData = data;
 
             data.result.rows.map((x, i) => {
-              this.actions.push({
+              this.actionSheetActions.push({
                 value: i,
                 name: x.name,
                 subname: "第 " + (i + 1) + " 套备战",
@@ -217,7 +217,7 @@ export default {
               });
             });
 
-            this.actions.push({
+            this.actionSheetActions.push({
               value: 3,
               name: "查看主页",
               subname: "需要安装王者营地",
