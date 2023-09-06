@@ -4,7 +4,7 @@
       <a-radio-group
         :value="viewInfo.model"
         :options="viewInfo.options"
-        @change="onViewChange"
+        @change="onRadioGroupChange"
         default-value="c"
       />
     </div>
@@ -137,7 +137,7 @@ export default {
           }
         });
     },
-    onViewChange(e) {
+    onRadioGroupChange(e) {
       this.viewInfo.model = e.target.value;
 
       this.getHeroChartsLog(6, this.bid, this.viewInfo.model, 0);

@@ -4,7 +4,7 @@
       <van-search
         v-model="search.value"
         :placeholder="tableData.searchPlaceholder"
-        @clear="onClearInputData"
+        @clear="onSearchClear"
         @search="search.value ? getSearch(search.value) : null"
         shape="round"
         class="app-c1130d301aabe8d6a9d46c322fd6150a"
@@ -25,7 +25,7 @@
         :data="tableData.result.rows"
         :height="clientHeight"
         :isLoading="tableData.loading"
-        @cell-click="onCellClick"
+        @cell-click="onTableCellClick"
       >
         <vxe-table-column title="id" field="uid" fixed="left" width="150" />
 
@@ -85,7 +85,7 @@
       <van-action-sheet
         v-model="showInfo.actionSheet"
         :title="tableDataRow.uid + ' 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -95,7 +95,7 @@
 
 <script>
 export default {
-  name: "BilibiliHome",
+  name: "bilibiliIndex",
   data() {
     return {
       copyData: "",
@@ -115,7 +115,7 @@ export default {
         uid: null,
       },
       paginationModel: 1,
-      actions: [
+      actionSheetActions: [
         { name: "复制订单", value: 0 },
         { name: "查看相关", value: 1 },
       ],
@@ -167,12 +167,52 @@ export default {
           }
         });
     },
+    getSearch: function () {
+      clearInterval(this.getRankingInterval);
+
+      this.getRanking(this.search.value, 0);
+    },
     getOrderInfo: function (row) {
       this.tableDataRow = row;
 
       this.showInfo.actionSheet = true;
     },
-    onBilibiliCopy: function (row) {
+    onSearchClear: function () {
+      this.search.value = null;
+      this.tableData = [];
+
+      clearInterval(this.getOrderInfoInterval);
+    },
+    onSwitchChange: function (e) {
+      if (e) {
+        this.getRankingInterval = setInterval(() => {
+          this.getRanking(this.search.value, this.paginationModel);
+        }, 10000);
+
+        this.$message.success(this.$appMsg.success[1000]);
+      } else {
+        clearInterval(this.getOrderInfoInterval);
+      }
+    },
+    onPaginationChange: function (e) {
+      this.getRanking(this.search.value, e - 1);
+    },
+    onTableCellClick: function ({ row }) {
+      this.getOrderInfo(row);
+    },
+    onActionSheetSelect: function (item) {
+      let orderInfo = this.tableDataRow;
+
+      if (item.value == 0) {
+        this.onCopy(orderInfo);
+      }
+
+      if (item.value == 1) {
+        this.search.value = orderInfo.uid;
+        this.getOrderInfo(orderInfo.uid, 1);
+      }
+    },
+    onCopy: function (row) {
       let url = location,
         longUrl = url.origin + url.pathname + "?q=" + row.uid;
 
@@ -212,46 +252,6 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    },
-    onClearInputData: function () {
-      this.search.value = null;
-      this.tableData = [];
-
-      clearInterval(this.getOrderInfoInterval);
-    },
-    getSearch: function () {
-      clearInterval(this.getRankingInterval);
-
-      this.getRanking(this.search.value, 0);
-    },
-    onSwitchChange: function (e) {
-      if (e) {
-        this.getRankingInterval = setInterval(() => {
-          this.getRanking(this.search.value, this.paginationModel);
-        }, 10000);
-
-        this.$message.success(this.$appMsg.success[1000]);
-      } else {
-        clearInterval(this.getOrderInfoInterval);
-      }
-    },
-    onPaginationChange: function (e) {
-      this.getRanking(this.search.value, e - 1);
-    },
-    onCellClick: function ({ row }) {
-      this.getOrderInfo(row);
-    },
-    onActionSheetSelect: function (item) {
-      let orderInfo = this.tableDataRow;
-
-      if (item.value == 0) {
-        this.onBilibiliCopy(orderInfo);
-      }
-
-      if (item.value == 1) {
-        this.search.value = orderInfo.uid;
-        this.getOrderInfo(orderInfo.uid, 1);
-      }
     },
   },
 };

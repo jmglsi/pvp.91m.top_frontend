@@ -1,5 +1,5 @@
 <template>
-  <div class="return-home">
+  <div class="skin-return-Index">
     <div class="return-8c35b9de834af969baf22173b9539eb9">
       <van-nav-bar
         left-arrow
@@ -7,7 +7,11 @@
         :fixed="true"
         :placeholder="type == 1 ? true : false"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         :left-text="$t('nav-bar.left-text')"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
@@ -275,7 +279,7 @@ import "echarts/lib/component/dataZoom";
 import "v-charts/lib/style.css";
 
 export default {
-  name: "RankingFanChang",
+  name: "skinReturnIndex",
   components: {
     VeLine,
     AppHello: () => import("@/components/App/Hello.vue"),
@@ -352,8 +356,8 @@ export default {
         )
         .then((res) => {
           let data = res.data.data,
-            result = data.result,
-            status = res.data.status;
+            status = res.data.status,
+            result = data.result;
 
           if (status.code == 200) {
             this.tableData = data;

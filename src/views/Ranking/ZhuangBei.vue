@@ -6,7 +6,7 @@
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
-        @cell-click="onCellClick"
+        @cell-click="onTableCellClick"
       >
         <vxe-table-column
           title="装备"
@@ -21,7 +21,7 @@
             { value: 5, label: '终极装' },
             { value: 6, label: '专精装' },
           ]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           width="75"
         >
           <template #default="{ row }">
@@ -134,9 +134,9 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.equipmentMenu"
+        v-model="showInfo.equipmentActionSheet"
         :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
       />
@@ -144,12 +144,12 @@
 
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
-        v-model="showInfo.skillMenu"
+        v-model="showInfo.skillActionSheet"
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
       >
         <template #default>
           <HeroEquipmentListOne
-            v-if="showInfo.skillMenu"
+            v-if="showInfo.skillActionSheet"
             :equipmentId="tableDataRow.id"
             :equipmentType="2"
           />
@@ -161,7 +161,7 @@
 
 <script>
 export default {
-  name: "RankingZhuangBei",
+  name: "rankingZhuangBei",
   components: {
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),
@@ -195,7 +195,7 @@ export default {
         id: null,
         name: this.$t("loading"),
       },
-      actions: [
+      actionSheetActions: [
         { name: "复制链接", value: 0 },
         { name: "装备详情", value: 1 },
         { name: "更新记录", subname: "NGA @破笼之鸟", value: 2 },
@@ -204,8 +204,8 @@ export default {
       listWidth: 0,
       filterValue: [],
       showInfo: {
-        skillMenu: false,
-        equipmentMenu: false,
+        skillActionSheet: false,
+        equipmentActionSheet: false,
       },
     };
   },
@@ -225,7 +225,7 @@ export default {
         this.tableDataRow.id = equipmentId;
         this.tableDataRow.name = equipmentName;
 
-        this.showInfo.skillMenu = true;
+        this.showInfo.skillActionSheet = true;
       }
 
       if (this.$appConfigInfo.appInfo.isReadme == 1) {
@@ -277,12 +277,39 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "id") {
         return row.type == option.value;
       }
     },
-    onZhuangBeiCopy: function (row) {
+    onTableCellClick: function ({ row }) {
+      this.tableDataRow = row;
+
+      this.showInfo.equipmentActionSheet = true;
+    },
+    onActionSheetSelect: function (item) {
+      let equipmentInfo = this.tableDataRow;
+
+      if (item.value == 0) {
+        this.onCopy(equipmentInfo);
+      }
+
+      if (item.value == 1) {
+        this.showInfo.skillActionSheet = true;
+      }
+
+      if (item.value == 2) {
+        this.$appOpenUrl(
+          this.$t("open-url.title"),
+          "NGA @破笼之鸟",
+          {
+            path: "//ngabbs.com/read.php?tid=19902976",
+          },
+          0
+        );
+      }
+    },
+    onCopy: function (row) {
       let url = location,
         longUrl =
           url.origin +
@@ -310,33 +337,6 @@ export default {
             this.$message.error(status.msg);
           }
         });
-    },
-    onCellClick: function ({ row }) {
-      this.tableDataRow = row;
-
-      this.showInfo.equipmentMenu = true;
-    },
-    onActionSheetSelect: function (item) {
-      let equipmentInfo = this.tableDataRow;
-
-      if (item.value == 0) {
-        this.onZhuangBeiCopy(equipmentInfo);
-      }
-
-      if (item.value == 1) {
-        this.showInfo.skillMenu = true;
-      }
-
-      if (item.value == 2) {
-        this.$appOpenUrl(
-          this.$t("open-url.title"),
-          "NGA @破笼之鸟",
-          {
-            path: "//ngabbs.com/read.php?tid=19902976",
-          },
-          0
-        );
-      }
     },
   },
 };

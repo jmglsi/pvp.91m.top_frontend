@@ -17,7 +17,7 @@ export default {
   "switch-view": "Switch View",
   "unknown": "Unknown",
   "up": "Increasing",
-  "copy": "Copy",
+  "copy": "copy Information",
   "please-agree-before-operation": "Please Agree Before Proceeding",
   "i-have-read-and-agreed": "I have read and agreed to",
   "privacy-and-data-statement": "Privacy and Data Statement",
@@ -78,7 +78,7 @@ export default {
     "left-text": "Return"
   },
   "setting": {
-    "title": "Settings",
+    "title": "Commonly Used",
     "position": {
       "title": "Swinging Split Lane",
       "label": "Different split lanes for individual heroes"

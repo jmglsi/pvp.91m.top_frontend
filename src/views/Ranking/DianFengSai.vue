@@ -8,13 +8,13 @@
       <vxe-table
         ref="refDianFengSai"
         id="refDianFengSai"
-        :cell-class-name="cellClassName"
+        :cell-class-name="onTableCellClassName"
         :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
-        @cell-click="onCellClick"
-        @custom="toolbarCustomEvent"
+        @cell-click="onTableCellClick"
+        @custom="onTableCustom"
       >
         <vxe-column
           title="英雄"
@@ -133,7 +133,7 @@
             title="禁用"
             field="allBanRate"
             :filters="[{ value: 0 }]"
-            :filter-method="filterMethod"
+            :filter-method="onColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -155,7 +155,7 @@
             title="出场"
             field="allPickRate"
             :filters="[{ value: 0 }]"
-            :filter-method="filterMethod"
+            :filter-method="onColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -226,7 +226,7 @@
             title="禁选"
             field="allBPRate"
             :filters="[{ value: 2.5, checked: true }]"
-            :filter-method="filterMethod"
+            :filter-method="onColumnFilterMethod"
             width="100"
             sortable
           >
@@ -252,7 +252,7 @@
             title="胜率"
             field="allWinRate"
             :filters="[{ value: 0 }]"
-            :filter-method="filterMethod"
+            :filter-method="onColumnFilterMethod"
             :width="listWidth"
             sortable
           >
@@ -416,7 +416,7 @@
 
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
-        v-model="showInfo.skillMenu"
+        v-model="showInfo.skillActionSheet"
         :title="tableDataRow.name + ' 的其他数据 (近期)'"
       >
         <template #default>
@@ -424,7 +424,7 @@
             v-model="skillInfo.model"
             v-if="skillInfo.model > -1"
             :ellipsis="false"
-            @click="onSkillTabsClick"
+            @click="onTabsClick"
           >
             <van-tab title="顺位 (推荐)">
               <HeroBp
@@ -493,13 +493,13 @@
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
-        v-model="showInfo.heroMenu"
+        v-model="showInfo.heroActionSheet"
         :title="tableDataRow.name + ' (' + tableDataRow.id + ') 如何操作'"
-        :actions="actions"
+        :actions="actionSheetActions"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
-        @open="onActionOpen"
-        @close="onActionClose"
+        @open="onActionSheetOpen"
+        @close="onActionSheetClose"
       />
     </div>
   </div>
@@ -507,7 +507,7 @@
 
 <script>
 export default {
-  name: "RankingDianFengSai",
+  name: "rankingDianFengSai",
   components: {
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
@@ -591,7 +591,7 @@ export default {
           rows: [],
         },
       },
-      actions: [
+      actionSheetActions: [
         { name: "趋势", subname: "左下角关注一下", value: 0 },
         { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
         { name: "更新记录", subname: "NGA @EndMP", value: 2 },
@@ -601,8 +601,8 @@ export default {
       clientHeight: 0,
       heroProficiencyWidth: 0,
       showInfo: {
-        skillMenu: false,
-        heroMenu: false,
+        skillActionSheet: false,
+        heroActionSheet: false,
         heroSameHobby: false,
       },
       cellInfo: {
@@ -653,19 +653,6 @@ export default {
       !this.$appIsMobile && visibleColumn.length > 6
         ? (this.listWidth = 0)
         : (this.listWidth = 90);
-    },
-    toolbarCustomEvent: function ({ type }) {
-      switch (type) {
-        case "confirm":
-          //确认
-          break;
-
-        case "reset":
-          //还原
-          break;
-      }
-
-      this.initTableWidth();
     },
     getHeroProficiency: function (id = 111) {
       this.heroProficiency = this.$t("loading");
@@ -762,7 +749,7 @@ export default {
                 this.$message.info(this.$appMsg.info[1030]);
               }
             }
-          } else if (status.code == 2006) {
+          } else if ([2006, 2015].indexOf(status.code) > -1) {
             this.tableData.loading = false;
             this.msg = status.msg;
           } else {
@@ -814,7 +801,20 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    onTableCustom: function ({ type }) {
+      switch (type) {
+        case "confirm":
+          //确认
+          break;
+
+        case "reset":
+          //还原
+          break;
+      }
+
+      this.initTableWidth();
+    },
+    onColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "allBanRate") {
         return row.allBanRate >= option.value;
       }
@@ -831,7 +831,7 @@ export default {
         return row.allWinRate >= option.value;
       }
     },
-    cellClassName: function ({ row, column }) {
+    onTableCellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
       if (column.property == "allBanRate") {
@@ -861,7 +861,7 @@ export default {
         }
       }
     },
-    onCellClick: function ({ row, column }) {
+    onTableCellClick: function ({ row, column }) {
       if (column.property != "allPickRate") {
         this.tableDataRow = row;
       }
@@ -871,27 +871,27 @@ export default {
 
         this.getHeroProficiency(row.id);
 
-        this.showInfo.skillMenu = false;
-        this.showInfo.heroMenu = false;
+        this.showInfo.skillActionSheet = false;
+        this.showInfo.heroActionSheet = false;
         this.showInfo.heroSameHobby = false;
       } else if (column.property == "allScore") {
         this.cellInfo.index = 0;
 
         if (row.id && row.id < 900) {
-          this.showInfo.skillMenu = true;
-          this.showInfo.heroMenu = false;
+          this.showInfo.skillActionSheet = true;
+          this.showInfo.heroActionSheet = false;
         } else {
-          this.showInfo.skillMenu = false;
-          this.showInfo.heroMenu = true;
+          this.showInfo.skillActionSheet = false;
+          this.showInfo.heroActionSheet = true;
         }
       } else {
         this.cellInfo.index = 1;
 
-        this.showInfo.skillMenu = false;
-        this.showInfo.heroMenu = true;
+        this.showInfo.skillActionSheet = false;
+        this.showInfo.heroActionSheet = true;
       }
     },
-    onSkillTabsClick: function (e) {
+    onTabsClick: function (e) {
       let tipsText;
 
       if (e == 0) {
@@ -914,10 +914,10 @@ export default {
         this.$message.info(tipsText);
       }
     },
-    onActionOpen: function () {
+    onActionSheetOpen: function () {
       this.showInfo.heroSameHobby = true;
     },
-    onActionClose: function () {
+    onActionSheetClose: function () {
       this.showInfo.heroSameHobby = false;
     },
     onActionSheetSelect: function (item) {

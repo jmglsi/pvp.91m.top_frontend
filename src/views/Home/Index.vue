@@ -64,7 +64,7 @@
 
 <script>
 export default {
-  name: "AppHome",
+  name: "appIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     //HomeGame: () => import("@/views/Home/Game.vue"),

@@ -10,7 +10,7 @@
           :loosing-text="appHomeInfo.miniappInfo.loosing"
           :loading-text="appHomeInfo.miniappInfo.loading"
           :success-text="appHomeInfo.miniappInfo.success"
-          @refresh="onDropdownRefreshClick"
+          @refresh="onPullRefresh"
           class="recommend-af03857fe372b964b53ef3a082c2b518"
         >
           <van-swipe
@@ -93,7 +93,7 @@
               <van-row>
                 <van-col span="5" class="home-56677dd04cbe46e7b175e734b4ec94ef">
                   <van-sidebar
-                    @change="onHeroChange()"
+                    @change="onSidebarChange"
                     v-model="changeInfo.bid"
                   >
                     <van-sidebar-item :title="$t('hero')" />
@@ -229,7 +229,7 @@
 import ColorThief from "colorthief";
 
 export default {
-  name: "RecommendHome",
+  name: "recommendHome",
   components: {
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
@@ -247,7 +247,6 @@ export default {
       },
       showInfo: {
         skeleton: true,
-        skillMenu: false,
       },
       appHomeInfo: {
         miniappInfo: {
@@ -281,24 +280,41 @@ export default {
   },
   mounted() {
     this.getAppHome();
-    this.initShow();
+    this.initPage();
 
     setTimeout(() => {
       this.initColor();
     }, 500);
   },
   methods: {
-    initShow: function () {
+    initPage: function () {
       let q = this.$appQuery,
         show = q.show || "";
 
       if (show == "heroSkill") {
         this.$refs.refSkillMenu.swipeTo(1);
-
-        this.showInfo.skillMenu = true;
-      } else {
-        this.showInfo.skillMenu = false;
       }
+    },
+    initColor: function () {
+      let colorthief = new ColorThief(),
+        nowColor = "0, 0, 0",
+        o =
+          document.getElementsByClassName(
+            "home-3c873293a7dc1ea8c20579f6a7ae94a9"
+          ) || [];
+
+      Array.from(o, (x, i) => {
+        let nowRow = this.appHomeInfo.swipeInfo.result.rows[i];
+
+        if (nowRow.name) {
+          x.addEventListener("load", () => {
+            nowColor = colorthief.getPalette(x, 3)[0].toString();
+
+            this.appHomeInfo.swipeInfo.result.rows[i].tag.color =
+              "rgb(" + nowColor + ")";
+          });
+        }
+      });
     },
     getAppHome: function () {
       let appConfigInfo = this.$appConfigInfo,
@@ -322,72 +338,6 @@ export default {
           this.$message.error(status.msg);
         }
       });
-    },
-    initColor: function () {
-      let colorthief = new ColorThief(),
-        nowColor = "0, 0, 0",
-        o =
-          document.getElementsByClassName(
-            "home-3c873293a7dc1ea8c20579f6a7ae94a9"
-          ) || [];
-
-      Array.from(o, (x, i) => {
-        let nowRow = this.appHomeInfo.swipeInfo.result.rows[i];
-
-        if (nowRow.name) {
-          x.addEventListener("load", () => {
-            nowColor = colorthief.getPalette(x, 3)[0].toString();
-
-            this.appHomeInfo.swipeInfo.result.rows[i].tag.color =
-              "rgb(" + nowColor + ")";
-          });
-        }
-      });
-    },
-    onSwipeChange: function (e) {
-      let changeInfo = this.changeInfo;
-
-      if (e == 1) {
-        this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
-      }
-    },
-    onUrlClick: function (data) {
-      this.$appOpenUrl(
-        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
-        null,
-        { path: data.url ? data.url : data.to },
-        data.url ? 0 : 1
-      );
-    },
-    getChangeImg: function (bid, id) {
-      let url;
-
-      if (bid == 1) {
-        url = "//image.ttwz.qq.com/images/skill/" + id + ".png";
-      } else if (bid == 2) {
-        url =
-          "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/" +
-          id +
-          ".png";
-      }
-
-      return url;
-    },
-    onHeroChange: function () {
-      let changeInfo = this.changeInfo;
-
-      this.tableData.result.rows = [];
-
-      if (changeInfo.bid == 0) {
-        this.changeInfo.bid = 1;
-
-        this.$appPush({
-          path: "/ranking",
-          query: { type: 0, bid: 3, cid: 0, did: 0, refresh: 1 },
-        });
-      } else {
-        this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
-      }
     },
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
@@ -430,17 +380,62 @@ export default {
           }
         });
     },
+    onSwipeChange: function (e) {
+      let changeInfo = this.changeInfo;
+
+      if (e == 1) {
+        this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
+      }
+    },
+    onSidebarChange: function () {
+      let changeInfo = this.changeInfo;
+
+      this.tableData.result.rows = [];
+
+      if (changeInfo.bid == 0) {
+        this.changeInfo.bid = 1;
+
+        this.$appPush({
+          path: "/ranking",
+          query: { type: 0, bid: 3, cid: 0, did: 0, refresh: 1 },
+        });
+      } else {
+        this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
+      }
+    },
     onComponentShow: function () {
       setTimeout(() => {
         this.showInfo.skeleton = false;
       }, 250);
     },
-    onDropdownRefreshClick: function () {
+    onPullRefresh: function () {
       setTimeout(() => {
         this.isLoading = false;
 
         this.$appPush({ path: this.appHomeInfo.miniappInfo.to });
       }, 2500);
+    },
+    getChangeImg: function (bid, id) {
+      let url;
+
+      if (bid == 1) {
+        url = "//image.ttwz.qq.com/images/skill/" + id + ".png";
+      } else if (bid == 2) {
+        url =
+          "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/" +
+          id +
+          ".png";
+      }
+
+      return url;
+    },
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
   },
 };

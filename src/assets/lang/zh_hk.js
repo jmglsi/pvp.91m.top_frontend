@@ -17,7 +17,7 @@ export default {
   "switch-view": "切換視圖",
   "unknown": "未知",
   "up": "上升",
-  "copy": "複製",
+  "copy": "複製信息",
   "please-agree-before-operation": "請同意後再操作",
   "i-have-read-and-agreed": "我已經閱讀並同意",
   "privacy-and-data-statement": "隱私和數據聲明",
@@ -78,7 +78,7 @@ export default {
     "left-text": "返回"
   },
   "setting": {
-    "title": "設置",
+    "title": "常用",
     "position": {
       "title": "搖擺分路",
       "label": "單個英雄不同分路的情況"

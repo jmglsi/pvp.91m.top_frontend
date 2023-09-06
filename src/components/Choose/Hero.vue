@@ -1,6 +1,6 @@
 <template>
   <div class="choose-a951404cf72bbe54a7fbac9cdf0908af">
-    <div class="choose-f4947bf65fb55ef270296ea141e6a5b4" @click="onActionClick">
+    <div class="choose-f4947bf65fb55ef270296ea141e6a5b4" @click="onActionSheetClick">
       <slot></slot>
     </div>
 
@@ -87,9 +87,6 @@ export default {
 
       this.showInfo.actionSheet = false;
     },
-    onActionClick: function () {
-      this.showInfo.actionSheet = true;
-    },
     getRanking: function (aid = 0, bid = 4, cid = 0, did = 1) {
       let ls = this.$appGetLocalStorage(
         "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
@@ -140,6 +137,9 @@ export default {
             this.$message.error(status.msg);
           }
         });
+    },
+    onActionSheetClick: function () {
+      this.showInfo.actionSheet = true;
     },
   },
 };

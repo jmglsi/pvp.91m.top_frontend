@@ -30,6 +30,8 @@ import {
   Popup,
   Progress,
   PullRefresh,
+  Radio,
+  RadioGroup,
   Row,
   Search,
   ShareSheet,
@@ -81,6 +83,8 @@ Vue
   .use(Popup)
   .use(Progress)
   .use(PullRefresh)
+  .use(Radio)
+  .use(RadioGroup)
   .use(Row)
   .use(Search)
   .use(ShareSheet)

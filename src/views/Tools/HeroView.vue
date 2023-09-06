@@ -103,7 +103,7 @@ import "echarts/lib/component/markLine";
 import "zrender/lib/svg/svg";
 
 export default {
-  name: "ToolsView",
+  name: "toolsHeroView",
   components: {
     VueQr,
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
@@ -224,13 +224,14 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            let heroData = res.data.data,
-              heroInfoData = heroData.heroInfo;
-            this.hero.info = heroInfoData;
+            let data = res.data.data,
+              heroInfo = data.heroInfo;
 
-            heroData.updateTime = ts;
+            this.hero.info = heroInfo;
 
-            this.$appSetLocalStorage("heroInfo-" + id, heroData);
+            data.updateTime = ts;
+
+            this.$appSetLocalStorage("heroInfo-" + id, data);
 
             //this.$message.success(this.$appMsg.success[1005]);
           } else {

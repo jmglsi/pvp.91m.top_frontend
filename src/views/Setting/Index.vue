@@ -7,9 +7,13 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         :left-text="$t('nav-bar.left-text')"
-        title="通用"
+        title="设置"
       />
     </div>
 
@@ -34,7 +38,7 @@
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
                 v-model="$appConfigInfo.appInfo.isSwingMode"
-                @change="onSwingModeChange"
+                @change="onSwingSwitchChange"
               />
             </span>
           </template>
@@ -47,7 +51,7 @@
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
                 v-model="$appConfigInfo.appInfo.isSmallMode"
-                @change="onSmallMobileChange"
+                @change="onSmallSwitchChange"
               />
             </span>
           </template>
@@ -60,7 +64,7 @@
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
                 v-model="$appConfigInfo.appInfo.isReductionMode"
-                @change="onReducedModeChange"
+                @change="onReducedSwitchChange"
               />
             </span>
           </template>
@@ -73,7 +77,7 @@
             <span class="setting-a833c0959e80ada90f239fb707903be2">
               <van-switch
                 v-model="$appConfigInfo.appInfo.openUrl"
-                @change="onOpenUrlChange"
+                @change="onOpenUrlSwitchChange"
               />
             </span>
           </template>
@@ -172,7 +176,7 @@
 
 <script>
 export default {
-  name: "SettingHome",
+  name: "settingIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },
@@ -199,7 +203,7 @@ export default {
     this.appConfigInfo = this.$appConfigInfo;
   },
   methods: {
-    onSwingModeChange: function (e) {
+    onSwingSwitchChange: function (e) {
       let ls = this.$appConfigInfo;
 
       ls.appInfo.isSwingMode = e;
@@ -207,7 +211,7 @@ export default {
 
       this.$message.success(this.$appMsg.success[1000]);
     },
-    onSmallMobileChange: function (e) {
+    onSmallSwitchChange: function (e) {
       let ls = this.$appConfigInfo;
 
       ls.appInfo.isSmallMode = e;
@@ -215,7 +219,7 @@ export default {
 
       this.$message.success(this.$appMsg.success[1000]);
     },
-    onReducedModeChange: function (e) {
+    onReducedSwitchChange: function (e) {
       let ls = this.$appConfigInfo;
 
       if (!e) {
@@ -233,7 +237,7 @@ export default {
 
       this.$message.success(this.$appMsg.success[1000]);
     },
-    onOpenUrlChange: function (e) {
+    onOpenUrlSwitchChange: function (e) {
       let ls = this.$appConfigInfo;
 
       ls.appInfo.openUrl = e;

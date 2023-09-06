@@ -6,7 +6,7 @@
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
-        @cell-click="onCellClick"
+        @cell-click="onTableCellClick"
       >
         <vxe-table-column
           title="玩家"
@@ -17,7 +17,7 @@
             { value: 1, label: '职业' },
             { value: 2, label: '主播' },
           ]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           width="75"
         >
           <template #default="{ row, rowIndex }">
@@ -145,7 +145,7 @@
                     <template #overlay>
                       <a-menu>
                         <a-menu-item
-                          v-for="(data, index) in actions_suit"
+                          v-for="(data, index) in suitActionSheetActions"
                           :key="
                             'ranking-31d3689c01b543a417ec7571237a436d-' + index
                           "
@@ -245,9 +245,9 @@
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
-        v-model="showInfo.playerMenu"
+        v-model="showInfo.playerActionSheet"
         :title="tableDataRow.gamePlayerName + ' 如何操作'"
-        :actions="actions"
+        :actions="playerActionSheetActions"
         :close-on-click-action="true"
         @select="onPlayerMenuActionSheetSelect"
       />
@@ -311,7 +311,7 @@
 import html2canvas from "html2canvas";
 
 export default {
-  name: "RankingWanJia",
+  name: "rankingWanJia",
   props: {
     isSmallMode: {
       type: Boolean,
@@ -366,16 +366,16 @@ export default {
       tableDataRow: {
         gamePlayerName: this.$t("loading"),
       },
-      actions: [
+      playeractionSheetActions: [
         { name: "对局回顾", value: 0 },
         { name: "查看主页", subname: "需要安装王者营地", value: 1 },
       ],
-      actions_suit: [],
+      suitActionSheetActions: [],
       clientHeight: 0,
       listWidth: 0,
       showInfo: {
+        playerActionSheet: false,
         shareImg: false,
-        playerMenu: false,
         heroList: false,
       },
     };
@@ -446,10 +446,101 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    getRankingBySuit: function (
+      roleId = 0,
+      heroId = 111,
+      aid = 10,
+      bid = 1,
+      cid = 0,
+      did = 0
+    ) {
+      if (roleId == 0) return;
+
+      this.$message.info(this.$appMsg.info[1029]);
+
+      this.suitActionSheetActions = [];
+
+      this.$axios
+        .post(
+          this.$appApi.app.getRanking +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did +
+            "&roleId=" +
+            roleId +
+            "&heroId=" +
+            heroId
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData_suit = data;
+
+            data.result.rows.map((x, i) => {
+              this.suitActionSheetActions.push({
+                value: i,
+                name: x.name,
+                subname: "第 " + (i + 1) + " 套备战",
+                url: x.url,
+              });
+            });
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "userId") {
         return row.tag.type == option.value;
       }
+    },
+    onTableCellClick: function ({ row, column }) {
+      if (row.userId == 0) return;
+
+      this.tableDataRow = row;
+
+      if (column.property == "commonlyUsed") {
+        this.showInfo.playerActionSheet = false;
+      } else {
+        this.showInfo.playerActionSheet = true;
+      }
+    },
+    onPlayerMenuActionSheetSelect: function (item) {
+      let playerInfo = this.tableDataRow;
+
+      if (item.value == 0) {
+        this.$appPush({
+          path:
+            "/hero/999/replay?title=" +
+            playerInfo.gamePlayerName +
+            "&userId=" +
+            playerInfo.userId +
+            "&roleId=" +
+            playerInfo.roleId +
+            "&teammate=0",
+        });
+      }
+
+      if (item.value == 1) {
+        this.$appOpenUrl(
+          this.$t("open-url.title"),
+          "需要安装王者营地",
+          {
+            path: playerInfo.profileUrl,
+          },
+          0
+        );
+      }
+    },
+    onHeroListActionSheetSelect: function () {
+      this.showInfo.heroList = true;
     },
     getHeroList: function (e) {
       let newHeroList = {},
@@ -514,106 +605,6 @@ export default {
 
         this.$message.success(this.$appMsg.success[1006]);
       });
-    },
-    getRankingBySuit: function (
-      roleId = 0,
-      heroId = 111,
-      aid = 10,
-      bid = 1,
-      cid = 0,
-      did = 0
-    ) {
-      if (roleId == 0) return;
-
-      this.$message.info(this.$appMsg.info[1029]);
-
-      this.actions_suit = [];
-
-      this.$axios
-        .post(
-          this.$appApi.app.getRanking +
-            "&aid=" +
-            aid +
-            "&bid=" +
-            bid +
-            "&cid=" +
-            cid +
-            "&did=" +
-            did +
-            "&roleId=" +
-            roleId +
-            "&heroId=" +
-            heroId
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.tableData_suit = data;
-
-            data.result.rows.map((x, i) => {
-              this.actions_suit.push({
-                value: i,
-                name: x.name,
-                subname: "第 " + (i + 1) + " 套备战",
-                url: x.url,
-              });
-            });
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-    },
-    downloadImg: function (url) {
-      let s = document.createElement("a");
-      s.style.display = "none";
-      s.href = url;
-      s.download = "top100.png";
-      document.body.appendChild(s);
-      s.click();
-      document.body.removeChild(s);
-    },
-    onCellClick: function ({ row, column }) {
-      if (row.userId == 0) return;
-
-      this.tableDataRow = row;
-
-      if (column.property == "commonlyUsed") {
-        this.showInfo.playerMenu = false;
-      } else {
-        this.showInfo.playerMenu = true;
-      }
-    },
-    onPlayerMenuActionSheetSelect: function (item) {
-      let playerInfo = this.tableDataRow;
-
-      if (item.value == 0) {
-        this.$appPush({
-          path:
-            "/hero/999/replay?title=" +
-            playerInfo.gamePlayerName +
-            "&userId=" +
-            playerInfo.userId +
-            "&roleId=" +
-            playerInfo.roleId +
-            "&teammate=0",
-        });
-      }
-
-      if (item.value == 1) {
-        this.$appOpenUrl(
-          this.$t("open-url.title"),
-          "需要安装王者营地",
-          {
-            path: playerInfo.profileUrl,
-          },
-          0
-        );
-      }
-    },
-    onHeroListActionSheetSelect: function () {
-      this.showInfo.heroList = true;
     },
   },
 };

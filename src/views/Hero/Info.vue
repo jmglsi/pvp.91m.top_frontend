@@ -11,7 +11,11 @@
             ? { backgroundColor: 'white !important' }
             : { backgroundColor: 'transparent !important' }
         "
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         @click-right="$message.info($appMsg.info[1004])"
         :left-text="scroll >= 50 ? '搜一搜' : null"
         z-index="99999999"
@@ -164,7 +168,7 @@
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="showInfo.heroMenu = true"
+          @click="showInfo.heroActionSheet = true"
         >
           <van-circle
             v-model="circle.model"
@@ -179,7 +183,7 @@
         </van-grid-item>
         <van-grid-item
           class="hero-c6e864acb6955eed0361921288d34149"
-          @click="showInfo.skillMenu = true"
+          @click="showInfo.skillActionSheet = true"
         >
           <div class="hero-f3412345b511c61986bba9a39793157f">
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
@@ -304,7 +308,7 @@
 
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
-        v-model="showInfo.skillMenu"
+        v-model="showInfo.skillActionSheet"
         :title="hero.info.name + ' 的其他数据 (近期)'"
       >
         <template #default>
@@ -348,7 +352,7 @@
 
     <div class="hero-16e1b9e46fe4483c6bc17aea9d20736a">
       <van-action-sheet
-        v-model="showInfo.heroMenu"
+        v-model="showInfo.heroActionSheet"
         :title="hero.info.name + ' 的 ' + circle.info.text"
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
@@ -439,7 +443,7 @@
 
 <script>
 export default {
-  name: "HeroInfo",
+  name: "heroInfo",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChartsHeroRadar: () => import("@/components/Charts/HeroRadar.vue"),
@@ -461,8 +465,8 @@ export default {
       let id = to.params.id;
 
       if (id) {
-        this.getHeroInfo(id);
         this.initShow();
+        this.getHeroInfo(id);
       }
     },
   },
@@ -533,13 +537,13 @@ export default {
         },
       },
       showInfo: {
+        imageIndex: 0,
+        imagePreview: false,
+        skillActionSheet: false,
+        heroActionSheet: false,
+        skeleton: true,
         heroImg: true,
         parameter: true,
-        skillMenu: false,
-        heroMenu: false,
-        imagePreview: false,
-        imageIndex: 0,
-        skeleton: true,
       },
       tabsInfo: {
         model: 0,
@@ -566,6 +570,12 @@ export default {
     this.initPage();
   },
   methods: {
+    initPage: function () {
+      let p = this.$route.params;
+
+      this.initShow();
+      this.getHeroInfo(p.id);
+    },
     initShow: function () {
       let r = this.$route,
         //hash = r.hash || "",
@@ -577,19 +587,13 @@ export default {
 
       setTimeout(() => {
         if (show == "heroSkill") {
-          this.showInfo.skillMenu = true;
+          this.showInfo.skillActionSheet = true;
         } else {
-          this.showInfo.skillMenu = false;
+          this.showInfo.skillActionSheet = false;
         }
       }, 500);
 
       window.addEventListener("scroll", this.listenerScrollTop);
-    },
-    initPage: function () {
-      let p = this.$route.params;
-
-      this.getHeroInfo(p.id);
-      this.initShow();
     },
     listenerScrollTop: function () {
       this.scroll =
@@ -623,22 +627,22 @@ export default {
           let status = res.data.status;
 
           if (status.code == 200) {
-            let heroData = res.data.data,
-              heroInfoData = heroData.heroInfo;
-            this.circle.info = heroData.circleInfo;
-            this.hero.info = heroInfoData;
+            let data = res.data.data,
+              heroInfo = data.heroInfo;
 
-            heroData.updateTime = ts;
+            this.circle.info = data.circleInfo;
+            this.hero.info = heroInfo;
 
-            this.$appSetLocalStorage("heroInfo-" + id, heroData);
+            data.updateTime = ts;
 
-            heroInfoData.id && heroInfoData.id < 900
+            this.$appSetLocalStorage("heroInfo-" + id, data);
+
+            heroInfo.id && heroInfo.id < 900
               ? (this.trendInfo.model = 0)
               : (this.trendInfo.model = 2);
 
-            this.hero.title = heroInfoData.name;
-            document.title =
-              heroInfoData.name + " | " + appConfigInfo.appInfo.name;
+            this.hero.title = heroInfo.name;
+            document.title = heroInfo.name + " | " + appConfigInfo.appInfo.name;
 
             //this.$message.success(this.$appMsg.success[1005]);
           } else {
@@ -655,27 +659,6 @@ export default {
       setTimeout(() => {
         this.showInfo.skeleton = false;
       }, 250);
-    },
-    onHeroVoteClick: function (voteType) {
-      this.$axios
-        .post(
-          this.$appApi.app.addHeroVote +
-            "&heroId=" +
-            this.hero.info.id +
-            "&voteType=" +
-            voteType
-        )
-        .then((res) => {
-          let status = res.data.status;
-
-          if (status.code == 200) {
-            this.$message.success(this.$appMsg.success[1000]);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-
-      this.showInfo.heroMenu = false;
     },
     onSkillTabsClick: function (e) {
       let tipsText;
@@ -699,6 +682,50 @@ export default {
 
         this.$message.info(tipsText);
       }
+    },
+    onHeroTabsClick: function (e) {
+      let appConfigInfo = this.$appConfigInfo,
+        heroInfo = this.hero.info,
+        dTitle;
+
+      if (e == 0) {
+        dTitle = heroInfo.name;
+
+        this.hero.title = dTitle;
+      } else if (e == 1) {
+        dTitle = "同分路对比";
+        this.hero.title = null;
+      } else if (e == 2) {
+        dTitle = "自定义对比";
+        this.hero.title = null;
+      }
+
+      document.title = dTitle + " | " + appConfigInfo.appInfo.name;
+
+      e == 0
+        ? (this.showInfo.parameter = true)
+        : (this.showInfo.parameter = false);
+    },
+    onHeroVoteClick: function (voteType) {
+      this.$axios
+        .post(
+          this.$appApi.app.addHeroVote +
+            "&heroId=" +
+            this.hero.info.id +
+            "&voteType=" +
+            voteType
+        )
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+
+      this.showInfo.heroActionSheet = false;
     },
     onHeroLikeClick: function () {
       this.$axios
@@ -730,29 +757,6 @@ export default {
     onImagePreviewClick: function (imageIndex) {
       this.showInfo.imagePreview = true;
       this.showInfo.imageIndex = imageIndex;
-    },
-    onHeroTabsClick: function (e) {
-      let appConfigInfo = this.$appConfigInfo,
-        heroInfo = this.hero.info,
-        dTitle;
-
-      if (e == 0) {
-        dTitle = heroInfo.name;
-
-        this.hero.title = dTitle;
-      } else if (e == 1) {
-        dTitle = "同分路对比";
-        this.hero.title = null;
-      } else if (e == 2) {
-        dTitle = "自定义对比";
-        this.hero.title = null;
-      }
-
-      document.title = dTitle + " | " + appConfigInfo.appInfo.name;
-
-      e == 0
-        ? (this.showInfo.parameter = true)
-        : (this.showInfo.parameter = false);
     },
   },
 };

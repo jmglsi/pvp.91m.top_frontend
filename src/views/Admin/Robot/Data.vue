@@ -146,7 +146,7 @@
 
 <script>
 export default {
-  name: "AdminRobotData",
+  name: "adminRobotData",
 };
 </script>
 

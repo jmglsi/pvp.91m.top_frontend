@@ -216,7 +216,7 @@
 
 <script>
 export default {
-  name: "ToolsWeekly",
+  name: "toolsWeekly",
   data() {
     return {
       articleId: parseInt(this.$route.query.articleId) || 0,
