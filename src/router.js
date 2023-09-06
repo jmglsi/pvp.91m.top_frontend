@@ -28,6 +28,22 @@ export default new Router({
       path: '/skin/encore',
       redirect: '/skin/return'
     }, {
+      path: '/skin',
+      name: 'skinReturnIndex',
+      redirect: '/ranking',
+      component: () =>
+        import('./components/Ranking/SkinReturn.vue'),
+      children: [
+        {
+          path: 'return',
+          name: 'skinReturn',
+          meta: {
+            title: '趋势',
+            keepAlive: true
+          }
+        }
+      ]
+    }, {
       path: '/',
       name: 'appIndex',
       component: () =>
@@ -99,22 +115,6 @@ export default new Router({
         title: '设置',
         keepAlive: true
       }
-    }, {
-      path: '/skin',
-      name: 'skinReturnIndex',
-      redirect: '/ranking',
-      component: () =>
-        import('./views/Ranking/SkinReturn.vue'),
-      children: [
-        {
-          path: 'return',
-          name: 'skinReturn',
-          meta: {
-            title: '趋势',
-            keepAlive: true
-          }
-        }
-      ]
     }, {
       path: '/hero',
       name: 'heroIndex',

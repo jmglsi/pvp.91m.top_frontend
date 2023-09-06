@@ -7,12 +7,8 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
         z-index="99999999"
         title="未命名的方案"
       >

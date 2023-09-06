@@ -132,7 +132,7 @@
           icon="/img/icons-app/game.png"
           title="全局BP模拟器"
           label="第一次使用务必看一下"
-          value="自豪的使用语雀"
+          value="视频教程"
           is-link
           @click="
             $appOpenUrl($t('open-url.title'), null, { path: url.question }, 0)
@@ -275,11 +275,14 @@
         <van-cell
           icon="manager"
           title="扩列链接"
-          label="复制到公众号可以续时"
           value="复制"
           is-link
           @click="onCopy"
-        />
+        >
+          <template #label>
+            <span style="color: red">复制到公众号可以续时</span>
+          </template>
+        </van-cell>
       </van-cell-group>
     </div>
 

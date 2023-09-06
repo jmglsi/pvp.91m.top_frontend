@@ -24,11 +24,7 @@
                   ? { color: '#fff !important' }
                   : {}
               "
-              @click="
-                $appPush({
-                  path: $store.getters.getHistory.fullPath,
-                })
-              "
+              @click-left="$appBack()"
               class="search-e979efff8a859d0adcb2d63d51cd9de4"
             >
               {{ $t("nav-bar.left-text") }}
@@ -1063,7 +1059,7 @@
             @click="onSkillTabsClick"
           >
             <van-tab title="顺位 (推荐)">
-              <HeroBp
+              <HeroBPIndex
                 v-if="skillInfo.model == 0"
                 :heroId="tableData.cardInfo.id"
               />
@@ -1137,7 +1133,7 @@ export default {
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
-    HeroBp: () => import("@/components/Hero/Bp.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

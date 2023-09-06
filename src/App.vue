@@ -582,7 +582,7 @@ div.app-recommend {
   }
 }
 
-div.app-bp {
+div.app-bpIndex {
   height: 443px;
 }
 
@@ -804,7 +804,7 @@ div.app-gx,
 div.app-wj,
 div.app-pz,
 div.app-zb,
-div.app-bp,
+div.app-bpIndex,
 div.app-genre,
 div.app-position,
 div.app-equipmentListAll,

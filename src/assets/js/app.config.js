@@ -216,14 +216,14 @@ if (!ls) {
 }
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
-Vue.prototype.$appPush = function (data = { path: '/' }) {
-  let replace = data.replace || false;
+Vue.prototype.$appBack = function () {
+  this.$router.push({
+    path: this.$store.getters.getHistory.fullPath,
+  });
+}
 
-  if (replace && !replace) {
-    this.$router.push(data);
-  } else {
-    this.$router.replace(data);
-  }
+Vue.prototype.$appPush = function (data = { path: '/' }) {
+  this.$router.push(data);
 }
 
 Vue.prototype.$appFloatToTime = function (float) {

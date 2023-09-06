@@ -427,7 +427,7 @@
             @click="onTabsClick"
           >
             <van-tab title="顺位 (推荐)">
-              <HeroBp
+              <HeroBPIndex
                 v-if="cellInfo.index == 0 && skillInfo.model == 0"
                 :heroId="tableDataRow.id"
               />
@@ -511,7 +511,7 @@ export default {
   components: {
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
-    HeroBp: () => import("@/components/Hero/Bp.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

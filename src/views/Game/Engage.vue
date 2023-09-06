@@ -7,13 +7,9 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
-        @click-right="onNavBarRightClick"
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
+        @click-right="onNavBarRightClick"
         title="交战"
         class="game-7140a921b48604a7db01e6b676e34174"
       >
