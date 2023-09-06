@@ -313,6 +313,8 @@ export default {
             this.appHomeInfo.swipeInfo.result.rows[i].tag.color =
               "rgb(" + nowColor + ")";
           });
+
+          return x;
         }
       });
     },

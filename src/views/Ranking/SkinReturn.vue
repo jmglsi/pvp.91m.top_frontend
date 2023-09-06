@@ -338,7 +338,10 @@ export default {
 
       Array.from(e.series, (x) => {
         x.symbol = "none";
+
+        return x;
       });
+
       return e;
     },
     getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {

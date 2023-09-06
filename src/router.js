@@ -171,7 +171,7 @@ export default new Router({
           path: 'weekly',
           name: 'toolsWeekly',
           component: () =>
-            import('./views/Tools/weekly.vue'),
+            import('./views/Tools/Weekly.vue'),
           meta: {
             title: '周报',
             keepAlive: false
