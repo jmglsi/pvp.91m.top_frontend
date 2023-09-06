@@ -4,7 +4,7 @@
       ref="refHeroEquipmentListOne"
       :data="tableData.result.rows"
       :loading="tableData.loading"
-      @cell-click="onCellClick"
+      @cell-click="onTableCellClick"
       height="443"
     >
       <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
@@ -71,7 +71,7 @@
           title="出场"
           field="allPickRate"
           :filters="[{ value: 1, checked: true }]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
           sortable
         >
@@ -127,7 +127,7 @@
           title="胜率"
           field="allWinRate"
           :filters="[{ value: 0 }]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
           sortable
         >
@@ -156,7 +156,7 @@
           title="占比"
           :field="'pickRate_' + index"
           :filters="[{ value: 0 }]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
           sortable
         >
@@ -179,7 +179,7 @@
           title="胜率"
           :field="'winRate_' + index"
           :filters="[{ value: 0 }]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
           sortable
         >
@@ -201,7 +201,7 @@
     </vxe-table>
 
     <van-action-sheet
-      v-model="showInfo.equipmentMenu"
+      v-model="showInfo.actionSheet"
       title=" "
       :style="{ maxHeight: '450px' }"
     >
@@ -319,7 +319,7 @@ export default {
         type: 1,
       },
       showInfo: {
-        equipmentMenu: false,
+        actionSheet: false,
       },
     };
   },
@@ -379,7 +379,7 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "allPickRate") {
         return row.allPickRate >= option.value;
       }
@@ -436,7 +436,7 @@ export default {
         return row.winRate_5 >= option.value;
       }
     },
-    onCellClick: function ({ row, column }) {
+    onTableCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
         this.equipmentInfo.type = 1;
         return this.getRanking(6, this.equipmentInfo.type, 0, 0, row.heroId);
@@ -492,7 +492,7 @@ export default {
         ],
       };
 
-      this.showInfo.equipmentMenu = true;
+      this.showInfo.actionSheet = true;
     },
   },
 };

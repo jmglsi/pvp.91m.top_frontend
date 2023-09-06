@@ -7,7 +7,11 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         :left-text="$t('nav-bar.left-text')"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
@@ -123,7 +127,7 @@
               <template #overlay>
                 <a-menu>
                   <a-menu-item
-                    v-for="(data, index) in actions_suit"
+                    v-for="(data, index) in suitActionSheetActions"
                     :key="'ranking-31d3689c01b543a417ec7571237a436d-' + index"
                     @click="
                       $appOpenUrl(
@@ -172,9 +176,9 @@
 
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
-        v-model="showInfo.replayMenu"
+        v-model="showInfo.actionSheet"
         :title="(tableDataRow.gamePlayerName || replay.title) + ' 如何操作'"
-        :actions="!replay.gameOpenId ? actions : []"
+        :actions="!replay.gameOpenId ? replayActionSheetActions : []"
         :close-on-click-action="true"
         @select="onActionSheetSelect"
         class="hero-4bc6fcee674cad1c5910499a6ad199b8"
@@ -197,7 +201,7 @@
 
 <script>
 export default {
-  name: "HeroReplay",
+  name: "heroReplay",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },
@@ -214,13 +218,13 @@ export default {
       tableDataRow: {
         gamePlayerName: this.$t("loading"),
       },
-      actions: [
+      replayActionSheetActions: [
         { name: "复制链接", value: 0 },
         { name: "回顾", value: 1 },
         { name: "详情", subname: "需要安装王者营地", value: 2 },
         //{ name: "铭文", subname: "需要安装王者营地", value: 3 },
       ],
-      actions_suit: [],
+      suitActionSheetActions: [],
       replay: {
         id: this.$route.params.id || 111,
         title: this.$route.query.title || this.$t("loading"),
@@ -236,7 +240,7 @@ export default {
         model: 1,
       },
       showInfo: {
-        replayMenu: false,
+        actionSheet: false,
       },
     };
   },
@@ -256,7 +260,7 @@ export default {
 
       this.$message.info(this.$appMsg.info[1029]);
 
-      this.actions_suit = [];
+      this.suitActionSheetActions = [];
 
       this.$axios
         .post(
@@ -282,7 +286,7 @@ export default {
             this.tableData_suit = data;
 
             data.result.rows.map((x, i) => {
-              this.actions_suit.push({
+              this.suitActionSheetActions.push({
                 value: i,
                 name: x.name,
                 subname: "第 " + (i + 1) + " 套备战",
@@ -297,27 +301,7 @@ export default {
     getGameInfo: function (row) {
       this.tableDataRow = row;
 
-      this.showInfo.replayMenu = true;
-    },
-    onReplayCopy: function (row) {
-      this.$axios
-        .post(this.$appApi.app.getShortUrl, {
-          url: row.replayUrl,
-        })
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            let shortUrl = data.url;
-
-            this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
-
-            this.$appCopyData(this.copyData);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
+      this.showInfo.actionSheet = true;
     },
     getHeroReplayByHeroId: function (page) {
       let replayInfo = this.replay;
@@ -354,7 +338,7 @@ export default {
       let replayInfo = this.tableDataRow;
 
       if (item.value == 0) {
-        this.onReplayCopy(replayInfo);
+        this.onCopy(replayInfo);
       }
 
       if (item.value == 1) {
@@ -391,6 +375,26 @@ export default {
           );
         }
       }
+    },
+    onCopy: function (row) {
+      this.$axios
+        .post(this.$appApi.app.getShortUrl, {
+          url: row.replayUrl,
+        })
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            let shortUrl = data.url;
+
+            this.copyData = this.replay.title + " 的对局回顾 ↓\n-\n" + shortUrl;
+
+            this.$appCopyData(this.copyData);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
   },
 };

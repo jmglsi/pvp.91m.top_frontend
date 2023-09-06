@@ -6,7 +6,7 @@
         v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
-        @click="onRankingTabsClick"
+        @click="onTabsClick"
         duration="0.5"
         line-width="25px"
       >
@@ -87,7 +87,7 @@
                   <div class="ranking-e1c6b759e0537c91d5c6dbb2d4738173">
                     <a-radio-group
                       :value="viewInfo.model"
-                      @change="onRadioChange"
+                      @change="onRadioGroupChange"
                       default-value="a"
                       button-style="solid"
                     >
@@ -204,20 +204,20 @@
     <AppHello v-if="viewInfo.model != 'b'" height="100px" />
 
     <van-popup
-      v-model="showInfo.rankingSearch"
-      v-if="showInfo.rankingSearch"
+      v-model="showInfo.popup"
+      v-if="showInfo.popup"
       class="app-69df17da0044a6e876b2afd3217d2564 ranking-31c631534a3cec9ed2c5283f653a06aa"
     >
       <a-input-search
         :defaultValue="searchInfo.defaultValue"
-        @search="onRankingSearch"
+        @search="onInputSearch"
         enter-button
         placeholder="试一试搜索阿离"
       />
     </van-popup>
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
-      <van-action-sheet v-model="showInfo.rankingFilterMenu" title="如何操作">
+      <van-action-sheet v-model="showInfo.actionSheet" title="如何操作">
         <template #default>
           <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
             <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">
@@ -297,7 +297,7 @@ import "v-charts/lib/style.css";
 import "zrender/lib/svg/svg";
 
 export default {
-  name: "RankingHome",
+  name: "rankingIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChartsMigrationLine: () => import("@/components/Charts/MigrationLine.vue"),
@@ -315,12 +315,9 @@ export default {
     $route: function (to) {
       let q = to.query;
 
-      this.heroName = q.heroName || "";
-      this.bid = parseInt(q.bid) || 0;
-      this.cid = parseInt(q.cid) || 0;
-      this.did = parseInt(q.did) || 0;
-      this.viewInfo.model = q.eid || "a";
-      this.refresh = parseInt(q.refresh) || 0;
+      if (q) {
+        this.initShow(q);
+      }
     },
   },
   data() {
@@ -342,11 +339,11 @@ export default {
         model: 0,
       },
       showInfo: {
+        actionSheet: false,
+        popup: false,
         dfsTips: true,
         skillTips: true,
         wanjiaTips: true,
-        rankingSearch: false,
-        rankingFilterMenu: false,
       },
       dfsAreaTypeInfo: {
         model: 0,
@@ -480,7 +477,15 @@ export default {
           });
       }
     },
-    onRankingTabsClick: function (e) {
+    initShow: function (q) {
+      this.heroName = q.heroName || "";
+      this.bid = parseInt(q.bid) || 0;
+      this.cid = parseInt(q.cid) || 0;
+      this.did = parseInt(q.did) || 0;
+      this.viewInfo.model = q.eid || "a";
+      this.refresh = parseInt(q.refresh) || 0;
+    },
+    onTabsClick: function (e) {
       if (e == 0) {
         /**
          *
@@ -501,11 +506,11 @@ export default {
         this.dfsAreaTypeInfo.model = this.bid;
         this.dfsPositionTypeInfo.model = this.cid;
 
-        this.showInfo.rankingFilterMenu = true;
+        this.showInfo.actionSheet = true;
       }
 
       if (e == 1) {
-        this.showInfo.rankingSearch = true;
+        this.showInfo.popup = true;
       }
 
       if (e == 2) {
@@ -521,7 +526,7 @@ export default {
 
         this.wjAreaTypeInfo.model = this.bid;
 
-        this.showInfo.rankingFilterMenu = true;
+        this.showInfo.actionSheet = true;
       }
 
       if (e == 3) {
@@ -559,7 +564,7 @@ export default {
         this.pzProvinceTypeInfo.model = this.cid;
         this.pzFightPowerTypeInfo.model = this.did;
 
-        this.showInfo.rankingFilterMenu = true;
+        this.showInfo.actionSheet = true;
       }
 
       if (e == 5) {
@@ -573,10 +578,10 @@ export default {
         this.nzOrderInfo.model = this.bid;
         this.nzStatusInfo.model = this.cid;
 
-        this.showInfo.rankingFilterMenu = true;
+        this.showInfo.actionSheet = true;
       }
     },
-    onRadioChange: function (e) {
+    onRadioGroupChange: function (e) {
       let tabsInfo = this.tabsInfo;
 
       this.viewInfo.model = e.target.value;
@@ -591,6 +596,19 @@ export default {
           refresh: 1,
         },
       });
+    },
+    onInputSearch: function (value) {
+      this.$appPush({
+        query: {
+          type: 1,
+          heroName: value,
+          refresh: 1,
+        },
+      });
+
+      this.searchInfo.defaultValue = value;
+
+      this.showInfo.popup = false;
     },
     onDropdownMenuChange: function () {
       let tabsInfo = this.tabsInfo,
@@ -635,21 +653,8 @@ export default {
       });
 
       if (tabsInfo.model != 4) {
-        this.showInfo.rankingFilterMenu = false;
+        this.showInfo.actionSheet = false;
       }
-    },
-    onRankingSearch: function (value) {
-      this.$appPush({
-        query: {
-          type: 1,
-          heroName: value,
-          refresh: 1,
-        },
-      });
-
-      this.searchInfo.defaultValue = value;
-
-      this.showInfo.rankingSearch = false;
     },
   },
 };

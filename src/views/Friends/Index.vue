@@ -7,7 +7,11 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         :left-text="$t('nav-bar.left-text')"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
@@ -154,7 +158,7 @@
         icon="chat-o"
         type="info"
         size="mini"
-        @click="onFriendsCopy(friendsInfo.name, friendsInfo.uin)"
+        @click="onCopy(friendsInfo.name, friendsInfo.uin)"
       >
         {{ $t("copy") }}
       </van-button>
@@ -164,7 +168,7 @@
 
 <script>
 export default {
-  name: "FriendsHome",
+  name: "friendsIndex",
   data() {
     return {
       copyData: "",
@@ -222,7 +226,7 @@ export default {
           }
         });
     },
-    onFriendsCopy: function (name, uin) {
+    onCopy: function (name, uin) {
       this.copyData = "用户名:" + name + "\nQQ:" + uin + "\n-\n" + location;
 
       this.$appCopyData(this.copyData);

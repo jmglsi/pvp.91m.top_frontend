@@ -8,8 +8,8 @@
           v-model="search.value"
           show-action
           :placeholder="search.placeholder"
-          @input="onClearInputData"
-          @clear="onClearInputData"
+          @input="onSearch"
+          @clear="onSearch"
           @search="
             search.value
               ? getSearch(search.value)
@@ -24,7 +24,11 @@
                   ? { color: '#fff !important' }
                   : {}
               "
-              @click="$appPush({ path: '/', query: { refresh: 1 } })"
+              @click="
+                $appPush({
+                  path: $store.getters.getHistory.fullPath,
+                })
+              "
               class="search-e979efff8a859d0adcb2d63d51cd9de4"
             >
               {{ $t("nav-bar.left-text") }}
@@ -327,7 +331,7 @@
             v-model="dataInfo.model"
             v-if="dataInfo.model > -1"
             :ellipsis="false"
-            :before-change="onDataTabsBeforeChange"
+            :before-change="onTabsBeforeChange"
             @click="onDataTabsClick"
             class="search-172457bddedfc8312574a6e2695e1a6d"
           >
@@ -1048,7 +1052,7 @@
 
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
-        v-model="showInfo.skillMenu"
+        v-model="showInfo.skillActionSheet"
         :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
       >
         <template #default>
@@ -1108,14 +1112,14 @@
 
     <div class="search-914f478e623fb19a2937274e72d82551">
       <van-action-sheet
-        v-model="showInfo.fightPowerMenu"
+        v-model="showInfo.fightPowerActionSheet"
         :title="
           tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ') 如何操作'
         "
       >
         <template #default>
           <HeroFightPower
-            v-if="showInfo.fightPowerMenu"
+            v-if="showInfo.fightPowerActionSheet"
             :heroId="tableData.cardInfo.id"
             :fightPowerType="2"
           />
@@ -1129,7 +1133,7 @@
 
 <script>
 export default {
-  name: "SearchHome",
+  name: "searchIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
@@ -1151,12 +1155,12 @@ export default {
 
       if (q.q) {
         if (parseInt(q.refresh) == 1) {
-          this.showInfo.fightPowerMenu = false;
+          this.showInfo.fightPowerActionSheet = false;
 
           this.getSearch(q.q, show);
         }
       } else {
-        this.initSearchHistory();
+        this.initShow();
       }
     },
   },
@@ -1243,12 +1247,12 @@ export default {
         model: 0,
       },
       showInfo: {
-        heroData: 0,
+        skillActionSheet: false,
+        fightPowerActionSheet: false,
         heroFeature: false,
         searchData: false,
         searchHistory: false,
-        skillMenu: false,
-        fightPowerMenu: false,
+        heroData: 0,
       },
       skillInfo: {
         model: 1,
@@ -1257,10 +1261,10 @@ export default {
     };
   },
   mounted() {
-    this.initShow();
+    this.initPage();
   },
   methods: {
-    initShow: function () {
+    initPage: function () {
       let q = this.$route.query,
         show = q.show || "";
 
@@ -1272,17 +1276,18 @@ export default {
 
       this.getSearch(searchValue, show);
     },
-    getHeroId: function (e) {
-      let searchData = e.name;
-
-      this.search.value = searchData;
+    initShow: function () {
+      let searchData = localStorage.getItem("searchData");
 
       if (searchData) {
-        this.showInfo.searchData = true;
+        this.tableData.search.history = searchData.split(",").reverse();
+
+        this.showInfo.searchHistory = true;
+      } else {
+        this.tableData.search.history = [];
+
         this.showInfo.searchHistory = false;
       }
-
-      this.getSearch(searchData);
     },
     getSearch: function (value, show = null) {
       this.search.value = value;
@@ -1313,7 +1318,7 @@ export default {
             this.$message.error(status.msg);
           }
 
-          this.initSearchHistory();
+          this.initShow();
 
           setInterval(() => {
             let text = this.tableData.search.placeholder;
@@ -1324,72 +1329,40 @@ export default {
 
           setTimeout(() => {
             if (show == "heroSkill") {
-              this.showInfo.skillMenu = true;
+              this.showInfo.skillActionSheet = true;
             } else {
-              this.showInfo.skillMenu = false;
+              this.showInfo.skillActionSheet = false;
             }
           }, 500);
         });
     },
-    initSearchHistory: function () {
-      let searchData = localStorage.getItem("searchData");
+    getHeroId: function (e) {
+      let searchData = e.name;
+
+      this.search.value = searchData;
 
       if (searchData) {
-        this.tableData.search.history = searchData.split(",").reverse();
-
-        this.showInfo.searchHistory = true;
-      } else {
-        this.tableData.search.history = [];
-
+        this.showInfo.searchData = true;
         this.showInfo.searchHistory = false;
       }
+
+      this.getSearch(searchData);
     },
-    addSearchData: function (value) {
-      let searchData = localStorage.getItem("searchData"),
-        setValue = searchData;
-
-      if (!searchData) {
-        setValue = value;
-      } else if (searchData.indexOf(value) == -1) {
-        setValue = searchData + "," + value;
-      }
-
-      localStorage.setItem("searchData", setValue);
-    },
-    onClearSearchData: function () {
-      this.$appDelectLocalStorage("searchData");
-
-      this.search.data = null;
-      this.tableData.search.history = [];
-
-      this.showInfo.searchData = false;
-      this.showInfo.searchHistory = false;
-
-      this.$message.success(this.$appMsg.success[1000]);
-    },
-    onClearInputData: function () {
+    onSearch: function () {
       if (this.search.value.length > 0) return;
 
       this.tableData.cardInfo.id = 0;
       this.tableData.cardInfo.isNew = false;
 
-      this.initSearchHistory();
+      this.initShow();
 
       this.showInfo.searchData = false;
-    },
-    onUrlClick: function (data) {
-      this.$appOpenUrl(
-        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
-        null,
-        { path: data.url ? data.url : data.to },
-        data.url ? 0 : 1
-      );
     },
     onDataTabsClick: function (e) {
       //let cardInfo = this.tableData.cardInfo;
 
       if (e == 1) {
-        this.showInfo.skillMenu = true;
+        this.showInfo.skillActionSheet = true;
       }
       /*
         else if (e == 2) {
@@ -1404,7 +1377,7 @@ export default {
             0
           );
         } else if (e == 4) {
-          this.showInfo.fightPowerMenu = true;
+          this.showInfo.fightPowerActionSheet = true;
         } else if (e == 5) {
           this.$appPush({
             path: "/ranking",
@@ -1425,13 +1398,6 @@ export default {
           });
         }
       */
-    },
-    onDataTabsBeforeChange: function (e) {
-      let change = false;
-
-      e == 0 || e == 2 ? (change = true) : (change = false);
-
-      return change;
     },
     onSkillTabsClick: function (e) {
       let tipsText;
@@ -1455,6 +1421,32 @@ export default {
 
         this.$message.info(tipsText);
       }
+    },
+    onTabsBeforeChange: function (e) {
+      let change = false;
+
+      e == 0 || e == 2 ? (change = true) : (change = false);
+
+      return change;
+    },
+    onClearSearchData: function () {
+      this.$appDelectLocalStorage("searchData");
+
+      this.search.data = null;
+      this.tableData.search.history = [];
+
+      this.showInfo.searchData = false;
+      this.showInfo.searchHistory = false;
+
+      this.$message.success(this.$appMsg.success[1000]);
+    },
+    onUrlClick: function (data) {
+      this.$appOpenUrl(
+        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        null,
+        { path: data.url ? data.url : data.to },
+        data.url ? 0 : 1
+      );
     },
     onShareClick: function () {
       let cardInfo = this.tableData.cardInfo,
@@ -1484,6 +1476,18 @@ export default {
       this.copyData = ret;
 
       this.$appCopyData(this.copyData);
+    },
+    addSearchData: function (value) {
+      let searchData = localStorage.getItem("searchData"),
+        setValue = searchData;
+
+      if (!searchData) {
+        setValue = value;
+      } else if (searchData.indexOf(value) == -1) {
+        setValue = searchData + "," + value;
+      }
+
+      localStorage.setItem("searchData", setValue);
     },
   },
 };

@@ -9,10 +9,7 @@
         :safe-area-inset-top="true"
         @click-left="
           $appPush({
-            path: '/my',
-            query: {
-              refresh: 0,
-            },
+            path: $store.getters.getHistory.fullPath,
           })
         "
         @click-right="onNavBarRightClick"
@@ -96,7 +93,7 @@
 
 <script>
 export default {
-  name: "GameEngage",
+  name: "gameEngage",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },

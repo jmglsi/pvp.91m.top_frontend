@@ -10,6 +10,7 @@ import {
   Input,
   Menu,
   Message,
+  Modal,
   Notification,
   Popover,
   Radio,
@@ -30,6 +31,7 @@ Vue
   .use(Input)
   .use(Menu)
   .use(Message)
+  .use(Modal)
   .use(Notification)
   .use(Popover)
   .use(Radio)

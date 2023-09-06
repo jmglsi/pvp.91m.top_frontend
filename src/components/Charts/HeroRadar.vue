@@ -6,8 +6,8 @@
         v-if="tabsModel == 2"
         :tags="tag.array"
         :placeholder="tag.placeholder"
-        @tags-changed="onTagsChanged"
-        @blur="onTagsBlur"
+        @tags-changed="onTagsInputChanged"
+        @blur="onTagsInputBlur"
         class="hero-radar-d57ac45256849d9b13e2422d91580fb9"
       />
     </div>
@@ -121,7 +121,7 @@ export default {
           }
         });
     },
-    onTagsChanged: function (e) {
+    onTagsInputChanged: function (e) {
       if (e.length == 0) {
         this.chartSettings = {};
         this.chartData = [];
@@ -135,7 +135,7 @@ export default {
         this.heroList.new = newTags.slice(1);
       }
     },
-    onTagsBlur: function () {
+    onTagsInputBlur: function () {
       let oldHeroList = this.heroList.old,
         newHeroList = this.heroList.new;
 

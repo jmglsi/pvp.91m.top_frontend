@@ -4,7 +4,7 @@
       ref="refHeroGenre"
       :data="tableData.result.rows"
       :loading="tableData.loading"
-      @cell-click="onCellClick"
+      @cell-click="onTableCellClick"
       height="443"
     >
       <vxe-table-column title="英雄" fixed="left" field="heroId" width="50">
@@ -47,7 +47,7 @@
             { value: 80110, label: '狂暴' },
             { value: 80109, label: '疾跑' },
           ]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           width="75"
         >
           <template #default="{ row }">
@@ -81,7 +81,7 @@
             { value: 3, label: '打野' },
             { value: 4, label: '游走' },
           ]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           width="75"
         >
           <template #default="{ row }">
@@ -104,7 +104,7 @@
           title="占比"
           field="pickRate"
           :filters="[{ value: 1, checked: true }]"
-          :filter-method="filterMethod"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
           sortable
         >
@@ -229,9 +229,6 @@ export default {
       genreInfo: {
         type: 0,
       },
-      showInfo: {
-        checked: false,
-      },
     };
   },
   created() {
@@ -292,7 +289,7 @@ export default {
           }
         });
     },
-    filterMethod: function ({ option, row, column }) {
+    onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "skillId") {
         return row.skillId == option.value;
       }
@@ -305,7 +302,7 @@ export default {
         return row.pickRate >= option.value;
       }
     },
-    onCellClick: function ({ row, column }) {
+    onTableCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
         this.genreInfo.type = 0;
         return this.getRanking(row.heroId, 14, this.genreInfo.type, 0, 0);

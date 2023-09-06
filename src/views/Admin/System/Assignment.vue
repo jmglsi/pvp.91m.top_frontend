@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: "AdminSystemAssignment",
+  name: "adminSystemAssignment",
   data() {
     return {
       dataSource: [

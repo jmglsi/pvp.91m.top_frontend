@@ -150,7 +150,7 @@
 import md5 from "js-md5";
 
 export default {
-  name: "UserLogin",
+  name: "userLogin",
   components: {
     UserOauth: () => import("@/components/User/Oauth.vue"),
   },
@@ -195,9 +195,25 @@ export default {
     if (this.accessToken) this.getWebAccountInfo(2);
   },
   methods: {
+    getWebAccountInfo: function (aid = 0) {
+      this.$axios
+        .post(this.$appApi.app.getWebAccountInfo + "&aid=" + aid)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.loginInfo.oauthInfo = data.oauthInfo;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.$appPush({ path: "/my" });
+        this.$appPush({
+          path: this.$store.getters.getHistory.fullPath,
+        });
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = this.$t("my.login");
@@ -306,20 +322,6 @@ export default {
           setTimeout(() => {
             this.showInfo.loginButton = true;
           }, 1000);
-        });
-    },
-    getWebAccountInfo: function (aid = 0) {
-      this.$axios
-        .post(this.$appApi.app.getWebAccountInfo + "&aid=" + aid)
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.loginInfo.oauthInfo = data.oauthInfo;
-          } else {
-            this.$message.error(status.msg);
-          }
         });
     },
   },

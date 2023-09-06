@@ -181,14 +181,14 @@
         v-model="showInfo.calendar"
         :title="tableData.result.title"
         :show-confirm="false"
-        :formatter="onFormatter"
+        :formatter="onCalendarFormatter"
         :min-date="date.min"
         :max-date="date.max"
       />
     </div>
 
     <div class="hero-ec93fee7573d5d8daa4444009358e91b">
-      <van-action-sheet v-model="showInfo.skillMenu" title="其他数据 (近期)">
+      <van-action-sheet v-model="showInfo.actionSheet" title="其他数据 (近期)">
         <template #default>
           <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
         </template>
@@ -199,7 +199,7 @@
       <van-dialog
         v-model="showInfo.dialog"
         @close="
-          showInfo.checked ? onHeroUpdateDetailCopy(heroId, tableDataRow) : null
+          showInfo.checked ? onCopy(heroId, tableDataRow) : null
         "
       >
         <template #title>
@@ -290,10 +290,10 @@ export default {
         text: "",
       },
       showInfo: {
-        calendar: false,
+        actionSheet: false,
         dialog: false,
+        calendar: false,
         checked: false,
-        skillMenu: false,
       },
     };
   },
@@ -303,7 +303,38 @@ export default {
     }
   },
   methods: {
-    onFormatter: function (day) {
+    getHeroUpdate: function (heroId, aid = 0) {
+      let appConfigInfo = this.$appConfigInfo,
+        date = new Date(),
+        ts = this.$appTs,
+        ls = this.$appGetLocalStorage("heroUpdate-" + heroId);
+
+      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
+
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+        return (this.tableData = ls);
+      }
+
+      this.$axios
+        .post(
+          this.$appApi.app.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.tableData = data;
+            this.tableData.updateTime = ts;
+
+            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onCalendarFormatter: function (day) {
       let o = this.tableData.result.rows,
         mapType = -5;
 
@@ -399,42 +430,11 @@ export default {
 
       return day;
     },
-    getHeroUpdate: function (heroId, aid = 0) {
-      let appConfigInfo = this.$appConfigInfo,
-        date = new Date(),
-        ts = this.$appTs,
-        ls = this.$appGetLocalStorage("heroUpdate-" + heroId);
-
-      this.date.min = new Date(date.setMonth(date.getMonth() - 4));
-      this.date.max = new Date(date.setMonth(date.getMonth() + 4));
-
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
-        return (this.tableData = ls);
-      }
-
-      this.$axios
-        .post(
-          this.$appApi.app.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.tableData = data;
-            this.tableData.updateTime = ts;
-
-            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-    },
     onEquipmentClick: function (e, a) {
       this.equipmentId = parseInt(e.equipment[a]) || 0;
-      this.showInfo.skillMenu = true;
+      this.showInfo.actionSheet = true;
     },
-    onHeroUpdateDetailCopy: function (heroId, row) {
+    onCopy: function (heroId, row) {
       let date = new Date(row.calendar.day);
 
       this.copyData =
