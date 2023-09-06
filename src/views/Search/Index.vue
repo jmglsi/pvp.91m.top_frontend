@@ -1129,7 +1129,7 @@
 
 <script>
 export default {
-  name: "SearchHome",
+  name: "searchIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),

@@ -164,7 +164,7 @@
 
 <script>
 export default {
-  name: "FriendsHome",
+  name: "friendsIndex",
   data() {
     return {
       copyData: "",

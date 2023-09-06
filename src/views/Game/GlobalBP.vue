@@ -818,7 +818,7 @@
 import draggable from "vuedraggable";
 
 export default {
-  name: "GameGlobalBP",
+  name: "gameGlobalBP",
   components: {
     draggable,
     ChartsGameLine: () => import("@/components/Charts/GameLine.vue"),

@@ -172,7 +172,7 @@
 
 <script>
 export default {
-  name: "SettingHome",
+  name: "settingIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },

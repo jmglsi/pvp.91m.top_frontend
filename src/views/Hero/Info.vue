@@ -439,7 +439,7 @@
 
 <script>
 export default {
-  name: "HeroInfo",
+  name: "heroInfo",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChartsHeroRadar: () => import("@/components/Charts/HeroRadar.vue"),

@@ -155,7 +155,7 @@
 
 <script>
 export default {
-  name: "GameTeam",
+  name: "gameTeam",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },

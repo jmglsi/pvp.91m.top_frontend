@@ -95,7 +95,7 @@
 
 <script>
 export default {
-  name: "BilibiliHome",
+  name: "bilibiliIndex",
   data() {
     return {
       copyData: "",

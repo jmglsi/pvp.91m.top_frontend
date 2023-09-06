@@ -154,7 +154,7 @@
 
 <script>
 export default {
-  name: "MiniAppHome",
+  name: "miniAppIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },

@@ -150,7 +150,7 @@
 import md5 from "js-md5";
 
 export default {
-  name: "UserLogin",
+  name: "userLogin",
   components: {
     UserOauth: () => import("@/components/User/Oauth.vue"),
   },

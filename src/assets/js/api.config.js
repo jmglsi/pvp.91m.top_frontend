@@ -103,37 +103,9 @@ axios.interceptors.response.use(
 Vue.prototype.$axios = axios;
 
 const appApi = baseUrl + "/hero/v1/app.php";
+//const biliApi = baseUrl + "/hero/v1/bilibili.php";
 const gameApi = baseUrl + "/hero/v1/game.php";
 const loginApi = baseUrl + "/hero/v1/login.php";
-const biliApi = baseUrl + "/hero/v1/bilibili.php";
-
-const bili = {
-  getOrderInfo: biliApi + "?type=getOrderInfo"
-}
-
-const game = {
-  createEngage: gameApi + "?type=createEngage",
-  createRole: gameApi + "?type=createRole",
-  createTeam: gameApi + "?type=createTeam",
-  deleteGameBP: gameApi + "?type=deleteGameBP",
-  deleteTeam: gameApi + "?type=deleteTeam",
-  getGameBP: gameApi + "?type=getGameBP",
-  getGameBPFile: gameApi + "?type=getGameBPFile",
-  getGameDashboard: gameApi + "?type=getGameDashboard",
-  getGameHome: gameApi + "?type=getGameHome",
-  getGamePrediction: gameApi + "?type=getGamePrediction",
-  getTeamInfo: gameApi + "?type=getTeamInfo",
-  joinTeam: gameApi + "?type=joinTeam",
-  setStatus: gameApi + "?type=setStatus",
-  setUsed: gameApi + "?type=setUsed",
-  updateGameBP: gameApi + "?type=updateGameBP",
-  updateGameBPIndex: gameApi + "?type=updateGameBPIndex",
-  updateTeamInfo: gameApi + "?type=updateTeamInfo",
-}
-
-const login = {
-  getLogin: loginApi
-}
 
 const app = {
   apiHost: "//api.91m.top",
@@ -166,9 +138,40 @@ const app = {
   uploadImg: appApi + "?type=uploadImg"
 }
 
+/*
+const bili = {
+  getOrderInfo: biliApi + "?type=getOrderInfo"
+}
+*/
+
+const game = {
+  createEngage: gameApi + "?type=createEngage",
+  createRole: gameApi + "?type=createRole",
+  createTeam: gameApi + "?type=createTeam",
+  deleteGameBP: gameApi + "?type=deleteGameBP",
+  deleteTeam: gameApi + "?type=deleteTeam",
+  getGameBP: gameApi + "?type=getGameBP",
+  getGameBPFile: gameApi + "?type=getGameBPFile",
+  getGameDashboard: gameApi + "?type=getGameDashboard",
+  getGameHome: gameApi + "?type=getGameHome",
+  getGamePrediction: gameApi + "?type=getGamePrediction",
+  getTeamInfo: gameApi + "?type=getTeamInfo",
+  joinTeam: gameApi + "?type=joinTeam",
+  setStatus: gameApi + "?type=setStatus",
+  setUsed: gameApi + "?type=setUsed",
+  updateGameBP: gameApi + "?type=updateGameBP",
+  updateGameBPIndex: gameApi + "?type=updateGameBPIndex",
+  updateTeamInfo: gameApi + "?type=updateTeamInfo",
+}
+
+const login = {
+  getLogin: loginApi
+}
+
+
 export default {
   app,
-  bili,
+  //bili,
   game,
   login
 }

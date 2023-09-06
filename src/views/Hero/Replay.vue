@@ -197,7 +197,7 @@
 
 <script>
 export default {
-  name: "HeroReplay",
+  name: "heroReplay",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
   },

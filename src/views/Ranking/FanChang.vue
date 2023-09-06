@@ -1,5 +1,5 @@
 <template>
-  <div class="return-home">
+  <div class="skin-return-Index">
     <div class="return-8c35b9de834af969baf22173b9539eb9">
       <van-nav-bar
         left-arrow
@@ -275,7 +275,7 @@ import "echarts/lib/component/dataZoom";
 import "v-charts/lib/style.css";
 
 export default {
-  name: "RankingFanChang",
+  name: "skinReturnIndex",
   components: {
     VeLine,
     AppHello: () => import("@/components/App/Hello.vue"),

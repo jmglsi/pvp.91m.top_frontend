@@ -28,17 +28,8 @@ export default new Router({
       path: '/skin/encore',
       redirect: '/skin/return'
     }, {
-      path: '/bilibili',
-      name: 'bilibili',
-      component: () =>
-        import('./views/Bilibili/Index.vue'),
-      meta: {
-        title: 'bilibili',
-        keepAlive: true
-      }
-    }, {
       path: '/',
-      name: 'home',
+      name: 'appIndex',
       component: () =>
         import('./views/Home/Index.vue'),
       meta: {
@@ -47,7 +38,7 @@ export default new Router({
       }
     }, {
       path: '/miniapp',
-      name: 'miniApp',
+      name: 'miniAppIndex',
       component: () =>
         import('./views/MiniApp/Index.vue'),
       meta: {
@@ -55,8 +46,26 @@ export default new Router({
         keepAlive: true
       }
     }, {
+      path: '/my',
+      name: 'userIndex',
+      component: () =>
+        import('./views/User/Index.vue'),
+      meta: {
+        title: '我的',
+        keepAlive: false
+      }
+    }, {
+      path: '/login',
+      name: 'userLogin',
+      component: () =>
+        import('./views/User/Login.vue'),
+      meta: {
+        title: '登录',
+        keepAlive: true
+      }
+    }, {
       path: '/ranking',
-      name: 'ranking',
+      name: 'rankingIndex',
       component: () =>
         import('./views/Ranking/Index.vue'),
       meta: {
@@ -65,7 +74,7 @@ export default new Router({
       }
     }, {
       path: '/search',
-      name: 'search',
+      name: 'searchIndex',
       component: () =>
         import('./views/Search/Index.vue'),
       meta: {
@@ -73,17 +82,8 @@ export default new Router({
         keepAlive: true
       }
     }, {
-      path: '/login',
-      name: 'login',
-      component: () =>
-        import('./views/User/Login.vue'),
-      meta: {
-        title: '登录',
-        keepAlive: true
-      }
-    }, {
       path: '/setting',
-      name: 'setting',
+      name: 'settingIndex',
       component: () =>
         import('./views/Setting/Index.vue'),
       meta: {
@@ -92,7 +92,7 @@ export default new Router({
       }
     }, {
       path: '/friends',
-      name: 'friends',
+      name: 'friendsIndex',
       component: () =>
         import('./views/Friends/Index.vue'),
       meta: {
@@ -100,17 +100,8 @@ export default new Router({
         keepAlive: false
       }
     }, {
-      path: '/my',
-      name: 'my',
-      component: () =>
-        import('./views/User/Index.vue'),
-      meta: {
-        title: '我的',
-        keepAlive: false
-      }
-    }, {
       path: '/skin',
-      name: 'skin',
+      name: 'skinReturnIndex',
       redirect: '/ranking',
       component: () =>
         import('./views/Ranking/FanChang.vue'),
@@ -124,8 +115,7 @@ export default new Router({
           }
         }
       ]
-    },
-    {
+    }, {
       path: '/hero',
       name: 'heroIndex',
       redirect: '/ranking',
@@ -170,7 +160,7 @@ export default new Router({
       children: [
         {
           path: 'hero/:id/view',
-          name: 'heroView',
+          name: 'toolsHeroView',
           component: () =>
             import('./views/Tools/HeroView.vue'),
           meta: {
@@ -179,7 +169,7 @@ export default new Router({
           }
         }, {
           path: 'weekly',
-          name: 'weekly',
+          name: 'toolsWeekly',
           component: () =>
             import('./views/Tools/weekly.vue'),
           meta: {
@@ -188,7 +178,7 @@ export default new Router({
           }
         }, {
           path: 'n/home',
-          name: 'nHome',
+          name: 'toolsNHome',
           component: () =>
             import('./views/Tools/NHome.vue'),
           meta: {

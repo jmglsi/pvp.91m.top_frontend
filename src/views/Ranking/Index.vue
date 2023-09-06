@@ -297,7 +297,7 @@ import "v-charts/lib/style.css";
 import "zrender/lib/svg/svg";
 
 export default {
-  name: "RankingHome",
+  name: "rankingIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChartsMigrationLine: () => import("@/components/Charts/MigrationLine.vue"),

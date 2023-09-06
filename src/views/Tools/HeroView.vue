@@ -103,7 +103,7 @@ import "echarts/lib/component/markLine";
 import "zrender/lib/svg/svg";
 
 export default {
-  name: "ToolsView",
+  name: "toolsHeroView",
   components: {
     VueQr,
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),

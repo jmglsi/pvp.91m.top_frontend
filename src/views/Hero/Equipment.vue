@@ -543,7 +543,7 @@ const plainOptions = allTag;
 const defaultCheckedList = allTag;
 
 export default {
-  name: "HeroEquipment",
+  name: "heroEquipment",
   components: {
     draggable,
     AppHello: () => import("@/components/App/Hello.vue"),

@@ -113,11 +113,18 @@
                 >
                   <span>新建帮会</span>
                 </a-menu-item>
-                <a-menu-item @click="onModalShowClick(1)" key="n-top-right-2">
+                <a-menu-item
+                  :disabled="gameLabel == 'new'"
+                  @click="onModalShowClick(1)"
+                  key="n-top-right-2"
+                >
                   <span>新建角色</span>
                 </a-menu-item>
+                <a-menu-item @click="onModalShowClick(4)" key="n-top-right-3">
+                  <span>导入角色</span>
+                </a-menu-item>
                 <a-menu-divider />
-                <a-menu-item disabled key="n-top-right-3">
+                <a-menu-item disabled key="n-top-right-4">
                   <!-- :style="gameLabel ? {} : { color: 'blue' }" -->
                   <span> 数据录入 </span>
                 </a-menu-item>
@@ -442,6 +449,7 @@
           <span v-if="showInfo.createRole">新建角色</span>
           <span v-if="showInfo.createEngage">新建分组</span>
           <span v-if="showInfo.createTeam">新建帮会</span>
+          <span v-if="showInfo.importRole">导入角色</span>
         </template>
 
         <div
@@ -520,6 +528,21 @@
               label="帮会名字"
               placeholder="请输入帮会名字"
               class="n-fce42c651ad31b43c91ec081b2da592d"
+            />
+          </van-cell-group>
+        </div>
+
+        <div
+          v-if="showInfo.importRole"
+          class="n-6dcb5225432681c2dce9ffcfcca81e25"
+        >
+          <van-cell-group :border="false">
+            <van-field
+              v-model="editInfo.roleText"
+              :autosize="{ maxHeight: 250 }"
+              rows="10"
+              type="textarea"
+              placeholder="复制 接龙 / 文档 的成员角色到这里，一行一个，建议：【职业】角色 Id"
             />
           </van-cell-group>
         </div>
@@ -617,7 +640,7 @@
 import draggable from "vuedraggable";
 
 export default {
-  name: "nHome",
+  name: "toolsNHome",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     draggable,
@@ -910,6 +933,7 @@ export default {
         nName: "",
         teamName: "",
         description: "",
+        roleText: "",
       },
       showInfo: {
         popup: false,
@@ -922,6 +946,7 @@ export default {
         createRole: false,
         createEngage: false,
         createTeam: false,
+        importRole: false,
         nModal: false,
       },
       statusInfo: [
@@ -943,7 +968,14 @@ export default {
       joinTeamId = this.joinTeamId;
 
     if (gameLabel) {
-      this.getGameBP(gameLabel);
+      if (gameLabel == "new") {
+        this.authorInfo.name = "本地";
+        this.authorInfo.description = "本地模式，右上角导入帮会成员角色";
+
+        this.initLocal();
+      } else {
+        this.getGameBP(gameLabel);
+      }
     } else {
       this.getGameHome(1);
 
@@ -956,6 +988,80 @@ export default {
     }
   },
   methods: {
+    initLocal: function () {
+      let roleText = this.$appGetLocalStorage("roleText") || "",
+        localCamp = this.$appGetLocalStorage("roleCamp") || {
+          model_1: 0,
+          model_2: 0,
+          rows_1: [],
+          rows_2: [],
+        },
+        professionInfo = this.professionInfo,
+        roleList = [];
+
+      this.columns = [];
+      this.editInfo.roleText = roleText;
+
+      if (!roleText) return;
+
+      roleText.split(/\n/).map((x, i) => {
+        professionInfo.rows.map((y, j) => {
+          let nTypeIndex = x.indexOf(y.name);
+
+          if (nTypeIndex > -1) {
+            let roleName = x.slice(nTypeIndex + 3, x.length);
+
+            roleList.push({
+              disabled: false,
+              nCamp: 0,
+              nIndex: 0,
+              nType: j,
+              nName: roleName,
+              nText: roleName,
+              status: 1,
+              yIndex: i,
+            });
+          }
+
+          this.columns.push({ text: y.name, value: j, children: [] });
+        });
+      });
+
+      this.tableData.result.rows = roleList;
+
+      /**
+       *
+       * 初始化表格
+       *
+       */
+      this.initColumns();
+      this.initCamp();
+
+      /**
+       *
+       * 初始化团
+       *
+       */
+      localCamp.rows_1.map((x) => {
+        if (x.nType > -1) {
+          this.tableData.result.rows[x.yIndex].nCamp = x.nCamp;
+          this.tableData.result.rows[x.yIndex].disabled = true;
+
+          this.campData.rows_1[x.nIndex] = x;
+        }
+      });
+
+      localCamp.rows_2.map((x) => {
+        if (x.nType > -1) {
+          this.tableData.result.rows[x.yIndex].nCamp = x.nCamp;
+          this.tableData.result.rows[x.yIndex].disabled = true;
+
+          this.campData.rows_2[x.nIndex] = x;
+        }
+      });
+
+      this.onIconLoadingChange();
+    },
     initCamp: function () {
       let all_1 = 0,
         all_2 = 0,
@@ -1016,21 +1122,19 @@ export default {
 
       this.campData.model_2 = 0;
       this.campData.rows_2 = initCamp_2;
-      this.columns = [];
 
+      this.columns = [];
       professionInfo.map((x, i) => {
         this.columns.push({ text: x.name, value: i, children: [] });
       });
 
       tableData.map((x, i) => {
-        if (x.nCamp == 1) {
+        if (x.nCamp == 0) {
+          //
+        } else if (x.nCamp == 1) {
           this.campData.rows_1[x.nIndex] = x;
-          //this.campData.rows_1[x.nIndex].nIndex = i;
-          //this.campData.rows_1[x.nIndex].yIndex = i;
         } else if (x.nCamp == 2) {
           this.campData.rows_2[x.nIndex] = x;
-          //this.campData.rows_2[x.nIndex].nIndex = i;
-          //this.campData.rows_2[x.nIndex].yIndex = i;
         }
 
         x.nIndex = i;
@@ -1040,7 +1144,7 @@ export default {
         this.tableData.result.rows[i].nIndex = i;
         this.tableData.result.rows[i].yIndex = i;
 
-        if (x.nCamp > 0 || x.status != 1) {
+        if (x.disabled || x.nCamp > 0 || x.status != 1) {
           x.disabled = true;
         } else {
           x.disabled = false;
@@ -1090,94 +1194,122 @@ export default {
         });
     },
     getGameBP: function (gameLabel, aid = 1) {
-      this.$axios
-        .post(
-          this.$appApi.game.getGameBP + "&aid=" + aid,
-          this.$qs.stringify({
-            gameLabel: gameLabel,
-          })
-        )
-        .then((res) => {
-          let status = res.data.status;
+      if (gameLabel == "new") {
+        this.onIconLoadingChange();
+      } else {
+        this.$axios
+          .post(
+            this.$appApi.game.getGameBP + "&aid=" + aid,
+            this.$qs.stringify({
+              gameLabel: gameLabel,
+            })
+          )
+          .then((res) => {
+            let status = res.data.status;
 
-          if (status.code == 200) {
-            let data = res.data.data;
+            if (status.code == 200) {
+              let data = res.data.data;
 
-            this.authorInfo = data.author;
-            this.tableData = data;
+              this.authorInfo = data.author;
+              this.tableData = data;
 
-            this.initColumns();
-            this.initCamp();
-            this.onIconLoadingChange();
+              this.initColumns();
+              this.initCamp();
+              this.onIconLoadingChange();
 
-            //this.$message.success(this.$appMsg.success[1005]);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
+              //this.$message.success(this.$appMsg.success[1005]);
+            } else {
+              this.$message.error(status.msg);
+            }
+          });
+      }
     },
-    updateGameBP: function (aid = 1) {
-      this.$axios
-        .post(
-          this.$appApi.game.updateGameBP + "&aid=" + aid,
-          this.$qs.stringify({
-            gameLabel: this.gameLabel,
-            arrData: JSON.stringify(this.newData),
-          })
-        )
-        .then((res) => {
-          let status = res.data.status;
+    updateGameBP: function (gameLabel, aid = 1) {
+      if (gameLabel == "new") {
+        this.onIconLoadingChange();
+      } else {
+        this.$axios
+          .post(
+            this.$appApi.game.updateGameBP + "&aid=" + aid,
+            this.$qs.stringify({
+              gameLabel: gameLabel,
+              arrData: JSON.stringify(this.newData),
+            })
+          )
+          .then((res) => {
+            let status = res.data.status;
 
-          if (status.code == 200) {
-            this.onIconLoadingChange();
+            if (status.code == 200) {
+              this.nowDataChange = false;
 
-            this.nowDataChange = false;
+              setTimeout(() => {
+                this.getGameBP(gameLabel);
+              }, 250);
 
-            setTimeout(() => {
-              this.getGameBP(this.gameLabel);
-            }, 250);
-
-            //this.$message.success(this.$appMsg.success[1000]);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
+              //this.$message.success(this.$appMsg.success[1000]);
+            } else {
+              this.$message.error(status.msg);
+            }
+          });
+      }
     },
     updateGameBPIndex: function (gameLabel, nId, nCamp, nIndex, aid = 1) {
-      this.$axios
-        .post(
-          this.$appApi.game.updateGameBPIndex + "&aid=" + aid,
-          this.$qs.stringify({
-            gameLabel: gameLabel,
-            nId: nId,
-            nCamp: nCamp,
-            nIndex: nIndex,
-          })
-        )
-        .then((res) => {
-          let status = res.data.status;
+      if (gameLabel == "new") {
+        if (nCamp == 1) {
+          this.campData.rows_1[nIndex].nCamp = nCamp;
+          this.campData.rows_1[nIndex].nIndex = nIndex;
+          this.campData.rows_1[nIndex].disabled = true;
+        } else if (nCamp == 2) {
+          this.campData.rows_2[nIndex].nCamp = nCamp;
+          this.campData.rows_2[nIndex].nIndex = nIndex;
+          this.campData.rows_2[nIndex].disabled = true;
+        }
 
-          if (status.code == 200) {
-            this.onIconLoadingChange();
+        this.nowDataChange = false;
 
-            this.nowDataChange = false;
+        this.$appSetLocalStorage("roleCamp", this.campData);
 
-            setTimeout(() => {
-              this.getGameBP(this.gameLabel);
-            }, 250);
+        setTimeout(() => {
+          this.getGameBP(this.gameLabel);
+        }, 250);
+      } else {
+        this.$axios
+          .post(
+            this.$appApi.game.updateGameBPIndex + "&aid=" + aid,
+            this.$qs.stringify({
+              gameLabel: gameLabel,
+              nId: nId,
+              nCamp: nCamp,
+              nIndex: nIndex,
+            })
+          )
+          .then((res) => {
+            let status = res.data.status;
 
-            //this.$message.success(this.$appMsg.success[1000]);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
+            if (status.code == 200) {
+              this.nowDataChange = false;
+
+              setTimeout(() => {
+                this.getGameBP(this.gameLabel);
+              }, 250);
+
+              //this.$message.success(this.$appMsg.success[1000]);
+            } else {
+              this.$message.error(status.msg);
+            }
+          });
+      }
     },
     onPullRefresh: function () {
       let gameLabel = this.gameLabel;
 
       if (gameLabel) {
         if (this.nowDataChange == true) {
-          this.updateGameBP(1);
+          if (gameLabel == "new") {
+            this.$appSetLocalStorage("roleCamp", this.newData);
+          }
+
+          this.updateGameBP(gameLabel, 1);
         }
       } else {
         this.getGameHome(1);
@@ -1217,6 +1349,10 @@ export default {
           this.onCreateTeamClick(editInfo.teamName, 1);
           this.editInfo.teamName = "";
         }
+      } else if (this.showInfo.importRole) {
+        this.$appSetLocalStorage("roleText", this.editInfo.roleText);
+
+        this.initLocal();
       }
 
       this.showInfo.nModal = false;
@@ -1490,7 +1626,6 @@ export default {
             } else {
               this.getGameHome(1);
             }
-            this.onIconLoadingChange();
 
             //this.$message.success(this.$appMsg.success[1000]);
           } else {
@@ -1511,7 +1646,6 @@ export default {
 
           if (status.code == 200) {
             this.getGameHome(1);
-            this.onIconLoadingChange();
 
             //this.$message.success(this.$appMsg.success[1000]);
           } else {
@@ -1532,7 +1666,6 @@ export default {
 
           if (status.code == 200) {
             this.getGameHome(1);
-            this.onIconLoadingChange();
 
             //this.$message.success(this.$appMsg.success[1000]);
           } else {
@@ -1547,14 +1680,22 @@ export default {
         this.showInfo.createRole = true;
         this.showInfo.createEngage = false;
         this.showInfo.createTeam = false;
+        this.showInfo.importRole = false;
       } else if (e == 2) {
         this.showInfo.createRole = false;
         this.showInfo.createEngage = true;
         this.showInfo.createTeam = false;
+        this.showInfo.importRole = false;
       } else if (e == 3) {
         this.showInfo.createRole = false;
         this.showInfo.createEngage = false;
         this.showInfo.createTeam = true;
+        this.showInfo.importRole = false;
+      } else if (e == 4) {
+        this.showInfo.createRole = false;
+        this.showInfo.createEngage = false;
+        this.showInfo.createTeam = false;
+        this.showInfo.importRole = true;
       }
     },
     onSetUsedClick: function (nId, aid = 1) {
