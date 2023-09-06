@@ -72,7 +72,7 @@
 
 <script>
 export default {
-  name: "GameHome",
+  name: "gameHome",
   data() {
     return {
       tableData: {

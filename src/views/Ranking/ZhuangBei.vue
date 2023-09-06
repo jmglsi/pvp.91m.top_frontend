@@ -161,7 +161,7 @@
 
 <script>
 export default {
-  name: "RankingZhuangBei",
+  name: "rankingZhuangBei",
   components: {
     HeroEquipmentListOne: () =>
       import("@/components/Hero/EquipmentList_One.vue"),

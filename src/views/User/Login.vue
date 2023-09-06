@@ -211,7 +211,9 @@ export default {
     },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.$appPush({ path: "/my" });
+        this.$appPush({
+          path: this.$store.getters.getHistory.fullPath,
+        });
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = this.$t("my.login");

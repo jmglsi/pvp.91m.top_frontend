@@ -78,7 +78,7 @@ export default {
     "left-text": "戻る"
   },
   "setting": {
-    "title": "設定",
+    "title": "よく使われる",
     "position": {
       "title": "揺れる分岐",
       "label": "英雄ごとに異なるレーンの状況"

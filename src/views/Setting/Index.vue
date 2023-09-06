@@ -7,9 +7,13 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         :left-text="$t('nav-bar.left-text')"
-        title="通用"
+        title="设置"
       />
     </div>
 

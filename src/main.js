@@ -11,6 +11,8 @@ Vue.use(VueClipboard);
 
 import { i18n } from './assets/import/i18n';
 
+import store from './assets/import/store';
+
 import './assets/import/antd';
 import './assets/import/vant';
 
@@ -19,6 +21,11 @@ import './assets/import/vxe-table';
 
 import './assets/js/app.config';
 import './assets/js/bilibili.config';
+
+import Vconsole from 'vconsole';
+if (localStorage.getItem("debug") == 1) {
+  new Vconsole();
+}
 
 import appApi from './assets/js/api.config';
 Vue.prototype.$appApi = appApi;
@@ -39,6 +46,7 @@ Vue.config.productionTip = false;
 new Vue({
   i18n,
   router,
+  store,
   render: (h) => h(App),
   /*
     mounted() {

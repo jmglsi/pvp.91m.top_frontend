@@ -315,12 +315,9 @@ export default {
     $route: function (to) {
       let q = to.query;
 
-      this.heroName = q.heroName || "";
-      this.bid = parseInt(q.bid) || 0;
-      this.cid = parseInt(q.cid) || 0;
-      this.did = parseInt(q.did) || 0;
-      this.viewInfo.model = q.eid || "a";
-      this.refresh = parseInt(q.refresh) || 0;
+      if (q) {
+        this.initShow(q);
+      }
     },
   },
   data() {
@@ -479,6 +476,14 @@ export default {
             this.$appSetLocalStorage("appConfigInfo", ls);
           });
       }
+    },
+    initShow: function (q) {
+      this.heroName = q.heroName || "";
+      this.bid = parseInt(q.bid) || 0;
+      this.cid = parseInt(q.cid) || 0;
+      this.did = parseInt(q.did) || 0;
+      this.viewInfo.model = q.eid || "a";
+      this.refresh = parseInt(q.refresh) || 0;
     },
     onTabsClick: function (e) {
       if (e == 0) {

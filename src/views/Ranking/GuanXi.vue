@@ -247,7 +247,7 @@
 
 <script>
 export default {
-  name: "RankingGuanXi",
+  name: "rankingGuanXi",
   props: {
     isSmallMode: {
       type: Boolean,

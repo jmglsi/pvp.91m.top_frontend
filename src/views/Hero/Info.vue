@@ -11,7 +11,11 @@
             ? { backgroundColor: 'white !important' }
             : { backgroundColor: 'transparent !important' }
         "
-        @click-left="$router.go(-1)"
+        @click-left="
+          $appPush({
+            path: $store.getters.getHistory.fullPath,
+          })
+        "
         @click-right="$message.info($appMsg.info[1004])"
         :left-text="scroll >= 50 ? '搜一搜' : null"
         z-index="99999999"
@@ -461,8 +465,8 @@ export default {
       let id = to.params.id;
 
       if (id) {
-        this.getHeroInfo(id);
         this.initShow();
+        this.getHeroInfo(id);
       }
     },
   },
@@ -566,6 +570,12 @@ export default {
     this.initPage();
   },
   methods: {
+    initPage: function () {
+      let p = this.$route.params;
+
+      this.initShow();
+      this.getHeroInfo(p.id);
+    },
     initShow: function () {
       let r = this.$route,
         //hash = r.hash || "",
@@ -584,12 +594,6 @@ export default {
       }, 500);
 
       window.addEventListener("scroll", this.listenerScrollTop);
-    },
-    initPage: function () {
-      let p = this.$route.params;
-
-      this.getHeroInfo(p.id);
-      this.initShow();
     },
     listenerScrollTop: function () {
       this.scroll =

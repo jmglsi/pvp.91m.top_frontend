@@ -24,7 +24,11 @@
                   ? { color: '#fff !important' }
                   : {}
               "
-              @click="$appPush({ path: '/', query: { refresh: 1 } })"
+              @click="
+                $appPush({
+                  path: $store.getters.getHistory.fullPath,
+                })
+              "
               class="search-e979efff8a859d0adcb2d63d51cd9de4"
             >
               {{ $t("nav-bar.left-text") }}
@@ -1156,7 +1160,7 @@ export default {
           this.getSearch(q.q, show);
         }
       } else {
-        this.initSearchHistory();
+        this.initShow();
       }
     },
   },
@@ -1257,10 +1261,10 @@ export default {
     };
   },
   mounted() {
-    this.initShow();
+    this.initPage();
   },
   methods: {
-    initShow: function () {
+    initPage: function () {
       let q = this.$route.query,
         show = q.show || "";
 
@@ -1272,7 +1276,7 @@ export default {
 
       this.getSearch(searchValue, show);
     },
-    initSearchHistory: function () {
+    initShow: function () {
       let searchData = localStorage.getItem("searchData");
 
       if (searchData) {
@@ -1314,7 +1318,7 @@ export default {
             this.$message.error(status.msg);
           }
 
-          this.initSearchHistory();
+          this.initShow();
 
           setInterval(() => {
             let text = this.tableData.search.placeholder;
@@ -1350,7 +1354,7 @@ export default {
       this.tableData.cardInfo.id = 0;
       this.tableData.cardInfo.isNew = false;
 
-      this.initSearchHistory();
+      this.initShow();
 
       this.showInfo.searchData = false;
     },

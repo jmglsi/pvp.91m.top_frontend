@@ -153,7 +153,7 @@
 
 <script>
 export default {
-  name: "AdminWebData",
+  name: "adminWebData",
   components: {
     HeroBp: () => import("@/components/Hero/Bp.vue"),
     HeroEquipmentListALL: () =>

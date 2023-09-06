@@ -229,7 +229,7 @@
 import ColorThief from "colorthief";
 
 export default {
-  name: "RecommendHome",
+  name: "recommendHome",
   components: {
     HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
@@ -280,14 +280,14 @@ export default {
   },
   mounted() {
     this.getAppHome();
-    this.initShow();
+    this.initPage();
 
     setTimeout(() => {
       this.initColor();
     }, 500);
   },
   methods: {
-    initShow: function () {
+    initPage: function () {
       let q = this.$appQuery,
         show = q.show || "";
 

@@ -78,7 +78,7 @@ export default {
     "left-text": "返回"
   },
   "setting": {
-    "title": "设置",
+    "title": "常用",
     "position": {
       "title": "摇摆分路",
       "label": "单个英雄不同分路的情况"

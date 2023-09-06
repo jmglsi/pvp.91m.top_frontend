@@ -78,7 +78,7 @@ export default {
     "left-text": "Return"
   },
   "setting": {
-    "title": "Settings",
+    "title": "Commonly Used",
     "position": {
       "title": "Swinging Split Lane",
       "label": "Different split lanes for individual heroes"

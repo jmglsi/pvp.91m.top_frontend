@@ -82,15 +82,6 @@ export default new Router({
         keepAlive: true
       }
     }, {
-      path: '/setting',
-      name: 'settingIndex',
-      component: () =>
-        import('./views/Setting/Index.vue'),
-      meta: {
-        title: '通用',
-        keepAlive: true
-      }
-    }, {
       path: '/friends',
       name: 'friendsIndex',
       component: () =>
@@ -100,11 +91,20 @@ export default new Router({
         keepAlive: false
       }
     }, {
+      path: '/setting',
+      name: 'settingIndex',
+      component: () =>
+        import('./views/Setting/Index.vue'),
+      meta: {
+        title: '设置',
+        keepAlive: true
+      }
+    }, {
       path: '/skin',
       name: 'skinReturnIndex',
       redirect: '/ranking',
       component: () =>
-        import('./views/Ranking/FanChang.vue'),
+        import('./views/Ranking/SkinReturn.vue'),
       children: [
         {
           path: 'return',

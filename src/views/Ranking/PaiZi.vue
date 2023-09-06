@@ -73,7 +73,7 @@
 
 <script>
 export default {
-  name: "RankingPaiZi",
+  name: "rankingPaiZi",
   components: {
     HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
   },

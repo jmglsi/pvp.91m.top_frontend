@@ -61,61 +61,14 @@ export default {
     AppReadme: () => import("@/components/App/Readme.vue"),
   },
   watch: {
-    $route: function (to) {
-      let nowPath = to.path,
-        statusBar = false,
-        whiteBar = false,
-        tabbar = false,
-        name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
-        accessToken = this.$cookie.get("accessToken") || null,
-        randAngle = Math.floor(Math.random() * 360),
-        //colorArr = ["orange", "red"],
-        //randColor = colorArr[Math.floor(Math.random() * colorArr.length)],
-        watermarkConfig = {
-          watermark_alpha: 0.3,
-          watermark_height: 25,
-          watermark_width: 100,
-          watermark_x: -50,
-          watermark_y: -25,
-          watermark_x_space: 25,
-          watermark_y_space: 150,
-          watermark_fontsize: "12px",
-          watermark_txt: "@" + name,
-          watermark_angle: randAngle,
-          watermark_color: "#bebebe",
-        },
-        needWatermark = /ranking|search/i.test(nowPath);
+    $route: function (to, from) {
+      let path = to.path;
 
-      if (accessToken) {
-        if (needWatermark == true) {
-          watermark.load(watermarkConfig);
-        }
+      this.initShow(to, from);
 
-        if (needWatermark == false && document.getElementById("wm_div_id")) {
-          watermark.remove();
-        }
+      if (path) {
+        this.initPage(path);
       }
-
-      this.tableData.result.model = nowPath;
-
-      /ranking|search/i.test(nowPath) == true || nowPath == "/"
-        ? (statusBar = true)
-        : (statusBar = false);
-      this.showInfo.statusBar = statusBar;
-
-      /ranking/i.test(nowPath) == true ? (whiteBar = true) : (whiteBar = false);
-      this.showInfo.whiteBar = whiteBar;
-
-      /tools|admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
-        nowPath
-      ) == true
-        ? (tabbar = false)
-        : (tabbar = true);
-      this.showInfo.tabbar = tabbar;
-
-      /tools/i.test(nowPath)
-        ? (this.noUpdateTips = true)
-        : (this.noUpdateTips = false);
     },
   },
   metaInfo() {
@@ -196,6 +149,81 @@ export default {
     this.getAppInfo();
   },
   methods: {
+    initPage: function (path) {
+      let statusBar = false,
+        whiteBar = false,
+        tabbar = false,
+        name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
+        accessToken = this.$cookie.get("accessToken") || null,
+        randAngle = Math.floor(Math.random() * 360),
+        //colorArr = ["orange", "red"],
+        //randColor = colorArr[Math.floor(Math.random() * colorArr.length)],
+        watermarkConfig = {
+          watermark_alpha: 0.3,
+          watermark_height: 25,
+          watermark_width: 100,
+          watermark_x: -50,
+          watermark_y: -25,
+          watermark_x_space: 25,
+          watermark_y_space: 150,
+          watermark_fontsize: "12px",
+          watermark_txt: "@" + name,
+          watermark_angle: randAngle,
+          watermark_color: "#bebebe",
+        },
+        needWatermark = /ranking|search/i.test(path);
+
+      if (accessToken) {
+        if (needWatermark == true) {
+          watermark.load(watermarkConfig);
+        }
+
+        if (needWatermark == false && document.getElementById("wm_div_id")) {
+          watermark.remove();
+        }
+      }
+
+      this.tableData.result.model = path;
+
+      /ranking|search/i.test(path) == true || path == "/"
+        ? (statusBar = true)
+        : (statusBar = false);
+      this.showInfo.statusBar = statusBar;
+
+      /ranking/i.test(path) == true ? (whiteBar = true) : (whiteBar = false);
+      this.showInfo.whiteBar = whiteBar;
+
+      /tools|admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
+        path
+      ) == true
+        ? (tabbar = false)
+        : (tabbar = true);
+      this.showInfo.tabbar = tabbar;
+
+      /tools/i.test(path)
+        ? (this.noUpdateTips = true)
+        : (this.noUpdateTips = false);
+    },
+    initShow: function (to, from) {
+      let getHistory = this.$store.getters.getHistory || {},
+        nowPath = {};
+
+      if (!from.name) {
+        nowPath = {
+          fullPath: "/",
+        };
+      } else if (to.name != from.name) {
+        nowPath = from;
+      } else {
+        return;
+      }
+
+      this.$store.commit("saveHistory", nowPath);
+
+      if (getHistory.length > 1) {
+        this.$store.getters.getHistory.shift();
+      }
+    },
     getAppInfo: function () {
       this.$axios.post(this.$appApi.app.getAppInfo).then((res) => {
         let data = res.data.data,
@@ -208,7 +236,8 @@ export default {
           tempAccessToken = q.tempAccessToken || "",
           oauthType = q.oauthType || "",
           tempText = q.tempText || null,
-          appConfigInfo = this.$appConfigInfo;
+          appConfigInfo = this.$appConfigInfo,
+          debug = 0;
 
         this.zoom = q.zoom || 1;
         this.tableData = data;
@@ -302,6 +331,12 @@ export default {
             this.$message.warning(
               this.$appMsg.warning[tempText] || this.$t("unknown")
             );
+        }
+
+        debug = this.$route.query.debug || 0;
+
+        if (debug == 1) {
+          localStorage.setItem("debug", 1);
         }
 
         this.showInfo.app = true;

@@ -507,7 +507,7 @@
 
 <script>
 export default {
-  name: "RankingDianFengSai",
+  name: "rankingDianFengSai",
   components: {
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
