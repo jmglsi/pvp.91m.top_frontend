@@ -24,7 +24,7 @@
                   ? { color: '#fff !important' }
                   : {}
               "
-              @click-left="$appBack()"
+              @click="$appBack()"
               class="search-e979efff8a859d0adcb2d63d51cd9de4"
             >
               {{ $t("nav-bar.left-text") }}

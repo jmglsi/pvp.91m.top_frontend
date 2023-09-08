@@ -247,7 +247,7 @@ export default {
 
           if (status.code == 200) {
             let suitData = res.data.data;
-            console.log(suitData);
+
             this.hero.qrcode = suitData;
 
             //this.$message.success(this.$appMsg.success[1005]);

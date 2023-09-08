@@ -62,13 +62,8 @@ export default {
   },
   watch: {
     $route: function (to, from) {
-      let path = to.path;
-
+      this.initPage(to);
       this.initShow(to, from);
-
-      if (path) {
-        this.initPage(path);
-      }
     },
   },
   metaInfo() {
@@ -149,10 +144,12 @@ export default {
     this.getAppInfo();
   },
   methods: {
-    initPage: function (path) {
+    initPage: function (to) {
       let statusBar = false,
         whiteBar = false,
         tabbar = false,
+        path = to.path,
+        isRobot = to.query.isRobot || 0,
         name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
         accessToken = this.$cookie.get("accessToken") || null,
         randAngle = Math.floor(Math.random() * 360),
@@ -183,6 +180,19 @@ export default {
         }
       }
 
+      if (isRobot) {
+        this.$appConfigInfo.appInfo.isReadme = true;
+        this.$appConfigInfo.tipsInfo.dfsTips = true;
+        this.$appConfigInfo.tipsInfo.skillTips = true;
+        this.$appConfigInfo.tipsInfo.wanjiaTips = true;
+
+        this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+
+        this.$cookie.set("agree", 1, {
+          expires: "1Y",
+        });
+      }
+
       this.tableData.result.model = path;
 
       /ranking|search/i.test(path) == true || path == "/"
@@ -200,7 +210,7 @@ export default {
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
 
-      /tools/i.test(path)
+      /tools/i.test(path) || isRobot == 1
         ? (this.noUpdateTips = true)
         : (this.noUpdateTips = false);
     },
@@ -656,10 +666,6 @@ div.app-1bda80f2be4d3658e0baa43fbe7ae8c1 {
   height: 100%;
   position: absolute;
   width: 100%;
-}
-
-div.app-6db4dcff371b9397d894ed932d085444 {
-  margin-top: 10px;
 }
 
 div.app-0ca41257ee36e86e5d89591c82113263 {

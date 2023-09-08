@@ -94,7 +94,7 @@
                 <li
                   v-for="(data, index) in row.heroList.slice(0, 5)"
                   :key="'ranking-124611e2f7ddd568c28b5cb512b89be0-' + index"
-                  @click="getRankingBySuit(tableDataRow.roleId, data.heroId)"
+                  @click="getRankingBySuit(row, data.heroId)"
                   class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
                 >
                   <a-dropdown :trigger="['click']">
@@ -366,7 +366,7 @@ export default {
       tableDataRow: {
         gamePlayerName: this.$t("loading"),
       },
-      playeractionSheetActions: [
+      playerActionSheetActions: [
         { name: "对局回顾", value: 0 },
         { name: "查看主页", subname: "需要安装王者营地", value: 1 },
       ],
@@ -447,14 +447,14 @@ export default {
         });
     },
     getRankingBySuit: function (
-      roleId = 0,
+      e,
       heroId = 111,
       aid = 10,
       bid = 1,
       cid = 0,
       did = 0
     ) {
-      if (roleId == 0) return;
+      if (e.roleId == 0) return;
 
       this.$message.info(this.$appMsg.info[1029]);
 
@@ -472,7 +472,7 @@ export default {
             "&did=" +
             did +
             "&roleId=" +
-            roleId +
+            e.roleId +
             "&heroId=" +
             heroId
         )
