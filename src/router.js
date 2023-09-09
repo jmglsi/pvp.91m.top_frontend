@@ -62,24 +62,6 @@ export default new Router({
         keepAlive: true
       }
     }, {
-      path: '/my',
-      name: 'userIndex',
-      component: () =>
-        import('./views/User/Index.vue'),
-      meta: {
-        title: '我的',
-        keepAlive: false
-      }
-    }, {
-      path: '/login',
-      name: 'userLogin',
-      component: () =>
-        import('./views/User/Login.vue'),
-      meta: {
-        title: '登录',
-        keepAlive: true
-      }
-    }, {
       path: '/ranking',
       name: 'rankingIndex',
       component: () =>
@@ -98,6 +80,15 @@ export default new Router({
         keepAlive: true
       }
     }, {
+      path: '/setting',
+      name: 'settingIndex',
+      component: () =>
+        import('./views/Setting/Index.vue'),
+      meta: {
+        title: '设置',
+        keepAlive: true
+      }
+    }, {
       path: '/friends',
       name: 'friendsIndex',
       component: () =>
@@ -107,13 +98,22 @@ export default new Router({
         keepAlive: false
       }
     }, {
-      path: '/setting',
-      name: 'settingIndex',
+      path: '/my',
+      name: 'userIndex',
       component: () =>
-        import('./views/Setting/Index.vue'),
+        import('./views/User/Index.vue'),
       meta: {
-        title: '设置',
-        keepAlive: true
+        title: '我的',
+        keepAlive: false
+      }
+    }, {
+      path: '/login',
+      name: 'userLogin',
+      component: () =>
+        import('./views/User/Login.vue'),
+      meta: {
+        title: '登录',
+        keepAlive: false
       }
     }, {
       path: '/hero',
@@ -129,7 +129,7 @@ export default new Router({
             import('./views/Hero/Info.vue'),
           meta: {
             title: '英雄',
-            keepAlive: true
+            keepAlive: false
           }
         }, {
           path: ':id/replay',
@@ -138,7 +138,7 @@ export default new Router({
             import('./views/Hero/Replay.vue'),
           meta: {
             title: '回顾',
-            keepAlive: true
+            keepAlive: false
           }
         }, {
           path: ':id/equipment',
@@ -147,7 +147,7 @@ export default new Router({
             import('./views/Hero/Equipment.vue'),
           meta: {
             title: '备战',
-            keepAlive: true
+            keepAlive: false
           }
         },
       ]
