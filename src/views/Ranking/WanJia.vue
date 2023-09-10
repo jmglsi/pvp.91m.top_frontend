@@ -239,7 +239,7 @@
         v-model="showInfo.shareImg"
         @confirm="showInfo.shareImg = false"
       >
-        <div class="ranking-3ab42c8325a264730406e37e1f731f70"></div>
+        <div class="ranking-3ab42c8325a264730406e37e1f731f70" />
       </van-dialog>
     </div>
 

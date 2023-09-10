@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
+        z-index="99999999"
       >
         <template #left>
           <div

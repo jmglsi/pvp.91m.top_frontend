@@ -9,6 +9,7 @@
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="onNavBarLeftClick"
+        z-index="99999999"
         class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
       />
     </div>

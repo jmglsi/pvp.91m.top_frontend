@@ -284,7 +284,7 @@
                       'hero-equipment-70c44009157f4d55186513004ddd9926-' + index
                     "
                     :title="data"
-                  ></van-tab>
+                  />
                 </van-tabs>
                 <van-grid :border="false" :column-num="3">
                   <van-grid-item
@@ -376,9 +376,9 @@
                                   {{ item.name }}
                                 </van-tag>
                               </div>
-                              <div v-html="data.des1"></div>
+                              <div v-html="data.des1" />
                               <br v-if="data.des2" />
-                              <div v-html="data.des2"></div>
+                              <div v-html="data.des2" />
                             </div>
                           </template>
                         </a-popover>

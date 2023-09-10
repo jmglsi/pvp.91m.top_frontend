@@ -478,7 +478,7 @@
               </van-grid>
 
               <van-grid v-else :border="false" :column-num="5">
-                <van-grid-item text="%"></van-grid-item>
+                <van-grid-item text="%" />
                 <van-grid-item
                   :text="$t('bp.all')"
                   @click="$message.info($appMsg.info[1022])"
@@ -497,8 +497,8 @@
                 <van-grid-item
                   :text="$t('bp.top-rank')"
                   @click="$message.info($appMsg.info[1023])"
-                ></van-grid-item>
-                <van-grid-item :text="$t('bp.ban')"></van-grid-item>
+                />
+                <van-grid-item :text="$t('bp.ban')" />
                 <van-grid-item>
                   <div
                     :class="
@@ -547,7 +547,7 @@
                     <span>{{ tableData.cardInfo.banRate[3] }}</span>
                   </div>
                 </van-grid-item>
-                <van-grid-item :text="$t('bp.pick')"></van-grid-item>
+                <van-grid-item :text="$t('bp.pick')" />
                 <van-grid-item>
                   <div
                     :class="
@@ -653,7 +653,7 @@
                     <span>{{ tableData.cardInfo.bpRate[3] }}</span>
                   </div>
                 </van-grid-item>
-                <van-grid-item :text="$t('bp.win')"></van-grid-item>
+                <van-grid-item :text="$t('bp.win')" />
                 <van-grid-item>
                   <div
                     :class="

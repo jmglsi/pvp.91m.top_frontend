@@ -12,12 +12,12 @@
             zIndex: '-5 !important',
           }"
           class="app-8de1f001663ee713d24888bb422e3881"
-        ></div>
+        />
         <div
           v-if="showInfo.whiteBar"
           :style="{ backgroundColor: 'white !important' }"
           class="app-4789d9440d92b2647ea8a52c2f5b31b5"
-        ></div>
+        />
       </div>
 
       <div v-if="showInfo.app" class="app-3d1b70e46d0b6cd9cfa43d743da14266">

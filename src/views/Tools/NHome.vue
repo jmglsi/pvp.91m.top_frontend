@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
+        z-index="99999999"
         class="n-7b54c0b5320a9a1b5ba31164e1e6de26"
       >
         <template #left>
@@ -302,7 +303,7 @@
                       height="20"
                       class="n-fc4b85d1f8f74bd31ae7eae82cbc2c62"
                     />
-                    <div class="n-5a6a603db52c0d61ec14ec297431dcf6"></div>
+                    <div class="n-5a6a603db52c0d61ec14ec297431dcf6" />
                   </van-grid-item>
                 </draggable>
               </van-grid>
@@ -403,7 +404,7 @@
                       height="20"
                       class="n-fc4b85d1f8f74bd31ae7eae82cbc2c62"
                     />
-                    <div class="n-5a6a603db52c0d61ec14ec297431dcf6"></div>
+                    <div class="n-5a6a603db52c0d61ec14ec297431dcf6" />
                   </van-grid-item>
                 </draggable>
               </van-grid>
