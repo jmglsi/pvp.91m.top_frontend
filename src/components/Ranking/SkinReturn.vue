@@ -7,12 +7,9 @@
         :fixed="true"
         :placeholder="type == 1 ? true : false"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
+        z-index="99999999"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #title>
@@ -338,7 +335,10 @@ export default {
 
       Array.from(e.series, (x) => {
         x.symbol = "none";
+
+        return x;
       });
+
       return e;
     },
     getRanking: function (aid = -1, bid = 0, cid = 0, did = 0) {

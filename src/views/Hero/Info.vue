@@ -11,13 +11,9 @@
             ? { backgroundColor: 'white !important' }
             : { backgroundColor: 'transparent !important' }
         "
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
+        :left-text="scroll >= 50 ? $t('nav-bar.left-text') : null"
+        @click-left="$appBack()"
         @click-right="$message.info($appMsg.info[1004])"
-        :left-text="scroll >= 50 ? '搜一搜' : null"
         z-index="99999999"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
@@ -98,7 +94,7 @@
           <img v-lazy="data" class="hero-44908c08b6c253a19ab6246e6eec857a" />
         </van-swipe-item>
         <template #indicator>
-          <div class="custom-indicator"></div>
+          <div class="custom-indicator" />
         </template>
       </van-swipe>
 
@@ -319,7 +315,7 @@
             @click="onSkillTabsClick"
           >
             <van-tab title="顺位 (推荐)">
-              <HeroBp :heroId="hero.info.id" />
+              <HeroBPIndex :heroId="hero.info.id" />
             </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList :genreId="hero.info.id" />
@@ -449,7 +445,7 @@ export default {
     ChartsHeroRadar: () => import("@/components/Charts/HeroRadar.vue"),
     ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
-    HeroBp: () => import("@/components/Hero/Bp.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

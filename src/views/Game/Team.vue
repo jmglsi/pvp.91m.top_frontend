@@ -7,14 +7,11 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
-        @click-right="onNavBarRightClick"
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
+        @click-right="onNavBarRightClick"
         title="队伍"
+        z-index="99999999"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
       >
         <van-icon name="add-o" slot="right" />

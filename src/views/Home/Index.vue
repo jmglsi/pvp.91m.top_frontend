@@ -1,35 +1,14 @@
 <template>
   <div class="app-index">
-    <div class="home-3edeff15047c21ac6441301927306137">
-      <van-sticky
-        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
-      >
-        <van-search
-          show-action
-          :placeholder="$appConfigInfo.appInfo.search.placeholder"
-          @click="$appPush({ path: '/search' })"
-          shape="round"
-        >
-          <template #action>
-            <img
-              v-lazy="$appConfigInfo.appInfo.search.img"
-              width="35"
-              height="35"
-              class="app-border-radius"
-              @click="onUrlClick($appConfigInfo.appInfo.search)"
-            />
-          </template>
-        </van-search>
-      </van-sticky>
-    </div>
-
-    <div class="app-6db4dcff371b9397d894ed932d085444">
+    <div class="home-4faa549767067d538f8945b062d2f244">
       <van-tabs
         v-model="tabsInfo.model"
         v-if="tabsInfo.model > -1"
         :border="false"
         :ellipsis="false"
         :swipeable="true"
+        :sticky="true"
+        :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
         @click="$appPush({ query: { type: tabsInfo.model } })"
         duration="0.5"
         line-width="25px"
@@ -40,6 +19,26 @@
           class="home-e7f8cbd87d347be881cba92dad128518"
         >
           <HomeRecommend />
+        </van-tab>
+        <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
+          <template #title>
+            <van-search
+              show-action
+              :placeholder="$appConfigInfo.appInfo.search.placeholder"
+              @click="$appPush({ path: '/search' })"
+              shape="round"
+            >
+              <template #action>
+                <img
+                  v-lazy="$appConfigInfo.appInfo.search.img"
+                  width="35"
+                  height="35"
+                  class="app-border-radius"
+                  @click="onUrlClick($appConfigInfo.appInfo.search)"
+                />
+              </template>
+            </van-search>
+          </template>
         </van-tab>
         <!--
         <van-tab
@@ -220,22 +219,12 @@ div.home-72ab9e07378f988922e6c91884048db0 {
 
 div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
   div.van-tabs__wrap {
-    margin-top: -3px;
-    width: 43% !important;
+    margin-top: -12px;
+    height: 60px;
   }
 
   div.van-tab--active {
     font-size: 25px;
-  }
-}
-
-div.home-3edeff15047c21ac6441301927306137 {
-  div.van-search {
-    margin-top: 2px;
-    position: absolute;
-    right: 0;
-    width: 57%;
-    z-index: @app-z-index;
   }
 }
 </style>

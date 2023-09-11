@@ -28,6 +28,22 @@ export default new Router({
       path: '/skin/encore',
       redirect: '/skin/return'
     }, {
+      path: '/skin',
+      name: 'skinReturnIndex',
+      redirect: '/ranking',
+      component: () =>
+        import('./components/Ranking/SkinReturn.vue'),
+      children: [
+        {
+          path: 'return',
+          name: 'skinReturn',
+          meta: {
+            title: '趋势',
+            keepAlive: true
+          }
+        }
+      ]
+    }, {
       path: '/',
       name: 'appIndex',
       component: () =>
@@ -43,24 +59,6 @@ export default new Router({
         import('./views/MiniApp/Index.vue'),
       meta: {
         title: '小程序',
-        keepAlive: true
-      }
-    }, {
-      path: '/my',
-      name: 'userIndex',
-      component: () =>
-        import('./views/User/Index.vue'),
-      meta: {
-        title: '我的',
-        keepAlive: false
-      }
-    }, {
-      path: '/login',
-      name: 'userLogin',
-      component: () =>
-        import('./views/User/Login.vue'),
-      meta: {
-        title: '登录',
         keepAlive: true
       }
     }, {
@@ -82,15 +80,6 @@ export default new Router({
         keepAlive: true
       }
     }, {
-      path: '/friends',
-      name: 'friendsIndex',
-      component: () =>
-        import('./views/Friends/Index.vue'),
-      meta: {
-        title: '扩列',
-        keepAlive: false
-      }
-    }, {
       path: '/setting',
       name: 'settingIndex',
       component: () =>
@@ -100,21 +89,32 @@ export default new Router({
         keepAlive: true
       }
     }, {
-      path: '/skin',
-      name: 'skinReturnIndex',
-      redirect: '/ranking',
+      path: '/friends',
+      name: 'friendsIndex',
       component: () =>
-        import('./views/Ranking/SkinReturn.vue'),
-      children: [
-        {
-          path: 'return',
-          name: 'skinReturn',
-          meta: {
-            title: '趋势',
-            keepAlive: true
-          }
-        }
-      ]
+        import('./views/Friends/Index.vue'),
+      meta: {
+        title: '扩列',
+        keepAlive: false
+      }
+    }, {
+      path: '/my',
+      name: 'userIndex',
+      component: () =>
+        import('./views/User/Index.vue'),
+      meta: {
+        title: '我的',
+        keepAlive: false
+      }
+    }, {
+      path: '/login',
+      name: 'userLogin',
+      component: () =>
+        import('./views/User/Login.vue'),
+      meta: {
+        title: '登录',
+        keepAlive: false
+      }
     }, {
       path: '/hero',
       name: 'heroIndex',
@@ -129,7 +129,7 @@ export default new Router({
             import('./views/Hero/Info.vue'),
           meta: {
             title: '英雄',
-            keepAlive: true
+            keepAlive: false
           }
         }, {
           path: ':id/replay',
@@ -138,7 +138,7 @@ export default new Router({
             import('./views/Hero/Replay.vue'),
           meta: {
             title: '回顾',
-            keepAlive: true
+            keepAlive: false
           }
         }, {
           path: ':id/equipment',
@@ -147,7 +147,7 @@ export default new Router({
             import('./views/Hero/Equipment.vue'),
           meta: {
             title: '备战',
-            keepAlive: true
+            keepAlive: false
           }
         },
       ]
@@ -171,7 +171,7 @@ export default new Router({
           path: 'weekly',
           name: 'toolsWeekly',
           component: () =>
-            import('./views/Tools/weekly.vue'),
+            import('./views/Tools/Weekly.vue'),
           meta: {
             title: '周报',
             keepAlive: false

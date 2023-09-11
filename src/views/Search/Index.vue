@@ -24,11 +24,7 @@
                   ? { color: '#fff !important' }
                   : {}
               "
-              @click="
-                $appPush({
-                  path: $store.getters.getHistory.fullPath,
-                })
-              "
+              @click="$appBack()"
               class="search-e979efff8a859d0adcb2d63d51cd9de4"
             >
               {{ $t("nav-bar.left-text") }}
@@ -482,7 +478,7 @@
               </van-grid>
 
               <van-grid v-else :border="false" :column-num="5">
-                <van-grid-item text="%"></van-grid-item>
+                <van-grid-item text="%" />
                 <van-grid-item
                   :text="$t('bp.all')"
                   @click="$message.info($appMsg.info[1022])"
@@ -501,8 +497,8 @@
                 <van-grid-item
                   :text="$t('bp.top-rank')"
                   @click="$message.info($appMsg.info[1023])"
-                ></van-grid-item>
-                <van-grid-item :text="$t('bp.ban')"></van-grid-item>
+                />
+                <van-grid-item :text="$t('bp.ban')" />
                 <van-grid-item>
                   <div
                     :class="
@@ -551,7 +547,7 @@
                     <span>{{ tableData.cardInfo.banRate[3] }}</span>
                   </div>
                 </van-grid-item>
-                <van-grid-item :text="$t('bp.pick')"></van-grid-item>
+                <van-grid-item :text="$t('bp.pick')" />
                 <van-grid-item>
                   <div
                     :class="
@@ -657,7 +653,7 @@
                     <span>{{ tableData.cardInfo.bpRate[3] }}</span>
                   </div>
                 </van-grid-item>
-                <van-grid-item :text="$t('bp.win')"></van-grid-item>
+                <van-grid-item :text="$t('bp.win')" />
                 <van-grid-item>
                   <div
                     :class="
@@ -1063,7 +1059,7 @@
             @click="onSkillTabsClick"
           >
             <van-tab title="顺位 (推荐)">
-              <HeroBp
+              <HeroBPIndex
                 v-if="skillInfo.model == 0"
                 :heroId="tableData.cardInfo.id"
               />
@@ -1137,7 +1133,7 @@ export default {
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
     ChooseHero: () => import("@/components/Choose/Hero.vue"),
-    HeroBp: () => import("@/components/Hero/Bp.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

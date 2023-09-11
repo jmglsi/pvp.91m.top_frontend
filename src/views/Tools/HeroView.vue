@@ -64,10 +64,9 @@
             class="tools-7fd0a5f5913603ec56c9095e237cd4bc"
           >
             {{
-              $appConfigInfo.positionInfo[data.positionId + 1][0] +
-              " | " +
-              parseInt(data.pickRate) +
-              "%"
+              ($appConfigInfo.positionInfo[data.positionId + 1][0] +
+                " | " +
+                parseInt(data.pickRate) || "-") + "%"
             }}
           </van-button>
         </li>
@@ -78,7 +77,7 @@
             :icon="hero.info.skill[1].img"
             class="tools-7fd0a5f5913603ec56c9095e237cd4bc"
           >
-            {{ parseInt(hero.info.skill[1].pickRate) + "%" }}
+            {{ (parseInt(hero.info.skill[1].pickRate) || "-") + "%" }}
           </van-button>
         </li>
       </ul>
@@ -86,7 +85,12 @@
 
     <div class="tools-01d8b754716fc5f519c1a4b654867193">
       <div class="tools-58e4ea8e49b560235a7058518676b7e4">
-        <vue-qr ref="refQrCode" :text="hero.qrcode.url" :size="200" />
+        <vue-qr
+          ref="refQrCode"
+          v-if="hero.qrcode.url"
+          :text="hero.qrcode.url"
+          :size="200"
+        />
       </div>
       <span class="tools-e144855db3887408c0e2202a42027279">
         {{ hero.qrcode.name }}
@@ -247,7 +251,7 @@ export default {
 
           if (status.code == 200) {
             let suitData = res.data.data;
-            console.log(suitData);
+
             this.hero.qrcode = suitData;
 
             //this.$message.success(this.$appMsg.success[1005]);
@@ -457,7 +461,7 @@ span.tools-c63abbfb166e7e598518fe6a7a58c86b {
 span.tools-e144855db3887408c0e2202a42027279 {
   font-size: 10px;
   left: 60px;
-  margin-top: 105px;
+  margin-top: 99px;
   position: absolute;
   text-align: center;
   width: 200px;
@@ -466,14 +470,14 @@ span.tools-e144855db3887408c0e2202a42027279 {
 div.tools-ea7120740464ce78c305436d1f150b4d {
   margin: 10px;
   margin-left: 5px;
-  margin-top: 12px;
+  margin-top: 15px;
   width: 250px;
 }
 
 div.tools-bed58a7a97fd68cfc9d2cf0dc5d9f9d5 {
   position: absolute;
   left: 5px;
-  top: 122px;
+  margin-top: 53px;
   text-align: @app-text-align;
 
   li {
@@ -512,11 +516,12 @@ div.tools-c63abbfb166e7e598518fe6a7a58c86b {
 
 div.tools-01d8b754716fc5f519c1a4b654867193 {
   z-index: -1;
+  position: absolute;
 }
 
 div.tools-58e4ea8e49b560235a7058518676b7e4 {
   left: -65px;
-  margin-top: 13px;
+  margin-top: 7px;
   position: absolute;
   transform: scale(0.25);
 }

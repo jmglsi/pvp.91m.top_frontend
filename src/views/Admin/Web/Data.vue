@@ -94,7 +94,7 @@
                 @click="onTabsClick"
               >
                 <van-tab title="顺位 (推荐)">
-                  <HeroBp
+                  <HeroBPIndex
                     v-if="skillInfo.model == 0"
                     :heroId="tableData.cardInfo.id"
                   />
@@ -155,7 +155,7 @@
 export default {
   name: "adminWebData",
   components: {
-    HeroBp: () => import("@/components/Hero/Bp.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

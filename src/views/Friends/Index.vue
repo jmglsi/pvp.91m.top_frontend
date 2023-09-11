@@ -7,12 +7,9 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
+        z-index="99999999"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
         <template #title>
@@ -118,10 +115,9 @@
                       class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
-                      v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
                       width="50"
-                      height="35"
+                      height="40"
                       class="app-d31cb1c15b091f41248935d88a8d0a45"
                     />
                   </div>

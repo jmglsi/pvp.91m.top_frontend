@@ -746,7 +746,10 @@
             @click="onTabsClick"
           >
             <van-tab title="顺位 (推荐)">
-              <HeroBp v-if="skillInfo.model == 0" :heroId="tableDataRow.id" />
+              <HeroBPIndex
+                v-if="skillInfo.model == 0"
+                :heroId="tableDataRow.id"
+              />
             </van-tab>
             <van-tab title="打法 (推荐)">
               <HeroGenreList
@@ -816,7 +819,7 @@ export default {
   name: "RankingGradient",
   components: {
     ChartsHeroCircle: () => import("@/components/Charts/HeroCircle.vue"),
-    HeroBp: () => import("@/components/Hero/Bp.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
     HeroEquipmentListOne: () =>

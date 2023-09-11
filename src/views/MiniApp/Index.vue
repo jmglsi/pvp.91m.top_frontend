@@ -7,8 +7,9 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         title=" "
+        z-index="99999999"
         class="miniapp-cce79bfde37d3f930a50bbaed2d29135"
-      ></van-nav-bar>
+      />
     </div>
 
     <div
@@ -106,7 +107,7 @@
 
     <div
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
-      @click="$router.go(-1)"
+      @click="$appPush({ path: '/' })"
     >
       <img v-lazy="'/img/icons-app/stow.png'" width="25" height="25" />
     </div>

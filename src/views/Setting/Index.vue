@@ -7,13 +7,11 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
         title="设置"
+        z-index="99999999"
+        class="setting-4644ad66ca89bea4c9eb012b0281fef9"
       />
     </div>
 
