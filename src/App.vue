@@ -443,8 +443,8 @@ img.app-border-radius {
 
 img.app-d31cb1c15b091f41248935d88a8d0a45 {
   border-radius: unset;
-  bottom: -19px !important;
-  margin-left: -52px !important;
+  bottom: -25px !important;
+  left: 2px !important;
   position: absolute;
   transform: scale(0.75);
 }

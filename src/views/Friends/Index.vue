@@ -115,10 +115,9 @@
                       class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
-                      v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
                       width="50"
-                      height="35"
+                      height="40"
                       class="app-d31cb1c15b091f41248935d88a8d0a45"
                     />
                   </div>
