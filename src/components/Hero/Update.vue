@@ -94,10 +94,7 @@
                 :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
                 @click="
                   item != heroId
-                    ? $appPush({
-                        path: '/hero/' + item + '/info',
-                        replace: true,
-                      })
+                    ? $appPush({ path: '/hero/' + item + '/info' })
                     : null
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"
@@ -198,9 +195,7 @@
     <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
-        @close="
-          showInfo.checked ? onCopy(heroId, tableDataRow) : null
-        "
+        @close="showInfo.checked ? onCopy(heroId, tableDataRow) : null"
       >
         <template #title>
           <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">
@@ -431,7 +426,7 @@ export default {
       return day;
     },
     onEquipmentClick: function (e, a) {
-      this.equipmentId = parseInt(e.equipment[a]) || 0;
+      this.equipmentId = parseInt(e.equipmentList[a]) || 0;
       this.showInfo.actionSheet = true;
     },
     onCopy: function (heroId, row) {

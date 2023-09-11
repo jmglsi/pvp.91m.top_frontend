@@ -7,12 +7,9 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="
-          $appPush({
-            path: $store.getters.getHistory.fullPath,
-          })
-        "
         :left-text="$t('nav-bar.left-text')"
+        @click-left="$appBack()"
+        z-index="99999999"
         class="hero-6809da26e032292efff6ec78cdec8de2"
       >
         <template #title>

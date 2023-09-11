@@ -6,6 +6,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
+        z-index="99999999"
       >
         <template #left>
           <div
@@ -132,7 +133,7 @@
           icon="/img/icons-app/game.png"
           title="全局BP模拟器"
           label="第一次使用务必看一下"
-          value="自豪的使用语雀"
+          value="视频教程"
           is-link
           @click="
             $appOpenUrl($t('open-url.title'), null, { path: url.question }, 0)
@@ -236,10 +237,9 @@
                       class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
-                      v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
                       width="50"
-                      height="35"
+                      height="40"
                       class="app-d31cb1c15b091f41248935d88a8d0a45"
                     />
                   </div>
@@ -275,11 +275,14 @@
         <van-cell
           icon="manager"
           title="扩列链接"
-          label="复制到公众号可以续时"
           value="复制"
           is-link
           @click="onCopy"
-        />
+        >
+          <template #label>
+            <span style="color: red">复制到公众号可以续时</span>
+          </template>
+        </van-cell>
       </van-cell-group>
     </div>
 

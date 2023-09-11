@@ -84,7 +84,10 @@ export default {
 
       Array.from(e.series, (x) => {
         x.symbol = "none";
+
+        return x;
       });
+
       return e;
     },
     getHeroChartsLog: function (aid, bid, cid, did) {

@@ -7,8 +7,9 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        @click-left="onNavBarLeftClick"
         :left-text="$t('nav-bar.left-text')"
+        @click-left="onNavBarLeftClick"
+        z-index="99999999"
         class="login-f921d5768e1eb9ca4fe4e6b4692622e6"
       />
     </div>
@@ -211,9 +212,7 @@ export default {
     },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.$appPush({
-          path: this.$store.getters.getHistory.fullPath,
-        });
+        this.$appBack();
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = this.$t("my.login");

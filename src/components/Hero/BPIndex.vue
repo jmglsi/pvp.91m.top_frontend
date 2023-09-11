@@ -1,5 +1,5 @@
 <template>
-  <div class="bp-ce736395c918ab733925e1d3298e7aca app-bp">
+  <div class="bp-ce736395c918ab733925e1d3298e7aca app-bpIndex">
     <van-row>
       <van-col span="12">
         <div class="bp-427034659a1ba05f529b72e639b4481f">
@@ -210,7 +210,7 @@
 
 <script>
 export default {
-  name: "HeroSameHobby",
+  name: "HeroBPIndex",
   props: {
     heroId: {
       type: Number,
