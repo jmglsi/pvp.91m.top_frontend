@@ -5,8 +5,8 @@
     "scripts": {
         "web:serve": "vue-cli-service serve --mode development",
         "web:build": "vue-cli-service build --mode production",
-        "web:start": "sh ~/Web/start.sh",
-        "web:stop": "sh ~/Web/stop.sh",
+        "web:start": "sh ~/Web/web_start.sh",
+        "web:stop": "sh ~/Web/web_stop.sh",
         "web:analyz": "vue-cli-service build --mode production --report",
         "web:sync": "sh sync.sh",
         "lint": "vue-cli-service lint",

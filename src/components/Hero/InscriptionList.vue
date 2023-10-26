@@ -34,6 +34,42 @@
       />
 
       <vxe-table-column
+        title="分段"
+        field="rankScore"
+        :width="listWidth"
+        sortable
+      >
+        <template #default="{ row }">
+          <span class="ranking-20b2165cf5e79e58d5e434b7d9370589">
+            {{ row.rankScore }}
+          </span>
+          <br />
+          <span class="ranking-20b2165cf5e79e58d5e434b7d9370589">
+            {{ row.roleJobName }}
+          </span>
+        </template>
+      </vxe-table-column>
+
+      <vxe-table-column
+        title="进度 (%)"
+        field="basePoints[1]"
+        width="125"
+        :title-prefix="{
+          content: $appMsg.tips[1023],
+        }"
+        sortable
+      >
+        <template #default="{ row }">
+          <span
+            :style="getBasePointsColor(row.basePoints[1] || 0)"
+            class="ranking-94077a6749587738aac37ee4ba7316bf"
+          >
+            {{ row.basePoints[0] || 0 }} | {{ row.basePoints[1] || 0 }}
+          </span>
+        </template>
+      </vxe-table-column>
+
+      <vxe-table-column
         title="战力"
         field="heroFightPower"
         :width="listWidth"
@@ -108,7 +144,7 @@ export default {
     };
   },
   created() {
-    this.listWidth = this.$appInitTableWidth(350);
+    this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
     getRankingByZhanli: function (
@@ -260,6 +296,39 @@ export default {
         );
       }
     },
+    getBasePointsColor(e) {
+      let nowColor = null,
+        ret = {};
+
+      if (e == 0) {
+        nowColor = null;
+      } else if (e < 80) {
+        nowColor = "blue";
+      } else if (e > 100) {
+        nowColor = "red";
+      } else {
+        nowColor = null;
+      }
+
+      if (nowColor) {
+        ret = {
+          color: nowColor,
+        };
+      }
+
+      return ret;
+    },
   },
 };
 </script>
+
+<style scoped lang="less">
+span.ranking-20b2165cf5e79e58d5e434b7d9370589 {
+  font-size: 10px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  margin-top: -13px;
+}
+</style>

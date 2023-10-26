@@ -99,7 +99,19 @@
             </a>
             <template #overlay>
               <a-menu>
-                <a-menu-item key="n-top-right-0">
+                <a-menu-item
+                  @click="
+                    $appOpenUrl(
+                      $t('open-url.title'),
+                      '查看使用说明',
+                      {
+                        path: url.question,
+                      },
+                      0
+                    )
+                  "
+                  key="n-top-right-0"
+                >
                   <span style="color: red">使用说明</span>
                 </a-menu-item>
                 <a-menu-divider />
@@ -671,6 +683,9 @@ export default {
       openId: this.$cookie.get("openId") || "",
       joinTeamId: this.$route.query.joinTeamId || "",
       gameLabel: this.$route.query.gameLabel || "",
+      url: {
+        question: "https://www.yuque.com/jmglsi/pvp/ftriowxggk00bxb0",
+      },
       tableData: {
         author: {},
         myInfo: {
