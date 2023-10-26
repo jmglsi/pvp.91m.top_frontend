@@ -410,6 +410,7 @@
             sortable
           />
         </vxe-table-colgroup>
+
         <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
