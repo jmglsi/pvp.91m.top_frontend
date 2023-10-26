@@ -325,33 +325,6 @@
             )
           "
         />
-        <!--
-          <van-cell
-            icon="description"
-            title="项目开放接口"
-            value="Coding"
-            is-link
-            @click="
-              $appOpenUrl(
-                $t('open-url.title'),
-                null,
-                { path: url.openSource[1] },
-                0
-              )
-            "
-          />
-          <van-cell
-            icon="/img/icons-app/coffee.png"
-            title="请我喝杯咖啡"
-            label="制作不易，支持一下"
-            value="爱发电"
-            icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-            is-link
-            @click="
-              $appOpenUrl($t('open-url.title'), null, { path: url.afdian }, 0)
-            "
-          />
-        -->
         <van-cell
           icon="comment-o"
           :title="$t('feedback.title')"
@@ -404,13 +377,69 @@
         title=" "
         class="login-b990d992f06c8db21d6b58c25f843529"
       >
-        <van-cell
-          title="沪ICP备16031287号-2"
-          @click="
-            $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
-          "
-          class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4"
-        />
+        <van-cell :border="false">
+          <span class="login-fbc6a8f9f756f1d3e6daaf7d5c5034b5">
+            <img
+              height="20"
+              v-lazy="
+                $appApi.app.appProxy +
+                'https://badgen.net/badge/IPv6/Yes?labelColor=000000&color=3aa675'
+              "
+            />
+          </span>
+
+          <span class="login-fbc6a8f9f756f1d3e6daaf7d5c5034b5">
+            <img
+              height="20"
+              v-lazy="
+                $appApi.app.appProxy +
+                'https://badgen.net/badge/SSL/Yes?labelColor=000000&color=3aa675'
+              "
+            />
+          </span>
+
+          <span class="login-fbc6a8f9f756f1d3e6daaf7d5c5034b5">
+            <img
+              height="20"
+              v-lazy="
+                $appApi.app.appProxy +
+                'https://badgen.net/badge/开发/文档?labelColor=000000&color=blue'
+              "
+              @click="
+                $appOpenUrl(
+                  $t('open-url.title'),
+                  null,
+                  { path: url.openSource[1] },
+                  0
+                )
+              "
+            />
+          </span>
+
+          <span class="login-fbc6a8f9f756f1d3e6daaf7d5c5034b5">
+            <img
+              height="20"
+              v-lazy="
+                $appApi.app.appProxy +
+                'https://badgen.net/badge/爱发电/赞助?labelColor=000000&color=946ce6'
+              "
+              @click="
+                $appOpenUrl($t('open-url.title'), null, { path: url.afdian }, 0)
+              "
+            />
+          </span>
+        </van-cell>
+        <van-cell class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4">
+          <template #title>
+            <span
+              @click="
+                $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
+              "
+            >
+              沪ICP备16031287号-2
+            </span>
+          </template>
+        </van-cell>
       </van-cell-group>
     </div>
 
@@ -576,7 +605,7 @@
       </van-action-sheet>
     </div>
 
-    <AppHello height="100px" />
+    <AppHello height="150px" />
   </div>
 </template>
 
@@ -600,9 +629,9 @@ export default {
         support: "//support.qq.com/products/305514",
         openSource: [
           "//ngabbs.com/read.php?tid=26200132",
-          "//e9c29a200307a5bb-jmglsi.doc.coding.io/",
+          "//91m.top/s/coding",
         ],
-        afdian: "//afdian.net/@jmglsi",
+        afdian: "//91m.top/s/afdian",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
       loginInfo: {
@@ -842,6 +871,15 @@ img.login-ef65f15f01e7d076cc4ef40d753e4d65 {
   position: absolute;
 }
 
+span.login-fbc6a8f9f756f1d3e6daaf7d5c5034b5 {
+  margin-left: 3px;
+  margin-right: 3px;
+
+  img {
+    border-radius: 5px !important;
+  }
+}
+
 span.login-25930e3036f13852cb0b29694bbab611 {
   margin: 0 3px;
 }
@@ -869,6 +907,12 @@ div.login-7dc22b2c6a992f0232345df41303f5ea {
 
   span.login-4646fa4296a7f5dea261e60e00ecd24b {
     font-size: 20px;
+  }
+}
+
+div.login-b990d992f06c8db21d6b58c25f843529 {
+  div.van-cell__value {
+    text-align: center !important;
   }
 }
 

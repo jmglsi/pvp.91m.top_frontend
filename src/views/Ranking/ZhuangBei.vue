@@ -53,6 +53,7 @@
           title="名字"
           field="name"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
+          sortable
         />
 
         <vxe-table-column

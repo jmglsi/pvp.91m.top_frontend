@@ -93,10 +93,10 @@
                     >
                       <a-radio-button value="a">梯度</a-radio-button>
                       <a-radio-button value="b">排行</a-radio-button>
-                      <a-radio-button :disabled="cid == 0" value="c">
+                      <a-radio-button value="c" :disabled="cid == 0">
                         迁徙
                       </a-radio-button>
-                      <a-radio-button :disabled="cid == 0" value="d">
+                      <a-radio-button value="d" :disabled="cid == 0">
                         战力
                       </a-radio-button>
                     </a-radio-group>
@@ -166,13 +166,29 @@
           />
         </van-tab>
 
+        <van-tab>
+          <template #title>
+            战力排行&nbsp;<i class="vxe-icon--funnel" />
+          </template>
+
+          <div class="ranking-f0bce2ae24464a70a3e9e78a1c36eea0">
+            <RankingZhanLi
+              v-if="tabsInfo.model == 4"
+              :bid="bid || heroFightPowerTypeInfo.model"
+              :cid="cid || dfsPositionTypeInfo.model"
+              :isSmallMode="isSmallMode"
+              :refresh="refresh || 0"
+            />
+          </div>
+        </van-tab>
+
         <!--
         <van-tab>
           <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
 
           <div class="ranking-02481dbde39222ea29fbc1d2f80b2885">
             <RankingPaiZi
-              v-if="tabsInfo.model == 4"
+              v-if="tabsInfo.model == 5"
               :isSmallMode="isSmallMode"
               :bid="bid || pzAreaTypeInfo.model"
               :cid="cid || pzProvinceTypeInfo.model"
@@ -189,7 +205,7 @@
 
           <div class="ranking-967b680d849350ecbc7c66ff16027608">
             <RankingNeiZhan
-              v-if="tabsInfo.model == 5"
+              v-if="tabsInfo.model == 6"
               :isSmallMode="isSmallMode"
               :bid="bid || nzOrderInfo.model"
               :cid="cid || nzStatusInfo.model"
@@ -305,6 +321,7 @@ export default {
       import("@/components/Charts/FightPowerLine.vue"),
     RankingDianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
     RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
+    RankingZhanLi: () => import("@/views/Ranking/ZhanLi.vue"),
     RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
     //RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
     //RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
@@ -354,6 +371,16 @@ export default {
           { value: 3, text: "上分推荐 (昨日)" },
           { value: 4, text: "全部 (最近 5 天)" },
           { value: 5, text: "全部 (最近 30 天)" },
+        ],
+      },
+      heroFightPowerTypeInfo: {
+        model: 0,
+        options: [
+          { value: 0, text: "全部 (近期)" },
+          { value: 1, text: "安卓 QQ" },
+          { value: 2, text: "苹果 QQ" },
+          { value: 3, text: "安卓 WX" },
+          { value: 4, text: "苹果 WX" },
         ],
       },
       dfsPositionTypeInfo: {
@@ -534,6 +561,16 @@ export default {
       }
 
       if (e == 4) {
+        this.bidInfo = this.heroFightPowerTypeInfo;
+        this.cidInfo = this.dfsPositionTypeInfo;
+
+        this.heroFightPowerTypeInfo.model = this.bid;
+        this.dfsPositionTypeInfo.model = this.cid;
+
+        this.showInfo.actionSheet = true;
+      }
+
+      if (e == 5) {
         let arrData_1 = [],
           arrData_2 = [],
           arrData_3 = [],
@@ -567,7 +604,7 @@ export default {
         this.showInfo.actionSheet = true;
       }
 
-      if (e == 5) {
+      if (e == 6) {
         this.bidInfo = this.nzOrderInfo;
         this.cidInfo = this.nzStatusInfo;
         this.didInfo = {
@@ -640,6 +677,10 @@ export default {
         //
       }
 
+      if (tabsInfo.model == 6) {
+        //
+      }
+
       this.$appPush({
         query: {
           type: tabsInfo.model,
@@ -652,9 +693,9 @@ export default {
         },
       });
 
-      if (tabsInfo.model != 4) {
-        this.showInfo.actionSheet = false;
-      }
+      //if (tabsInfo.model != 4) {
+      this.showInfo.actionSheet = false;
+      //}
     },
   },
 };
