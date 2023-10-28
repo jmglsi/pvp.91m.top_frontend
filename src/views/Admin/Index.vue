@@ -65,7 +65,7 @@
         <a-menu>
           <a-menu-item key="0">站长</a-menu-item>
           <a-menu-item key="1">
-            <a href="//www.yuque.com/jmglsi/pvp/yyxgbh" target="_blank">
+            <a href="//docs.91m.top" target="_blank">
               常见问题
             </a>
           </a-menu-item>

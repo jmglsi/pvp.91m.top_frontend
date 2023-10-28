@@ -867,7 +867,7 @@ export default {
         },
       },
       url: {
-        question: "//www.yuque.com/jmglsi/pvp/gbpl91",
+        question: "//docs.91m.top",
       },
       isPortrait: true,
       recommendHeroId: null,
@@ -955,7 +955,7 @@ export default {
           {
             title: "常见问题",
             to: null,
-            url: "//www.yuque.com/jmglsi/pvp/gbpl91",
+            url: "//docs.91m.top",
           },
         ],
       },
