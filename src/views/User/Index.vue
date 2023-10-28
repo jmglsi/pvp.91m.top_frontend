@@ -405,7 +405,7 @@
               height="20"
               v-lazy="
                 $appApi.app.appProxy +
-                'https://badgen.net/badge/使用/文档?labelColor=000000&color=blue'
+                'https://badgen.net/badge/介绍/文档?labelColor=000000&color=blue'
               "
               @click="
                 $appOpenUrl(
@@ -627,13 +627,11 @@ export default {
       },
       isLogin: false,
       url: {
-        question: "//docs.91m.top",
+        question:
+          "//docs.91m.top/%E7%BD%91%E7%AB%99/%E5%85%A8%E5%B1%80_BP_%E6%A8%A1%E6%8B%9F%E5%99%A8.html",
         friends: "//docs.91m.top",
         support: "//support.qq.com/products/305514",
-        openSource: [
-          "//ngabbs.com/read.php?tid=26200132",
-          "//docs.91m.top",
-        ],
+        openSource: ["//ngabbs.com/read.php?tid=26200132", "//docs.91m.top"],
         afdian: "//91m.top/s/afdian",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
