@@ -17,7 +17,7 @@
             </span>
             <br />
             <br />
-            <a href="//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH" target="_blank">
+            <a href="//docs.91m.top/%E5%A3%B0%E6%98%8E.html" target="_blank">
               《{{ $t("privacy-and-data-statement") }}》
             </a>
           </a-checkbox>

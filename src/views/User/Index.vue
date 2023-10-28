@@ -335,15 +335,17 @@
             $appOpenUrl($t('open-url.title'), null, { path: url.support }, 0)
           "
         />
-        <van-cell
-          icon="friends-o"
-          :title="$t('thank.title')"
-          :value="$t('thank.value')"
-          is-link
-          @click="
-            $appOpenUrl($t('open-url.title'), null, { path: url.friends }, 0)
-          "
-        />
+        <!--
+          <van-cell
+            icon="friends-o"
+            :title="$t('thank.title')"
+            :value="$t('thank.value')"
+            is-link
+            @click="
+              $appOpenUrl($t('open-url.title'), null, { path: url.friends }, 0)
+            "
+          />
+        -->
       </van-cell-group>
     </div>
 
@@ -403,7 +405,7 @@
               height="20"
               v-lazy="
                 $appApi.app.appProxy +
-                'https://badgen.net/badge/开发/文档?labelColor=000000&color=blue'
+                'https://badgen.net/badge/使用/文档?labelColor=000000&color=blue'
               "
               @click="
                 $appOpenUrl(
@@ -429,14 +431,14 @@
             />
           </span>
         </van-cell>
-        <van-cell class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4">
+        <van-cell v-if="nowHost" class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4">
           <template #title>
             <span
               @click="
                 $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
               "
             >
-              沪ICP备16031287号-2
+              {{ beianInfo[nowHost] }}
             </span>
           </template>
         </van-cell>
@@ -617,6 +619,7 @@ export default {
   },
   data() {
     return {
+      nowHost: location.host,
       copyData: null,
       login: {
         status: false,
@@ -624,15 +627,19 @@ export default {
       },
       isLogin: false,
       url: {
-        question: "//www.yuque.com/jmglsi/pvp/gbpl91",
-        friends: "//www.yuque.com/jmglsi/pvp/yyxgbh#NPkLH",
+        question: "//docs.91m.top",
+        friends: "//docs.91m.top",
         support: "//support.qq.com/products/305514",
         openSource: [
           "//ngabbs.com/read.php?tid=26200132",
-          "//91m.top/s/coding",
+          "//docs.91m.top",
         ],
         afdian: "//91m.top/s/afdian",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
+      },
+      beianInfo: {
+        "pvp.91m.top": "沪ICP备16031287号-2",
+        "pvp.laoliubei.com": "闽ICP备19018960号-1",
       },
       loginInfo: {
         certification: {
