@@ -684,7 +684,7 @@ export default {
       joinTeamId: this.$route.query.joinTeamId || "",
       gameLabel: this.$route.query.gameLabel || "",
       url: {
-        question: "https://www.yuque.com/jmglsi/pvp/ftriowxggk00bxb0",
+        question: "//docs.91m.top/%E7%BD%91%E7%AB%99/%E9%80%86%E6%B0%B4%E5%AF%92.html",
       },
       tableData: {
         author: {},
