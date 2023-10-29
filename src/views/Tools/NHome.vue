@@ -1873,11 +1873,11 @@ div.n-b4e157ffbfb4ee490b792d5eabfbdac1 {
 }
 
 div.n-fcc35edc628651ab30ef10d9f772acf0 {
-  width: 100px;
   float: left;
   margin-top: 10px;
   margin-left: 10px;
   margin-bottom: 10px;
+  width: 100px;
 }
 
 div.n-6cf5e5a50b79366afe6c4b68f0ba7f7c {

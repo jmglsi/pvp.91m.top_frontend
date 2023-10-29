@@ -134,11 +134,13 @@ img.oauth-523290da497b3b91d14b1699ba5b4316 {
 }
 
 ul.oauth-fae0b4b90bcae3951a2a115697b83089 {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
   vertical-align: middle;
 
   li.oauth-d7c4aa2641b836c39a069c80c569f682 {
-    float: left;
     margin: 0 8px;
   }
 }
