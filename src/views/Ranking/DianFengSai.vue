@@ -680,7 +680,7 @@ export default {
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + this.time
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         if (aid == 15) {
           this.progressData = ls;
         } else {
@@ -769,7 +769,7 @@ export default {
           "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.lineData = ls);
       }
 

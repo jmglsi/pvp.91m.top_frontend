@@ -399,7 +399,7 @@ export default {
         ),
         playerList = [];
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         this.tableData = ls;
         playerList = ls.result.rows;
 

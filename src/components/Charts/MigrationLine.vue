@@ -99,7 +99,7 @@ export default {
           "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.lineData = ls);
       }
 

@@ -248,7 +248,7 @@ export default {
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         if (bid == 1) {
           this.change.skillList = ls.result.rows;
         } else if (bid == 2) {
