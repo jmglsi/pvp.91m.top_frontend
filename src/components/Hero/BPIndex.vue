@@ -327,7 +327,7 @@ export default {
         ts = this.$appTs,
         ls = this.$appGetLocalStorage("heroBpIndex-" + heroId);
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.tableData = ls);
       }
 

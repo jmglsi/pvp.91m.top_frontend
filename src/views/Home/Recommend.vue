@@ -77,13 +77,13 @@
               </van-grid>
 
               <van-cell
-                :title="appHomeInfo.tipsInfo.title || $t('loading')"
-                :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
-                :value="appHomeInfo.tipsInfo.value || '⏳'"
-                :is-link="appHomeInfo.tipsInfo.isLink"
+                :title="appHomeInfo.homeTipsInfo.title || $t('loading')"
+                :label="appHomeInfo.homeTipsInfo.label || '清除缓存试一试~'"
+                :value="appHomeInfo.homeTipsInfo.value || '⏳'"
+                :is-link="appHomeInfo.homeTipsInfo.isLink"
                 @click="
-                  appHomeInfo.tipsInfo.isLink
-                    ? onUrlClick(appHomeInfo.tipsInfo)
+                  appHomeInfo.homeTipsInfo.isLink
+                    ? onUrlClick(appHomeInfo.homeTipsInfo)
                     : null
                 "
                 class="app-06eab62dcb5a23b966a620807d78e66f"
@@ -262,7 +262,7 @@ export default {
           },
         },
         indexInfo: [],
-        tipsInfo: {
+        homeTipsInfo: {
           title: null,
           label: null,
           value: null,
@@ -323,7 +323,7 @@ export default {
         ts = this.$appTs,
         ls = this.$appGetLocalStorage("appHome");
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.appHomeInfo = ls);
       }
 
@@ -348,7 +348,7 @@ export default {
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.tableData = ls);
       }
 

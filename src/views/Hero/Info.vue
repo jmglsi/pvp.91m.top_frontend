@@ -600,7 +600,7 @@ export default {
         ts = this.$appTs,
         ls = this.$appGetLocalStorage("heroInfo-" + id);
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         let heroInfoData = ls.heroInfo;
 
         this.circle.info = ls.circleInfo;

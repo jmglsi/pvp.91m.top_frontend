@@ -245,7 +245,7 @@ export default {
           tempOpenId = q.tempOpenId || "",
           tempAccessToken = q.tempAccessToken || "",
           oauthType = q.oauthType || "",
-          tempText = q.tempText || null,
+          tempText = q.tempText || "",
           appConfigInfo = this.$appConfigInfo,
           debug = 0;
 
@@ -253,22 +253,46 @@ export default {
         this.tableData = data;
         this.tableData.result.model = this.$route.path;
 
-        if (appInfo.update.time != appConfigInfo.appInfo.update.time) {
-          this.$appDelectAllLocalStorage();
-        }
+        let updateTime = appConfigInfo.appInfo.updateInfo.time || 0;
+        //let updateVersion = appConfigInfo.appInfo.updateInfo.version || 0;
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let today = year + "-" + month + "-" + day;
+        let lastUpdateTipsDay = this.$cookie.get("lastUpdateTipsDay") || "";
 
-        if (appInfo.update.version != appConfigInfo.appInfo.update.version) {
-          if (appInfo.update.text && !this.noUpdateTips) {
+        //if (appInfo.updateInfo.version != updateVersion) {
+        if (lastUpdateTipsDay != today) {
+          if (appInfo.updateInfo.text && !this.noUpdateTips) {
             this.$dialog
               .alert({
-                title: appInfo.update.title,
-                message: appInfo.update.text,
+                title: appInfo.updateInfo.title || "loading...",
+                message: appInfo.updateInfo.text || "loading...",
+                allowHtml: true,
+                showCancelButton: true,
+                confirmButtonText: "今日不再提醒",
+                cancelButtonText: "取消",
                 theme: "round-button",
               })
               .then(() => {
-                //on close
+                this.$cookie.set("lastUpdateTipsDay", today, {
+                  expires: "1M",
+                });
+              })
+              .catch(() => {
+                //on cancel
               });
           }
+
+          this.$appDelectLocalStorage("appConfigInfo");
+        }
+
+        //this.$appDelectLocalStorage("appConfigInfo");
+        //}
+
+        if (appInfo.updateInfo.time != updateTime) {
+          this.$appDelectAllLocalStorage();
 
           this.$appDelectLocalStorage("appConfigInfo");
         }
@@ -287,12 +311,12 @@ export default {
           name: appInfo.name || "苏苏的荣耀助手",
           script: appInfo.script || [],
           tempText: appInfo.tempText || "",
-          update: {
-            version: appInfo.update.version || 0,
-            time: appInfo.update.time || 0,
-            title: appInfo.update.title || this.$t("loading"),
-            text: appInfo.update.text || this.$t("loading"),
-            timeout: appInfo.update.timeout || 43200,
+          updateInfo: {
+            version: appInfo.updateInfo.version || 0,
+            time: appInfo.updateInfo.time || 0,
+            title: appInfo.updateInfo.title || this.$t("loading"),
+            text: appInfo.updateInfo.text || this.$t("loading"),
+            timeout: appInfo.updateInfo.timeout || 43200,
           },
           search: {
             img: appInfo.search.img || null,
@@ -337,10 +361,11 @@ export default {
             });
           }
 
-          if (tempText)
+          if (tempText) {
             this.$message.warning(
               this.$appMsg.warning[tempText] || this.$t("unknown")
             );
+          }
         }
 
         debug = this.$route.query.debug || 0;
