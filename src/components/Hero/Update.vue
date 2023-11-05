@@ -307,7 +307,7 @@ export default {
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
       this.date.max = new Date(date.setMonth(date.getMonth() + 4));
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.tableData = ls);
       }
 

@@ -153,12 +153,12 @@
         <van-cell
           :title="$t('other.update.title')"
           :label="$t('other.update.label')"
-          :value="$appConfigInfo.appInfo.update.time"
+          :value="$appConfigInfo.appInfo.updateInfo.time"
         />
         <van-cell
           :title="$t('other.version.title')"
           :label="$t('other.version.label')"
-          :value="$appConfigInfo.appInfo.update.version"
+          :value="$appConfigInfo.appInfo.updateInfo.version"
         />
         <van-cell
           :title="$t('other.pwa.title')"

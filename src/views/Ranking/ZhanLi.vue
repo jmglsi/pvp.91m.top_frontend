@@ -95,7 +95,7 @@
             field="fightPower[2]"
             :filters="[{ value: 0 }]"
             :filter-method="onColumnFilterMethod"
-            width="100"
+            :width="listWidth"
             sortable
           >
             <template #filter="{ $panel, column }">
@@ -234,7 +234,7 @@ export default {
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + this.time
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         if (aid == 15) {
           this.progressData = ls;
         } else {

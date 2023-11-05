@@ -114,7 +114,7 @@ export default {
 
       if (
         ls &&
-        ts - ls.updateTime < appConfigInfo.appInfo.update.timeout &&
+        ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout &&
         tipsType == 0
       ) {
         return (this.tableData = ls);

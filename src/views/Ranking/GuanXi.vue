@@ -329,7 +329,7 @@ export default {
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + heroName
         );
 
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.update.timeout) {
+      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         return (this.tableData = ls);
       }
 

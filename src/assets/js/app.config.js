@@ -26,12 +26,16 @@ Vue.prototype.$appConfigInfo = {
     name: "苏苏的荣耀助手",
     script: [],
     tempText: null,
-    update: {
+    updateInfo: {
       version: 0,
       time: 0,
       title: "loading...",
       text: "loading...",
       timeout: 43200
+    },
+    todayInfo: {
+      title: "loading...",
+      text: "loading..."
     },
     search: {
       img: "/img/icons-app/customer_service.png",
