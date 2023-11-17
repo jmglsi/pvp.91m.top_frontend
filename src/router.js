@@ -223,6 +223,51 @@ export default new Router({
           }
         }
       ]
+    }, {
+      path: '/admin',
+      name: 'adminIndex',
+      redirect: '/ranking',
+      component: () =>
+        import('./views/Admin/Index.vue'),
+      children: [
+        {
+          path: 'web-data',
+          name: 'webData',
+          component: () =>
+            import('./views/Admin/Web/Data.vue'),
+          meta: {
+            title: '数据站',
+            keepAlive: true
+          }
+        }, {
+          path: 'robot-data',
+          name: 'robotData',
+          component: () =>
+            import('./views/Admin/Robot/Data.vue'),
+          meta: {
+            title: '机器人',
+            keepAlive: true
+          }
+        }, {
+          path: 'mp-data',
+          name: 'mpData',
+          component: () =>
+            import('./views/Admin/Mp/Data.vue'),
+          meta: {
+            title: '公众号',
+            keepAlive: true
+          }
+        }, {
+          path: 'system-assignment',
+          name: 'systemAssignment',
+          component: () =>
+            import('./views/Admin/System/Assignment.vue'),
+          meta: {
+            title: '机器人',
+            keepAlive: true
+          }
+        }
+      ]
     }
   ]
 })

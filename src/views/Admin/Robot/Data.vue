@@ -7,7 +7,7 @@
           <h1>🤖️ 主人，很高兴为您服务。</h1>
           <template #overlay>
             <a-menu :style="{ textAlign: 'left', width: '100px' }">
-              <a-sub-menu key="robot" title="机器人">
+              <a-sub-menu key="menu" title="菜单">
                 <a-menu-item>添加</a-menu-item>
               </a-sub-menu>
             </a-menu>
@@ -34,7 +34,7 @@
           <a-statistic title="活跃群" :value="1727" />
         </a-col>
         <a-col :span="6">
-          <a-statistic title="机器人" :value="5" />
+          <a-statistic title="机器人" :value="7" />
         </a-col>
       </a-row>
     </div>
@@ -46,7 +46,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=50371140&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -60,7 +60,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=1042815109&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -74,7 +74,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=50371140&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -88,7 +88,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=1042815109&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -102,7 +102,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=2132625207&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -116,7 +116,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=3578572094&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -130,7 +130,7 @@
             width="50"
             height="50"
             v-lazy="'//q.qlogo.cn/headimg_dl?dst_uin=3106897087&spec=640'"
-            class="app-border-radius"
+            class="app-border-radius admin-28b9163adcfeda8130d6c59c12195f93"
           />
           <img
             width="20"
@@ -155,6 +155,10 @@ img.admin-58a5bd4d1fe1914a7438e768c0627486 {
   margin-left: -15px;
   margin-top: 33px;
   position: absolute;
+}
+
+img.admin-28b9163adcfeda8130d6c59c12195f93 {
+  border: 1px solid gray;
 }
 
 li.admin-28a3cbd51bfd74ac3fec434e0603fec2 {

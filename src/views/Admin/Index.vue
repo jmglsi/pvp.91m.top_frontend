@@ -12,21 +12,20 @@
       @click="handleClick"
       mode="inline"
     >
-      <a-sub-menu key="sub-web" title="网站">
+      <a-sub-menu key="sub-web" title="数据站">
         <a-menu-item
           key="web-data"
           @click="$appPush({ path: '/admin/web-data' })"
         >
           苏苏的荣耀助手
         </a-menu-item>
-        <!--
-          <a-menu-item
-            key="web-data2"
-            @click="$appPush({ path: '/admin/web-data' })"
-          >
-            奶香的一刀
-          </a-menu-item>
-        -->
+        <a-menu-item
+          disabled
+          key="web-data-2"
+          @click="$appPush({ path: '/admin/web-data' })"
+        >
+          奶香的一刀
+        </a-menu-item>
       </a-sub-menu>
       <a-sub-menu key="sub-robot" title="机器人">
         <a-menu-item
@@ -64,13 +63,8 @@
       <template #overlay>
         <a-menu>
           <a-menu-item key="0">站长</a-menu-item>
-          <a-menu-item key="1">
-            <a href="//docs.91m.top" target="_blank">
-              常见问题
-            </a>
-          </a-menu-item>
           <a-menu-divider />
-          <a-menu-item key="3" :style="{ color: 'red' }">退出登录</a-menu-item>
+          <a-menu-item key="1" :style="{ color: 'red' }">退出登录</a-menu-item>
         </a-menu>
       </template>
     </a-dropdown>
@@ -114,6 +108,7 @@ export default {
 
 <style lang="less">
 img.admin-11692cbdb16fd998d9dc739c3d53afaa {
+  border: 1px solid white;
   position: absolute;
   right: 25px;
   top: 25px;
