@@ -7,7 +7,7 @@
           <h1>📒 正在执行以下任务。</h1>
           <template #overlay>
             <a-menu :style="{ textAlign: 'left', width: '100px' }">
-              <a-sub-menu key="web" title="网站">
+              <a-sub-menu key="web" title="数据站">
                 <a-menu-item>首页 (轮播)</a-menu-item>
                 <a-menu-item>首页 (龙珠)</a-menu-item>
                 <a-menu-item>导航 (置底)</a-menu-item>

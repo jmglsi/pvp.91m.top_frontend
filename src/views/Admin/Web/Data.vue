@@ -3,7 +3,30 @@
     <!-- <div>这里是 web-data</div> -->
     <div class="app-4717d11da95ed90ccdb4d4a0648bad39">
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
-        <h1>👋 晚上好，苏苏 ~</h1>
+        <a-dropdown :trigger="['click']">
+          <h1>👋 下午好，苏苏 ~</h1>
+          <template #overlay>
+            <a-menu :style="{ textAlign: 'left', width: '100px' }">
+              <a-sub-menu key="menu" title="菜单">
+                <a-menu-item
+                  @click="
+                    $appOpenUrl(
+                      $t('open-url.title'),
+                      null,
+                      {
+                        path: '//api.91m.top/hero/v1/app.php?type=getQrcode&host=camp.qq.com',
+                      },
+                      0
+                    )
+                  "
+                  >扫码登录</a-menu-item
+                >
+                <a-menu-divider />
+                <a-menu-item>设置</a-menu-item>
+              </a-sub-menu>
+            </a-menu>
+          </template>
+        </a-dropdown>
       </div>
     </div>
 
@@ -12,15 +35,15 @@
         <a-col :span="8">
           <a-statistic
             title="对局样本"
-            :value="93239"
+            :value="293239"
             :valueStyle="{ color: 'red' }"
           />
         </a-col>
         <a-col :span="8">
-          <a-statistic title="注册用户" :value="17206" />
+          <a-statistic title="注册用户" :value="57206" />
         </a-col>
         <a-col :span="8">
-          <a-statistic title="活跃用户" :value="288" />
+          <a-statistic title="活跃用户" :value="2388" />
         </a-col>
       </a-row>
     </div>
