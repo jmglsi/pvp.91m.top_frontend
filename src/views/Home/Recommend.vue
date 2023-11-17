@@ -77,13 +77,13 @@
               </van-grid>
 
               <van-cell
-                :title="appHomeInfo.homeTipsInfo.title || $t('loading')"
-                :label="appHomeInfo.homeTipsInfo.label || '清除缓存试一试~'"
-                :value="appHomeInfo.homeTipsInfo.value || '⏳'"
-                :is-link="appHomeInfo.homeTipsInfo.isLink"
+                :title="appHomeInfo.tipsInfo.title || $t('loading')"
+                :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
+                :value="appHomeInfo.tipsInfo.value || '⏳'"
+                :is-link="appHomeInfo.tipsInfo.isLink"
                 @click="
-                  appHomeInfo.homeTipsInfo.isLink
-                    ? onUrlClick(appHomeInfo.homeTipsInfo)
+                  appHomeInfo.tipsInfo.isLink
+                    ? onUrlClick(appHomeInfo.tipsInfo)
                     : null
                 "
                 class="app-06eab62dcb5a23b966a620807d78e66f"
@@ -262,7 +262,7 @@ export default {
           },
         },
         indexInfo: [],
-        homeTipsInfo: {
+        tipsInfo: {
           title: null,
           label: null,
           value: null,

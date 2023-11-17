@@ -822,7 +822,8 @@
               </van-cell-group>
 
               <van-cell-group :border="false" title="更多">
-                <van-grid :border="false" :column-num="3">
+                <van-grid :border="false" :column-num="2">
+                  <!--
                   <van-grid-item
                     @click="
                       tableData.cardInfo.type.indexOf(4) > -1
@@ -832,7 +833,6 @@
                     icon="/img/icons-app/jungle.png"
                     text="打野数据"
                   />
-                  <!--
                   <van-grid-item
                     @click="$message.info($appMsg.info[1024])"
                     icon="/img/icons-app/medal.png"
