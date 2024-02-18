@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    history: {}
+    history: {},
+    lastUrl: ""
   },
   actions: {
     // 在这里定义异步操作方法
@@ -13,11 +14,17 @@ export default new Vuex.Store({
   mutations: {
     saveHistory(state, data) {
       state.history = data;
+    },
+    saveLastUrl(state, data) {
+      state.lastUrl = data;
     }
   },
   getters: {
     getHistory(state) {
       return state.history;
+    },
+    getLastUrl(state) {
+      return state.lastUrl;
     }
   }
 });

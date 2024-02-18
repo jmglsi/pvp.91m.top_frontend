@@ -117,9 +117,9 @@
                           width="28"
                           height="28"
                           v-lazy="
-                            '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                            '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                             data.item_id +
-                            '.png'
+                            '.jpg'
                           "
                         />
                       </div>
@@ -300,9 +300,9 @@
                         width="28"
                         height="28"
                         v-lazy="
-                          '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                          '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                           data.item_id +
-                          '.png'
+                          '.jpg'
                         "
                         @click="onItemChoose(data)"
                         class="app-border-radius"

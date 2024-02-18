@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import XEUtils from 'xe-utils';
 
-let url = location;
+let ua = navigator.userAgent, url = window.location;
 
 Vue.prototype.$appCountry = /(127\.0\.0\.1|localhost|pvp\.91m\.top)/i.test(url.host);
-Vue.prototype.$appIsApple = /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
-Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(navigator.userAgent);
+Vue.prototype.$appIsApple = /(iPhone|iPad|iPod|Mac)/i.test(ua);
+Vue.prototype.$appInDouyin = /Bytedance/i.test(ua);
+Vue.prototype.$appInWechat = /MicroMessenger/i.test(ua);
+Vue.prototype.$appInWechatMiniapp = /miniProgram/i.test(ua);
+Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(ua);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
 //appQuery 只适合首次
@@ -221,12 +224,18 @@ if (!ls) {
 Vue.prototype.$appConfigInfo = Vue.prototype.$appGetLocalStorage("appConfigInfo");
 
 Vue.prototype.$appBack = function () {
-  this.$router.push({
+  let data = {
     path: this.$store.getters.getHistory.fullPath,
-  });
+  };
+
+  //data.replace = true;
+
+  this.$router.push(data);
 }
 
 Vue.prototype.$appPush = function (data = { path: '/' }) {
+  //data.replace = true;
+
   this.$router.push(data);
 }
 
@@ -255,6 +264,72 @@ Vue.prototype.$appFloatToTime = function (float) {
   return num_1 + ":" + num_2;
 }
 
+Vue.prototype.$appInitMiniapp = function () {
+  Vue.prototype.$axios.post(Vue.prototype.$appApi.app.getJsapiTicket).then((res) => {
+    let data = res.data.data;
+
+    Vue.prototype.$share = data.share;
+
+    if (Vue.prototype.$appInDouyin) {
+      Vue.prototype.$douyin = window.tt;
+
+      /**
+       * 
+       * 小程序通讯
+       * 
+       */
+      Vue.prototype.$douyin.miniProgram.getEnv((res) => {
+        if (res.miniprogram) {
+          Vue.prototype.$douyin.miniProgram.postMessage({
+            data: {
+              url_real: window.location.href.split("#")[0],
+              share: data.share
+            }
+          });
+        }
+      });
+    }
+
+    if (Vue.prototype.$appInWechat) {
+      Vue.prototype.$wechat = window.wx;
+
+      Vue.prototype.$wechat.config(data.ticket);
+      Vue.prototype.$wechat.ready(() => {
+        /**
+         * 
+         * 网页分享
+         * 
+         */
+        Vue.prototype.$wechat.updateAppMessageShareData({
+          title: data.share.title,
+          desc: data.share.desc,
+          link: data.share.link,
+          imgUrl: data.share.imgUrl,
+          success: function (res) {
+            console.log(res);
+          },
+        });
+
+        /**
+         * 
+         * 小程序通讯
+         * 
+         */
+        Vue.prototype.$wechat.miniProgram.getEnv((res) => {
+          if (res.miniprogram) {
+            Vue.prototype.$wechat.miniProgram.postMessage({
+              data: {
+                url_real: window.location.href.split("#")[0],
+                share: data.share
+              }
+            });
+          }
+        });
+      });
+    }
+  });
+}
+
 Vue.prototype.$appOpenUrl = function (title, message = null, data = { path: '/' }, urlType = 0) {
   if (urlType == 0) {
     let ls = Vue.prototype.$appConfigInfo;
@@ -270,7 +345,27 @@ Vue.prototype.$appOpenUrl = function (title, message = null, data = { path: '/' 
         })
         .then(() => {
           //on confirm
-          window.open(data.path);
+          //window.open(data.path);
+
+          if (Vue.prototype.$appInWechatMiniapp) {
+            Vue.prototype.$wechat.ready(() => {
+              Vue.prototype.$wechat.miniProgram.getEnv((res) => {
+                console.log(res.miniprogram)
+                if (res.miniprogram) {
+                  this.$copyText(data.path).then(
+                    () => {
+                      this.$message.success("复制成功，请用自带浏览器打开");
+                    },
+                    () => {
+                      //this.$message.error("复制失败");
+                    }
+                  );
+                }
+              });
+            })
+          } else {
+            window.open(data.path);
+          }
         })
         .catch(() => {
           //on cancel
@@ -282,6 +377,8 @@ Vue.prototype.$appOpenUrl = function (title, message = null, data = { path: '/' 
     if (message) {
       this.$message.warning(message);
     }
+
+    //data.replace = true;
 
     this.$router.push(data);
   }
@@ -307,24 +404,22 @@ Vue.prototype.$appInitTableWidth = function (tableWidth) {
 }
 
 Vue.prototype.$appCopyData = function (data, successText = "复制成功", errorText = "复制失败") {
-  setTimeout(() => {
-    this.$dialog
-      .confirm({
-        title: "是否复制?",
-        message: "您的分享是我更新的动力"
-      })
-      .then(() => {
-        this.$copyText(data).then(
-          () => {
-            this.$message.success(successText);
-          },
-          () => {
-            this.$message.error(errorText);
-          }
-        );
-      })
-      .catch(() => {
-        //on cancel
-      });
-  }, 250);
+  this.$dialog
+    .confirm({
+      title: "是否复制?",
+      message: "您的分享是我更新的动力"
+    })
+    .then(() => {
+      this.$copyText(data).then(
+        () => {
+          this.$message.success(successText);
+        },
+        () => {
+          this.$message.error(errorText);
+        }
+      );
+    })
+    .catch(() => {
+      //on cancel
+    });
 }

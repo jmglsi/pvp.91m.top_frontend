@@ -99,20 +99,33 @@
           : { marginTop: '40px' }
       "
     >
-      <img
-        v-lazy="loginInfo.img"
-        @click="
-          $appPush({
-            path: '/friends',
-            query: {
-              openId: loginInfo.openId,
-            },
-          })
-        "
-        width="100"
-        height="100"
-        class="app-border-radius"
-      />
+      <a-dropdown :trigger="['click']">
+        <img
+          v-lazy="loginInfo.img"
+          width="100"
+          height="100"
+          class="app-border-radius"
+        />
+        <template #overlay>
+          <a-menu>
+            <a-menu-item>
+              <a href="https://cn.gravatar.com" target="_blank">更换头像</a>
+            </a-menu-item>
+            <a-menu-item
+              @click="
+                $appPush({
+                  path: '/friends',
+                  query: {
+                    openId: loginInfo.openId,
+                  },
+                })
+              "
+            >
+              <span>好友扩列</span>
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
       <img
         v-lazy="'/img/icons-app/my_home_page.png'"
         width="25"
@@ -224,8 +237,9 @@
                   <div :style="{ position: 'relative' }">
                     <img
                       v-lazy="{
-                        src: '/img/icons-hero/' + data.id + '.jpg',
-                        error:
+                        //src: '/img/icons-hero/' + data.id + '.jpg',
+                        //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
+                        src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                           data.id +
                           '/' +
@@ -425,20 +439,18 @@
                 $appApi.app.appProxy +
                 'https://badgen.net/badge/爱发电/赞助?labelColor=000000&color=946ce6'
               "
-              @click="
-                $appOpenUrl($t('open-url.title'), null, { path: url.afdian }, 0)
-              "
+              @click="$appPush({ path: '/thank' })"
             />
           </span>
         </van-cell>
-        <van-cell v-if="nowHost" class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4">
+        <van-cell v-if="icp" class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4">
           <template #title>
             <span
               @click="
                 $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
               "
             >
-              {{ beianInfo[nowHost] }}
+              {{ icp }}
             </span>
           </template>
         </van-cell>
@@ -619,7 +631,6 @@ export default {
   },
   data() {
     return {
-      nowHost: location.host,
       copyData: null,
       login: {
         status: false,
@@ -628,17 +639,14 @@ export default {
       isLogin: false,
       url: {
         question:
-          "//docs.91m.top/%E7%BD%91%E7%AB%99/%E5%85%A8%E5%B1%80_BP_%E6%A8%A1%E6%8B%9F%E5%99%A8.html",
+          "//docs.91m.top/%E7%BD%91%E7%AB%99/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80_%E5%85%A8%E5%B1%80_BP_%E6%A8%A1%E6%8B%9F%E5%99%A8.html",
         friends: "//docs.91m.top",
         support: "//support.qq.com/products/305514",
         openSource: ["//ngabbs.com/read.php?tid=26200132", "//docs.91m.top"],
-        afdian: "//91m.top/s/afdian",
+        afdian: "//afdian.net/a/jmglsi",
         beian: "//beian.miit.gov.cn/#/Integrated/index",
       },
-      beianInfo: {
-        "pvp.91m.top": "沪ICP备16031287号-2",
-        "pvp.laoliubei.com": "闽ICP备19018960号-1",
-      },
+      icp: null,
       loginInfo: {
         certification: {
           color: null,
@@ -727,6 +735,8 @@ export default {
           let data = res.data.data,
             status = res.data.status;
 
+          this.icp = status.icp;
+
           if (status.code == 200) {
             this.loginInfo = data;
             this.newInfo = data;
@@ -740,6 +750,8 @@ export default {
             this.isLogin = true;
           } else {
             this.isLogin = false;
+
+            //this.$message.error(status.msg);
           }
         });
     },

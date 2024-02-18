@@ -78,6 +78,12 @@ div.ti-input {
   border-radius: 5px;
 }
 
+div.hero-0a96464cb313aab9cc51e5aa61b0193f {
+  img {
+    border-radius: 100%;
+  }
+}
+
 div.hero-a2d3b30fd0cc9eb4affc0de9b7049895 {
   div.van-nav-bar__right {
     width: 40% !important;

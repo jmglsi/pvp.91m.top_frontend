@@ -128,8 +128,9 @@
                       </span>
                       <img
                         v-lazy="{
-                          src: '/img/icons-hero/' + data.heroId + '.jpg',
-                          error:
+                          //src: '/img/icons-hero/' + data.heroId + '.jpg',
+                          //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.heroId + '/' + data.heroId + '.jpg',
+                          src:
                             '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                             data.heroId +
                             '/' +
@@ -275,8 +276,9 @@
                 >
                   <img
                     v-lazy="{
-                      src: '/img/icons-hero/' + data[0] + '.jpg',
-                      error:
+                      //src: '/img/icons-hero/' + data[0] + '.jpg',
+                      //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data[0] + '/' + data[0] + '.jpg',
+                      src:
                         '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                         data[0] +
                         '/' +

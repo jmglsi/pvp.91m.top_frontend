@@ -1260,7 +1260,7 @@ export default {
 
               setTimeout(() => {
                 this.getGameBP(gameLabel);
-              }, 250);
+              }, 500);
 
               //this.$message.success(this.$appMsg.success[1000]);
             } else {
@@ -1287,7 +1287,7 @@ export default {
 
         setTimeout(() => {
           this.getGameBP(this.gameLabel);
-        }, 250);
+        }, 500);
       } else {
         this.$axios
           .post(
@@ -1307,7 +1307,7 @@ export default {
 
               setTimeout(() => {
                 this.getGameBP(this.gameLabel);
-              }, 250);
+              }, 500);
 
               //this.$message.success(this.$appMsg.success[1000]);
             } else {
