@@ -10,8 +10,9 @@ Vue.prototype.$cookie = cookie;
 import aegis from 'aegis-web-sdk';
 
 import axios from 'axios';
+Vue.prototype.$axios = axios;
 
-let url = location,
+let url = window.location,
   nowQuery = Vue.prototype.$appQuery,
   baseUrl,
   baseHost = nowQuery.host || null,
@@ -44,9 +45,20 @@ axios.defaults.baseURL = baseUrl;
  * 
  */
 axios.interceptors.request.use(function (config) {
-  let data = qs.parse(config.data);
+  let data = qs.parse(config.data),
+    url_real = window.location.href.split("#")[0], url_last;
 
-  config.url += "&host=" + (cookie.get("host") || url.host) + "&lang=" + (cookie.get("lang") || "zh-CN") + "&url=" + encodeURIComponent(url.pathname + url.search) + "&ref=" + encodeURIComponent(cookie.get("ref") || "");
+  if (Vue.prototype.$appIsApple) {
+    url_last = Vue.prototype.$store.getters.getLastUrl || "";
+
+    if (!url_last) {
+      Vue.prototype.$store.commit("saveLastUrl", url_real);
+    }
+  } else {
+    url_last = url_real;
+  }
+
+  config.url += "&host=" + (cookie.get("host") || url.host) + "&lang=" + (cookie.get("lang") || "zh-CN") + "&ref=" + encodeURIComponent(cookie.get("ref") || "") + "&url=" + encodeURIComponent(url_last) + "&url_real=" + encodeURIComponent(url_real);
 
   if (config.method == "post") {
     const openId = cookie.get("openId");
@@ -103,9 +115,12 @@ axios.interceptors.response.use(
 Vue.prototype.$axios = axios;
 
 const appApi = baseUrl + "/hero/v1/app.php";
+const appAdminApi = baseUrl + "/hero/v1/admin.php";
 //const biliApi = baseUrl + "/hero/v1/bilibili.php";
 const gameApi = baseUrl + "/hero/v1/game.php";
 const loginApi = baseUrl + "/hero/v1/login.php";
+
+const botAdminApi = process.env.VUE_APP_BOT_URL + "/admin.php";
 
 const app = {
   apiHost: "//api.91m.top",
@@ -114,9 +129,11 @@ const app = {
   addHeroFightPowerByWebAccount: appApi + "?type=addHeroFightPowerByWebAccount",
   addHeroVote: appApi + "?type=addHeroVote",
   addWebAccountLikeHero: appApi + "?type=addWebAccountLikeHero",
+  getAfdian: appApi + "?type=getAfdian",
   getAppHome: appApi + "?type=getAppHome",
   getAppInfo: appApi + "?type=getAppInfo",
   getCivilwarMatchInfo: appApi + "?type=getCivilwarMatchInfo",
+  getCoordinate: appApi + "?type=getCoordinate",
   getHeroBpIndex: appApi + "?type=getHeroBpIndex",
   getHeroChartsLog: appApi + "?type=getHeroChartsLog",
   getHeroInfo: appApi + "?type=getHeroInfo",
@@ -126,6 +143,7 @@ const app = {
   getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
   getHeroUpdate: appApi + "?type=getHeroUpdate",
   getHeroUpdateDetail: appApi + "?type=getHeroUpdateDetail",
+  getJsapiTicket: appApi + "?type=getJsapiTicket",
   getMiniAppInfo: appApi + "?type=getMiniAppInfo",
   getRanking: appApi + "?type=getRanking",
   getSearch: appApi + "?type=getSearch",
@@ -135,7 +153,9 @@ const app = {
   getWebAccountInfo: appApi + "?type=getWebAccountInfo",
   loginWebAccount: appApi + "?type=loginWebAccount",
   updateWebAccountInfo: appApi + "?type=updateWebAccountInfo",
-  uploadImg: appApi + "?type=uploadImg"
+  uploadImg: appApi + "?type=uploadImg",
+  //
+  getDataByWebData: appAdminApi + "?type=getDataByWebData"
 }
 
 /*
@@ -168,10 +188,15 @@ const login = {
   getLogin: loginApi
 }
 
+const bot = {
+  getDataByRobotData: botAdminApi + "?type=getDataByRobotData",
+  sendMsg: botAdminApi + "?type=sendMsg"
+}
 
 export default {
   app,
   //bili,
   game,
-  login
+  login,
+  bot
 }

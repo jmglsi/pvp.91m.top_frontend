@@ -12,8 +12,9 @@
           <div :style="{ position: 'relative' }">
             <img
               v-lazy="{
-                src: '/img/icons-hero/' + row.heroId + '.jpg',
-                error:
+                //src: '/img/icons-hero/' + row.heroId + '.jpg',
+                //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.heroId + '/' + row.heroId + '.jpg',
+                src:
                   '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                   row.heroId +
                   '/' +
@@ -39,11 +40,12 @@
           <div :style="{ position: 'relative' }">
             <img
               v-lazy="{
-                src: '/img/icons-equipment/' + row.equipmentId + '.jpg',
-                error:
-                  '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                //src: '/img/icons-equipment/' + row.equipmentId + '.jpg',
+                //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.equipmentId + '.jpg',
+                src:
+                  '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                   row.equipmentId +
-                  '.png',
+                  '.jpg',
               }"
               width="25"
               height="25"
@@ -209,8 +211,9 @@
         <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
           <img
             v-lazy="{
-              src: '/img/icons-hero/' + lineData.heroId + '.jpg',
-              error:
+              //src: '/img/icons-hero/' + lineData.heroId + '.jpg',
+              //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + lineData.heroId + '/' + lineData.heroId + '.jpg',
+              src:
                 '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                 lineData.heroId +
                 '/' +
@@ -224,11 +227,12 @@
           &nbsp;和&nbsp;
           <img
             v-lazy="{
-              src: '/img/icons-equipment/' + lineData.equipmentId + '.jpg',
-              error:
-                '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+              //src: '/img/icons-equipment/' + lineData.equipmentId + '.jpg',
+              //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + lineData.equipmentId + '.jpg',
+              src:
+                '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                 lineData.equipmentId +
-                '.png',
+                '.jpg',
             }"
             width="25"
             height="25"

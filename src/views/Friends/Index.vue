@@ -102,8 +102,9 @@
                   <div :style="{ position: 'relative' }">
                     <img
                       v-lazy="{
-                        src: '/img/icons-hero/' + data.id + '.jpg',
-                        error:
+                        //src: '/img/icons-hero/' + data.id + '.jpg',
+                        //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
+                        src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                           data.id +
                           '/' +
@@ -170,8 +171,7 @@ export default {
       copyData: "",
       friendsInfo: {
         name: "苏苏",
-        uin: 50371140,
-        img: "//q.qlogo.cn/headimg_dl?dst_uin=50371140&spec=640",
+        img: "//cn.gravatar.com/avatar/8d0d4a6b8394fa1fe09ed57b2793c63eae72d8859734323b7a08dfdf8013aa45?size=512",
         certification: {
           color: "",
           text: "",
@@ -183,6 +183,7 @@ export default {
           starIcon: "//camp.qq.com/battle/profile/roleJobV2/1.png",
           score: 1200,
         },
+        uin: 50371140,
       },
       collapseInfo: {
         model: ["1"],

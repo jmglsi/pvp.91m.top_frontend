@@ -17,9 +17,9 @@
           <div :style="{ position: 'relative' }">
             <img
               v-lazy="{
-                src: '/img/icons-skill/' + row.skillId + '.jpg',
-                error:
-                  '//image.ttwz.qq.com/images/skill/' + row.skillId + '.png',
+                //src: '/img/icons-skill/' + row.skillId + '.jpg',
+                //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
+                src: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
               }"
               width="25"
               height="25"
@@ -48,11 +48,12 @@
               <img
                 v-if="row.list[index] > 0"
                 v-lazy="{
-                  src: '/img/icons-equipment/' + row.list[index] + '.jpg',
-                  error:
-                    '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  //src: '/img/icons-equipment/' + row.list[index] + '.jpg',
+                  //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.list[index] + '.jpg',
+                  src:
+                    '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                     row.list[index] +
-                    '.png',
+                    '.jpg',
                 }"
                 width="25"
                 height="25"

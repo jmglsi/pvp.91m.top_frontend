@@ -31,14 +31,17 @@
             </div>
           </template>
           <template #action>
-            <ChooseHero @select="getHeroId">
+            <ChooseHero
+              @select="getHeroId"
+              class="search-e63a3d77ef528e9465c5ec19abb57693"
+            >
               <img
                 v-lazy="
                   tableData.cardInfo.id && tableData.cardInfo.id < 900
                     ? {
-                        src:
-                          '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
-                        error: tableData.cardInfo.img,
+                        //src: '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
+                        //error: tableData.cardInfo.img,
+                        src: tableData.cardInfo.img,
                       }
                     : '/img/icons-app/hero_white.png'
                 "
@@ -47,9 +50,102 @@
                 class="app-border-radius"
               />
             </ChooseHero>
+
+            <div
+              @click="
+                tableData.cardInfo.id && tableData.cardInfo.id < 900
+                  ? (showInfo.heroPopup = true)
+                  : null
+              "
+              class="search-e63a3d77ef528e9465c5ec19abb57693"
+            >
+              <img
+                v-lazy="'/img/icons-app/more.png'"
+                width="30"
+                height="30"
+                class="app-border-radius"
+              />
+            </div>
           </template>
         </van-search>
       </van-sticky>
+    </div>
+
+    <div>
+      <van-popup
+        v-model="showInfo.heroPopup"
+        position="top"
+        :style="{ height: '35%' }"
+      >
+        <div
+          :style="
+            $appIsApple && $appConfigInfo.appInfo.pwa == 1
+              ? { marginTop: '50px' }
+              : {}
+          "
+        >
+          <van-cell-group :border="false" title="更多">
+            <van-grid :border="false" :column-num="3">
+              <van-grid-item
+                @click="
+                  tableData.cardInfo.type.indexOf(4) > -1
+                    ? (showInfo.heroFeature = true)
+                    : $message.info($appMsg.info[1025])
+                "
+                icon="/img/icons-app/jungle.png"
+                text="打野数据"
+              />
+              <van-grid-item
+                @click="
+                  $appPush({
+                    path: '/ranking',
+                    query: {
+                      type: 1,
+                      heroName: tableData.cardInfo.name,
+                      refresh: 1,
+                    },
+                  })
+                "
+                icon="exchange"
+                text="关系克制"
+              />
+              <van-grid-item
+                @click="
+                  $appPush({
+                    path:
+                      '/hero/' +
+                      tableData.cardInfo.id +
+                      '/replay?title=' +
+                      tableData.cardInfo.name +
+                      '&teammate=0',
+                  })
+                "
+                icon="tv-o"
+                text="对局回顾"
+              />
+              <van-grid-item
+                @click="$message.info($appMsg.info[1024])"
+                icon="/img/icons-app/medal.png"
+                text="最低金牌"
+              />
+              <van-grid-item
+                @click="
+                  $appOpenUrl(
+                    $t('open-url.title'),
+                    'NGA @小熊de大熊',
+                    {
+                      path: '//ngabbs.com/read.php?tid=12677614',
+                    },
+                    0
+                  )
+                "
+                icon="/img/icons-app/attack_speed.png"
+                text="攻速阈值"
+              />
+            </van-grid>
+          </van-cell-group>
+        </div>
+      </van-popup>
     </div>
 
     <div
@@ -134,6 +230,7 @@
                   </van-grid>
                 </van-cell-group>
               </li>
+              <!--
               <li
                 class="app-1951b6e7c82938dd7446a41e829b247b search-9eca81635365b5dcc7960ad26bb0b714"
               >
@@ -245,6 +342,7 @@
                   </van-grid>
                 </van-cell-group>
               </li>
+              -->
             </ul>
           </div>
 
@@ -820,71 +918,6 @@
                   />
                 </van-grid>
               </van-cell-group>
-
-              <van-cell-group :border="false" title="更多">
-                <van-grid :border="false" :column-num="2">
-                  <!--
-                  <van-grid-item
-                    @click="
-                      tableData.cardInfo.type.indexOf(4) > -1
-                        ? (showInfo.heroFeature = true)
-                        : $message.info($appMsg.info[1025])
-                    "
-                    icon="/img/icons-app/jungle.png"
-                    text="打野数据"
-                  />
-                  <van-grid-item
-                    @click="$message.info($appMsg.info[1024])"
-                    icon="/img/icons-app/medal.png"
-                    text="最低金牌"
-                  />
-                  -->
-                  <!--
-                  <van-grid-item
-                    @click="
-                      $appOpenUrl(
-                        $t('open-url.title'),
-                        'NGA @小熊de大熊',
-                        {
-                          path: '//ngabbs.com/read.php?tid=12677614',
-                        },
-                        0
-                      )
-                    "
-                    icon="/img/icons-app/attack_speed.png"
-                    text="攻速阈值"
-                  />
-                  -->
-                  <van-grid-item
-                    @click="
-                      $appPush({
-                        path: '/ranking',
-                        query: {
-                          type: 1,
-                          heroName: tableData.cardInfo.name,
-                          refresh: 1,
-                        },
-                      })
-                    "
-                    icon="exchange"
-                    text="关系克制"
-                  />
-                  <van-grid-item
-                    @click="
-                      $appPush({
-                        path:
-                          '/hero/' +
-                          tableData.cardInfo.id +
-                          '/replay?title=' +
-                          tableData.cardInfo.name +
-                          '&teammate=0',
-                      })
-                    "
-                    icon="tv-o"
-                    text="对局回顾"
-                  />
-                </van-grid>
-              </van-cell-group>
             </van-tab>
           </van-tabs>
         </van-cell-group>
@@ -1246,6 +1279,7 @@ export default {
         skillActionSheet: false,
         fightPowerActionSheet: false,
         heroFeature: false,
+        heroPopup: false,
         searchData: false,
         searchHistory: false,
         heroData: 0,
@@ -1285,7 +1319,7 @@ export default {
         this.showInfo.searchHistory = false;
       }
     },
-    getSearch: function (value, show = null) {
+    getSearch: function (value = "", show = null) {
       this.search.value = value;
 
       this.$axios
@@ -1302,7 +1336,17 @@ export default {
           if (status.code == 200) {
             this.tableData = data;
 
-            this.addSearchData(value);
+            if (value) {
+              this.addSearchData(value);
+
+              this.$appPush({
+                path: "/search",
+                query: {
+                  q: value,
+                  refresh: 1,
+                },
+              });
+            }
 
             if (data.result.rows.length > 0) {
               this.showInfo.searchData = true;
@@ -1591,6 +1635,11 @@ div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: @app-text-align;
+}
+
+div.search-e63a3d77ef528e9465c5ec19abb57693 {
+  display: inline-block;
+  margin: 0 5px;
 }
 
 div.search-7b0acd4657210b07548f308396bb87a1 {

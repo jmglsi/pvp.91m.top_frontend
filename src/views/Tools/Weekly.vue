@@ -30,8 +30,9 @@
               <div :style="{ position: 'relative' }">
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error:
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
+                    src:
                       '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                       data.id +
                       '/' +
@@ -71,11 +72,12 @@
               <div :style="{ position: 'relative' }">
                 <img
                   v-lazy="{
-                    src: '/img/icons-equipment/' + data + '.jpg',
-                    error:
-                      '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                    //src: '/img/icons-equipment/' + data + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + data + '.jpg',
+                    src:
+                      '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                       data +
-                      '.png',
+                      '.jpg',
                   }"
                   width="35"
                   height="35"
@@ -112,8 +114,9 @@
               <div :style="{ position: 'relative' }">
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.heroId + '.jpg',
-                    error:
+                    //src: '/img/icons-hero/' + data.heroId + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.heroId + '/' + data.heroId + '.jpg',
+                    src:
                       '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                       data.heroId +
                       '/' +
@@ -127,9 +130,9 @@
 
                 <img
                   v-lazy="{
-                    src: '/img/icons-skill/' + data.id + '.jpg',
-                    error:
-                      '//image.ttwz.qq.com/images/skill/' + data.id + '.png',
+                    //src: '/img/icons-skill/' + data.id + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + data.id + '.jpg',
+                    src: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + data.id + '.jpg',
                   }"
                   width="17"
                   height="17"
@@ -163,8 +166,9 @@
               <div :style="{ position: 'relative' }">
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.heroId + '.jpg',
-                    error:
+                    //src: '/img/icons-hero/' + data.heroId + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.heroId + '/' + data.heroId + '.jpg',
+                    src:
                       '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                       data.heroId +
                       '/' +
@@ -178,11 +182,12 @@
 
                 <img
                   v-lazy="{
-                    src: '/img/icons-equipment/' + data.id + '.jpg',
-                    error:
-                      '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                    //src: '/img/icons-equipment/' + data.id + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + data.id + '.jpg',
+                    src:
+                      '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                       data.id +
-                      '.png',
+                      '.jpg',
                   }"
                   width="17"
                   height="17"

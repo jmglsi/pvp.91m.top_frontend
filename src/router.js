@@ -62,6 +62,15 @@ export default new Router({
         keepAlive: true
       }
     }, {
+      path: '/thank',
+      name: 'thank',
+      component: () =>
+        import('./views/Thank/Index.vue'),
+      meta: {
+        title: '感谢页',
+        keepAlive: true
+      }
+    }, {
       path: '/ranking',
       name: 'rankingIndex',
       component: () =>
@@ -185,6 +194,15 @@ export default new Router({
             title: '逆水寒-队伍编辑器',
             keepAlive: false
           }
+        }, {
+          path: 'fishing/ground',
+          name: 'toolsFishingGround',
+          component: () =>
+            import('./views/Tools/FishingGround.vue'),
+          meta: {
+            title: '梧桐路亚：杭嘉湖黑坑信息汇总',
+            keepAlive: false
+          }
         },
       ]
     }, {
@@ -231,12 +249,21 @@ export default new Router({
         import('./views/Admin/Index.vue'),
       children: [
         {
-          path: 'web-data',
-          name: 'webData',
+          path: 'web-data-492e8',
+          name: 'webData-492e8',
           component: () =>
-            import('./views/Admin/Web/Data.vue'),
+            import('./views/Admin/Web/Data-492e8.vue'),
           meta: {
-            title: '数据站',
+            title: '数据站:苏苏的荣耀助手',
+            keepAlive: true
+          }
+        }, {
+          path: 'web-data-5533c',
+          name: 'webData-5533c',
+          component: () =>
+            import('./views/Admin/Web/Data-5533c.vue'),
+          meta: {
+            title: '数据站:奶香的一刀',
             keepAlive: true
           }
         }, {

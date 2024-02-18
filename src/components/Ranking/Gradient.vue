@@ -46,8 +46,9 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error: data.img,
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: data.img,
+                    src: data.img,
                   }"
                   width="50"
                   height="50"
@@ -63,8 +64,9 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
-                      error: data.skill[0].img,
+                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      //error: data.skill[0].img,
+                      src: data.skill[0].img,
                     }"
                     :style="{ left: '-10px' }"
                     width="15"
@@ -83,8 +85,9 @@
                   </span>
                   <img
                     v-lazy="{
-                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
-                      error: data.skill[1].img,
+                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      //error: data.skill[1].img,
+                      src: data.skill[1].img,
                     }"
                     :style="{ left: '45px' }"
                     width="15"
@@ -161,8 +164,9 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error: data.img,
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: data.img,
+                    src: data.img,
                   }"
                   width="50"
                   height="50"
@@ -178,8 +182,9 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
-                      error: data.skill[0].img,
+                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      //error: data.skill[0].img,
+                      src: data.skill[0].img,
                     }"
                     :style="{ left: '-10px' }"
                     width="15"
@@ -198,8 +203,9 @@
                   </span>
                   <img
                     v-lazy="{
-                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
-                      error: data.skill[1].img,
+                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      //error: data.skill[1].img,
+                      src: data.skill[1].img,
                     }"
                     :style="{ left: '45px' }"
                     width="15"
@@ -275,8 +281,9 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error: data.img,
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: data.img,
+                    src: data.img,
                   }"
                   width="50"
                   height="50"
@@ -292,8 +299,9 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
-                      error: data.skill[0].img,
+                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      //error: data.skill[0].img,
+                      src: data.skill[0].img,
                     }"
                     :style="{ left: '-10px' }"
                     width="15"
@@ -312,8 +320,9 @@
                   </span>
                   <img
                     v-lazy="{
-                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
-                      error: data.skill[1].img,
+                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      //error: data.skill[1].img,
+                      src: data.skill[1].img,
                     }"
                     :style="{ left: '45px' }"
                     width="15"
@@ -389,8 +398,9 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error: data.img,
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: data.img,
+                    src: data.img,
                   }"
                   width="50"
                   height="50"
@@ -406,8 +416,9 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
-                      error: data.skill[0].img,
+                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      //error: data.skill[0].img,
+                      src: data.skill[0].img,
                     }"
                     :style="{ left: '-10px' }"
                     width="15"
@@ -426,8 +437,9 @@
                   </span>
                   <img
                     v-lazy="{
-                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
-                      error: data.skill[1].img,
+                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      //error: data.skill[1].img,
+                      src: data.skill[1].img,
                     }"
                     :style="{ left: '45px' }"
                     width="15"
@@ -499,8 +511,9 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error: data.img,
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: data.img,
+                    src: data.img,
                   }"
                   width="50"
                   height="50"
@@ -516,8 +529,9 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
-                      error: data.skill[0].img,
+                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      //error: data.skill[0].img,
+                      src: data.skill[0].img,
                     }"
                     :style="{ left: '-10px' }"
                     width="15"
@@ -536,8 +550,9 @@
                   </span>
                   <img
                     v-lazy="{
-                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
-                      error: data.skill[1].img,
+                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      //error: data.skill[1].img,
+                      src: data.skill[1].img,
                     }"
                     :style="{ left: '45px' }"
                     width="15"
@@ -607,8 +622,9 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + data.id + '.jpg',
-                    error: data.img,
+                    //src: '/img/icons-hero/' + data.id + '.jpg',
+                    //error: data.img,
+                    src: data.img,
                   }"
                   width="50"
                   height="50"
@@ -624,8 +640,9 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
-                      error: data.skill[0].img,
+                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
+                      //error: data.skill[0].img,
+                      src: data.skill[0].img,
                     }"
                     :style="{ left: '-10px' }"
                     width="15"
@@ -644,8 +661,9 @@
                   </span>
                   <img
                     v-lazy="{
-                      src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
-                      error: data.skill[1].img,
+                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
+                      //error: data.skill[1].img,
+                      src: data.skill[1].img,
                     }"
                     :style="{ left: '45px' }"
                     width="15"
@@ -699,11 +717,11 @@
         @click="
           $appPush({
             path: '/friends',
-            query: { openId: '122faeffce051c73a476a40919ea71fb' },
+            query: { openId: '694b93b7da23a5243b7632c52a8fc49d' },
           })
         "
       >
-        @安致远
+        @迪安51
       </span>
       提供
       <br />

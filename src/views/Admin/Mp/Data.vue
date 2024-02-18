@@ -4,9 +4,11 @@
     <div class="app-4717d11da95ed90ccdb4d4a0648bad39">
       <div class="admin-8ef8eb00bde6d89a54da830b8c26727d">
         <a-dropdown :trigger="['click']">
-          <h1>⛰️ 努力创作！</h1>
+          <h1>
+            <span>⛰️ 努力创作！</span>
+          </h1>
           <template #overlay>
-            <a-menu :style="{ textAlign: 'left', width: '100px' }">
+            <a-menu :style="{ width: '100px' }">
               <a-sub-menu key="menu" title="菜单">
                 <a-menu-item>添加</a-menu-item>
               </a-sub-menu>

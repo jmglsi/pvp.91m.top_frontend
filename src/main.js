@@ -3,15 +3,16 @@ import App from './App.vue';
 import router from './router';
 import './registerServiceWorker';
 
-import VueMeta from 'vue-meta';
-Vue.use(VueMeta);
-
 import VueClipboard from 'vue-clipboard2';
 Vue.use(VueClipboard);
+
+import VueMeta from 'vue-meta';
+Vue.use(VueMeta);
 
 import { i18n } from './assets/import/i18n';
 
 import store from './assets/import/store';
+Vue.prototype.$store = store;
 
 import './assets/import/antd';
 import './assets/import/vant';
@@ -22,16 +23,15 @@ import './assets/import/vxe-table';
 import './assets/js/app.config';
 import './assets/js/bilibili.config';
 
-import Vconsole from 'vconsole';
-if (localStorage.getItem("debug") == 1) {
-  new Vconsole();
-}
-
 import appApi from './assets/js/api.config';
 Vue.prototype.$appApi = appApi;
 
 import appMsg from './assets/js/code.config';
 Vue.prototype.$appMsg = appMsg;
+
+router.afterEach(() => {
+  Vue.prototype.$appInitMiniapp();
+})
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title + ' | ' + Vue.prototype.$appConfigInfo.appInfo.name;

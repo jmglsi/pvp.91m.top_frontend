@@ -185,8 +185,9 @@
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
                 v-lazy="{
-                  src: '/img/icons-skill/' + hero.info.skill[0].id + '.jpg',
-                  error: hero.info.skill[0].img,
+                  //src: '/img/icons-skill/' + hero.info.skill[0].id + '.jpg',
+                  //error: hero.info.skill[0].img,
+                  src: hero.info.skill[0].img,
                 }"
                 width="25"
                 height="25"
@@ -201,8 +202,9 @@
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
                 v-lazy="{
-                  src: '/img/icons-equipment/' + hero.info.skill[1].id + '.jpg',
-                  error: hero.info.skill[1].img,
+                  //src: '/img/icons-equipment/' + hero.info.skill[1].id + '.jpg',
+                  //error: hero.info.skill[1].img,
+                  src: hero.info.skill[1].img,
                 }"
                 width="25"
                 height="25"
@@ -504,12 +506,12 @@ export default {
           skill: [
             {
               id: null,
-              img: "//image.ttwz.qq.com/images/skill/80102.png",
+              img: "//game.gtimg.cn/images/yxzj/img201606/summoner/80102.jpg",
               pickRate: 0,
             },
             {
               id: null,
-              img: "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1701.png",
+              img: "//game.gtimg.cn/images/yxzj/img201606/itemimg/1701.jpg",
               pickTimes: 0,
             },
           ],
@@ -654,7 +656,7 @@ export default {
     onComponentShow: function () {
       setTimeout(() => {
         this.showInfo.skeleton = false;
-      }, 250);
+      }, 500);
     },
     onSkillTabsClick: function (e) {
       let tipsText;
