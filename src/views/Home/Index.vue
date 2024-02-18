@@ -23,21 +23,23 @@
         <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
           <template #title>
             <van-search
-              show-action
               :placeholder="$appConfigInfo.appInfo.search.placeholder"
               @click="$appPush({ path: '/search' })"
               shape="round"
+              class="home-b6651e4ed730d53f874841b07507986c"
             >
-              <template #action>
-                <img
-                  v-lazy="$appConfigInfo.appInfo.search.img"
-                  width="35"
-                  height="35"
-                  class="app-border-radius"
-                  @click="onUrlClick($appConfigInfo.appInfo.search)"
-                />
-              </template>
             </van-search>
+          </template>
+        </van-tab>
+        <van-tab class="home-e7f8cbd87d347be881cba92dad128518">
+          <template #title>
+            <img
+              v-lazy="$appConfigInfo.appInfo.search.img"
+              width="35"
+              height="35"
+              class="app-border-radius"
+              @click="onUrlClick($appConfigInfo.appInfo.search)"
+            />
           </template>
         </van-tab>
         <!--
@@ -168,6 +170,12 @@ li.home-423fda2e543a1804accff6229de61143 {
   margin-left: 20px;
   text-align: @app-text-align;
   width: 150px;
+}
+
+div.home-b6651e4ed730d53f874841b07507986c {
+  input.van-field__control {
+    text-align: center;
+  }
 }
 
 div.home-caa1dc26349a3e0c95b4a9e69a6e53b7 {

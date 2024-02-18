@@ -33,11 +33,12 @@
             >
               <img
                 v-lazy="{
-                  src: '/img/icons-equipment/' + row.id + '.jpg',
-                  error:
-                    '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                  //src: '/img/icons-equipment/' + row.id + '.jpg',
+                  //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.id + '.jpg',
+                  src:
+                    '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                     row.id +
-                    '.png',
+                    '.jpg',
                 }"
                 width="50"
                 height="50"

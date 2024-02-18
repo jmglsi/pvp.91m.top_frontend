@@ -142,6 +142,7 @@ ul.oauth-fae0b4b90bcae3951a2a115697b83089 {
 
   li.oauth-d7c4aa2641b836c39a069c80c569f682 {
     margin: 0 8px;
+    margin-bottom: 10px;
   }
 }
 

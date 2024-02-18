@@ -27,8 +27,14 @@
             >
               <img
                 v-lazy="{
-                  src: '/img/icons-hero/' + row.id + '.jpg',
-                  error: row.img,
+                  //src: '/img/icons-hero/' + row.id + '.jpg',
+                  //error: row.img,
+                  src:
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    row.id +
+                    '/' +
+                    row.id +
+                    '.jpg',
                 }"
                 width="50"
                 height="50"

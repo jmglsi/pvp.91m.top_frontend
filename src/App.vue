@@ -3,7 +3,7 @@
     <AppReadme v-if="!noUpdateTips" />
 
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
-      <div v-if="$appConfigInfo.appInfo.pwa == 1">
+      <div v-if="$appIsApple && $appConfigInfo.appInfo.pwa == 1">
         <div
           v-if="showInfo.statusBar"
           :style="{
@@ -28,6 +28,44 @@
         <router-view v-else class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
       </div>
     </div>
+
+    <!--
+    <div
+      :style="{
+        height: bottomHeight + 'px',
+        overflow: bottomHeight < 175 ? 'hidden' : 'auto',
+        paddingTop: '10px',
+      }"
+      class="app-c696671ab3f65c37ca1c3899d5da3352"
+    >
+      <div
+        @touchstart="test_start"
+        @touchmove="test_move"
+        @touchend="test_end"
+        class="app-c572af95c789f65ee013ad5aa62b7b59"
+      >
+        <div class="app-0704716ec20b7c8363dbb02633edfc7e"></div>
+      </div>
+
+      <div
+        :style="{
+          overflow: bottomHeight < 175 ? 'hidden' : 'auto',
+        }"
+        class="app-44d87ea4c47ebfb7ea291a5dc72042f8"
+      >
+        容器头部
+
+        <div
+          style="height: 1000px; background-color: green; margin: 10px"
+          class="app-44d87ea4c47ebfb7ea291a5dc7204218"
+        >
+          容器内容
+        </div>
+
+        容器底部
+      </div>
+    </div>
+    -->
 
     <div class="app-ad7786f9368e7c2dc1cde095284ca39f">
       <van-tabbar
@@ -101,6 +139,7 @@ export default {
   },
   data() {
     return {
+      bottomHeight: 175,
       zoom: 1,
       noUpdateTips: true,
       tableData: {
@@ -246,8 +285,7 @@ export default {
           tempAccessToken = q.tempAccessToken || "",
           oauthType = q.oauthType || "",
           tempText = q.tempText || "",
-          appConfigInfo = this.$appConfigInfo,
-          debug = 0;
+          appConfigInfo = this.$appConfigInfo;
 
         this.zoom = q.zoom || 1;
         this.tableData = data;
@@ -368,12 +406,6 @@ export default {
           }
         }
 
-        debug = this.$route.query.debug || 0;
-
-        if (debug == 1) {
-          localStorage.setItem("debug", 1);
-        }
-
         this.showInfo.app = true;
       });
 
@@ -384,7 +416,7 @@ export default {
        */
       setTimeout(() => {
         this.showInfo.app = true;
-      }, 250);
+      }, 500);
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(
@@ -393,6 +425,36 @@ export default {
         { path: data.url ? data.url : data.to },
         data.url ? 0 : 1
       );
+    },
+    test_start: function () {
+      document.getElementById("app").style.overflowY = "hidden";
+    },
+    test_move: function (e) {
+      let cH = document.body.clientHeight,
+        cY = cH - e.touches[0].clientY,
+        height = 0;
+
+      if (cY < 175) {
+        height = 175;
+      } else if (cH - cY < 75) {
+        height = cH - 75;
+      } else {
+        height = cY;
+      }
+
+      this.bottomHeight = height;
+    },
+    test_end: function () {
+      let cH = document.body.clientHeight,
+        bottomHeight = this.bottomHeight;
+
+      document.getElementById("app").style.overflowY = "unset";
+
+      if (bottomHeight < 175) {
+        this.bottomHeight = 175;
+      } else {
+        this.bottomHeight = cH - 75;
+      }
     },
   },
 };
@@ -476,6 +538,11 @@ img.app-d31cb1c15b091f41248935d88a8d0a45 {
 
 img.app-4ab161130e76571ab0c31aa23a6238c7 {
   margin: 0 10px;
+}
+
+i.vxe-cell-help-icon {
+  color: orange;
+  margin-bottom: 3px;
 }
 
 i.app-6de102c0bc4dc7f72ce287d6b0828052 {
@@ -619,6 +686,38 @@ div.app-recommend {
 
 div.app-bpIndex {
   height: 443px;
+}
+
+div.app-c572af95c789f65ee013ad5aa62b7b59 {
+  margin-top: -35px;
+  padding-top: 15px;
+  height: 50px;
+}
+
+div.app-c696671ab3f65c37ca1c3899d5da3352 {
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0px -1px 7px rgb(220, 220, 220);
+  padding-bottom: 40px;
+}
+
+div.app-0704716ec20b7c8363dbb02633edfc7e {
+  background-color: rgb(227, 231, 241);
+  border-radius: 10px;
+  width: 50px;
+  margin: 25px auto;
+  height: 7px;
+}
+
+div.app-44d87ea4c47ebfb7ea291a5dc72042f8 {
+  margin: 10px;
+  margin-top: 13px;
+  height: 767px;
+  background-color: red;
 }
 
 div.app-0cecd2d48b0c852a513d34eec25042b7 {

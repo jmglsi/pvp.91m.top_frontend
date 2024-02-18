@@ -132,12 +132,12 @@ export default {
           skill: [
             {
               id: null,
-              img: "//image.ttwz.qq.com/images/skill/80102.png",
+              img: "//game.gtimg.cn/images/yxzj/img201606/summoner/80102.jpg",
               pickRate: 0,
             },
             {
               id: null,
-              img: "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/1701.png",
+              img: "//game.gtimg.cn/images/yxzj/img201606/itemimg/1701.jpg",
               pickTimes: 0,
             },
           ],
@@ -416,6 +416,8 @@ export default {
               "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did,
               this.lineData
             );
+          } else {
+            //this.$message.error(status.msg);
           }
         });
     },

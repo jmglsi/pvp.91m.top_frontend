@@ -44,8 +44,9 @@
             >
               <img
                 v-lazy="{
-                  src: '/img/icons-hero/' + row.id + '.jpg',
-                  error: row.img,
+                  //src: '/img/icons-hero/' + row.id + '.jpg',
+                  //error: row.img,
+                  src: row.img,
                 }"
                 width="50"
                 height="50"
@@ -54,8 +55,9 @@
               <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                 <img
                   v-lazy="{
-                    src: '/img/icons-skill/' + row.skill[0].id + '.jpg',
-                    error: row.skill[0].img,
+                    //src: '/img/icons-skill/' + row.skill[0].id + '.jpg',
+                    //error: row.skill[0].img,
+                    src: row.skill[0].img,
                   }"
                   width="15"
                   height="15"
@@ -68,8 +70,9 @@
                 </span>
                 <img
                   v-lazy="{
-                    src: '/img/icons-equipment/' + row.skill[1].id + '.jpg',
-                    error: row.skill[1].img,
+                    //src: '/img/icons-equipment/' + row.skill[1].id + '.jpg',
+                    //error: row.skill[1].img,
+                    src: row.skill[1].img,
                   }"
                   width="15"
                   height="15"
@@ -799,6 +802,8 @@ export default {
               "heroChartsLog-" + aid + "-" + bid + "-" + cid + "-" + did,
               this.lineData
             );
+          } else {
+            //this.$message.error(status.msg);
           }
         });
     },

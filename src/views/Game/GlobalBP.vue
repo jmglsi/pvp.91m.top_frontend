@@ -71,8 +71,9 @@
                 v-lazy="
                   heroId
                     ? {
-                        src: '/img/icons-hero/' + heroId + '.jpg',
-                        error:
+                        //src: '/img/icons-hero/' + heroId + '.jpg',
+                        //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
+                        src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                           heroId +
                           '/' +
@@ -124,8 +125,9 @@
                 v-lazy="
                   heroId
                     ? {
-                        src: '/img/icons-hero/' + heroId + '.jpg',
-                        error:
+                        //src: '/img/icons-hero/' + heroId + '.jpg',
+                        //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
+                        src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                           heroId +
                           '/' +
@@ -188,8 +190,9 @@
                     v-lazy="
                       heroId
                         ? {
-                            src: '/img/icons-hero/' + heroId + '.jpg',
-                            error:
+                            //src: '/img/icons-hero/' + heroId + '.jpg',
+                            //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
+                            src:
                               '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                               heroId +
                               '/' +
@@ -306,8 +309,9 @@
                         </span>
                         <img
                           v-lazy="{
-                            src: '/img/icons-hero/' + data.id + '.jpg',
-                            error: data.img,
+                            //src: '/img/icons-hero/' + data.id + '.jpg',
+                            //error: data.img,
+                            src: data.img,
                           }"
                           :style="
                             tabsInfo.model < 6 && (data.isBan || data.isUsed)
@@ -375,8 +379,9 @@
                         </span>
                         <img
                           v-lazy="{
-                            src: '/img/icons-hero/' + data.id + '.jpg',
-                            error: data.img,
+                            //src: '/img/icons-hero/' + data.id + '.jpg',
+                            //error: data.img,
+                            src: data.img,
                           }"
                           :style="
                             tabsInfo.model < 6 && (data.isBan || data.isUsed)
@@ -430,8 +435,9 @@
                     v-lazy="
                       heroId
                         ? {
-                            src: '/img/icons-hero/' + heroId + '.jpg',
-                            error:
+                            //src: '/img/icons-hero/' + heroId + '.jpg',
+                            //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
+                            src:
                               '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                               heroId +
                               '/' +
@@ -614,13 +620,9 @@
               <template slot="title">
                 <img
                   v-lazy="{
-                    src: '/img/icons-hero/' + recommendHeroId + '.jpg',
-                    error:
-                      '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                      recommendHeroId +
-                      '/' +
-                      recommendHeroId +
-                      '.jpg',
+                    //src: '/img/icons-hero/' + recommendHeroId + '.jpg',
+                    //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + recommendHeroId + '/' + recommendHeroId + '.jpg',
+                    src: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + recommendHeroId + '/' + recommendHeroId + '.jpg',
                   }"
                   width="25"
                   height="25"

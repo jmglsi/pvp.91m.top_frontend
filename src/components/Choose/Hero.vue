@@ -1,6 +1,9 @@
 <template>
   <div class="choose-a951404cf72bbe54a7fbac9cdf0908af">
-    <div class="choose-f4947bf65fb55ef270296ea141e6a5b4" @click="onActionSheetClick">
+    <div
+      class="choose-f4947bf65fb55ef270296ea141e6a5b4"
+      @click="onActionSheetClick"
+    >
       <slot />
     </div>
 
@@ -39,8 +42,9 @@
             >
               <img
                 v-lazy="{
-                  src: '/img/icons-hero/' + data.id + '.jpg',
-                  error: data.img,
+                  //src: '/img/icons-hero/' + data.id + '.jpg',
+                  //error: data.img,
+                  src: data.img,
                 }"
                 width="50"
                 height="50"

@@ -151,8 +151,9 @@
                             width="30"
                             height="30"
                             v-lazy="{
-                              src: '/img/icons-hero/' + data.heroId + '.jpg',
-                              error:
+                              //src: '/img/icons-hero/' + data.heroId + '.jpg',
+                              //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.heroId + '/' + data.heroId + '.jpg',
+                              src:
                                 '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
                                 data.heroId +
                                 '/' +
@@ -408,7 +409,7 @@ export default {
     onComponentShow: function () {
       setTimeout(() => {
         this.showInfo.skeleton = false;
-      }, 250);
+      }, 500);
     },
     onPullRefresh: function () {
       setTimeout(() => {
@@ -421,12 +422,12 @@ export default {
       let url;
 
       if (bid == 1) {
-        url = "//image.ttwz.qq.com/images/skill/" + id + ".png";
+        url = "//game.gtimg.cn/images/yxzj/img201606/summoner/" + id + ".jpg";
       } else if (bid == 2) {
         url =
-          "//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/" +
+          "//game.gtimg.cn/images/yxzj/img201606/itemimg/" +
           id +
-          ".png";
+          ".jpg";
       }
 
       return url;

@@ -369,8 +369,9 @@ export default {
           { value: 1, text: "QQ (昨日)" },
           { value: 2, text: "WX (昨日)" },
           { value: 3, text: "上分推荐 (昨日)" },
-          { value: 4, text: "全部 (最近 5 天)" },
+          { value: 4, text: "全部 (最近 6 天)" },
           { value: 5, text: "全部 (最近 30 天)" },
+          { value: 6, text: "我关注的" },
         ],
       },
       heroFightPowerTypeInfo: {

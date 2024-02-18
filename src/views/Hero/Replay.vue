@@ -69,7 +69,9 @@
             >
               <van-grid-item
                 :icon="
-                  '//image.ttwz.qq.com/images/skill/' + data.heroSkill + '.png'
+                  '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
+                  data.heroSkill +
+                  '.jpg'
                 "
                 :text="data.heroPosition"
                 class="hero-0a96464cb313aab9cc51e5aa61b0193f"
@@ -79,9 +81,9 @@
                 :key="'hero-b49d75de8b355a6d857fa2b655f35f7c-' + index"
                 :icon="
                   data > 0
-                    ? '//image.ttwz.qq.com/h5/images/bangbang/mobile/wzry/equip/' +
+                    ? '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
                       data +
-                      '.png'
+                      '.jpg'
                     : null
                 "
                 @click="
