@@ -108,6 +108,31 @@
       >
         {{ loginInfo.text }}
       </van-button>
+      &nbsp;&nbsp;&nbsp;
+      <van-button
+        round
+        :disabled="
+          loginInfo.type != 1 ||
+          !$appConfigInfo.appInfo.isReadme ||
+          !showInfo.loginButton
+            ? true
+            : false
+        "
+        size="small"
+        color="linear-gradient(to right, #fccf31, #f55555)"
+        @click="
+          $appPush({
+            path: '/search',
+            query: {
+              q: '大佬们快来加群',
+              refresh: 1,
+            },
+          })
+        "
+        class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
+      >
+        交友
+      </van-button>
 
       <div
         v-if="$appConfigInfo.appInfo.isReadme == 1 && loginInfo.type == 1"

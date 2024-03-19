@@ -63,7 +63,7 @@
 
               <div class="fishing-6f552ec92fd36b2069f0a4b62deee3d8">
                 <div class="fishing-6143a13693f3963c1b45083162cad920">
-                  塘主：{{ data.admin }}，<a href="">信息有误？</a>
+                  塘主：{{ data.admin }}，<a href="">信息有误?</a>
                 </div>
                 <br />
                 <div class="fishing-6143a13693f3963c1b45083162cad920">
@@ -521,12 +521,12 @@ export default {
       this.value2 = 0;
       this.value3 = 0;
     },
-    onButtonConfirm() {
+    onButtonConfirm: function () {
       this.onFilter();
 
       this.$refs.refFishingGround.toggle();
     },
-    onRefresh() {
+    onRefresh: function () {
       this.tempFishingGround = this.tableData;
       this.isLoading = false;
 

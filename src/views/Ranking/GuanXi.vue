@@ -324,7 +324,7 @@ export default {
     */
   },
   methods: {
-    getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = null) {
+    getRanking: function (aid = 1, bid = 0, cid = 0, did = 0, heroName = "") {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -332,7 +332,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;

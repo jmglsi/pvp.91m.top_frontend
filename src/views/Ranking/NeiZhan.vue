@@ -319,9 +319,7 @@ export default {
           this.$appOpenUrl(
             this.$t("open-url.title"),
             "需要安装王者营地",
-            {
-              path: playerInfo.profileUrl,
-            },
+            { path: playerInfo.profileUrl },
             0
           );
         } else {
@@ -334,9 +332,7 @@ export default {
           this.$appOpenUrl(
             this.$t("open-url.title"),
             "需要安装王者营地",
-            {
-              path: playerInfo.inscriptionUrl,
-            },
+            { path: playerInfo.inscriptionUrl },
             0
           );
         } else {

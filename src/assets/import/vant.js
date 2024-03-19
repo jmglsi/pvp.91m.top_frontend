@@ -27,6 +27,7 @@ import {
   NavBar,
   Pagination,
   Picker,
+  Popover,
   Popup,
   Progress,
   PullRefresh,
@@ -48,7 +49,7 @@ import {
   TabbarItem,
   Tabs,
   Tag,
-  Uploader,
+  Uploader
 } from 'vant';
 import '@vant/touch-emulator';
 
@@ -80,6 +81,7 @@ Vue
   .use(NavBar)
   .use(Pagination)
   .use(Picker)
+  .use(Popover)
   .use(Popup)
   .use(Progress)
   .use(PullRefresh)

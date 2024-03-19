@@ -1,6 +1,6 @@
 <template>
   <div class="hero-equipment">
-    <div class="hero-equipment-46682fd67ae12a15c6433c2dbe69effd">
+    <div class="hero-46682fd67ae12a15c6433c2dbe69effd">
       <van-nav-bar
         left-arrow
         :border="false"
@@ -26,7 +26,7 @@
             <van-icon v-show="false" name="ellipsis" size="18" />
 
             <template slot="content">
-              <div class="hero-equipment-7d5a4bb93ee168ac07930ac48716e41f">
+              <div class="hero-7d5a4bb93ee168ac07930ac48716e41f">
                 <van-cell-group :border="false" title="技能、分路">
                   <van-grid :border="false" :column-num="2">
                     <van-grid-item>
@@ -56,7 +56,7 @@
                           ? (showInfo.isBig = false)
                           : (showInfo.isBig = true)
                       "
-                      class="hero-equipment-22822552a6f5c0cf14c945f4f6fea081"
+                      class="hero-22822552a6f5c0cf14c945f4f6fea081"
                     >
                       <img
                         width="15"
@@ -66,7 +66,7 @@
                             ? '//pic.rmb.bdstatic.com/bjh/e7f2225412920b26a606ea4422b716b8.jpeg'
                             : '//pic.rmb.bdstatic.com/bjh/1eda7acbe1911284b79f2720b55c6ea9.jpeg'
                         "
-                        class="hero-equipment-046bda3addab352133049c67c32859c2"
+                        class="hero-046bda3addab352133049c67c32859c2"
                       />
                       &nbsp;-&nbsp;
                     </span>
@@ -76,10 +76,10 @@
                       v-lazy="
                         '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                       "
-                      class="hero-equipment-046bda3addab352133049c67c32859c2"
+                      class="hero-046bda3addab352133049c67c32859c2"
                     />
                     <span
-                      class="hero-equipment-22822552a6f5c0cf14c945f4f6fea081"
+                      class="hero-22822552a6f5c0cf14c945f4f6fea081"
                     >
                       {{ chooseInfo.price || 0 }}
                     </span>
@@ -90,28 +90,28 @@
                       v-lazy="
                         '//pic.rmb.bdstatic.com/bjh/d110862ec23fb8ba4ec5ac9d393f1e12.png'
                       "
-                      class="hero-equipment-046bda3addab352133049c67c32859c2"
+                      class="hero-046bda3addab352133049c67c32859c2"
                     />
                     <span
-                      class="hero-equipment-22822552a6f5c0cf14c945f4f6fea081"
+                      class="hero-22822552a6f5c0cf14c945f4f6fea081"
                     >
                       {{ chooseInfo.time || "00:00" }}
                     </span>
                   </template>
-                  <div class="hero-equipment-a7bd1412fc3d4fb5968cbe78aa51e41a">
+                  <div class="hero-a7bd1412fc3d4fb5968cbe78aa51e41a">
                     <draggable
                       :list="chooseList"
-                      class="hero-equipment-9d68288c30614ee39e8260cdb81dc630"
+                      class="hero-9d68288c30614ee39e8260cdb81dc630"
                     >
                       <div
                         v-for="(data, index) in chooseList"
                         :key="
-                          'hero-equipment-b1c2779b9bc8205364266507480d4ee9-' +
+                          'hero-b1c2779b9bc8205364266507480d4ee9-' +
                           index
                         "
                         v-show="onDraggableShow(data)"
                         @click="onItemDelete(data, index)"
-                        class="hero-equipment-2b17aa16463c3aeca8da93a07962df5a"
+                        class="hero-2b17aa16463c3aeca8da93a07962df5a"
                       >
                         <img
                           width="28"
@@ -139,7 +139,7 @@
           ? { marginTop: '-50px' }
           : {}
       "
-      class="hero-equipment-84422605a132f74a6c772d788a76e968"
+      class="hero-84422605a132f74a6c772d788a76e968"
     >
       <van-row>
         <van-col :span="$appIsMobile ? 6 : 2">
@@ -159,7 +159,7 @@
             <van-sidebar-item title="推荐" />
             <van-sidebar-item>
               <template #title>
-                <div class="hero-equipment-39ac5a75c3d64a3b45733fbc8ad4275b">
+                <div class="hero-39ac5a75c3d64a3b45733fbc8ad4275b">
                   <ChooseHero @select="getHeroId">
                     <img
                       width="50"
@@ -180,7 +180,7 @@
                       v-lazy="
                         '//pic.rmb.bdstatic.com/bjh/ca9f38c9f423fc9b63998761bc77080f.png'
                       "
-                      class="hero-equipment-464e0def3c0912855013b4af9a3c312e"
+                      class="hero-464e0def3c0912855013b4af9a3c312e"
                     />
                   </ChooseHero>
                 </div>
@@ -189,7 +189,7 @@
           </van-sidebar>
         </van-col>
         <van-col :span="$appIsMobile ? 18 : 22">
-          <div class="hero-equipment-9305946983d796f54630b29f8241fdf9">
+          <div class="hero-9305946983d796f54630b29f8241fdf9">
             <div v-show="sidebarInfo.model == 0">
               <van-cell-group :border="false">
                 <template #title>
@@ -205,12 +205,12 @@
                   <van-grid-item
                     v-for="(data, index) in skillInfo"
                     :key="
-                      'hero-equipment-bbc65924097b4aa22d23bd88f6d1e107-' + index
+                      'hero-bbc65924097b4aa22d23bd88f6d1e107-' + index
                     "
                     :icon="data.icon"
                     :text="data.name"
                     @click="onSkillClick(data)"
-                    icon-prefix="hero-equipment-8b812bcd24d7f0b29c950eebfa4876f6"
+                    icon-prefix="hero-8b812bcd24d7f0b29c950eebfa4876f6"
                   />
                 </van-grid>
               </van-cell-group>
@@ -230,7 +230,7 @@
                   <van-grid-item
                     v-for="(data, index) in positionInfo"
                     :key="
-                      'hero-equipment-b1c2779b9bc8205364266507480d4ee9-' + index
+                      'hero-b1c2779b9bc8205364266507480d4ee9-' + index
                     "
                     :icon="data.icon"
                     :text="data.name"
@@ -247,7 +247,7 @@
 
                     <template slot="content">
                       <div
-                        class="hero-equipment-d86e26348c6bcf5542c3a8fae2e2d1b0"
+                        class="hero-d86e26348c6bcf5542c3a8fae2e2d1b0"
                       >
                         不同的出装有不同的打法
                       </div>
@@ -259,7 +259,7 @@
                         }"
                       />
                       <div
-                        class="hero-equipment-e9326e4d97ca90bdc8f972e25e6967ff"
+                        class="hero-e9326e4d97ca90bdc8f972e25e6967ff"
                       >
                         <a-checkbox
                           :indeterminate="indeterminate"
@@ -281,7 +281,7 @@
                   <van-tab
                     v-for="(data, index) in tabsInfo.tabs"
                     :key="
-                      'hero-equipment-70c44009157f4d55186513004ddd9926-' + index
+                      'hero-70c44009157f4d55186513004ddd9926-' + index
                     "
                     :title="data"
                   />
@@ -290,10 +290,10 @@
                   <van-grid-item
                     v-for="(data, index) in listInfo.equipment"
                     :key="
-                      'hero-equipment-b22320a558966d2b8acc4d2ba5c16f34-' + index
+                      'hero-b22320a558966d2b8acc4d2ba5c16f34-' + index
                     "
                     v-show="onItemShow(data)"
-                    icon-prefix="hero-equipment-8b812bcd24d7f0b29c950eebfa4876f6"
+                    icon-prefix="hero-8b812bcd24d7f0b29c950eebfa4876f6"
                   >
                     <template #icon>
                       <img
@@ -314,7 +314,7 @@
                         @click="onItemClick"
                       >
                         <span
-                          class="hero-equipment-bfdb7aa2ebfcd02113b228f44f73d2a7"
+                          class="hero-bfdb7aa2ebfcd02113b228f44f73d2a7"
                         >
                           {{ data.item_name }}
                         </span>
@@ -328,18 +328,18 @@
                           />
                           <template slot="title">
                             <div
-                              class="hero-equipment-3b09ddd4e6e3d406a35c2319e712aff7"
+                              class="hero-3b09ddd4e6e3d406a35c2319e712aff7"
                             >
                               <span
-                                class="hero-equipment-853bf9d3be5a89003b5f5b481a7f1a56"
+                                class="hero-853bf9d3be5a89003b5f5b481a7f1a56"
                               >
                                 {{ data.item_name }}
                               </span>
                               <span
-                                class="hero-equipment-8723cf2d0377e86f7f75c09ae7a76a55"
+                                class="hero-8723cf2d0377e86f7f75c09ae7a76a55"
                               >
                                 <span
-                                  class="hero-equipment-261370eb2630e93715dfb2d0845949fb"
+                                  class="hero-261370eb2630e93715dfb2d0845949fb"
                                 >
                                   损失
                                 </span>
@@ -349,7 +349,7 @@
                                   v-lazy="
                                     '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                                   "
-                                  class="hero-equipment-99cb324cd7e789db254f951a8babc0a8"
+                                  class="hero-99cb324cd7e789db254f951a8babc0a8"
                                 />
                                 <del>{{ data.loss_price }}</del>
                               </span>
@@ -357,21 +357,21 @@
                           </template>
                           <template slot="content">
                             <div
-                              class="hero-equipment-f5f7f495ed00512c9ee88c432bd988e8"
+                              class="hero-f5f7f495ed00512c9ee88c432bd988e8"
                             >
                               <div
-                                class="hero-equipment-0e65087ef714d330232ef74987513fbb"
+                                class="hero-0e65087ef714d330232ef74987513fbb"
                               >
                                 <van-tag
                                   v-for="(item, index) in data.tags"
                                   :key="
-                                    'hero-equipment-ccea3902e0a790c97b64aae26de79e9c-' +
+                                    'hero-ccea3902e0a790c97b64aae26de79e9c-' +
                                     index
                                   "
                                   v-show="item.hidden == false"
                                   :color="item.color"
                                   plain
-                                  class="hero-equipment-8a0ef47dc7fb94fd86ca714928f64401"
+                                  class="hero-8a0ef47dc7fb94fd86ca714928f64401"
                                 >
                                   {{ item.name }}
                                 </van-tag>
@@ -385,7 +385,7 @@
                       </div>
 
                       <div
-                        class="hero-equipment-c97389bccf8dd107758c9be4f12a6ab8"
+                        class="hero-c97389bccf8dd107758c9be4f12a6ab8"
                       >
                         <img
                           width="12"
@@ -395,12 +395,12 @@
                           "
                         />
                         <span
-                          class="hero-equipment-a6fd35511053bd90735e98ca6f02a4c9"
+                          class="hero-a6fd35511053bd90735e98ca6f02a4c9"
                         >
                           {{ data.total_price }}
                         </span>
                         <span
-                          class="hero-equipment-32e99218b3e9a25c3ca08b8ff83c7620"
+                          class="hero-32e99218b3e9a25c3ca08b8ff83c7620"
                         >
                           <del>{{ data.price }}</del>
                         </span>
@@ -496,7 +496,7 @@
                   >
                     描述
                     <span
-                      class="hero-equipment-d1ce62e9288a1640df00006f274c0910"
+                      class="hero-d1ce62e9288a1640df00006f274c0910"
                     >
                       (发布需登录)
                     </span>
@@ -826,46 +826,46 @@ export default {
 </script>
 
 <style scoped lang="less">
-a.hero-equipment-61b5514f16614481c1eb3b3219cfd112 {
+a.hero-61b5514f16614481c1eb3b3219cfd112 {
   margin-top: 25px;
 }
 
-img.hero-equipment-464e0def3c0912855013b4af9a3c312e {
+img.hero-464e0def3c0912855013b4af9a3c312e {
   background-color: white !important;
   bottom: -3px;
   margin-left: -13px;
   position: absolute;
 }
 
-img.hero-equipment-99cb324cd7e789db254f951a8babc0a8 {
+img.hero-99cb324cd7e789db254f951a8babc0a8 {
   margin-right: 4px;
   margin-top: -3px;
 }
 
-img.hero-equipment-046bda3addab352133049c67c32859c2 {
+img.hero-046bda3addab352133049c67c32859c2 {
   margin-top: -3px;
 }
 
-span.hero-equipment-d1ce62e9288a1640df00006f274c0910 {
+span.hero-d1ce62e9288a1640df00006f274c0910 {
   color: red !important;
 }
 
-span.hero-equipment-32e99218b3e9a25c3ca08b8ff83c7620 {
+span.hero-32e99218b3e9a25c3ca08b8ff83c7620 {
   color: gray !important;
   font-size: @app-font-size;
 }
 
-span.hero-equipment-8a0ef47dc7fb94fd86ca714928f64401 {
+span.hero-8a0ef47dc7fb94fd86ca714928f64401 {
   margin-right: 5px;
 }
 
-span.hero-equipment-8723cf2d0377e86f7f75c09ae7a76a55 {
+span.hero-8723cf2d0377e86f7f75c09ae7a76a55 {
   color: gray !important;
   position: absolute;
   right: 10px;
 }
 
-div.hero-equipment-84422605a132f74a6c772d788a76e968,
+div.hero-84422605a132f74a6c772d788a76e968,
 div.hero-equipment,
 div.van-row,
 div.van-col,
@@ -878,52 +878,52 @@ div.van-sidebar {
   position: fixed;
 }
 
-div.hero-equipment-a7bd1412fc3d4fb5968cbe78aa51e41a {
+div.hero-a7bd1412fc3d4fb5968cbe78aa51e41a {
   margin-top: 10px;
 }
 
-div.hero-equipment-9d68288c30614ee39e8260cdb81dc630 {
+div.hero-9d68288c30614ee39e8260cdb81dc630 {
   display: contents;
 }
 
-div.hero-equipment-7d5a4bb93ee168ac07930ac48716e41f {
+div.hero-7d5a4bb93ee168ac07930ac48716e41f {
   height: 400px;
   width: 237px;
 }
 
-div.hero-equipment-7d5a4bb93ee168ac07930ac48716e41f {
+div.hero-7d5a4bb93ee168ac07930ac48716e41f {
   div.van-cell-group__title {
     margin-top: -13px;
   }
 }
 
-div.hero-equipment-96870cdb3f6b9ce1bb1de37cc7caf04d {
+div.hero-96870cdb3f6b9ce1bb1de37cc7caf04d {
   font-size: @app-font-size;
 }
 
-div.hero-equipment-2b17aa16463c3aeca8da93a07962df5a {
+div.hero-2b17aa16463c3aeca8da93a07962df5a {
   float: left;
   margin: 3px 5px;
 }
 
-div.hero-equipment-9305946983d796f54630b29f8241fdf9 {
+div.hero-9305946983d796f54630b29f8241fdf9 {
   font-size: 12px;
   text-align: @app-text-align;
 }
 
-div.hero-equipment-e9326e4d97ca90bdc8f972e25e6967ff {
+div.hero-e9326e4d97ca90bdc8f972e25e6967ff {
   margin-bottom: 15px;
 }
 
-div.hero-equipment-3b09ddd4e6e3d406a35c2319e712aff7 {
+div.hero-3b09ddd4e6e3d406a35c2319e712aff7 {
   text-align: @app-text-align;
 }
 
-div.hero-equipment-0e65087ef714d330232ef74987513fbb {
+div.hero-0e65087ef714d330232ef74987513fbb {
   margin-bottom: 8px;
 }
 
-div.hero-equipment-f5f7f495ed00512c9ee88c432bd988e8 {
+div.hero-f5f7f495ed00512c9ee88c432bd988e8 {
   max-height: 285px;
   overflow: auto;
   width: 200px;

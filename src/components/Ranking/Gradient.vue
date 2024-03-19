@@ -1124,7 +1124,7 @@ export default {
           this.$t("open-url.title"),
           "NGA @EndMP",
           {
-            path: "//ngabbs.com/read.php?pid=" + heroInfo.updateId,
+            path: "https://ngabbs.com/read.php?pid=" + heroInfo.updateId,
           },
           0
         );
@@ -1135,7 +1135,7 @@ export default {
           this.$t("open-url.title"),
           "NGA @小熊de大熊",
           {
-            path: "//ngabbs.com/read.php?tid=12677614",
+            path: "https://ngabbs.com/read.php?tid=12677614",
           },
           0
         );

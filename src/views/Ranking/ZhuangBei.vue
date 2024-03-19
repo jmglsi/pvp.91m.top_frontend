@@ -242,7 +242,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;
@@ -305,7 +307,7 @@ export default {
           this.$t("open-url.title"),
           "NGA @破笼之鸟",
           {
-            path: "//ngabbs.com/read.php?tid=19902976",
+            path: "https://ngabbs.com/read.php?tid=19902976",
           },
           0
         );

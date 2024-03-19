@@ -560,8 +560,14 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
-          this.getRanking(0, newValue.bid, newValue.cid, newValue.did);
-          this.getRanking(15);
+          this.getRanking(
+            0,
+            newValue.bid,
+            newValue.cid,
+            newValue.did,
+            this.time
+          );
+          this.getRanking(15, 0, 0, 0, this.time);
         }
       },
     },
@@ -634,8 +640,8 @@ export default {
 
     /*
       if (this.$appConfigInfo.appInfo.isReadme == 1) {
-        this.getRanking(0, this.bid, this.cid, this.did);
-        this.getRanking(15);
+        this.getRanking(0, this.bid, this.cid, this.did, this.time);
+        this.getRanking(15, 0, 0, 0, this.time);
       }
     */
   },
@@ -676,11 +682,11 @@ export default {
           }
         });
     },
-    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0, time = "") {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + this.time
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
@@ -733,16 +739,7 @@ export default {
             }
 
             this.$appSetLocalStorage(
-              "ranking-" +
-                aid +
-                "-" +
-                bid +
-                "-" +
-                cid +
-                "-" +
-                did +
-                "-" +
-                this.time,
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time,
               newData
             );
 
@@ -773,7 +770,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.lineData = ls);
+        this.lineData = ls;
+
+        return;
       }
 
       this.$axios
@@ -956,7 +955,7 @@ export default {
           this.$t("open-url.title"),
           "NGA @EndMP",
           {
-            path: "//ngabbs.com/read.php?pid=" + heroInfo.updateId,
+            path: "https://ngabbs.com/read.php?pid=" + heroInfo.updateId,
           },
           0
         );
@@ -967,7 +966,7 @@ export default {
           this.$t("open-url.title"),
           "NGA @小熊de大熊",
           {
-            path: "//ngabbs.com/read.php?tid=12677614",
+            path: "https://ngabbs.com/read.php?tid=12677614",
           },
           0
         );

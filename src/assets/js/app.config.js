@@ -45,7 +45,8 @@ Vue.prototype.$appConfigInfo = {
       placeholder: "loading...",
       to: null,
       url: null,
-    }
+    },
+    wxMiniappUrl: ""
   },
   oauthInfo: ["qq", "yuque", "afdian", "coding", "github"],
   positionInfo: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
@@ -305,9 +306,6 @@ Vue.prototype.$appInitMiniapp = function () {
           desc: data.share.desc,
           link: data.share.link,
           imgUrl: data.share.imgUrl,
-          success: function (res) {
-            console.log(res);
-          },
         });
 
         /**

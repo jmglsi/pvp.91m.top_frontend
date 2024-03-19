@@ -91,7 +91,7 @@
                     $t('open-url.title'),
                     'NGA @破笼之鸟',
                     {
-                      path: '//ngabbs.com/read.php?tid=19902976',
+                      path: 'https://ngabbs.com/read.php?tid=19902976',
                     },
                     0
                   )
@@ -127,7 +127,7 @@
                 <a-menu>
                   <a-menu-item
                     v-for="(data, index) in suitActionSheetActions"
-                    :key="'ranking-31d3689c01b543a417ec7571237a436d-' + index"
+                    :key="'hero-d97e274d2c9aed66c5d724627ae98768-' + index"
                     @click="
                       $appOpenUrl(
                         $t('open-url.title'),
@@ -344,9 +344,7 @@ export default {
         this.$appOpenUrl(
           "是否打开对局回顾?",
           null,
-          {
-            path: replayInfo.replayUrl,
-          },
+          { path: replayInfo.replayUrl },
           0
         );
       }
@@ -355,9 +353,7 @@ export default {
         this.$appOpenUrl(
           this.$t("open-url.title"),
           "需要安装王者营地",
-          {
-            path: replayInfo.hippyUrl,
-          },
+          { path: replayInfo.hippyUrl },
           0
         );
       }
@@ -367,9 +363,7 @@ export default {
           this.$appOpenUrl(
             this.$t("open-url.title"),
             "需要安装王者营地",
-            {
-              path: replayInfo.inscriptionUrl,
-            },
+            { path: replayInfo.inscriptionUrl },
             0
           );
         }

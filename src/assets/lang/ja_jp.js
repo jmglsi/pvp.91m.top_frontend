@@ -46,6 +46,11 @@ export default {
     "login": "ログインする",
     "register": "登録する"
   },
+  "my-link": {
+    "title": "拡張リンク",
+    "label": "公式アカウントにコピーすると時間が伸びます",
+    "value": "コピー"
+  },
   "oauth": {
     "sign-in-with": "サードパーティ製サービスと連携する",
     "third-party-authorization": "サードパーティ認証",
@@ -58,7 +63,7 @@ export default {
     "value": "NGA"
   },
   "open-url": {
-    "title": "外部リンクを開いてもよろしいですか？"
+    "title": "外部リンクを開いてもよろしいですか?"
   },
   "search": {
     "history": "検索履歴",

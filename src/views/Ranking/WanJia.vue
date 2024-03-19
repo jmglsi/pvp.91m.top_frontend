@@ -398,16 +398,14 @@ export default {
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
           "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
-        ),
-        playerList = [];
+        );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
         this.tableData = ls;
-        playerList = ls.result.rows;
 
-        this.getHeroList(playerList);
+        this.getHeroList(ls.result.rows);
 
-        return this.tableData;
+        return;
       }
 
       this.tableData.loading = true;
@@ -433,14 +431,12 @@ export default {
             this.tableData.loading = false;
             this.tableData.updateTime = ts;
 
-            playerList = data.result.rows;
-
             this.$appSetLocalStorage(
               "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
               this.tableData
             );
 
-            this.getHeroList(playerList);
+            this.getHeroList(data.result.rows);
 
             //this.$message.success(this.$appMsg.success[1005]);
           } else {
@@ -534,9 +530,7 @@ export default {
         this.$appOpenUrl(
           this.$t("open-url.title"),
           "需要安装王者营地",
-          {
-            path: playerInfo.profileUrl,
-          },
+          { path: playerInfo.profileUrl },
           0
         );
       }

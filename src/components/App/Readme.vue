@@ -17,7 +17,7 @@
             </span>
             <br />
             <br />
-            <a href="//docs.91m.top/%E5%A3%B0%E6%98%8E.html" target="_blank">
+            <a href="https://docs.91m.top/%E5%A3%B0%E6%98%8E.html" target="_blank">
               《{{ $t("privacy-and-data-statement") }}》
             </a>
           </a-checkbox>

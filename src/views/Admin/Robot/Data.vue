@@ -376,7 +376,7 @@ export default {
         return row.frameId == option.value;
       }
     },
-    getSelectEvent() {
+    getSelectEvent: function () {
       let group = this.$refs.refAdminGroup.getCheckboxRecords(),
         groupNum = group.length;
 
