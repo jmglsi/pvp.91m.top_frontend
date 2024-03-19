@@ -16,7 +16,7 @@
                       $t('open-url.title'),
                       null,
                       {
-                        path: '//api.91m.top/hero/v1/app.php?type=getQrcode&host=camp.qq.com',
+                        path: 'https://api.91m.top/hero/v1/app.php?type=getQrcode&host=camp.qq.com',
                       },
                       0
                     )

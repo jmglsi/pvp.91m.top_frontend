@@ -82,7 +82,7 @@
             <input
               v-model="option.value"
               v-for="(option, index) in column.filters"
-              :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
+              :key="'hero-92423e1b31d3e7fdac76d2ac26c45699-' + index"
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.value, option)"
@@ -138,7 +138,7 @@
             <input
               v-model="option.value"
               v-for="(option, index) in column.filters"
-              :key="'hero-equipment-92089e17c1e005ddc0336c65dfa6b63b-' + index"
+              :key="'hero-92089e17c1e005ddc0336c65dfa6b63b-' + index"
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.value, option)"
@@ -151,7 +151,7 @@
 
       <vxe-table-colgroup
         v-for="(data, index) in 6"
-        :key="'hero-equipment-5306afd97611c2ddc21400d0fcd9139c-' + index"
+        :key="'hero-5306afd97611c2ddc21400d0fcd9139c-' + index"
         :title="'格子_' + (index + 1).toString() + ' (%)'"
       >
         <vxe-table-column
@@ -167,7 +167,7 @@
             <input
               v-model="option.value"
               v-for="(option, index) in column.filters"
-              :key="'hero-equipment-ec3049b6fc592a98856d838ecfbfc3de-' + index"
+              :key="'hero-ec3049b6fc592a98856d838ecfbfc3de-' + index"
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.value, option)"
@@ -190,7 +190,7 @@
             <input
               v-model="option.value"
               v-for="(option, index) in column.filters"
-              :key="'hero-equipment-92089e17c1e005ddc0336c65dfa6b63b-' + index"
+              :key="'hero-92089e17c1e005ddc0336c65dfa6b63b-' + index"
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.value, option)"
@@ -339,7 +339,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;

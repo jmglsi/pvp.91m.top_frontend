@@ -143,10 +143,15 @@
               ? $appOpenUrl(
                   '是否切至国外?',
                   null,
-                  { path: '//pvp.r18.games' },
+                  { path: 'https://pvp.r18.games' },
                   0
                 )
-              : $appOpenUrl('是否切至国内?', null, { path: '//pvp.91m.top' }, 0)
+              : $appOpenUrl(
+                  '是否切至国内?',
+                  null,
+                  { path: 'https://pvp.91m.top' },
+                  0
+                )
           "
           is-link
         />

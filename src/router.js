@@ -158,6 +158,15 @@ export default new Router({
             title: '备战',
             keepAlive: false
           }
+        }, {
+          path: 'tools',
+          name: 'heroTools',
+          component: () =>
+            import('./views/Hero/Tools.vue'),
+          meta: {
+            title: '英雄-工具',
+            keepAlive: false
+          }
         },
       ]
     }, {
@@ -183,6 +192,15 @@ export default new Router({
             import('./views/Tools/Weekly.vue'),
           meta: {
             title: '周报',
+            keepAlive: false
+          }
+        }, {
+          path: 'xhh',
+          name: 'xhh',
+          component: () =>
+            import('./views/Tools/Xhh.vue'),
+          meta: {
+            title: '小灰灰',
             keepAlive: false
           }
         }, {

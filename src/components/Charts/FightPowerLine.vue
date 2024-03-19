@@ -120,8 +120,6 @@ export default {
       return e;
     },
     getHeroChartsLog: function (aid, bid, cid, did) {
-      if (bid == 0) return;
-
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -129,7 +127,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.lineData = ls);
+        this.lineData = ls;
+
+        return;
       }
 
       this.lineData = {

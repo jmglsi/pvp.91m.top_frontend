@@ -46,6 +46,11 @@ export default {
     "login": "Log In",
     "register": "Register"
   },
+  "my-link": {
+    "title": "Expand Link",
+    "label": "Copy to the official account for extended time",
+    "value": "Copy"
+  },
   "oauth": {
     "sign-in-with": "Sign In with Third-Party Account",
     "third-party-authorization": "Third-Party Authorization",

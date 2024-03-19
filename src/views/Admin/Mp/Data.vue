@@ -5,7 +5,7 @@
       <div class="admin-8ef8eb00bde6d89a54da830b8c26727d">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>⛰️ 努力创作！</span>
+            <span>⛰️ 努力创作!</span>
           </h1>
           <template #overlay>
             <a-menu :style="{ width: '100px' }">

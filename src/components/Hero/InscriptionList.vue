@@ -114,7 +114,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRankingByZhanli(newValue.heroId, 10, 0, 0, 0);
+          this.getRankingByZhanli(10, 0, 0, 0, newValue.heroId);
         }
       },
     },
@@ -148,11 +148,11 @@ export default {
   },
   methods: {
     getRankingByZhanli: function (
-      heroId = 111,
       aid = 10,
       bid = 0,
       cid = 0,
-      did = 0
+      did = 0,
+      heroId = 111
     ) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
@@ -161,7 +161,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;

@@ -46,6 +46,11 @@ export default {
     "login": "登录",
     "register": "注册"
   },
+  "my-link": {
+    "title": "扩列链接",
+    "label": "复制到公众号可以续时",
+    "value": "复制"
+  },
   "oauth": {
     "sign-in-with": "第三方登录",
     "third-party-authorization": "第三方授权",

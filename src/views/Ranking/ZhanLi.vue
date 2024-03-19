@@ -186,7 +186,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
-          this.getRanking(19, this.bid, this.cid, this.did);
+          this.getRanking(19, this.bid, this.cid, this.did, this.time);
         }
       },
     },
@@ -233,11 +233,11 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0, time = "") {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + this.time
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
@@ -277,16 +277,7 @@ export default {
             this.tableData.updateTime = ts;
 
             this.$appSetLocalStorage(
-              "ranking-" +
-                aid +
-                "-" +
-                bid +
-                "-" +
-                cid +
-                "-" +
-                did +
-                "-" +
-                this.time,
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time,
               this.tableData
             );
 

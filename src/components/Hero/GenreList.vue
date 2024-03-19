@@ -115,7 +115,7 @@
             <input
               v-model="option.value"
               v-for="(option, index) in column.filters"
-              :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
+              :key="'hero-92423e1b31d3e7fdac76d2ac26c45699-' + index"
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.value, option)"
@@ -169,7 +169,7 @@
             <input
               v-model="option.value"
               v-for="(option, index) in column.filters"
-              :key="'hero-equipment-92423e1b31d3e7fdac76d2ac26c45699-' + index"
+              :key="'hero-0f61e84a305f2be97898b866a87496c1-' + index"
               type="type"
               placeholder="0"
               @input="$panel.changeOption($event, !!option.value, option)"
@@ -214,7 +214,7 @@ export default {
         if (!newValue.genreId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(newValue.genreId, 14, 0, 0, 0);
+          this.getRanking(14, 0, 0, 0, newValue.genreId);
         }
       },
     },
@@ -237,7 +237,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (genreId = 111, aid = 14, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 14, bid = 0, cid = 0, did = 0, genreId = 111) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -245,7 +245,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;
@@ -307,17 +309,17 @@ export default {
     onTableCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
         this.genreInfo.type = 0;
-        return this.getRanking(row.heroId, 14, this.genreInfo.type, 0, 0);
+        return this.getRanking(14, this.genreInfo.type, 0, 0, row.heroId);
       }
 
       if (column.property == "skillId") {
         this.genreInfo.type = 1;
-        return this.getRanking(row.skillId, 14, this.genreInfo.type, 0, 0);
+        return this.getRanking(14, this.genreInfo.type, 0, 0, row.skillId);
       }
 
       if (column.property == "positionId") {
         this.genreInfo.type = 2;
-        return this.getRanking(row.positionId, 14, this.genreInfo.type, 0, 0);
+        return this.getRanking(14, this.genreInfo.type, 0, 0, row.positionId);
       }
     },
   },

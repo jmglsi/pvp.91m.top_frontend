@@ -1,7 +1,5 @@
 <template>
   <div id="app" :style="{ zoom: zoom }">
-    <AppReadme v-if="!noUpdateTips" />
-
     <div class="app-63c4cfbde5ad50f3f537c2540374995e">
       <div v-if="$appIsApple && $appConfigInfo.appInfo.pwa == 1">
         <div
@@ -27,6 +25,34 @@
 
         <router-view v-else class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
       </div>
+    </div>
+
+    <AppReadme v-if="!noUpdateTips" />
+
+    <div
+      v-if="showInfo.tabbar && showInfo.miniappButton"
+      @click="openWxMiniapp"
+      class="app-f1453f63de7b681a25dc590be0c8a31e"
+    >
+      <van-popover
+        v-model="showInfo.miniappPopover"
+        placement="right"
+        trigger="click"
+      >
+        <template #reference>
+          <van-button round plain color="orange" size="small">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img width="20" height="20" v-lazy="'/img/icons-app/miniapp.png'" />
+          </van-button>
+        </template>
+
+        <div
+          @click="openWxMiniapp"
+          class="app-26e2e326f1b1b65c8872276c20d24535"
+        >
+          推荐使用小程序~<br />体验更好更丝滑~
+        </div>
+      </van-popover>
     </div>
 
     <!--
@@ -173,6 +199,8 @@ export default {
         hello: true,
         statusBar: true,
         whiteBar: false,
+        miniappButton: false,
+        miniappPopover: true,
       },
     };
   },
@@ -362,6 +390,7 @@ export default {
             to: appInfo.search.to || null,
             url: appInfo.search.url || null,
           },
+          wxMiniappUrl: appInfo.wxMiniappUrl || null,
         };
         this.$appConfigInfo.oauthInfo = oauthInfo || [];
         this.$appConfigInfo.positionInfo = positionInfo || [];
@@ -373,7 +402,12 @@ export default {
             message: tipsInfo.title,
             description: tipsInfo.description,
             onClick: () => {
-              this.onUrlClick(tipsInfo);
+              this.$appOpenUrl(
+                "是否打开" + (tipsInfo.url ? "外部" : "内部") + "链接?",
+                null,
+                { path: tipsInfo.url ? tipsInfo.url : tipsInfo.to },
+                tipsInfo.url ? 0 : 1
+              );
             },
           });
         }
@@ -409,6 +443,10 @@ export default {
         this.showInfo.app = true;
       });
 
+      if (!this.$appInWechatMiniapp) {
+        this.showInfo.miniappButton = true;
+      }
+
       /**
        *
        * 以防上方没加载完，加载完后再显示
@@ -418,12 +456,14 @@ export default {
         this.showInfo.app = true;
       }, 500);
     },
-    onUrlClick: function (data) {
+    openWxMiniapp: function () {
       this.$appOpenUrl(
-        "是否打开" + (data.url ? "外部" : "内部") + "链接?",
+        this.$t("open-url.title"),
         null,
-        { path: data.url ? data.url : data.to },
-        data.url ? 0 : 1
+        {
+          path: this.$appConfigInfo.appInfo.wxMiniappUrl,
+        },
+        0
       );
     },
     test_start: function () {
@@ -602,6 +642,11 @@ span.van-tab__text {
   margin: 11px 0;
 }
 
+span.app-ce6834f6417aa0bd26ce2c913f27302d {
+  margin-left: 5px;
+  margin-right: -3px;
+}
+
 span.app-a5a5c883f68e45baa83f140e218759f1 {
   bottom: 30px;
   left: 0;
@@ -688,6 +733,19 @@ div.app-bpIndex {
   height: 443px;
 }
 
+div.app-f1453f63de7b681a25dc590be0c8a31e {
+  position: fixed;
+  bottom: 125px;
+  left: -25px;
+  z-index: 10 !important;
+}
+
+div.app-26e2e326f1b1b65c8872276c20d24535 {
+  padding: 10px;
+  font-size: 12px;
+  color: gray;
+}
+
 div.app-c572af95c789f65ee013ad5aa62b7b59 {
   margin-top: -35px;
   padding-top: 15px;
@@ -700,9 +758,9 @@ div.app-c696671ab3f65c37ca1c3899d5da3352 {
   position: fixed;
   background-color: white;
   border-radius: 10px;
-  z-index: 10;
   box-shadow: 0px -1px 7px rgb(220, 220, 220);
   padding-bottom: 40px;
+  z-index: 10 !important;
 }
 
 div.app-0704716ec20b7c8363dbb02633edfc7e {

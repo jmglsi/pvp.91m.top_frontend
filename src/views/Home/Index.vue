@@ -9,7 +9,7 @@
         :swipeable="true"
         :sticky="true"
         :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
-        @click="$appPush({ query: { type: tabsInfo.model } })"
+        :before-change="onTabsBeforeChange"
         duration="0.5"
         line-width="25px"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
@@ -35,10 +35,10 @@
           <template #title>
             <img
               v-lazy="$appConfigInfo.appInfo.search.img"
+              @click="onUrlClick($appConfigInfo.appInfo.search)"
               width="35"
               height="35"
               class="app-border-radius"
-              @click="onUrlClick($appConfigInfo.appInfo.search)"
             />
           </template>
         </van-tab>
@@ -138,6 +138,9 @@ export default {
             //on cancel
           });
       }
+    },
+    onTabsBeforeChange: function () {
+      return false;
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(
