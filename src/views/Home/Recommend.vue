@@ -6,10 +6,10 @@
       >
         <van-pull-refresh
           v-model="isLoading"
-          :pulling-text="appHomeInfo.miniappInfo.pulling"
-          :loosing-text="appHomeInfo.miniappInfo.loosing"
-          :loading-text="appHomeInfo.miniappInfo.loading"
-          :success-text="appHomeInfo.miniappInfo.success"
+          :pulling-text="homeData.miniappInfo.pulling"
+          :loosing-text="homeData.miniappInfo.loosing"
+          :loading-text="homeData.miniappInfo.loading"
+          :success-text="homeData.miniappInfo.success"
           @refresh="onPullRefresh"
           class="recommend-af03857fe372b964b53ef3a082c2b518"
         >
@@ -19,7 +19,7 @@
             class="app-f97c2ea77c6a08b3afd5a59851cbe0d8"
           >
             <van-swipe-item
-              v-for="(data, index) in appHomeInfo.swipeInfo.result.rows"
+              v-for="(data, index) in homeData.swipeInfo.result.rows"
               :key="'recommend-0c74eea41745fb37742d335606774a60-' + index"
               @click="onUrlClick(data)"
               class="recommend-ac104b3f82b3b5d3643319a05734ce93"
@@ -55,7 +55,7 @@
                 class="app-18e05b8e51e3beb49ba55397d11cb8ce"
               >
                 <van-grid-item
-                  v-for="(data, index) in appHomeInfo.indexInfo"
+                  v-for="(data, index) in homeData.indexInfo"
                   :key="'recommend-ea25beed04733529ada26478f028b97e-' + index"
                   :to="data.to"
                 >
@@ -77,13 +77,13 @@
               </van-grid>
 
               <van-cell
-                :title="appHomeInfo.tipsInfo.title || $t('loading')"
-                :label="appHomeInfo.tipsInfo.label || '清除缓存试一试~'"
-                :value="appHomeInfo.tipsInfo.value || '⏳'"
-                :is-link="appHomeInfo.tipsInfo.isLink"
+                :title="homeData.tipsInfo.title || $t('loading')"
+                :label="homeData.tipsInfo.label || '清除缓存试一试~'"
+                :value="homeData.tipsInfo.value || '⏳'"
+                :is-link="homeData.tipsInfo.isLink"
                 @click="
-                  appHomeInfo.tipsInfo.isLink
-                    ? onUrlClick(appHomeInfo.tipsInfo)
+                  homeData.tipsInfo.isLink
+                    ? onUrlClick(homeData.tipsInfo)
                     : null
                 "
                 class="app-06eab62dcb5a23b966a620807d78e66f"
@@ -246,10 +246,7 @@ export default {
         column: [],
         columns: [],
       },
-      showInfo: {
-        skeleton: true,
-      },
-      appHomeInfo: {
+      homeData: {
         miniappInfo: {
           to: "/miniapp",
           pulling: "喵呜...",
@@ -276,6 +273,9 @@ export default {
         bid: 1,
         cid: 0,
         img: null,
+      },
+      showInfo: {
+        skeleton: true,
       },
     };
   },
@@ -305,13 +305,13 @@ export default {
           ) || [];
 
       Array.from(o, (x, i) => {
-        let nowRow = this.appHomeInfo.swipeInfo.result.rows[i];
+        let nowRow = this.homeData.swipeInfo.result.rows[i];
 
         if (nowRow.name) {
           x.addEventListener("load", () => {
             nowColor = colorthief.getPalette(x, 3)[0].toString();
 
-            this.appHomeInfo.swipeInfo.result.rows[i].tag.color =
+            this.homeData.swipeInfo.result.rows[i].tag.color =
               "rgb(" + nowColor + ")";
           });
 
@@ -325,7 +325,9 @@ export default {
         ls = this.$appGetLocalStorage("appHome");
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.appHomeInfo = ls);
+        this.homeData = ls;
+
+        return;
       }
 
       this.$axios.post(this.$appApi.app.getAppHome).then((res) => {
@@ -333,10 +335,10 @@ export default {
           status = res.data.status;
 
         if (status.code == 200) {
-          this.appHomeInfo = data;
-          this.appHomeInfo.updateTime = ts;
+          this.homeData = data;
+          this.homeData.updateTime = ts;
 
-          this.$appSetLocalStorage("appHome", this.appHomeInfo);
+          this.$appSetLocalStorage("appHome", this.homeData);
         } else {
           this.$message.error(status.msg);
         }
@@ -350,7 +352,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.$axios
@@ -415,7 +419,7 @@ export default {
       setTimeout(() => {
         this.isLoading = false;
 
-        this.$appPush({ path: this.appHomeInfo.miniappInfo.to });
+        this.$appPush({ path: this.homeData.miniappInfo.to });
       }, 2500);
     },
     getChangeImg: function (bid, id) {
@@ -424,10 +428,7 @@ export default {
       if (bid == 1) {
         url = "//game.gtimg.cn/images/yxzj/img201606/summoner/" + id + ".jpg";
       } else if (bid == 2) {
-        url =
-          "//game.gtimg.cn/images/yxzj/img201606/itemimg/" +
-          id +
-          ".jpg";
+        url = "//game.gtimg.cn/images/yxzj/img201606/itemimg/" + id + ".jpg";
       }
 
       return url;

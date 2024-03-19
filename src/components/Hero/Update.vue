@@ -37,7 +37,7 @@
               (updateInfo.model == 1 && data.calendar.type > 0) ||
               (updateInfo.model == 2 && data.calendar.type >= 0)
             "
-            :key="'update-587fa4ff436ed0ff2113cd87bb01967b-' + index"
+            :key="'hero-587fa4ff436ed0ff2113cd87bb01967b-' + index"
             :color="data.calendar.color"
           >
             <van-tag
@@ -59,7 +59,7 @@
               <van-tag
                 round
                 v-for="(data, index) in data.tags"
-                :key="'update-12c9bc92e856bdab7bc932b5d368f97e-' + index"
+                :key="'hero-12c9bc92e856bdab7bc932b5d368f97e-' + index"
                 color="black"
                 class="update-26edf9c6ae9f8356043d0e175516cab6"
               >
@@ -91,7 +91,7 @@
             <div class="update-c936f93d328137bba0ab32510a2e4fd0">
               <span
                 v-for="(item, index) in data.heroList"
-                :key="'update-54099f84a9943b4b1eed932ec22066eb-' + index"
+                :key="'hero-54099f84a9943b4b1eed932ec22066eb-' + index"
                 @click="
                   item != heroId
                     ? $appPush({ path: '/hero/' + item + '/info' })
@@ -128,7 +128,7 @@
               <van-divider />
               <span
                 v-for="(item, index) in data.equipmentList"
-                :key="'update-df0ed5943fd740242219ad3e45245f6e-' + index"
+                :key="'hero-df0ed5943fd740242219ad3e45245f6e-' + index"
                 @click="onEquipmentClick(data, index)"
                 class="update-cf1228c4eb54ec10bf815f0ed3816a49"
               >
@@ -157,7 +157,7 @@
               $t('open-url.title'),
               'NGA @EndMP',
               {
-                path: '//ngabbs.com/read.php?pid=' + updateId,
+                path: 'https://ngabbs.com/read.php?pid=' + updateId,
               },
               0
             )
@@ -255,7 +255,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getHeroUpdate(newValue.heroId, newValue.aid);
+          this.getHeroUpdate(newValue.aid, newValue.heroId);
         }
       },
     },
@@ -296,11 +296,11 @@ export default {
   },
   mounted() {
     if (this.$appConfigInfo.appInfo.isReadme == 1) {
-      this.getHeroUpdate(this.heroId, this.aid);
+      this.getHeroUpdate(this.aid, this.heroId);
     }
   },
   methods: {
-    getHeroUpdate: function (heroId, aid = 0) {
+    getHeroUpdate: function (aid = 0, heroId) {
       let appConfigInfo = this.$appConfigInfo,
         date = new Date(),
         ts = this.$appTs,
@@ -310,7 +310,9 @@ export default {
       this.date.max = new Date(date.setMonth(date.getMonth() + 4));
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.$axios

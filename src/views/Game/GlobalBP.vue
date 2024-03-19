@@ -20,9 +20,7 @@
           $appOpenUrl(
             $t('open-url.title'),
             '查看常见问题',
-            {
-              path: url.question,
-            },
+            { path: url.question },
             0
           )
         "
@@ -64,7 +62,10 @@
               v-if="index == 0 || index == 2 || index == 11 || index == 13"
               class="game-4978748050a936d2f77fe718f1d81524"
             >
-              <span class="game-ee5411f228b6a2c6a510f907f315d5b4">
+              <span
+                v-if="showInfo.index == 1"
+                class="game-ee5411f228b6a2c6a510f907f315d5b4"
+              >
                 {{ index + 1 }}
               </span>
               <img
@@ -118,7 +119,10 @@
               v-if="index == 1 || index == 3 || index == 10 || index == 12"
               class="game-6e9c0050fe873888fbf53ec6f7b21816"
             >
-              <span class="game-ee5411f228b6a2c6a510f907f315d5b4">
+              <span
+                v-if="showInfo.index == 1"
+                class="game-ee5411f228b6a2c6a510f907f315d5b4"
+              >
                 {{ index + 1 }}
               </span>
               <img
@@ -212,6 +216,7 @@
                     class="game-eee32796c3fdfc147115c9f6e875c090"
                   />
                   <span
+                    v-if="showInfo.index == 1"
                     :style="{ textAlign: 'left' }"
                     class="game-7ac4fc59b483c826ad0441884322b71a"
                   >
@@ -426,6 +431,7 @@
                   class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
                   <span
+                    v-if="showInfo.index == 1"
                     :style="{ marginLeft: '-15px', textAlign: 'right' }"
                     class="game-7ac4fc59b483c826ad0441884322b71a"
                   >
@@ -712,7 +718,12 @@
               size="small"
               color="black"
               @click="
-                $appOpenUrl($t('open-url.title'), '查看常见问题', { path: url.question }, 0)
+                $appOpenUrl(
+                  $t('open-url.title'), 
+                  '查看常见问题', 
+                  { path: url.question }, 
+                  0
+                )
               "
             />
           </li>
@@ -745,6 +756,15 @@
             @click="onSwapPositionClick"
           >
             交换位置
+          </van-button>
+          &nbsp;
+          <van-button
+            round
+            type="info"
+            size="small"
+            @click="onShowHideIndexClick"
+          >
+            {{ showInfo.index == 1 ? "隐藏" : "显示" }} BP 顺序
           </van-button>
         </div>
         <van-divider
@@ -819,6 +839,8 @@
 <script>
 import draggable from "vuedraggable";
 
+import "../../assets/less/globalBP.less";
+
 export default {
   name: "gameGlobalBP",
   components: {
@@ -830,6 +852,7 @@ export default {
     return {
       copyData: "",
       gameLabel: this.$route.params.id || "",
+      skinType: "default",
       bpCountdown: 45,
       bpOpponent: {},
       bpSelf: {},
@@ -869,7 +892,7 @@ export default {
         },
       },
       url: {
-        question: "//docs.91m.top",
+        question: "https://docs.91m.top",
       },
       isPortrait: true,
       recommendHeroId: null,
@@ -957,7 +980,7 @@ export default {
           {
             title: "常见问题",
             to: null,
-            url: "//docs.91m.top",
+            url: "https://docs.91m.top",
           },
         ],
       },
@@ -985,6 +1008,7 @@ export default {
         recommend: false,
         isBan: true,
         isUsed: true,
+        index: false,
       },
     };
   },
@@ -999,6 +1023,8 @@ export default {
   },
   mounted() {
     let gameLabel = this.gameLabel;
+
+    this.initPage();
 
     if (gameLabel) {
       this.getGameBP(gameLabel);
@@ -1039,6 +1065,15 @@ export default {
           this.$message.warning(this.$appMsg.warning[1000]);
         }
       }
+    },
+    initPage: function () {
+      let q = this.$appQuery,
+        showIndex;
+
+      showIndex = this.$appGetLocalStorage("gameBP-show-index") || 0;
+
+      this.skinType = q.skinType;
+      this.showInfo.index = showIndex;
     },
     initBPOrder: function (bpPerspective, bpIndex) {
       let tabsModel = this.tabsInfo.model,
@@ -1185,7 +1220,7 @@ export default {
         });
     },
     getGameBP: function (gameLabel, aid = 0) {
-      if (this.gameLabel == "new") {
+      if (this.gameLabel == "new" && this.skinType == "default") {
         this.$message.warning(this.$appMsg.warning[750]);
         //本地
       } else {
@@ -1561,7 +1596,7 @@ export default {
           //on cancel
         });
     },
-    onSwapPositionClick() {
+    onSwapPositionClick: function () {
       let tabsModel = this.tabsInfo.model,
         teamInfo = this.gameInfo.result.rows[tabsModel].team,
         tempTeamInfo;
@@ -1574,6 +1609,19 @@ export default {
       this.onGamePerspectiveClick();
 
       this.$message.warning(this.$appMsg.warning[1004]);
+    },
+    onShowHideIndexClick: function () {
+      let showIndex = this.$appGetLocalStorage("gameBP-show-index") || 0;
+
+      if (showIndex == 0) {
+        this.$appSetLocalStorage("gameBP-show-index", 1);
+      } else {
+        this.$appSetLocalStorage("gameBP-show-index", 0);
+      }
+
+      showIndex = this.$appGetLocalStorage("gameBP-show-index");
+
+      this.showInfo.index = showIndex;
     },
     onToolsMenuClick: function (toolType) {
       let tabsModel = this.tabsInfo.model,
@@ -1707,237 +1755,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
-img.game-eee32796c3fdfc147115c9f6e875c090,
-img.game-aa95efe1c5d39e5e9389ca5833e63fbe {
-  border-radius: 10px;
-  margin: 5px;
-}
-
-img.game-5de9dd2a5714dd606db0e0fa1611c227,
-img.game-221cf04d9a9e32c6af24502f96e3ecfe {
-  border-radius: @app-border-radius;
-  margin: 5px;
-}
-
-img.game-dce7c4174ce9323904a934a486c41288 {
-  margin-left: -20px;
-  margin-top: 20px;
-  position: absolute;
-}
-
-img.game-7185d8bd2cbce5ad7c638a99095aee6c {
-  margin-bottom: 25px;
-}
-
-img.game-8d74837b1dc10576d7757cfd35b4661d {
-  margin-right: 3px;
-  margin-top: -5px;
-}
-
-span.game-99e127c3f9d57b5d03327ebe8b1e4982 {
-  margin-left: 20px;
-  margin-right: 10px;
-}
-
-span.game-59b9fd83bc5ce802ee9ace7db0e22522 {
-  bottom: -4px;
-  position: absolute;
-}
-
-span.game-80653328482d7cba8da3f0fa033b0c12 {
-  margin: 0 5px;
-}
-
-span.game-0db3e75efe3faa0cee4451fb55bc4c53 {
-  font-size: 20px;
-}
-
-span.game-9965db4bfcd480ab6c0b1a6a3de68bab {
-  margin-left: -15px;
-  position: absolute;
-  top: 1px;
-  z-index: @app-z-index;
-}
-
-span.game-45949fe72cfc70cc6a7bd3870cabc397 {
-  color: red;
-  font-size: @app-font-size;
-}
-
-span.game-ee5411f228b6a2c6a510f907f315d5b4 {
-  font-size: @app-font-size;
-  margin-left: 12px;
-  position: absolute;
-  text-align: center;
-  top: -13px;
-  width: 15px;
-}
-
-span.game-7ac4fc59b483c826ad0441884322b71a {
-  color: gray;
-  font-size: @app-font-size;
-  margin-top: 3px;
-  position: absolute;
-  width: 15px;
-}
-
-button.game-8e4f204791d1b591b6a6f93b572f9b2d {
-  img.van-icon__image {
-    border-radius: @app-border-radius;
-    height: 40px;
-    margin-left: -8px;
-    margin-top: -2px;
-    width: 40px;
-  }
-}
-
-div.van-tabs__wrap {
-  z-index: 2 !important;
-}
-
-div.game-bp-portrait {
-  margin-top: 60%;
-}
-
-div.game-d26ecf27da6e3263cf318adbb8b5f00a {
-  text-align: @app-text-align;
-}
-
-div.game-2c9118a482fe35d5ab2b6cb01c1985be {
-  display: contents;
-}
-
-div.game-d75e14b5c8f13e894fe9bf9d5426c198,
-div.game-251504ba219ea8c3175f47b73bdde6e6 {
-  position: absolute;
-  top: 80px;
-  width: @app-width;
-}
-
-div.game-d75e14b5c8f13e894fe9bf9d5426c198 {
-  left: 0;
-}
-
-div.game-251504ba219ea8c3175f47b73bdde6e6 {
-  right: 0;
-}
-
-div.game-b3d70a861f68652bf97d7a26bf421d4f {
-  font-size: 12px;
-  margin-top: 15px;
-}
-
-div.game-bd40579650e3f651e222aef268d5c8ae {
-  margin-top: 10px;
-}
-
-img.game-1cf3b0809c3dde16d56153690bc902a2 {
-  animation: blueTwinkle 800ms ease-out infinite alternate;
-  border: 2px solid rgb(0, 0, 255, 0.5) !important;
-}
-
-@keyframes blueTwinkle {
-  0% {
-    box-shadow: 0 0 5px rgba(0, 0, 255, 0.2), inset 0 0 5px rgba(0, 0, 255, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(0, 0, 255, 0.6),
-      inset 0 0 10px rgba(0, 0, 255, 0.4);
-  }
-}
-
-img.game-99b844b6785d8d7378bbc2b1401af365 {
-  animation: redTwinkle 800ms ease-out infinite alternate;
-  border: 2px solid rgb(255, 0, 0, 0.5) !important;
-}
-
-@keyframes redTwinkle {
-  0% {
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6),
-      inset 0 0 10px rgba(255, 0, 0, 0.4);
-  }
-}
-
-div.game-87740aa9337e54dbad53ec95089dca77 {
-  background-color: white !important;
-}
-
-div.game-beedfb16b1c81d2901c32b6dcc2939d0,
-div.game-173f312c43fe32a4f01c84d1cf0520b1 {
-  margin: 3px;
-  position: fixed;
-}
-
-div.game-beedfb16b1c81d2901c32b6dcc2939d0,
-div.game-173f312c43fe32a4f01c84d1cf0520b1 {
-  right: 95px;
-}
-
-div.game-beedfb16b1c81d2901c32b6dcc2939d0 {
-  top: 65px;
-  z-index: @app-z-index;
-}
-
-div.game-173f312c43fe32a4f01c84d1cf0520b1 {
-  bottom: 42px;
-  height: 35px;
-  z-index: @app-z-index;
-}
-
-div.game-e4e6288c92630a6c237c15442fdb0917 {
-  li {
-    float: left;
-    margin: 3px 5px;
-  }
-}
-
-div.game-8c9cb4a232c7e88403dddc3a0e589162,
-div.game-c6a2f8b3941d7f91bc4e51839e5371e0,
-div.game-8c9cb4a232c7e88403dddc3a0e589162,
-div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  position: absolute;
-}
-
-div.game-bf2c7b7ad9bcf75cd72e0b4ce30500e3 {
-  li {
-    float: left;
-  }
-}
-
-div.game-ba9bced6af8121cf6413000a4274ac2b {
-  li {
-    float: right;
-  }
-}
-
-div.game-8c9cb4a232c7e88403dddc3a0e589162,
-div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  top: 15px;
-  width: 165px;
-}
-
-div.game-8c9cb4a232c7e88403dddc3a0e589162 {
-  left: 25px;
-}
-
-div.game-c6a2f8b3941d7f91bc4e51839e5371e0 {
-  right: 25px;
-}
-
-div.game-4863c43e8743ebf1be3f48c5c4519627 {
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  z-index: @app-z-index;
-}
-
-div.game-5b51012ae7490ea129b5d75ad9b1016c,
-div.game-2d121e51de7a817bff612f1e16fadb8e {
-  font-size: 12px;
-}
-</style>

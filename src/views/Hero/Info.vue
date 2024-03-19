@@ -418,7 +418,7 @@
                 ? $appOpenUrl(
                     $t('open-url.title'),
                     null,
-                    { path: '//ngabbs.com/read.php?tid=' + hero.info.wikiId },
+                    { path: 'https://ngabbs.com/read.php?tid=' + hero.info.wikiId },
                     0
                   )
                 : $message.info($appMsg.info[1006])
@@ -607,12 +607,11 @@ export default {
 
         this.circle.info = ls.circleInfo;
         this.hero.info = heroInfoData;
+        this.hero.title = heroInfoData.name;
 
         heroInfoData.id && heroInfoData.id < 900
           ? (this.trendInfo.model = 0)
           : (this.trendInfo.model = 2);
-
-        this.hero.title = heroInfoData.name;
 
         document.title = heroInfoData.name + " | " + appConfigInfo.appInfo.name;
 

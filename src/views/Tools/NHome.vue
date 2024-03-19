@@ -104,9 +104,7 @@
                     $appOpenUrl(
                       $t('open-url.title'),
                       '查看使用说明',
-                      {
-                        path: url.question,
-                      },
+                      { path: url.question },
                       0
                     )
                   "
@@ -684,7 +682,8 @@ export default {
       joinTeamId: this.$route.query.joinTeamId || "",
       gameLabel: this.$route.query.gameLabel || "",
       url: {
-        question: "//docs.91m.top/%E7%BD%91%E7%AB%99/%E9%80%86%E6%B0%B4%E5%AF%92.html",
+        question:
+          "https://docs.91m.top/%E7%BD%91%E7%AB%99/%E9%80%86%E6%B0%B4%E5%AF%92.html",
       },
       tableData: {
         author: {},
@@ -1373,7 +1372,7 @@ export default {
 
       this.showInfo.nModal = false;
     },
-    onCampChange() {
+    onCampChange: function () {
       let newData = {
         rows_1: [],
         rows_2: [],

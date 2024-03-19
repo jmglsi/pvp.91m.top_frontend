@@ -1,45 +1,45 @@
 <template>
-  <div class="bp-ce736395c918ab733925e1d3298e7aca app-bpIndex">
+  <div class="hero-bp app-bpIndex">
     <van-row>
       <van-col span="12">
-        <div class="bp-427034659a1ba05f529b72e639b4481f">
+        <div class="hero-427034659a1ba05f529b72e639b4481f">
           <span>蓝方</span>
           <br />
           <span>总占比:{{ heroBpInfo.blue.allPickRate }}</span>
-          <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+          <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
           <br />
           <span>总胜率:{{ heroBpInfo.blue.allWinRate }}</span>
-          <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+          <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
         </div>
-        <ul class="bp-666568243a3618d60572c92f2cf0ff3d">
+        <ul class="hero-666568243a3618d60572c92f2cf0ff3d">
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[0].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               1
             </div>
             <div
               :style="{ marginTop: '-55px' }"
-              class="bp-0492ba0dd77bbcafdac5b4aeded96ed1"
+              class="hero-0492ba0dd77bbcafdac5b4aeded96ed1"
             >
               <span>
                 占比:
                 {{ newBpInfo.blue[0].pickRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
               <br />
               <span>
                 胜率:
                 {{ newBpInfo.blue[0].winRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
             </div>
           </li>
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[1].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               4
             </div>
@@ -47,31 +47,31 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[1].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               5
             </div>
             <div
               :style="{ marginTop: '-85px' }"
-              class="bp-0492ba0dd77bbcafdac5b4aeded96ed1"
+              class="hero-0492ba0dd77bbcafdac5b4aeded96ed1"
             >
               <span>
                 占比:
                 {{ newBpInfo.blue[1].pickRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
               <br />
               <span>
                 胜率:
                 {{ newBpInfo.blue[1].winRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
             </div>
           </li>
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[2].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               8
             </div>
@@ -79,45 +79,45 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.blue[2].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-00b97ff5a43507241bb2776b701516bb"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               9
             </div>
             <div
               :style="{ marginTop: '-85px' }"
-              class="bp-0492ba0dd77bbcafdac5b4aeded96ed1"
+              class="hero-0492ba0dd77bbcafdac5b4aeded96ed1"
             >
               <span>
                 占比:
                 {{ newBpInfo.blue[2].pickRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
               <br />
               <span>
                 胜率:
                 {{ newBpInfo.blue[2].winRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
             </div>
           </li>
         </ul>
       </van-col>
       <van-col span="12">
-        <div class="bp-427034659a1ba05f529b72e639b4481f">
+        <div class="hero-427034659a1ba05f529b72e639b4481f">
           <span>红方</span>
           <br />
           <span>总占比:{{ heroBpInfo.red.allPickRate }}</span>
-          <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+          <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
           <br />
           <span>总胜率:{{ heroBpInfo.red.allWinRate }}</span>
-          <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+          <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
         </div>
 
-        <ul class="bp-d5f3c2f290902549bb3b62cbfbf7a1bb">
+        <ul class="hero-d5f3c2f290902549bb3b62cbfbf7a1bb">
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[0].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               2
             </div>
@@ -125,31 +125,31 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[0].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               3
             </div>
             <div
               :style="{ marginTop: '-85px' }"
-              class="bp-6c02537f8c5493e03caec9b1ea2cb5e7"
+              class="hero-6c02537f8c5493e03caec9b1ea2cb5e7"
             >
               <span>
                 占比:
                 {{ newBpInfo.red[0].pickRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
               <br />
               <span>
                 胜率:
                 {{ newBpInfo.red[0].winRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
             </div>
           </li>
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[1].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               6
             </div>
@@ -157,48 +157,48 @@
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[1].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               7
             </div>
             <div
               :style="{ marginTop: '-85px' }"
-              class="bp-6c02537f8c5493e03caec9b1ea2cb5e7"
+              class="hero-6c02537f8c5493e03caec9b1ea2cb5e7"
             >
               <span>
                 占比:
                 {{ newBpInfo.red[1].pickRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
               <br />
               <span>
                 胜率:
                 {{ newBpInfo.red[1].winRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
             </div>
           </li>
           <li>
             <div
               :style="{ opacity: (newBpInfo.red[2].pickRate / 100) * 2 }"
-              class="bp-84d1241e18d9a700e019ca9654463a63 bp-85a6487e98ea46cd1391fd415d370de0"
+              class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               10
             </div>
             <div
               :style="{ marginTop: '-55px' }"
-              class="bp-6c02537f8c5493e03caec9b1ea2cb5e7"
+              class="hero-6c02537f8c5493e03caec9b1ea2cb5e7"
             >
               <span>
                 占比:
                 {{ newBpInfo.red[2].pickRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
               <br />
               <span>
                 胜率:
                 {{ newBpInfo.red[2].winRate }}
-                <span class="bp-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
+                <span class="hero-4f9cc6d1b08849bf0c18bc06df163a6a">%</span>
               </span>
             </div>
           </li>
@@ -328,7 +328,9 @@ export default {
         ls = this.$appGetLocalStorage("heroBpIndex-" + heroId);
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.$axios
@@ -448,33 +450,33 @@ export default {
 </script>
 
 <style scoped lang="less">
-ul.bp-666568243a3618d60572c92f2cf0ff3d {
+ul.hero-666568243a3618d60572c92f2cf0ff3d {
   float: left;
 }
 
-ul.bp-d5f3c2f290902549bb3b62cbfbf7a1bb {
+ul.hero-d5f3c2f290902549bb3b62cbfbf7a1bb {
   float: right;
 }
 
-ul.bp-666568243a3618d60572c92f2cf0ff3d,
-ul.bp-d5f3c2f290902549bb3b62cbfbf7a1bb {
+ul.hero-666568243a3618d60572c92f2cf0ff3d,
+ul.hero-d5f3c2f290902549bb3b62cbfbf7a1bb {
   margin-top: 10px;
 }
 
-span.bp-4f9cc6d1b08849bf0c18bc06df163a6a {
+span.hero-4f9cc6d1b08849bf0c18bc06df163a6a {
   font-size: @app-font-size;
 }
 
-div.bp-84d1241e18d9a700e019ca9654463a63 {
+div.hero-84d1241e18d9a700e019ca9654463a63 {
   color: white;
 }
 
-div.bp-427034659a1ba05f529b72e639b4481f {
+div.hero-427034659a1ba05f529b72e639b4481f {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-div.bp-00b97ff5a43507241bb2776b701516bb {
+div.hero-00b97ff5a43507241bb2776b701516bb {
   background-color: blue;
   border-radius: 10px;
   height: @app-height;
@@ -483,7 +485,7 @@ div.bp-00b97ff5a43507241bb2776b701516bb {
   width: @app-width;
 }
 
-div.bp-85a6487e98ea46cd1391fd415d370de0 {
+div.hero-85a6487e98ea46cd1391fd415d370de0 {
   background-color: red;
   border-radius: 10px;
   height: @app-height;
@@ -492,13 +494,13 @@ div.bp-85a6487e98ea46cd1391fd415d370de0 {
   width: @app-width;
 }
 
-div.bp-0492ba0dd77bbcafdac5b4aeded96ed1 {
+div.hero-0492ba0dd77bbcafdac5b4aeded96ed1 {
   left: 75px;
   position: absolute;
   text-align: @app-text-align;
 }
 
-div.bp-6c02537f8c5493e03caec9b1ea2cb5e7 {
+div.hero-6c02537f8c5493e03caec9b1ea2cb5e7 {
   position: absolute;
   right: 75px;
   text-align: @app-text-align;

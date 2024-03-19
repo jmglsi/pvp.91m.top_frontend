@@ -134,6 +134,7 @@ const app = {
   getAppInfo: appApi + "?type=getAppInfo",
   getCivilwarMatchInfo: appApi + "?type=getCivilwarMatchInfo",
   getCoordinate: appApi + "?type=getCoordinate",
+  getChallenge: appApi + "?type=getChallenge",
   getHeroBpIndex: appApi + "?type=getHeroBpIndex",
   getHeroChartsLog: appApi + "?type=getHeroChartsLog",
   getHeroInfo: appApi + "?type=getHeroInfo",

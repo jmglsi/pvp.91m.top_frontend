@@ -124,7 +124,11 @@
                 text="对局回顾"
               />
               <van-grid-item
-                @click="$message.info($appMsg.info[1024])"
+                @click="
+                  $appPush({
+                    path: '/hero/tools',
+                  })
+                "
                 icon="/img/icons-app/medal.png"
                 text="最低金牌"
               />
@@ -134,7 +138,7 @@
                     $t('open-url.title'),
                     'NGA @小熊de大熊',
                     {
-                      path: '//ngabbs.com/read.php?tid=12677614',
+                      path: 'https://ngabbs.com/read.php?tid=12677614',
                     },
                     0
                   )
@@ -852,10 +856,28 @@
               "
             >
               <template #title>
-                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  {{ $t("prepare-for-war") }}
-                </span>
-                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
+                <van-popover v-model="showInfo.heroPopover" trigger="click">
+                  <template #reference>
+                    <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                      {{ $t("prepare-for-war") }}
+                    </span>
+                    <img
+                      v-lazy="'/img/icons-app/hot.png'"
+                      width="13"
+                      height="13"
+                    />
+                  </template>
+
+                  <div
+                    v-if="popover"
+                    class="search-c1577badc90f903de67f271a6fd1b451"
+                  >
+                    <span
+                      v-html="popover"
+                      class="search-cd563e444a95dc7ced1843748af0c3c4"
+                    ></span>
+                  </div>
+                </van-popover>
               </template>
             </van-tab>
             <van-tab
@@ -1217,6 +1239,7 @@ export default {
         value: this.$route.query.q || "",
         placeholder: this.$t("search.placeholder"),
       },
+      popover: "",
       tableData: {
         result: {
           rows: [],
@@ -1270,6 +1293,10 @@ export default {
             redBlue: null,
             killTime: [0, 0, 0],
           },
+          adjustment: {
+            hero: -1,
+            equipment: [],
+          },
         },
       },
       dataInfo: {
@@ -1283,6 +1310,7 @@ export default {
         searchData: false,
         searchHistory: false,
         heroData: 0,
+        heroPopover: false,
       },
       skillInfo: {
         model: 1,
@@ -1319,7 +1347,42 @@ export default {
         this.showInfo.searchHistory = false;
       }
     },
-    getSearch: function (value = "", show = null) {
+    getHeroPopover(data) {
+      let tips = "",
+        ret =
+          "<br /><div><a href='https://docs.91m.top/%E7%BD%91%E7%AB%99/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80_%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html'>备战默认每周一更新，干预则是昨日</a></div>",
+        tempEquipment = [],
+        equipment;
+
+      if (data.equipment.length > 0) {
+        this.showInfo.heroPopover = true;
+
+        data.equipment.map((e) => {
+          tempEquipment.push(e.name);
+        });
+
+        equipment = tempEquipment.join();
+
+        tips =
+          "<div>近期更新涉及该英雄出装：<span style='color: red;'>" +
+          equipment +
+          "</span></div>";
+      } else if (data.hero >= 1 && data.hero <= 2) {
+        this.showInfo.heroPopover = true;
+
+        tips =
+          "<div>近期更新涉及该英雄，<a href='/search?q=%E5%85%AC%E5%91%8A&refresh=1'><span style='color: red;'>需要注意公告</span></a></div>";
+      }
+
+      if (this.showInfo.heroPopover) {
+        ret = tips + "-" + ret;
+      } else {
+        ret = "";
+      }
+
+      this.popover = ret;
+    },
+    getSearch: function (value = "", show = "") {
       this.search.value = value;
 
       this.$axios
@@ -1339,13 +1402,7 @@ export default {
             if (value) {
               this.addSearchData(value);
 
-              this.$appPush({
-                path: "/search",
-                query: {
-                  q: value,
-                  refresh: 1,
-                },
-              });
+              this.getHeroPopover(data.cardInfo.adjustment);
             }
 
             if (data.result.rows.length > 0) {
@@ -1371,7 +1428,7 @@ export default {
             if (show == "heroSkill") {
               this.showInfo.skillActionSheet = true;
             } else {
-              this.showInfo.skillActionSheet = false;
+              //this.showInfo.skillActionSheet = false;
             }
           }, 500);
         });
@@ -1412,7 +1469,7 @@ export default {
             this.$t('open-url.title'),
             "NGA @小熊de大熊",
             {
-              path: "//ngabbs.com/read.php?tid=12677614",
+              path: "https://ngabbs.com/read.php?tid=12677614",
             },
             0
           );
@@ -1631,10 +1688,19 @@ span.search-7c61bf0e17805d4183c7eeb293ebdb42 {
   width: 250px;
 }
 
+span.search-cd563e444a95dc7ced1843748af0c3c4 {
+  color: gray;
+  font-size: 12px;
+}
+
 div.search-843c48c53bd40c7f476497c030fb0e92,
 div.search-f63b407c95e4f2db4c44e27b3a8d136b,
 div.search-db4665e1908869c6354106ce00ff95ba {
   text-align: @app-text-align;
+}
+
+div.search-c1577badc90f903de67f271a6fd1b451 {
+  padding: 10px;
 }
 
 div.search-e63a3d77ef528e9465c5ec19abb57693 {

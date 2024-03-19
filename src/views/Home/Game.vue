@@ -92,7 +92,9 @@ export default {
         ls = this.$appGetLocalStorage("gameHome");
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.$axios

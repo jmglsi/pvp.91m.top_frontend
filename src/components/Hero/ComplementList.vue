@@ -96,7 +96,7 @@
           <input
             v-model="option.value"
             v-for="(option, index) in column.filters"
-            :key="'hero-complement-3884d17acbdfbe7dd4921e00606d4e93-' + index"
+            :key="'hero-67d4289528e347c593703282b09bca9e-' + index"
             type="type"
             placeholder="0"
             @input="$panel.changeOption($event, !!option.value, option)"
@@ -118,7 +118,7 @@
           <input
             v-model="option.value"
             v-for="(option, index) in column.filters"
-            :key="'hero-equipment-3884d17acbdfbe7dd4921e00606d4e93-' + index"
+            :key="'hero-12f72a5512d42a5730f721925b6bb5fb-' + index"
             type="type"
             placeholder="0"
             @input="$panel.changeOption($event, !!option.value, option)"
@@ -158,11 +158,11 @@ export default {
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
           this.getRanking(
-            newValue.complementId,
             17,
             newValue.complementType,
             0,
-            0
+            0,
+            newValue.complementId
           );
         }
       },
@@ -186,7 +186,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (heroId = 111, aid = 17, bid = 1, cid = 0, did = 0) {
+    getRanking: function (aid = 17, bid = 1, cid = 0, did = 0, heroId = 111) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -194,7 +194,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;
@@ -261,22 +263,22 @@ export default {
       if (column.property == "hero[0]") {
         this.complementInfo.type = 1;
         return this.getRanking(
-          row.hero[0].id,
           17,
           this.complementInfo.type,
           0,
-          0
+          0,
+          row.hero[0].id
         );
       }
 
       if (column.property == "hero[1]") {
         this.complementInfo.type = 2;
         return this.getRanking(
-          row.hero[1].id,
           17,
           this.complementInfo.type,
           0,
-          0
+          0,
+          row.hero[1].id
         );
       }
     },

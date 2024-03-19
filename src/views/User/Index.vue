@@ -270,7 +270,7 @@
                 icon="question-o"
                 color="red"
                 size="mini"
-                class="hero-same-hobby-14c32e76fd7b6f33de94027b74bbc3fb"
+                class="login-14c32e76fd7b6f33de94027b74bbc3fb"
                 @click="
                   $appPush({
                     path: '/search',
@@ -288,13 +288,13 @@
         </van-collapse>
         <van-cell
           icon="manager"
-          title="扩列链接"
-          value="复制"
+          :title="$t('my-link.title')"
+          :value="$t('my-link.value')"
           is-link
           @click="onCopy"
         >
           <template #label>
-            <span style="color: red">复制到公众号可以续时</span>
+            <span style="color: red">{{ $t("my-link.label") }}</span>
           </template>
         </van-cell>
       </van-cell-group>
@@ -310,11 +310,14 @@
           v-if="isLogin"
           icon="exchange"
           :title="$t('oauth.third-party-authorization')"
-          :label="$t('oauth.label')"
           :value="$t('oauth.value')"
           is-link
           @click="$appPush({ path: '/login' })"
-        />
+        >
+          <template #label>
+            <span style="color: blue">{{ $t("oauth.label") }}</span>
+          </template>
+        </van-cell>
       </van-cell-group>
     </div>
 
@@ -639,12 +642,15 @@ export default {
       isLogin: false,
       url: {
         question:
-          "//docs.91m.top/%E7%BD%91%E7%AB%99/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80_%E5%85%A8%E5%B1%80_BP_%E6%A8%A1%E6%8B%9F%E5%99%A8.html",
-        friends: "//docs.91m.top",
-        support: "//support.qq.com/products/305514",
-        openSource: ["//ngabbs.com/read.php?tid=26200132", "//docs.91m.top"],
-        afdian: "//afdian.net/a/jmglsi",
-        beian: "//beian.miit.gov.cn/#/Integrated/index",
+          "https://docs.91m.top/%E7%BD%91%E7%AB%99/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80_%E5%85%A8%E5%B1%80_BP_%E6%A8%A1%E6%8B%9F%E5%99%A8.html",
+        friends: "https://docs.91m.top",
+        support: "https://support.qq.com/products/305514",
+        openSource: [
+          "https://ngabbs.com/read.php?tid=26200132",
+          "https://docs.91m.top",
+        ],
+        afdian: "https://afdian.net/a/jmglsi",
+        beian: "https://beian.miit.gov.cn/#/Integrated/index",
       },
       icp: null,
       loginInfo: {

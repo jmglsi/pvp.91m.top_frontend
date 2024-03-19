@@ -46,6 +46,11 @@ export default {
     "login": "登錄",
     "register": "註冊"
   },
+  "my-link": {
+    "title": "擴列鏈接",
+    "label": "複製到公衆號可以續時",
+    "value": "複製"
+  },
   "oauth": {
     "sign-in-with": "第三方登錄",
     "third-party-authorization": "第三方授權",

@@ -132,7 +132,10 @@
                   v-lazy="{
                     //src: '/img/icons-skill/' + data.id + '.jpg',
                     //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + data.id + '.jpg',
-                    src: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + data.id + '.jpg',
+                    src:
+                      '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
+                      data.id +
+                      '.jpg',
                   }"
                   width="17"
                   height="17"
@@ -247,22 +250,6 @@ export default {
   },
   methods: {
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
-      let appConfigInfo = this.$appConfigInfo,
-        ts = this.$appTs,
-        ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
-        );
-
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        if (bid == 1) {
-          this.change.skillList = ls.result.rows;
-        } else if (bid == 2) {
-          this.change.equipmentList = ls.result.rows;
-        }
-
-        return (this.tableData = ls);
-      }
-
       this.$axios
         .post(
           this.$appApi.app.getRanking +
@@ -281,13 +268,6 @@ export default {
 
           if (status.code == 200) {
             this.tableData = data;
-            this.tableData.loading = false;
-            this.tableData.updateTime = ts;
-
-            this.$appSetLocalStorage(
-              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
-              this.tableData
-            );
           } else {
             this.$message.error(status.msg);
           }

@@ -208,7 +208,7 @@ export default {
 
       this.getHeroInfo(p.id);
       this.getHeroInfoByRandSuit(p.id);
-      this.getRankingByGenreList(p.id, 14);
+      this.getRankingByGenreList(14, 0, 0, 0, p.id);
     },
     getHeroInfo: function (id = 111) {
       let ts = this.$appTs,
@@ -322,11 +322,11 @@ export default {
       }
     },
     getRankingByGenreList: function (
-      genreId = 111,
       aid = 14,
       bid = 0,
       cid = 0,
-      did = 0
+      did = 0,
+      genreId = 111
     ) {
       let ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -517,7 +517,7 @@ div.tools-c63abbfb166e7e598518fe6a7a58c86b {
 }
 
 div.tools-01d8b754716fc5f519c1a4b654867193 {
-  z-index: -1;
+  z-index: -1 !important;
   position: absolute;
 }
 

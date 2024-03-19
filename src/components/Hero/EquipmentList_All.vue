@@ -19,7 +19,10 @@
               v-lazy="{
                 //src: '/img/icons-skill/' + row.skillId + '.jpg',
                 //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
-                src: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
+                src:
+                  '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
+                  row.skillId +
+                  '.jpg',
               }"
               width="25"
               height="25"
@@ -37,7 +40,7 @@
       >
         <vxe-table-column
           v-for="(data, index) in 6"
-          :key="'hero-equipment-63533b8c27ff8e8051af3dd96ed6e9be-' + index"
+          :key="'hero-a9265e5b88bd92bd087aeae1073d52cc-' + index"
           :title="(index + 1).toString()"
           :field="'list[' + index + ']'"
           :width="$appIsMobile ? 60 : 0"
@@ -91,7 +94,7 @@
           <input
             v-model="option.value"
             v-for="(option, index) in column.filters"
-            :key="'hero-equipment-3884d17acbdfbe7dd4921e00606d4e93-' + index"
+            :key="'hero-b2a572a087a351dd24557bf6e86afccd-' + index"
             type="type"
             placeholder="0"
             @input="$panel.changeOption($event, !!option.value, option)"
@@ -142,7 +145,7 @@ export default {
         if (!newValue.heroId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(newValue.heroId, 6, 0, 0, 0);
+          this.getRanking(6, 0, 0, 0, newValue.heroId);
         }
       },
     },
@@ -162,7 +165,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(1450);
   },
   methods: {
-    getRanking: function (heroId = 111, aid = 6, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 6, bid = 0, cid = 0, did = 0, heroId = 111) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -170,7 +173,9 @@ export default {
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        return (this.tableData = ls);
+        this.tableData = ls;
+
+        return;
       }
 
       this.tableData.loading = true;
