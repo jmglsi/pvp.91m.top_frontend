@@ -2,13 +2,13 @@
   <div class="hero-line">
     <div class="hero-965f1a65ae362b02d244345afcbf542e">
       <ve-line
+        :after-config="afterConfig"
+        :data="lineData.result"
         :extend="lineData.extend"
-        :settings="lineData.settings"
+        :loading="lineData.loading"
         :mark-line="lineData.markLine"
         :mark-point="lineData.markPoint"
-        :data="lineData.result"
-        :loading="lineData.loading"
-        :after-config="afterConfig"
+        :settings="lineData.settings"
         height="500px"
         width="99.2%"
         class="hero-be4fa98d69734bbd05d093fc0010f826"

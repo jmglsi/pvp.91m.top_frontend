@@ -2,13 +2,13 @@
   <div class="game-line">
     <div class="game-4ab266e6ed1b47485fec1e603c659269">
       <ve-line
+        :after-config="afterConfig"
+        :data="lineData.result"
         :extend="lineData.extend"
-        :settings="lineData.settings"
+        :loading="lineData.loading"
         :mark-line="lineData.markLine"
         :mark-point="lineData.markPoint"
-        :data="lineData.result"
-        :loading="lineData.loading"
-        :after-config="afterConfig"
+        :settings="lineData.settings"
         width="99.2%"
         height="250px"
         class="game-7a0c936f40819c94d6d605e89f223e45"

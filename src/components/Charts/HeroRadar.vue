@@ -14,10 +14,10 @@
 
     <div class="hero-radar-00c0096b2f59afa06ea70de0e19fff29">
       <ve-radar
-        :extend="radarData.extend"
-        :settings="radarData.settings"
         :data="radarData.result"
+        :extend="radarData.extend"
         :loading="radarData.loading"
+        :settings="radarData.settings"
         legend-position="bottom"
         height="550px"
         class="hero-radar-ca6674b328707b5a1f0b012105a7e4e1"

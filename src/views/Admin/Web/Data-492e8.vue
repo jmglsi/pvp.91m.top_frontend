@@ -35,14 +35,17 @@
 
     <div class="admin-8e086eb841d9b5cd2f89212ac8fd0527">
       <a-row>
-        <a-col :span="8">
+        <a-col :span="6">
           <a-statistic title="注册用户" :value="dataInfo.num_all" />
         </a-col>
-        <a-col :span="8">
+        <a-col :span="6">
           <a-statistic title="活跃用户" :value="dataInfo.num_update" />
         </a-col>
-        <a-col :span="8">
+        <a-col :span="6">
           <a-statistic title="白名单" :value="dataInfo.num_whitelist" />
+        </a-col>
+        <a-col :span="6">
+          <a-statistic title="玩家数" :value="dataInfo.num_player" />
         </a-col>
       </a-row>
     </div>
@@ -311,6 +314,7 @@ export default {
         num_all: 0,
         num_update: 0,
         num_whitelist: 0,
+        num_player: 0,
       },
       showInfo: {
         actionSheet: false,

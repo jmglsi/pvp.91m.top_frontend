@@ -11,13 +11,13 @@
 
     <div class="ranking-47a721d2dcdc9a9875507e9f389e6409">
       <ve-line
+        :after-config="afterConfig"
+        :data="lineData.result"
         :extend="lineData.extend"
-        :settings="lineData.settings"
+        :loading="lineData.loading"
         :mark-line="lineData.markLine"
         :mark-point="lineData.markPoint"
-        :data="lineData.result"
-        :loading="lineData.loading"
-        :after-config="afterConfig"
+        :settings="lineData.settings"
         height="500px"
         width="99.2%"
         class="ranking-1ef625581088ffc24d94e052d9ebc61d"

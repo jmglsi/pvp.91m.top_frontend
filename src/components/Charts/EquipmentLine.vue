@@ -2,14 +2,14 @@
   <div class="equipment-line">
     <div class="equipment-965f1a65ae362b02d244345afcbf542e">
       <ve-line
+        :after-config="afterConfig"
+        :data="lineData.result"
         :extend="lineData.extend"
-        :settings="lineData.settings"
+        :height="$appIsMobile ? '375px' : '475px'"
+        :loading="lineData.loading"
         :mark-line="lineData.markLine"
         :mark-point="lineData.markPoint"
-        :data="lineData.result"
-        :loading="lineData.loading"
-        :after-config="afterConfig"
-        :height="$appIsMobile ? '375px' : '475px'"
+        :settings="lineData.settings"
         width="100%"
         class="equipment-be4fa98d69734bbd05d093fc0010f826"
       />

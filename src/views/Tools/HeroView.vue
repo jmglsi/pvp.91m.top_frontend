@@ -31,7 +31,7 @@
       <span
         class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1 tools-c63abbfb166e7e598518fe6a7a58c86b"
       >
-        最后更新 {{ viewInfo.nowTime }}
+        最后更新 {{ viewInfo.nowTime.substring(2) }}
       </span>
     </div>
 

@@ -2,13 +2,12 @@
   <div class="ranking-charts">
     <div class="ranking-f879e7f0824fcc83d172401c3cb31b8a">
       <ve-line
-        :init-options="{ renderer: 'svg' }"
-        :extend="lineData.extend"
-        :mark-line="lineData.markLine"
-        :data="charts"
         :after-config="afterConfig"
-        :width="exStyle.width"
+        :data="charts"
+        :extend="lineData.extend"
         :height="exStyle.height"
+        :mark-line="lineData.markLine"
+        :width="exStyle.width"
         class="ranking-c934456eea80a3c5db05ed142c757e07"
       />
     </div>
