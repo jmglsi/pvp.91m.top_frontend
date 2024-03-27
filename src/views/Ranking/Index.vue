@@ -810,6 +810,10 @@ div.ranking-d742492b2526d57a222af9b54040b3b4 {
   z-index: 99999999 !important;
 }
 
+div.ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81 {
+  display: inline-block;
+}
+
 div.ranking-2862744e5d7cce9d070aa41172557d78 {
   font-size: @app-font-size;
   margin-top: 50px;

@@ -113,7 +113,7 @@ export default new Router({
         import('./views/User/Index.vue'),
       meta: {
         title: '我的',
-        keepAlive: false
+        keepAlive: true
       }
     }, {
       path: '/login',

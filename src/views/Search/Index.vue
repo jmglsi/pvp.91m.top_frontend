@@ -1200,7 +1200,7 @@ export default {
     //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   watch: {
-    $route: function (to) {
+    $route: function (to, from) {
       let q = to.query,
         show = q.show || "";
 
@@ -1208,7 +1208,9 @@ export default {
         if (parseInt(q.refresh) == 1) {
           this.showInfo.fightPowerActionSheet = false;
 
-          this.getSearch(q.q, show);
+          if (from.name != "searchIndex") {
+            this.getSearch(q.q, show);
+          }
         }
       } else {
         this.initShow();
@@ -1401,6 +1403,14 @@ export default {
 
             if (value) {
               this.addSearchData(value);
+
+              this.$appPush({
+                query: {
+                  q: value,
+                  show: show,
+                  refresh: 1,
+                },
+              });
 
               this.getHeroPopover(data.cardInfo.adjustment);
             }
