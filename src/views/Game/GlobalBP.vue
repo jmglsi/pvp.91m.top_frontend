@@ -1034,7 +1034,7 @@ export default {
       return this.$appPush({ path: "/game" });
     }
   },
-  beforeDestroy() {
+  unmounted() {
     window.removeEventListener("beforeunload", this.beforeunload, false);
 
     if (this.$appIsMobile) {

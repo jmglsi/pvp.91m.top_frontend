@@ -37,11 +37,11 @@
         <template #right>
           <div class="hero-68adaff1d028a37f27fb33c483329cba">
             <van-popover
-              v-model="showInfo.popover"
+              v-model="showInfo.popoverMeau"
               trigger="click"
               placement="bottom-end"
-              :actions="actions"
-              @select="onPopoverSelect"
+              :actions="popoverMeauActions"
+              @select="onPopoverMeauSelect"
             >
               <template #reference>
                 <img
@@ -99,7 +99,19 @@
 
       <div class="hero-175c358c9271d591abf0163679968135">
         <van-divider :style="{ padding: '0 16px' }">
-          {{ areaType }}
+          <van-popover
+            v-model="showInfo.popoverArea"
+            trigger="click"
+            placement="bottom"
+            :actions="popoverAreaActions"
+            @select="onPopoverAreaSelect"
+          >
+            <template #reference>
+              <span class="hero-fd49d92b96ae025864a37f8a357c4352">
+                点击这里切换：{{ areaType }}
+              </span>
+            </template>
+          </van-popover>
         </van-divider>
       </div>
     </div>
@@ -157,10 +169,16 @@ export default {
   data() {
     return {
       areaType: "安卓QQ",
-      actions: [
+      popoverMeauActions: [
         { text: "查牌子", value: 0 },
         { text: "查战力", value: 1 },
         { text: "查皮肤", value: 2 },
+      ],
+      popoverAreaActions: [
+        { text: "安卓QQ" },
+        { text: "苹果QQ" },
+        { text: "安卓WX" },
+        { text: "苹果WX" },
       ],
       tableData: {
         loading: false,
@@ -189,7 +207,8 @@ export default {
         type: [],
       },
       showInfo: {
-        popover: false,
+        popoverArea: false,
+        popoverMeau: true,
       },
     };
   },
@@ -200,20 +219,25 @@ export default {
 
       this.getSelectData();
     },
-    onPopoverSelect(e) {
+    onPopoverMeauSelect: function (e) {
       this.selectInfo = e;
 
       this.getSelectData();
     },
+    onPopoverAreaSelect: function (e) {
+      this.areaType = e.text;
+
+      this.getRankingByHeroPaiZi(9, 0, 0, 0, this.heroInfo.id, this.areaType);
+    },
     getSelectData: function () {
       let q = this.$route.query,
-        areaType = q.areaType || "安卓QQ",
+        areaType = q.areaType || this.areaType,
         selectIndex = this.selectInfo.value;
 
-      this.areaType = areaType;
-
       if (selectIndex == 0) {
-        this.getRankingByHeroPaiZi(9, 0, 0, 0, this.heroInfo.id, areaType);
+        this.areaType = areaType;
+
+        this.getRankingByHeroPaiZi(9, 0, 0, 0, this.heroInfo.id, this.areaType);
       } else if (selectIndex == 1) {
         this.$message.info(this.$appMsg.info[1032]);
       } else if (selectIndex == 2) {

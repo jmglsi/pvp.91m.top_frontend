@@ -48,6 +48,7 @@
         <vxe-table
           ref="refAdminRobot"
           align="left"
+          border="inner"
           :data="tableData.robot.rows"
         >
           <vxe-column type="seq" width="60"></vxe-column>

@@ -561,11 +561,11 @@ export default {
       tipsInfo: [0, 0, 0, 0, 0],
     };
   },
-  destroy() {
-    window.removeEventListener("scroll", this.listenerScrollTop);
-  },
   mounted() {
     this.initPage();
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.listenerScrollTop);
   },
   methods: {
     initPage: function () {

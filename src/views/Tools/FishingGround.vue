@@ -134,6 +134,8 @@
           <div v-else class="fishing-9e7ab34aa9bb04e005d4a23f721e2707">
             暂无信息
           </div>
+
+          <div id="container"></div>
         </van-collapse>
       </van-pull-refresh>
 
@@ -156,6 +158,8 @@
 </template>
 
 <script>
+//import AMapLoader from "@amap/amap-jsapi-loader";
+
 export default {
   name: "FishingGround",
   components: {
@@ -413,7 +417,10 @@ export default {
     };
   },
   mounted() {
-    this.initPage();
+    //this.initPage();
+    setTimeout(() => {
+      this.test();
+    }, 500);
   },
   methods: {
     initPage: function () {
@@ -444,6 +451,14 @@ export default {
         this.tempFishingGround = this.tableData;
 
         this.$message.success(this.$appMsg.success[1000]);
+      });
+    },
+    test: function () {
+      this.$wechat.ready(() => {
+        this.$wechat.openLocation({
+          latitude: 120.76,
+          longitude: 30.75,
+        });
       });
     },
     getDistance: function (lng1, lat1, lng2, lat2) {

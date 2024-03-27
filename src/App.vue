@@ -1,6 +1,6 @@
 <template>
   <div id="app" :style="{ zoom: zoom }">
-    <div class="app-63c4cfbde5ad50f3f537c2540374995e">
+    <div v-watermark="watermark" class="app-63c4cfbde5ad50f3f537c2540374995e">
       <div v-if="$appIsApple && $appConfigInfo.appInfo.pwa == 1">
         <div
           v-if="showInfo.statusBar"
@@ -117,8 +117,6 @@
 </template>
 
 <script>
-import watermark from "watermark-dom";
-
 export default {
   name: "AppHome",
   components: {
@@ -165,6 +163,13 @@ export default {
   },
   data() {
     return {
+      watermark: {
+        content: "",
+        rotate: 25,
+        width: 150,
+        height: 150,
+        color: "rgb(244, 244, 244)",
+      },
       bottomHeight: 175,
       zoom: 1,
       noUpdateTips: true,
@@ -218,33 +223,16 @@ export default {
         path = to.path,
         isRobot = to.query.isRobot || 0,
         name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
-        accessToken = this.$cookie.get("accessToken") || null,
-        randAngle = Math.floor(Math.random() * 360),
-        //colorArr = ["orange", "red"],
-        //randColor = colorArr[Math.floor(Math.random() * colorArr.length)],
-        watermarkConfig = {
-          watermark_alpha: 0.3,
-          watermark_height: 25,
-          watermark_width: 100,
-          watermark_x: -50,
-          watermark_y: -25,
-          watermark_x_space: 25,
-          watermark_y_space: 150,
-          watermark_fontsize: "12px",
-          watermark_txt: "@" + name,
-          watermark_angle: randAngle,
-          watermark_color: "#bebebe",
-        },
-        needWatermark = /ranking|search/i.test(path);
+        accessToken = this.$cookie.get("accessToken") || null;
 
       if (accessToken) {
-        if (needWatermark == true) {
-          watermark.load(watermarkConfig);
-        }
-
-        if (needWatermark == false && document.getElementById("wm_div_id")) {
-          watermark.remove();
-        }
+        this.watermark = {
+          content: "@" + name,
+          rotate: 25,
+          width: 150,
+          height: 150,
+          color: "rgb(244, 244, 244)",
+        };
       }
 
       if (isRobot) {
@@ -731,6 +719,19 @@ div.app-recommend {
 
 div.app-bpIndex {
   height: 443px;
+}
+
+div.app-63c4cfbde5ad50f3f537c2540374995e {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+div.app-097ee6ec15c5d0a4c39910b8b8797ca3 {
+  height: 100%;
+  width: 100%;
+  position: static !important;
+  z-index: @app-z-index !important;
 }
 
 div.app-f1453f63de7b681a25dc590be0c8a31e {

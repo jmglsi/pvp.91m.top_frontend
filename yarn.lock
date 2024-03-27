@@ -13,7 +13,7 @@
 
 "@amap/amap-jsapi-loader@^1.0.1":
   version "1.0.1"
-  resolved "https://registry.npmmirror.com/@amap/amap-jsapi-loader/-/amap-jsapi-loader-1.0.1.tgz"
+  resolved "https://mirrors.cloud.tencent.com/npm/@amap/amap-jsapi-loader/-/amap-jsapi-loader-1.0.1.tgz#9ec4b4d5d2467eac451f6c852e35db69e9f9f0c0"
   integrity sha512-nPyLKt7Ow/ThHLkSvn2etQlUzqxmTVgK7bIgwdBRTg2HK5668oN7xVxkaiRe3YZEzGzfV2XgH5Jmu2T73ljejw==
 
 "@ampproject/remapping@^2.1.0":
@@ -9548,6 +9548,11 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
+vue-watermark-directive@^1.0.0:
+  version "1.0.0"
+  resolved "https://mirrors.cloud.tencent.com/npm/vue-watermark-directive/-/vue-watermark-directive-1.0.0.tgz#6ac467b07b55aae5b500004996ced8ee34b2adcc"
+  integrity sha512-DCCiadxOUnB+S1T12qIQjTQkDyrNOEDM+Vsu93W97BBjUgAFvhvoc8nfJdbNjvLgVu9z7sexd8puP5F3WkjMfQ==
+
 vue@^2.6.10, vue@^2.6.14:
   version "2.6.14"
   resolved "https://registry.npmjs.org/vue/-/vue-2.6.14.tgz"
@@ -9594,11 +9599,6 @@ watchpack@^1.7.4:
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
-
-watermark-dom@^2.3.0:
-  version "2.3.0"
-  resolved "https://mirrors.cloud.tencent.com/npm/watermark-dom/-/watermark-dom-2.3.0.tgz"
-  integrity sha512-2++fJESs8ULlrOPHEJGi72UxcDmVTsJDZ3kMa5umU6IWc78A4g1kOAqh1k6FEQhrq9QpkV7wzuoUeMhvFlWGWg==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"
