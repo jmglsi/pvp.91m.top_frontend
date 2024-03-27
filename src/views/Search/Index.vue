@@ -125,15 +125,6 @@
               />
               <van-grid-item
                 @click="
-                  $appPush({
-                    path: '/hero/tools',
-                  })
-                "
-                icon="/img/icons-app/medal.png"
-                text="最低金牌"
-              />
-              <van-grid-item
-                @click="
                   $appOpenUrl(
                     $t('open-url.title'),
                     'NGA @小熊de大熊',
@@ -145,6 +136,24 @@
                 "
                 icon="/img/icons-app/attack_speed.png"
                 text="攻速阈值"
+              />
+              <van-grid-item
+                @click="
+                  $appPush({
+                    path: '/hero/tools',
+                  })
+                "
+                icon="/img/icons-app/medal.png"
+                text="查牌子"
+              />
+              <van-grid-item
+                @click="
+                  $appPush({
+                    path: '/hero/tools',
+                  })
+                "
+                icon="/img/icons-app/skin.png"
+                text="查皮肤"
               />
             </van-grid>
           </van-cell-group>
