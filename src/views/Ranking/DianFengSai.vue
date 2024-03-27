@@ -1,7 +1,11 @@
 <template>
   <div class="ranking-dfs app-dfs">
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
-      <vxe-toolbar ref="refXToolbar" custom />
+      <vxe-toolbar
+        style="background-color: rgb(246, 246, 248) !important"
+        ref="refXToolbar"
+        custom
+      />
     </div>
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
@@ -91,7 +95,6 @@
         <vxe-column title="#" type="seq" width="50" />
 
         <vxe-table-colgroup
-          title="出场越低，波动越大 (%)"
           :title-prefix="{
             content:
               $appMsg.tips[1015] +
@@ -101,6 +104,33 @@
               $appMsg.tips[1018],
           }"
         >
+          <template #header>
+            <div
+              @click="
+                $appOpenUrl(
+                  $t('open-url.title'),
+                  null,
+                  { path: url.openSource[0] },
+                  0
+                )
+              "
+              class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81"
+            >
+              <span class="ranking-6ad9203f996965a0c641bbf73cc1143f">
+                出场越低，波动越大 (%)
+              </span>
+              <van-tag
+                plain
+                round
+                type="warning"
+                size="medium"
+                class="ranking-f5e0d4e9cee528a53f64ea02550517bf"
+              >
+                算法测试中
+              </van-tag>
+            </div>
+          </template>
+
           <vxe-column
             title="趋势"
             field="trend"
@@ -577,6 +607,9 @@ export default {
       msg: "",
       time: this.$route.query.t || "",
       heroProficiency: this.$t("loading"),
+      url: {
+        openSource: ["https://docs.91m.top"],
+      },
       tableData: {
         loading: false,
         result: {

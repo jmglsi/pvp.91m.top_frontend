@@ -29,7 +29,7 @@ VXETable.setup({
   table: {
     align: "center",
     autoResize: true,
-    border: "inner",
+    border: "outer",
     keepSource: true,
     showOverflow: null,
     stripe: true,
@@ -44,9 +44,11 @@ VXETable.setup({
       trigger: "cell"
     },
     scrollX: {
+      enabled: true,
       gt: -1
     },
     scrollY: {
+      enabled: true,
       gt: -1
     }
   },

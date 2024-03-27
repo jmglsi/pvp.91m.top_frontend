@@ -87,7 +87,11 @@ axios.interceptors.request.use(function (config) {
  */
 axios.interceptors.response.use(
   response => {
-    if (response.data.status.code == 2004) {
+    let code = response.data.status.code;
+
+    if (code == 988) {
+      location.href = "https://docs.91m.top?ref=expired";
+    } else if (code == 2004) {
       let currentRoute = router.currentRoute;
 
       cookie.delete("openId");

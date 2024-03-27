@@ -9,6 +9,9 @@ Vue.use(VueClipboard);
 import VueMeta from 'vue-meta';
 Vue.use(VueMeta);
 
+import watermark from 'vue-watermark-directive';
+Vue.use(watermark);
+
 import { i18n } from './assets/import/i18n';
 
 import store from './assets/import/store';

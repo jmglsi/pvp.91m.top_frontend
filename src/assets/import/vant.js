@@ -75,6 +75,8 @@ Vue
   .use(ImagePreview)
   .use(Lazyload, {
     lazyComponent: true,
+    preload: 0.75,
+    attempt: 0,
     loading: '/img/icons-app/loading.png'
   })
   .use(Loading)
