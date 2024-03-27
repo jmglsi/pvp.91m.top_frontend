@@ -165,9 +165,10 @@ export default {
     return {
       watermark: {
         content: "",
+        font: "12px Microsoft YaHei",
         rotate: 25,
-        width: 150,
-        height: 150,
+        width: 135,
+        height: 100,
         color: "rgb(244, 244, 244)",
       },
       bottomHeight: 175,
@@ -228,10 +229,11 @@ export default {
       if (accessToken) {
         this.watermark = {
           content: "@" + name,
+          font: "12px Microsoft YaHei",
           rotate: 25,
-          width: 150,
-          height: 150,
-          color: "rgb(244, 244, 244)",
+          width: 135,
+          height: 100,
+          color: "rgb(240, 240, 240)",
         };
       }
 
