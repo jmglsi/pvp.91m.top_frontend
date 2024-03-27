@@ -202,7 +202,7 @@ export default {
       },
       heroInfo: {
         id: 0,
-        name: "请选择",
+        name: "请选择英雄",
         img: "",
         type: [],
       },
@@ -233,6 +233,10 @@ export default {
       let q = this.$route.query,
         areaType = q.areaType || this.areaType,
         selectIndex = this.selectInfo.value;
+
+      if (this.heroInfo.id == 0) {
+        return this.$message.error(this.$appMsg.error[1013]);
+      }
 
       if (selectIndex == 0) {
         this.areaType = areaType;
