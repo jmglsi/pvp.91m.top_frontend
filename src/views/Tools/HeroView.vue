@@ -4,7 +4,7 @@
       <van-button
         round
         size="small"
-        :icon="'/img/icons-hero/' + hero.info.id + '.jpg'"
+        :icon="hero.info.img"
         class="tools-7fd0a5f5913603ec56c9095e237cd4bc"
       >
         <img
@@ -26,12 +26,13 @@
         />
       </van-button>
       <span class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1">
-        热度趋势 来源:苏苏的荣耀助手
+        热度趋势 来源:<span style="color: blue">苏苏的荣耀助手</span>
       </span>
       <span
         class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1 tools-c63abbfb166e7e598518fe6a7a58c86b"
       >
-        最后更新 {{ viewInfo.nowTime.substring(2) }}
+        最后更新
+        <span style="color: red">{{ viewInfo.nowTime.substring(2) }}</span>
       </span>
     </div>
 
@@ -44,7 +45,7 @@
       :exStyle="{
         width: '302px',
         height: '115px',
-        grid: { left: -43, bottom: -15, width: 302, height: 105 },
+        grid: { left: -50, bottom: -15, width: 300, height: 105 },
       }"
       :animation="false"
       class="tools-ea7120740464ce78c305436d1f150b4d"
@@ -60,7 +61,11 @@
             v-if="index < 2 && data.pickRate > 5"
             round
             size="mini"
-            :icon="'/img/icons-skill/' + data.skillId + '.jpg'"
+            :icon="
+              'https://game.gtimg.cn/images/yxzj/img201606/summoner/' +
+              data.skillId +
+              '.jpg'
+            "
             class="tools-7fd0a5f5913603ec56c9095e237cd4bc"
           >
             {{
