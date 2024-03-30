@@ -143,18 +143,6 @@ export default {
           }
         });
     },
-    openKeys: function (e) {
-      console.log("openKeys", e);
-    },
-    selectedKeys: function (e) {
-      console.log("selectedKeys", e);
-    },
-    handleClick: function (e) {
-      console.log("handleClick", e);
-    },
-    titleClick: function (e) {
-      console.log("titleClick", e);
-    },
   },
 };
 </script>

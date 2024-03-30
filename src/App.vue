@@ -404,14 +404,14 @@ export default {
 
         if (!oauthType) {
           if (tempOpenId) {
-            this.$cookie.set("tempOpenId", tempOpenId, { expires: "1h" });
+            this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
             this.$cookie.set("tempAccessToken", tempAccessToken, {
-              expires: "1h",
+              expires: "1H",
             });
           }
 
-          if (appInfo.tempText) {
-            this.$message.info(appInfo.tempText);
+          if (tempText) {
+            this.$message.info(tempText);
 
             this.$appDelectAllLocalStorage();
           }
@@ -424,9 +424,7 @@ export default {
           }
 
           if (tempText) {
-            this.$message.warning(
-              this.$appMsg.warning[tempText] || this.$t("unknown")
-            );
+            this.$message.warning(this.$appMsg.warning[tempText]);
           }
         }
 

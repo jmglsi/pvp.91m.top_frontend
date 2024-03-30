@@ -912,7 +912,7 @@
               >
                 <van-grid :border="false" :column-num="3">
                   <van-grid-item
-                    v-for="(data, index) in tableData.cardInfo.behavior"
+                    v-for="(data, index) in tableData.cardInfo.performance[0]"
                     :key="'search-b3f9864c505c0a9096540e0ef4b18e17-' + index"
                     class="search-a09f3d18d97597a65b022847ad930687"
                   >
@@ -942,11 +942,36 @@
               >
                 <van-grid :border="false" :column-num="3">
                   <van-grid-item
-                    v-for="(data, index) in tableData.cardInfo.highLight"
+                    v-for="(data, index) in tableData.cardInfo.performance[1]"
                     :key="'search-b72889efaadc4b88fe8eefe617f4bc99-' + index"
                     :text="data.title"
                     class="search-166e01dd604a0a8bbce5a14bdb61b128"
                   />
+                </van-grid>
+              </van-cell-group>
+
+              <van-cell-group
+                :border="false"
+                @click="$message.info($appMsg.info[1027])"
+                title="其他参数"
+              >
+                <van-grid :border="false" :column-num="3">
+                  <van-grid-item
+                    v-for="(data, index) in tableData.cardInfo.performance[2]"
+                    :key="'search-b72889efaadc4b88fe8eefe617f4bc99-' + index"
+                    class="search-9f8cf4f2a40f914629b098467656e95d"
+                  >
+                    <template #text>
+                      <span :style="data.value <= 10 ? { color: 'red' } : {}">
+                        <div class="search-a81df89bd652380468a0ef592202d26a">
+                          {{ data.key }}
+                        </div>
+                        <div class="search-12ef9122e7ab541f6ebf062e7556c851">
+                          {{ data.value }}
+                        </div>
+                      </span>
+                    </template>
+                  </van-grid-item>
                 </van-grid>
               </van-cell-group>
             </van-tab>
@@ -1122,19 +1147,19 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
-            <van-tab title="顺位 (推荐)">
+            <van-tab title="顺位">
               <HeroBPIndex
                 v-if="skillInfo.model == 0"
                 :heroId="tableData.cardInfo.id"
               />
             </van-tab>
-            <van-tab title="打法 (推荐)">
+            <van-tab title="打法">
               <HeroGenreList
                 v-if="skillInfo.model == 1"
                 :genreId="tableData.cardInfo.id"
               />
             </van-tab>
-            <van-tab title="出装 (推荐)">
+            <van-tab title="出装">
               <HeroEquipmentListALL
                 v-if="skillInfo.model == 2"
                 :heroId="tableData.cardInfo.id"
@@ -1282,8 +1307,7 @@ export default {
           name: null,
           title: null,
           type: [],
-          behavior: [],
-          highLight: [],
+          performance: [],
           feature: {
             blue: {
               blue: {
@@ -1364,6 +1388,10 @@ export default {
           "<br /><div><a href='https://docs.91m.top/%E7%BD%91%E7%AB%99/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80_%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html'>备战默认每周一更新，干预则是昨日</a></div>",
         tempEquipment = [],
         equipment;
+
+      if (!data) {
+        return;
+      }
 
       if (data.equipment.length > 0) {
         this.showInfo.heroPopover = true;
@@ -1710,6 +1738,15 @@ span.search-7c61bf0e17805d4183c7eeb293ebdb42 {
 span.search-cd563e444a95dc7ced1843748af0c3c4 {
   color: gray;
   font-size: 12px;
+}
+
+div.search-9f8cf4f2a40f914629b098467656e95d {
+  font-size: @app-font-size;
+  text-align: center;
+}
+
+div.search-12ef9122e7ab541f6ebf062e7556c851 {
+  margin-top: 3px;
 }
 
 div.search-843c48c53bd40c7f476497c030fb0e92,

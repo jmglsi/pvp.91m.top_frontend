@@ -316,13 +316,13 @@
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
-            <van-tab title="顺位 (推荐)">
+            <van-tab title="顺位">
               <HeroBPIndex :heroId="hero.info.id" />
             </van-tab>
-            <van-tab title="打法 (推荐)">
+            <van-tab title="打法">
               <HeroGenreList :genreId="hero.info.id" />
             </van-tab>
-            <van-tab title="出装 (推荐)">
+            <van-tab title="出装">
               <HeroEquipmentListALL :heroId="hero.info.id" />
             </van-tab>
             <van-tab title="出装 (单件)">

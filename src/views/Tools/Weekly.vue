@@ -216,7 +216,7 @@
 
     <div class="tools-0718fd9d729c89c24317bec50cd5f968">
       <van-divider content-position="right">
-        数据来源 苏苏的荣耀助手
+        数据整理 苏苏的荣耀助手
       </van-divider>
     </div>
   </div>

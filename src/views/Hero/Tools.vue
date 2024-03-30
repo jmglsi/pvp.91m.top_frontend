@@ -133,10 +133,15 @@
                 &nbsp;
                 <div
                   :style="{
-                    color: data.pickRate >= 50 ? 'red' : 'unset',
+                    marginTop: '5px',
+                    color:
+                      data.score >= 7.5 || data.pickRate >= 50
+                        ? 'red'
+                        : 'unset',
                   }"
                 >
-                  {{ data.pickRate }} %
+                  <span>{{ data.score }} | {{ data.pickRate }}</span>
+                  <span class="hero-f929a9d9af35e647bf66a06a6c421ea1">%</span>
                 </div>
               </div>
             </div>
@@ -146,11 +151,25 @@
 
       <div class="hero-175c358c9271d591abf0163679968135">
         <van-divider :style="{ padding: '0 16px' }">
-          今天上线的皮肤，隔日更新
+          今天上线的皮肤，隔日更新 (仅供参考)
         </van-divider>
 
-        <div class="hero-7c7f825106f6288d7e5bea8012e23041">
-          皮肤手感占比 (仅供参考)
+        <div
+          @click="
+            $appOpenUrl(
+              $t('open-url.title'),
+              '是否打开外部链接?',
+              {
+                path: 'https://ricochet.cn/wzry/skin',
+              },
+              0
+            )
+          "
+          class="hero-7c7f825106f6288d7e5bea8012e23041"
+        >
+          手感占比，评分由
+          <span style="color: rgb(25, 137, 250) !important">NGA@sjn4048</span>
+          提供
         </div>
       </div>
     </div>
@@ -171,7 +190,7 @@ export default {
       areaType: "安卓QQ",
       popoverMeauActions: [
         { text: "查牌子", value: 0 },
-        { text: "查战力", value: 1 },
+        { text: "查战力 (国服)", value: 1 },
         { text: "查皮肤", value: 2 },
       ],
       popoverAreaActions: [
@@ -243,7 +262,14 @@ export default {
 
         this.getRankingByHeroPaiZi(9, 0, 0, 0, this.heroInfo.id, this.areaType);
       } else if (selectIndex == 1) {
-        this.$message.info(this.$appMsg.info[1032]);
+        this.$appPush({
+          path: "/search",
+          query: {
+            q: this.heroInfo.name,
+            show: "heroSkill",
+            refresh: 1,
+          },
+        });
       } else if (selectIndex == 2) {
         this.getRankingByHeroSkin(18, 0, 0, 0, this.heroInfo.id);
       }
@@ -416,6 +442,11 @@ span.hero-b84d89f2a957899d88d18f67175fb663 {
   font-size: 12px;
 }
 
+span.hero-f929a9d9af35e647bf66a06a6c421ea1 {
+  margin-left: 3px;
+  font-size: 8px;
+}
+
 div.hero-45af63c525ab541863e3e50f2f52c934 {
   margin-top: 75px;
 }
@@ -425,11 +456,12 @@ div.hero-da4fb4d6fd537e447df2bda7175dfb30 {
 }
 
 div.hero-c8b5f5d48f608ded3e078de9bef7c61b {
-  margin-top: 5px;
+  margin-top: 7px;
   font-size: 12px;
 }
 
 div.hero-7c7f825106f6288d7e5bea8012e23041 {
   color: red;
+  font-size: @app-font-size;
 }
 </style>
