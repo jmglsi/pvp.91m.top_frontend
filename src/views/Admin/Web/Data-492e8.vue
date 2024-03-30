@@ -223,19 +223,19 @@
                 :ellipsis="false"
                 @click="onTabsClick"
               >
-                <van-tab title="顺位 (推荐)">
+                <van-tab title="顺位">
                   <HeroBPIndex
                     v-if="skillInfo.model == 0"
                     :heroId="tableData.cardInfo.id"
                   />
                 </van-tab>
-                <van-tab title="打法 (推荐)">
+                <van-tab title="打法">
                   <HeroGenreList
                     v-if="skillInfo.model == 1"
                     :genreId="tableData.cardInfo.id"
                   />
                 </van-tab>
-                <van-tab title="出装 (推荐)">
+                <van-tab title="出装">
                   <HeroEquipmentListALL
                     v-if="skillInfo.model == 2"
                     :heroId="tableData.cardInfo.id"

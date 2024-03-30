@@ -78,6 +78,7 @@
         <vxe-table
           ref="refAdminGroup"
           align="left"
+          border="inner"
           :data="tableData.group.rows"
         >
           <vxe-column type="checkbox" width="60"></vxe-column>
@@ -135,6 +136,7 @@
         <vxe-table
           ref="refAdminPlugins"
           align="left"
+          border="inner"
           :data="tableData.plugins.rows"
         >
           <vxe-column type="seq" width="60"></vxe-column>
@@ -257,12 +259,7 @@ export default {
           this.$appApi.bot.getDataByRobotData + "&frameId=2500",
           this.$qs.stringify({
             key: this.botInfo.key,
-          }),
-          {
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
+          })
         )
         .then((res) => {
           let data = res.data.data,
