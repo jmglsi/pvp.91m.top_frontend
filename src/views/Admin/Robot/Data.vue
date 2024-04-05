@@ -106,7 +106,29 @@
             title="群组"
             show-overflow="ellipsis"
             sortable
-          ></vxe-column>
+          >
+            <template #default="{ row }">
+              <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
+                {{ row.group }}
+              </span>
+              <span
+                v-if="row.tag.length > 0"
+                class="admin-35a3fd9ebe1b21426f457f83df90890a"
+              >
+                <br />
+                <van-tag
+                  v-for="(data, index) in row.tag"
+                  :key="'admin-4f1cb2cce1bd665d34f21735c517cf9f-' + index"
+                  round
+                  :color="data.color"
+                  type="primary"
+                  class="admin-1957c2d79946c8557790e643435fea9a"
+                >
+                  {{ data.name }}
+                </van-tag>
+              </span>
+            </template>
+          </vxe-column>
           <vxe-column field="lastTime" title="时间" sortable></vxe-column>
         </vxe-table>
 
@@ -208,7 +230,7 @@ export default {
         },
       },
       frameList: [
-        70000, 75000, 20000, 40000, 60000, 10000, 15000, 2500, 80000, 90000,
+        20000, 60000, 70000, 75000, 40000, 10000, 15000, 2500, 80000, 90000,
         50000,
       ],
       frameInfo: {
@@ -218,7 +240,7 @@ export default {
         20000: "WeChat (可爱猫)",
         40000: "DingTalk",
         50000: "NokNok",
-        60000: "QQ (Gocq-http)",
+        60000: "QQ (LiteLoaderQQNT)",
         70000: "QQ (Guild)",
         75000: "QQ (Group)",
         80000: "其他-王者营地",
@@ -372,6 +394,8 @@ export default {
     onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "frameId") {
         return row.frameId == option.value;
+      } else if (column.group == "group") {
+        return row.tag == option.value;
       }
     },
     getSelectEvent: function () {
@@ -386,14 +410,38 @@ export default {
       this.$message.success("开始推送");
 
       group.map((x, i) => {
-        setTimeout(() => {
-          this.sendMsg(x.frameId, x.robot, 100, x.group, this.botInfo.msg, {
+        let msgType,
+          msgData = {};
+
+        if (x.frameId == 20000) {
+          msgType = 100;
+          msgData = {
             robot_wxid: x.robot,
             from_wxid: x.group,
-          });
+          };
+        } else if (x.frameId == 60000) {
+          msgType = 2;
+          msgData = {
+            message_type: "group",
+            self_id: x.robot,
+            group_id: String(x.group),
+          };
+        }
 
-          this.percentage = Math.floor(((i + 1) / groupNum) * 100);
-        }, 1000 * i);
+        if (msgData != {}) {
+          setTimeout(() => {
+            this.sendMsg(
+              x.frameId,
+              x.robot,
+              msgType,
+              x.group,
+              this.botInfo.msg,
+              msgData
+            );
+
+            this.percentage = Math.floor(((i + 1) / groupNum) * 100);
+          }, 1000 * i);
+        }
       });
 
       setTimeout(() => {
@@ -418,6 +466,10 @@ li.admin-a64328a2760af2ca12a5b7c909082c14 {
   color: white;
   text-align: center;
   margin-top: 15px;
+}
+
+span.admin-1957c2d79946c8557790e643435fea9a {
+  margin-right: 5px;
 }
 
 div.admin-558dab5fd681d940120defdcedf70585 {

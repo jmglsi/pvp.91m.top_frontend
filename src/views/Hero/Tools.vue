@@ -8,7 +8,7 @@
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="$appBack()"
-        z-index="99999999"
+        z-index="2000"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>
@@ -167,14 +167,20 @@
           "
           class="hero-7c7f825106f6288d7e5bea8012e23041"
         >
-          手感占比，评分由
-          <span style="color: rgb(25, 137, 250) !important">NGA@sjn4048</span>
-          提供
+          <span class="hero-41f3f668239a416414146113b108bcbc">
+            理论上越喜欢的皮肤，使用的场次越多
+          </span>
+          <br />
+          <span class="hero-04ad1b6577bcddb707fdd0b80abe2e78">
+            手感占比，评分由
+            <span style="color: rgb(25, 137, 250) !important">NGA@sjn4048</span>
+            提供
+          </span>
         </div>
       </div>
     </div>
 
-    <AppHello height="50px" />
+    <AppHello height="100px" />
   </div>
 </template>
 

@@ -14,7 +14,7 @@
         :left-text="scroll >= 50 ? $t('nav-bar.left-text') : null"
         @click-left="$appBack()"
         @click-right="$message.info($appMsg.info[1004])"
-        z-index="99999999"
+        z-index="2000"
         class="hero-a2d3b30fd0cc9eb4affc0de9b7049895"
       >
         <template #title>

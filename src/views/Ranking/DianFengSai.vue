@@ -132,7 +132,7 @@
           </template>
 
           <vxe-column
-            title="趋势"
+            title="热度"
             field="trend"
             width="100"
             :title-prefix="{ content: $appMsg.tips[1016] }"
@@ -215,6 +215,7 @@
                         class="ranking-7e8b2826e5b06781c19f0ee58f12f230"
                       />
                     </template>
+
                     <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                       {{ row.allPickRate }}
                     </span>

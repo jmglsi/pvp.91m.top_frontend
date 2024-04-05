@@ -7,7 +7,7 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         title=" "
-        z-index="99999999"
+        z-index="2000"
         class="miniapp-cce79bfde37d3f930a50bbaed2d29135"
       />
     </div>

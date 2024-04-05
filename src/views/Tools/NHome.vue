@@ -6,7 +6,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        z-index="99999999"
+        z-index="2000"
         class="n-7b54c0b5320a9a1b5ba31164e1e6de26"
       >
         <template #left>

@@ -11,24 +11,27 @@
           class="ranking-1ac6534055d3b55bd4340435430b314d"
         >
           <template #title>
-            T<span
+            T
+            <span
               :style="{ color: 'red !important', fontSize: '30px' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
-              >0</span
             >
+              0
+            </span>
             &nbsp;
             <span
               class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
               <a-popover trigger="click" placement="bottomRight">
-                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  非禁必选 <van-icon name="question-o" />
-                </span>
                 <template slot="content">
                   <span>
                     在极高的禁选率和胜率加持下，有着版本最顶尖的强度，熟练后可直接无脑选用
                   </span>
                 </template>
+
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  非禁必选 <van-icon name="question-o" />
+                </span>
               </a-popover>
             </span>
           </template>
@@ -128,25 +131,28 @@
           class="ranking-1ac6534055d3b55bd4340435430b314d"
         >
           <template #title>
-            T<span
+            T
+            <span
               :style="{ color: '#fa8072 !important' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
-              >0.5</span
             >
+              0.5
+            </span>
             &nbsp;
             <span
               class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
               <a-popover trigger="click" placement="bottomRight">
-                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  一人之下 <van-icon name="question-o" />
-                </span>
                 <template slot="content">
                   <span>
                     介于 T0 和 T1
                     之间，具有作为团队核心的能力，适用于绝大多数阵容
                   </span>
                 </template>
+
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  一人之下 <van-icon name="question-o" />
+                </span>
               </a-popover>
             </span>
           </template>
@@ -246,24 +252,27 @@
           class="ranking-1ac6534055d3b55bd4340435430b314d"
         >
           <template #title>
-            T<span
+            T
+            <span
               :style="{ color: 'orange !important' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
-              >1</span
             >
+              1
+            </span>
             &nbsp;
             <span
               class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
               <a-popover trigger="click" placement="bottomRight">
-                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  强势英雄 <van-icon name="question-o" />
-                </span>
                 <template slot="content">
                   <span>
                     是队伍的中坚力量，具有左右胜利的实力，一般需要依阵容搭配使用
                   </span>
                 </template>
+
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  强势英雄 <van-icon name="question-o" />
+                </span>
               </a-popover>
             </span>
           </template>
@@ -363,24 +372,27 @@
           class="ranking-1ac6534055d3b55bd4340435430b314d"
         >
           <template #title>
-            T<span
+            T
+            <span
               :style="{ color: '#3d9140 !important' }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
-              >2</span
             >
+              2
+            </span>
             &nbsp;
             <span
               class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
               <a-popover trigger="click" placement="bottomRight">
-                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  体系英雄 <van-icon name="question-o" />
-                </span>
                 <template slot="content">
                   <span>
                     能在自己的领域内表现卓越，在某些战局中起到主导团队的作用
                   </span>
                 </template>
+
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  体系英雄 <van-icon name="question-o" />
+                </span>
               </a-popover>
             </span>
           </template>
@@ -480,20 +492,22 @@
           class="ranking-1ac6534055d3b55bd4340435430b314d"
         >
           <template #title>
-            T<span class="ranking-0eef127325d38ed4804c26bd7c88bab3">3</span>
+            T
+            <span class="ranking-0eef127325d38ed4804c26bd7c88bab3">3</span>
             &nbsp;
             <span
               class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
               <a-popover trigger="click" placement="bottomRight">
-                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  奇兵英雄 <van-icon name="question-o" />
-                </span>
                 <template slot="content">
                   <span>
                     有明显的克制关系，优缺点明显，能够在特定的阵容中表现突出
                   </span>
                 </template>
+
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  奇兵英雄 <van-icon name="question-o" />
+                </span>
               </a-popover>
             </span>
           </template>
@@ -593,18 +607,20 @@
           class="ranking-1ac6534055d3b55bd4340435430b314d"
         >
           <template #title>
-            T<span class="ranking-0eef127325d38ed4804c26bd7c88bab3">4</span>
+            T
+            <span class="ranking-0eef127325d38ed4804c26bd7c88bab3">4</span>
             &nbsp;
             <span
               class="ranking-3605ac8c437e0c5eb801c76edfd6fb43 ranking-b4ba22aa4e7d0527ad550251603c5355"
             >
               <a-popover trigger="click" placement="bottomRight">
-                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
-                  弱势英雄 <van-icon name="question-o" />
-                </span>
                 <template slot="content">
                   <span>不是绝活哥，不建议上手</span>
                 </template>
+
+                <span class="ranking-0423cce7314e9aa98f20a3c55124479b">
+                  弱势英雄 <van-icon name="question-o" />
+                </span>
               </a-popover>
             </span>
           </template>

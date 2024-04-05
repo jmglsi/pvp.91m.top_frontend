@@ -6,7 +6,7 @@
         :fixed="true"
         :placeholder="true"
         :safe-area-inset-top="true"
-        z-index="99999999"
+        z-index="2000"
       >
         <template #left>
           <div
@@ -18,24 +18,43 @@
           </div>
         </template>
         <template #title>
-          <div v-if="isLogin" class="login-f9c7cabc13f359223ebc3ccf9cc104b8">
-            <span
-              class="login-25930e3036f13852cb0b29694bbab611 login-b068931cc450442b63f5b3d276ea4297"
+          <div
+            v-if="isLogin"
+            @click="$message.info($appMsg.info[1003])"
+            class="login-f9c7cabc13f359223ebc3ccf9cc104b8"
+          >
+            <van-popover
+              v-model="showInfo.popoverMeau"
+              :get-container="getContainer"
+              trigger="click"
+              placement="bottom"
             >
-              {{ loginInfo.name }}
-            </span>
-            <span
-              class="login-25930e3036f13852cb0b29694bbab611 login-293a35164a20c927b0fd61942fbc1cf2"
-            >
-              <van-tag
-                round
-                :color="loginInfo.certification.color"
-                class="login-7eaa86d23ffacfb49464ee78252aa43a"
-                @click="$message.info($appMsg.info[1003])"
-              >
-                {{ loginInfo.certification.text }}
-              </van-tag>
-            </span>
+              <template #reference>
+                <span
+                  class="login-25930e3036f13852cb0b29694bbab611 login-b068931cc450442b63f5b3d276ea4297"
+                >
+                  {{ loginInfo.name }}
+                </span>
+                <span
+                  class="login-25930e3036f13852cb0b29694bbab611 login-293a35164a20c927b0fd61942fbc1cf2"
+                >
+                  <van-tag
+                    round
+                    :color="loginInfo.certification.color"
+                    class="login-7eaa86d23ffacfb49464ee78252aa43a"
+                  >
+                    {{ loginInfo.certification.text }}
+                  </van-tag>
+                </span>
+              </template>
+
+              <div
+                v-if="loginInfo.tips"
+                v-html="loginInfo.tips"
+                @click="onCopy"
+                class="login-d50b09e1c7e5e32af4ecd82963b1ac76"
+              ></div>
+            </van-popover>
           </div>
         </template>
         <template #right>
@@ -251,6 +270,7 @@
                       class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
+                      v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
                       width="50"
                       height="40"
@@ -675,6 +695,7 @@ export default {
           text: null,
         },
         description: null,
+        tips: null,
         heroList: [],
         areaType: 1,
         provinceType: 1,
@@ -691,6 +712,7 @@ export default {
         friendsType: true,
         editType: false,
         languageMenu: false,
+        popoverMeau: false,
       },
       collapseInfo: {
         model: ["1"],
@@ -701,6 +723,10 @@ export default {
     $route: function (to) {
       let q = to.query,
         refresh = q.refresh;
+
+      if (this.loginInfo.tips) {
+        this.showInfo.popoverMeau = true;
+      }
 
       if (refresh == 1) {
         this.getWebAccountInfo();
@@ -734,6 +760,9 @@ export default {
     this.getWebAccountInfo();
   },
   methods: {
+    getContainer: function () {
+      return document.querySelector(".login-index");
+    },
     getWebAccountInfo: function (aid = 0) {
       this.$axios
         .post(this.$appApi.app.getWebAccountInfo + "&aid=" + aid)
@@ -754,6 +783,7 @@ export default {
               : (this.showInfo.friendsType = false);
 
             this.isLogin = true;
+            this.showInfo.popoverMeau = true;
           } else {
             this.isLogin = false;
 
@@ -941,5 +971,9 @@ div.login-b990d992f06c8db21d6b58c25f843529 {
 
 div.login-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
   font-size: @app-font-size;
+}
+
+div.login-d50b09e1c7e5e32af4ecd82963b1ac76{
+  padding: 10px;
 }
 </style>

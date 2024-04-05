@@ -9,7 +9,7 @@
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="$appBack()"
-        z-index="99999999"
+        z-index="2000"
         title="未命名的方案"
       >
         <template #title>

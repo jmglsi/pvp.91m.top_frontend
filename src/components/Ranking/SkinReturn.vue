@@ -9,7 +9,7 @@
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="$appBack()"
-        z-index="99999999"
+        z-index="2000"
         class="return-0229cfdc78c2b9da8e238c9c89967c70"
       >
         <template #title>

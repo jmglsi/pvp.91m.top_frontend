@@ -8,10 +8,10 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
-        @click-left="$appBack()"
+        @click-left="$appPush({ path: '/my' })"
         @click-right="onNavBarRightClick"
         title="队伍"
-        z-index="99999999"
+        z-index="2000"
         class="game-6fd4f92278806c6e544f958ba762c7a9"
       >
         <van-icon name="add-o" slot="right" />

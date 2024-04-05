@@ -80,7 +80,6 @@
           field="commonlyUsed"
           width="325"
           align="left"
-          :title-prefix="{ content: $appMsg.tips[1007] }"
         >
           <template #default="{ row }">
             <div
