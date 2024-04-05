@@ -26,7 +26,7 @@
         />
       </van-button>
       <span class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1">
-        热度趋势 来源:<span style="color: blue">苏苏的荣耀助手</span>
+        热度趋势 <span style="color: blue">苏苏的荣耀助手</span> 整理
       </span>
       <span
         class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1 tools-c63abbfb166e7e598518fe6a7a58c86b"

@@ -10,7 +10,6 @@
         }"
         :defaultOpenKeys="['sub-web', 'sub-robot']"
         :defaultSelectedKeys="defaultSelectedKey"
-        @click="handleClick"
         mode="inline"
       >
         <a-sub-menu key="sub-web" title="数据站">

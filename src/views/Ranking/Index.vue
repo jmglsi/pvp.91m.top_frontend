@@ -78,12 +78,30 @@
               "
               class="ranking-87714e7bd6c0d80c7bbdb69629b5a80d"
             >
-              <a-popover
-                placement="bottomRight"
+              <van-popover
+                v-model="showInfo.popoverMeau"
+                :get-container="getContainer"
                 trigger="click"
-                overlayClassName="ranking-ed3451c988256d717ce6e41d24da7e45"
+                placement="bottom-end"
               >
-                <template slot="content">
+                <template #reference>
+                  <span>
+                    <div
+                      class="ranking-1fc99c22c900d9d31cb0ad2434ed4464 app-52b0e5c90604d59d1814f184d58e2033"
+                    >
+                      <van-button
+                        round
+                        icon="exchange"
+                        size="small"
+                        color="linear-gradient(to right, #fd6585, #0d25b9)"
+                      >
+                        {{ $t("switch-view") }} &nbsp;&nbsp;&nbsp;&nbsp;
+                      </van-button>
+                    </div>
+                  </span>
+                </template>
+
+                <span>
                   <div class="ranking-e1c6b759e0537c91d5c6dbb2d4738173">
                     <a-radio-group
                       :value="viewInfo.model"
@@ -101,20 +119,8 @@
                       </a-radio-button>
                     </a-radio-group>
                   </div>
-                </template>
-                <div
-                  class="ranking-1fc99c22c900d9d31cb0ad2434ed4464 app-52b0e5c90604d59d1814f184d58e2033"
-                >
-                  <van-button
-                    round
-                    icon="exchange"
-                    size="small"
-                    color="linear-gradient(to right, #fd6585, #0d25b9)"
-                  >
-                    {{ $t("switch-view") }} &nbsp;&nbsp;&nbsp;&nbsp;
-                  </van-button>
-                </div>
-              </a-popover>
+                </span>
+              </van-popover>
             </div>
           </div>
         </van-tab>
@@ -361,6 +367,7 @@ export default {
         dfsTips: true,
         skillTips: true,
         wanjiaTips: true,
+        popoverMeau: false,
       },
       dfsAreaTypeInfo: {
         model: 0,
@@ -448,6 +455,9 @@ export default {
   },
   created() {
     this.initPage();
+  },
+  mounted() {
+    this.showInfo.popoverMeau = true;
   },
   methods: {
     initPage: function () {
@@ -698,6 +708,9 @@ export default {
       this.showInfo.actionSheet = false;
       //}
     },
+    getContainer: function () {
+      return document.querySelector(".ranking-index");
+    },
   },
 };
 </script>
@@ -706,10 +719,6 @@ export default {
 .vxe-cell,
 .vxe-cell--label {
   font-family: monospace;
-}
-
-label.ant-radio-wrapper {
-  margin-top: 10px;
 }
 
 img.ranking-be66eb32605e1f12853a2ad4ac9ccddc {
@@ -802,6 +811,10 @@ div.ranking-progress {
   position: absolute;
 }
 
+div.ranking-e1c6b759e0537c91d5c6dbb2d4738173 {
+  margin: 10px;
+}
+
 div.ranking-d742492b2526d57a222af9b54040b3b4 {
   left: 0;
   position: absolute;
@@ -883,11 +896,6 @@ div.ranking-a6c2fcca8d40c28ed46b93c2c629f0ae {
 div.ranking-8d583d7c052e343e6817b99812fa03b6 {
   left: 60px !important;
   top: 205px !important;
-}
-
-div.ranking-ed3451c988256d717ce6e41d24da7e45 {
-  left: unset !important;
-  right: 10px !important;
 }
 
 div.ranking-a9b4432c8e9b49bafa0a23e52d970016 {

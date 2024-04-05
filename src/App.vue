@@ -40,10 +40,16 @@
         trigger="click"
       >
         <template #reference>
-          <van-button round plain color="orange" size="small">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img width="20" height="20" v-lazy="'/img/icons-app/miniapp.png'" />
-          </van-button>
+          <span>
+            <van-button round plain color="orange" size="small">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <img
+                width="20"
+                height="20"
+                v-lazy="'/img/icons-app/miniapp.png'"
+              />
+            </van-button>
+          </span>
         </template>
 
         <div
@@ -260,7 +266,7 @@ export default {
       /ranking/i.test(path) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /tools|admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game\/(.*?)/i.test(
+      /^\/(tools|admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game)/i.test(
         path
       ) == true
         ? (tabbar = false)
@@ -677,15 +683,29 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
   font-size: @app-font-size;
 }
 
-div.ant-popover-title,
-ul.ant-dropdown-menu {
-  text-align: center;
+label.ant-radio-wrapper {
+  margin-top: 10px;
 }
 
 div.ant-message,
 div.ant-notification,
 div.vxe-table--tooltip-wrapper {
   z-index: 99999999 !important;
+}
+
+div.ant-popover {
+  padding: 10px;
+}
+
+div.ant-popover-title,
+ul.ant-dropdown-menu {
+  text-align: center;
+}
+
+div.van-popup {
+  div.van-popover__content {
+    z-index: 99999999 !important;
+  }
 }
 
 div.van-tabs__nav {
@@ -706,6 +726,21 @@ div.vxe-table {
 div.app-index {
   div.van-tabs__nav {
     background-color: transparent !important;
+  }
+}
+
+div.login-index {
+  div.van-popup {
+    padding: 0 10px !important;
+  }
+}
+
+div.ranking-index {
+  div.van-popover {
+    left: unset !important;
+    right: 10px !important;
+    top: 50px !important;
+    width: 275px;
   }
 }
 
@@ -731,7 +766,7 @@ div.app-097ee6ec15c5d0a4c39910b8b8797ca3 {
   height: 100%;
   width: 100%;
   position: static !important;
-  z-index: @app-z-index !important;
+  z-index: @app-z-index;
 }
 
 div.app-f1453f63de7b681a25dc590be0c8a31e {

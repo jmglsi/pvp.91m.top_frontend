@@ -9,7 +9,7 @@
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="$appBack()"
-        z-index="99999999"
+        z-index="2000"
         class="friends-5d0a052a1d6ec891c70280ed2aad1d2a"
       >
         <template #title>
@@ -116,6 +116,7 @@
                       class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
                     />
                     <img
+                      v-if="data.fightPowerIcon"
                       v-lazy="data.fightPowerIcon"
                       width="50"
                       height="40"

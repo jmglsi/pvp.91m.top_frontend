@@ -867,25 +867,23 @@
               <template #title>
                 <van-popover v-model="showInfo.heroPopover" trigger="click">
                   <template #reference>
-                    <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                      {{ $t("prepare-for-war") }}
+                    <span>
+                      <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                        {{ $t("prepare-for-war") }}
+                      </span>
+                      <img
+                        v-lazy="'/img/icons-app/hot.png'"
+                        width="13"
+                        height="13"
+                      />
                     </span>
-                    <img
-                      v-lazy="'/img/icons-app/hot.png'"
-                      width="13"
-                      height="13"
-                    />
                   </template>
 
                   <div
                     v-if="popover"
+                    v-html="popover"
                     class="search-c1577badc90f903de67f271a6fd1b451"
-                  >
-                    <span
-                      v-html="popover"
-                      class="search-cd563e444a95dc7ced1843748af0c3c4"
-                    ></span>
-                  </div>
+                  ></div>
                 </van-popover>
               </template>
             </van-tab>
@@ -1735,11 +1733,6 @@ span.search-7c61bf0e17805d4183c7eeb293ebdb42 {
   width: 250px;
 }
 
-span.search-cd563e444a95dc7ced1843748af0c3c4 {
-  color: gray;
-  font-size: 12px;
-}
-
 div.search-9f8cf4f2a40f914629b098467656e95d {
   font-size: @app-font-size;
   text-align: center;
@@ -1756,6 +1749,8 @@ div.search-db4665e1908869c6354106ce00ff95ba {
 }
 
 div.search-c1577badc90f903de67f271a6fd1b451 {
+  color: gray;
+  font-size: 12px;
   padding: 10px;
 }
 

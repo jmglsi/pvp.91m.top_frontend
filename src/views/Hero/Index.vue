@@ -70,10 +70,6 @@ span.hero-5a7c3c141fd96e8559a5994bd1c63057 {
   margin: 0 2px;
 }
 
-div.van-collapse {
-  margin-top: 3px;
-}
-
 div.ti-input {
   border-radius: 5px;
 }
