@@ -2,6 +2,7 @@
   <div class="equipment-line">
     <div class="equipment-965f1a65ae362b02d244345afcbf542e">
       <ve-line
+        :init-options="{ renderer: 'svg' }"
         :after-config="afterConfig"
         :data="lineData.result"
         :extend="lineData.extend"
@@ -24,7 +25,7 @@ import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
 import "echarts/lib/component/title";
 
-import "v-charts/lib/style.css";
+import "zrender/lib/svg/svg";
 
 export default {
   name: "ChartsEquipmentLine",

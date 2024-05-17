@@ -69,7 +69,7 @@
             class="tools-7fd0a5f5913603ec56c9095e237cd4bc"
           >
             {{
-              ($appConfigInfo.positionInfo[data.positionId + 1][0] +
+              ($appConfigInfo.positionInfo[data.positionId + 1 || 0][0] +
                 " | " +
                 parseInt(data.pickRate) || "-") + "%"
             }}
@@ -108,8 +108,6 @@
 import VueQr from "vue-qr";
 
 import "echarts/lib/component/markLine";
-
-import "zrender/lib/svg/svg";
 
 export default {
   name: "toolsHeroView",

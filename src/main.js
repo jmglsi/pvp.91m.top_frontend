@@ -17,11 +17,13 @@ import { i18n } from './assets/import/i18n';
 import store from './assets/import/store';
 Vue.prototype.$store = store;
 
-import './assets/import/antd';
-import './assets/import/vant';
+import 'v-charts/lib/style.css';
 
 import 'xe-utils';
 import './assets/import/vxe-table';
+
+import './assets/import/antd';
+import './assets/import/vant';
 
 import './assets/js/app.config';
 import './assets/js/bilibili.config';

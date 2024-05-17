@@ -2,6 +2,7 @@
   <div class="game-line">
     <div class="game-4ab266e6ed1b47485fec1e603c659269">
       <ve-line
+        :init-options="{ renderer: 'svg' }"
         :after-config="afterConfig"
         :data="lineData.result"
         :extend="lineData.extend"
@@ -9,8 +10,8 @@
         :mark-line="lineData.markLine"
         :mark-point="lineData.markPoint"
         :settings="lineData.settings"
-        width="99.2%"
         height="250px"
+        width="99.2%"
         class="game-7a0c936f40819c94d6d605e89f223e45"
       />
     </div>
@@ -25,7 +26,7 @@ import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
 import "echarts/lib/component/title";
 
-import "v-charts/lib/style.css";
+import 'zrender/lib/svg/svg';
 
 export default {
   name: "ChartsGameLine",

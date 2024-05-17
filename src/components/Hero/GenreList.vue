@@ -88,7 +88,7 @@
         >
           <template #default="{ row }">
             <div :style="{ position: 'relative' }">
-              {{ $appConfigInfo.positionInfo[row.positionId + 1][0] }}
+              {{ $appConfigInfo.positionInfo[row.positionId + 1 || 0][0] }}
             </div>
           </template>
         </vxe-table-column>

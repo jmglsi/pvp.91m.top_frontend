@@ -40,8 +40,6 @@ import "echarts/lib/component/markPoint";
 import "echarts/lib/component/title";
 import "echarts/lib/component/toolbox";
 
-import "v-charts/lib/style.css";
-
 export default {
   name: "HeroHistogram",
   components: {
@@ -56,15 +54,15 @@ export default {
       type: Number,
       default: 0,
     },
-    detailed: {
+    detail: {
       type: Number,
       default: 1,
     },
   },
   computed: {
     listenChange() {
-      const { heroId, aid, detailed } = this;
-      return { heroId, aid, detailed };
+      const { heroId, aid, detail } = this;
+      return { heroId, aid, detail };
     },
   },
   watch: {
@@ -76,7 +74,7 @@ export default {
         this.getHeroChartsLog(
           newValue.aid,
           newValue.heroId,
-          Number(newValue.detailed)
+          Number(newValue.detail)
         );
       },
     },
@@ -118,7 +116,7 @@ export default {
 
       return e;
     },
-    getHeroChartsLog: function (aid, heroId, detailed) {
+    getHeroChartsLog: function (aid, heroId, detail) {
       this.lineData = {
         loading: true,
         result: {
@@ -130,12 +128,12 @@ export default {
       this.$axios
         .post(
           this.$appApi.app.getHeroChartsLog +
-            "&heroId=" +
-            heroId +
             "&aid=" +
             aid +
-            "&detailed=" +
-            detailed
+            "&heroId=" +
+            heroId +
+            "&detail=" +
+            detail
         )
         .then((res) => {
           let data = res.data.data,

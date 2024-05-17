@@ -370,9 +370,11 @@ export default {
       }
     },
     onCopy: function (row) {
+      let longUrl = row.replayUrl;
+
       this.$axios
         .post(this.$appApi.app.getShortUrl, {
-          url: row.replayUrl,
+          url: longUrl,
         })
         .then((res) => {
           let data = res.data.data,

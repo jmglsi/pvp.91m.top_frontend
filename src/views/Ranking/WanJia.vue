@@ -62,7 +62,22 @@
           sortable
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div :style="{ position: 'relative', marginTop: '-15px' }">
+              <div class="ranking-6d19eb4601bfeac4a56e54d12adcb954">
+                <van-tag
+                  plain
+                  :color="
+                    $appConfigInfo.positionInfo[row.positionList[0] || 0][1] ||
+                    'black'
+                  "
+                >
+                  {{
+                    $appConfigInfo.positionInfo[row.positionList[0] || 0][0] ||
+                    $t("unknown")
+                  }}
+                </van-tag>
+              </div>
+
               <div class="app-52b0e5c90604d59d1814f184d58e2033">
                 {{ row.rankScore }}
               </div>
@@ -256,7 +271,7 @@
     <div class="ranking-9ba6e31a929c8c8d48edbc31d01824ad">
       <van-action-sheet
         v-model="showInfo.heroList"
-        title="大佬们在玩什么"
+        :title="'大佬们在玩什么 - 出场 ' + allHeroList.length + ' 个英雄'"
         @select="onHeroListActionSheetSelect"
       >
         <template #default>
@@ -356,6 +371,9 @@ export default {
   data() {
     return {
       allHeroList: [],
+      allPositionList: [],
+      allHeroNum: 0,
+      allPositionNum: 0,
       copyData: "",
       uin: "",
       tableData: {
@@ -539,19 +557,33 @@ export default {
     },
     getHeroList: function (e) {
       let newHeroList = {},
+        newPositionList = {},
         heroId = 0,
-        o = [];
+        o = [],
+        g = [];
 
       e.map((x) => {
         o = x.heroList;
+        g = x.positionList;
+
+        this.allHeroNum += o.length;
+        this.allPositionNum += g.length;
 
         o.map((y) => {
           heroId = y.heroId;
 
           if (heroId in newHeroList) {
-            newHeroList[heroId] = newHeroList[heroId] + 1;
+            newHeroList[heroId] += 1;
           } else {
             newHeroList[heroId] = 1;
+          }
+        });
+
+        g.map((k) => {
+          if (k in newPositionList) {
+            newPositionList[k] += 1;
+          } else {
+            newPositionList[k] = 1;
           }
         });
       });
@@ -559,9 +591,15 @@ export default {
       this.allHeroList = Object.entries(newHeroList).sort(
         (a, b) => b[1] - a[1]
       );
+
+      this.allPositionList = Object.entries(newPositionList).sort(
+        (a, b) => b[1] - a[1]
+      );
       //转数组、降序
     },
     getPlayerList: function () {
+      let topNum = this.tableData.result.rows.length;
+
       document.body.scrollTop = document.documentElement.scrollTop = 0;
       this.showInfo.shareImg = true;
       this.$message.warning(this.$appMsg.warning[500]);
@@ -585,7 +623,7 @@ export default {
         canvas.toBlob(
           function (blob) {
             const eleLink = document.createElement("a");
-            eleLink.download = "top100.png";
+            eleLink.download = "top" + topNum + ".png";
             eleLink.style.display = "none";
             eleLink.href = URL.createObjectURL(blob);
             //触发点击

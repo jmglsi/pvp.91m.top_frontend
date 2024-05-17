@@ -101,10 +101,10 @@ export default {
       this.$axios
         .post(
           this.$appApi.app.getHeroChartsLog +
-            "&heroId=" +
-            heroId +
             "&aid=" +
-            aid,
+            aid +
+            "&heroId=" +
+            heroId,
           {
             arrData: heroName,
           }

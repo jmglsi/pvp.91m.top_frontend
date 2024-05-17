@@ -49,8 +49,8 @@
               </template>
 
               <div
-                v-if="loginInfo.tips"
-                v-html="loginInfo.tips"
+                v-if="loginInfo.tips.text"
+                v-html="loginInfo.tips.text"
                 @click="onCopy"
                 class="login-d50b09e1c7e5e32af4ecd82963b1ac76"
               ></div>
@@ -162,8 +162,8 @@
         class="login-71c2fb64c38e4ee108607ca840607e48"
       >
         <van-cell
-          icon="/img/icons-app/game.png"
           title="全局BP模拟器"
+          icon="/img/icons-app/game.png"
           label="第一次使用务必看一下"
           value="视频教程"
           is-link
@@ -234,8 +234,8 @@
         </van-cell>
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
-            icon="/img/icons-app/hero_black.png"
             title="关注列表"
+            icon="/img/icons-app/hero_black.png"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             name="1"
@@ -288,7 +288,7 @@
               <van-button
                 round
                 icon="question-o"
-                color="red"
+                type="danger"
                 size="mini"
                 class="login-14c32e76fd7b6f33de94027b74bbc3fb"
                 @click="
@@ -306,6 +306,7 @@
             </div>
           </van-collapse-item>
         </van-collapse>
+        <!--
         <van-cell
           icon="manager"
           :title="$t('my-link.title')"
@@ -317,6 +318,7 @@
             <span style="color: red">{{ $t("my-link.label") }}</span>
           </template>
         </van-cell>
+        -->
       </van-cell-group>
     </div>
 
@@ -695,7 +697,10 @@ export default {
           text: null,
         },
         description: null,
-        tips: null,
+        tips: {
+          text: null,
+          copyData: null,
+        },
         heroList: [],
         areaType: 1,
         provinceType: 1,
@@ -724,7 +729,7 @@ export default {
       let q = to.query,
         refresh = q.refresh;
 
-      if (this.loginInfo.tips) {
+      if (this.loginInfo.tips.text) {
         this.showInfo.popoverMeau = true;
       }
 
@@ -904,12 +909,9 @@ export default {
         });
     },
     onCopy: function () {
-      let url = location,
-        longUrl = url.origin + "/friends?openId=" + this.loginInfo.openId;
+      let copyData = this.loginInfo.tips.copyData;
 
-      this.copyData = longUrl;
-
-      this.$appCopyData(this.copyData);
+      copyData ? this.$appCopyData(copyData) : null;
     },
   },
 };
@@ -973,7 +975,7 @@ div.login-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
   font-size: @app-font-size;
 }
 
-div.login-d50b09e1c7e5e32af4ecd82963b1ac76{
+div.login-d50b09e1c7e5e32af4ecd82963b1ac76 {
   padding: 10px;
 }
 </style>

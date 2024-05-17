@@ -11,6 +11,7 @@
 
     <div class="ranking-47a721d2dcdc9a9875507e9f389e6409">
       <ve-line
+        :init-options="{ renderer: 'svg' }"
         :after-config="afterConfig"
         :data="lineData.result"
         :extend="lineData.extend"
@@ -56,6 +57,8 @@
 
 <script>
 import VeLine from "v-charts/lib/line.common";
+
+import 'zrender/lib/svg/svg';
 
 export default {
   name: "ChartsFightPowerLine",

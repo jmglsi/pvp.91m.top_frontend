@@ -16,7 +16,7 @@
           <template #overlay>
             <a-menu :style="{ width: '100px' }">
               <a-sub-menu key="menu" title="菜单">
-                <a-menu-item @click="setMsg">推送内容</a-menu-item>
+                <a-menu-item @click="setMsg">推送的内容</a-menu-item>
                 <a-menu-item @click="setClient">配置客户端</a-menu-item>
                 <a-menu-divider />
                 <a-menu-item disabled>设置</a-menu-item>
@@ -31,14 +31,17 @@
       class="app-4717d11da95ed90ccdb4d4a0648bad39 admin-8e086eb841d9b5cd2f89212ac8fd0527"
     >
       <a-row>
-        <a-col :span="8" @click="onRowClick('robot')">
+        <a-col :span="4" @click="onRowClick('robot')">
           <a-statistic title="机器人" :value="tableData.robot.rows.length" />
         </a-col>
-        <a-col :span="8" @click="onRowClick('group')">
-          <a-statistic title="活跃群" :value="tableData.group.rows.length" />
+        <a-col :span="4" @click="onRowClick('group')">
+          <a-statistic title="活跃群组" :value="tableData.group.rows.length" />
         </a-col>
-        <a-col :span="8" @click="onRowClick('plugins')">
-          <a-statistic title="功能" :value="tableData.plugins.rows.length" />
+        <a-col :span="4" @click="onRowClick('plugins')">
+          <a-statistic
+            title="插件功能"
+            :value="tableData.plugins.rows.length"
+          />
         </a-col>
       </a-row>
     </div>
@@ -58,6 +61,7 @@
             width="175"
             field="frameId"
             title="类型"
+            show-overflow="ellipsis"
             sortable
           >
             <template #default="{ row }">
@@ -68,9 +72,10 @@
             width="250"
             field="robot"
             title="机器人"
+            show-overflow="ellipsis"
             sortable
-          ></vxe-column>
-          <vxe-column field="lastTime" title="时间" sortable></vxe-column>
+          />
+          <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
         </vxe-table>
       </div>
 
@@ -80,15 +85,51 @@
           align="left"
           border="inner"
           :data="tableData.group.rows"
+          :expand-config="{
+            accordion: true,
+            //lazy: true,
+            loadMethod: getRssList,
+          }"
         >
           <vxe-column type="checkbox" width="60"></vxe-column>
           <vxe-column type="seq" width="60"></vxe-column>
+          <vxe-table-column type="expand" width="80">
+            <template v-slot:content="{ row }">
+              <div
+                v-if="row.frameId != 5000"
+                class="admin-1bc7ec347bf21539b57f61784a05eba6"
+              >
+                <span class="admin-ee86c7f2e154cb36ed0c1a975f28b7b0">
+                  订阅列表：
+                </span>
+                <br />
+                <span v-show="getRssList(row)"></span>
+                <van-button
+                  v-for="(data, index) in rssData.result.rows"
+                  :key="'admin-2e18d726e34c59f679fbf74316c67b68' + index"
+                  :type="data.switch == 1 ? 'danger' : 'info'"
+                  size="mini"
+                  round
+                  @click="updateRssInfo(row, data.rssId, index)"
+                >
+                  {{ data.rssId }}
+                </van-button>
+              </div>
+
+              <div v-else class="admin-1bc7ec347bf21539b57f61784a05eba6">
+                <span class="admin-ee86c7f2e154cb36ed0c1a975f28b7b0">
+                  其他：
+                </span>
+              </div>
+            </template>
+          </vxe-table-column>
           <vxe-column
             :filters="frameData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="175"
             field="frameId"
             title="类型"
+            show-overflow="ellipsis"
             sortable
           >
             <template #default="{ row }">
@@ -96,23 +137,20 @@
             </template>
           </vxe-column>
           <vxe-column
+            :filters="robotData.result.rows"
+            :filter-method="onTableColumnFilterMethod"
             width="250"
             field="robot"
             title="机器人"
-            sortable
-          ></vxe-column>
-          <vxe-column
-            field="group"
-            title="群组"
             show-overflow="ellipsis"
             sortable
           >
             <template #default="{ row }">
               <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
-                {{ row.group }}
+                {{ row.robot }}
               </span>
               <span
-                v-if="row.tag.length > 0"
+                v-if="row.frameId == 5000 && row.tag.length > 0"
                 class="admin-35a3fd9ebe1b21426f457f83df90890a"
               >
                 <br />
@@ -129,7 +167,35 @@
               </span>
             </template>
           </vxe-column>
-          <vxe-column field="lastTime" title="时间" sortable></vxe-column>
+          <vxe-column
+            field="group"
+            title="群组"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
+                {{ row.group }}
+              </span>
+              <span
+                v-if="row.frameId != 5000 && row.tag.length > 0"
+                class="admin-35a3fd9ebe1b21426f457f83df90890a"
+              >
+                <br />
+                <van-tag
+                  v-for="(data, index) in row.tag"
+                  :key="'admin-4f1cb2cce1bd665d34f21735c517cf9f-' + index"
+                  round
+                  :color="data.color"
+                  type="primary"
+                  class="admin-1957c2d79946c8557790e643435fea9a"
+                >
+                  {{ data.name }}
+                </van-tag>
+              </span>
+            </template>
+          </vxe-column>
+          <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
         </vxe-table>
 
         <div class="admin-ca523f12368dc2ab03fed17e5369442b">
@@ -142,12 +208,7 @@
                 >
                   ✈️ 发送
                 </li>
-                <li
-                  @click="getDataByRobotData"
-                  class="admin-a64328a2760af2ca12a5b7c909082c14"
-                >
-                  🐛 测试
-                </li>
+                <li class="admin-a64328a2760af2ca12a5b7c909082c14">🐛 测试</li>
               </ul>
             </div>
           </div>
@@ -173,6 +234,7 @@
             width="250"
             field="info.trigger.frame"
             title="框架"
+            show-overflow="ellipsis"
             sortable
           >
             <template #default="{ row }">
@@ -204,12 +266,17 @@
         </vxe-table>
       </div>
     </div>
+
+    <AppHello height="100px" />
   </div>
 </template>
 
 <script>
 export default {
   name: "adminRobotData",
+  components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
   data() {
     return {
       percentage: 0,
@@ -229,12 +296,23 @@ export default {
           rows: [],
         },
       },
+      robotData: {
+        result: {
+          rows: [],
+        },
+      },
+      rssData: {
+        result: {
+          rows: [],
+        },
+      },
       frameList: [
-        20000, 60000, 70000, 75000, 40000, 10000, 15000, 2500, 80000, 90000,
-        50000,
+        20000, 5000, 60000, 70000, 75000, 15000, 10000, 40000, 2500, 80000,
+        90000, 50000,
       ],
       frameInfo: {
         2500: "其他-小爱音箱",
+        5000: "WeChat (公众号)",
         10000: "QQ (MyPCQQ)",
         15000: "QQ (OPQ)",
         20000: "WeChat (可爱猫)",
@@ -246,7 +324,12 @@ export default {
         80000: "其他-王者营地",
         90000: "miYouShe",
       },
-      botInfo: {
+      pageInfo: {
+        currentPage: 1,
+        pageSize: 25,
+      },
+      robotInfo: {
+        list: [],
         frameHost: null,
         key: null,
         msg: null,
@@ -260,7 +343,7 @@ export default {
     this.initPage();
   },
   mounted() {
-    this.getDataByRobotData();
+    this.getDataByRobotData(0);
   },
   methods: {
     initPage: function () {
@@ -271,16 +354,28 @@ export default {
         });
       });
 
-      this.botInfo.msg = this.$appGetLocalStorage("bot-sendMsg");
-      this.botInfo.frameHost = this.$appGetLocalStorage("bot-frameHost");
-      this.botInfo.key = this.$appGetLocalStorage("bot-key");
+      this.robotInfo.list = this.$appGetLocalStorage("robot-list") || [];
+
+      this.robotInfo.list.map((x) => {
+        this.robotData.result.rows.push({
+          value: x.robot,
+          label: x.robot,
+        });
+      });
+
+      this.robotInfo.msg = this.$appGetLocalStorage("robot-sendMsg");
+      this.robotInfo.frameHost = this.$appGetLocalStorage("robot-frameHost");
+      this.robotInfo.key = this.$appGetLocalStorage("robot-key");
     },
-    getDataByRobotData: function () {
+    getDataByRobotData: function (aid = 0) {
       this.$axios
         .post(
-          this.$appApi.bot.getDataByRobotData + "&frameId=2500",
+          this.$appApi.robot.getDataByRobotData +
+            "&aid=" +
+            aid +
+            "&frameId=2500",
           this.$qs.stringify({
-            key: this.botInfo.key,
+            key: this.robotInfo.key,
           })
         )
         .then((res) => {
@@ -288,6 +383,14 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
+            let robotList = [];
+
+            data.robot.rows.map((x) => {
+              robotList.push(x);
+            });
+
+            this.$appSetLocalStorage("robot-list", robotList);
+
             this.tableData = data;
           } else {
             this.$message.error(status.msg);
@@ -312,33 +415,33 @@ export default {
     setClient: function () {
       let frameHost, key;
 
-      frameHost = prompt("请输入地址", this.botInfo.frameHost || "test.com");
+      frameHost = prompt("请输入地址", this.robotInfo.frameHost || "test.com");
 
       if (frameHost) {
-        this.botInfo.frameHost = frameHost;
+        this.robotInfo.frameHost = frameHost;
 
-        this.$appSetLocalStorage("bot-frameHost", frameHost);
+        this.$appSetLocalStorage("robot-frameHost", frameHost);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
 
-      key = prompt("请输入密钥", this.botInfo.key || "abcd1234");
+      key = prompt("请输入密钥", this.robotInfo.key || "abcd1234");
 
       if (key) {
-        this.botInfo.key = key;
+        this.robotInfo.key = key;
 
-        this.$appSetLocalStorage("bot-key", key);
+        this.$appSetLocalStorage("robot-key", key);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
     },
     setMsg: function () {
-      let msg = prompt("请输入内容", this.botInfo.msg || "hello~");
+      let msg = prompt("请输入内容", this.robotInfo.msg || "hello~");
 
       if (msg) {
-        this.botInfo.msg = msg;
+        this.robotInfo.msg = msg;
 
-        this.$appSetLocalStorage("bot-sendMsg", msg);
+        this.$appSetLocalStorage("robot-sendMsg", msg);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -353,15 +456,15 @@ export default {
     ) {
       this.$axios
         .post(
-          this.$appApi.bot.sendMsg +
+          this.$appApi.robot.sendMsg +
             "&frameId=" +
             frameId +
             "&frameHost=" +
-            this.botInfo.frameHost +
+            this.robotInfo.frameHost +
             ":" +
             this.getFrameInfo(frameId),
           this.$qs.stringify({
-            key: this.botInfo.key,
+            key: this.robotInfo.key,
             msgRobot: msgRobot,
             msgType: msgType,
             msgSource: msgSource,
@@ -394,8 +497,8 @@ export default {
     onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "frameId") {
         return row.frameId == option.value;
-      } else if (column.group == "group") {
-        return row.tag == option.value;
+      } else if (column.property == "robot") {
+        return row.robot == option.value;
       }
     },
     getSelectEvent: function () {
@@ -435,7 +538,7 @@ export default {
               x.robot,
               msgType,
               x.group,
-              this.botInfo.msg,
+              this.robotInfo.msg,
               msgData
             );
 
@@ -448,6 +551,58 @@ export default {
         this.percentage = 0;
       }, 1000 * groupNum);
       //}
+    },
+    getRssList: function (row) {
+      this.$axios
+        .post(
+          this.$appApi.robot.getRssList + "&aid=2",
+          this.$qs.stringify({
+            frameId: row.frameId,
+            robotUin: row.robot,
+            msgSource: row.group,
+          })
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.rssData.result.rows = data;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    updateRssInfo: function (row, rssId, e) {
+      this.$axios
+        .post(
+          this.$appApi.robot.getRssList + "&aid=1",
+          this.$qs.stringify({
+            frameId: row.frameId,
+            robotUin: row.robot,
+            msgSource: row.group,
+            rssId: rssId,
+          })
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            let rssSwitch = this.rssData.result.rows[e].switch || 0;
+
+            rssSwitch == 1
+              ? (this.rssData.result.rows[e].switch = 0)
+              : (this.rssData.result.rows[e].switch = 1);
+
+            this.$message.info(data);
+          } else {
+            this.$message.error(status.msg);
+          }
+
+          //resolve();
+        });
+      //});
     },
   },
 };
@@ -470,6 +625,14 @@ li.admin-a64328a2760af2ca12a5b7c909082c14 {
 
 span.admin-1957c2d79946c8557790e643435fea9a {
   margin-right: 5px;
+}
+
+span.admin-ee86c7f2e154cb36ed0c1a975f28b7b0 {
+  font-size: @app-font-size;
+}
+
+div.admin-1bc7ec347bf21539b57f61784a05eba6 {
+  margin: 10px;
 }
 
 div.admin-558dab5fd681d940120defdcedf70585 {

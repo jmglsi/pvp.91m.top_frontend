@@ -8,7 +8,8 @@ Vue.prototype.$appIsApple = /(iPhone|iPad|iPod|Mac)/i.test(ua);
 Vue.prototype.$appInDouyin = /Bytedance/i.test(ua);
 Vue.prototype.$appInWechat = /MicroMessenger/i.test(ua);
 Vue.prototype.$appInWechatMiniapp = /miniProgram/i.test(ua);
-Vue.prototype.$appIsMobile = /(Android|Linux|iPhone|iPad|iPod|Mobile)/i.test(ua);
+Vue.prototype.$appIsMobile = /(Android|iPhone|iPad|iPod|Mobile)/i.test(ua);
+Vue.prototype.$appIsRobot = (url.search.indexOf("isRobot=1") > -1 ? true : false);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
 //appQuery 只适合首次
@@ -36,6 +37,9 @@ Vue.prototype.$appConfigInfo = {
       text: "loading...",
       timeout: 43200
     },
+    wxMiniappInfo: {
+      url: null
+    },
     todayInfo: {
       title: "loading...",
       text: "loading..."
@@ -46,10 +50,34 @@ Vue.prototype.$appConfigInfo = {
       to: null,
       url: null,
     },
-    wxMiniappUrl: ""
   },
   oauthInfo: ["qq", "yuque", "afdian", "coding", "github"],
-  positionInfo: ["全部分路", "对抗路", "中路", "发育路", "打野", "游走"],
+  positionInfo: [
+    [
+      "全部分路",
+      "#000000"
+    ],
+    [
+      "对抗路",
+      "#ff8c00"
+    ],
+    [
+      "中路",
+      "#ee0a24"
+    ],
+    [
+      "发育路",
+      "#1e90ff"
+    ],
+    [
+      "打野",
+      "#7232dc"
+    ],
+    [
+      "游走",
+      "#3cb371"
+    ]
+  ],
   professionInfo: [
     {
       color: [],
@@ -283,7 +311,7 @@ Vue.prototype.$appInitMiniapp = function () {
         if (res.miniprogram) {
           Vue.prototype.$douyin.miniProgram.postMessage({
             data: {
-              url_real: window.location.href.split("#")[0],
+              url_real: url.href.split("#")[0],
               share: data.share
             }
           });
@@ -348,7 +376,6 @@ Vue.prototype.$appOpenUrl = function (title, message = null, data = { path: '/' 
           if (Vue.prototype.$appInWechatMiniapp) {
             Vue.prototype.$wechat.ready(() => {
               Vue.prototype.$wechat.miniProgram.getEnv((res) => {
-                console.log(res.miniprogram)
                 if (res.miniprogram) {
                   this.$copyText(data.path).then(
                     () => {

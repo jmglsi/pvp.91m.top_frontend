@@ -2,15 +2,24 @@
   <div class="admin-mp-data">
     <!-- <div>这里是 mp-data</div> -->
     <div class="app-4717d11da95ed90ccdb4d4a0648bad39">
-      <div class="admin-8ef8eb00bde6d89a54da830b8c26727d">
+      <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>⛰️ 努力创作!</span>
+            <span>📖 管理员，很高兴为您服务。</span>
+            <div
+              v-if="percentage > 0"
+              class="admin-558dab5fd681d940120defdcedf70585"
+            >
+              <van-progress :percentage="percentage" />
+            </div>
           </h1>
           <template #overlay>
             <a-menu :style="{ width: '100px' }">
               <a-sub-menu key="menu" title="菜单">
-                <a-menu-item>添加</a-menu-item>
+                <a-menu-item disabled @click="setMsg">推送的内容</a-menu-item>
+                <a-menu-item @click="setClient">配置客户端</a-menu-item>
+                <a-menu-divider />
+                <a-menu-item disabled>设置</a-menu-item>
               </a-sub-menu>
             </a-menu>
           </template>
@@ -22,66 +31,618 @@
       class="app-4717d11da95ed90ccdb4d4a0648bad39 admin-8e086eb841d9b5cd2f89212ac8fd0527"
     >
       <a-row>
-        <a-col :span="6">
-          <a-statistic
-            title="关注人数"
-            :value="137392"
-            :valueStyle="{ color: 'red' }"
-          />
+        <a-col :span="4" @click="onRowClick('robot')">
+          <a-statistic title="公众号" :value="tableData.robot.rows.length" />
         </a-col>
-        <a-col :span="6">
-          <a-statistic title="公众号" :value="3" />
+        <a-col :span="4" @click="onRowClick('group')">
+          <a-statistic title="活跃人数" :value="tableData.group.rows.length" />
         </a-col>
       </a-row>
     </div>
 
-    <div class="admin-7c11462935c3430d9063aeda83f79d2a">
-      <ul>
-        <li class="admin-28a3cbd51bfd74ac3fec434e0603fec2">
-          <img
-            width="50"
-            height="50"
-            v-lazy="
-              $appApi.app.appProxy +
-              'https://pic2.58cdn.com.cn/nowater/webim/big/n_v2f3ee60123e3a4f088d0c88eddda88ec2.jpg'
-            "
-            class="app-border-radius admin-7e1cb576d3715672cbb051e705e911bb"
+    <div class="admin-bfee7d52ba8fdb819662db5383073de4">
+      <div v-show="showInfo.type == 'robot'">
+        <vxe-table
+          ref="refAdminRobot"
+          align="left"
+          border="inner"
+          :data="tableData.robot.rows"
+        >
+          <vxe-column type="seq" width="60"></vxe-column>
+          <!--
+          <vxe-column
+            :filters="frameData.result.rows"
+            :filter-method="onTableColumnFilterMethod"
+            width="175"
+            field="frameId"
+            title="类型"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              {{ frameInfo[row.frameId] }}
+            </template>
+          </vxe-column>
+          -->
+          <vxe-column
+            width="250"
+            field="robot"
+            title="公众号"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
+                {{ row.robot }}
+              </span>
+              <span
+                v-if="row.tag.length > 0"
+                class="admin-35a3fd9ebe1b21426f457f83df90890a"
+              >
+                <br />
+                <van-tag
+                  v-for="(data, index) in row.tag"
+                  :key="'admin-4f1cb2cce1bd665d34f21735c517cf9f-' + index"
+                  round
+                  :color="data.color"
+                  type="primary"
+                  class="admin-1957c2d79946c8557790e643435fea9a"
+                >
+                  {{ data.name }}
+                </van-tag>
+              </span>
+            </template>
+          </vxe-column>
+          <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
+        </vxe-table>
+      </div>
+
+      <div v-show="showInfo.type == 'group'">
+        <vxe-table
+          ref="refAdminGroup"
+          align="left"
+          border="inner"
+          :data="tableData.group.rows"
+          :expand-config="{
+            accordion: true,
+            //lazy: true,
+            //loadMethod: getRssList,
+          }"
+        >
+          <vxe-column type="checkbox" width="60"></vxe-column>
+          <vxe-column type="seq" width="60"></vxe-column>
+          <vxe-table-column type="expand" width="80">
+            <template v-slot:content="{ row }">
+              <div class="admin-1bc7ec347bf21539b57f61784a05eba6">
+                <span class="admin-ee86c7f2e154cb36ed0c1a975f28b7b0">
+                  其他：
+                </span>
+                <br />
+                <van-button
+                  round
+                  type="info"
+                  size="mini"
+                  @click="getSign(3, 0, row)"
+                >
+                  加积分
+                </van-button>
+                <van-button
+                  round
+                  type="danger"
+                  size="mini"
+                  @click="getSign(3, 1, row)"
+                >
+                  减积分
+                </van-button>
+              </div>
+            </template>
+          </vxe-table-column>
+          <!--
+          <vxe-column
+            :filters="frameData.result.rows"
+            :filter-method="onTableColumnFilterMethod"
+            width="175"
+            field="frameId"
+            title="类型"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              {{ frameInfo[row.frameId] }}
+            </template>
+          </vxe-column>
+          -->
+          <vxe-column
+            :filters="robotData.result.rows"
+            :filter-method="onTableColumnFilterMethod"
+            width="250"
+            field="robot"
+            title="公众号"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
+                {{ row.robot }}
+              </span>
+              <span
+                v-if="row.tag.length > 0"
+                class="admin-35a3fd9ebe1b21426f457f83df90890a"
+              >
+                <br />
+                <van-tag
+                  v-for="(data, index) in row.tag"
+                  :key="'admin-4f1cb2cce1bd665d34f21735c517cf9f-' + index"
+                  round
+                  :color="data.color"
+                  type="primary"
+                  class="admin-1957c2d79946c8557790e643435fea9a"
+                >
+                  {{ data.name }}
+                </van-tag>
+              </span>
+            </template>
+          </vxe-column>
+          <vxe-column
+            field="group"
+            title="用户"
+            show-overflow="ellipsis"
+            sortable
           />
-        </li>
-        <li class="admin-28a3cbd51bfd74ac3fec434e0603fec2">
-          <img
-            width="50"
-            height="50"
-            v-lazy="
-              $appApi.app.appProxy +
-              'https://pic2.58cdn.com.cn/nowater/webim/big/n_v29fbb9eb5e7784b99b6f36e26ba067cf6.jpg'
-            "
-            class="app-border-radius admin-7e1cb576d3715672cbb051e705e911bb"
-          />
-        </li>
-        <li class="admin-28a3cbd51bfd74ac3fec434e0603fec2">
-          <img
-            width="50"
-            height="50"
-            v-lazy="
-              $appApi.app.appProxy +
-              'https://pic5.58cdn.com.cn/nowater/webim/big/n_v2d7ed8bc82b72483c8957a5f1e9e3a1ab.png'
-            "
-            class="app-border-radius admin-7e1cb576d3715672cbb051e705e911bb"
-          />
-        </li>
-      </ul>
+          <vxe-column field="integral" title="积分" sortable></vxe-column>
+          <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
+        </vxe-table>
+
+        <!--
+        <div class="admin-ca523f12368dc2ab03fed17e5369442b">
+          <div class="admin-d781a0af3220c510f8f1cf8486492b49">
+            <div class="admin-41ed537ff495a1a76e5ac1bad83c4cae">
+              <ul class="admin-ba4bdf717f7ca47fbba74da7e76e0a49">
+                <li
+                  @click="getSelectEvent"
+                  class="admin-a64328a2760af2ca12a5b7c909082c14"
+                >
+                  ✈️ 发送
+                </li>
+                <li class="admin-a64328a2760af2ca12a5b7c909082c14">🐛 测试</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        -->
+      </div>
+
+      <div v-show="showInfo.type == 'plugins'">
+        <vxe-table
+          ref="refAdminPlugins"
+          align="left"
+          border="inner"
+          :data="tableData.plugins.rows"
+        >
+          <vxe-column type="seq" width="60"></vxe-column>
+          <vxe-column
+            width="175"
+            field="info.name"
+            title="插件"
+            show-overflow="ellipsis"
+            sortable
+          ></vxe-column>
+          <vxe-column
+            width="250"
+            field="info.trigger.frame"
+            title="框架"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              {{
+                row.info.trigger.frame
+                  .map((e) => {
+                    return frameInfo[e];
+                  })
+                  .toString()
+              }}
+            </template>
+          </vxe-column>
+          <vxe-column
+            field="info.trigger.command"
+            title="指令"
+            show-overflow="ellipsis"
+            sortable
+          >
+            <template #default="{ row }">
+              {{
+                row.info.trigger.command
+                  .map((e) => {
+                    return e.keywords;
+                  })
+                  .toString()
+              }}
+            </template>
+          </vxe-column>
+        </vxe-table>
+      </div>
     </div>
+
+    <AppHello height="100px" />
   </div>
 </template>
 
+<script>
+export default {
+  name: "adminMpData",
+  components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
+  },
+  data() {
+    return {
+      percentage: 0,
+      tableData: {
+        robot: {
+          rows: [],
+        },
+        group: {
+          rows: [],
+        },
+        plugins: {
+          rows: [],
+        },
+      },
+      frameData: {
+        result: {
+          rows: [],
+        },
+      },
+      robotData: {
+        result: {
+          rows: [],
+        },
+      },
+      rssData: {
+        result: {
+          rows: [],
+        },
+      },
+      frameList: [
+        20000, 5000, 60000, 70000, 75000, 15000, 10000, 40000, 2500, 80000,
+        90000, 50000,
+      ],
+      frameInfo: {
+        2500: "其他-小爱音箱",
+        5000: "WeChat (公众号)",
+        10000: "QQ (MyPCQQ)",
+        15000: "QQ (OPQ)",
+        20000: "WeChat (可爱猫)",
+        40000: "DingTalk",
+        50000: "NokNok",
+        60000: "QQ (LiteLoaderQQNT)",
+        70000: "QQ (Guild)",
+        75000: "QQ (Group)",
+        80000: "其他-王者营地",
+        90000: "miYouShe",
+      },
+      robotInfo: {
+        list: [],
+        frameHost: null,
+        key: null,
+        msg: null,
+      },
+      showInfo: {
+        type: "robot",
+      },
+    };
+  },
+  created() {
+    this.initPage();
+  },
+  mounted() {
+    this.getDataByRobotData(1);
+  },
+  methods: {
+    initPage: function () {
+      this.frameList.map((x) => {
+        this.frameData.result.rows.push({
+          value: x,
+          label: this.frameInfo[x],
+        });
+      });
+
+      this.robotInfo.list = this.$appGetLocalStorage("mp-list") || [];
+
+      this.robotInfo.list.map((x) => {
+        this.robotData.result.rows.push({
+          value: x.robot,
+          label: x.robot,
+        });
+      });
+
+      this.robotInfo.msg = this.$appGetLocalStorage("robot-sendMsg");
+      this.robotInfo.frameHost = this.$appGetLocalStorage("robot-frameHost");
+      this.robotInfo.key = this.$appGetLocalStorage("robot-key");
+    },
+    getSign: function (aid = 3, bid = 0, row = {}) {
+      if (row == {}) return;
+
+      let cid = 0,
+        did = 0,
+        integral = 0;
+
+      if (bid == 0) {
+        integral = prompt("【加】多少？", 100);
+      } else if (bid == 1) {
+        integral = prompt("【减】多少？", 100) * -1;
+      }
+
+      bid = 0;
+      cid = integral || 0;
+
+      this.$axios
+        .post(
+          this.$appApi.app.getSign +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&cid=" +
+            cid +
+            "&did=" +
+            did,
+          this.$qs.stringify({
+            frameId: row.frameId,
+            robotUin: "wx.mp",
+            msgSource: row.robot,
+            id: row.group,
+          })
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.getDataByRobotData(1);
+
+            this.$message.info(data);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    getDataByRobotData: function (aid = 1) {
+      this.$axios
+        .post(
+          this.$appApi.robot.getDataByRobotData +
+            "&aid=" +
+            aid +
+            "&frameId=2500",
+          this.$qs.stringify({
+            key: this.robotInfo.key,
+          })
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            let robotList = [];
+
+            data.robot.rows.map((x) => {
+              robotList.push(x);
+            });
+
+            this.$appSetLocalStorage("mp-list", robotList);
+
+            this.tableData = data;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    getFrameInfo: function (frameId) {
+      let ret;
+
+      if (frameId == 10000) {
+        ret = 8010;
+      } else if (frameId == 15000) {
+        ret = 8086;
+      } else if (frameId == 20000) {
+        ret = 8073;
+      } else if (frameId == 60000) {
+        ret = 8020;
+      }
+
+      return ret;
+    },
+    setClient: function () {
+      let frameHost, key;
+
+      frameHost = prompt("请输入地址", this.robotInfo.frameHost || "test.com");
+
+      if (frameHost) {
+        this.robotInfo.frameHost = frameHost;
+
+        this.$appSetLocalStorage("robot-frameHost", frameHost);
+
+        this.$message.success(this.$appMsg.success[1000]);
+      }
+
+      key = prompt("请输入密钥", this.robotInfo.key || "abcd1234");
+
+      if (key) {
+        this.robotInfo.key = key;
+
+        this.$appSetLocalStorage("robot-key", key);
+
+        this.$message.success(this.$appMsg.success[1000]);
+      }
+    },
+    setMsg: function () {
+      let msg = prompt("请输入内容", this.robotInfo.msg || "hello~");
+
+      if (msg) {
+        this.robotInfo.msg = msg;
+
+        this.$appSetLocalStorage("robot-sendMsg", msg);
+
+        this.$message.success(this.$appMsg.success[1000]);
+      }
+    },
+    sendMsg: function (
+      frameId,
+      msgRobot,
+      msgType,
+      msgSource,
+      msgContent,
+      msgExt
+    ) {
+      this.$axios
+        .post(
+          this.$appApi.robot.sendMsg +
+            "&frameId=" +
+            frameId +
+            "&frameHost=" +
+            this.robotInfo.frameHost +
+            ":" +
+            this.getFrameInfo(frameId),
+          this.$qs.stringify({
+            key: this.robotInfo.key,
+            msgRobot: msgRobot,
+            msgType: msgType,
+            msgSource: msgSource,
+            msgContent: msgContent,
+            msgExt: JSON.stringify({
+              msgOrigMsg: msgExt,
+              msgType: "text_msg",
+            }),
+          }),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            console.log(data);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onRowClick: function (type) {
+      this.showInfo.type = type;
+    },
+    onTableColumnFilterMethod: function ({ option, row, column }) {
+      if (column.property == "frameId") {
+        return row.frameId == option.value;
+      } else if (column.property == "robot") {
+        return row.robot == option.value;
+      }
+    },
+    getSelectEvent: function () {
+      let group = this.$refs.refAdminGroup.getCheckboxRecords(),
+        groupNum = group.length;
+
+      //if (groupNum == 0) {
+      //没选中
+      //} else if (groupNum > 10) {
+      //群太多
+      //} else {
+      this.$message.success("开始推送");
+
+      group.map((x, i) => {
+        let msgType,
+          msgData = {};
+
+        if (x.frameId == 20000) {
+          msgType = 100;
+          msgData = {
+            robot_wxid: x.robot,
+            from_wxid: x.group,
+          };
+        } else if (x.frameId == 60000) {
+          msgType = 2;
+          msgData = {
+            message_type: "group",
+            self_id: x.robot,
+            group_id: String(x.group),
+          };
+        }
+
+        if (msgData != {}) {
+          setTimeout(() => {
+            this.sendMsg(
+              x.frameId,
+              x.robot,
+              msgType,
+              x.group,
+              this.robotInfo.msg,
+              msgData
+            );
+
+            this.percentage = Math.floor(((i + 1) / groupNum) * 100);
+          }, 1000 * i);
+        }
+      });
+
+      setTimeout(() => {
+        this.percentage = 0;
+      }, 1000 * groupNum);
+      //}
+    },
+  },
+};
+</script>
+
 <style scoped lang="less">
-li.admin-28a3cbd51bfd74ac3fec434e0603fec2 {
-  float: left;
-  margin-right: 20px;
+img.admin-58a5bd4d1fe1914a7438e768c0627486 {
+  margin-left: -15px;
+  margin-top: 33px;
+  position: absolute;
 }
 
-img.admin-7e1cb576d3715672cbb051e705e911bb {
-  border: 1px solid gray;
+li.admin-a64328a2760af2ca12a5b7c909082c14 {
+  float: left;
+  margin: 0 27px;
+  color: white;
+  text-align: center;
+  margin-top: 15px;
+}
+
+span.admin-1957c2d79946c8557790e643435fea9a {
+  margin-right: 5px;
+}
+
+span.admin-ee86c7f2e154cb36ed0c1a975f28b7b0 {
+  font-size: @app-font-size;
+}
+
+div.admin-1bc7ec347bf21539b57f61784a05eba6 {
+  margin: 10px;
+}
+
+div.admin-558dab5fd681d940120defdcedf70585 {
+  width: 400px;
+  position: absolute;
+  margin-top: 3px;
+}
+
+div.admin-ca523f12368dc2ab03fed17e5369442b {
+  position: fixed;
+  bottom: 35px;
+  height: 50px;
+  z-index: 99999999 !important;
+  margin: 0 auto;
+  right: 35px;
+}
+
+div.admin-d781a0af3220c510f8f1cf8486492b49 {
+  height: 50px;
+  width: 200px;
+  margin: 0 auto;
+  background-color: #1890ff;
+  border-radius: 25px;
 }
 </style>

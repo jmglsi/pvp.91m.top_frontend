@@ -275,7 +275,7 @@ export default {
     },
     getHeroUpdateDetail: function (articleId) {
       this.$axios
-        .post(this.$appApi.app.getHeroUpdateDetail + "&articleId=" + articleId)
+        .post(this.$appApi.app.getHeroUpdate + "&aid=1&articleId=" + articleId)
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;

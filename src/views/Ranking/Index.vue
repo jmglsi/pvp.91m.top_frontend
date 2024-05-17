@@ -51,7 +51,7 @@
                     :isSmallMode="isSmallMode"
                     :bid="bid || dfsAreaTypeInfo.model"
                     :cid="cid || dfsPositionTypeInfo.model"
-                    :did="did || 0"
+                    :did="did || Number($appConfigInfo.appInfo.isSwingMode)"
                     :refresh="refresh || 0"
                   />
                 </a-tooltip>
@@ -315,9 +315,6 @@ import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
 import "echarts/lib/component/title";
 
-import "v-charts/lib/style.css";
-import "zrender/lib/svg/svg";
-
 export default {
   name: "rankingIndex",
   components: {
@@ -457,7 +454,11 @@ export default {
     this.initPage();
   },
   mounted() {
-    this.showInfo.popoverMeau = true;
+    let show = false;
+
+    this.$appIsRobot ? (show = false) : (show = true);
+
+    this.showInfo.popoverMeau = show;
   },
   methods: {
     initPage: function () {

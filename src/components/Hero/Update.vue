@@ -225,10 +225,6 @@
 export default {
   name: "HeroUpdate",
   props: {
-    aid: {
-      type: Number,
-      default: 0,
-    },
     heroId: {
       type: Number,
       default: 0,
@@ -244,18 +240,18 @@ export default {
   },
   computed: {
     listenChange() {
-      const { aid, heroId, updateId } = this;
-      return { aid, heroId, updateId };
+      const { heroId, updateId } = this;
+      return { heroId, updateId };
     },
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         if (!newValue.heroId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getHeroUpdate(newValue.aid, newValue.heroId);
+          this.getHeroUpdate(newValue.updateType, newValue.heroId);
         }
       },
     },
@@ -296,7 +292,7 @@ export default {
   },
   mounted() {
     if (this.$appConfigInfo.appInfo.isReadme == 1) {
-      this.getHeroUpdate(this.aid, this.heroId);
+      this.getHeroUpdate(0, this.heroId);
     }
   },
   methods: {
@@ -317,7 +313,7 @@ export default {
 
       this.$axios
         .post(
-          this.$appApi.app.getHeroUpdate + "&heroId=" + heroId + "&aid=" + aid
+          this.$appApi.app.getHeroUpdate + "&aid=" + aid + "&heroId=" + heroId
         )
         .then((res) => {
           let data = res.data.data,
@@ -452,8 +448,8 @@ export default {
     onOpenHeroUpdateDetailClick: function (heroId, row) {
       this.$axios
         .post(
-          this.$appApi.app.getHeroUpdateDetail +
-            "&heroId=" +
+          this.$appApi.app.getHeroUpdate +
+            "&aid=1&heroId=" +
             heroId +
             "&articleId=" +
             row.articleId
