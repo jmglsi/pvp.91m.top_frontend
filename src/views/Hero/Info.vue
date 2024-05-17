@@ -60,11 +60,13 @@
               >
                 <van-tag
                   v-if="data"
-                  round
-                  :color="$appConfigInfo.positionInfo[data][1] || 'black'"
+                  plain
+                  :color="$appConfigInfo.positionInfo[data || 0][1] || 'black'"
                   class="hero-bc267281c62550407c9572aff2a45f69"
                 >
-                  {{ $appConfigInfo.positionInfo[data][0] || $t("unknown") }}
+                  {{
+                    $appConfigInfo.positionInfo[data || 0][0] || $t("unknown")
+                  }}
                 </van-tag>
               </li>
             </ul>
@@ -257,13 +259,13 @@
         <div class="hero-e06398232dc80e41209489705546802c">
           <HeroHistogram
             v-if="tabsInfo.model == 0 && trendInfo.model == 0"
-            :heroId="hero.info.id"
             :aid="trendInfo.model"
+            :heroId="hero.info.id"
           />
           <ChartsHeroLine
             v-else-if="tabsInfo.model == 0 && trendInfo.model > 0"
-            :heroId="hero.info.id"
             :aid="trendInfo.model"
+            :heroId="hero.info.id"
           />
         </div>
         <div
@@ -296,7 +298,6 @@
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroUpdate
             v-if="hero.info.id && hero.info.id < 900"
-            :aid="1"
             :heroId="hero.info.id"
             :updateId="hero.info.updateId"
           />

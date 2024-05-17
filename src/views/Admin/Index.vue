@@ -1,14 +1,34 @@
 <template>
   <div class="admin-index">
+    <div class="admin-62060944ea84cd403907030743e460af">
+      <a-dropdown :trigger="['click']">
+        <img
+          width="35"
+          height="35"
+          v-lazy="loginInfo.img"
+          class="app-border-radius admin-11692cbdb16fd998d9dc739c3d53afaa"
+        />
+        <template #overlay>
+          <a-menu>
+            <a-menu-item key="0">{{ loginInfo.name }}</a-menu-item>
+            <a-menu-divider />
+            <a-menu-item key="1" :style="{ color: 'red' }"
+              >退出登录</a-menu-item
+            >
+          </a-menu>
+        </template>
+      </a-dropdown>
+    </div>
+
     <div class="admin-88eca23dacf6d9789faa45810c104607">
       <a-menu
         :style="{
           height: '100%',
-          width: '256px',
+          width: '225px',
           position: 'absolute',
           zIndex: '1 !important',
         }"
-        :defaultOpenKeys="['sub-web', 'sub-robot']"
+        :defaultOpenKeys="['sub-robot', 'sub-mp']"
         :defaultSelectedKeys="defaultSelectedKey"
         mode="inline"
       >
@@ -28,8 +48,8 @@
           </a-menu-item>
           <a-menu-item
             disabled
-            key="web-data-32374"
-            @click="$appPush({ path: '/admin/web-data-32374' })"
+            key="web-data-d88e5"
+            @click="$appPush({ path: '/admin/web-data-d88e5' })"
           >
             暴走的巅峰赛
           </a-menu-item>
@@ -42,9 +62,8 @@
             数据
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu disabled key="sub-mp" title="公众号">
+        <a-sub-menu key="sub-mp" title="公众号">
           <a-menu-item
-            disabled
             key="mp-data"
             @click="$appPush({ path: '/admin/mp-data' })"
           >
@@ -53,7 +72,6 @@
         </a-sub-menu>
         <a-sub-menu disabled key="sub-system" title="系统">
           <a-menu-item
-            disabled
             key="system-assignment"
             @click="$appPush({ path: '/admin/system-assignment' })"
           >
@@ -62,22 +80,6 @@
         </a-sub-menu>
       </a-menu>
     </div>
-
-    <a-dropdown :trigger="['click']">
-      <img
-        width="35"
-        height="35"
-        v-lazy="loginInfo.img"
-        class="app-border-radius admin-11692cbdb16fd998d9dc739c3d53afaa"
-      />
-      <template #overlay>
-        <a-menu>
-          <a-menu-item key="0">{{ loginInfo.name }}</a-menu-item>
-          <a-menu-divider />
-          <a-menu-item key="1" :style="{ color: 'red' }">退出登录</a-menu-item>
-        </a-menu>
-      </template>
-    </a-dropdown>
 
     <router-view
       class="app-76da017caccd1fb264af2218f6064b0d admin-65421a7ec15d60a791fe243310e147d9"
@@ -93,6 +95,8 @@ export default {
       isLogin: false,
       defaultSelectedKey: [],
       loginInfo: {
+        name: "苏苏",
+        img: "//cn.gravatar.com/avatar/8d0d4a6b8394fa1fe09ed57b2793c63eae72d8859734323b7a08dfdf8013aa45?size=512",
         certification: {
           color: null,
           text: null,
@@ -120,7 +124,7 @@ export default {
     initPage: function () {
       let q = this.$route;
 
-      this.defaultSelectedKey = [q.path.split("/")[2] || "web-data-492e8"];
+      this.defaultSelectedKey = [q.path.split("/")[2] || "mp-data"];
     },
     getWebAccountInfo: function (aid = 0) {
       this.$axios

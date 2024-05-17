@@ -110,7 +110,7 @@ export default {
 
         url.href =
           this.$appApi.login.getLogin +
-          "?oauthType=" +
+          "&oauthType=" +
           oauth.type +
           "&openId=" +
           this.openId +

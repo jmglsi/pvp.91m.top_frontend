@@ -2,6 +2,7 @@
   <div class="ranking-charts">
     <div class="ranking-f879e7f0824fcc83d172401c3cb31b8a">
       <ve-line
+        :init-options="{ renderer: 'svg' }"
         :after-config="afterConfig"
         :data="charts"
         :extend="lineData.extend"
@@ -16,6 +17,8 @@
 
 <script>
 import VeLine from "v-charts/lib/line.common";
+
+import 'zrender/lib/svg/svg';
 
 export default {
   name: "ChartsRankingLine",

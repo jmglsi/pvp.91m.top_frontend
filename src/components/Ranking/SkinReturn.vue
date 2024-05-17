@@ -250,6 +250,7 @@
         class="return-9eff02d43a97619df7707398ec7099cb"
       >
         <ve-line
+          :init-options="{ renderer: 'svg' }"
           :extend="lineData.extend"
           :settings="lineData.settings"
           :mark-line="lineData.markLine"
@@ -257,8 +258,8 @@
           :data="lineData.result"
           :loading="lineData.loading"
           :after-config="afterConfig"
-          width="99.2%"
           height="650px"
+          width="99.2%"
           class="return-f3581151f1ec81c0c0a0226b4aa6e2d5"
         />
       </div>
@@ -271,9 +272,11 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
-import "echarts/lib/component/title";
 import "echarts/lib/component/dataZoom";
-import "v-charts/lib/style.css";
+import "echarts/lib/component/markLine";
+import "echarts/lib/component/markPoint";
+
+import 'zrender/lib/svg/svg';
 
 export default {
   name: "skinReturnIndex",

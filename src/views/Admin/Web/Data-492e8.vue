@@ -16,7 +16,7 @@
                       $t('open-url.title'),
                       null,
                       {
-                        path: 'https://api.91m.top/hero/v1/app.php?type=getQrcode&host=camp.qq.com',
+                        path: 'https://api.91m.top/hero/app?type=getQrcode&host=camp.qq.com',
                       },
                       0
                     )
@@ -35,17 +35,20 @@
 
     <div class="admin-8e086eb841d9b5cd2f89212ac8fd0527">
       <a-row>
-        <a-col :span="6">
-          <a-statistic title="注册用户" :value="dataInfo.num_all" />
+        <a-col @click="onCleanDataClick(1)" :span="4">
+          <a-statistic title="短链接" :value="dataInfo.num_shorturl" />
         </a-col>
-        <a-col :span="6">
-          <a-statistic title="活跃用户" :value="dataInfo.num_update" />
+        <a-col @click="onCleanDataClick(2)" :span="4">
+          <a-statistic title="玩家数" :value="dataInfo.num_player" />
         </a-col>
-        <a-col :span="6">
+        <a-col :span="4">
           <a-statistic title="白名单" :value="dataInfo.num_whitelist" />
         </a-col>
-        <a-col :span="6">
-          <a-statistic title="玩家数" :value="dataInfo.num_player" />
+        <a-col :span="4">
+          <a-statistic title="注册用户" :value="dataInfo.num_all" />
+        </a-col>
+        <a-col :span="4">
+          <a-statistic title="活跃用户" :value="dataInfo.num_update" />
         </a-col>
       </a-row>
     </div>
@@ -278,6 +281,8 @@
         </div>
       </div>
     </div>
+
+    <AppHello height="50px" />
   </div>
 </template>
 
@@ -285,6 +290,7 @@
 export default {
   name: "adminWebData-492e8",
   components: {
+    AppHello: () => import("@/components/App/Hello.vue"),
     HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
     HeroEquipmentListALL: () =>
       import("@/components/Hero/EquipmentList_All.vue"),
@@ -315,6 +321,7 @@ export default {
         num_update: 0,
         num_whitelist: 0,
         num_player: 0,
+        num_shorturl: 0,
       },
       showInfo: {
         actionSheet: false,
@@ -334,6 +341,44 @@ export default {
     this.getSearch();
   },
   methods: {
+    onCleanDataClick: function (aid) {
+      let type;
+
+      if (aid == 1) {
+        type = "短链接";
+      } else if (aid == 2) {
+        type = "玩家";
+      }
+
+      this.$dialog
+        .confirm({
+          title: "是否清除 " + type + " ?",
+          message: "此操作不可逆",
+        })
+        .then(() => {
+          //on confirm
+
+          this.cleanDataByWebData(aid);
+        })
+        .catch(() => {
+          //on cancel
+        });
+    },
+    cleanDataByWebData: function (aid) {
+      this.$axios
+        .post(this.$appApi.app.cleanDataByWebData + "&aid=" + aid)
+        .then((res) => {
+          let status = res.data.status;
+
+          if (status.code == 200) {
+            this.getDataByWebData();
+
+            this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
     getDataByWebData: function () {
       this.$axios.post(this.$appApi.app.getDataByWebData).then((res) => {
         let data = res.data.data,

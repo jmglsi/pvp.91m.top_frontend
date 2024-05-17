@@ -285,6 +285,15 @@ export default new Router({
             keepAlive: true
           }
         }, {
+          path: 'web-data-d88e5',
+          name: 'webData-d88e5',
+          component: () =>
+            import('./views/Admin/Web/Data-d88e5.vue'),
+          meta: {
+            title: '数据站:暴走的巅峰赛',
+            keepAlive: true
+          }
+        }, {
           path: 'robot-data',
           name: 'robotData',
           component: () =>
@@ -308,7 +317,7 @@ export default new Router({
           component: () =>
             import('./views/Admin/System/Assignment.vue'),
           meta: {
-            title: '机器人',
+            title: '系统',
             keepAlive: true
           }
         }

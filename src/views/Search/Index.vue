@@ -976,6 +976,13 @@
           </van-tabs>
         </van-cell-group>
 
+        <div
+          v-if="tableData.cardInfo.name"
+          class="search-e5a3b1a60b86d6662effcad3198a8533"
+        >
+          <SearchWordCloud :q="tempQ" />
+        </div>
+
         <div class="search-cbf8ce69d638243d800b392c8d298b16">
           <HeroSameHobby :heroId="tableData.cardInfo.id" />
         </div>
@@ -1230,6 +1237,7 @@ export default {
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     //HeroUpdate: () => import("@/components/Hero/Update.vue"),
+    SearchWordCloud: () => import("@/components/Charts/SearchWordCloud.vue"),
   },
   watch: {
     $route: function (to, from) {
@@ -1273,6 +1281,7 @@ export default {
         value: this.$route.query.q || "",
         placeholder: this.$t("search.placeholder"),
       },
+      tempQ: "",
       popover: "",
       tableData: {
         result: {
@@ -1446,6 +1455,12 @@ export default {
                   refresh: 1,
                 },
               });
+
+              this.tempQ = data.cardInfo.name;
+
+              if (data.cardInfo.cName) {
+                this.tempQ += "_" + data.cardInfo.cName.replaceAll("|", "_");
+              }
 
               this.getHeroPopover(data.cardInfo.adjustment);
             }

@@ -30,7 +30,7 @@
     <AppReadme v-if="!noUpdateTips" />
 
     <div
-      v-if="showInfo.tabbar && showInfo.miniappButton"
+      v-if="!$appIsRobot && showInfo.tabbar && showInfo.miniappButton"
       @click="openWxMiniapp"
       class="app-f1453f63de7b681a25dc590be0c8a31e"
     >
@@ -228,7 +228,7 @@ export default {
         whiteBar = false,
         tabbar = false,
         path = to.path,
-        isRobot = to.query.isRobot || 0,
+        isRobot = this.$isRobot,
         name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
         accessToken = this.$cookie.get("accessToken") || null;
 
@@ -380,13 +380,15 @@ export default {
             text: appInfo.updateInfo.text || this.$t("loading"),
             timeout: appInfo.updateInfo.timeout || 43200,
           },
+          wxMiniappInfo: {
+            url: appInfo.wxMiniappInfo.url || null,
+          },
           search: {
             img: appInfo.search.img || null,
             placeholder: appInfo.search.placeholder || null,
             to: appInfo.search.to || null,
             url: appInfo.search.url || null,
           },
-          wxMiniappUrl: appInfo.wxMiniappUrl || null,
         };
         this.$appConfigInfo.oauthInfo = oauthInfo || [];
         this.$appConfigInfo.positionInfo = positionInfo || [];
@@ -455,7 +457,7 @@ export default {
         this.$t("open-url.title"),
         null,
         {
-          path: this.$appConfigInfo.appInfo.wxMiniappUrl,
+          path: this.$appConfigInfo.appInfo.wxMiniappInfo.url,
         },
         0
       );
@@ -820,7 +822,7 @@ div.app-0cecd2d48b0c852a513d34eec25042b7 {
 }
 
 div.app-4717d11da95ed90ccdb4d4a0648bad39 {
-  margin-bottom: 65px;
+  margin-bottom: 50px;
   margin-top: 50px;
 }
 
@@ -828,7 +830,7 @@ div.app-76da017caccd1fb264af2218f6064b0d {
   height: 740px;
   overflow: auto;
   padding-bottom: 25px;
-  padding-left: 280px;
+  padding-left: 250px;
   padding-right: 25px;
   padding-top: 25px;
   position: absolute;

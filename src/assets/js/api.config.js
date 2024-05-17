@@ -118,13 +118,15 @@ axios.interceptors.response.use(
 
 Vue.prototype.$axios = axios;
 
-const appApi = baseUrl + "/hero/v1/app.php";
-const appAdminApi = baseUrl + "/hero/v1/admin.php";
-//const biliApi = baseUrl + "/hero/v1/bilibili.php";
-const gameApi = baseUrl + "/hero/v1/game.php";
-const loginApi = baseUrl + "/hero/v1/login.php";
+const appApi = baseUrl;
 
-const botAdminApi = process.env.VUE_APP_BOT_URL + "/admin.php";
+//const biliApi = baseUrl + "?method=bilibili";
+const gameApi = baseUrl + "?method=game";
+const loginApi = baseUrl + "?method=login";
+const robotApi = baseUrl + "?method=robot";
+
+const appAdminApi = baseUrl + "?method=admin";
+const robotAdminApi = process.env.VUE_APP_BOT_URL + "?method=admin";
 
 const app = {
   apiHost: "//api.91m.top",
@@ -136,10 +138,9 @@ const app = {
   getAfdian: appApi + "?type=getAfdian",
   getAppHome: appApi + "?type=getAppHome",
   getAppInfo: appApi + "?type=getAppInfo",
+  getChallenge: appApi + "?type=getChallenge",
   getCivilwarMatchInfo: appApi + "?type=getCivilwarMatchInfo",
   getCoordinate: appApi + "?type=getCoordinate",
-  getChallenge: appApi + "?type=getChallenge",
-  getHeroBpIndex: appApi + "?type=getHeroBpIndex",
   getHeroChartsLog: appApi + "?type=getHeroChartsLog",
   getHeroInfo: appApi + "?type=getHeroInfo",
   getHeroInfoByRandSuit: appApi + "?type=getHeroInfoByRandSuit",
@@ -147,12 +148,12 @@ const app = {
   getHeroProficiency: appApi + "?type=getHeroProficiency",
   getHeroReplayByHeroId: appApi + "?type=getHeroReplayByHeroId",
   getHeroUpdate: appApi + "?type=getHeroUpdate",
-  getHeroUpdateDetail: appApi + "?type=getHeroUpdateDetail",
   getJsapiTicket: appApi + "?type=getJsapiTicket",
   getMiniAppInfo: appApi + "?type=getMiniAppInfo",
   getRanking: appApi + "?type=getRanking",
   getSearch: appApi + "?type=getSearch",
   getShortUrl: appApi + "?type=getShortUrl",
+  getSign: appApi + "?type=getSign",
   getSkinReturnLog: appApi + "?type=getSkinReturnLog",
   getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
   getWebAccountInfo: appApi + "?type=getWebAccountInfo",
@@ -160,7 +161,8 @@ const app = {
   updateWebAccountInfo: appApi + "?type=updateWebAccountInfo",
   uploadImg: appApi + "?type=uploadImg",
   //
-  getDataByWebData: appAdminApi + "?type=getDataByWebData"
+  cleanDataByWebData: appAdminApi + "&type=cleanDataByWebData",
+  getDataByWebData: appAdminApi + "&type=getDataByWebData"
 }
 
 /*
@@ -170,32 +172,34 @@ const bili = {
 */
 
 const game = {
-  createEngage: gameApi + "?type=createEngage",
-  createRole: gameApi + "?type=createRole",
-  createTeam: gameApi + "?type=createTeam",
-  deleteGameBP: gameApi + "?type=deleteGameBP",
-  deleteTeam: gameApi + "?type=deleteTeam",
-  getGameBP: gameApi + "?type=getGameBP",
-  getGameBPFile: gameApi + "?type=getGameBPFile",
-  getGameDashboard: gameApi + "?type=getGameDashboard",
-  getGameHome: gameApi + "?type=getGameHome",
-  getGamePrediction: gameApi + "?type=getGamePrediction",
-  getTeamInfo: gameApi + "?type=getTeamInfo",
-  joinTeam: gameApi + "?type=joinTeam",
-  setStatus: gameApi + "?type=setStatus",
-  setUsed: gameApi + "?type=setUsed",
-  updateGameBP: gameApi + "?type=updateGameBP",
-  updateGameBPIndex: gameApi + "?type=updateGameBPIndex",
-  updateTeamInfo: gameApi + "?type=updateTeamInfo",
+  createEngage: gameApi + "&type=createEngage",
+  createRole: gameApi + "&type=createRole",
+  createTeam: gameApi + "&type=createTeam",
+  deleteGameBP: gameApi + "&type=deleteGameBP",
+  deleteTeam: gameApi + "&type=deleteTeam",
+  getGameBP: gameApi + "&type=getGameBP",
+  getGameBPFile: gameApi + "&type=getGameBPFile",
+  getGameDashboard: gameApi + "&type=getGameDashboard",
+  getGameHome: gameApi + "&type=getGameHome",
+  getGamePrediction: gameApi + "&type=getGamePrediction",
+  getTeamInfo: gameApi + "&type=getTeamInfo",
+  joinTeam: gameApi + "&type=joinTeam",
+  setStatus: gameApi + "&type=setStatus",
+  setUsed: gameApi + "&type=setUsed",
+  updateGameBP: gameApi + "&type=updateGameBP",
+  updateGameBPIndex: gameApi + "&type=updateGameBPIndex",
+  updateTeamInfo: gameApi + "&type=updateTeamInfo",
 }
 
 const login = {
   getLogin: loginApi
 }
 
-const bot = {
-  getDataByRobotData: botAdminApi + "?type=getDataByRobotData",
-  sendMsg: botAdminApi + "?type=sendMsg"
+const robot = {
+  getRssList: robotApi + "&type=rss",
+  //
+  getDataByRobotData: robotAdminApi + "&type=getDataByRobotData",
+  sendMsg: robotAdminApi + "&type=sendMsg",
 }
 
 export default {
@@ -203,5 +207,5 @@ export default {
   //bili,
   game,
   login,
-  bot
+  robot
 }

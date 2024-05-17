@@ -52,7 +52,7 @@
         <van-button
           round
           icon="question-o"
-          color="red"
+          type="danger"
           size="mini"
           class="hero-14c32e76fd7b6f33de94027b74bbc3fb"
           @click="
