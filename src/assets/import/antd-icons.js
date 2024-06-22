@@ -33,3 +33,35 @@ export { default as SearchOutline }
 export { default as CloseOutline }
   from '@ant-design/icons/lib/outline/CloseOutline';
 //close
+
+export { default as HomeOutline }
+from '@ant-design/icons/lib/outline/HomeOutline';
+//home
+
+export { default as BarChartOutline }
+from '@ant-design/icons/lib/outline/BarChartOutline';
+//bar-chart
+
+export { default as RobotOutline }
+from '@ant-design/icons/lib/outline/RobotOutline';
+//robot
+
+export { default as WechatOutline }
+from '@ant-design/icons/lib/outline/WechatOutline';
+//wechat
+
+export { default as GlobalOutline }
+from '@ant-design/icons/lib/outline/GlobalOutline';
+//global
+
+export { default as ShopOutline }
+from '@ant-design/icons/lib/outline/ShopOutline';
+//shop
+
+export { default as MenuFoldOutline }
+from '@ant-design/icons/lib/outline/MenuFoldOutline';
+//menu-fold
+
+export { default as MenuUnfoldOutline }
+from '@ant-design/icons/lib/outline/MenuUnfoldOutline';
+//menu-unfold

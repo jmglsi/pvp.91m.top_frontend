@@ -219,7 +219,7 @@
           @show="onComponentShow"
           class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
         >
-          <HeroUpdate :aid="0" :heroId="0" />
+          <HeroUpdate :extraId="0" :aid="0" />
         </lazy-component>
       </div>
     </div>
@@ -419,7 +419,9 @@ export default {
       setTimeout(() => {
         this.isLoading = false;
 
-        this.$appPush({ path: this.homeData.miniappInfo.to });
+        this.$appPush({
+          path: this.homeData.miniappInfo.to,
+        });
       }, 2500);
     },
     getChangeImg: function (bid, id) {

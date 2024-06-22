@@ -39,7 +39,9 @@
             </van-tag>
 
             <div
-              :style="{ position: 'relative' }"
+              :style="{
+                position: 'relative',
+              }"
               :class="
                 isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-0b22b207c2b785ceff7a241980f23d14'
@@ -139,7 +141,11 @@
             sortable
           >
             <template #default="{ row }">
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <span v-if="row.id && row.id < 900">
                   <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                     <img
@@ -150,7 +156,7 @@
                       class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
                     />
                     <ChartsRankingLine
-                      :trend="row.trend"
+                      :extraType="row.trend"
                       :charts="{
                         columns: lineData.result.columns,
                         rows: lineData.result.rows[row.id],
@@ -206,7 +212,11 @@
               %
             </template>
             <template #default="{ row }">
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <a-popover trigger="click" placement="right">
                     <template #content>
@@ -248,8 +258,8 @@
 
                     <ChartsHeroProgress
                       v-if="row.id && row.id < 900 && bid < 4"
+                      :extraList="progressData.result.rows[row.id]"
                       :listWidth="heroProficiencyWidth - 10"
-                      :progressData="progressData.result.rows[row.id]"
                     />
                   </a-popover>
                 </lazy-component>
@@ -308,13 +318,27 @@
 
         <vxe-table-colgroup
           :title-prefix="{
+            content: $appMsg.tips[1025],
+          }"
+          title="国百"
+        >
+          <vxe-column
+            title="估算"
+            field="avgQQFightPower"
+            :width="listWidth"
+            sortable
+          />
+        </vxe-table-colgroup>
+
+        <vxe-table-colgroup
+          :title-prefix="{
             content: $appMsg.tips[1022],
           }"
           title="输出"
         >
           <vxe-column
-            title="转化"
-            field="hurtTransRate"
+            title="对人"
+            field="totalHeroHurtCnt"
             :width="listWidth"
             sortable
           />
@@ -325,8 +349,8 @@
             sortable
           />
           <vxe-column
-            title="对人"
-            field="totalHeroHurtCnt"
+            title="转化"
+            field="hurtTransRate"
             :width="listWidth"
             sortable
           />
@@ -334,14 +358,14 @@
 
         <vxe-table-colgroup title="承伤">
           <vxe-column
-            title="全部"
-            field="totalBehurtCnt"
+            title="每死"
+            field="behurtPerDeath"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="每死"
-            field="behurtPerDeath"
+            title="全部"
+            field="totalBehurtCnt"
             :width="listWidth"
             sortable
           />
@@ -354,14 +378,14 @@
           }"
         >
           <vxe-column
-            title="全部"
-            field="equipmentMoney"
+            title="分均"
+            field="equipmentMoneyMin"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="分均"
-            field="equipmentMoneyMin"
+            title="全部"
+            field="equipmentMoney"
             :width="listWidth"
             sortable
           />
@@ -405,8 +429,8 @@
 
         <vxe-table-colgroup title="牌子 (%)">
           <vxe-column
-            title="全部"
-            field="allBrandRate"
+            title="银牌"
+            field="evaluateSilverRate"
             :width="listWidth"
             sortable
           />
@@ -417,8 +441,8 @@
             sortable
           />
           <vxe-column
-            title="银牌"
-            field="evaluateSilverRate"
+            title="全部"
+            field="allBrandRate"
             :width="listWidth"
             sortable
           />
@@ -426,8 +450,8 @@
 
         <vxe-table-colgroup title="MVP (%)">
           <vxe-column
-            title="全部"
-            field="allMvpRate"
+            title="败方"
+            field="loseMvpRate"
             :width="listWidth"
             sortable
           />
@@ -438,8 +462,8 @@
             sortable
           />
           <vxe-column
-            title="败方"
-            field="loseMvpRate"
+            title="全部"
+            field="allMvpRate"
             :width="listWidth"
             sortable
           />
@@ -464,26 +488,26 @@
             <van-tab title="顺位">
               <HeroBPIndex
                 v-if="cellInfo.index == 0 && skillInfo.model == 0"
-                :heroId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="打法">
               <HeroGenreList
                 v-if="cellInfo.index == 0 && skillInfo.model == 1"
-                :genreId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装">
               <HeroEquipmentListALL
                 v-if="cellInfo.index == 0 && skillInfo.model == 2"
-                :heroId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装 (单件)">
               <HeroEquipmentListOne
                 v-if="cellInfo.index == 0 && skillInfo.model == 3"
-                :equipmentId="tableDataRow.id"
-                :equipmentType="1"
+                :extraId="tableDataRow.id"
+                :extraType="1"
               />
             </van-tab>
             <van-tab>
@@ -496,7 +520,7 @@
 
               <HeroInscriptionList
                 v-if="cellInfo.index == 0 && skillInfo.model == 4"
-                :heroId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab
@@ -507,9 +531,9 @@
                 <div class="app-0cecd2d48b0c852a513d34eec25042b7">
                   <HeroUpdate
                     v-if="cellInfo.index == 0 && skillInfo.model == 5"
-                    :aid="1"
-                    :heroId="tableDataRow.id"
+                    :extraId="tableDataRow.id"
                     :updateId="tableDataRow.updateId"
+                    :aid="1"
                   />
                 </div>
               -->
@@ -523,7 +547,7 @@
       v-if="cellInfo.index > -1 && showInfo.heroSameHobby"
       class="ranking-d742492b2526d57a222af9b54040b3b4"
     >
-      <HeroSameHobby :heroId="tableDataRow.id" />
+      <HeroSameHobby :extraId="tableDataRow.id" />
     </div>
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
@@ -557,10 +581,6 @@ export default {
     //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     bid: {
       type: Number,
       default: 0,
@@ -576,6 +596,10 @@ export default {
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

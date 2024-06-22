@@ -29,7 +29,9 @@
           >
             <template #default="{ row }">
               <div
-                :style="{ position: 'relative' }"
+                :style="{
+                  position: 'relative',
+                }"
                 :class="
                   isSmallMode
                     ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
@@ -70,7 +72,9 @@
           >
             <template #default="{ row }">
               <div
-                :style="{ position: 'relative' }"
+                :style="{
+                  position: 'relative',
+                }"
                 :class="
                   isSmallMode
                     ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-5d308b6a0da77ffb33c63fc542f58746'
@@ -251,10 +255,6 @@
 export default {
   name: "rankingGuanXi",
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     heroName: {
       type: String,
       default: "",
@@ -262,6 +262,10 @@ export default {
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

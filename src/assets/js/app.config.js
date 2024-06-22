@@ -297,7 +297,7 @@ Vue.prototype.$appInitMiniapp = function () {
   Vue.prototype.$axios.post(Vue.prototype.$appApi.app.getJsapiTicket).then((res) => {
     let data = res.data.data;
 
-    Vue.prototype.$share = data.share;
+    Vue.prototype.$share = data.extra;
 
     if (Vue.prototype.$appInDouyin) {
       Vue.prototype.$douyin = window.tt;
@@ -309,12 +309,23 @@ Vue.prototype.$appInitMiniapp = function () {
        */
       Vue.prototype.$douyin.miniProgram.getEnv((res) => {
         if (res.miniprogram) {
-          Vue.prototype.$douyin.miniProgram.postMessage({
-            data: {
-              url_real: url.href.split("#")[0],
-              share: data.share
-            }
-          });
+          if (data.type == "getAd") {
+            Vue.prototype.$wechat.miniProgram.postMessage({
+              data:{
+                type: "getAd"
+              }
+            });
+          } else {
+            Vue.prototype.$wechat.miniProgram.postMessage({
+              data: {
+                type: "share",
+                extra: {
+                  url: window.location.href.split("#")[0],
+                  share: data.extra
+                }
+              }
+            });
+          }
         }
       });
     }
@@ -324,17 +335,19 @@ Vue.prototype.$appInitMiniapp = function () {
 
       Vue.prototype.$wechat.config(data.ticket);
       Vue.prototype.$wechat.ready(() => {
-        /**
-         * 
-         * 网页分享
-         * 
-         */
-        Vue.prototype.$wechat.updateAppMessageShareData({
-          title: data.share.title,
-          desc: data.share.desc,
-          link: data.share.link,
-          imgUrl: data.share.imgUrl,
-        });
+        if (data.type == "share") {
+          /**
+           * 
+           * 网页分享
+           * 
+           */
+          Vue.prototype.$wechat.updateAppMessageShareData({
+            title: data.extra.title,
+            desc: data.extra.desc,
+            link: data.extra.link,
+            imgUrl: data.extra.imgUrl,
+          });
+        }
 
         /**
          * 
@@ -343,12 +356,23 @@ Vue.prototype.$appInitMiniapp = function () {
          */
         Vue.prototype.$wechat.miniProgram.getEnv((res) => {
           if (res.miniprogram) {
-            Vue.prototype.$wechat.miniProgram.postMessage({
-              data: {
-                url_real: window.location.href.split("#")[0],
-                share: data.share
-              }
-            });
+            if (data.type == "getAd") {
+              Vue.prototype.$wechat.miniProgram.postMessage({
+                data:{
+                  type: "getAd"
+                }
+              });
+            } else {
+              Vue.prototype.$wechat.miniProgram.postMessage({
+                data: {
+                  type: "share",
+                  extra: {
+                    url: window.location.href.split("#")[0],
+                    share: data.extra
+                  }
+                }
+              });
+            }
           }
         });
       });

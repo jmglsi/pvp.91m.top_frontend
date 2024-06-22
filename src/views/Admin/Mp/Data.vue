@@ -14,7 +14,11 @@
             </div>
           </h1>
           <template #overlay>
-            <a-menu :style="{ width: '100px' }">
+            <a-menu
+              :style="{
+                width: '100px',
+              }"
+            >
               <a-sub-menu key="menu" title="菜单">
                 <a-menu-item disabled @click="setMsg">推送的内容</a-menu-item>
                 <a-menu-item @click="setClient">配置客户端</a-menu-item>

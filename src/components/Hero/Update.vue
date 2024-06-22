@@ -44,7 +44,7 @@
               v-if="data.calendar.day"
               :color="data.calendar.color"
               @click="
-                heroId > 0 ? onOpenHeroUpdateDetailClick(heroId, data) : null
+                extraId > 0 ? onOpenHeroUpdateDetailClick(extraId, data) : null
               "
               round
               class="update-5a0c2e4611419b82b55675d035764007"
@@ -93,8 +93,10 @@
                 v-for="(item, index) in data.heroList"
                 :key="'hero-54099f84a9943b4b1eed932ec22066eb-' + index"
                 @click="
-                  item != heroId
-                    ? $appPush({ path: '/hero/' + item + '/info' })
+                  item != extraId
+                    ? $appPush({
+                        path: '/hero/' + item + '/info',
+                      })
                     : null
                 "
                 class="update-704985931ce54a5350c733c036dfd8b2"
@@ -151,7 +153,7 @@
         </a-timeline>
 
         <div
-          v-if="heroId > 0 && updateId > 0"
+          v-if="extraId > 0 && updateId > 0"
           @click="
             $appOpenUrl(
               $t('open-url.title'),
@@ -189,7 +191,7 @@
     <div class="hero-ec93fee7573d5d8daa4444009358e91b">
       <van-action-sheet v-model="showInfo.actionSheet" title="其他数据 (近期)">
         <template #default>
-          <HeroEquipmentListOne :equipmentId="equipmentId" :equipmentType="2" />
+          <HeroEquipmentListOne :extraId="equipmentId" :extraType="2" />
         </template>
       </van-action-sheet>
     </div>
@@ -197,7 +199,7 @@
     <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
-        @close="showInfo.checked ? onCopy(heroId, tableDataRow) : null"
+        @close="showInfo.checked ? onCopy(tableDataRow) : null"
       >
         <template #title>
           <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">
@@ -225,7 +227,7 @@
 export default {
   name: "HeroUpdate",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
@@ -240,18 +242,18 @@ export default {
   },
   computed: {
     listenChange() {
-      const { heroId, updateId } = this;
-      return { heroId, updateId };
+      const { extraId, updateId } = this;
+      return { extraId, updateId };
     },
   },
   watch: {
     listenChange: {
       immediate: false,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getHeroUpdate(newValue.updateType, newValue.heroId);
+          this.getHeroUpdate(newValue.updateType, newValue.extraId);
         }
       },
     },
@@ -292,7 +294,7 @@ export default {
   },
   mounted() {
     if (this.$appConfigInfo.appInfo.isReadme == 1) {
-      this.getHeroUpdate(0, this.heroId);
+      this.getHeroUpdate(0, this.extraId);
     }
   },
   methods: {
@@ -426,10 +428,10 @@ export default {
       return day;
     },
     onEquipmentClick: function (e, a) {
-      this.equipmentId = parseInt(e.equipmentList[a]) || 0;
+      this.equipmentId = Number(e.equipmentList[a]) || 0;
       this.showInfo.actionSheet = true;
     },
-    onCopy: function (heroId, row) {
+    onCopy: function (row) {
       let date = new Date(row.calendar.day);
 
       this.copyData =

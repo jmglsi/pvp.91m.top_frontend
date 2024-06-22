@@ -86,7 +86,9 @@
               @click="getQrCode(data)"
             >
               <div
-                :style="{ position: 'relative' }"
+                :style="{
+                  position: 'relative',
+                }"
                 class="miniapp-4db8e25cf2f70a4b5f72062871f970a7"
               >
                 <img
@@ -107,7 +109,11 @@
 
     <div
       class="miniapp-021a7599a708a3781fabe39f7631edfc"
-      @click="$appPush({ path: '/' })"
+      @click="
+        $appPush({
+          path: '/',
+        })
+      "
     >
       <img v-lazy="'/img/icons-app/stow.png'" width="25" height="25" />
     </div>

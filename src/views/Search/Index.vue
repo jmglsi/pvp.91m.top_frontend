@@ -75,7 +75,9 @@
       <van-popup
         v-model="showInfo.heroPopup"
         position="top"
-        :style="{ height: '35%' }"
+        :style="{
+          height: '35%',
+        }"
       >
         <div
           :style="
@@ -212,7 +214,9 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange !important' }"
+                          :style="{
+                            color: 'orange !important',
+                          }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -262,7 +266,9 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange !important' }"
+                          :style="{
+                            color: 'orange !important'
+                          }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -311,7 +317,9 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange !important' }"
+                          :style="{
+                            color: 'orange !important'
+                          }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -342,7 +350,9 @@
                       <span class="search-8fd6a51f93ef7b5379535e63a5e071cd">
                         <span
                           v-if="data.isTop"
-                          :style="{ color: 'orange !important' }"
+                          :style="{
+                            color: 'orange !important'
+                          }"
                           class="search-f43418d85f50da28b3a9c1e780237105"
                         >
                           <van-icon :name="data.icon" />
@@ -508,7 +518,11 @@
                     </span>
                   </div>
                   <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
-                    <div :style="{ position: 'relative' }">
+                    <div
+                      :style="{
+                        position: 'relative',
+                      }"
+                    >
                       <span class="search-b37184da1d9153fb045173b0a4b03e39">
                         {{ $t("bp.pick") }}
                       </span>
@@ -950,7 +964,7 @@
 
               <van-cell-group
                 :border="false"
-                @click="$message.info($appMsg.info[1027])"
+                @click="$message.info($appMsg.info[1032])"
                 title="其他参数"
               >
                 <van-grid :border="false" :column-num="3">
@@ -976,15 +990,17 @@
           </van-tabs>
         </van-cell-group>
 
+        <!--
         <div
           v-if="tableData.cardInfo.name"
           class="search-e5a3b1a60b86d6662effcad3198a8533"
         >
           <SearchWordCloud :q="tempQ" />
         </div>
+        -->
 
         <div class="search-cbf8ce69d638243d800b392c8d298b16">
-          <HeroSameHobby :heroId="tableData.cardInfo.id" />
+          <HeroSameHobby :extraId="tableData.cardInfo.id" />
         </div>
       </div>
 
@@ -1125,7 +1141,9 @@
           <br />
           该灵感由
           <span
-            :style="{ color: '#1989fa !important' }"
+            :style="{
+              color: '#1989fa !important',
+            }"
             @click="
               $appPush({
                 path: '/friends',
@@ -1155,26 +1173,26 @@
             <van-tab title="顺位">
               <HeroBPIndex
                 v-if="skillInfo.model == 0"
-                :heroId="tableData.cardInfo.id"
+                :extraId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab title="打法">
               <HeroGenreList
                 v-if="skillInfo.model == 1"
-                :genreId="tableData.cardInfo.id"
+                :extraId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab title="出装">
               <HeroEquipmentListALL
                 v-if="skillInfo.model == 2"
-                :heroId="tableData.cardInfo.id"
+                :extraId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab title="出装 (单件)">
               <HeroEquipmentListOne
                 v-if="skillInfo.model == 3"
-                :equipmentId="tableData.cardInfo.id"
-                :equipmentType="1"
+                :extraId="tableData.cardInfo.id"
+                :extraType="1"
               />
             </van-tab>
             <van-tab>
@@ -1187,7 +1205,7 @@
 
               <HeroInscriptionList
                 v-if="skillInfo.model == 4"
-                :heroId="tableData.cardInfo.id"
+                :extraId="tableData.cardInfo.id"
               />
             </van-tab>
             <van-tab
@@ -1210,8 +1228,8 @@
         <template #default>
           <HeroFightPower
             v-if="showInfo.fightPowerActionSheet"
-            :heroId="tableData.cardInfo.id"
-            :fightPowerType="2"
+            :extraId="tableData.cardInfo.id"
+            :extraType="2"
           />
         </template>
       </van-action-sheet>
@@ -1237,7 +1255,7 @@ export default {
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
     //HeroUpdate: () => import("@/components/Hero/Update.vue"),
-    SearchWordCloud: () => import("@/components/Charts/SearchWordCloud.vue"),
+    //SearchWordCloud: () => import("@/components/Charts/SearchWordCloud.vue"),
   },
   watch: {
     $route: function (to, from) {
@@ -1625,9 +1643,7 @@ export default {
       ret += "P:" + cardInfo.pickRate.join(" / ") + "\n";
       ret += "∑:" + cardInfo.bpRate.join(" / ") + "\n";
       ret += "W:" + cardInfo.winRate.join(" / ") + "\n";
-      ret +=
-        "> 最后调整 " + (cardInfo.adjustmentTime || "近一年暂无调整") + "\n";
-      ret += "> 成就 " + cardInfo.label + "\n";
+      ret += "> " + cardInfo.label + "\n";
       ret += "> 综合 " + url.origin + "/s/" + cardInfo.id;
 
       this.copyData = ret;

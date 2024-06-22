@@ -27,7 +27,9 @@
             </van-tag>
 
             <div
-              :style="{ position: 'relative' }"
+              :style="{
+                position: 'relative',
+              }"
               :class="
                 isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
@@ -56,7 +58,11 @@
           sortable
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <div class="app-52b0e5c90604d59d1814f184d58e2033">
                 {{ row.rankScore_bo1 }}
               </div>
@@ -71,17 +77,25 @@
 
         <vxe-column title="状态" field="status" :width="listWidth" sortable>
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <div v-if="row.status == 0">空闲</div>
               <div
                 v-else-if="row.status == 1"
-                :style="{ color: 'blue !important' }"
+                :style="{
+                  color: 'blue !important',
+                }"
               >
                 队列中
               </div>
               <div
                 v-else-if="row.status == 2"
-                :style="{ color: 'red !important' }"
+                :style="{
+                  color: 'red !important',
+                }"
               >
                 对局中
               </div>
@@ -150,10 +164,6 @@
 export default {
   name: "rankingNeiZhan",
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     bid: {
       type: Number,
       default: 0,
@@ -169,6 +179,10 @@ export default {
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

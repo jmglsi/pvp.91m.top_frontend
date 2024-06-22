@@ -96,25 +96,25 @@
 export default {
   name: "HeroInscriptionList",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { extraId } = this;
+      return { extraId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRankingByZhanli(10, 0, 0, 0, newValue.heroId);
+          this.getRankingByZhanli(10, 0, 0, 0, newValue.extraId);
         }
       },
     },

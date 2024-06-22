@@ -11,7 +11,6 @@
 
     <div class="ranking-47a721d2dcdc9a9875507e9f389e6409">
       <ve-line
-        :init-options="{ renderer: 'svg' }"
         :after-config="afterConfig"
         :data="lineData.result"
         :extend="lineData.extend"
@@ -28,7 +27,9 @@
     <div class="ranking-2862744e5d7cce9d070aa41172557d78">
       该灵感由
       <span
-        :style="{ color: '#1989fa !important' }"
+        :style="{
+          color: '#1989fa !important',
+        }"
         @click="
           $appPush({
             path: '/friends',
@@ -40,7 +41,9 @@
       </span>
       &nbsp;和&nbsp;
       <span
-        :style="{ color: '#1989fa !important' }"
+        :style="{
+          color: '#1989fa !important',
+        }"
         @click="
           $appPush({
             path: '/friends',
@@ -58,7 +61,7 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
-import 'zrender/lib/svg/svg';
+import "zrender/lib/svg/svg";
 
 export default {
   name: "ChartsFightPowerLine",
@@ -100,10 +103,10 @@ export default {
       viewInfo: {
         model: "c",
         options: [
-          { value: "a", label: "国1" },
-          { value: "b", label: "国10" },
-          { value: "c", label: "国50" },
-          { value: "d", label: "国100" },
+          { value: "a", label: "国 1" },
+          { value: "b", label: "国 10" },
+          { value: "c", label: "国 50" },
+          { value: "d", label: "国 100" },
         ],
       },
     };

@@ -46,7 +46,7 @@ export default {
     VeHistogram,
   },
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
@@ -61,19 +61,19 @@ export default {
   },
   computed: {
     listenChange() {
-      const { heroId, aid, detail } = this;
-      return { heroId, aid, detail };
+      const { extraId, aid, detail } = this;
+      return { extraId, aid, detail };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
         this.getHeroChartsLog(
           newValue.aid,
-          newValue.heroId,
+          newValue.extraId,
           Number(newValue.detail)
         );
       },

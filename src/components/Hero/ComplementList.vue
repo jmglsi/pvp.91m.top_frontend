@@ -26,7 +26,11 @@
           width="90"
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <img
                 v-lazy="{
                   //src: '/img/icons-hero/' + row.hero[0].id + '.jpg',
@@ -60,7 +64,11 @@
           width="90"
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <img
                 v-lazy="{
                   //src: '/img/icons-hero/' + row.hero[1].id + '.jpg',
@@ -135,35 +143,29 @@
 export default {
   name: "HeroComplement",
   props: {
-    complementId: {
+    extraId: {
       type: Number,
       default: 0,
     },
-    complementType: {
+    extraType: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { complementId, complementType } = this;
-      return { complementId, complementType };
+      const { extraId, extraType } = this;
+      return { extraId, extraType };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.complementId) return;
+        if (!newValue.extraId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(
-            17,
-            newValue.complementType,
-            0,
-            0,
-            newValue.complementId
-          );
+          this.getRanking(17, newValue.extraType, 0, 0, newValue.extraId);
         }
       },
     },

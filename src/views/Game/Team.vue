@@ -8,7 +8,11 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
-        @click-left="$appPush({ path: '/my' })"
+        @click-left="
+          $appPush({
+            path: '/my',
+          })
+        "
         @click-right="onNavBarRightClick"
         title="队伍"
         z-index="2000"
@@ -359,7 +363,9 @@ export default {
             let label = data.label;
 
             this.$appDelectLocalStorage("tempTeamId");
-            this.$appPush({ path: "/game/" + label + "/bp" });
+            this.$appPush({
+              path: "/game/" + label + "/bp",
+            });
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {

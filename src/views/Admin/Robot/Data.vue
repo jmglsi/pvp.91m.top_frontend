@@ -14,7 +14,11 @@
             </div>
           </h1>
           <template #overlay>
-            <a-menu :style="{ width: '100px' }">
+            <a-menu
+              :style="{
+                width: '100px',
+              }"
+            >
               <a-sub-menu key="menu" title="菜单">
                 <a-menu-item @click="setMsg">推送的内容</a-menu-item>
                 <a-menu-item @click="setClient">配置客户端</a-menu-item>
@@ -513,33 +517,33 @@ export default {
       this.$message.success("开始推送");
 
       group.map((x, i) => {
-        let msgType,
-          msgData = {};
+        let msgContent = this.robotInfo.msg,
+          msgExt = {};
 
         if (x.frameId == 20000) {
-          msgType = 100;
-          msgData = {
+          msgExt = {
             robot_wxid: x.robot,
             from_wxid: x.group,
           };
         } else if (x.frameId == 60000) {
-          msgType = 2;
-          msgData = {
+          msgExt = {
             message_type: "group",
             self_id: x.robot,
             group_id: String(x.group),
           };
+        } else {
+          return;
         }
 
-        if (msgData != {}) {
+        if (msgExt != {}) {
           setTimeout(() => {
             this.sendMsg(
               x.frameId,
               x.robot,
-              msgType,
+              x.group.indexOf(":") > -1 ? "guild" : "group",
               x.group,
-              this.robotInfo.msg,
-              msgData
+              msgContent,
+              msgExt
             );
 
             this.percentage = Math.floor(((i + 1) / groupNum) * 100);

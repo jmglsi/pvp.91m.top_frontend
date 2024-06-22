@@ -26,7 +26,6 @@ import './assets/import/antd';
 import './assets/import/vant';
 
 import './assets/js/app.config';
-import './assets/js/bilibili.config';
 
 import appApi from './assets/js/api.config';
 Vue.prototype.$appApi = appApi;

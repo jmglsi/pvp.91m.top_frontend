@@ -8,7 +8,11 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
-        @click-left="$appPush({ path: '/my' })"
+        @click-left="
+          $appPush({
+            path: '/my',
+          })
+        "
         @click-right="onNavBarRightClick"
         title="交战"
         z-index="2000"
@@ -38,7 +42,11 @@
         >
           <div class="game-237b90fb6955b98328736810edefe6e7">
             <van-row
-              @click="$appPush({ path: '/game/' + data.engage.label + '/bp' })"
+              @click="
+                $appPush({
+                  path: '/game/' + data.engage.label + '/bp',
+                })
+              "
             >
               <van-col span="7">
                 <img

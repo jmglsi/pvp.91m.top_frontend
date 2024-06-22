@@ -267,6 +267,15 @@ export default new Router({
         import('./views/Admin/Index.vue'),
       children: [
         {
+          path: 'home-data',
+          name: 'homeData',
+          component: () =>
+            import('./views/Admin/Home/Data.vue'),
+          meta: {
+            title: '数据站:工作台',
+            keepAlive: true
+          }
+        }, {
           path: 'web-data-492e8',
           name: 'webData-492e8',
           component: () =>
@@ -312,10 +321,19 @@ export default new Router({
             keepAlive: true
           }
         }, {
-          path: 'system-assignment',
-          name: 'systemAssignment',
+          path: 'shop-data',
+          name: 'shopData',
           component: () =>
-            import('./views/Admin/System/Assignment.vue'),
+            import('./views/Admin/Shop/Data.vue'),
+          meta: {
+            title: '商店',
+            keepAlive: true
+          }
+        }, {
+          path: 'system-data',
+          name: 'systemData',
+          component: () =>
+            import('./views/Admin/System/Data.vue'),
           meta: {
             title: '系统',
             keepAlive: true

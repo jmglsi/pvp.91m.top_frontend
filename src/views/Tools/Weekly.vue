@@ -27,7 +27,11 @@
               v-for="(data, index) in update.heroList.slice(0, 10)"
               :key="'tools-cfa606defc3c9f6e30fbe7005a331abe-' + index"
             >
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <img
                   v-lazy="{
                     //src: '/img/icons-hero/' + data.id + '.jpg',
@@ -69,7 +73,11 @@
               v-for="(data, index) in update.equipmentList"
               :key="'tools-cfa606defc3c9f6e30fbe7005a331abe-' + index"
             >
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <img
                   v-lazy="{
                     //src: '/img/icons-equipment/' + data + '.jpg',
@@ -111,7 +119,11 @@
               v-for="(data, index) in change.skillList.slice(0, 10)"
               :key="'tools-cfa606defc3c9f6e30fbe7005a331abe-' + index"
             >
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <img
                   v-lazy="{
                     //src: '/img/icons-hero/' + data.heroId + '.jpg',
@@ -166,7 +178,11 @@
               v-for="(data, index) in change.equipmentList.slice(0, 25)"
               :key="'tools-cfa606defc3c9f6e30fbe7005a331abe-' + index"
             >
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <img
                   v-lazy="{
                     //src: '/img/icons-hero/' + data.heroId + '.jpg',
@@ -227,7 +243,7 @@ export default {
   name: "toolsWeekly",
   data() {
     return {
-      articleId: parseInt(this.$route.query.articleId) || 0,
+      articleId: Number(this.$route.query.articleId) || 0,
       update: {
         heroList: [],
         equipmentList: [],

@@ -1,211 +1,249 @@
 <template>
   <div class="hero-equipmentListOne app-equipmentListOne">
-    <vxe-table
-      ref="refHeroEquipmentListOne"
-      :data="tableData.result.rows"
-      :loading="tableData.loading"
-      @cell-click="onTableCellClick"
-      height="443"
+    <van-button
+      :style="{
+        position: 'absolute',
+        left: '5px',
+        top: '65px',
+        zIndex: 9999999,
+      }"
+      round
+      color="orange"
+      size="small"
+      @click="show == 'mind' ? (show = 'list') : (show = 'mind')"
     >
-      <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
-        <template #default="{ row }">
-          <div :style="{ position: 'relative' }">
-            <img
-              v-lazy="{
-                //src: '/img/icons-hero/' + row.heroId + '.jpg',
-                //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.heroId + '/' + row.heroId + '.jpg',
-                src:
-                  '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                  row.heroId +
-                  '/' +
-                  row.heroId +
-                  '.jpg',
-              }"
-              width="25"
-              height="25"
-              class="app-border-radius"
-            />
-          </div>
-        </template>
-      </vxe-table-column>
+      切换
+    </van-button>
 
-      <vxe-table-column
-        :title-prefix="{ content: $appMsg.tips[1001] }"
-        title="装备"
-        field="equipmentId"
-        fixed="left"
-        width="50"
+    <HeroMindMap
+      v-if="show == 'mind'"
+      :extraId="extraInfo.id"
+      :extraType="extraInfo.type"
+      :extraList="tableData.result.rows"
+    />
+
+    <div v-else-if="show == 'list'">
+      <vxe-table
+        ref="refHeroEquipmentListOne"
+        :data="tableData.result.rows"
+        :loading="tableData.loading"
+        @cell-click="onTableCellClick"
+        height="443"
       >
-        <template #default="{ row }">
-          <div :style="{ position: 'relative' }">
-            <img
-              v-lazy="{
-                //src: '/img/icons-equipment/' + row.equipmentId + '.jpg',
-                //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.equipmentId + '.jpg',
-                src:
-                  '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
-                  row.equipmentId +
-                  '.jpg',
-              }"
-              width="25"
-              height="25"
-              class="app-border-radius"
-            />
-          </div>
-        </template>
-      </vxe-table-column>
-
-      <vxe-table-column title="#" type="seq" width="50" />
-
-      <vxe-table-column
-        title="顺位"
-        field="maxIndex"
-        :width="listWidth"
-        :title-prefix="{ content: $appMsg.tips[1012] }"
-        sortable
-      />
-
-      <vxe-table-colgroup
-        title="全部 (%)"
-        :title-prefix="{ content: $appMsg.tips[1002] }"
-      >
-        <vxe-table-column
-          title="出场"
-          field="allPickRate"
-          :filters="[{ value: 1, checked: true }]"
-          :filter-method="onTableColumnFilterMethod"
-          :width="listWidth"
-          sortable
-        >
-          <template #filter="{ $panel, column }">
-            ≥
-            <input
-              v-model="option.value"
-              v-for="(option, index) in column.filters"
-              :key="'hero-92423e1b31d3e7fdac76d2ac26c45699-' + index"
-              type="type"
-              placeholder="0"
-              @input="$panel.changeOption($event, !!option.value, option)"
-              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
-            />
-            %
-          </template>
+        <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
-              <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
-                {{ row.allPickRate }}
-              </span>
-              <div
-                v-if="row.change.updateValue != 0"
-                :style="
-                  row.change.updateType == 2
-                    ? { color: 'red !important' }
-                    : { color: 'blue !important' }
-                "
-                class="app-b0704b59dbf144bfeffb53bdb11d7128"
-              >
-                <span class="app-b1275ae967fdbd25d1692fa5e2f547e0">
-                  {{
-                    (row.change.updateType == 2 ? "+" : "-") +
-                    Math.abs(row.change.updateValue)
-                  }}
-                </span>
-
-                <img
-                  v-if="row.change.updateType != 0"
-                  v-lazy="
-                    '/img/icons-app/hot_' + row.change.updateType + '.png'
-                  "
-                  width="15"
-                  height="15"
-                  class="app-db21bca782a535e91eb87f56b8abdc45"
-                />
-              </div>
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
+              <img
+                v-lazy="{
+                  //src: '/img/icons-hero/' + row.heroId + '.jpg',
+                  //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.heroId + '/' + row.heroId + '.jpg',
+                  src:
+                    '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
+                    row.heroId +
+                    '/' +
+                    row.heroId +
+                    '.jpg',
+                }"
+                width="25"
+                height="25"
+                class="app-border-radius"
+              />
             </div>
           </template>
         </vxe-table-column>
 
         <vxe-table-column
-          title="胜率"
-          field="allWinRate"
-          :filters="[{ value: 0 }]"
-          :filter-method="onTableColumnFilterMethod"
-          :width="listWidth"
-          sortable
+          :title-prefix="{ content: $appMsg.tips[1001] }"
+          title="装备"
+          field="equipmentId"
+          fixed="left"
+          width="50"
         >
-          <template #filter="{ $panel, column }">
-            ≥
-            <input
-              v-model="option.value"
-              v-for="(option, index) in column.filters"
-              :key="'hero-92089e17c1e005ddc0336c65dfa6b63b-' + index"
-              type="type"
-              placeholder="0"
-              @input="$panel.changeOption($event, !!option.value, option)"
-              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
-            />
-            %
-          </template>
-        </vxe-table-column>
-      </vxe-table-colgroup>
-
-      <vxe-table-colgroup
-        v-for="(data, index) in 6"
-        :key="'hero-5306afd97611c2ddc21400d0fcd9139c-' + index"
-        :title="'格子_' + (index + 1).toString() + ' (%)'"
-      >
-        <vxe-table-column
-          title="占比"
-          :field="'pickRate_' + index"
-          :filters="[{ value: 0 }]"
-          :filter-method="onTableColumnFilterMethod"
-          :width="listWidth"
-          sortable
-        >
-          <template #filter="{ $panel, column }">
-            ≥
-            <input
-              v-model="option.value"
-              v-for="(option, index) in column.filters"
-              :key="'hero-ec3049b6fc592a98856d838ecfbfc3de-' + index"
-              type="type"
-              placeholder="0"
-              @input="$panel.changeOption($event, !!option.value, option)"
-              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
-            />
-            %
+          <template #default="{ row }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
+              <img
+                v-lazy="{
+                  //src: '/img/icons-equipment/' + row.equipmentId + '.jpg',
+                  //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.equipmentId + '.jpg',
+                  src:
+                    '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
+                    row.equipmentId +
+                    '.jpg',
+                }"
+                width="25"
+                height="25"
+                class="app-border-radius"
+              />
+            </div>
           </template>
         </vxe-table-column>
 
+        <vxe-table-column title="#" type="seq" width="50" />
+
         <vxe-table-column
-          title="胜率"
-          :field="'winRate_' + index"
-          :filters="[{ value: 0 }]"
-          :filter-method="onTableColumnFilterMethod"
+          title="顺位"
+          field="maxIndex"
           :width="listWidth"
+          :title-prefix="{ content: $appMsg.tips[1012] }"
           sortable
+        />
+
+        <vxe-table-colgroup
+          title="全部 (%)"
+          :title-prefix="{ content: $appMsg.tips[1002] }"
         >
-          <template #filter="{ $panel, column }">
-            ≥
-            <input
-              v-model="option.value"
-              v-for="(option, index) in column.filters"
-              :key="'hero-92089e17c1e005ddc0336c65dfa6b63b-' + index"
-              type="type"
-              placeholder="0"
-              @input="$panel.changeOption($event, !!option.value, option)"
-              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
-            />
-            %
-          </template>
-        </vxe-table-column>
-      </vxe-table-colgroup>
-    </vxe-table>
+          <vxe-table-column
+            title="出场"
+            field="allPickRate"
+            :filters="[{ value: 1, checked: true }]"
+            :filter-method="onTableColumnFilterMethod"
+            :width="listWidth"
+            sortable
+          >
+            <template #filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.value"
+                v-for="(option, index) in column.filters"
+                :key="'hero-92423e1b31d3e7fdac76d2ac26c45699-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.value, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+            <template #default="{ row }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
+                <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
+                  {{ row.allPickRate }}
+                </span>
+                <div
+                  v-if="row.change.updateValue != 0"
+                  :style="
+                    row.change.updateType == 2
+                      ? { color: 'red !important' }
+                      : { color: 'blue !important' }
+                  "
+                  class="app-b0704b59dbf144bfeffb53bdb11d7128"
+                >
+                  <span class="app-b1275ae967fdbd25d1692fa5e2f547e0">
+                    {{
+                      (row.change.updateType == 2 ? "+" : "-") +
+                      Math.abs(row.change.updateValue)
+                    }}
+                  </span>
+
+                  <img
+                    v-if="row.change.updateType != 0"
+                    v-lazy="
+                      '/img/icons-app/hot_' + row.change.updateType + '.png'
+                    "
+                    width="15"
+                    height="15"
+                    class="app-db21bca782a535e91eb87f56b8abdc45"
+                  />
+                </div>
+              </div>
+            </template>
+          </vxe-table-column>
+
+          <vxe-table-column
+            title="胜率"
+            field="allWinRate"
+            :filters="[{ value: 0 }]"
+            :filter-method="onTableColumnFilterMethod"
+            :width="listWidth"
+            sortable
+          >
+            <template #filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.value"
+                v-for="(option, index) in column.filters"
+                :key="'hero-92089e17c1e005ddc0336c65dfa6b63b-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.value, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
+        </vxe-table-colgroup>
+
+        <vxe-table-colgroup
+          v-for="(data, index) in 6"
+          :key="'hero-5306afd97611c2ddc21400d0fcd9139c-' + index"
+          :title="'格子_' + (index + 1).toString() + ' (%)'"
+        >
+          <vxe-table-column
+            title="占比"
+            :field="'pickRate_' + index"
+            :filters="[{ value: 0 }]"
+            :filter-method="onTableColumnFilterMethod"
+            :width="listWidth"
+            sortable
+          >
+            <template #filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.value"
+                v-for="(option, index) in column.filters"
+                :key="'hero-ec3049b6fc592a98856d838ecfbfc3de-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.value, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
+
+          <vxe-table-column
+            title="胜率"
+            :field="'winRate_' + index"
+            :filters="[{ value: 0 }]"
+            :filter-method="onTableColumnFilterMethod"
+            :width="listWidth"
+            sortable
+          >
+            <template #filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.value"
+                v-for="(option, index) in column.filters"
+                :key="'hero-92089e17c1e005ddc0336c65dfa6b63b-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.value, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-table-column>
+        </vxe-table-colgroup>
+      </vxe-table>
+    </div>
 
     <van-action-sheet
       v-model="showInfo.actionSheet"
       title=" "
-      :style="{ maxHeight: '450px' }"
+      :style="{
+        maxHeight: '450px',
+      }"
     >
       <template #default>
         <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
@@ -242,11 +280,13 @@
         </div>
 
         <div class="app-2acf2be2c6fdd22f4a6282a72817bdb1">
-          <ChartsEquipmentLine :heroEquipment="lineDataRow" />
+          <ChartsEquipmentLine :extraList="lineDataRow" />
         </div>
 
         <div
-          :style="{ marginTop: '-10px !important' }"
+          :style="{
+            marginTop: '-10px !important',
+          }"
           class="app-61046f2f5eefe3dc179e52af32241062 hero-386260160edfd75a6b62facc140fd3a4"
         >
           <span class="app-e4c9479b11955648dad558fe717a4eb2">
@@ -270,44 +310,42 @@
 export default {
   name: "HeroEquipmentList_One",
   props: {
-    equipmentId: {
+    extraId: {
       type: Number,
       default: 0,
     },
-    equipmentType: {
+    extraType: {
       type: Number,
       default: 1,
     },
   },
   computed: {
     listenChange() {
-      const { equipmentId, equipmentType } = this;
-      return { equipmentId, equipmentType };
+      const { extraId, extraType } = this;
+      return { extraId, extraType };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.equipmentId) return;
+        if (!newValue.extraId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(
-            6,
-            newValue.equipmentType,
-            0,
-            0,
-            newValue.equipmentId
-          );
+          this.show = "list";
+
+          this.getRanking(6, newValue.extraType, 0, 0, newValue.extraId);
         }
       },
     },
   },
   components: {
+    HeroMindMap: () => import("@/components/Hero/MindMap.vue"),
     ChartsEquipmentLine: () => import("@/components/Charts/EquipmentLine.vue"),
   },
   data() {
     return {
+      show: "mind",
       listWidth: 0,
       tableData: {
         loading: false,
@@ -316,10 +354,12 @@ export default {
         },
       },
       lineData: {
+        heroId: null,
         equipmentId: null,
       },
       lineDataRow: {},
-      equipmentInfo: {
+      extraInfo: {
+        id: this.extraId,
         type: 1,
       },
       showInfo: {
@@ -444,19 +484,17 @@ export default {
     },
     onTableCellClick: function ({ row, column }) {
       if (column.property == "heroId") {
-        this.equipmentInfo.type = 1;
-        return this.getRanking(6, this.equipmentInfo.type, 0, 0, row.heroId);
+        this.extraInfo.id = row.heroId;
+        this.extraInfo.type = 1;
+
+        return this.getRanking(6, this.extraInfo.type, 0, 0, row.heroId);
       }
 
       if (column.property == "equipmentId") {
-        this.equipmentInfo.type = 2;
-        return this.getRanking(
-          6,
-          this.equipmentInfo.type,
-          0,
-          0,
-          row.equipmentId
-        );
+        this.extraInfo.id = row.equipmentId;
+        this.extraInfo.type = 2;
+
+        return this.getRanking(6, this.extraInfo.type, 0, 0, row.equipmentId);
       }
 
       this.lineData.heroId = row.heroId;

@@ -8,7 +8,11 @@
             <span>👋 您好，管理员。</span>
           </h1>
           <template #overlay>
-            <a-menu :style="{ width: '100px' }">
+            <a-menu
+              :style="{
+                width: '100px',
+              }"
+            >
               <a-sub-menu key="menu" title="菜单">
                 <a-menu-item
                   @click="
@@ -58,7 +62,7 @@
     >
       <div class="admin-86c07e1e288d644944e82928f72a3db6">
         <a-menu
-          :defaultSelectedKeys="['hot-talk']"
+          :default-selected-keys="['hot-talk']"
           @select="onMenuSelect"
           mode="horizontal"
         >
@@ -229,26 +233,26 @@
                 <van-tab title="顺位">
                   <HeroBPIndex
                     v-if="skillInfo.model == 0"
-                    :heroId="tableData.cardInfo.id"
+                    :extraId="tableData.cardInfo.id"
                   />
                 </van-tab>
                 <van-tab title="打法">
                   <HeroGenreList
                     v-if="skillInfo.model == 1"
-                    :genreId="tableData.cardInfo.id"
+                    :extraId="tableData.cardInfo.id"
                   />
                 </van-tab>
                 <van-tab title="出装">
                   <HeroEquipmentListALL
                     v-if="skillInfo.model == 2"
-                    :heroId="tableData.cardInfo.id"
+                    :extraId="tableData.cardInfo.id"
                   />
                 </van-tab>
                 <van-tab title="出装 (单件)">
                   <HeroEquipmentListOne
                     v-if="skillInfo.model == 3"
-                    :equipmentId="tableData.cardInfo.id"
-                    :equipmentType="1"
+                    :extraId="tableData.cardInfo.id"
+                    :extraType="1"
                   />
                 </van-tab>
                 <van-tab>
@@ -265,7 +269,7 @@
 
                   <HeroInscriptionList
                     v-if="skillInfo.model == 4"
-                    :heroId="tableData.cardInfo.id"
+                    :extraId="tableData.cardInfo.id"
                   />
                 </van-tab>
                 <van-tab

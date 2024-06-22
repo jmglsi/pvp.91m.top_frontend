@@ -20,8 +20,8 @@
 
         <ChartsHeroProgress
           v-if="hero.info.id && hero.info.id < 900"
+          :extraList="progressData.result.rows[hero.info.id]"
           :listWidth="60"
-          :progressData="progressData.result.rows[hero.info.id]"
           class="tools-c63abbfb166e7e598518fe6a7a58c86b"
         />
       </van-button>
@@ -37,7 +37,7 @@
     </div>
 
     <ChartsRankingLine
-      :trend="hero.info.change.trendType"
+      :extraType="hero.info.change.trendType"
       :charts="{
         columns: lineData.result.columns,
         rows: lineData.result.rows[hero.info.id],
@@ -71,7 +71,7 @@
             {{
               ($appConfigInfo.positionInfo[data.positionId + 1 || 0][0] +
                 " | " +
-                parseInt(data.pickRate) || "-") + "%"
+                Number(data.pickRate) || "-") + "%"
             }}
           </van-button>
         </li>

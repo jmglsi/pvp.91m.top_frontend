@@ -18,7 +18,9 @@
         >
           <template #default="{ row }">
             <div
-              :style="{ position: 'relative' }"
+              :style="{
+                position: 'relative',
+              }"
               :class="
                 isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-0b22b207c2b785ceff7a241980f23d14'
@@ -152,10 +154,6 @@
 export default {
   name: "rankingDianFengSai",
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     bid: {
       type: Number,
       default: 0,
@@ -171,6 +169,10 @@ export default {
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

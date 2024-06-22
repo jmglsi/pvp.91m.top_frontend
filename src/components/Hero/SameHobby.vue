@@ -11,9 +11,17 @@
             v-for="(data, index) in tableData.result.rows"
             :key="'hero-c0fbe3299b9f6d7787c3c413f35fbfae-' + index"
             class="app-1951b6e7c82938dd7446a41e829b247b"
-            @click="$appPush({ path: data.to })"
+            @click="
+              $appPush({
+                path: data.to,
+              })
+            "
           >
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <img
                 v-if="data.fightPowerIcon"
                 v-lazy="data.fightPowerIcon"
@@ -76,24 +84,24 @@
 export default {
   name: "HeroSameHobby",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { extraId } = this;
+      return { extraId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
-        this.getHeroInfoByWebAccountList(newValue.heroId, 0);
+        this.getHeroInfoByWebAccountList(newValue.extraId, 0);
       },
     },
   },

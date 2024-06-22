@@ -13,7 +13,13 @@
         class="game-b3d70a861f68652bf97d7a26bf421d4f"
       >
         请将设备横过来 或
-        <span :style="{ color: 'red !important' }">点击这里</span> 切换横屏
+        <span
+          :style="{
+            color: 'red !important',
+          }"
+          >点击这里</span
+        >
+        切换横屏
       </div>
       <div
         @click="
@@ -34,14 +40,18 @@
     <span class="app-f4842dcb685d490e2a43212b8072a6fe">
       <span
         class="game-d4f94e5b8f23a1755b438ff70ed16fc6"
-        :style="{ color: 'blue !important' }"
+        :style="{
+          color: 'blue !important',
+        }"
       >
         {{ gameInfo.result.rows[tabsInfo.model].team.team_1.name }}
       </span>
       <span class="game-80653328482d7cba8da3f0fa033b0c12">Vs</span>
       <span
         class="game-1426b22460332d802aedd4d54d35f3ee"
-        :style="{ color: 'red !important' }"
+        :style="{
+          color: 'red !important',
+        }"
       >
         {{ gameInfo.result.rows[tabsInfo.model].team.team_2.name }}
       </span>
@@ -217,7 +227,9 @@
                   />
                   <span
                     v-if="showInfo.index == 1"
-                    :style="{ textAlign: 'left' }"
+                    :style="{
+                      textAlign: 'left',
+                    }"
                     class="game-7ac4fc59b483c826ad0441884322b71a"
                   >
                     {{ index + 1 }}
@@ -432,7 +444,10 @@
                 >
                   <span
                     v-if="showInfo.index == 1"
-                    :style="{ marginLeft: '-15px', textAlign: 'right' }"
+                    :style="{
+                      marginLeft: '-15px',
+                      textAlign: 'right',
+                    }"
                     class="game-7ac4fc59b483c826ad0441884322b71a"
                   >
                     {{ index + 1 }}
@@ -571,7 +586,9 @@
           <span>
             <span
               class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-              :style="{ color: 'red !important' }"
+              :style="{
+                color: 'red !important',
+              }"
             >
               已禁
             </span>
@@ -588,7 +605,9 @@
             <span>
               <span
                 class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-                :style="{ color: 'orange !important' }"
+                :style="{
+                  color: 'orange !important'
+                }"
               >
                 已用
               </span>
@@ -611,7 +630,9 @@
               <span>
                 <span
                   class="game-59b9fd83bc5ce802ee9ace7db0e22522"
-                  :style="{ color: '#1989fa !important' }"
+                  :style="{
+                    color: '#1989fa !important'
+                  }"
                 >
                   推荐
                 </span>
@@ -642,7 +663,7 @@
                 </span>
               </template>
               <template slot="content">
-                <GameRecommend :heroId="recommendHeroId" />
+                <GameRecommend :extraId="recommendHeroId" />
               </template>
             </a-popover>
           -->
@@ -768,7 +789,10 @@
           </van-button>
         </div>
         <van-divider
-          :style="{ color: 'red !important', borderColor: 'red !important' }"
+          :style="{
+            color: 'red !important',
+            borderColor: 'red !important',
+          }"
         >
           以下功能慎用
         </van-divider>
@@ -791,12 +815,12 @@
       class="app-69df17da0044a6e876b2afd3217d2564"
     >
       <ChartsGameLine
-        :arrData="
+        :extraType="0"
+        :extraList="
           gameInfo.result.rows[tabsInfo.model].blue.pick +
           '|' +
           gameInfo.result.rows[tabsInfo.model].red.pick
         "
-        :trendType="0"
       />
     </van-popup>
 
@@ -1031,7 +1055,9 @@ export default {
 
       this.getRanking();
     } else {
-      return this.$appPush({ path: "/game" });
+      return this.$appPush({
+        path: "/game",
+      });
     }
   },
   unmounted() {
@@ -1405,7 +1431,9 @@ export default {
             if (nowIndex == 0) {
               tabsModel = 0;
 
-              this.$appPush({ path: "/game/engage" });
+              this.$appPush({
+                path: "/game/engage",
+              });
             } else {
               this.gameInfo.result.rows.splice(nowIndex, 1);
               tabsModel = nowIndex - 1;

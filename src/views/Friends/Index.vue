@@ -97,9 +97,17 @@
                   v-for="(data, index) in friendsInfo.heroList"
                   :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
                   class="app-1951b6e7c82938dd7446a41e829b247b"
-                  @click="$appPush({ path: '/hero/' + data.id + '/info' })"
+                  @click="
+                    $appPush({
+                      path: '/hero/' + data.id + '/info',
+                    })
+                  "
                 >
-                  <div :style="{ position: 'relative' }">
+                  <div
+                    :style="{
+                      position: 'relative',
+                    }"
+                  >
                     <img
                       v-lazy="{
                         //src: '/img/icons-hero/' + data.id + '.jpg',

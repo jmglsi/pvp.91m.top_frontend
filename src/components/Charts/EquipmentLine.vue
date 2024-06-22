@@ -33,24 +33,24 @@ export default {
     VeLine,
   },
   props: {
-    heroEquipment: {
+    extraList: {
       type: Object,
       default: () => ({}),
     },
   },
   computed: {
     listenChange() {
-      const { heroEquipment } = this;
-      return { heroEquipment };
+      const { extraList } = this;
+      return { extraList };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroEquipment == {}) return;
+        if (newValue.extraList == {}) return;
 
-        this.lineData.result = newValue.heroEquipment;
+        this.lineData.result = newValue.extraList;
 
         this.lineData.loading = false;
       },

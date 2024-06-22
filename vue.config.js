@@ -6,6 +6,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   productionSourceMap: false,
+  transpileDependencies: ['simple-mind-map'],
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       /*

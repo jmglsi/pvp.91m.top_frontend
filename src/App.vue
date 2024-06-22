@@ -1,5 +1,10 @@
 <template>
-  <div id="app" :style="{ zoom: zoom }">
+  <div
+    id="app"
+    :style="{
+      zoom: zoom,
+    }"
+  >
     <div v-watermark="watermark" class="app-63c4cfbde5ad50f3f537c2540374995e">
       <div v-if="$appIsApple && $appConfigInfo.appInfo.pwa == 1">
         <div
@@ -13,7 +18,9 @@
         />
         <div
           v-if="showInfo.whiteBar"
-          :style="{ backgroundColor: 'white !important' }"
+          :style="{
+            backgroundColor: 'white !important',
+          }"
           class="app-4789d9440d92b2647ea8a52c2f5b31b5"
         />
       </div>
@@ -228,7 +235,7 @@ export default {
         whiteBar = false,
         tabbar = false,
         path = to.path,
-        isRobot = this.$isRobot,
+        isRobot = this.$appIsRobot,
         name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
         accessToken = this.$cookie.get("accessToken") || null;
 
@@ -266,7 +273,7 @@ export default {
       /ranking/i.test(path) == true ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /^\/(tools|admin|miniapp|bilibili|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game)/i.test(
+      /^\/(tools|admin|miniapp|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game)/i.test(
         path
       ) == true
         ? (tabbar = false)
@@ -505,6 +512,15 @@ export default {
   position: absolute;
   text-align: center;
   width: 100%;
+}
+
+#mindMapContainer {
+  margin: 0;
+  padding: 0;
+  height: 446px;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(237, 237, 237) !important;
 }
 
 .app-bda9643ac6601722a28f238714274da4 {
@@ -830,7 +846,6 @@ div.app-76da017caccd1fb264af2218f6064b0d {
   height: 740px;
   overflow: auto;
   padding-bottom: 25px;
-  padding-left: 250px;
   padding-right: 25px;
   padding-top: 25px;
   position: absolute;
@@ -1013,7 +1028,7 @@ div.app-71c40c24a80f0a5cda72f93d3af1d904 {
 }
 
 div.app-61046f2f5eefe3dc179e52af32241062 {
-  margin: 0 15px 25px 15px;
+  margin: 15px;
   text-align: @app-text-align;
 }
 

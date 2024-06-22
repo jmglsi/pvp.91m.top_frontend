@@ -120,7 +120,6 @@ Vue.prototype.$axios = axios;
 
 const appApi = baseUrl;
 
-//const biliApi = baseUrl + "?method=bilibili";
 const gameApi = baseUrl + "?method=game";
 const loginApi = baseUrl + "?method=login";
 const robotApi = baseUrl + "?method=robot";

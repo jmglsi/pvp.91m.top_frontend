@@ -13,7 +13,10 @@
           <template #title>
             T
             <span
-              :style="{ color: 'red !important', fontSize: '30px' }"
+              :style="{
+                color: 'red !important',
+                fontSize: '30px',
+              }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
             >
               0
@@ -44,7 +47,7 @@
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <ChartsHeroCircle
-                    :progressData="progressData.result.rows[data.id]"
+                    :extraList="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
                 <img
@@ -71,7 +74,9 @@
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
-                    :style="{ left: '-10px' }"
+                    :style="{
+                      left: '-10px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
@@ -92,7 +97,9 @@
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
-                    :style="{ left: '45px' }"
+                    :style="{
+                      left: '45px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
@@ -133,7 +140,9 @@
           <template #title>
             T
             <span
-              :style="{ color: '#fa8072 !important' }"
+              :style="{
+                color: '#fa8072 !important',
+              }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
             >
               0.5
@@ -165,7 +174,7 @@
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <ChartsHeroCircle
-                    :progressData="progressData.result.rows[data.id]"
+                    :extraList="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
                 <img
@@ -192,7 +201,9 @@
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
-                    :style="{ left: '-10px' }"
+                    :style="{
+                      left: '-10px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
@@ -213,7 +224,9 @@
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
-                    :style="{ left: '45px' }"
+                    :style="{
+                      left: '45px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
@@ -254,7 +267,9 @@
           <template #title>
             T
             <span
-              :style="{ color: 'orange !important' }"
+              :style="{
+                color: 'orange !important',
+              }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
             >
               1
@@ -285,7 +300,7 @@
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <ChartsHeroCircle
-                    :progressData="progressData.result.rows[data.id]"
+                    :extraList="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
                 <img
@@ -312,7 +327,9 @@
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
-                    :style="{ left: '-10px' }"
+                    :style="{
+                      left: '-10px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
@@ -333,7 +350,9 @@
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
-                    :style="{ left: '45px' }"
+                    :style="{
+                      left: '45px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
@@ -374,7 +393,9 @@
           <template #title>
             T
             <span
-              :style="{ color: '#3d9140 !important' }"
+              :style="{
+                color: '#3d9140 !important',
+              }"
               class="ranking-0eef127325d38ed4804c26bd7c88bab3"
             >
               2
@@ -405,7 +426,7 @@
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <ChartsHeroCircle
-                    :progressData="progressData.result.rows[data.id]"
+                    :extraList="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
                 <img
@@ -432,7 +453,9 @@
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
-                    :style="{ left: '-10px' }"
+                    :style="{
+                      left: '-10px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
@@ -453,7 +476,9 @@
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
-                    :style="{ left: '45px' }"
+                    :style="{
+                      left: '45px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
@@ -520,7 +545,7 @@
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <ChartsHeroCircle
-                    :progressData="progressData.result.rows[data.id]"
+                    :extraList="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
                 <img
@@ -547,7 +572,9 @@
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
-                    :style="{ left: '-10px' }"
+                    :style="{
+                      left: '-10px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
@@ -568,7 +595,9 @@
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
-                    :style="{ left: '45px' }"
+                    :style="{
+                      left: '45px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
@@ -633,7 +662,7 @@
               >
                 <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                   <ChartsHeroCircle
-                    :progressData="progressData.result.rows[data.id]"
+                    :extraList="progressData.result.rows[data.id]"
                   />
                 </lazy-component>
                 <img
@@ -660,7 +689,9 @@
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
-                    :style="{ left: '-10px' }"
+                    :style="{
+                      left: '-10px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
@@ -681,7 +712,9 @@
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
-                    :style="{ left: '45px' }"
+                    :style="{
+                      left: '45px',
+                    }"
                     width="15"
                     height="15"
                     class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
@@ -717,7 +750,9 @@
     <div class="ranking-2862744e5d7cce9d070aa41172557d78">
       英雄梯度由
       <span
-        :style="{ color: '#1989fa !important' }"
+        :style="{
+          color: '#1989fa !important',
+        }"
         @click="
           $appPush({
             path: '/friends',
@@ -729,7 +764,9 @@
       </span>
       和
       <span
-        :style="{ color: '#1989fa !important' }"
+        :style="{
+          color: '#1989fa !important',
+        }"
         @click="
           $appPush({
             path: '/friends',
@@ -742,7 +779,11 @@
       提供
       <br />
       最后更新时间：
-      <span :style="{ color: 'red !important' }">
+      <span
+        :style="{
+          color: 'red !important',
+        }"
+      >
         {{ tableData.result.updateTime || "等待更新" }}
       </span>
       <br />
@@ -751,7 +792,9 @@
       <br />
       <br />
       <span
-        :style="{ color: 'orange !important' }"
+        :style="{
+          color: 'orange !important',
+        }"
         @click="
           tableData.result.url
             ? $appOpenUrl(
@@ -782,26 +825,26 @@
             <van-tab title="顺位">
               <HeroBPIndex
                 v-if="skillInfo.model == 0"
-                :heroId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="打法">
               <HeroGenreList
                 v-if="skillInfo.model == 1"
-                :genreId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装">
               <HeroEquipmentListALL
                 v-if="skillInfo.model == 2"
-                :heroId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab title="出装 (单件)">
               <HeroEquipmentListOne
                 v-if="skillInfo.model == 3"
-                :equipmentId="tableDataRow.id"
-                :equipmentType="1"
+                :extraId="tableDataRow.id"
+                :extraType="1"
               />
             </van-tab>
             <van-tab>
@@ -814,7 +857,7 @@
 
               <HeroInscriptionList
                 v-if="skillInfo.model == 4"
-                :heroId="tableDataRow.id"
+                :extraId="tableDataRow.id"
               />
             </van-tab>
             <van-tab
@@ -831,7 +874,7 @@
       v-if="showInfo.heroSameHobby"
       class="ranking-d742492b2526d57a222af9b54040b3b4"
     >
-      <HeroSameHobby :heroId="tableDataRow.id" />
+      <HeroSameHobby :extraId="tableDataRow.id" />
     </div>
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
@@ -1130,9 +1173,11 @@ export default {
       }
 
       /*
-        if (item.value == 1) {
-          this.$appPush({ path: "/hero/" + heroInfo.id + "/equipment" });
-        }
+      if (item.value == 1) {
+        this.$appPush({
+          path: "/hero/" + heroInfo.id + "/equipment",
+        });
+      }
       */
 
       if (item.value == 2) {

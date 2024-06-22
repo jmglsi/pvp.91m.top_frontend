@@ -26,7 +26,9 @@
         >
           <template #default="{ row }">
             <div
-              :style="{ position: 'relative' }"
+              :style="{
+                position: 'relative',
+              }"
               :class="
                 isSmallMode ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
@@ -90,7 +92,11 @@
             sortable
           >
             <template #default="{ row }">
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                   {{ row.allPickRate }}
                 </span>
@@ -152,8 +158,8 @@
         <template #default>
           <HeroEquipmentListOne
             v-if="showInfo.skillActionSheet"
-            :equipmentId="tableDataRow.id"
-            :equipmentType="2"
+            :extraId="tableDataRow.id"
+            :extraType="2"
           />
         </template>
       </van-action-sheet>
@@ -169,13 +175,13 @@ export default {
       import("@/components/Hero/EquipmentList_One.vue"),
   },
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -220,7 +226,7 @@ export default {
   methods: {
     initPage: function () {
       let q = this.$route.query,
-        equipmentId = parseInt(q.equipmentId) || 0,
+        equipmentId = Number(q.equipmentId) || 0,
         equipmentName = q.equipmentName || this.$t("loading");
 
       if (equipmentId) {
