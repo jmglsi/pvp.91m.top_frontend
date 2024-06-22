@@ -18,7 +18,9 @@
         >
           <template #default="{ row }">
             <div
-              :style="{ position: 'relative' }"
+              :style="{
+                position: 'relative',
+              }"
               :class="
                 isSmallMode ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4' : null
               "
@@ -63,8 +65,8 @@
         <template #default>
           <HeroFightPower
             v-if="showInfo.actionSheet"
-            :heroId="tableDataRow.id"
-            :fightPowerType="did"
+            :extraId="tableDataRow.id"
+            :extraType="did"
           />
         </template>
       </van-action-sheet>
@@ -101,10 +103,6 @@ export default {
     };
   },
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     bid: {
       type: Number,
       default: 0,
@@ -120,6 +118,10 @@ export default {
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

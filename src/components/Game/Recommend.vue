@@ -79,26 +79,26 @@
 export default {
   name: "GameRecommend",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { extraId } = this;
+      return { extraId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (newValue.heroId == 0) return;
+        if (newValue.extraId == 0) return;
 
         this.lineData.result = [];
 
-        //this.getGamePrediction(newValue.heroId, newValue.trendType);
+        //this.getGamePrediction(newValue.extraId, newValue.trendType);
       },
     },
   },

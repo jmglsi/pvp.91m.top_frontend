@@ -51,7 +51,9 @@
                 </div>
                 <div>
                   <span
-                    :style="{ color: topInfo[1].tag.color }"
+                    :style="{
+                      color: topInfo[1].tag.color,
+                    }"
                     class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     2
@@ -102,7 +104,9 @@
                 </div>
                 <div>
                   <span
-                    :style="{ color: topInfo[0].tag.color }"
+                    :style="{
+                      color: topInfo[0].tag.color,
+                    }"
                     class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     1
@@ -142,7 +146,9 @@
                 </div>
                 <div>
                   <span
-                    :style="{ color: topInfo[2].tag.color }"
+                    :style="{
+                      color: topInfo[2].tag.color,
+                    }"
                     class="return-279a4b0330c1a4ef39cde3a334a9c652"
                   >
                     3
@@ -189,7 +195,11 @@
                 >{{ row.skinName }}</van-tag
               >
 
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <img
                   v-lazy="row.skinImg"
                   width="35"
@@ -220,7 +230,11 @@
             sortable
           >
             <template #default="{ row }">
-              <div :style="{ position: 'relative' }">
+              <div
+                :style="{
+                  position: 'relative',
+                }"
+              >
                 <div>{{ row.allVoteNum }}</div>
                 <span
                   v-if="row.needVote > 0"
@@ -276,7 +290,7 @@ import "echarts/lib/component/dataZoom";
 import "echarts/lib/component/markLine";
 import "echarts/lib/component/markPoint";
 
-import 'zrender/lib/svg/svg';
+import "zrender/lib/svg/svg";
 
 export default {
   name: "skinReturnIndex",
@@ -286,7 +300,7 @@ export default {
   },
   data() {
     return {
-      type: parseInt(this.$route.query.type) || 0,
+      type: Number(this.$route.query.type) || 0,
       tableData: {
         loading: true,
         result: {

@@ -259,13 +259,13 @@
         <div class="hero-e06398232dc80e41209489705546802c">
           <HeroHistogram
             v-if="tabsInfo.model == 0 && trendInfo.model == 0"
+            :extraId="hero.info.id"
             :aid="trendInfo.model"
-            :heroId="hero.info.id"
           />
           <ChartsHeroLine
             v-else-if="tabsInfo.model == 0 && trendInfo.model > 0"
+            :extraId="hero.info.id"
             :aid="trendInfo.model"
-            :heroId="hero.info.id"
           />
         </div>
         <div
@@ -275,7 +275,7 @@
           <ChartsHeroRadar
             v-if="tabsInfo.model > 0"
             :tabsModel="tabsInfo.model"
-            :heroId="hero.info.id"
+            :extraId="hero.info.id"
           />
         </div>
       </van-tabs>
@@ -292,13 +292,13 @@
         class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
       >
         <div id="heroSameHobby" class="hero-b7b5e31b028440d2e0e0157baad49513">
-          <HeroSameHobby :heroId="hero.info.id" />
+          <HeroSameHobby :extraId="hero.info.id" />
         </div>
 
         <div class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroUpdate
             v-if="hero.info.id && hero.info.id < 900"
-            :heroId="hero.info.id"
+            :extraId="hero.info.id"
             :updateId="hero.info.updateId"
           />
         </div>
@@ -318,19 +318,16 @@
             @click="onSkillTabsClick"
           >
             <van-tab title="顺位">
-              <HeroBPIndex :heroId="hero.info.id" />
+              <HeroBPIndex :extraId="hero.info.id" />
             </van-tab>
             <van-tab title="打法">
-              <HeroGenreList :genreId="hero.info.id" />
+              <HeroGenreList :extraId="hero.info.id" />
             </van-tab>
             <van-tab title="出装">
-              <HeroEquipmentListALL :heroId="hero.info.id" />
+              <HeroEquipmentListALL :extraId="hero.info.id" />
             </van-tab>
             <van-tab title="出装 (单件)">
-              <HeroEquipmentListOne
-                :equipmentId="hero.info.id"
-                :equipmentType="1"
-              />
+              <HeroEquipmentListOne :extraId="hero.info.id" :extraType="1" />
             </van-tab>
             <van-tab>
               <template #title>
@@ -340,7 +337,7 @@
                 <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
               </template>
 
-              <HeroInscriptionList :heroId="hero.info.id" />
+              <HeroInscriptionList :extraId="hero.info.id" />
             </van-tab>
           </van-tabs>
         </template>

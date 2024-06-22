@@ -34,30 +34,30 @@ export default {
     VeLine,
   },
   props: {
-    arrData: {
-      type: String,
-      default: "",
-    },
-    trendType: {
+    extraType: {
       type: Number,
       default: 0,
+    },
+    extraList: {
+      type: String,
+      default: "",
     },
   },
   computed: {
     listenChange() {
-      const { arrData, trendType } = this;
-      return { arrData, trendType };
+      const { extraList, extraType } = this;
+      return { extraList, extraType };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.arrData) return;
+        if (!newValue.extraList) return;
 
         this.lineData.result = [];
 
-        this.getGamePrediction(newValue.arrData, newValue.trendType);
+        this.getGamePrediction(newValue.extraList, newValue.extraType);
       },
     },
   },

@@ -30,13 +30,13 @@
           v-model="loginInfo.data.name"
           v-if="loginInfo.type == 0"
           left-icon="/img/icons-app/user.png"
-          placeholder="请输入用户名 (仅支持中英文数字)"
+          placeholder="请输入用户名 (仅支持中英文数字，2~8 字)"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.email"
           left-icon="/img/icons-app/email.png"
-          placeholder="请输入邮箱"
+          placeholder="请输入邮箱 例如：admin@91m.top"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
@@ -155,6 +155,7 @@
         <p>注:</p>
         <p>1.信息是加密储存的</p>
         <p>2.用户名 和 QQ 将用于扩列、BP界面、找回密码，请不要瞎写</p>
+        <p>3.用浏览器记住密码的请优先记录邮箱</p>
       </span>
     </div>
 
@@ -237,7 +238,9 @@ export default {
     },
     onNavBarLeftClick: function () {
       if (this.loginInfo.type == 1) {
-        this.$appPush({ path: '/my' });
+        this.$appPush({
+          path: "/my",
+        });
       } else {
         this.loginInfo.type = 1;
         this.loginInfo.text = this.$t("my.login");

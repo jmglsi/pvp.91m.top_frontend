@@ -81,7 +81,7 @@ export default {
       let stack = [];
 
       while (arr.length) {
-        let index = parseInt(Math.random() * arr.length);
+        let index = Number(Math.random() * arr.length);
 
         stack.push(arr[index]);
         arr.splice(index, 1);

@@ -231,7 +231,7 @@
       class="app-69df17da0044a6e876b2afd3217d2564 ranking-31c631534a3cec9ed2c5283f653a06aa"
     >
       <a-input-search
-        :defaultValue="searchInfo.defaultValue"
+        :default-value="searchInfo.defaultValue"
         @search="onInputSearch"
         enter-button
         placeholder="试一试搜索阿离"
@@ -469,10 +469,10 @@ export default {
         wanjiaTips = ls.tipsInfo.wanjiaTips || false;
 
       this.heroName = q.heroName || "";
-      this.tabsInfo.model = parseInt(q.type) || 0;
-      q.bid ? (this.bid = parseInt(q.bid)) : (this.bid = 0);
-      q.cid ? (this.cid = parseInt(q.cid)) : (this.cid = 0);
-      q.did ? (this.did = parseInt(q.did)) : (this.did = 0);
+      this.tabsInfo.model = Number(q.type) || 0;
+      q.bid ? (this.bid = Number(q.bid)) : (this.bid = 0);
+      q.cid ? (this.cid = Number(q.cid)) : (this.cid = 0);
+      q.did ? (this.did = Number(q.did)) : (this.did = 0);
       q.gc ? (this.gc = q.gc) : (this.gc = "");
 
       if (!dfsTips || !skillTips || !wanjiaTips) {
@@ -518,11 +518,11 @@ export default {
     },
     initShow: function (q) {
       this.heroName = q.heroName || "";
-      this.bid = parseInt(q.bid) || 0;
-      this.cid = parseInt(q.cid) || 0;
-      this.did = parseInt(q.did) || 0;
+      this.bid = Number(q.bid) || 0;
+      this.cid = Number(q.cid) || 0;
+      this.did = Number(q.did) || 0;
       this.viewInfo.model = q.eid || "a";
-      this.refresh = parseInt(q.refresh) || 0;
+      this.refresh = Number(q.refresh) || 0;
     },
     onTabsClick: function (e) {
       if (e == 0) {

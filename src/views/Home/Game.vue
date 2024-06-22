@@ -11,7 +11,11 @@
           v-for="(data, index) in tableData.result.rows"
           :key="'game-b02986e365a0828581dffc56b591ffa9-' + index"
           :border="false"
-          @click="$appPush({ path: '/game/' + data.game.label + '/bp' })"
+          @click="
+            $appPush({
+              path: '/game/' + data.game.label + '/bp',
+            })
+          "
           class="game-ed4838a6d4554b1829c7f86a58e3f20f"
         >
           <template #title>

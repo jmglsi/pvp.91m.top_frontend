@@ -62,13 +62,25 @@
       class="hero-45af63c525ab541863e3e50f2f52c934"
     >
       <div class="hero-da4fb4d6fd537e447df2bda7175dfb30">
+        <h3>铜牌</h3>
+        <ul class="hero-808c832aed5231b27514e2f46c89f06f">
+          <li
+            v-for="(data, index) in paiziData.result.tongpai_list"
+            :key="'hero-211b6ce6196c920a37d216fdf52d3f3e-' + index"
+          >
+            {{ data.city }}：{{ data.zhanli }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-da4fb4d6fd537e447df2bda7175dfb30">
         <h3>银牌</h3>
         <ul class="hero-808c832aed5231b27514e2f46c89f06f">
           <li
             v-for="(data, index) in paiziData.result.yinpai_list"
             :key="'hero-3a2ef6246515b12e951994a8ee67a1d2-' + index"
           >
-            {{ data.province }} - {{ data.city }}：{{ data.zhanli }}
+            {{ data.city }}：{{ data.zhanli }}
           </li>
         </ul>
       </div>
@@ -80,7 +92,7 @@
             v-for="(data, index) in paiziData.result.jinpai_list"
             :key="'hero-30eb8bc8bc47b22eaf9ef7a89765c90f-' + index"
           >
-            {{ data.province }}：{{ data.zhanli }}
+            {{ data.city }}：{{ data.zhanli }}
           </li>
         </ul>
       </div>
@@ -92,13 +104,17 @@
             v-for="(data, index) in paiziData.result.xiaoguobiao_list"
             :key="'hero-211b6ce6196c920a37d216fdf52d3f3e-' + index"
           >
-            全国：{{ data.zhanli }}
+            {{ data.city }}：{{ data.zhanli }}
           </li>
         </ul>
       </div>
 
       <div class="hero-175c358c9271d591abf0163679968135">
-        <van-divider :style="{ padding: '0 16px' }">
+        <van-divider
+          :style="{
+            padding: '0 16px',
+          }"
+        >
           <van-popover
             v-model="showInfo.popoverArea"
             trigger="click"
@@ -113,6 +129,14 @@
             </template>
           </van-popover>
         </van-divider>
+
+        <div class="hero-7c7f825106f6288d7e5bea8012e23041">
+          <span class="hero-04ad1b6577bcddb707fdd0b80abe2e78">
+            牌子由
+            <span style="color: rgb(25, 137, 250) !important">遇见导航</span>
+            提供
+          </span>
+        </div>
       </div>
     </div>
 
@@ -150,7 +174,11 @@
       </div>
 
       <div class="hero-175c358c9271d591abf0163679968135">
-        <van-divider :style="{ padding: '0 16px' }">
+        <van-divider
+          :style="{
+            padding: '0 16px',
+          }"
+        >
           今天上线的皮肤，隔日更新 (仅供参考)
         </van-divider>
 
@@ -180,7 +208,7 @@
       </div>
     </div>
 
-    <AppHello height="100px" />
+    <AppHello height="150px" />
   </div>
 </template>
 

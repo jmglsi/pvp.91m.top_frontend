@@ -39,29 +39,29 @@ export default {
     VueTagsInput: () => import("@johmun/vue-tags-input"),
   },
   props: {
-    tabsModel: {
+    extraId: {
       type: Number,
       default: 0,
     },
-    heroId: {
+    tabsModel: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { tabsModel, heroId } = this;
-      return { tabsModel, heroId };
+      const { extraId, tabsModel } = this;
+      return { extraId, tabsModel };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
         if (newValue.tabsModel == 1) {
-          this.getHeroChartsLog(4, newValue.heroId, "");
+          this.getHeroChartsLog(4, newValue.extraId, "");
         } else {
           this.tag.array = [];
         }

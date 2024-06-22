@@ -3,9 +3,11 @@
     <div class="ranking-b4f7c7e8fa453e4f092e63945c548a2f">
       <van-circle
         v-model="currentRate[0]"
-        :rate="progressData[0] * 0.25"
+        :rate="extraList[0] * 0.25"
         :clockwise="false"
-        :style="{ zIndex: '2 !important' }"
+        :style="{
+          zIndex: '2 !important',
+        }"
         size="60px"
         color="green"
       />
@@ -13,9 +15,11 @@
     <div class="ranking-b4f7c7e8fa453e4f092e63945c548a2f">
       <van-circle
         v-model="currentRate[1]"
-        :rate="(progressData[0] + progressData[1]) * 0.25"
+        :rate="(extraList[0] + extraList[1]) * 0.25"
         :clockwise="false"
-        :style="{ zIndex: '1 !important' }"
+        :style="{
+          zIndex: '1 !important',
+        }"
         size="60px"
         color="orange"
       />
@@ -25,7 +29,9 @@
         v-model="currentRate[2]"
         :rate="25"
         :clockwise="false"
-        :style="{ zIndex: '0 !important' }"
+        :style="{
+          zIndex: '0 !important',
+        }"
         size="60px"
         color="red"
       />
@@ -37,7 +43,7 @@
 export default {
   name: "ChartsHeroCircle",
   props: {
-    progressData: {
+    extraList: {
       type: Array,
       default: () => {
         return [];

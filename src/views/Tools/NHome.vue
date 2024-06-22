@@ -257,7 +257,9 @@
                       &nbsp;
                     </span>
                     <span
-                      :style="{ color: 'rgb(' + data.color[0] + ')' }"
+                      :style="{
+                        color: 'rgb(' + data.color[0] + ')',
+                      }"
                       class="n-0a0aced2a9def01994f24aec79c15122"
                     >
                       {{ index == 0 ? "一团" : data.name }} &nbsp; ({{
@@ -358,7 +360,9 @@
                       &nbsp;
                     </span>
                     <span
-                      :style="{ color: 'rgb(' + data.color[0] + ')' }"
+                      :style="{
+                        color: 'rgb(' + data.color[0] + ')',
+                      }"
                       class="n-0a0aced2a9def01994f24aec79c15122"
                     >
                       {{ index == 0 ? "二团" : data.name }} &nbsp; ({{
@@ -429,7 +433,9 @@
         v-if="gameLabel"
         v-model="showInfo.popup"
         position="top"
-        :style="{ height: '30%' }"
+        :style="{
+          height: '30%',
+        }"
       >
         <div class="n-3f8de12aae28c954ba0ccf610da2a648">
           <div class="n-3a7f5ddf6c68a1694bf9b542e8876835">
@@ -630,7 +636,9 @@
     <div class="n-8cf6000423c44588ad4bba401804890c">
       该灵感由帮会
       <span
-        :style="{ color: '#1989fa !important' }"
+        :style="{
+          color: '#1989fa !important',
+        }"
         @click="
           $appPush({
             path: '/friends',
@@ -1473,7 +1481,9 @@ export default {
       let copyData = "";
 
       if (index == 0) {
-        this.$appPush({ path: "/tools/n/home?gameLabel=" + this.nowGameLabel });
+        this.$appPush({
+          path: "/tools/n/home?gameLabel=" + this.nowGameLabel,
+        });
       } else if (index == 1) {
         copyData =
           "链接:" +
@@ -1620,7 +1630,9 @@ export default {
           }
         });
 
-      this.$appPush({ path: "/tools/n/home" });
+      this.$appPush({
+        path: "/tools/n/home",
+      });
     },
     onCreateRoleClick: function (nName, nType, description, aid = 1) {
       this.$axios
@@ -1760,7 +1772,9 @@ export default {
 
       this.getGameHome(1);
 
-      this.$appPush({ path: "/tools/n/home" });
+      this.$appPush({
+        path: "/tools/n/home",
+      });
     },
     onTitleClick: function () {
       if (this.showInfo.popup == false) {

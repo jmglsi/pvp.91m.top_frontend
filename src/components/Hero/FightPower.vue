@@ -111,7 +111,11 @@
 
               <vxe-table-column type="expand" width="50">
                 <template #content="{ row, rowIndex }">
-                  <div :style="{ position: 'relative' }">
+                  <div
+                    :style="{
+                      position: 'relative',
+                    }"
+                  >
                     <img
                       v-if="row.fightPowerImg"
                       v-lazy="row.fightPowerImg"
@@ -182,19 +186,19 @@
 export default {
   name: "HeroFightPower",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
-    fightPowerType: {
+    extraType: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId, fightPowerType } = this;
-      return { heroId, fightPowerType };
+      const { extraId, extraType } = this;
+      return { extraId, extraType };
     },
   },
   data() {
@@ -289,7 +293,7 @@ export default {
 
       this.$message.info(
         "请上传查询英雄的 " +
-          this.$appColumnsInfo.fightPowerType.text[this.fightPowerType] +
+          this.$appColumnsInfo.fightPowerType.text[this.extraType] +
           " 图片，此图片仅供参考"
       );
     },
@@ -301,7 +305,7 @@ export default {
       }
 
       let postData = {
-        fightPowerType: this.fightPowerType,
+        fightPowerType: this.extraType,
         fightPowerImg: fightPower.img,
         fightPowerValue: fightPower.value,
       };
@@ -310,7 +314,7 @@ export default {
         .post(
           this.$appApi.app.addHeroFightPowerByWebAccount +
             "&heroId=" +
-            this.heroId,
+            this.extraId,
           this.$qs.stringify(postData)
         )
         .then((res) => {
@@ -357,7 +361,7 @@ export default {
     },
     onTabsClick: function (e) {
       if (e == 1) {
-        this.getRanking(this.heroId, 10, 0, 0, this.fightPowerType);
+        this.getRanking(this.extraId, 10, 0, 0, this.extraType);
       }
     },
     onTableColumnFilterMethod: function ({ option, row, column }) {

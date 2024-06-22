@@ -99,7 +99,11 @@
                 :disabled="login.status"
                 size="small"
                 color="linear-gradient(to right, #4bb0ff, #6149f6)"
-                @click="$appPush({ path: '/login' })"
+                @click="
+                  $appPush({
+                    path: '/login',
+                  })
+                "
                 class="app-0162f4b7b2dbdf6aff3a25de02e49a8b"
               >
                 {{ login.text }}
@@ -251,9 +255,17 @@
                   v-for="(data, index) in loginInfo.heroList"
                   :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
                   class="app-1951b6e7c82938dd7446a41e829b247b"
-                  @click="$appPush({ path: '/hero/' + data.id + '/info' })"
+                  @click="
+                    $appPush({
+                      path: '/hero/' + data.id + '/info',
+                    })
+                  "
                 >
-                  <div :style="{ position: 'relative' }">
+                  <div
+                    :style="{
+                      position: 'relative',
+                    }"
+                  >
                     <img
                       v-lazy="{
                         //src: '/img/icons-hero/' + data.id + '.jpg',
@@ -334,7 +346,11 @@
           :title="$t('oauth.third-party-authorization')"
           :value="$t('oauth.value')"
           is-link
-          @click="$appPush({ path: '/login' })"
+          @click="
+            $appPush({
+              path: '/login',
+            })
+          "
         >
           <template #label>
             <span style="color: blue">{{ $t("oauth.label") }}</span>
@@ -464,7 +480,11 @@
                 $appApi.app.appProxy +
                 'https://badgen.net/badge/爱发电/赞助?labelColor=000000&color=946ce6'
               "
-              @click="$appPush({ path: '/thank' })"
+              @click="
+                $appPush({
+                  path: '/thank',
+                })
+              "
             />
           </span>
         </van-cell>
@@ -525,10 +545,26 @@
               class="login-3c5bcb72d710faf0c301750abeb5704f"
             >
               <van-field
+                v-model="newInfo.name"
+                input-align="right"
+                label="昵称"
+              />
+              <van-field
+                v-model="newInfo.email"
+                input-align="right"
+                label="邮箱"
+              />
+              <van-field
+                v-model="newInfo.uin"
+                type="number"
+                input-align="right"
+                label="QQ"
+              />
+              <van-field
                 v-model="$appColumnsInfo.areaType[newInfo.areaType]"
-                readonly
                 input-align="right"
                 label="大区"
+                readonly
               >
                 <template #button>
                   <div class="login-1f4910bc86a6970eb3401b1dde5a1177">
@@ -547,9 +583,9 @@
               <!--
               <van-field
                 v-model="$appColumnsInfo.provinceType[newInfo.provinceType]"
-                readonly
                 input-align="right"
                 label="省份"
+                readonly
               >
                 <template #button>
                   <div class="login-d00aad59acfadc27e8f50ccc61533a30">
@@ -603,9 +639,9 @@
               class="login-3c5bcb72d710faf0c301750abeb5704f"
             >
               <van-field
-                readonly
-                label="扩列"
                 @click="$message.warning($appMsg.warning[1002])"
+                label="扩列"
+                readonly
               >
                 <template #button>
                   <span class="login-35494217d6a01388d07eccf816b6ea39">
@@ -616,7 +652,6 @@
 
               <van-field
                 v-model="newInfo.description"
-                autosize
                 label="签名"
                 rows="2"
                 maxlength="255"
@@ -624,17 +659,18 @@
                 input-align="right"
                 placeholder="请输入签名"
                 @click="$message.warning($appMsg.warning[1003])"
+                autosize
                 show-word-limit
               />
             </van-cell-group>
 
             <div class="login-47260541d2fb8caec524833d2a4eac4e">
               <van-button
-                round
                 size="small"
                 type="primary"
                 class="app-a066f238070a70cb531c9bd722c65b36"
                 @click="updateWebAccountInfo"
+                round
               >
                 保存信息
               </van-button>
@@ -680,6 +716,10 @@ export default {
           color: null,
           text: null,
         },
+        tips: {
+          text: null,
+          copyData: null,
+        },
         description: null,
         heroList: [],
         areaType: 1,
@@ -690,17 +730,20 @@ export default {
           starIcon: "//camp.qq.com/battle/profile/roleJobV2/1.png",
           score: 1200,
         },
+        name: null,
+        email: null,
+        uin: 12345,
       },
       newInfo: {
         certification: {
           color: null,
           text: null,
         },
-        description: null,
         tips: {
           text: null,
           copyData: null,
         },
+        description: null,
         heroList: [],
         areaType: 1,
         provinceType: 1,
@@ -710,6 +753,9 @@ export default {
           starIcon: "//camp.qq.com/battle/profile/roleJobV2/1.png",
           score: 1200,
         },
+        name: null,
+        email: null,
+        uin: 12345,
       },
       showInfo: {
         actionSheet: false,
@@ -727,13 +773,14 @@ export default {
   watch: {
     $route: function (to) {
       let q = to.query,
-        refresh = q.refresh;
+        refresh = q.refresh,
+        agree = this.$appConfigInfo.appInfo.isReadme;
 
       if (this.loginInfo.tips.text) {
         this.showInfo.popoverMeau = true;
       }
 
-      if (refresh == 1) {
+      if (agree == 1 && refresh == 1) {
         this.getWebAccountInfo();
       }
     },
@@ -749,7 +796,7 @@ export default {
 
       setTimeout(() => {
         this.$appPush({
-          refresh: 1,
+          query: { refresh: 1 },
         });
 
         this.$router.go(0);
@@ -803,6 +850,9 @@ export default {
         starType: this.newInfo.rank.starType,
         nowRankScore: this.newInfo.rank.score,
         friendsType: Number(this.showInfo.friendsType),
+        name: this.newInfo.name,
+        email: this.newInfo.email,
+        uin: this.newInfo.uin,
         description: this.newInfo.description,
       };
 

@@ -14,7 +14,11 @@
         sortable
       >
         <template #default="{ row }">
-          <div :style="{ position: 'relative' }">
+          <div
+            :style="{
+              position: 'relative',
+            }"
+          >
             <img
               v-lazy="{
                 //src: '/img/icons-skill/' + row.skillId + '.jpg',
@@ -47,7 +51,11 @@
           sortable
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <img
                 v-if="row.list[index] > 0"
                 v-lazy="{
@@ -127,25 +135,25 @@
 export default {
   name: "HeroEquipmentList_All",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { extraId } = this;
+      return { extraId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(6, 0, 0, 0, newValue.heroId);
+          this.getRanking(6, 0, 0, 0, newValue.extraId);
         }
       },
     },

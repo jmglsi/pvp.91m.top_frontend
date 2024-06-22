@@ -24,7 +24,11 @@
           <template #title>
             <van-search
               :placeholder="$appConfigInfo.appInfo.search.placeholder"
-              @click="$appPush({ path: '/search' })"
+              @click="
+                $appPush({
+                  path: '/search',
+                })
+              "
               shape="round"
               class="home-b6651e4ed730d53f874841b07507986c"
             >
@@ -103,9 +107,9 @@ export default {
   methods: {
     initPage: function () {
       let q = this.$appQuery,
-        pwa = parseInt(q.pwa) || 0,
-        type = parseInt(q.type) || 0,
-        version = parseInt(q.v) || 1609430400,
+        pwa = Number(q.pwa) || 0,
+        type = Number(q.type) || 0,
+        version = Number(q.v) || 1609430400,
         ls = this.$appConfigInfo;
 
       this.tabsInfo.model = type;

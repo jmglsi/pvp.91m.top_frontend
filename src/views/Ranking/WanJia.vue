@@ -32,7 +32,9 @@
             </van-tag>
 
             <div
-              :style="{ position: 'relative' }"
+              :style="{
+                position: 'relative',
+              }"
               :class="
                 isSmallMode
                   ? 'app-1de7efdd403ec02d55f5c1d9557a2fc4 ranking-4a9c5e0aad3727c90e3744aeb04534ba'
@@ -62,7 +64,12 @@
           sortable
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative', marginTop: '-15px' }">
+            <div
+              :style="{
+                position: 'relative',
+                marginTop: '-15px',
+              }"
+            >
               <div class="ranking-6d19eb4601bfeac4a56e54d12adcb954">
                 <van-tag
                   plain
@@ -112,7 +119,11 @@
                   class="ranking-80ef788ee63a7ce63e7ad1403967bf11"
                 >
                   <a-dropdown :trigger="['click']">
-                    <div :style="{ position: 'relative' }">
+                    <div
+                      :style="{
+                        position: 'relative',
+                      }"
+                    >
                       <img
                         v-if="data.index <= 10"
                         v-lazy="
@@ -235,7 +246,9 @@
       <div class="ranking-2862744e5d7cce9d070aa41172557d78">
         国服数据由
         <span
-          :style="{ color: '#1989fa !important' }"
+          :style="{
+            color: '#1989fa !important',
+          }"
           @click="
             $appPush({
               path: '/friends',
@@ -329,10 +342,6 @@ import html2canvas from "html2canvas";
 export default {
   name: "rankingWanJia",
   props: {
-    isSmallMode: {
-      type: Boolean,
-      default: false,
-    },
     bid: {
       type: Number,
       default: 0,
@@ -348,6 +357,10 @@ export default {
     refresh: {
       type: Number,
       default: 0,
+    },
+    isSmallMode: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

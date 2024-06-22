@@ -9,7 +9,11 @@
     >
       <vxe-table-column title="英雄" fixed="left" field="heroId" width="50">
         <template #default="{ row }">
-          <div :style="{ position: 'relative' }">
+          <div
+            :style="{
+              position: 'relative',
+            }"
+          >
             <img
               v-lazy="{
                 //src: '/img/icons-hero/' + row.heroId + '.jpg',
@@ -52,7 +56,11 @@
           width="75"
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <img
                 v-lazy="
                   row.skillId == 0
@@ -87,7 +95,11 @@
           width="75"
         >
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               {{ $appConfigInfo.positionInfo[row.positionId + 1 || 0][0] }}
             </div>
           </template>
@@ -124,7 +136,11 @@
             %
           </template>
           <template #default="{ row }">
-            <div :style="{ position: 'relative' }">
+            <div
+              :style="{
+                position: 'relative',
+              }"
+            >
               <span class="app-9ec86c2c7ff0fcaa177028a0b2d091b8">
                 {{ row.pickRate }}
               </span>
@@ -196,25 +212,25 @@
 export default {
   name: "HeroGenreList",
   props: {
-    genreId: {
+    extraId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { genreId } = this;
-      return { genreId };
+      const { extraId } = this;
+      return { extraId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.genreId) return;
+        if (!newValue.extraId) return;
 
         if (this.$appConfigInfo.appInfo.isReadme == 1) {
-          this.getRanking(14, 0, 0, 0, newValue.genreId);
+          this.getRanking(14, 0, 0, 0, newValue.extraId);
         }
       },
     },

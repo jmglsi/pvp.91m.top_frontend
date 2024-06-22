@@ -19,7 +19,10 @@
         </template>
         <template #right>
           <a-popover
-            :style="{ marginRight: '-10px', marginTop: '10px' }"
+            :style="{
+              marginRight: '-10px',
+              marginTop: '10px',
+            }"
             trigger="click"
             placement="bottomRight"
           >
@@ -78,9 +81,7 @@
                       "
                       class="hero-046bda3addab352133049c67c32859c2"
                     />
-                    <span
-                      class="hero-22822552a6f5c0cf14c945f4f6fea081"
-                    >
+                    <span class="hero-22822552a6f5c0cf14c945f4f6fea081">
                       {{ chooseInfo.price || 0 }}
                     </span>
                     &nbsp;-&nbsp;
@@ -92,9 +93,7 @@
                       "
                       class="hero-046bda3addab352133049c67c32859c2"
                     />
-                    <span
-                      class="hero-22822552a6f5c0cf14c945f4f6fea081"
-                    >
+                    <span class="hero-22822552a6f5c0cf14c945f4f6fea081">
                       {{ chooseInfo.time || "00:00" }}
                     </span>
                   </template>
@@ -105,10 +104,7 @@
                     >
                       <div
                         v-for="(data, index) in chooseList"
-                        :key="
-                          'hero-b1c2779b9bc8205364266507480d4ee9-' +
-                          index
-                        "
+                        :key="'hero-b1c2779b9bc8205364266507480d4ee9-' + index"
                         v-show="onDraggableShow(data)"
                         @click="onItemDelete(data, index)"
                         class="hero-2b17aa16463c3aeca8da93a07962df5a"
@@ -204,9 +200,7 @@
                 <van-grid :border="false" :column-num="2">
                   <van-grid-item
                     v-for="(data, index) in skillInfo"
-                    :key="
-                      'hero-bbc65924097b4aa22d23bd88f6d1e107-' + index
-                    "
+                    :key="'hero-bbc65924097b4aa22d23bd88f6d1e107-' + index"
                     :icon="data.icon"
                     :text="data.name"
                     @click="onSkillClick(data)"
@@ -229,9 +223,7 @@
                 <van-grid :border="false" :column-num="2">
                   <van-grid-item
                     v-for="(data, index) in positionInfo"
-                    :key="
-                      'hero-b1c2779b9bc8205364266507480d4ee9-' + index
-                    "
+                    :key="'hero-b1c2779b9bc8205364266507480d4ee9-' + index"
                     :icon="data.icon"
                     :text="data.name"
                     @click="onPositionClick(data)"
@@ -246,9 +238,7 @@
                     出装选择 <van-icon name="question-o" />
 
                     <template slot="content">
-                      <div
-                        class="hero-d86e26348c6bcf5542c3a8fae2e2d1b0"
-                      >
+                      <div class="hero-d86e26348c6bcf5542c3a8fae2e2d1b0">
                         不同的出装有不同的打法
                       </div>
                       <van-divider
@@ -258,9 +248,7 @@
                           padding: '0 8px',
                         }"
                       />
-                      <div
-                        class="hero-e9326e4d97ca90bdc8f972e25e6967ff"
-                      >
+                      <div class="hero-e9326e4d97ca90bdc8f972e25e6967ff">
                         <a-checkbox
                           :indeterminate="indeterminate"
                           :checked="checkAll"
@@ -280,18 +268,14 @@
                 <van-tabs v-model="tabsInfo.model" sticky>
                   <van-tab
                     v-for="(data, index) in tabsInfo.tabs"
-                    :key="
-                      'hero-70c44009157f4d55186513004ddd9926-' + index
-                    "
+                    :key="'hero-70c44009157f4d55186513004ddd9926-' + index"
                     :title="data"
                   />
                 </van-tabs>
                 <van-grid :border="false" :column-num="3">
                   <van-grid-item
                     v-for="(data, index) in listInfo.equipment"
-                    :key="
-                      'hero-b22320a558966d2b8acc4d2ba5c16f34-' + index
-                    "
+                    :key="'hero-b22320a558966d2b8acc4d2ba5c16f34-' + index"
                     v-show="onItemShow(data)"
                     icon-prefix="hero-8b812bcd24d7f0b29c950eebfa4876f6"
                   >
@@ -310,12 +294,12 @@
                     </template>
                     <template #text>
                       <div
-                        :style="{ position: 'relative' }"
+                        :style="{
+                          position: 'relative',
+                        }"
                         @click="onItemClick"
                       >
-                        <span
-                          class="hero-bfdb7aa2ebfcd02113b228f44f73d2a7"
-                        >
+                        <span class="hero-bfdb7aa2ebfcd02113b228f44f73d2a7">
                           {{ data.item_name }}
                         </span>
                         <a-popover :placement="placement" trigger="click">
@@ -327,9 +311,7 @@
                             "
                           />
                           <template slot="title">
-                            <div
-                              class="hero-3b09ddd4e6e3d406a35c2319e712aff7"
-                            >
+                            <div class="hero-3b09ddd4e6e3d406a35c2319e712aff7">
                               <span
                                 class="hero-853bf9d3be5a89003b5f5b481a7f1a56"
                               >
@@ -356,9 +338,7 @@
                             </div>
                           </template>
                           <template slot="content">
-                            <div
-                              class="hero-f5f7f495ed00512c9ee88c432bd988e8"
-                            >
+                            <div class="hero-f5f7f495ed00512c9ee88c432bd988e8">
                               <div
                                 class="hero-0e65087ef714d330232ef74987513fbb"
                               >
@@ -384,9 +364,7 @@
                         </a-popover>
                       </div>
 
-                      <div
-                        class="hero-c97389bccf8dd107758c9be4f12a6ab8"
-                      >
+                      <div class="hero-c97389bccf8dd107758c9be4f12a6ab8">
                         <img
                           width="12"
                           height="12"
@@ -394,14 +372,10 @@
                             '//pic.rmb.bdstatic.com/bjh/9e9d94db9e19f60f9eff310ded227d65.png'
                           "
                         />
-                        <span
-                          class="hero-a6fd35511053bd90735e98ca6f02a4c9"
-                        >
+                        <span class="hero-a6fd35511053bd90735e98ca6f02a4c9">
                           {{ data.total_price }}
                         </span>
-                        <span
-                          class="hero-32e99218b3e9a25c3ca08b8ff83c7620"
-                        >
+                        <span class="hero-32e99218b3e9a25c3ca08b8ff83c7620">
                           <del>{{ data.price }}</del>
                         </span>
                       </div>
@@ -495,9 +469,7 @@
                     trigger="click"
                   >
                     描述
-                    <span
-                      class="hero-d1ce62e9288a1640df00006f274c0910"
-                    >
+                    <span class="hero-d1ce62e9288a1640df00006f274c0910">
                       (发布需登录)
                     </span>
                     <van-icon name="question-o" />
@@ -716,7 +688,9 @@ export default {
     getHeroId: function (e) {
       this.chooseInfo.heroId = e;
 
-      this.$appPush({ path: "/hero/" + e + "/equipment" });
+      this.$appPush({
+        path: "/hero/" + e + "/equipment",
+      });
     },
     onCheckboxChange(e) {
       this.indeterminate = !!e.length && e.length < plainOptions.length;

@@ -26,7 +26,7 @@ export default {
     VeLine,
   },
   props: {
-    trend: {
+    extraType: {
       type: Number,
       default: 0,
     },
@@ -49,15 +49,15 @@ export default {
   },
   computed: {
     listenChange() {
-      const { trend, charts } = this;
-      return { trend, charts };
+      const { extraType, charts } = this;
+      return { extraType, charts };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        let nowColor = this.colorInfo[newValue.trend];
+        let nowColor = this.colorInfo[newValue.extraType];
 
         this.lineData.extend.color[0] = nowColor;
         this.lineData.extend.series.areaStyle.color.colorStops[0].color =

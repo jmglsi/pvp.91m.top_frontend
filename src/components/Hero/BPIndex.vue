@@ -14,13 +14,17 @@
         <ul class="hero-666568243a3618d60572c92f2cf0ff3d">
           <li>
             <div
-              :style="{ opacity: (newBpInfo.blue[0].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.blue[0].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               1
             </div>
             <div
-              :style="{ marginTop: '-55px' }"
+              :style="{
+                marginTop: '-55px',
+              }"
               class="hero-0492ba0dd77bbcafdac5b4aeded96ed1"
             >
               <span>
@@ -38,7 +42,9 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.blue[1].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.blue[1].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               4
@@ -46,13 +52,17 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.blue[1].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.blue[1].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               5
             </div>
             <div
-              :style="{ marginTop: '-85px' }"
+              :style="{
+                marginTop: '-85px',
+              }"
               class="hero-0492ba0dd77bbcafdac5b4aeded96ed1"
             >
               <span>
@@ -70,7 +80,9 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.blue[2].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.blue[2].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               8
@@ -78,13 +90,17 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.blue[2].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.blue[2].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-00b97ff5a43507241bb2776b701516bb"
             >
               9
             </div>
             <div
-              :style="{ marginTop: '-85px' }"
+              :style="{
+                marginTop: '-85px',
+              }"
               class="hero-0492ba0dd77bbcafdac5b4aeded96ed1"
             >
               <span>
@@ -116,7 +132,9 @@
         <ul class="hero-d5f3c2f290902549bb3b62cbfbf7a1bb">
           <li>
             <div
-              :style="{ opacity: (newBpInfo.red[0].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.red[0].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               2
@@ -124,13 +142,17 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.red[0].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.red[0].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               3
             </div>
             <div
-              :style="{ marginTop: '-85px' }"
+              :style="{
+                marginTop: '-85px',
+              }"
               class="hero-6c02537f8c5493e03caec9b1ea2cb5e7"
             >
               <span>
@@ -148,7 +170,9 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.red[1].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.red[1].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               6
@@ -156,13 +180,17 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.red[1].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.red[1].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               7
             </div>
             <div
-              :style="{ marginTop: '-85px' }"
+              :style="{
+                marginTop: '-85px',
+              }"
               class="hero-6c02537f8c5493e03caec9b1ea2cb5e7"
             >
               <span>
@@ -180,13 +208,17 @@
           </li>
           <li>
             <div
-              :style="{ opacity: (newBpInfo.red[2].pickRate / 100) * 2 }"
+              :style="{
+                opacity: (newBpInfo.red[2].pickRate / 100) * 2,
+              }"
               class="hero-84d1241e18d9a700e019ca9654463a63 hero-85a6487e98ea46cd1391fd415d370de0"
             >
               10
             </div>
             <div
-              :style="{ marginTop: '-55px' }"
+              :style="{
+                marginTop: '-55px',
+              }"
               class="hero-6c02537f8c5493e03caec9b1ea2cb5e7"
             >
               <span>
@@ -212,24 +244,24 @@
 export default {
   name: "HeroBPIndex",
   props: {
-    heroId: {
+    extraId: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { heroId } = this;
-      return { heroId };
+      const { extraId } = this;
+      return { extraId };
     },
   },
   watch: {
     listenChange: {
       immediate: true,
       handler(newValue) {
-        if (!newValue.heroId) return;
+        if (!newValue.extraId) return;
 
-        this.getRanking(4, 0, 0, 0, newValue.heroId);
+        this.getRanking(4, 0, 0, 0, newValue.extraId);
       },
     },
   },

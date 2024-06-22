@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 import {
   Avatar,
+  Button,
   Card,
   Checkbox,
   Col,
@@ -23,6 +24,7 @@ import {
 
 Vue
   .use(Avatar)
+  .use(Button)
   .use(Card)
   .use(Checkbox)
   .use(Col)
