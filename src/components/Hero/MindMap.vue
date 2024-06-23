@@ -67,8 +67,10 @@ export default {
           ".jpg");
   },
   mounted() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+
     this.mindMap = new MindMap({
-      el: document.getElementById("mindMapContainer"),
+      el: document.querySelector("#mindMapContainer"),
       fit: true,
       fitPadding: 15,
       maxTag: 2,

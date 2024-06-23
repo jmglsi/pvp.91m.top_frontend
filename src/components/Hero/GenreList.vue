@@ -253,11 +253,11 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (aid = 14, bid = 0, cid = 0, did = 0, genreId = 111) {
+    getRanking: function (aid = 14, bid = 0, cid = 0, did = 0, id = 111) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + genreId
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + id
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
@@ -280,7 +280,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            genreId
+            id
         )
         .then((res) => {
           let data = res.data.data,
@@ -292,16 +292,7 @@ export default {
             this.tableData.updateTime = ts;
 
             this.$appSetLocalStorage(
-              "ranking-" +
-                aid +
-                "-" +
-                bid +
-                "-" +
-                cid +
-                "-" +
-                did +
-                "-" +
-                genreId,
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + id,
               this.tableData
             );
           } else {

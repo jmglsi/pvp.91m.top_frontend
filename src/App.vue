@@ -470,7 +470,7 @@ export default {
       );
     },
     test_start: function () {
-      document.getElementById("app").style.overflowY = "hidden";
+      document.querySelector("#app").style.overflowY = "hidden";
     },
     test_move: function (e) {
       let cH = document.body.clientHeight,
@@ -491,7 +491,7 @@ export default {
       let cH = document.body.clientHeight,
         bottomHeight = this.bottomHeight;
 
-      document.getElementById("app").style.overflowY = "unset";
+      document.querySelector("#app").style.overflowY = "unset";
 
       if (bottomHeight < 175) {
         this.bottomHeight = 175;

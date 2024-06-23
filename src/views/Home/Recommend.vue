@@ -26,7 +26,6 @@
             >
               <img
                 v-lazy="data.img"
-                crossorigin="anonymous"
                 class="home-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag

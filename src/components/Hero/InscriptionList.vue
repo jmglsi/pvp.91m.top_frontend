@@ -273,7 +273,7 @@ export default {
     onTableCellClick: function ({ row }) {
       this.tableDataRow = row;
 
-      this.getRankingBySuit(row.roleId, this.heroId);
+      this.getRankingBySuit(row.roleId, this.extraId);
 
       this.showInfo.actionSheet = true;
     },
