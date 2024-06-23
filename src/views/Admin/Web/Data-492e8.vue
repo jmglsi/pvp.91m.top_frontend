@@ -201,7 +201,7 @@
               class="admin-6fbd61fbcdda4791745558dd23de319b"
             >
               <span
-                v-if="data.isTop == false"
+                v-if="!data.isTop"
                 class="app-b28e48b33c0948bab67b77d696b3b9fd admin-caf10022f329436a8ee8bf7e9f7e466a"
               >
                 {{ data.value }}

@@ -1327,7 +1327,7 @@ export default {
       let gameLabel = this.gameLabel;
 
       if (gameLabel) {
-        if (this.nowDataChange == true) {
+        if (this.nowDataChange) {
           if (gameLabel == "new") {
             this.$appSetLocalStorage("roleCamp", this.newData);
           }
@@ -1777,10 +1777,10 @@ export default {
       });
     },
     onTitleClick: function () {
-      if (this.showInfo.popup == false) {
-        this.showInfo.popup = true;
-      } else {
+      if (this.showInfo.popup) {
         this.showInfo.popup = false;
+      } else {
+        this.showInfo.popup = true;
       }
     },
     onEditClick: function () {

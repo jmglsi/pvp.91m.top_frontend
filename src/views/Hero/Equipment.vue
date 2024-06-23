@@ -348,7 +348,7 @@
                                     'hero-ccea3902e0a790c97b64aae26de79e9c-' +
                                     index
                                   "
-                                  v-show="item.hidden == false"
+                                  v-show="!item.hidden"
                                   :color="item.color"
                                   plain
                                   class="hero-8a0ef47dc7fb94fd86ca714928f64401"

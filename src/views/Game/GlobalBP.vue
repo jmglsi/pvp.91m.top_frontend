@@ -293,11 +293,10 @@
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
                           data.trend == 2 &&
-                          (showInfo.isBan == true ||
-                            (showInfo.isBan == false && data.isBan == false)) &&
-                          (showInfo.isUsed == true ||
-                            (showInfo.isUsed == false &&
-                              data.isUsed == false)) &&
+                          (showInfo.isBan ||
+                            (!showInfo.isBan && !data.isBan)) &&
+                          (showInfo.isUsed ||
+                            (!showInfo.isUsed && !data.isUsed)) &&
                           (data.type.includes(tableData.model) ||
                             tableData.model == 0)
                         "
@@ -314,15 +313,17 @@
                             round
                             color="red"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                            >已禁</van-tag
                           >
+                            已禁
+                          </van-tag>
                           <van-tag
                             round
                             v-if="data.isUsed"
                             color="orange"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                            >已用</van-tag
                           >
+                            已用
+                          </van-tag>
                         </span>
                         <img
                           v-lazy="{
@@ -363,11 +364,10 @@
                         v-for="(data, index) in tableData.result.rows"
                         v-show="
                           data.trend != 2 &&
-                          (showInfo.isBan == true ||
-                            (showInfo.isBan == false && data.isBan == false)) &&
-                          (showInfo.isUsed == true ||
-                            (showInfo.isUsed == false &&
-                              data.isUsed == false)) &&
+                          (showInfo.isBan ||
+                            (!showInfo.isBan && !data.isBan)) &&
+                          (showInfo.isUsed ||
+                            (!showInfo.isUsed && !data.isUsed)) &&
                           (data.type.includes(tableData.model) ||
                             tableData.model == 0)
                         "
@@ -384,15 +384,17 @@
                             round
                             color="red"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                            >已禁</van-tag
                           >
+                            已禁
+                          </van-tag>
                           <van-tag
                             round
                             v-if="data.isUsed"
                             color="orange"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
-                            >已用</van-tag
                           >
+                            已用
+                          </van-tag>
                         </span>
                         <img
                           v-lazy="{
@@ -669,7 +671,7 @@
           -->
           <span class="game-99e127c3f9d57b5d03327ebe8b1e4982">|</span>
         </li>
-        <li>
+        <li v-if="bpMode != 'sort'">
           <a-dropdown :trigger="['click']" placement="topCenter">
             <van-button round icon="apps-o" size="small" color="black" />
             <template #overlay>
@@ -905,7 +907,7 @@ export default {
         ],
       },
       eye: "closed-eye",
-      bpMode: "view",
+      bpMode: "view", //view:访问 edit:编辑 sort:排序
       bpPerspective: 1,
       blueStepsClass: "game-1cf3b0809c3dde16d56153690bc902a2",
       redStepsClass: "game-99b844b6785d8d7378bbc2b1401af365",
@@ -1075,6 +1077,7 @@ export default {
         if (e) {
           e.returnValue = "关闭提示";
         }
+
         return "关闭提示";
       }
     },
@@ -1499,55 +1502,10 @@ export default {
         this.gameInfo.result.rows[tabsModel].stepsNow = nowIndex;
       }
     },
-    onGamePickHeroClick: function (hero, nowIndex) {
+    onGamePickHeroClick: function (e, nowIndex) {
       let tabsModel = this.tabsInfo.model,
-        bpMode = this.bpMode;
-
-      if (bpMode == "sort") {
-        let sortText,
-          newTrend = -1;
-
-        this.recommendHeroId = 0;
-
-        if (hero.trend == 2) {
-          sortText = "其他";
-          newTrend = 0;
-        } else {
-          sortText = "置顶";
-          newTrend = 2;
-        }
-
-        this.$dialog
-          .confirm({
-            title: "是否将【" + hero.name + "】标记为【" + sortText + "】?",
-          })
-          .then(() => {
-            //on confirm
-            this.tableData.result.rows[nowIndex].trend = newTrend;
-          })
-          .catch(() => {
-            //on cancel
-          });
-
-        return;
-      } else {
-        this.recommendHeroId = hero.id;
-
-        if (tabsModel < 6) {
-          if (
-            this.gameInfo.result.rows[tabsModel].blue.ban.includes(hero.id) ||
-            this.gameInfo.result.rows[tabsModel].red.ban.includes(hero.id)
-          ) {
-            return this.$message.error("本局 " + hero.name + " 已被禁用");
-          } else if (this.gameInfo.used.includes(hero.id)) {
-            return this.$message.warning(
-              hero.name + " 已被 " + this.bpOpponent.name + " 使用"
-            );
-          }
-        } else {
-          //巅峰对局
-        }
-      }
+        bpMode = this.bpMode,
+        tempList = this.tableData.result.rows;
 
       if (bpMode == "edit") {
         let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
@@ -1562,7 +1520,7 @@ export default {
           this.gameInfo.result.rows[tabsModel].BPOrder.splice(
             oldIndex,
             1,
-            hero.id
+            e.id
           );
         }
 
@@ -1576,6 +1534,48 @@ export default {
         this.gameInfo.result.rows[tabsModel].stepsNow = oldIndex + 1;
 
         this.initBPOrder(this.bpPerspective, tabsModel);
+      } else if (bpMode == "sort") {
+        let sortText,
+          newTrend = -1;
+
+        this.recommendHeroId = 0;
+
+        if (e.trend == 2) {
+          sortText = "其他";
+          newTrend = 0;
+        } else {
+          sortText = "置顶";
+          newTrend = 2;
+        }
+
+        this.$dialog
+          .confirm({
+            title: "是否将【" + e.name + "】标记为【" + sortText + "】?",
+          })
+          .then(() => {
+            //on confirm
+
+            this.tableData.result.rows = [];
+            this.tableData.result.rows = tempList;
+            this.tableData.result.rows[nowIndex].trend = newTrend;
+          })
+          .catch(() => {
+            //on cancel
+          });
+      } else if (bpMode == "view") {
+        this.recommendHeroId = e.id;
+
+        if (tabsModel < 6) {
+          if (e.isBan) {
+            return this.$message.error("本局 " + e.name + " 已被禁用");
+          } else if (this.gameInfo.used.includes(e.id)) {
+            return this.$message.warning(
+              e.name + " 已被 " + this.bpOpponent.name + " 使用"
+            );
+          }
+        } else {
+          //巅峰对局
+        }
       }
     },
     onNewSortClick: function () {
@@ -1600,7 +1600,7 @@ export default {
         setTimeout(() => {
           this.$router.go(0);
         }, 500);
-      } else {
+      } else if (this.bpMode == "view") {
         this.bpMode = "sort";
 
         this.showInfo.setting = false;
@@ -1619,6 +1619,8 @@ export default {
           this.$appDelectLocalStorage("gameBP");
 
           this.getRanking();
+
+          this.$message.success(this.$appMsg.success[1000]);
         })
         .catch(() => {
           //on cancel
@@ -1733,7 +1735,7 @@ export default {
           this.initCountdown();
 
           this.$message.info(this.$appMsg.info[1001]);
-        } else {
+        } else if (this.bpMode == "edit") {
           this.bpMode = "view";
 
           this.onUpdateGameBPClick(tabsModel);

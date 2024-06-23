@@ -17,7 +17,10 @@
             </span>
             <br />
             <br />
-            <a href="https://docs.91m.top/%E5%A3%B0%E6%98%8E.html" target="_blank">
+            <a
+              href="https://docs.91m.top/%E5%A3%B0%E6%98%8E.html"
+              target="_blank"
+            >
               《{{ $t("privacy-and-data-statement") }}》
             </a>
           </a-checkbox>
@@ -52,7 +55,7 @@ export default {
         nowChecked = false,
         nowChecked_int = 0;
 
-      if (this.showInfo.checkbox == true) {
+      if (this.showInfo.checkbox) {
         nowActionSheet = true;
         nowChecked = false;
         nowChecked_int = 0;

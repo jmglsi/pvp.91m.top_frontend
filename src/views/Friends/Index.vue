@@ -180,7 +180,7 @@ export default {
       copyData: "",
       friendsInfo: {
         name: "苏苏",
-        img: "//cn.gravatar.com/avatar/8d0d4a6b8394fa1fe09ed57b2793c63eae72d8859734323b7a08dfdf8013aa45?size=512",
+        img: "/img/icons-app/loading.png",
         certification: {
           color: "",
           text: "",
