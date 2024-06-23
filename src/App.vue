@@ -213,7 +213,7 @@ export default {
         },
       },
       showInfo: {
-        tabbar: true,
+        tabbar: false,
         app: false,
         hello: true,
         statusBar: true,
@@ -265,17 +265,17 @@ export default {
 
       this.tableData.result.model = path;
 
-      /ranking|search/i.test(path) == true || path == "/"
+      /ranking|search/i.test(path) || path == "/"
         ? (statusBar = true)
         : (statusBar = false);
       this.showInfo.statusBar = statusBar;
 
-      /ranking/i.test(path) == true ? (whiteBar = true) : (whiteBar = false);
+      /ranking/i.test(path) ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
       /^\/(tools|admin|miniapp|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game)/i.test(
         path
-      ) == true
+      )
         ? (tabbar = false)
         : (tabbar = true);
       this.showInfo.tabbar = tabbar;
