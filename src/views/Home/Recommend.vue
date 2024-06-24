@@ -319,25 +319,12 @@ export default {
       });
     },
     getAppHome: function () {
-      let appConfigInfo = this.$appConfigInfo,
-        ts = this.$appTs,
-        ls = this.$appGetLocalStorage("appHome");
-
-      if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        this.homeData = ls;
-
-        return;
-      }
-
       this.$axios.post(this.$appApi.app.getAppHome).then((res) => {
         let data = res.data.data,
           status = res.data.status;
 
         if (status.code == 200) {
           this.homeData = data;
-          this.homeData.updateTime = ts;
-
-          this.$appSetLocalStorage("appHome", this.homeData);
         } else {
           this.$message.error(status.msg);
         }

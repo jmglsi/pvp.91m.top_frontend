@@ -169,11 +169,6 @@ export default {
           name: "full-screen",
           content: "yes",
         },
-        {
-          vmid: "format-mobile-web-app-capable",
-          name: "mobile-web-app-capable",
-          content: "yes",
-        },
       ],
       script: this.$appConfigInfo.appInfo.script || [],
       link: this.$appConfigInfo.appInfo.link || [],

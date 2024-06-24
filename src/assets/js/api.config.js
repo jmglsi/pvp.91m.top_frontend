@@ -25,7 +25,7 @@ if (baseRef) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  // 生产环境
+  //生产环境
 }
 
 baseUrl = process.env.VUE_APP_BASE_URL;
