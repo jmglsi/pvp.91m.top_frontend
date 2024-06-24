@@ -2,7 +2,7 @@
   <div v-if="isPortrait" class="game-bp-portrait">
     <div slot-scope class="game-a76e75b5854094183e66c274e1d276e9">
       <img
-        v-lazy="'/img/icons-game/horizontal.png'"
+        v-lazy="$appCache + '/img/icons-game/horizontal.png'"
         @click="isPortrait = false"
         width="100"
         height="100"
@@ -82,7 +82,6 @@
                 v-lazy="
                   heroId
                     ? {
-                        //src: '/img/icons-hero/' + heroId + '.jpg',
                         //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
                         src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -91,7 +90,7 @@
                           heroId +
                           '.jpg',
                       }
-                    : '/img/icons-app/hero_white.png'
+                    : $appCache + '/img/icons-app/hero_white.png'
                 "
                 :class="
                   bpMode == 'edit' &&
@@ -105,7 +104,7 @@
               />
               <img
                 v-if="gameInfo.result.rows[tabsInfo.model].BPOrder[index] > 0"
-                v-lazy="'/img/icons-game/locked.png'"
+                v-lazy="$appCache + '/img/icons-game/locked.png'"
                 width="20"
                 height="20"
                 class="game-dce7c4174ce9323904a934a486c41288"
@@ -139,7 +138,6 @@
                 v-lazy="
                   heroId
                     ? {
-                        //src: '/img/icons-hero/' + heroId + '.jpg',
                         //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
                         src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -148,7 +146,7 @@
                           heroId +
                           '.jpg',
                       }
-                    : '/img/icons-app/hero_white.png'
+                    : $appCache + '/img/icons-app/hero_white.png'
                 "
                 :class="
                   bpMode == 'edit' &&
@@ -162,7 +160,7 @@
               />
               <img
                 v-if="gameInfo.result.rows[tabsInfo.model].BPOrder[index] > 0"
-                v-lazy="'/img/icons-game/locked.png'"
+                v-lazy="$appCache + '/img/icons-game/locked.png'"
                 width="20"
                 height="20"
                 class="game-dce7c4174ce9323904a934a486c41288"
@@ -204,7 +202,6 @@
                     v-lazy="
                       heroId
                         ? {
-                            //src: '/img/icons-hero/' + heroId + '.jpg',
                             //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
                             src:
                               '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -213,7 +210,7 @@
                               heroId +
                               '.jpg',
                           }
-                        : '/img/icons-app/hero_white.png'
+                        : $appCache + '/img/icons-app/hero_white.png'
                     "
                     :class="
                       bpMode == 'edit' &&
@@ -327,7 +324,6 @@
                         </span>
                         <img
                           v-lazy="{
-                            //src: '/img/icons-hero/' + data.id + '.jpg',
                             //error: data.img,
                             src: data.img,
                           }"
@@ -398,7 +394,6 @@
                         </span>
                         <img
                           v-lazy="{
-                            //src: '/img/icons-hero/' + data.id + '.jpg',
                             //error: data.img,
                             src: data.img,
                           }"
@@ -458,7 +453,6 @@
                     v-lazy="
                       heroId
                         ? {
-                            //src: '/img/icons-hero/' + heroId + '.jpg',
                             //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + heroId + '/' + heroId + '.jpg',
                             src:
                               '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -467,7 +461,7 @@
                               heroId +
                               '.jpg',
                           }
-                        : '/img/icons-app/hero_white.png'
+                        : $appCache + '/img/icons-app/hero_white.png'
                     "
                     :class="
                       bpMode == 'edit' &&
@@ -649,7 +643,6 @@
               <template slot="title">
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + recommendHeroId + '.jpg',
                     //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + recommendHeroId + '/' + recommendHeroId + '.jpg',
                     src: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + recommendHeroId + '/' + recommendHeroId + '.jpg',
                   }"
@@ -981,7 +974,7 @@ export default {
       },
       authorInfo: {
         name: "本地",
-        logo: "/img/icons-game/kpl.png",
+        logo: this.$appCache + "/img/icons-game/kpl.png",
         actions: [
           {
             title: "注册登录后",

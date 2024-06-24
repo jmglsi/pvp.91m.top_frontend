@@ -91,7 +91,7 @@
                     class="app-border-radius"
                   />
                   <img
-                    v-lazy="'/img/icons-app/crown.png'"
+                    v-lazy="$appCache + '/img/icons-app/crown.png'"
                     width="50"
                     height="50"
                     class="return-c3aea51299c526f7b079c527ae02deb9"
@@ -321,15 +321,15 @@ export default {
       clientHeight: 0,
       topInfo: [
         {
-          skinImg: "/img/icons-app/hero_white.png",
+          skinImg: this.$appCache + "/img/icons-app/hero_white.png",
           tag: {},
         },
         {
-          skinImg: "/img/icons-app/hero_white.png",
+          skinImg: this.$appCache + "/img/icons-app/hero_white.png",
           tag: {},
         },
         {
-          skinImg: "/img/icons-app/hero_white.png",
+          skinImg: this.$appCache + "/img/icons-app/hero_white.png",
           tag: {},
         },
       ],

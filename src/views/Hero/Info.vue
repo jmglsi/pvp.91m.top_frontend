@@ -39,7 +39,10 @@
               <img
                 v-if="showInfo.parameter && hero.info.change.trendType > 0"
                 v-lazy="
-                  '/img/icons-app/hot_' + hero.info.change.trendType + '.png'
+                  $appCache +
+                  '/img/icons-app/hot_' +
+                  hero.info.change.trendType +
+                  '.png'
                 "
                 width="15"
                 height="15"
@@ -130,7 +133,7 @@
         >
           <div class="hero-9f1e888d1782176b9f8c60c8b08a0837">
             <img
-              v-lazy="'/img/icons-app/gold.png'"
+              v-lazy="$appCache + '/img/icons-app/gold.png'"
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -142,7 +145,7 @@
             </span>
 
             <img
-              v-lazy="'/img/icons-app/time.png'"
+              v-lazy="$appCache + '/img/icons-app/time.png'"
               width="25"
               height="25"
               class="hero-ff2364a0be3d20e46cc69efb36afe9a5"
@@ -187,7 +190,6 @@
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
                 v-lazy="{
-                  //src: '/img/icons-skill/' + hero.info.skill[0].id + '.jpg',
                   //error: hero.info.skill[0].img,
                   src: hero.info.skill[0].img,
                 }"
@@ -204,7 +206,6 @@
             <span class="hero-5a7c3c141fd96e8559a5994bd1c63057">
               <img
                 v-lazy="{
-                  //src: '/img/icons-equipment/' + hero.info.skill[1].id + '.jpg',
                   //error: hero.info.skill[1].img,
                   src: hero.info.skill[1].img,
                 }"
@@ -334,7 +335,11 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
+                <img
+                  v-lazy="$appCache + '/img/icons-app/hot.png'"
+                  width="13"
+                  height="13"
+                />
               </template>
 
               <HeroInscriptionList :extraId="hero.info.id" />
@@ -401,16 +406,17 @@
       <van-tabbar fixed class="app-130a360689f8d613da10c94d53527a1b">
         <van-tabbar-item
           v-if="hero.info.id && hero.info.id < 999"
-          :icon="'/img/icons-app/like_' + hero.info.likeStatus + '.png'"
-          icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
+          :icon="
+            $appCache + '/img/icons-app/like_' + hero.info.likeStatus + '.png'
+          "
           @click="onHeroLikeClick"
+          icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >
           {{ hero.info.likeStatus == 1 ? "已关注" : "关注" }}
         </van-tabbar-item>
         <!--
           <van-tabbar-item
-            icon="/img/icons-app/research.png"
-            icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
+            :icon="$appCache + '/img/icons-app/research.png'"
             @click="
               hero.info.wikiId
                 ? $appOpenUrl(
@@ -421,12 +427,13 @@
                   )
                 : $message.info($appMsg.info[1006])
             "
+            icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
           >
             稷下图书馆
           </van-tabbar-item>
         -->
         <van-tabbar-item
-          icon="/img/icons-app/group.png"
+          :icon="$appCache + '/img/icons-app/group.png'"
           to="/search?q=%E5%A4%A7%E4%BD%AC%E4%BB%AC%E5%BF%AB%E6%9D%A5%E5%8A%A0%E7%BE%A4&refresh=1"
           icon-prefix="app-72383b9892bd1e6a2bd310dfb1fb2344"
         >
@@ -522,11 +529,11 @@ export default {
           tips: this.$t("loading"),
           vote: [
             {
-              img: "/img/icons-app/cry.png",
+              img: this.$appCache + "/img/icons-app/cry.png",
               text: this.$t("loading"),
             },
             {
-              img: "/img/icons-app/smile.png",
+              img: this.$appCache + "/img/icons-app/smile.png",
               text: this.$t("loading"),
             },
           ],

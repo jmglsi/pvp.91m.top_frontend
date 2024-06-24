@@ -52,7 +52,6 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + data.id + '.jpg',
                     //error: data.img,
                     src: data.img,
                   }"
@@ -62,7 +61,9 @@
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                  v-lazy="
+                    $appCache + '/img/icons-app/hot_' + data.trend + '.png'
+                  "
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
@@ -70,7 +71,6 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
@@ -93,7 +93,6 @@
                   </span>
                   <img
                     v-lazy="{
-                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
@@ -179,7 +178,6 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + data.id + '.jpg',
                     //error: data.img,
                     src: data.img,
                   }"
@@ -189,7 +187,9 @@
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                  v-lazy="
+                    $appCache + '/img/icons-app/hot_' + data.trend + '.png'
+                  "
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
@@ -197,7 +197,6 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
@@ -220,7 +219,6 @@
                   </span>
                   <img
                     v-lazy="{
-                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
@@ -305,7 +303,6 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + data.id + '.jpg',
                     //error: data.img,
                     src: data.img,
                   }"
@@ -315,7 +312,9 @@
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                  v-lazy="
+                    $appCache + '/img/icons-app/hot_' + data.trend + '.png'
+                  "
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
@@ -323,7 +322,6 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
@@ -346,7 +344,6 @@
                   </span>
                   <img
                     v-lazy="{
-                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
@@ -431,7 +428,6 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + data.id + '.jpg',
                     //error: data.img,
                     src: data.img,
                   }"
@@ -441,7 +437,9 @@
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                  v-lazy="
+                    $appCache + '/img/icons-app/hot_' + data.trend + '.png'
+                  "
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
@@ -449,7 +447,6 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
@@ -472,7 +469,6 @@
                   </span>
                   <img
                     v-lazy="{
-                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
@@ -550,7 +546,6 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + data.id + '.jpg',
                     //error: data.img,
                     src: data.img,
                   }"
@@ -560,7 +555,9 @@
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                  v-lazy="
+                    $appCache + '/img/icons-app/hot_' + data.trend + '.png'
+                  "
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
@@ -568,7 +565,6 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
@@ -591,7 +587,6 @@
                   </span>
                   <img
                     v-lazy="{
-                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
@@ -667,7 +662,6 @@
                 </lazy-component>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + data.id + '.jpg',
                     //error: data.img,
                     src: data.img,
                   }"
@@ -677,7 +671,9 @@
                 />
                 <img
                   v-if="data.trend > 0"
-                  v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                  v-lazy="
+                    $appCache + '/img/icons-app/hot_' + data.trend + '.png'
+                  "
                   width="15"
                   height="15"
                   class="ranking-e49cd5784f7893174dadee338fd0e61b"
@@ -685,7 +681,6 @@
                 <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                   <img
                     v-lazy="{
-                      //src: '/img/icons-skill/' + data.skill[0].id + '.jpg',
                       //error: data.skill[0].img,
                       src: data.skill[0].img,
                     }"
@@ -708,7 +703,6 @@
                   </span>
                   <img
                     v-lazy="{
-                      //src: '/img/icons-equipment/' + data.skill[1].id + '.jpg',
                       //error: data.skill[1].img,
                       src: data.skill[1].img,
                     }"
@@ -852,7 +846,11 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
+                <img
+                  v-lazy="$appCache + '/img/icons-app/hot.png'"
+                  width="13"
+                  height="13"
+                />
               </template>
 
               <HeroInscriptionList

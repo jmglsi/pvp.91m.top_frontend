@@ -51,9 +51,9 @@
             <van-button round plain color="orange" size="small">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <img
+                v-lazy="$appCache + '/img/icons-app/miniapp.png'"
                 width="20"
                 height="20"
-                v-lazy="'/img/icons-app/miniapp.png'"
               />
             </van-button>
           </span>
@@ -169,6 +169,11 @@ export default {
           name: "full-screen",
           content: "yes",
         },
+        {
+          vmid: "format-mobile-web-app-capable",
+          name: "mobile-web-app-capable",
+          content: "yes",
+        },
       ],
       script: this.$appConfigInfo.appInfo.script || [],
       link: this.$appConfigInfo.appInfo.link || [],
@@ -236,19 +241,16 @@ export default {
         tabbar = false,
         path = to.path,
         isRobot = this.$appIsRobot,
-        name = this.$cookie.get("name") || this.$appConfigInfo.appInfo.name,
-        accessToken = this.$cookie.get("accessToken") || null;
+        name = this.$cookie.get("name") || "苏苏的荣耀助手";
 
-      if (accessToken) {
-        this.watermark = {
-          content: "@" + name,
-          font: "12px Microsoft YaHei",
-          rotate: 25,
-          width: 135,
-          height: 100,
-          color: "rgb(240, 240, 240)",
-        };
-      }
+      this.watermark = {
+        content: "@" + name,
+        font: "12px Microsoft YaHei",
+        rotate: 25,
+        width: 135,
+        height: 100,
+        color: "rgb(240, 240, 240)",
+      };
 
       if (isRobot) {
         this.$appConfigInfo.appInfo.isReadme = true;

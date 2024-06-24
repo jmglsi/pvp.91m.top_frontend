@@ -115,7 +115,11 @@
         })
       "
     >
-      <img v-lazy="'/img/icons-app/stow.png'" width="25" height="25" />
+      <img
+        v-lazy="$appCache + '/img/icons-app/stow.png'"
+        width="25"
+        height="25"
+      />
     </div>
 
     <div class="miniapp-5bce5b8f873dd260895c472435bfcdf4">

@@ -39,7 +39,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-hero/' + row.heroId + '.jpg',
                   //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.heroId + '/' + row.heroId + '.jpg',
                   src:
                     '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -71,7 +70,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-equipment/' + row.equipmentId + '.jpg',
                   //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.equipmentId + '.jpg',
                   src:
                     '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
@@ -149,7 +147,10 @@
                   <img
                     v-if="row.change.updateType != 0"
                     v-lazy="
-                      '/img/icons-app/hot_' + row.change.updateType + '.png'
+                      $appCache +
+                      '/img/icons-app/hot_' +
+                      row.change.updateType +
+                      '.png'
                     "
                     width="15"
                     height="15"
@@ -249,7 +250,6 @@
         <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
           <img
             v-lazy="{
-              //src: '/img/icons-hero/' + lineData.heroId + '.jpg',
               //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + lineData.heroId + '/' + lineData.heroId + '.jpg',
               src:
                 '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -265,7 +265,6 @@
           &nbsp;和&nbsp;
           <img
             v-lazy="{
-              //src: '/img/icons-equipment/' + lineData.equipmentId + '.jpg',
               //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + lineData.equipmentId + '.jpg',
               src:
                 '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +

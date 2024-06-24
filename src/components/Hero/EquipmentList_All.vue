@@ -21,7 +21,6 @@
           >
             <img
               v-lazy="{
-                //src: '/img/icons-skill/' + row.skillId + '.jpg',
                 //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
                 src:
                   '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
@@ -59,7 +58,6 @@
               <img
                 v-if="row.list[index] > 0"
                 v-lazy="{
-                  //src: '/img/icons-equipment/' + row.list[index] + '.jpg',
                   //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.list[index] + '.jpg',
                   src:
                     '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +

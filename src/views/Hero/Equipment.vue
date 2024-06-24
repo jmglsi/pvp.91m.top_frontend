@@ -167,7 +167,7 @@
                             '/' +
                             chooseInfo.heroId +
                             '.jpg'
-                          : '/img/icons-app/hero_white.png'
+                          : $appCache + '/img/icons-app/hero_white.png'
                       "
                     />
                     <img

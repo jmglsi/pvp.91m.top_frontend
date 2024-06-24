@@ -27,7 +27,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-hero/' + row.id + '.jpg',
                   //error: row.img,
                   src: row.img,
                 }"

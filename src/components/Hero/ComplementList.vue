@@ -33,7 +33,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-hero/' + row.hero[0].id + '.jpg',
                   //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.hero[0].id + '/' + row.hero[0].id + '.jpg',
                   src:
                     '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -71,7 +70,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-hero/' + row.hero[1].id + '.jpg',
                   //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.hero[1].id + '/' + row.hero[1].id + '.jpg',
                   src:
                     '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
