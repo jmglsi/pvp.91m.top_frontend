@@ -105,7 +105,6 @@
                   v-lazy="
                     item < 900
                       ? {
-                          //src: '/img/icons-hero/' + item + '.jpg',
                           //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + item + '/' + item + '.jpg',
                           src:
                             '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -114,7 +113,7 @@
                             item +
                             '.jpg',
                         }
-                      : '/img/icons-app/hero_white.png'
+                      : $appCache + '/img/icons-app/hero_white.png'
                   "
                   width="40"
                   height="40"
@@ -136,7 +135,6 @@
               >
                 <img
                   v-lazy="{
-                    //src: '/img/icons-equipment/' + item + '.jpg',
                     //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + item + '.jpg',
                     src:
                       '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +

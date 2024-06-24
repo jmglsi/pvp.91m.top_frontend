@@ -7,8 +7,6 @@ Vue.prototype.$qs = qs;
 import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
 
-import aegis from 'aegis-web-sdk';
-
 import axios from 'axios';
 Vue.prototype.$axios = axios;
 
@@ -27,13 +25,7 @@ if (baseRef) {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  new aegis({
-    id: "5GVrzSe8lWdPQ86vmw",
-    uin: cookie.get("openId") || null,
-    reportApiSpeed: true,
-    reportAssetSpeed: true,
-    spa: true,
-  });
+  // 生产环境
 }
 
 baseUrl = process.env.VUE_APP_BASE_URL;

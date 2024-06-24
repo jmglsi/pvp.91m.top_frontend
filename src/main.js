@@ -3,6 +3,8 @@ import App from './App.vue';
 import router from './router';
 import './registerServiceWorker';
 
+import './assets/js/app.config';
+
 import VueClipboard from 'vue-clipboard2';
 Vue.use(VueClipboard);
 
@@ -12,10 +14,16 @@ Vue.use(VueMeta);
 import watermark from 'vue-watermark-directive';
 Vue.use(watermark);
 
-import { i18n } from './assets/import/i18n';
-
 import store from './assets/import/store';
 Vue.prototype.$store = store;
+
+import appApi from './assets/js/api.config';
+Vue.prototype.$appApi = appApi;
+
+import appMsg from './assets/js/code.config';
+Vue.prototype.$appMsg = appMsg;
+
+import { i18n } from './assets/import/i18n';
 
 import 'v-charts/lib/style.css';
 
@@ -24,14 +32,6 @@ import './assets/import/vxe-table';
 
 import './assets/import/antd';
 import './assets/import/vant';
-
-import './assets/js/app.config';
-
-import appApi from './assets/js/api.config';
-Vue.prototype.$appApi = appApi;
-
-import appMsg from './assets/js/code.config';
-Vue.prototype.$appMsg = appMsg;
 
 router.afterEach(() => {
   Vue.prototype.$appInitMiniapp();

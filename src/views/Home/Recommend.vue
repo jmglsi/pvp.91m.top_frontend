@@ -29,8 +29,9 @@
                 class="home-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag
-                mark
+                v-if="data.tag.text"
                 :color="data.tag.color"
+                mark
                 size="medium"
                 class="app-a5a5c883f68e45baa83f140e218759f1"
               >
@@ -112,17 +113,17 @@
                     >
                       <span v-if="changeInfo.cid == 0">
                         <img
+                          v-lazy="$appCache + '/img/icons-app/hot_2.png'"
                           width="20"
                           height="20"
-                          v-lazy="'/img/icons-app/hot_2.png'"
                         />
                         {{ $t("up") }}
                       </span>
                       <span v-else>
                         <img
+                          v-lazy="$appCache + '/img/icons-app/hot_1.png'"
                           width="20"
                           height="20"
-                          v-lazy="'/img/icons-app/hot_1.png'"
                         />
                         {{ $t("down") }}
                       </span>
@@ -150,7 +151,6 @@
                             width="30"
                             height="30"
                             v-lazy="{
-                              //src: '/img/icons-hero/' + data.heroId + '.jpg',
                               //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.heroId + '/' + data.heroId + '.jpg',
                               src:
                                 '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +

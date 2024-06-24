@@ -3,6 +3,7 @@ import XEUtils from 'xe-utils';
 
 let ua = navigator.userAgent, url = window.location;
 
+Vue.prototype.$appCache = "//cache.91m.top/pvp.91m.top";
 Vue.prototype.$appCountry = /(127\.0\.0\.1|localhost|pvp\.91m\.top)/i.test(url.host);
 Vue.prototype.$appIsApple = /(iPhone|iPad|iPod|Mac)/i.test(ua);
 Vue.prototype.$appInDouyin = /Bytedance/i.test(ua);
@@ -45,7 +46,7 @@ Vue.prototype.$appConfigInfo = {
       text: "loading..."
     },
     search: {
-      img: "/img/icons-app/customer_service.png",
+      img: Vue.prototype.$appCache + '/img/icons-app/loading.png',
       placeholder: "loading...",
       to: null,
       url: null,
@@ -311,7 +312,7 @@ Vue.prototype.$appInitMiniapp = function () {
         if (res.miniprogram) {
           if (data.type == "getAd") {
             Vue.prototype.$wechat.miniProgram.postMessage({
-              data:{
+              data: {
                 type: "getAd"
               }
             });
@@ -358,7 +359,7 @@ Vue.prototype.$appInitMiniapp = function () {
           if (res.miniprogram) {
             if (data.type == "getAd") {
               Vue.prototype.$wechat.miniProgram.postMessage({
-                data:{
+                data: {
                   type: "getAd"
                 }
               });

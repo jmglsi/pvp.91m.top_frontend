@@ -201,7 +201,7 @@ export default {
       defaultSelectedKey: [],
       loginInfo: {
         name: "苏苏",
-        img: "/img/icons-app/loading.png",
+        img: this.$appCache + "/img/icons-app/loading.png",
         certification: {
           color: null,
           text: null,

@@ -209,7 +209,7 @@
 
               <img
                 v-if="data.trend > 0"
-                v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                v-lazy="$appCache + '/img/icons-app/hot_' + data.trend + '.png'"
                 width="18"
                 height="18"
                 class="search-97c89d1a7343e149ab400d0bb141c7de"
@@ -261,7 +261,7 @@
                       国服 (备战)
                     </span>
                     <img
-                      v-lazy="'/img/icons-app/hot.png'"
+                      v-lazy="$appCache + '/img/icons-app/hot.png'"
                       width="13"
                       height="13"
                     />

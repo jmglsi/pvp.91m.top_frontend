@@ -35,7 +35,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-equipment/' + row.id + '.jpg',
                   //error: '//game.gtimg.cn/images/yxzj/img201606/itemimg/' + row.id + '.jpg',
                   src:
                     '//game.gtimg.cn/images/yxzj/img201606/itemimg/' +
@@ -119,7 +118,10 @@
                   <img
                     v-if="row.change.updateType != 0"
                     v-lazy="
-                      '/img/icons-app/hot_' + row.change.updateType + '.png'
+                      $appCache +
+                      '/img/icons-app/hot_' +
+                      row.change.updateType +
+                      '.png'
                     "
                     width="15"
                     height="15"

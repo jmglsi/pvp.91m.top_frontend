@@ -40,7 +40,6 @@
               >
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + row.hero[0].id + '.jpg',
                     //error: row.hero[0].img,
                     src: row.hero[0].img,
                   }"
@@ -83,7 +82,6 @@
               >
                 <img
                   v-lazy="{
-                    //src: '/img/icons-hero/' + row.hero[1].id + '.jpg',
                     //error: row.hero[1].img,
                     src: row.hero[1].img,
                   }"

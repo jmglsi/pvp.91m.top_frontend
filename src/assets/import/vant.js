@@ -77,7 +77,7 @@ Vue
     lazyComponent: true,
     preload: 0.75,
     attempt: 0,
-    loading: '/img/icons-app/loading.png'
+    loading: Vue.prototype.$appCache + '/img/icons-app/loading.png'
   })
   .use(Loading)
   .use(NavBar)

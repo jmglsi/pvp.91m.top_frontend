@@ -62,7 +62,10 @@
             @click="showInfo.languageMenu = true"
             class="login-35b118640aa1bb334cacc58d3215f130"
           >
-            <van-icon name="/img/icons-app/translate.png" size="18" />
+            <van-icon
+              :name="$appCache + '/img/icons-app/translate.png'"
+              size="18"
+            />
           </div>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div
@@ -150,7 +153,7 @@
         </template>
       </a-dropdown>
       <img
-        v-lazy="'/img/icons-app/my_home_page.png'"
+        v-lazy="$appCache + '/img/icons-app/my_home_page.png'"
         width="25"
         height="25"
         class="app-border-radius login-ef65f15f01e7d076cc4ef40d753e4d65"
@@ -166,14 +169,14 @@
         class="login-71c2fb64c38e4ee108607ca840607e48"
       >
         <van-cell
-          title="全局BP模拟器"
-          icon="/img/icons-app/game.png"
-          label="第一次使用务必看一下"
-          value="视频教程"
-          is-link
+          :icon="$appCache + '/img/icons-app/game.png'"
           @click="
             $appOpenUrl($t('open-url.title'), null, { path: url.question }, 0)
           "
+          title="全局BP模拟器"
+          label="第一次使用务必看一下"
+          value="视频教程"
+          is-link
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-grid
@@ -182,7 +185,7 @@
           class="login-c3d90961c9bf155d11cbef9c57725aea"
         >
           <van-grid-item
-            icon="/img/icons-game/team.png"
+            :icon="$appCache + '/img/icons-game/team.png'"
             to="/game/team"
             icon-prefix="login-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="login-7409cbd9b549064c9b5ea3ab21ee3ac6"
@@ -197,7 +200,7 @@
             </template>
           </van-grid-item>
           <van-grid-item
-            icon="/img/icons-game/engage.png"
+            :icon="$appCache + '/img/icons-game/engage.png'"
             to="/game/engage"
             icon-prefix="login-c1d8fd0f00bccc16b2cf5d07bfc3c96f"
             class="login-308ffde0dc5bd5718dcf0396fcc2a596"
@@ -222,8 +225,8 @@
         class="login-abf7b3191e2a24c6fc3c008124bcf0d4"
       >
         <van-cell
+          :icon="$appCache + '/img/icons-game/king.png'"
           title="王者荣耀"
-          icon="/img/icons-game/king.png"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
@@ -238,11 +241,10 @@
         </van-cell>
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
+            :icon="$appCache + '/img/icons-app/hero_black.png'"
             title="关注列表"
-            icon="/img/icons-app/hero_black.png"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-            name="1"
           >
             <div
               v-if="loginInfo.heroList.length > 0"
@@ -268,7 +270,6 @@
                   >
                     <img
                       v-lazy="{
-                        //src: '/img/icons-hero/' + data.id + '.jpg',
                         //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
                         src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +

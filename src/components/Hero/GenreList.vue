@@ -16,7 +16,6 @@
           >
             <img
               v-lazy="{
-                //src: '/img/icons-hero/' + row.heroId + '.jpg',
                 //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + row.heroId + '/' + row.heroId + '.jpg',
                 src:
                   '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -64,9 +63,8 @@
               <img
                 v-lazy="
                   row.skillId == 0
-                    ? '/img/icons-app/question.png'
+                    ? $appCache + '/img/icons-app/question.png'
                     : {
-                        //src: '/img/icons-skill/' + row.skillId + '.jpg',
                         //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
                         src:
                           '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
@@ -163,7 +161,10 @@
                 <img
                   v-if="row.change.updateType != 0"
                   v-lazy="
-                    '/img/icons-app/hot_' + row.change.updateType + '.png'
+                    $appCache +
+                    '/img/icons-app/hot_' +
+                    row.change.updateType +
+                    '.png'
                   "
                   width="15"
                   height="15"

@@ -29,20 +29,20 @@
         <van-field
           v-model="loginInfo.data.name"
           v-if="loginInfo.type == 0"
-          left-icon="/img/icons-app/user.png"
+          :left-icon="$appCache + '/img/icons-app/user.png'"
           placeholder="请输入用户名 (仅支持中英文数字，2~8 字)"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.email"
-          left-icon="/img/icons-app/email.png"
+          :left-icon="$appCache + '/img/icons-app/email.png'"
           placeholder="请输入邮箱 例如：admin@91m.top"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.code"
           v-if="loginInfo.type == 3"
-          left-icon="/img/icons-app/captcha.png"
+          :left-icon="$appCache + '/img/icons-app/captcha.png'"
           placeholder="请输入验证码"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
@@ -64,7 +64,7 @@
           v-model="loginInfo.data.password"
           v-if="loginInfo.type < 2"
           type="password"
-          left-icon="/img/icons-app/password_lock.png"
+          :left-icon="$appCache + '/img/icons-app/password_lock.png'"
           placeholder="请输入密码"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
@@ -72,14 +72,14 @@
           v-model="loginInfo.data.newPassword"
           v-if="loginInfo.type == 3"
           type="password"
-          left-icon="/img/icons-app/password_lock.png"
+          :left-icon="$appCache + '/img/icons-app/password_lock.png'"
           placeholder="请输入新密码"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />
         <van-field
           v-model="loginInfo.data.uin"
           v-if="loginInfo.type == 0"
-          left-icon="/img/icons-app/qq.png"
+          :left-icon="$appCache + '/img/icons-app/qq.png'"
           placeholder="联系 QQ"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         />

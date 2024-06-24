@@ -50,7 +50,6 @@
             >
               <img
                 v-lazy="{
-                  //src: '/img/icons-hero/' + row.id + '.jpg',
                   //error: row.img,
                   src: row.img,
                 }"
@@ -61,7 +60,6 @@
               <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                 <img
                   v-lazy="{
-                    //src: '/img/icons-skill/' + row.skill[0].id + '.jpg',
                     //error: row.skill[0].img,
                     src: row.skill[0].img,
                   }"
@@ -76,7 +74,6 @@
                 </span>
                 <img
                   v-lazy="{
-                    //src: '/img/icons-equipment/' + row.skill[1].id + '.jpg',
                     //error: row.skill[1].img,
                     src: row.skill[1].img,
                   }"
@@ -150,7 +147,9 @@
                   <lazy-component class="hero-2a23eb5062a0258f23f4969c4c60aa2e">
                     <img
                       v-if="row.trend > 0"
-                      v-lazy="'/img/icons-app/hot_' + row.trend + '.png'"
+                      v-lazy="
+                        $appCache + '/img/icons-app/hot_' + row.trend + '.png'
+                      "
                       width="15"
                       height="15"
                       class="ranking-3d5f1ffeadf58eb64ef57aef7e53a31e"
@@ -248,7 +247,10 @@
                       <img
                         v-if="row.change.updateType != 0"
                         v-lazy="
-                          '/img/icons-app/hot_' + row.change.updateType + '.png'
+                          $appCache +
+                          '/img/icons-app/hot_' +
+                          row.change.updateType +
+                          '.png'
                         "
                         width="15"
                         height="15"
@@ -515,7 +517,11 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
+                <img
+                  v-lazy="$appCache + '/img/icons-app/hot.png'"
+                  width="13"
+                  height="13"
+                />
               </template>
 
               <HeroInscriptionList

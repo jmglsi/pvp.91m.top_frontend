@@ -64,8 +64,8 @@
       >
         <van-cell
           v-if="friendsInfo"
+          :icon="$appCache + '/img/icons-game/king.png'"
           title="王者荣耀"
-          icon="/img/icons-game/king.png"
           icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
         >
           <template #right-icon>
@@ -80,11 +80,10 @@
         </van-cell>
         <van-collapse v-model="collapseInfo.model" :border="false">
           <van-collapse-item
-            icon="/img/icons-app/hero_black.png"
+            :icon="$appCache + '/img/icons-app/hero_black.png'"
             title="关注列表"
             value="快速访问"
             icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-            name="1"
           >
             <div
               v-if="friendsInfo.heroList.length > 0"
@@ -110,7 +109,6 @@
                   >
                     <img
                       v-lazy="{
-                        //src: '/img/icons-hero/' + data.id + '.jpg',
                         //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
                         src:
                           '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
@@ -180,7 +178,7 @@ export default {
       copyData: "",
       friendsInfo: {
         name: "苏苏",
-        img: "/img/icons-app/loading.png",
+        img: this.$appCache + "/img/icons-app/loading.png",
         certification: {
           color: "",
           text: "",

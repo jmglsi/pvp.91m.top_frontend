@@ -81,7 +81,7 @@
               </span>
               <img
                 v-if="gameLabel"
-                v-lazy="'/img/icons-app/stow.png'"
+                v-lazy="$appCache + '/img/icons-app/stow.png'"
                 width="15"
                 height="15"
                 class="n-72534a6f0c50503046338e9ce9231d3d"

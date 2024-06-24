@@ -9,7 +9,12 @@
       >
         <img
           v-if="hero.info.change.trendType > 0"
-          v-lazy="'/img/icons-app/hot_' + hero.info.change.trendType + '.png'"
+          v-lazy="
+            $appCache +
+            '/img/icons-app/hot_' +
+            hero.info.change.trendType +
+            '.png'
+          "
           width="15"
           height="15"
           class="tools-26a263bb8e3b535b7a46349053f49e96"

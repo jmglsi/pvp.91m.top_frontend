@@ -20,11 +20,10 @@
                 v-lazy="
                   heroInfo.id && heroInfo.id < 900
                     ? {
-                        //src: '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
                         //error: tableData.cardInfo.img,
                         src: heroInfo.img,
                       }
-                    : '/img/icons-app/hero_white.png'
+                    : $appCache + '/img/icons-app/hero_white.png'
                 "
                 class="hero-8ba6da67abb320a53f0428302ecb4826"
               />
@@ -45,7 +44,7 @@
             >
               <template #reference>
                 <img
-                  v-lazy="'/img/icons-app/more.png'"
+                  v-lazy="$appCache + '/img/icons-app/more.png'"
                   width="30"
                   height="30"
                   class="app-border-radius"

@@ -39,11 +39,10 @@
                 v-lazy="
                   tableData.cardInfo.id && tableData.cardInfo.id < 900
                     ? {
-                        //src: '/img/icons-hero/' + tableData.cardInfo.id + '.jpg',
                         //error: tableData.cardInfo.img,
                         src: tableData.cardInfo.img,
                       }
-                    : '/img/icons-app/hero_white.png'
+                    : $appCache + '/img/icons-app/hero_white.png'
                 "
                 width="30"
                 height="30"
@@ -60,7 +59,7 @@
               class="search-e63a3d77ef528e9465c5ec19abb57693"
             >
               <img
-                v-lazy="'/img/icons-app/more.png'"
+                v-lazy="$appCache + '/img/icons-app/more.png'"
                 width="30"
                 height="30"
                 class="app-border-radius"
@@ -89,12 +88,12 @@
           <van-cell-group :border="false" title="更多">
             <van-grid :border="false" :column-num="3">
               <van-grid-item
+                :icon="$appCache + '/img/icons-app/jungle.png'"
                 @click="
                   tableData.cardInfo.type.indexOf(4) > -1
                     ? (showInfo.heroFeature = true)
                     : $message.info($appMsg.info[1025])
                 "
-                icon="/img/icons-app/jungle.png"
                 text="打野数据"
               />
               <van-grid-item
@@ -126,6 +125,7 @@
                 text="对局回顾"
               />
               <van-grid-item
+                :icon="$appCache + '/img/icons-app/attack_speed.png'"
                 @click="
                   $appOpenUrl(
                     $t('open-url.title'),
@@ -136,25 +136,24 @@
                     0
                   )
                 "
-                icon="/img/icons-app/attack_speed.png"
                 text="攻速阈值"
               />
               <van-grid-item
+                :icon="$appCache + '/img/icons-app/medal.png'"
                 @click="
                   $appPush({
                     path: '/hero/tools',
                   })
                 "
-                icon="/img/icons-app/medal.png"
                 text="查牌子"
               />
               <van-grid-item
+                :icon="$appCache + '/img/icons-app/skin.png'"
                 @click="
                   $appPush({
                     path: '/hero/tools',
                   })
                 "
-                icon="/img/icons-app/skin.png"
                 text="查皮肤"
               />
             </van-grid>
@@ -236,7 +235,12 @@
                           {{ data.value }}
                           <img
                             v-if="data.trend > 0"
-                            v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                            v-lazy="
+                              $appCache +
+                              '/img/icons-app/hot_' +
+                              data.trend +
+                              '.png'
+                            "
                             width="18"
                             height="18"
                             class="search-97c89d1a7343e149ab400d0bb141c7de"
@@ -288,7 +292,7 @@
                           {{ data.value }}
                           <img
                             v-if="data.trend > 0"
-                            v-lazy="'/img/icons-app/hot_' + data.trend + '.png'"
+                            v-lazy="$appCache + '/img/icons-app/hot_' + data.trend + '.png'"
                             width="18"
                             height="18"
                             class="search-97c89d1a7343e149ab400d0bb141c7de"
@@ -460,6 +464,7 @@
                 <img
                   v-if="tableData.cardInfo.change.trendType > 0"
                   v-lazy="
+                    $appCache +
                     '/img/icons-app/hot_' +
                     tableData.cardInfo.change.trendType +
                     '.png'
@@ -545,6 +550,7 @@
                       <img
                         v-if="tableData.cardInfo.change.updateType != 0"
                         v-lazy="
+                          $appCache +
                           '/img/icons-app/hot_' +
                           tableData.cardInfo.change.updateType +
                           '.png'
@@ -886,7 +892,7 @@
                         {{ $t("prepare-for-war") }}
                       </span>
                       <img
-                        v-lazy="'/img/icons-app/hot.png'"
+                        v-lazy="$appCache + '/img/icons-app/hot.png'"
                         width="13"
                         height="13"
                       />
@@ -911,7 +917,7 @@
                   {{ $t("other.title") }}
                 </span>
                 <img
-                  v-lazy="'/img/icons-app/star.png'"
+                  v-lazy="$appCache + '/img/icons-app/star.png'"
                   width="17"
                   height="17"
                 />
@@ -1039,7 +1045,11 @@
           <span>buff 双开:{{ tableData.cardInfo.feature.redBlue }}</span>
         </div>
         <div class="search-8c36adba08eefa688be68bc3cf4d5fd6">
-          <img width="250" height="250" v-lazy="'/img/icons-app/map.png'" />
+          <img
+            v-lazy="$appCache + '/img/icons-app/map.png'"
+            width="250"
+            height="250"
+          />
         </div>
         <div class="search-a4339819b3dc402989af88a6fdfe4b76">
           <van-tag
@@ -1200,7 +1210,11 @@
                 <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
                   国服 (备战)
                 </span>
-                <img v-lazy="'/img/icons-app/hot.png'" width="13" height="13" />
+                <img
+                  v-lazy="$appCache + '/img/icons-app/hot.png'"
+                  width="13"
+                  height="13"
+                />
               </template>
 
               <HeroInscriptionList
