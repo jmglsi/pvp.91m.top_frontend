@@ -52,7 +52,7 @@
           color="#000000"
           size="mini"
           class="hero-14c32e76fd7b6f33de94027b74bbc3fb"
-          @click="getHeroInfoByWebAccountList(heroId, 1)"
+          @click="getHeroInfoByWebAccountList(extraId, 1)"
         >
           {{ $t("refresh") }}
         </van-button>
