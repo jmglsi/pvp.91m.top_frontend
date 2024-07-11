@@ -76,7 +76,7 @@
             {{
               ($appConfigInfo.positionInfo[data.positionId + 1 || 0][0] +
                 " | " +
-                Number(data.pickRate) || "-") + "%"
+                parseInt(data.pickRate) || "-") + "%"
             }}
           </van-button>
         </li>

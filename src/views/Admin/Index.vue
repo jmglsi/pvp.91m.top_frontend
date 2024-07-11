@@ -10,15 +10,23 @@
         />
         <template #overlay>
           <a-menu>
-            <a-menu-item key="0">{{ loginInfo.name }}</a-menu-item>
+            <a-menu-item key="0">
+              <van-tag :color="loginInfo.certification.color" type="primary">
+                {{ loginInfo.certification.text }}
+              </van-tag>
+              <span class="admin-ee5e6f32be8ae4437eef536794a34083">
+                {{ loginInfo.name }}
+              </span>
+            </a-menu-item>
             <a-menu-divider />
             <a-menu-item
               key="1"
               :style="{
                 color: 'red',
               }"
+              @click="onLogoutClick"
             >
-              退出登录
+              {{ $t("my.login-out") }}
             </a-menu-item>
           </a-menu>
         </template>
@@ -51,16 +59,14 @@
           <a-icon type="home" />
           <span>工作台</span>
         </a-menu-item>
-        <a-sub-menu
-          v-show="loginInfo.keys.indexOf('sub-web') > -1"
-          key="sub-web"
-        >
+        <a-sub-menu v-show="onModuleShow('sub-web')" key="sub-web">
           <span slot="title">
             <a-icon type="bar-chart" />
             <span>数据站</span>
           </span>
 
           <a-menu-item
+            v-show="onModuleShow('web-data-492e8')"
             key="web-data-492e8"
             @click="
               $appPush({
@@ -72,6 +78,7 @@
           </a-menu-item>
           <a-menu-item
             disabled
+            v-show="onModuleShow('web-data-5533c')"
             key="web-data-5533c"
             @click="
               $appPush({
@@ -83,6 +90,7 @@
           </a-menu-item>
           <a-menu-item
             disabled
+            v-show="onModuleShow('web-data-d88e5')"
             key="web-data-d88e5"
             @click="
               $appPush({
@@ -93,16 +101,14 @@
             暴走的巅峰赛
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu
-          v-show="loginInfo.keys.indexOf('sub-robot') > -1"
-          key="sub-robot"
-        >
+        <a-sub-menu v-show="onModuleShow('sub-robot')" key="sub-robot">
           <span slot="title">
             <a-icon type="robot" />
             <span>机器人</span>
           </span>
 
           <a-menu-item
+            v-show="onModuleShow('robot-data')"
             key="robot-data"
             @click="
               $appPush({
@@ -113,13 +119,14 @@
             管理
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu v-show="loginInfo.keys.indexOf('sub-mp') > -1" key="sub-mp">
+        <a-sub-menu v-show="onModuleShow('sub-mp')" key="sub-mp">
           <span slot="title">
             <a-icon type="wechat" />
             <span>公众号</span>
           </span>
 
           <a-menu-item
+            v-show="onModuleShow('mp-data')"
             key="mp-data"
             @click="
               $appPush({
@@ -130,16 +137,14 @@
             管理
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu
-          v-show="loginInfo.keys.indexOf('sub-shop') > -1"
-          key="sub-shop"
-        >
+        <a-sub-menu v-show="onModuleShow('sub-shop')" key="sub-shop">
           <span slot="title">
             <a-icon type="shop" />
             <span>商&nbsp;&nbsp;&nbsp;店</span>
           </span>
 
           <a-menu-item
+            v-show="onModuleShow('shop-data')"
             key="shop-data"
             @click="
               $appPush({
@@ -150,17 +155,14 @@
             管理
           </a-menu-item>
         </a-sub-menu>
-        <a-sub-menu
-          v-show="loginInfo.keys.indexOf('sub-system') > -1"
-          key="sub-system"
-        >
+        <a-sub-menu v-show="onModuleShow('sub-system')" key="sub-system">
           <span slot="title">
             <a-icon type="global" />
             <span>系&nbsp;&nbsp;&nbsp;统</span>
           </span>
 
           <a-menu-item
-            key="system-data"
+            v-show="onModuleShow('system-data')"
             @click="
               $appPush({
                 path: '/admin/system-data',
@@ -229,8 +231,8 @@ export default {
           query: { refresh: 1 },
         });
 
-        this.$router.go(0);
-      }, 2500);
+        location.reload();
+      }, 2000);
     } else {
       this.initPage();
     }
@@ -263,6 +265,32 @@ export default {
           }
         });
     },
+    onModuleShow: function (key) {
+      return this.loginInfo.keys.indexOf(key) > -1 ? true : false;
+    },
+    onLogoutClick: function () {
+      this.$dialog
+        .confirm({
+          title: "是否退出登录?",
+        })
+        .then(() => {
+          //on confirm
+
+          this.$cookie.delete("openId");
+          this.$cookie.delete("accessToken");
+          this.$cookie.delete("tempOpenId");
+          this.$cookie.delete("tempAccessToken");
+
+          this.$appDelectAllLocalStorage();
+
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        })
+        .catch(() => {
+          //on cancel
+        });
+    },
     onCollapsedClick: function () {
       let ret;
 
@@ -281,6 +309,10 @@ img.admin-11692cbdb16fd998d9dc739c3d53afaa {
   right: 25px;
   top: 25px;
   z-index: @app-z-index;
+}
+
+span.admin-ee5e6f32be8ae4437eef536794a34083{
+  margin-left: 3px;
 }
 
 div.admin-index {

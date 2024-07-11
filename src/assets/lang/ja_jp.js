@@ -1,104 +1,106 @@
 export default {
   "authenticate": "最強認証",
-  "based": "基于 顶端巅峰赛 统計",
-  "competition": "コンペティション",
-  "comprehensive": "総合的な",
-  "down": "ダウン",
+  "based": "頂点の統計に基づいて",
+  "competition": "競技",
+  "comprehensive": "包括的",
+  "down": "下がる",
   "equipment": "装備",
   "hero": "ヒーロー",
-  "more": "もっと",
+  "how-to-operate": "操作方法",
+  "more": "もっと見る",
   "none": "データなし",
-  "prepare-for-war": "戦闘の準備をする",
-  "recommend": "おすすめ",
-  "refresh": "更新する",
+  "prepare-for-war": "戦争の準備",
+  "recommend": "推薦",
+  "refresh": "更新",
   "select-language": "言語を選択してください",
-  "share": "共有する",
+  "share": "共有",
   "skill": "スキル",
-  "switch-view": "ビューを切り替える",
-  "unknown": "未知の",
-  "up": "アップ",
-  "copy": "情報をコピーする",
-  "please-agree-before-operation": "操作する前に同意してください",
-  "i-have-read-and-agreed": "読んで同意した",
-  "privacy-and-data-statement": "プライバシーとデータの声明",
+  "switch-view": "ビューを切り替え",
+  "unknown": "不明",
+  "up": "上がる",
+  "copy": "情報をコピー",
+  "please-agree-before-operation": "操作前に同意してください",
+  "i-have-read-and-agreed": "私はすでに読み、同意しました",
+  "privacy-and-data-statement": "プライバシーおよびデータの声明",
   "bp": {
-    "all": "全分段",
+    "all": "全セクション",
     "ban": "禁止",
-    "bp": "禁選",
+    "bp": "禁止選択",
     "pick": "出場",
-    "rank": "高星局",
-    "top-rank": "顶端局",
+    "rank": "高評価のゲーム",
+    "top-rank": "トップゲーム",
     "win": "勝率"
   },
   "feedback": {
-    "title": "意見や提案を送信する",
-    "label": "何でも大丈夫、批判歓迎",
-    "value": "兔小巢"
+    "title": "意見や提案のフィードバック",
+    "label": "何でも大丈夫、ご意見をお聞かせください",
+    "value": "トゥーシャオチャオ"
   },
   "home": {
-    "bottom": "データは任意に引用され、出典が明記されていればよいです"
+    "bottom": "データは自由に引用できますが、出所を明記してください"
   },
   "my": {
-    "change": "パスワードを変更する",
-    "forget": "パスワードを忘れる",
+    "change": "パスワードの変更",
+    "forget": "パスワードを忘れた場合",
     "login-i": "登録 / ログイン",
-    "login-out": "ログアウトする",
-    "login": "ログインする",
-    "register": "登録する"
+    "login-out": "ログアウト",
+    "login": "ログイン",
+    "register": "登録"
   },
   "my-link": {
-    "title": "拡張リンク",
-    "label": "公式アカウントにコピーすると時間が伸びます",
+    "title": "リンクの拡大",
+    "label": "公式アカウントにコピーして時間を延長",
     "value": "コピー"
   },
   "oauth": {
-    "sign-in-with": "サードパーティ製サービスと連携する",
-    "third-party-authorization": "サードパーティ認証",
-    "label": "連携するとログインが簡単になります",
+    "sign-in-with": "第三者ログイン",
+    "third-party-authorization": "第三者認証",
+    "label": "バインド後、迅速なログインが可能",
     "value": "見る"
   },
   "open-source": {
-    "title": "プロジェクトのオープンソースについて",
-    "label": "学習用にのみ、商用利用を禁止します",
+    "title": "オープンソースプロジェクトの紹介",
+    "label": "学習のみで、商業利用は禁止",
     "value": "NGA"
   },
   "open-url": {
-    "title": "外部リンクを開いてもよろしいですか?"
+    "title": "外部リンクを開きますか？"
   },
   "search": {
     "history": "検索履歴",
-    "clean-history": "検索履歴をクリアする",
+    "clean-history": "検索履歴をクリア",
     "hot-keywords": "ホットキーワード",
     "hot-talk": "ホットトーク",
-    "no-adjusted-temporarily": "一時的に調整されていません",
-    "no-skin-temporarily": "ワードローブは空です",
+    "no-adjusted-temporarily": "一時調整されていません",
+    "no-skin-temporarily": "クローゼットが空です",
     "text": "検索",
     "placeholder": "検索"
   },
   "thank": {
-    "title": "みなさまに感謝",
-    "value": "yuqueを誇りに思います"
+    "title": "皆さんに感謝します",
+    "value": "自豪に語燕を使用"
   },
   "nav-bar": {
     "left-text": "戻る"
   },
   "setting": {
-    "title": "よく使われる",
+    "top-title": "設定",
+    "title": "よく使う",
     "position": {
-      "title": "揺れる分岐",
-      "label": "英雄ごとに異なるレーンの状況"
+      "title": "揺れる道",
+      "label": "1つのヒーローが異なる道を歩む状況"
     },
     "small": {
-      "title": "小さい画面に対応",
-      "label": "一部のページは自動的に画像を縮小します"
+      "title": "小画面への適応",
+      "label": "一部のページでは画像が自動的に小さくなります"
     },
     "mode": {
-      "title": "シンプルモード",
-      "label": "ランキング画面の描画速度を最適化します"
+      "title": "簡易モード",
+      "label": "ランキングインターフェースのレンダリング速度を最適化"
     },
     "link": {
       "title": "リンクを開く",
-      "label": "外部リンクを開くときに警告が表示されます"
+      "label": "外部リンクを開く際に警告があります"
     }
   },
   "cache": {
@@ -108,38 +110,38 @@ export default {
     },
     "system": {
       "title": "システムキャッシュをクリア",
-      "label": "[注意] 上記の設定が失われます"
+      "label": "[注意操作] 上記の設定は失われます"
     },
     "global-bp": {
       "title": "グローバルBPシミュレーターキャッシュをクリア",
-      "label": "[注意] カスタムソートが失われます"
+      "label": "[注意操作] カスタムソートは失われます"
     }
   },
   "group": {
-    "title": "グループ",
+    "title": "グループ内",
     "gg": {
-      "title": "公式お知らせ",
-      "label": "最新のお知らせを配信します"
+      "title": "キングの公告",
+      "label": "最新の公告情報をプッシュ"
     },
     "change": {
-      "title": "増減率変化",
-      "label": "急激に変化しているヒーローを配信します"
+      "title": "相対的変化",
+      "label": "顕著な変化のヒーローをプッシュ"
     }
   },
   "other": {
     "title": "その他",
     "area": {
-      "title": "地域",
-      "label": "カードの訪問を切り替えてみてください",
-      "type": ["China", "国外"]
+      "title": "現在の地域",
+      "label": "アクセスカードの可能性がある場合は切り替えてみてください",
+      "type": ["国内", "国外"]
     },
     "update": {
       "title": "更新時間",
-      "label": "最後にデータが更新された時間"
+      "label": "最後のデータ更新時間"
     },
     "version": {
       "title": "システムバージョン",
-      "label": "最後にシステムが更新された時間"
+      "label": "最後のシステム更新時間"
     },
     "pwa": {
       "title": "アクセスタイプ"

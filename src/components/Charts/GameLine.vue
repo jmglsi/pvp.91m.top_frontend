@@ -89,7 +89,7 @@ export default {
 
       return e;
     },
-    getGamePrediction: function (arrData, aid) {
+    getGamePrediction: function (extraData, aid) {
       this.lineData = {
         loading: true,
         result: {
@@ -101,7 +101,7 @@ export default {
         .post(
           this.$appApi.game.getGamePrediction + "&aid=" + aid,
           this.$qs.stringify({
-            arrData: arrData,
+            extraData: extraData,
           })
         )
         .then((res) => {

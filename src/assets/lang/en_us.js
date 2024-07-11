@@ -1,104 +1,106 @@
 export default {
-  "authenticate": "Strongest Authentication",
-  "based": "Based on Peak Competition Statistics",
+  "authenticate": "Ultimate Authentication",
+  "based": "Based on top peak competition statistics",
   "competition": "Competition",
   "comprehensive": "Comprehensive",
-  "down": "Decreasing",
+  "down": "Down",
   "equipment": "Equipment",
   "hero": "Hero",
+  "how-to-operate": "How to Operate",
   "more": "More",
-  "none": "No Data",
-  "prepare-for-war": "Prepare for Battle",
-  "recommend": "Recommended",
+  "none": "No Data Available",
+  "prepare-for-war": "Prepare for War",
+  "recommend": "Recommend",
   "refresh": "Refresh",
   "select-language": "Select Language",
   "share": "Share",
-  "skill": "Skills",
+  "skill": "Skill",
   "switch-view": "Switch View",
   "unknown": "Unknown",
-  "up": "Increasing",
-  "copy": "copy Information",
-  "please-agree-before-operation": "Please Agree Before Proceeding",
-  "i-have-read-and-agreed": "I have read and agreed to",
+  "up": "Up",
+  "copy": "Copy Information",
+  "please-agree-before-operation": "Please agree before operating",
+  "i-have-read-and-agreed": "I have read and agreed",
   "privacy-and-data-statement": "Privacy and Data Statement",
   "bp": {
-    "all": "All Sections",
+    "all": "All Segments",
     "ban": "Ban",
-    "bp": "Banned Pick",
-    "pick": "Picked",
-    "rank": "High Star Match",
-    "top-rank": "Top Match",
+    "bp": "Ban/Pick",
+    "pick": "Pick",
+    "rank": "High-Star Matches",
+    "top-rank": "Top Matches",
     "win": "Win Rate"
   },
   "feedback": {
-    "title": "Feedback and Suggestions",
-    "label": "Anything goes, feel free to express yourself",
-    "value": "Tu Xiaochao"
+    "title": "Feedback for Suggestions and Opinions",
+    "label": "Anything goes, feel free to vent",
+    "value": "Tuxiao Chao"
   },
   "home": {
-    "bottom": "Data is cited arbitrarily, as long as the source is indicated"
+    "bottom": "Data can be freely cited, just indicate the source"
   },
   "my": {
     "change": "Change Password",
     "forget": "Forgot Password",
     "login-i": "Register / Login",
-    "login-out": "Log Out",
-    "login": "Log In",
+    "login-out": "Logout",
+    "login": "Login",
     "register": "Register"
   },
   "my-link": {
     "title": "Expand Link",
-    "label": "Copy to the official account for extended time",
+    "label": "Copy to the public account to extend the time",
     "value": "Copy"
   },
   "oauth": {
-    "sign-in-with": "Sign In with Third-Party Account",
-    "third-party-authorization": "Third-Party Authorization",
-    "label": "After binding, you can log in quickly",
+    "sign-in-with": "Sign in with Third Party",
+    "third-party-authorization": "Third Party Authorization",
+    "label": "Binding allows for quick login",
     "value": "View"
   },
   "open-source": {
-    "title": "Introduction to Project Open Source",
-    "label": "For learning only, commercial use is prohibited",
+    "title": "Open Source Project Introduction",
+    "label": "For learning purposes only, commercial use is prohibited",
     "value": "NGA"
   },
   "open-url": {
-    "title": "Do you want to open the external link?"
+    "title": "Open External Link?"
   },
   "search": {
     "history": "Search History",
     "clean-history": "Clear Search History",
     "hot-keywords": "Hot Keywords",
     "hot-talk": "Hot Discussions",
-    "no-adjusted-temporarily": "Not Adjusted for the Time Being",
-    "no-skin-temporarily": "Wardrobe is Empty",
+    "no-adjusted-temporarily": "Not Adjusted Temporarily",
+    "no-skin-temporarily": "Wardrobe Empty",
     "text": "Search",
     "placeholder": "Search"
   },
   "thank": {
-    "title": "Thank you, partners",
-    "value": "Proudly Using Yuque"
+    "title": "Thanks to All Partners",
+    "value": "Proudly using Yuque"
   },
   "nav-bar": {
-    "left-text": "Return"
+    "left-text": "Back"
   },
   "setting": {
+    "top-title": "Settings",
     "title": "Commonly Used",
     "position": {
-      "title": "Swinging Split Lane",
-      "label": "Different split lanes for individual heroes"
+      "title": "Swinging Position",
+      "label": "Situations where a single hero has different positions"
     },
     "small": {
       "title": "Adapt to Small Screens",
-      "label": "Some pages will automatically shrink images"
+      "label": "Some pages will automatically reduce image size"
     },
     "mode": {
       "title": "Simplified Mode",
-      "label": "Optimizes rendering speed of ranking interface"
+      "label": "Optimizes the rendering speed of the ranking interface"
     },
     "link": {
-      "title": "Open Links",
-      "label": "Prompts when opening external links"
+      "title": "Open Link",
+      "label": "Prompt when opening external links"
     }
   },
   "cache": {
@@ -108,11 +110,11 @@ export default {
     },
     "system": {
       "title": "Clear System Cache",
-      "label": "[Proceed with caution] Settings above will be lost"
+      "label": "[Caution] The settings above will be lost"
     },
     "global-bp": {
       "title": "Clear Global BP Simulator Cache",
-      "label": "[Proceed with caution] Custom sorting will be lost"
+      "label": "[Caution] Custom sorting will be lost"
     }
   },
   "group": {
@@ -122,24 +124,24 @@ export default {
       "label": "Push the latest announcement information"
     },
     "change": {
-      "title": "MoM Change",
+      "title": "Sequential Change",
       "label": "Push heroes with significant changes"
     }
   },
   "other": {
     "title": "Other",
     "area": {
-      "title": "Current Region",
-      "label": "Visitors can try to switch regions",
-      "type": ["China", "Overseas"]
+      "title": "Current Area",
+      "label": "If you are experiencing access issues, try switching this",
+      "type": ["Domestic", "Overseas"]
     },
     "update": {
       "title": "Update Time",
-      "label": "Time of the last data update"
+      "label": "The last time the data was updated"
     },
     "version": {
       "title": "System Version",
-      "label": "Time of the last system update"
+      "label": "The last time the system was updated"
     },
     "pwa": {
       "title": "Access Type"

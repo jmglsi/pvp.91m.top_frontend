@@ -408,7 +408,7 @@ export default {
         this.$appPush({
           path: this.homeData.miniappInfo.to,
         });
-      }, 2500);
+      }, 2000);
     },
     getChangeImg: function (bid, id) {
       let url;

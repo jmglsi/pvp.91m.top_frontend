@@ -135,7 +135,7 @@ export default {
               this.$message.error(status.msg);
             }
           });
-      }, 2500);
+      }, 2000);
     },
     resetChallengeToken: function () {
       this.$axios.post(this.$appApi.app.getChallenge + "&aid=2").then((res) => {

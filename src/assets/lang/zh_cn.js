@@ -6,6 +6,7 @@ export default {
   "down": "下降",
   "equipment": "装备",
   "hero": "英雄",
+  "how-to-operate": "如何操作",
   "more": "更多",
   "none": "暂无数据",
   "prepare-for-war": "备战",
@@ -83,6 +84,7 @@ export default {
     "left-text": "返回"
   },
   "setting": {
+    "top-title": "设置",
     "title": "常用",
     "position": {
       "title": "摇摆分路",

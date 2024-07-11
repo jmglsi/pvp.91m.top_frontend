@@ -1,11 +1,12 @@
 export default {
-  "authenticate": "最強認證",
+  "authenticate": "最强認證",
   "based": "基於 頂端巔峰賽 統計",
   "competition": "賽事",
   "comprehensive": "綜合",
   "down": "下降",
   "equipment": "裝備",
   "hero": "英雄",
+  "how-to-operate": "點樣操作",
   "more": "更多",
   "none": "暫無數據",
   "prepare-for-war": "備戰",
@@ -48,7 +49,7 @@ export default {
   },
   "my-link": {
     "title": "擴列鏈接",
-    "label": "複製到公衆號可以續時",
+    "label": "複製到公眾號可以續時",
     "value": "複製"
   },
   "oauth": {
@@ -59,7 +60,7 @@ export default {
   },
   "open-source": {
     "title": "項目開源介紹",
-    "label": "僅供學習，禁止商用",
+    "label": "僅供學習，禁止商業",
     "value": "NGA"
   },
   "open-url": {
@@ -71,18 +72,19 @@ export default {
     "hot-keywords": "熱門搜索",
     "hot-talk": "熱門討論",
     "no-adjusted-temporarily": "暫未調整",
-    "no-skin-temporarily": "衣櫥空空",
+    "no-skin-temporarily": "衣櫃空空",
     "text": "搜索",
     "placeholder": "搜索"
   },
   "thank": {
-    "title": "感謝各位夥伴",
-    "value": "自豪地使用語雀"
+    "title": "感謝各位伙伴",
+    "value": "自豪的使用語鵲"
   },
   "nav-bar": {
     "left-text": "返回"
   },
   "setting": {
+    "top-title": "設置",
     "title": "常用",
     "position": {
       "title": "搖擺分路",
@@ -93,7 +95,7 @@ export default {
       "label": "部分頁面將自動縮小圖片"
     },
     "mode": {
-      "title": "精簡模式",
+      "title": "簡潔模式",
       "label": "優化排行界面的渲染速度"
     },
     "link": {
@@ -102,24 +104,24 @@ export default {
     }
   },
   "cache": {
-    "title": "緩存",
+    "title": "快取",
     "ranking": {
-      "title": "清空排行緩存"
+      "title": "清空排行快取"
     },
     "system": {
-      "title": "清空系統緩存",
+      "title": "清空系統快取",
       "label": "[謹慎操作] 上方的設置將丟失"
     },
     "global-bp": {
-      "title": "清空全局BP模擬器緩存",
+      "title": "清空全局BP模擬器快取",
       "label": "[謹慎操作] 自定義排序將丟失"
     }
   },
   "group": {
-    "title": "群組內",
+    "title": "群內",
     "gg": {
       "title": "王者公告",
-      "label": "推送最新的公告訊息"
+      "label": "推送最新的公告信息"
     },
     "change": {
       "title": "環比變化",
@@ -129,7 +131,7 @@ export default {
   "other": {
     "title": "其他",
     "area": {
-      "title": "目前地區",
+      "title": "當前地區",
       "label": "訪問卡的可以嘗試切換下",
       "type": ["國內", "國外"]
     },

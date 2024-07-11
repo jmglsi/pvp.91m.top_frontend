@@ -85,7 +85,7 @@
               : {}
           "
         >
-          <van-cell-group :border="false" title="更多">
+          <van-cell-group :border="false" :title="$t('more')">
             <van-grid :border="false" :column-num="3">
               <van-grid-item
                 :icon="$appCache + '/img/icons-app/jungle.png'"

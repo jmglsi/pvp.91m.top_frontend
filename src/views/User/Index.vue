@@ -135,7 +135,14 @@
         <template #overlay>
           <a-menu>
             <a-menu-item>
-              <a href="https://cn.gravatar.com" target="_blank">更换头像</a>
+              <van-uploader
+                :after-read="onAfterRead"
+                :before-read="onBeforeRead"
+                :max-size="1 * 1024 * 1024"
+                @oversize="onOversize"
+              >
+                <span>更换头像</span>
+              </van-uploader>
             </a-menu-item>
             <a-menu-item
               @click="
@@ -723,6 +730,7 @@ export default {
         },
         description: null,
         heroList: [],
+        img: null,
         areaType: 1,
         provinceType: 1,
         friendsType: 1,
@@ -746,6 +754,7 @@ export default {
         },
         description: null,
         heroList: [],
+        img: null,
         areaType: 1,
         provinceType: 1,
         friendsType: 1,
@@ -800,8 +809,8 @@ export default {
           query: { refresh: 1 },
         });
 
-        this.$router.go(0);
-      }, 2500);
+        location.reload();
+      }, 2000);
     } else {
       this.login = {
         status: false,
@@ -813,6 +822,49 @@ export default {
     this.getWebAccountInfo();
   },
   methods: {
+    onAfterRead: function (file) {
+      let data = file.content;
+
+      this.$message.info(this.$appMsg.info[1002]);
+
+      this.$axios
+        .post(
+          this.$appApi.app.uploadImg,
+          this.$qs.stringify({
+            filePath: data,
+          })
+        )
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
+
+          if (status.code == 200) {
+            this.newInfo.img = data.img;
+
+            this.updateWebAccountInfo();
+
+            //this.$message.success(this.$appMsg.success[1000]);
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
+    },
+    onBeforeRead: function (file) {
+      if (
+        file.type != "image/png" &&
+        file.type != "image/gif" &&
+        file.type != "image/jpg" &&
+        file.type != "image/jpeg"
+      ) {
+        this.$message.error(this.$appMsg.error[1004]);
+        return false;
+      } else {
+        return true;
+      }
+    },
+    onOversize: function () {
+      this.$message.error(this.$appMsg.error[1005]);
+    },
     getContainer: function () {
       return document.querySelector(".login-index");
     },
@@ -854,6 +906,7 @@ export default {
         name: this.newInfo.name,
         email: this.newInfo.email,
         uin: this.newInfo.uin,
+        img: this.newInfo.img,
         description: this.newInfo.description,
       };
 
@@ -947,7 +1000,6 @@ export default {
           //on confirm
           this.isLogin = false;
 
-          this.$cookie.delete("agree");
           this.$cookie.delete("openId");
           this.$cookie.delete("accessToken");
           this.$cookie.delete("tempOpenId");

@@ -8,8 +8,8 @@
         :placeholder="true"
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
+        :title="$t('setting.top-title')"
         @click-left="$appBack()"
-        title="设置"
         z-index="2000"
         class="setting-4644ad66ca89bea4c9eb012b0281fef9"
       />
@@ -253,8 +253,6 @@ export default {
         this.$appDelectLocalStorage("heroChartsLog");
         this.$appDelectLocalStorage("ranking");
       } else if (e == 1) {
-        this.$cookie.delete("agree");
-
         this.$appDelectLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE");
         this.$appDelectLocalStorage("appConfigInfo");
 
@@ -267,7 +265,7 @@ export default {
 
       if (e == 1) {
         setTimeout(() => {
-          this.$router.go(0);
+          location.reload();
         }, 500);
       }
     },

@@ -239,7 +239,10 @@
     </van-popup>
 
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
-      <van-action-sheet v-model="showInfo.actionSheet" title="如何操作">
+      <van-action-sheet
+        v-model="showInfo.actionSheet"
+        :title="$t('how-to-operate')"
+      >
         <template #default>
           <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
             <van-dropdown-menu class="ranking-fdb4c24dae49e3ec89942ac5d4893f4f">
@@ -583,27 +586,27 @@ export default {
       }
 
       if (e == 5) {
-        let arrData_1 = [],
-          arrData_2 = [],
-          arrData_3 = [],
+        let extraData_1 = [],
+          extraData_2 = [],
+          extraData_3 = [],
           o = this.$appColumnsInfo.areaType || [],
           p = this.$appColumnsInfo.provinceType || [],
           q = this.$appColumnsInfo.fightPowerType.text || [];
 
         o.map((x, i) => {
-          arrData_1.push({ text: x, value: i });
+          extraData_1.push({ text: x, value: i });
         });
-        this.pzAreaTypeInfo.options = arrData_1;
+        this.pzAreaTypeInfo.options = extraData_1;
 
         p.map((x, i) => {
-          arrData_2.push({ text: x, value: i });
+          extraData_2.push({ text: x, value: i });
         });
-        this.pzProvinceTypeInfo.options = arrData_2;
+        this.pzProvinceTypeInfo.options = extraData_2;
 
         q.map((x, i) => {
-          arrData_3.push({ text: x, value: i });
+          extraData_3.push({ text: x, value: i });
         });
-        this.pzFightPowerTypeInfo.options = arrData_3;
+        this.pzFightPowerTypeInfo.options = extraData_3;
 
         this.bidInfo = this.pzAreaTypeInfo;
         this.cidInfo = this.pzProvinceTypeInfo;
