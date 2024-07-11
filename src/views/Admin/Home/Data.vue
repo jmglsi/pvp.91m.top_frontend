@@ -5,8 +5,21 @@
       <div class="admin-49657711d4f79ee0e5501a5c554026b8">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>💼 这里是工作台</span>
+            <span>💼 这里是工作台。</span>
           </h1>
+          <template #overlay>
+            <a-menu
+              :style="{
+                width: '100px',
+              }"
+            >
+              <a-sub-menu key="menu" title="菜单">
+                <a-menu-item @click="$appPush({ path: '/' })">
+                  返回首页
+                </a-menu-item>
+              </a-sub-menu>
+            </a-menu>
+          </template>
         </a-dropdown>
       </div>
     </div>
@@ -17,8 +30,7 @@
 export default {
   name: "adminHomeData",
   data() {
-    return {
-    };
+    return {};
   },
   created() {},
   methods: {},

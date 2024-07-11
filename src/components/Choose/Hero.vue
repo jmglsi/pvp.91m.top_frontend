@@ -10,7 +10,7 @@
     <van-action-sheet
       v-model="showInfo.actionSheet"
       :closeable="false"
-      title="如何操作"
+      :title="$t('how-to-operate')"
     >
       <van-tabs
         v-model="tableData.model"

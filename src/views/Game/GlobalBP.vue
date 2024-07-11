@@ -1375,7 +1375,7 @@ export default {
             teamId_1: gameInfo.team.team_1.id,
             teamId_2: gameInfo.team.team_2.id,
             gameWinCamp: gameInfo.win.camp,
-            arrData: String(gameInfo.BPOrder),
+            extraData: String(gameInfo.BPOrder),
           })
         )
         .then((res) => {
@@ -1398,8 +1398,8 @@ export default {
           this.$message.error(this.$appMsg.error[1011]);
 
           setTimeout(() => {
-            this.$router.go(0);
-          }, 2500);
+            location.reload();
+          }, 2000);
         } else {
           this.gameInfo.result.rows.splice(nowIndex, 1);
           tabsModel = nowIndex - 1;
@@ -1591,7 +1591,7 @@ export default {
         this.$message.success(this.$appMsg.success[1000]);
 
         setTimeout(() => {
-          this.$router.go(0);
+          location.reload();
         }, 500);
       } else if (this.bpMode == "view") {
         this.bpMode = "sort";

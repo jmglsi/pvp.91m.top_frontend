@@ -106,7 +106,7 @@ export default {
             "&heroId=" +
             heroId,
           {
-            arrData: heroName,
+            extraData: heroName,
           }
         )
         .then((res) => {

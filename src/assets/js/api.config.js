@@ -91,7 +91,7 @@ axios.interceptors.response.use(
       cookie.delete("tempOpenId");
       cookie.delete("tempAccessToken");
 
-      if (currentRoute.name != "login") {
+      if (currentRoute.name != "userLogin") {
         router.replace({
           path: "/login",
           query: { redirect: currentRoute.fullPath }
@@ -115,6 +115,7 @@ const appApi = baseUrl;
 const gameApi = baseUrl + "?method=game";
 const loginApi = baseUrl + "?method=login";
 const robotApi = baseUrl + "?method=robot";
+const payApi = baseUrl + "?method=pay";
 
 const appAdminApi = baseUrl + "?method=admin";
 const robotAdminApi = process.env.VUE_APP_BOT_URL + "?method=admin";
@@ -156,12 +157,6 @@ const app = {
   getDataByWebData: appAdminApi + "&type=getDataByWebData"
 }
 
-/*
-const bili = {
-  getOrderInfo: biliApi + "?type=getOrderInfo"
-}
-*/
-
 const game = {
   createEngage: gameApi + "&type=createEngage",
   createRole: gameApi + "&type=createRole",
@@ -193,10 +188,14 @@ const robot = {
   sendMsg: robotAdminApi + "&type=sendMsg",
 }
 
+const pay = {
+  getSkuList: payApi + "&type=getSkuList",
+}
+
 export default {
   app,
-  //bili,
   game,
   login,
-  robot
+  robot,
+  pay
 }

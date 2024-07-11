@@ -5,7 +5,7 @@
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>👋 您好，管理员。</span>
+            <span>👋 管理员，很高兴为您服务。</span>
           </h1>
           <template #overlay>
             <a-menu
@@ -169,23 +169,6 @@
               "
             >
               官方赛事数据库
-            </a-menu-item>
-            <a-menu-divider />
-            <a-menu-item
-              key="ai-chatgpt"
-              @click="
-                $appOpenUrl(
-                  '是否打开外部链接?',
-                  null,
-                  { path: 'https://chatgpt.woc.moe' },
-                  0
-                )
-              "
-            >
-              ChatGPT (聊天)
-            </a-menu-item>
-            <a-menu-item disabled key="ai-stable-diffusion">
-              Stable Diffusion (画图)
             </a-menu-item>
           </a-sub-menu>
         </a-menu>

@@ -575,9 +575,9 @@
           :cancel-button-text="$t('cancel')"
           :columns="columns"
           :swipe-duration="250"
+          :title="$t('how-to-operate')"
           @confirm="onPickerConfirm"
           @cancel="onPickerCancel"
-          title="如何操作"
           ref="refPicker"
         />
       </van-popup>
@@ -589,8 +589,8 @@
         :actions="roleActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
+        :title="$t('how-to-operate')"
         @select="onRoleActionSheetSelect"
-        title="如何操作"
       />
     </div>
 
@@ -600,8 +600,8 @@
         :actions="teamActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
+        :title="$t('how-to-operate')"
         @select="onTeamActionSheetSelect"
-        title="如何操作"
       />
     </div>
 
@@ -611,8 +611,8 @@
         :actions="engageActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
+        :title="$t('how-to-operate')"
         @select="onEngageActionSheetSelect"
-        title="如何操作"
       />
     </div>
 
@@ -1256,7 +1256,7 @@ export default {
             this.$appApi.game.updateGameBP + "&aid=" + aid,
             this.$qs.stringify({
               gameLabel: gameLabel,
-              arrData: JSON.stringify(this.newData),
+              extraData: JSON.stringify(this.newData),
             })
           )
           .then((res) => {

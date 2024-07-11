@@ -57,7 +57,75 @@
     </div>
 
     <div
-      v-if="selectInfo.value == 0 && heroInfo.id > 0 && heroInfo.id < 900"
+      v-if="selectInfo.value == 0"
+      class="hero-45af63c525ab541863e3e50f2f52c934"
+    >
+      <div class="hero-9b898abc5472b4fc427f88da23cf76d1">
+        <van-grid :border="false" :column-num="3">
+          <van-grid-item
+            v-for="(data, index) in skinData.result.rows"
+            :key="'hero-cf2a06a8e5d83d1eb2c472e7e5b496e0-' + index"
+          >
+            <div class="hero-508c6ba453fed92a75a63dba09c892cf">
+              <img width="90" height="140" v-lazy="data.skinIcon" />
+              <div class="hero-c8b5f5d48f608ded3e078de9bef7c61b">
+                <span>{{ data.skinName }}</span>
+                &nbsp;
+                <div
+                  :style="{
+                    marginTop: '5px',
+                    color:
+                      data.score >= 7.5 || data.pickRate >= 50
+                        ? 'red'
+                        : 'unset',
+                  }"
+                >
+                  <span>{{ data.score }} | {{ data.pickRate }}</span>
+                  <span class="hero-f929a9d9af35e647bf66a06a6c421ea1">%</span>
+                </div>
+              </div>
+            </div>
+          </van-grid-item>
+        </van-grid>
+      </div>
+
+      <div class="hero-175c358c9271d591abf0163679968135">
+        <van-divider
+          :style="{
+            padding: '0 16px',
+          }"
+        >
+          今天上线的皮肤，隔日更新 (仅供参考)
+        </van-divider>
+
+        <div
+          @click="
+            $appOpenUrl(
+              $t('open-url.title'),
+              '是否打开外部链接?',
+              {
+                path: 'https://ricochet.cn/wzry/skin',
+              },
+              0
+            )
+          "
+          class="hero-7c7f825106f6288d7e5bea8012e23041"
+        >
+          <span class="hero-41f3f668239a416414146113b108bcbc">
+            理论上越喜欢的皮肤，使用的场次越多
+          </span>
+          <br />
+          <span class="hero-04ad1b6577bcddb707fdd0b80abe2e78">
+            手感占比，评分由
+            <span style="color: rgb(25, 137, 250) !important">NGA@sjn4048</span>
+            提供
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div
+      v-else-if="selectInfo.value == 1 && heroInfo.id > 0 && heroInfo.id < 900"
       class="hero-45af63c525ab541863e3e50f2f52c934"
     >
       <div class="hero-da4fb4d6fd537e447df2bda7175dfb30">
@@ -139,74 +207,6 @@
       </div>
     </div>
 
-    <div
-      v-else-if="selectInfo.value == 2"
-      class="hero-45af63c525ab541863e3e50f2f52c934"
-    >
-      <div class="hero-9b898abc5472b4fc427f88da23cf76d1">
-        <van-grid :border="false" :column-num="3">
-          <van-grid-item
-            v-for="(data, index) in skinData.result.rows"
-            :key="'hero-cf2a06a8e5d83d1eb2c472e7e5b496e0-' + index"
-          >
-            <div class="hero-508c6ba453fed92a75a63dba09c892cf">
-              <img width="90" height="140" v-lazy="data.skinIcon" />
-              <div class="hero-c8b5f5d48f608ded3e078de9bef7c61b">
-                <span>{{ data.skinName }}</span>
-                &nbsp;
-                <div
-                  :style="{
-                    marginTop: '5px',
-                    color:
-                      data.score >= 7.5 || data.pickRate >= 50
-                        ? 'red'
-                        : 'unset',
-                  }"
-                >
-                  <span>{{ data.score }} | {{ data.pickRate }}</span>
-                  <span class="hero-f929a9d9af35e647bf66a06a6c421ea1">%</span>
-                </div>
-              </div>
-            </div>
-          </van-grid-item>
-        </van-grid>
-      </div>
-
-      <div class="hero-175c358c9271d591abf0163679968135">
-        <van-divider
-          :style="{
-            padding: '0 16px',
-          }"
-        >
-          今天上线的皮肤，隔日更新 (仅供参考)
-        </van-divider>
-
-        <div
-          @click="
-            $appOpenUrl(
-              $t('open-url.title'),
-              '是否打开外部链接?',
-              {
-                path: 'https://ricochet.cn/wzry/skin',
-              },
-              0
-            )
-          "
-          class="hero-7c7f825106f6288d7e5bea8012e23041"
-        >
-          <span class="hero-41f3f668239a416414146113b108bcbc">
-            理论上越喜欢的皮肤，使用的场次越多
-          </span>
-          <br />
-          <span class="hero-04ad1b6577bcddb707fdd0b80abe2e78">
-            手感占比，评分由
-            <span style="color: rgb(25, 137, 250) !important">NGA@sjn4048</span>
-            提供
-          </span>
-        </div>
-      </div>
-    </div>
-
     <AppHello height="150px" />
   </div>
 </template>
@@ -222,9 +222,9 @@ export default {
     return {
       areaType: "安卓QQ",
       popoverMeauActions: [
-        { text: "查牌子", value: 0 },
-        { text: "查战力 (国服)", value: 1 },
-        { text: "查皮肤", value: 2 },
+        { text: "查皮肤", value: 0 },
+        { text: "查牌子", value: 1 },
+        { text: "查战力 (国服)", value: 2 },
       ],
       popoverAreaActions: [
         { text: "安卓QQ" },
@@ -249,7 +249,7 @@ export default {
         },
       },
       selectInfo: {
-        text: "查牌子",
+        text: "查皮肤",
         value: 0,
       },
       heroInfo: {
@@ -291,10 +291,12 @@ export default {
       }
 
       if (selectIndex == 0) {
+        this.getRankingByHeroSkin(18, 0, 0, 0, this.heroInfo.id);
+      } else if (selectIndex == 1) {
         this.areaType = areaType;
 
         this.getRankingByHeroPaiZi(9, 0, 0, 0, this.heroInfo.id, this.areaType);
-      } else if (selectIndex == 1) {
+      } else if (selectIndex == 2) {
         this.$appPush({
           path: "/search",
           query: {
@@ -303,8 +305,6 @@ export default {
             refresh: 1,
           },
         });
-      } else if (selectIndex == 2) {
-        this.getRankingByHeroSkin(18, 0, 0, 0, this.heroInfo.id);
       }
     },
     getRankingByHeroPaiZi: function (
