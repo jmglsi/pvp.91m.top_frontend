@@ -305,6 +305,7 @@ export default {
     },
     onLoginClick: function (loginType) {
       let q = this.$route.query,
+        redirect = q.redirect || "/my",
         data = this.loginInfo.data;
 
       this.showInfo.loginButton = false;
@@ -335,7 +336,7 @@ export default {
             this.$appDelectAllLocalStorage();
 
             this.$appPush({
-              path: q.redirect || "/my",
+              path: redirect,
               query: {
                 refresh: 1,
               },

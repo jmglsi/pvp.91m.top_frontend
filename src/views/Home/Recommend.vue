@@ -43,7 +43,7 @@
 
         <div class="app-609a820218e58b4ea5a5f7656e61a0ad">
           <van-swipe
-            ref="refSkillMenu"
+            ref="refSkillRecommend"
             :autoplay="10000"
             @change="onSwipeChange"
             class="app-1c17c2e6813dda8cab7978f50d30203c"
@@ -221,6 +221,16 @@
           <HeroUpdate :extraId="0" :aid="0" />
         </lazy-component>
       </div>
+
+      <div v-if="icp" class="home-b467ee88fe43e04a918a10585678bdf9">
+        <span
+          @click="
+            $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
+          "
+        >
+          {{ $t("home.bottom") }} | {{ icp }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -235,6 +245,10 @@ export default {
   },
   data() {
     return {
+      icp: null,
+      url: {
+        beian: "https://beian.miit.gov.cn/#/Integrated/index",
+      },
       isLoading: false,
       tableData: {
         loading: true,
@@ -323,6 +337,8 @@ export default {
         let data = res.data.data,
           status = res.data.status;
 
+        this.icp = status.icp;
+
         if (status.code == 200) {
           this.homeData = data;
         } else {
@@ -386,11 +402,8 @@ export default {
       this.tableData.result.rows = [];
 
       if (changeInfo.bid == 0) {
-        this.changeInfo.bid = 1;
-
         this.$appPush({
-          path: "/ranking",
-          query: { type: 0, bid: 3, cid: 0, did: 0, refresh: 1 },
+          path: "/tools/daily",
         });
       } else {
         this.getRanking(11, changeInfo.bid, changeInfo.cid, 0);
@@ -408,13 +421,13 @@ export default {
         this.$appPush({
           path: this.homeData.miniappInfo.to,
         });
-      }, 2000);
+      }, 1000 * 2.5);
     },
     getChangeImg: function (bid, id) {
       let url;
 
       if (bid == 1) {
-        url = "//game.gtimg.cn/images/yxzj/img201606/summoner/" + id + ".jpg";
+        url = "//camp.qq.com/images/skill/" + id + ".png";
       } else if (bid == 2) {
         url = "//game.gtimg.cn/images/yxzj/img201606/itemimg/" + id + ".jpg";
       }

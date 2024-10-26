@@ -2,6 +2,8 @@
   <div class="hero-equipmentListAll app-equipmentListAll">
     <vxe-table
       ref="refHeroEquipmentListAll"
+      id="refHeroEquipmentListAll"
+      :custom-config="{ storage: true }"
       :data="tableData.result.rows"
       :loading="tableData.loading"
       height="443"
@@ -21,11 +23,8 @@
           >
             <img
               v-lazy="{
-                //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
-                src:
-                  '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
-                  row.skillId +
-                  '.jpg',
+                //error: '//camp.qq.com/images/skill/' + row.skillId + '.png',
+                src: '//camp.qq.com/images/skill/' + row.skillId + '.png',
               }"
               width="25"
               height="25"

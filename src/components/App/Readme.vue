@@ -74,8 +74,8 @@ export default {
       this.$message.success(this.$appMsg.success[1000]);
 
       setTimeout(() => {
-        location.reload();
-      }, 2000);
+        window.location.reload();
+      }, 1000 * 2.5);
     },
   },
 };

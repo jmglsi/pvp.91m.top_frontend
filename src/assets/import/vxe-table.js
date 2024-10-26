@@ -9,10 +9,13 @@ import {
   Filter,
   Header,
   Icon,
+  Pager,
+  Select,
   Table,
   Toolbar,
   Tooltip,
 } from 'vxe-table';
+import 'vxe-table/lib/style.css';
 
 Vue
   .use(Button)
@@ -21,6 +24,8 @@ Vue
   .use(Filter)
   .use(Header)
   .use(Icon)
+  .use(Pager)
+  .use(Select)
   .use(Table)
   .use(Toolbar)
   .use(Tooltip)

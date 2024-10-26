@@ -5,7 +5,7 @@
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>🤖️ 管理员，很高兴为您服务。</span>
+            <span>🤖️ 主人，很高兴为您服务。</span>
             <div
               v-if="percentage > 0"
               class="admin-558dab5fd681d940120defdcedf70585"
@@ -39,7 +39,7 @@
           <a-statistic title="机器人" :value="tableData.robot.rows.length" />
         </a-col>
         <a-col :span="4" @click="onRowClick('group')">
-          <a-statistic title="活跃群组" :value="tableData.group.rows.length" />
+          <a-statistic title="活跃群组" :value="tableData.group.total" />
         </a-col>
         <a-col :span="4" @click="onRowClick('plugins')">
           <a-statistic
@@ -54,8 +54,10 @@
       <div v-show="showInfo.type == 'robot'">
         <vxe-table
           ref="refAdminRobot"
+          id="refAdminRobot"
           align="left"
           border="inner"
+          :custom-config="{ storage: true }"
           :data="tableData.robot.rows"
         >
           <vxe-column type="seq" width="60"></vxe-column>
@@ -86,45 +88,18 @@
       <div v-show="showInfo.type == 'group'">
         <vxe-table
           ref="refAdminGroup"
+          id="refAdminGroup"
           align="left"
           border="inner"
+          :custom-config="{ storage: true }"
+          :expand-config="{ accordion: true }"
           :data="tableData.group.rows"
-          :expand-config="{
-            accordion: true,
-            //lazy: true,
-            loadMethod: getRssList,
-          }"
         >
           <vxe-column type="checkbox" width="60"></vxe-column>
           <vxe-column type="seq" width="60"></vxe-column>
           <vxe-table-column type="expand" width="80">
             <template v-slot:content="{ row }">
-              <div
-                v-if="row.frameId != 5000"
-                class="admin-1bc7ec347bf21539b57f61784a05eba6"
-              >
-                <span class="admin-ee86c7f2e154cb36ed0c1a975f28b7b0">
-                  订阅列表：
-                </span>
-                <br />
-                <span v-show="getRssList(row)"></span>
-                <van-button
-                  v-for="(data, index) in rssData.result.rows"
-                  :key="'admin-2e18d726e34c59f679fbf74316c67b68' + index"
-                  :type="data.switch == 1 ? 'danger' : 'info'"
-                  size="mini"
-                  round
-                  @click="updateRssInfo(row, data.rssId, index)"
-                >
-                  {{ data.rssId }}
-                </van-button>
-              </div>
-
-              <div v-else class="admin-1bc7ec347bf21539b57f61784a05eba6">
-                <span class="admin-ee86c7f2e154cb36ed0c1a975f28b7b0">
-                  其他：
-                </span>
-              </div>
+              <RobotFunction :row="row" />
             </template>
           </vxe-table-column>
           <vxe-column
@@ -202,6 +177,16 @@
           <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
         </vxe-table>
 
+        <div class="app-face1cbe136c70e1fc08cff038596944">
+          <van-pagination
+            v-model="paginationInfo.model"
+            :total-items="tableData.group.total"
+            :items-per-page="tableData.group.pageSize"
+            @change="onPaginationChange"
+            class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
+          />
+        </div>
+
         <div class="admin-ca523f12368dc2ab03fed17e5369442b">
           <div class="admin-d781a0af3220c510f8f1cf8486492b49">
             <div class="admin-41ed537ff495a1a76e5ac1bad83c4cae">
@@ -222,8 +207,10 @@
       <div v-show="showInfo.type == 'plugins'">
         <vxe-table
           ref="refAdminPlugins"
+          id="refAdminPlugins"
           align="left"
           border="inner"
+          :custom-config="{ storage: true }"
           :data="tableData.plugins.rows"
         >
           <vxe-column type="seq" width="60"></vxe-column>
@@ -280,6 +267,7 @@ export default {
   name: "adminRobotData",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
+    RobotFunction: () => import("@/components/Admin/RobotFunction.vue"),
   },
   data() {
     return {
@@ -290,6 +278,9 @@ export default {
         },
         group: {
           rows: [],
+          total: 25,
+          totalPage: 0,
+          pageSize: 25,
         },
         plugins: {
           rows: [],
@@ -305,14 +296,9 @@ export default {
           rows: [],
         },
       },
-      rssData: {
-        result: {
-          rows: [],
-        },
-      },
       frameList: [
-        20000, 5000, 60000, 70000, 75000, 15000, 10000, 40000, 2500, 80000,
-        90000, 50000,
+        20000, 5000, 30000, 60000, 70000, 75000, 15000, 10000, 40000, 2500,
+        80000, 90000, 50000,
       ],
       frameInfo: {
         2500: "其他-小爱音箱",
@@ -320,13 +306,17 @@ export default {
         10000: "QQ (MyPCQQ)",
         15000: "QQ (OPQ)",
         20000: "WeChat (可爱猫)",
+        30000: "FeiShu (飞书)",
         40000: "DingTalk",
         50000: "NokNok",
         60000: "QQ (LiteLoaderQQNT)",
-        70000: "QQ (Guild)",
-        75000: "QQ (Group)",
+        70000: "QQ (频道)",
+        75000: "QQ (群)",
         80000: "其他-王者营地",
-        90000: "miYouShe",
+        90000: "miYouShe (米游社)",
+      },
+      paginationInfo: {
+        model: 0,
       },
       pageInfo: {
         currentPage: 1,
@@ -347,7 +337,7 @@ export default {
     this.initPage();
   },
   mounted() {
-    this.getDataByRobotData(0);
+    this.getDataByRobotData(0, 0);
   },
   methods: {
     initPage: function () {
@@ -358,7 +348,7 @@ export default {
         });
       });
 
-      this.robotInfo.list = this.$appGetLocalStorage("robot-list") || [];
+      this.robotInfo.list = this.$appGetLocalStorage("admin-robot-list") || [];
 
       this.robotInfo.list.map((x) => {
         this.robotData.result.rows.push({
@@ -367,16 +357,20 @@ export default {
         });
       });
 
-      this.robotInfo.msg = this.$appGetLocalStorage("robot-sendMsg");
-      this.robotInfo.frameHost = this.$appGetLocalStorage("robot-frameHost");
-      this.robotInfo.key = this.$appGetLocalStorage("robot-key");
+      this.robotInfo.msg = this.$appGetLocalStorage("admin-robot-sendMsg");
+      this.robotInfo.frameHost = this.$appGetLocalStorage(
+        "admin-robot-frameHost"
+      );
+      this.robotInfo.key = this.$appGetLocalStorage("admin-robot-key");
     },
-    getDataByRobotData: function (aid = 0) {
+    getDataByRobotData: function (aid = 0, page = 0) {
       this.$axios
         .post(
           this.$appApi.robot.getDataByRobotData +
             "&aid=" +
             aid +
+            "&page=" +
+            page +
             "&frameId=2500",
           this.$qs.stringify({
             key: this.robotInfo.key,
@@ -393,7 +387,7 @@ export default {
               robotList.push(x);
             });
 
-            this.$appSetLocalStorage("robot-list", robotList);
+            this.$appSetLocalStorage("admin-robot-list", robotList);
 
             this.tableData = data;
           } else {
@@ -424,7 +418,7 @@ export default {
       if (frameHost) {
         this.robotInfo.frameHost = frameHost;
 
-        this.$appSetLocalStorage("robot-frameHost", frameHost);
+        this.$appSetLocalStorage("admin-robot-frameHost", frameHost);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -434,7 +428,7 @@ export default {
       if (key) {
         this.robotInfo.key = key;
 
-        this.$appSetLocalStorage("robot-key", key);
+        this.$appSetLocalStorage("admin-robot-key", key);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -445,7 +439,7 @@ export default {
       if (msg) {
         this.robotInfo.msg = msg;
 
-        this.$appSetLocalStorage("robot-sendMsg", msg);
+        this.$appSetLocalStorage("admin-robot-sendMsg", msg);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -556,57 +550,8 @@ export default {
       }, 1000 * groupNum);
       //}
     },
-    getRssList: function (row) {
-      this.$axios
-        .post(
-          this.$appApi.robot.getRssList + "&aid=2",
-          this.$qs.stringify({
-            frameId: row.frameId,
-            robotUin: row.robot,
-            msgSource: row.group,
-          })
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.rssData.result.rows = data;
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-    },
-    updateRssInfo: function (row, rssId, e) {
-      this.$axios
-        .post(
-          this.$appApi.robot.getRssList + "&aid=1",
-          this.$qs.stringify({
-            frameId: row.frameId,
-            robotUin: row.robot,
-            msgSource: row.group,
-            rssId: rssId,
-          })
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            let rssSwitch = this.rssData.result.rows[e].switch || 0;
-
-            rssSwitch == 1
-              ? (this.rssData.result.rows[e].switch = 0)
-              : (this.rssData.result.rows[e].switch = 1);
-
-            this.$message.info(data);
-          } else {
-            this.$message.error(status.msg);
-          }
-
-          //resolve();
-        });
-      //});
+    onPaginationChange: function (e) {
+      this.getDataByRobotData(0, e - 1);
     },
   },
 };
@@ -629,14 +574,6 @@ li.admin-a64328a2760af2ca12a5b7c909082c14 {
 
 span.admin-1957c2d79946c8557790e643435fea9a {
   margin-right: 5px;
-}
-
-span.admin-ee86c7f2e154cb36ed0c1a975f28b7b0 {
-  font-size: @app-font-size;
-}
-
-div.admin-1bc7ec347bf21539b57f61784a05eba6 {
-  margin: 10px;
 }
 
 div.admin-558dab5fd681d940120defdcedf70585 {

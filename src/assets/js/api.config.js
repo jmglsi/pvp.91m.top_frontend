@@ -82,7 +82,7 @@ axios.interceptors.response.use(
     let code = response.data.status.code;
 
     if (code == 988) {
-      location.href = "https://docs.91m.top?ref=expired";
+      window.location.href = "https://docs.91m.top?ref=expired";
     } else if (code == 2004) {
       let currentRoute = router.currentRoute;
 
@@ -90,6 +90,7 @@ axios.interceptors.response.use(
       cookie.delete("accessToken");
       cookie.delete("tempOpenId");
       cookie.delete("tempAccessToken");
+      cookie.delete("tab-index");
 
       if (currentRoute.name != "userLogin") {
         router.replace({
@@ -154,7 +155,8 @@ const app = {
   uploadImg: appApi + "?type=uploadImg",
   //
   cleanDataByWebData: appAdminApi + "&type=cleanDataByWebData",
-  getDataByWebData: appAdminApi + "&type=getDataByWebData"
+  getDataByWebData: appAdminApi + "&type=getDataByWebData",
+  getDataByShopData: appAdminApi + "&type=getDataByShopData",
 }
 
 const game = {

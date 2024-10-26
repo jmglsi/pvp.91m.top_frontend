@@ -2,6 +2,8 @@
   <div class="hero-genre app-genre">
     <vxe-table
       ref="refHeroGenre"
+      id="refHeroGenre"
+      :custom-config="{ storage: true }"
       :data="tableData.result.rows"
       :loading="tableData.loading"
       @cell-click="onTableCellClick"
@@ -65,11 +67,9 @@
                   row.skillId == 0
                     ? $appCache + '/img/icons-app/question.png'
                     : {
-                        //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + row.skillId + '.jpg',
+                        //error: '//camp.qq.com/images/skill/' + row.skillId + '.png',
                         src:
-                          '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
-                          row.skillId +
-                          '.jpg',
+                          '//camp.qq.com/images/skill/' + row.skillId + '.png',
                       }
                 "
                 width="25"

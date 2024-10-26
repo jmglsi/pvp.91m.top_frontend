@@ -43,14 +43,14 @@
 
     <ChartsRankingLine
       :extraType="hero.info.change.trendType"
-      :charts="{
-        columns: lineData.result.columns,
-        rows: lineData.result.rows[hero.info.id],
-      }"
-      :exStyle="{
+      :extraStyle="{
         width: '302px',
         height: '115px',
         grid: { left: -50, bottom: -15, width: 300, height: 105 },
+      }"
+      :charts="{
+        columns: lineData.result.columns,
+        rows: lineData.result.rows[hero.info.id],
       }"
       :animation="false"
       class="tools-ea7120740464ce78c305436d1f150b4d"
@@ -66,11 +66,7 @@
             v-if="index < 2 && data.pickRate > 5"
             round
             size="mini"
-            :icon="
-              'https://game.gtimg.cn/images/yxzj/img201606/summoner/' +
-              data.skillId +
-              '.jpg'
-            "
+            :icon="'https://camp.qq.com/images/skill/' + data.skillId + '.png'"
             class="tools-7fd0a5f5913603ec56c9095e237cd4bc"
           >
             {{
@@ -140,7 +136,7 @@ export default {
           skill: [
             {
               id: null,
-              img: "//game.gtimg.cn/images/yxzj/img201606/summoner/80102.jpg",
+              img: "//camp.qq.com/images/skill/80102.png",
               pickRate: 0,
             },
             {
@@ -161,14 +157,14 @@ export default {
           rows: [],
         },
       },
-      lineData: {
+      progressData: {
         result: {
-          columns: ["日期", "热度"],
           rows: [],
         },
       },
-      progressData: {
+      lineData: {
         result: {
+          columns: ["日期", "热度"],
           rows: [],
         },
       },

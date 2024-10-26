@@ -118,13 +118,6 @@ export default {
   },
   methods: {
     getGamePrediction: function (extraData, aid) {
-      this.lineData = {
-        loading: true,
-        result: {
-          rows: [],
-        },
-      };
-
       this.$axios
         .post(
           this.$appApi.game.getGamePrediction + "&aid=" + aid,

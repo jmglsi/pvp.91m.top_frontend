@@ -25,6 +25,8 @@
     <div v-else-if="show == 'list'">
       <vxe-table
         ref="refHeroEquipmentListOne"
+        id="refHeroEquipmentListOne"
+        :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :loading="tableData.loading"
         @cell-click="onTableCellClick"

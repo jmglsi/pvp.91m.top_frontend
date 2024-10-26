@@ -139,11 +139,8 @@
 
                 <img
                   v-lazy="{
-                    //error: '//game.gtimg.cn/images/yxzj/img201606/summoner/' + data.id + '.jpg',
-                    src:
-                      '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
-                      data.id +
-                      '.jpg',
+                    //error: '//camp.qq.com/images/skill/' + data.id + '.png',
+                    src: '//camp.qq.com/images/skill/' + data.id + '.png',
                   }"
                   width="17"
                   height="17"

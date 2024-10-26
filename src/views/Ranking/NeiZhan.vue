@@ -3,6 +3,8 @@
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-table
         ref="refNeiZhan"
+        id="refNeiZhan"
+        :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"

@@ -3,6 +3,8 @@
     <div class="ranking-7d87a4288bd07b77fe09098939795c8c">
       <vxe-table
         ref="refWanJia"
+        id="refWanJia"
+        :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
@@ -125,18 +127,15 @@
                       }"
                     >
                       <img
-                        v-if="data.index <= 10"
-                        v-lazy="
-                          $appApi.app.appProxy +
-                          'https://pic.rmb.bdstatic.com/bjh/4b26a884e51a1211586df996a8b508a5.png'
-                        "
+                        v-if="data.index <= 100"
+                        v-lazy="data.fightPowerIcon"
                         width="30"
                         height="20"
                         crossorigin="anonymous"
                         class="ranking-be66eb32605e1f12853a2ad4ac9ccddc"
                       />
                       <span
-                        v-if="data.index <= 10"
+                        v-if="data.index <= 100"
                         class="ranking-5cb6f4cb579d8c69b973e0fec7239056"
                       >
                         {{ data.index }}

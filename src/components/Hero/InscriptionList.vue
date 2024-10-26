@@ -2,6 +2,8 @@
   <div class="hero-inscription app-inscription">
     <vxe-table
       ref="refHeroInscription"
+      id="refHeroInscription"
+      :custom-config="{ storage: true }"
       :data="tableData.result.rows"
       :loading="tableData.loading"
       @cell-click="onTableCellClick"

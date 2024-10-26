@@ -186,6 +186,15 @@ export default new Router({
             keepAlive: false
           }
         }, {
+          path: 'daily',
+          name: 'toolsDaily',
+          component: () =>
+            import('./views/Tools/Daily.vue'),
+          meta: {
+            title: '日报',
+            keepAlive: false
+          }
+        }, {
           path: 'weekly',
           name: 'toolsWeekly',
           component: () =>
@@ -205,9 +214,9 @@ export default new Router({
           }
         }, {
           path: 'n/home',
-          name: 'toolsNHome',
+          name: 'toolsNhome',
           component: () =>
-            import('./views/Tools/NHome.vue'),
+            import('./views/Tools/Nhome.vue'),
           meta: {
             title: '逆水寒-队伍编辑器',
             keepAlive: false
@@ -336,6 +345,15 @@ export default new Router({
             import('./views/Admin/System/Data.vue'),
           meta: {
             title: '系统',
+            keepAlive: true
+          }
+        }, {
+          path: 'xw-data-0c2c5',
+          name: 'xwData-0c2c5',
+          component: () =>
+            import('./views/Admin/Xw/Data-0c2c5.vue'),
+          meta: {
+            title: '内页整理:项目管理',
             keepAlive: true
           }
         }

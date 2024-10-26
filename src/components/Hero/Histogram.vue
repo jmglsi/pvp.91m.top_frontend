@@ -83,6 +83,7 @@ export default {
     return {
       trendIndex: 0,
       lineData: {
+        status: 200,
         loading: true,
         extend: {},
         tooltip: {},
@@ -116,15 +117,7 @@ export default {
 
       return e;
     },
-    getHeroChartsLog: function (aid, heroId, detail) {
-      this.lineData = {
-        loading: true,
-        result: {
-          rows: [],
-        },
-        status: 200,
-      };
-
+    getHeroChartsLog: function (aid, heroId = 111, detail = 1) {
       this.$axios
         .post(
           this.$appApi.app.getHeroChartsLog +

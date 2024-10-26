@@ -6,9 +6,9 @@
         :after-config="afterConfig"
         :data="charts"
         :extend="lineData.extend"
-        :height="exStyle.height"
+        :height="extraStyle.height"
         :mark-line="lineData.markLine"
-        :width="exStyle.width"
+        :width="extraStyle.width"
         class="ranking-c934456eea80a3c5db05ed142c757e07"
       />
     </div>
@@ -30,17 +30,17 @@ export default {
       type: Number,
       default: 0,
     },
-    charts: {
-      type: Object,
-      default: () => ({}),
-    },
-    exStyle: {
+    extraStyle: {
       type: Object,
       default: () => ({
         width: "85px",
         height: "50px",
         grid: { left: -40, bottom: 40, width: 118 },
       }),
+    },
+    charts: {
+      type: Object,
+      default: () => ({}),
     },
     animation: {
       type: Boolean,
@@ -122,10 +122,10 @@ export default {
             show: false,
           },
           grid: {
-            left: this.exStyle.grid.left,
-            bottom: this.exStyle.grid.bottom,
-            width: this.exStyle.grid.width,
-            height: this.exStyle.grid.height,
+            left: this.extraStyle.grid.left,
+            bottom: this.extraStyle.grid.bottom,
+            width: this.extraStyle.grid.width,
+            height: this.extraStyle.grid.height,
             tooltip: {
               show: false,
             },

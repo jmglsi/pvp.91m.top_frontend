@@ -10,7 +10,7 @@
             @click="showInfo.calendar = true"
           >
             <span class="update-6b0325a49e13e1c8adc31a953f4bca63">
-              {{ tableData.result.tips }}
+              {{ updateData.result.tips }}
             </span>
           </van-col>
           <van-col :span="$appIsMobile ? 9 : 3">
@@ -31,7 +31,7 @@
       <div class="update-7d4e6768382f99a87a56cad0ac71b15b">
         <a-timeline>
           <a-timeline-item
-            v-for="(data, index) in tableData.result.rows"
+            v-for="(data, index) in updateData.result.rows"
             v-show="
               (updateInfo.model == 0 && data.calendar.type <= 0) ||
               (updateInfo.model == 1 && data.calendar.type > 0) ||
@@ -178,7 +178,7 @@
     <div class="update-54d18ea9d2c044692d2df8b888792af8">
       <van-calendar
         v-model="showInfo.calendar"
-        :title="tableData.result.title"
+        :title="updateData.result.title"
         :show-confirm="false"
         :formatter="onCalendarFormatter"
         :min-date="date.min"
@@ -197,7 +197,7 @@
     <div class="update-25ad144033367c9bb904b06d66436d71">
       <van-dialog
         v-model="showInfo.dialog"
-        @close="showInfo.checked ? onCopy(tableDataRow) : null"
+        @close="showInfo.checked ? onCopy(updateDataRow) : null"
       >
         <template #title>
           <span class="update-f1223965b6bcd34f5e1e3115266cb7ba">
@@ -264,14 +264,14 @@ export default {
         min: new Date(),
         max: new Date(),
       },
-      tableData: {
+      updateData: {
         result: {
           rows: [],
           tips: "",
           title: "",
         },
       },
-      tableDataRow: {},
+      updateDataRow: {},
       updateInfo: {
         model: 0,
         options: [
@@ -292,45 +292,56 @@ export default {
   },
   mounted() {
     if (this.$appConfigInfo.appInfo.isReadme == 1) {
-      this.getHeroUpdate(0, this.extraId);
+      this.getHeroUpdate(0, 0, this.extraId);
     }
   },
   methods: {
-    getHeroUpdate: function (aid = 0, heroId) {
+    getHeroUpdate: function (aid = 0, bid = 0, heroId = 0) {
       let appConfigInfo = this.$appConfigInfo,
         date = new Date(),
         ts = this.$appTs,
-        ls = this.$appGetLocalStorage("heroUpdate-" + heroId);
+        ls = this.$appGetLocalStorage(
+          "heroUpdate-" + aid + "-" + bid + "-" + heroId
+        );
 
       this.date.min = new Date(date.setMonth(date.getMonth() - 4));
       this.date.max = new Date(date.setMonth(date.getMonth() + 4));
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
-        this.tableData = ls;
+        this.updateData = ls;
 
         return;
       }
 
       this.$axios
         .post(
-          this.$appApi.app.getHeroUpdate + "&aid=" + aid + "&heroId=" + heroId
+          this.$appApi.app.getHeroUpdate +
+            "&aid=" +
+            aid +
+            "&bid=" +
+            bid +
+            "&heroId=" +
+            heroId
         )
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableData = data;
-            this.tableData.updateTime = ts;
+            this.updateData = data;
+            this.updateData.updateTime = ts;
 
-            this.$appSetLocalStorage("heroUpdate-" + heroId, this.tableData);
+            this.$appSetLocalStorage(
+              "heroUpdate-" + aid + "-" + bid + "-" + heroId,
+              this.updateData
+            );
           } else {
             this.$message.error(status.msg);
           }
         });
     },
     onCalendarFormatter: function (day) {
-      let o = this.tableData.result.rows,
+      let o = this.updateData.result.rows,
         mapType = -5;
 
       let oDay =
@@ -459,7 +470,7 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.tableDataRow = row;
+            this.updateDataRow = row;
 
             this.updateInfo.text = data.heroList[0].updateText;
             this.updateInfo.title = row.calendar.day + " 的更新内容";

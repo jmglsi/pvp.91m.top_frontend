@@ -181,8 +181,10 @@
       <div v-if="type == 0" class="return-32cf2eae6fcd7e91e52572c57b0dfed2">
         <vxe-table
           ref="refSkinReturn"
-          :loading="tableData.loading"
+          id="refSkinReturn"
+          :custom-config="{ storage: true }"
           :data="tableData.result.rows.slice(3)"
+          :loading="tableData.loading"
           :height="clientHeight"
         >
           <vxe-table-column title="#" field="skinName" fixed="left" width="75">
