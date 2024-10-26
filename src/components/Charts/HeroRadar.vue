@@ -3,7 +3,7 @@
     <div class="hero-radar-b86b97a57d04d7096b93b34cea410cfe">
       <vue-tags-input
         v-model="tag.text"
-        v-if="tabsModel == 2"
+        v-if="extraModel == 2"
         :tags="tag.array"
         :placeholder="tag.placeholder"
         @tags-changed="onTagsInputChanged"
@@ -43,15 +43,15 @@ export default {
       type: Number,
       default: 0,
     },
-    tabsModel: {
+    extraModel: {
       type: Number,
       default: 0,
     },
   },
   computed: {
     listenChange() {
-      const { extraId, tabsModel } = this;
-      return { extraId, tabsModel };
+      const { extraId, extraModel } = this;
+      return { extraId, extraModel };
     },
   },
   watch: {
@@ -60,7 +60,7 @@ export default {
       handler(newValue) {
         if (!newValue.extraId) return;
 
-        if (newValue.tabsModel == 1) {
+        if (newValue.extraModel == 1) {
           this.getHeroChartsLog(4, newValue.extraId, "");
         } else {
           this.tag.array = [];
@@ -90,14 +90,7 @@ export default {
     };
   },
   methods: {
-    getHeroChartsLog: function (aid, heroId, heroName = "") {
-      this.radarData = {
-        loading: true,
-        result: {
-          rows: [],
-        },
-      };
-
+    getHeroChartsLog: function (aid, heroId = 111, heroName = "") {
       this.$axios
         .post(
           this.$appApi.app.getHeroChartsLog +

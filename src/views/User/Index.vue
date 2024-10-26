@@ -30,21 +30,18 @@
               placement="bottom"
             >
               <template #reference>
-                <span
-                  class="login-25930e3036f13852cb0b29694bbab611 login-b068931cc450442b63f5b3d276ea4297"
-                >
-                  {{ loginInfo.name }}
-                </span>
-                <span
-                  class="login-25930e3036f13852cb0b29694bbab611 login-293a35164a20c927b0fd61942fbc1cf2"
-                >
-                  <van-tag
-                    round
-                    :color="loginInfo.certification.color"
-                    class="login-7eaa86d23ffacfb49464ee78252aa43a"
-                  >
-                    {{ loginInfo.certification.text }}
-                  </van-tag>
+                <span class="login-e1381593f93f33c2bc2e0b2ebce2200e">
+                  <span class="login-293a35164a20c927b0fd61942fbc1cf2">
+                    <van-tag
+                      :color="loginInfo.certification.color"
+                      class="login-7eaa86d23ffacfb49464ee78252aa43a"
+                    >
+                      {{ loginInfo.certification.text }}
+                    </van-tag>
+                  </span>
+                  <span class="login-b068931cc450442b63f5b3d276ea4297">
+                    {{ loginInfo.name }}
+                  </span>
                 </span>
               </template>
 
@@ -138,7 +135,7 @@
               <van-uploader
                 :after-read="onAfterRead"
                 :before-read="onBeforeRead"
-                :max-size="1 * 1024 * 1024"
+                :max-size="5 * 1024 * 1024"
                 @oversize="onOversize"
               >
                 <span>更换头像</span>
@@ -154,7 +151,7 @@
                 })
               "
             >
-              <span>好友扩列</span>
+              <span>我的主页</span>
             </a-menu-item>
           </a-menu>
         </template>
@@ -481,6 +478,7 @@
             />
           </span>
 
+          <!--
           <span class="login-fbc6a8f9f756f1d3e6daaf7d5c5034b5">
             <img
               height="20"
@@ -495,6 +493,7 @@
               "
             />
           </span>
+          -->
         </van-cell>
         <van-cell v-if="icp" class="login-c0bdff9ec0fe8c0a83371c4573d7ecf4">
           <template #title>
@@ -503,7 +502,7 @@
                 $appOpenUrl($t('open-url.title'), null, { path: url.beian }, 0)
               "
             >
-              {{ icp }}
+              {{ $t("home.bottom") }} | {{ icp }}
             </span>
           </template>
         </van-cell>
@@ -798,20 +797,7 @@ export default {
   created() {
     let q = this.$route.query;
 
-    if (q.oauthType) {
-      this.login = {
-        status: true,
-        text: this.$t("loading"),
-      };
-
-      setTimeout(() => {
-        this.$appPush({
-          query: { refresh: 1 },
-        });
-
-        location.reload();
-      }, 2000);
-    } else {
+    if (!q.oauthType) {
       this.login = {
         status: false,
         text: this.$t("my.login-i"),
@@ -1004,6 +990,7 @@ export default {
           this.$cookie.delete("accessToken");
           this.$cookie.delete("tempOpenId");
           this.$cookie.delete("tempAccessToken");
+          this.$cookie.delete("tab-index");
 
           this.$appDelectAllLocalStorage();
         })
@@ -1038,12 +1025,11 @@ span.login-fbc6a8f9f756f1d3e6daaf7d5c5034b5 {
   }
 }
 
-span.login-25930e3036f13852cb0b29694bbab611 {
-  margin: 0 3px;
-}
-
 span.login-b068931cc450442b63f5b3d276ea4297 {
-  font-size: 12px;
+  color: unset !important;
+  margin-left: 3px;
+  font-size: 13px;
+  font-weight: unset !important;
 }
 
 span.login-7a33dbf09bb2e3ed21ecb1adf0cb37b4 {
@@ -1075,7 +1061,7 @@ div.login-b990d992f06c8db21d6b58c25f843529 {
 }
 
 div.login-c0bdff9ec0fe8c0a83371c4573d7ecf4 {
-  font-size: @app-font-size;
+  font-size: 12px;
 }
 
 div.login-d50b09e1c7e5e32af4ecd82963b1ac76 {

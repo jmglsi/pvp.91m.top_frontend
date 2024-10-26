@@ -9,43 +9,85 @@
         :swipeable="true"
         :sticky="true"
         :offset-top="$appIsApple && $appConfigInfo.appInfo.pwa == 1 ? 50 : 0"
-        :before-change="onTabsBeforeChange"
+        @change="onTabsChange"
         duration="0.5"
         line-width="25px"
         class="home-5db8dca30c2d7f0c2bc225ae852c5053"
       >
-        <van-tab
-          :title="$t('recommend')"
-          class="home-e7f8cbd87d347be881cba92dad128518"
-        >
-          <HomeRecommend />
+        <!--
+        :before-change="onTabsBeforeChange"
+        -->
+        <van-tab class="home-e7f8cbd87d347be881cba92dad128518">
+          <template #title>
+            <img
+              width="33"
+              height="33"
+              v-lazy="$appCache + '/img/icons-game/wzry.png'"
+            />
+          </template>
+        </van-tab>
+        <!--
+        <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
+          <template #title>
+            <img
+              width="33"
+              height="33"
+              v-lazy="$appCache + '/img/icons-game/jcc.png'"
+            />
+          </template>
+
+          <van-search
+            :placeholder="$appConfigInfo.appInfo.search.placeholder"
+            @click="
+              $appPush({
+                path: '/search',
+              })
+            "
+            shape="round"
+            class="home-b6651e4ed730d53f874841b07507986c"
+          >
+          </van-search>
+        </van-tab>
+        -->
+        <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
+          <template #title>
+            <img
+              width="33"
+              height="33"
+              v-lazy="$appCache + '/img/icons-game/wzry_xzpx.png'"
+            />
+          </template>
         </van-tab>
         <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
           <template #title>
-            <van-search
-              :placeholder="$appConfigInfo.appInfo.search.placeholder"
-              @click="
-                $appPush({
-                  path: '/search',
-                })
-              "
-              shape="round"
-              class="home-b6651e4ed730d53f874841b07507986c"
+            <van-popover
+              v-model="showInfo.popoverMeau"
+              :actions="popoverMeauActions"
+              @select="onPopoverMeauSelect"
+              trigger="click"
+              placement="bottom-end"
             >
-            </van-search>
+              <template #reference>
+                <span class="home-59ffc0dc2bc3e6f52ba91e7639d55987">
+                  ⬇️ {{ $t("more") }} ⬇️
+                </span>
+              </template>
+            </van-popover>
           </template>
         </van-tab>
+        <!--
         <van-tab class="home-e7f8cbd87d347be881cba92dad128518">
           <template #title>
             <img
               v-lazy="$appConfigInfo.appInfo.search.img"
               @click="onUrlClick($appConfigInfo.appInfo.search)"
-              width="35"
-              height="35"
+              width="33"
+              height="33"
               class="app-border-radius"
             />
           </template>
         </van-tab>
+        -->
         <!--
         <van-tab
           :title="$t('competition')"
@@ -55,12 +97,10 @@
         </van-tab>
         -->
       </van-tabs>
-    </div>
 
-    <div class="home-72ab9e07378f988922e6c91884048db0">
-      <span class="home-865fc5de432c76bc2ab45afb9ff5b8de">
-        {{ $t("home.bottom") }}
-      </span>
+      <div v-if="tabsInfo.model == 0">
+        <HomeRecommend />
+      </div>
     </div>
 
     <AppHello height="100px" />
@@ -72,8 +112,8 @@ export default {
   name: "appIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    //HomeGame: () => import("@/views/Home/Game.vue"),
     HomeRecommend: () => import("@/views/Home/Recommend.vue"),
+    //HomeGame: () => import("@/views/Home/Game.vue"),
   },
   metaInfo() {
     return {
@@ -96,23 +136,36 @@ export default {
   data() {
     return {
       copyData: "",
+      popoverMeauActions: [{ text: "工具箱", value: 0 }],
+      selectInfo: {
+        text: "工具箱",
+        value: 0,
+      },
       tabsInfo: {
         model: 0,
+      },
+      showInfo: {
+        popoverMeau: true,
       },
     };
   },
   created() {
     this.initPage();
+
+    setTimeout(() => {
+      this.showInfo.popoverMeau = false;
+    }, 1000 * 5);
   },
   methods: {
     initPage: function () {
       let q = this.$appQuery,
-        pwa = Number(q.pwa) || 0,
-        type = Number(q.type) || 0,
         version = Number(q.v) || 1609430400,
+        pwa = Number(q.pwa) || 0,
+        gameType = Number(q.gameType) || 0,
+        gameIndex = this.$cookie.get("game-index") || 0,
         ls = this.$appConfigInfo;
 
-      this.tabsInfo.model = type;
+      this.tabsInfo.model = Number(gameType) || Number(gameIndex);
 
       if (pwa == 0) return;
 
@@ -142,6 +195,21 @@ export default {
             //on cancel
           });
       }
+    },
+    onPopoverMeauSelect: function (e) {
+      this.getSelectData(e);
+    },
+    getSelectData: function (e) {
+      let selectIndex = e.value;
+
+      if (selectIndex == 0) {
+        this.$appPush({ path: "/hero/tools" });
+      }
+    },
+    onTabsChange: function (e) {
+      this.$cookie.set("game-index", String(e), {
+        expires: "1Y",
+      });
     },
     onTabsBeforeChange: function () {
       return false;
@@ -227,19 +295,24 @@ div.home-f55b83381f479ed4c1203b80f891d83a {
   margin-top: 5px;
 }
 
-div.home-72ab9e07378f988922e6c91884048db0 {
+div.home-b467ee88fe43e04a918a10585678bdf9 {
   font-size: 12px;
-  margin: 25px;
+  margin-top: 25px;
 }
 
 div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
   div.van-tabs__wrap {
-    margin-top: -12px;
+    //margin-top: -12px;
+    margin-top: 3px;
     height: 60px;
   }
 
   div.van-tab--active {
     font-size: 25px;
+  }
+
+  div.van-popup {
+    left: 10000px !important;
   }
 }
 </style>

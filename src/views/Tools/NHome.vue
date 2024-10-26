@@ -659,10 +659,10 @@
 import draggable from "vuedraggable";
 
 export default {
-  name: "toolsNHome",
+  name: "toolsNhome",
   components: {
-    AppHello: () => import("@/components/App/Hello.vue"),
     draggable,
+    AppHello: () => import("@/components/App/Hello.vue"),
   },
   watch: {
     $route: function (to) {
@@ -1469,8 +1469,8 @@ export default {
           "帮会:" +
           this.nowTeamName +
           "\n链接:" +
-          location.origin +
-          location.pathname +
+          window.location.origin +
+          window.location.pathname +
           "?joinTeamId=" +
           this.nowTeamId;
 
@@ -1487,8 +1487,8 @@ export default {
       } else if (index == 1) {
         copyData =
           "链接:" +
-          location.origin +
-          location.pathname +
+          window.location.origin +
+          window.location.pathname +
           "?gameLabel=" +
           this.nowGameLabel;
 

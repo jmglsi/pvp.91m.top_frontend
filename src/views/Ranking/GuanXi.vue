@@ -3,7 +3,9 @@
     <div class="ranking-78117a02d15f1dffe5263f47a220c56b">
       <vxe-table
         ref="refGuanXi"
+        id="refGuanXi"
         :cell-class-name="onTableCellClassName"
+        :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"

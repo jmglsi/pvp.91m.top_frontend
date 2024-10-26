@@ -5,7 +5,7 @@
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>📖 管理员，很高兴为您服务。</span>
+            <span>📖 主人，很高兴为您服务。</span>
             <div
               v-if="percentage > 0"
               class="admin-558dab5fd681d940120defdcedf70585"
@@ -39,7 +39,7 @@
           <a-statistic title="公众号" :value="tableData.robot.rows.length" />
         </a-col>
         <a-col :span="4" @click="onRowClick('group')">
-          <a-statistic title="活跃人数" :value="tableData.group.rows.length" />
+          <a-statistic title="活跃人数" :value="tableData.group.total" />
         </a-col>
       </a-row>
     </div>
@@ -48,8 +48,11 @@
       <div v-show="showInfo.type == 'robot'">
         <vxe-table
           ref="refAdminRobot"
+          id="refAdminRobot"
           align="left"
           border="inner"
+          :custom-config="{ storage: true }"
+          :expand-config="{ accordion: true }"
           :data="tableData.robot.rows"
         >
           <vxe-column type="seq" width="60"></vxe-column>
@@ -104,8 +107,10 @@
       <div v-show="showInfo.type == 'group'">
         <vxe-table
           ref="refAdminGroup"
+          id="refAdminGroup"
           align="left"
           border="inner"
+          :custom-config="{ storage: true }"
           :data="tableData.group.rows"
           :expand-config="{
             accordion: true,
@@ -117,28 +122,7 @@
           <vxe-column type="seq" width="60"></vxe-column>
           <vxe-table-column type="expand" width="80">
             <template v-slot:content="{ row }">
-              <div class="admin-1bc7ec347bf21539b57f61784a05eba6">
-                <span class="admin-ee86c7f2e154cb36ed0c1a975f28b7b0">
-                  其他：
-                </span>
-                <br />
-                <van-button
-                  round
-                  type="info"
-                  size="mini"
-                  @click="getSign(3, 0, row)"
-                >
-                  加积分
-                </van-button>
-                <van-button
-                  round
-                  type="danger"
-                  size="mini"
-                  @click="getSign(3, 1, row)"
-                >
-                  减积分
-                </van-button>
-              </div>
+              <MpFunction :row="row" />
             </template>
           </vxe-table-column>
           <!--
@@ -197,6 +181,16 @@
           <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
         </vxe-table>
 
+        <div class="app-face1cbe136c70e1fc08cff038596944">
+          <van-pagination
+            v-model="paginationInfo.model"
+            :total-items="tableData.group.total"
+            :items-per-page="tableData.group.pageSize"
+            @change="onPaginationChange"
+            class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
+          />
+        </div>
+
         <!--
         <div class="admin-ca523f12368dc2ab03fed17e5369442b">
           <div class="admin-d781a0af3220c510f8f1cf8486492b49">
@@ -219,8 +213,10 @@
       <div v-show="showInfo.type == 'plugins'">
         <vxe-table
           ref="refAdminPlugins"
+          id="refAdminPlugins"
           align="left"
           border="inner"
+          :custom-config="{ storage: true }"
           :data="tableData.plugins.rows"
         >
           <vxe-column type="seq" width="60"></vxe-column>
@@ -277,6 +273,7 @@ export default {
   name: "adminMpData",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
+    MpFunction: () => import("@/components/Admin/MpFunction.vue"),
   },
   data() {
     return {
@@ -287,6 +284,9 @@ export default {
         },
         group: {
           rows: [],
+          total: 25,
+          totalPage: 0,
+          pageSize: 25,
         },
         plugins: {
           rows: [],
@@ -298,11 +298,6 @@ export default {
         },
       },
       robotData: {
-        result: {
-          rows: [],
-        },
-      },
-      rssData: {
         result: {
           rows: [],
         },
@@ -325,6 +320,9 @@ export default {
         80000: "其他-王者营地",
         90000: "miYouShe",
       },
+      paginationInfo: {
+        model: 0,
+      },
       robotInfo: {
         list: [],
         frameHost: null,
@@ -340,7 +338,7 @@ export default {
     this.initPage();
   },
   mounted() {
-    this.getDataByRobotData(1);
+    this.getDataByRobotData(1, 0);
   },
   methods: {
     initPage: function () {
@@ -351,7 +349,7 @@ export default {
         });
       });
 
-      this.robotInfo.list = this.$appGetLocalStorage("mp-list") || [];
+      this.robotInfo.list = this.$appGetLocalStorage("admin-mp-list") || [];
 
       this.robotInfo.list.map((x) => {
         this.robotData.result.rows.push({
@@ -360,63 +358,18 @@ export default {
         });
       });
 
-      this.robotInfo.msg = this.$appGetLocalStorage("robot-sendMsg");
-      this.robotInfo.frameHost = this.$appGetLocalStorage("robot-frameHost");
-      this.robotInfo.key = this.$appGetLocalStorage("robot-key");
+      this.robotInfo.msg = this.$appGetLocalStorage("admin-mp-sendMsg");
+      this.robotInfo.frameHost = this.$appGetLocalStorage("admin-mp-frameHost");
+      this.robotInfo.key = this.$appGetLocalStorage("admin-mp-key");
     },
-    getSign: function (aid = 3, bid = 0, row = {}) {
-      if (row == {}) return;
-
-      let cid = 0,
-        did = 0,
-        integral = 0;
-
-      if (bid == 0) {
-        integral = prompt("【加】多少？", 100);
-      } else if (bid == 1) {
-        integral = prompt("【减】多少？", 100) * -1;
-      }
-
-      bid = 0;
-      cid = integral || 0;
-
-      this.$axios
-        .post(
-          this.$appApi.app.getSign +
-            "&aid=" +
-            aid +
-            "&bid=" +
-            bid +
-            "&cid=" +
-            cid +
-            "&did=" +
-            did,
-          this.$qs.stringify({
-            frameId: row.frameId,
-            robotUin: "wx.mp",
-            msgSource: row.robot,
-            id: row.group,
-          })
-        )
-        .then((res) => {
-          let data = res.data.data,
-            status = res.data.status;
-
-          if (status.code == 200) {
-            this.getDataByRobotData(1);
-
-            this.$message.info(data);
-          } else {
-            this.$message.error(status.msg);
-          }
-        });
-    },
-    getDataByRobotData: function (aid = 1) {
+    getDataByRobotData: function (aid = 1, page = 0) {
       this.$axios
         .post(
           this.$appApi.robot.getDataByRobotData +
             "&aid=" +
             aid +
+            "&page=" +
+            page +
             "&frameId=2500",
           this.$qs.stringify({
             key: this.robotInfo.key,
@@ -433,7 +386,7 @@ export default {
               robotList.push(x);
             });
 
-            this.$appSetLocalStorage("mp-list", robotList);
+            this.$appSetLocalStorage("admin-mp-list", robotList);
 
             this.tableData = data;
           } else {
@@ -464,7 +417,7 @@ export default {
       if (frameHost) {
         this.robotInfo.frameHost = frameHost;
 
-        this.$appSetLocalStorage("robot-frameHost", frameHost);
+        this.$appSetLocalStorage("admin-mp-frameHost", frameHost);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -474,7 +427,7 @@ export default {
       if (key) {
         this.robotInfo.key = key;
 
-        this.$appSetLocalStorage("robot-key", key);
+        this.$appSetLocalStorage("admin-mp-key", key);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -485,7 +438,7 @@ export default {
       if (msg) {
         this.robotInfo.msg = msg;
 
-        this.$appSetLocalStorage("robot-sendMsg", msg);
+        this.$appSetLocalStorage("admin-mp-sendMsg", msg);
 
         this.$message.success(this.$appMsg.success[1000]);
       }
@@ -596,6 +549,9 @@ export default {
       }, 1000 * groupNum);
       //}
     },
+    onPaginationChange: function (e) {
+      this.getDataByRobotData(1, e - 1);
+    },
   },
 };
 </script>
@@ -617,14 +573,6 @@ li.admin-a64328a2760af2ca12a5b7c909082c14 {
 
 span.admin-1957c2d79946c8557790e643435fea9a {
   margin-right: 5px;
-}
-
-span.admin-ee86c7f2e154cb36ed0c1a975f28b7b0 {
-  font-size: @app-font-size;
-}
-
-div.admin-1bc7ec347bf21539b57f61784a05eba6 {
-  margin: 10px;
 }
 
 div.admin-558dab5fd681d940120defdcedf70585 {

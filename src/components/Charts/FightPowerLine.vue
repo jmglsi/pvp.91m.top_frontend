@@ -138,13 +138,6 @@ export default {
         return;
       }
 
-      this.lineData = {
-        loading: true,
-        result: {
-          rows: [],
-        },
-      };
-
       this.$axios
         .post(
           this.$appApi.app.getHeroChartsLog +

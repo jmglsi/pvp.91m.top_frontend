@@ -188,6 +188,8 @@
           </div>
         </van-tab>
 
+        <van-tab disabled title="内容待定"></van-tab>
+
         <!--
         <van-tab>
           <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
@@ -329,10 +331,10 @@ export default {
     RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
     RankingZhanLi: () => import("@/views/Ranking/ZhanLi.vue"),
     RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
-    //RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
-    //RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
     RankingWanJia: () => import("@/views/Ranking/WanJia.vue"),
     RankingZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
+    //RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
+    //RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
   },
   watch: {
     $route: function (to) {
@@ -488,12 +490,16 @@ export default {
           this.showInfo.dfsTips = false;
           this.showInfo.skillTips = false;
           this.showInfo.wanjiaTips = false;
-        }, 15000);
+        }, 1000 * 15);
       } else {
         this.showInfo.dfsTips = false;
         this.showInfo.skillTips = false;
         this.showInfo.wanjiaTips = false;
       }
+
+      setTimeout(() => {
+        this.showInfo.popoverMeau = false;
+      }, 1000 * 5);
 
       this.isSmallMode = ls.appInfo.isSmallMode;
 
@@ -769,9 +775,13 @@ span.ranking-7de1b8678bf87a631bd5f2c2b70a1214 {
 span.ranking-5cb6f4cb579d8c69b973e0fec7239056 {
   color: red !important;
   font-size: @app-font-size;
-  margin-left: -10px;
-  margin-top: 10px;
+  margin-left: -13px;
+  margin-top: 20px;
   position: absolute;
+}
+
+span.ranking-7c7f825106f6288d7e5bea8012e23041 {
+  font-size: 10px;
 }
 
 div.vxe-table--main-wrapper {
@@ -1017,5 +1027,9 @@ div.ranking-87714e7bd6c0d80c7bbdb69629b5a80d {
   position: fixed;
   right: -15px;
   z-index: 10 !important;
+}
+
+div.ranking-19c5e5344dbdca6ef8d9ba5d989aea4d {
+  margin: 10px;
 }
 </style>

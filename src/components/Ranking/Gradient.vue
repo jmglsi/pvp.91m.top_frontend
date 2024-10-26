@@ -902,7 +902,6 @@ export default {
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   props: {
     bid: {

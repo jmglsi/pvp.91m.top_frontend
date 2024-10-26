@@ -275,8 +275,8 @@
         >
           <ChartsHeroRadar
             v-if="tabsInfo.model > 0"
-            :tabsModel="tabsInfo.model"
             :extraId="hero.info.id"
+            :extraModel="tabsInfo.model"
           />
         </div>
       </van-tabs>
@@ -292,7 +292,7 @@
         @show="onComponentShow"
         class="hero-2a23eb5062a0258f23f4969c4c60aa2e"
       >
-        <div id="heroSameHobby" class="hero-b7b5e31b028440d2e0e0157baad49513">
+        <div class="hero-b7b5e31b028440d2e0e0157baad49513">
           <HeroSameHobby :extraId="hero.info.id" />
         </div>
 
@@ -511,7 +511,7 @@ export default {
           skill: [
             {
               id: null,
-              img: "//game.gtimg.cn/images/yxzj/img201606/summoner/80102.jpg",
+              img: "//camp.qq.com/images/skill/80102.png",
               pickRate: 0,
             },
             {

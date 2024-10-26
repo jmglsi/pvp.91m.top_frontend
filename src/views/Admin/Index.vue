@@ -11,7 +11,7 @@
         <template #overlay>
           <a-menu>
             <a-menu-item key="0">
-              <van-tag :color="loginInfo.certification.color" type="primary">
+              <van-tag :color="loginInfo.certification.color">
                 {{ loginInfo.certification.text }}
               </van-tag>
               <span class="admin-ee5e6f32be8ae4437eef536794a34083">
@@ -42,8 +42,10 @@
       <a-menu
         :style="{
           height: '100%',
+          overflowY: 'auto',
         }"
-        :default-selected-keys="defaultSelectedKey"
+        :default-selected-keys="defaultSelectedKeys"
+        :default-open-keys="defaultOpenKeys"
         :inline-collapsed="collapsed"
         mode="inline"
         theme="dark"
@@ -155,14 +157,98 @@
             管理
           </a-menu-item>
         </a-sub-menu>
+        <!--
+        <a-sub-menu v-show="onModuleShow('sub-xw')" key="sub-xw">
+          <span slot="title">
+            <a-icon type="file-done" />
+            <span>地质勘察</span>
+          </span>
+
+          <a-menu-item
+            v-show="onModuleShow('xw-data-0c2c5')"
+            key="xw-data-0c2c5"
+            @click="
+              $appPush({
+                path: '/admin/xw-data-0c2c5',
+              })
+            "
+          >
+            项目管理
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            勘探点管理
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            钻探工人管理
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            钻孔任务分配
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            数据浏览
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            地图浏览
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            项目统计
+          </a-menu-item>
+          <a-menu-item
+            @click="
+              $appPush({
+                path: '/admin/exploration-data',
+              })
+            "
+          >
+            数据报送
+          </a-menu-item>
+        </a-sub-menu>
+        -->
         <a-sub-menu v-show="onModuleShow('sub-system')" key="sub-system">
           <span slot="title">
             <a-icon type="global" />
-            <span>系&nbsp;&nbsp;&nbsp;统</span>
+            <span>系统设置</span>
           </span>
 
           <a-menu-item
             v-show="onModuleShow('system-data')"
+            key="system-data"
             @click="
               $appPush({
                 path: '/admin/system-data',
@@ -200,7 +286,8 @@ export default {
     return {
       collapsed: false,
       isLogin: false,
-      defaultSelectedKey: [],
+      defaultSelectedKeys: [],
+      defaultOpenKeys: [],
       loginInfo: {
         name: "苏苏",
         img: this.$appCache + "/img/icons-app/loading.png",
@@ -225,15 +312,7 @@ export default {
   created() {
     let q = this.$route.query;
 
-    if (q.oauthType) {
-      setTimeout(() => {
-        this.$appPush({
-          query: { refresh: 1 },
-        });
-
-        location.reload();
-      }, 2000);
-    } else {
+    if (!q.oauthType) {
       this.initPage();
     }
   },
@@ -242,8 +321,13 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$route;
-      this.defaultSelectedKey = [q.path.split("/")[2] || "home-data"];
+      let q = this.$route,
+        selectedKey;
+
+      selectedKey = q.path.split("/")[2] || "home-data";
+
+      this.defaultSelectedKeys = [selectedKey];
+      this.defaultOpenKeys = ["sub-" + selectedKey.split("-")[0]];
     },
     getWebAccountInfo: function (aid = 0) {
       this.$axios
@@ -280,11 +364,12 @@ export default {
           this.$cookie.delete("accessToken");
           this.$cookie.delete("tempOpenId");
           this.$cookie.delete("tempAccessToken");
+          this.$cookie.delete("tab-index");
 
           this.$appDelectAllLocalStorage();
 
           setTimeout(() => {
-            location.reload();
+            window.location.reload();
           }, 1000);
         })
         .catch(() => {
@@ -311,7 +396,7 @@ img.admin-11692cbdb16fd998d9dc739c3d53afaa {
   z-index: @app-z-index;
 }
 
-span.admin-ee5e6f32be8ae4437eef536794a34083{
+span.admin-ee5e6f32be8ae4437eef536794a34083 {
   margin-left: 3px;
 }
 
@@ -331,8 +416,8 @@ div.admin-65421a7ec15d60a791fe243310e147d9 {
 }
 
 div.admin-a6e5c6ead5e961e03325d9b0e06ec08f {
-  position: absolute;
-  left: 15px;
-  bottom: 15px;
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
 }
 </style>

@@ -309,9 +309,10 @@ export default {
           positionInfo = data.positionInfo,
           tipsInfo = data.tipsInfo,
           q = this.$appQuery,
+          redirect = q.redirect || window.location.pathname,
+          oauthType = q.oauthType || "",
           tempOpenId = q.tempOpenId || "",
           tempAccessToken = q.tempAccessToken || "",
-          oauthType = q.oauthType || "",
           tempText = q.tempText || "",
           appConfigInfo = this.$appConfigInfo;
 
@@ -375,6 +376,7 @@ export default {
           pwa: appConfigInfo.appInfo.pwa || 0,
           link: appInfo.link || [],
           name: appInfo.name || "苏苏的荣耀助手",
+          avgScore: appInfo.avgScore || 0,
           script: appInfo.script || [],
           tempText: appInfo.tempText || "",
           updateInfo: {
@@ -433,6 +435,17 @@ export default {
             this.$cookie.set("accessToken", tempAccessToken, {
               expires: "1M",
             });
+
+            setTimeout(() => {
+              this.$appPush({
+                path: redirect,
+                query: {
+                  refresh: 1,
+                },
+              });
+
+              location.reload();
+            }, 1000 * 2.5);
           }
 
           if (tempText) {
@@ -961,7 +974,8 @@ div.app-f3cc17bc0d768ca60b8bb496a10b1990 {
 }
 
 div.app-a139b05b7f8e496c00991733ef7cd589 {
-  margin: 25px 10px 0 10px;
+  //margin: 25px 10px 0 10px;
+  margin: 10px;
   padding: 0;
 }
 

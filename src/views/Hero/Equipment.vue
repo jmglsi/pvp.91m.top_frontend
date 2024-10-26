@@ -38,9 +38,9 @@
                           width="28"
                           height="28"
                           v-lazy="
-                            '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
+                            '//camp.qq.com/images/skill/' +
                             (chooseInfo.skillId || 80104) +
-                            '.jpg'
+                            '.png'
                           "
                           class="app-border-radius"
                         />
@@ -574,53 +574,58 @@ export default {
       skillInfo: [
         {
           id: 80104,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80104.jpg",
+          icon: "//camp.qq.com/images/skill/80104.png",
           name: "惩击",
         },
         {
           id: 80108,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80108.jpg",
+          icon: "//camp.qq.com/images/skill/80108.png",
           name: "终结",
         },
         {
           id: 80110,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80110.jpg",
+          icon: "//camp.qq.com/images/skill/80110.png",
           name: "狂暴",
         },
         {
           id: 80109,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80109.jpg",
+          icon: "//camp.qq.com/images/skill/80109.png",
           name: "疾跑",
         },
         {
           id: 80102,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80102.jpg",
+          icon: "//camp.qq.com/images/skill/80102.png",
           name: "治疗",
         },
         {
           id: 80105,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80105.jpg",
+          icon: "//camp.qq.com/images/skill/80105.png",
           name: "干扰",
         },
         {
           id: 80103,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80103.jpg",
+          icon: "//camp.qq.com/images/skill/80103.png",
           name: "眩晕",
         },
         {
           id: 80107,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80107.jpg",
+          icon: "//camp.qq.com/images/skill/80107.png",
           name: "净化",
         },
         {
           id: 80121,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80121.jpg",
+          icon: "//camp.qq.com/images/skill/80121.png",
           name: "弱化",
         },
         {
           id: 80115,
-          icon: "//game.gtimg.cn/images/yxzj/img201606/summoner/80115.jpg",
+          icon: "//camp.qq.com/images/skill/80115.png",
           name: "闪现",
+        },
+        {
+          id: 74100,
+          icon: "//camp.qq.com/images/skill/74100.png",
+          name: "草灵",
         },
       ],
       positionInfo: [

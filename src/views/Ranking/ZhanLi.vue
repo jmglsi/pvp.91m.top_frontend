@@ -2,12 +2,14 @@
   <div class="hero-fightPower">
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-table
-        ref="refDianFengSai"
-        id="refDianFengSai"
+        ref="refDZhanLi"
+        id="refZhanLi"
         :custom-config="{ storage: true }"
+        :expand-config="{ accordion: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
+        @cell-click="onTableCellClick"
       >
         <vxe-column
           title="英雄"
@@ -46,6 +48,16 @@
         </vxe-column>
 
         <vxe-column title="#" type="seq" width="50" />
+
+        <!--
+        <vxe-column title="更多" field="more" type="expand" width="80">
+          <template #content="{ row }">
+            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
+              <ChartsHeroLine :extraId="row.id" :aid="1" />
+            </div>
+          </template>
+        </vxe-column>
+        -->
 
         <vxe-table-colgroup
           title="国服分"
@@ -146,12 +158,96 @@
         <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
+
+    <div class="ranking-ffab85bb31b6936dee15c689b1581675">
+      <van-action-sheet
+        v-model="showInfo.skillActionSheet"
+        :title="tableDataRow.name + ' 的其他数据 (近期)'"
+      >
+        <template #default>
+          <van-tabs
+            v-model="skillInfo.model"
+            v-if="skillInfo.model > -1"
+            :ellipsis="false"
+            @click="onTabsClick"
+          >
+            <van-tab title="顺位">
+              <HeroBPIndex
+                v-if="cellInfo.index == 0 && skillInfo.model == 0"
+                :extraId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab title="打法">
+              <HeroGenreList
+                v-if="cellInfo.index == 0 && skillInfo.model == 1"
+                :extraId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab title="出装">
+              <HeroEquipmentListALL
+                v-if="cellInfo.index == 0 && skillInfo.model == 2"
+                :extraId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab title="出装 (单件)">
+              <HeroEquipmentListOne
+                v-if="cellInfo.index == 0 && skillInfo.model == 3"
+                :extraId="tableDataRow.id"
+                :extraType="1"
+              />
+            </van-tab>
+            <van-tab>
+              <template #title>
+                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                  国服 (备战)
+                </span>
+                <img
+                  v-lazy="$appCache + '/img/icons-app/hot.png'"
+                  width="13"
+                  height="13"
+                />
+              </template>
+
+              <HeroInscriptionList
+                v-if="cellInfo.index == 0 && skillInfo.model == 4"
+                :extraId="tableDataRow.id"
+              />
+            </van-tab>
+            <van-tab
+              title="更新调整"
+              :to="'/hero/' + tableDataRow.id + '/info?show=heroUpdate'"
+            >
+              <!--
+                <div class="app-0cecd2d48b0c852a513d34eec25042b7">
+                  <HeroUpdate
+                    v-if="cellInfo.index == 0 && skillInfo.model == 5"
+                    :extraId="tableDataRow.id"
+                    :updateId="tableDataRow.updateId"
+                    :aid="1"
+                  />
+                </div>
+              -->
+            </van-tab>
+          </van-tabs>
+        </template>
+      </van-action-sheet>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "rankingDianFengSai",
+  components: {
+    //ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
+    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
+    HeroEquipmentListALL: () =>
+      import("@/components/Hero/EquipmentList_All.vue"),
+    HeroEquipmentListOne: () =>
+      import("@/components/Hero/EquipmentList_One.vue"),
+    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
+    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+  },
   props: {
     bid: {
       type: Number,
@@ -222,6 +318,9 @@ export default {
       },
       tabsInfo: {
         model: 0,
+      },
+      showInfo: {
+        skillActionSheet: false,
       },
       skillInfo: {
         model: 1,
@@ -312,6 +411,38 @@ export default {
 
       if (column.property == "fightPower[3]") {
         return row.fightPower[3] >= option.value;
+      }
+    },
+    onTableCellClick: function ({ row, column }) {
+      this.tableDataRow = row;
+
+      if (row.id && row.id < 900 && column.field != "more") {
+        this.showInfo.skillActionSheet = true;
+      } else {
+        this.showInfo.skillActionSheet = false;
+      }
+    },
+    onTabsClick: function (e) {
+      let tipsText;
+
+      if (e == 0) {
+        tipsText = this.$appMsg.info[1014];
+      } else if (e == 1) {
+        tipsText = this.$appMsg.info[1007];
+      } else if (e == 2) {
+        tipsText = this.$appMsg.info[1008];
+      } else if (e == 3) {
+        tipsText = this.$appMsg.info[1009];
+      } else if (e == 4) {
+        tipsText = this.$appMsg.info[1010];
+      } else if (e == 5) {
+        tipsText = this.$appMsg.info[1028];
+      }
+
+      if (tipsText && this.tipsInfo[e] == 0) {
+        this.tipsInfo[e] = 1;
+
+        this.$message.info(tipsText);
       }
     },
   },

@@ -3,6 +3,8 @@
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
       <vxe-table
         ref="refZhuangBei"
+        id="refZhuangBei"
+        :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
@@ -83,7 +85,7 @@
           />
         </vxe-table-colgroup>
 
-        <vxe-table-colgroup title="出场越低，波动越大 (%)">
+        <vxe-table-colgroup :title="$appMsg.tips[1004] + ' (%)'">
           <vxe-table-column
             title="出场"
             field="allPickRate"

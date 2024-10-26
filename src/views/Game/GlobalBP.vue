@@ -69,7 +69,13 @@
             @click="onGameBanPickClick(index)"
           >
             <span
-              v-if="index == 0 || index == 2 || index == 11 || index == 13"
+              v-if="
+                index == 0 ||
+                index == 2 ||
+                index == 11 ||
+                index == 13 ||
+                index == 15
+              "
               class="game-4978748050a936d2f77fe718f1d81524"
             >
               <span
@@ -125,7 +131,13 @@
             @click="onGameBanPickClick(index)"
           >
             <span
-              v-if="index == 1 || index == 3 || index == 10 || index == 12"
+              v-if="
+                index == 1 ||
+                index == 3 ||
+                index == 10 ||
+                index == 12 ||
+                index == 14
+              "
               class="game-6e9c0050fe873888fbf53ec6f7b21816"
             >
               <span
@@ -193,8 +205,8 @@
                     index == 4 ||
                     index == 7 ||
                     index == 8 ||
-                    index == 15 ||
-                    index == 16
+                    index == 17 ||
+                    index == 18
                   "
                   class="game-4978748050a936d2f77fe718f1d81524"
                 >
@@ -434,8 +446,8 @@
                     index == 5 ||
                     index == 6 ||
                     index == 9 ||
-                    index == 14 ||
-                    index == 17
+                    index == 16 ||
+                    index == 19
                   "
                   class="game-6e9c0050fe873888fbf53ec6f7b21816"
                 >
@@ -876,27 +888,32 @@ export default {
       bpOpponent: {},
       bpSelf: {},
       bpIndex: {
-        ban: [0, 1, 2, 3, 10, 11, 12, 13],
-        blue: [0, 2, 4, 7, 8, 11, 13, 15, 16],
-        red: [1, 3, 5, 6, 9, 10, 12, 14, 17],
+        ban: [0, 1, 2, 3, 10, 11, 12, 13, 14, 15],
+        blue: [0, 2, 4, 7, 8, 11, 13, 15, 17, 18],
+        red: [1, 3, 5, 6, 9, 10, 12, 14, 16, 19],
         bpPerspective: [
           1, //0 - 1
           1, //1 - 2
           1, //2 - 3
+          //-
           2, //3 - 4
           1, //4 - 5
           2, //5 - 6
           1, //6 - 7
           2, //7 - 8
           1, //8 - 9
+          //-
           1, //9 - 10
           1, //10 - 11
           1, //11 - 12
           1, //12 - 13
-          2, //13 - 14
+          1, //13 - 14
           1, //14 - 15
+          //-
           2, //15 - 16
-          1, //16 -17
+          1, //16 - 17
+          2, //17 - 18
+          1, //18 - 19
         ],
       },
       eye: "closed-eye",
@@ -941,11 +958,11 @@ export default {
                 time: null,
               },
               blue: {
-                ban: [0, 0, 0, 0],
+                ban: [0, 0, 0, 0, 0],
                 pick: [0, 0, 0, 0, 0],
               },
               red: {
-                ban: [0, 0, 0, 0],
+                ban: [0, 0, 0, 0, 0],
                 pick: [0, 0, 0, 0, 0],
               },
               win: {
@@ -965,7 +982,9 @@ export default {
                 },
               },
               stepsNow: 0,
-              BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+              BPOrder: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+              ],
             },
           ],
         },
@@ -1120,14 +1139,15 @@ export default {
           orderList.BPOrder[2],
           orderList.BPOrder[11],
           orderList.BPOrder[13],
+          orderList.BPOrder[15],
         ];
 
         this.gameInfo.result.rows[i].blue.pick = [
           orderList.BPOrder[4],
           orderList.BPOrder[7],
           orderList.BPOrder[8],
-          orderList.BPOrder[15],
-          orderList.BPOrder[16],
+          orderList.BPOrder[17],
+          orderList.BPOrder[18],
         ];
 
         this.gameInfo.result.rows[i].red.ban = [
@@ -1135,14 +1155,15 @@ export default {
           orderList.BPOrder[3],
           orderList.BPOrder[10],
           orderList.BPOrder[12],
+          orderList.BPOrder[14],
         ];
 
         this.gameInfo.result.rows[i].red.pick = [
           orderList.BPOrder[5],
           orderList.BPOrder[6],
           orderList.BPOrder[9],
-          orderList.BPOrder[14],
-          orderList.BPOrder[17],
+          orderList.BPOrder[16],
+          orderList.BPOrder[19],
         ];
 
         used.push.apply(
@@ -1305,11 +1326,11 @@ export default {
             ? { team_1: teamInfo.team_1, team_2: teamInfo.team_2 }
             : { team_1: teamInfo.team_2, team_2: teamInfo.team_1 },
         blue: {
-          ban: [0, 0, 0, 0],
+          ban: [0, 0, 0, 0, 0],
           pick: [0, 0, 0, 0, 0],
         },
         red: {
-          ban: [0, 0, 0, 0],
+          ban: [0, 0, 0, 0, 0],
           pick: [0, 0, 0, 0, 0],
         },
         win: {
@@ -1320,7 +1341,7 @@ export default {
           logo: null,
         },
         stepsNow: 0,
-        BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       };
       //创建 BP 的时候切换红蓝阵营
 
@@ -1398,8 +1419,8 @@ export default {
           this.$message.error(this.$appMsg.error[1011]);
 
           setTimeout(() => {
-            location.reload();
-          }, 2000);
+            window.location.reload();
+          }, 1000 * 2.5);
         } else {
           this.gameInfo.result.rows.splice(nowIndex, 1);
           tabsModel = nowIndex - 1;
@@ -1503,11 +1524,11 @@ export default {
       if (bpMode == "edit") {
         let oldIndex = this.gameInfo.result.rows[tabsModel].stepsNow;
 
-        if (oldIndex == 16) {
+        if (oldIndex == 18) {
           this.$message.warning(this.$appMsg.warning[1001]);
         }
 
-        if (oldIndex >= 18) {
+        if (oldIndex >= 20) {
           oldIndex = 0;
         } else {
           this.gameInfo.result.rows[tabsModel].BPOrder.splice(
@@ -1591,7 +1612,7 @@ export default {
         this.$message.success(this.$appMsg.success[1000]);
 
         setTimeout(() => {
-          location.reload();
+          window.location.reload();
         }, 500);
       } else if (this.bpMode == "view") {
         this.bpMode = "sort";
@@ -1681,11 +1702,11 @@ export default {
             team_2: teamInfo.team_2,
           },
           blue: {
-            ban: [0, 0, 0, 0],
+            ban: [0, 0, 0, 0, 0],
             pick: [0, 0, 0, 0, 0],
           },
           red: {
-            ban: [0, 0, 0, 0],
+            ban: [0, 0, 0, 0, 0],
             pick: [0, 0, 0, 0, 0],
           },
           win: {
@@ -1696,7 +1717,7 @@ export default {
             logo: null,
           },
           stepsNow: 0,
-          BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          BPOrder: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         };
 
         this.$dialog

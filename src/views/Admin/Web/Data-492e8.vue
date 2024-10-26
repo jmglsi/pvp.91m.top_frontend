@@ -5,7 +5,7 @@
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>👋 管理员，很高兴为您服务。</span>
+            <span>👋 主人，很高兴为您服务。</span>
           </h1>
           <template #overlay>
             <a-menu
@@ -285,7 +285,6 @@ export default {
       import("@/components/Hero/EquipmentList_One.vue"),
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
-    //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   data() {
     return {

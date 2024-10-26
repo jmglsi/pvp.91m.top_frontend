@@ -68,11 +68,7 @@
               class="hero-c906a12df6d50e587b83a727416b5173"
             >
               <van-grid-item
-                :icon="
-                  '//game.gtimg.cn/images/yxzj/img201606/summoner/' +
-                  data.heroSkill +
-                  '.jpg'
-                "
+                :icon="'//camp.qq.com/images/skill/' + data.heroSkill + '.png'"
                 :text="data.heroPosition"
                 class="hero-0a96464cb313aab9cc51e5aa61b0193f"
               />
@@ -210,9 +206,10 @@ export default {
       tableData: {
         result: {
           rows: [],
+          total: 25,
+          totalPage: 0,
+          pageSize: 25,
         },
-        total: 200,
-        pageSize: 25,
       },
       tableDataRow: {
         gamePlayerName: this.$t("loading"),

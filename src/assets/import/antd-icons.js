@@ -38,6 +38,14 @@ export { default as HomeOutline }
 from '@ant-design/icons/lib/outline/HomeOutline';
 //home
 
+export { default as MenuFoldOutline }
+from '@ant-design/icons/lib/outline/MenuFoldOutline';
+//menu-fold
+
+export { default as MenuUnfoldOutline }
+from '@ant-design/icons/lib/outline/MenuUnfoldOutline';
+//menu-unfold
+
 export { default as BarChartOutline }
 from '@ant-design/icons/lib/outline/BarChartOutline';
 //bar-chart
@@ -58,10 +66,6 @@ export { default as ShopOutline }
 from '@ant-design/icons/lib/outline/ShopOutline';
 //shop
 
-export { default as MenuFoldOutline }
-from '@ant-design/icons/lib/outline/MenuFoldOutline';
-//menu-fold
-
-export { default as MenuUnfoldOutline }
-from '@ant-design/icons/lib/outline/MenuUnfoldOutline';
-//menu-unfold
+export { default as FileDoneOutline }
+from '@ant-design/icons/lib/outline/FileDoneOutline';
+//file-done

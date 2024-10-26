@@ -2,6 +2,8 @@
   <div class="hero-complement app-complement">
     <vxe-table
       ref="refHeroComplement"
+      id="refHeroComplement"
+      :custom-config="{ storage: true }"
       :data="tableData.result.rows"
       :loading="tableData.loading"
       @cell-click="onTableCellClick"

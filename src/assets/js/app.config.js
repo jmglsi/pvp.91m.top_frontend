@@ -29,6 +29,7 @@ Vue.prototype.$appConfigInfo = {
     pwa: 0,
     link: [],
     name: "苏苏的荣耀助手",
+    avgScore: 0,
     script: [],
     tempText: null,
     updateInfo: {

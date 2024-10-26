@@ -37,10 +37,10 @@
           <div class="hero-68adaff1d028a37f27fb33c483329cba">
             <van-popover
               v-model="showInfo.popoverMeau"
-              trigger="click"
-              placement="bottom-end"
               :actions="popoverMeauActions"
               @select="onPopoverMeauSelect"
+              trigger="click"
+              placement="bottom-end"
             >
               <template #reference>
                 <img
@@ -125,7 +125,7 @@
     </div>
 
     <div
-      v-else-if="selectInfo.value == 1 && heroInfo.id > 0 && heroInfo.id < 900"
+      v-else-if="selectInfo.value == 1"
       class="hero-45af63c525ab541863e3e50f2f52c934"
     >
       <div class="hero-da4fb4d6fd537e447df2bda7175dfb30">
@@ -184,10 +184,10 @@
         >
           <van-popover
             v-model="showInfo.popoverArea"
-            trigger="click"
-            placement="bottom"
             :actions="popoverAreaActions"
             @select="onPopoverAreaSelect"
+            trigger="click"
+            placement="bottom"
           >
             <template #reference>
               <span class="hero-fd49d92b96ae025864a37f8a357c4352">
@@ -207,6 +207,11 @@
       </div>
     </div>
 
+    <div
+      v-else-if="selectInfo.value == 2"
+      class="hero-45af63c525ab541863e3e50f2f52c934"
+    ></div>
+
     <AppHello height="150px" />
   </div>
 </template>
@@ -224,7 +229,9 @@ export default {
       popoverMeauActions: [
         { text: "查皮肤", value: 0 },
         { text: "查牌子", value: 1 },
-        { text: "查战力 (国服)", value: 2 },
+        { text: "查日报", value: 2 },
+        { text: "查移动轨迹", value: 3, disabled: true },
+        { text: "查国服战力", value: 4 },
       ],
       popoverAreaActions: [
         { text: "安卓QQ" },
@@ -264,7 +271,11 @@ export default {
       },
     };
   },
-  mounted() {},
+  mounted() {
+    setTimeout(() => {
+      this.showInfo.popoverMeau = false;
+    }, 1000 * 5);
+  },
   methods: {
     getHeroId: function (e) {
       this.heroInfo = e;
@@ -286,7 +297,7 @@ export default {
         areaType = q.areaType || this.areaType,
         selectIndex = this.selectInfo.value;
 
-      if (this.heroInfo.id == 0) {
+      if (this.heroInfo.id == 0 && selectIndex != 2) {
         return this.$message.error(this.$appMsg.error[1013]);
       }
 
@@ -297,6 +308,10 @@ export default {
 
         this.getRankingByHeroPaiZi(9, 0, 0, 0, this.heroInfo.id, this.areaType);
       } else if (selectIndex == 2) {
+        this.$appPush({ path: "/tools/daily" });
+      } else if (selectIndex == 3) {
+        //
+      } else if (selectIndex == 4) {
         this.$appPush({
           path: "/search",
           query: {

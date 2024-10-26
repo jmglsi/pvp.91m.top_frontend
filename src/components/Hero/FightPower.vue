@@ -20,7 +20,7 @@
               <van-uploader
                 :after-read="onAfterRead"
                 :before-read="onBeforeRead"
-                :max-size="3 * 1024 * 1024"
+                :max-size="5 * 1024 * 1024"
                 @oversize="onOversize"
               >
                 <div class="hero-fightPower-4b2011a6e3693d22750506daa83636c2">
@@ -102,7 +102,9 @@
             class="hero-fightPower-8198feb840dbc4a19c84ebfab63d9515 app-pzOne"
           >
             <vxe-table
-              ref="refPaiZiOne"
+              ref="refHeroFightPower"
+              id="refHeroFightPower"
+              :custom-config="{ storage: true }"
               :data="tableData.result.rows"
               :loading="tableData.loading"
               height="543"

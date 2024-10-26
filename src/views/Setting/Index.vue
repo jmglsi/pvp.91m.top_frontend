@@ -265,7 +265,7 @@ export default {
 
       if (e == 1) {
         setTimeout(() => {
-          location.reload();
+          window.location.reload();
         }, 500);
       }
     },

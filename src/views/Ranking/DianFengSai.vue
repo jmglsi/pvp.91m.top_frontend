@@ -14,6 +14,7 @@
         id="refDianFengSai"
         :cell-class-name="onTableCellClassName"
         :custom-config="{ storage: true }"
+        :expand-config="{ accordion: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
@@ -93,6 +94,16 @@
 
         <vxe-column title="#" type="seq" width="50" />
 
+        <!--
+        <vxe-column title="更多" field="more" type="expand" width="80">
+          <template #content="{ row }">
+            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
+              <ChartsHeroLine :extraId="row.id" :aid="0" />
+            </div>
+          </template>
+        </vxe-column>
+        -->
+
         <vxe-table-colgroup
           :title-prefix="{
             content:
@@ -116,7 +127,7 @@
               class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81"
             >
               <span class="ranking-6ad9203f996965a0c641bbf73cc1143f">
-                出场越低，波动越大 (%)
+                {{ $appMsg.tips[1004] }} (%)
               </span>
               <van-tag
                 plain
@@ -134,7 +145,12 @@
             title="热度"
             field="trend"
             width="100"
-            :title-prefix="{ content: $appMsg.tips[1016] }"
+            :title-prefix="{
+              content:
+                $appMsg.tips[1016] +
+                '\n当前平均分数 ≈ ' +
+                ($appConfigInfo.appInfo.avgScore || 0),
+            }"
             sortable
           >
             <template #default="{ row }">
@@ -169,7 +185,7 @@
           </vxe-column>
           <vxe-column
             title="禁用"
-            field="allBanRate"
+            field="allBanRate[0]"
             :filters="[{ value: 0 }]"
             :filter-method="onColumnFilterMethod"
             :width="listWidth"
@@ -187,6 +203,16 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
               %
+            </template>
+
+            <template #default="{ row }">
+              <span class="ranking-1af981c4a03f0457557be06e1096edac">
+                {{ row.allBanRate[0] }}
+              </span>
+              <br />
+              <span class="ranking-7c7f825106f6288d7e5bea8012e23041">
+                {{ row.allBanRate[1] }}
+              </span>
             </template>
           </vxe-column>
           <vxe-column
@@ -574,6 +600,7 @@
 export default {
   name: "rankingDianFengSai",
   components: {
+    //ChartsHeroLine: () => import("@/components/Charts/HeroLine.vue"),
     ChartsHeroProgress: () => import("@/components/Charts/HeroProgress.vue"),
     ChartsRankingLine: () => import("@/components/Charts/RankingLine.vue"),
     HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
@@ -584,7 +611,6 @@ export default {
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    //HeroUpdate: () => import("@/components/Hero/Update.vue"),
   },
   props: {
     bid: {
@@ -654,14 +680,14 @@ export default {
         id: null,
         name: this.$t("loading"),
       },
-      lineData: {
+      progressData: {
         result: {
-          columns: [],
           rows: [],
         },
       },
-      progressData: {
+      lineData: {
         result: {
+          columns: ["日期", "热度"],
           rows: [],
         },
       },
@@ -884,8 +910,8 @@ export default {
       this.initTableWidth();
     },
     onColumnFilterMethod: function ({ option, row, column }) {
-      if (column.property == "allBanRate") {
-        return row.allBanRate >= option.value;
+      if (column.property == "allBanRate[0]") {
+        return row.allTogetherBanRate >= option.value;
       }
 
       if (column.property == "allBPRate") {
@@ -903,8 +929,8 @@ export default {
     onTableCellClassName: function ({ row, column }) {
       let color = this.tableData.result.color;
 
-      if (column.property == "allBanRate") {
-        if (row.allBanRate >= color.ban) {
+      if (column.property == "allBanRate[0]") {
+        if (row.allBanRate[0] >= color.ban) {
           return "app-bda9643ac6601722a28f238714274da4";
         }
       }
@@ -923,7 +949,7 @@ export default {
 
       if (column.property == "allWinRate") {
         if (
-          (row.allBanRate >= color.ban || row.allPickRate >= color.pick) &&
+          (row.allBanRate[0] >= color.ban || row.allPickRate >= color.pick) &&
           row.allWinRate >= color.win
         ) {
           return "app-9f27410725ab8cc8854a2769c7a516b8";
@@ -931,9 +957,7 @@ export default {
       }
     },
     onTableCellClick: function ({ row, column }) {
-      if (column.property != "allPickRate") {
-        this.tableDataRow = row;
-      }
+      this.tableDataRow = row;
 
       if (column.property == "allPickRate") {
         this.cellInfo.index = -1;
@@ -953,7 +977,7 @@ export default {
           this.showInfo.skillActionSheet = false;
           this.showInfo.heroActionSheet = true;
         }
-      } else {
+      } else if (column.property != "more") {
         this.cellInfo.index = 1;
 
         this.showInfo.skillActionSheet = false;

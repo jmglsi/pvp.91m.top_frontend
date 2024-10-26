@@ -30,6 +30,19 @@
               {{ $t("nav-bar.left-text") }}
             </div>
           </template>
+          <template #label>
+            <span :style="{ color: 'gray' }"> 王者荣耀 </span>
+          </template>
+          <template #left-icon>
+            <img
+              width="20"
+              height="20"
+              v-lazy="
+                'https://cache.91m.top/pvp.91m.top/img/icons-game/wzry.png'
+              "
+              class="search-2fede256f4fb851f5a3f1e477e3657cf"
+            />
+          </template>
           <template #action>
             <ChooseHero
               @select="getHeroId"
@@ -486,22 +499,33 @@
                 <van-grid-item>
                   <div
                     :class="
-                      tableData.cardInfo.banRate[3] >= 30
+                      tableData.cardInfo.banRate[3][0] >= 30
                         ? 'app-bda9643ac6601722a28f238714274da4'
                         : null
                     "
                     class="search-0c27228425c2ec1dd01a785b6e9a0437"
                   >
-                    <span>{{ tableData.cardInfo.banRate[3] }}</span>
+                    <span>{{ tableData.cardInfo.banRate[3][0] }}</span>
                     <span
-                      v-if="tableData.cardInfo.banRate[3] > 0"
+                      v-if="tableData.cardInfo.banRate[3][0] > 0"
                       class="search-d427af48bbd4a36972ce659cd329dd38"
                     >
                       %
                     </span>
                   </div>
                   <div class="search-8d84ed4977747dd8eab8dbdc9ed3508c">
-                    {{ $t("bp.ban") }}
+                    <div
+                      :style="{
+                        position: 'relative',
+                      }"
+                    >
+                      <span class="search-b37184da1d9153fb045173b0a4b03e39">
+                        {{ $t("bp.ban") }}
+                      </span>
+                      <span class="search-f96fbfb7c36f867dee51abdbca5e11fe">
+                        {{ tableData.cardInfo.banRate[3][1] }}
+                      </span>
+                    </div>
                   </div>
                 </van-grid-item>
                 <van-grid-item>
@@ -669,13 +693,13 @@
                 <van-grid-item>
                   <div
                     :class="
-                      tableData.cardInfo.banRate[3] >= 30
+                      tableData.cardInfo.banRate[3][0] >= 30
                         ? 'app-bda9643ac6601722a28f238714274da4'
                         : null
                     "
                     class="search-0c27228425c2ec1dd01a785b6e9a0437"
                   >
-                    <span>{{ tableData.cardInfo.banRate[3] }}</span>
+                    <span>{{ tableData.cardInfo.banRate[3][0] }}</span>
                   </div>
                 </van-grid-item>
                 <van-grid-item :text="$t('bp.pick')" />
@@ -1268,7 +1292,6 @@ export default {
     HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
     HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
     HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    //HeroUpdate: () => import("@/components/Hero/Update.vue"),
     //SearchWordCloud: () => import("@/components/Charts/SearchWordCloud.vue"),
   },
   watch: {
@@ -1697,6 +1720,11 @@ img.search-3cdd9882517a697dfcf15e4bcf9fde7e {
 img.search-20a7da8370c02da6e860aaebf3a54c57 {
   border-radius: unset;
   width: 100%;
+}
+
+img.search-2fede256f4fb851f5a3f1e477e3657cf {
+  margin-top: -3px;
+  border-radius: 100%;
 }
 
 i.search-a0edf16f0e677f3e28dfd77595f437be {
