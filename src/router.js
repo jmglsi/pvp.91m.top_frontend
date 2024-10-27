@@ -214,9 +214,9 @@ export default new Router({
           }
         }, {
           path: 'n/home',
-          name: 'toolsNhome',
+          name: 'toolsNHome',
           component: () =>
-            import('./views/Tools/Nhome.vue'),
+            import('./views/Tools/NHome.vue'),
           meta: {
             title: '逆水寒-队伍编辑器',
             keepAlive: false
