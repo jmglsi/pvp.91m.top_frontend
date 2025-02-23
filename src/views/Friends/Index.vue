@@ -14,26 +14,26 @@
       >
         <template #title>
           <span
+            v-if="$appGameType == 'wzry'"
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
           >
-            &lt;{{ $appColumnsInfo.areaType[friendsInfo.areaType] }}&gt;
-          </span>
-          <span
-            class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
-          >
-            {{ friendsInfo.name }}
+            &lt;{{ $wzryColumnsInfo.areaType[friendsInfo.areaType] }}&gt;
           </span>
           <span
             class="friends-d64cb5ed2250938cb89d25beef75f604 friends-0a862f895f636cb1313fefe4eb09810f"
           >
             <van-tag
-              round
               :color="friendsInfo.certification.color"
               class="friends-e14d426045f0bd910a6606a7a11122eb"
               @click="$message.info($appMsg.info[1003])"
             >
               {{ friendsInfo.certification.text }}
             </van-tag>
+          </span>
+          <span
+            class="friends-d64cb5ed2250938cb89d25beef75f604 friends-2a0906894c02a2995ccddcda771afab7"
+          >
+            {{ friendsInfo.name }}
           </span>
         </template>
       </van-nav-bar>
@@ -57,91 +57,98 @@
       </div>
     </div>
 
-    <div class="friends-452abde170a4d98ca1ada465cac0eed5">
-      <van-cell-group
-        :border="false"
-        class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f"
-      >
-        <van-cell
-          v-if="friendsInfo"
-          :icon="$appCache + '/img/icons-game/king.png'"
-          title="王者荣耀"
-          icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
-        >
-          <template #right-icon>
-            <span class="friends-012c09cef7751ec30c771ff22eafb10a">
-              <img v-lazy="friendsInfo.rank.starIcon" width="50" height="50" />
-              <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
-              <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">
-                {{ friendsInfo.rank.score }}
-              </span>
-            </span>
-          </template>
-        </van-cell>
-        <van-collapse v-model="collapseInfo.model" :border="false">
-          <van-collapse-item
-            :icon="$appCache + '/img/icons-app/hero_black.png'"
-            title="关注列表"
-            value="快速访问"
-            icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
+    <div
+      v-if="$appGameType == 'wzry'"
+      class="friends-452abde170a4d98ca1ada465cac0eed5"
+    >
+      <van-tabs>
+        <van-tab title="王者荣耀">
+          <van-cell-group
+            :border="false"
+            class="friends-7cb42f1ecb1c02ca1d3e65083e3c4f8f"
           >
-            <div
-              v-if="friendsInfo.heroList.length > 0"
-              class="app-c1351782c9c93025d72864180d0cf28c"
+            <van-cell
+              v-if="friendsInfo"
+              :icon="$appCache + '/img/icons-game/king.png'"
+              title="王者荣耀"
+              icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
             >
-              <ul
-                class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
+              <template #right-icon>
+                <span class="friends-012c09cef7751ec30c771ff22eafb10a">
+                  <img
+                    v-lazy="friendsInfo.rank.starIcon"
+                    width="50"
+                    height="50"
+                  />
+                  <span class="app-dac41b9450b77c3eb0ab7d8428d004f5">|</span>
+                  <span class="friends-df5aabe3c98f0d4b148fc34c3aab05a8">
+                    {{ friendsInfo.rank.score }}
+                  </span>
+                </span>
+              </template>
+            </van-cell>
+            <van-collapse v-model="collapseInfo.model" :border="false">
+              <van-collapse-item
+                :icon="$appCache + '/img/icons-app/hero_black.png'"
+                title="关注列表"
+                value="快速访问"
+                icon-prefix="app-6de102c0bc4dc7f72ce287d6b0828052"
               >
-                <li
-                  v-for="(data, index) in friendsInfo.heroList"
-                  :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
-                  class="app-1951b6e7c82938dd7446a41e829b247b"
-                  @click="
-                    $appPush({
-                      path: '/hero/' + data.id + '/info',
-                    })
-                  "
+                <div
+                  v-if="friendsInfo.heroList.length > 0"
+                  class="app-c1351782c9c93025d72864180d0cf28c"
                 >
-                  <div
-                    :style="{
-                      position: 'relative',
-                    }"
+                  <ul
+                    class="app-d865b50ce307751bdeb9a6ab16e7baf9 app-9e60d3ee1e1574cae90960f940c0a821"
                   >
-                    <img
-                      v-lazy="{
-                        //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
-                        src:
-                          '//game.gtimg.cn/images/yxzj/img201606/heroimg/' +
-                          data.id +
-                          '/' +
-                          data.id +
-                          '.jpg',
-                      }"
-                      width="35"
-                      height="35"
-                      class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
-                    />
-                    <img
-                      v-if="data.fightPowerIcon"
-                      v-lazy="data.fightPowerIcon"
-                      width="50"
-                      height="40"
-                      class="app-d31cb1c15b091f41248935d88a8d0a45"
-                    />
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div
-              v-else
-              @click="$message.info($appMsg.info[1015])"
-              class="app-5ddd8715c99cbf00677a622145b3c163"
-            >
-              未设置
-            </div>
-          </van-collapse-item>
-        </van-collapse>
-      </van-cell-group>
+                    <li
+                      v-for="(data, index) in friendsInfo.heroList"
+                      :key="'app-56bc526c61d7296b48276b2203da4c49-' + index"
+                      class="app-1951b6e7c82938dd7446a41e829b247b"
+                      @click="
+                        $appPush({
+                          path: '/hero/' + data.id + '/info',
+                        })
+                      "
+                    >
+                      <div
+                        :style="{
+                          position: 'relative',
+                        }"
+                      >
+                        <img
+                          v-lazy="{
+                            //error: '//game.gtimg.cn/images/yxzj/img201606/heroimg/' + data.id + '/' + data.id + '.jpg',
+                            src: data.img,
+                          }"
+                          width="35"
+                          height="35"
+                          class="app-border-radius app-4ab161130e76571ab0c31aa23a6238c7"
+                        />
+                        <img
+                          v-if="data.fightPowerIcon"
+                          v-lazy="data.fightPowerIcon"
+                          width="50"
+                          height="40"
+                          class="app-d31cb1c15b091f41248935d88a8d0a45"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  v-else
+                  @click="$message.info($appMsg.info[1015])"
+                  class="app-5ddd8715c99cbf00677a622145b3c163"
+                >
+                  未设置
+                </div>
+              </van-collapse-item>
+            </van-collapse>
+          </van-cell-group>
+        </van-tab>
+        <van-tab title="待定" disabled></van-tab>
+      </van-tabs>
     </div>
 
     <div

@@ -55,6 +55,9 @@ VXETable.setup({
     scrollY: {
       enabled: true,
       gt: -1
+    },
+    tooltipConfig: {
+      showAll: true
     }
   },
   i18n: (key, args) => i18n.t(key, args)

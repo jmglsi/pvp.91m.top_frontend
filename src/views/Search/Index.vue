@@ -44,7 +44,7 @@
             />
           </template>
           <template #action>
-            <ChooseHero
+            <ChooseWzryHero
               @select="getHeroId"
               class="search-e63a3d77ef528e9465c5ec19abb57693"
             >
@@ -61,7 +61,7 @@
                 height="30"
                 class="app-border-radius"
               />
-            </ChooseHero>
+            </ChooseWzryHero>
 
             <div
               @click="
@@ -114,14 +114,14 @@
                   $appPush({
                     path: '/ranking',
                     query: {
-                      type: 1,
+                      type: 4,
                       heroName: tableData.cardInfo.name,
                       refresh: 1,
                     },
                   })
                 "
                 icon="exchange"
-                text="关系克制"
+                text="关系库"
               />
               <van-grid-item
                 @click="
@@ -155,7 +155,7 @@
                 :icon="$appCache + '/img/icons-app/medal.png'"
                 @click="
                   $appPush({
-                    path: '/hero/tools',
+                    path: '/tools/box',
                   })
                 "
                 text="查牌子"
@@ -164,7 +164,7 @@
                 :icon="$appCache + '/img/icons-app/skin.png'"
                 @click="
                   $appPush({
-                    path: '/hero/tools',
+                    path: '/tools/box',
                   })
                 "
                 text="查皮肤"
@@ -968,7 +968,7 @@
                           data.id.indexOf("8-") > -1
                             ? data.title +
                               " / " +
-                              tableData.cardInfo.equipmentMoneyMin
+                              tableData.cardInfo.totalPriceMin
                             : data.title
                         }}
                       </span>
@@ -1025,12 +1025,12 @@
           v-if="tableData.cardInfo.name"
           class="search-e5a3b1a60b86d6662effcad3198a8533"
         >
-          <SearchWordCloud :q="tempQ" />
+          <ChartsOtherSearchWordCloud :q="tempQ" />
         </div>
         -->
 
         <div class="search-cbf8ce69d638243d800b392c8d298b16">
-          <HeroSameHobby :extraId="tableData.cardInfo.id" />
+          <GameWzryHeroSameHobby :extraId="tableData.cardInfo.id" />
         </div>
       </div>
 
@@ -1195,62 +1195,69 @@
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
+        :title="
+          tableData.cardInfo.name +
+          ' 的备战 (' +
+          $appConfigInfo.appInfo.updateInfo.weekly +
+          ' 更新，可能有老数据)'
+        "
       >
         <template #default>
           <van-tabs
-            v-model="skillInfo.model"
-            v-if="skillInfo.model > -1"
+            v-model="extraInfo.model"
+            v-if="extraInfo.model > -1"
             :ellipsis="false"
             @click="onSkillTabsClick"
           >
-            <van-tab title="顺位">
-              <HeroBPIndex
-                v-if="skillInfo.model == 0"
-                :extraId="tableData.cardInfo.id"
-              />
-            </van-tab>
-            <van-tab title="打法">
-              <HeroGenreList
-                v-if="skillInfo.model == 1"
-                :extraId="tableData.cardInfo.id"
-              />
-            </van-tab>
-            <van-tab title="出装">
-              <HeroEquipmentListALL
-                v-if="skillInfo.model == 2"
-                :extraId="tableData.cardInfo.id"
-              />
-            </van-tab>
-            <van-tab title="出装 (单件)">
-              <HeroEquipmentListOne
-                v-if="skillInfo.model == 3"
-                :extraId="tableData.cardInfo.id"
-                :extraType="1"
-              />
-            </van-tab>
-            <van-tab>
-              <template #title>
-                <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                  国服 (备战)
-                </span>
-                <img
-                  v-lazy="$appCache + '/img/icons-app/hot.png'"
-                  width="13"
-                  height="13"
+            <div v-if="$appGameType == 'wzry'">
+              <van-tab title="顺位">
+                <GameWzryHeroBPIndex
+                  v-if="extraInfo.model == 0"
+                  :extraId="tableData.cardInfo.id"
                 />
-              </template>
+              </van-tab>
+              <van-tab title="打法">
+                <GameWzryHeroGenreList
+                  v-if="extraInfo.model == 1"
+                  :extraId="tableData.cardInfo.id"
+                />
+              </van-tab>
+              <van-tab title="出装">
+                <GameWzryHeroEquipmentListALL
+                  v-if="extraInfo.model == 2"
+                  :extraId="tableData.cardInfo.id"
+                />
+              </van-tab>
+              <van-tab title="出装 (单件)">
+                <GameWzryHeroEquipmentListOne
+                  v-if="extraInfo.model == 3"
+                  :extraId="tableData.cardInfo.id"
+                  :extraType="1"
+                />
+              </van-tab>
+              <van-tab>
+                <template #title>
+                  <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                    国服 (备战)
+                  </span>
+                  <img
+                    v-lazy="$appCache + '/img/icons-app/hot.png'"
+                    width="13"
+                    height="13"
+                  />
+                </template>
 
-              <HeroInscriptionList
-                v-if="skillInfo.model == 4"
-                :extraId="tableData.cardInfo.id"
-              />
-            </van-tab>
-            <van-tab
-              title="更新调整"
-              :to="'/hero/' + tableData.cardInfo.id + '/info?show=heroUpdate'"
-            >
-            </van-tab>
+                <GameWzryHeroInscriptionList
+                  v-if="extraInfo.model == 4"
+                  :extraId="tableData.cardInfo.id"
+                />
+              </van-tab>
+              <van-tab
+                title="更新调整"
+                :to="'/hero/' + tableData.cardInfo.id + '/info?show=heroUpdate'"
+              >
+              </van-tab>
+            </div>
           </van-tabs>
         </template>
       </van-action-sheet>
@@ -1260,11 +1267,15 @@
       <van-action-sheet
         v-model="showInfo.fightPowerActionSheet"
         :title="
-          tableData.cardInfo.name + ' (' + tableData.cardInfo.id + ') 如何操作'
+          tableData.cardInfo.name +
+          ' (' +
+          tableData.cardInfo.id +
+          ') ' +
+          $t('how-to-operate')
         "
       >
         <template #default>
-          <HeroFightPower
+          <GameWzryHeroFightPower
             v-if="showInfo.fightPowerActionSheet"
             :extraId="tableData.cardInfo.id"
             :extraType="2"
@@ -1282,17 +1293,22 @@ export default {
   name: "searchIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    ChooseHero: () => import("@/components/Choose/Hero.vue"),
-    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
-    HeroEquipmentListALL: () =>
-      import("@/components/Hero/EquipmentList_All.vue"),
-    HeroEquipmentListOne: () =>
-      import("@/components/Hero/EquipmentList_One.vue"),
-    HeroFightPower: () => import("@/components/Hero/FightPower.vue"),
-    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
-    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
-    HeroSameHobby: () => import("@/components/Hero/SameHobby.vue"),
-    //SearchWordCloud: () => import("@/components/Charts/SearchWordCloud.vue"),
+    ChooseWzryHero: () => import("@/components/Choose/Wzry/Hero.vue"),
+    GameWzryHeroBPIndex: () =>
+      import("@/components/Game/Wzry/Hero/BPIndex.vue"),
+    GameWzryHeroEquipmentListALL: () =>
+      import("@/components/Game/Wzry/Hero/EquipmentList_All.vue"),
+    GameWzryHeroEquipmentListOne: () =>
+      import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
+    GameWzryHeroFightPower: () =>
+      import("@/components/Game/Wzry/Hero/FightPower.vue"),
+    GameWzryHeroGenreList: () =>
+      import("@/components/Game/Wzry/Hero/GenreList.vue"),
+    GameWzryHeroInscriptionList: () =>
+      import("@/components/Game/Wzry/Hero/InscriptionList.vue"),
+    GameWzryHeroSameHobby: () =>
+      import("@/components/Game/Wzry/Hero/SameHobby.vue"),
+    //ChartsOtherSearchWordCloud: () => import("@/components/Charts/Other/SearchWordCloud.vue"),
   },
   watch: {
     $route: function (to, from) {
@@ -1409,7 +1425,7 @@ export default {
         heroData: 0,
         heroPopover: false,
       },
-      skillInfo: {
+      extraInfo: {
         model: 1,
       },
       tipsInfo: [0, 0, 0, 0, 0, 0],
@@ -1504,11 +1520,16 @@ export default {
               this.addSearchData(value);
 
               this.$appPush({
-                query: {
-                  q: value,
-                  show: show,
-                  refresh: 1,
-                },
+                query: show
+                  ? {
+                      q: value,
+                      show: show,
+                      refresh: 1,
+                    }
+                  : {
+                      q: value,
+                      refresh: 1,
+                    },
               });
 
               this.tempQ = data.cardInfo.name;
@@ -1799,11 +1820,6 @@ span.search-f43418d85f50da28b3a9c1e780237105 {
 span.search-3682992b479e96709916587ba97f026b {
   font-size: @app-font-size;
   margin-top: 5px;
-}
-
-span.search-7c61bf0e17805d4183c7eeb293ebdb42 {
-  position: absolute;
-  width: 250px;
 }
 
 div.search-9f8cf4f2a40f914629b098467656e95d {

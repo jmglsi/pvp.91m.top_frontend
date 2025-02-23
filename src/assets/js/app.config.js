@@ -1,15 +1,19 @@
 import Vue from 'vue';
 import XEUtils from 'xe-utils';
 
+import cookie from 'vue-cookie';
+Vue.prototype.$cookie = cookie;
+
 let ua = navigator.userAgent, url = window.location;
 
 Vue.prototype.$appCache = "//cache.91m.top/pvp.91m.top";
-Vue.prototype.$appCountry = /(127\.0\.0\.1|localhost|pvp\.91m\.top)/i.test(url.host);
+Vue.prototype.$appGameType = cookie.get("game-type") || "wzry";
 Vue.prototype.$appIsApple = /(iPhone|iPad|iPod|Mac)/i.test(ua);
 Vue.prototype.$appInDouyin = /Bytedance/i.test(ua);
 Vue.prototype.$appInWechat = /MicroMessenger/i.test(ua);
 Vue.prototype.$appInWechatMiniapp = /miniProgram/i.test(ua);
 Vue.prototype.$appIsMobile = /(Android|iPhone|iPad|iPod|Mobile)/i.test(ua);
+Vue.prototype.$appIsMyHost = /(localhost:8080|jcc\.91m\.top|pvp\.91m\.top|pvp\.r18\.games|pvp\.qialol\.com)/i.test(url.host);
 Vue.prototype.$appIsRobot = (url.search.indexOf("isRobot=1") > -1 ? true : false);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
@@ -29,17 +33,20 @@ Vue.prototype.$appConfigInfo = {
     pwa: 0,
     link: [],
     name: "苏苏的荣耀助手",
-    avgScore: 0,
     script: [],
     tempText: null,
     updateInfo: {
       version: 0,
-      time: 0,
-      title: "loading...",
       text: "loading...",
-      timeout: 43200
+      title: "loading...",
+      time: 0,
+      timeout: 43200,
+      //
+      avgScore: 0,
+      daily: 0,
+      weekly: 0,
     },
-    wxMiniappInfo: {
+    miniappInfo: {
       url: null
     },
     todayInfo: {
@@ -54,82 +61,12 @@ Vue.prototype.$appConfigInfo = {
     },
   },
   oauthInfo: ["qq", "yuque", "afdian", "coding", "github"],
-  positionInfo: [
-    [
-      "全部分路",
-      "#000000"
-    ],
-    [
-      "对抗路",
-      "#ff8c00"
-    ],
-    [
-      "中路",
-      "#ee0a24"
-    ],
-    [
-      "发育路",
-      "#1e90ff"
-    ],
-    [
-      "打野",
-      "#7232dc"
-    ],
-    [
-      "游走",
-      "#3cb371"
-    ]
-  ],
-  professionInfo: [
-    {
-      color: [],
-      name: "全部",
-      icon: "",
-      num: [0, 0],
-    },
-    {
-      color: ["190, 125, 75", "234, 152, 92"],
-      name: "铁衣",
-      icon: "//n.netease.com/data/attachment/common/5e/common_118_icon.jpg",
-      num: [0, 0],
-    },
-    {
-      color: ["64, 90, 146", "88, 119, 184"],
-      name: "神相",
-      icon: "//n.netease.com/data/attachment/common/eb/common_117_icon.jpg",
-      num: [0, 0],
-    },
-    {
-      color: ["92, 156, 182", "126, 202, 234"],
-      name: "碎梦",
-      icon: "//n.netease.com/data/attachment/common/c4/common_116_icon.jpg",
-      num: [0, 0],
-    },
-    {
-      color: ["122, 66, 137", "204, 113, 218"],
-      name: "九灵",
-      icon: "//n.netease.com/data/attachment/common/2b/common_115_icon.jpg",
-      num: [0, 0],
-    },
-    {
-      color: ["213, 103, 124", "245, 139, 161"],
-      name: "素问",
-      icon: "//n.netease.com/data/attachment/common/5f/common_114_icon.jpg",
-      num: [0, 0],
-    },
-    {
-      color: ["125, 54, 49", "127, 68, 66"],
-      name: "血河",
-      icon: "//n.netease.com/data/attachment/common/73/common_113_icon.jpg",
-      num: [0, 0],
-    }
-  ],
   tipsInfo: {
-    dfsTips: false,
-    skillTips: false,
-    wanjiaTips: false
+    gameTips: false,
+    extraTips: false,
+    playerTips: false
   },
-};
+}
 
 Vue.prototype.$appLanguageInfo = [
   {
@@ -150,7 +87,13 @@ Vue.prototype.$appLanguageInfo = [
   },
 ]
 
-Vue.prototype.$appColumnsInfo = {
+Vue.prototype.$appGameInfo = [
+  "wzry",
+  "jcc",
+  //"nsh"
+]
+
+Vue.prototype.$wzryColumnsInfo = {
   areaType: [
     "请选择大区",
     "安卓QQ",
@@ -224,6 +167,68 @@ Vue.prototype.$appColumnsInfo = {
   type: 0,
 }
 
+Vue.prototype.$wzryPositionInfo = [
+  ["全部分路", "#000000"],
+  ["对抗路", "#ff8c00"],
+  ["中路", "#ee0a24"],
+  ["发育路", "#1e90ff"],
+  ["打野", "#7232dc"],
+  ["游走", "#3cb371"]
+]
+
+Vue.prototype.$jccPiecePriceInfo = [
+  "135, 135, 135",
+  "81, 198, 32",
+  "33, 99, 192",
+  "190, 0, 193",
+  "192, 148, 32"
+]
+
+Vue.prototype.$nshProfessionInfo = [
+  {
+    color: [],
+    name: "全部",
+    icon: "",
+    num: [0, 0],
+  },
+  {
+    color: ["190, 125, 75", "234, 152, 92"],
+    name: "铁衣",
+    icon: "//n.netease.com/data/attachment/common/5e/common_118_icon.jpg",
+    num: [0, 0],
+  },
+  {
+    color: ["64, 90, 146", "88, 119, 184"],
+    name: "神相",
+    icon: "//n.netease.com/data/attachment/common/eb/common_117_icon.jpg",
+    num: [0, 0],
+  },
+  {
+    color: ["92, 156, 182", "126, 202, 234"],
+    name: "碎梦",
+    icon: "//n.netease.com/data/attachment/common/c4/common_116_icon.jpg",
+    num: [0, 0],
+  },
+  {
+    color: ["122, 66, 137", "204, 113, 218"],
+    name: "九灵",
+    icon: "//n.netease.com/data/attachment/common/2b/common_115_icon.jpg",
+    num: [0, 0],
+  },
+  {
+    color: ["213, 103, 124", "245, 139, 161"],
+    name: "素问",
+    icon: "//n.netease.com/data/attachment/common/5f/common_114_icon.jpg",
+    num: [0, 0],
+  },
+  {
+    color: ["125, 54, 49", "127, 68, 66"],
+    name: "血河",
+    icon: "//n.netease.com/data/attachment/common/73/common_113_icon.jpg",
+    num: [0, 0],
+  }
+]
+
 Vue.prototype.$appSetLocalStorage = function (key, value = {}) {
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -241,7 +246,19 @@ Vue.prototype.$appDelectLocalStorage = function (key = "ranking") {
 }
 
 Vue.prototype.$appDelectAllLocalStorage = function () {
-  let cacheList = ["appHome", "appHeroList", "gameHome", "heroChartsLog", "heroInfo", "heroSameHobby", "heroUpdate", "ranking", "search", "searchData"];
+  let cacheList = [
+    "appHeroList",
+    "appHome",
+    "gameHome",
+    "heroChartsLog",
+    "heroInfo",
+    "heroSameHobby",
+    "heroUpdate",
+    "ranking",
+    "search",
+    "searchData",
+    "tempTeam"
+  ];
 
   cacheList.map((x) => {
     Vue.prototype.$appDelectLocalStorage(x);
@@ -312,13 +329,27 @@ Vue.prototype.$appInitMiniapp = function () {
       Vue.prototype.$douyin.miniProgram.getEnv((res) => {
         if (res.miniprogram) {
           if (data.type == "getAd") {
-            Vue.prototype.$wechat.miniProgram.postMessage({
+            Vue.prototype.$douyin.miniProgram.navigateBack({ back: Vue.prototype.$appTs });
+
+            Vue.prototype.$douyin.miniProgram.postMessage({
               data: {
                 type: "getAd"
               }
             });
-          } else {
-            Vue.prototype.$wechat.miniProgram.postMessage({
+          } else if (data.type == "share") {
+            /**
+             * 
+             * 网页分享
+             * 
+             */
+            Vue.prototype.$douyin.updateAppMessageShareData({
+              title: data.extra.title,
+              desc: data.extra.desc,
+              link: data.extra.link,
+              imgUrl: data.extra.imgUrl,
+            });
+
+            Vue.prototype.$douyin.miniProgram.postMessage({
               data: {
                 type: "share",
                 extra: {
@@ -337,20 +368,6 @@ Vue.prototype.$appInitMiniapp = function () {
 
       Vue.prototype.$wechat.config(data.ticket);
       Vue.prototype.$wechat.ready(() => {
-        if (data.type == "share") {
-          /**
-           * 
-           * 网页分享
-           * 
-           */
-          Vue.prototype.$wechat.updateAppMessageShareData({
-            title: data.extra.title,
-            desc: data.extra.desc,
-            link: data.extra.link,
-            imgUrl: data.extra.imgUrl,
-          });
-        }
-
         /**
          * 
          * 小程序通讯
@@ -359,12 +376,27 @@ Vue.prototype.$appInitMiniapp = function () {
         Vue.prototype.$wechat.miniProgram.getEnv((res) => {
           if (res.miniprogram) {
             if (data.type == "getAd") {
+              Vue.prototype.$wechat.miniProgram.navigateTo({ url: '/pages/web/web?url=' + encodeURIComponent("https://docs.91m.top?ref=getAd") });
+              Vue.prototype.$wechat.miniProgram.navigateBack({ delta: 1 });
+
               Vue.prototype.$wechat.miniProgram.postMessage({
                 data: {
                   type: "getAd"
                 }
               });
-            } else {
+            } else if (data.type == "share") {
+              /**
+               * 
+               * 网页分享
+               * 
+               */
+              Vue.prototype.$wechat.updateAppMessageShareData({
+                title: data.extra.title,
+                desc: data.extra.desc,
+                link: data.extra.link,
+                imgUrl: data.extra.imgUrl,
+              });
+
               Vue.prototype.$wechat.miniProgram.postMessage({
                 data: {
                   type: "share",

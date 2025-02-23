@@ -6,7 +6,8 @@ export default {
   "down": "下がる",
   "equipment": "装備",
   "hero": "ヒーロー",
-  "how-to-operate": "操作方法",
+  "how-to-operate": "どうやって操作するの",
+  "how-to-choose": "いかに選ぶべきか",
   "more": "もっと見る",
   "none": "データなし",
   "prepare-for-war": "戦争の準備",
@@ -60,7 +61,6 @@ export default {
   },
   "open-source": {
     "title": "オープンソースプロジェクトの紹介",
-    "label": "学習のみで、商業利用は禁止",
     "value": "NGA"
   },
   "open-url": {

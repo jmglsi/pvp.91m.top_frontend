@@ -10,13 +10,13 @@
         duration="0.5"
         line-width="25px"
       >
-        <van-tab>
+        <van-tab :disabled="$appGameType != 'wzry'">
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
-              <span>梯度排行&nbsp;</span>
+              <span>英雄排行&nbsp;</span>
 
               <a-tooltip
-                :visible="showInfo.dfsTips"
+                :visible="showInfo.gameTips"
                 overlayClassName="ranking-2d6772ddd3e52a2c53cd8c794ec5ded3"
                 placement="bottomRight"
               >
@@ -31,15 +31,15 @@
           <div v-if="tabsInfo.model == 0">
             <div class="ranking-5f02576721f9492841a54d9bf8a47370">
               <div v-if="viewInfo.model == 'a'">
-                <RankingGradient
-                  :bid="bid || dfsAreaTypeInfo.model"
-                  :cid="cid || dfsPositionTypeInfo.model"
+                <GameWzryRankingTiDu
+                  :bid="bid || wzryAreaTypeInfo.model"
+                  :cid="cid || wzryPositionTypeInfo.model"
                 />
               </div>
 
               <div v-else-if="viewInfo.model == 'b'">
                 <a-tooltip
-                  :visible="showInfo.skillTips"
+                  :visible="showInfo.extraTips"
                   overlayClassName="ranking-8d583d7c052e343e6817b99812fa03b6"
                   placement="left"
                 >
@@ -47,10 +47,10 @@
                     <span>左侧查看备战，右侧搜索舆论</span>
                   </template>
 
-                  <RankingDianFengSai
+                  <GameWzryRanking
                     :isSmallMode="isSmallMode"
-                    :bid="bid || dfsAreaTypeInfo.model"
-                    :cid="cid || dfsPositionTypeInfo.model"
+                    :bid="bid || wzryAreaTypeInfo.model"
+                    :cid="cid || wzryPositionTypeInfo.model"
                     :did="did || Number($appConfigInfo.appInfo.isSwingMode)"
                     :refresh="refresh || 0"
                   />
@@ -58,11 +58,15 @@
               </div>
 
               <div v-else-if="viewInfo.model == 'c'">
-                <ChartsMigrationLine :bid="cid || dfsPositionTypeInfo.model" />
+                <ChartsWzryMigrationLine
+                  :bid="cid || wzryPositionTypeInfo.model"
+                />
               </div>
 
               <div v-else-if="viewInfo.model == 'd'">
-                <ChartsFightPowerLine :bid="cid || dfsPositionTypeInfo.model" />
+                <ChartsWzryFightPowerLine
+                  :bid="cid || wzryPositionTypeInfo.model"
+                />
               </div>
             </div>
 
@@ -125,27 +129,28 @@
           </div>
         </van-tab>
 
-        <van-tab>
+        <van-tab :disabled="$appGameType != 'wzry'">
           <template #title>
-            关系克制 (近期)&nbsp;<i class="vxe-icon--search" />
+            战力排行&nbsp;<i class="vxe-icon--funnel" />
           </template>
 
           <div class="ranking-f0bce2ae24464a70a3e9e78a1c36eea0">
-            <RankingGuanXi
+            <GameWzryRankingZhanLi
               v-if="tabsInfo.model == 1"
+              :bid="bid || wzryFightPowerTypeInfo.model"
+              :cid="cid || wzryPositionTypeInfo.model"
               :isSmallMode="isSmallMode"
-              :heroName="heroName"
               :refresh="refresh || 0"
             />
           </div>
         </van-tab>
 
-        <van-tab>
+        <van-tab :disabled="$appGameType != 'wzry'">
           <template #title>
             <div class="ranking-49d4c899070175b7649d7424a5d2ee41">
-              <span>玩家 (非实时)&nbsp;</span>
+              <span>玩家排行&nbsp;</span>
 
-              <a-tooltip :visible="showInfo.wanjiaTips" placement="bottomRight">
+              <a-tooltip :visible="showInfo.playerTips" placement="bottomRight">
                 <template slot="title">
                   <span>大佬们在玩什么</span>
                 </template>
@@ -155,64 +160,89 @@
           </template>
 
           <div class="ranking-c48b544672dab7bc931d3c19985856d6">
-            <RankingWanJia
+            <GameWzryRankingWanJia
               v-if="tabsInfo.model == 2"
               :isSmallMode="isSmallMode"
-              :bid="bid || wjAreaTypeInfo.model"
+              :bid="bid || wzryPlayerAreaTypeInfo.model"
               :refresh="refresh || 0"
             />
           </div>
-        </van-tab>
-
-        <van-tab title="装备 (近期)">
-          <RankingZhuangBei
-            v-if="tabsInfo.model == 3"
-            :isSmallMode="isSmallMode"
-            :refresh="refresh || 0"
-          />
         </van-tab>
 
         <van-tab>
           <template #title>
-            战力排行&nbsp;<i class="vxe-icon--funnel" />
+            装备库&nbsp;<i class="vxe-icon--funnel" />
           </template>
 
-          <div class="ranking-f0bce2ae24464a70a3e9e78a1c36eea0">
-            <RankingZhanLi
-              v-if="tabsInfo.model == 4"
-              :bid="bid || heroFightPowerTypeInfo.model"
-              :cid="cid || dfsPositionTypeInfo.model"
+          <div
+            v-if="gameEquipmentSelectInfo.model == 1"
+            class="ranking-7e3bb7a1e300ab761a82ac7f1df82e8a"
+          >
+            <GameWzryRankingZhuangBeiKu
+              v-if="tabsInfo.model == 3"
               :isSmallMode="isSmallMode"
               :refresh="refresh || 0"
             />
           </div>
+
+          <div
+            v-else-if="gameEquipmentSelectInfo.model == 2"
+            class="ranking-7e3bb7a1e300ab761a82ac7f1df82e8a"
+          >
+            <GameJccRankingZhuangBeiKu
+              v-if="tabsInfo.model == 3"
+              :isSmallMode="isSmallMode"
+              :refresh="refresh || 0"
+            />
+          </div>
+
+          <div v-else class="ranking-689fdaf6324c0a1d4369c477538a4c63">
+            上方选择游戏 或 等待内容更新 :D
+          </div>
+        </van-tab>
+
+        <van-tab :disabled="$appGameType != 'wzry'">
+          <template #title>
+            关系库&nbsp;<i class="vxe-icon--search" />
+          </template>
+
+          <div class="ranking-f0bce2ae24464a70a3e9e78a1c36eea0">
+            <GameWzryRankingGuanXiKu
+              v-if="tabsInfo.model == 4"
+              :isSmallMode="isSmallMode"
+              :heroName="heroName"
+              :refresh="refresh || 0"
+            />
+          </div>
+        </van-tab>
+
+        <van-tab :disabled="$appGameType != 'jcc'">
+          <template #title>
+            弈子排行&nbsp;<i class="vxe-icon--funnel" />
+          </template>
+
+          <GameJccRanking :isSmallMode="isSmallMode" :refresh="refresh || 0" />
+        </van-tab>
+
+        <van-tab :disabled="$appGameType != 'jcc'">
+          <template #title>
+            强化符文&nbsp;<i class="vxe-icon--funnel" />
+          </template>
+
+          <GameJccRankingQiangHuaFuWen
+            :isSmallMode="isSmallMode"
+            :refresh="refresh || 0"
+          />
         </van-tab>
 
         <van-tab disabled title="内容待定"></van-tab>
 
         <!--
         <van-tab>
-          <template #title>牌子&nbsp;<i class="vxe-icon--funnel" /></template>
-
-          <div class="ranking-02481dbde39222ea29fbc1d2f80b2885">
-            <RankingPaiZi
-              v-if="tabsInfo.model == 5"
-              :isSmallMode="isSmallMode"
-              :bid="bid || pzAreaTypeInfo.model"
-              :cid="cid || pzProvinceTypeInfo.model"
-              :did="did || pzFightPowerTypeInfo.model"
-              :refresh="refresh || 0"
-            />
-          </div>
-        </van-tab>
-        -->
-
-        <!--
-        <van-tab>
           <template #title>内战&nbsp;<i class="vxe-icon--funnel" /></template>
 
           <div class="ranking-967b680d849350ecbc7c66ff16027608">
-            <RankingNeiZhan
+            <GameWzryRankingNeiZhan
               v-if="tabsInfo.model == 6"
               :isSmallMode="isSmallMode"
               :bid="bid || nzOrderInfo.model"
@@ -225,7 +255,9 @@
       </van-tabs>
     </div>
 
+    <!--
     <AppHello v-if="viewInfo.model != 'b'" height="100px" />
+    -->
 
     <van-popup
       v-model="showInfo.popup"
@@ -288,10 +320,7 @@
       </van-action-sheet>
     </div>
 
-    <div
-      v-if="viewInfo.model == 'b'"
-      class="ranking-ebf09abeb7c3db44741d328324915725"
-    >
+    <div class="ranking-ebf09abeb7c3db44741d328324915725">
       <van-divider
         :style="{
           padding: '0 15px',
@@ -301,13 +330,7 @@
         }"
         @click="$message.info($appMsg.info[1012])"
       >
-        <van-tag
-          round
-          type="danger"
-          class="ranking-4d09fbef1438e2b23375b87ba3e02942"
-        >
-          游客部分功能受限，登录后将自动解锁
-        </van-tag>
+        您的分享是我更新的动力
       </van-divider>
     </div>
   </div>
@@ -323,18 +346,25 @@ import "echarts/lib/component/title";
 export default {
   name: "rankingIndex",
   components: {
-    AppHello: () => import("@/components/App/Hello.vue"),
-    ChartsMigrationLine: () => import("@/components/Charts/MigrationLine.vue"),
-    ChartsFightPowerLine: () =>
-      import("@/components/Charts/FightPowerLine.vue"),
-    RankingDianFengSai: () => import("@/views/Ranking/DianFengSai.vue"),
-    RankingGradient: () => import("@/components/Ranking/Gradient.vue"),
-    RankingZhanLi: () => import("@/views/Ranking/ZhanLi.vue"),
-    RankingGuanXi: () => import("@/views/Ranking/GuanXi.vue"),
-    RankingWanJia: () => import("@/views/Ranking/WanJia.vue"),
-    RankingZhuangBei: () => import("@/views/Ranking/ZhuangBei.vue"),
-    //RankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
-    //RankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
+    //AppHello: () => import("@/components/App/Hello.vue"),
+    ChartsWzryMigrationLine: () =>
+      import("@/components/Charts/Wzry/MigrationLine.vue"),
+    ChartsWzryFightPowerLine: () =>
+      import("@/components/Charts/Wzry/FightPowerLine.vue"),
+    GameWzryRanking: () => import("@/views/Ranking/Wzry/Game.vue"),
+    GameWzryRankingTiDu: () => import("@/views/Ranking/Wzry/TiDu.vue"),
+    GameWzryRankingZhanLi: () => import("@/views/Ranking/Wzry/ZhanLi.vue"),
+    GameWzryRankingGuanXiKu: () => import("@/views/Ranking/Wzry/GuanXiKu.vue"),
+    GameWzryRankingWanJia: () => import("@/views/Ranking/Wzry/WanJia.vue"),
+    GameWzryRankingZhuangBeiKu: () =>
+      import("@/views/Ranking/Wzry/ZhuangBeiKu.vue"),
+    GameJccRankingZhuangBeiKu: () =>
+      import("@/views/Ranking/Jcc/ZhuangBeiKu.vue"),
+    GameJccRankingQiangHuaFuWen: () =>
+      import("@/views/Ranking/Jcc/QiangHuaFuWen.vue"),
+    GameJccRanking: () => import("@/views/Ranking/Jcc/Game.vue"),
+    //GameWzryRankingNeiZhan: () => import("@/views/Ranking/NeiZhan.vue"),
+    //GameWzryRankingPaiZi: () => import("@/views/Ranking/PaiZi.vue"),
   },
   watch: {
     $route: function (to) {
@@ -366,12 +396,12 @@ export default {
       showInfo: {
         actionSheet: false,
         popup: false,
-        dfsTips: true,
-        skillTips: true,
-        wanjiaTips: true,
+        gameTips: true,
+        extraTips: true,
+        playerTips: true,
         popoverMeau: false,
       },
-      dfsAreaTypeInfo: {
+      wzryAreaTypeInfo: {
         model: 0,
         options: [
           { value: 0, text: "全部 (昨日)" },
@@ -383,17 +413,17 @@ export default {
           { value: 6, text: "我关注的" },
         ],
       },
-      heroFightPowerTypeInfo: {
+      wzryFightPowerTypeInfo: {
         model: 0,
         options: [
-          { value: 0, text: "全部 (近期)" },
+          { value: 0, text: "全部" },
           { value: 1, text: "安卓 QQ" },
           { value: 2, text: "苹果 QQ" },
           { value: 3, text: "安卓 WX" },
           { value: 4, text: "苹果 WX" },
         ],
       },
-      dfsPositionTypeInfo: {
+      wzryPositionTypeInfo: {
         model: 0,
         options: [
           { value: 0, text: "全部分路 ω' )و" },
@@ -404,7 +434,7 @@ export default {
           { value: 5, text: "游走" },
         ],
       },
-      wjAreaTypeInfo: {
+      wzryPlayerAreaTypeInfo: {
         model: 0,
         options: [
           { value: 0, text: "全部" },
@@ -414,17 +444,14 @@ export default {
           { value: 4, text: "苹果WX" },
         ],
       },
-      pzAreaTypeInfo: {
+      gameEquipmentSelectInfo: {
         model: 0,
-        options: [],
-      },
-      pzProvinceTypeInfo: {
-        model: 0,
-        options: [],
-      },
-      pzFightPowerTypeInfo: {
-        model: 0,
-        options: [],
+        options: [
+          { value: 0, text: "请选择游戏" },
+          { value: 1, text: "王者荣耀" },
+          { value: 2, text: "金铲铲" },
+          //{ value: 3, text: "逆水寒" },
+        ],
       },
       nzOrderInfo: {
         model: 0,
@@ -469,32 +496,35 @@ export default {
     initPage: function () {
       let q = this.$route.query,
         ls = this.$appConfigInfo,
-        dfsTips = ls.tipsInfo.dfsTips || false,
-        skillTips = ls.tipsInfo.skillTips || false,
-        wanjiaTips = ls.tipsInfo.wanjiaTips || false;
+        gameTips = ls.tipsInfo.gameTips || false,
+        extraTips = ls.tipsInfo.extraTips || false,
+        playerTips = ls.tipsInfo.playerTips || false;
+
+      this.tabsInfo.model = Number(q.type) || 0;
+      this.gameEquipmentSelectInfo.model = Number(q.bid) || 0;
 
       this.heroName = q.heroName || "";
-      this.tabsInfo.model = Number(q.type) || 0;
+
       q.bid ? (this.bid = Number(q.bid)) : (this.bid = 0);
       q.cid ? (this.cid = Number(q.cid)) : (this.cid = 0);
       q.did ? (this.did = Number(q.did)) : (this.did = 0);
       q.gc ? (this.gc = q.gc) : (this.gc = "");
 
-      if (!dfsTips || !skillTips || !wanjiaTips) {
-        ls.tipsInfo.dfsTips = true;
-        ls.tipsInfo.skillTips = true;
-        ls.tipsInfo.wanjiaTips = true;
+      if (!gameTips || !extraTips || !playerTips) {
+        ls.tipsInfo.gameTips = true;
+        ls.tipsInfo.extraTips = true;
+        ls.tipsInfo.playerTips = true;
         this.$appSetLocalStorage("appConfigInfo", ls);
 
         setTimeout(() => {
-          this.showInfo.dfsTips = false;
-          this.showInfo.skillTips = false;
-          this.showInfo.wanjiaTips = false;
+          this.showInfo.gameTips = false;
+          this.showInfo.extraTips = false;
+          this.showInfo.playerTips = false;
         }, 1000 * 15);
       } else {
-        this.showInfo.dfsTips = false;
-        this.showInfo.skillTips = false;
-        this.showInfo.wanjiaTips = false;
+        this.showInfo.gameTips = false;
+        this.showInfo.extraTips = false;
+        this.showInfo.playerTips = false;
       }
 
       setTimeout(() => {
@@ -540,29 +570,36 @@ export default {
          * 初始化菜单
          *
          */
-        this.bidInfo = this.dfsAreaTypeInfo;
-        this.cidInfo = this.dfsPositionTypeInfo;
+        this.bidInfo = this.wzryAreaTypeInfo;
+        this.cidInfo = this.wzryPositionTypeInfo;
         this.didInfo = {
           model: 0,
           options: [],
         };
+
         /**
          *
          * 同步选项
          *
          */
-        this.dfsAreaTypeInfo.model = this.bid;
-        this.dfsPositionTypeInfo.model = this.cid;
+        this.wzryAreaTypeInfo.model = this.bid;
+        this.wzryPositionTypeInfo.model = this.cid;
 
         this.showInfo.actionSheet = true;
       }
 
       if (e == 1) {
-        this.showInfo.popup = true;
+        this.bidInfo = this.wzryFightPowerTypeInfo;
+        this.cidInfo = this.wzryPositionTypeInfo;
+
+        this.wzryFightPowerTypeInfo.model = this.bid;
+        this.wzryPositionTypeInfo.model = this.cid;
+
+        this.showInfo.actionSheet = true;
       }
 
       if (e == 2) {
-        this.bidInfo = this.wjAreaTypeInfo;
+        this.bidInfo = this.wzryPlayerAreaTypeInfo;
         this.cidInfo = {
           model: 0,
           options: [],
@@ -572,57 +609,33 @@ export default {
           options: [],
         };
 
-        this.wjAreaTypeInfo.model = this.bid;
+        this.wzryPlayerAreaTypeInfo.model = this.bid;
 
         this.showInfo.actionSheet = true;
       }
 
       if (e == 3) {
-        //
+        this.bidInfo = this.gameEquipmentSelectInfo;
+        this.cidInfo = {
+          model: 0,
+          options: [],
+        };
+        this.didInfo = {
+          model: 0,
+          options: [],
+        };
+
+        this.gameEquipmentSelectInfo.model = this.bid;
+
+        this.showInfo.actionSheet = true;
       }
 
       if (e == 4) {
-        this.bidInfo = this.heroFightPowerTypeInfo;
-        this.cidInfo = this.dfsPositionTypeInfo;
-
-        this.heroFightPowerTypeInfo.model = this.bid;
-        this.dfsPositionTypeInfo.model = this.cid;
-
-        this.showInfo.actionSheet = true;
+        this.showInfo.popup = true;
       }
 
       if (e == 5) {
-        let extraData_1 = [],
-          extraData_2 = [],
-          extraData_3 = [],
-          o = this.$appColumnsInfo.areaType || [],
-          p = this.$appColumnsInfo.provinceType || [],
-          q = this.$appColumnsInfo.fightPowerType.text || [];
-
-        o.map((x, i) => {
-          extraData_1.push({ text: x, value: i });
-        });
-        this.pzAreaTypeInfo.options = extraData_1;
-
-        p.map((x, i) => {
-          extraData_2.push({ text: x, value: i });
-        });
-        this.pzProvinceTypeInfo.options = extraData_2;
-
-        q.map((x, i) => {
-          extraData_3.push({ text: x, value: i });
-        });
-        this.pzFightPowerTypeInfo.options = extraData_3;
-
-        this.bidInfo = this.pzAreaTypeInfo;
-        this.cidInfo = this.pzProvinceTypeInfo;
-        this.didInfo = this.pzFightPowerTypeInfo;
-
-        this.pzAreaTypeInfo.model = this.bid;
-        this.pzProvinceTypeInfo.model = this.cid;
-        this.pzFightPowerTypeInfo.model = this.did;
-
-        this.showInfo.actionSheet = true;
+        //
       }
 
       if (e == 6) {
@@ -658,7 +671,7 @@ export default {
     onInputSearch: function (value) {
       this.$appPush({
         query: {
-          type: 1,
+          type: 4,
           heroName: value,
           refresh: 1,
         },
@@ -754,11 +767,6 @@ li.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
   width: 40px;
 }
 
-span.ranking-80ef788ee63a7ce63e7ad1403967bf11 {
-  margin: 0 10px;
-  white-space: nowrap;
-}
-
 span.ranking-4da12add5b0c1920dcde6c5627d30422 {
   left: 0;
   margin: 50px 0;
@@ -782,6 +790,13 @@ span.ranking-5cb6f4cb579d8c69b973e0fec7239056 {
 
 span.ranking-7c7f825106f6288d7e5bea8012e23041 {
   font-size: 10px;
+}
+
+span.ranking-8302b5f225fa915b2cf1a42525d4e0d3 {
+  position: absolute;
+  font-size: 12px;
+  left: 0;
+  top: -15px;
 }
 
 div.vxe-table--main-wrapper {
@@ -825,6 +840,11 @@ div.ranking-progress {
   position: absolute;
 }
 
+div.ranking-689fdaf6324c0a1d4369c477538a4c63 {
+  margin: 50px;
+  color: red;
+}
+
 div.ranking-e1c6b759e0537c91d5c6dbb2d4738173 {
   margin: 10px;
 }
@@ -839,11 +859,6 @@ div.ranking-d742492b2526d57a222af9b54040b3b4 {
 
 div.ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81 {
   display: inline-block;
-}
-
-div.ranking-2862744e5d7cce9d070aa41172557d78 {
-  font-size: @app-font-size;
-  margin-top: 50px;
 }
 
 div.ranking-51c877f489423eb1c3901dd0e12c03d4 {
@@ -862,9 +877,9 @@ div.ranking-0e1a8b3f7f6162bf4b88d3d001b88374 {
 }
 
 div.ranking-abb5cb2b15eb9ccfe416f0ba3da3499e {
-  height: 225px;
+  height: 150px;
   margin: 0 auto;
-  margin-top: 25px;
+  margin-top: 50px;
   position: absolute;
   width: 100%;
 }
@@ -897,9 +912,10 @@ div.ranking-420e569f7ae439ae256513412631f2f4 {
   left: 0;
   margin: 0 auto;
   margin-top: -3px;
-  overflow: hidden;
   position: absolute;
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
   width: 100%;
 }
 

@@ -7,6 +7,7 @@ export default {
   "equipment": "Equipment",
   "hero": "Hero",
   "how-to-operate": "How to Operate",
+  "how-to-choose": "How to Choose",
   "more": "More",
   "none": "No Data Available",
   "prepare-for-war": "Prepare for War",
@@ -60,7 +61,6 @@ export default {
   },
   "open-source": {
     "title": "Open Source Project Introduction",
-    "label": "For learning purposes only, commercial use is prohibited",
     "value": "NGA"
   },
   "open-url": {

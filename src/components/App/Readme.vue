@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "AppReadme",
+  name: "appReadme",
   data() {
     return {
       agree: false,

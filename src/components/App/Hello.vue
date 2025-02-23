@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "AppHello",
+  name: "appHello",
   props: {
     height: {
       type: String,

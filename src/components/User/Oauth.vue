@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  name: "UserOauth",
+  name: "userOauth",
   props: {
     openId: {
       type: String,

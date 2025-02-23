@@ -136,10 +136,10 @@
           :title="$t('other.area.title')"
           :label="$t('other.area.label')"
           :value="
-            $appCountry ? $t('other.area.type[0]') : $t('other.area.type[1]')
+            $appIsMyHost ? $t('other.area.type[0]') : $t('other.area.type[1]')
           "
           @click="
-            $appCountry
+            $appIsMyHost
               ? $appOpenUrl(
                   '是否切至国外?',
                   null,
@@ -155,11 +155,13 @@
           "
           is-link
         />
+        <!--
         <van-cell
           :title="$t('other.update.title')"
           :label="$t('other.update.label')"
-          :value="$appConfigInfo.appInfo.updateInfo.time"
+          :value="$appConfigInfo.appInfo.updateInfo.daily"
         />
+        -->
         <van-cell
           :title="$t('other.version.title')"
           :label="$t('other.version.label')"
@@ -230,8 +232,8 @@ export default {
       } else {
         this.$appSetLocalStorage("VXE_TABLE_CUSTOM_COLUMN_VISIBLE", {
           _v: 0,
-          refDianFengSai:
-            "allBrandRate,evaluateGoldRate,evaluateSilverRate,allMvpRate,winMvpRate,loseMvpRate,totalBeHurtedCntPerMin,totalOutputPerMin,totalHurtHeroCntPerMin,equMoneyOverflow,equMoneyMin,killCnt,deadCnt,assistCnt,joinGamePercent,usedtime",
+          refWzryGame:
+            "allBrandRate,evaluateGoldRate,evaluateSilverRate,allMvpRate,winMvpRate,loseMvpRate,totalBeHurtedCntPerMin,totalOutputPerMin,totalHurtHeroCntPerMin,totalPrice,totalPriceMin,killCnt,deadCnt,assistCnt,joinGamePercent,usedtime",
         });
       }
 

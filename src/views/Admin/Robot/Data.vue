@@ -5,7 +5,7 @@
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>🤖️ 主人，很高兴为您服务。</span>
+            <span>🤖️ 您好，很高兴为您服务。</span>
             <div
               v-if="percentage > 0"
               class="admin-558dab5fd681d940120defdcedf70585"
@@ -35,17 +35,11 @@
       class="app-4717d11da95ed90ccdb4d4a0648bad39 admin-8e086eb841d9b5cd2f89212ac8fd0527"
     >
       <a-row>
-        <a-col :span="4" @click="onRowClick('robot')">
-          <a-statistic title="机器人" :value="tableData.robot.rows.length" />
+        <a-col :span="3" @click="onRowClick('robot', 0)">
+          <a-statistic title="机器人" :value="tableData[0].total" />
         </a-col>
-        <a-col :span="4" @click="onRowClick('group')">
-          <a-statistic title="活跃群组" :value="tableData.group.total" />
-        </a-col>
-        <a-col :span="4" @click="onRowClick('plugins')">
-          <a-statistic
-            title="插件功能"
-            :value="tableData.plugins.rows.length"
-          />
+        <a-col :span="3" @click="onRowClick('group', 1)">
+          <a-statistic title="活跃群组" :value="tableData[1].total" />
         </a-col>
       </a-row>
     </div>
@@ -58,9 +52,9 @@
           align="left"
           border="inner"
           :custom-config="{ storage: true }"
-          :data="tableData.robot.rows"
+          :data="tableData[0].rows"
         >
-          <vxe-column type="seq" width="60"></vxe-column>
+          <vxe-column type="seq" width="60" />
           <vxe-column
             :filters="frameData.result.rows"
             :filter-method="onTableColumnFilterMethod"
@@ -68,7 +62,6 @@
             field="frameId"
             title="类型"
             show-overflow="ellipsis"
-            sortable
           >
             <template #default="{ row }">
               {{ frameInfo[row.frameId] }}
@@ -79,24 +72,23 @@
             field="robot"
             title="机器人"
             show-overflow="ellipsis"
-            sortable
           />
-          <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
+          <vxe-column field="updated_at" title="更新时间" sortable />
         </vxe-table>
       </div>
 
       <div v-show="showInfo.type == 'group'">
         <vxe-table
-          ref="refAdminGroup"
-          id="refAdminGroup"
+          ref="refAdminRobotGroup"
+          id="refAdminRobotGroup"
           align="left"
           border="inner"
           :custom-config="{ storage: true }"
           :expand-config="{ accordion: true }"
-          :data="tableData.group.rows"
+          :data="tableData[1].rows"
         >
-          <vxe-column type="checkbox" width="60"></vxe-column>
-          <vxe-column type="seq" width="60"></vxe-column>
+          <vxe-column type="checkbox" width="60" />
+          <vxe-column type="seq" width="60" />
           <vxe-table-column type="expand" width="80">
             <template v-slot:content="{ row }">
               <RobotFunction :row="row" />
@@ -109,7 +101,6 @@
             field="frameId"
             title="类型"
             show-overflow="ellipsis"
-            sortable
           >
             <template #default="{ row }">
               {{ frameInfo[row.frameId] }}
@@ -122,7 +113,6 @@
             field="robot"
             title="机器人"
             show-overflow="ellipsis"
-            sortable
           >
             <template #default="{ row }">
               <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
@@ -146,12 +136,7 @@
               </span>
             </template>
           </vxe-column>
-          <vxe-column
-            field="group"
-            title="群组"
-            show-overflow="ellipsis"
-            sortable
-          >
+          <vxe-column field="group" title="群组" show-overflow="ellipsis">
             <template #default="{ row }">
               <span class="admin-fbb2abea8cbe41aacdf1b893f9cb4459">
                 {{ row.group }}
@@ -174,16 +159,16 @@
               </span>
             </template>
           </vxe-column>
-          <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
+          <vxe-column field="updated_at" title="更新时间" sortable />
         </vxe-table>
 
         <div class="app-face1cbe136c70e1fc08cff038596944">
           <van-pagination
             v-model="paginationInfo.model"
-            :total-items="tableData.group.total"
-            :items-per-page="tableData.group.pageSize"
+            :total-items="tableData[1].total"
+            :items-per-page="tableData[1].pageSize"
             @change="onPaginationChange"
-            class="hero-fe7cd4d1bf3fea9a0d921e224b3fa24c"
+            class="admin-44e675bf674e7760df79b8b7f2360008"
           />
         </div>
 
@@ -203,59 +188,6 @@
           </div>
         </div>
       </div>
-
-      <div v-show="showInfo.type == 'plugins'">
-        <vxe-table
-          ref="refAdminPlugins"
-          id="refAdminPlugins"
-          align="left"
-          border="inner"
-          :custom-config="{ storage: true }"
-          :data="tableData.plugins.rows"
-        >
-          <vxe-column type="seq" width="60"></vxe-column>
-          <vxe-column
-            width="175"
-            field="info.name"
-            title="插件"
-            show-overflow="ellipsis"
-            sortable
-          ></vxe-column>
-          <vxe-column
-            width="250"
-            field="info.trigger.frame"
-            title="框架"
-            show-overflow="ellipsis"
-            sortable
-          >
-            <template #default="{ row }">
-              {{
-                row.info.trigger.frame
-                  .map((e) => {
-                    return frameInfo[e];
-                  })
-                  .toString()
-              }}
-            </template>
-          </vxe-column>
-          <vxe-column
-            field="info.trigger.command"
-            title="指令"
-            show-overflow="ellipsis"
-            sortable
-          >
-            <template #default="{ row }">
-              {{
-                row.info.trigger.command
-                  .map((e) => {
-                    return e.keywords;
-                  })
-                  .toString()
-              }}
-            </template>
-          </vxe-column>
-        </vxe-table>
-      </div>
     </div>
 
     <AppHello height="100px" />
@@ -267,25 +199,31 @@ export default {
   name: "adminRobotData",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    RobotFunction: () => import("@/components/Admin/RobotFunction.vue"),
+    RobotFunction: () => import("@/components/Admin/Function/Robot.vue"),
   },
   data() {
     return {
       percentage: 0,
-      tableData: {
-        robot: {
-          rows: [],
-        },
-        group: {
+      tableData: [
+        {
           rows: [],
           total: 25,
           totalPage: 0,
           pageSize: 25,
         },
-        plugins: {
+        {
           rows: [],
+          total: 25,
+          totalPage: 0,
+          pageSize: 25,
         },
-      },
+        {
+          rows: [],
+          total: 25,
+          totalPage: 0,
+          pageSize: 25,
+        },
+      ],
       frameData: {
         result: {
           rows: [],
@@ -330,14 +268,13 @@ export default {
       },
       showInfo: {
         type: "robot",
+        index: 0,
       },
     };
   },
-  created() {
-    this.initPage();
-  },
   mounted() {
-    this.getDataByRobotData(0, 0);
+    this.initPage();
+    this.getAdminData(1, 0, 0);
   },
   methods: {
     initPage: function () {
@@ -363,18 +300,17 @@ export default {
       );
       this.robotInfo.key = this.$appGetLocalStorage("admin-robot-key");
     },
-    getDataByRobotData: function (aid = 0, page = 0) {
+    getAdminData: function (aid = 1, bid = 0, page = 0) {
       this.$axios
         .post(
-          this.$appApi.robot.getDataByRobotData +
+          this.$appApi.app.getAdminData +
             "&aid=" +
             aid +
+            "&bid=" +
+            bid +
             "&page=" +
             page +
-            "&frameId=2500",
-          this.$qs.stringify({
-            key: this.robotInfo.key,
-          })
+            "&frameId=2500"
         )
         .then((res) => {
           let data = res.data.data,
@@ -383,7 +319,7 @@ export default {
           if (status.code == 200) {
             let robotList = [];
 
-            data.robot.rows.map((x) => {
+            data[0].rows.map((x) => {
               robotList.push(x);
             });
 
@@ -489,8 +425,9 @@ export default {
           }
         });
     },
-    onRowClick: function (type) {
+    onRowClick: function (type, index) {
       this.showInfo.type = type;
+      this.showInfo.index = index;
     },
     onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "frameId") {
@@ -500,7 +437,7 @@ export default {
       }
     },
     getSelectEvent: function () {
-      let group = this.$refs.refAdminGroup.getCheckboxRecords(),
+      let group = this.$refs.refAdminRobotGroup.getCheckboxRecords(),
         groupNum = group.length;
 
       //if (groupNum == 0) {
@@ -551,19 +488,13 @@ export default {
       //}
     },
     onPaginationChange: function (e) {
-      this.getDataByRobotData(0, e - 1);
+      this.getAdminData(1, this.showInfo.index, e - 1);
     },
   },
 };
 </script>
 
 <style scoped lang="less">
-img.admin-58a5bd4d1fe1914a7438e768c0627486 {
-  margin-left: -15px;
-  margin-top: 33px;
-  position: absolute;
-}
-
 li.admin-a64328a2760af2ca12a5b7c909082c14 {
   float: left;
   margin: 0 27px;

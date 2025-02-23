@@ -23,26 +23,13 @@ export default new Router({
       redirect: '/game/new/bp'
     }, {
       path: '/n/home',
-      redirect: '/tools/n/home'
+      redirect: '/tools/nsh/home'
     }, {
       path: '/skin/encore',
-      redirect: '/skin/return'
+      redirect: '/tools/5acd9'
     }, {
-      path: '/skin',
-      name: 'skinReturnIndex',
-      redirect: '/ranking',
-      component: () =>
-        import('./components/Ranking/SkinReturn.vue'),
-      children: [
-        {
-          path: 'return',
-          name: 'skinReturn',
-          meta: {
-            title: '趋势',
-            keepAlive: true
-          }
-        }
-      ]
+      path: '/skin/return',
+      redirect: '/tools/5acd9'
     }, {
       path: '/',
       name: 'appIndex',
@@ -63,7 +50,7 @@ export default new Router({
       }
     }, {
       path: '/thank',
-      name: 'thank',
+      name: 'thankHome',
       component: () =>
         import('./views/Thank/Index.vue'),
       meta: {
@@ -129,13 +116,13 @@ export default new Router({
       name: 'heroIndex',
       redirect: '/ranking',
       component: () =>
-        import('./views/Hero/Index.vue'),
+        import('./views/Game/Wzry/Hero/Index.vue'),
       children: [
         {
           path: ':id/info',
           name: 'heroInfo',
           component: () =>
-            import('./views/Hero/Info.vue'),
+            import('./views/Game/Wzry/Hero/Info.vue'),
           meta: {
             title: '英雄',
             keepAlive: false
@@ -144,7 +131,7 @@ export default new Router({
           path: ':id/replay',
           name: 'heroReplay',
           component: () =>
-            import('./views/Hero/Replay.vue'),
+            import('./views/Game/Wzry/Hero/Replay.vue'),
           meta: {
             title: '回顾',
             keepAlive: false
@@ -153,18 +140,9 @@ export default new Router({
           path: ':id/equipment',
           name: 'heroEquipment',
           component: () =>
-            import('./views/Hero/Equipment.vue'),
+            import('./views/Game/Wzry/Hero/Equipment.vue'),
           meta: {
             title: '备战',
-            keepAlive: false
-          }
-        }, {
-          path: 'tools',
-          name: 'heroTools',
-          component: () =>
-            import('./views/Hero/Tools.vue'),
-          meta: {
-            title: '英雄-工具',
             keepAlive: false
           }
         },
@@ -177,19 +155,38 @@ export default new Router({
         import('./views/Tools/Index.vue'),
       children: [
         {
+          path: 'box',
+          name: 'toolsBox',
+          component: () =>
+            import('./views/Tools/Wzry/Box.vue'),
+          meta: {
+            title: '工具箱',
+            keepAlive: false
+          }
+        },
+        {
+          path: 'mp',
+          name: 'toolsMp',
+          component: () =>
+            import('./views/Tools/Wzry/Mp.vue'),
+          meta: {
+            title: '公众号',
+            keepAlive: false
+          }
+        }, {
           path: 'hero/:id/view',
           name: 'toolsHeroView',
           component: () =>
-            import('./views/Tools/HeroView.vue'),
+            import('./views/Tools/Wzry/HeroView.vue'),
           meta: {
-            title: '预览',
+            title: '英雄-预览',
             keepAlive: false
           }
         }, {
           path: 'daily',
           name: 'toolsDaily',
           component: () =>
-            import('./views/Tools/Daily.vue'),
+            import('./views/Tools/Wzry/Daily.vue'),
           meta: {
             title: '日报',
             keepAlive: false
@@ -198,36 +195,54 @@ export default new Router({
           path: 'weekly',
           name: 'toolsWeekly',
           component: () =>
-            import('./views/Tools/Weekly.vue'),
+            import('./views/Tools/Wzry/Weekly.vue'),
           meta: {
             title: '周报',
             keepAlive: false
           }
         }, {
-          path: 'xhh',
-          name: 'xhh',
+          path: 'nsh/home',
+          name: 'toolsNshHome',
           component: () =>
-            import('./views/Tools/Xhh.vue'),
-          meta: {
-            title: '小灰灰',
-            keepAlive: false
-          }
-        }, {
-          path: 'n/home',
-          name: 'toolsNHome',
-          component: () =>
-            import('./views/Tools/NHome.vue'),
+            import('./views/Tools/Nsh/Home.vue'),
           meta: {
             title: '逆水寒-队伍编辑器',
             keepAlive: false
           }
         }, {
-          path: 'fishing/ground',
+          path: '5acd9',
+          name: 'toolsPiaoXuan',
+          component: () =>
+            import('./views/Tools/Other/PiaoXuan.vue'),
+          meta: {
+            title: '票选',
+            keepAlive: true
+          }
+        }, {
+          path: '82a7c',
+          name: 'toolsZhuLi',
+          component: () =>
+            import('./views/Tools/Other/ZhuLi.vue'),
+          meta: {
+            title: '助力',
+            keepAlive: true
+          }
+        }, {
+          path: 'bbd08',
+          name: 'toolsQianDao',
+          component: () =>
+            import('./views/Tools/Other/QianDao.vue'),
+          meta: {
+            title: '签到',
+            keepAlive: false
+          }
+        }, {
+          path: '13906',
           name: 'toolsFishingGround',
           component: () =>
-            import('./views/Tools/FishingGround.vue'),
+            import('./views/Tools/Other/FishingGround.vue'),
           meta: {
-            title: '梧桐路亚：杭嘉湖黑坑信息汇总',
+            title: '梧桐路亚-杭嘉湖黑坑信息汇总',
             keepAlive: false
           }
         },
@@ -237,13 +252,13 @@ export default new Router({
       name: 'gameIndex',
       redirect: '/ranking',
       component: () =>
-        import('./views/Game/Index.vue'),
+        import('./views/Game/GlobalBP/Index.vue'),
       children: [
         {
           path: 'team',
           name: 'gameTeam',
           component: () =>
-            import('./views/Game/Team.vue'),
+            import('./views/Game/GlobalBP/Team.vue'),
           meta: {
             title: '队伍',
             keepAlive: false
@@ -252,7 +267,7 @@ export default new Router({
           path: 'engage',
           name: 'gameEngage',
           component: () =>
-            import('./views/Game/Engage.vue'),
+            import('./views/Game/GlobalBP/Engage.vue'),
           meta: {
             title: '交战',
             keepAlive: false
@@ -261,7 +276,7 @@ export default new Router({
           path: ':id/bp',
           name: 'gameGlobalBP',
           component: () =>
-            import('./views/Game/GlobalBP.vue'),
+            import('./views/Game/GlobalBP/Match.vue'),
           meta: {
             title: '全局BP模拟器',
             keepAlive: false
@@ -330,12 +345,30 @@ export default new Router({
             keepAlive: true
           }
         }, {
+          path: 'miniapp-data',
+          name: 'miniappData',
+          component: () =>
+            import('./views/Admin/Miniapp/Data.vue'),
+          meta: {
+            title: '小程序',
+            keepAlive: true
+          }
+        }, {
           path: 'shop-data',
           name: 'shopData',
           component: () =>
             import('./views/Admin/Shop/Data.vue'),
           meta: {
-            title: '商店',
+            title: '小商店',
+            keepAlive: true
+          }
+        }, {
+          path: 'shopping-data',
+          name: 'shoppingData',
+          component: () =>
+            import('./views/Admin/Shopping/Data.vue'),
+          meta: {
+            title: '组队消费',
             keepAlive: true
           }
         }, {
