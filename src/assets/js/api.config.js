@@ -7,6 +7,9 @@ Vue.prototype.$qs = qs;
 import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
 
+import md5 from "js-md5";
+Vue.prototype.$md5 = md5;
+
 import axios from 'axios';
 Vue.prototype.$axios = axios;
 
@@ -38,7 +41,9 @@ axios.defaults.baseURL = baseUrl;
  */
 axios.interceptors.request.use(function (config) {
   let data = qs.parse(config.data),
-    url_real = window.location.href.split("#")[0], url_last;
+    ts = Number(Date.parse(new Date()).toString().slice(0, 10)),
+    url_real = window.location.href.split("#")[0] || "",
+    url_last = url_real || "";
 
   if (Vue.prototype.$appIsApple) {
     url_last = Vue.prototype.$store.getters.getLastUrl || "";
@@ -46,11 +51,9 @@ axios.interceptors.request.use(function (config) {
     if (!url_last) {
       Vue.prototype.$store.commit("saveLastUrl", url_real);
     }
-  } else {
-    url_last = url_real;
   }
 
-  config.url += "&host=" + (cookie.get("host") || url.host) + "&lang=" + (cookie.get("lang") || "zh-CN") + "&ref=" + encodeURIComponent(cookie.get("ref") || "") + "&url=" + encodeURIComponent(url_last) + "&url_real=" + encodeURIComponent(url_real);
+  config.url += "&host=" + encodeURIComponent(cookie.get("host") || url.host) + "&lang=" + encodeURIComponent(cookie.get("lang") || "zh-CN") + "&ref=" + encodeURIComponent(cookie.get("ref") || "") + "&game_type=" + encodeURIComponent(cookie.get("game-type") || "wzry") + "&url=" + encodeURIComponent(url_last) + "&url_real=" + encodeURIComponent(url_real) + "&ts=" + ts;
 
   if (config.method == "post") {
     const openId = cookie.get("openId");
@@ -65,6 +68,15 @@ axios.interceptors.request.use(function (config) {
       ...data
     });
   }
+
+  var newUrl = "",
+    get = config.url.split("?")[1].split("&"),
+    post = config.data.split("&");
+
+  newUrl = get.join("&") + "&" + post.join("&");
+  newUrl = newUrl.split("&").sort().join("&");
+
+  config.url += "&sign=" + Vue.prototype.$md5(newUrl);
 
   return config;
 },
@@ -88,9 +100,12 @@ axios.interceptors.response.use(
 
       cookie.delete("openId");
       cookie.delete("accessToken");
+      //-
       cookie.delete("tempOpenId");
       cookie.delete("tempAccessToken");
-      cookie.delete("tab-index");
+      cookie.delete("game-type");
+      cookie.delete("game-index");
+      cookie.delete("lastUpdateTipsDay");
 
       if (currentRoute.name != "userLogin") {
         router.replace({
@@ -108,8 +123,6 @@ axios.interceptors.response.use(
     }
     return Promise.reject(error.response.data)
   });
-
-Vue.prototype.$axios = axios;
 
 const appApi = baseUrl;
 
@@ -145,18 +158,19 @@ const app = {
   getMiniAppInfo: appApi + "?type=getMiniAppInfo",
   getRanking: appApi + "?type=getRanking",
   getSearch: appApi + "?type=getSearch",
+  getShoppingInfo: appApi + "?type=getShoppingInfo",
   getShortUrl: appApi + "?type=getShortUrl",
   getSign: appApi + "?type=getSign",
   getSkinReturnLog: appApi + "?type=getSkinReturnLog",
   getSmobaHelperUserInfo: appApi + "?type=getSmobaHelperUserInfo",
   getWebAccountInfo: appApi + "?type=getWebAccountInfo",
   loginWebAccount: appApi + "?type=loginWebAccount",
+  updateShoppingInfo: appApi + "?type=updateShoppingInfo",
   updateWebAccountInfo: appApi + "?type=updateWebAccountInfo",
   uploadImg: appApi + "?type=uploadImg",
   //
-  cleanDataByWebData: appAdminApi + "&type=cleanDataByWebData",
-  getDataByWebData: appAdminApi + "&type=getDataByWebData",
-  getDataByShopData: appAdminApi + "&type=getDataByShopData",
+  getAdminData: appAdminApi + "&type=getAdminData",
+  cleanAdminData: appAdminApi + "&type=cleanAdminData",
 }
 
 const game = {
@@ -191,7 +205,7 @@ const robot = {
 }
 
 const pay = {
-  getSkuList: payApi + "&type=getSkuList",
+  getAdminData: payApi + "&type=getAdminData",
 }
 
 export default {

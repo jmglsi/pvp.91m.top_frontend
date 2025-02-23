@@ -58,6 +58,10 @@ export { default as WechatOutline }
 from '@ant-design/icons/lib/outline/WechatOutline';
 //wechat
 
+export { default as AppstoreOutline }
+from '@ant-design/icons/lib/outline/AppstoreOutline';
+//appstore
+
 export { default as GlobalOutline }
 from '@ant-design/icons/lib/outline/GlobalOutline';
 //global
@@ -65,6 +69,14 @@ from '@ant-design/icons/lib/outline/GlobalOutline';
 export { default as ShopOutline }
 from '@ant-design/icons/lib/outline/ShopOutline';
 //shop
+
+export { default as MobileOutline }
+from '@ant-design/icons/lib/outline/MobileOutline';
+//mobile
+
+export { default as ShoppingOutline }
+from '@ant-design/icons/lib/outline/ShoppingOutline';
+//shopping
 
 export { default as FileDoneOutline }
 from '@ant-design/icons/lib/outline/FileDoneOutline';

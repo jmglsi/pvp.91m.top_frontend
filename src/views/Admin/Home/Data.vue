@@ -5,7 +5,7 @@
       <div class="admin-49657711d4f79ee0e5501a5c554026b8">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>💼 主人，这里是工作台哦。</span>
+            <span>💼 您好，这里是工作台哦。</span>
           </h1>
           <template #overlay>
             <a-menu

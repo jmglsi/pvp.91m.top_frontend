@@ -139,10 +139,28 @@
             管理
           </a-menu-item>
         </a-sub-menu>
+        <a-sub-menu v-show="onModuleShow('sub-miniapp')" key="sub-miniapp">
+          <span slot="title">
+            <a-icon type="appstore" />
+            <span>小程序</span>
+          </span>
+
+          <a-menu-item
+            v-show="onModuleShow('miniapp-data')"
+            key="miniapp-data"
+            @click="
+              $appPush({
+                path: '/admin/miniapp-data',
+              })
+            "
+          >
+            管理
+          </a-menu-item>
+        </a-sub-menu>
         <a-sub-menu v-show="onModuleShow('sub-shop')" key="sub-shop">
           <span slot="title">
             <a-icon type="shop" />
-            <span>商&nbsp;&nbsp;&nbsp;店</span>
+            <span>小商店</span>
           </span>
 
           <a-menu-item
@@ -157,7 +175,24 @@
             管理
           </a-menu-item>
         </a-sub-menu>
-        <!--
+        <a-sub-menu v-show="onModuleShow('sub-shopping')" key="sub-shopping">
+          <span slot="title">
+            <a-icon type="shopping" />
+            <span>组队消费</span>
+          </span>
+
+          <a-menu-item
+            v-show="onModuleShow('shopping-data')"
+            key="shopping-data"
+            @click="
+              $appPush({
+                path: '/admin/shopping-data',
+              })
+            "
+          >
+            管理
+          </a-menu-item>
+        </a-sub-menu>
         <a-sub-menu v-show="onModuleShow('sub-xw')" key="sub-xw">
           <span slot="title">
             <a-icon type="file-done" />
@@ -239,7 +274,6 @@
             数据报送
           </a-menu-item>
         </a-sub-menu>
-        -->
         <a-sub-menu v-show="onModuleShow('sub-system')" key="sub-system">
           <span slot="title">
             <a-icon type="global" />
@@ -339,7 +373,9 @@ export default {
           if (status.code == 200) {
             this.loginInfo = data;
 
-            this.$cookie.set("name", data.name, { expires: "1M" });
+            this.$cookie.set("name", data.name, {
+              expires: "1M",
+            });
 
             this.isLogin = true;
           } else {
@@ -362,9 +398,12 @@ export default {
 
           this.$cookie.delete("openId");
           this.$cookie.delete("accessToken");
+          //-
           this.$cookie.delete("tempOpenId");
           this.$cookie.delete("tempAccessToken");
-          this.$cookie.delete("tab-index");
+          this.$cookie.delete("lastUpdateTipsDay");
+          this.$cookie.delete("game-index");
+          this.$cookie.delete("game-type");
 
           this.$appDelectAllLocalStorage();
 
@@ -394,6 +433,10 @@ img.admin-11692cbdb16fd998d9dc739c3d53afaa {
   right: 25px;
   top: 25px;
   z-index: @app-z-index;
+}
+
+img.admin-886408eeb59b2d1c9c237c3c340b7cda {
+  margin-top: -3px;
 }
 
 span.admin-ee5e6f32be8ae4437eef536794a34083 {

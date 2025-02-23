@@ -7,6 +7,7 @@ export default {
   "equipment": "裝備",
   "hero": "英雄",
   "how-to-operate": "點樣操作",
+  "how-to-choose": "如何選擇",
   "more": "更多",
   "none": "暫無數據",
   "prepare-for-war": "備戰",
@@ -60,7 +61,6 @@ export default {
   },
   "open-source": {
     "title": "項目開源介紹",
-    "label": "僅供學習，禁止商業",
     "value": "NGA"
   },
   "open-url": {

@@ -5,7 +5,7 @@
       <div class="admin-49657711d4f79ee0e5501a5c554026b8">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>📒 主人，很高兴为您服务。</span>
+            <span>📒 您好，很高兴为您服务。</span>
           </h1>
         </a-dropdown>
       </div>
@@ -15,13 +15,13 @@
       class="app-4717d11da95ed90ccdb4d4a0648bad39 admin-8e086eb841d9b5cd2f89212ac8fd0527"
     >
       <a-row>
-        <a-col :span="4">
+        <a-col :span="3">
           <a-statistic title="总项目" :value="tableData.result.rows.length" />
         </a-col>
-        <a-col :span="4">
+        <a-col :span="3">
           <a-statistic title="今年项目" :value="5" />
         </a-col>
-        <a-col :span="4">
+        <a-col :span="3">
           <a-statistic title="当前进行" :value="1" />
         </a-col>
       </a-row>
@@ -36,7 +36,7 @@
         :custom-config="{ storage: true }"
         :data="tableData.result.rows"
       >
-        <vxe-column type="seq" width="60"></vxe-column>
+        <vxe-column type="seq" width="60" />
         <vxe-column
           width="350"
           field="project"
@@ -71,7 +71,7 @@
           show-overflow="ellipsis"
           sortable
         />
-        <vxe-column field="updateTime" title="更新时间" sortable></vxe-column>
+        <vxe-column field="updateTime" title="更新时间" sortable />
       </vxe-table>
 
       <vxe-pager
@@ -166,6 +166,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

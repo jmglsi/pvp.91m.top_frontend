@@ -6,9 +6,8 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  name: "adminWebData-5533c",
+  name: "adminWebData-5533cData",
 };
 </script>

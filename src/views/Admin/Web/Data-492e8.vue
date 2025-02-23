@@ -5,7 +5,7 @@
       <div class="admin-8c36adba08eefa688be68bc3cf4d5fd6">
         <a-dropdown :trigger="['click']">
           <h1>
-            <span>👋 主人，很高兴为您服务。</span>
+            <span>👋 您好，很高兴为您服务。</span>
           </h1>
           <template #overlay>
             <a-menu
@@ -39,19 +39,19 @@
 
     <div class="admin-8e086eb841d9b5cd2f89212ac8fd0527">
       <a-row>
-        <a-col @click="onCleanDataClick(1)" :span="4">
-          <a-statistic title="短链接" :value="dataInfo.num_shorturl" />
-        </a-col>
-        <a-col @click="onCleanDataClick(2)" :span="4">
-          <a-statistic title="玩家数" :value="dataInfo.num_player" />
-        </a-col>
-        <a-col :span="4">
+        <a-col :span="3">
           <a-statistic title="白名单" :value="dataInfo.num_whitelist" />
         </a-col>
-        <a-col :span="4">
+        <a-col :span="3" @click="onCleanDataClick(1)">
+          <a-statistic title="短链接" :value="dataInfo.num_shorturl" />
+        </a-col>
+        <a-col :span="3" @click="onCleanDataClick(2)">
+          <a-statistic title="玩家人数" :value="dataInfo.num_player" />
+        </a-col>
+        <a-col :span="3">
           <a-statistic title="注册用户" :value="dataInfo.num_all" />
         </a-col>
-        <a-col :span="4">
+        <a-col :span="3">
           <a-statistic title="活跃用户" :value="dataInfo.num_update" />
         </a-col>
       </a-row>
@@ -106,7 +106,7 @@
                 $appOpenUrl(
                   '是否打开外部链接?',
                   null,
-                  { path: '/ranking?type=3&bid=0&cid=0&did=0&eid=b&refresh=1' },
+                  { path: '/ranking?type=3&bid=1&cid=0&did=0&eid=b&refresh=1' },
                   0
                 )
               "
@@ -204,64 +204,71 @@
         <div class="admin-c9d65acf110c123e832b5cc410a20904">
           <van-action-sheet
             v-model="showInfo.actionSheet"
-            :title="tableData.cardInfo.name + ' 的其他数据 (近期)'"
+            :title="
+              tableData.cardInfo.name +
+              ' 的备战 (' +
+              $appConfigInfo.appInfo.updateInfo.weekly +
+              ' 更新，可能有老数据)'
+            "
           >
             <template #default>
               <van-tabs
-                v-model="skillInfo.model"
-                v-if="skillInfo.model > -1"
+                v-model="extraInfo.model"
+                v-if="extraInfo.model > -1"
                 :ellipsis="false"
                 @click="onTabsClick"
               >
-                <van-tab title="顺位">
-                  <HeroBPIndex
-                    v-if="skillInfo.model == 0"
-                    :extraId="tableData.cardInfo.id"
-                  />
-                </van-tab>
-                <van-tab title="打法">
-                  <HeroGenreList
-                    v-if="skillInfo.model == 1"
-                    :extraId="tableData.cardInfo.id"
-                  />
-                </van-tab>
-                <van-tab title="出装">
-                  <HeroEquipmentListALL
-                    v-if="skillInfo.model == 2"
-                    :extraId="tableData.cardInfo.id"
-                  />
-                </van-tab>
-                <van-tab title="出装 (单件)">
-                  <HeroEquipmentListOne
-                    v-if="skillInfo.model == 3"
-                    :extraId="tableData.cardInfo.id"
-                    :extraType="1"
-                  />
-                </van-tab>
-                <van-tab>
-                  <template #title>
-                    <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
-                      国服 (备战)
-                    </span>
-                    <img
-                      v-lazy="$appCache + '/img/icons-app/hot.png'"
-                      width="13"
-                      height="13"
+                <div v-if="$appGameType == 'wzry'">
+                  <van-tab title="顺位">
+                    <GameWzryHeroBPIndex
+                      v-if="extraInfo.model == 0"
+                      :extraId="tableData.cardInfo.id"
                     />
-                  </template>
+                  </van-tab>
+                  <van-tab title="打法">
+                    <GameWzryHeroGenreList
+                      v-if="extraInfo.model == 1"
+                      :extraId="tableData.cardInfo.id"
+                    />
+                  </van-tab>
+                  <van-tab title="出装">
+                    <GameWzryHeroEquipmentListALL
+                      v-if="extraInfo.model == 2"
+                      :extraId="tableData.cardInfo.id"
+                    />
+                  </van-tab>
+                  <van-tab title="出装 (单件)">
+                    <GameWzryHeroEquipmentListOne
+                      v-if="extraInfo.model == 3"
+                      :extraId="tableData.cardInfo.id"
+                      :extraType="1"
+                    />
+                  </van-tab>
+                  <van-tab>
+                    <template #title>
+                      <span class="search-a1dc4f2906acdca0db3dc793f879a8ff">
+                        国服 (备战)
+                      </span>
+                      <img
+                        v-lazy="$appCache + '/img/icons-app/hot.png'"
+                        width="13"
+                        height="13"
+                      />
+                    </template>
 
-                  <HeroInscriptionList
-                    v-if="skillInfo.model == 4"
-                    :extraId="tableData.cardInfo.id"
-                  />
-                </van-tab>
-                <van-tab
-                  title="更新调整"
-                  :to="
-                    '/hero/' + tableData.cardInfo.id + '/info?show=heroUpdate'
-                  "
-                >
-                </van-tab>
+                    <GameWzryHeroInscriptionList
+                      v-if="extraInfo.model == 4"
+                      :extraId="tableData.cardInfo.id"
+                    />
+                  </van-tab>
+                  <van-tab
+                    title="更新调整"
+                    :to="
+                      '/hero/' + tableData.cardInfo.id + '/info?show=heroUpdate'
+                    "
+                  >
+                  </van-tab>
+                </div>
               </van-tabs>
             </template>
           </van-action-sheet>
@@ -275,16 +282,19 @@
 
 <script>
 export default {
-  name: "adminWebData-492e8",
+  name: "adminWebData-492e8Data",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    HeroBPIndex: () => import("@/components/Hero/BPIndex.vue"),
-    HeroEquipmentListALL: () =>
-      import("@/components/Hero/EquipmentList_All.vue"),
-    HeroEquipmentListOne: () =>
-      import("@/components/Hero/EquipmentList_One.vue"),
-    HeroGenreList: () => import("@/components/Hero/GenreList.vue"),
-    HeroInscriptionList: () => import("@/components/Hero/InscriptionList.vue"),
+    GameWzryHeroBPIndex: () =>
+      import("@/components/Game/Wzry/Hero/BPIndex.vue"),
+    GameWzryHeroEquipmentListALL: () =>
+      import("@/components/Game/Wzry/Hero/EquipmentList_All.vue"),
+    GameWzryHeroEquipmentListOne: () =>
+      import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
+    GameWzryHeroGenreList: () =>
+      import("@/components/Game/Wzry/Hero/GenreList.vue"),
+    GameWzryHeroInscriptionList: () =>
+      import("@/components/Game/Wzry/Hero/InscriptionList.vue"),
   },
   data() {
     return {
@@ -316,14 +326,14 @@ export default {
         searchHistory: false,
         heroData: 0,
       },
-      skillInfo: {
+      extraInfo: {
         model: 1,
       },
       tipsInfo: [0, 0, 0, 0, 0, 0],
     };
   },
   mounted() {
-    this.getDataByWebData();
+    this.getAdminData(0);
     this.getSearch();
   },
   methods: {
@@ -344,20 +354,20 @@ export default {
         .then(() => {
           //on confirm
 
-          this.cleanDataByWebData(aid);
+          this.cleanDataByRobotData(aid);
         })
         .catch(() => {
           //on cancel
         });
     },
-    cleanDataByWebData: function (aid) {
+    cleanDataByRobotData: function (aid) {
       this.$axios
-        .post(this.$appApi.app.cleanDataByWebData + "&aid=" + aid)
+        .post(this.$appApi.app.cleanAdminData + "&aid=" + aid)
         .then((res) => {
           let status = res.data.status;
 
           if (status.code == 200) {
-            this.getDataByWebData();
+            this.getAdminData(0);
 
             this.$message.success(this.$appMsg.success[1000]);
           } else {
@@ -365,17 +375,19 @@ export default {
           }
         });
     },
-    getDataByWebData: function () {
-      this.$axios.post(this.$appApi.app.getDataByWebData).then((res) => {
-        let data = res.data.data,
-          status = res.data.status;
+    getAdminData: function (aid = 0) {
+      this.$axios
+        .post(this.$appApi.app.getAdminData + "&aid=" + aid)
+        .then((res) => {
+          let data = res.data.data,
+            status = res.data.status;
 
-        if (status.code == 200) {
-          this.dataInfo = data;
-        } else {
-          this.$message.error(status.msg);
-        }
-      });
+          if (status.code == 200) {
+            this.dataInfo = data;
+          } else {
+            this.$message.error(status.msg);
+          }
+        });
     },
     getSearch: function (value = "") {
       this.$axios

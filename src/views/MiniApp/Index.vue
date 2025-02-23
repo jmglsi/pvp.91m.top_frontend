@@ -123,11 +123,11 @@
     </div>
 
     <div class="miniapp-5bce5b8f873dd260895c472435bfcdf4">
-      <van-dialog v-model="showInfo.qrcode">
+      <van-dialog v-model="showInfo.qrCode">
         <template #title>
           <div class="miniapp-faf7002d3f2741ac9bc7f60cfc4d888d">
             <img
-              v-lazy="qrcodeInfo.favicon"
+              v-lazy="qrCodeInfo.favicon"
               width="20"
               height="20"
               class="miniapp-2259b1e5ad5ffd24b6fd4dcd1a89f19e"
@@ -139,13 +139,13 @@
           </div>
         </template>
         <img
-          v-lazy="qrcodeInfo.qrcode"
+          v-lazy="qrCodeInfo.qrCode"
           width="150"
           height="150"
           class="miniapp-53eb3ce1747e8a37d3f912fab5a6f24e"
           @click="
-            qrcodeInfo.url
-              ? onUrlClick(qrcodeInfo)
+            qrCodeInfo.url
+              ? onUrlClick(qrCodeInfo)
               : $message.warning($appMsg.warning[1006])
           "
         />
@@ -153,7 +153,7 @@
         <div class="miniapp-aa79b87e9649590354fb9181f371e5bc">
           关注
           <span class="miniapp-9ad284a8297802bd67af0356d21ae35f">
-            {{ qrcodeInfo.text }}
+            {{ qrCodeInfo.text }}
           </span>
         </div>
       </van-dialog>
@@ -186,9 +186,9 @@ export default {
         },
       },
       cooperation: [],
-      qrcodeInfo: {},
+      qrCodeInfo: {},
       showInfo: {
-        qrcode: false,
+        qrCode: false,
       },
     };
   },
@@ -201,8 +201,8 @@ export default {
         index = Number(q.index || -1);
 
       if (index > -1) {
-        this.qrcodeInfo = this.miniapp.result.b[index];
-        this.showInfo.qrcode = true;
+        this.qrCodeInfo = this.miniapp.result.b[index];
+        this.showInfo.qrCode = true;
       }
     },
     shuffle: function (arr) {
@@ -224,8 +224,8 @@ export default {
       });
     },
     getQrCode: function (data) {
-      this.qrcodeInfo = data;
-      this.showInfo.qrcode = true;
+      this.qrCodeInfo = data;
+      this.showInfo.qrCode = true;
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(

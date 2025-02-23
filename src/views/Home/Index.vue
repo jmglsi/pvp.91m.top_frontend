@@ -25,9 +25,10 @@
               v-lazy="$appCache + '/img/icons-game/wzry.png'"
             />
           </template>
+
+          <HomeWzryRecommend />
         </van-tab>
-        <!--
-        <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
+        <van-tab class="home-e7f8cbd87d347be881cba92dad128518">
           <template #title>
             <img
               width="33"
@@ -35,29 +36,18 @@
               v-lazy="$appCache + '/img/icons-game/jcc.png'"
             />
           </template>
-
-          <van-search
-            :placeholder="$appConfigInfo.appInfo.search.placeholder"
-            @click="
-              $appPush({
-                path: '/search',
-              })
-            "
-            shape="round"
-            class="home-b6651e4ed730d53f874841b07507986c"
-          >
-          </van-search>
         </van-tab>
-        -->
-        <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
+        <!--
+        <van-tab class="home-e7f8cbd87d347be881cba92dad128518">
           <template #title>
             <img
               width="33"
               height="33"
-              v-lazy="$appCache + '/img/icons-game/wzry_xzpx.png'"
+              v-lazy="$appCache + '/img/icons-game/nsh.png'"
             />
           </template>
         </van-tab>
+        -->
         <van-tab disabled class="home-e7f8cbd87d347be881cba92dad128518">
           <template #title>
             <van-popover
@@ -93,14 +83,10 @@
           :title="$t('competition')"
           class="home-e7f8cbd87d347be881cba92dad128518"
         >
-          <HomeGame />
+          <HomeGlobalBPMatch />
         </van-tab>
         -->
       </van-tabs>
-
-      <div v-if="tabsInfo.model == 0">
-        <HomeRecommend />
-      </div>
     </div>
 
     <AppHello height="100px" />
@@ -112,8 +98,8 @@ export default {
   name: "appIndex",
   components: {
     AppHello: () => import("@/components/App/Hello.vue"),
-    HomeRecommend: () => import("@/views/Home/Recommend.vue"),
-    //HomeGame: () => import("@/views/Home/Game.vue"),
+    HomeWzryRecommend: () => import("@/views/Home/Wzry/Recommend.vue"),
+    //HomeGlobalBPMatch: () => import("@/views/Home/GlobalBP/Match.vue"),
   },
   metaInfo() {
     return {
@@ -142,7 +128,7 @@ export default {
         value: 0,
       },
       tabsInfo: {
-        model: 0,
+        model: 1,
       },
       showInfo: {
         popoverMeau: true,
@@ -161,11 +147,10 @@ export default {
       let q = this.$appQuery,
         version = Number(q.v) || 1609430400,
         pwa = Number(q.pwa) || 0,
-        gameType = Number(q.gameType) || 0,
-        gameIndex = this.$cookie.get("game-index") || 0,
+        gameIndex = Number(this.$cookie.get("game-index")) || 0,
         ls = this.$appConfigInfo;
 
-      this.tabsInfo.model = Number(gameType) || Number(gameIndex);
+      this.tabsInfo.model = gameIndex;
 
       if (pwa == 0) return;
 
@@ -203,16 +188,29 @@ export default {
       let selectIndex = e.value;
 
       if (selectIndex == 0) {
-        this.$appPush({ path: "/hero/tools" });
+        this.$appPush({ path: "/tools/box" });
       }
     },
+    onTabsBeforeChange: function () {
+      //
+    },
     onTabsChange: function (e) {
-      this.$cookie.set("game-index", String(e), {
+      let gameIndex = String(e),
+        gameType = this.$appGameInfo[e];
+
+      this.$cookie.set("game-index", gameIndex, {
         expires: "1Y",
       });
-    },
-    onTabsBeforeChange: function () {
-      return false;
+
+      this.$cookie.set("game-type", gameType, {
+        expires: "1Y",
+      });
+
+      this.$message.info(this.$appMsg.info[1033]);
+
+      setTimeout(() => {
+        window.location.href = window.location.origin + "/my?refresh=1";
+      }, 1000);
     },
     onUrlClick: function (data) {
       this.$appOpenUrl(
@@ -237,7 +235,7 @@ ul.home-0fb3346555b8f5460aaaf04001361da5 {
   height: 367px;
   overflow-y: auto;
   white-space: nowrap;
-  width: 250px;
+  width: 250px !important;
 }
 
 li.home-423fda2e543a1804accff6229de61143 {
@@ -245,12 +243,6 @@ li.home-423fda2e543a1804accff6229de61143 {
   margin-left: 20px;
   text-align: @app-text-align;
   width: 150px;
-}
-
-div.home-b6651e4ed730d53f874841b07507986c {
-  input.van-field__control {
-    text-align: center;
-  }
 }
 
 div.home-caa1dc26349a3e0c95b4a9e69a6e53b7 {
@@ -303,16 +295,12 @@ div.home-b467ee88fe43e04a918a10585678bdf9 {
 div.home-5db8dca30c2d7f0c2bc225ae852c5053 {
   div.van-tabs__wrap {
     //margin-top: -12px;
-    margin-top: 3px;
+    //margin-top: 3px;
     height: 60px;
   }
 
   div.van-tab--active {
     font-size: 25px;
-  }
-
-  div.van-popup {
-    left: 10000px !important;
   }
 }
 </style>

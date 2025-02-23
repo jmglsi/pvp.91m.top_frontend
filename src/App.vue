@@ -25,6 +25,18 @@
         />
       </div>
 
+      <div
+        v-else-if="$appInWechatMiniapp"
+        class="app-655254d3dc0f9b7f5f5f2a5c36cf09e6"
+      >
+        <van-nav-bar
+          :border="false"
+          :fixed="true"
+          :safe-area-inset-top="true"
+          :style="{ zIndex: -1 }"
+        />
+      </div>
+
       <div v-if="showInfo.app" class="app-3d1b70e46d0b6cd9cfa43d743da14266">
         <keep-alive v-if="$route.meta.keepAlive">
           <router-view class="app-1bda80f2be4d3658e0baa43fbe7ae8c1" />
@@ -36,9 +48,9 @@
 
     <AppReadme v-if="!noUpdateTips" />
 
+    <!--
     <div
-      v-if="!$appIsRobot && showInfo.tabbar && showInfo.miniappButton"
-      @click="openWxMiniapp"
+      v-if="showInfo.tabbar && !$appIsRobot && showInfo.miniappButton"
       class="app-f1453f63de7b681a25dc590be0c8a31e"
     >
       <van-popover
@@ -67,6 +79,7 @@
         </div>
       </van-popover>
     </div>
+    -->
 
     <!--
     <div
@@ -110,7 +123,6 @@
       <van-tabbar
         v-model="tableData.result.model"
         v-if="showInfo.tabbar"
-        fixed
         class="app-130a360689f8d613da10c94d53527a1b"
       >
         <van-tabbar-item
@@ -119,6 +131,7 @@
           :icon="data.icon"
           :to="data.to"
           :name="data.name"
+          :badge="data.badge"
           :class="data.isBig ? 'app-0353ac5a7e2d6e9a6a0e652c63b2832a' : null"
           icon-prefix="app-e0c3b278eeb2cab05f548d7af0f2c949"
         >
@@ -182,14 +195,14 @@ export default {
         rotate: 25,
         width: 135,
         height: 100,
-        color: "rgb(244, 244, 244)",
+        color: "rgb(240, 240, 240)",
       },
       bottomHeight: 175,
       zoom: 1,
       noUpdateTips: true,
       tableData: {
         result: {
-          model: "/",
+          model: window.location.pathname,
           rows: [
             {
               icon: null,
@@ -236,10 +249,10 @@ export default {
         tabbar = false,
         path = to.path,
         isRobot = this.$appIsRobot,
-        name = this.$cookie.get("name") || "苏苏的荣耀助手";
+        openId = this.$cookie.get("openId") || "苏苏的荣耀助手";
 
       this.watermark = {
-        content: "@" + name,
+        content: "@" + openId.slice(0, 12),
         font: "12px Microsoft YaHei",
         rotate: 25,
         width: 135,
@@ -249,9 +262,9 @@ export default {
 
       if (isRobot) {
         this.$appConfigInfo.appInfo.isReadme = true;
-        this.$appConfigInfo.tipsInfo.dfsTips = true;
-        this.$appConfigInfo.tipsInfo.skillTips = true;
-        this.$appConfigInfo.tipsInfo.wanjiaTips = true;
+        this.$appConfigInfo.tipsInfo.gameTips = true;
+        this.$appConfigInfo.tipsInfo.extraTips = true;
+        this.$appConfigInfo.tipsInfo.playerTips = true;
 
         this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
 
@@ -260,7 +273,7 @@ export default {
         });
       }
 
-      this.tableData.result.model = path;
+      this.tableData.result.model = window.location.pathname || path;
 
       /ranking|search/i.test(path) || path == "/"
         ? (statusBar = true)
@@ -306,22 +319,21 @@ export default {
         let data = res.data.data,
           appInfo = data.appInfo,
           oauthInfo = data.oauthInfo,
-          positionInfo = data.positionInfo,
           tipsInfo = data.tipsInfo,
           q = this.$appQuery,
-          redirect = q.redirect || window.location.pathname,
           oauthType = q.oauthType || "",
-          tempOpenId = q.tempOpenId || "",
           tempAccessToken = q.tempAccessToken || "",
+          tempOpenId = q.tempOpenId || "",
           tempText = q.tempText || "",
           appConfigInfo = this.$appConfigInfo;
 
         this.zoom = q.zoom || 1;
         this.tableData = data;
-        this.tableData.result.model = this.$route.path;
+        this.tableData.result.model =
+          window.location.pathname || this.$route.path;
 
-        let updateTime = appConfigInfo.appInfo.updateInfo.time || 0;
-        //let updateVersion = appConfigInfo.appInfo.updateInfo.version || 0;
+        //let updateTime = appConfigInfo.appInfo.updateInfo.time || 0;
+        let updateVersion = appConfigInfo.appInfo.updateInfo.version || 0;
         let date = new Date();
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
@@ -329,7 +341,18 @@ export default {
         let today = year + "-" + month + "-" + day;
         let lastUpdateTipsDay = this.$cookie.get("lastUpdateTipsDay") || "";
 
-        //if (appInfo.updateInfo.version != updateVersion) {
+        if (appInfo.updateInfo.version != updateVersion) {
+          this.$cookie.delete("tempOpenId");
+          this.$cookie.delete("tempAccessToken");
+          this.$cookie.delete("lastUpdateTipsDay");
+          this.$cookie.delete("game-index");
+          this.$cookie.delete("game-type");
+
+          this.$appDelectAllLocalStorage();
+
+          this.$appDelectLocalStorage("appConfigInfo");
+        }
+
         if (lastUpdateTipsDay != today) {
           if (appInfo.updateInfo.text && !this.noUpdateTips) {
             this.$dialog
@@ -355,15 +378,6 @@ export default {
           this.$appDelectLocalStorage("appConfigInfo");
         }
 
-        //this.$appDelectLocalStorage("appConfigInfo");
-        //}
-
-        if (appInfo.updateInfo.time != updateTime) {
-          this.$appDelectAllLocalStorage();
-
-          this.$appDelectLocalStorage("appConfigInfo");
-        }
-
         this.$appConfigInfo.appInfo = {
           isReadme: Boolean(appConfigInfo.appInfo.isReadme) || false,
           isSwingMode: Boolean(appConfigInfo.appInfo.isSwingMode) || false,
@@ -376,18 +390,21 @@ export default {
           pwa: appConfigInfo.appInfo.pwa || 0,
           link: appInfo.link || [],
           name: appInfo.name || "苏苏的荣耀助手",
-          avgScore: appInfo.avgScore || 0,
           script: appInfo.script || [],
           tempText: appInfo.tempText || "",
           updateInfo: {
             version: appInfo.updateInfo.version || 0,
-            time: appInfo.updateInfo.time || 0,
-            title: appInfo.updateInfo.title || this.$t("loading"),
             text: appInfo.updateInfo.text || this.$t("loading"),
+            title: appInfo.updateInfo.title || this.$t("loading"),
+            time: appInfo.updateInfo.time || 0,
             timeout: appInfo.updateInfo.timeout || 43200,
+            //
+            avgScore: appInfo.updateInfo.avgScore || 0,
+            daily: appInfo.updateInfo.daily || 0,
+            weekly: appInfo.updateInfo.weekly || 0,
           },
-          wxMiniappInfo: {
-            url: appInfo.wxMiniappInfo.url || null,
+          miniappInfo: {
+            url: appInfo.miniappInfo.url || null,
           },
           search: {
             img: appInfo.search.img || null,
@@ -397,9 +414,10 @@ export default {
           },
         };
         this.$appConfigInfo.oauthInfo = oauthInfo || [];
-        this.$appConfigInfo.positionInfo = positionInfo || [];
 
         this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
+
+        this.getGameInfo();
 
         if (tipsInfo) {
           this.$notification.open({
@@ -418,33 +436,49 @@ export default {
 
         if (!oauthType) {
           if (tempOpenId) {
-            this.$cookie.set("tempOpenId", tempOpenId, { expires: "1H" });
+            this.$cookie.set("tempOpenId", tempOpenId, {
+              expires: "1H",
+            });
             this.$cookie.set("tempAccessToken", tempAccessToken, {
               expires: "1H",
             });
           }
 
           if (tempText) {
-            this.$message.info(tempText);
+            this.$message.warning(this.$appMsg.warning[tempText]);
 
             this.$appDelectAllLocalStorage();
           }
         } else {
           if (tempOpenId) {
-            this.$cookie.set("openId", tempOpenId, { expires: "1M" });
+            this.$cookie.set("openId", tempOpenId, {
+              expires: "1M",
+            });
             this.$cookie.set("accessToken", tempAccessToken, {
               expires: "1M",
             });
 
             setTimeout(() => {
-              this.$appPush({
-                path: redirect,
-                query: {
-                  refresh: 1,
-                },
-              });
+              let nowUrl,
+                nowPath,
+                nowSearch,
+                nowSearchIndex = 0;
 
-              location.reload();
+              nowPath = window.location.pathname;
+              nowSearch = window.location.search;
+              nowSearch = nowSearch.replace("&refresh=0", "");
+              nowSearch = nowSearch.replace("&refresh=1", "");
+              nowSearchIndex = nowSearch.indexOf("&tempOpenId=");
+
+              if (nowSearchIndex == -1) {
+                nowSearchIndex = nowSearch.length;
+              }
+
+              nowSearch = nowSearch.substring(0, nowSearchIndex);
+
+              nowUrl = nowPath + nowSearch;
+
+              window.location.href = nowUrl;
             }, 1000 * 2.5);
           }
 
@@ -456,9 +490,9 @@ export default {
         this.showInfo.app = true;
       });
 
-      if (!this.$appInWechatMiniapp) {
-        this.showInfo.miniappButton = true;
-      }
+      //if (!this.$appInWechatMiniapp) {
+      //this.showInfo.miniappButton = true;
+      //}
 
       /**
        *
@@ -469,12 +503,35 @@ export default {
         this.showInfo.app = true;
       }, 500);
     },
+    getGameInfo: function () {
+      let q = this.$appQuery,
+        gameType = q.gameType || this.$appGameType,
+        gameIndex = this.$appGameInfo.indexOf(gameType);
+
+      if (gameIndex == -1) {
+        gameIndex = 0;
+      }
+
+      gameType = this.$appGameInfo[gameIndex];
+
+      if (this.$cookie.get("game-index") != gameIndex) {
+        this.$message.info(this.$appMsg.info[1034]);
+      }
+
+      this.$cookie.set("game-index", gameIndex, {
+        expires: "1Y",
+      });
+
+      this.$cookie.set("game-type", gameType, {
+        expires: "1Y",
+      });
+    },
     openWxMiniapp: function () {
       this.$appOpenUrl(
         this.$t("open-url.title"),
         null,
         {
-          path: this.$appConfigInfo.appInfo.wxMiniappInfo.url,
+          path: this.$appConfigInfo.appInfo.miniappInfo.url,
         },
         0
       );
@@ -553,6 +610,10 @@ export default {
   color: purple !important;
 }
 
+.app-8a900759792c14b84891392b9f0e360d {
+  color: black !important;
+}
+
 .app-d7a506baa20bdbe9daaa1366348175a9 {
   color: rgb(222, 177, 81) !important;
 }
@@ -561,8 +622,24 @@ export default {
   color: rgb(35, 124, 123) !important;
 }
 
-.app-8a900759792c14b84891392b9f0e360d {
-  color: black !important;
+.app-07b92306234cbd0130797a0832bb6ec8 {
+  color: rgb(135, 135, 135) !important;
+}
+
+.app-px74c62958bafea1f814e2eb4aa1a173 {
+  color: rgb(81, 198, 32) !important;
+}
+
+.app-794c031c8f0677bd60c22c57a8c209f5 {
+  color: rgb(33, 99, 192) !important;
+}
+
+.app-ed403ab7f16652930c096cf5ace1e810 {
+  color: rgb(190, 0, 193) !important;
+}
+
+.app-fa564e797e42df57903a35d6ce5c97c5 {
+  color: rgb(192, 148, 32) !important;
 }
 
 .app-5f19eaf71f40d74d66be84db52b3ad87 {
@@ -711,6 +788,11 @@ span.app-e4c9479b11955648dad558fe717a4eb2 {
   font-size: @app-font-size;
 }
 
+span.app-f929a9d9af35e647bf66a06a6c421ea1 {
+  margin-left: 3px;
+  font-size: 8px;
+}
+
 label.ant-radio-wrapper {
   margin-top: 10px;
 }
@@ -782,6 +864,40 @@ div.app-recommend {
 
 div.app-bpIndex {
   height: 443px;
+}
+
+div.app-e7cc92f4d89cae11c55145231f702389 {
+  margin: 5px;
+  text-align: center;
+  width: 100px;
+}
+
+div.app-68adaff1d028a37f27fb33c483329cba {
+  margin-right: -2px;
+}
+
+div.app-ecb26e3ebb0456087e850f45c7484687 {
+  width: 100px;
+  height: 40px;
+  margin-top: -40px;
+  position: absolute;
+  backdrop-filter: blur(5px);
+  filter: blur(6px);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+div.app-e8a723fff1bfb5b0e938a949c31b0659 {
+  margin-top: -47px;
+  position: absolute;
+  z-index: 1;
+  text-align: left;
+  font-size: 12px;
+}
+
+div.app-c8b5f5d48f608ded3e078de9bef7c61b {
+  margin-top: 7px;
+  font-size: 12px;
 }
 
 div.app-63c4cfbde5ad50f3f537c2540374995e {
@@ -1051,23 +1167,25 @@ div.app-044a82dc9b34eebf2c54fe2c3c904368 {
   margin: 15px 0 5px 0px;
 }
 
-div.app-dfs,
-div.app-gx,
+div.app-wzry,
+div.app-jcc,
+div.app-px,
+div.app-td,
 div.app-wj,
-div.app-pz,
-div.app-zb,
+div.app-zbk,
+div.app-gxk,
+div.app-qhfw,
 div.app-bpIndex,
 div.app-genre,
-div.app-position,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
 div.app-inscription,
+div.app-pz,
 div.app-pzOne {
   margin-top: 3px;
 }
 
 div.app-genre,
-div.app-position,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
 div.app-inscription,

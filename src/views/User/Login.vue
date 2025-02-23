@@ -174,8 +174,6 @@
 </template>
 
 <script>
-import md5 from "js-md5";
-
 export default {
   name: "userLogin",
   components: {
@@ -266,7 +264,7 @@ export default {
           this.$qs.stringify({
             email: data.email,
             code: data.code,
-            newPassword: data.newPassword ? md5(data.newPassword) : "",
+            newPassword: data.newPassword ? this.$md5(data.newPassword) : "",
           })
         )
         .then((res) => {
@@ -317,8 +315,8 @@ export default {
             name: data.name,
             email: data.email,
             code: data.code,
-            password: data.password ? md5(data.password) : "",
-            newPassword: data.newPassword ? md5(data.newPassword) : "",
+            password: data.password ? this.$md5(data.password) : "",
+            newPassword: data.newPassword ? this.$md5(data.newPassword) : "",
             uin: data.uin,
           })
         )
@@ -327,11 +325,15 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$cookie.set("openId", data.openId, { expires: "1M" });
+            this.$cookie.set("openId", data.openId, {
+              expires: "1M",
+            });
             this.$cookie.set("accessToken", data.accessToken, {
               expires: "1M",
             });
-            this.$cookie.set("name", data.name, { expires: "1M" });
+            this.$cookie.set("name", data.name, {
+              expires: "1M",
+            });
 
             this.$appDelectAllLocalStorage();
 
@@ -357,7 +359,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-i.my-c1d8fd0f00bccc16b2cf5d07bfc3c96f {
+i.login-c1d8fd0f00bccc16b2cf5d07bfc3c96f {
   img.van-icon__image {
     border-radius: unset;
   }
