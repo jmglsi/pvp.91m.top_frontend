@@ -204,7 +204,7 @@
         <div class="admin-c9d65acf110c123e832b5cc410a20904">
           <van-action-sheet
             v-model="showInfo.actionSheet"
-            :title="
+            :description="
               tableData.cardInfo.name +
               ' 的备战 (' +
               $appConfigInfo.appInfo.updateInfo.weekly +
@@ -454,12 +454,13 @@ export default {
           "no-skin-time",
         ].indexOf(this.selectedKeys) > -1
       ) {
-        this.$appOpenUrl(
-          "是否打开内部链接?",
-          null,
-          { path: "/search?q=" + encodeURIComponent(e.value) + "&refresh=1" },
-          0
-        );
+        this.$appPush({
+          path: "/search",
+          query: {
+            q: e.value,
+            refresh: 1,
+          },
+        });
       } else if (["position-recommend"].indexOf(this.selectedKeys) > -1) {
         this.showInfo.actionSheet = true;
       }

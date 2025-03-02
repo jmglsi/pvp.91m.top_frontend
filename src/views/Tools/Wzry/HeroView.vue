@@ -31,7 +31,7 @@
         />
       </van-button>
       <span class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1">
-        热度趋势 <span style="color: blue">苏苏的荣耀助手</span> 整理
+        热度趋势 <span style="color: #1680d1">苏苏的荣耀助手</span> 整理
       </span>
       <span
         class="tools-d3eb91ba1fa50a7d88bd6a93569c69b1 tools-c63abbfb166e7e598518fe6a7a58c86b"
@@ -229,7 +229,7 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.app.getHeroInfo + "&id=" + id)
+        .post(this.$appApi.app.getHeroInfo + "&id=" + encodeURIComponent(id))
         .then((res) => {
           let status = res.data.status;
 
@@ -251,7 +251,11 @@ export default {
     },
     getHeroInfoByRandSuit: function (id = 111) {
       this.$axios
-        .post(this.$appApi.app.getHeroInfoByRandSuit + "&id=" + id)
+        .post(
+          this.$appApi.app.getHeroInfoByRandSuit +
+            "&id=" +
+            encodeURIComponent(id)
+        )
         .then((res) => {
           let status = res.data.status;
 
@@ -357,7 +361,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            id
+            encodeURIComponent(id)
         )
         .then((res) => {
           let data = res.data.data,

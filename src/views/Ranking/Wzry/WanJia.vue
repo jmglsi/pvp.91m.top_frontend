@@ -11,9 +11,8 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
-          title="玩家"
           field="userId"
-          fixed="left"
+          title="玩家"
           :filters="[
             { value: 0, label: '普通' },
             { value: 1, label: '职业' },
@@ -51,7 +50,7 @@
                 class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div
-                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-0e1a8b3f7f6162bf4b88d3d001b88374"
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 app-0e1a8b3f7f6162bf4b88d3d001b88374"
               >
                 {{ rowIndex + 1 }}
               </div>
@@ -60,8 +59,8 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="巅峰分"
           field="rankScore"
+          title="巅峰分"
           :width="$appIsMobile ? 100 : 0"
           sortable
         >
@@ -99,9 +98,9 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="常用 | 点击可同步备战 (出装、铭文)"
           field="commonlyUsed"
-          width="325"
+          title="常用 (非实时) | 点击可同步备战 (出装、铭文)"
+          width="350"
           align="left"
         >
           <template #default="{ row }">
@@ -186,8 +185,8 @@
                               path: '/search',
                               query: {
                                 q: data.heroId,
-                                show: 'heroSkill',
                                 refresh: 1,
+                                show: 'heroSkill',
                               },
                             })
                           "
@@ -220,7 +219,7 @@
         icon="share"
         size="mini"
         color="linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237))"
-        @click="getPlayerList"
+        @click="onShareButtonClick"
       >
         分享图片
       </van-button>
@@ -248,9 +247,9 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.playerActionSheet"
-        :title="tableDataRow.gamePlayerName + ' ' + $t('how-to-operate')"
         :actions="playerActionSheetActions"
         :close-on-click-action="true"
+        :description="tableDataRow.gamePlayerName + ' ' + $t('how-to-operate')"
         @select="onPlayerMenuActionSheetSelect"
       />
     </div>
@@ -258,7 +257,7 @@
     <div class="ranking-9ba6e31a929c8c8d48edbc31d01824ad">
       <van-action-sheet
         v-model="showInfo.heroList"
-        :title="'大佬们在玩什么 - 出场 ' + allHeroList.length + ' 个英雄'"
+        :description="'大佬们在玩什么 - 出场 ' + allHeroList.length + ' 个英雄'"
         @select="onHeroListActionSheetSelect"
       >
         <template #default>
@@ -349,6 +348,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(2, newValue.bid, newValue.cid, 0);
         }
       },
@@ -475,7 +475,7 @@ export default {
             "&roleId=" +
             e.roleId +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -538,6 +538,46 @@ export default {
         );
       }
     },
+    onShareButtonClick: function () {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      this.showInfo.shareImg = true;
+      this.$message.warning(this.$appMsg.warning[500]);
+
+      html2canvas(
+        document.getElementsByClassName(
+          "ranking-7d87a4288bd07b77fe09098939795c8c"
+        )[0],
+        {
+          useCORS: true,
+          //allowTaint: true,
+          scale: 2,
+        }
+      ).then((canvas) => {
+        let shareImg = document.getElementsByClassName(
+          "ranking-3ab42c8325a264730406e37e1f731f70"
+        )[0];
+        shareImg.innerHTML = null;
+        shareImg.appendChild(canvas);
+
+        canvas.toBlob(
+          function (blob) {
+            const eleLink = document.createElement("a");
+            eleLink.download = "shareImg.png";
+            eleLink.style.display = "none";
+            eleLink.href = URL.createObjectURL(blob);
+            //触发点击
+            document.body.appendChild(eleLink);
+            eleLink.click();
+            //然后移除
+            document.body.removeChild(eleLink);
+          },
+          "image/png",
+          1
+        );
+
+        this.$message.success(this.$appMsg.success[1006]);
+      });
+    },
     onHeroListActionSheetSelect: function () {
       this.showInfo.heroList = true;
     },
@@ -582,48 +622,6 @@ export default {
         (a, b) => b[1] - a[1]
       );
       //转数组、降序
-    },
-    getPlayerList: function () {
-      let topNum = this.tableData.result.rows.length;
-
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
-      this.showInfo.shareImg = true;
-      this.$message.warning(this.$appMsg.warning[500]);
-
-      html2canvas(
-        document.getElementsByClassName(
-          "ranking-7d87a4288bd07b77fe09098939795c8c"
-        )[0],
-        {
-          useCORS: true,
-          //allowTaint: true,
-          scale: 2,
-        }
-      ).then((canvas) => {
-        let shareImg = document.getElementsByClassName(
-          "ranking-3ab42c8325a264730406e37e1f731f70"
-        )[0];
-        shareImg.innerHTML = null;
-        shareImg.appendChild(canvas);
-
-        canvas.toBlob(
-          function (blob) {
-            const eleLink = document.createElement("a");
-            eleLink.download = "top" + topNum + ".png";
-            eleLink.style.display = "none";
-            eleLink.href = URL.createObjectURL(blob);
-            //触发点击
-            document.body.appendChild(eleLink);
-            eleLink.click();
-            //然后移除
-            document.body.removeChild(eleLink);
-          },
-          "image/png",
-          1
-        );
-
-        this.$message.success(this.$appMsg.success[1006]);
-      });
     },
   },
 };

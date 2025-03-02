@@ -13,6 +13,8 @@ Vue.prototype.$md5 = md5;
 import axios from 'axios';
 Vue.prototype.$axios = axios;
 
+import DisableDevtool from 'disable-devtool';
+
 let url = window.location,
   nowQuery = Vue.prototype.$appQuery,
   baseUrl,
@@ -29,6 +31,8 @@ if (baseRef) {
 
 if (process.env.NODE_ENV === 'production') {
   //生产环境
+
+  DisableDevtool();
 }
 
 baseUrl = process.env.VUE_APP_BASE_URL;
@@ -69,7 +73,7 @@ axios.interceptors.request.use(function (config) {
     });
   }
 
-  var newUrl = "",
+  let newUrl = "",
     get = config.url.split("?")[1].split("&"),
     post = config.data.split("&");
 
@@ -94,7 +98,7 @@ axios.interceptors.response.use(
     let code = response.data.status.code;
 
     if (code == 988) {
-      window.location.href = "https://docs.91m.top?ref=expired";
+      window.location.href = "https://docs.91m.top?tempCode=1000";
     } else if (code == 2004) {
       let currentRoute = router.currentRoute;
 

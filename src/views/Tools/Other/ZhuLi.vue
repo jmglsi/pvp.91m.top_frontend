@@ -1,5 +1,5 @@
 <template>
-  <div class="tools-ng">
+  <div class="tools-zl">
     <div class="tools-8c35b9de834af969baf22173b9539eb9">
       <van-nav-bar
         left-arrow
@@ -83,7 +83,7 @@
       该灵感由
       <span
         :style="{
-          color: '#1989fa !important',
+          color: '#1680d1 !important',
         }"
       >
         @夏天天
@@ -160,7 +160,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-div.tools-ng {
+div.tools-zl {
   text-align: center;
 }
 

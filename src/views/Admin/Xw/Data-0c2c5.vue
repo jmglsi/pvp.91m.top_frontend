@@ -38,22 +38,22 @@
       >
         <vxe-column type="seq" width="60" />
         <vxe-column
-          width="350"
           field="project"
+          width="350"
           title="项目名"
           show-overflow="ellipsis"
           sortable
         />
         <vxe-column
-          width="200"
           field="principal"
+          width="200"
           title="负责人"
           show-overflow="ellipsis"
           sortable
         />
         <vxe-column
-          width="100"
           field="status"
+          width="100"
           title="状态"
           show-overflow="ellipsis"
           sortable
@@ -65,8 +65,8 @@
           </template>
         </vxe-column>
         <vxe-column
-          width="200"
           field="addTime"
+          width="200"
           title="添加时间"
           show-overflow="ellipsis"
           sortable
@@ -146,7 +146,7 @@ export default {
       },
       statusInfo: {
         0: {
-          color: "blue",
+          color: "#1680d1",
           text: "未开始",
         },
         1: {

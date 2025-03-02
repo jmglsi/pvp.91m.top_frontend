@@ -144,8 +144,8 @@
                         path: '/search',
                         query: {
                           q: data.heroId,
-                          show: 'heroSkill',
                           refresh: 1,
+                          show: 'heroSkill',
                         },
                       })
                     "
@@ -173,7 +173,7 @@
     <div class="hero-d471f003c8678a7f2f2edc5ad677940f">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="
+        :description="
           (tableDataRow.gamePlayerName || replay.title) +
           ' ' +
           $t('how-to-operate')
@@ -277,7 +277,7 @@ export default {
             "&roleId=" +
             roleId +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -311,7 +311,7 @@ export default {
         .post(
           this.$appApi.app.getHeroReplayByHeroId +
             "&id=" +
-            replayInfo.id +
+            encodeURIComponent(replayInfo.id) +
             "&userId=" +
             replayInfo.userId +
             "&roleId=" +

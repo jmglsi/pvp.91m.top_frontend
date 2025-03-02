@@ -32,13 +32,16 @@
           align="left"
           border="inner"
           :custom-config="{ storage: true }"
+          :edit-config="{ trigger: 'click', mode: 'row' }"
           :data="tableData[0].rows"
         >
-          <vxe-column type="seq" width="60" />
           <!--
-          <vxe-column width="200" field="sId" title="序号" sortable />
+          <vxe-column field="sId" title="序号" width="200" sortable />
           -->
           <vxe-column
+            field="type.id"
+            fixed="left"
+            title="类型"
             :filters="[
               { value: 1000, label: '手机' },
               { value: 2000, label: '电脑' },
@@ -47,17 +50,16 @@
             ]"
             :filter-method="onTableColumnFilterMethod"
             width="75"
-            field="type.id"
-            title="类型"
           >
             <template #default="{ row }">
               {{ row.type.label }}
             </template>
           </vxe-column>
           <vxe-column
-            width="100"
             field="brand.name"
+            fixed="left"
             title="品牌"
+            width="100"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -73,9 +75,11 @@
             </template>
           </vxe-column>
           <vxe-column
-            width="325"
             field="name"
+            fixed="left"
             title="名称"
+            width="300"
+            :edit-render="{ name: 'input' }"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -83,15 +87,53 @@
             </template>
           </vxe-column>
           <vxe-column
-            width="150"
             field="description"
             title="描述"
+            width="150"
+            :edit-render="{ name: 'input' }"
             show-overflow="ellipsis"
           />
-          <vxe-column width="75" field="condition" title="成色" sortable />
-          <vxe-column width="75" field="price" title="价格" sortable />
-          <vxe-column width="75" field="num" title="库存" sortable />
-          <vxe-column field="updated_at" title="更新时间" sortable />
+          <vxe-column
+            field="condition"
+            title="成色"
+            width="100"
+            :edit-render="{ name: 'input' }"
+            sortable
+          />
+          <vxe-column
+            field="price"
+            title="价格"
+            width="100"
+            :edit-render="{ name: 'input' }"
+            sortable
+          />
+          <vxe-column
+            field="num"
+            title="库存"
+            width="100"
+            :edit-render="{ name: 'input' }"
+            sortable
+          />
+          <vxe-column
+            field="updated_at"
+            title="更新时间"
+            width="175"
+            show-overflow="ellipsis"
+            sortable
+          />
+          <vxe-column title="操作" width="160">
+            <template #default="{ row }">
+              <template v-if="hasEditStatus(row)">
+                <vxe-button @click="saveRowEvent(row)">保存</vxe-button>
+                <vxe-button @click="cancelRowEvent()">取消</vxe-button>
+              </template>
+              <template v-else>
+                <vxe-button @click="editRowEvent(row)">编辑</vxe-button>
+              </template>
+            </template>
+          </vxe-column>
+
+          <vxe-column type="seq" width="60" />
         </vxe-table>
 
         <div class="app-face1cbe136c70e1fc08cff038596944">
@@ -116,9 +158,9 @@
         >
           <vxe-column type="seq" width="60" />
           <vxe-column
-            width="225"
             field="sId"
             title="订单"
+            width="225"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -130,9 +172,9 @@
             </template>
           </vxe-column>
           <vxe-column
-            width="175"
             field="name"
             title="名称"
+            width="175"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -140,14 +182,24 @@
             </template>
           </vxe-column>
           <vxe-column
-            width="225"
             field="param"
             title="参数"
+            width="225"
             show-overflow="ellipsis"
           />
-          <vxe-column width="75" field="money" title="金额" sortable />
-          <vxe-column field="created_at" title="创建时间" sortable />
-          <vxe-column field="updated_at" title="更新时间" sortable />
+          <vxe-column field="money" title="金额" width="100" sortable />
+          <vxe-column
+            field="created_at"
+            title="创建时间"
+            show-overflow="ellipsis"
+            sortable
+          />
+          <vxe-column
+            field="updated_at"
+            title="更新时间"
+            show-overflow="ellipsis"
+            sortable
+          />
         </vxe-table>
 
         <div class="app-face1cbe136c70e1fc08cff038596944">
@@ -235,6 +287,36 @@ export default {
     },
     onPaginationChange: function (e) {
       this.getAdminData(4, this.showInfo.index, e - 1);
+    },
+    hasEditStatus: function (row) {
+      const $table = this.$refs.refAdminShopRobot;
+
+      if ($table) {
+        return $table.isEditByRow(row);
+      }
+    },
+    editRowEvent: function (row) {
+      const $table = this.$refs.refAdminShopRobot;
+
+      if ($table) {
+        $table.setEditRow(row);
+      }
+    },
+    saveRowEvent: function (row) {
+      const $table = this.$refs.refAdminShopRobot;
+
+      if ($table) {
+        $table.clearEdit().then(() => {
+          console.log(row);
+        });
+      }
+    },
+    cancelRowEvent: function () {
+      const $table = this.$refs.refAdminShopRobot;
+
+      if ($table) {
+        $table.clearEdit();
+      }
     },
   },
 };

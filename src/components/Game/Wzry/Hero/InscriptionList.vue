@@ -10,8 +10,8 @@
       height="443"
     >
       <vxe-table-column
-        title="玩家"
         field="gamePlayerName"
+        title="玩家"
         fixed="left"
         width="125"
         :title-prefix="{
@@ -22,8 +22,8 @@
       <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-column
-        title="大区"
         field="selareaId"
+        title="大区"
         :filters="[
           { value: 1, label: '安卓QQ' },
           { value: 2, label: '苹果QQ' },
@@ -36,8 +36,8 @@
       />
 
       <vxe-table-column
-        title="分段"
         field="rankScore"
+        title="分段"
         :width="listWidth"
         sortable
       >
@@ -53,8 +53,8 @@
       </vxe-table-column>
 
       <vxe-table-column
-        title="进度 (%)"
         field="basePoints[1]"
+        title="进度 (%)"
         width="125"
         :title-prefix="{
           content: $appMsg.tips[1023],
@@ -72,12 +72,12 @@
       </vxe-table-column>
 
       <vxe-table-column
-        title="战力"
         field="heroFightPower"
-        :width="listWidth"
+        title="战力"
         :title-prefix="{
           content: '非实时\n' + $appMsg.tips[1013],
         }"
+        :width="listWidth"
         sortable
       />
     </vxe-table>
@@ -85,9 +85,9 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="tableDataRow.gamePlayerName + ' ' + $t('how-to-operate')"
         :actions="actionSheetActions"
         :close-on-click-action="true"
+        :description="tableDataRow.gamePlayerName + ' ' + $t('how-to-operate')"
         @select="onActionSheetSelect"
       />
     </div>
@@ -182,7 +182,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -239,7 +239,7 @@ export default {
             "&roleId=" +
             roleId +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -307,7 +307,7 @@ export default {
       if (e == 0) {
         nowColor = null;
       } else if (e < 80) {
-        nowColor = "blue";
+        nowColor = "#1680d1";
       } else if (e > 100) {
         nowColor = "red";
       } else {

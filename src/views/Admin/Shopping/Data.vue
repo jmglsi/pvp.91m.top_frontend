@@ -39,8 +39,8 @@
           >
             <vxe-column type="seq" width="60" />
             <vxe-column
-              width="150"
               field="gamePlayerName"
+              width="150"
               title="昵称"
               show-overflow="ellipsis"
             >
@@ -49,12 +49,14 @@
               </template>
             </vxe-column>
             <vxe-column
-              width="200"
               field="wechat"
+              width="200"
               title="微信号"
               show-overflow="ellipsis"
             />
             <vxe-column
+              field="areaType"
+              title="游戏大区"
               :filters="[
                 { value: 1, label: '安卓QQ' },
                 { value: 2, label: '苹果QQ' },
@@ -63,12 +65,20 @@
               ]"
               :filter-method="onTableColumnFilterMethod"
               width="125"
-              field="areaType"
-              title="游戏大区"
             />
-            <vxe-column width="125" field="price" title="消费金额" sortable />
-            <vxe-column field="created_at" title="创建时间" sortable />
-            <vxe-column field="updated_at" title="更新时间" sortable />
+            <vxe-column field="price" title="消费金额" width="125" sortable />
+            <vxe-column
+              field="created_at"
+              title="创建时间"
+              show-overflow="ellipsis"
+              sortable
+            />
+            <vxe-column
+              field="updated_at"
+              title="更新时间"
+              show-overflow="ellipsis"
+              sortable
+            />
           </vxe-table>
         </div>
 
@@ -188,11 +198,11 @@ export default {
         });
       });
 
-      this.robotInfo.msg = this.$appGetLocalStorage("admin-shopping-sendMsg");
-      this.robotInfo.frameHost = this.$appGetLocalStorage(
-        "admin-shopping-frameHost"
-      );
-      this.robotInfo.key = this.$appGetLocalStorage("admin-shopping-key");
+      this.robotInfo.msg =
+        this.$appGetLocalStorage("admin-shopping-sendMsg") || "";
+      this.robotInfo.frameHost =
+        this.$appGetLocalStorage("admin-shopping-frameHost") || "";
+      this.robotInfo.key = this.$appGetLocalStorage("admin-shopping-key") || "";
     },
     getAdminData: function (aid = 5, bid = 0, page = 0) {
       this.$axios

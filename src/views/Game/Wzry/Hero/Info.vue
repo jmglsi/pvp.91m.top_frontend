@@ -307,7 +307,7 @@
     <div class="hero-2882d594d0ac3524bffd5148791e96da">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           hero.info.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -362,7 +362,7 @@
     <div class="hero-16e1b9e46fe4483c6bc17aea9d20736a">
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
-        :title="hero.info.name + ' 的 ' + circle.info.text"
+        :description="hero.info.name + ' 的 ' + circle.info.text"
         class="hero-6b6bfab1b3e7ce800a7ea90c638d7f3a"
       >
         <template #default>
@@ -637,7 +637,7 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.app.getHeroInfo + "&id=" + id)
+        .post(this.$appApi.app.getHeroInfo + "&id=" + encodeURIComponent(id))
         .then((res) => {
           let status = res.data.status;
 
@@ -726,7 +726,7 @@ export default {
         .post(
           this.$appApi.app.addHeroVote +
             "&id=" +
-            this.hero.info.id +
+            encodeURIComponent(this.hero.info.id) +
             "&voteType=" +
             voteType
         )
@@ -745,7 +745,9 @@ export default {
     onHeroLikeClick: function () {
       this.$axios
         .post(
-          this.$appApi.app.addWebAccountLikeHero + "&id=" + this.hero.info.id
+          this.$appApi.app.addWebAccountLikeHero +
+            "&id=" +
+            encodeURIComponent(this.hero.info.id)
         )
         .then((res) => {
           let heroData = this.hero,

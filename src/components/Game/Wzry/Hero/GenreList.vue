@@ -9,7 +9,7 @@
       @cell-click="onTableCellClick"
       height="443"
     >
-      <vxe-table-column title="英雄" fixed="left" field="heroId" width="50">
+      <vxe-table-column field="heroId" fixed="left" title="英雄" width="50">
         <template #default="{ row }">
           <div
             :style="{
@@ -34,8 +34,8 @@
         :title-prefix="{ content: $appMsg.tips[1003] }"
       >
         <vxe-table-column
-          title="技能"
           field="skillId"
+          title="技能"
           :filters="[
             { value: 80102, label: '治疗' },
             { value: 80103, label: '眩晕' },
@@ -75,8 +75,8 @@
           </template>
         </vxe-table-column>
         <vxe-table-column
-          title="分路"
           field="positionId"
+          title="分路"
           :filters="[
             { value: 0, label: '对抗路' },
             { value: 1, label: '中路' },
@@ -108,8 +108,8 @@
         }"
       >
         <vxe-table-column
-          title="占比"
           field="pickRate"
+          title="占比"
           :filters="[{ value: 1, checked: true }]"
           :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
@@ -142,7 +142,7 @@
                 :style="
                   row.change.updateType == 2
                     ? { color: 'red !important' }
-                    : { color: 'blue !important' }
+                    : { color: '#1680d1 !important' }
                 "
                 class="app-b0704b59dbf144bfeffb53bdb11d7128"
               >
@@ -170,7 +170,7 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="胜率" field="winRate" :width="listWidth">
+        <vxe-table-column field="winRate" title="胜率" :width="listWidth">
           <template #filter="{ $panel, column }">
             ≥
             <input
@@ -189,8 +189,8 @@
 
       <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
-          title="胜方"
           field="mvpRate"
+          title="胜方"
           :width="listWidth"
           sortable
         />
@@ -271,7 +271,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            id
+            encodeURIComponent(id)
         )
         .then((res) => {
           let data = res.data.data,

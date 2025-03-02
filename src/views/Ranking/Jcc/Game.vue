@@ -1,12 +1,15 @@
 <template>
   <div class="ranking-jcc app-jcc">
+    <!--
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
       <vxe-toolbar
-        style="background-color: rgb(246, 246, 248) !important"
+        size="mini"
+        style="background-color: rgb(246, 246, 248) !important;"
         ref="refJccToolbar"
         custom
       />
     </div>
+    -->
 
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-table
@@ -22,9 +25,8 @@
         @custom="onTableCustom"
       >
         <vxe-column
-          title="弈子"
           field="price"
-          fixed="left"
+          title="#"
           :filters="[
             //{ value: 0, label: '0 费' },
             { value: 1, label: '1 费' },
@@ -114,21 +116,9 @@
           </template>
         </vxe-column>
 
-        <vxe-column title="#" type="seq" width="50" />
-
-        <!--
-        <vxe-column title="更多" field="more" type="expand" width="80">
-          <template #content="{ row }">
-            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
-              <ChartsWzryHeroLine :extraId="row.id" :aid="0" />
-            </div>
-          </template>
-        </vxe-column>
-        -->
-
         <vxe-column
-          title="出场"
           field="allPickRate[1]"
+          title="出场"
           :filters="[{ value: 0.01, checked: true }]"
           :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
@@ -174,7 +164,7 @@
                       :style="
                         row.change.updateType == 2
                           ? { color: 'red !important' }
-                          : { color: 'blue !important' }
+                          : { color: '#1680d1 !important' }
                       "
                       class="app-b0704b59dbf144bfeffb53bdb11d7128"
                     >
@@ -211,8 +201,8 @@
           </template>
         </vxe-column>
         <vxe-column
-          title="排名"
           field="allAvg"
+          title="排名"
           :filters="[{ value: 0 }]"
           :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
@@ -262,7 +252,7 @@
               class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81"
             >
               <span class="ranking-6ad9203f996965a0c641bbf73cc1143f">
-                {{ $appMsg.tips[1004] }} (%)
+                {{ $appMsg.tips[1004] }}(%)
               </span>
               <van-tag
                 plain
@@ -278,8 +268,8 @@
           </template>
 
           <vxe-column
-            title="3星"
             field="starRate_3"
+            title="3星"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -300,8 +290,8 @@
             </template>
           </vxe-column>
           <vxe-column
-            title="吃分"
             field="pickRate_4"
+            title="吃分"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -322,8 +312,8 @@
             </template>
           </vxe-column>
           <vxe-column
-            title="吃鸡"
             field="pickRate_1"
+            title="吃鸡"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -345,6 +335,20 @@
           </vxe-column>
         </vxe-table-colgroup>
 
+        <!--
+        <vxe-column field="more" type="expand" title="更多" width="80">
+          <template #content="{ row }">
+            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
+              <ChartsWzryHeroLine :extraId="row.id" :aid="0" />
+            </div>
+          </template>
+        </vxe-column>
+        -->
+
+        <!--
+        <vxe-column title="#" type="seq" width="50" />
+        -->
+
         <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
@@ -352,7 +356,7 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -440,7 +444,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' (' +
           tableDataRow.id +
@@ -512,6 +516,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(
             50,
             newValue.bid,
@@ -586,11 +591,11 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.initTableWidth();
 
-    this.$nextTick(() => {
-      this.getHeroChartsLog(7);
+    //this.$nextTick(() => {
+    //this.getHeroChartsLog(7);
 
-      this.$refs.refJccGame.connect(this.$refs.refJccToolbar);
-    });
+    //this.$refs.refJccGame.connect(this.$refs.refJccToolbar);
+    //});
     //手动将表格和工具栏进行关联
 
     /*
@@ -623,7 +628,9 @@ export default {
       this.heroProficiency = this.$t("loading");
 
       this.$axios
-        .post(this.$appApi.app.getHeroProficiency + "&id=" + id)
+        .post(
+          this.$appApi.app.getHeroProficiency + "&id=" + encodeURIComponent(id)
+        )
         .then((res) => {
           let status = res.data.status;
 

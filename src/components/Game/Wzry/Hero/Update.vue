@@ -187,7 +187,7 @@
     </div>
 
     <div class="hero-ec93fee7573d5d8daa4444009358e91b">
-      <van-action-sheet v-model="showInfo.actionSheet" title="其他数据 (近期)">
+      <van-action-sheet v-model="showInfo.actionSheet" description="其他数据 (近期)">
         <template #default>
           <GameWzryHeroEquipmentListOne :extraId="equipmentId" :extraType="2" />
         </template>
@@ -321,7 +321,7 @@ export default {
             "&bid=" +
             bid +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -462,7 +462,7 @@ export default {
           this.$appApi.app.getHeroUpdate +
             "&aid=1" +
             "&id=" +
-            heroId +
+            encodeURIComponent(heroId) +
             "&articleId=" +
             row.articleId
         )

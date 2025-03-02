@@ -10,7 +10,7 @@
     <van-action-sheet
       v-model="showInfo.actionSheet"
       :closeable="false"
-      :title="'英雄 - ' + $t('how-to-choose')"
+      :description="'英雄 - ' + $t('how-to-choose')"
     >
       <van-tabs
         v-model="tableData.model"

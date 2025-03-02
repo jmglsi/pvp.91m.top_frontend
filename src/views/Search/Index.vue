@@ -30,6 +30,7 @@
               {{ $t("nav-bar.left-text") }}
             </div>
           </template>
+          <!--
           <template #label>
             <span :style="{ color: 'gray' }"> 王者荣耀 </span>
           </template>
@@ -37,12 +38,11 @@
             <img
               width="20"
               height="20"
-              v-lazy="
-                'https://cache.91m.top/pvp.91m.top/img/icons-game/wzry.png'
-              "
+              v-lazy="$appCache + '/img/icons-game/wzry.png'"
               class="search-2fede256f4fb851f5a3f1e477e3657cf"
             />
           </template>
+          -->
           <template #action>
             <ChooseWzryHero
               @select="getHeroId"
@@ -560,7 +560,7 @@
                         :style="
                           tableData.cardInfo.change.updateType == 2
                             ? { color: 'red !important' }
-                            : { color: 'blue !important' }
+                            : { color: '#1680d1 !important' }
                         "
                         class="search-cad25b2e05f6e21804b99605ab78a40b"
                       >
@@ -1087,7 +1087,7 @@
             :text-color="
               tableData.cardInfo.feature.blue.blue.pickRate >
               tableData.cardInfo.feature.blue.red.pickRate
-                ? 'blue'
+                ? '#1680d1'
                 : 'gray'
             "
           >
@@ -1121,7 +1121,7 @@
             :text-color="
               tableData.cardInfo.feature.red.blue.pickRate >
               tableData.cardInfo.feature.red.red.pickRate
-                ? 'blue'
+                ? '#1680d1'
                 : 'gray'
             "
           >
@@ -1176,7 +1176,7 @@
           该灵感由
           <span
             :style="{
-              color: '#1989fa !important',
+              color: '#1680d1 !important',
             }"
             @click="
               $appPush({
@@ -1195,7 +1195,7 @@
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           tableData.cardInfo.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -1266,7 +1266,7 @@
     <div class="search-914f478e623fb19a2937274e72d82551">
       <van-action-sheet
         v-model="showInfo.fightPowerActionSheet"
-        :title="
+        :description="
           tableData.cardInfo.name +
           ' (' +
           tableData.cardInfo.id +
@@ -1780,7 +1780,7 @@ span.search-c27c140f08b0252f3027cf077cee2358 {
 }
 
 span.search-ddfb601e1d7aa0d473f1a3ab353ef982 {
-  color: blue !important;
+  color: #1680d1 !important;
 }
 
 span.search-5077dcc14128f743498aaafcbd0ecb5d {

@@ -44,7 +44,7 @@
                   <span
                     :style="
                       gameLabel && tableData.myInfo.status != 0
-                        ? { color: 'blue' }
+                        ? { color: '#1680d1' }
                         : {}
                     "
                   >
@@ -139,7 +139,7 @@
                 </a-menu-item>
                 <a-menu-divider />
                 <a-menu-item disabled key="n-top-right-4">
-                  <!-- :style="gameLabel ? {} : { color: 'blue' }" -->
+                  <!-- :style="gameLabel ? {} : { color: '#1680d1' }" -->
                   <span> 数据录入 </span>
                 </a-menu-item>
               </a-menu>
@@ -596,7 +596,7 @@
         :actions="roleActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
-        :title="$t('how-to-operate')"
+        :description="$t('how-to-operate')"
         @select="onRoleActionSheetSelect"
       />
     </div>
@@ -607,7 +607,7 @@
         :actions="teamActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
-        :title="$t('how-to-operate')"
+        :description="$t('how-to-operate')"
         @select="onTeamActionSheetSelect"
       />
     </div>
@@ -618,7 +618,7 @@
         :actions="engageActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
-        :title="$t('how-to-operate')"
+        :description="$t('how-to-operate')"
         @select="onEngageActionSheetSelect"
       />
     </div>
@@ -629,7 +629,7 @@
         :actions="editActionSheetActions"
         :closeable="false"
         :close-on-click-action="true"
-        :title="
+        :description="
           professionInfo.rows[tableDataRow.nType].name +
           ' - ' +
           statusInfo[tableDataRow.status] +
@@ -645,7 +645,7 @@
       该灵感由
       <span
         :style="{
-          color: '#1989fa !important',
+          color: '#1680d1 !important',
         }"
         @click="
           $appPush({
@@ -691,7 +691,7 @@ export default {
       nowTeamId: "",
       nowTeamName: "",
       nowGameLabel: "",
-      nowIconColor: "#1989fa",
+      nowIconColor: "#1680d1",
       nowIconName: "add-o",
       nowDataChange: false,
       openId: this.$cookie.get("openId") || "",
@@ -1555,7 +1555,7 @@ export default {
         if (this.gameLabel) {
           this.onIconColor(this.tableData.myInfo.status);
         } else {
-          this.nowIconColor = "#1989fa";
+          this.nowIconColor = "#1680d1";
         }
 
         this.nowIconName = "add-o";
@@ -1570,7 +1570,7 @@ export default {
 
       if (this.openId) {
         if (status == 0) {
-          color = "#1989fa";
+          color = "#1680d1";
         } else if (status == 1) {
           color = "red";
         } else if (status == 2) {
@@ -1580,7 +1580,7 @@ export default {
         }
       } else {
         status = 0;
-        color = "#1989fa";
+        color = "#1680d1";
       }
 
       this.nowIconColor = color;
@@ -1844,7 +1844,7 @@ export default {
     onEngageListClick: function (e) {
       this.showInfo.engageActionSheet = true;
 
-      this.nowGameLabel = e.gameLabel;
+      this.nowGameLabel = e.extraData.gameLabel;
     },
   },
 };

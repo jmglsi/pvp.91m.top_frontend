@@ -175,6 +175,24 @@
             管理
           </a-menu-item>
         </a-sub-menu>
+        <a-sub-menu v-show="onModuleShow('sub-ke')" key="sub-ke">
+          <span slot="title">
+            <a-icon type="shopping" />
+            <span>大酷儿</span>
+          </span>
+
+          <a-menu-item
+            v-show="onModuleShow('ke-data-2faa5')"
+            key="ke-data-2faa5"
+            @click="
+              $appPush({
+                path: '/admin/ke-data-2faa5',
+              })
+            "
+          >
+            管理
+          </a-menu-item>
+        </a-sub-menu>
         <a-sub-menu v-show="onModuleShow('sub-shopping')" key="sub-shopping">
           <span slot="title">
             <a-icon type="shopping" />
@@ -462,5 +480,9 @@ div.admin-a6e5c6ead5e961e03325d9b0e06ec08f {
   position: fixed;
   left: 10px;
   bottom: 10px;
+}
+
+div.admin-cc18a9ce6325c786a08f962ed0e43099{
+  font-size: @app-font-size;
 }
 </style>

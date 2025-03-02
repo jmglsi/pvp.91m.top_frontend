@@ -12,7 +12,6 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-colgroup
-          fixed="left"
           :title="heroName ? heroName : '推荐'"
           :title-prefix="{ content: $appMsg.tips[1009] }"
         >
@@ -101,15 +100,13 @@
           </vxe-table-column>
         </vxe-table-colgroup>
 
-        <vxe-table-column title="#" type="seq" width="50" />
-
         <vxe-table-colgroup
           title="队友 (%)"
           :title-prefix="{ content: $appMsg.tips[1005] }"
         >
           <vxe-table-column
-            title="出场"
             field="teammatePickRate"
+            title="出场"
             :filters="[{ value: 0.25, checked: true }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -131,8 +128,8 @@
           </vxe-table-column>
 
           <vxe-table-column
-            title="胜率"
             field="teammateWinRate"
+            title="胜率"
             :width="listWidth"
           >
             <template #filter="{ $panel, column }">
@@ -152,8 +149,8 @@
         </vxe-table-colgroup>
 
         <vxe-table-column
-          title="适配"
           field="adaptation"
+          title="适配"
           :filters="[{ value: 0 }]"
           :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
@@ -183,8 +180,8 @@
           }"
         >
           <vxe-table-column
-            title="出场"
             field="opponentPickRate"
+            title="出场"
             :filters="[{ value: 0.25, checked: true }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -206,8 +203,8 @@
           </vxe-table-column>
 
           <vxe-table-column
-            title="胜率"
             field="opponentWinRate"
+            title="胜率"
             :width="listWidth"
           >
             <template #filter="{ $panel, column }">
@@ -225,13 +222,17 @@
             </template>
           </vxe-table-column>
         </vxe-table-colgroup>
+
+        <!--
+        <vxe-table-column title="#" type="seq" width="50" />
+        -->
       </vxe-table>
     </div>
 
     <div class="ranking-a803bd2018728bd6e689e0f9dc5e483c">
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
-        :title="
+        :description="
           tableDataRow.hero[0].name +
           ' - ' +
           tableDataRow.hero[1].name +
@@ -276,6 +277,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(1, 0, 0, 0, newValue.heroName);
         }
       },
