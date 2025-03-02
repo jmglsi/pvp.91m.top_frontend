@@ -23,5 +23,6 @@ yarn lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-# 请我喝咖啡
-![咖啡](https://ae04.alicdn.com/kf/H5a76a37f16014b2faebd7a5fc7187622F.png)
+# 说明
+
+文档迁徙至 [助手文档中心](https://docs.91m.top/%E6%9C%BA%E5%99%A8%E4%BA%BA/%E6%A1%86%E6%9E%B6%E9%83%A8%E7%BD%B2.html)

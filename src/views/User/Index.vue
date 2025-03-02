@@ -135,8 +135,8 @@
               <van-uploader
                 :after-read="onAfterRead"
                 :before-read="onBeforeRead"
-                :max-size="10 * 1024 * 1024"
                 @oversize="onOversize"
+                max-size="52428800"
               >
                 <span>更换头像</span>
               </van-uploader>
@@ -190,12 +190,12 @@
               "
             >
               <template #label>
-                <span style="color: blue">{{ $t("oauth.label") }}</span>
+                <span style="color: #1680d1">{{ $t("oauth.label") }}</span>
               </template>
             </van-cell>
           </van-cell-group>
         </van-tab>
-        <van-tab v-if="$appGameType == 'wzry'" title="王者荣耀">
+        <van-tab v-if="$appGameType == 'wzry' && $appIsMyHost" title="王者荣耀">
           <van-cell-group
             :border="false"
             class="login-71c2fb64c38e4ee108607ca840607e48"
@@ -386,7 +386,7 @@
             -->
           </van-cell-group>
         </van-tab>
-        <van-tab v-if="$appGameType == 'wzry'" title="组队消费">
+        <van-tab v-if="$appGameType == 'wzry' && $appIsMyHost" title="组队消费">
           <Shopping />
         </van-tab>
         <van-tab v-if="$appGameType == 'nsh'" title="逆水寒">
@@ -475,7 +475,7 @@
               height="20"
               v-lazy="
                 $appApi.app.appProxy +
-                'https://badgen.net/badge/IPv6/Yes?labelColor=000000&color=3aa675'
+                'https://badgen.net/badge/SSL/Yes?labelColor=000000&color=3aa675'
               "
             />
           </span>
@@ -485,7 +485,7 @@
               height="20"
               v-lazy="
                 $appApi.app.appProxy +
-                'https://badgen.net/badge/SSL/Yes?labelColor=000000&color=3aa675'
+                'https://badgen.net/badge/IPv6/Yes?labelColor=000000&color=3aa675'
               "
             />
           </span>
@@ -513,7 +513,7 @@
               height="20"
               v-lazy="
                 $appApi.app.appProxy +
-                'https://badgen.net/badge/赞助/支持?labelColor=000000&color=946ce6'
+                'https://badgen.net/badge/爱发电/赞助?labelColor=000000&color=946ce6'
               "
               @click="
                 $appPush({
@@ -570,7 +570,7 @@
     <div class="login-0b8eeb7297d7691797414caa1ec92c8e">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        title="我的信息"
+        description="我的信息"
         @close="showInfo.editType = false"
       >
         <template #default>
@@ -813,14 +813,16 @@ export default {
   watch: {
     $route: function (to) {
       let q = to.query,
-        refresh = q.refresh,
-        agree = this.$appConfigInfo.appInfo.isReadme;
+        refresh = q.refresh;
 
       if (this.loginInfo.tips.text) {
         this.showInfo.popoverMeau = true;
       }
 
-      if (agree == 1 && refresh == 1) {
+      let agree = this.$appConfigInfo.appInfo.isReadme;
+
+      if (agree == 1 || (agree == 1 && refresh == 1)) {
+        //if (refresh == 1) {
         this.getWebAccountInfo();
       }
     },
@@ -839,8 +841,8 @@ export default {
     this.getWebAccountInfo();
   },
   methods: {
-    onAfterRead: function (file) {
-      let data = file.content;
+    onAfterRead: function (e) {
+      let data = e.content;
 
       this.$message.info(this.$appMsg.info[1002]);
 

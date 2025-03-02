@@ -1,5 +1,5 @@
 <template>
-  <div class="tools-yc">
+  <div class="tools-fg">
     <div class="tools-17e4897adf2b88206ea3ba83a3ebcf96">
       <van-dropdown-menu>
         <van-dropdown-item
@@ -282,11 +282,11 @@ export default {
       });
     },
     getDistance: function (lng1, lat1, lng2, lat2) {
-      var radLat1 = (lat1 * Math.PI) / 180.0;
-      var radLat2 = (lat2 * Math.PI) / 180.0;
-      var a = radLat1 - radLat2;
-      var b = (lng1 * Math.PI) / 180.0 - (lng2 * Math.PI) / 180.0;
-      var s =
+      let radLat1 = (lat1 * Math.PI) / 180.0;
+      let radLat2 = (lat2 * Math.PI) / 180.0;
+      let a = radLat1 - radLat2;
+      let b = (lng1 * Math.PI) / 180.0 - (lng2 * Math.PI) / 180.0;
+      let s =
         2 *
         Math.asin(
           Math.sqrt(

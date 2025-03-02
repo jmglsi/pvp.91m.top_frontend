@@ -4,7 +4,7 @@
       v-model="showInfo.actionSheet"
       :closeable="false"
       :close-on-click-overlay="false"
-      :title="$t('please-agree-before-operation')"
+      :description="$t('please-agree-before-operation')"
     >
       <div class="app-fe64546261ce7a19b6784737edd0fdf1">
         <div class="app-41b238cc893836e28b50cd5a59843803">

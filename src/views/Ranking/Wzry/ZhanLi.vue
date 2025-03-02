@@ -12,13 +12,12 @@
         @cell-click="onTableCellClick"
       >
         <vxe-column
-          title="英雄"
           field="allScore"
-          fixed="left"
+          title="#"
           width="75"
           sortable
         >
-          <template #default="{ row }">
+          <template #default="{ row, rowIndex }">
             <div
               :style="{
                 position: 'relative',
@@ -38,16 +37,11 @@
                 height="50"
                 class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
-            </div>
-          </template>
-        </vxe-column>
-
-        <vxe-column title="#" type="seq" width="50" />
-
-        <vxe-column title="更多" field="more" type="expand" width="80">
-          <template #content="{ row }">
-            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
-              <ChartsHeroLine :extraId="row.id" :aid="1" />
+              <div
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 app-0e1a8b3f7f6162bf4b88d3d001b88374"
+              >
+                {{ rowIndex + 1 }}
+              </div>
             </div>
           </template>
         </vxe-column>
@@ -59,8 +53,8 @@
           }"
         >
           <vxe-column
-            title="1"
             field="fightPower[0]"
+            title="1"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -77,12 +71,11 @@
                 @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
-              %
             </template>
           </vxe-column>
           <vxe-column
-            title="10"
             field="fightPower[1]"
+            title="10"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -99,12 +92,11 @@
                 @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
-              %
             </template>
           </vxe-column>
           <vxe-column
-            title="50"
             field="fightPower[2]"
+            title="50"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -121,12 +113,11 @@
                 @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
-              %
             </template>
           </vxe-column>
           <vxe-column
-            title="100"
             field="fightPower[3]"
+            title="100"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -143,19 +134,53 @@
                 @input="$panel.changeOption($event, !!option.value, option)"
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
-              %
             </template>
           </vxe-column>
         </vxe-table-colgroup>
+
+        <vxe-column field="more" type="expand" title="更多" width="80">
+          <template #content="{ row }">
+            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
+              <ChartsHeroLine :extraId="row.id" :aid="1" />
+            </div>
+          </template>
+        </vxe-column>
+
+        <!--
+        <vxe-column title="#" type="seq" width="50" />
+        -->
 
         <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
 
+    <div
+      class="ranking-abb5cb2b15eb9ccfe416f0ba3da3499e app-52b0e5c90604d59d1814f184d58e2033"
+    >
+      <van-button
+        round
+        icon="share"
+        size="mini"
+        color="linear-gradient(to right, rgb(18, 194, 233), rgb(196, 113, 237))"
+        @click="onShareButtonClick"
+      >
+        分享图片
+      </van-button>
+    </div>
+
+    <div class="ranking-707bf3cdee24b2a21ec613ec27c66a11">
+      <van-dialog
+        v-model="showInfo.shareImg"
+        @confirm="showInfo.shareImg = false"
+      >
+        <div class="ranking-3ab42c8325a264730406e37e1f731f70" />
+      </van-dialog>
+    </div>
+
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -236,6 +261,8 @@
 </template>
 
 <script>
+import html2canvas from "html2canvas";
+
 export default {
   name: "rankingZhanLi",
   components: {
@@ -286,6 +313,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(19, this.bid, this.cid, this.did, this.time);
         }
       },
@@ -323,6 +351,7 @@ export default {
         model: 0,
       },
       showInfo: {
+        shareImg: false,
         skillActionSheet: false,
       },
       extraInfo: {
@@ -332,7 +361,7 @@ export default {
     };
   },
   created() {
-    this.clientHeight = this.$appInitTableHeight(10);
+    //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
@@ -447,6 +476,46 @@ export default {
 
         this.$message.info(tipsText);
       }
+    },
+    onShareButtonClick: function () {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      this.showInfo.shareImg = true;
+      this.$message.warning(this.$appMsg.warning[500]);
+
+      html2canvas(
+        document.getElementsByClassName(
+          "ranking-e10ca73b79369d2183f81ca10fb587af"
+        )[0],
+        {
+          useCORS: true,
+          //allowTaint: true,
+          scale: 2,
+        }
+      ).then((canvas) => {
+        let shareImg = document.getElementsByClassName(
+          "ranking-3ab42c8325a264730406e37e1f731f70"
+        )[0];
+        shareImg.innerHTML = null;
+        shareImg.appendChild(canvas);
+
+        canvas.toBlob(
+          function (blob) {
+            const eleLink = document.createElement("a");
+            eleLink.download = "shareImg.png";
+            eleLink.style.display = "none";
+            eleLink.href = URL.createObjectURL(blob);
+            //触发点击
+            document.body.appendChild(eleLink);
+            eleLink.click();
+            //然后移除
+            document.body.removeChild(eleLink);
+          },
+          "image/png",
+          1
+        );
+
+        this.$message.success(this.$appMsg.success[1006]);
+      });
     },
   },
 };

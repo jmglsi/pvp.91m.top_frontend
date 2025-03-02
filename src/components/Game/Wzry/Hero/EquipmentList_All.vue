@@ -9,9 +9,9 @@
       height="443"
     >
       <vxe-table-column
-        title="技能"
         field="skillId"
         fixed="left"
+        title="技能"
         width="50"
         sortable
       >
@@ -43,8 +43,8 @@
         <vxe-table-column
           v-for="(data, index) in 6"
           :key="'hero-a9265e5b88bd92bd087aeae1073d52cc-' + index"
-          :title="(index + 1).toString()"
           :field="'equipment.list[' + index + ']'"
+          :title="(index + 1).toString()"
           :width="$appIsMobile ? 60 : 0"
           sortable
         >
@@ -70,20 +70,20 @@
       </vxe-table-colgroup>
 
       <vxe-table-column
-        title="价格"
         field="totalPrice"
+        title="价格"
         :width="listWidth"
         sortable
       />
 
       <vxe-table-column
-        title="场次"
         field="pickTimes"
+        title="场次"
         :width="listWidth"
         sortable
       />
 
-      <vxe-table-column title="胜率 (%)" field="winRate" width="125">
+      <vxe-table-column field="winRate" title="胜率 (%)" width="125">
         <template #filter="{ $panel, column }">
           ≥
           <input
@@ -100,16 +100,16 @@
       </vxe-table-column>
 
       <vxe-table-column
-        title="时长"
         field="usedtime"
+        title="时长"
         :width="listWidth"
         sortable
       />
 
       <vxe-table-colgroup title="MVP (%)">
         <vxe-table-column
-          title="胜方"
           field="mvpRate"
+          title="胜方"
           :width="listWidth"
           sortable
         />
@@ -187,7 +187,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,

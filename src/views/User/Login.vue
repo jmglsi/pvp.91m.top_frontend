@@ -170,6 +170,10 @@
     >
       <span @click="onUpdateClick">{{ $t("my.forget") }}</span>
     </div>
+
+    <!--
+    <AppReadme />
+    -->
   </div>
 </template>
 
@@ -177,6 +181,7 @@
 export default {
   name: "userLogin",
   components: {
+    //AppReadme: () => import("@/components/App/Readme.vue"),
     UserOauth: () => import("@/components/User/Oauth.vue"),
   },
   data() {
@@ -375,7 +380,7 @@ div.login-f01ae8c7f2d058ec6be00db589a32bea {
 }
 
 div.login-60ae25445ac62d5ec51c776826888d9f {
-  color: #1989fa !important;
+  color: #1680d1 !important;
   left: 25px;
 }
 

@@ -38,11 +38,11 @@
           <vxe-column type="seq" width="60" />
           <!--
           <vxe-column
+            field="frameId"
+            title="类型"
             :filters="frameData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="175"
-            field="frameId"
-            title="类型"
             show-overflow="ellipsis"
             sortable
           >
@@ -52,9 +52,9 @@
           </vxe-column>
           -->
           <vxe-column
-            width="250"
             field="robot"
             title="公众号"
+            width="250"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -79,7 +79,12 @@
               </span>
             </template>
           </vxe-column>
-          <vxe-column field="updated_at" title="更新时间" sortable />
+          <vxe-column
+            field="updated_at"
+            title="更新时间"
+            show-overflow="ellipsis"
+            sortable
+          />
         </vxe-table>
       </div>
 
@@ -106,11 +111,11 @@
           </vxe-table-column>
           <!--
           <vxe-column
+            field="frameId"
+            title="类型"
             :filters="frameData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="175"
-            field="frameId"
-            title="类型"
             show-overflow="ellipsis"
             sortable
           >
@@ -120,11 +125,11 @@
           </vxe-column>
           -->
           <vxe-column
+            field="robot"
+            title="公众号"
             :filters="robotData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="250"
-            field="robot"
-            title="公众号"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -151,7 +156,12 @@
           </vxe-column>
           <vxe-column field="group" title="用户" show-overflow="ellipsis" />
           <vxe-column field="integral" title="积分" sortable />
-          <vxe-column field="updated_at" title="更新时间" sortable />
+          <vxe-column
+            field="updated_at"
+            title="更新时间"
+            show-overflow="ellipsis"
+            sortable
+          />
         </vxe-table>
 
         <div class="app-face1cbe136c70e1fc08cff038596944">
@@ -283,9 +293,10 @@ export default {
         });
       });
 
-      this.robotInfo.msg = this.$appGetLocalStorage("admin-mp-sendMsg");
-      this.robotInfo.frameHost = this.$appGetLocalStorage("admin-mp-frameHost");
-      this.robotInfo.key = this.$appGetLocalStorage("admin-mp-key");
+      this.robotInfo.msg = this.$appGetLocalStorage("admin-mp-sendMsg") || "";
+      this.robotInfo.frameHost =
+        this.$appGetLocalStorage("admin-mp-frameHost") || "";
+      this.robotInfo.key = this.$appGetLocalStorage("admin-mp-key") || "";
     },
     getAdminData: function (aid = 2, bid = 0, page = 0) {
       this.$axios

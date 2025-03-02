@@ -124,7 +124,7 @@ export default {
             "&aid=" +
             aid +
             "&id=" +
-            heroId +
+            encodeURIComponent(heroId) +
             "&detail=" +
             detail
         )

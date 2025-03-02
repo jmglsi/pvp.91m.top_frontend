@@ -11,9 +11,8 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
-          title="装备"
           field="id"
-          fixed="left"
+          title="装备"
           :filters="[
             { value: 0, label: '其他' },
             { value: 1, label: '成型装备' },
@@ -26,7 +25,7 @@
           :filter-method="onTableColumnFilterMethod"
           width="75"
         >
-          <template #default="{ row }">
+          <template #default="{ row, rowIndex }">
             <div
               :style="{
                 position: 'relative',
@@ -44,22 +43,41 @@
                 height="50"
                 class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
+              <div
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 app-0e1a8b3f7f6162bf4b88d3d001b88374"
+              >
+                {{ rowIndex + 1 }}
+              </div>
             </div>
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="#" type="seq" width="75" />
-
         <vxe-table-column
-          title="名字"
           field="name"
+          title="名字"
+          :filters="[{ value: '' }]"
+          :filter-method="onTableColumnFilterMethod"
           :width="listWidth > 0 ? listWidth + 25 : listWidth"
+          show-overflow="ellipsis"
           sortable
-        />
+        >
+          <template #filter="{ $panel, column }">
+            <input
+              v-model="option.value"
+              v-for="(option, index) in column.filters"
+              :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
+              type="type"
+              placeholder="装备名"
+              @input="$panel.changeOption($event, !!option.value, option)"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              :style="{ width: '125px !important' }"
+            />
+          </template>
+        </vxe-table-column>
 
         <vxe-table-column
-          title="出场"
           field="allPickRate[1]"
+          title="出场"
           :filters="[{ value: 0.01, checked: true }]"
           :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
@@ -93,7 +111,7 @@
                   :style="
                     row.change.updateType == 2
                       ? { color: 'red !important' }
-                      : { color: 'blue !important' }
+                      : { color: '#1680d1 !important' }
                   "
                   class="app-b0704b59dbf144bfeffb53bdb11d7128"
                 >
@@ -123,8 +141,8 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="排名"
           field="allAvg"
+          title="排名"
           :filters="[{ value: 0 }]"
           :filter-method="onTableColumnFilterMethod"
           :width="listWidth"
@@ -145,10 +163,10 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-colgroup :title="$appMsg.tips[1004] + ' (%)'">
+        <vxe-table-colgroup :title="$appMsg.tips[1004] + '(%)'">
           <vxe-table-column
-            title="吃分"
             field="pickRate_4"
+            title="吃分"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -170,8 +188,8 @@
           </vxe-table-column>
 
           <vxe-table-column
-            title="吃鸡"
             field="pickRate_1"
+            title="吃鸡"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -192,13 +210,17 @@
             </template>
           </vxe-table-column>
         </vxe-table-colgroup>
+
+        <!--
+        <vxe-table-column title="#" type="seq" width="75" />
+        -->
       </vxe-table>
     </div>
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.equipmentActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' (' +
           tableDataRow.id +
@@ -214,7 +236,7 @@
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -356,6 +378,10 @@ export default {
     onTableColumnFilterMethod: function ({ option, row, column }) {
       if (column.property == "id") {
         return row.type == option.label;
+      }
+
+      if (column.property == "name") {
+        return row.name.indexOf(option.value) > -1;
       }
 
       if (column.property == "allPickRate[1]") {

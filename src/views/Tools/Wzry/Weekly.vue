@@ -7,8 +7,8 @@
       <van-divider
         content-position="right"
         :style="{
-          color: '#1989fa',
-          borderColor: '#1989fa',
+          color: '#1680d1',
+          borderColor: '#1680d1',
         }"
       >
         最近更新
@@ -47,7 +47,7 @@
                   class="tools-5688b4942ace92e2a2445773bcc4c483"
                 >
                   <van-icon
-                    :color="data.updateType == 3 ? 'green' : 'blue'"
+                    :color="data.updateType == 3 ? 'green' : '#1680d1'"
                     size="17"
                     name="goods-collect"
                   />
@@ -92,8 +92,8 @@
       <van-divider
         content-position="right"
         :style="{
-          color: '#1989fa',
-          borderColor: '#1989fa',
+          color: '#1680d1',
+          borderColor: '#1680d1',
         }"
       >
         环比变化

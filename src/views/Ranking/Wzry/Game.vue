@@ -1,8 +1,12 @@
 <template>
   <div class="ranking-wzry app-wzry">
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
+      <!--
+        style="background-color: rgb(246, 246, 248) !important;"
+      -->
       <vxe-toolbar
-        style="background-color: rgb(246, 246, 248) !important"
+        size="mini"
+        style="background-color: transparent"
         ref="refWzryToolbar"
         custom
       />
@@ -21,13 +25,27 @@
         @cell-click="onTableCellClick"
         @custom="onTableCustom"
       >
+        <!-- fixed="left" -->
         <vxe-column
-          title="英雄"
           field="allScore"
-          fixed="left"
+          title="#"
+          :filters="[{ value: '' }]"
+          :filter-method="onTableColumnFilterMethod"
           width="75"
           sortable
         >
+          <template #filter="{ $panel, column }">
+            <input
+              v-model="option.value"
+              v-for="(option, index) in column.filters"
+              :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
+              type="type"
+              placeholder="试试 英雄名/别名"
+              @input="$panel.changeOption($event, !!option.value, option)"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              :style="{ width: '125px !important' }"
+            />
+          </template>
           <template #default="{ row }">
             <van-tag
               v-if="row.tag.text"
@@ -92,10 +110,8 @@
           </template>
         </vxe-column>
 
-        <vxe-column title="#" type="seq" width="50" />
-
         <!--
-        <vxe-column title="更多" field="more" type="expand" width="80">
+        <vxe-column field="more" type="expand" title="更多" width="80">
           <template #content="{ row }">
             <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
               <ChartsWzryHeroLine :extraId="row.id" :aid="0" />
@@ -127,7 +143,7 @@
               class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81"
             >
               <span class="ranking-6ad9203f996965a0c641bbf73cc1143f">
-                {{ $appMsg.tips[1004] }} (%)
+                {{ $appMsg.tips[1004] }}(%)
               </span>
               <van-tag
                 plain
@@ -142,18 +158,18 @@
           </template>
 
           <vxe-column
-            title="热度"
             field="trend"
-            width="100"
+            title="热度"
             :title-prefix="{
               content:
                 $appMsg.tips[1016] +
                 '\n当前平均分数 ≈ ' +
                 ($appConfigInfo.appInfo.updateInfo.avgScore || 0),
             }"
+            width="100"
             sortable
           >
-            <template #default="{ row }">
+            <template #default="{ row, rowIndex }">
               <div
                 :style="{
                   position: 'relative',
@@ -182,6 +198,11 @@
                         rows: lineData.result.rows[row.id],
                       }"
                     />
+                    <div
+                      class="app-5f19eaf71f40d74d66be84db52b3ad87 app-0e1a8b3f7f6162bf4b88d3d001b88374"
+                    >
+                      {{ rowIndex + 1 }}
+                    </div>
                   </lazy-component>
                 </span>
                 <span v-else>-</span>
@@ -189,8 +210,28 @@
             </template>
           </vxe-column>
           <vxe-column
-            title="禁用"
-            field="allBanRate[0]"
+            field="allWinRate"
+            title="胜率"
+            :width="listWidth"
+            :sortable="tableData.result.whiteList"
+          >
+            <template #filter="{ $panel, column }">
+              ≥
+              <input
+                v-model="option.value"
+                v-for="(option, index) in column.filters"
+                :key="'hero-6b557157ba74177968c0e2cb78fa87b7-' + index"
+                type="type"
+                placeholder="0"
+                @input="$panel.changeOption($event, !!option.value, option)"
+                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              />
+              %
+            </template>
+          </vxe-column>
+          <vxe-column
+            :field="'allBanRate[' + banInfo.index + ']'"
+            :title="banInfo.title"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -212,17 +253,13 @@
 
             <template #default="{ row }">
               <span class="ranking-1af981c4a03f0457557be06e1096edac">
-                {{ row.allBanRate[0] }}
-              </span>
-              <br />
-              <span class="ranking-7c7f825106f6288d7e5bea8012e23041">
-                {{ row.allBanRate[1] }}
+                {{ row.allBanRate[banInfo.index] }}
               </span>
             </template>
           </vxe-column>
           <vxe-column
-            title="出场"
             field="allPickRate"
+            title="出场"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -264,7 +301,7 @@
                       :style="
                         row.change.updateType == 2
                           ? { color: 'red !important' }
-                          : { color: 'blue !important' }
+                          : { color: '#1680d1 !important' }
                       "
                       class="app-b0704b59dbf144bfeffb53bdb11d7128"
                     >
@@ -300,8 +337,8 @@
             </template>
           </vxe-column>
           <vxe-column
-            title="禁选"
             field="allBPRate"
+            title="禁选"
             :filters="[{ value: 2.5, checked: true }]"
             :filter-method="onTableColumnFilterMethod"
             width="100"
@@ -325,41 +362,23 @@
               <span v-else>{{ row.allBPRate }}</span>
             </template>
           </vxe-column>
-          <vxe-column
-            title="胜率"
-            field="allWinRate"
-            :sortable="tableData.result.whiteList"
-            :width="listWidth"
-          >
-            <template #filter="{ $panel, column }">
-              ≥
-              <input
-                v-model="option.value"
-                v-for="(option, index) in column.filters"
-                :key="'hero-6b557157ba74177968c0e2cb78fa87b7-' + index"
-                type="type"
-                placeholder="0"
-                @input="$panel.changeOption($event, !!option.value, option)"
-                class="app-fa42596ed8c1eff3ed8b93bba913bde3"
-              />
-              %
-            </template>
-          </vxe-column>
         </vxe-table-colgroup>
 
+        <!--
         <vxe-table-colgroup
+          title="国百"
           :title-prefix="{
             content: $appMsg.tips[1025],
           }"
-          title="国百"
         >
           <vxe-column
-            title="估算"
             field="avgQQFightPower"
+            title="估算"
             :width="listWidth"
             sortable
           />
         </vxe-table-colgroup>
+        -->
 
         <vxe-table-colgroup
           :title-prefix="{
@@ -368,20 +387,20 @@
           title="输出"
         >
           <vxe-column
-            title="对人"
             field="totalHeroHurtCnt"
+            title="对人"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="全部"
             field="totalHurtCnt"
+            title="全部"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="转化"
             field="hurtTransRate"
+            title="转化"
             :width="listWidth"
             sortable
           />
@@ -389,14 +408,14 @@
 
         <vxe-table-colgroup title="承伤">
           <vxe-column
-            title="每死"
             field="behurtPerDeath"
+            title="每死"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="全部"
             field="totalBehurtCnt"
+            title="全部"
             :width="listWidth"
             sortable
           />
@@ -409,14 +428,14 @@
           }"
         >
           <vxe-column
-            title="分均"
             field="totalPriceMin"
+            title="分均"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="全部"
             field="totalPrice"
+            title="全部"
             :width="listWidth"
             sortable
           />
@@ -424,14 +443,14 @@
 
         <vxe-table-colgroup title="团队">
           <vxe-column
-            title="参团"
             field="joinGamePercent"
+            title="参团"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="时长"
             field="usedtime"
+            title="时长"
             :width="listWidth"
             sortable
           />
@@ -439,20 +458,20 @@
 
         <vxe-table-colgroup title="KDA">
           <vxe-column
-            title="击杀"
             field="killCnt"
+            title="击杀"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="死亡"
             field="deadCnt"
+            title="死亡"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="助攻"
             field="assistCnt"
+            title="助攻"
             :width="listWidth"
             sortable
           />
@@ -460,20 +479,20 @@
 
         <vxe-table-colgroup title="牌子 (%)">
           <vxe-column
-            title="银牌"
             field="evaluateSilverRate"
+            title="银牌"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="金牌"
             field="evaluateGoldRate"
+            title="金牌"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="全部"
             field="allBrandRate"
+            title="全部"
             :width="listWidth"
             sortable
           />
@@ -481,24 +500,28 @@
 
         <vxe-table-colgroup title="MVP (%)">
           <vxe-column
-            title="败方"
             field="loseMvpRate"
+            title="败方"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="胜方"
             field="winMvpRate"
+            title="胜方"
             :width="listWidth"
             sortable
           />
           <vxe-column
-            title="全部"
             field="allMvpRate"
+            title="全部"
             :width="listWidth"
             sortable
           />
         </vxe-table-colgroup>
+
+        <!--
+        <vxe-column title="#" type="seq" width="50" />
+        -->
 
         <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
@@ -507,7 +530,7 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -595,7 +618,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' (' +
           tableDataRow.id +
@@ -669,6 +692,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(
             0,
             newValue.bid,
@@ -728,6 +752,10 @@ export default {
         heroActionSheet: false,
         heroSameHobby: false,
       },
+      banInfo: {
+        title: "禁用",
+        index: 1,
+      },
       cellInfo: {
         index: 0,
       },
@@ -781,7 +809,9 @@ export default {
       this.heroProficiency = this.$t("loading");
 
       this.$axios
-        .post(this.$appApi.app.getHeroProficiency + "&id=" + id)
+        .post(
+          this.$appApi.app.getHeroProficiency + "&id=" + encodeURIComponent(id)
+        )
         .then((res) => {
           let status = res.data.status;
 
@@ -935,42 +965,54 @@ export default {
       this.initTableWidth();
     },
     onTableColumnFilterMethod: function ({ option, row, column }) {
-      if (column.property == "allBanRate[0]") {
-        return row.allTogetherBanRate >= option.value;
+      if (column.property == "allScore") {
+        let cName = row.cName || "占位符|占位符";
+
+        return (
+          row.name == option.value ||
+          row.name.indexOf(option.value) > -1 ||
+          cName.indexOf(option.value) > -1
+        );
       }
 
-      if (column.property == "allBPRate") {
-        return row.allBPRate >= option.value;
+      if (column.property.indexOf("allBanRate") > -1) {
+        return row.allBanRate[this.banInfo.index] >= option.value;
       }
 
       if (column.property == "allPickRate") {
         return row.allPickRate >= option.value;
       }
+
+      if (column.property == "allBPRate") {
+        return row.allBPRate >= option.value;
+      }
     },
     onTableCellClassName: function ({ row, column }) {
-      let color = this.tableData.result.color;
+      let color = this.tableData.result.color,
+        allBanRateIndex = this.banInfo.index;
 
-      if (column.property == "allBanRate[0]") {
-        if (row.allBanRate[0] >= color.ban) {
+      if (column.property.indexOf("allBanRate") > -1) {
+        if (row.allBanRate[allBanRateIndex] >= color.ban) {
           return "app-bda9643ac6601722a28f238714274da4";
         }
       }
 
       if (column.property == "allPickRate") {
         if (row.allPickRate >= color.pick && row.allWinRate >= color.win) {
-          return "app-48d6215903dff56238e52e8891380c8f";
+          //return "app-48d6215903dff56238e52e8891380c8f";
         }
       }
 
       if (column.property == "allBPRate") {
         if (row.allBPRate >= color.bp) {
-          return "app-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
+          //return "app-ee3e4aec9bcaaaf72cd0c59e8a0f477d";
         }
       }
 
       if (column.property == "allWinRate") {
         if (
-          (row.allBanRate[0] >= color.ban || row.allPickRate >= color.pick) &&
+          (row.allBanRate[allBanRateIndex] >= color.ban ||
+            row.allPickRate >= color.pick) &&
           row.allWinRate >= color.win
         ) {
           return "app-9f27410725ab8cc8854a2769c7a516b8";
@@ -1000,6 +1042,14 @@ export default {
         this.showInfo.skillActionSheet = false;
         this.showInfo.heroActionSheet = false;
         this.showInfo.heroSameHobby = false;
+      } else if (column.property.indexOf("allBanRate") > -1) {
+        if (this.banInfo.index == 1) {
+          this.banInfo.title = "双禁";
+          this.banInfo.index = 0;
+        } else {
+          this.banInfo.title = "禁用";
+          this.banInfo.index = 1;
+        }
       } else if (column.property != "more") {
         this.cellInfo.index = 1;
 

@@ -18,7 +18,7 @@
 <script>
 import VeLine from "v-charts/lib/line.common";
 
-import 'zrender/lib/svg/svg';
+import "zrender/lib/svg/svg";
 
 export default {
   name: "chartsRankingLine",
@@ -59,11 +59,13 @@ export default {
       handler(newValue) {
         let nowColor = this.colorInfo[newValue.extraType];
 
-        this.lineData.extend.color[0] = nowColor;
-        this.lineData.extend.series.areaStyle.color.colorStops[0].color =
-          nowColor;
-        this.lineData.extend.series.areaStyle.color.colorStops[1].color =
-          nowColor;
+        if (nowColor) {
+          this.lineData.extend.color[0] = nowColor;
+          this.lineData.extend.series.areaStyle.color.colorStops[0].color =
+            nowColor;
+          this.lineData.extend.series.areaStyle.color.colorStops[1].color =
+            nowColor;
+        }
         this.lineData.result = newValue.charts;
 
         this.lineData.extend.animation = this.animation;
@@ -75,7 +77,7 @@ export default {
       lineData: {
         extend: {
           animation: true,
-          color: ["orange"],
+          color: [],
           series: {
             type: "line",
             smooth: true,
@@ -151,7 +153,7 @@ export default {
           rows: [],
         },
       },
-      colorInfo: ["orange", "#4694d6", "red"],
+      colorInfo: ["orange", "#1680d1", "red"],
     };
   },
   methods: {

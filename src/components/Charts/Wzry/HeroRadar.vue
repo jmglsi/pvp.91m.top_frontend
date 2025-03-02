@@ -93,7 +93,11 @@ export default {
     getHeroChartsLog: function (aid, heroId = 111, heroName = "") {
       this.$axios
         .post(
-          this.$appApi.app.getHeroChartsLog + "&aid=" + aid + "&id=" + heroId,
+          this.$appApi.app.getHeroChartsLog +
+            "&aid=" +
+            aid +
+            "&id=" +
+            encodeURIComponent(heroId),
           {
             extraData: heroName,
           }

@@ -228,6 +228,15 @@ export default new Router({
             keepAlive: true
           }
         }, {
+          path: 'c7f6f',
+          name: 'toolsShop',
+          component: () =>
+            import('./views/Tools/Other/Shop.vue'),
+          meta: {
+            title: '小商店',
+            keepAlive: true
+          }
+        }, {
           path: 'bbd08',
           name: 'toolsQianDao',
           component: () =>
@@ -386,7 +395,16 @@ export default new Router({
           component: () =>
             import('./views/Admin/Xw/Data-0c2c5.vue'),
           meta: {
-            title: '内页整理:项目管理',
+            title: '夕雯',
+            keepAlive: true
+          }
+        }, {
+          path: 'ke-data-2faa5',
+          name: 'keData-2faa5',
+          component: () =>
+            import('./views/Admin/Ke/Data-2faa5.vue'),
+          meta: {
+            title: '酷儿',
             keepAlive: true
           }
         }

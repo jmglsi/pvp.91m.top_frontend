@@ -1,34 +1,38 @@
 import Vue from 'vue';
 import { i18n } from './i18n';
+import 'vxe-table/lib/style.css';
 
 import {
   VXETable,
   Button,
   Colgroup,
   Column,
+  Edit,
   Filter,
   Header,
   Icon,
+  Input,
   Pager,
   Select,
-  Table,
   Toolbar,
   Tooltip,
+  Table,
 } from 'vxe-table';
-import 'vxe-table/lib/style.css';
 
 Vue
   .use(Button)
   .use(Colgroup)
   .use(Column)
+  .use(Edit)
   .use(Filter)
   .use(Header)
   .use(Icon)
+  .use(Input)
   .use(Pager)
   .use(Select)
-  .use(Table)
   .use(Toolbar)
   .use(Tooltip)
+  .use(Table)
 
 VXETable.setup({
   table: {
@@ -57,8 +61,8 @@ VXETable.setup({
       gt: -1
     },
     tooltipConfig: {
-      showAll: true
-    }
+      //showAll: true
+    },
   },
   i18n: (key, args) => i18n.t(key, args)
 });

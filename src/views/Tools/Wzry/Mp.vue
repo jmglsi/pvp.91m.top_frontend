@@ -5,6 +5,7 @@
         left-arrow
         :border="false"
         :fixed="true"
+        :placeholder="true"
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="$appBack()"

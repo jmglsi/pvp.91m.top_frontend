@@ -23,15 +23,12 @@ Vue.prototype.$appApi = appApi;
 import appMsg from './assets/js/code.config';
 Vue.prototype.$appMsg = appMsg;
 
-import { i18n } from './assets/import/i18n';
-
-import 'v-charts/lib/style.css';
-
-import 'xe-utils';
 import './assets/import/vxe-table';
 
 import './assets/import/antd';
 import './assets/import/vant';
+
+import { i18n } from './assets/import/i18n';
 
 router.afterEach(() => {
   Vue.prototype.$appInitMiniapp();
@@ -48,8 +45,8 @@ Vue.config.productionTip = false;
 //阻止启动时生成生产提示
 
 new Vue({
-  i18n,
   router,
+  i18n,
   store,
   render: (h) => h(App),
   /*

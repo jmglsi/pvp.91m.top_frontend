@@ -140,8 +140,8 @@
                               path: '/search',
                               query: {
                                 q: data.heroId,
-                                show: 'heroSkill',
                                 refresh: 1,
+                                show: 'heroSkill',
                               },
                             })
                           "
@@ -174,7 +174,7 @@
                             :style="
                               data.change.updateType == 2
                                 ? { color: 'red !important' }
-                                : { color: 'blue !important' }
+                                : { color: '#1680d1 !important' }
                             "
                             class="app-07cc694b9b3fc636710fa08b6922c42b home-2095d846baffaf78edd96501f098e66a"
                           >

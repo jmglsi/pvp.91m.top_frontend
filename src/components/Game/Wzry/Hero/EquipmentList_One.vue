@@ -32,7 +32,7 @@
         @cell-click="onTableCellClick"
         height="443"
       >
-        <vxe-table-column title="英雄" field="heroId" fixed="left" width="50">
+        <vxe-table-column field="heroId" fixed="left" title="英雄" width="50">
           <template #default="{ row }">
             <div
               :style="{
@@ -54,9 +54,9 @@
 
         <vxe-table-column
           :title-prefix="{ content: $appMsg.tips[1001] }"
-          title="装备"
           field="equipmentId"
           fixed="left"
+          title="装备"
           width="50"
         >
           <template #default="{ row }">
@@ -81,10 +81,10 @@
         <vxe-table-column title="#" type="seq" width="50" />
 
         <vxe-table-column
-          title="顺位"
           field="maxIndex"
-          :width="listWidth"
+          title="顺位"
           :title-prefix="{ content: $appMsg.tips[1012] }"
+          :width="listWidth"
           sortable
         />
 
@@ -93,8 +93,8 @@
           :title-prefix="{ content: $appMsg.tips[1002] }"
         >
           <vxe-table-column
-            title="出场"
             field="allPickRate"
+            title="出场"
             :filters="[{ value: 1, checked: true }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -127,7 +127,7 @@
                   :style="
                     row.change.updateType == 2
                       ? { color: 'red !important' }
-                      : { color: 'blue !important' }
+                      : { color: '#1680d1 !important' }
                   "
                   class="app-b0704b59dbf144bfeffb53bdb11d7128"
                 >
@@ -155,7 +155,7 @@
             </template>
           </vxe-table-column>
 
-          <vxe-table-column title="胜率" field="allWinRate" :width="listWidth">
+          <vxe-table-column field="allWinRate" title="胜率" :width="listWidth">
             <template #filter="{ $panel, column }">
               ≥
               <input
@@ -178,8 +178,8 @@
           :title="'格子_' + (index + 1).toString() + ' (%)'"
         >
           <vxe-table-column
-            title="占比"
             :field="'pickRate_' + index"
+            title="占比"
             :filters="[{ value: 0 }]"
             :filter-method="onTableColumnFilterMethod"
             :width="listWidth"
@@ -201,8 +201,8 @@
           </vxe-table-column>
 
           <vxe-table-column
-            title="胜率"
             :field="'winRate_' + index"
+            title="胜率"
             :width="listWidth"
           >
             <template #filter="{ $panel, column }">
@@ -225,10 +225,10 @@
 
     <van-action-sheet
       v-model="showInfo.actionSheet"
-      title=" "
       :style="{
         maxHeight: '450px',
       }"
+      title=" "
     >
       <template #default>
         <div class="app-044a82dc9b34eebf2c54fe2c3c904368">
@@ -377,7 +377,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            id
+            encodeURIComponent(id)
         )
         .then((res) => {
           let tipsText,

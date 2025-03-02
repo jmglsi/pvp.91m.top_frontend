@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import XEUtils from 'xe-utils';
+import 'v-charts/lib/style.css';
 
 import cookie from 'vue-cookie';
 Vue.prototype.$cookie = cookie;
@@ -13,7 +14,7 @@ Vue.prototype.$appInDouyin = /Bytedance/i.test(ua);
 Vue.prototype.$appInWechat = /MicroMessenger/i.test(ua);
 Vue.prototype.$appInWechatMiniapp = /miniProgram/i.test(ua);
 Vue.prototype.$appIsMobile = /(Android|iPhone|iPad|iPod|Mobile)/i.test(ua);
-Vue.prototype.$appIsMyHost = /(localhost:8080|jcc\.91m\.top|pvp\.91m\.top|pvp\.r18\.games|pvp\.qialol\.com)/i.test(url.host);
+Vue.prototype.$appIsMyHost = /(localhost:8080|pvp\.91m\.top|pvp\.r18\.games|pvp\.qialol\.com)/i.test(url.host);
 Vue.prototype.$appIsRobot = (url.search.indexOf("isRobot=1") > -1 ? true : false);
 Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
 Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
@@ -34,7 +35,6 @@ Vue.prototype.$appConfigInfo = {
     link: [],
     name: "苏苏的荣耀助手",
     script: [],
-    tempText: null,
     updateInfo: {
       version: 0,
       text: "loading...",
@@ -68,6 +68,12 @@ Vue.prototype.$appConfigInfo = {
   },
 }
 
+Vue.prototype.$appGameInfo = [
+  "wzry",
+  "jcc",
+  //"nsh"
+]
+
 Vue.prototype.$appLanguageInfo = [
   {
     title: '中文 (简体)',
@@ -87,11 +93,14 @@ Vue.prototype.$appLanguageInfo = [
   },
 ]
 
-Vue.prototype.$appGameInfo = [
-  "wzry",
-  "jcc",
-  //"nsh"
-]
+Vue.prototype.$appWatermarkInfo = {
+  content: "",
+  font: "12px Microsoft YaHei",
+  rotate: 25,
+  width: 135,
+  height: 100,
+  color: "rgb(240, 240, 240)",
+};
 
 Vue.prototype.$wzryColumnsInfo = {
   areaType: [
@@ -316,7 +325,7 @@ Vue.prototype.$appInitMiniapp = function () {
   Vue.prototype.$axios.post(Vue.prototype.$appApi.app.getJsapiTicket).then((res) => {
     let data = res.data.data;
 
-    Vue.prototype.$share = data.extra;
+    Vue.prototype.$share = data.extraData;
 
     if (Vue.prototype.$appInDouyin) {
       Vue.prototype.$douyin = window.tt;
@@ -343,10 +352,10 @@ Vue.prototype.$appInitMiniapp = function () {
              * 
              */
             Vue.prototype.$douyin.updateAppMessageShareData({
-              title: data.extra.title,
-              desc: data.extra.desc,
-              link: data.extra.link,
-              imgUrl: data.extra.imgUrl,
+              title: data.extraData.title,
+              desc: data.extraData.desc,
+              link: data.extraData.link,
+              imgUrl: data.extraData.imgUrl,
             });
 
             Vue.prototype.$douyin.miniProgram.postMessage({
@@ -354,7 +363,7 @@ Vue.prototype.$appInitMiniapp = function () {
                 type: "share",
                 extra: {
                   url: window.location.href.split("#")[0],
-                  share: data.extra
+                  share: data.extraData
                 }
               }
             });
@@ -391,10 +400,10 @@ Vue.prototype.$appInitMiniapp = function () {
                * 
                */
               Vue.prototype.$wechat.updateAppMessageShareData({
-                title: data.extra.title,
-                desc: data.extra.desc,
-                link: data.extra.link,
-                imgUrl: data.extra.imgUrl,
+                title: data.extraData.title,
+                desc: data.extraData.desc,
+                link: data.extraData.link,
+                imgUrl: data.extraData.imgUrl,
               });
 
               Vue.prototype.$wechat.miniProgram.postMessage({
@@ -402,7 +411,7 @@ Vue.prototype.$appInitMiniapp = function () {
                   type: "share",
                   extra: {
                     url: window.location.href.split("#")[0],
-                    share: data.extra
+                    share: data.extraData
                   }
                 }
               });

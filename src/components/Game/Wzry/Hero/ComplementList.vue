@@ -15,8 +15,8 @@
         :title-prefix="{ content: $appMsg.tips[1019] }"
       >
         <vxe-table-column
-          title="1"
           field="hero[0]"
+          title="1"
           :filters="[
             { value: 0, label: '对抗路' },
             { value: 1, label: '中路' },
@@ -47,8 +47,8 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="2"
           field="hero[1]"
+          title="2"
           :filters="[
             { value: 0, label: '对抗路' },
             { value: 1, label: '中路' },
@@ -82,8 +82,8 @@
       <vxe-table-column title="#" type="seq" width="50" />
 
       <vxe-table-column
-        title="场次"
         field="pickTimes"
+        title="场次"
         :filters="[{ value: 100, checked: true }]"
         :filter-method="onTableColumnFilterMethod"
         :width="listWidth"
@@ -103,7 +103,7 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column title="胜率 (%)" field="winRate" width="125">
+      <vxe-table-column field="winRate" title="胜率 (%)" width="125">
         <template #filter="{ $panel, column }">
           ≥
           <input
@@ -198,7 +198,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,

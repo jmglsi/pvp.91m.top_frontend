@@ -5,6 +5,7 @@
         left-arrow
         :border="false"
         :fixed="true"
+        :placeholder="true"
         :safe-area-inset-top="true"
         :left-text="$t('nav-bar.left-text')"
         @click-left="$appBack()"
@@ -371,8 +372,8 @@ export default {
           path: "/search",
           query: {
             q: this.heroInfo.name,
-            show: "heroSkill",
             refresh: 1,
+            show: "heroSkill",
           },
         });
       }
@@ -422,9 +423,9 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId +
+            encodeURIComponent(heroId) +
             "&areaType=" +
-            areaType
+            encodeURIComponent(areaType)
         )
         .then((res) => {
           let data = res.data.data,
@@ -493,7 +494,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -543,10 +544,6 @@ ul.hero-808c832aed5231b27514e2f46c89f06f {
 span.hero-b84d89f2a957899d88d18f67175fb663 {
   color: gray;
   font-size: 12px;
-}
-
-div.hero-45af63c525ab541863e3e50f2f52c934 {
-  margin-top: 50px;
 }
 
 div.hero-da4fb4d6fd537e447df2bda7175dfb30 {

@@ -20,8 +20,8 @@
               <van-uploader
                 :after-read="onAfterRead"
                 :before-read="onBeforeRead"
-                :max-size="10 * 1024 * 1024"
                 @oversize="onOversize"
+                max-size="52428800"
               >
                 <div class="hero-fightPower-4b2011a6e3693d22750506daa83636c2">
                   <van-button round size="small" type="info">
@@ -38,7 +38,7 @@
             <van-button
               round
               size="small"
-              color="linear-gradient(to right, #43CBFF, #6874E8)"
+              color="linear-gradient(to right, #43cbff, #6874e8)"
               @click="onAddGroupClick"
             >
               战力互助
@@ -47,7 +47,7 @@
             <van-button
               round
               size="small"
-              color="linear-gradient(to right, #6874E8, #9708CC)"
+              color="linear-gradient(to right, #6874e8, #9708cc)"
               @click="onExampleClick"
             >
               示例图片
@@ -135,8 +135,8 @@
               </vxe-table-column>
 
               <vxe-table-column
-                title="大区"
                 field="areaText"
+                title="大区"
                 :filters="[
                   { value: 1, label: '安卓QQ' },
                   { value: 2, label: '苹果QQ' },
@@ -149,22 +149,22 @@
               />
 
               <vxe-table-column
-                title="省份"
                 field="provinceText"
+                title="省份"
                 width="175"
                 sortable
               />
 
               <vxe-table-column
-                title="分数"
                 field="fightPowerValue"
+                title="分数"
                 :width="listWidth"
                 sortable
               />
 
               <vxe-table-column
-                title="更新时间"
                 field="updateTime"
+                title="更新时间"
                 width="200"
                 sortable
               />
@@ -235,8 +235,8 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    onAfterRead: function (file) {
-      let data = file.content;
+    onAfterRead: function (e) {
+      let data = e.content;
 
       this.$message.info(this.$appMsg.info[1002]);
 
@@ -316,7 +316,7 @@ export default {
         .post(
           this.$appApi.app.addHeroFightPowerByWebAccount +
             "&id=" +
-            this.extraId,
+            encodeURIComponent(this.extraId),
           this.$qs.stringify(postData)
         )
         .then((res) => {
@@ -345,7 +345,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,

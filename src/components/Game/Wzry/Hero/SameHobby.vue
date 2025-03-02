@@ -131,7 +131,11 @@ export default {
       }
 
       this.$axios
-        .post(this.$appApi.app.getHeroInfoByWebAccountList + "&id=" + heroId)
+        .post(
+          this.$appApi.app.getHeroInfoByWebAccountList +
+            "&id=" +
+            encodeURIComponent(heroId)
+        )
         .then((res) => {
           let data = res.data.data,
             status = res.data.status;

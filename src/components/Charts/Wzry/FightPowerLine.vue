@@ -28,7 +28,7 @@
       该灵感由
       <span
         :style="{
-          color: '#1989fa !important',
+          color: '#1680d1 !important',
         }"
         @click="
           $appPush({

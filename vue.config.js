@@ -1,12 +1,65 @@
-const Path = require('path')
-const Zlib = require('zlib')
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
-//const PrerenderSPAPlugin = require('prerender-spa-plugin')
-//const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
+const Path = require('path');
+const Zlib = require('zlib');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
+//const PrerenderSPAPlugin = require('prerender-spa-plugin');
+//const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 
 module.exports = {
   productionSourceMap: false,
   transpileDependencies: ['simple-mind-map'],
+  css: {
+    loaderOptions: {
+      less: {
+        modifyVars: {
+          hack: 'true; @import "' + Path.resolve(__dirname, './src/assets/less/config.less') + '";'
+        },
+        javascriptEnabled: true,
+      }
+    },
+    extract: false
+  },
+  pwa: {
+    name: '苏苏的荣耀助手 | 九一的多彩世界',
+    short_name: '苏苏助手',
+    themeColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black-translucent'
+  },
+  chainWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      if (process.env.npm_config_report) {
+        config
+          .plugin('webpack-bundle-analyzer')
+          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+      }
+
+      config
+        .plugin('compression-webpack-plugin')
+        .use(new CompressionWebpackPlugin({
+          filename: '[path].br[query]',
+          algorithm: 'brotliCompress',
+          test: /\.(js|css|html|svg)$/,
+          compressionOptions: {
+            params: {
+              [Zlib.constants.BROTLI_PARAM_QUALITY]: 11,
+            },
+          },
+          threshold: 5120,
+          minRatio: 0.8,
+          deleteOriginalAssets: false
+        }));
+
+      config.resolve.alias
+        .set('@ant-design/icons/lib/dist$', Path.resolve(__dirname, './src/assets/import/antd-icons.js'));
+
+
+      config.plugins
+        .delete('preload');
+
+      config.plugins
+        .delete('prefetch');
+    }
+  },
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       /*
@@ -105,52 +158,4 @@ module.exports = {
       }
     }
   },
-  chainWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      if (process.env.npm_config_report) {
-        config
-          .plugin('webpack-bundle-analyzer')
-          .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin).end()
-      }
-
-      config
-        .plugin('compression-webpack-plugin')
-        .use(new CompressionWebpackPlugin({
-          filename: '[path].br[query]',
-          algorithm: 'brotliCompress',
-          test: /\.(js|css|html|svg)$/,
-          compressionOptions: {
-            params: {
-              [Zlib.constants.BROTLI_PARAM_QUALITY]: 11,
-            },
-          },
-          threshold: 5120,
-          minRatio: 0.8,
-          deleteOriginalAssets: false
-        }))
-
-      config.plugins.delete('prefetch')
-
-      config.resolve.alias
-        .set('@ant-design/icons/lib/dist$', Path.resolve(__dirname, './src/assets/import/antd-icons.js'));
-    }
-  },
-  css: {
-    loaderOptions: {
-      less: {
-        javascriptEnabled: true,
-        modifyVars: {
-          hack: 'true; @import "' + Path.resolve(__dirname, './src/assets/less/config.less') + '";'
-        }
-      }
-    },
-    extract: false
-  },
-  pwa: {
-    name: '苏苏的荣耀助手 | 九一的多彩世界',
-    short_name: '苏苏助手',
-    themeColor: '#000000',
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black-translucent'
-  }
 }

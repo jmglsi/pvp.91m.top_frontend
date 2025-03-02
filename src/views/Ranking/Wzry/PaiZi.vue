@@ -12,9 +12,8 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
-          title="英雄"
           field="name"
-          fixed="left"
+          title="#"
           width="75"
           sortable
         >
@@ -40,28 +39,28 @@
           </template>
         </vxe-table-column>
 
-        <vxe-table-column title="#" type="seq" width="75" />
-
         <vxe-table-column
-          title="战力"
           field="fightPowerValue"
+          title="战力"
           width="75"
           sortable
         />
 
         <vxe-table-column
-          title="更新时间"
           field="updateTime"
+          title="更新时间"
           :width="listWidth"
           sortable
         />
+
+        <vxe-table-column title="#" type="seq" width="75" />
       </vxe-table>
     </div>
 
     <div class="ranking-84226baebc9c90dd5bba99237b39725a">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="tableDataRow.name + ' ' + $t('how-to-operate')"
+        :description="tableDataRow.name + ' ' + $t('how-to-operate')"
       >
         <template #default>
           <GameWzryHeroFightPower
@@ -139,6 +138,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
         }
       },

@@ -10,7 +10,7 @@
     <van-action-sheet
       v-model="showInfo.actionSheet"
       :closeable="false"
-      :title="'皮肤 - ' + $t('how-to-choose')"
+      :description="'皮肤 - ' + $t('how-to-choose')"
     >
       <div class="choose-be7fdb49198e3c5175fd7a20e1c2ae93">
         <van-grid :border="false" :column-num="3">
@@ -138,7 +138,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,

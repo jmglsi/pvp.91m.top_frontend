@@ -56,11 +56,11 @@
         >
           <vxe-column type="seq" width="60" />
           <vxe-column
+            field="frameId"
+            title="类型"
             :filters="frameData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="175"
-            field="frameId"
-            title="类型"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -68,12 +68,17 @@
             </template>
           </vxe-column>
           <vxe-column
-            width="250"
             field="robot"
             title="机器人"
+            width="250"
             show-overflow="ellipsis"
           />
-          <vxe-column field="updated_at" title="更新时间" sortable />
+          <vxe-column
+            field="updated_at"
+            title="更新时间"
+            show-overflow="ellipsis"
+            sortable
+          />
         </vxe-table>
       </div>
 
@@ -95,11 +100,11 @@
             </template>
           </vxe-table-column>
           <vxe-column
+            field="frameId"
+            title="类型"
             :filters="frameData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="175"
-            field="frameId"
-            title="类型"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -107,11 +112,11 @@
             </template>
           </vxe-column>
           <vxe-column
+            field="robot"
+            title="机器人"
             :filters="robotData.result.rows"
             :filter-method="onTableColumnFilterMethod"
             width="250"
-            field="robot"
-            title="机器人"
             show-overflow="ellipsis"
           >
             <template #default="{ row }">
@@ -159,7 +164,12 @@
               </span>
             </template>
           </vxe-column>
-          <vxe-column field="updated_at" title="更新时间" sortable />
+          <vxe-column
+            field="updated_at"
+            title="更新时间"
+            show-overflow="ellipsis"
+            sortable
+          />
         </vxe-table>
 
         <div class="app-face1cbe136c70e1fc08cff038596944">
@@ -294,11 +304,11 @@ export default {
         });
       });
 
-      this.robotInfo.msg = this.$appGetLocalStorage("admin-robot-sendMsg");
-      this.robotInfo.frameHost = this.$appGetLocalStorage(
-        "admin-robot-frameHost"
-      );
-      this.robotInfo.key = this.$appGetLocalStorage("admin-robot-key");
+      this.robotInfo.msg =
+        this.$appGetLocalStorage("admin-robot-sendMsg") || "";
+      this.robotInfo.frameHost =
+        this.$appGetLocalStorage("admin-robot-frameHost") || "";
+      this.robotInfo.key = this.$appGetLocalStorage("admin-robot-key") || "";
     },
     getAdminData: function (aid = 1, bid = 0, page = 0) {
       this.$axios

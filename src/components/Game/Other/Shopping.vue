@@ -169,7 +169,7 @@ export default {
           let nowInterval = setInterval(() => {
             this.interval--;
 
-            if (this.interval == 0) {
+            if (this.interval <= 0) {
               this.isTimeout = true;
               this.intervalTitle = "保存信息";
 
@@ -221,8 +221,10 @@ export default {
         this.getShoppingInfo();
       }, 1000 * 2.5);
     },
-    onAfterRead: function (file) {
-      if (file.content) {
+    onAfterRead: function (e) {
+      let data = e.content;
+
+      if (data) {
         this.shoppingInfo.isUpload = 1;
 
         this.$message.success(this.$appMsg.success[1000]);

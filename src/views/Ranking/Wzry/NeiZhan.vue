@@ -11,9 +11,8 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
-          title="玩家"
           field="userId"
-          fixed="left"
+          title="玩家"
           width="75"
           :title-prefix="{ content: $appMsg.tips[1006] }"
         >
@@ -45,7 +44,7 @@
                 class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
               />
               <div
-                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-0e1a8b3f7f6162bf4b88d3d001b88374"
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 app-0e1a8b3f7f6162bf4b88d3d001b88374"
               >
                 {{ rowIndex + 1 }}
               </div>
@@ -54,8 +53,8 @@
         </vxe-table-column>
 
         <vxe-table-column
-          title="内战分"
           field="rankScore_bo_1"
+          title="内战分"
           :width="listWidth"
           sortable
         >
@@ -77,7 +76,7 @@
           </template>
         </vxe-table-column>
 
-        <vxe-column title="状态" field="status" :width="listWidth" sortable>
+        <vxe-column field="status" title="状态" :width="listWidth" sortable>
           <template #default="{ row }">
             <div
               :style="{
@@ -88,7 +87,7 @@
               <div
                 v-else-if="row.status == 1"
                 :style="{
-                  color: 'blue !important',
+                  color: '#1680d1 !important',
                 }"
               >
                 队列中
@@ -110,9 +109,9 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.playerActionSheet"
-        :title="tableDataRow.gamePlayerName + ' ' + $t('how-to-operate')"
         :actions="actionSheetActions"
         :close-on-click-action="true"
+        :description="tableDataRow.gamePlayerName + ' ' + $t('how-to-operate')"
         @select="onActionSheetSelect"
       />
     </div>
@@ -120,7 +119,7 @@
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
       <van-action-sheet
         v-model="showInfo.civilwarActionSheet"
-        :title="matchInfo.matchStatus + ' - ' + matchInfo.matchWinCamp"
+        :description="matchInfo.matchStatus + ' - ' + matchInfo.matchWinCamp"
       >
         <template #default>
           <div class="ranking-8747b0956746ca03e56e59d7312efcb1">
@@ -145,7 +144,7 @@
                   <div
                     :style="
                       index < 5
-                        ? { color: 'blue !important' }
+                        ? { color: '#1680d1 !important' }
                         : { color: 'red !important' }
                     "
                     class="ranking-561f33b3e8f36a8c9cdf1a5a3b099497"
@@ -200,6 +199,7 @@ export default {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
         if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+          //if (newValue.refresh == 1) {
           this.getRanking(12, newValue.bid, newValue.cid, 0);
         }
       },

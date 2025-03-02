@@ -5,7 +5,10 @@
       zoom: zoom,
     }"
   >
-    <div v-watermark="watermark" class="app-63c4cfbde5ad50f3f537c2540374995e">
+    <div
+      v-watermark="$appWatermarkInfo"
+      class="app-63c4cfbde5ad50f3f537c2540374995e"
+    >
       <div v-if="$appIsApple && $appConfigInfo.appInfo.pwa == 1">
         <div
           v-if="showInfo.statusBar"
@@ -189,14 +192,6 @@ export default {
   },
   data() {
     return {
-      watermark: {
-        content: "",
-        font: "12px Microsoft YaHei",
-        rotate: 25,
-        width: 135,
-        height: 100,
-        color: "rgb(240, 240, 240)",
-      },
       bottomHeight: 175,
       zoom: 1,
       noUpdateTips: true,
@@ -251,7 +246,7 @@ export default {
         isRobot = this.$appIsRobot,
         openId = this.$cookie.get("openId") || "苏苏的荣耀助手";
 
-      this.watermark = {
+      this.$appWatermarkInfo = {
         content: "@" + openId.slice(0, 12),
         font: "12px Microsoft YaHei",
         rotate: 25,
@@ -322,9 +317,9 @@ export default {
           tipsInfo = data.tipsInfo,
           q = this.$appQuery,
           oauthType = q.oauthType || "",
-          tempAccessToken = q.tempAccessToken || "",
           tempOpenId = q.tempOpenId || "",
-          tempText = q.tempText || "",
+          tempAccessToken = q.tempAccessToken || "",
+          tempCode = q.tempCode || "",
           appConfigInfo = this.$appConfigInfo;
 
         this.zoom = q.zoom || 1;
@@ -391,7 +386,6 @@ export default {
           link: appInfo.link || [],
           name: appInfo.name || "苏苏的荣耀助手",
           script: appInfo.script || [],
-          tempText: appInfo.tempText || "",
           updateInfo: {
             version: appInfo.updateInfo.version || 0,
             text: appInfo.updateInfo.text || this.$t("loading"),
@@ -444,8 +438,8 @@ export default {
             });
           }
 
-          if (tempText) {
-            this.$message.warning(this.$appMsg.warning[tempText]);
+          if (tempCode) {
+            this.$message.warning(this.$appMsg.warning[tempCode]);
 
             this.$appDelectAllLocalStorage();
           }
@@ -482,8 +476,8 @@ export default {
             }, 1000 * 2.5);
           }
 
-          if (tempText) {
-            this.$message.warning(this.$appMsg.warning[tempText]);
+          if (tempCode) {
+            this.$message.warning(this.$appMsg.warning[tempCode]);
           }
         }
 
@@ -515,7 +509,7 @@ export default {
       gameType = this.$appGameInfo[gameIndex];
 
       if (this.$cookie.get("game-index") != gameIndex) {
-        this.$message.info(this.$appMsg.info[1034]);
+        //this.$message.info(this.$appMsg.info[1034]);
       }
 
       this.$cookie.set("game-index", gameIndex, {
@@ -603,7 +597,7 @@ export default {
 }
 
 .app-48d6215903dff56238e52e8891380c8f {
-  color: blue !important;
+  color: #1680d1 !important;
 }
 
 .app-fdc229c08af23dac1a0e8caac88a239d {
@@ -979,15 +973,23 @@ div.app-76da017caccd1fb264af2218f6064b0d {
   width: 100%;
 }
 
+div.app-0e1a8b3f7f6162bf4b88d3d001b88374 {
+  font-size: @app-font-size;
+  left: -28px;
+  margin-top: -5px;
+  position: absolute;
+  width: 100%;
+}
+
 div.app-fe64546261ce7a19b6784737edd0fdf1 {
-  height: 423px;
+  height: 225px;
 
   label.ant-checkbox-wrapper {
     width: 250px;
   }
 
   div.app-41b238cc893836e28b50cd5a59843803 {
-    margin-top: 175px;
+    margin-top: 50px;
     position: absolute;
     width: 100%;
   }

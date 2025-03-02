@@ -558,7 +558,7 @@
               bpPerspective == 1 ? teamInfo.team_1.logo : teamInfo.team_2.logo
             "
             size="small"
-            color="linear-gradient(to right, #43CBFF, #6874E8)"
+            color="linear-gradient(to right, #43cbff, #6874e8)"
             class="game-8e4f204791d1b591b6a6f93b572f9b2d"
             @click="onGamePerspectiveClick"
           >
@@ -639,7 +639,7 @@
                 <span
                   class="game-59b9fd83bc5ce802ee9ace7db0e22522"
                   :style="{
-                    color: '#1989fa !important'
+                    color: '#1680d1 !important'
                   }"
                 >
                   推荐
@@ -647,7 +647,7 @@
                 <span>
                   <van-switch
                     v-model="showInfo.recommend"
-                    active-color="#1989fa"
+                    active-color="#1680d1"
                     size="13px"
                   />
                 </span>
@@ -1134,6 +1134,7 @@ export default {
       for (let i = 0; i < bpIndex + 1; i++) {
         let orderList = gameInfo.result.rows[i];
 
+        /*
         this.gameInfo.result.rows[i].blue.ban = [
           orderList.BPOrder[0],
           orderList.BPOrder[2],
@@ -1141,7 +1142,16 @@ export default {
           orderList.BPOrder[13],
           orderList.BPOrder[15],
         ];
+        */
+        this.$set(this.gameInfo.result.rows[i].blue, "ban", [
+          orderList.BPOrder[0],
+          orderList.BPOrder[2],
+          orderList.BPOrder[11],
+          orderList.BPOrder[13],
+          orderList.BPOrder[15],
+        ]);
 
+        /*
         this.gameInfo.result.rows[i].blue.pick = [
           orderList.BPOrder[4],
           orderList.BPOrder[7],
@@ -1149,7 +1159,16 @@ export default {
           orderList.BPOrder[17],
           orderList.BPOrder[18],
         ];
+        */
+        this.$set(this.gameInfo.result.rows[i].blue, "pick", [
+          orderList.BPOrder[4],
+          orderList.BPOrder[7],
+          orderList.BPOrder[8],
+          orderList.BPOrder[17],
+          orderList.BPOrder[18],
+        ]);
 
+        /*
         this.gameInfo.result.rows[i].red.ban = [
           orderList.BPOrder[1],
           orderList.BPOrder[3],
@@ -1157,7 +1176,16 @@ export default {
           orderList.BPOrder[12],
           orderList.BPOrder[14],
         ];
+        */
+        this.$set(this.gameInfo.result.rows[i].red, "ban", [
+          orderList.BPOrder[1],
+          orderList.BPOrder[3],
+          orderList.BPOrder[10],
+          orderList.BPOrder[12],
+          orderList.BPOrder[14],
+        ]);
 
+        /*
         this.gameInfo.result.rows[i].red.pick = [
           orderList.BPOrder[5],
           orderList.BPOrder[6],
@@ -1165,6 +1193,14 @@ export default {
           orderList.BPOrder[16],
           orderList.BPOrder[19],
         ];
+        */
+        this.$set(this.gameInfo.result.rows[i].red, "pick", [
+          orderList.BPOrder[5],
+          orderList.BPOrder[6],
+          orderList.BPOrder[9],
+          orderList.BPOrder[16],
+          orderList.BPOrder[19],
+        ]);
 
         used.push.apply(
           used,
@@ -1513,7 +1549,8 @@ export default {
         }
         //对照 bpIndex 视角表格,如果是 1 则初始化
 
-        this.gameInfo.result.rows[tabsModel].stepsNow = nowIndex;
+        //this.gameInfo.result.rows[tabsModel].stepsNow = nowIndex;
+        this.$set(this.gameInfo.result.rows[tabsModel], "stepsNow", nowIndex);
       }
     },
     onGamePickHeroClick: function (e, nowIndex) {
@@ -1545,7 +1582,12 @@ export default {
         }
         //对照 bpIndex 视角表格,如果是 1 则初始化
 
-        this.gameInfo.result.rows[tabsModel].stepsNow = oldIndex + 1;
+        //this.gameInfo.result.rows[tabsModel].stepsNow = oldIndex + 1;
+        this.$set(
+          this.gameInfo.result.rows[tabsModel],
+          "stepsNow",
+          oldIndex + 1
+        );
 
         this.initBPOrder(this.bpPerspective, tabsModel);
       } else if (bpMode == "sort") {
@@ -1643,12 +1685,21 @@ export default {
     onSwapPositionClick: function () {
       let tabsModel = this.tabsInfo.model,
         teamInfo = this.gameInfo.result.rows[tabsModel].team,
-        tempTeamInfo;
+        tempTeamInfo = teamInfo.team_1;
 
-      tempTeamInfo = teamInfo.team_1;
+      //this.gameInfo.result.rows[tabsModel].team.team_1 = teamInfo.team_2;
+      //this.gameInfo.result.rows[tabsModel].team.team_2 = tempTeamInfo;
 
-      this.gameInfo.result.rows[tabsModel].team.team_1 = teamInfo.team_2;
-      this.gameInfo.result.rows[tabsModel].team.team_2 = tempTeamInfo;
+      this.$set(
+        this.gameInfo.result.rows[tabsModel].team,
+        "team_1",
+        teamInfo.team_2
+      );
+      this.$set(
+        this.gameInfo.result.rows[tabsModel].team,
+        "team_2",
+        tempTeamInfo
+      );
 
       this.onGamePerspectiveClick();
 
@@ -1663,7 +1714,7 @@ export default {
         this.$appSetLocalStorage("gameBP-show-index", 0);
       }
 
-      showIndex = this.$appGetLocalStorage("gameBP-show-index");
+      showIndex = this.$appGetLocalStorage("gameBP-show-index") || 0;
 
       this.showInfo.index = showIndex;
     },
@@ -1727,7 +1778,8 @@ export default {
           })
           .then(() => {
             //on confirm
-            this.gameInfo.result.rows[tabsModel] = newGameInfo;
+            //this.gameInfo.result.rows[tabsModel] = newGameInfo;
+            this.$set(this.gameInfo.result.rows, tabsModel, newGameInfo);
 
             this.$message.success(this.$appMsg.success[1000]);
           })
@@ -1782,6 +1834,7 @@ export default {
           //on confirm
           nowWinCamp = winCamp;
 
+          /*
           this.gameInfo.result.rows[tabsModel].win = {
             camp: nowWinCamp,
             color: nowWinColor,
@@ -1789,6 +1842,14 @@ export default {
             logo: nowWinTeam.logo,
             name: nowWinTeam.name,
           };
+          */
+          this.$set(this.gameInfo.result.rows[tabsModel], "win", {
+            camp: nowWinCamp,
+            color: nowWinColor,
+            id: nowWinTeam.id,
+            logo: nowWinTeam.logo,
+            name: nowWinTeam.name,
+          });
 
           this.$message.success(this.$appMsg.success[1000]);
         })

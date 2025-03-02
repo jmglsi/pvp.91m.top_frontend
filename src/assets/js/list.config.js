@@ -1123,7 +1123,7 @@ equipment.map((x) => {
   let desArr_1 = [...new Set(des1.match(eval("/" + tagArr_1 + "/g")))] || [];
 
   desArr_1.map((y) => {
-    let nowColor = colorArr_1[y] || "#1989fa";
+    let nowColor = colorArr_1[y] || "#1680d1";
 
     x.tags.push({ color: nowColor, name: y, hidden: false });
   })
@@ -1133,7 +1133,7 @@ equipment.map((x) => {
     let desArr_2 = [...new Set(des2.match(eval("/" + tagArr_2 + "/g")))] || [];
 
     desArr_2.map((z) => {
-      let nowColor = colorArr_2[z] || "#1989fa";
+      let nowColor = colorArr_2[z] || "#1680d1";
 
       x.tags.push({ color: nowColor, name: z, hidden: true });
       x.des2 = x.des2.replace(eval("/" + z + "/g"), '<span style="color: ' + nowColor + '">' + z + '</span>');

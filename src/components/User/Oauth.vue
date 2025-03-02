@@ -3,8 +3,8 @@
     <div class="oauth-ceb83cb85dff6aa94a65ed6cac1f563f">
       <van-divider
         :style="{
-          color: '#1989fa !important',
-          borderColor: '#1989fa !important',
+          color: '#1680d1 !important',
+          borderColor: '#1680d1 !important',
           padding: '0 16px',
         }"
       >

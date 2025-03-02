@@ -9,7 +9,7 @@
       <span v-show="getRssList(row)"></span>
       <van-button
         v-for="(data, index) in tableData.result.rows"
-        :key="'admin-2e18d726e34c59f679fbf74316c67b68' + index"
+        :key="'admin-2e18d726e34c59f679fbf74316c67b68-' + index"
         :type="data.switch == 1 ? 'danger' : 'info'"
         size="mini"
         round

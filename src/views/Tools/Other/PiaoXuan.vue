@@ -69,7 +69,9 @@
               <br />
               <span
                 :style="
-                  topInfo[1].needTime > 0 ? { color: 'red' } : { color: 'blue' }
+                  topInfo[1].needTime > 0
+                    ? { color: 'red' }
+                    : { color: '#1680d1' }
                 "
               >
                 还差:{{ topInfo[1].needVote }} 万
@@ -165,7 +167,9 @@
               <br />
               <span
                 :style="
-                  topInfo[2].needTime > 0 ? { color: 'red' } : { color: 'blue' }
+                  topInfo[2].needTime > 0
+                    ? { color: 'red' }
+                    : { color: '#1680d1' }
                 "
               >
                 还差:{{ topInfo[2].needVote }} 万
@@ -186,7 +190,7 @@
           :loading="tableData.loading"
           :height="clientHeight"
         >
-          <vxe-table-column title="#" field="skinName" fixed="left" width="75">
+          <vxe-table-column field="skinName" title="#" width="75">
             <template #default="{ row, rowIndex }">
               <van-tag
                 :color="row.tag.color"
@@ -218,15 +222,15 @@
           </vxe-table-column>
 
           <vxe-table-column
-            title="分均 (≈)"
             field="addNum"
+            title="分均 (≈)"
             width="100"
             sortable
           />
 
           <vxe-table-column
-            title="当前 (万)"
             field="allVoteNum"
+            title="当前 (万)"
             :width="listWidth"
             :title-prefix="{ content: $appMsg.tips[1020] }"
             sortable
@@ -241,7 +245,7 @@
                 <span
                   v-if="row.needVote > 0"
                   :style="
-                    row.needTime > 0 ? { color: 'red' } : { color: 'blue' }
+                    row.needTime > 0 ? { color: 'red' } : { color: '#1680d1' }
                   "
                   class="tools-ad602d217564b616b293eac07fc53138"
                 >
@@ -252,8 +256,8 @@
           </vxe-table-column>
 
           <vxe-table-column
-            title="还需 (时)"
             field="needTime"
+            title="还需 (时)"
             :width="listWidth"
             :title-prefix="{ content: $appMsg.tips[1021] }"
             sortable
@@ -393,7 +397,7 @@ span.tools-ad602d217564b616b293eac07fc53138 {
 }
 
 span.tools-4fb4d4758e19b050e0de1ef488ae54a3 {
-  color: #1989fa;
+  color: #1680d1;
 }
 
 div.tools-58206caebd18d792f59aa1ec064f65d1 {

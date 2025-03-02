@@ -745,7 +745,7 @@
       英雄梯度由
       <span
         :style="{
-          color: '#1989fa !important',
+          color: '#1680d1 !important',
         }"
         @click="
           $appPush({
@@ -759,7 +759,7 @@
       和
       <span
         :style="{
-          color: '#1989fa !important',
+          color: '#1680d1 !important',
         }"
         @click="
           $appPush({
@@ -799,7 +799,7 @@
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' 的备战 (' +
           $appConfigInfo.appInfo.updateInfo.weekly +
@@ -877,7 +877,7 @@
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
-        :title="
+        :description="
           tableDataRow.name +
           ' (' +
           tableDataRow.id +

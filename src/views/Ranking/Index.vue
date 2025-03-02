@@ -275,7 +275,7 @@
     <div class="ranking-851095463bdd8ecc4ef18c2b243949ce">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="$t('how-to-operate')"
+        :description="$t('how-to-operate')"
       >
         <template #default>
           <div class="ranking-22ae5d40867aec91fe193ba201bd3cec">
@@ -795,7 +795,7 @@ span.ranking-7c7f825106f6288d7e5bea8012e23041 {
 span.ranking-8302b5f225fa915b2cf1a42525d4e0d3 {
   position: absolute;
   font-size: 12px;
-  left: 0;
+  left: 5px;
   top: -15px;
 }
 
@@ -826,7 +826,7 @@ td.app-bda9643ac6601722a28f238714274da4 div.vxe-cell,
 td.app-ee3e4aec9bcaaaf72cd0c59e8a0f477d div.vxe-cell,
 td.app-48d6215903dff56238e52e8891380c8f div.vxe-cell,
 td.app-9f27410725ab8cc8854a2769c7a516b8 div.vxe-cell {
-  font-size: 18px;
+  //font-size: 18px;
 }
 
 div.ranking-index {
@@ -864,14 +864,6 @@ div.ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81 {
 div.ranking-51c877f489423eb1c3901dd0e12c03d4 {
   bottom: -19px;
   font-size: @app-font-size;
-  position: absolute;
-  width: 100%;
-}
-
-div.ranking-0e1a8b3f7f6162bf4b88d3d001b88374 {
-  font-size: @app-font-size;
-  left: -28px;
-  margin-top: -10px;
   position: absolute;
   width: 100%;
 }
@@ -941,8 +933,8 @@ div.ranking-ebf09abeb7c3db44741d328324915725 {
 }
 
 div.ranking-e20c0bfa2eeda7a13463d390a5bbfc4f {
-  left: -3px;
-  margin-top: 9px;
+  left: 75px;
+  margin-top: -6px;
   position: absolute;
   z-index: 10 !important;
 

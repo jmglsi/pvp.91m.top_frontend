@@ -1,6 +1,258 @@
 <template>
   <div class="hero-line">
-    <div v-if="extraId > 0" class="hero-965f1a65ae362b02d244345afcbf542e">
+    <div v-if="extraId == 0" class="hero-965f1a65ae362b02d244345afcbf542e">
+      <van-nav-bar
+        left-arrow
+        :border="false"
+        :fixed="true"
+        :placeholder="true"
+        :safe-area-inset-top="true"
+        :left-text="$t('nav-bar.left-text')"
+        title="日报"
+        @click-left="$appBack()"
+        z-index="2000"
+        class="hero-0229cfdc78c2b9da8e238c9c89967c70"
+      />
+
+      <div
+        :style="
+          $appIsApple && $appConfigInfo.appInfo.pwa == 1
+            ? { marginTop: '-50px' }
+            : {}
+        "
+        class="hero-c79bf9a3203b55c0d029240ba7e395f4"
+      >
+        <van-cell-group :border="false">
+          <template #title>
+            <span class="hero-997cffd1b4c15bd001f2548df5c541a0">最新公告</span>
+            <span
+              @click="
+                $appOpenUrl(
+                  $t('open-url.title'),
+                  null,
+                  { path: '/search', query: { q: '公告', refresh: 1 } },
+                  1
+                )
+              "
+              class="hero-f2c563299eda7a8301fd79097a3d77a8 hero-7b7be5bb65f2587452c0483cd3135b33"
+            >
+              更多公告 ➡️
+            </span>
+          </template>
+
+          <div class="hero-f6c155a5c2cef52607235042a3c7495a">
+            <ul>
+              <li
+                v-for="(data, index) in updateData.result.rows.slice(0, 4)"
+                :key="'hero-575b1378d20d0a1168556d58376e9752-' + index"
+              >
+                <span
+                  v-if="data.articleId"
+                  @click="
+                    $appOpenUrl(
+                      $t('open-url.title'),
+                      null,
+                      { path: data.url },
+                      0
+                    )
+                  "
+                  class="hero-2c8c32a3612ad83843c5de17963fb3c5"
+                >
+                  {{ data.title }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </van-cell-group>
+
+        <van-cell-group :border="false">
+          <template #title>
+            <span class="hero-997cffd1b4c15bd001f2548df5c541a0">今日表现</span>
+            <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
+            <span class="hero-4b5af54a365b5077f89b573ff376ef82">
+              <van-popover
+                v-model="showInfo.areaPopoverMeau"
+                :actions="wzryAreaTypeInfo"
+                @select="onAreaPopoverMeauSelect"
+                trigger="click"
+                placement="bottom"
+              >
+                <template #reference>
+                  <span class="hero-4af0496fe8b12ee0444d5b96af96f88f">
+                    {{ areaInfo.text }} 🔄
+                  </span>
+                </template>
+              </van-popover>
+            </span>
+            <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
+            <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
+              <span class="hero-412d90612ddb71698502ce6f29370422">
+                11:30、23:30 更新
+              </span>
+              <span class="hero-f04ba7249dc09ecf99855b888f3ec78f">，</span>
+              <span class="hero-5e442f77a551ef0cc4247e56def59551">
+                版本迭代可能会提前
+              </span>
+            </span>
+          </template>
+
+          <div class="hero-9d64fb4582069dc644b61fd7dc2d5165">
+            <van-grid :border="false" :column-num="3">
+              <van-grid-item>
+                <div class="hero-f48628f46cc0d14236d6077e1f61345e">
+                  涨得最多
+                </div>
+                <div
+                  v-if="lineData.result.rows.length > 0"
+                  class="hero-8f422c42efbb8530bd3edf9691d66a8b"
+                >
+                  {{
+                    lineData.result.rows[lineData.result.rows.length - 1][
+                      "英雄"
+                    ]
+                  }}
+                </div>
+                <div v-else class="hero-8f422c42efbb8530bd3edf9691d66a8b">
+                  -
+                </div>
+              </van-grid-item>
+              <van-grid-item>
+                <div class="hero-f48628f46cc0d14236d6077e1f61345e">
+                  跌的最多
+                </div>
+                <div
+                  v-if="lineData.result.rows.length > 0"
+                  class="hero-8f422c42efbb8530bd3edf9691d66a8b"
+                >
+                  {{ lineData.result.rows[0]["英雄"] }}
+                </div>
+                <div v-else class="hero-8f422c42efbb8530bd3edf9691d66a8b">
+                  -
+                </div>
+              </van-grid-item>
+              <van-grid-item>
+                <div class="hero-f48628f46cc0d14236d6077e1f61345e">
+                  上分推荐
+                </div>
+                <div class="hero-8f422c42efbb8530bd3edf9691d66a8b">待定</div>
+              </van-grid-item>
+            </van-grid>
+          </div>
+        </van-cell-group>
+
+        <van-cell-group :border="false">
+          <template #title>
+            <span class="hero-997cffd1b4c15bd001f2548df5c541a0">主力玩家</span>
+            <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
+            <span class="hero-4b5af54a365b5077f89b573ff376ef82">
+              <van-popover
+                v-model="showInfo.positionPopoverMeau"
+                :actions="wzryPositionTypeInfo"
+                @select="onPositionPopoverMeauSelect"
+                trigger="click"
+                placement="bottom"
+              >
+                <template #reference>
+                  <span class="hero-4af0496fe8b12ee0444d5b96af96f88f">
+                    {{ positionInfo.text }} 🔄
+                  </span>
+                </template>
+              </van-popover>
+            </span>
+            <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
+            <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
+              展示出场流入、流出 (%)
+            </span>
+            <span
+              @click="
+                $appOpenUrl(
+                  $t('open-url.title'),
+                  null,
+                  { path: '/ranking', query: { eid: 'b', refresh: 1 } },
+                  1
+                )
+              "
+              class="hero-7b7be5bb65f2587452c0483cd3135b33"
+            >
+              查看排行 ➡️
+            </span>
+          </template>
+
+          <div class="hero-75b7804e3a61dc0afa66de488a958d0e">
+            <ve-bar
+              :init-options="{ renderer: 'svg' }"
+              :after-config="afterConfig"
+              :data="lineData.result"
+              :extend="lineData.extend"
+              :loading="lineData.loading"
+              :mark-line="lineData.markLine"
+              :mark-point="lineData.markPoint"
+              :settings="lineData.settings"
+              height="310px"
+              width="99.2%"
+              class="hero-be4fa98d69734bbd05d093fc0010f826"
+            />
+          </div>
+        </van-cell-group>
+
+        <van-cell-group :border="false">
+          <template #title>
+            <span class="hero-997cffd1b4c15bd001f2548df5c541a0">自选英雄</span>
+            <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
+            <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
+              <span class="hero-3c5ce68e1f3bf8481a8a6bd4dbbc2667">
+                需要在趋势界面关注，关注时间降序
+              </span>
+              <span class="hero-292937f1e5601746d29e89815e616d8e">，</span>
+              <span class="hero-a0e1d7ed00ffc971001f952f32c21e79">
+                展示的是近期热度
+              </span>
+            </span>
+          </template>
+
+          <div class="hero-f6c155a5c2cef52607235042a3c7495a">
+            <div v-if="tableData.result.rows.length == 0">
+              <span class="hero-b97a15ec8ca41266ead22e99fea31e9b">暂无</span>
+            </div>
+            <div v-else>
+              <van-grid :border="false" :column-num="3">
+                <van-grid-item
+                  v-for="(data, index) in tableData.result.rows.slice(0, 6)"
+                  :key="'hero-098bb54d95474d39207adbc5bcb1fdf5-' + index"
+                  @click="
+                    $appOpenUrl(
+                      $t('open-url.title'),
+                      null,
+                      { path: '/search', query: { q: data.name, refresh: 1 } },
+                      1
+                    )
+                  "
+                >
+                  <img
+                    class="hero-d5e8f5d4f1a7835d6b60df741458142f"
+                    width="30"
+                    height="30"
+                    v-lazy="data.img"
+                  />
+                  <span class="hero-32488b56a42cdf9280f9f95a9d447738">
+                    {{ data.name }}
+                  </span>
+                  <ChartsWzryRankingLine
+                    :extraType="data.trend"
+                    :charts="{
+                      columns: chartsData.result.columns,
+                      rows: chartsData.result.rows[data.id],
+                    }"
+                  />
+                </van-grid-item>
+              </van-grid>
+            </div>
+          </div>
+        </van-cell-group>
+      </div>
+    </div>
+
+    <div v-else-if="extraId > 0" class="hero-965f1a65ae362b02d244345afcbf542e">
       <div class="hero-180e46b52d0588c3d7bd1cd31116cfe3">
         <ve-line
           :after-config="afterConfig"
@@ -15,232 +267,6 @@
           class="hero-be4fa98d69734bbd05d093fc0010f826"
         />
       </div>
-    </div>
-
-    <div v-else-if="extraId == 0" class="hero-965f1a65ae362b02d244345afcbf542e">
-      <van-nav-bar
-        left-arrow
-        :border="false"
-        :fixed="true"
-        :safe-area-inset-top="true"
-        :left-text="$t('nav-bar.left-text')"
-        title="日报"
-        @click-left="$appBack()"
-        z-index="2000"
-        class="return-0229cfdc78c2b9da8e238c9c89967c70"
-      >
-      </van-nav-bar>
-
-      <van-cell-group :border="false">
-        <template #title>
-          <span class="hero-997cffd1b4c15bd001f2548df5c541a0">最新公告</span>
-          <span
-            @click="
-              $appOpenUrl(
-                $t('open-url.title'),
-                null,
-                { path: '/search', query: { q: '公告', refresh: 1 } },
-                1
-              )
-            "
-            class="hero-f2c563299eda7a8301fd79097a3d77a8 hero-7b7be5bb65f2587452c0483cd3135b33"
-          >
-            更多公告 ➡️
-          </span>
-        </template>
-
-        <div class="hero-f6c155a5c2cef52607235042a3c7495a">
-          <ul>
-            <li
-              v-for="(data, index) in updateData.result.rows.slice(0, 4)"
-              :key="'hero-575b1378d20d0a1168556d58376e9752' + index"
-            >
-              <span
-                v-if="data.articleId"
-                @click="
-                  $appOpenUrl($t('open-url.title'), null, { path: data.url }, 0)
-                "
-                class="hero-2c8c32a3612ad83843c5de17963fb3c5"
-              >
-                {{ data.title }}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </van-cell-group>
-
-      <van-cell-group :border="false">
-        <template #title>
-          <span class="hero-997cffd1b4c15bd001f2548df5c541a0">今日表现</span>
-          <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
-          <span class="hero-4b5af54a365b5077f89b573ff376ef82">
-            <van-popover
-              v-model="showInfo.areaPopoverMeau"
-              :actions="wzryAreaTypeInfo"
-              @select="onAreaPopoverMeauSelect"
-              trigger="click"
-              placement="bottom"
-            >
-              <template #reference>
-                <span class="hero-4af0496fe8b12ee0444d5b96af96f88f">
-                  {{ areaInfo.text }} 🔄
-                </span>
-              </template>
-            </van-popover>
-          </span>
-          <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
-          <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
-            <span class="hero-412d90612ddb71698502ce6f29370422">
-              11:30、23:30 更新
-            </span>
-            <span class="hero-f04ba7249dc09ecf99855b888f3ec78f">，</span>
-            <span class="hero-5e442f77a551ef0cc4247e56def59551">
-              版本迭代可能会提前
-            </span>
-          </span>
-        </template>
-
-        <div class="hero-9d64fb4582069dc644b61fd7dc2d5165">
-          <van-grid :border="false" :column-num="3">
-            <van-grid-item>
-              <div class="hero-f48628f46cc0d14236d6077e1f61345e">涨得最多</div>
-              <div
-                v-if="lineData.result.rows.length > 0"
-                class="hero-8f422c42efbb8530bd3edf9691d66a8b"
-              >
-                {{
-                  lineData.result.rows[lineData.result.rows.length - 1]["英雄"]
-                }}
-              </div>
-              <div v-else class="hero-8f422c42efbb8530bd3edf9691d66a8b">-</div>
-            </van-grid-item>
-            <van-grid-item>
-              <div class="hero-f48628f46cc0d14236d6077e1f61345e">跌的最多</div>
-              <div
-                v-if="lineData.result.rows.length > 0"
-                class="hero-8f422c42efbb8530bd3edf9691d66a8b"
-              >
-                {{ lineData.result.rows[0]["英雄"] }}
-              </div>
-              <div v-else class="hero-8f422c42efbb8530bd3edf9691d66a8b">-</div>
-            </van-grid-item>
-            <van-grid-item>
-              <div class="hero-f48628f46cc0d14236d6077e1f61345e">上分推荐</div>
-              <div class="hero-8f422c42efbb8530bd3edf9691d66a8b">待定</div>
-            </van-grid-item>
-          </van-grid>
-        </div>
-      </van-cell-group>
-
-      <van-cell-group :border="false">
-        <template #title>
-          <span class="hero-997cffd1b4c15bd001f2548df5c541a0">主力玩家</span>
-          <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
-          <span class="hero-4b5af54a365b5077f89b573ff376ef82">
-            <van-popover
-              v-model="showInfo.positionPopoverMeau"
-              :actions="wzryPositionTypeInfo"
-              @select="onPositionPopoverMeauSelect"
-              trigger="click"
-              placement="bottom"
-            >
-              <template #reference>
-                <span class="hero-4af0496fe8b12ee0444d5b96af96f88f">
-                  {{ positionInfo.text }} 🔄
-                </span>
-              </template>
-            </van-popover>
-          </span>
-          <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
-          <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
-            展示出场流入、流出 (%)
-          </span>
-          <span
-            @click="
-              $appOpenUrl(
-                $t('open-url.title'),
-                null,
-                { path: '/ranking', query: { eid: 'b', refresh: 1 } },
-                1
-              )
-            "
-            class="hero-7b7be5bb65f2587452c0483cd3135b33"
-          >
-            查看排行 ➡️
-          </span>
-        </template>
-
-        <div class="hero-75b7804e3a61dc0afa66de488a958d0e">
-          <ve-bar
-            :init-options="{ renderer: 'svg' }"
-            :after-config="afterConfig"
-            :data="lineData.result"
-            :extend="lineData.extend"
-            :loading="lineData.loading"
-            :mark-line="lineData.markLine"
-            :mark-point="lineData.markPoint"
-            :settings="lineData.settings"
-            height="310px"
-            width="99.2%"
-            class="hero-be4fa98d69734bbd05d093fc0010f826"
-          />
-        </div>
-      </van-cell-group>
-
-      <van-cell-group :border="false">
-        <template #title>
-          <span class="hero-997cffd1b4c15bd001f2548df5c541a0">自选英雄</span>
-          <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
-          <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
-            <span class="hero-3c5ce68e1f3bf8481a8a6bd4dbbc2667">
-              需要在趋势界面关注，关注时间降序
-            </span>
-            <span class="hero-292937f1e5601746d29e89815e616d8e">，</span>
-            <span class="hero-a0e1d7ed00ffc971001f952f32c21e79">
-              展示的是近期热度
-            </span>
-          </span>
-        </template>
-
-        <div class="hero-f6c155a5c2cef52607235042a3c7495a">
-          <div v-if="tableData.result.rows.length == 0">
-            <span class="hero-b97a15ec8ca41266ead22e99fea31e9b">暂无</span>
-          </div>
-          <div v-else>
-            <van-grid :border="false" :column-num="3">
-              <van-grid-item
-                v-for="(data, index) in tableData.result.rows.slice(0, 6)"
-                :key="'hero-098bb54d95474d39207adbc5bcb1fdf5' + index"
-                @click="
-                  $appOpenUrl(
-                    $t('open-url.title'),
-                    null,
-                    { path: '/search', query: { q: data.name, refresh: 1 } },
-                    1
-                  )
-                "
-              >
-                <img
-                  class="hero-d5e8f5d4f1a7835d6b60df741458142f"
-                  width="30"
-                  height="30"
-                  v-lazy="data.img"
-                />
-                <span class="hero-32488b56a42cdf9280f9f95a9d447738">
-                  {{ data.name }}
-                </span>
-                <ChartsWzryRankingLine
-                  :extraType="data.trend"
-                  :charts="{
-                    columns: chartsData.result.columns,
-                    rows: chartsData.result.rows[data.id],
-                  }"
-                />
-              </van-grid-item>
-            </van-grid>
-          </div>
-        </div>
-      </van-cell-group>
     </div>
 
     <AppHello height="50px" />
@@ -439,7 +465,7 @@ export default {
             "&bid=" +
             bid +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -553,7 +579,7 @@ export default {
             "&cid=" +
             cid +
             "&id=" +
-            heroId +
+            encodeURIComponent(heroId) +
             "&detail=" +
             detail
         )

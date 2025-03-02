@@ -61,7 +61,7 @@
     <div class="game-ddf0c31260ebcb524c92953f905b6624">
       <van-action-sheet
         v-model="showInfo.actionSheet"
-        :title="
+        :description="
           tableDataRow.id
             ? tableDataRow.name + ' ' + $t('how-to-operate')
             : '新建队伍'
@@ -104,8 +104,8 @@
                   <van-uploader
                     :after-read="onAfterRead"
                     :before-read="onBeforeRead"
-                    :max-size="10 * 1024 * 1024"
                     @oversize="onOversize"
+                    max-size="52428800"
                   >
                     <div class="game-5f758f428b7ca18a42a55032f534bd2e">
                       <van-button round size="small" type="info">
@@ -183,8 +183,8 @@ export default {
     this.getGameDashboard();
   },
   methods: {
-    onAfterRead: function (file) {
-      let data = file.content;
+    onAfterRead: function (e) {
+      let data = e.content;
 
       this.$message.info(this.$appMsg.info[1002]);
 

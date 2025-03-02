@@ -377,7 +377,7 @@ export default {
             "&did=" +
             did +
             "&id=" +
-            heroId
+            encodeURIComponent(heroId)
         )
         .then((res) => {
           let data = res.data.data,
@@ -525,7 +525,7 @@ div.hero-427034659a1ba05f529b72e639b4481f {
 }
 
 div.hero-00b97ff5a43507241bb2776b701516bb {
-  background-color: blue;
+  background-color: #1680d1;
   border-radius: 10px;
   height: @app-height;
   margin: 10px;
