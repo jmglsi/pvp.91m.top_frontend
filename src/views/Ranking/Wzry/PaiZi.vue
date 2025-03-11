@@ -11,12 +11,7 @@
         empty-text="点击上方筛选"
         @cell-click="onTableCellClick"
       >
-        <vxe-table-column
-          field="name"
-          title="#"
-          width="75"
-          sortable
-        >
+        <vxe-table-column field="name" title="#" width="75" sortable>
           <template #default="{ row }">
             <div
               :style="{
@@ -133,11 +128,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 && newValue.refresh == 1) {
           //if (newValue.refresh == 1) {
           this.getRanking(4, newValue.bid, newValue.cid, newValue.did);
         }
@@ -147,12 +142,9 @@ export default {
   created() {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
-
-    /*
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
-        this.getRanking(4, this.bid, this.cid, this.did);
-      }
-    */
+  },
+  mounted() {
+    this.getRanking(4, this.bid, this.cid, this.did);
   },
   methods: {
     getRanking: function (aid = 4, bid = 0, cid = 0, did = 0) {

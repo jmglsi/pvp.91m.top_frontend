@@ -541,7 +541,7 @@
       <van-popup v-model="showInfo.languageMenu" round position="bottom">
         <van-picker
           show-toolbar
-          :default-index="$cookie.get('lang-index') || 0"
+          :default-index="$appCookie('lang-index') || 0"
           :confirm-button-text="$t('confirm')"
           :cancel-button-text="$t('cancel')"
           :columns="
@@ -730,7 +730,7 @@ export default {
   },
   data() {
     return {
-      copyData: null,
+      copyData: "",
       login: {
         status: false,
         text: this.$t("my.login-i"),
@@ -756,7 +756,7 @@ export default {
         },
         tips: {
           text: null,
-          copyData: null,
+          copyData: "",
         },
         description: null,
         heroList: [],
@@ -780,7 +780,7 @@ export default {
         },
         tips: {
           text: null,
-          copyData: null,
+          copyData: "",
         },
         description: null,
         heroList: [],
@@ -821,7 +821,7 @@ export default {
 
       let agree = this.$appConfigInfo.appInfo.isReadme;
 
-      if (agree == 1 || (agree == 1 && refresh == 1)) {
+      if (agree == 1 && refresh == 1) {
         //if (refresh == 1) {
         this.getWebAccountInfo();
       }
@@ -900,9 +900,9 @@ export default {
             this.loginInfo = data;
             this.newInfo = data;
 
-            this.$cookie.set("name", data.name, {
-              expires: "1M",
-            });
+            //this.$appCookie("name", data.name, {
+            //expires: "1M",
+            //});
 
             data.friendsType == 1
               ? (this.showInfo.friendsType = true)
@@ -974,13 +974,14 @@ export default {
     onLanguagePickerConfirm: function (e, i) {
       let lang = this.$appLanguageInfo[i].lang || "zh-CN";
 
-      this.$cookie.set("lang", lang, {
-        expires: "1Y",
-      });
-      this.$cookie.set("lang-index", i, {
-        expires: "1Y",
-      });
       this.$i18n.locale = lang;
+
+      this.$appCookie("lang", lang, {
+        expires: "1y",
+      });
+      this.$appCookie("lang-index", i, {
+        expires: "1y",
+      });
 
       this.$message.success(e + " ok");
 
@@ -1021,14 +1022,28 @@ export default {
           //on confirm
           this.isLogin = false;
 
-          this.$cookie.delete("openId");
-          this.$cookie.delete("accessToken");
+          this.$appCookie("openId", null, {
+            expires: -1,
+          });
+          this.$appCookie("accessToken", null, {
+            expires: -1,
+          });
           //-
-          this.$cookie.delete("tempOpenId");
-          this.$cookie.delete("tempAccessToken");
-          this.$cookie.delete("lastUpdateTipsDay");
-          this.$cookie.delete("game-index");
-          this.$cookie.delete("game-type");
+          this.$appCookie("tempOpenId", null, {
+            expires: -1,
+          });
+          this.$appCookie("tempAccessToken", null, {
+            expires: -1,
+          });
+          this.$appCookie("lastUpdateTipsDay", null, {
+            expires: -1,
+          });
+          this.$appCookie("game-index", null, {
+            expires: -1,
+          });
+          this.$appCookie("game-type", null, {
+            expires: -1,
+          });
 
           this.$appDelectAllLocalStorage();
         })

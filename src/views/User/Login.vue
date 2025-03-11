@@ -218,8 +218,8 @@ export default {
   mounted() {
     let q = this.$route.query;
 
-    this.openId = this.$cookie.get("openId") || "";
-    this.accessToken = this.$cookie.get("accessToken") || "";
+    this.openId = this.$appCookie("openId") || "";
+    this.accessToken = this.$appCookie("accessToken") || "";
     this.redirect = q.redirect || "";
 
     if (this.accessToken) this.getWebAccountInfo(2);
@@ -330,15 +330,15 @@ export default {
             status = res.data.status;
 
           if (status.code == 200) {
-            this.$cookie.set("openId", data.openId, {
+            this.$appCookie("openId", data.openId, {
               expires: "1M",
             });
-            this.$cookie.set("accessToken", data.accessToken, {
+            this.$appCookie("accessToken", data.accessToken, {
               expires: "1M",
             });
-            this.$cookie.set("name", data.name, {
-              expires: "1M",
-            });
+            //this.$appCookie("name", data.name, {
+            //expires: "1M",
+            //});
 
             this.$appDelectAllLocalStorage();
 

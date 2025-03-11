@@ -29,9 +29,9 @@
                 class="home-3c873293a7dc1ea8c20579f6a7ae94a9"
               />
               <van-tag
+                mark
                 v-if="data.tag.text"
                 :color="data.tag.color"
-                mark
                 size="medium"
                 class="app-a5a5c883f68e45baa83f140e218759f1"
               >
@@ -297,7 +297,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         show = q.show || "";
 
       if (show == "heroSkill") {

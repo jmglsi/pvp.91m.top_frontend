@@ -1,9 +1,9 @@
 <template>
-  <div class="ranking-qhfw app-qhfw">
+  <div class="ranking-jb app-jb">
     <div class="ranking-3ede7e85e7bd91a85bce2a134d18fb18">
       <vxe-table
-        ref="refJccQiangHuaFuWen"
-        id="refJccQiangHuaFuWen"
+        ref="refJccJiBan"
+        id="refJccJiBan"
         :custom-config="{ storage: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
@@ -13,7 +13,7 @@
         <vxe-table-column
           fixed="left"
           field="id"
-          title="符文"
+          title="羁绊"
           :filters="[
             //{ value: 0, label: '其他' },
             { value: 1, label: '1 级' },
@@ -40,7 +40,7 @@
                 }"
                 width="50"
                 height="50"
-                class="app-border-radius ranking-b798abe6e1b1318ee36b0dcb3fb9e4d3"
+                class="app-border-radius ranking-5ced96d52e4a626a6252b8dcea779fcd"
               />
               <div
                 class="app-5f19eaf71f40d74d66be84db52b3ad87 app-0e1a8b3f7f6162bf4b88d3d001b88374"
@@ -73,21 +73,6 @@
             />
           </template>
         </vxe-table-column>
-
-        <vxe-table-column
-          field="index"
-          title="阶段"
-          :filters="[
-            //{ value: 0, label: '其他' },
-            { value: 1, label: '阶段 1' },
-            { value: 2, label: '阶段 2' },
-            { value: 3, label: '阶段 3' },
-          ]"
-          :filter-method="onTableColumnFilterMethod"
-          :width="listWidth"
-          show-overflow="ellipsis"
-          sortable
-        />
 
         <vxe-table-column
           field="allPickRate[1]"
@@ -273,7 +258,7 @@
 
 <script>
 export default {
-  name: "rankingQiangHuaFuWen",
+  name: "rankingJiBan",
   components: {
     //GameWzryHeroEquipmentListOne: () => import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
   },
@@ -343,10 +328,10 @@ export default {
       let agree = this.$appConfigInfo.appInfo.isReadme;
 
       if (agree == 1) {
-        this.getRanking(51, 0, 0, 0);
+        this.getRanking(54, 0, 0, 0);
       }
     },
-    getRanking: function (aid = 51, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 54, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(

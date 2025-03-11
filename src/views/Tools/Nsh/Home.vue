@@ -333,8 +333,8 @@
               :style="{
                 color: 'gray',
                 borderColor: 'gray',
-                padding: '0 16px',
                 marginTop: '40px',
+                padding: '0 16px',
               }"
             >
               <span style="color: red">
@@ -451,8 +451,8 @@
             :style="{
               color: 'red',
               borderColor: 'red',
-              padding: '0 16px',
               marginTop: '20px',
+              padding: '0 16px',
             }"
           >
             点击下方可复制成员信息
@@ -577,7 +577,7 @@
       <van-popup v-model="showInfo.picker" round position="bottom">
         <van-picker
           show-toolbar
-          :default-index="$cookie.get('lang-index') || 0"
+          :default-index="$appCookie('lang-index') || 0"
           :confirm-button-text="$t('confirm')"
           :cancel-button-text="$t('cancel')"
           :columns="columns"
@@ -694,7 +694,7 @@ export default {
       nowIconColor: "#1680d1",
       nowIconName: "add-o",
       nowDataChange: false,
-      openId: this.$cookie.get("openId") || "",
+      openId: this.$appCookie("openId") || "",
       joinTeamId: this.$route.query.joinTeamId || "",
       gameLabel: this.$route.query.gameLabel || "",
       url: {

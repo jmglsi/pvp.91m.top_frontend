@@ -101,12 +101,7 @@ export default {
 
       let nowTime = null;
 
-      let date = new Date(),
-        nowYear = date.getFullYear(),
-        nowMonth = date.getMonth() + 1,
-        nowDate = date.getDate();
-
-      nowTime = nowYear + "-" + nowMonth + "-" + nowDate;
+      nowTime = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
 
       this.$axios
         .post(

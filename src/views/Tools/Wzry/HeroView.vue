@@ -178,39 +178,19 @@ export default {
   },
   created() {
     this.initPage();
-
+  },
+  mounted() {
     this.getRanking(15);
     this.getHeroChartsLog(7);
   },
   methods: {
     initPage: function () {
-      let p = this.$route.params,
-        date = new Date(),
-        nowYear = date.getFullYear(),
-        nowMonth = date.getMonth() + 1,
-        nowDate = date.getDate(),
-        nowH = date.getHours(),
-        nowI = date.getMinutes(),
-        nowS = date.getSeconds();
+      let p = this.$route.params;
 
-      if (nowMonth < 10) nowMonth = "0" + nowMonth;
-      if (nowDate < 10) nowDate = "0" + nowDate;
-      if (nowH < 10) nowH = "0" + nowH;
-      if (nowI < 10) nowI = "0" + nowI;
-      if (nowS < 10) nowS = "0" + nowS;
-
-      this.viewInfo.nowTime =
-        nowYear +
-        "-" +
-        nowMonth +
-        "-" +
-        nowDate +
-        " " +
-        nowH +
-        ":" +
-        nowI +
-        ":" +
-        nowS;
+      this.viewInfo.nowTime = this.$appXEUtils.toDateString(
+        new Date(),
+        "yyyy-MM-dd HH:mm:ss"
+      );
 
       this.getHeroInfo(p.id);
       this.getHeroInfoByRandSuit(p.id);

@@ -64,6 +64,18 @@
             </ChooseWzryHero>
 
             <div
+              @click="showInfo.calendar = true"
+              class="search-e63a3d77ef528e9465c5ec19abb57693"
+            >
+              <img
+                v-lazy="$appCache + '/img/icons-app/calendar.png'"
+                width="30"
+                height="30"
+                class="app-border-radius"
+              />
+            </div>
+
+            <div
               @click="
                 tableData.cardInfo.id && tableData.cardInfo.id < 900
                   ? (showInfo.heroPopup = true)
@@ -112,20 +124,6 @@
               <van-grid-item
                 @click="
                   $appPush({
-                    path: '/ranking',
-                    query: {
-                      type: 4,
-                      heroName: tableData.cardInfo.name,
-                      refresh: 1,
-                    },
-                  })
-                "
-                icon="exchange"
-                text="关系库"
-              />
-              <van-grid-item
-                @click="
-                  $appPush({
                     path:
                       '/hero/' +
                       tableData.cardInfo.id +
@@ -138,18 +136,18 @@
                 text="对局回顾"
               />
               <van-grid-item
-                :icon="$appCache + '/img/icons-app/attack_speed.png'"
                 @click="
-                  $appOpenUrl(
-                    $t('open-url.title'),
-                    'NGA @小熊de大熊',
-                    {
-                      path: 'https://ngabbs.com/read.php?tid=12677614',
+                  $appPush({
+                    path: '/ranking',
+                    query: {
+                      type: 4,
+                      heroName: tableData.cardInfo.name,
+                      refresh: 1,
                     },
-                    0
-                  )
+                  })
                 "
-                text="攻速阈值"
+                icon="exchange"
+                text="关系库"
               />
               <van-grid-item
                 :icon="$appCache + '/img/icons-app/medal.png'"
@@ -168,6 +166,20 @@
                   })
                 "
                 text="查皮肤"
+              />
+              <van-grid-item
+                :icon="$appCache + '/img/icons-app/attack_speed.png'"
+                @click="
+                  $appOpenUrl(
+                    $t('open-url.title'),
+                    'NGA @小熊de大熊',
+                    {
+                      path: 'https://ngabbs.com/read.php?tid=12677614',
+                    },
+                    0
+                  )
+                "
+                text="攻速阈值"
               />
             </van-grid>
           </van-cell-group>
@@ -475,7 +487,10 @@
                   {{ $t("comprehensive") }}
                 </span>
                 <img
-                  v-if="tableData.cardInfo.change.trendType > 0"
+                  v-if="
+                    tableData.cardInfo.change.trendType > 0 &&
+                    dateInfo.day.length == 0
+                  "
                   v-lazy="
                     $appCache +
                     '/img/icons-app/hot_' +
@@ -556,7 +571,10 @@
                         {{ $t("bp.pick") }}
                       </span>
                       <span
-                        v-if="tableData.cardInfo.change.updateValue != 0"
+                        v-if="
+                          tableData.cardInfo.change.updateValue != 0 &&
+                          dateInfo.day.length == 0
+                        "
                         :style="
                           tableData.cardInfo.change.updateType == 2
                             ? { color: 'red !important' }
@@ -572,7 +590,10 @@
                         }}
                       </span>
                       <img
-                        v-if="tableData.cardInfo.change.updateType != 0"
+                        v-if="
+                          tableData.cardInfo.change.updateType != 0 &&
+                          dateInfo.day.length == 0
+                        "
                         v-lazy="
                           $appCache +
                           '/img/icons-app/hot_' +
@@ -872,7 +893,7 @@
                   v-if="showInfo.heroData == 0"
                   class="search-adba909214f9aea0d6208b9bbc56dee0"
                 >
-                  <van-icon name="underway-o" /> 11:30
+                  <van-icon name="underway-o" /> 11/23:30
                 </span>
                 <span
                   v-if="showInfo.heroData == 0"
@@ -905,7 +926,9 @@
             </van-tab>
             <van-tab
               :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id > 900
+                tableData.cardInfo.id == 0 ||
+                tableData.cardInfo.id > 900 ||
+                dateInfo.day.length > 0
               "
             >
               <template #title>
@@ -933,7 +956,9 @@
             </van-tab>
             <van-tab
               :disabled="
-                tableData.cardInfo.id == 0 || tableData.cardInfo.id > 900
+                tableData.cardInfo.id == 0 ||
+                tableData.cardInfo.id > 900 ||
+                dateInfo.day.length > 0
               "
             >
               <template #title>
@@ -1192,6 +1217,17 @@
       </van-dialog>
     </div>
 
+    <div class="search-d0fc08c85e93b0b15cd32f1bb252c811">
+      <van-calendar
+        v-model="showInfo.calendar"
+        title="命运的齿轮开始转动"
+        :formatter="onCalendarFormatter"
+        :min-date="dateInfo.min"
+        :max-date="dateInfo.max"
+        @confirm="onConfirmClick"
+      />
+    </div>
+
     <div class="search-52c594123f7e3908fcfbf69d69c94dff">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
@@ -1320,7 +1356,7 @@ export default {
           this.showInfo.fightPowerActionSheet = false;
 
           if (from.name != "searchIndex") {
-            this.getSearch(q.q, show);
+            this.getSearch(q.q, "", show);
           }
         }
       } else {
@@ -1354,6 +1390,7 @@ export default {
       },
       tempQ: "",
       popover: "",
+      lastDataDay: "",
       tableData: {
         result: {
           rows: [],
@@ -1412,10 +1449,16 @@ export default {
           },
         },
       },
+      dateInfo: {
+        min: new Date(),
+        max: new Date(),
+        day: "",
+      },
       dataInfo: {
         model: 0,
       },
       showInfo: {
+        calendar: false,
         skillActionSheet: false,
         fightPowerActionSheet: false,
         heroFeature: false,
@@ -1445,7 +1488,14 @@ export default {
         this.showInfo.searchHistory = false;
       }
 
-      this.getSearch(searchValue, show);
+      let date = new Date();
+
+      this.dateInfo.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.dateInfo.max = new Date(date.setMonth(date.getMonth() + 4));
+
+      this.dateInfo.day = this.$appCookie("lastDataDay") || "";
+
+      this.getSearch(searchValue, this.dateInfo.day, show);
     },
     initShow: function () {
       let searchData = localStorage.getItem("searchData");
@@ -1499,14 +1549,14 @@ export default {
 
       this.popover = ret;
     },
-    getSearch: function (value = "", show = "") {
+    getSearch: function (value = "", time = "", show = "") {
       this.search.value = value;
 
       this.$axios
         .post(
           this.$appApi.app.getSearch,
           this.$qs.stringify({
-            q: value,
+            q: value + time,
           })
         )
         .then((res) => {
@@ -1579,7 +1629,25 @@ export default {
         this.showInfo.searchHistory = false;
       }
 
-      this.getSearch(searchData);
+      this.getSearch(searchData, this.dateInfo.day);
+    },
+    formatDate: function (date) {
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    },
+    onCalendarFormatter: function (day) {
+      let oldDay = this.$appXEUtils.toDateString(
+          this.formatDate(day.date),
+          "yyyy-MM-dd"
+        ),
+        newDay = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+
+      if (oldDay == newDay) {
+        day.topInfo = "11/23:30";
+        day.text = "更新";
+        day.bottomInfo = "昨日数据";
+      }
+
+      return day;
     },
     onSearch: function () {
       if (this.search.value.length > 0) return;
@@ -1707,6 +1775,30 @@ export default {
       this.copyData = ret;
 
       this.$appCopyData(this.copyData);
+    },
+    onConfirmClick: function (date) {
+      let newDay = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+
+      this.showInfo.calendar = false;
+
+      this.dateInfo.day = this.$appXEUtils.toDateString(
+        this.formatDate(date),
+        "yyyy-MM-dd"
+      );
+
+      if (newDay == this.dateInfo.day) {
+        this.dateInfo.day = "";
+
+        this.$appCookie("lastDataDay", null, {
+          expires: -1,
+        });
+      } else {
+        this.$appCookie("lastDataDay", this.dateInfo.day, {
+          expires: "1d",
+        });
+      }
+
+      this.getSearch(this.search.value, this.dateInfo.day);
     },
     addSearchData: function (value) {
       let searchData = localStorage.getItem("searchData"),

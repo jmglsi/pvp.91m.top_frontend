@@ -76,7 +76,7 @@ div.game-99938282f04071859941e18f16efcf42 {
   }
 
   div.van-grid-item__content {
-    padding: 8px 4px;
+    padding: 15px 5px;
   }
 }
 </style>

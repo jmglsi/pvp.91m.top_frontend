@@ -11,15 +11,40 @@
     >
       <vxe-table-column
         field="gamePlayerName"
-        title="玩家"
+        title="常玩/玩家"
         fixed="left"
         width="125"
         :title-prefix="{
           content: $appMsg.tips[1014],
         }"
-      />
+      >
+        <template #default="{ row }">
+          <div
+            :style="{
+              position: 'relative',
+              marginTop: '-15px',
+            }"
+          >
+            <div class="ranking-6d19eb4601bfeac4a56e54d12adcb954">
+              <van-tag
+                plain
+                v-for="(data, index) in row.positionList"
+                :key="'ranking-2d20b6873d862bf066a8377c5ba8cc33-' + index"
+                :color="$wzryPositionInfo[data || 0][1] || 'black'"
+                class="app-b69a71d636ec20584432124284825b1e"
+              >
+                {{ $wzryPositionInfo[data || 0][0] }}
+              </van-tag>
+            </div>
 
-      <vxe-table-column title="#" type="seq" width="50" />
+            <div
+              class="app-5f19eaf71f40d74d66be84db52b3ad87 app-420e569f7ae439ae256513412631f2f4"
+            >
+              {{ row.gamePlayerName }}
+            </div>
+          </div>
+        </template>
+      </vxe-table-column>
 
       <vxe-table-column
         field="selareaId"
@@ -36,19 +61,38 @@
       />
 
       <vxe-table-column
+        field="heroFightPower"
+        title="战力"
+        :title-prefix="{
+          content: '非实时\n' + $appMsg.tips[1013],
+        }"
+        :width="listWidth"
+        sortable
+      />
+
+      <vxe-table-column
         field="rankScore"
         title="分段"
         :width="listWidth"
         sortable
       >
         <template #default="{ row }">
-          <span class="ranking-20b2165cf5e79e58d5e434b7d9370589">
-            {{ row.rankScore }}
-          </span>
-          <br />
-          <span class="ranking-20b2165cf5e79e58d5e434b7d9370589">
-            {{ row.roleJobName }}
-          </span>
+          <div
+            :style="{
+              position: 'relative',
+              marginTop: '-15px',
+            }"
+          >
+            <div class="app-52b0e5c90604d59d1814f184d58e2033">
+              {{ row.rankScore }}
+            </div>
+
+            <div
+              class="app-5f19eaf71f40d74d66be84db52b3ad87 app-420e569f7ae439ae256513412631f2f4"
+            >
+              {{ row.roleJobName }}
+            </div>
+          </div>
         </template>
       </vxe-table-column>
 
@@ -71,15 +115,7 @@
         </template>
       </vxe-table-column>
 
-      <vxe-table-column
-        field="heroFightPower"
-        title="战力"
-        :title-prefix="{
-          content: '非实时\n' + $appMsg.tips[1013],
-        }"
-        :width="listWidth"
-        sortable
-      />
+      <vxe-table-column title="#" type="seq" width="50" />
     </vxe-table>
 
     <div class="ranking-c654dca3c049bcd2c955393eeb98ee68">
@@ -114,8 +150,9 @@ export default {
       immediate: true,
       handler(newValue) {
         if (!newValue.extraId) return;
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (this.$appConfigInfo.appInfo.isReadme == 1) {
+        if (agree == 1) {
           this.getRankingByZhanli(10, 0, 0, 0, newValue.extraId);
         }
       },
@@ -325,14 +362,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="less">
-span.ranking-20b2165cf5e79e58d5e434b7d9370589 {
-  font-size: 10px;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  left: 0;
-  margin-top: -13px;
-}
-</style>

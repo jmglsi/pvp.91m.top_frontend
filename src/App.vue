@@ -232,7 +232,7 @@ export default {
     };
   },
   created() {
-    this.$i18n.locale = this.$cookie.get("lang") || "zh-CN";
+    this.$i18n.locale = this.$appCookie("lang") || "zh-CN";
   },
   mounted() {
     this.getAppInfo();
@@ -244,7 +244,7 @@ export default {
         tabbar = false,
         path = to.path,
         isRobot = this.$appIsRobot,
-        openId = this.$cookie.get("openId") || "苏苏的荣耀助手";
+        openId = this.$appCookie("openId") || "苏苏的荣耀助手";
 
       this.$appWatermarkInfo = {
         content: "@" + openId.slice(0, 12),
@@ -252,7 +252,7 @@ export default {
         rotate: 25,
         width: 135,
         height: 100,
-        color: "rgb(240, 240, 240)",
+        color: "rgba(175, 175, 175, 0.25)",
       };
 
       if (isRobot) {
@@ -263,8 +263,8 @@ export default {
 
         this.$appSetLocalStorage("appConfigInfo", this.$appConfigInfo);
 
-        this.$cookie.set("agree", 1, {
-          expires: "1Y",
+        this.$appCookie("agree", 1, {
+          expires: "1y",
         });
       }
 
@@ -278,7 +278,7 @@ export default {
       /ranking/i.test(path) ? (whiteBar = true) : (whiteBar = false);
       this.showInfo.whiteBar = whiteBar;
 
-      /^\/(tools|admin|miniapp|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game)/i.test(
+      /^\/(admin|miniapp|login|skin|hero\/(.*?)\/info|hero\/(.*?)\/replay|hero\/(.*?)\/view|hero\/(.*?)\/equipment|game)/i.test(
         path
       )
         ? (tabbar = false)
@@ -329,19 +329,25 @@ export default {
 
         //let updateTime = appConfigInfo.appInfo.updateInfo.time || 0;
         let updateVersion = appConfigInfo.appInfo.updateInfo.version || 0;
-        let date = new Date();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        let today = year + "-" + month + "-" + day;
-        let lastUpdateTipsDay = this.$cookie.get("lastUpdateTipsDay") || "";
+        let today = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+        let lastUpdateTipsDay = this.$appCookie("lastUpdateTipsDay") || "";
 
         if (appInfo.updateInfo.version != updateVersion) {
-          this.$cookie.delete("tempOpenId");
-          this.$cookie.delete("tempAccessToken");
-          this.$cookie.delete("lastUpdateTipsDay");
-          this.$cookie.delete("game-index");
-          this.$cookie.delete("game-type");
+          this.$appCookie("tempOpenId", null, {
+            expires: -1,
+          });
+          this.$appCookie("tempAccessToken", null, {
+            expires: -1,
+          });
+          this.$appCookie("lastUpdateTipsDay", null, {
+            expires: -1,
+          });
+          this.$appCookie("game-index", null, {
+            expires: -1,
+          });
+          this.$appCookie("game-type", null, {
+            expires: -1,
+          });
 
           this.$appDelectAllLocalStorage();
 
@@ -361,8 +367,8 @@ export default {
                 theme: "round-button",
               })
               .then(() => {
-                this.$cookie.set("lastUpdateTipsDay", today, {
-                  expires: "1M",
+                this.$appCookie("lastUpdateTipsDay", today, {
+                  expires: "1d",
                 });
               })
               .catch(() => {
@@ -430,10 +436,10 @@ export default {
 
         if (!oauthType) {
           if (tempOpenId) {
-            this.$cookie.set("tempOpenId", tempOpenId, {
+            this.$appCookie("tempOpenId", tempOpenId, {
               expires: "1H",
             });
-            this.$cookie.set("tempAccessToken", tempAccessToken, {
+            this.$appCookie("tempAccessToken", tempAccessToken, {
               expires: "1H",
             });
           }
@@ -445,10 +451,10 @@ export default {
           }
         } else {
           if (tempOpenId) {
-            this.$cookie.set("openId", tempOpenId, {
+            this.$appCookie("openId", tempOpenId, {
               expires: "1M",
             });
-            this.$cookie.set("accessToken", tempAccessToken, {
+            this.$appCookie("accessToken", tempAccessToken, {
               expires: "1M",
             });
 
@@ -508,16 +514,16 @@ export default {
 
       gameType = this.$appGameInfo[gameIndex];
 
-      if (this.$cookie.get("game-index") != gameIndex) {
+      if (this.$appCookie("game-index") != gameIndex) {
         //this.$message.info(this.$appMsg.info[1034]);
       }
 
-      this.$cookie.set("game-index", gameIndex, {
-        expires: "1Y",
+      this.$appCookie("game-index", gameIndex, {
+        expires: "1y",
       });
 
-      this.$cookie.set("game-type", gameType, {
-        expires: "1Y",
+      this.$appCookie("game-type", gameType, {
+        expires: "1y",
       });
     },
     openWxMiniapp: function () {
@@ -735,6 +741,10 @@ span.van-tab__text {
   margin: 11px 0;
 }
 
+span.app-b69a71d636ec20584432124284825b1e {
+  margin: 0 3px;
+}
+
 span.app-ce6834f6417aa0bd26ce2c913f27302d {
   margin-left: 5px;
   margin-right: -3px;
@@ -860,6 +870,18 @@ div.app-bpIndex {
   height: 443px;
 }
 
+div.app-420e569f7ae439ae256513412631f2f4 {
+  font-size: @app-font-size;
+  left: 0;
+  margin: 0 auto;
+  margin-top: -3px;
+  position: absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
 div.app-e7cc92f4d89cae11c55145231f702389 {
   margin: 5px;
   text-align: center;
@@ -876,7 +898,7 @@ div.app-ecb26e3ebb0456087e850f45c7484687 {
   margin-top: -40px;
   position: absolute;
   backdrop-filter: blur(5px);
-  filter: blur(6px);
+  filter: blur(5px);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -1170,18 +1192,22 @@ div.app-044a82dc9b34eebf2c54fe2c3c904368 {
 }
 
 div.app-wzry,
-div.app-jcc,
-div.app-px,
-div.app-td,
+div.app-zl,
 div.app-wj,
 div.app-zbk,
 div.app-gxk,
+div.app-jcc,
+div.app-jb,
 div.app-qhfw,
+//
 div.app-bpIndex,
 div.app-genre,
 div.app-equipmentListAll,
 div.app-equipmentListOne,
 div.app-inscription,
+//
+div.app-px,
+div.app-td,
 div.app-pz,
 div.app-pzOne {
   margin-top: 3px;

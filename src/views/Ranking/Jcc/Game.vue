@@ -4,7 +4,7 @@
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
       <vxe-toolbar
         size="mini"
-        style="background-color: rgb(246, 246, 248) !important;"
+        style="background-color: rgb(250, 250, 250) !important;"
         ref="refJccToolbar"
         custom
       />
@@ -15,16 +15,17 @@
       <vxe-table
         ref="refJccGame"
         id="refJccGame"
-        :cell-class-name="onTableCellClassName"
         :custom-config="{ storage: true }"
         :expand-config="{ accordion: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
+        :cell-class-name="onTableCellClassName"
         @cell-click="onTableCellClick"
         @custom="onTableCustom"
       >
-        <vxe-column
+        <vxe-table-column
+          fixed="left"
           field="price"
           title="#"
           :filters="[
@@ -42,9 +43,9 @@
           <template #default="{ row }">
             <!--
             <van-tag
+              mark
               v-if="row.tag.text"
               :color="row.tag.color"
-              mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
             >
@@ -114,9 +115,9 @@
               </div>
             </div>
           </template>
-        </vxe-column>
+        </vxe-table-column>
 
-        <vxe-column
+        <vxe-table-column
           field="allPickRate[1]"
           title="出场"
           :filters="[{ value: 0.01, checked: true }]"
@@ -199,8 +200,8 @@
                 -->
             </div>
           </template>
-        </vxe-column>
-        <vxe-column
+        </vxe-table-column>
+        <vxe-table-column
           field="allAvg"
           title="排名"
           :filters="[{ value: 0 }]"
@@ -227,31 +228,22 @@
               <span v-else>{{ row.allBPRate }}</span>
             </template>
             -->
-        </vxe-column>
+        </vxe-table-column>
 
-        <vxe-table-colgroup
-          :title-prefix="{
-            content:
-              $appMsg.tips[1015] +
-              '\n' +
-              $appMsg.tips[1010] +
-              '\n-\n' +
-              $appMsg.tips[1018],
-          }"
-        >
+        <vxe-table-colgroup>
           <template #header>
-            <div
-              @click="
-                $appOpenUrl(
-                  $t('open-url.title'),
-                  null,
-                  { path: url.openSource[0] },
-                  0
-                )
-              "
-              class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81"
-            >
-              <span class="ranking-6ad9203f996965a0c641bbf73cc1143f">
+            <div class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81">
+              <span
+                @click="
+                  $appOpenUrl(
+                    $t('open-url.title'),
+                    null,
+                    { path: url.openSource[0] },
+                    0
+                  )
+                "
+                class="ranking-6ad9203f996965a0c641bbf73cc1143f"
+              >
                 {{ $appMsg.tips[1004] }}(%)
               </span>
               <van-tag
@@ -267,7 +259,7 @@
             </div>
           </template>
 
-          <vxe-column
+          <vxe-table-column
             field="starRate_3"
             title="3星"
             :filters="[{ value: 0 }]"
@@ -288,8 +280,8 @@
               />
               %
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="pickRate_4"
             title="吃分"
             :filters="[{ value: 0 }]"
@@ -310,8 +302,8 @@
               />
               %
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="pickRate_1"
             title="吃鸡"
             :filters="[{ value: 0 }]"
@@ -332,21 +324,21 @@
               />
               %
             </template>
-          </vxe-column>
+          </vxe-table-column>
         </vxe-table-colgroup>
 
         <!--
-        <vxe-column field="more" type="expand" title="更多" width="80">
+        <vxe-table-column field="more" type="expand" title="更多" width="80">
           <template #content="{ row }">
             <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
               <ChartsWzryHeroLine :extraId="row.id" :aid="0" />
             </div>
           </template>
-        </vxe-column>
+        </vxe-table-column>
         -->
 
         <!--
-        <vxe-column title="#" type="seq" width="50" />
+        <vxe-table-column title="#" type="seq" width="50" />
         -->
 
         <template #empty><div v-html="msg || '暂无数据'" /></template>
@@ -438,7 +430,9 @@
       v-if="cellInfo.index > -1 && showInfo.heroSameHobby"
       class="ranking-d742492b2526d57a222af9b54040b3b4"
     >
+      <!--
       <GameWzryHeroSameHobby :extraId="tableDataRow.id" />
+      -->
     </div>
 
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
@@ -468,18 +462,12 @@ export default {
     //ChartsWzryHeroLine: () => import("@/components/Charts/Wzry/HeroLine.vue"),
     //ChartsWzryHeroProgress: () => import("@/components/Charts/Wzry/HeroProgress.vue"),
     //ChartsWzryChartsRankingLine: () => import("@/components/Charts/Wzry/RankingLine.vue"),
-    GameWzryHeroBPIndex: () =>
-      import("@/components/Game/Wzry/Hero/BPIndex.vue"),
-    GameWzryHeroEquipmentListALL: () =>
-      import("@/components/Game/Wzry/Hero/EquipmentList_All.vue"),
-    GameWzryHeroEquipmentListOne: () =>
-      import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
-    GameWzryHeroGenreList: () =>
-      import("@/components/Game/Wzry/Hero/GenreList.vue"),
-    GameWzryHeroInscriptionList: () =>
-      import("@/components/Game/Wzry/Hero/InscriptionList.vue"),
-    GameWzryHeroSameHobby: () =>
-      import("@/components/Game/Wzry/Hero/SameHobby.vue"),
+    //GameWzryHeroBPIndex: () => import("@/components/Game/Wzry/Hero/BPIndex.vue"),
+    //GameWzryHeroEquipmentListALL: () => import("@/components/Game/Wzry/Hero/EquipmentList_All.vue"),
+    //GameWzryHeroEquipmentListOne: () => import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
+    //GameWzryHeroGenreList: () => import("@/components/Game/Wzry/Hero/GenreList.vue"),
+    //GameWzryHeroInscriptionList: () => import("@/components/Game/Wzry/Hero/InscriptionList.vue"),
+    //GameWzryHeroSameHobby: () => import("@/components/Game/Wzry/Hero/SameHobby.vue"),
   },
   props: {
     bid: {
@@ -511,20 +499,13 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 && newValue.refresh == 1) {
           //if (newValue.refresh == 1) {
-          this.getRanking(
-            50,
-            newValue.bid,
-            newValue.cid,
-            newValue.did,
-            this.time
-          );
-          //this.getRanking(15, 0, 0, 0, this.time);
+          this.getRanking(50, newValue.bid, newValue.cid, newValue.did);
         }
       },
     },
@@ -562,10 +543,10 @@ export default {
         },
       },
       actionSheetActions: [
-        { name: "趋势", subname: "左下角关注一下", value: 0 },
-        { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
+        { name: "热度趋势", subname: "左下角关注一下", value: 0 },
+        { name: "搜索一下", subname: "看看都在聊什么", value: 1 },
+        //{ name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        //{ name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
       listWidth: 0,
       clientHeight: 0,
@@ -590,20 +571,14 @@ export default {
   created() {
     this.clientHeight = this.$appInitTableHeight(10);
     this.initTableWidth();
-
+  },
+  mounted() {
     //this.$nextTick(() => {
     //this.getHeroChartsLog(7);
-
     //this.$refs.refJccGame.connect(this.$refs.refJccToolbar);
     //});
     //手动将表格和工具栏进行关联
-
-    /*
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
-        this.getRanking(0, this.bid, this.cid, this.did, this.time);
-        this.getRanking(15, 0, 0, 0, this.time);
-      }
-    */
+    this.getRanking(50, this.bid, this.cid, this.did);
   },
   methods: {
     initTableWidth: function () {
@@ -644,11 +619,11 @@ export default {
           }
         });
     },
-    getRanking: function (aid = 50, bid = 0, cid = 0, did = 0, time = "") {
+    getRanking: function (aid = 50, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
@@ -673,10 +648,7 @@ export default {
             "&cid=" +
             cid +
             "&did=" +
-            did,
-          this.$qs.stringify({
-            t: this.time,
-          })
+            did
         )
         .then((res) => {
           let data = res.data.data,
@@ -701,17 +673,9 @@ export default {
             }
 
             this.$appSetLocalStorage(
-              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time,
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
               newData
             );
-
-            if (aid == 0) {
-              //this.$message.success(this.$appMsg.success[1005]);
-
-              if (this.time) {
-                this.$message.info(this.$appMsg.info[1030]);
-              }
-            }
           } else if ([2006, 2015].indexOf(status.code) > -1) {
             this.tableData.loading = false;
             this.msg = status.msg;

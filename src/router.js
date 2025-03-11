@@ -64,7 +64,7 @@ export default new Router({
         import('./views/Ranking/Index.vue'),
       meta: {
         title: '排行',
-        keepAlive: true
+        keepAlive: false
       }
     }, {
       path: '/search',
@@ -73,7 +73,7 @@ export default new Router({
         import('./views/Search/Index.vue'),
       meta: {
         title: '搜索',
-        keepAlive: true
+        keepAlive: false
       }
     }, {
       path: '/setting',

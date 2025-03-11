@@ -146,8 +146,9 @@ export default {
 
             this.$appSetLocalStorage("heroSameHobby-" + heroId, this.tableData);
 
-            if (tipsType == 1)
-              this.$message.success(this.$appMsg.success[1000]);
+            if (tipsType == 1) {
+              //this.$message.success(this.$appMsg.success[1000]);
+            }
           } else {
             this.$message.error(status.msg);
           }

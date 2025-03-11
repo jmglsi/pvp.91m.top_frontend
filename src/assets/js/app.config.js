@@ -1,24 +1,27 @@
 import Vue from 'vue';
-import XEUtils from 'xe-utils';
 import 'v-charts/lib/style.css';
 
-import cookie from 'vue-cookie';
-Vue.prototype.$cookie = cookie;
+import XEUtils from 'xe-utils';
+Vue.prototype.$appXEUtils = XEUtils;
 
-let ua = navigator.userAgent, url = window.location;
+let ua = navigator.userAgent;
 
+Vue.prototype.$appCookie = XEUtils.cookie;
+Vue.prototype.$appGameType = XEUtils.cookie("game-type") || "wzry";
+Vue.prototype.$appTs = XEUtils.timestamp(new Date()).toString().slice(0, 10);
+Vue.prototype.$appLocat = XEUtils.locat();
+//
+let nowUrl = Vue.prototype.$appLocat;
+Vue.prototype.$appQuery = nowUrl.searchQuery;
+Vue.prototype.$appIsRobot = (Number(nowUrl.searchQuery.isRobot) == 1 ? true : false);
+Vue.prototype.$appIsMyHost = /(localhost:8080|pvp\.91m\.top|pvp\.r18\.games|pvp\.qialol\.com)/i.test(nowUrl.host);
+//只适合首次
 Vue.prototype.$appCache = "//cache.91m.top/pvp.91m.top";
-Vue.prototype.$appGameType = cookie.get("game-type") || "wzry";
 Vue.prototype.$appIsApple = /(iPhone|iPad|iPod|Mac)/i.test(ua);
 Vue.prototype.$appInDouyin = /Bytedance/i.test(ua);
 Vue.prototype.$appInWechat = /MicroMessenger/i.test(ua);
 Vue.prototype.$appInWechatMiniapp = /miniProgram/i.test(ua);
 Vue.prototype.$appIsMobile = /(Android|iPhone|iPad|iPod|Mobile)/i.test(ua);
-Vue.prototype.$appIsMyHost = /(localhost:8080|pvp\.91m\.top|pvp\.r18\.games|pvp\.qialol\.com)/i.test(url.host);
-Vue.prototype.$appIsRobot = (url.search.indexOf("isRobot=1") > -1 ? true : false);
-Vue.prototype.$appTs = Number(Date.parse(new Date()).toString().slice(0, 10));
-Vue.prototype.$appQuery = XEUtils.parseUrl(url).searchQuery;
-//appQuery 只适合首次
 Vue.prototype.$appHeight = document.documentElement.clientHeight;
 Vue.prototype.$appWidth = document.documentElement.clientWidth;
 
@@ -99,7 +102,7 @@ Vue.prototype.$appWatermarkInfo = {
   rotate: 25,
   width: 135,
   height: 100,
-  color: "rgb(240, 240, 240)",
+  color: "rgb(250, 250, 250)",
 };
 
 Vue.prototype.$wzryColumnsInfo = {

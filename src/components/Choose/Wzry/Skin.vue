@@ -111,7 +111,7 @@ export default {
 
       this.showInfo.actionSheet = false;
     },
-    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0, heroId = 111) {
+    getRanking: function (aid = 18, bid = 0, cid = 0, did = 0, heroId = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(

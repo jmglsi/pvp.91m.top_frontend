@@ -35,9 +35,10 @@
           :expand-config="{ accordion: true }"
           :data="tableData[0].rows"
         >
-          <vxe-column type="seq" width="60" />
+          <vxe-table-column type="seq" width="60" />
+
           <!--
-          <vxe-column
+          <vxe-table-column
             field="frameId"
             title="类型"
             :filters="frameData.result.rows"
@@ -49,9 +50,10 @@
             <template #default="{ row }">
               {{ frameInfo[row.frameId] }}
             </template>
-          </vxe-column>
+          </vxe-table-column>
           -->
-          <vxe-column
+
+          <vxe-table-column
             field="robot"
             title="公众号"
             width="250"
@@ -67,9 +69,9 @@
               >
                 <br />
                 <van-tag
+                  round
                   v-for="(data, index) in row.tag"
                   :key="'admin-4f1cb2cce1bd665d34f21735c517cf9f-' + index"
-                  round
                   :color="data.color"
                   type="primary"
                   class="admin-1957c2d79946c8557790e643435fea9a"
@@ -78,8 +80,9 @@
                 </van-tag>
               </span>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="updated_at"
             title="更新时间"
             show-overflow="ellipsis"
@@ -102,15 +105,18 @@
             //loadMethod: getRssList,
           }"
         >
-          <vxe-column type="checkbox" width="60" />
-          <vxe-column type="seq" width="60" />
+          <vxe-table-column type="checkbox" width="60" />
+
+          <vxe-table-column type="seq" width="60" />
+
           <vxe-table-column type="expand" width="80">
             <template v-slot:content="{ row }">
               <MpFunction :row="row" />
             </template>
           </vxe-table-column>
+
           <!--
-          <vxe-column
+          <vxe-table-column
             field="frameId"
             title="类型"
             :filters="frameData.result.rows"
@@ -122,9 +128,10 @@
             <template #default="{ row }">
               {{ frameInfo[row.frameId] }}
             </template>
-          </vxe-column>
+          </vxe-table-column>
           -->
-          <vxe-column
+
+          <vxe-table-column
             field="robot"
             title="公众号"
             :filters="robotData.result.rows"
@@ -142,9 +149,9 @@
               >
                 <br />
                 <van-tag
+                  round
                   v-for="(data, index) in row.tag"
                   :key="'admin-4f1cb2cce1bd665d34f21735c517cf9f-' + index"
-                  round
                   :color="data.color"
                   type="primary"
                   class="admin-1957c2d79946c8557790e643435fea9a"
@@ -153,10 +160,13 @@
                 </van-tag>
               </span>
             </template>
-          </vxe-column>
-          <vxe-column field="group" title="用户" show-overflow="ellipsis" />
-          <vxe-column field="integral" title="积分" sortable />
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column field="group" title="用户" show-overflow="ellipsis" />
+
+          <vxe-table-column field="integral" title="积分" sortable />
+
+          <vxe-table-column
             field="updated_at"
             title="更新时间"
             show-overflow="ellipsis"

@@ -11,6 +11,7 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
+          fixed="left"
           field="id"
           title="装备"
           :filters="[
@@ -214,6 +215,8 @@
         <!--
         <vxe-table-column title="#" type="seq" width="75" />
         -->
+
+        <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
 
@@ -259,8 +262,7 @@
 export default {
   name: "rankingZhuangBeiKu",
   components: {
-    GameWzryHeroEquipmentListOne: () =>
-      import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
+    //GameWzryHeroEquipmentListOne: () => import("@/components/Game/Wzry/Hero/EquipmentList_One.vue"),
   },
   props: {
     refresh: {
@@ -280,6 +282,7 @@ export default {
   },
   data() {
     return {
+      msg: "",
       copyData: "",
       tableData: {
         loading: false,
@@ -324,7 +327,9 @@ export default {
         this.showInfo.skillActionSheet = true;
       }
 
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
+      let agree = this.$appConfigInfo.appInfo.isReadme;
+
+      if (agree == 1) {
         this.getRanking(53, 0, 0, 0);
       }
     },
@@ -370,6 +375,9 @@ export default {
             );
 
             //this.$message.success(this.$appMsg.success[1005]);
+          } else if ([2006, 2015].indexOf(status.code) > -1) {
+            this.tableData.loading = false;
+            this.msg = status.msg;
           } else {
             this.$message.error(status.msg);
           }

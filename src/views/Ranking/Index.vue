@@ -225,6 +225,15 @@
         </van-tab>
 
         <van-tab :disabled="$appGameType != 'jcc'">
+          <template #title>羁绊排行&nbsp;<i class="vxe-icon--funnel" /> </template>
+
+          <GameJccRankingJiBan
+            :isSmallMode="isSmallMode"
+            :refresh="refresh || 0"
+          />
+        </van-tab>
+
+        <van-tab :disabled="$appGameType != 'jcc'">
           <template #title>
             强化符文&nbsp;<i class="vxe-icon--funnel" />
           </template>
@@ -323,10 +332,10 @@
     <div class="ranking-ebf09abeb7c3db44741d328324915725">
       <van-divider
         :style="{
-          padding: '0 15px',
           color: 'rgb(243, 189, 103) !important',
           marginTop: '-3px',
           borderColor: 'rgb(243, 189, 103) !important',
+          padding: '0 16px',
         }"
         @click="$message.info($appMsg.info[1012])"
       >
@@ -360,6 +369,7 @@ export default {
       import("@/views/Ranking/Wzry/ZhuangBeiKu.vue"),
     GameJccRankingZhuangBeiKu: () =>
       import("@/views/Ranking/Jcc/ZhuangBeiKu.vue"),
+    GameJccRankingJiBan: () => import("@/views/Ranking/Jcc/JiBan.vue"),
     GameJccRankingQiangHuaFuWen: () =>
       import("@/views/Ranking/Jcc/QiangHuaFuWen.vue"),
     GameJccRanking: () => import("@/views/Ranking/Jcc/Game.vue"),
@@ -638,7 +648,7 @@ export default {
         //
       }
 
-      if (e == 6) {
+      if (e == 99) {
         this.bidInfo = this.nzOrderInfo;
         this.cidInfo = this.nzStatusInfo;
         this.didInfo = {
@@ -757,6 +767,10 @@ img.ranking-e49cd5784f7893174dadee338fd0e61b {
   position: absolute;
 }
 
+img.ranking-5ced96d52e4a626a6252b8dcea779fcd {
+  background-color: rgba(175, 175, 175, 0.5);
+}
+
 ul.ranking-f138efce9d200665110c7c47b8a57811 {
   display: initial;
 }
@@ -789,7 +803,7 @@ span.ranking-5cb6f4cb579d8c69b973e0fec7239056 {
 }
 
 span.ranking-7c7f825106f6288d7e5bea8012e23041 {
-  font-size: 10px;
+  font-size: @app-font-size;
 }
 
 span.ranking-8302b5f225fa915b2cf1a42525d4e0d3 {
@@ -838,6 +852,11 @@ div.ranking-index {
 div.ranking-progress {
   margin-top: 3px;
   position: absolute;
+}
+
+div.ranking-2862744e5d7cce9d070aa41172557d78 {
+  margin: 50px 0;
+  font-size: @app-font-size;
 }
 
 div.ranking-689fdaf6324c0a1d4369c477538a4c63 {
@@ -897,18 +916,6 @@ div.ranking-3ab42c8325a264730406e37e1f731f70 {
     object-fit: cover;
     width: 100% !important;
   }
-}
-
-div.ranking-420e569f7ae439ae256513412631f2f4 {
-  font-size: @app-font-size;
-  left: 0;
-  margin: 0 auto;
-  margin-top: -3px;
-  position: absolute;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
 }
 
 div.ranking-a6c2fcca8d40c28ed46b93c2c629f0ae {

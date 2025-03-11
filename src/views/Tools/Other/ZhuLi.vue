@@ -170,6 +170,7 @@ div.tools-aaa5fbf0b4fecc42e01468a7e7331cfd {
 
 div.tools-a14c7eab75f1c40e073c8e492ccdf5a4 {
   margin-top: 25px;
+  font-size: @app-font-size;
 }
 
 div.tools-976557a5817b8cc329f662b64fcc3248 {

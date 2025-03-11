@@ -52,7 +52,7 @@
                   v-if="data.price == 0"
                   class="tools-28a3baff1739a145c522207499d5041c"
                 >
-                  <van-tag type="danger" size="large" plain round>
+                  <van-tag plain round type="danger" size="large">
                     封塘中
                   </van-tag>
                 </span>
@@ -73,7 +73,7 @@
                     :key="'tools-bcedd7a0b808f13e1783c88f4fef0e59-' + index"
                     class="tools-e9c1aedfcdf98f5a373dbbc98d122e9b"
                   >
-                    <van-tag type="primary" size="large" plain round>
+                    <van-tag plain round type="primary" size="large">
                       {{ data }}
                     </van-tag>
                   </span>

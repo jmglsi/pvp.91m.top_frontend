@@ -11,6 +11,7 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
+          fixed="left"
           field="id"
           title="装备"
           :filters="[
@@ -160,6 +161,8 @@
         <!--
         <vxe-table-column title="#" type="seq" width="75" />
         -->
+
+        <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
 
@@ -190,11 +193,21 @@
         "
       >
         <template #default>
-          <GameWzryHeroEquipmentListOne
-            v-if="showInfo.skillActionSheet"
-            :extraId="tableDataRow.id"
-            :extraType="2"
-          />
+          <van-tabs
+            v-model="extraInfo.model"
+            v-if="extraInfo.model > -1"
+            :ellipsis="false"
+          >
+            <div v-if="$appGameType == 'wzry'">
+              <van-tab title="出装 (单件)">
+                <GameWzryHeroEquipmentListOne
+                  v-if="extraInfo.model == 0"
+                  :extraId="tableDataRow.id"
+                  :extraType="2"
+                />
+              </van-tab>
+            </div>
+          </van-tabs>
         </template>
       </van-action-sheet>
     </div>
@@ -226,6 +239,7 @@ export default {
   },
   data() {
     return {
+      msg: "",
       copyData: "",
       tableData: {
         loading: false,
@@ -246,6 +260,9 @@ export default {
       clientHeight: 0,
       listWidth: 0,
       filterValue: [],
+      extraInfo: {
+        model: 1,
+      },
       showInfo: {
         skillActionSheet: false,
         equipmentActionSheet: false,
@@ -271,7 +288,9 @@ export default {
         this.showInfo.skillActionSheet = true;
       }
 
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
+      let agree = this.$appConfigInfo.appInfo.isReadme;
+
+      if (agree == 1) {
         this.getRanking(3, 0, 0, 0);
       }
     },
@@ -318,6 +337,9 @@ export default {
             );
 
             //this.$message.success(this.$appMsg.success[1005]);
+          } else if ([2006, 2015].indexOf(status.code) > -1) {
+            this.tableData.loading = false;
+            this.msg = status.msg;
           } else {
             this.$message.error(status.msg);
           }

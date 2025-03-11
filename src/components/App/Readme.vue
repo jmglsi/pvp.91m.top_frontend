@@ -44,7 +44,7 @@ export default {
   },
   mounted() {
     let agree = 0;
-    agree = this.$cookie.get("agree");
+    agree = this.$appCookie("agree");
 
     this.agree = agree;
     this.$appConfigInfo.appInfo.isReadme = agree;
@@ -67,11 +67,12 @@ export default {
 
       this.showInfo.actionSheet = nowActionSheet;
       this.showInfo.checkbox = nowChecked;
-      this.$cookie.set("agree", nowChecked_int, {
-        expires: "1Y",
+
+      this.$appCookie("agree", nowChecked_int, {
+        expires: "1y",
       });
 
-      this.$message.success(this.$appMsg.success[1000]);
+      //this.$message.success(this.$appMsg.success[1000]);
 
       setTimeout(() => {
         window.location.reload();

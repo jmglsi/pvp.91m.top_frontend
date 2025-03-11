@@ -15,14 +15,7 @@
       切换
     </van-button>
 
-    <GameWzryHeroMindMap
-      v-if="show == 'mind'"
-      :extraId="extraInfo.id"
-      :extraType="extraInfo.type"
-      :extraList="tableData.result.rows"
-    />
-
-    <div v-else-if="show == 'list'">
+    <div v-if="show == 'list'">
       <vxe-table
         ref="refWzryHeroEquipmentListOne"
         id="refWzryHeroEquipmentListOne"
@@ -223,6 +216,13 @@
       </vxe-table>
     </div>
 
+    <GameWzryHeroMindMap
+      v-else-if="show == 'mind'"
+      :extraId="extraInfo.id"
+      :extraType="extraInfo.type"
+      :extraList="tableData.result.rows"
+    />
+
     <van-action-sheet
       v-model="showInfo.actionSheet"
       :style="{
@@ -305,9 +305,13 @@ export default {
       immediate: true,
       handler(newValue) {
         if (!newValue.extraId) return;
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (this.$appConfigInfo.appInfo.isReadme == 1) {
+        if (agree == 1) {
           this.show = "list";
+
+          this.extraInfo.id = newValue.extraId;
+          this.extraInfo.type = newValue.extraType;
 
           this.getRanking(6, newValue.extraType, 0, 0, newValue.extraId);
         }
@@ -339,7 +343,7 @@ export default {
       lineDataRow: {},
       extraInfo: {
         id: this.extraId,
-        type: 1,
+        type: this.extraType,
       },
       showInfo: {
         actionSheet: false,
@@ -350,7 +354,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(1450);
   },
   methods: {
-    getRanking: function (aid = 6, bid = 1, cid = 0, did = 0, id = 111) {
+    getRanking: function (aid = 6, bid = 1, cid = 0, did = 0, id = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(

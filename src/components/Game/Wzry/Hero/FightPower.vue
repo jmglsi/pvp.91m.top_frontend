@@ -111,29 +111,6 @@
             >
               <vxe-table-column title="#" type="seq" width="50" />
 
-              <vxe-table-column type="expand" width="50">
-                <template #content="{ row, rowIndex }">
-                  <div
-                    :style="{
-                      position: 'relative',
-                    }"
-                  >
-                    <img
-                      v-if="row.fightPowerImg"
-                      v-lazy="row.fightPowerImg"
-                      @click="onImagePreviewClick(rowIndex)"
-                      class="hero-fightPower-559b72e1d0f69118d849a535f9000646"
-                    />
-                    <span
-                      v-else
-                      class="hero-fightPower-768607b02a407038d55cbdc241ef8df2"
-                    >
-                      没有图片
-                    </span>
-                  </div>
-                </template>
-              </vxe-table-column>
-
               <vxe-table-column
                 field="areaText"
                 title="大区"
@@ -168,6 +145,29 @@
                 width="200"
                 sortable
               />
+
+              <vxe-table-column type="expand" width="50">
+                <template #content="{ row, rowIndex }">
+                  <div
+                    :style="{
+                      position: 'relative',
+                    }"
+                  >
+                    <img
+                      v-if="row.fightPowerImg"
+                      v-lazy="row.fightPowerImg"
+                      @click="onImagePreviewClick(rowIndex)"
+                      class="hero-fightPower-559b72e1d0f69118d849a535f9000646"
+                    />
+                    <span
+                      v-else
+                      class="hero-fightPower-768607b02a407038d55cbdc241ef8df2"
+                    >
+                      没有图片
+                    </span>
+                  </div>
+                </template>
+              </vxe-table-column>
             </vxe-table>
           </div>
         </van-tab>
@@ -330,7 +330,7 @@ export default {
           }
         });
     },
-    getRanking: function (heroId, aid = 10, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 10, bid = 0, cid = 0, did = 0, heroId = 0) {
       if (heroId == 0 || did == 0) return;
 
       this.$axios
@@ -363,7 +363,7 @@ export default {
     },
     onTabsClick: function (e) {
       if (e == 1) {
-        this.getRanking(this.extraId, 10, 0, 0, this.extraType);
+        this.getRanking(10, 0, 0, this.extraType, this.extraId);
       }
     },
     onTableColumnFilterMethod: function ({ option, row, column }) {
