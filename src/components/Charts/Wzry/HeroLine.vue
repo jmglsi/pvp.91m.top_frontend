@@ -87,7 +87,7 @@
             <span class="hero-18b58e781121d29af9c6dd24a2b9bdbc">|</span>
             <span class="hero-f2c563299eda7a8301fd79097a3d77a8">
               <span class="hero-412d90612ddb71698502ce6f29370422">
-                11:30、23:30 更新
+                11/23:30 更新
               </span>
               <span class="hero-f04ba7249dc09ecf99855b888f3ec78f">，</span>
               <span class="hero-5e442f77a551ef0cc4247e56def59551">
@@ -484,11 +484,11 @@ export default {
           }
         });
     },
-    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0, time = "") {
+    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
-          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time
+          "ranking-" + aid + "-" + bid + "-" + cid + "-" + did
         );
 
       if (ls && ts - ls.updateTime < appConfigInfo.appInfo.updateInfo.timeout) {
@@ -513,10 +513,7 @@ export default {
             "&cid=" +
             cid +
             "&did=" +
-            did,
-          this.$qs.stringify({
-            t: this.time,
-          })
+            did
         )
         .then((res) => {
           let data = res.data.data,
@@ -539,17 +536,9 @@ export default {
             }
 
             this.$appSetLocalStorage(
-              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did + "-" + time,
+              "ranking-" + aid + "-" + bid + "-" + cid + "-" + did,
               newData
             );
-
-            if (aid == 0) {
-              //this.$message.success(this.$appMsg.success[1005]);
-
-              if (this.time) {
-                this.$message.info(this.$appMsg.info[1030]);
-              }
-            }
           } else if ([2006, 2015].indexOf(status.code) > -1) {
             this.tableData.loading = false;
             this.msg = status.msg;

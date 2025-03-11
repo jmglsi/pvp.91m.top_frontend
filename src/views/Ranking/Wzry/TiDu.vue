@@ -931,9 +931,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
-        if (this.$appConfigInfo.appInfo.isReadme == 1) {
+        let agree = this.$appConfigInfo.appInfo.isReadme;
+
+        if (agree == 1) {
           this.getRanking(16, newValue.bid, newValue.cid, 0);
           this.getRanking(15);
 
@@ -962,10 +964,10 @@ export default {
         },
       },
       actionSheetActions: [
-        { name: "备战", subname: "学习大神思路", value: 0 },
-        { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
+        { name: "出装备战", subname: "学习大神的思路", value: 0 },
+        { name: "搜索一下", subname: "看看都在聊什么", value: 1 },
+        //{ name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        //{ name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
       showInfo: {
         tableData: {
@@ -1014,6 +1016,14 @@ export default {
       },
       tipsInfo: [0, 0, 0, 0, 0, 0],
     };
+  },
+  mounted() {
+    this.getRanking(16, this.bid, this.cid, 0);
+    this.getRanking(15);
+
+    setTimeout(() => {
+      this.getRankingByT(16, this.bid, this.cid, 0);
+    }, 500);
   },
   methods: {
     getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {

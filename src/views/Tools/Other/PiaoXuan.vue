@@ -43,7 +43,7 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[1].tag.color" round type="primary">
+                  <van-tag round :color="topInfo[1].tag.color" type="primary">
                     {{ topInfo[1].skinName }}
                   </van-tag>
                 </div>
@@ -98,7 +98,7 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[0].tag.color" round type="primary">{{
+                  <van-tag round :color="topInfo[0].tag.color" type="primary">{{
                     topInfo[0].skinName
                   }}</van-tag>
                 </div>
@@ -141,7 +141,7 @@
                   />
                 </div>
                 <div>
-                  <van-tag :color="topInfo[2].tag.color" round type="primary">
+                  <van-tag round :color="topInfo[2].tag.color" type="primary">
                     {{ topInfo[2].skinName }}
                   </van-tag>
                 </div>
@@ -193,8 +193,8 @@
           <vxe-table-column field="skinName" title="#" width="75">
             <template #default="{ row, rowIndex }">
               <van-tag
-                :color="row.tag.color"
                 mark
+                :color="row.tag.color"
                 type="primary"
                 class="app-e4d23e841d8e8804190027bce3180fa5"
               >

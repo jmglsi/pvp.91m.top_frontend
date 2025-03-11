@@ -39,8 +39,9 @@ export default {
       immediate: true,
       handler(newValue) {
         if (!newValue.extraId) return;
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (this.$appConfigInfo.appInfo.isReadme == 1) {
+        if (agree == 1) {
           this.initPage(this.extraList);
         }
       },

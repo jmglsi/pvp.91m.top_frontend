@@ -36,9 +36,10 @@
           :data="tableData[0].rows"
         >
           <!--
-          <vxe-column field="sId" title="序号" width="200" sortable />
+          <vxe-table-column field="sId" title="序号" width="200" sortable />
           -->
-          <vxe-column
+
+          <vxe-table-column
             field="type.id"
             fixed="left"
             title="类型"
@@ -54,8 +55,9 @@
             <template #default="{ row }">
               {{ row.type.label }}
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="brand.name"
             fixed="left"
             title="品牌"
@@ -73,8 +75,9 @@
                 {{ row.brand.name }}
               </span>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="name"
             fixed="left"
             title="名称"
@@ -85,43 +88,49 @@
             <template #default="{ row }">
               {{ row.status }}&nbsp;|&nbsp;{{ row.name }}
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="description"
             title="描述"
             width="150"
             :edit-render="{ name: 'input' }"
             show-overflow="ellipsis"
           />
-          <vxe-column
+
+          <vxe-table-column
             field="condition"
             title="成色"
             width="100"
             :edit-render="{ name: 'input' }"
             sortable
           />
-          <vxe-column
+
+          <vxe-table-column
             field="price"
             title="价格"
             width="100"
             :edit-render="{ name: 'input' }"
             sortable
           />
-          <vxe-column
+
+          <vxe-table-column
             field="num"
             title="库存"
             width="100"
             :edit-render="{ name: 'input' }"
             sortable
           />
-          <vxe-column
+
+          <vxe-table-column
             field="updated_at"
             title="更新时间"
             width="175"
             show-overflow="ellipsis"
             sortable
           />
-          <vxe-column title="操作" width="160">
+
+          <vxe-table-column title="操作" width="160">
             <template #default="{ row }">
               <template v-if="hasEditStatus(row)">
                 <vxe-button @click="saveRowEvent(row)">保存</vxe-button>
@@ -131,9 +140,9 @@
                 <vxe-button @click="editRowEvent(row)">编辑</vxe-button>
               </template>
             </template>
-          </vxe-column>
+          </vxe-table-column>
 
-          <vxe-column type="seq" width="60" />
+          <vxe-table-column type="seq" width="60" />
         </vxe-table>
 
         <div class="app-face1cbe136c70e1fc08cff038596944">
@@ -156,8 +165,9 @@
           :custom-config="{ storage: true }"
           :data="tableData[1].rows"
         >
-          <vxe-column type="seq" width="60" />
-          <vxe-column
+          <vxe-table-column type="seq" width="60" />
+
+          <vxe-table-column
             field="sId"
             title="订单"
             width="225"
@@ -170,8 +180,9 @@
                 {{ row.trade_status }}&nbsp;|&nbsp;{{ row.out_trade_no }}
               </span>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="name"
             title="名称"
             width="175"
@@ -180,21 +191,25 @@
             <template #default="{ row }">
               <span>{{ row.sId }}&nbsp;|&nbsp;{{ row.name }}</span>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="param"
             title="参数"
             width="225"
             show-overflow="ellipsis"
           />
-          <vxe-column field="money" title="金额" width="100" sortable />
-          <vxe-column
+
+          <vxe-table-column field="money" title="金额" width="100" sortable />
+
+          <vxe-table-column
             field="created_at"
             title="创建时间"
             show-overflow="ellipsis"
             sortable
           />
-          <vxe-column
+
+          <vxe-table-column
             field="updated_at"
             title="更新时间"
             show-overflow="ellipsis"

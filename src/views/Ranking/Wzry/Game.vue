@@ -2,12 +2,12 @@
   <div class="ranking-wzry app-wzry">
     <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
       <!--
-        style="background-color: rgb(246, 246, 248) !important;"
+        style="background-color: rgb(250, 250, 250) !important;"
       -->
       <vxe-toolbar
         size="mini"
         style="background-color: transparent"
-        ref="refWzryToolbar"
+        ref="refWzryGameToolbar"
         custom
       />
     </div>
@@ -16,17 +16,17 @@
       <vxe-table
         ref="refWzryGame"
         id="refWzryGame"
-        :cell-class-name="onTableCellClassName"
         :custom-config="{ storage: true }"
         :expand-config="{ accordion: true }"
         :data="tableData.result.rows"
         :height="clientHeight"
         :loading="tableData.loading"
+        :cell-class-name="onTableCellClassName"
         @cell-click="onTableCellClick"
         @custom="onTableCustom"
       >
-        <!-- fixed="left" -->
-        <vxe-column
+        <vxe-table-column
+          fixed="left"
           field="allScore"
           title="#"
           :filters="[{ value: '' }]"
@@ -48,9 +48,9 @@
           </template>
           <template #default="{ row }">
             <van-tag
-              v-if="row.tag.text"
-              :color="row.tag.color"
               mark
+              v-if="row.tag.text && dateInfo.day.length == 0"
+              :color="row.tag.color"
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
             >
@@ -78,6 +78,7 @@
               />
               <div class="ranking-713dd4d0b2e842c08da62ddeec872331">
                 <img
+                  v-if="dateInfo.day.length == 0"
                   v-lazy="{
                     //error: row.skill[0].img,
                     src: row.skill[0].img,
@@ -87,11 +88,13 @@
                   class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-35af5e6c0fc290aa4f2e38d4c8296a03"
                 />
                 <span
+                  v-if="dateInfo.day.length == 0"
                   class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-043052eea2d064cab23119e56f4f640e"
                 >
                   {{ row.skill[0].pickRate }}%
                 </span>
                 <img
+                  v-if="dateInfo.day.length == 0"
                   v-lazy="{
                     //error: row.skill[1].img,
                     src: row.skill[1].img,
@@ -101,6 +104,7 @@
                   class="app-border-radius ranking-95a25d46f98b0ec553d892cc45037d57 ranking-fbfe7b256ce6b4df1d03d8022163c6d2"
                 />
                 <span
+                  v-if="dateInfo.day.length == 0"
                   class="app-0fc3cfbc27e91ea60a787de13dae3e3c app-5f19eaf71f40d74d66be84db52b3ad87 ranking-dabb6e25dffefe5b4821b7062afbdaef"
                 >
                   {{ row.skill[1].pickRate }}%
@@ -108,17 +112,7 @@
               </div>
             </div>
           </template>
-        </vxe-column>
-
-        <!--
-        <vxe-column field="more" type="expand" title="更多" width="80">
-          <template #content="{ row }">
-            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
-              <ChartsWzryHeroLine :extraId="row.id" :aid="0" />
-            </div>
-          </template>
-        </vxe-column>
-        -->
+        </vxe-table-column>
 
         <vxe-table-colgroup
           :title-prefix="{
@@ -131,18 +125,18 @@
           }"
         >
           <template #header>
-            <div
-              @click="
-                $appOpenUrl(
-                  $t('open-url.title'),
-                  null,
-                  { path: url.openSource[0] },
-                  0
-                )
-              "
-              class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81"
-            >
-              <span class="ranking-6ad9203f996965a0c641bbf73cc1143f">
+            <div class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81">
+              <span
+                @click="
+                  $appOpenUrl(
+                    $t('open-url.title'),
+                    null,
+                    { path: url.openSource[0] },
+                    0
+                  )
+                "
+                class="ranking-6ad9203f996965a0c641bbf73cc1143f"
+              >
                 {{ $appMsg.tips[1004] }}(%)
               </span>
               <van-tag
@@ -150,14 +144,16 @@
                 round
                 type="warning"
                 size="medium"
+                @click="showInfo.calendar = true"
                 class="ranking-f5e0d4e9cee528a53f64ea02550517bf"
               >
-                {{ $appConfigInfo.appInfo.updateInfo.daily }} 更新，算法测试中
+                {{ dateInfo.day || $appConfigInfo.appInfo.updateInfo.daily }}
+                {{ dateInfo.day.length > 0 ? "📅" : "更新，算法测试中" }}
               </van-tag>
             </div>
           </template>
 
-          <vxe-column
+          <vxe-table-column
             field="trend"
             title="热度"
             :title-prefix="{
@@ -166,6 +162,7 @@
                 '\n当前平均分数 ≈ ' +
                 ($appConfigInfo.appInfo.updateInfo.avgScore || 0),
             }"
+            :visible="dateInfo.day.length == 0"
             width="100"
             sortable
           >
@@ -208,8 +205,9 @@
                 <span v-else>-</span>
               </div>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+
+          <vxe-table-column
             field="allWinRate"
             title="胜率"
             :width="listWidth"
@@ -228,8 +226,8 @@
               />
               %
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             :field="'allBanRate[' + banInfo.index + ']'"
             :title="banInfo.title"
             :filters="[{ value: 0 }]"
@@ -256,8 +254,8 @@
                 {{ row.allBanRate[banInfo.index] }}
               </span>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="allPickRate"
             title="出场"
             :filters="[{ value: 0 }]"
@@ -288,7 +286,9 @@
                   <a-popover trigger="click" placement="right">
                     <template #content>
                       <div
-                        v-html="heroProficiency"
+                        v-html="
+                          dateInfo.day.length == 0 ? heroProficiency : '-'
+                        "
                         class="ranking-7e8b2826e5b06781c19f0ee58f12f230"
                       />
                     </template>
@@ -297,7 +297,9 @@
                       {{ row.allPickRate }}
                     </span>
                     <div
-                      v-if="row.change.updateValue != 0"
+                      v-if="
+                        row.change.updateValue != 0 && dateInfo.day.length == 0
+                      "
                       :style="
                         row.change.updateType == 2
                           ? { color: 'red !important' }
@@ -327,7 +329,12 @@
                     </div>
 
                     <ChartsWzryHeroProgress
-                      v-if="row.id && row.id < 900 && bid < 4"
+                      v-if="
+                        row.id &&
+                        row.id < 900 &&
+                        bid < 4 &&
+                        dateInfo.day.length == 0
+                      "
                       :extraList="progressData.result.rows[row.id]"
                       :listWidth="heroProficiencyWidth - 10"
                     />
@@ -335,8 +342,8 @@
                 </lazy-component>
               </div>
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="allBPRate"
             title="禁选"
             :filters="[{ value: 2.5, checked: true }]"
@@ -361,7 +368,7 @@
               <span v-if="!row.updateId">0</span>
               <span v-else>{{ row.allBPRate }}</span>
             </template>
-          </vxe-column>
+          </vxe-table-column>
         </vxe-table-colgroup>
 
         <!--
@@ -371,7 +378,7 @@
             content: $appMsg.tips[1025],
           }"
         >
-          <vxe-column
+          <vxe-table-column
             field="avgQQFightPower"
             title="估算"
             :width="listWidth"
@@ -386,19 +393,19 @@
           }"
           title="输出"
         >
-          <vxe-column
+          <vxe-table-column
             field="totalHeroHurtCnt"
             title="对人"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="totalHurtCnt"
             title="全部"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="hurtTransRate"
             title="转化"
             :width="listWidth"
@@ -407,13 +414,13 @@
         </vxe-table-colgroup>
 
         <vxe-table-colgroup title="承伤">
-          <vxe-column
+          <vxe-table-column
             field="behurtPerDeath"
             title="每死"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="totalBehurtCnt"
             title="全部"
             :width="listWidth"
@@ -427,13 +434,13 @@
             content: $appMsg.tips[1017],
           }"
         >
-          <vxe-column
+          <vxe-table-column
             field="totalPriceMin"
             title="分均"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="totalPrice"
             title="全部"
             :width="listWidth"
@@ -442,13 +449,13 @@
         </vxe-table-colgroup>
 
         <vxe-table-colgroup title="团队">
-          <vxe-column
+          <vxe-table-column
             field="joinGamePercent"
             title="参团"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="usedtime"
             title="时长"
             :width="listWidth"
@@ -457,19 +464,19 @@
         </vxe-table-colgroup>
 
         <vxe-table-colgroup title="KDA">
-          <vxe-column
+          <vxe-table-column
             field="killCnt"
             title="击杀"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="deadCnt"
             title="死亡"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="assistCnt"
             title="助攻"
             :width="listWidth"
@@ -478,19 +485,19 @@
         </vxe-table-colgroup>
 
         <vxe-table-colgroup title="牌子 (%)">
-          <vxe-column
+          <vxe-table-column
             field="evaluateSilverRate"
             title="银牌"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="evaluateGoldRate"
             title="金牌"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="allBrandRate"
             title="全部"
             :width="listWidth"
@@ -499,19 +506,19 @@
         </vxe-table-colgroup>
 
         <vxe-table-colgroup title="MVP (%)">
-          <vxe-column
+          <vxe-table-column
             field="loseMvpRate"
             title="败方"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="winMvpRate"
             title="胜方"
             :width="listWidth"
             sortable
           />
-          <vxe-column
+          <vxe-table-column
             field="allMvpRate"
             title="全部"
             :width="listWidth"
@@ -519,8 +526,19 @@
           />
         </vxe-table-colgroup>
 
+        <vxe-table-column field="more" type="expand" title="更多" width="80">
+          <template #content="{ row }">
+            <div
+              :style="{ width: $appWidth - 20 + 'px' }"
+              class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d"
+            >
+              <GameWzryHeroMore :extraId="row.id" />
+            </div>
+          </template>
+        </vxe-table-column>
+
         <!--
-        <vxe-column title="#" type="seq" width="50" />
+        <vxe-table-column title="#" type="seq" width="50" />
         -->
 
         <template #empty><div v-html="msg || '暂无数据'" /></template>
@@ -615,6 +633,17 @@
       <GameWzryHeroSameHobby :extraId="tableDataRow.id" />
     </div>
 
+    <div class="ranking-61643949857abb484bacc753356d6071">
+      <van-calendar
+        v-model="showInfo.calendar"
+        title="命运的齿轮开始转动"
+        :formatter="onCalendarFormatter"
+        :min-date="dateInfo.min"
+        :max-date="dateInfo.max"
+        @confirm="onConfirmClick"
+      />
+    </div>
+
     <div class="ranking-2a070514f71e4c264a78b600fc9a8e0d">
       <van-action-sheet
         v-model="showInfo.heroActionSheet"
@@ -644,6 +673,7 @@ export default {
       import("@/components/Charts/Wzry/HeroProgress.vue"),
     ChartsWzryChartsRankingLine: () =>
       import("@/components/Charts/Wzry/RankingLine.vue"),
+    GameWzryHeroMore: () => import("@/components/Game/Wzry/Hero/More.vue"),
     GameWzryHeroBPIndex: () =>
       import("@/components/Game/Wzry/Hero/BPIndex.vue"),
     GameWzryHeroEquipmentListALL: () =>
@@ -687,20 +717,19 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 && newValue.refresh == 1) {
           //if (newValue.refresh == 1) {
           this.getRanking(
             0,
             newValue.bid,
             newValue.cid,
             newValue.did,
-            this.time
+            this.dateInfo.day
           );
-          this.getRanking(15, 0, 0, 0, this.time);
         }
       },
     },
@@ -708,7 +737,6 @@ export default {
   data() {
     return {
       msg: "",
-      time: this.$route.query.t || "",
       heroProficiency: this.$t("loading"),
       url: {
         openSource: ["https://docs.91m.top"],
@@ -739,22 +767,29 @@ export default {
         },
       },
       actionSheetActions: [
-        { name: "趋势", subname: "左下角关注一下", value: 0 },
-        { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
+        { name: "热度趋势", subname: "左下角关注一下", value: 0 },
+        { name: "搜索一下", subname: "看看都在聊什么", value: 1 },
+        //{ name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        //{ name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
+      width: 0,
       listWidth: 0,
       clientHeight: 0,
       heroProficiencyWidth: 0,
+      dateInfo: {
+        min: new Date(),
+        max: new Date(),
+        day: "",
+      },
       showInfo: {
+        calendar: false,
         skillActionSheet: false,
         heroActionSheet: false,
         heroSameHobby: false,
       },
       banInfo: {
-        title: "禁用",
-        index: 1,
+        title: "双禁",
+        index: 0,
       },
       cellInfo: {
         index: 0,
@@ -772,21 +807,27 @@ export default {
     this.clientHeight = this.$appInitTableHeight(10);
     this.initTableWidth();
 
+    this.initPage();
+  },
+  mounted() {
     this.$nextTick(() => {
+      this.getRanking(0, this.bid, this.cid, this.did, this.dateInfo.day);
+      this.getRanking(15, 0, 0, 0, "");
       this.getHeroChartsLog(7);
 
-      this.$refs.refWzryGame.connect(this.$refs.refWzryToolbar);
+      this.$refs.refWzryGame.connect(this.$refs.refWzryGameToolbar);
     });
     //手动将表格和工具栏进行关联
-
-    /*
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
-        this.getRanking(0, this.bid, this.cid, this.did, this.time);
-        this.getRanking(15, 0, 0, 0, this.time);
-      }
-    */
   },
   methods: {
+    initPage: function () {
+      let date = new Date();
+
+      this.dateInfo.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.dateInfo.max = new Date(date.setMonth(date.getMonth() + 4));
+
+      this.dateInfo.day = this.$appCookie("lastDataDay") || "";
+    },
     initTableWidth: function () {
       this.listWidth = this.$appInitTableWidth(1450);
       this.heroProficiencyWidth = (this.listWidth || 80) - 20;
@@ -856,7 +897,7 @@ export default {
             "&did=" +
             did,
           this.$qs.stringify({
-            t: this.time,
+            t: time,
           })
         )
         .then((res) => {
@@ -891,7 +932,7 @@ export default {
             if (aid == 0) {
               //this.$message.success(this.$appMsg.success[1005]);
 
-              if (this.time) {
+              if (time) {
                 this.$message.info(this.$appMsg.info[1030]);
               }
             }
@@ -950,6 +991,24 @@ export default {
             //this.$message.error(status.msg);
           }
         });
+    },
+    formatDate: function (date) {
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    },
+    onCalendarFormatter: function (day) {
+      let oldDay = this.$appXEUtils.toDateString(
+          this.formatDate(day.date),
+          "yyyy-MM-dd"
+        ),
+        newDay = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+
+      if (oldDay == newDay) {
+        day.topInfo = "11/23:30";
+        day.text = "更新";
+        day.bottomInfo = "昨日数据";
+      }
+
+      return day;
     },
     onTableCustom: function ({ type }) {
       switch (type) {
@@ -1019,7 +1078,7 @@ export default {
         }
       }
     },
-    onTableCellClick: function ({ row, column }) {
+    onTableCellClick: function ({ row, rowIndex, column }) {
       this.tableDataRow = row;
 
       if (column.property == "allScore") {
@@ -1033,7 +1092,13 @@ export default {
           this.showInfo.heroActionSheet = true;
         }
       } else if (column.property == "trend") {
-        this.$appPush({ path: "/hero/" + row.id + "/info" });
+        this.$refs.refWzryGame.toggleRowExpand(
+          this.tableData.result.rows[rowIndex]
+        );
+      } else if (column.property == "allWinRate") {
+        this.$refs.refWzryGame.toggleRowExpand(
+          this.tableData.result.rows[rowIndex]
+        );
       } else if (column.property == "allPickRate") {
         this.cellInfo.index = -1;
 
@@ -1043,12 +1108,12 @@ export default {
         this.showInfo.heroActionSheet = false;
         this.showInfo.heroSameHobby = false;
       } else if (column.property.indexOf("allBanRate") > -1) {
-        if (this.banInfo.index == 1) {
-          this.banInfo.title = "双禁";
-          this.banInfo.index = 0;
-        } else {
+        if (this.banInfo.index == 0) {
           this.banInfo.title = "禁用";
           this.banInfo.index = 1;
+        } else {
+          this.banInfo.title = "双禁";
+          this.banInfo.index = 0;
         }
       } else if (column.property != "more") {
         this.cellInfo.index = 1;
@@ -1056,6 +1121,30 @@ export default {
         this.showInfo.skillActionSheet = false;
         this.showInfo.heroActionSheet = true;
       }
+    },
+    onConfirmClick: function (date) {
+      let newDay = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+
+      this.showInfo.calendar = false;
+
+      this.dateInfo.day = this.$appXEUtils.toDateString(
+        this.formatDate(date),
+        "yyyy-MM-dd"
+      );
+
+      if (newDay == this.dateInfo.day) {
+        this.dateInfo.day = "";
+
+        this.$appCookie("lastDataDay", null, {
+          expires: -1,
+        });
+      } else {
+        this.$appCookie("lastDataDay", this.dateInfo.day, {
+          expires: "1d",
+        });
+      }
+
+      this.getRanking(0, this.bid, this.cid, this.did, this.dateInfo.day);
     },
     onTabsClick: function (e) {
       let tipsText;

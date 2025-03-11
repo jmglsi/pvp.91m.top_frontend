@@ -186,8 +186,6 @@ export default {
       });
     },
     updateShoppingInfo: function () {
-      console.log(this.shoppingInfo);
-
       this.$axios
         .post(
           this.$appApi.app.updateShoppingInfo,

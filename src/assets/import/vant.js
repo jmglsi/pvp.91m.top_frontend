@@ -33,6 +33,7 @@ import {
   PullRefresh,
   Radio,
   RadioGroup,
+  Rate,
   Row,
   Search,
   ShareSheet,
@@ -89,6 +90,7 @@ Vue
   .use(PullRefresh)
   .use(Radio)
   .use(RadioGroup)
+  .use(Rate)
   .use(Row)
   .use(Search)
   .use(ShareSheet)

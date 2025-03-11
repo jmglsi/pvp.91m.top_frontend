@@ -41,12 +41,12 @@
             :color="data.calendar.color"
           >
             <van-tag
+              round
               v-if="data.calendar.day"
               :color="data.calendar.color"
               @click="
                 extraId > 0 ? onOpenHeroUpdateDetailClick(extraId, data) : null
               "
-              round
               class="update-5a0c2e4611419b82b55675d035764007"
             >
               {{ data.calendar.day }}
@@ -165,8 +165,9 @@
           class="update-0b479089ade5d13a2c41830785ebac9d"
         >
           <van-tag
-            round
+            plain
             color="orange"
+            size="large"
             class="update-77ed43eb3bc38c0cb1a38367cfedd9d6"
           >
             更多更新记录
@@ -187,7 +188,10 @@
     </div>
 
     <div class="hero-ec93fee7573d5d8daa4444009358e91b">
-      <van-action-sheet v-model="showInfo.actionSheet" description="其他数据 (近期)">
+      <van-action-sheet
+        v-model="showInfo.actionSheet"
+        description="其他数据 (近期)"
+      >
         <template #default>
           <GameWzryHeroEquipmentListOne :extraId="equipmentId" :extraType="2" />
         </template>
@@ -249,8 +253,9 @@ export default {
       immediate: false,
       handler(newValue) {
         if (!newValue.extraId) return;
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (this.$appConfigInfo.appInfo.isReadme == 1) {
+        if (agree == 1) {
           this.getHeroUpdate(0, newValue.updateType, newValue.extraId);
         }
       },
@@ -291,7 +296,9 @@ export default {
     };
   },
   mounted() {
-    if (this.$appConfigInfo.appInfo.isReadme == 1) {
+    let agree = this.$appConfigInfo.appInfo.isReadme;
+
+    if (agree == 1) {
       this.getHeroUpdate(0, 0, this.extraId);
     }
   },
@@ -340,16 +347,17 @@ export default {
           }
         });
     },
+    formatDate: function (date) {
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    },
     onCalendarFormatter: function (day) {
       let o = this.updateData.result.rows,
         mapType = -5;
 
-      let oDay =
-        day.date.getFullYear() +
-        "/" +
-        (day.date.getMonth() + 1) +
-        "/" +
-        day.date.getDate();
+      let oldDay = this.$appXEUtils.toDateString(
+        this.formatDate(day.date),
+        "yyyy-MM-dd"
+      );
 
       o.map((x) => {
         let result = x.calendar;
@@ -357,7 +365,7 @@ export default {
         if (result.type == -1) {
           //
         } else {
-          if (oDay == result.day) {
+          if (oldDay == result.day) {
             if (result.type == 0) {
               day.bottomInfo = result.text;
             }

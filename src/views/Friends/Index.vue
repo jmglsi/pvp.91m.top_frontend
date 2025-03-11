@@ -209,9 +209,9 @@ export default {
   },
   methods: {
     getWebAccountInfo: function (tipsType, aid = 1) {
-      let postData = {},
-        q = this.$route.query,
-        openId = q.openId || "";
+      let q = this.$route.query,
+        openId = q.openId || "",
+        postData = {};
 
       tipsType == 0 ? (postData = { friendsOpenId: openId }) : (postData = {});
 

@@ -147,7 +147,7 @@ export default {
       let q = this.$appQuery,
         version = Number(q.v) || 1609430400,
         pwa = Number(q.pwa) || 0,
-        gameIndex = Number(this.$cookie.get("game-index")) || 0,
+        gameIndex = Number(this.$appCookie("game-index")) || 0,
         ls = this.$appConfigInfo;
 
       this.tabsInfo.model = gameIndex;
@@ -198,12 +198,12 @@ export default {
       let gameIndex = String(e),
         gameType = this.$appGameInfo[e];
 
-      this.$cookie.set("game-index", gameIndex, {
-        expires: "1Y",
+      this.$appCookie("game-index", gameIndex, {
+        expires: "1y",
       });
 
-      this.$cookie.set("game-type", gameType, {
-        expires: "1Y",
+      this.$appCookie("game-type", gameType, {
+        expires: "1y",
       });
 
       this.$message.info(this.$appMsg.info[1033]);

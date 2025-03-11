@@ -37,8 +37,9 @@
             :custom-config="{ storage: true }"
             :data="tableData[1].rows"
           >
-            <vxe-column type="seq" width="60" />
-            <vxe-column
+            <vxe-table-column type="seq" width="60" />
+
+            <vxe-table-column
               field="gamePlayerName"
               width="150"
               title="昵称"
@@ -47,14 +48,16 @@
               <template #default="{ row }">
                 {{ row.isUpload }}&nbsp;|&nbsp;{{ row.gamePlayerName }}
               </template>
-            </vxe-column>
-            <vxe-column
+            </vxe-table-column>
+
+            <vxe-table-column
               field="wechat"
               width="200"
               title="微信号"
               show-overflow="ellipsis"
             />
-            <vxe-column
+
+            <vxe-table-column
               field="areaType"
               title="游戏大区"
               :filters="[
@@ -66,14 +69,17 @@
               :filter-method="onTableColumnFilterMethod"
               width="125"
             />
-            <vxe-column field="price" title="消费金额" width="125" sortable />
-            <vxe-column
+
+            <vxe-table-column field="price" title="消费金额" width="125" sortable />
+
+            <vxe-table-column
               field="created_at"
               title="创建时间"
               show-overflow="ellipsis"
               sortable
             />
-            <vxe-column
+
+            <vxe-table-column
               field="updated_at"
               title="更新时间"
               show-overflow="ellipsis"

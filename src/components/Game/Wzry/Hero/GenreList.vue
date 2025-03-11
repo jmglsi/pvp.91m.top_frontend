@@ -219,8 +219,9 @@ export default {
       immediate: true,
       handler(newValue) {
         if (!newValue.extraId) return;
+        let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (this.$appConfigInfo.appInfo.isReadme == 1) {
+        if (agree == 1) {
           this.getRanking(14, 0, 0, 0, newValue.extraId);
         }
       },
@@ -244,7 +245,7 @@ export default {
     this.listWidth = this.$appInitTableWidth(750);
   },
   methods: {
-    getRanking: function (aid = 14, bid = 0, cid = 0, did = 0, id = 111) {
+    getRanking: function (aid = 14, bid = 0, cid = 0, did = 0, id = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(

@@ -1,6 +1,7 @@
 const Path = require('path');
 const Zlib = require('zlib');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const WebpackObfuscator = require('webpack-obfuscator');
 //const PrerenderSPAPlugin = require('prerender-spa-plugin');
 //const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 
@@ -83,6 +84,11 @@ module.exports = {
           })
         );
       */
+
+      config.plugins
+        .push(new WebpackObfuscator({
+          renameGlobals: true
+        }, []));
 
       config.optimization = {
         splitChunks: {

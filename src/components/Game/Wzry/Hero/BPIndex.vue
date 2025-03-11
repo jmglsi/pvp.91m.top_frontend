@@ -354,7 +354,7 @@ export default {
     };
   },
   methods: {
-    getRanking: function (aid, bid, cid, did, heroId) {
+    getRanking: function (aid = 4, bid = 0, cid = 0, did = 0, heroId = 0) {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage("heroBpIndex-" + heroId);

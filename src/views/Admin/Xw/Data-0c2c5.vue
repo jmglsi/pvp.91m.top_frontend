@@ -36,22 +36,25 @@
         :custom-config="{ storage: true }"
         :data="tableData.result.rows"
       >
-        <vxe-column type="seq" width="60" />
-        <vxe-column
+        <vxe-table-column type="seq" width="60" />
+
+        <vxe-table-column
           field="project"
           width="350"
           title="项目名"
           show-overflow="ellipsis"
           sortable
         />
-        <vxe-column
+
+        <vxe-table-column
           field="principal"
           width="200"
           title="负责人"
           show-overflow="ellipsis"
           sortable
         />
-        <vxe-column
+
+        <vxe-table-column
           field="status"
           width="100"
           title="状态"
@@ -63,15 +66,17 @@
               {{ statusInfo[row.status].text }}
             </van-tag>
           </template>
-        </vxe-column>
-        <vxe-column
+        </vxe-table-column>
+
+        <vxe-table-column
           field="addTime"
           width="200"
           title="添加时间"
           show-overflow="ellipsis"
           sortable
         />
-        <vxe-column field="updateTime" title="更新时间" sortable />
+
+        <vxe-table-column field="updateTime" title="更新时间" sortable />
       </vxe-table>
 
       <vxe-pager

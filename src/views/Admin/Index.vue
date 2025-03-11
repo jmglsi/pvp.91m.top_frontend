@@ -391,9 +391,9 @@ export default {
           if (status.code == 200) {
             this.loginInfo = data;
 
-            this.$cookie.set("name", data.name, {
-              expires: "1M",
-            });
+            //this.$appCookie("name", data.name, {
+            //expires: "1M",
+            //});
 
             this.isLogin = true;
           } else {
@@ -414,14 +414,28 @@ export default {
         .then(() => {
           //on confirm
 
-          this.$cookie.delete("openId");
-          this.$cookie.delete("accessToken");
+          this.$appCookie("openId", null, {
+            expires: -1,
+          });
+          this.$appCookie("accessToken", null, {
+            expires: -1,
+          });
           //-
-          this.$cookie.delete("tempOpenId");
-          this.$cookie.delete("tempAccessToken");
-          this.$cookie.delete("lastUpdateTipsDay");
-          this.$cookie.delete("game-index");
-          this.$cookie.delete("game-type");
+          this.$appCookie("tempOpenId", null, {
+            expires: -1,
+          });
+          this.$appCookie("tempAccessToken", null, {
+            expires: -1,
+          });
+          this.$appCookie("lastUpdateTipsDay", null, {
+            expires: -1,
+          });
+          this.$appCookie("game-index", null, {
+            expires: -1,
+          });
+          this.$appCookie("game-type", null, {
+            expires: -1,
+          });
 
           this.$appDelectAllLocalStorage();
 
@@ -482,7 +496,7 @@ div.admin-a6e5c6ead5e961e03325d9b0e06ec08f {
   bottom: 10px;
 }
 
-div.admin-cc18a9ce6325c786a08f962ed0e43099{
+div.admin-cc18a9ce6325c786a08f962ed0e43099 {
   font-size: @app-font-size;
 }
 </style>

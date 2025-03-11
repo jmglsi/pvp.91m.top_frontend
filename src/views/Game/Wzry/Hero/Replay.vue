@@ -47,8 +47,8 @@
               {{ data.status == "success" ? "胜利" : "失败" }}
             </van-tag>
             <van-tag
-              v-if="!replay.teammate"
               round
+              v-if="!replay.teammate"
               color="black"
               class="hero-e4d23e841d8e8804190027bce3180fa5"
             >
@@ -100,8 +100,8 @@
 
           <div class="hero-75c8e1c4a51a48edb54306fb640fdc4f">
             <van-tag
-              v-if="!replay.teammate"
               round
+              v-if="!replay.teammate"
               disabled
               color="black"
               size="medium"
@@ -113,7 +113,7 @@
             <a-dropdown v-if="!replay.teammate" :trigger="['click']">
               <van-tag
                 round
-                @click="getRanking(data.roleId, data.heroId)"
+                @click="getRanking(10, 1, 0, 0, data.heroId, data.roleId)"
                 color="orange"
                 size="medium"
                 class="hero-ce50a09343724eb82df11390e2c1de18"
@@ -250,12 +250,12 @@ export default {
   },
   methods: {
     getRanking: function (
-      roleId = 0,
-      heroId = 111,
       aid = 10,
       bid = 1,
       cid = 0,
-      did = 0
+      did = 0,
+      heroId = 0,
+      roleId = 0
     ) {
       if (roleId == 0) return;
 

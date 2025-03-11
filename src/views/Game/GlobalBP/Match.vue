@@ -197,7 +197,7 @@
                 v-for="(heroId, index) in gameInfo.result.rows[tabsInfo.model]
                   .BPOrder"
                 :key="'game-0da8f0c7ef089161786e997dfcd5474e-' + index"
-                :style="$appIsMobile ? {} : { marginTop: '50px' }"
+                :style="$appIsMobile ? {} : { marginTop: '55px' }"
                 @click="onGameBanPickClick(index)"
               >
                 <span
@@ -318,8 +318,8 @@
                           class="game-f3ebcda14817d8dbbc6e7c33e7ee3969"
                         >
                           <van-tag
-                            v-if="data.isBan"
                             round
+                            v-if="data.isBan"
                             color="red"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
                           >
@@ -344,8 +344,8 @@
                               ? { filter: 'grayscale(1)' }
                               : {}
                           "
-                          width="40"
-                          height="40"
+                          :width="$appIsMobile ? 40 : 55"
+                          :height="$appIsMobile ? 40 : 55"
                           class="game-ae47f38706d42938ff1dbd5960a08056"
                         />
                       </van-grid-item>
@@ -388,8 +388,8 @@
                           class="game-f3ebcda14817d8dbbc6e7c33e7ee3969"
                         >
                           <van-tag
-                            v-if="data.isBan"
                             round
+                            v-if="data.isBan"
                             color="red"
                             class="game-9965db4bfcd480ab6c0b1a6a3de68bab"
                           >
@@ -414,8 +414,8 @@
                               ? { filter: 'grayscale(1)' }
                               : {}
                           "
-                          width="40"
-                          height="40"
+                          :width="$appIsMobile ? 40 : 55"
+                          :height="$appIsMobile ? 40 : 55"
                           class="game-ae47f38706d42938ff1dbd5960a08056"
                         />
                       </van-grid-item>
@@ -1108,7 +1108,7 @@ export default {
       }
     },
     initPage: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         showIndex;
 
       showIndex = this.$appGetLocalStorage("gameBP-show-index") || 0;
@@ -1246,13 +1246,9 @@ export default {
         return (this.tableData = ls);
       }
 
-      let nowTime = null,
-        date = new Date(),
-        nowYear = date.getFullYear(),
-        nowMonth = date.getMonth() + 1,
-        nowDate = date.getDate();
+      let nowTime = null;
 
-      nowTime = nowYear + "-" + nowMonth + "-" + nowDate;
+      nowTime = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
 
       this.$axios
         .post(

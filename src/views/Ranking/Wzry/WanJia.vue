@@ -11,6 +11,7 @@
         @cell-click="onTableCellClick"
       >
         <vxe-table-column
+          fixed="left"
           field="userId"
           title="玩家"
           :filters="[
@@ -23,9 +24,9 @@
         >
           <template #default="{ row, rowIndex }">
             <van-tag
+              mark
               v-if="row.tag"
               :color="row.tag.color"
-              mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
             >
@@ -60,8 +61,8 @@
 
         <vxe-table-column
           field="rankScore"
-          title="巅峰分"
-          :width="$appIsMobile ? 100 : 0"
+          title="分路/巅峰分"
+          :width="$appIsMobile ? 125 : 0"
           sortable
         >
           <template #default="{ row }">
@@ -74,14 +75,12 @@
               <div class="ranking-6d19eb4601bfeac4a56e54d12adcb954">
                 <van-tag
                   plain
-                  :color="
-                    $wzryPositionInfo[row.positionList[0] || 0][1] || 'black'
-                  "
+                  v-for="(data, index) in row.positionList"
+                  :key="'ranking-2d20b6873d862bf066a8377c5ba8cc33-' + index"
+                  :color="$wzryPositionInfo[data || 0][1] || 'black'"
+                  class="app-b69a71d636ec20584432124284825b1e"
                 >
-                  {{
-                    $wzryPositionInfo[row.positionList[0] || 0][0] ||
-                    $t("unknown")
-                  }}
+                  {{ $wzryPositionInfo[data || 0][0] }}
                 </van-tag>
               </div>
 
@@ -89,7 +88,7 @@
                 {{ row.rankScore }}
               </div>
               <div
-                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-420e569f7ae439ae256513412631f2f4"
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 app-420e569f7ae439ae256513412631f2f4"
               >
                 {{ row.gamePlayerName }}
               </div>
@@ -99,7 +98,7 @@
 
         <vxe-table-column
           field="commonlyUsed"
-          title="常用 (非实时) | 点击可同步备战 (出装、铭文)"
+          title="常玩 (非实时) | 点击可同步备战 (出装、铭文)"
           width="350"
           align="left"
         >
@@ -208,6 +207,8 @@
             </div>
           </template>
         </vxe-table-column>
+
+        <template #empty><div v-html="msg || '暂无数据'" /></template>
       </vxe-table>
     </div>
 
@@ -343,11 +344,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 && newValue.refresh == 1) {
           //if (newValue.refresh == 1) {
           this.getRanking(2, newValue.bid, newValue.cid, 0);
         }
@@ -356,6 +357,7 @@ export default {
   },
   data() {
     return {
+      msg: "",
       allHeroList: [],
       allPositionList: [],
       allHeroNum: 0,
@@ -388,12 +390,9 @@ export default {
   created() {
     //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
-
-    /*
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
-        this.getRanking(2, this.bid, this.cid, 0);
-      }
-    */
+  },
+  mounted() {
+    this.getRanking(2, this.bid, this.cid, 0);
   },
   methods: {
     getRanking: function (aid = 2, bid = 0, cid = 0, did = 0) {
@@ -442,6 +441,9 @@ export default {
             this.getHeroList(data.result.rows);
 
             //this.$message.success(this.$appMsg.success[1005]);
+          } else if ([2006, 2015].indexOf(status.code) > -1) {
+            this.tableData.loading = false;
+            this.msg = status.msg;
           } else {
             this.$message.error(status.msg);
           }

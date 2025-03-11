@@ -1,5 +1,17 @@
 <template>
-  <div class="hero-fightPower">
+  <div class="ranking-zl app-zl">
+    <div class="ranking-e20c0bfa2eeda7a13463d390a5bbfc4f">
+      <!--
+        style="background-color: rgb(250, 250, 250) !important;"
+      -->
+      <vxe-toolbar
+        size="mini"
+        style="background-color: transparent"
+        ref="refWzryZhanLiToolbar"
+        custom
+      />
+    </div>
+
     <div class="ranking-e10ca73b79369d2183f81ca10fb587af">
       <vxe-table
         ref="refWzryZhanLi"
@@ -11,12 +23,27 @@
         :loading="tableData.loading"
         @cell-click="onTableCellClick"
       >
-        <vxe-column
+        <vxe-table-column
+          fixed="left"
           field="allScore"
           title="#"
+          :filters="[{ value: '' }]"
+          :filter-method="onTableColumnFilterMethod"
           width="75"
           sortable
         >
+          <template #filter="{ $panel, column }">
+            <input
+              v-model="option.value"
+              v-for="(option, index) in column.filters"
+              :key="'hero-687a3138e43e7447a967a510bf02ac98-' + index"
+              type="type"
+              placeholder="试试 英雄名/别名"
+              @input="$panel.changeOption($event, !!option.value, option)"
+              class="app-fa42596ed8c1eff3ed8b93bba913bde3"
+              :style="{ width: '125px !important' }"
+            />
+          </template>
           <template #default="{ row, rowIndex }">
             <div
               :style="{
@@ -44,15 +71,33 @@
               </div>
             </div>
           </template>
-        </vxe-column>
+        </vxe-table-column>
 
         <vxe-table-colgroup
-          title="国服分"
           :title-prefix="{
             content: $appMsg.tips[1024],
           }"
         >
-          <vxe-column
+          <template #header>
+            <div class="ranking-f4a47ff1f3e53bfd1dabc667a6bdbc81">
+              <span class="ranking-94b5e6ecb955f53a3cb1227effbb7d6a">
+                国服分
+              </span>
+              <van-tag
+                plain
+                round
+                type="warning"
+                size="medium"
+                @click="showInfo.calendar = true"
+                class="ranking-f5e0d4e9cee528a53f64ea02550517bf"
+              >
+                {{ dateInfo.day }}
+                {{ dateInfo.day.length > 0 ? "📅" : "凌晨更新" }}
+              </van-tag>
+            </div>
+          </template>
+
+          <vxe-table-column
             field="fightPower[0]"
             title="1"
             :filters="[{ value: 0 }]"
@@ -72,8 +117,8 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="fightPower[1]"
             title="10"
             :filters="[{ value: 0 }]"
@@ -93,8 +138,8 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="fightPower[2]"
             title="50"
             :filters="[{ value: 0 }]"
@@ -114,8 +159,8 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
             </template>
-          </vxe-column>
-          <vxe-column
+          </vxe-table-column>
+          <vxe-table-column
             field="fightPower[3]"
             title="100"
             :filters="[{ value: 0 }]"
@@ -135,19 +180,22 @@
                 class="app-fa42596ed8c1eff3ed8b93bba913bde3"
               />
             </template>
-          </vxe-column>
+          </vxe-table-column>
         </vxe-table-colgroup>
 
-        <vxe-column field="more" type="expand" title="更多" width="80">
+        <vxe-table-column field="more" type="expand" title="更多" width="80">
           <template #content="{ row }">
-            <div class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d">
+            <div
+              :style="{ width: $appWidth - 20 + 'px' }"
+              class="ranking-19c5e5344dbdca6ef8d9ba5d989aea4d"
+            >
               <ChartsHeroLine :extraId="row.id" :aid="1" />
             </div>
           </template>
-        </vxe-column>
+        </vxe-table-column>
 
         <!--
-        <vxe-column title="#" type="seq" width="50" />
+        <vxe-table-column title="#" type="seq" width="50" />
         -->
 
         <template #empty><div v-html="msg || '暂无数据'" /></template>
@@ -177,6 +225,17 @@
       </van-dialog>
     </div>
 
+    <div class="ranking-61643949857abb484bacc753356d6071">
+      <van-calendar
+        v-model="showInfo.calendar"
+        title="命运的齿轮开始转动"
+        :formatter="onCalendarFormatter"
+        :min-date="dateInfo.min"
+        :max-date="dateInfo.max"
+        @confirm="onConfirmClick"
+      />
+    </div>
+
     <div class="ranking-ffab85bb31b6936dee15c689b1581675">
       <van-action-sheet
         v-model="showInfo.skillActionSheet"
@@ -197,25 +256,25 @@
             <div v-if="$appGameType == 'wzry'">
               <van-tab title="顺位">
                 <GameWzryHeroBPIndex
-                  v-if="cellInfo.index == 0 && extraInfo.model == 0"
+                  v-if="extraInfo.model == 0"
                   :extraId="tableDataRow.id"
                 />
               </van-tab>
               <van-tab title="打法">
                 <GameWzryHeroGenreList
-                  v-if="cellInfo.index == 0 && extraInfo.model == 1"
+                  v-if="extraInfo.model == 1"
                   :extraId="tableDataRow.id"
                 />
               </van-tab>
               <van-tab title="出装">
                 <GameWzryHeroEquipmentListALL
-                  v-if="cellInfo.index == 0 && extraInfo.model == 2"
+                  v-if="extraInfo.model == 2"
                   :extraId="tableDataRow.id"
                 />
               </van-tab>
               <van-tab title="出装 (单件)">
                 <GameWzryHeroEquipmentListOne
-                  v-if="cellInfo.index == 0 && extraInfo.model == 3"
+                  v-if="extraInfo.model == 3"
                   :extraId="tableDataRow.id"
                   :extraType="1"
                 />
@@ -233,7 +292,7 @@
                 </template>
 
                 <GameWzryHeroInscriptionList
-                  v-if="cellInfo.index == 0 && extraInfo.model == 4"
+                  v-if="extraInfo.model == 4"
                   :extraId="tableDataRow.id"
                 />
               </van-tab>
@@ -244,7 +303,7 @@
                 <!--
                 <div class="app-0cecd2d48b0c852a513d34eec25042b7">
                   <HeroUpdate
-                    v-if="cellInfo.index == 0 && extraInfo.model == 5"
+                    v-if="extraInfo.model == 5"
                     :extraId="tableDataRow.id"
                     :updateId="tableDataRow.updateId"
                     :aid="1"
@@ -308,13 +367,13 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 && newValue.refresh == 1) {
           //if (newValue.refresh == 1) {
-          this.getRanking(19, this.bid, this.cid, this.did, this.time);
+          this.getRanking(19, this.bid, this.cid, this.did, this.dateInfo.day);
         }
       },
     },
@@ -322,7 +381,6 @@ export default {
   data() {
     return {
       msg: "",
-      time: this.$route.query.t || "",
       tableData: {
         loading: false,
         result: {
@@ -337,20 +395,23 @@ export default {
         name: this.$t("loading"),
       },
       actionSheetActions: [
-        { name: "趋势", subname: "左下角关注一下", value: 0 },
-        { name: "搜一搜", subname: "看看都在聊什么", value: 1 },
-        { name: "更新记录", subname: "NGA @EndMP", value: 2 },
-        { name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
+        { name: "热度趋势", subname: "左下角关注一下", value: 0 },
+        { name: "搜索一下", subname: "看看都在聊什么", value: 1 },
+        //{ name: "更新记录", subname: "NGA @EndMP", value: 2 },
+        //{ name: "攻速阈值", subname: "NGA @小熊de大熊", value: 3 },
       ],
       listWidth: 0,
       clientHeight: 0,
-      cellInfo: {
-        index: 0,
-      },
       tabsInfo: {
         model: 0,
       },
+      dateInfo: {
+        min: new Date(),
+        max: new Date(),
+        day: "",
+      },
       showInfo: {
+        calendar: false,
         shareImg: false,
         skillActionSheet: false,
       },
@@ -363,9 +424,27 @@ export default {
   created() {
     //this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(750);
+
+    this.initPage();
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.getRanking(19, this.bid, this.cid, this.did, this.dateInfo.day);
+
+      this.$refs.refWzryZhanLi.connect(this.$refs.refWzryZhanLiToolbar);
+    });
+    //手动将表格和工具栏进行关联
   },
   methods: {
-    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0, time = "") {
+    initPage: function () {
+      let date = new Date();
+
+      this.dateInfo.min = new Date(date.setMonth(date.getMonth() - 4));
+      this.dateInfo.max = new Date(date.setMonth(date.getMonth() + 4));
+
+      this.dateInfo.day = this.$appCookie("lastDataDay") || "";
+    },
+    getRanking: function (aid = 19, bid = 0, cid = 0, did = 0, time = "") {
       let appConfigInfo = this.$appConfigInfo,
         ts = this.$appTs,
         ls = this.$appGetLocalStorage(
@@ -396,7 +475,7 @@ export default {
             "&did=" +
             did,
           this.$qs.stringify({
-            t: this.time,
+            t: time,
           })
         )
         .then((res) => {
@@ -413,10 +492,10 @@ export default {
               this.tableData
             );
 
-            if (aid == 0) {
+            if (aid == 19) {
               //this.$message.success(this.$appMsg.success[1005]);
 
-              if (this.time) {
+              if (time) {
                 this.$message.info(this.$appMsg.info[1030]);
               }
             }
@@ -428,7 +507,35 @@ export default {
           }
         });
     },
+    formatDate: function (date) {
+      return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    },
+    onCalendarFormatter: function (day) {
+      let oldDay = this.$appXEUtils.toDateString(
+          this.formatDate(day.date),
+          "yyyy-MM-dd"
+        ),
+        newDay = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+
+      if (oldDay == newDay) {
+        day.topInfo = "01:30";
+        day.text = "更新";
+        day.bottomInfo = "最新数据";
+      }
+
+      return day;
+    },
     onTableColumnFilterMethod: function ({ option, row, column }) {
+      if (column.property == "allScore") {
+        let cName = row.cName || "占位符|占位符";
+
+        return (
+          row.name == option.value ||
+          row.name.indexOf(option.value) > -1 ||
+          cName.indexOf(option.value) > -1
+        );
+      }
+
       if (column.property == "fightPower[0]") {
         return row.fightPower[0] >= option.value;
       }
@@ -445,14 +552,42 @@ export default {
         return row.fightPower[3] >= option.value;
       }
     },
-    onTableCellClick: function ({ row, column }) {
+    onTableCellClick: function ({ row, rowIndex, column }) {
       this.tableDataRow = row;
 
-      if (row.id && row.id < 900 && column.field != "more") {
+      if (column.property == "allScore") {
         this.showInfo.skillActionSheet = true;
-      } else {
+      } else if (column.property.indexOf("fightPower") > -1) {
+        this.$refs.refWzryZhanLi.toggleRowExpand(
+          this.tableData.result.rows[rowIndex]
+        );
+      } else if (column.property != "more") {
         this.showInfo.skillActionSheet = false;
       }
+    },
+    onConfirmClick: function (date) {
+      let newDay = this.$appXEUtils.toDateString(new Date(), "yyyy-MM-dd");
+
+      this.showInfo.calendar = false;
+
+      this.dateInfo.day = this.$appXEUtils.toDateString(
+        this.formatDate(date),
+        "yyyy-MM-dd"
+      );
+
+      if (newDay == this.dateInfo.day) {
+        this.dateInfo.day = "";
+
+        this.$appCookie("lastDataDay", null, {
+          expires: -1,
+        });
+      } else {
+        this.$appCookie("lastDataDay", this.dateInfo.day, {
+          expires: "1d",
+        });
+      }
+
+      this.getRanking(19, this.bid, this.cid, this.did, this.dateInfo.day);
     },
     onTabsClick: function (e) {
       let tipsText;

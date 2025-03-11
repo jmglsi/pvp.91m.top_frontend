@@ -224,7 +224,8 @@ export default {
       },
     };
   },
-  created() {
+  created() {},
+  mounted() {
     let articleId = this.articleId;
 
     this.getRanking(11, 1, 0, 0);
@@ -235,7 +236,7 @@ export default {
     }
   },
   methods: {
-    getRanking: function (aid = 0, bid = 0, cid = 0, did = 0) {
+    getRanking: function (aid = 11, bid = 0, cid = 0, did = 0) {
       this.$axios
         .post(
           this.$appApi.app.getRanking +

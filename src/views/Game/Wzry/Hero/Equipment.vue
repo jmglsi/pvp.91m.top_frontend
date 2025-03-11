@@ -245,7 +245,7 @@
                         :style="{
                           color: 'orange !important',
                           borderColor: 'orange !important',
-                          padding: '0 8px',
+                          padding: '0 16px',
                         }"
                       />
                       <div class="hero-e9326e4d97ca90bdc8f972e25e6967ff">
@@ -343,6 +343,7 @@
                                 class="hero-0e65087ef714d330232ef74987513fbb"
                               >
                                 <van-tag
+                                  plain
                                   v-for="(item, index) in data.tags"
                                   :key="
                                     'hero-ccea3902e0a790c97b64aae26de79e9c-' +
@@ -350,7 +351,6 @@
                                   "
                                   v-show="!item.hidden"
                                   :color="item.color"
-                                  plain
                                   class="hero-8a0ef47dc7fb94fd86ca714928f64401"
                                 >
                                   {{ item.name }}
@@ -667,7 +667,7 @@ export default {
   },
   methods: {
     initPage: function () {
-      let q = this.$appQuery,
+      let q = this.$route.query,
         p = this.$route.params;
 
       this.chooseInfo.heroId = p.id;

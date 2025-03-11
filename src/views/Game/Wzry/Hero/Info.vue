@@ -62,8 +62,8 @@
                 :key="'hero-5b659d3a22bcdd20abf3405d43ae80a7-' + index"
               >
                 <van-tag
-                  v-if="data"
                   plain
+                  v-if="data"
                   :color="$wzryPositionInfo[data || 0][1] || 'black'"
                   class="hero-bc267281c62550407c9572aff2a45f69"
                 >

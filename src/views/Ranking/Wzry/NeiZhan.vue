@@ -18,9 +18,9 @@
         >
           <template #default="{ row, rowIndex }">
             <van-tag
+              mark
               v-if="row.tag"
               :color="row.tag.color"
-              mark
               type="primary"
               class="app-e4d23e841d8e8804190027bce3180fa5"
             >
@@ -68,7 +68,7 @@
                 {{ row.rankScore_bo_1 }}
               </div>
               <div
-                class="app-5f19eaf71f40d74d66be84db52b3ad87 ranking-420e569f7ae439ae256513412631f2f4"
+                class="app-5f19eaf71f40d74d66be84db52b3ad87 app-420e569f7ae439ae256513412631f2f4"
               >
                 {{ row.gamePlayerName }}
               </div>
@@ -76,7 +76,7 @@
           </template>
         </vxe-table-column>
 
-        <vxe-column field="status" title="状态" :width="listWidth" sortable>
+        <vxe-table-column field="status" title="状态" :width="listWidth" sortable>
           <template #default="{ row }">
             <div
               :style="{
@@ -102,7 +102,7 @@
               </div>
             </div>
           </template>
-        </vxe-column>
+        </vxe-table-column>
       </vxe-table>
     </div>
 
@@ -194,11 +194,11 @@ export default {
   },
   watch: {
     listenChange: {
-      immediate: true,
+      immediate: false,
       handler(newValue) {
         let agree = this.$appConfigInfo.appInfo.isReadme;
 
-        if (agree == 1 || (agree == 1 && newValue.refresh == 1)) {
+        if (agree == 1 && newValue.refresh == 1) {
           //if (newValue.refresh == 1) {
           this.getRanking(12, newValue.bid, newValue.cid, 0);
         }
@@ -240,12 +240,9 @@ export default {
   created() {
     this.clientHeight = this.$appInitTableHeight(10);
     this.listWidth = this.$appInitTableWidth(350);
-
-    /*
-      if (this.$appConfigInfo.appInfo.isReadme == 1) {
-        this.getRanking(12, this.bid, this.cid, 0);
-      }
-    */
+  },
+  mounted() {
+    this.getRanking(12, this.bid, this.cid, 0);
 
     if (this.gameLabel) {
       this.getCivilwarMatchInfo(this.gameLabel);
